@@ -3,7 +3,7 @@
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 aside-logo">
 			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 				<h2 class="pull-left" style="margin-left: 60px;">
-					<img style="width: 50px; height: 50px; float:left" src="../assets/img/samLogo.png" /> <strong style="font-size: 35px;">圣安米悦</strong><br><font>提 成 管 理 系 统</font>
+					<img style="width: 50px; height: 50px; float:left" src="../assets/img/logo1.png" /> <strong style="font-size: 35px;"> 圣安米悦</strong><br><font>提 成 管 理 系 统</font>
 				</h2>
 			</div>
 			<!-- <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">

@@ -3,7 +3,7 @@
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 aside-logo">
 			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 				<h2 class="pull-left" style="margin-left: 60px;">
-					<img style="width: 50px; height: 50px; float:left" src="../assets/img/samLogo.png" /> <strong style="font-size: 40px;">圣安</strong><br><font>收 费 管 理 系 统</font>
+					<img style="width: 50px; height: 50px; float:left" src="../assets/img/samLogo.png" /> <strong style="font-size: 35px;">圣安米悦</strong><br><font>提 成 管 理 系 统</font>
 				</h2>
 			</div>
 			<!-- <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -24,27 +24,22 @@
 						<li>
 							<p style=" font-size: 30px; padding-left: 15px;" aria-hidden="true">功能列表</p>
 						</li>
+						<li v-if="has(1)">
+							<router-link to="/MP/Summary"><i class="fa fa-table" aria-hidden="false">　提成汇总</i></router-link>
+						</li>
 						<li class="li-active" v-if="has(1)">
-							<router-link to="/MP/ComprehensivePatientInfo"><i class="fa fa-table fa-circle" aria-hidden="true" v-on:click="titleChange('患者管理')">　患者管理</i></router-link>
+							<router-link to="/MP/ComprehensivePatientInfo"><i class="fa fa-table fa-circle" aria-hidden="true">　提成管理</i></router-link>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/Charge"><i class="fa fa-table" aria-hidden="false" v-on:click="titleChange('缴费管理')">　缴费管理</i></router-link>
+							<router-link to="/MP/Charge"><i class="fa fa-table" aria-hidden="false">　消费管理</i></router-link>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/Summary"><i class="fa fa-table" aria-hidden="false" v-on:change="titleChange('缴费汇总')">　交费汇总</i></router-link>
+							<router-link to="/MP/PayServiceProject"><i class="fa fa-table" aria-hidden="false">　商品管理</i></router-link>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/PayServiceProject"><i class="fa fa-table" aria-hidden="false" v-on:click="titleChange('项目管理')">　项目管理</i></router-link>
+							<router-link to="/MP/Department"><i class="fa fa-table" aria-hidden="false">　商铺管理</i></router-link>
 						</li>
-						<li v-if="has(1)">
-							<router-link to="/MP/Department"><i class="fa fa-table" aria-hidden="false" v-on:click="titleChange('科室管理')">　科室管理</i></router-link>
-						</li>
-						<li v-if="has(1)">
-							<router-link to="/MP/Medicalinsurance"><i class="fa fa-table" aria-hidden="false" v-on:click="titleChange('医保类型')">　医保类型</i></router-link>
-						</li>
-						<li v-if="has(1)">
-							<router-link to="/MP/PatientStype"><i class="fa fa-table" aria-hidden="false" v-on:click="titleChange('患者类型')">　患者类型</i></router-link>
-						</li>
+						
 						<li v-if="has(1)">
 							<router-link to="/MP/DataUpdate"><i class="fa fa-table" aria-hidden="false" v-on:click="titleChange('数据上传')">　数据上传</i></router-link>
 						</li>

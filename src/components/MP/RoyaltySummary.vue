@@ -1,12 +1,12 @@
 <template>
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-				<h1 class="titleCss">患者管理</h1>
+				<h1 class="titleCss">提成管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>住 院 号：</p>
+					<p>员工工号：</p>
 				</div>
 				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="hospNum"></div>
 			</div>
@@ -19,57 +19,17 @@
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>科　　室：</p>
+					<p>岗　　位：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<department ref='department' @departChange='departChange'></department>
-				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>性　　别：</p>
-				</div>
-				<div class="col-md-8 col-lg-8">
-					<select class="form-control" v-model="sex">
-						<option value="0">全部</option>
-						<option value="1">男</option>
-						<option value="2">女</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>患者类型：</p>
-				</div>
-				<div class="col-md-8 col-lg-8">
-					<PS ref="ps" @objChange='psChange'></PS>
-				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>医保类型：</p>
-				</div>
-				<div class="col-md-8 col-lg-8">
-					<MIS ref="mis" @objChange='misChange'></MIS>
-				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>是否住院：</p>
-				</div>
-				<div class="col-md-8 col-lg-8">
-					<select class="form-control" v-model="inHosp">
-						<option value="">全部</option>
-						<option value="1">是</option>
-						<option value="0">否</option>
-					</select>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>入院时间：</p>
+					<p>开始时间：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<dPicker style="width:100%" v-model="hospTime" v-on:change="dateAction('0')"></dPicker>
@@ -77,19 +37,13 @@
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>出院时间：</p>
+					<p>结束时间：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<dPicker style="width:100%" v-model="outHosp" v-on:change="dateAction('1')"></dPicker>
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px; padding-bottom:1.5%;">
-				<button type="button" class="btn btn-primary pull-right" @click="exportTableToExcel('datatable','患者费用统计表')">导出</button>
-				<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-				 v-on:click="myFile()" v-if="has(2)">导入<input type="file" id="myFile" class="inputfile" style="display:none;"
-					 @change="handlerUpload($event)"></button>
-				<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-				 v-on:click="addPatient()" v-if="has(2)">添加患者</button>
 				<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 				 v-on:click="conditionCheck()">查询</button>
 			</div>
@@ -101,55 +55,37 @@
 					<div class="table-responsive pre-scrollable" style=" max-height:464px">
 						<table class="table table-bordered table-hover user-table" id="datatable">
 							<div id="fHeader" v-show="fixedHeader">
-								<div class="text-center">住院号</div>
+								<div class="text-center">员工工号</div>
 								<div class="text-center">姓名</div>
 								<div class="text-center">年龄</div>
-								<div class="text-center">科室</div>
-								<div class="text-center">患者类型</div>
-								<div class="text-center">医保类型</div>
-								<div class="text-center">性别</div>
-								<div class="text-center">在院</div>
-								<div class="text-center">入院时间</div>
-								<div class="text-center">出院时间</div>
-								<div class="text-center" v-for="(item1,index1) in projectList" :key="index1">{{item1.name}}</div>
-								<div class="text-center">合计</div>
-								<th class="text-center">操作员</th>
-								<div class="text-center" v-if="has(2)">修改</div>
+								<div class="text-center">岗位</div>
+								<div class="text-center">提成总额</div>
+								<div class="text-center">扣费总额</div>
+								<div class="text-center">合计总额</div>
+								<div class="text-center">在职</div>
 							</div>
 							<thead class="datathead">
 								<tr>
-									<th class="text-center">住院号</th>
+									<th class="text-center">员工号</th>
 									<th class="text-center">姓名</th>
 									<th class="text-center">年龄</th>
-									<th class="text-center">科室</th>
-									<th class="text-center">患者类型</th>
-									<th class="text-center">医保类型</th>
-									<th class="text-center">性别</th>
-									<th class="text-center">在院</th>
-									<th class="text-center">入院时间</th>
-									<th class="text-center">出院时间</th>
-									<th class="text-center" v-for="(item1,index1) in projectList" :key="index1">{{item1.name}}</th>
-									<th class="text-center">合计</th>
-									<th class="text-center">操作员</th>
-									<th class="text-center" v-if="has(2)">修改</th>
+									<th class="text-center">岗位</th>
+									<th class="text-center">在职</th>
+									<th class="text-center">提成总额</th>
+									<th class="text-center">扣费总额</th>
+									<th class="text-center">合计总额</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item2,index2) in patientList" :key="index2">
+								<tr v-for="(item2,index2) in patientList" :key="index2" v-on:dblclick="modifyPatient(item2)">
 									<td>{{item2.hospNum}}</td>
 									<td>{{item2.name}}</td>
 									<td>{{item2.age}}</td>
 									<td>{{item2.DEPTNAME}}</td>
 									<td>{{item2.patitypename}}</td>
 									<td>{{item2.mitypename}}</td>
-									<td>{{item2.sex==1 ? '男' : '女'}}</td>
+									<td>{{item2.mitypename}}</td>
 									<td>{{item2.inHosp==1 ? '在' : '否'}}</td>
-									<td>{{dateFilter(item2.hospTime)}}</td>
-									<td>{{dateFilter(item2.outHosp)}}</td>
-									<td v-for="(item3,index3) in projectList" :key="index3">{{dataChuLi(item2,index3)}}</td>
-									<td>{{item2.receivable}}</td>
-									<td>{{item2.ACCOUNT_NAME}}</td>
-									<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyPatient(item2)">修改</button></td>
 								</tr>
 							</tbody>
 						</table>
@@ -160,7 +96,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="addPatient">
 				<div class="modal-dialog">
-					<patient ref="patient" @addPatient='feedback'></patient>
+					<SubRoy ref="patient" @addPatient='feedback'></SubRoy>
 				</div>
 			</div>
 		</div>
@@ -173,6 +109,7 @@
 	import dPicker from 'vue2-datepicker'
 	import department from '../common/Department.vue'
 	import project from '../common/Project.vue'
+	import SubRoy from '../MP/SubRoySum/SubRoyList'
 	import patient from '../MP/PatientInfo/PatientContent'
 	import PS from '../common/PatientStype.vue'
 	import MIS from '../common/MedicalInsuranceStype.vue'
@@ -183,6 +120,7 @@
 			department,
 			project,
 			patient,
+			SubRoy,
 			PS,
 			MIS,
 		},
@@ -269,8 +207,7 @@
 			},
 			//modify the cotent of patient
 			modifyPatient(item) {
-				console.log('modify the cotent of patient')
-				this.$refs.patient.initData('modify', item)
+				
 				$("#addPatient").modal('show')
 			},
 			//the list , which is detail infomation of patient,was checked.

@@ -2,12 +2,12 @@
 <template>
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">收费管理页</h1>
+			<h1 class="titleCss">充值管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>住院号：</p>
+					<p>会员号：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<input class="form-control" type="text" value="" v-model="hospNum">
@@ -21,58 +21,18 @@
 					<input class="form-control" type="text" value="" v-model="name">
 				</div>
 			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>交费时间：</p>
-				</div>
-				<div class="col-md-8 col-lg-8" style="line-height: 34px;">
-					<dp style="padding: 0; width:100%" v-model="hospTime" v-on:change="dateAction('0')"></dp>
-				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="margin-left:-30px;">
-				<div class="col-md-2 col-lg-2" style="padding: 0;line-height: 34px;">到</div>
-				<div class="col-md-8 col-lg-8" style="line-height: 34px;">
-					<dp style="padding: 0; width:100%" v-model="outHosp" v-on:change="dateAction('1')"></dp>
-				</div>
-			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>科&nbsp;&nbsp;&nbsp;室：</p>
+					<p>岗&nbsp;&nbsp;&nbsp;位：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<department ref='department' @departChange='departChange'></department>
 				</div>
 			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>性&nbsp;&nbsp;&nbsp;别：</p>
-				</div>
-				<div class="col-md-8 col-lg-8">
-					<select class="form-control" v-model="sex">
-						<option value="0">全部</option>
-						<option value="1">男</option>
-						<option value="2">女</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>患者类型：</p>
-				</div>
-				<div class="col-md-8 col-lg-8">
-					<PS ref="ps" @objChange='psChange'></PS>
-				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>医保类型：</p>
-				</div>
-				<div class="col-md-8 col-lg-8">
-					<MIS ref="mis" @objChange='misChange'></MIS>
-				</div>
-			</div>
+			
+			
 			<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xs-offset-7 col-sm-offset-7 col-md-offset-7 col-lg-offset-7" style="padding-right:30px;padding-bottom:1.5%;">
 				<button type="button" class="btn btn-primary pull-right m_r_10" @click="exportTableToExcel('datatable','患者费用统计表')">导出</button>
 				<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"

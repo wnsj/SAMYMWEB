@@ -1,13 +1,14 @@
-<!-- 收费项目管理 -->
+<!-- the page of department management -->
 <template>
+
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">项目管理</h1>
+			<h1 class="titleCss">会员管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<p>项目名：</p>
+					<p>姓名：</p>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					<input class="form-control" type="text" v-model="name">
@@ -28,93 +29,92 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="addProject()" v-if="has(2)">添加项目</button>
-			 <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			  v-on:click="checkProjcet()">查询</button>
+			 v-on:click="addDepartment()"  v-if="has(2)">添加会员</button>
+			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+			 v-on:click="checkDepartment()">查询</button>
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable" style="max-height:464px">
-					 <table class="table table-bordered table-hover" id="datatable">
-						<!-- <div id="fHeader" v-show="fixedHeader">
-							<div class="text-center">ID</div>
-							<div class="text-center">项目名称</div>
-							<div class="text-center">是否在用</div>
-							<div class="text-center">修改项目</div>
-						</div> -->
-					  <thead class="datathead">
-					    <tr>
-							<th class="text-center">ID</th>
-					      <th class="text-center">项目名称</th>
-						  <th class="text-center">是否在用</th>
-						  <th class="text-center" v-if="has(2)">修改项目</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					    <tr v-for="(item,index) in payProject" :key="index" v-on:dblclick="modifyProject(item)">
-						   <td class="text-center">{{item.payserviceId}}</td>
-					      <td class="text-center">{{item.name}}</td>
-					      <td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-                <td class="text-center"  v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyProject(item,index)">修改</button></td>
-					    </tr>
-					  </tbody>
+					<table class="table table-bordered table-hover" id="datatable" >
+						<thead class="datathead">
+							<tr>
+								<th class="text-center">会员卡号</th>
+								<th class="text-center">姓名</th>
+								<th class="text-center">手机号</th>
+								<th class="text-center">性别</th>
+								<th class="text-center">生日</th>
+								<th class="text-center">是否停用</th>
+								<th class="text-center" v-if="has(2)">修改</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="modifyDepartment(item)">
+								<td class="text-center">{{index}}</td>
+								<td class="text-center">{{item.name}}</td>
+								<td class="text-center">{{item.name}}</td>
+								<td class="text-center">{{item.name}}</td>
+								<td class="text-center">{{item.name}}</td>
+								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">科室修改</button></td>
+							</tr>
+						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
-			<div class="modal fade" id="procjectContent">
+			<div class="modal fade" id="departmentContent">
 				<div class="modal-dialog">
-					<procjectContent ref='pc' @addProject='feedBack'></procjectContent>
+					<departmentContent ref='dc' @addDepartment='feedBack'></departmentContent>
 				</div>
 			</div>
 		</div>
 	</div>
+
 </template>
 
 
 <script>
-
-	import procjectContent from '../MP/PSP/ProjectContent.vue'
-
+	import departmentContent from '../MP/Depart/DepartmentContent.vue'
 	export default {
-		components:{
-			procjectContent,
+		components: {
+			departmentContent,
 		},
 		data() {
 			return {
-				payProject:[],
-				isuse:'1',
-				name:'',
+				departmentList: [],
+				isuse: '1',
+				name: '',
 				fixedHeader: false,
 			};
 		},
 		methods: {
-			//add the cotent of project
-			addProject() {
-				console.log('modify the cotent of project')
-				this.$refs.pc.initData('add')
-				$("#procjectContent").modal("show")
+			//modify the cotent of department
+			addDepartment() {
+				console.log('modify the cotent of department')
+				this.$refs.dc.initData('add')
+				$("#departmentContent").modal('show')
 			},
-			//modify the cotent of project
-			modifyProject(item) {
+			//modify the cotent of department
+			modifyDepartment(item) {
         if(!this.has(2)){
           alert("暂无权限修改!");
           return;
         }
-				console.log('modify the cotent of project')
-				this.$refs.pc.initData('modify',item)
-				$("#procjectContent").modal("show")
+				console.log('modify the cotent of department')
+				this.$refs.dc.initData('modify', item)
+				$("#departmentContent").modal('show')
 			},
 			//feedback from adding and modifying view
-			feedBack(){
-				this.checkProjcet()
-				$("#procjectContent").modal('hide')
+			feedBack() {
+				this.checkDepartment()
+				$("#departmentContent").modal('hide')
 			},
-			//check the list of projcet
-			checkProjcet(){
-				console.log('checkProjcet')
-				var url = this.url + '/payserviceAction/queryPayservice'
+			//check the list of department
+			checkDepartment() {
+				console.log('checkDepartment')
+				var url = this.url + '/departmentAction/queryDepartment'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -123,15 +123,15 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						name:this.name,
-						isuse:this.isuse,
+						name: this.name,
+						isuse: this.isuse,
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
-						this.payProject = res.retData
+						this.departmentList = res.retData
 					} else {
 						alert(res.retMsg)
 					}
@@ -168,7 +168,7 @@
 		window.addEventListener('scroll',this.handleScroll,true)
 		},
 		created() {
-		  this.checkProjcet()
+		  this.checkDepartment()
 		}
 	}
 </script>

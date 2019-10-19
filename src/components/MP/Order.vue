@@ -1,13 +1,14 @@
 <!-- the page of department management -->
 <template>
+
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">患者类型</h1>
+			<h1 class="titleCss">预约管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<p>类型：</p>
+					<p>姓名：</p>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					<input class="form-control" type="text" v-model="name">
@@ -28,9 +29,9 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="addObj()" v-if="has(2)">添加类型</button>
+			 v-on:click="addDepartment()"  v-if="has(2)">添加预约</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="checkObj()">查询</button>
+			 v-on:click="checkDepartment()">查询</button>
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
@@ -38,24 +39,33 @@
 					<table class="table table-bordered table-hover" id="datatable" >
 						<!-- <div id="fHeader" v-show="fixedHeader">
 							<div class="text-center">ID</div>
-							<div class="text-center">患者类型</div>
+							<div class="text-center">科室名称</div>
 							<div class="text-center">是否停用</div>
-							<div class="text-center">修改类型</div>
+							<div class="text-center">修改科室</div>
 						</div> -->
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">ID</th>
-								<th class="text-center">患者类型</th>
+								<th class="text-center">会员卡号</th>
+								<th class="text-center">姓名</th>
+								<th class="text-center">手机号</th>
+								<th class="text-center">性别</th>
+								<th class="text-center">预约时间</th>
 								<th class="text-center">是否停用</th>
-								<th class="text-center" v-if="has(2)">修改类型</th>
+								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in objList" :key="index" v-on:dblclick="modifyObj(item)">
+							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="modifyDepartment(item)">
 								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.patitypename}}</td>
+								<td class="text-center">{{item.name}}</td>
+								<td class="text-center">{{item.name}}</td>
+								<td class="text-center">{{item.name}}</td>
+								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyObj(item,index)">修改</button></td>
+								<td class="text-center" v-if="has(2)">
+									<button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button>
+									<button type="button" class="btn btn-primary" v-on:click="modifyDepartment(item,index)">取消</button>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -63,11 +73,9 @@
 			</div>
 		</div>
 		<div class="row row_edit">
-			<div class="modal fade" id="patientStype">
+			<div class="modal fade" id="departmentContent">
 				<div class="modal-dialog">
-
-					<PSC ref='mic' @addObj='feedBack'></PSC>
-
+					<departmentContent ref='dc' @addDepartment='feedBack'></departmentContent>
 				</div>
 			</div>
 		</div>
@@ -77,46 +85,45 @@
 
 
 <script>
-
-	import PSC from '../MP/PatientInfo/PatientStypeContent.vue'
+	import departmentContent from '../MP/Depart/DepartmentContent.vue'
 	export default {
 		components: {
-			PSC,
+			departmentContent,
 		},
 		data() {
 			return {
-				objList: [],
+				departmentList: [],
 				isuse: '1',
 				name: '',
 				fixedHeader: false,
 			};
 		},
 		methods: {
-			//add the cotent of MedicalInsuranceStype
-			addObj() {
-				console.log('add the cotent of MedicalInsuranceStype')
-				this.$refs.mic.initData('add')
-				$("#patientStype").modal('show')
+			//modify the cotent of department
+			addDepartment() {
+				console.log('modify the cotent of department')
+				this.$refs.dc.initData('add')
+				$("#departmentContent").modal('show')
 			},
-			//modify the cotent of MedicalInsuranceStype
-			modifyObj(item) {
+			//modify the cotent of department
+			modifyDepartment(item) {
         if(!this.has(2)){
           alert("暂无权限修改!");
           return;
         }
-				console.log('modify the cotent of MedicalInsuranceStype')
-				this.$refs.mic.initData('modify', item)
-				$("#patientStype").modal('show')
+				console.log('modify the cotent of department')
+				this.$refs.dc.initData('modify', item)
+				$("#departmentContent").modal('show')
 			},
 			//feedback from adding and modifying view
 			feedBack() {
-				this.checkObj()
-				$("#patientStype").modal('hide')
+				this.checkDepartment()
+				$("#departmentContent").modal('hide')
 			},
-			//check the list of MedicalInsuranceStype
-			checkObj() {
-				console.log('checkObj')
-				var url = this.url + '/patienttypeAction/queryPatientType'
+			//check the list of department
+			checkDepartment() {
+				console.log('checkDepartment')
+				var url = this.url + '/departmentAction/queryDepartment'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -125,15 +132,15 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						patitypename: this.name,
+						name: this.name,
 						isuse: this.isuse,
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					// console.log(res)
+					console.log(res)
 					if (res.retCode == '0000') {
-						this.objList = res.retData
+						this.departmentList = res.retData
 					} else {
 						alert(res.retMsg)
 					}
@@ -170,7 +177,7 @@
 		window.addEventListener('scroll',this.handleScroll,true)
 		},
 		created() {
-		  this.checkObj()
+		  this.checkDepartment()
 		}
 	}
 </script>

@@ -3,7 +3,7 @@
 
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">科室管理</h1>
+			<h1 class="titleCss">岗位管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -29,7 +29,7 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="addDepartment()"  v-if="has(2)">添加科室</button>
+			 v-on:click="addDepartment()"  v-if="has(2)">添加</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="checkDepartment()">查询</button>
 		</div>
@@ -46,9 +46,9 @@
 						<thead class="datathead">
 							<tr>
 								<th class="text-center">ID</th>
-								<th class="text-center">科室名称</th>
+								<th class="text-center">岗位名称</th>
 								<th class="text-center">是否停用</th>
-								<th class="text-center" v-if="has(2)">修改科室</th>
+								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -56,7 +56,7 @@
 								<td class="text-center">{{index}}</td>
 								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">科室修改</button></td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>

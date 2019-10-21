@@ -85,11 +85,9 @@
 
 
 <script>
-	import departmentContent from '../MP/Depart/DepartmentContent.vue'
 	import SubOrder from '../MP/SubOrder/SubOrderList.vue'
 	export default {
 		components: {
-			departmentContent,
 			SubOrder,
 		},
 		data() {

@@ -193,10 +193,9 @@
 
 
 <script>
-	import departmentContent from '../MP/Depart/DepartmentContent.vue'
 	export default {
 		components: {
-			departmentContent,
+			
 		},
 		data() {
 			return {

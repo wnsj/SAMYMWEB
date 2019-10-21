@@ -54,7 +54,7 @@ body{
 .my-aside ul li p{
     display:inline-block;
     text-align: left;
-    width:175px;
+    width:190px;
 }
 .my-aside ul .li-active{
     background-color: #fff; 

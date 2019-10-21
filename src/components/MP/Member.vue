@@ -77,11 +77,9 @@
 
 
 <script>
-	import departmentContent from '../MP/Depart/DepartmentContent.vue'
 	import SubMemberRun from '../MP/SubMemberRun/SubMemberRunList.vue'
 	export default {
 		components: {
-			departmentContent,
 			SubMemberRun
 		},
 		data() {

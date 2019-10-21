@@ -76,11 +76,9 @@
 
 
 <script>
-	import departmentContent from '../MP/Depart/DepartmentContent.vue'
 	import SubPost from '../MP/SubPost/SubPostList.vue'
 	export default {
 		components: {
-			departmentContent,
 			SubPost,
 		},
 		data() {

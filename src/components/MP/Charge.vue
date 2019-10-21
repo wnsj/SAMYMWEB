@@ -165,7 +165,7 @@
 		methods: {
 			//go into the view of added patient charge
 			addPatientCharge: function() {
-				this.$refs.fee.initData('add')
+				//this.$refs.fee.initData('add')
 				$("#addFee").modal("show")
 				console.log('进入添加患者界面')
 			},

@@ -207,6 +207,7 @@
 			},
 			//modify the cotent of patient
 			modifyPatient(item) {
+				console.log(item);
 				
 				$("#addPatient").modal('show')
 			},
@@ -419,4 +420,5 @@
 			display: none
 		}
 	}
+
 </style>

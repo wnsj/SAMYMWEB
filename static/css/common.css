@@ -47,7 +47,14 @@ body{
     /* color: #fff; */
 }
 .my-aside ul li i{
-    padding: 0 15px 0 22px;
+    display:inline-block;
+    text-align: left;
+    width:175px;
+}   
+.my-aside ul li p{
+    display:inline-block;
+    text-align: left;
+    width:175px;
 }
 .my-aside ul .li-active{
     background-color: #fff; 
@@ -109,3 +116,9 @@ body{
 }
 
 #myModalJoin{ overflow-y:hidden!important;}
+.tableContent{
+    width:95%; margin: 0 auto;
+}
+.modal-header{
+    border-bottom: none;
+}

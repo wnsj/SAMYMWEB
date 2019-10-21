@@ -79,7 +79,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item2,index2) in patientList" :key="index2">
+								<tr v-for="(item2,index2) in patientList" :key="index2"  v-on:dblclick="modifyPatient(item2)">
 									<td>{{item2.hospNum}}</td>
 									<td>{{item2.name}}</td>
 									<td>{{item2.age}}</td>
@@ -98,7 +98,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="addPatient">
 				<div class="modal-dialog">
-					<patient ref="patient" @addPatient='feedback'></patient>
+					<SubMember ref="patient" @addPatient='feedback'></SubMember>
 				</div>
 			</div>
 		</div>
@@ -114,6 +114,7 @@
 	import patient from '../MP/PatientInfo/PatientContent'
 	import PS from '../common/PatientStype.vue'
 	import MIS from '../common/MedicalInsuranceStype.vue'
+	import SubMember from '../MP/SubMember/SubMemberList'
 	export default {
 		name: 'employee',
 		components: {
@@ -123,6 +124,7 @@
 			patient,
 			PS,
 			MIS,
+			SubMember,
 		},
 		data() {
 			return {
@@ -208,7 +210,7 @@
 			//modify the cotent of patient
 			modifyPatient(item) {
 				console.log('modify the cotent of patient')
-				this.$refs.patient.initData('modify', item)
+				//this.$refs.patient.initData('modify', item)
 				$("#addPatient").modal('show')
 			},
 			//the list , which is detail infomation of patient,was checked.

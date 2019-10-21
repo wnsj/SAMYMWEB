@@ -84,7 +84,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="empContent">
 				<div class="modal-dialog">
-					<emp ref='emp' @addDepartment='feedBack'></emp>
+					<SubStaff ref='emp' @addDepartment='feedBack'></SubStaff>
 				</div>
 			</div>
 		</div>
@@ -95,9 +95,11 @@
 
 <script>
 	import emp from '../MP/SubEmp/SubEmp.vue'
+	import SubStaff from '../MP/SubStaff/SubStaffList.vue'
 	export default {
 		components: {
 			emp,
+			SubStaff,
 		},
 		data() {
 			return {
@@ -111,7 +113,7 @@
 			//modify the cotent of department
 			addEmp() {
 				console.log('modify the cotent of department')
-				this.$refs.emp.initData('add')
+				//this.$refs.emp.initData('add')
 				$("#empContent").modal('show')
 			},
 			//modify the cotent of department
@@ -121,7 +123,7 @@
 					return;
 				}
 				console.log('modify the cotent of department')
-				this.$refs.emp.initData('modify', item)
+				//this.$refs.emp.initData('modify', item)
 				$("#empContent").modal('show')
 			},
 			//feedback from adding and modifying view

@@ -66,7 +66,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="departmentContent">
 				<div class="modal-dialog">
-					<departmentContent ref='dc' @addDepartment='feedBack'></departmentContent>
+					<SubPost ref='dc' @addDepartment='feedBack'></SubPost>
 				</div>
 			</div>
 		</div>
@@ -77,9 +77,11 @@
 
 <script>
 	import departmentContent from '../MP/Depart/DepartmentContent.vue'
+	import SubPost from '../MP/SubPost/SubPostList.vue'
 	export default {
 		components: {
 			departmentContent,
+			SubPost,
 		},
 		data() {
 			return {
@@ -93,17 +95,17 @@
 			//modify the cotent of department
 			addDepartment() {
 				console.log('modify the cotent of department')
-				this.$refs.dc.initData('add')
+				//this.$refs.dc.initData('add')
 				$("#departmentContent").modal('show')
 			},
 			//modify the cotent of department
 			modifyDepartment(item) {
-        if(!this.has(2)){
-          alert("暂无权限修改!");
-          return;
-        }
+				if(!this.has(2)){
+				alert("暂无权限修改!");
+				return;
+				}
 				console.log('modify the cotent of department')
-				this.$refs.dc.initData('modify', item)
+				//this.$refs.dc.initData('modify', item)
 				$("#departmentContent").modal('show')
 			},
 			//feedback from adding and modifying view

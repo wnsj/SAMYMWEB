@@ -3,7 +3,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h4 id="myModalLabel">提成列表</h4>
+			<h4 id="myModalLabel">员工列表</h4>
 		</div>
 		<div class="tableContent">
 			<nobr class="widthmax">
@@ -11,13 +11,13 @@
 					<table class="table table-bordered table-hover user-table" id="datatable">
 						<thead>
 							<tr>
-								<th class="text-center">会员卡号</th>
+								<th class="text-center">员工工号</th>
 								<th class="text-center">姓名</th>
-								<th class="text-center">年龄</th>
 								<th class="text-center">岗位</th>
-								<th class="text-center">提成总额</th>
-								<th class="text-center">扣费总额</th>
-								<th class="text-center">合计总额</th>
+								<th class="text-center">手机号</th>
+								<th class="text-center">性别</th>
+								<th class="text-center">入职时间</th>
+								<th class="text-center">是否停用</th>
 							</tr>
 						</thead> 
 						<tbody>
@@ -210,7 +210,7 @@
 				});
 			},
 			closeCurrentPage(){
-				$("#addPatient").modal("hide")
+				$("#empContent").modal("hide")
 				console.log('关闭添加患者界面')
 			},
 			//Query patient's information based on the hosNum

@@ -3,7 +3,7 @@
 
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">提成管理</h1>
+			<h1 class="titleCss">提成规则</h1>
 		</div>
 
 

@@ -46,7 +46,7 @@
 							<router-link to="/MP/Employee"><i class="fa fa-table" aria-hidden="false">　员工管理</i></router-link>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/Royalty"><i class="fa fa-table" aria-hidden="false" >　提成管理</i></router-link>
+							<router-link to="/MP/Royalty"><i class="fa fa-table" aria-hidden="false" >　提成规则管理</i></router-link>
 						</li>
 						<li v-if="has(1)">
 							<router-link to="/MP/Position"><i class="fa fa-table" aria-hidden="false" >　岗位管理</i></router-link>

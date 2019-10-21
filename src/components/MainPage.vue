@@ -25,24 +25,34 @@
 							<p style=" font-size: 30px; padding-left: 15px;" aria-hidden="true">功能列表</p>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/Summary"><i class="fa fa-table" aria-hidden="false">　提成汇总</i></router-link>
+							<router-link to="/MP/RoyaltySummary"><i class="fa fa-table" aria-hidden="false">　提成汇总</i></router-link>
 						</li>
 						<li class="li-active" v-if="has(1)">
-							<router-link to="/MP/ComprehensivePatientInfo"><i class="fa fa-table fa-circle" aria-hidden="true">　提成管理</i></router-link>
+							<router-link to="/MP/MemberSummary"><i class="fa fa-table fa-circle" aria-hidden="true">　会员总表</i></router-link>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/Charge"><i class="fa fa-table" aria-hidden="false">　消费管理</i></router-link>
+							<router-link to="/MP/SettleSummary"><i class="fa fa-table" aria-hidden="false">　消费管理</i></router-link>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/PayServiceProject"><i class="fa fa-table" aria-hidden="false">　商品管理</i></router-link>
+							<router-link to="/MP/Member"><i class="fa fa-table" aria-hidden="false">　会员管理</i></router-link>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/Department"><i class="fa fa-table" aria-hidden="false">　商铺管理</i></router-link>
+							<router-link to="/MP/Charge"><i class="fa fa-table" aria-hidden="false">　充值管理(退费)</i></router-link>
+						</li>
+						<li v-if="has(1)">
+							<router-link to="/MP/Order"><i class="fa fa-table" aria-hidden="false" >　预约管理</i></router-link>
+						</li>
+						<li v-if="has(1)">
+							<router-link to="/MP/Employee"><i class="fa fa-table" aria-hidden="false">　员工管理</i></router-link>
+						</li>
+						<li v-if="has(1)">
+							<router-link to="/MP/Royalty"><i class="fa fa-table" aria-hidden="false" >　提成管理</i></router-link>
+						</li>
+						<li v-if="has(1)">
+							<router-link to="/MP/Position"><i class="fa fa-table" aria-hidden="false" >　岗位管理</i></router-link>
 						</li>
 						
-						<li v-if="has(1)">
-							<router-link to="/MP/DataUpdate"><i class="fa fa-table" aria-hidden="false" v-on:click="titleChange('数据上传')">　数据上传</i></router-link>
-						</li>
+						
 					</ul>
 				</div>
 				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 embed-responsive embed-responsive-16by9" style="overflow: inherit; background-color:">

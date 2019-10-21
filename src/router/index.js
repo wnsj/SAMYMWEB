@@ -1,16 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import MainPage from '@/components/MainPage.vue'
-import ComprehensivePatientInfo from '../components/MP/ComprehensivePatientInfo.vue'
-import PP from '../components/MP/PayServiceProject.vue'
-import Depart from '../components/MP/Department.vue'
-import Charge from '../components/MP/Charge.vue'
-import Summary from '../components/MP/Summary.vue'
 import login from '@/components/login.vue'
-import Medicalinsurance from '@/components/MP/Medicalinsurance.vue'
-import PatientStype from '@/components/MP/PatientStype.vue'
-import DataUpdate from '@/components/MP/DataUpdate.vue'
-import test from '../components/MP/test.vue'
+import MainPage from '@/components/MainPage.vue'
+/*------------*/
+import Employee from '../components/MP/Employee.vue'
+import Member from '../components/MP/Member.vue'
+import Charge from '../components/MP/Charge.vue'
+import Position from '../components/MP/Position.vue'
+import Order from '../components/MP/Order.vue'
+import Royalty from '../components/MP/Royalty.vue'
+import SettleSummary from '../components/MP/SettleSummary.vue'
+import MemberSummary from '../components/MP/MemberSummary.vue'
+import RoyaltySummary from '../components/MP/RoyaltySummary.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -25,19 +27,24 @@ export default new Router({
       name: 'MainPage',
       component: MainPage,
       children: [{
-          path: '/MP/ComprehensivePatientInfo',
-          name: 'ComprehensivePatientInfo',
-          component: ComprehensivePatientInfo,
+          path: '/MP/RoyaltySummary',
+          name: 'RoyaltySummary',
+          component: RoyaltySummary,
         },
         {
-          path: '/MP/PayServiceProject',
-          name: 'PP',
-          component: PP,
+          path: '/MP/MemberSummary',
+          name: 'MemberSummary',
+          component: MemberSummary,
         },
+				{
+				  path: '/MP/SettleSummary',
+				  name: 'SettleSummary',
+				  component: SettleSummary,
+				},
         {
-          path: '/MP/Department',
-          name: 'Depart',
-          component: Depart,
+          path: '/MP/Employee',
+          name: 'Employee',
+          component: Employee,
         },
         {
           path: '/MP/Charge',
@@ -45,32 +52,27 @@ export default new Router({
           component: Charge,
         },
         {
-          path: '/MP/Summary',
-          name: 'Summary',
-          component: Summary,
+          path: '/MP/Member',
+          name: 'Member',
+          component: Member,
         },
         {
-          path: '/MP/Medicalinsurance',
-          name: 'Medicalinsurance',
-          component: Medicalinsurance,
+          path: '/MP/Position',
+          name: 'Position',
+          component: Position,
         },
 				{
-				  path: '/MP/PatientStype',
-				  name: 'PatientStype',
-				  component: PatientStype,
+				  path: '/MP/Order',
+				  name: 'Order',
+				  component: Order,
 				},
 				{
-				  path: '/MP/DataUpdate',
-				  name: 'DataUpdate',
-				  component: DataUpdate,
+				  path: '/MP/Royalty',
+				  name: 'Royalty',
+				  component: Royalty,
 				},
-        {
-          path: '/test',
-          path: '/MP/test',
-          name: 'test',
-          component: test,
-        }
+        
       ],
-      redirect: '/MP/ComprehensivePatientInfo'
+      redirect: '/MP/RoyaltySummary'
     }]
 })

@@ -17,10 +17,10 @@
 
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">类型</th>
-								<th class="text-center"></th>
-								<th class="text-center">是否停用</th>
-								<th class="text-center" v-if="has(2)">修改科室</th>
+								<th class="text-center">岗位</th>
+								<th class="text-center">额度级别</th>
+								<th class="text-center">提点</th>
+								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>

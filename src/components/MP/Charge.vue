@@ -7,7 +7,7 @@
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>会员号：</p>
+					<p>会员卡号：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<input class="form-control" type="text" value="" v-model="hospNum">
@@ -15,7 +15,23 @@
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>姓&nbsp;&nbsp;&nbsp;名：</p>
+					<p>姓　　名：</p>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<input class="form-control" type="text" value="" v-model="name">
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>推荐人姓名：</p>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<input class="form-control" type="text" value="" v-model="name">
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>推荐人岗位：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<input class="form-control" type="text" value="" v-model="name">
@@ -23,16 +39,19 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>岗&nbsp;&nbsp;&nbsp;位：</p>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="col-md-1 col-lg-1 text-right" style="padding: 0; line-height: 34px;">
+					<p>充值时间：</p>
 				</div>
-				<div class="col-md-8 col-lg-8">
-					<department ref='department' @departChange='departChange'></department>
+				<div class="col-md-8 col-lg-8 text-left">
+					<span>
+						<dPicker></dPicker>
+					</span> —
+					<span>
+						<dPicker></dPicker>
+					</span>
 				</div>
 			</div>
-			
-			
 			<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xs-offset-7 col-sm-offset-7 col-md-offset-7 col-lg-offset-7" style="padding-right:30px;padding-bottom:1.5%;">
 				<button type="button" class="btn btn-primary pull-right m_r_10" @click="exportTableToExcel('datatable','患者费用统计表')">导出</button>
 				<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
@@ -45,45 +64,17 @@
 			<nobr class="widthmax">
 				<div class="table-responsive pre-scrollable" style="max-height:464px">
 					<table class="table table-bordered table-hover user-table" id="datatable">
-						<!-- <div id="fHeader" v-show="fixedHeader">
-							<div class="fth_1">
-								<div class="text-center"><p>住院号</p></div>
-								<div class="text-center"><p>入院时间</p></div>
-								<div class="text-center"><p>姓名</p></div>
-								<div class="text-center"><p>性别</p></div>
-								<div class="text-center"><p>科室</p></div>
-								<div class="text-center"><p>患者类型</p></div>
-								<div class="text-center"><p>医保类型</p></div>
-								<div class="text-center"><p>年龄</p></div>
-								<div class="text-center"><p>缴费时间</p></div>
-								<div class="text-center"><p>缴费合计</p></div>
-								<div class="text-center" v-for="(item,index) in projectList" :key="index"><p>{{item.name}}</p></div>
-								<div class="text-center"><p>编辑</p></div>
-								<div class="text-center"><p>打印</p></div>
-							</div>
-							<div class="fth_2">
-								<div class="text-center" v-for="index3 in projectList.length*4"><p>{{feedbackTableTitle(index3-1)}}</p></div>
-							</div>
-						</div> -->
+						
 						<thead class="datathead">
 							<tr class="datatr_1">
-								<th class="text-center" rowspan='2'>住院号</th>
-								<th class="text-center" rowspan='2'>入院时间</th>
+								<th class="text-center" rowspan='2'>会员卡号</th>
 								<th class="text-center" rowspan='2'>姓名</th>
-								<th class="text-center" rowspan='2'>性别</th>
-								<th class="text-center" rowspan='2'>科室</th>
-								<th class="text-center" rowspan='2'>患者类型</th>
-								<th class="text-center" rowspan='2'>医保类型</th>
-								<th class="text-center" rowspan='2'>年龄</th>
-								<th class="text-center" rowspan='2'>缴费时间</th>
-								<th class="text-center" rowspan='2'>缴费合计</th>
-								<th class="text-center" rowspan='2'>操作员</th>
-								<th class="text-center" colspan="4" v-for="(item,index) in projectList" :key="index">{{item.name}}</th>
-								<th class="text-center" rowspan='2' v-if="has(2)">编辑</th>
-								<th class="text-center" rowspan='2'>打印</th>
-							</tr>
-							<tr class="datatr_2">
-								<th class="text-center" v-for="index3 in projectList.length*4">{{feedbackTableTitle(index3-1)}}</th>
+								<th class="text-center" rowspan='2'>手机号</th>
+								<th class="text-center" rowspan='2'>推荐人姓名</th>
+								<th class="text-center" rowspan='2'>推荐人岗位</th>
+								<th class="text-center" rowspan='2'>充值时间</th>
+								<th class="text-center" rowspan='2'>充值金额(退款)</th>
+								<th class="text-center" rowspan='2'>操作</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -94,14 +85,8 @@
 								<td>{{patient.SEX==1 ? '男' : '女'}}</td>
 								<td>{{patient.DEPTNAME}}</td>
 								<td>{{patient.PATITYPENAME}}</td>
-								<td>{{patient.MITYPENAME}}</td>
-								<td>{{patient.AGE}}</td>
-								<td>{{patient.PAYMENTTIME  | dateFormatFilter('YYYY-MM-DD')}}</td>
-								<td>{{patient.ACTUALPAYMENT}}</td>
-								<td>{{patient.ACCOUNT_NAME}}</td>
-								<td v-for="index3 in projectList.length*4">{{feedbackTableContent(patientList[index1],index3-1)}}</td>
+								<td>{{patient.PATITYPENAME}}</td>
 								<td class="text-center" style="padding:0" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyPatientCharge(patient)">编辑</button></td>
-								<td class="text-center" style="padding:0"><button class="btn btn-primary pull-right m_r_10" @click="printing(patient)">打印</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -126,6 +111,7 @@
 </template>
 
 <script>
+	import dPicker from 'vue2-datepicker'
 	import project from '../common/Project.vue'
 	import department from '../common/Department.vue'
 	import dp from 'vue2-datepicker'
@@ -135,6 +121,7 @@
 	import MIS from '../common/MedicalInsuranceStype.vue'
 	export default {
 		components: {
+			dPicker,
 			project,
 			department,
 			dp,

@@ -7,23 +7,24 @@
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<p>姓名：</p>
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>会员卡号：</p>
 				</div>
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-					<input class="form-control" type="text" v-model="name">
-				</div>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="hospNum"></div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding: 0; line-height: 34px;">
-					<p>是否在用：</p>
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>姓　　名：</p>
 				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<select class="form-control" v-model="isuse">
-						<option value="">全部</option>
-						<option value="1">是</option>
-						<option value="0">否</option>
-					</select>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="name"></div>
+			</div>
+			
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>手机号：</p>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<input class="form-control" type="text" value="" v-model="name">
 				</div>
 			</div>
 		</div>

@@ -6,14 +6,8 @@
 					<img style="width: 50px; height: 50px; float:left" src="../assets/img/logo1.png" /> <strong style="font-size: 35px;"> 圣安米悦</strong><br><font>提 成 管 理 系 统</font>
 				</h2>
 			</div>
-			<!-- <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-				<h2 class="pull-left" style="margin-left: 60px;">
-					<img style="width: 50px; height: 50px; float:left" src="../assets/img/ja_logo.png" /> <strong style="font-size: 40px;">佶安</strong><br><font>收 费 管 理 系 统</font>
-				</h2>
-			</div> -->
-			
 			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 text-right">
-				<p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，收费管理系统</p>
+				<p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，提成管理系统</p>
 				<button class="btn btn-default m_r_10" style="margin-top: 40px;" v-on:click="loginOut()">退出</button>
 			</div>
 		</div>

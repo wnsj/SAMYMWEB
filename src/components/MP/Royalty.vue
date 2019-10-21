@@ -9,7 +9,12 @@
 
 		<div class="col-md-6 col-lg-6">
 			<div class="col-md-12 col-lg-12 main-title">
-				<h3>流水提成规则</h3>
+				<div class="col-md-6 col-lg-6 text-left">
+					<h3>流水提成规则</h3>
+				</div>
+				<div class="col-md-6 col-lg-6 pull-right">
+					<button type="button" class="btn button-outline pull-right" v-on:click="modifyDepartment(item,index)">添加</button>
+				</div>
 			</div>
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable" style="max-height:464px">
@@ -28,7 +33,7 @@
 								<td class="text-center">{{index}}</td>
 								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">科室修改</button></td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -37,7 +42,12 @@
 		</div>
 		<div class="col-md-6 col-lg-6">
 			<div class="col-md-12 col-lg-12 main-title">
-				<h3>会员卡提成规则</h3>
+				<div class="col-md-6 col-lg-6 text-left">
+					<h3>会员卡提成规则</h3>
+				</div>
+				<div class="col-md-6 col-lg-6 pull-right">
+					<button type="button" class="btn button-outline pull-right" v-on:click="modifyDepartment(item,index)">添加</button>
+				</div>
 			</div>
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable" style="max-height:464px">
@@ -45,18 +55,22 @@
 		
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">类型</th>
-								<th class="text-center"></th>
-								<th class="text-center">是否停用</th>
-								<th class="text-center" v-if="has(2)">修改科室</th>
+								<th class="text-center">岗位</th>
+								<th class="text-center">充值类型</th>
+								<th class="text-center">提点</th>
+								<th class="text-center">消费额度</th>
+								<th class="text-center">提成比例</th>
+								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="modifyDepartment(item)">
 								<td class="text-center">{{index}}</td>
 								<td class="text-center">{{item.name}}</td>
+								<td class="text-center">{{index}}</td>
+								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">科室修改</button></td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -65,7 +79,13 @@
 		</div>
 		<div class="col-md-6 col-lg-6">
 			<div class="col-md-12 col-lg-12 main-title">
-				<h3>预约人数提成规则</h3>
+				
+				<div class="col-md-6 col-lg-6 text-left">
+					<h3>会员卡退费扣提成规则</h3>
+				</div>
+				<div class="col-md-6 col-lg-6 pull-right">
+					<button type="button" class="btn button-outline pull-right" v-on:click="modifyDepartment(item,index)">添加</button>
+				</div>
 			</div>
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable" style="max-height:464px">
@@ -73,10 +93,10 @@
 		
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">类型</th>
-								<th class="text-center"></th>
-								<th class="text-center">是否停用</th>
-								<th class="text-center" v-if="has(2)">修改科室</th>
+								<th class="text-center">岗位</th>
+								<th class="text-center">额度级别</th>
+								<th class="text-center">扣款比例</th>
+								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -84,7 +104,7 @@
 								<td class="text-center">{{index}}</td>
 								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">科室修改</button></td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -93,7 +113,13 @@
 		</div>
 		<div class="col-md-6 col-lg-6">
 			<div class="col-md-12 col-lg-12 main-title">
-				<h3>退号扣提成规则</h3>
+				
+				<div class="col-md-6 col-lg-6 text-left">
+					<h3>预约人数提成规则</h3>
+				</div>
+				<div class="col-md-6 col-lg-6 pull-right">
+					<button type="button" class="btn button-outline pull-right" v-on:click="modifyDepartment(item,index)">添加</button>
+				</div>
 			</div>
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable" style="max-height:464px">
@@ -101,10 +127,10 @@
 		
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">类型</th>
-								<th class="text-center"></th>
-								<th class="text-center">是否停用</th>
-								<th class="text-center" v-if="has(2)">修改科室</th>
+								<th class="text-center">岗位</th>
+								<th class="text-center">预约人数</th>
+								<th class="text-center">提成金额</th>
+								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -112,7 +138,7 @@
 								<td class="text-center">{{index}}</td>
 								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">科室修改</button></td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -121,7 +147,12 @@
 		</div>
 		<div class="col-md-6 col-lg-6">
 			<div class="col-md-12 col-lg-12 main-title">
-				<h3>会员卡退费扣提成规则</h3>
+				<div class="col-md-6 col-lg-6 text-left">
+					<h3>退号扣提成规则</h3>
+				</div>
+				<div class="col-md-6 col-lg-6 pull-right">
+					<button type="button" class="btn button-outline pull-right" v-on:click="modifyDepartment(item,index)">添加</button>
+				</div>
 			</div>
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable" style="max-height:464px">
@@ -129,10 +160,10 @@
 		
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">类型</th>
-								<th class="text-center"></th>
-								<th class="text-center">是否停用</th>
-								<th class="text-center" v-if="has(2)">修改科室</th>
+								<th class="text-center">岗位</th>
+								<th class="text-center">预约人数</th>
+								<th class="text-center">扣款金额</th>
+								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -140,13 +171,14 @@
 								<td class="text-center">{{index}}</td>
 								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">科室修改</button></td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
+		
 
 		<div class="row row_edit">
 			<div class="modal fade" id="departmentContent">

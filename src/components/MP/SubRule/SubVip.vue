@@ -54,15 +54,9 @@
 
 <script>
 	import dPicker from 'vue2-datepicker'
-	import department from '../../common/Department.vue'
-	import PS from '../../common/PatientStype.vue'
-	import MIS from '../../common/MedicalInsuranceStype.vue'
 	export default {
 		components:{
 			dPicker,
-			department,
-			PS,
-			MIS,
 		},
 		data() {
 			return {

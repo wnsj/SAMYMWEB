@@ -86,7 +86,7 @@
 
 <script>
 	import departmentContent from '../MP/Depart/DepartmentContent.vue'
-	import SubOrder from '../MP/SubOrder/SubOrderList.vue'
+	import SubOrder from '../MP/SubOrder/SubOrder.vue'
 	export default {
 		components: {
 			departmentContent,

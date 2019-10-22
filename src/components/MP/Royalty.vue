@@ -13,7 +13,7 @@
 					<h3>流水提成规则</h3>
 				</div>
 				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn button-outline pull-right" v-on:click="modifyDepartment(item,index)">添加</button>
+					<button type="button" class="btn btn-warning pos1" v-on:click="modifyDepartment(item,index)">添加</button>
 				</div>
 			</div>
 			<div class="col-md-12 col-lg-12">
@@ -22,10 +22,10 @@
 
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">岗位</th>
-								<th class="text-center">额度级别</th>
-								<th class="text-center">提点</th>
-								<th class="text-center" v-if="has(2)">修改</th>
+								<th class="text-center col-md-2">岗位</th>
+								<th class="text-center col-md-4">额度级别</th>
+								<th class="text-center col-md-3">提点</th>
+								<th class="text-center col-md-3" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -46,7 +46,7 @@
 					<h3>会员卡提成规则</h3>
 				</div>
 				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn button-outline pull-right" v-on:click="modifyDepartment(item,index)">添加</button>
+					<button type="button" class="btn btn-warning pos2" v-on:click="addSubVip(item,index)">添加</button>
 				</div>
 			</div>
 			<div class="col-md-12 col-lg-12">
@@ -55,22 +55,22 @@
 		
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">岗位</th>
-								<th class="text-center">充值类型</th>
-								<th class="text-center">提点</th>
-								<th class="text-center">消费额度</th>
-								<th class="text-center">提成比例</th>
-								<th class="text-center" v-if="has(2)">修改</th>
+								<th class="text-center  col-md-1">岗位</th>
+								<th class="text-center  col-md-3">充值类型</th>
+								<th class="text-center  col-md-1">提点</th>
+								<th class="text-center  col-md-3">消费额度</th>
+								<th class="text-center  col-md-2">提成比例</th>
+								<th class="text-center  col-md-2" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="modifyDepartment(item)">
+							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubVip(item)">
 								<td class="text-center">{{index}}</td>
 								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{index}}</td>
 								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubVip(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -84,7 +84,7 @@
 					<h3>会员卡退费扣提成规则</h3>
 				</div>
 				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn button-outline pull-right" v-on:click="modifyDepartment(item,index)">添加</button>
+					<button type="button" class="btn btn-warning pos1" v-on:click="addSubVipRefund(item,index)">添加</button>
 				</div>
 			</div>
 			<div class="col-md-12 col-lg-12">
@@ -93,18 +93,18 @@
 		
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">岗位</th>
-								<th class="text-center">额度级别</th>
-								<th class="text-center">扣款比例</th>
-								<th class="text-center" v-if="has(2)">修改</th>
+								<th class="text-center col-md-2">岗位</th>
+								<th class="text-center col-md-4">额度级别</th>
+								<th class="text-center col-md-3">扣款比例</th>
+								<th class="text-center col-md-3" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="modifyDepartment(item)">
+							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubVipRefund(item)">
 								<td class="text-center">{{index}}</td>
 								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubVipRefund(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -118,7 +118,7 @@
 					<h3>预约人数提成规则</h3>
 				</div>
 				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn button-outline pull-right" v-on:click="modifyDepartment(item,index)">添加</button>
+					<button type="button" class="btn btn-warning pos2" v-on:click="addSubVipOrder(item,index)">添加</button>
 				</div>
 			</div>
 			<div class="col-md-12 col-lg-12">
@@ -127,18 +127,18 @@
 		
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">岗位</th>
-								<th class="text-center">预约人数</th>
-								<th class="text-center">提成金额</th>
-								<th class="text-center" v-if="has(2)">修改</th>
+								<th class="text-center col-md-2">岗位</th>
+								<th class="text-center col-md-4">预约人数</th>
+								<th class="text-center col-md-4">提成金额</th>
+								<th class="text-center col-md-2" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="modifyDepartment(item)">
+							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubVipOrder(item)">
 								<td class="text-center">{{index}}</td>
 								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubVipOrder(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -151,7 +151,7 @@
 					<h3>退号扣提成规则</h3>
 				</div>
 				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn button-outline pull-right" v-on:click="modifyDepartment(item,index)">添加</button>
+					<button type="button" class="btn btn-warning pos1" v-on:click="addSubCharg(item,index)">添加</button>
 				</div>
 			</div>
 			<div class="col-md-12 col-lg-12">
@@ -160,18 +160,18 @@
 		
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">岗位</th>
-								<th class="text-center">预约人数</th>
-								<th class="text-center">扣款金额</th>
-								<th class="text-center" v-if="has(2)">修改</th>
+								<th class="text-center col-md-2">岗位</th>
+								<th class="text-center col-md-4">预约人数</th>
+								<th class="text-center col-md-3">扣款金额</th>
+								<th class="text-center col-md-3" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="modifyDepartment(item)">
+							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubCharg(item)">
 								<td class="text-center">{{index}}</td>
 								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubCharg(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -181,9 +181,37 @@
 		
 
 		<div class="row row_edit">
-			<div class="modal fade" id="departmentContent">
+			<div class="modal fade" id="SubFlowWater">
 				<div class="modal-dialog">
-					<departmentContent ref='dc' @addDepartment='feedBack'></departmentContent>
+					<SubFlowWater ref='dc' @addDepartment='feedBack'></SubFlowWater>
+				</div>
+			</div>
+		</div>
+		<div class="row row_edit">
+			<div class="modal fade" id="SubVip">
+				<div class="modal-dialog">
+					<SubVip ref='dc' @addDepartment='feedBack'></SubVip>
+				</div>
+			</div>
+		</div>
+		<div class="row row_edit">
+			<div class="modal fade" id="SubVipRefund">
+				<div class="modal-dialog">
+					<SubVipRefund ref='dc' @addDepartment='feedBack'></SubVipRefund>
+				</div>
+			</div>
+		</div>
+		<div class="row row_edit">
+			<div class="modal fade" id="SubVipOrder">
+				<div class="modal-dialog">
+					<SubVipOrder ref='dc' @addDepartment='feedBack'></SubVipOrder>
+				</div>
+			</div>
+		</div>
+		<div class="row row_edit">
+			<div class="modal fade" id="SubCharg">
+				<div class="modal-dialog">
+					<SubCharg ref='dc' @addDepartment='feedBack'></SubCharg>
 				</div>
 			</div>
 		</div>
@@ -194,9 +222,19 @@
 
 <script>
 	import departmentContent from '../MP/Depart/DepartmentContent.vue'
+	import SubFlowWater from '../MP/SubRule/SubFlowWater.vue'
+	import SubVip from '../MP/SubRule/SubVip.vue'
+	import SubVipRefund from '../MP/SubRule/SubVipRefund.vue'
+	import SubVipOrder from '../MP/SubRule/SubVipOrder.vue'
+	import SubCharg from '../MP/SubRule/SubCharg.vue'
 	export default {
 		components: {
 			departmentContent,
+			SubFlowWater,
+			SubVip,
+			SubVipRefund,
+			SubVipOrder,
+			SubCharg,
 		},
 		data() {
 			return {
@@ -211,22 +249,34 @@
 			addDepartment() {
 				console.log('modify the cotent of department')
 				this.$refs.dc.initData('add')
-				$("#departmentContent").modal('show')
+				$("#SubFlowWater").modal('show')
 			},
 			//modify the cotent of department
 			modifyDepartment(item) {
-				if (!this.has(2)) {
-					alert("暂无权限修改!");
-					return;
-				}
+				//if (!this.has(2)) {
+				//	alert("暂无权限修改!");
+				//	return;
+				//}
 				console.log('modify the cotent of department')
-				this.$refs.dc.initData('modify', item)
-				$("#departmentContent").modal('show')
+				//this.$refs.dc.initData('modify', item)
+				$("#SubFlowWater").modal('show')
+			},
+			addSubVip(item) {
+				$("#SubVip").modal('show')
+			},
+			addSubVipRefund(item) {
+				$("#SubVipRefund").modal('show')
+			},
+			addSubVipOrder(item) {
+				$("#SubVipOrder").modal('show')
+			},
+			addSubCharg(item) {
+				$("#SubCharg").modal('show')
 			},
 			//feedback from adding and modifying view
 			feedBack() {
 				this.checkDepartment()
-				$("#departmentContent").modal('hide')
+				$("#SubFlowWater").modal('hide')
 			},
 			//check the list of department
 			checkDepartment() {
@@ -309,10 +359,17 @@
 		border: 1px solid #ddd;
 		font-weight: bold;
 	}
-
 	@media print {
 		#fHeader {
 			display: none
 		}
+	}
+	.pos1{
+		margin-top:15px;
+		margin-left:114px;
+	}
+	.pos2{
+		margin-top:15px;
+		margin-left:160px;
 	}
 </style>

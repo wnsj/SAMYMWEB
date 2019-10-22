@@ -77,7 +77,7 @@
 
 <script>
 	import departmentContent from '../MP/Depart/DepartmentContent.vue'
-	import SubPost from '../MP/SubPost/SubPostList.vue'
+	import SubPost from '../MP/SubPost/SubPost.vue'
 	export default {
 		components: {
 			departmentContent,

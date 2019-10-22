@@ -84,7 +84,14 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="empContent">
 				<div class="modal-dialog">
-					<SubStaff ref='emp' @addDepartment='feedBack'></SubStaff>
+					<SubStaff ref='staff' @addDepartment='feedBack'></SubStaff>
+				</div>
+			</div>
+		</div>
+		<div class="row row_edit">
+			<div class="modal fade" id="emp">
+				<div class="modal-dialog">
+					<emp ref='emp' @addDepartment='feedBack'></emp>
 				</div>
 			</div>
 		</div>
@@ -111,10 +118,15 @@
 		},
 		methods: {
 			//modify the cotent of department
-			addEmp() {
+			addStaff() {
 				console.log('modify the cotent of department')
 				//this.$refs.emp.initData('add')
 				$("#empContent").modal('show')
+			},
+			addEmp() {
+				console.log('modify the cotent of department')
+				//this.$refs.emp.initData('add')
+				$("#emp").modal('show')
 			},
 			//modify the cotent of department
 			modifyEmp(item) {

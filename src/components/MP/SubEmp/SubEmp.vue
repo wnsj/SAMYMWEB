@@ -50,7 +50,7 @@
 					
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addPatient()">确认</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addEmp()">确认</button>
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
 						</div>
 					</div>
@@ -74,9 +74,9 @@
 		data() {
 			return {
 				employee:{
-					empName:'',
-					sex:'',
-					posId:'',
+					empId:'-1',
+					empName:'name',
+					posId:'1',
 					sex:'1',
 					isuse:'1',
 				},
@@ -100,10 +100,9 @@
 					this.isModify=false
 					
 					
-					// this.patient.hospTime=this.moment('','YYYY-MM-DD HH:mm:ss.000')
 				}else if(param=='modify'){
 					console.log('Initialization patient’s content, which modifies patient')
-// 					this.type='modify'
+					this.type='modify'
 // 					this.isExist='1'
 // 					this.isModify=true
 // 					this.title='修改'
@@ -159,46 +158,14 @@
 			},
 			//the event of addtional button
 			addEmp(){
-				if(this.isExist=='1'){
-					if(!confirm("是否确定提交，提交将覆盖原有患者数据！！！")){
-						return
-					}
-				}
-				this.patient.hospNum=this.hospNum
-				if(this.isBlank(this.patient.hospNum)){
-					alert("住院号不能为空")
+				if(this.isBlank(this.employee.empName)){
+					alert("员工的姓名不能为空")
 					return
 				}
-				if(this.isBlank(this.patient.patitypeid)){
-					alert("患者类型不能为空")
+				if(this.isBlank(this.employee.posId) && this.employee.posId == '0'){
+					alert("岗位类型不能为空")
 					return
 				}
-				if(this.isBlank(this.patient.mitypeid)){
-					alert("医保类型不能为空")
-					return
-				}
-				if(this.isBlank(this.patient.name) ){
-					alert("姓名不能为空")
-					return
-				}
-				if(this.isBlank(this.patient.deptId)){
-					alert("科室不能为空")
-					return
-				}
-				if(this.patient.inHosp != '1' && this.patient.inHosp != '0'){
-					alert("是否在院不能为空")
-					return
-				}
-				if(!this.isBlank(this.patient.outHosp)){
-					this.patient.outHosp=this.moment(this.patient.outHosp,'YYYY-MM-DD HH:mm:ss.000')
-				}
-				if(!this.isBlank(this.patient.hospTime)){
-					this.patient.hospTime=this.moment(this.patient.hospTime,'YYYY-MM-DD HH:mm:ss.000')
-				}else{
-					alert("入院时间不能为空")
-					return
-				}
-				
 				var url = this.url + '/employeeAction/addUpdateEmp'
 				this.$ajax({
 					method: 'POST',
@@ -207,7 +174,7 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data:this.patient,
+					data:[this.employee],
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
@@ -221,7 +188,7 @@
 				});
 			},
 			closeCurrentPage(){
-				$("#empContent").modal("hide")
+				$("#emp").modal("hide")
 				console.log('关闭添加员工界面')
 			},
 			//Query patient's information based on the hosNum

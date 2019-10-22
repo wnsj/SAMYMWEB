@@ -47,7 +47,7 @@
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="addEmp()" v-if="has(2)">添加员工</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="checkDepartment()">查询</button>
+			 v-on:click="checkEmp()">查询</button>
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
@@ -66,14 +66,14 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="modifyDepartment(item)">
-								<td class="text-center">{{index}}</td>
+							<tr v-for="(item,index) in employeeList" :key="index" v-on:dblclick="modifyDepartment(item)">
+								<td class="text-center">{{item.empId}}</td>
+								<td class="text-center">{{item.empName}}</td>
+								<td class="text-center">{{item.posName}}</td>
 								<td class="text-center">{{item.name}}</td>
+								<td class="text-center">{{item.sex=='1' ? '男':'女'}}</td>
 								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
+								<td class="text-center">{{item.isuse==true ? "在用" : "停用"}}</td>
 								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyEmp(item,index)">修改</button></td>
 							</tr>
 						</tbody>
@@ -110,7 +110,7 @@
 		},
 		data() {
 			return {
-				departmentList: [],
+				employeeList: [],
 				isuse: '1',
 				name: '',
 				fixedHeader: false,
@@ -144,9 +144,9 @@
 				$("#empContent").modal('hide')
 			},
 			//check the list of department
-			checkDepartment() {
+			checkEmp() {
 				console.log('checkDepartment')
-				var url = this.url + '/departmentAction/queryDepartment'
+				var url = this.url + '/employeeAction/queryEmp'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -155,15 +155,15 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						name: this.name,
-						isuse: this.isuse,
+						name: '',
+						isuse: '',
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
-						this.departmentList = res.retData
+						this.employeeList = res.retData
 					} else {
 						alert(res.retMsg)
 					}
@@ -199,7 +199,7 @@
 			window.addEventListener('scroll', this.handleScroll, true)
 		},
 		created() {
-			this.checkDepartment()
+			this.checkEmp()
 		}
 	}
 </script>

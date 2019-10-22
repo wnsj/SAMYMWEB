@@ -32,7 +32,7 @@
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="addDepartment()"  v-if="has(2)">添加会员</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="checkDepartment()">查询</button>
+			 v-on:click="checkMember()">查询</button>
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
@@ -50,14 +50,14 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="modifyDepartment(item)">
-								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">科室修改</button></td>
+							<tr v-for="(item,index) in memberList" :key="index" v-on:dblclick="modifyDepartment(item)">
+								<td class="text-center">{{item.memName}}</td>
+								<td class="text-center">{{item.memNum}}</td>
+								<td class="text-center">{{item.phone}}</td>
+								<td class="text-center">{{item.sex}}</td>
+								<td class="text-center">{{item.birthday}}</td>
+								<td class="text-center">{{item.isuse==true ? "在用" : "停用"}}</td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -85,7 +85,7 @@
 		},
 		data() {
 			return {
-				departmentList: [],
+				memberList: [],
 				isuse: '1',
 				name: '',
 				fixedHeader: false,
@@ -113,10 +113,39 @@
 				this.checkDepartment()
 				$("#departmentContent").modal('hide')
 			},
+			//check the list of member
+			checkMember() {
+				console.log('checkMember')
+				var url = this.url + '/memberAction/queryVagueMember'
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: {
+						name: '',
+						isuse: '',
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					console.log(res)
+					if (res.retCode == '0000') {
+						this.memberList = res.retData
+					} else {
+						alert(res.retMsg)
+					}
+			
+				}).catch((error) => {
+					console.log('请求失败处理')
+				});
+			},
 			//check the list of department
 			checkDepartment() {
 				console.log('checkDepartment')
-				var url = this.url + '/departmentAction/queryDepartment'
+				var url = this.url + '/memberAction/queryDepartment'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -170,7 +199,7 @@
 		window.addEventListener('scroll',this.handleScroll,true)
 		},
 		created() {
-		  this.checkDepartment()
+		  this.checkMember()
 		}
 	}
 </script>

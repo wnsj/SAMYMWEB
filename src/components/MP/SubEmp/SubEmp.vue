@@ -3,7 +3,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h4 id="myModalLabel" class="modal-title">{{title}}会员</h4>
+			<h4 id="myModalLabel" class="modal-title">{{title}}员工</h4>
 		</div>
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop" id="basic">
@@ -11,25 +11,25 @@
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">姓名：</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="patient.name" placeholder="">
+							<input type="text" class="form-control" v-model="employee.empName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">手机号：</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="patient.name" placeholder="">
+							<input type="text" class="form-control" v-model="employee.name" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">年龄：</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="patient.age" placeholder="">
+							<input type="text" class="form-control" v-model="employee.age" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="sex" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">性　别：</label>
 						<div class="col-md-8">
-							<select class="form-control" v-model="patient.sex">
+							<select class="form-control" v-model="employee.sex">
 								<option value="1">男</option>
 								<option value="2">女</option>
 							</select>
@@ -38,13 +38,13 @@
 					<div class="col-md-6 form-group clearfix">
 						<label for="gh" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">岗位：</label>
 						<div class="col-md-8">
-							<department ref="dept" @departChange='departChange'></department>
+							<pos ref="pos" @departChange='departChange'></pos>
 						</div>
 					</div>
 					
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">生　日：</label>
-						<dPicker class="col-md-8" style="width:65%;" v-model="patient.hospTime" v-on:change="dateAction('1')"></dPicker>
+						<dPicker class="col-md-8" style="width:65%;" v-model="employee.hospTime" v-on:change="dateAction('1')"></dPicker>
 					</div>
 					
 					
@@ -65,24 +65,20 @@
 
 <script>
 	import dPicker from 'vue2-datepicker'
-	import department from '../../common/Department.vue'
-	import PS from '../../common/PatientStype.vue'
-	import MIS from '../../common/MedicalInsuranceStype.vue'
+	import pos from '../../common/Position.vue'
 	export default {
 		components:{
 			dPicker,
-			department,
-			PS,
-			MIS,
+			pos,
 		},
 		data() {
 			return {
-				patient:{
-					hospTime:'',
-					name:'',
-					outHosp:'',
+				employee:{
+					empName:'',
+					sex:'',
+					posId:'',
 					sex:'1',
-					age:'',
+					isuse:'1',
 				},
 				type:'',
 				title:'新增',
@@ -98,11 +94,10 @@
 			initData(param,patient) {
 				if(param=='add'){
 					console.log('Initialization patient’s content, which adds patient')
-// 					this.type='add'
-// 					this.title='新增'
-// 					this.isExist='0'
-// 					this.isModify=false
-// 					this.patient={}
+					this.type='add'
+					this.title='新增'
+					this.isExist='0'
+					this.isModify=false
 					
 					
 					// this.patient.hospTime=this.moment('','YYYY-MM-DD HH:mm:ss.000')
@@ -163,8 +158,7 @@
 				}
 			},
 			//the event of addtional button
-			addPatient(){
-				console.log('the event of addtional button')
+			addEmp(){
 				if(this.isExist=='1'){
 					if(!confirm("是否确定提交，提交将覆盖原有患者数据！！！")){
 						return
@@ -204,10 +198,8 @@
 					alert("入院时间不能为空")
 					return
 				}
-				this.patient.paymentList=this.projectList
-				this.patient.accountId=this.accountId
-				// console.log('the event of addtional button'+JSON.stringify(this.patient))
-				var url = this.url + '/patientAction/addPatient'
+				
+				var url = this.url + '/employeeAction/addUpdateEmp'
 				this.$ajax({
 					method: 'POST',
 					url: url,

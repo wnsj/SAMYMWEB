@@ -42,24 +42,18 @@
 
 <script>
 	import dPicker from 'vue2-datepicker'
-	import department from '../../common/Department.vue'
-	import PS from '../../common/PatientStype.vue'
-	import MIS from '../../common/MedicalInsuranceStype.vue'
 	export default {
 		components:{
 			dPicker,
-			department,
-			PS,
-			MIS,
 		},
 		data() {
 			return {
-				patient:{
-					hospTime:'',
-					name:'',
-					outHosp:'',
+				employee:{
+					empName:'',
+					sex:'',
+					posId:'',
 					sex:'1',
-					age:'',
+					isuse:'1',
 				},
 				type:'',
 				title:'新增',

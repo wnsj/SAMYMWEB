@@ -109,21 +109,11 @@
 <script>
 	import axios from 'axios'
 	import dPicker from 'vue2-datepicker'
-	import department from '../common/Department.vue'
-	import project from '../common/Project.vue'
-	import patient from '../MP/PatientInfo/PatientContent'
-	import PS from '../common/PatientStype.vue'
-	import MIS from '../common/MedicalInsuranceStype.vue'
 	import SubMember from '../MP/SubMember/SubMemberList'
 	export default {
 		name: 'employee',
 		components: {
 			dPicker,
-			department,
-			project,
-			patient,
-			PS,
-			MIS,
 			SubMember,
 		},
 		data() {
@@ -135,7 +125,7 @@
 				deptId: '',
 				patitypeid: '',
 				mitypeid: '',
-				patientList: [],
+				patientList: ["",""],
 				inHosp: '', //是否在院
 				sex: '0', //性别
 				hospTime: '',

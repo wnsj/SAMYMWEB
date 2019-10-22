@@ -221,7 +221,7 @@
 
 
 <script>
-	import departmentContent from '../MP/Depart/DepartmentContent.vue'
+
 	import SubFlowWater from '../MP/SubRule/SubFlowWater.vue'
 	import SubVip from '../MP/SubRule/SubVip.vue'
 	import SubVipRefund from '../MP/SubRule/SubVipRefund.vue'
@@ -229,7 +229,6 @@
 	import SubCharg from '../MP/SubRule/SubCharg.vue'
 	export default {
 		components: {
-			departmentContent,
 			SubFlowWater,
 			SubVip,
 			SubVipRefund,

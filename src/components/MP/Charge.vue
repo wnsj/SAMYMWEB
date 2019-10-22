@@ -100,36 +100,17 @@
 				</div>
 			</div>
 		</div>
-		<div class="row row_edit">
-			<div class="modal fade" id="receipt">
-				<div class="modal-dialog">
-					<receipt ref="receipt"></receipt>
-				</div>
-			</div>
-		</div>
 	</div>
 </template>
 
 <script>
 	import dPicker from 'vue2-datepicker'
-	import project from '../common/Project.vue'
-	import department from '../common/Department.vue'
-	import dp from 'vue2-datepicker'
 	import adding from '../MP/Charge/Addingfees'
-	import receipt from '../MP/Charge/Receipt'
-	import PS from '../common/PatientStype.vue'
-	import MIS from '../common/MedicalInsuranceStype.vue'
 	import SubRecharge from '../MP/SubRecharge/SubRecharge.vue'
 	export default {
 		components: {
 			dPicker,
-			project,
-			department,
-			dp,
 			adding,
-			receipt,
-			PS,
-			MIS,
 			SubRecharge,
 		},
 		data() {

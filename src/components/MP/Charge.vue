@@ -96,7 +96,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="addFee">
 				<div class="modal-dialog">
-					<adding ref='fee' @feedbackCharge="feedBack"></adding>
+					<SubRecharge ref='fee' @feedbackCharge="feedBack"></SubRecharge>
 				</div>
 			</div>
 		</div>
@@ -106,10 +106,12 @@
 <script>
 	import dPicker from 'vue2-datepicker'
 	import adding from '../MP/Charge/Addingfees'
+	import SubRecharge from '../MP/SubRecharge/SubRecharge.vue'
 	export default {
 		components: {
 			dPicker,
 			adding,
+			SubRecharge,
 		},
 		data() {
 			return {
@@ -139,7 +141,7 @@
 			},
 			//go into the view of modified patient charge
 			modifyPatientCharge: function(param) {
-				this.$refs.fee.initData('modify',param)
+				//this.$refs.fee.initData('modify',param)
 				$("#addFee").modal("show")
 				console.log('进入添加患者界面')
 			},

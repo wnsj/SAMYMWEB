@@ -3,38 +3,38 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h4 id="myModalLabel">提成列表</h4>
+			<h4 id="myModalLabel" class="modal-title">流水提成规则</h4>
 		</div>
-		<div class="tableContent">
-			<nobr class="widthmax">
-				<div class="table-responsive pre-scrollable" style=" max-height:464px">
-					<table class="table table-bordered table-hover user-table" id="datatable">
-						<thead>
-							<tr>
-								<th class="text-center">会员卡号</th>
-								<th class="text-center">姓名</th>
-								<th class="text-center">年龄</th>
-								<th class="text-center">岗位</th>
-								<th class="text-center">提成总额</th>
-								<th class="text-center">扣费总额</th>
-								<th class="text-center">合计总额</th>
-							</tr>
-						</thead> 
-						<tbody>
-							<tr v-for="(item2,index2) in patientList" :key="index2">
-								<td>{{item2.hospNum}}</td>
-								<td>{{item2.name}}</td>
-								<td>{{item2.age}}</td>
-								<td>{{item2.DEPTNAME}}</td>
-								<td>{{item2.patitypename}}</td>
-								<td>{{item2.mitypename}}</td>
-								<td>{{item2.mitypename}}</td>
-								<td>{{item2.inHosp==1 ? '在' : '否'}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</nobr>
+		<div class="modal-body  pos_r">
+			<div class="tab-pane fade in active martop" id="basic">
+				<form action="" class="clearfix">
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">岗位：</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" v-model="patient.workname" placeholder="">
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">额度级别：</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" v-model="patient.level" placeholder="">
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">提点：</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" v-model="patient.remind" placeholder="">
+						</div>
+					</div>
+					<div class="form-group clearfix">
+						<div class="col-md-12">
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addPatient()">确认</button>
+							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+						</div>
+					</div>
+				</form>
+			</div>
+	
 		</div>
 		
 	</div>
@@ -63,7 +63,7 @@
 				isExist:'0',
 				accountId:this.accountId(),
 			};
-		}, 
+		},
 		methods:{
 			// Initialization patient’s content
 			initData(param,patient) {
@@ -204,7 +204,7 @@
 				});
 			},
 			closeCurrentPage(){
-				$("#addPatient").modal("hide")
+				$("#SubFlowWater").modal("hide")
 				console.log('关闭添加患者界面')
 			},
 			//Query patient's information based on the hosNum

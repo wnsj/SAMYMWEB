@@ -77,7 +77,8 @@
 
 
 <script>
-	import SubMemberRun from '../MP/SubMemberRun/SubMemberRunList.vue'
+
+	import SubMemberRun from '../MP/SubMemberRun/SubMemberRun.vue'
 	export default {
 		components: {
 			SubMemberRun

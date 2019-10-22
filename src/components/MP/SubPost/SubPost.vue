@@ -40,6 +40,10 @@
 <script>
 	import dPicker from 'vue2-datepicker'
 
+
+
+
+
 	export default {
 		components:{
 			dPicker,

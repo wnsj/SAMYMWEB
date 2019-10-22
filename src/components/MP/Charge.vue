@@ -54,8 +54,6 @@
 			</div>
 			<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xs-offset-7 col-sm-offset-7 col-md-offset-7 col-lg-offset-7" style="padding-right:30px;padding-bottom:1.5%;">
 				<button type="button" class="btn btn-primary pull-right m_r_10" @click="exportTableToExcel('datatable','患者费用统计表')">导出</button>
-				<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-				 v-on:click="addPatientCharge()" v-if="has(2)">添加缴费</button>
 				<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 				 v-on:click="conditionCheck()">查询</button>
 			</div>

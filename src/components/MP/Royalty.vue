@@ -1,7 +1,7 @@
 <!-- the page of department management -->
 <template>
 
-	<div>
+	<div class="clearfix" style="height:100%">
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">提成规则管理</h1>
 		</div>
@@ -370,5 +370,12 @@
 	.pos2{
 		margin-top:15px;
 		margin-left:160px;
+	}
+	.clearfix:after{
+		content:"";
+		display:block;
+		width:100%;
+		height:0;
+		clear:both;
 	}
 </style>

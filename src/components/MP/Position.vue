@@ -37,12 +37,7 @@
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable" style="max-height:464px">
 					<table class="table table-bordered table-hover" id="datatable" >
-						<!-- <div id="fHeader" v-show="fixedHeader">
-							<div class="text-center">ID</div>
-							<div class="text-center">科室名称</div>
-							<div class="text-center">是否停用</div>
-							<div class="text-center">修改科室</div>
-						</div> -->
+						
 						<thead class="datathead">
 							<tr>
 								<th class="text-center">ID</th>
@@ -52,9 +47,9 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="modifyDepartment(item)">
-								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.name}}</td>
+							<tr v-for="(item,index) in positionList" :key="index" v-on:dblclick="modifyDepartment(item)">
+								<td class="text-center">{{item.posId}}</td>
+								<td class="text-center">{{item.posName}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
 								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
 							</tr>
@@ -83,38 +78,37 @@
 		},
 		data() {
 			return {
-				departmentList: [],
+				positionList: [],
 				isuse: '1',
 				name: '',
 				fixedHeader: false,
 			};
 		},
 		methods: {
-			//modify the cotent of department
-			addDepartment() {
-				console.log('modify the cotent of department')
+			//modify the cotent of position
+			addPosition() {
+				console.log('modify the cotent of position')
 				//this.$refs.dc.initData('add')
-				$("#departmentContent").modal('show')
+				$("#positionContent").modal('show')
 			},
-			//modify the cotent of department
-			modifyDepartment(item) {
+			//modify the cotent of position
+			modifyPosition(item) {
 				if(!this.has(2)){
 				alert("暂无权限修改!");
 				return;
 				}
-				console.log('modify the cotent of department')
-				//this.$refs.dc.initData('modify', item)
-				$("#departmentContent").modal('show')
+				console.log('modify the cotent of position')
+				$("#positionContent").modal('show')
 			},
 			//feedback from adding and modifying view
 			feedBack() {
-				this.checkDepartment()
-				$("#departmentContent").modal('hide')
+				this.checkPosition()
+				$("#positionContent").modal('hide')
 			},
-			//check the list of department
-			checkDepartment() {
-				console.log('checkDepartment')
-				var url = this.url + '/departmentAction/queryDepartment'
+			//check the list of position
+			checkPosition() {
+				console.log('checkPosition')
+				var url = this.url + '/positionAction/queryPosition'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -123,15 +117,15 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						name: this.name,
-						isuse: this.isuse,
+						name: '',
+						isuse: '',
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
-						this.departmentList = res.retData
+						this.positionList = res.retData
 					} else {
 						alert(res.retMsg)
 					}
@@ -168,7 +162,7 @@
 		window.addEventListener('scroll',this.handleScroll,true)
 		},
 		created() {
-		  this.checkDepartment()
+		  this.checkPosition()
 		}
 	}
 </script>

@@ -29,9 +29,9 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="addDepartment()"  v-if="has(2)">添加</button>
+			 v-on:click="addPosition()"  v-if="has(2)">添加</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="checkDepartment()">查询</button>
+			 v-on:click="checkPosition()">查询</button>
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
@@ -59,7 +59,7 @@
 			</div>
 		</div>
 		<div class="row row_edit">
-			<div class="modal fade" id="departmentContent">
+			<div class="modal fade" id="positionContent">
 				<div class="modal-dialog">
 					<SubPost ref='dc' @addDepartment='feedBack'></SubPost>
 				</div>
@@ -79,7 +79,7 @@
 		},
 		data() {
 			return {
-				positionList: [],
+				positionList: ["",],
 				isuse: '1',
 				name: '',
 				fixedHeader: false,

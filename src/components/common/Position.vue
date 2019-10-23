@@ -1,8 +1,8 @@
 <template>
-  <select class="form-control" v-model="deptId" v-on:change="departChange()">
+  <select class="form-control" v-model="posId" v-on:change="positionChange()">
     <option value="0">--未选择--</option>
-    <option v-for="(item,index) in departmentList" :key="index" v-bind:value="item.deptId">
-      {{item.name}}
+    <option v-for="(item,index) in positionList" :key="index" v-bind:value="item.posId">
+      {{item.posName}}
     </option>
   </select>
 </template>
@@ -13,36 +13,40 @@
     name: 'department',
     data() {
       return {
-        departName: '',
-        deptId: '0',
-        departmentList: [],
-				deptObj:{},
+        posName: '',
+        posId: '0',
+        positionList: [],
+				posObj:{
+					posId:'0',
+					posName: '',
+				},
       };
     },
     methods: {
-      //提交部门名称和ID
-      departChange: function () {
-				
-        this.deptObj = this.exchangeDepartName(this.deptId)
-        this.$emit('departChange', this.deptObj)
+      //提交岗位名称和ID
+      positionChange: function () {
+				console.log('岗位1：'+this.posObj.posId)
+        this.posObj = this.exchangePosName(this.posId)
+				console.log('岗位2：'+this.posObj.posId)
+        this.$emit('positionChange', this.posObj)
       },
-      setDpart: function (deptId) {
-        this.deptId = deptId
-				console.log('设置部门'+this.deptId)
+      setPos: function (posId) {
+        this.posId = posId
+				console.log('设置岗位'+this.posId)
       },
       //添加前缀的部门名字兑换原来的名字
-      exchangeDepartName: function (param) {
-        var dp = {}
-        for (var i = 0; i < this.departmentList.length; i++) {
-          dp = this.departmentList[i];
-          if (dp.deptId == param) {
-            return dp
+      exchangePosName: function (param) {
+        var pos = {}
+        for (var i = 0; i < this.positionList.length; i++) {
+          pos = this.positionList[i];
+          if (pos.posId == param) {
+            return pos
           }
         }
       },
      
-      async getDepartment() {
-        var url = this.url + '/departmentAction/queryDepartment'
+      async getPosition() {
+        var url = this.url + '/positionAction/queryPosition'
         this.$ajax({
         	method: 'POST',
         	url: url,
@@ -58,20 +62,20 @@
         	var res = response.data
         	if (res.retCode == '0000') {
         		if (res.retData.length > 0) {
-        			this.departmentList = res.retData
+        			this.positionList = res.retData
         		}
         	} else {
         		alert(res.retMsg)
         	}
         
         }).catch((error) => {
-        	console.log('请求失败处理')
+        	console.log('岗位数据请求失败处理')
         });
       },
 
     },
     created() {
-      this.getDepartment()
+      this.getPosition()
     },
   }
 </script>

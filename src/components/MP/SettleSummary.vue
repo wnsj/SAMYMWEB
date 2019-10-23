@@ -125,7 +125,7 @@
 				deptId: '',
 				patitypeid: '',
 				mitypeid: '',
-				patientList: [],
+				patientList: ["",],
 				inHosp: '', //是否在院
 				sex: '0', //性别
 				hospTime: '',

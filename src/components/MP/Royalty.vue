@@ -13,7 +13,7 @@
 					<h3>流水提成规则</h3>
 				</div>
 				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn btn-warning pos1" v-on:click="modifyDepartment(item,index)">添加</button>
+					<button type="button" class="btn btn-warning pos1" v-on:click="addRoyalty('add')">添加</button>
 				</div>
 			</div>
 			<div class="col-md-12 col-lg-12">
@@ -29,11 +29,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="modifyDepartment(item)">
+							<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='0'" v-on:dblclick="addSubVipRefund(item)">
 								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
+								<td class="text-center">{{item.flowSmall}}~{{item.flowBig}} 万</td>
+								<td class="text-center">{{item.turRoy}}%</td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubVipRefund(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -100,10 +100,10 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubVipRefund(item)">
+							<tr v-for="(item,index) in royaltyList" :key="index" v-on:dblclick="addSubVipRefund(item)">
 								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
+								<td class="text-center">{{item.flowSmall}}~{{item.flowBig}} 万</td>
+								<td class="text-center">{{item.turRoy}}%</td>
 								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubVipRefund(item,index)">修改</button></td>
 							</tr>
 						</tbody>
@@ -183,7 +183,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="SubFlowWater">
 				<div class="modal-dialog">
-					<SubFlowWater ref='dc' @addDepartment='feedBack'></SubFlowWater>
+					<SubFlowWater ref='flowWater' @certainAction='feedBack'></SubFlowWater>
 				</div>
 			</div>
 		</div>
@@ -238,16 +238,17 @@
 		data() {
 			return {
 				departmentList: [],
+				royaltyList:[],
 				isuse: '1',
 				name: '',
 				fixedHeader: false,
 			};
 		},
 		methods: {
-			//modify the cotent of department
-			addDepartment() {
-				console.log('modify the cotent of department')
-				this.$refs.dc.initData('add')
+			//modify the cotent of Royalty
+			addRoyalty() {
+				console.log('modify the cotent of Royalty')
+				this.$refs.flowWater.initData('add')
 				$("#SubFlowWater").modal('show')
 			},
 			//modify the cotent of department
@@ -274,13 +275,13 @@
 			},
 			//feedback from adding and modifying view
 			feedBack() {
-				this.checkDepartment()
+				this.checkRoyaltyList()
 				$("#SubFlowWater").modal('hide')
 			},
 			//check the list of department
-			checkDepartment() {
-				console.log('checkDepartment')
-				var url = this.url + '/departmentAction/queryDepartment'
+			checkRoyaltyList() {
+				console.log('checkRoyaltyList')
+				var url = this.url + '/royaltyAction/queryRoyalty'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -288,22 +289,19 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data: {
-						name: this.name,
-						isuse: this.isuse,
-					},
+					data: {},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
-						this.departmentList = res.retData
+						this.royaltyList = res.retData
 					} else {
 						alert(res.retMsg)
 					}
 
 				}).catch((error) => {
-					console.log('请求失败处理')
+					console.log('提成规则数据请求失败')
 				});
 			},
 			handleScroll(e) {
@@ -333,7 +331,7 @@
 			window.addEventListener('scroll', this.handleScroll, true)
 		},
 		created() {
-			this.checkDepartment()
+			this.checkRoyaltyList()
 		}
 	}
 </script>

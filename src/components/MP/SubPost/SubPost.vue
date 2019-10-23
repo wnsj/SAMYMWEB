@@ -39,62 +39,26 @@
 
 <script>
 	import dPicker from 'vue2-datepicker'
-
-
-
-
-
 	export default {
 		components:{
 			dPicker,
 		},
 		data() {
 			return {
-				patient:{
-					hospTime:'',
-					name:'',
-					outHosp:'',
-					sex:'1',
-					age:'',
-				},
-				type:'',
-				title:'新增',
-				isModify:false,
-				projectList:[],
-				hospNum:'',
-				isExist:'0',
-				accountId:this.accountId(),
+				positionList:["",],
 			};
 		},
 		methods:{
 			// Initialization patient’s content
-			initData(param,patient) {
+			initData(param,posContent) {
 				if(param=='add'){
 					console.log('Initialization patient’s content, which adds patient')
 					this.type='add'
 					this.title='新增'
-					this.isExist='0'
-					this.isModify=false
-					this.patient={}
-					this.$refs.dept.setDpart('0')
-					this.$refs.ps.setObjId('0')
-					this.$refs.mis.setObjId('0')
-					this.hospNum=''
-					this.patient.sex='1'
-					this.patient.inHosp='1'
-					// this.patient.hospTime=this.moment('','YYYY-MM-DD HH:mm:ss.000')
 				}else if(param=='modify'){
 					console.log('Initialization patient’s content, which modifies patient')
 					this.type='modify'
-					this.isExist='1'
-					this.isModify=true
 					this.title='修改'
-					// console.log("patient"+JSON.stringify(patient))
-					Object.assign(this.patient,patient)
-					this.hospNum=this.patient.hospNum
-					this.$refs.dept.setDpart(this.patient.deptId)
-					this.$refs.ps.setObjId(this.patient.patitypeid)
-					this.$refs.mis.setObjId(this.patient.mitypeid)
 				}
 			},
 			//date formatting 
@@ -206,7 +170,7 @@
 				});
 			},
 			closeCurrentPage(){
-				$("#departmentContent").modal("hide")
+				$("#positionContent").modal("hide")
 				console.log('关闭添加患者界面')
 			},
 			//Query patient's information based on the hosNum

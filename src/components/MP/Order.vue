@@ -93,7 +93,7 @@
 		},
 		data() {
 			return {
-				departmentList: [],
+				departmentList: ["",],
 				isuse: '1',
 				name: '',
 				fixedHeader: false,

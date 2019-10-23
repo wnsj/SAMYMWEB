@@ -3,6 +3,16 @@
 body{
     background-color: #eeeeee;
 }
+.end-aline{
+    display: inline-block;
+    text-align:justify;
+    text-align-last:justify;
+}
+.sign-left{
+    float: left;
+    line-height: 34px;
+    font-weight: bold;
+}
 .titleCss{
 	color: #ffffff;
 	margin-top:35px;

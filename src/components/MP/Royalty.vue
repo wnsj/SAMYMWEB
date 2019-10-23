@@ -1,185 +1,190 @@
 <!-- the page of department management -->
 <template>
 
-	<div class="clearfix" style="height:100%">
-		<div class="col-md-12 col-lg-12 main-title">
+	<div class="royCon" ref="con1">
+		<div class="col-md-12 col-lg-12 main-title royTit">
 			<h1 class="titleCss">提成规则管理</h1>
 		</div>
+		<div class="royRow">
+			<div class="col-md-6 col-lg-6">
+				<div class="col-md-12 col-lg-12 main-title" ref="tit">
+					<div class="col-md-6 col-lg-6 text-left">
+						<h3>流水提成规则</h3>
+					</div>
+					<div class="col-md-6 col-lg-6 pull-right">
+						<button type="button" class="btn btn-warning pos1" v-on:click="modifyDepartment(item,index)">添加</button>
+					</div>
+				</div>
+				<div class="col-md-12 col-lg-12">
+					<div class="table-responsive pre-scrollable" ref="tab1" style="max-height:464px">
+						<table class="table table-bordered table-hover" id="datatable">
 
-
-		<div class="col-md-6 col-lg-6">
-			<div class="col-md-12 col-lg-12 main-title">
-				<div class="col-md-6 col-lg-6 text-left">
-					<h3>流水提成规则</h3>
-				</div>
-				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn btn-warning pos1" v-on:click="modifyDepartment(item,index)">添加</button>
-				</div>
-			</div>
-			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" style="max-height:464px">
-					<table class="table table-bordered table-hover" id="datatable">
-
-						<thead class="datathead">
-							<tr>
-								<th class="text-center col-md-2">岗位</th>
-								<th class="text-center col-md-4">额度级别</th>
-								<th class="text-center col-md-3">提点</th>
-								<th class="text-center col-md-3" v-if="has(2)">修改</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="modifyDepartment(item)">
-								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
-							</tr>
-						</tbody>
-					</table>
+							<thead class="datathead">
+								<tr>
+									<th class="text-center col-md-2">岗位</th>
+									<th class="text-center col-md-4">额度级别</th>
+									<th class="text-center col-md-3">提点</th>
+									<th class="text-center col-md-3" v-if="has(2)">修改</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="modifyDepartment(item)">
+									<td class="text-center">{{index}}</td>
+									<td class="text-center">{{item.name}}</td>
+									<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
+									<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
+			<div class="col-md-6 col-lg-6">
+				<div class="col-md-12 col-lg-12 main-title">
+					<div class="col-md-6 col-lg-6 text-left">
+						<h3>会员卡提成规则</h3>
+					</div>
+					<div class="col-md-6 col-lg-6 pull-right">
+						<button type="button" class="btn btn-warning pos2" v-on:click="addSubVip(item,index)">添加</button>
+					</div>
+				</div>
+				<div class="col-md-12 col-lg-12">
+					<div class="table-responsive pre-scrollable" ref="tab2" style="max-height:464px">
+						<table class="table table-bordered table-hover" id="datatable">
+			
+							<thead class="datathead">
+								<tr>
+									<th class="text-center  col-md-1">岗位</th>
+									<th class="text-center  col-md-3">充值类型</th>
+									<th class="text-center  col-md-1">提点</th>
+									<th class="text-center  col-md-3">消费额度</th>
+									<th class="text-center  col-md-2">提成比例</th>
+									<th class="text-center  col-md-2" v-if="has(2)">修改</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubVip(item)">
+									<td class="text-center">{{index}}</td>
+									<td class="text-center">{{item.name}}</td>
+									<td class="text-center">{{index}}</td>
+									<td class="text-center">{{item.name}}</td>
+									<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
+									<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubVip(item,index)">修改</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div style="clear:both"></div>
 		</div>
-		<div class="col-md-6 col-lg-6">
-			<div class="col-md-12 col-lg-12 main-title">
-				<div class="col-md-6 col-lg-6 text-left">
-					<h3>会员卡提成规则</h3>
+		<div class="royRow">
+			<div class="col-md-6 col-lg-6">
+				<div class="col-md-12 col-lg-12 main-title">
+					
+					<div class="col-md-6 col-lg-6 text-left">
+						<h3>会员卡退费扣提成规则</h3>
+					</div>
+					<div class="col-md-6 col-lg-6 pull-right">
+						<button type="button" class="btn btn-warning pos1" v-on:click="addSubVipRefund(item,index)">添加</button>
+					</div>
 				</div>
-				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn btn-warning pos2" v-on:click="addSubVip(item,index)">添加</button>
+				<div class="col-md-12 col-lg-12">
+					<div class="table-responsive pre-scrollable" ref="tab3" style="max-height:464px">
+						<table class="table table-bordered table-hover" id="datatable">
+			
+							<thead class="datathead">
+								<tr>
+									<th class="text-center col-md-2">岗位</th>
+									<th class="text-center col-md-4">额度级别</th>
+									<th class="text-center col-md-3">扣款比例</th>
+									<th class="text-center col-md-3" v-if="has(2)">修改</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubVipRefund(item)">
+									<td class="text-center">{{index}}</td>
+									<td class="text-center">{{item.name}}</td>
+									<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
+									<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubVipRefund(item,index)">修改</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" style="max-height:464px">
-					<table class="table table-bordered table-hover" id="datatable">
-		
-						<thead class="datathead">
-							<tr>
-								<th class="text-center  col-md-1">岗位</th>
-								<th class="text-center  col-md-3">充值类型</th>
-								<th class="text-center  col-md-1">提点</th>
-								<th class="text-center  col-md-3">消费额度</th>
-								<th class="text-center  col-md-2">提成比例</th>
-								<th class="text-center  col-md-2" v-if="has(2)">修改</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubVip(item)">
-								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubVip(item,index)">修改</button></td>
-							</tr>
-						</tbody>
-					</table>
+			<div class="col-md-6 col-lg-6">
+				<div class="col-md-12 col-lg-12 main-title">
+					
+					<div class="col-md-6 col-lg-6 text-left">
+						<h3>预约人数提成规则</h3>
+					</div>
+					<div class="col-md-6 col-lg-6 pull-right">
+						<button type="button" class="btn btn-warning pos2" v-on:click="addSubVipOrder(item,index)">添加</button>
+					</div>
+				</div>
+				<div class="col-md-12 col-lg-12">
+					<div class="table-responsive pre-scrollable" ref="tab4" style="max-height:464px">
+						<table class="table table-bordered table-hover" id="datatable">
+			
+							<thead class="datathead">
+								<tr>
+									<th class="text-center col-md-2">岗位</th>
+									<th class="text-center col-md-4">预约人数</th>
+									<th class="text-center col-md-4">提成金额</th>
+									<th class="text-center col-md-2" v-if="has(2)">修改</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubVipOrder(item)">
+									<td class="text-center">{{index}}</td>
+									<td class="text-center">{{item.name}}</td>
+									<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
+									<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubVipOrder(item,index)">修改</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
+			<div style="clear:both"></div>
 		</div>
-		<div class="col-md-6 col-lg-6">
-			<div class="col-md-12 col-lg-12 main-title">
-				
-				<div class="col-md-6 col-lg-6 text-left">
-					<h3>会员卡退费扣提成规则</h3>
+		<div class="royRow">
+			<div class="col-md-6 col-lg-6">
+				<div class="col-md-12 col-lg-12 main-title">
+					<div class="col-md-6 col-lg-6 text-left">
+						<h3>退号扣提成规则</h3>
+					</div>
+					<div class="col-md-6 col-lg-6 pull-right">
+						<button type="button" class="btn btn-warning pos1" v-on:click="addSubCharg(item,index)">添加</button>
+					</div>
 				</div>
-				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn btn-warning pos1" v-on:click="addSubVipRefund(item,index)">添加</button>
+				<div class="col-md-12 col-lg-12">
+					<div class="table-responsive pre-scrollable" ref="tab5" style="max-height:464px">
+						<table class="table table-bordered table-hover" id="datatable">
+			
+							<thead class="datathead">
+								<tr>
+									<th class="text-center col-md-2">岗位</th>
+									<th class="text-center col-md-4">预约人数</th>
+									<th class="text-center col-md-3">扣款金额</th>
+									<th class="text-center col-md-3" v-if="has(2)">修改</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubCharg(item)">
+									<td class="text-center">{{index}}</td>
+									<td class="text-center">{{item.name}}</td>
+									<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
+									<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubCharg(item,index)">修改</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" style="max-height:464px">
-					<table class="table table-bordered table-hover" id="datatable">
-		
-						<thead class="datathead">
-							<tr>
-								<th class="text-center col-md-2">岗位</th>
-								<th class="text-center col-md-4">额度级别</th>
-								<th class="text-center col-md-3">扣款比例</th>
-								<th class="text-center col-md-3" v-if="has(2)">修改</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubVipRefund(item)">
-								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubVipRefund(item,index)">修改</button></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
+			<div style="clear:both"></div>
 		</div>
-		<div class="col-md-6 col-lg-6">
-			<div class="col-md-12 col-lg-12 main-title">
-				
-				<div class="col-md-6 col-lg-6 text-left">
-					<h3>预约人数提成规则</h3>
-				</div>
-				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn btn-warning pos2" v-on:click="addSubVipOrder(item,index)">添加</button>
-				</div>
-			</div>
-			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" style="max-height:464px">
-					<table class="table table-bordered table-hover" id="datatable">
-		
-						<thead class="datathead">
-							<tr>
-								<th class="text-center col-md-2">岗位</th>
-								<th class="text-center col-md-4">预约人数</th>
-								<th class="text-center col-md-4">提成金额</th>
-								<th class="text-center col-md-2" v-if="has(2)">修改</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubVipOrder(item)">
-								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubVipOrder(item,index)">修改</button></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-6 col-lg-6">
-			<div class="col-md-12 col-lg-12 main-title">
-				<div class="col-md-6 col-lg-6 text-left">
-					<h3>退号扣提成规则</h3>
-				</div>
-				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn btn-warning pos1" v-on:click="addSubCharg(item,index)">添加</button>
-				</div>
-			</div>
-			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" style="max-height:464px">
-					<table class="table table-bordered table-hover" id="datatable">
-		
-						<thead class="datathead">
-							<tr>
-								<th class="text-center col-md-2">岗位</th>
-								<th class="text-center col-md-4">预约人数</th>
-								<th class="text-center col-md-3">扣款金额</th>
-								<th class="text-center col-md-3" v-if="has(2)">修改</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubCharg(item)">
-								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubCharg(item,index)">修改</button></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		
-
 		<div class="row row_edit">
 			<div class="modal fade" id="SubFlowWater">
 				<div class="modal-dialog">
@@ -330,7 +335,17 @@
 			}
 		},
 		mounted() {
-			window.addEventListener('scroll', this.handleScroll, true)
+			window.addEventListener('scroll', this.handleScroll, true);
+			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			let conH = this.$refs.con1.offsetHeight;
+			let titH = this.$refs.tit.offsetHeight;
+			let sigH = (h-150)/3;
+			let maxH = parseInt(sigH-titH)
+			this.$refs.tab1.style = "max-height:"+maxH+"px";
+			this.$refs.tab2.style = "max-height:"+maxH+"px";
+			this.$refs.tab3.style = "max-height:"+maxH+"px";
+			this.$refs.tab4.style = "max-height:"+maxH+"px";
+			this.$refs.tab5.style = "max-height:"+maxH+"px";
 		},
 		created() {
 			this.checkDepartment()
@@ -342,7 +357,18 @@
 	#datatable {
 		position: relative;
 	}
+	.royCon{
+		position:relative;
+		height:calc();
 
+	}
+	.royTit{
+		 position:absolute;
+		 left:0;
+		 right:0;
+		 top:40px;
+		 margin:0 auto;
+	}
 	#fHeader {
 		position: absolute;
 		top: 0;
@@ -365,7 +391,7 @@
 	}
 	.pos1{
 		margin-top:15px;
-		margin-left:114px;
+		margin-left:100px;
 	}
 	.pos2{
 		margin-top:15px;

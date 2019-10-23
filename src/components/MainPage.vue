@@ -108,7 +108,7 @@
 			},
 		},
 		mounted() {
-			init()
+			init();
 		},
 	}
 </script>

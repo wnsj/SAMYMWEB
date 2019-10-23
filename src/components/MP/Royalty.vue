@@ -1,12 +1,10 @@
 <!-- the page of department management -->
 <template>
 
-	<div>
+	<div class="clearfix" style="height:100%">
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">提成规则管理</h1>
 		</div>
-
-
 		<div class="col-md-6 col-lg-6">
 			<div class="col-md-12 col-lg-12 main-title">
 				<div class="col-md-6 col-lg-6 text-left">
@@ -25,7 +23,6 @@
 								<th class="text-center col-md-2">岗位</th>
 								<th class="text-center col-md-4">额度级别</th>
 								<th class="text-center col-md-3">提点</th>
-								<th class="text-center col-md-3" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -33,7 +30,6 @@
 								<td class="text-center">{{index}}</td>
 								<td class="text-center">{{item.flowSmall}}~{{item.flowBig}} 万</td>
 								<td class="text-center">{{item.turRoy}}%</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubVipRefund(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -46,7 +42,7 @@
 					<h3>会员卡提成规则</h3>
 				</div>
 				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn btn-warning pos2" v-on:click="addSubVip(item,index)">添加</button>
+					<button type="button" class="btn btn-warning pos2" v-on:click="addSubVip()">添加</button>
 				</div>
 			</div>
 			<div class="col-md-12 col-lg-12">
@@ -60,17 +56,15 @@
 								<th class="text-center  col-md-1">提点</th>
 								<th class="text-center  col-md-3">消费额度</th>
 								<th class="text-center  col-md-2">提成比例</th>
-								<th class="text-center  col-md-2" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubVip(item)">
-								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubVip(item,index)">修改</button></td>
+							<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='1'" v-on:dblclick="addSubVip(item)">
+								<td class="text-center">{{item.posId}}</td>
+								<td class="text-center">{{item.consumeType}}</td>
+								<td class="text-center">{{item.turRoy}}</td>
+								<td class="text-center">{{item.royProcess}}</td>
+								<td class="text-center">{{item.memProportion}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -84,7 +78,7 @@
 					<h3>会员卡退费扣提成规则</h3>
 				</div>
 				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn btn-warning pos1" v-on:click="addSubVipRefund(item,index)">添加</button>
+					<button type="button" class="btn btn-warning pos1" v-on:click="addSubVipRefund()">添加</button>
 				</div>
 			</div>
 			<div class="col-md-12 col-lg-12">
@@ -96,7 +90,6 @@
 								<th class="text-center col-md-2">岗位</th>
 								<th class="text-center col-md-4">额度级别</th>
 								<th class="text-center col-md-3">扣款比例</th>
-								<th class="text-center col-md-3" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -104,7 +97,6 @@
 								<td class="text-center">{{index}}</td>
 								<td class="text-center">{{item.flowSmall}}~{{item.flowBig}} 万</td>
 								<td class="text-center">{{item.turRoy}}%</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubVipRefund(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -118,7 +110,7 @@
 					<h3>预约人数提成规则</h3>
 				</div>
 				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn btn-warning pos2" v-on:click="addSubVipOrder(item,index)">添加</button>
+					<button type="button" class="btn btn-warning pos2" v-on:click="addSubVipOrder()">添加</button>
 				</div>
 			</div>
 			<div class="col-md-12 col-lg-12">
@@ -130,15 +122,13 @@
 								<th class="text-center col-md-2">岗位</th>
 								<th class="text-center col-md-4">预约人数</th>
 								<th class="text-center col-md-4">提成金额</th>
-								<th class="text-center col-md-2" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubVipOrder(item)">
+							<tr v-for="(item,index) in royaltyList" :key="index" v-on:dblclick="addSubVipOrder(item)">
 								<td class="text-center">{{index}}</td>
 								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubVipOrder(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -151,7 +141,7 @@
 					<h3>退号扣提成规则</h3>
 				</div>
 				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn btn-warning pos1" v-on:click="addSubCharg(item,index)">添加</button>
+					<button type="button" class="btn btn-warning pos1" v-on:click="addSubCharg()">添加</button>
 				</div>
 			</div>
 			<div class="col-md-12 col-lg-12">
@@ -163,15 +153,13 @@
 								<th class="text-center col-md-2">岗位</th>
 								<th class="text-center col-md-4">预约人数</th>
 								<th class="text-center col-md-3">扣款金额</th>
-								<th class="text-center col-md-3" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="addSubCharg(item)">
+							<tr v-for="(item,index) in royaltyList" :key="index" v-on:dblclick="addSubCharg(item)">
 								<td class="text-center">{{index}}</td>
 								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="addSubCharg(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -190,28 +178,28 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="SubVip">
 				<div class="modal-dialog">
-					<SubVip ref='dc' @addDepartment='feedBack'></SubVip>
+					<SubVip ref='vip' @certainAction='feedBack'></SubVip>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="SubVipRefund">
 				<div class="modal-dialog">
-					<SubVipRefund ref='dc' @addDepartment='feedBack'></SubVipRefund>
+					<SubVipRefund ref='refund' @certainAction='feedBack'></SubVipRefund>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="SubVipOrder">
 				<div class="modal-dialog">
-					<SubVipOrder ref='dc' @addDepartment='feedBack'></SubVipOrder>
+					<SubVipOrder ref='order' @certainAction='feedBack'></SubVipOrder>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="SubCharg">
 				<div class="modal-dialog">
-					<SubCharg ref='dc' @addDepartment='feedBack'></SubCharg>
+					<SubCharg ref='charg' @certainAction='feedBack'></SubCharg>
 				</div>
 			</div>
 		</div>
@@ -237,7 +225,6 @@
 		},
 		data() {
 			return {
-				departmentList: [],
 				royaltyList:[],
 				isuse: '1',
 				name: '',
@@ -261,22 +248,23 @@
 				//this.$refs.dc.initData('modify', item)
 				$("#SubFlowWater").modal('show')
 			},
-			addSubVip(item) {
+			addSubVip() {
 				$("#SubVip").modal('show')
 			},
-			addSubVipRefund(item) {
+			addSubVipRefund() {
 				$("#SubVipRefund").modal('show')
 			},
-			addSubVipOrder(item) {
+			addSubVipOrder() {
 				$("#SubVipOrder").modal('show')
 			},
-			addSubCharg(item) {
+			addSubCharg() {
 				$("#SubCharg").modal('show')
 			},
 			//feedback from adding and modifying view
 			feedBack() {
 				this.checkRoyaltyList()
 				$("#SubFlowWater").modal('hide')
+				$("#SubVip").modal('hide')
 			},
 			//check the list of department
 			checkRoyaltyList() {
@@ -368,5 +356,12 @@
 	.pos2{
 		margin-top:15px;
 		margin-left:160px;
+	}
+	.clearfix:after{
+		content:"";
+		display:block;
+		width:100%;
+		height:0;
+		clear:both;
 	}
 </style>

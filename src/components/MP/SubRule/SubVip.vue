@@ -87,7 +87,7 @@
 						turRoy:'0',
 						royProcess:'0',
 						memProportion:'',
-						consumeType:'0',
+						consumeType:'1',
 					}
 					this.$refs.pos.setPos('0')
 				}else if(param=='modify'){

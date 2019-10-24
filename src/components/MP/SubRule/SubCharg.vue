@@ -14,17 +14,22 @@
 							<pos ref='pos' @positionChange='posChange'></pos>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预约人数</label><span class="sign-left">:</span>
-						<div class="col-md-8 pos-re">
-							<input type="text" class="form-control" v-model="FWRoyalty.orderpe" placeholder="">
+					<div class="col-md-9 form-group clearfix">
+						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预约人数</label><span class="sign-left">:</span>
+						<div class="col-md-4 pos-re">
+							<input type="text" class="form-control" v-model="FWRoyalty.orderSmall" placeholder="">
+							<span class="pos-ab pos-tr">人</span>
+						</div> 
+						<div style="line-height:34px; float:left;">~</div>
+						<div class="col-md-4 pos-re">
+							<input type="text" class="form-control" v-model="FWRoyalty.orderBig" placeholder="">
 							<span class="pos-ab pos-tr">人</span>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">扣款金额</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="FWRoyalty.deduction" placeholder="">
+							<input type="text" class="form-control" v-model="FWRoyalty.visRoy" placeholder="">
 						</div>
 					</div>
 					<div class="form-group clearfix">
@@ -51,10 +56,10 @@
 			return {
 				FWRoyalty:{
 					posId:'0',
-					flowBig:'0',
-					turRoy:'0',
-					flowSmall:'0',
-					consumeType:'0',
+					orderBig:'0',
+					visRoy:'0',
+					orderSmall:'0',
+					consumeType:'4',
 				},
 				title:'新增',
 			};
@@ -68,10 +73,10 @@
 					this.title='新增'
 					this.FWRoyalty={
 						posId:'0',
-						flowBig:'0',
-						turRoy:'0',
-						flowSmall:'0',
-						consumeType:'3',
+						orderBig:'0',
+						visRoy:'0',
+						orderSmall:'0',
+						consumeType:'4',
 					}
 					this.$refs.pos.setPos('0')
 				}else if(param=='modify'){
@@ -102,12 +107,12 @@
 					alert("岗位类型不能为空")
 					return
 				}
-				if(this.isBlank(this.FWRoyalty.flowBig)){
-					alert("大额度不能为空")
+				if(this.isBlank(this.FWRoyalty.consumeType)){
+					alert("访问类型不能为空")
 					return
 				}
-				if(this.isBlank(this.FWRoyalty.turRoy)){
-					alert("提成点数不能为空")
+				if(this.isBlank(this.FWRoyalty.visRoy)){
+					alert("提成金额不能为空")
 					return
 				}
 				

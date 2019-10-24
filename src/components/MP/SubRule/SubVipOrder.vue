@@ -15,16 +15,28 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预约人数</label><span class="sign-left">:</span>
-						<div class="col-md-8 pos-re">
-							<input type="text" class="form-control" v-model="FWRoyalty.orderpe" placeholder="">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">访问类型</label><span class="sign-left">:</span>
+						<select class="form-control" v-model="FWRoyalty.consumeType">
+						  <option value="5">初访</option>
+						  <option value="6">再访</option>
+						</select>
+					</div>
+					<div class="col-md-9 form-group clearfix">
+						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预约人数</label><span class="sign-left">:</span>
+						<div class="col-md-4 pos-re">
+							<input type="text" class="form-control" v-model="FWRoyalty.orderSmall" placeholder="">
+							<span class="pos-ab pos-tr">人</span>
+						</div> 
+						<div style="line-height:34px; float:left;">~</div>
+						<div class="col-md-4 pos-re">
+							<input type="text" class="form-control" v-model="FWRoyalty.orderBig" placeholder="">
 							<span class="pos-ab pos-tr">人</span>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">提成金额</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="FWRoyalty.royaltymoney" placeholder="">
+							<input type="text" class="form-control" v-model="FWRoyalty.visRoy" placeholder="">
 						</div>
 					</div>
 					<div class="form-group clearfix">
@@ -51,10 +63,10 @@
 			return {
 				FWRoyalty:{
 					posId:'0',
-					flowBig:'0',
-					turRoy:'0',
-					flowSmall:'0',
-					consumeType:'0',
+					orderSmall:'0',
+					orderBig:'0',
+					visRoy:'0',
+					consumeType:'5',
 				},
 				title:'新增',
 			};
@@ -64,19 +76,17 @@
 			initData(param,FWRoyalty) {
 				if(param=='add'){
 					console.log('Initialization FWRoyalty’s content, which adds FWRoyalty')
-					this.type='add'
 					this.title='新增'
 					this.FWRoyalty={
 						posId:'0',
-						flowBig:'0',
-						turRoy:'0',
-						flowSmall:'0',
-						consumeType:'3',
+						orderSmall:'0',
+						orderBig:'0',
+						visRoy:'0',
+						consumeType:'5',
 					}
 					this.$refs.pos.setPos('0')
 				}else if(param=='modify'){
 					console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
-					this.type='modify'
 					this.title='修改'
 					
 				}
@@ -102,12 +112,12 @@
 					alert("岗位类型不能为空")
 					return
 				}
-				if(this.isBlank(this.FWRoyalty.flowBig)){
-					alert("大额度不能为空")
+				if(this.isBlank(this.FWRoyalty.consumeType)){
+					alert("访问类型不能为空")
 					return
 				}
-				if(this.isBlank(this.FWRoyalty.turRoy)){
-					alert("提成点数不能为空")
+				if(this.isBlank(this.FWRoyalty.visRoy)){
+					alert("提成金额不能为空")
 					return
 				}
 				
@@ -126,7 +136,7 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						$("#SubVipOrder").modal("hide")
+						this.$emit('certainAction')
 					}
 				}).catch((error) => {
 					console.log('添加流水规则失败')

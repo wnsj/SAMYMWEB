@@ -1,6 +1,5 @@
 <!-- the page of department management -->
 <template>
-
 	<div class="clearfix" style="height:100%">
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">提成规则管理</h1>
@@ -167,7 +166,6 @@
 			</div>
 		</div>
 		
-
 		<div class="row row_edit">
 			<div class="modal fade" id="SubFlowWater">
 				<div class="modal-dialog">
@@ -209,7 +207,7 @@
 
 
 <script>
-
+// --------------------------------------
 	import SubFlowWater from '../MP/SubRule/SubFlowWater.vue'
 	import SubVip from '../MP/SubRule/SubVip.vue'
 	import SubVipRefund from '../MP/SubRule/SubVipRefund.vue'

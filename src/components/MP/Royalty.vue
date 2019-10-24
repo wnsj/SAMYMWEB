@@ -4,168 +4,176 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">提成规则管理</h1>
 		</div>
-		<div class="col-md-6 col-lg-6">
-			<div class="col-md-12 col-lg-12 main-title">
-				<div class="col-md-6 col-lg-6 text-left">
-					<h3>流水提成规则</h3>
+		<div>
+			<div class="col-md-6 col-lg-6">
+				<div class="col-md-12 col-lg-12 main-title" ref="tit">
+					<div class="col-md-6 col-lg-6 text-left">
+						<h3>流水提成规则</h3>
+					</div>
+					<div class="col-md-6 col-lg-6 pull-right">
+						<button type="button" class="btn btn-warning pos1" v-on:click="addRoyalty('add')">添加</button>
+					</div>
 				</div>
-				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn btn-warning pos1" v-on:click="addRoyalty('add')">添加</button>
-				</div>
-			</div>
-			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" style="max-height:464px">
-					<table class="table table-bordered table-hover" id="datatable">
+				<div class="col-md-12 col-lg-12">
+					<div class="table-responsive pre-scrollable" ref="tab1" style="max-height:464px">
+						<table class="table table-bordered table-hover" id="datatable">
 
-						<thead class="datathead">
-							<tr>
-								<th class="text-center col-md-2">岗位</th>
-								<th class="text-center col-md-4">额度级别</th>
-								<th class="text-center col-md-3">提点</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='0'" v-on:dblclick="addSubVipRefund(item)">
-								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.flowSmall}}~{{item.flowBig}} 万</td>
-								<td class="text-center">{{item.turRoy}}%</td>
-							</tr>
-						</tbody>
-					</table>
+							<thead class="datathead">
+								<tr>
+									<th class="text-center col-md-2">岗位</th>
+									<th class="text-center col-md-4">额度级别</th>
+									<th class="text-center col-md-3">提点</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='0'" v-on:dblclick="addRoyalty(item)">
+									<td class="text-center">{{index}}</td>
+									<td class="text-center">{{item.flowSmall}}~{{item.flowBig}} 万</td>
+									<td class="text-center">{{item.turRoy}}%</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
+			<div class="col-md-6 col-lg-6">
+				<div class="col-md-12 col-lg-12 main-title">
+					<div class="col-md-6 col-lg-6 text-left">
+						<h3>会员卡提成规则</h3>
+					</div>
+					<div class="col-md-6 col-lg-6 pull-right">
+						<button type="button" class="btn btn-warning pos2" v-on:click="addSubVip()">添加</button>
+					</div>
+				</div>
+				<div class="col-md-12 col-lg-12">
+					<div class="table-responsive pre-scrollable" ref="tab2" style="max-height:464px">
+						<table class="table table-bordered table-hover" id="datatable">
+			
+							<thead class="datathead">
+								<tr>
+									<th class="text-center  col-md-1">岗位</th>
+									<th class="text-center  col-md-3">充值类型</th>
+									<th class="text-center  col-md-1">提点</th>
+									<th class="text-center  col-md-3">消费额度</th>
+									<th class="text-center  col-md-2">提成比例</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='1'" v-on:dblclick="addSubVip(item)">
+									<td class="text-center">{{item.posId}}</td>
+									<td class="text-center">{{item.consumeType}}</td>
+									<td class="text-center">{{item.turRoy}}</td>
+									<td class="text-center">{{item.royProcess}}</td>
+									<td class="text-center">{{item.memProportion}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div style="clear:both"></div>
 		</div>
-		<div class="col-md-6 col-lg-6">
-			<div class="col-md-12 col-lg-12 main-title">
-				<div class="col-md-6 col-lg-6 text-left">
-					<h3>会员卡提成规则</h3>
+		<div>
+			<div class="col-md-6 col-lg-6">
+				<div class="col-md-12 col-lg-12 main-title">
+					
+					<div class="col-md-6 col-lg-6 text-left">
+						<h3>会员卡退费扣提成规则</h3>
+					</div>
+					<div class="col-md-6 col-lg-6 pull-right">
+						<button type="button" class="btn btn-warning pos1" v-on:click="addSubVipRefund()">添加</button>
+					</div>
 				</div>
-				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn btn-warning pos2" v-on:click="addSubVip()">添加</button>
+				<div class="col-md-12 col-lg-12">
+					<div class="table-responsive pre-scrollable" ref="tab3" style="max-height:464px">
+						<table class="table table-bordered table-hover" id="datatable">
+			
+							<thead class="datathead">
+								<tr>
+									<th class="text-center col-md-2">岗位</th>
+									<th class="text-center col-md-4">额度级别</th>
+									<th class="text-center col-md-3">扣款比例</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(item,index) in royaltyList" :key="index" v-on:dblclick="addSubVipRefund(item)">
+									<td class="text-center">{{index}}</td>
+									<td class="text-center">{{item.flowSmall}}~{{item.flowBig}} 万</td>
+									<td class="text-center">{{item.turRoy}}%</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" style="max-height:464px">
-					<table class="table table-bordered table-hover" id="datatable">
-		
-						<thead class="datathead">
-							<tr>
-								<th class="text-center  col-md-1">岗位</th>
-								<th class="text-center  col-md-3">充值类型</th>
-								<th class="text-center  col-md-1">提点</th>
-								<th class="text-center  col-md-3">消费额度</th>
-								<th class="text-center  col-md-2">提成比例</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='1'" v-on:dblclick="addSubVip(item)">
-								<td class="text-center">{{item.posId}}</td>
-								<td class="text-center">{{item.consumeType}}</td>
-								<td class="text-center">{{item.turRoy}}</td>
-								<td class="text-center">{{item.royProcess}}</td>
-								<td class="text-center">{{item.memProportion}}</td>
-							</tr>
-						</tbody>
-					</table>
+			<div class="col-md-6 col-lg-6">
+				<div class="col-md-12 col-lg-12 main-title">
+					
+					<div class="col-md-6 col-lg-6 text-left">
+						<h3>预约人数提成规则</h3>
+					</div>
+					<div class="col-md-6 col-lg-6 pull-right">
+						<button type="button" class="btn btn-warning pos2" v-on:click="addSubVipOrder()">添加</button>
+					</div>
+				</div>
+				<div class="col-md-12 col-lg-12">
+					<div class="table-responsive pre-scrollable" ref="tab4" style="max-height:464px">
+						<table class="table table-bordered table-hover" id="datatable">
+			
+							<thead class="datathead">
+								<tr>
+									<th class="text-center col-md-2">岗位</th>
+									<th class="text-center col-md-4">预约人数</th>
+									<th class="text-center col-md-4">提成金额</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(item,index) in royaltyList" :key="index" v-on:dblclick="addSubVipOrder(item)">
+									<td class="text-center">{{index}}</td>
+									<td class="text-center">{{item.name}}</td>
+									<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
+			<div style="clear:both"></div>
 		</div>
-		<div class="col-md-6 col-lg-6">
-			<div class="col-md-12 col-lg-12 main-title">
-				
-				<div class="col-md-6 col-lg-6 text-left">
-					<h3>会员卡退费扣提成规则</h3>
+		<div>	
+			<div class="col-md-6 col-lg-6">
+				<div class="col-md-12 col-lg-12 main-title">
+					<div class="col-md-6 col-lg-6 text-left">
+						<h3>退号扣提成规则</h3>
+					</div>
+					<div class="col-md-6 col-lg-6 pull-right">
+						<button type="button" class="btn btn-warning pos1" v-on:click="addSubCharg()">添加</button>
+					</div>
 				</div>
-				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn btn-warning pos1" v-on:click="addSubVipRefund()">添加</button>
+				<div class="col-md-12 col-lg-12">
+					<div class="table-responsive pre-scrollable" ref="tab5" style="max-height:464px">
+						<table class="table table-bordered table-hover" id="datatable">
+			
+							<thead class="datathead">
+								<tr>
+									<th class="text-center col-md-2">岗位</th>
+									<th class="text-center col-md-4">预约人数</th>
+									<th class="text-center col-md-3">扣款金额</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(item,index) in royaltyList" :key="index" v-on:dblclick="addSubCharg(item)">
+									<td class="text-center">{{index}}</td>
+									<td class="text-center">{{item.name}}</td>
+									<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" style="max-height:464px">
-					<table class="table table-bordered table-hover" id="datatable">
-		
-						<thead class="datathead">
-							<tr>
-								<th class="text-center col-md-2">岗位</th>
-								<th class="text-center col-md-4">额度级别</th>
-								<th class="text-center col-md-3">扣款比例</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="(item,index) in royaltyList" :key="index" v-on:dblclick="addSubVipRefund(item)">
-								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.flowSmall}}~{{item.flowBig}} 万</td>
-								<td class="text-center">{{item.turRoy}}%</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
+			<div style="clear:both"></div>
 		</div>
-		<div class="col-md-6 col-lg-6">
-			<div class="col-md-12 col-lg-12 main-title">
-				
-				<div class="col-md-6 col-lg-6 text-left">
-					<h3>预约人数提成规则</h3>
-				</div>
-				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn btn-warning pos2" v-on:click="addSubVipOrder()">添加</button>
-				</div>
-			</div>
-			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" style="max-height:464px">
-					<table class="table table-bordered table-hover" id="datatable">
-		
-						<thead class="datathead">
-							<tr>
-								<th class="text-center col-md-2">岗位</th>
-								<th class="text-center col-md-4">预约人数</th>
-								<th class="text-center col-md-4">提成金额</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="(item,index) in royaltyList" :key="index" v-on:dblclick="addSubVipOrder(item)">
-								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-6 col-lg-6">
-			<div class="col-md-12 col-lg-12 main-title">
-				<div class="col-md-6 col-lg-6 text-left">
-					<h3>退号扣提成规则</h3>
-				</div>
-				<div class="col-md-6 col-lg-6 pull-right">
-					<button type="button" class="btn btn-warning pos1" v-on:click="addSubCharg()">添加</button>
-				</div>
-			</div>
-			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" style="max-height:464px">
-					<table class="table table-bordered table-hover" id="datatable">
-		
-						<thead class="datathead">
-							<tr>
-								<th class="text-center col-md-2">岗位</th>
-								<th class="text-center col-md-4">预约人数</th>
-								<th class="text-center col-md-3">扣款金额</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="(item,index) in royaltyList" :key="index" v-on:dblclick="addSubCharg(item)">
-								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		
 		<div class="row row_edit">
 			<div class="modal fade" id="SubFlowWater">
 				<div class="modal-dialog">
@@ -314,7 +322,16 @@
 			}
 		},
 		mounted() {
-			window.addEventListener('scroll', this.handleScroll, true)
+			window.addEventListener('scroll', this.handleScroll, true);
+			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
+			let divH = (h-150)/3;
+			let titH = this.$refs.tit.offsetHeight;
+			let maxH = divH-titH;
+			this.$refs.tab1.style="max-height:"+maxH+"px";
+			this.$refs.tab2.style="max-height:"+maxH+"px";
+			this.$refs.tab3.style="max-height:"+maxH+"px";
+			this.$refs.tab4.style="max-height:"+maxH+"px";
+			this.$refs.tab5.style="max-height:"+maxH+"px";
 		},
 		created() {
 			this.checkRoyaltyList()

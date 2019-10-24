@@ -11,19 +11,26 @@
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">岗位</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="patient.workname" placeholder="">
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">额度级别</label><span class="sign-left">:</span>
-						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="patient.quotalevel" placeholder="">
+							<pos ref='pos' @positionChange='posChange'></pos>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">扣款比例</label><span class="sign-left">:</span>
-						<div class="col-md-8">
+						<div class="col-md-8 pos-re">
 							<input type="text" class="form-control" v-model="patient.deductionratio" placeholder="">
+							<span class="pos-ab pos-tr">%</span>
+						</div>
+					</div>
+					<div class="col-md-9 form-group clearfix">
+						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">额度级别</label><span class="sign-left">:</span>
+						<div class="col-md-4 pos-re">
+							<input type="text" class="form-control" v-model="FWRoyalty.flowSmall" placeholder="">
+							<span class="pos-ab pos-tr">万</span>
+						</div> 
+						<div style="line-height:34px; float:left;">~</div>
+						<div class="col-md-4 pos-re">
+							<input type="text" class="form-control" v-model="FWRoyalty.flowBig" placeholder="">
+							<span class="pos-ab pos-tr">万</span>
 						</div>
 					</div>
 					<div class="form-group clearfix">
@@ -42,12 +49,21 @@
 
 <script>
 	import dPicker from 'vue2-datepicker'
+	import pos from '../../common/Position.vue'
 	export default {
 		components:{
 			dPicker,
+			pos,
 		},
 		data() {
 			return {
+				FWRoyalty:{
+					posId:'0',
+					flowBig:'0',
+					turRoy:'0',
+					flowSmall:'0',
+					consumeType:'0',
+				},
 				patient:{
 					hospTime:'',
 					name:'',

@@ -15,21 +15,23 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-
-						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">提点：</label>
-
-						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="FWRoyalty.turRoy" placeholder="">%
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">提点</label><span class="sign-left">:</span>
+						<div class="col-md-8 pos-re">
+							<input type="text" class="form-control" v-model="FWRoyalty.turRoy" placeholder="">
+							<span class="pos-ab pos-tr">%</span>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">额度级别：</label>
-						<span>
-							<input type="text" class="form-control" v-model="FWRoyalty.flowSmall" placeholder="">万 ~
-						</span>
-						<span>
-							<input type="text" class="form-control" v-model="FWRoyalty.flowBig" placeholder="">万
-						</span>
+					<div class="col-md-9 form-group clearfix" style="text-align:left;">
+						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">额度级别</label><span class="sign-left">:</span>
+						<div class="col-md-4 pos-re">
+							<input type="text" class="form-control" v-model="FWRoyalty.flowSmall" placeholder="">
+							<span class="pos-ab pos-tr">万</span>
+						</div> 
+						<div style="line-height:34px; float:left;">~</div>
+						<div class="col-md-4 pos-re">
+							<input type="text" class="form-control" v-model="FWRoyalty.flowBig" placeholder="">
+							<span class="pos-ab pos-tr">万</span>
+						</div>
 					</div>
 					
 					<div class="form-group clearfix">
@@ -147,5 +149,13 @@
 </script>
 
 <style>
-
+	.pos-tr{ 
+		top:0;
+		right:20px; 
+		line-height:34px;
+		-webkit-user-select:none;
+    	-moz-user-select:none;
+    	-ms-user-select:none;
+    	user-select:none;
+	}
 </style>

@@ -3,6 +3,12 @@
 body{
     background-color: #eeeeee;
 }
+.pos-re{
+    position: relative;
+}
+.pos-ab{
+    position:absolute;
+}
 .end-aline{
     display: inline-block;
     text-align:justify;

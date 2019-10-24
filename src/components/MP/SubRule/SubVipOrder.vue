@@ -11,13 +11,14 @@
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">岗位</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="patient.workname" placeholder="">
+							<pos ref='pos' @positionChange='posChange'></pos>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预约人数</label><span class="sign-left">:</span>
-						<div class="col-md-8">
+						<div class="col-md-8 pos-re">
 							<input type="text" class="form-control" v-model="patient.orderpe" placeholder="">
+							<span class="pos-ab pos-tr">人</span>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
@@ -42,9 +43,11 @@
 
 <script>
 	import dPicker from 'vue2-datepicker'
+	import pos from '../../common/Position.vue'
 	export default {
 		components:{
 			dPicker,
+			pos,
 		},
 		data() {
 			return {

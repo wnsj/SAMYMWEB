@@ -96,7 +96,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-on:dblclick="addSubVipRefund(item)">
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='3'" v-on:dblclick="addSubVipRefund(item)">
 									<td class="text-center">{{index}}</td>
 									<td class="text-center">{{item.flowSmall}}~{{item.flowBig}} 万</td>
 									<td class="text-center">{{item.turRoy}}%</td>
@@ -128,7 +128,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-on:dblclick="addSubVipOrder(item)">
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='5' || item.consumeType=='6'" v-on:dblclick="addSubVipOrder(item)">
 									<td class="text-center">{{index}}</td>
 									<td class="text-center">{{item.name}}</td>
 									<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
@@ -162,7 +162,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-on:dblclick="addSubCharg(item)">
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='5'" v-on:dblclick="addSubCharg(item)">
 									<td class="text-center">{{index}}</td>
 									<td class="text-center">{{item.name}}</td>
 									<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>

@@ -9,19 +9,19 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">姓名：</label>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="patient.name" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">手机号：</label>
+						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="patient.tel" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="sex" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">性别：</label>
+						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">性别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="patient.sex">
 								<option value="1">男</option>
@@ -30,11 +30,11 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">预约时间：</label>
+						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预约时间</label><span class="sign-left">:</span>
 						<dPicker class="col-md-8" style="width:65%;" v-model="patient.birthday" v-on:change="dateAction('1')"></dPicker>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="erpzh" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">是否停用：</label>
+						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否停用</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="patient.inHosp">
 								<option value="1">是</option>

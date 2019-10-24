@@ -207,7 +207,7 @@
 
 
 <script>
-// --------------------------------------
+
 	import SubFlowWater from '../MP/SubRule/SubFlowWater.vue'
 	import SubVip from '../MP/SubRule/SubVip.vue'
 	import SubVipRefund from '../MP/SubRule/SubVipRefund.vue'

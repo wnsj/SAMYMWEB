@@ -8,6 +8,9 @@
 			</div>
 			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 text-right">
 				<p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，提成管理系统</p>
+				<button class="btn btn-warning m_r_10" style="margin-top: 40px;" v-on:click="addPatientCharge()">充值</button>
+				<button class="btn btn-success m_r_10" style="margin-top: 40px;">消费</button>
+				<button class="btn btn-danger m_r_10" style="margin-top: 40px;">退费</button>
 				<button class="btn btn-default m_r_10" style="margin-top: 40px;" v-on:click="loginOut()">退出</button>
 			</div>
 		</div>
@@ -54,18 +57,28 @@
 				</div>
 			</div>
 		</div>
+		<div class="row row_edit">
+		<div class="modal fade" id="addFee">
+			<div class="modal-dialog">
+				<SubRecharge ref='fee' @feedbackCharge="feedBack"></SubRecharge>
+			</div>
+		</div>
 	</div>
 	</div>
+	
 </template>
 
 <script type="module">
+	import SubRecharge from '../components/MP/SubRecharge/SubRecharge.vue'
 	import axios from 'axios'
 	import Cookies from 'js-cookie'
 	import {
 		init
 	} from '@/../static/js/common.js'
 	export default {
-		components: {},
+		components: {
+			SubRecharge,
+		},
 		data() {
 			return {
 				title:'患者管理',
@@ -73,7 +86,10 @@
 			}
 		},
 		methods:{
-			
+			addPatientCharge: function() {
+				$("#addFee").modal("show")
+				console.log('进入添加患者界面')
+			},
 			titleChange(param){
 				console.log('param:'+param)
 				this.title=param
@@ -92,7 +108,7 @@
 			},
 		},
 		mounted() {
-			init()
+			init();
 		},
 	}
 </script>

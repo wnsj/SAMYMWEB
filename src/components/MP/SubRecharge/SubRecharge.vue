@@ -9,36 +9,36 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">姓名：</label>
-						<div class="col-md-8">
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span class="sign-left">:</span>
+						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="patient.name" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">手机号：</label>
-						<div class="col-md-8">
+						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span class="sign-left">:</span>
+						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="patient.tel" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">推荐人姓名：</label>
-						<div class="col-md-8">
+						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">推荐人姓名</label><span class="sign-left">:</span>
+						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="patient.recommender" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="gh" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">推荐人岗位：</label>
-						<div class="col-md-8">
-							<department ref="dept" @departChange='departChange'></department>
+						<label for="gh" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">推荐人岗位</label><span class="sign-left">:</span>
+						<div class="col-md-7">
+							<input type="text" class="form-control" v-model="patient.reposition" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">充值时间：</label>
-						<dPicker class="col-md-8" style="width:65%;" v-model="patient.rechargetime" v-on:change="dateAction('1')"></dPicker>
+						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">充值时间</label><span class="sign-left">:</span>
+						<dPicker class="col-md-7" style="width:59%;" v-model="patient.rechargetime" v-on:change="dateAction('1')"></dPicker>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">充值金额：</label>
-						<div class="col-md-8">
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">充值金额</label><span class="sign-left">:</span>
+						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="patient.name" placeholder="">
 						</div>
 					</div>

@@ -9,31 +9,31 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">岗位：</label>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">岗位</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="patient.workname" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">充值类型：</label>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">充值类型</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="patient.rechargetype" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">提点：</label>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">提点</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="patient.remind" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">消费额度：</label>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">消费额度</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="patient.quota" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">提成比例：</label>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">提成比例</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="patient.ratio" placeholder="">
 						</div>

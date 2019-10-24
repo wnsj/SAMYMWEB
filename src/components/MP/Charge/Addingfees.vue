@@ -3,7 +3,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h4 id="myModalLabel" class="modal-title">{{title}}交费</h4>
+			<h4 id="myModalLabel" class="modal-title">新增{{title}}</h4>
 		</div>
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop pre-scrollable" id="basic" style="max-height: 500px; height:500px;">
@@ -169,27 +169,19 @@
 		},
 		methods: {
 			// Initialization procject’s content
-			initData(param, patient) {
-				if (param == 'add') {
+			initData(param) {
+				if (param == 'recharge') {
 					console.log('Initialization procject’s content, which adds projcet')
 					this.postType = 'add'
-					this.title = '新增'
-					this.isUse = true
-					this.hospNum = ''
-					this.isHidden = false
-					this.patient = {}
-					this.remark = ''
-					// this.patient.updateTime
-				} else if (param == 'modify') {
+					this.title = '充值'
+				} else if (param == 'consume') {
 					console.log('Initialization procject’s content, which modifies projcet')
-					this.patient = patient
-					this.hospNum = ''
-					this.isHidden = true
 					this.postType = 'modify'
-					this.title = '修改'
-					this.updatePatientChargeInfo()
-					// this.projectName=procject.name
-					// this.payserviceId=procject.payserviceId
+					this.title = '消费'
+				} else if (param == 'refund') {
+					console.log('Initialization procject’s content, which modifies projcet')
+					this.postType = 'modify'
+					this.title = '退费'
 				}
 			},
 			//feedback department information

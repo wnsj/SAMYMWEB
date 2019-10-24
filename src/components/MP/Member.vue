@@ -51,8 +51,8 @@
 						</thead>
 						<tbody>
 							<tr v-for="(item,index) in memberList" :key="index" v-on:dblclick="modifyDepartment(item)">
-								<td class="text-center">{{item.memName}}</td>
 								<td class="text-center">{{item.memNum}}</td>
+								<td class="text-center">{{item.memName}}</td>
 								<td class="text-center">{{item.phone}}</td>
 								<td class="text-center">{{item.sex}}</td>
 								<td class="text-center">{{item.birthday}}</td>

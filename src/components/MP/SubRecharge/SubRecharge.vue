@@ -1,205 +1,180 @@
-<!-- add and modify patient -->
+<!-- add and modify consume -->
 <template>
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h4 id="myModalLabel" class="modal-title">{{title}}充值</h4>
+			<h2 id="myModalLabel" class="modal-title">{{title}}</h2>
 		</div>
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员卡号</label><span
+						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="patient.name" placeholder="">
+							<input type="text" class="form-control" v-model="consume.memNum" v-on:change="checkMemNum(consume.memNum)">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span
+						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="patient.tel" placeholder="">
+							<input type="text" class="form-control" v-model="consume.memName" disabled="disabled">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">推荐人姓名</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span
+						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="patient.recommender" placeholder="">
+							<input type="text" class="form-control" v-model="consume.phone" disabled="disabled">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="gh" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">推荐人岗位</label><span class="sign-left">:</span>
+						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">金额</label><span
+						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="patient.reposition" placeholder="">
+							<input type="text" class="form-control" v-model="consume.momey" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">充值时间</label><span class="sign-left">:</span>
-						<dPicker class="col-md-7" style="width:59%;" v-model="patient.rechargetime" v-on:change="dateAction('1')"></dPicker>
+						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">时间</label><span
+						 class="sign-left">:</span>
+						<dPicker class="col-md-7" style="width:59%;" v-model="consume.rechargetime" disabled="disabled"></dPicker>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">充值金额</label><span class="sign-left">:</span>
+						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">维护人</label><span
+						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="patient.name" placeholder="">
+							<emp ref="emp" @employeeChange="empChange"></emp>
 						</div>
 					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addPatient()">确认</button>
-							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+							 v-on:click="addFee()">确认</button>
+							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+							 v-on:click="closeCurrentPage()">返回</button>
 						</div>
 					</div>
 
 				</form>
 			</div>
-	
+
 		</div>
-		
+
 	</div>
 </template>
 
 <script>
 	import dPicker from 'vue2-datepicker'
+	import emp from '../../common/Employee.vue'
 	export default {
-		components:{
+		components: {
 			dPicker,
+			emp,
 		},
 		data() {
 			return {
-				patient:{
-					hospTime:'',
-					name:'',
-					outHosp:'',
-					sex:'1',
-					age:'',
+				consume: {
+					memNum: '',
+					momey: '',
+					empId: '',
+					empName:'',
+					phone:'',
+					costType: '',
+					balance:'',
 				},
-				type:'',
-				title:'新增',
-				isModify:false,
-				projectList:[],
-				hospNum:'',
-				isExist:'0',
-				accountId:this.accountId(),
+				title: '',
+				accountId: this.accountId(),
 			};
 		},
-		methods:{
-			// Initialization patient’s content
-			initData(param,patient) {
-				if(param=='add'){
-					console.log('Initialization patient’s content, which adds patient')
-					this.type='add'
-					this.title='新增'
-					this.isExist='0'
-					this.isModify=false
-					this.patient={}
-					this.$refs.dept.setDpart('0')
-					this.$refs.ps.setObjId('0')
-					this.$refs.mis.setObjId('0')
-					this.hospNum=''
-					this.patient.sex='1'
-					this.patient.inHosp='1'
-					// this.patient.hospTime=this.moment('','YYYY-MM-DD HH:mm:ss.000')
-				}else if(param=='modify'){
-					console.log('Initialization patient’s content, which modifies patient')
-					this.type='modify'
-					this.isExist='1'
-					this.isModify=true
-					this.title='修改'
-					// console.log("patient"+JSON.stringify(patient))
-					Object.assign(this.patient,patient)
-					this.hospNum=this.patient.hospNum
-					this.$refs.dept.setDpart(this.patient.deptId)
-					this.$refs.ps.setObjId(this.patient.patitypeid)
-					this.$refs.mis.setObjId(this.patient.mitypeid)
+		methods: {
+			// Initialization consume’s content
+			initData(param) {
+				this.consume = {
+					memNum: '',
+					momey: '',
+					empId: '',
+					empName:'',
+					phone:'',
+					rechargetime:this.moment('','YYYY-MM-DD HH:mm:ss.000'),
+					costType: '',
+					balance:'',
+				}
+				if (param == 'recharge') {
+					console.log('new increasing recharge')
+					this.title = '充值'
+					this.consume.consumeType='1'
+				} else if (param == 'consume') {
+					console.log('new increasing consume')
+					this.title = '消费'
+					this.consume.consumeType='2'
+				} else if (param == 'refund') {
+					console.log('new increasing refund')
+					this.title = '退费'
+					this.consume.consumeType='3'
 				}
 			},
-			//date formatting 
-			dateAction(param){
-				if(param=='1'){
-					if(!this.isBlank(this.patient.hospTime)){
-						this.patient.hospTime=this.moment(this.patient.hospTime,'YYYY-MM-DD HH:mm:ss.000')
-					}else{
-						this.patient.hospTime=''
-					}
-				}else if(param=='2'){
-					if(!this.isBlank(this.patient.outHosp)){
-						this.patient.outHosp=this.moment(this.patient.outHosp,'YYYY-MM-DD HH:mm:ss.000')
-					}else{
-						this.patient.outHosp=''
-					}
-				}
-			},
-			//feedback department information
-			departChange:function(param){
+			//feedback employee information
+			empChange: function(param) {
 				// console.log('科室：'+JSON.stringify(param))
-				if(this.isBlank(param)){
-					this.patient.deptId=""
-				}else{
-					this.patient.deptId=param.deptId
+				if (this.isBlank(param)) {
+					this.consume.empId = ""
+				} else {
+					this.consume.empId = param.empId
 				}
-				console.log('科室：'+this.patient.deptId)
+				console.log('员工：' + this.consume.empId)
 			},
-			//feedback PatientStype information
-			psChange:function(param){
-				if(this.isBlank(param)){
-					this.patient.patitypeid=''
-				}else{
-					this.patient.patitypeid=param.patitypeid
+			
+			//feedback consumeStype information
+			psChange: function(param) {
+				if (this.isBlank(param)) {
+					this.consume.patitypeid = ''
+				} else {
+					this.consume.patitypeid = param.patitypeid
 				}
 			},
 			//feedback MedicalInsuranceStype information
-			misChange:function(param){
-				if(this.isBlank(param)){
-					this.patient.mitypeid=''
-				}else{
-					this.patient.mitypeid=param.mitypeid
+			misChange: function(param) {
+				if (this.isBlank(param)) {
+					this.consume.mitypeid = ''
+				} else {
+					this.consume.mitypeid = param.mitypeid
 				}
 			},
 			//the event of addtional button
-			addPatient(){
+			addFee() {
 				console.log('the event of addtional button')
-				if(this.isExist=='1'){
-					if(!confirm("是否确定提交，提交将覆盖原有患者数据！！！")){
-						return
-					}
-				}
-				this.patient.hospNum=this.hospNum
-				if(this.isBlank(this.patient.hospNum)){
-					alert("住院号不能为空")
+				
+				if (this.isBlank(this.consume.memNum)) {
+					alert("会员卡号不能为空")
 					return
 				}
-				if(this.isBlank(this.patient.patitypeid)){
-					alert("患者类型不能为空")
+				if (this.isBlank(this.consume.momey)) {
+					alert("金额不能为空")
 					return
 				}
-				if(this.isBlank(this.patient.mitypeid)){
-					alert("医保类型不能为空")
+				if (this.isBlank(this.consume.empId)) {
+					alert("维护人不能为空")
 					return
 				}
-				if(this.isBlank(this.patient.name) ){
-					alert("姓名不能为空")
+				
+				if (!this.isBlank(this.consume.rechargetime)) {
+					this.consume.rechargetime = this.moment(this.consume.rechargetime, 'YYYY-MM-DD HH:mm:ss.000')
+				}
+				
+				if(this.consume.consumeType=='2' && this.consume.balance < this.consume.momey){
+					alert("您的余额不足，请充值")
 					return
 				}
-				if(this.isBlank(this.patient.deptId)){
-					alert("科室不能为空")
+				if(this.consume.consumeType=='3' && this.consume.balance < this.consume.momey){
+					alert("您的余额不足，请查询余额后在进行退款")
 					return
 				}
-				if(this.patient.inHosp != '1' && this.patient.inHosp != '0'){
-					alert("是否在院不能为空")
-					return
-				}
-				if(!this.isBlank(this.patient.outHosp)){
-					this.patient.outHosp=this.moment(this.patient.outHosp,'YYYY-MM-DD HH:mm:ss.000')
-				}
-				if(!this.isBlank(this.patient.hospTime)){
-					this.patient.hospTime=this.moment(this.patient.hospTime,'YYYY-MM-DD HH:mm:ss.000')
-				}else{
-					alert("入院时间不能为空")
-					return
-				}
-				this.patient.paymentList=this.projectList
-				this.patient.accountId=this.accountId
-				// console.log('the event of addtional button'+JSON.stringify(this.patient))
-				var url = this.url + '/patientAction/addPatient'
+				
+				
+				
+				var url = this.url + '/accountRecordAction/addAccountRecord'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -207,30 +182,32 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data:this.patient,
+					data: this.consume,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						this.$emit('addPatient')
+						$("#addFee").modal("show")
+					}else{
+						alert(res.retMsg)
 					}
 				}).catch((error) => {
 					console.log('请求失败处理')
 				});
 			},
-			closeCurrentPage(){
+			closeCurrentPage() {
 				$("#addFee").modal("hide")
 				console.log('关闭添加患者界面')
 			},
-			//Query patient's information based on the hosNum
-			conditionCheck(param){
-				console.log('checkhosNum')
-				if(this.isBlank(param)){
+			//Query member's information based on the memNum
+			checkMemNum(param) {
+				console.log('checkMemNum')
+				if (this.isBlank(param)) {
 					return
 				}
-				var url = this.url + '/patientAction/queryPatientByHospNum'
+				var url = this.url + '/memberAction/queryMember'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -239,38 +216,31 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						hospNum:param
+						memNum: param,
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
 					if (res.retCode == '0000') {
-						if (res.retData != null) {
-							this.patient = res.retData
-							this.isExist = '1'
-							
-							this.$refs.dept.setDpart(this.patient.deptId)
-							this.$refs.ps.setObjId(this.patient.patitypeid)
-							this.$refs.mis.setObjId(this.patient.mitypeid)
-						}else{
-							this.patient={}
-							this.patient.sex='1'
-							this.patient.inHosp='1'
-							this.isExist = '0'
-							this.$refs.dept.setDpart('0')
-							this.$refs.ps.setObjId('0')
-							this.$refs.mis.setObjId('0')
-							alert("没有查到此住院号,可以进行添加")
-						}
+						console.log('查到了'+JSON.stringify(res))
+						
+						this.consume.memNum=res.retData[0].memNum
+						this.consume.memName=res.retData[0].memName
+						this.consume.phone=res.retData[0].phone
+						this.consume.balance=res.retData[0].balance
+					} else {
+						console.log('没有查到会员信息，请添加会员后充值')
+						this.consume.memName=''
+						this.consume.phone=''
 					}
+							
 				}).catch((error) => {
-					console.log('请求失败处理')
+					console.log('会员查询请求失败')
 				});
 			},
-			
+
 		}
-		
+
 	}
 </script>
 

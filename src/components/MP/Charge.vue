@@ -1,4 +1,4 @@
-<!-- 收费管理页 -->
+<!-- 充值管理页 -->
 <template>
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">

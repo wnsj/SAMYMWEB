@@ -61,7 +61,7 @@
 							<tbody>
 								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='1' || item.consumeType=='2'" v-on:dblclick="addSubVip(item)">
 									<td class="text-center">{{item.posName}}</td>
-									<td class="text-center">{{item.consumeType}}</td>
+									<td class="text-center">{{item.consumeType=='1' ? "初办" : "再续"}}</td>
 									<td class="text-center">{{item.turRoy}}%</td>
 									<td class="text-center">{{item.royProcess}}%</td>
 									<td class="text-center">{{item.memProportion}}%</td>

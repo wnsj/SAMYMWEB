@@ -131,7 +131,7 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						$("#SubCharg").modal("hide")
+						this.$emit('certainAction')
 					}
 				}).catch((error) => {
 					console.log('添加流水规则失败')

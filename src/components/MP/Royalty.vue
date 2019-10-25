@@ -388,6 +388,6 @@
 		clear:both;
 	}
 	th{
-		background:#ccc;
+		background:#eee;
 	}
 </style>

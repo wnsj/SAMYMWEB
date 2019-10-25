@@ -58,9 +58,9 @@
 				FWRoyalty:{
 					posId:'0',
 					flowBig:'0',
-					turRoy:'0',
+					refundProportion:'0',
 					flowSmall:'0',
-					consumeType:'0',
+					consumeType:'3',
 				},
 				title:'新增',
 			};
@@ -70,12 +70,11 @@
 			initData(param,patient) {
 				if(param=='add'){
 					console.log('Initialization patient’s content, which adds patient')
-					this.type='add'
 					this.title='新增'
 					this.FWRoyalty={
 						posId:'0',
 						flowBig:'0',
-						turRoy:'0',
+						refundProportion:'0',
 						flowSmall:'0',
 						consumeType:'3',
 					}
@@ -112,8 +111,8 @@
 					alert("大额度不能为空")
 					return
 				}
-				if(this.isBlank(this.FWRoyalty.turRoy)){
-					alert("提成点数不能为空")
+				if(this.isBlank(this.FWRoyalty.refundProportion)){
+					alert("扣款点数不能为空")
 					return
 				}
 				
@@ -132,7 +131,7 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						$("#SubVipRefund").modal("hide")
+						this.$emit('certainAction')
 					}
 				}).catch((error) => {
 					console.log('添加流水规则失败')

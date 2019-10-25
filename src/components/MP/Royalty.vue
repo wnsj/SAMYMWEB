@@ -27,7 +27,7 @@
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='0'" v-on:dblclick="addRoyalty(item)">
-									<td class="text-center">{{index}}</td>
+									<td class="text-center">{{item.posName}}</td>
 									<td class="text-center">{{item.flowSmall}}~{{item.flowBig}} 万</td>
 									<td class="text-center">{{item.turRoy}}%</td>
 								</tr>
@@ -59,12 +59,12 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='1'" v-on:dblclick="addSubVip(item)">
-									<td class="text-center">{{item.posId}}</td>
-									<td class="text-center">{{item.consumeType}}</td>
-									<td class="text-center">{{item.turRoy}}</td>
-									<td class="text-center">{{item.royProcess}}</td>
-									<td class="text-center">{{item.memProportion}}</td>
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='1' || item.consumeType=='2'" v-on:dblclick="addSubVip(item)">
+									<td class="text-center">{{item.posName}}</td>
+									<td class="text-center">{{item.consumeType=='1' ? "初办" : "再续"}}</td>
+									<td class="text-center">{{item.turRoy}}%</td>
+									<td class="text-center">{{item.royProcess}}%</td>
+									<td class="text-center">{{item.memProportion}}%</td>
 								</tr>
 							</tbody>
 						</table>
@@ -97,9 +97,9 @@
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='3'" v-on:dblclick="addSubVipRefund(item)">
-									<td class="text-center">{{index}}</td>
+									<td class="text-center">{{item.posName}}</td>
 									<td class="text-center">{{item.flowSmall}}~{{item.flowBig}} 万</td>
-									<td class="text-center">{{item.turRoy}}%</td>
+									<td class="text-center">{{item.refundProportion}}%</td>
 								</tr>
 							</tbody>
 						</table>
@@ -123,15 +123,17 @@
 							<thead class="datathead">
 								<tr>
 									<th class="text-center col-md-2">岗位</th>
-									<th class="text-center col-md-4">预约人数</th>
-									<th class="text-center col-md-4">提成金额</th>
+									<th class="text-center col-md-3">预约人数(人)</th>
+									<th class="text-center col-md-3">访问类型</th>
+									<th class="text-center col-md-5">提成金额(每人/元)</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='5' || item.consumeType=='6'" v-on:dblclick="addSubVipOrder(item)">
-									<td class="text-center">{{index}}</td>
-									<td class="text-center">{{item.name}}</td>
-									<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
+									<td class="text-center">{{item.posName}}</td>
+									<td class="text-center">{{item.orderSmall}} ~ {{item.orderBig}}</td>
+									<td class="text-center">{{item.consumeType=='5' ? "初访" : "复访"}}</td>
+									<td class="text-center">{{item.visRoy}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -157,15 +159,15 @@
 							<thead class="datathead">
 								<tr>
 									<th class="text-center col-md-2">岗位</th>
-									<th class="text-center col-md-4">预约人数</th>
+									<th class="text-center col-md-4">退号人数</th>
 									<th class="text-center col-md-3">扣款金额</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='5'" v-on:dblclick="addSubCharg(item)">
-									<td class="text-center">{{index}}</td>
-									<td class="text-center">{{item.name}}</td>
-									<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='4'" v-on:dblclick="addSubCharg(item)">
+									<td class="text-center">{{item.posName}}</td>
+									<td class="text-center">{{item.orderSmall}} ~ {{item.orderBig}}</td>
+									<td class="text-center">{{item.visRoy}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -271,6 +273,9 @@
 				this.checkRoyaltyList()
 				$("#SubFlowWater").modal('hide')
 				$("#SubVip").modal('hide')
+				$("#SubVipRefund").modal('hide')
+				$("#SubVipOrder").modal('hide')
+				$("#SubCharg").modal('hide')
 			},
 			//check the list of department
 			checkRoyaltyList() {

@@ -26,7 +26,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='0'" v-on:dblclick="addRoyalty(item)">
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='0'" v-on:dblclick="updateRoyalty(item)">
 									<td class="text-center">{{item.posName}}</td>
 									<td class="text-center">{{item.flowSmall}}~{{item.flowBig}} 万</td>
 									<td class="text-center">{{item.turRoy}}%</td>
@@ -59,10 +59,10 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='1' || item.consumeType=='2'" v-on:dblclick="addSubVip(item)">
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='1' || item.consumeType=='2'" v-on:dblclick="updateSubVip(item)">
 									<td class="text-center">{{item.posName}}</td>
 									<td class="text-center">{{item.consumeType=='1' ? "初办" : "再续"}}</td>
-									<td class="text-center">{{item.turRoy}}%</td>
+									<td class="text-center">{{item.memRoy}}%</td>
 									<td class="text-center">{{item.royProcess}}%</td>
 									<td class="text-center">{{item.memProportion}}%</td>
 								</tr>
@@ -96,7 +96,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='3'" v-on:dblclick="addSubVipRefund(item)">
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='3'" v-on:dblclick="updateSubVipRefund(item)">
 									<td class="text-center">{{item.posName}}</td>
 									<td class="text-center">{{item.flowSmall}}~{{item.flowBig}} 万</td>
 									<td class="text-center">{{item.refundProportion}}%</td>
@@ -129,7 +129,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='5' || item.consumeType=='6'" v-on:dblclick="addSubVipOrder(item)">
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='5' || item.consumeType=='6'" v-on:dblclick="updateSubVipOrder(item)">
 									<td class="text-center">{{item.posName}}</td>
 									<td class="text-center">{{item.orderSmall}} ~ {{item.orderBig}}</td>
 									<td class="text-center">{{item.consumeType=='5' ? "初访" : "复访"}}</td>
@@ -164,7 +164,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='4'" v-on:dblclick="addSubCharg(item)">
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='4'" v-on:dblclick="updateSubCharg(item)">
 									<td class="text-center">{{item.posName}}</td>
 									<td class="text-center">{{item.orderSmall}} ~ {{item.orderBig}}</td>
 									<td class="text-center">{{item.visRoy}}</td>
@@ -242,30 +242,43 @@
 		methods: {
 			//modify the cotent of Royalty
 			addRoyalty() {
-				console.log('modify the cotent of Royalty')
-				this.$refs.flowWater.initData('add')
-				$("#SubFlowWater").modal('show')
+				this.$refs.flowWater.initData('add');
+				$("#SubFlowWater").modal('show');
 			},
-			//modify the cotent of department
-			modifyDepartment(item) {
-				//if (!this.has(2)) {
-				//	alert("暂无权限修改!");
-				//	return;
-				//}
-				console.log('modify the cotent of department')
-				//this.$refs.dc.initData('modify', item)
-				$("#SubFlowWater").modal('show')
+			updateRoyalty(item) {
+				this.$refs.flowWater.initData('modify',item);
+				$("#SubFlowWater").modal('show');
 			},
 			addSubVip() {
-				$("#SubVip").modal('show')
+				this.$refs.vip.initData('add');
+				$("#SubVip").modal('show');
+			},
+			updateSubVip(item) {
+				this.$refs.vip.initData('modify',item);
+				$("#SubVip").modal('show');
 			},
 			addSubVipRefund() {
+				this.$refs.refund.initData('add');
+				$("#SubVipRefund").modal('show');
+			},
+			updateSubVipRefund(item) {
+				this.$refs.refund.initData('modify',item);
 				$("#SubVipRefund").modal('show')
 			},
 			addSubVipOrder() {
+				this.$refs.order.initData('add');
+				$("#SubVipOrder").modal('show')
+			},
+			updateSubVipOrder(item) {
+				this.$refs.order.initData('modify',item);
 				$("#SubVipOrder").modal('show')
 			},
 			addSubCharg() {
+				this.$refs.charg.initData('add');
+				$("#SubCharg").modal('show')
+			},
+			updateSubCharg(item) {
+				this.$refs.charg.initData('modify',item);
 				$("#SubCharg").modal('show')
 			},
 			//feedback from adding and modifying view

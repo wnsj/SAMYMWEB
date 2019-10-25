@@ -35,7 +35,7 @@
 					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction(title)">确认</button>
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
 						</div>
 					</div>
@@ -67,7 +67,7 @@
 		},
 		methods:{
 			// Initialization patient’s content
-			initData(param,patient) {
+			initData(param,FWRoyalty) {
 				if(param=='add'){
 					console.log('Initialization patient’s content, which adds patient')
 					this.title='新增'
@@ -83,7 +83,8 @@
 					console.log('Initialization patient’s content, which modifies patient')
 					this.type='modify'
 					this.title='修改'
-					
+					this.FWRoyalty = FWRoyalty
+					this.$refs.pos.setPos(FWRoyalty.posId)
 				}
 			},
 			
@@ -99,7 +100,7 @@
 			},
 			
 			//the event of addtional button
-			certainAction(){
+			certainAction(param){
 				console.log('the event of addtional button')
 				
 				
@@ -115,8 +116,14 @@
 					alert("扣款点数不能为空")
 					return
 				}
-				
-				var url = this.url + '/royaltyAction/addRoyalty'
+				switch(param){
+					case '新增':
+						var url = this.url + '/royaltyAction/addRoyalty';
+						break;
+					case '修改':
+						var url = this.url + '/royaltyAction/updateRoyalty'
+						break;	
+				}
 				this.$ajax({
 					method: 'POST',
 					url: url,

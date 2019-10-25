@@ -5,17 +5,17 @@
 			<h1 class="titleCss">提成规则管理</h1>
 		</div>
 		<div>
-			<div class="col-md-6 col-lg-6">
+			<div class="col-md-5 col-lg-5 part">
 				<div class="col-md-12 col-lg-12 main-title" ref="tit">
-					<div class="col-md-6 col-lg-6 text-left">
+					<div class="col-md-8 col-lg-8 text-left">
 						<h3>流水提成规则</h3>
 					</div>
-					<div class="col-md-6 col-lg-6 pull-right">
+					<div class="col-md-4 col-lg-4 pull-right">
 						<button type="button" class="btn btn-warning pos1" v-on:click="addRoyalty('add')">添加</button>
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
-					<div class="table-responsive pre-scrollable" ref="tab1" style="max-height:464px">
+					<div class="table-responsive pre-scrollable" ref="tab1">
 						<table class="table table-bordered table-hover" id="datatable">
 
 							<thead class="datathead">
@@ -36,25 +36,25 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6 col-lg-6">
+			<div class="col-md-5 col-lg-5 part">
 				<div class="col-md-12 col-lg-12 main-title">
-					<div class="col-md-6 col-lg-6 text-left">
+					<div class="col-md-8 col-lg-8 text-left">
 						<h3>会员卡提成规则</h3>
 					</div>
-					<div class="col-md-6 col-lg-6 pull-right">
-						<button type="button" class="btn btn-warning pos2" v-on:click="addSubVip()">添加</button>
+					<div class="col-md-4 col-lg-4 pull-right">
+						<button type="button" class="btn btn-warning pos1" v-on:click="addSubVip()">添加</button>
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
-					<div class="table-responsive pre-scrollable" ref="tab2" style="max-height:464px">
+					<div class="table-responsive pre-scrollable" ref="tab2">
 						<table class="table table-bordered table-hover" id="datatable">
 			
 							<thead class="datathead">
 								<tr>
-									<th class="text-center  col-md-1">岗位</th>
-									<th class="text-center  col-md-3">充值类型</th>
-									<th class="text-center  col-md-1">提点</th>
-									<th class="text-center  col-md-3">消费额度</th>
+									<th class="text-center  col-md-2">岗位</th>
+									<th class="text-center  col-md-2">充值类型</th>
+									<th class="text-center  col-md-2">提点</th>
+									<th class="text-center  col-md-2">消费额度</th>
 									<th class="text-center  col-md-2">提成比例</th>
 								</tr>
 							</thead>
@@ -74,18 +74,18 @@
 			<div style="clear:both"></div>
 		</div>
 		<div>
-			<div class="col-md-6 col-lg-6">
+			<div class="col-md-5 col-lg-5 part">
 				<div class="col-md-12 col-lg-12 main-title">
 					
-					<div class="col-md-6 col-lg-6 text-left">
+					<div class="col-md-8 col-lg-8 text-left">
 						<h3>会员卡退费扣提成规则</h3>
 					</div>
-					<div class="col-md-6 col-lg-6 pull-right">
+					<div class="col-md-4 col-lg-4 pull-right">
 						<button type="button" class="btn btn-warning pos1" v-on:click="addSubVipRefund()">添加</button>
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
-					<div class="table-responsive pre-scrollable" ref="tab3" style="max-height:464px">
+					<div class="table-responsive pre-scrollable" ref="tab3">
 						<table class="table table-bordered table-hover" id="datatable">
 			
 							<thead class="datathead">
@@ -106,18 +106,18 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6 col-lg-6">
+			<div class="col-md-5 col-lg-5 part">
 				<div class="col-md-12 col-lg-12 main-title">
 					
-					<div class="col-md-6 col-lg-6 text-left">
+					<div class="col-md-8 col-lg-8 text-left">
 						<h3>预约人数提成规则</h3>
 					</div>
-					<div class="col-md-6 col-lg-6 pull-right">
-						<button type="button" class="btn btn-warning pos2" v-on:click="addSubVipOrder()">添加</button>
+					<div class="col-md-4 col-lg-4 pull-right">
+						<button type="button" class="btn btn-warning pos1" v-on:click="addSubVipOrder()">添加</button>
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
-					<div class="table-responsive pre-scrollable" ref="tab4" style="max-height:464px">
+					<div class="table-responsive pre-scrollable" ref="tab4">
 						<table class="table table-bordered table-hover" id="datatable">
 			
 							<thead class="datathead">
@@ -141,17 +141,17 @@
 			<div style="clear:both"></div>
 		</div>
 		<div>	
-			<div class="col-md-6 col-lg-6">
+			<div class="col-md-5 col-lg-5 part">
 				<div class="col-md-12 col-lg-12 main-title">
-					<div class="col-md-6 col-lg-6 text-left">
+					<div class="col-md-8 col-lg-8 text-left">
 						<h3>退号扣提成规则</h3>
 					</div>
-					<div class="col-md-6 col-lg-6 pull-right">
+					<div class="col-md-4 col-lg-4 pull-right">
 						<button type="button" class="btn btn-warning pos1" v-on:click="addSubCharg()">添加</button>
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
-					<div class="table-responsive pre-scrollable" ref="tab5" style="max-height:464px">
+					<div class="table-responsive pre-scrollable" ref="tab5">
 						<table class="table table-bordered table-hover" id="datatable">
 			
 							<thead class="datathead">
@@ -324,14 +324,14 @@
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true);
 			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
-			let divH = (h-150)/3;
+			let divH = (h-240)/3;
 			let titH = this.$refs.tit.offsetHeight;
 			let maxH = divH-titH;
-			this.$refs.tab1.style="max-height:"+maxH+"px";
-			this.$refs.tab2.style="max-height:"+maxH+"px";
-			this.$refs.tab3.style="max-height:"+maxH+"px";
-			this.$refs.tab4.style="max-height:"+maxH+"px";
-			this.$refs.tab5.style="max-height:"+maxH+"px";
+			this.$refs.tab1.style="height:"+maxH+"px";
+			this.$refs.tab2.style="height:"+maxH+"px";
+			this.$refs.tab3.style="height:"+maxH+"px";
+			this.$refs.tab4.style="height:"+maxH+"px";
+			this.$refs.tab5.style="height:"+maxH+"px";
 		},
 		created() {
 			this.checkRoyaltyList()
@@ -366,11 +366,14 @@
 	}
 	.pos1{
 		margin-top:15px;
-		margin-left:114px;
+		margin-left:70px;
 	}
-	.pos2{
-		margin-top:15px;
-		margin-left:160px;
+	.part{
+		box-shadow: -5px 0 5px #ccc, 5px 0 5px #ccc , 0 -5px 5px #ccc, 0 5px 5px #ccc;
+		margin:20px 0 0 5%;
+		background:#fff;
+		padding:0 0 10px 0;
+		box-sizing:border-box;
 	}
 	.clearfix:after{
 		content:"";
@@ -378,5 +381,8 @@
 		width:100%;
 		height:0;
 		clear:both;
+	}
+	th{
+		background:#ccc;
 	}
 </style>

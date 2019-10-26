@@ -8,7 +8,7 @@
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<p>科室名：</p>
+					<p>岗位名：</p>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					<input class="form-control" type="text" v-model="name">
@@ -47,11 +47,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in positionList" :key="index" v-on:dblclick="modifyDepartment(item)">
+							<tr v-for="(item,index) in positionList" :key="index" v-on:dblclick="modifyPosition(item)">
 								<td class="text-center">{{item.posId}}</td>
 								<td class="text-center">{{item.posName}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyPosition(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -61,7 +61,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="positionContent">
 				<div class="modal-dialog">
-					<SubPost ref='pos' @addDepartment='feedBack'></SubPost>
+					<SubPost ref='subPost' @certainAction='feedBack'></SubPost>
 				</div>
 			</div>
 		</div>
@@ -89,7 +89,7 @@
 			//modify the cotent of position
 			addPosition() {
 				console.log('modify the cotent of position')
-				this.$refs.pos.initData('add')
+				this.$refs.subPost.initData('add')
 				$("#positionContent").modal('show')
 			},
 			//modify the cotent of position
@@ -98,7 +98,7 @@
 				alert("暂无权限修改!");
 				return;
 				}
-				this.$refs.pos.initData('modify',item)
+				this.$refs.subPost.initData('modify',item)
 				$("#positionContent").modal('show')
 			},
 			//feedback from adding and modifying view
@@ -118,13 +118,12 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						name: '',
-						isuse: '',
+						posName: '',
+						isuse: '1',
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
 					if (res.retCode == '0000') {
 						this.positionList = res.retData
 					} else {

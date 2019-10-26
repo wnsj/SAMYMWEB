@@ -9,23 +9,41 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">岗位名称：</label>
+						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">商铺名称：</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="store.workname" placeholder="">
+							<input type="text" class="form-control" v-model="store.storeName" placeholder="">
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">联系人：</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" v-model="store.connecter" placeholder="">
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">联系电话：</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" v-model="store.phone" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="erpzh" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">是否停用：</label>
 						<div class="col-md-8">
-							<select class="form-control" v-model="store.inHosp">
+							<select class="form-control" v-model="store.isuse">
 								<option value="1">是</option>
 								<option value="0">否</option>
 							</select>
 						</div>
 					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">联系地址：</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" v-model="store.address" placeholder="">
+						</div>
+					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addPatient()">确认</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
 						</div>
 					</div>
@@ -47,111 +65,67 @@
 			return {
 				store:{
 					storeName:'',
+					connecter:'',
+					phone:'',
+					address:'',
+					isuse:'1',
 				},
 				title:'',
 			};
 		},
 		methods:{
-			// Initialization patient’s content
-			initData(param,posContent) {
+			// Initialization store’s content
+			initData(param,storeContent) {
 				if(param=='add'){
-					console.log('Initialization patient’s content, which adds patient')
+					console.log('Initialization store’s content, which adds store')
 					
 					this.title='新增'
+					
+					this.store={
+						storeName:'',
+						connecter:'',
+						phone:'',
+						address:'',
+						isuse:'1',
+					}
+					
 				}else if(param=='modify'){
-					console.log('Initialization patient’s content, which modifies patient')
+					console.log('Initialization store’s content, which modifies store')
 					
 					this.title='修改'
+					console.log(JSON.stringify(storeContent))
+					Object.assign(this.store,storeContent)
 				}
 			},
-			//date formatting 
-			dateAction(param){
-				if(param=='1'){
-					if(!this.isBlank(this.patient.hospTime)){
-						this.patient.hospTime=this.moment(this.patient.hospTime,'YYYY-MM-DD HH:mm:ss.000')
-					}else{
-						this.patient.hospTime=''
-					}
-				}else if(param=='2'){
-					if(!this.isBlank(this.patient.outHosp)){
-						this.patient.outHosp=this.moment(this.patient.outHosp,'YYYY-MM-DD HH:mm:ss.000')
-					}else{
-						this.patient.outHosp=''
-					}
-				}
-			},
-			//feedback department information
-			departChange:function(param){
-				// console.log('科室：'+JSON.stringify(param))
-				if(this.isBlank(param)){
-					this.patient.deptId=""
-				}else{
-					this.patient.deptId=param.deptId
-				}
-				console.log('科室：'+this.patient.deptId)
-			},
-			//feedback PatientStype information
-			psChange:function(param){
-				if(this.isBlank(param)){
-					this.patient.patitypeid=''
-				}else{
-					this.patient.patitypeid=param.patitypeid
-				}
-			},
-			//feedback MedicalInsuranceStype information
-			misChange:function(param){
-				if(this.isBlank(param)){
-					this.patient.mitypeid=''
-				}else{
-					this.patient.mitypeid=param.mitypeid
-				}
+			closeCurrentPage(){
+				$("#storeContent").modal("hide")
+				console.log('关闭添加患者界面')
 			},
 			//the event of addtional button
-			addPatient(){
+			certainAction(){
 				console.log('the event of addtional button')
-				if(this.isExist=='1'){
-					if(!confirm("是否确定提交，提交将覆盖原有患者数据！！！")){
-						return
-					}
-				}
-				this.patient.hospNum=this.hospNum
-				if(this.isBlank(this.patient.hospNum)){
-					alert("住院号不能为空")
+				
+			
+				if(this.isBlank(this.store.storeName)){
+					alert("店名不能为空")
 					return
 				}
-				if(this.isBlank(this.patient.patitypeid)){
-					alert("患者类型不能为空")
+				if(this.isBlank(this.store.connecter)){
+					alert("联系人不能为空")
 					return
 				}
-				if(this.isBlank(this.patient.mitypeid)){
-					alert("医保类型不能为空")
+				if(this.isBlank(this.store.phone)){
+					alert("联系人电话不能为空")
 					return
 				}
-				if(this.isBlank(this.patient.name) ){
-					alert("姓名不能为空")
-					return
+				switch(this.title){
+					case '新增':
+						var url = this.url + '/storeAction/addStore';
+						break;
+					case '修改':
+						var url = this.url + '/storeAction/updateStore'
+						break;	
 				}
-				if(this.isBlank(this.patient.deptId)){
-					alert("科室不能为空")
-					return
-				}
-				if(this.patient.inHosp != '1' && this.patient.inHosp != '0'){
-					alert("是否在院不能为空")
-					return
-				}
-				if(!this.isBlank(this.patient.outHosp)){
-					this.patient.outHosp=this.moment(this.patient.outHosp,'YYYY-MM-DD HH:mm:ss.000')
-				}
-				if(!this.isBlank(this.patient.hospTime)){
-					this.patient.hospTime=this.moment(this.patient.hospTime,'YYYY-MM-DD HH:mm:ss.000')
-				}else{
-					alert("入院时间不能为空")
-					return
-				}
-				this.patient.paymentList=this.projectList
-				this.patient.accountId=this.accountId
-				// console.log('the event of addtional button'+JSON.stringify(this.patient))
-				var url = this.url + '/patientAction/addPatient'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -159,65 +133,17 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data:this.patient,
+					data:this.store,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						this.$emit('addPatient')
+						this.$emit('certainAction')
 					}
 				}).catch((error) => {
-					console.log('请求失败处理')
-				});
-			},
-			closeCurrentPage(){
-				$("#positionContent").modal("hide")
-				console.log('关闭添加患者界面')
-			},
-			//Query patient's information based on the hosNum
-			conditionCheck(param){
-				console.log('checkhosNum')
-				if(this.isBlank(param)){
-					return
-				}
-				var url = this.url + '/patientAction/queryPatientByHospNum'
-				this.$ajax({
-					method: 'POST',
-					url: url,
-					headers: {
-						'Content-Type': this.contentType,
-						'Access-Token': this.accessToken
-					},
-					data: {
-						hospNum:param
-					},
-					dataType: 'json',
-				}).then((response) => {
-					var res = response.data
-					console.log(res)
-					if (res.retCode == '0000') {
-						if (res.retData != null) {
-							this.patient = res.retData
-							this.isExist = '1'
-							
-							this.$refs.dept.setDpart(this.patient.deptId)
-							this.$refs.ps.setObjId(this.patient.patitypeid)
-							this.$refs.mis.setObjId(this.patient.mitypeid)
-						}else{
-							this.patient={}
-							this.patient.sex='1'
-							this.patient.inHosp='1'
-							this.isExist = '0'
-							this.$refs.dept.setDpart('0')
-							this.$refs.ps.setObjId('0')
-							this.$refs.mis.setObjId('0')
-							alert("没有查到此住院号,可以进行添加")
-						}
-					}
-				}).catch((error) => {
-					console.log('请求失败处理')
+					console.log('添加流水规则失败')
 				});
 			},
 			

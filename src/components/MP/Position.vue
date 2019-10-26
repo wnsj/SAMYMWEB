@@ -61,7 +61,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="positionContent">
 				<div class="modal-dialog">
-					<SubPost ref='dc' @addDepartment='feedBack'></SubPost>
+					<SubPost ref='pos' @addDepartment='feedBack'></SubPost>
 				</div>
 			</div>
 		</div>
@@ -89,7 +89,7 @@
 			//modify the cotent of position
 			addPosition() {
 				console.log('modify the cotent of position')
-				//this.$refs.dc.initData('add')
+				this.$refs.pos.initData('add')
 				$("#positionContent").modal('show')
 			},
 			//modify the cotent of position
@@ -98,7 +98,7 @@
 				alert("暂无权限修改!");
 				return;
 				}
-				console.log('modify the cotent of position')
+				this.$refs.pos.initData('modify',item)
 				$("#positionContent").modal('show')
 			},
 			//feedback from adding and modifying view

@@ -11,7 +11,13 @@
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">岗位名称：</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="position.name" placeholder="">
+							<input type="text" class="form-control" v-model="position.posName" placeholder="">
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">上级：</label>
+						<div class="col-md-8">
+							<pos ref="pos" @positionChange='posChange'></pos>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
@@ -25,132 +31,77 @@
 					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addposition()">确认</button>
-							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+							 v-on:click="certainAction()">确认</button>
+							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+							 v-on:click="closeCurrentPage()">返回</button>
 						</div>
 					</div>
 				</form>
 			</div>
-	
+
 		</div>
-		
+
 	</div>
 </template>
 
 <script>
 	import dPicker from 'vue2-datepicker'
+	import pos from '../../common/position.vue'
 	export default {
-		components:{
+		components: {
 			dPicker,
+			pos,
 		},
 		data() {
 			return {
-				position:{
-					
+				position: {
+					posName: '',
+					parentId: '',
+					isuse: '1',
 				},
+				title: '',
 			};
 		},
-		methods:{
+		methods: {
 			// Initialization position’s content
-			initData(param,posContent) {
-				if(param=='add'){
+			initData(param, posContent) {
+				if (param == 'add') {
 					console.log('Initialization position’s content, which adds position')
-					this.type='add'
-					this.title='新增'
-				}else if(param=='modify'){
+					this.title = '新增'
+					this.position = {
+						posName: '',
+						parentId: '',
+						isuse: '1',
+					}
+				} else if (param == 'modify') {
 					console.log('Initialization position’s content, which modifies position')
-					this.type='modify'
-					this.title='修改'
-				}
-			},
-			//date formatting 
-			dateAction(param){
-				if(param=='1'){
-					if(!this.isBlank(this.position.hospTime)){
-						this.position.hospTime=this.moment(this.position.hospTime,'YYYY-MM-DD HH:mm:ss.000')
-					}else{
-						this.position.hospTime=''
-					}
-				}else if(param=='2'){
-					if(!this.isBlank(this.position.outHosp)){
-						this.position.outHosp=this.moment(this.position.outHosp,'YYYY-MM-DD HH:mm:ss.000')
-					}else{
-						this.position.outHosp=''
+					this.title = '修改'
+					Object.assign(this.position,posContent)
+					if(this.position.posId>0){
+						this.$refs.pos.setPos(this.position.posId)
 					}
 				}
 			},
-			//feedback department information
-			departChange:function(param){
-				// console.log('科室：'+JSON.stringify(param))
+			
+			posChange(param){
 				if(this.isBlank(param)){
-					this.position.deptId=""
+					this.position.parentId=""
 				}else{
-					this.position.deptId=param.deptId
-				}
-				console.log('科室：'+this.position.deptId)
-			},
-			//feedback positionStype information
-			psChange:function(param){
-				if(this.isBlank(param)){
-					this.position.patitypeid=''
-				}else{
-					this.position.patitypeid=param.patitypeid
-				}
-			},
-			//feedback MedicalInsuranceStype information
-			misChange:function(param){
-				if(this.isBlank(param)){
-					this.position.mitypeid=''
-				}else{
-					this.position.mitypeid=param.mitypeid
+					this.position.parentId=param.posId
 				}
 			},
 			//the event of addtional button
-			addposition(){
+			certainAction() {
 				console.log('the event of addtional button')
-				if(this.isExist=='1'){
-					if(!confirm("是否确定提交，提交将覆盖原有患者数据！！！")){
-						return
-					}
-				}
-				this.position.hospNum=this.hospNum
-				if(this.isBlank(this.position.hospNum)){
-					alert("住院号不能为空")
+				
+				if (this.isBlank(this.position.posName)) {
+					alert("岗位名称不能为空")
 					return
 				}
-				if(this.isBlank(this.position.patitypeid)){
-					alert("患者类型不能为空")
-					return
-				}
-				if(this.isBlank(this.position.mitypeid)){
-					alert("医保类型不能为空")
-					return
-				}
-				if(this.isBlank(this.position.name) ){
-					alert("姓名不能为空")
-					return
-				}
-				if(this.isBlank(this.position.deptId)){
-					alert("科室不能为空")
-					return
-				}
-				if(this.position.inHosp != '1' && this.position.inHosp != '0'){
-					alert("是否在院不能为空")
-					return
-				}
-				if(!this.isBlank(this.position.outHosp)){
-					this.position.outHosp=this.moment(this.position.outHosp,'YYYY-MM-DD HH:mm:ss.000')
-				}
-				if(!this.isBlank(this.position.hospTime)){
-					this.position.hospTime=this.moment(this.position.hospTime,'YYYY-MM-DD HH:mm:ss.000')
-				}else{
-					alert("入院时间不能为空")
-					return
-				}
-				this.position.paymentList=this.projectList
-				this.position.accountId=this.accountId
-				// console.log('the event of addtional button'+JSON.stringify(this.position))
-				var url = this.url + '/positionAction/addposition'
+				
+				var url = this.url+'/positionAction/addPosition'
+				
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -158,73 +109,28 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data:this.position,
+					data: this.position,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						this.$emit('addposition')
+						this.$emit('certainAction')
 					}
 				}).catch((error) => {
-					console.log('请求失败处理')
+					console.log('岗位信息请提交失败')
 				});
 			},
-			closeCurrentPage(){
+			closeCurrentPage() {
 				$("#positionContent").modal("hide")
 				console.log('关闭添加患者界面')
 			},
-			//Query position's information based on the hosNum
-			conditionCheck(param){
-				console.log('checkhosNum')
-				if(this.isBlank(param)){
-					return
-				}
-				var url = this.url + '/positionAction/querypositionByHospNum'
-				this.$ajax({
-					method: 'POST',
-					url: url,
-					headers: {
-						'Content-Type': this.contentType,
-						'Access-Token': this.accessToken
-					},
-					data: {
-						hospNum:param
-					},
-					dataType: 'json',
-				}).then((response) => {
-					var res = response.data
-					console.log(res)
-					if (res.retCode == '0000') {
-						if (res.retData != null) {
-							this.position = res.retData
-							this.isExist = '1'
-							
-							this.$refs.dept.setDpart(this.position.deptId)
-							this.$refs.ps.setObjId(this.position.patitypeid)
-							this.$refs.mis.setObjId(this.position.mitypeid)
-						}else{
-							this.position={}
-							this.position.sex='1'
-							this.position.inHosp='1'
-							this.isExist = '0'
-							this.$refs.dept.setDpart('0')
-							this.$refs.ps.setObjId('0')
-							this.$refs.mis.setObjId('0')
-							alert("没有查到此住院号,可以进行添加")
-						}
-					}
-				}).catch((error) => {
-					console.log('请求失败处理')
-				});
-			},
-			
 		}
-		
+
 	}
 </script>
 
 <style>
-	
+
 </style>

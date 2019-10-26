@@ -40,18 +40,22 @@
 						
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">ID</th>
-								<th class="text-center">岗位名称</th>
+								<th class="text-center">店铺名称</th>
+								<th class="text-center">联系人</th>
+								<th class="text-center">联系电话</th>
 								<th class="text-center">是否停用</th>
+								<th class="text-center">商铺地址</th>
 								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in storeList" :key="index" v-on:dblclick="modifyDepartment(item)">
-								<td class="text-center">{{item.posId}}</td>
-								<td class="text-center">{{item.posName}}</td>
+							<tr v-for="(item,index) in storeList" :key="index" v-on:dblclick="modifyStore(item)">
+								<td class="text-center">{{item.storeName}}</td>
+								<td class="text-center">{{item.connecter}}</td>
+								<td class="text-center">{{item.phone}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
+								<td class="text-center">{{item.address}}</td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyStore(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -61,7 +65,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="storeContent">
 				<div class="modal-dialog">
-					<SubPost ref='dc' @addDepartment='feedBack'></SubPost>
+					<SubStore ref='store' @certainAction='feedBack'></SubStore>
 				</div>
 			</div>
 		</div>
@@ -72,10 +76,10 @@
 
 <script>
 
-	import SubPost from '../MP/SubPost/SubPost.vue'
+	import SubStore from '../MP/SubStore/SubStore.vue'
 	export default {
 		components: {
-			SubPost,
+			SubStore,
 		},
 		data() {
 			return {
@@ -89,7 +93,7 @@
 			//modify the cotent of store
 			addStore() {
 				console.log('modify the cotent of store')
-				//this.$refs.dc.initData('add')
+				this.$refs.store.initData('add')
 				$("#storeContent").modal('show')
 			},
 			//modify the cotent of store
@@ -98,7 +102,7 @@
 				alert("暂无权限修改!");
 				return;
 				}
-				console.log('modify the cotent of store')
+				this.$refs.store.initData('modify',item)
 				$("#storeContent").modal('show')
 			},
 			//feedback from adding and modifying view
@@ -109,7 +113,7 @@
 			//check the list of store
 			checkStore() {
 				console.log('checkStore')
-				var url = this.url + '/storeAction/querystore'
+				var url = this.url + '/storeAction/queryStore'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -118,13 +122,12 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						name: '',
-						isuse: '',
+						storeName: '',
+						isuse: '1',
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
 					if (res.retCode == '0000') {
 						this.storeList = res.retData
 					} else {
@@ -132,7 +135,7 @@
 					}
 
 				}).catch((error) => {
-					console.log('请求失败处理')
+					console.log('商铺查询请求失败')
 				});
 			},
 			handleScroll(e){

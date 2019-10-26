@@ -17,7 +17,7 @@
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">上级：</label>
 						<div class="col-md-8">
-							<pos ref="pos" @positionChange='posChange'></pos>
+							<position ref="position" @positionChange='posChange'></position>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
@@ -47,11 +47,11 @@
 
 <script>
 	import dPicker from 'vue2-datepicker'
-	import pos from '../../common/position.vue'
+	import position from '../../common/Position.vue'
 	export default {
 		components: {
 			dPicker,
-			pos,
+			position,
 		},
 		data() {
 			return {
@@ -78,8 +78,9 @@
 					console.log('Initialization position’s content, which modifies position')
 					this.title = '修改'
 					Object.assign(this.position,posContent)
-					if(this.position.posId>0){
-						this.$refs.pos.setPos(this.position.posId)
+					console.log(JSON.stringify(this.position))
+					if(this.position.parentId>0){
+						this.$refs.position.setPos(this.position.parentId)
 					}
 				}
 			},
@@ -99,8 +100,14 @@
 					alert("岗位名称不能为空")
 					return
 				}
-				
-				var url = this.url+'/positionAction/addPosition'
+				switch(this.title){
+					case '新增':
+						var url = this.url+'/positionAction/addPosition'
+						break;
+					case '修改':
+						var url = this.url+'/positionAction/updatePosition'
+						break;
+				}
 				
 				this.$ajax({
 					method: 'POST',

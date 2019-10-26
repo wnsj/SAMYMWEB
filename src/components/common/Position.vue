@@ -25,14 +25,14 @@
     methods: {
       //提交岗位名称和ID
       positionChange: function () {
-				console.log('岗位1：'+this.posObj.posId)
+				// console.log('岗位1：'+this.posObj.posId)
         this.posObj = this.exchangePosName(this.posId)
-				console.log('岗位2：'+this.posObj.posId)
+				// console.log('岗位2：'+this.posObj.posId)
         this.$emit('positionChange', this.posObj)
       },
       setPos: function (posId) {
         this.posId = posId
-				console.log('设置岗位'+this.posId)
+				// console.log('设置岗位'+this.posId)
       },
       //添加前缀的部门名字兑换原来的名字
       exchangePosName: function (param) {

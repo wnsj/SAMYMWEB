@@ -1,4 +1,4 @@
-<!-- add and modify patient -->
+<!-- add and modify employee -->
 <template>
 	<div class="modal-content">
 		<div class="modal-header">
@@ -38,136 +38,129 @@
 					<div class="col-md-6 form-group clearfix">
 						<label for="gh" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">岗位：</label>
 						<div class="col-md-8">
-							<pos ref="pos" @departChange='departChange'></pos>
+							<pos ref="pos" @positionChange='positionChange'></pos>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="gh" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">上级：</label>
 						<div class="col-md-8">
-							<pos ref="pos" @departChange='departChange'></pos>
+							<emp ref="emp" @employeeChange="employeeChange"></emp>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<!-- <div class="col-md-6 form-group clearfix">
 						<label class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">生　日：</label>
-						<dPicker class="col-md-8" style="width:65%;" v-model="employee.hospTime" v-on:change="dateAction('1')"></dPicker>
-					</div>
-					
-					
+						<dPicker class="col-md-8" style="width:65%;" v-model="employee.birthday" v-on:change="dateAction('1')"></dPicker>
+					</div> -->
+
+
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addEmp()">确认</button>
-							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+							 v-on:click="addEmp()">确认</button>
+							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+							 v-on:click="closeCurrentPage()">返回</button>
 						</div>
 					</div>
 
 				</form>
 			</div>
-	
+
 		</div>
-		
+
 	</div>
 </template>
 
 <script>
 	import dPicker from 'vue2-datepicker'
 	import pos from '../../common/Position.vue'
+	import emp from '../../common/Employee.vue'
 	export default {
-		components:{
+		components: {
 			dPicker,
 			pos,
+			emp,
 		},
 		data() {
 			return {
-				employee:{
-					empId:'-1',
-					empName:'name',
-					posId:'1',
-					sex:'1',
-					isuse:'1',
+				employee: {
+					empId: '',
+					empName: '',
+					posId: '0',
+					sex: '1',
+					isuse: '1',
+					leaderId:'',
+					birthday:'',
 				},
-				type:'',
-				title:'新增',
-				isModify:false,
-				projectList:[],
-				hospNum:'',
-				isExist:'0',
-				accountId:this.accountId(),
+				title: '新增',
 			};
 		},
-		methods:{
-			// Initialization patient’s content
-			initData(param,patient) {
-				if(param=='add'){
-					console.log('Initialization patient’s content, which adds patient')
-					this.type='add'
-					this.title='新增'
-					this.isExist='0'
-					this.isModify=false
-					
-					
-				}else if(param=='modify'){
-					console.log('Initialization patient’s content, which modifies patient')
-					this.type='modify'
-// 					this.isExist='1'
-// 					this.isModify=true
-// 					this.title='修改'
-					// console.log("patient"+JSON.stringify(patient))
-// 					Object.assign(this.patient,patient)
-// 					this.hospNum=this.patient.hospNum
-// 					this.$refs.dept.setDpart(this.patient.deptId)
-// 					this.$refs.ps.setObjId(this.patient.patitypeid)
-// 					this.$refs.mis.setObjId(this.patient.mitypeid)
+		methods: {
+			// Initialization employee’s content
+			initData(param, employee) {
+				if (param == 'add') {
+					console.log('Initialization employee’s content, which adds employee')
+					this.title = '新增'
+
+					this.employee = {
+						empId: '',
+						empName: '',
+						posId: '0',
+						sex: '1',
+						isuse: '1',
+						leaderId:'',
+					}
+					this.$refs.pos.setPos(this.employee.posId)
+					this.$refs.emp.setPosId(this.employee.posId)
+				} else if (param == 'modify') {
+					console.log('Initialization employee’s content, which modifies employee')
+					this.title='修改'
+					Object.assign(this.employee,employee)
+					this.$refs.pos.setPosId(this.employee.posId)
+					this.$refs.emp.setPosId(this.employee.posId)
 				}
 			},
 			//date formatting 
-			dateAction(param){
-				if(param=='1'){
-					if(!this.isBlank(this.patient.hospTime)){
-						this.patient.hospTime=this.moment(this.patient.hospTime,'YYYY-MM-DD HH:mm:ss.000')
-					}else{
-						this.patient.hospTime=''
+			dateAction(param) {
+				if (param == '1') {
+					if (!this.isBlank(this.employee.hospTime)) {
+						this.employee.hospTime = this.moment(this.employee.hospTime, 'YYYY-MM-DD HH:mm:ss.000')
+					} else {
+						this.employee.hospTime = ''
 					}
-				}else if(param=='2'){
-					if(!this.isBlank(this.patient.outHosp)){
-						this.patient.outHosp=this.moment(this.patient.outHosp,'YYYY-MM-DD HH:mm:ss.000')
-					}else{
-						this.patient.outHosp=''
+				} else if (param == '2') {
+					if (!this.isBlank(this.employee.outHosp)) {
+						this.employee.outHosp = this.moment(this.employee.outHosp, 'YYYY-MM-DD HH:mm:ss.000')
+					} else {
+						this.employee.outHosp = ''
 					}
 				}
 			},
 			//feedback department information
-			departChange:function(param){
-				// console.log('科室：'+JSON.stringify(param))
-				if(this.isBlank(param)){
-					this.patient.deptId=""
-				}else{
-					this.patient.deptId=param.deptId
-				}
-				console.log('科室：'+this.patient.deptId)
-			},
-			//feedback PatientStype information
-			psChange:function(param){
-				if(this.isBlank(param)){
-					this.patient.patitypeid=''
-				}else{
-					this.patient.patitypeid=param.patitypeid
+			positionChange: function(param) {
+				if (this.isBlank(param)) {
+					this.employee.posId = ""
+				} else {
+					this.employee.posId = param.posId
+					// console.log("父级ID"+param.parentId)
+					this.$refs.emp.setPosId(param.parentId)
 				}
 			},
-			//feedback MedicalInsuranceStype information
-			misChange:function(param){
-				if(this.isBlank(param)){
-					this.patient.mitypeid=''
-				}else{
-					this.patient.mitypeid=param.mitypeid
+			//feedback employeeStype information
+			employeeChange: function(param) {
+				if (this.isBlank(param)) {
+					this.employee.leaderId = ''
+				} else {
+					this.employee.leaderId = param.empId
 				}
 			},
+			
 			//the event of addtional button
-			addEmp(){
-				if(this.isBlank(this.employee.empName)){
+			addEmp() {
+				if (this.isBlank(this.employee.empName)) {
 					alert("员工的姓名不能为空")
 					return
 				}
-				if(this.isBlank(this.employee.posId) && this.employee.posId == '0'){
+				if (this.isBlank(this.employee.posId) && this.employee.posId == '0') {
 					alert("岗位类型不能为空")
 					return
 				}
@@ -179,30 +172,30 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data:[this.employee],
+					data: [this.employee],
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						this.$emit('addPatient')
+						this.$emit('addemployee')
 					}
 				}).catch((error) => {
 					console.log('请求失败处理')
 				});
 			},
-			closeCurrentPage(){
+			closeCurrentPage() {
 				$("#emp").modal("hide")
 				console.log('关闭添加员工界面')
 			},
-			//Query patient's information based on the hosNum
-			conditionCheck(param){
+			//Query employee's information based on the hosNum
+			conditionCheck(param) {
 				console.log('checkhosNum')
-				if(this.isBlank(param)){
+				if (this.isBlank(param)) {
 					return
 				}
-				var url = this.url + '/patientAction/queryPatientByHospNum'
+				var url = this.url + '/employeeAction/queryemployeeByHospNum'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -211,7 +204,7 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						hospNum:param
+						hospNum: param
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -219,16 +212,16 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						if (res.retData != null) {
-							this.patient = res.retData
+							this.employee = res.retData
 							this.isExist = '1'
-							
-							this.$refs.dept.setDpart(this.patient.deptId)
-							this.$refs.ps.setObjId(this.patient.patitypeid)
-							this.$refs.mis.setObjId(this.patient.mitypeid)
-						}else{
-							this.patient={}
-							this.patient.sex='1'
-							this.patient.inHosp='1'
+
+							this.$refs.dept.setDpart(this.employee.deptId)
+							this.$refs.ps.setObjId(this.employee.patitypeid)
+							this.$refs.mis.setObjId(this.employee.mitypeid)
+						} else {
+							this.employee = {}
+							this.employee.sex = '1'
+							this.employee.inHosp = '1'
 							this.isExist = '0'
 							this.$refs.dept.setDpart('0')
 							this.$refs.ps.setObjId('0')
@@ -240,9 +233,9 @@
 					console.log('请求失败处理')
 				});
 			},
-			
+
 		}
-		
+
 	}
 </script>
 

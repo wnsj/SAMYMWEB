@@ -12,6 +12,7 @@ import Royalty from '../components/MP/Royalty.vue'
 import SettleSummary from '../components/MP/SettleSummary.vue'
 import MemberSummary from '../components/MP/MemberSummary.vue'
 import RoyaltySummary from '../components/MP/RoyaltySummary.vue'
+import Store from '../components/MP/Store.vue'
 
 Vue.use(Router)
 
@@ -70,6 +71,11 @@ export default new Router({
 				  path: '/MP/Royalty',
 				  name: 'Royalty',
 				  component: Royalty,
+				},
+				{
+				  path: '/MP/Store',
+				  name: 'Store',
+				  component: Store,
 				},
         
       ],

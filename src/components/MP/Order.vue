@@ -29,9 +29,9 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="addDepartment()"  v-if="has(2)">添加预约</button>
+			 v-on:click="addOrder()">添加预约</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="checkDepartment()">查询</button>
+			 v-on:click="checkOrderList()">查询</button>
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
@@ -42,23 +42,24 @@
 								<th class="text-center">会员卡号</th>
 								<th class="text-center">姓名</th>
 								<th class="text-center">手机号</th>
-								<th class="text-center">性别</th>
+								<th class="text-center">访问类型</th>
+								<th class="text-center">来电时间</th>
 								<th class="text-center">预约时间</th>
-								<th class="text-center">是否停用</th>
 								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in departmentList" :key="index" v-on:dblclick="modifyDepartment(item)">
+							<tr v-for="(item,index) in orderList" :key="index" v-on:dblclick="updateOrder(item)">
 								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
+								<td class="text-center">{{item.appName}}</td>
+								<td class="text-center">{{item.phone}}</td>
+								<td class="text-center">{{item.visitType=='0' ? "初访" : "复访"}}</td>
+								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-")}}</td>
+								<td class="text-center">{{item.appDate}}</td>
+								
 								<td class="text-center" v-if="has(2)">
-									<button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button>
-									<button type="button" class="btn btn-primary" v-on:click="modifyDepartment(item,index)">取消</button>
+									<button type="button" class="btn btn-warning" v-on:click="updateOrder(item)">修改</button>
+									<button type="button" class="btn btn-primary" v-on:click="updateOrder(item)">取消</button>
 								</td>
 							</tr>
 						</tbody>
@@ -67,9 +68,9 @@
 			</div>
 		</div>
 		<div class="row row_edit">
-			<div class="modal fade" id="departmentContent">
+			<div class="modal fade" id="orderContent">
 				<div class="modal-dialog">
-					<SubOrder ref='dc' @addDepartment='feedBack'></SubOrder>
+					<SubOrder ref='order' @addOrder='feedBack'></SubOrder>
 				</div>
 			</div>
 		</div>
@@ -87,37 +88,31 @@
 		},
 		data() {
 			return {
-				departmentList: ["",],
+				orderList: ["",],
 				isuse: '1',
 				name: '',
 				fixedHeader: false,
 			};
 		},
 		methods: {
-			//modify the cotent of department
-			addDepartment() {
-				console.log('modify the cotent of department')
-				//this.$refs.dc.initData('add')
-				$("#departmentContent").modal('show')
+			//modify the cotent of orderContent
+			addOrder() {
+				this.$refs.order.initData('add')
+				$("#orderContent").modal('show')
 			},
-			//modify the cotent of department
-			modifyDepartment(item) {
-				if(!this.has(2)){
-				alert("暂无权限修改!");
-				return;
-				}
-				console.log('modify the cotent of department')
-				//this.$refs.dc.initData('modify', item)
-				$("#departmentContent").modal('show')
+			updateOrder(item) {
+				this.$refs.order.initData('modify',item);
+				$("#orderContent").modal('show');
 			},
 			//feedback from adding and modifying view
 			feedBack() {
-				this.checkDepartment()
-				$("#departmentContent").modal('hide')
+				this.checkOrderList()
+				$("#orderContent").modal('hide')
 			},
-			//check the list of department
-			checkDepartment() {
-				var url = this.url + '/appointmentAction/addAppointment'
+
+			//check the list of orderContent
+			checkOrderList() {
+				var url = this.url + '/appointmentAction/queryAppointment'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -126,15 +121,15 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						name: this.name,
-						isuse: this.isuse,
+						appName: '',
+						phone: '',
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
+					//console.log(JSON.stringify(res))
 					if (res.retCode == '0000') {
-						this.departmentList = res.retData
+						this.orderList = res.retData
 					} else {
 						alert(res.retMsg)
 					}
@@ -171,7 +166,7 @@
 			window.addEventListener('scroll',this.handleScroll,true)
 		},
 		created() {
-		
+		  this.checkOrderList()
 		}
 	}
 </script>

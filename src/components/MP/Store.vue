@@ -3,12 +3,12 @@
 
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">岗位管理</h1>
+			<h1 class="titleCss">商铺管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<p>科室名：</p>
+					<p>商铺名：</p>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					<input class="form-control" type="text" v-model="name">
@@ -29,9 +29,9 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="addPosition()"  v-if="has(2)">添加</button>
+			 v-on:click="addStore()"  v-if="has(2)">添加</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="checkPosition()">查询</button>
+			 v-on:click="checkStore()">查询</button>
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
@@ -40,18 +40,22 @@
 						
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">ID</th>
-								<th class="text-center">岗位名称</th>
+								<th class="text-center">店铺名称</th>
+								<th class="text-center">联系人</th>
+								<th class="text-center">联系电话</th>
 								<th class="text-center">是否停用</th>
+								<th class="text-center">商铺地址</th>
 								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in positionList" :key="index" v-on:dblclick="modifyDepartment(item)">
-								<td class="text-center">{{item.posId}}</td>
-								<td class="text-center">{{item.posName}}</td>
+							<tr v-for="(item,index) in storeList" :key="index" v-on:dblclick="modifyStore(item)">
+								<td class="text-center">{{item.storeName}}</td>
+								<td class="text-center">{{item.connecter}}</td>
+								<td class="text-center">{{item.phone}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
+								<td class="text-center">{{item.address}}</td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyStore(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -59,9 +63,9 @@
 			</div>
 		</div>
 		<div class="row row_edit">
-			<div class="modal fade" id="positionContent">
+			<div class="modal fade" id="storeContent">
 				<div class="modal-dialog">
-					<SubPost ref='pos' @addDepartment='feedBack'></SubPost>
+					<SubStore ref='store' @certainAction='feedBack'></SubStore>
 				</div>
 			</div>
 		</div>
@@ -72,44 +76,44 @@
 
 <script>
 
-	import SubPost from '../MP/SubPost/SubPost.vue'
+	import SubStore from '../MP/SubStore/SubStore.vue'
 	export default {
 		components: {
-			SubPost,
+			SubStore,
 		},
 		data() {
 			return {
-				positionList: ["",],
+				storeList: [],
 				isuse: '1',
 				name: '',
 				fixedHeader: false,
 			};
 		},
 		methods: {
-			//modify the cotent of position
-			addPosition() {
-				console.log('modify the cotent of position')
-				this.$refs.pos.initData('add')
-				$("#positionContent").modal('show')
+			//modify the cotent of store
+			addStore() {
+				console.log('modify the cotent of store')
+				this.$refs.store.initData('add')
+				$("#storeContent").modal('show')
 			},
-			//modify the cotent of position
-			modifyPosition(item) {
+			//modify the cotent of store
+			modifyStore(item) {
 				if(!this.has(2)){
 				alert("暂无权限修改!");
 				return;
 				}
-				this.$refs.pos.initData('modify',item)
-				$("#positionContent").modal('show')
+				this.$refs.store.initData('modify',item)
+				$("#storeContent").modal('show')
 			},
 			//feedback from adding and modifying view
 			feedBack() {
-				this.checkPosition()
-				$("#positionContent").modal('hide')
+				this.checkStore()
+				$("#storeContent").modal('hide')
 			},
-			//check the list of position
-			checkPosition() {
-				console.log('checkPosition')
-				var url = this.url + '/positionAction/queryPosition'
+			//check the list of store
+			checkStore() {
+				console.log('checkStore')
+				var url = this.url + '/storeAction/queryStore'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -118,21 +122,20 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						name: '',
-						isuse: '',
+						storeName: '',
+						isuse: '1',
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
 					if (res.retCode == '0000') {
-						this.positionList = res.retData
+						this.storeList = res.retData
 					} else {
 						alert(res.retMsg)
 					}
 
 				}).catch((error) => {
-					console.log('请求失败处理')
+					console.log('商铺查询请求失败')
 				});
 			},
 			handleScroll(e){
@@ -163,15 +166,15 @@
 		window.addEventListener('scroll',this.handleScroll,true)
 		},
 		created() {
-		  this.checkPosition()
+		  this.checkStore()
 		}
 	}
 </script>
 
 <style>
-  #datatable{position:relative;}
+  #datatable{store:relative;}
   #fHeader {
-    position: absolute;
+    store: absolute;
     top: 0;
     left: 0;
     background: #eeeeee;

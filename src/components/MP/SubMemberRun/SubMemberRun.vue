@@ -1,4 +1,4 @@
-<!-- add and modify patient -->
+<!-- add and modify FWRoyalty -->
 <template>
 	<div class="modal-content">
 		<div class="modal-header">
@@ -11,19 +11,19 @@
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="patient.memName" placeholder="">
+							<input type="text" class="form-control" v-model="FWRoyalty.memName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="patient.phone" placeholder="">
+							<input type="text" class="form-control" v-model="FWRoyalty.phone" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">性别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<select class="form-control" v-model="patient.sex">
+							<select class="form-control" v-model="FWRoyalty.sex">
 								<option value="1">男</option>
 								<option value="2">女</option>
 							</select>
@@ -31,12 +31,12 @@
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">生日</label><span class="sign-left">:</span>
-						<dPicker class="col-md-8" style="width:65%;" v-model="patient.birthday" v-on:change="dateAction('1')"></dPicker>
+						<dPicker class="col-md-8" style="width:65%;" v-model="FWRoyalty.birthday" v-on:change="dateAction('1')"></dPicker>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否启用</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<select class="form-control" v-model="patient.isuse">
+							<select class="form-control" v-model="FWRoyalty.isuse">
 								<option value="1">是</option>
 								<option value="0">否</option>
 							</select>
@@ -44,7 +44,7 @@
 					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addPatient()">确认</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addFWRoyalty()">确认</button>
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
 						</div>
 					</div>
@@ -55,10 +55,12 @@
 </template>
 
 <script>
+	import dPicker from 'vue2-datepicker'
 	import pos from '../../common/Position.vue'
 	export default {
 		components:{
 			pos,
+			dPicker,
 		},
 		data() {
 			return {

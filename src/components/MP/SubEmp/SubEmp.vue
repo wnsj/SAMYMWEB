@@ -41,7 +41,12 @@
 							<pos ref="pos" @departChange='departChange'></pos>
 						</div>
 					</div>
-					
+					<div class="col-md-6 form-group clearfix">
+						<label for="gh" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">上级：</label>
+						<div class="col-md-8">
+							<pos ref="pos" @departChange='departChange'></pos>
+						</div>
+					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">生　日：</label>
 						<dPicker class="col-md-8" style="width:65%;" v-model="employee.hospTime" v-on:change="dateAction('1')"></dPicker>

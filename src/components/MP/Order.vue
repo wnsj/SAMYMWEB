@@ -37,12 +37,6 @@
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable" style="max-height:464px">
 					<table class="table table-bordered table-hover" id="datatable" >
-						<!-- <div id="fHeader" v-show="fixedHeader">
-							<div class="text-center">ID</div>
-							<div class="text-center">科室名称</div>
-							<div class="text-center">是否停用</div>
-							<div class="text-center">修改科室</div>
-						</div> -->
 						<thead class="datathead">
 							<tr>
 								<th class="text-center">会员卡号</th>
@@ -123,8 +117,7 @@
 			},
 			//check the list of department
 			checkDepartment() {
-				console.log('checkDepartment')
-				var url = this.url + '/departmentAction/queryDepartment'
+				var url = this.url + '/appointmentAction/addAppointment'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -175,10 +168,10 @@
 			}
 		},
 		mounted () {
-		window.addEventListener('scroll',this.handleScroll,true)
+			window.addEventListener('scroll',this.handleScroll,true)
 		},
 		created() {
-		  this.checkDepartment()
+		
 		}
 	}
 </script>

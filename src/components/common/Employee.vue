@@ -13,6 +13,7 @@
 			return {
 				empName: '',
 				empId: '0',
+				posId:'',
 				employeeList: [],
 				empObj: {
 					empId: '0',
@@ -42,7 +43,14 @@
 					}
 				}
 			},
-
+			setPosId(posId){
+				if(this.isBlank(posId)){
+					this.posId=''
+				}else{
+					this.posId=posId
+				}
+				this.getEmployeeList()
+			},
 			async getEmployeeList() {
 				var url = this.url + '/employeeAction/queryEmp'
 				this.$ajax({
@@ -53,6 +61,7 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
+						posId:this.posId,
 						isuse: '1'
 					},
 					dataType: 'json',

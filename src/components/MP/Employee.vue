@@ -66,7 +66,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in employeeList" :key="index" v-on:dblclick="modifyDepartment(item)">
+							<tr v-for="(item,index) in employeeList" :key="index" v-on:dblclick="modifyEmp(item)">
 								<td class="text-center">{{item.empId}}</td>
 								<td class="text-center">{{item.empName}}</td>
 								<td class="text-center">{{item.posName}}</td>
@@ -78,13 +78,6 @@
 							</tr>
 						</tbody>
 					</table>
-				</div>
-			</div>
-		</div>
-		<div class="row row_edit">
-			<div class="modal fade" id="empContent">
-				<div class="modal-dialog">
-					<SubStaff ref='staff' @addDepartment='feedBack'></SubStaff>
 				</div>
 			</div>
 		</div>
@@ -102,11 +95,9 @@
 
 <script>
 	import emp from '../MP/SubEmp/SubEmp.vue'
-	import SubStaff from '../MP/SubStaff/SubStaffList.vue'
 	export default {
 		components: {
 			emp,
-			SubStaff,
 		},
 		data() {
 			return {
@@ -118,14 +109,10 @@
 		},
 		methods: {
 			//modify the cotent of department
-			addStaff() {
-				console.log('modify the cotent of department')
-				//this.$refs.emp.initData('add')
-				$("#empContent").modal('show')
-			},
+			
 			addEmp() {
 				console.log('modify the cotent of department')
-				//this.$refs.emp.initData('add')
+				this.$refs.emp.initData('add')
 				$("#emp").modal('show')
 			},
 			//modify the cotent of department
@@ -135,7 +122,7 @@
 					return;
 				}
 				console.log('modify the cotent of department')
-				//this.$refs.emp.initData('modify', item)
+				this.$refs.emp.initData('modify', item)
 				$("#empContent").modal('show')
 			},
 			//feedback from adding and modifying view

@@ -48,7 +48,9 @@
 						<li v-if="has(1)">
 							<router-link to="/MP/Position"><i class="fa fa-table" aria-hidden="false" >　岗位管理</i></router-link>
 						</li>
-						
+						<li v-if="has(1)">
+							<router-link to="/MP/Store"><i class="fa fa-table" aria-hidden="false" >　商铺管理</i></router-link>
+						</li>
 						
 					</ul>
 				</div>

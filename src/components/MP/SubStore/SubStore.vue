@@ -1,65 +1,34 @@
-<!-- add and modify patient -->
+<!-- add and modify store -->
 <template>
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h4 id="myModalLabel" class="modal-title">{{title}}员工</h4>
+			<h4 id="myModalLabel" class="modal-title">{{title}}商铺</h4>
 		</div>
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop" id="basic">
-				<form action="">
+				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">姓名：</label>
+						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">岗位名称：</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="employee.empName" placeholder="">
+							<input type="text" class="form-control" v-model="store.workname" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">手机号：</label>
+						<label for="erpzh" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">是否停用：</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="employee.name" placeholder="">
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">年龄：</label>
-						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="employee.age" placeholder="">
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="sex" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">性　别：</label>
-						<div class="col-md-8">
-							<select class="form-control" v-model="employee.sex">
-								<option value="1">男</option>
-								<option value="2">女</option>
+							<select class="form-control" v-model="store.inHosp">
+								<option value="1">是</option>
+								<option value="0">否</option>
 							</select>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="gh" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">岗位：</label>
-						<div class="col-md-8">
-							<pos ref="pos" @departChange='departChange'></pos>
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="gh" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">上级：</label>
-						<div class="col-md-8">
-							<pos ref="pos" @departChange='departChange'></pos>
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">生　日：</label>
-						<dPicker class="col-md-8" style="width:65%;" v-model="employee.hospTime" v-on:change="dateAction('1')"></dPicker>
-					</div>
-					
-					
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addEmp()">确认</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addPatient()">确认</button>
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
 						</div>
 					</div>
-
 				</form>
 			</div>
 	
@@ -70,53 +39,29 @@
 
 <script>
 	import dPicker from 'vue2-datepicker'
-	import pos from '../../common/Position.vue'
 	export default {
 		components:{
 			dPicker,
-			pos,
 		},
 		data() {
 			return {
-				employee:{
-					empId:'-1',
-					empName:'name',
-					posId:'1',
-					sex:'1',
-					isuse:'1',
+				store:{
+					storeName:'',
 				},
-				type:'',
-				title:'新增',
-				isModify:false,
-				projectList:[],
-				hospNum:'',
-				isExist:'0',
-				accountId:this.accountId(),
+				title:'',
 			};
 		},
 		methods:{
 			// Initialization patient’s content
-			initData(param,patient) {
+			initData(param,posContent) {
 				if(param=='add'){
 					console.log('Initialization patient’s content, which adds patient')
-					this.type='add'
+					
 					this.title='新增'
-					this.isExist='0'
-					this.isModify=false
-					
-					
 				}else if(param=='modify'){
 					console.log('Initialization patient’s content, which modifies patient')
-					this.type='modify'
-// 					this.isExist='1'
-// 					this.isModify=true
-// 					this.title='修改'
-					// console.log("patient"+JSON.stringify(patient))
-// 					Object.assign(this.patient,patient)
-// 					this.hospNum=this.patient.hospNum
-// 					this.$refs.dept.setDpart(this.patient.deptId)
-// 					this.$refs.ps.setObjId(this.patient.patitypeid)
-// 					this.$refs.mis.setObjId(this.patient.mitypeid)
+					
+					this.title='修改'
 				}
 			},
 			//date formatting 
@@ -162,16 +107,51 @@
 				}
 			},
 			//the event of addtional button
-			addEmp(){
-				if(this.isBlank(this.employee.empName)){
-					alert("员工的姓名不能为空")
+			addPatient(){
+				console.log('the event of addtional button')
+				if(this.isExist=='1'){
+					if(!confirm("是否确定提交，提交将覆盖原有患者数据！！！")){
+						return
+					}
+				}
+				this.patient.hospNum=this.hospNum
+				if(this.isBlank(this.patient.hospNum)){
+					alert("住院号不能为空")
 					return
 				}
-				if(this.isBlank(this.employee.posId) && this.employee.posId == '0'){
-					alert("岗位类型不能为空")
+				if(this.isBlank(this.patient.patitypeid)){
+					alert("患者类型不能为空")
 					return
 				}
-				var url = this.url + '/employeeAction/addUpdateEmp'
+				if(this.isBlank(this.patient.mitypeid)){
+					alert("医保类型不能为空")
+					return
+				}
+				if(this.isBlank(this.patient.name) ){
+					alert("姓名不能为空")
+					return
+				}
+				if(this.isBlank(this.patient.deptId)){
+					alert("科室不能为空")
+					return
+				}
+				if(this.patient.inHosp != '1' && this.patient.inHosp != '0'){
+					alert("是否在院不能为空")
+					return
+				}
+				if(!this.isBlank(this.patient.outHosp)){
+					this.patient.outHosp=this.moment(this.patient.outHosp,'YYYY-MM-DD HH:mm:ss.000')
+				}
+				if(!this.isBlank(this.patient.hospTime)){
+					this.patient.hospTime=this.moment(this.patient.hospTime,'YYYY-MM-DD HH:mm:ss.000')
+				}else{
+					alert("入院时间不能为空")
+					return
+				}
+				this.patient.paymentList=this.projectList
+				this.patient.accountId=this.accountId
+				// console.log('the event of addtional button'+JSON.stringify(this.patient))
+				var url = this.url + '/patientAction/addPatient'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -179,7 +159,7 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data:[this.employee],
+					data:this.patient,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
@@ -193,8 +173,8 @@
 				});
 			},
 			closeCurrentPage(){
-				$("#emp").modal("hide")
-				console.log('关闭添加员工界面')
+				$("#positionContent").modal("hide")
+				console.log('关闭添加患者界面')
 			},
 			//Query patient's information based on the hosNum
 			conditionCheck(param){
@@ -247,5 +227,6 @@
 </script>
 
 <style>
-
+	
 </style>
+

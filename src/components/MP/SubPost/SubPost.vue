@@ -1,4 +1,4 @@
-<!-- add and modify patient -->
+<!-- add and modify position -->
 <template>
 	<div class="modal-content">
 		<div class="modal-header">
@@ -11,13 +11,13 @@
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">岗位名称：</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="patient.workname" placeholder="">
+							<input type="text" class="form-control" v-model="position.name" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="erpzh" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">是否停用：</label>
 						<div class="col-md-8">
-							<select class="form-control" v-model="patient.inHosp">
+							<select class="form-control" v-model="position.isuse">
 								<option value="1">是</option>
 								<option value="0">否</option>
 							</select>
@@ -25,7 +25,7 @@
 					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addPatient()">确认</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addposition()">确认</button>
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
 						</div>
 					</div>
@@ -45,18 +45,20 @@
 		},
 		data() {
 			return {
-				positionList:["",],
+				position:{
+					
+				},
 			};
 		},
 		methods:{
-			// Initialization patient’s content
+			// Initialization position’s content
 			initData(param,posContent) {
 				if(param=='add'){
-					console.log('Initialization patient’s content, which adds patient')
+					console.log('Initialization position’s content, which adds position')
 					this.type='add'
 					this.title='新增'
 				}else if(param=='modify'){
-					console.log('Initialization patient’s content, which modifies patient')
+					console.log('Initialization position’s content, which modifies position')
 					this.type='modify'
 					this.title='修改'
 				}
@@ -64,16 +66,16 @@
 			//date formatting 
 			dateAction(param){
 				if(param=='1'){
-					if(!this.isBlank(this.patient.hospTime)){
-						this.patient.hospTime=this.moment(this.patient.hospTime,'YYYY-MM-DD HH:mm:ss.000')
+					if(!this.isBlank(this.position.hospTime)){
+						this.position.hospTime=this.moment(this.position.hospTime,'YYYY-MM-DD HH:mm:ss.000')
 					}else{
-						this.patient.hospTime=''
+						this.position.hospTime=''
 					}
 				}else if(param=='2'){
-					if(!this.isBlank(this.patient.outHosp)){
-						this.patient.outHosp=this.moment(this.patient.outHosp,'YYYY-MM-DD HH:mm:ss.000')
+					if(!this.isBlank(this.position.outHosp)){
+						this.position.outHosp=this.moment(this.position.outHosp,'YYYY-MM-DD HH:mm:ss.000')
 					}else{
-						this.patient.outHosp=''
+						this.position.outHosp=''
 					}
 				}
 			},
@@ -81,74 +83,74 @@
 			departChange:function(param){
 				// console.log('科室：'+JSON.stringify(param))
 				if(this.isBlank(param)){
-					this.patient.deptId=""
+					this.position.deptId=""
 				}else{
-					this.patient.deptId=param.deptId
+					this.position.deptId=param.deptId
 				}
-				console.log('科室：'+this.patient.deptId)
+				console.log('科室：'+this.position.deptId)
 			},
-			//feedback PatientStype information
+			//feedback positionStype information
 			psChange:function(param){
 				if(this.isBlank(param)){
-					this.patient.patitypeid=''
+					this.position.patitypeid=''
 				}else{
-					this.patient.patitypeid=param.patitypeid
+					this.position.patitypeid=param.patitypeid
 				}
 			},
 			//feedback MedicalInsuranceStype information
 			misChange:function(param){
 				if(this.isBlank(param)){
-					this.patient.mitypeid=''
+					this.position.mitypeid=''
 				}else{
-					this.patient.mitypeid=param.mitypeid
+					this.position.mitypeid=param.mitypeid
 				}
 			},
 			//the event of addtional button
-			addPatient(){
+			addposition(){
 				console.log('the event of addtional button')
 				if(this.isExist=='1'){
 					if(!confirm("是否确定提交，提交将覆盖原有患者数据！！！")){
 						return
 					}
 				}
-				this.patient.hospNum=this.hospNum
-				if(this.isBlank(this.patient.hospNum)){
+				this.position.hospNum=this.hospNum
+				if(this.isBlank(this.position.hospNum)){
 					alert("住院号不能为空")
 					return
 				}
-				if(this.isBlank(this.patient.patitypeid)){
+				if(this.isBlank(this.position.patitypeid)){
 					alert("患者类型不能为空")
 					return
 				}
-				if(this.isBlank(this.patient.mitypeid)){
+				if(this.isBlank(this.position.mitypeid)){
 					alert("医保类型不能为空")
 					return
 				}
-				if(this.isBlank(this.patient.name) ){
+				if(this.isBlank(this.position.name) ){
 					alert("姓名不能为空")
 					return
 				}
-				if(this.isBlank(this.patient.deptId)){
+				if(this.isBlank(this.position.deptId)){
 					alert("科室不能为空")
 					return
 				}
-				if(this.patient.inHosp != '1' && this.patient.inHosp != '0'){
+				if(this.position.inHosp != '1' && this.position.inHosp != '0'){
 					alert("是否在院不能为空")
 					return
 				}
-				if(!this.isBlank(this.patient.outHosp)){
-					this.patient.outHosp=this.moment(this.patient.outHosp,'YYYY-MM-DD HH:mm:ss.000')
+				if(!this.isBlank(this.position.outHosp)){
+					this.position.outHosp=this.moment(this.position.outHosp,'YYYY-MM-DD HH:mm:ss.000')
 				}
-				if(!this.isBlank(this.patient.hospTime)){
-					this.patient.hospTime=this.moment(this.patient.hospTime,'YYYY-MM-DD HH:mm:ss.000')
+				if(!this.isBlank(this.position.hospTime)){
+					this.position.hospTime=this.moment(this.position.hospTime,'YYYY-MM-DD HH:mm:ss.000')
 				}else{
 					alert("入院时间不能为空")
 					return
 				}
-				this.patient.paymentList=this.projectList
-				this.patient.accountId=this.accountId
-				// console.log('the event of addtional button'+JSON.stringify(this.patient))
-				var url = this.url + '/patientAction/addPatient'
+				this.position.paymentList=this.projectList
+				this.position.accountId=this.accountId
+				// console.log('the event of addtional button'+JSON.stringify(this.position))
+				var url = this.url + '/positionAction/addposition'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -156,14 +158,14 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data:this.patient,
+					data:this.position,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						this.$emit('addPatient')
+						this.$emit('addposition')
 					}
 				}).catch((error) => {
 					console.log('请求失败处理')
@@ -173,13 +175,13 @@
 				$("#positionContent").modal("hide")
 				console.log('关闭添加患者界面')
 			},
-			//Query patient's information based on the hosNum
+			//Query position's information based on the hosNum
 			conditionCheck(param){
 				console.log('checkhosNum')
 				if(this.isBlank(param)){
 					return
 				}
-				var url = this.url + '/patientAction/queryPatientByHospNum'
+				var url = this.url + '/positionAction/querypositionByHospNum'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -196,16 +198,16 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						if (res.retData != null) {
-							this.patient = res.retData
+							this.position = res.retData
 							this.isExist = '1'
 							
-							this.$refs.dept.setDpart(this.patient.deptId)
-							this.$refs.ps.setObjId(this.patient.patitypeid)
-							this.$refs.mis.setObjId(this.patient.mitypeid)
+							this.$refs.dept.setDpart(this.position.deptId)
+							this.$refs.ps.setObjId(this.position.patitypeid)
+							this.$refs.mis.setObjId(this.position.mitypeid)
 						}else{
-							this.patient={}
-							this.patient.sex='1'
-							this.patient.inHosp='1'
+							this.position={}
+							this.position.sex='1'
+							this.position.inHosp='1'
 							this.isExist = '0'
 							this.$refs.dept.setDpart('0')
 							this.$refs.ps.setObjId('0')

@@ -3,12 +3,12 @@
 
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">预约管理</h1>
+			<h1 class="titleCss">商铺管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<p>姓名：</p>
+					<p>商铺名：</p>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					<input class="form-control" type="text" v-model="name">
@@ -29,38 +29,29 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="addOrder()"  v-if="has(2)">添加预约</button>
+			 v-on:click="addStore()"  v-if="has(2)">添加</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="checkOrderList()">查询</button>
+			 v-on:click="checkStore()">查询</button>
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable" style="max-height:464px">
 					<table class="table table-bordered table-hover" id="datatable" >
+						
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">会员卡号</th>
-								<th class="text-center">姓名</th>
-								<th class="text-center">手机号</th>
-								<th class="text-center">访问类型</th>
-								<th class="text-center">来电时间</th>
-								<th class="text-center">预约时间</th>
+								<th class="text-center">ID</th>
+								<th class="text-center">岗位名称</th>
+								<th class="text-center">是否停用</th>
 								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in orderList" :key="index" v-on:dblclick="modifyOrder(item)">
-								<td class="text-center">{{index}}</td>
-								<td class="text-center">{{item.appName}}</td>
-								<td class="text-center">{{item.phone}}</td>
-								<td class="text-center">{{item.visitType=='0' ? "初访" : "复访"}}</td>
-								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-")}}</td>
-								<td class="text-center">{{item.appDate}}</td>
-								
-								<td class="text-center" v-if="has(2)">
-									<button type="button" class="btn btn-warning" v-on:click="modifyOrder(item,index)">修改</button>
-									<button type="button" class="btn btn-primary" v-on:click="modifyOrder(item,index)">取消</button>
-								</td>
+							<tr v-for="(item,index) in storeList" :key="index" v-on:dblclick="modifyDepartment(item)">
+								<td class="text-center">{{item.posId}}</td>
+								<td class="text-center">{{item.posName}}</td>
+								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -68,9 +59,9 @@
 			</div>
 		</div>
 		<div class="row row_edit">
-			<div class="modal fade" id="orderContent">
+			<div class="modal fade" id="storeContent">
 				<div class="modal-dialog">
-					<SubOrder ref='order' @addOrder='feedBack'></SubOrder>
+					<SubPost ref='dc' @addDepartment='feedBack'></SubPost>
 				</div>
 			</div>
 		</div>
@@ -81,45 +72,44 @@
 
 <script>
 
-	import SubOrder from '../MP/SubOrder/SubOrder.vue'
+	import SubPost from '../MP/SubPost/SubPost.vue'
 	export default {
 		components: {
-			SubOrder,
+			SubPost,
 		},
 		data() {
 			return {
-				orderList: ["",],
+				storeList: [],
 				isuse: '1',
 				name: '',
 				fixedHeader: false,
 			};
 		},
 		methods: {
-			//modify the cotent of orderContent
-			addOrder() {
-				console.log('modify the cotent of orderContent')
+			//modify the cotent of store
+			addStore() {
+				console.log('modify the cotent of store')
 				//this.$refs.dc.initData('add')
-				$("#orderContent").modal('show')
+				$("#storeContent").modal('show')
 			},
-			//modify the cotent of orderContent
-			modifyDepartment(item) {
+			//modify the cotent of store
+			modifyStore(item) {
 				if(!this.has(2)){
 				alert("暂无权限修改!");
 				return;
 				}
-				console.log('modify the cotent of orderContent')
-				//this.$refs.dc.initData('modify', item)
-				$("#orderContent").modal('show')
+				console.log('modify the cotent of store')
+				$("#storeContent").modal('show')
 			},
 			//feedback from adding and modifying view
 			feedBack() {
-				this.checkOrderList()
-				$("#orderContent").modal('hide')
+				this.checkStore()
+				$("#storeContent").modal('hide')
 			},
-			//check the list of orderContent
-			checkOrderList() {
-				console.log('checkOrderList')
-				var url = this.url + '/appointmentAction/queryAppointment'
+			//check the list of store
+			checkStore() {
+				console.log('checkStore')
+				var url = this.url + '/storeAction/querystore'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -128,15 +118,15 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						appName: '',
-						phone: '',
+						name: '',
+						isuse: '',
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(JSON.stringify(res))
+					console.log(res)
 					if (res.retCode == '0000') {
-						this.orderList = res.retData
+						this.storeList = res.retData
 					} else {
 						alert(res.retMsg)
 					}
@@ -173,15 +163,15 @@
 		window.addEventListener('scroll',this.handleScroll,true)
 		},
 		created() {
-		  this.checkOrderList()
+		  this.checkStore()
 		}
 	}
 </script>
 
 <style>
-  #datatable{position:relative;}
+  #datatable{store:relative;}
   #fHeader {
-    position: absolute;
+    store: absolute;
     top: 0;
     left: 0;
     background: #eeeeee;

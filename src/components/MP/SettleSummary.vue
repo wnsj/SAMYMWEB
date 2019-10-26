@@ -25,23 +25,22 @@
 					<input class="form-control" type="text" value="" v-model="tel">
 				</div>
 			</div>
-		</div>
+		</div> 
 		<div class="row">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>开始时间：</p>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:10px;">
+				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;">
+					<p>消费时间：</p>
 				</div>
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-4 col-lg-4">
 					<dPicker style="width:100%" v-model="hospTime" v-on:change="dateAction('0')"></dPicker>
 				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>结束时间：</p>
+				<div style="padding: 0; line-height: 34px; float:left">
+					~
 				</div>
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-4 col-lg-4">
 					<dPicker style="width:100%" v-model="outHosp" v-on:change="dateAction('1')"></dPicker>
 				</div>
+				
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px; padding-bottom:1.5%;">
 				<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
@@ -93,7 +92,6 @@
 	</div>
 </template>
 
-
 <script>
 	import axios from 'axios'
 	import dPicker from 'vue2-datepicker'
@@ -118,6 +116,9 @@
 
 		methods: {
 			conditionCheck: function() {
+				console.log('this.hospNum:'+this.hospNum)
+				console.log('this.name:'+this.name)
+				console.log('this.tel:'+this.tel)
 				var url = this.url + '/accountRecordAction/queryAccountRecordTotal'
 				this.$ajax({
 					method: 'POST',
@@ -126,10 +127,15 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data:{},
+					data:{
+						MEM_NAME:this.name,
+						MEM_NUM:this.hospNum,
+						PHONE:this.tel
+					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
+					console.log(res);
 					if (res.retCode == '0000') {
 						this.consumList = res.retData;
 					}
@@ -230,7 +236,12 @@
 		border: 1px solid #ddd;
 		font-weight: bold;
 	}
-
+	.pa-right{
+		padding-right:0;
+	}
+	.pa-left{
+		padding-left:0;
+	}
 	@media print {
 		#fHeader {
 			display: none

@@ -7,23 +7,65 @@
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<p>姓名：</p>
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>会员卡号：</p>
 				</div>
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-					<input class="form-control" type="text" v-model="name">
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memNum"></div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>姓　　名：</p>
+				</div>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="appName"></div>
+			</div>
+
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>手	机	号：</p>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding: 0; line-height: 34px;">
-					<p>是否在用：</p>
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-right" style="padding: 0; line-height: 34px;">
+					<p>访问类型：</p>
 				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<select class="form-control" v-model="isuse">
-						<option value="">全部</option>
-						<option value="1">是</option>
-						<option value="0">否</option>
+				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+					<select class="form-control" v-model="visitType">
+						<option value="0">初访</option>
+						<option value="1">再访</option>
 					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
+				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;">
+					<p>来电时间：</p>
+				</div>
+				<div class="col-md-4 col-lg-4">
+					<dPicker style="width:100%" v-model="telTimeBegin" v-on:change="dateAction('0')"></dPicker>
+				</div>
+				<div style="padding: 0; line-height: 34px; float:left">
+					~
+				</div>
+				<div class="col-md-4 col-lg-4">
+					<dPicker style="width:100%" v-model="telTimeEnd" v-on:change="dateAction('1')"></dPicker>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
+				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;">
+					<p>预约时间：</p>
+				</div>
+				<div class="col-md-4 col-lg-4">
+					<dPicker style="width:100%" v-model="orderTimeBegin" v-on:change="dateAction('0')"></dPicker>
+				</div>
+				<div style="padding: 0; line-height: 34px; float:left">
+					~
+				</div>
+				<div class="col-md-4 col-lg-4">
+					<dPicker style="width:100%" v-model="orderTimeEnd" v-on:change="dateAction('1')"></dPicker>
 				</div>
 			</div>
 		</div>
@@ -82,16 +124,23 @@
 <script>
 
 	import SubOrder from '../MP/SubOrder/SubOrder.vue'
+	import dPicker from 'vue2-datepicker'
 	export default {
 		components: {
 			SubOrder,
+			dPicker,
 		},
 		data() {
 			return {
-				orderList: ["",],
-				isuse: '1',
-				name: '',
-				fixedHeader: false,
+				memNum:"",
+				appName:"",
+				phone:"",
+				visitType:"",
+				telTimeBegin:"",
+				telTimeEnd:"",
+				orderTimeBegin:"",
+				orderTimeEnd:"",
+				orderList: ["",],	
 			};
 		},
 		methods: {
@@ -121,8 +170,15 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						appName: '',
-						phone: '',
+						memNum:this.index,
+						appName:this.appName,
+						phone:this.phone,
+						visitType:this.visitType,
+						telTimeBegin:this.telTimeBegin,
+						telTimeEnd:this.telTimeEnd,
+						orderTimeBegin:this.orderTimeBegin,
+						orderTimeEnd:this.orderTimeEnd,
+						
 					},
 					dataType: 'json',
 				}).then((response) => {

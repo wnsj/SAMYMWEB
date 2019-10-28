@@ -8,10 +8,10 @@
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding: 0; line-height: 34px;">
-					<p>工号：</p>
+					<p>店铺：</p>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-					<input class="form-control" type="text" v-model="name">
+					<store ref="store" @storeChange='storeChange'></store>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -19,7 +19,7 @@
 					<p>姓名：</p>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-					<input class="form-control" type="text" v-model="name">
+					<input class="form-control" type="text" v-model="empName">
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -27,7 +27,15 @@
 					<p>手机号：</p>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-					<input class="form-control" type="text" v-model="name">
+					<input class="form-control" type="text" v-model="iphone">
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
+					<pos ref="pos" @positionChange='positionChange'></pos>
+				</div>
+				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+					<pos></pos>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -55,9 +63,10 @@
 					<table class="table table-bordered table-hover" id="datatable">
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">员工工号</th>
-								<th class="text-center">姓名</th>
+								<th class="text-center">店铺</th>
 								<th class="text-center">岗位</th>
+								<!-- <th class="text-center">员工工号</th> -->
+								<th class="text-center">姓名</th>
 								<th class="text-center">手机号</th>
 								<th class="text-center">性别</th>
 								<th class="text-center">入职时间</th>
@@ -68,8 +77,9 @@
 						<tbody>
 							<tr v-for="(item,index) in employeeList" :key="index" v-on:dblclick="modifyEmp(item)">
 								<td class="text-center">{{item.empId}}</td>
-								<td class="text-center">{{item.empName}}</td>
 								<td class="text-center">{{item.posName}}</td>
+								<!-- <td class="text-center">{{item.empId}}</td> -->
+								<td class="text-center">{{item.empName}}</td>
 								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.sex=='1' ? '男':'女'}}</td>
 								<td class="text-center">{{item.name}}</td>
@@ -95,16 +105,23 @@
 
 <script>
 	import emp from '../MP/SubEmp/SubEmp.vue'
+	import store from '../common/Store.vue'
+	import pos from '../common/Position.vue'
 	export default {
 		components: {
 			emp,
+			pos,
+			store,
 		},
 		data() {
 			return {
 				employeeList: [],
 				isuse: '1',
-				name: '',
+				empName: '',
+				iphone:'',
 				fixedHeader: false,
+				posId:'',
+				storeId:'',
 			};
 		},
 		methods: {
@@ -125,6 +142,22 @@
 				this.$refs.emp.initData('modify', item)
 				$("#empContent").modal('show')
 			},
+			
+			storeChange:function(param){
+				if (this.isBlank(param)) {
+					this.storeId = ""
+				} else {
+					this.storeId = param.storeId
+				}
+			},
+			//feedback department information
+			positionChange: function(param) {
+				if (this.isBlank(param)) {
+					this.posId = ""
+				} else {
+					this.posId = param.posId
+				}
+			},
 			//feedback from adding and modifying view
 			feedBack() {
 				this.checkDepartment()
@@ -142,8 +175,10 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						name: '',
-						isuse: '',
+						posId: this.posId,
+						storeId: this.storeId,
+						empName: this.empName,
+						isuse: '1',
 					},
 					dataType: 'json',
 				}).then((response) => {

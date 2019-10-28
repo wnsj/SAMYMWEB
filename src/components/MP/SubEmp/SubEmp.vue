@@ -15,6 +15,12 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">店铺：</label>
+						<div class="col-md-8">
+							<store ref="store" @storeChange='storeChange'></store>
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">手机号：</label>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="employee.name" placeholder="">
@@ -74,11 +80,13 @@
 	import dPicker from 'vue2-datepicker'
 	import pos from '../../common/Position.vue'
 	import emp from '../../common/Employee.vue'
+	import store from '../../common/Store.vue'
 	export default {
 		components: {
 			dPicker,
 			pos,
 			emp,
+			store,
 		},
 		data() {
 			return {
@@ -90,6 +98,7 @@
 					isuse: '1',
 					leaderId:'',
 					birthday:'',
+					storeId:'',
 				},
 				title: '新增',
 			};
@@ -108,6 +117,7 @@
 						sex: '1',
 						isuse: '1',
 						leaderId:'',
+						storeId:'',
 					}
 					this.$refs.pos.setPos(this.employee.posId)
 					this.$refs.emp.setPosId(this.employee.posId)
@@ -117,6 +127,7 @@
 					Object.assign(this.employee,employee)
 					this.$refs.pos.setPosId(this.employee.posId)
 					this.$refs.emp.setPosId(this.employee.posId)
+					this.$refs.store.setStore(this.employee.storeId)
 				}
 			},
 			//date formatting 
@@ -133,6 +144,13 @@
 					} else {
 						this.employee.outHosp = ''
 					}
+				}
+			},
+			storeChange:function(param){
+				if (this.isBlank(param)) {
+					this.employee.storeId = ""
+				} else {
+					this.employee.storeId = param.storeId
 				}
 			},
 			//feedback department information
@@ -162,6 +180,10 @@
 				}
 				if (this.isBlank(this.employee.posId) && this.employee.posId == '0') {
 					alert("岗位类型不能为空")
+					return
+				}
+				if (this.isBlank(this.employee.storeId) && this.employee.storeId == '0') {
+					alert("店铺不能为空")
 					return
 				}
 				var url = this.url + '/employeeAction/addUpdateEmp'

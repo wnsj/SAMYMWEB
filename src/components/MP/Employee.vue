@@ -32,10 +32,10 @@
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<pos ref="pos" @positionChange='positionChange'></pos>
+					<p>岗位：</p>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-					<pos></pos>
+					<pos ref="pos" @positionChange='positionChange'></pos>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -94,7 +94,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="emp">
 				<div class="modal-dialog">
-					<emp ref='emp' @addDepartment='feedBack'></emp>
+					<emp ref='emp' @addEmp='feedBack'></emp>
 				</div>
 			</div>
 		</div>
@@ -140,7 +140,7 @@
 				}
 				console.log('modify the cotent of department')
 				this.$refs.emp.initData('modify', item)
-				$("#empContent").modal('show')
+				$("#emp").modal('show')
 			},
 			
 			storeChange:function(param){
@@ -160,12 +160,12 @@
 			},
 			//feedback from adding and modifying view
 			feedBack() {
-				this.checkDepartment()
-				$("#empContent").modal('hide')
+				this.checkEmp()
+				$("#emp").modal('hide')
 			},
 			//check the list of department
 			checkEmp() {
-				console.log('checkDepartment')
+				console.log('checkEmp')
 				var url = this.url + '/employeeAction/queryEmp'
 				this.$ajax({
 					method: 'POST',

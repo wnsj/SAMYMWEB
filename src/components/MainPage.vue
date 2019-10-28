@@ -21,11 +21,11 @@
 						<li>
 							<p style=" font-size: 30px; " aria-hidden="true">功能列表</p>
 						</li>
-						<li v-if="has(1)">
-							<router-link to="/MP/RoyaltySummary"><i class="fa fa-table" aria-hidden="false">　提成汇总</i></router-link>
-						</li>
 						<li class="li-active" v-if="has(1)">
-							<router-link to="/MP/MemberSummary"><i class="fa fa-table fa-circle" aria-hidden="true">　会员总表</i></router-link>
+							<router-link to="/MP/RoyaltySummary"><i class="fa fa-table fa-circle" aria-hidden="false">　提成汇总</i></router-link>
+						</li>
+						<li v-if="has(1)">
+							<router-link to="/MP/MemberSummary"><i class="fa fa-table" aria-hidden="true">　会员总表</i></router-link>
 						</li>
 						<li v-if="has(1)">
 							<router-link to="/MP/SettleSummary"><i class="fa fa-table" aria-hidden="false">　消费管理</i></router-link>

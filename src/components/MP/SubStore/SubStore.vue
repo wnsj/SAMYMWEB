@@ -143,7 +143,7 @@
 						this.$emit('certainAction')
 					}
 				}).catch((error) => {
-					console.log('添加流水规则失败')
+					console.log('添加商铺失败')
 				});
 			},
 			

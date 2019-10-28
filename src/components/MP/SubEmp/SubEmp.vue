@@ -53,12 +53,6 @@
 							<emp ref="emp" @employeeChange="employeeChange"></emp>
 						</div>
 					</div>
-					<!-- <div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">生　日：</label>
-						<dPicker class="col-md-8" style="width:65%;" v-model="employee.birthday" v-on:change="dateAction('1')"></dPicker>
-					</div> -->
-
-
 					<div class="form-group clearfix">
 						<div class="col-md-12">
 							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
@@ -125,7 +119,7 @@
 					console.log('Initialization employee’s content, which modifies employee')
 					this.title='修改'
 					Object.assign(this.employee,employee)
-					this.$refs.pos.setPosId(this.employee.posId)
+					this.$refs.pos.setPos(this.employee.posId)
 					this.$refs.emp.setPosId(this.employee.posId)
 					this.$refs.store.setStore(this.employee.storeId)
 				}
@@ -186,7 +180,8 @@
 					alert("店铺不能为空")
 					return
 				}
-				var url = this.url + '/employeeAction/addUpdateEmp'
+				var url = this.url + '/employeeAction/addUpdateEmp';
+				 
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -201,10 +196,10 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						this.$emit('addemployee')
+						this.$emit('addEmp')
 					}
 				}).catch((error) => {
-					console.log('请求失败处理')
+					console.log('员工请求失败')
 				});
 			},
 			closeCurrentPage() {

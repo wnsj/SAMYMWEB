@@ -96,8 +96,8 @@
 								<td class="text-center">{{item.appName}}</td>
 								<td class="text-center">{{item.phone}}</td>
 								<td class="text-center">{{item.visitType=='0' ? "初访" : "复访"}}</td>
-								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-")}}</td>
-								<td class="text-center">{{item.appDate}}</td>
+								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+								<td class="text-center">{{item.appDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								
 								<td class="text-center" v-if="has(2)">
 									<button type="button" class="btn btn-warning" v-on:click="updateOrder(item)">修改</button>

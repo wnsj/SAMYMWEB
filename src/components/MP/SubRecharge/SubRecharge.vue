@@ -79,10 +79,10 @@
 					memNum: '',
 					momey: '',
 					empId: '',
-					empName:'',
-					phone:'',
-					costType: '',
-					balance:'',
+					empName: '',
+					phone: '',
+					costType: '1',
+					balance: '',
 				},
 				title: '',
 				accountId: this.accountId(),
@@ -95,24 +95,24 @@
 					memNum: '',
 					momey: '',
 					empId: '',
-					empName:'',
-					phone:'',
-					rechargetime:this.moment('','YYYY-MM-DD HH:mm:ss.000'),
+					empName: '',
+					phone: '',
+					rechargetime: this.moment('', 'YYYY-MM-DD HH:mm:ss.000'),
 					costType: '',
-					balance:'',
+					balance: '',
 				}
 				if (param == 'recharge') {
 					console.log('new increasing recharge')
 					this.title = '充值'
-					this.consume.consumeType='1'
+					this.consume.costType = '1'
 				} else if (param == 'consume') {
 					console.log('new increasing consume')
 					this.title = '消费'
-					this.consume.consumeType='2'
+					this.consume.costType = '2'
 				} else if (param == 'refund') {
 					console.log('new increasing refund')
 					this.title = '退费'
-					this.consume.consumeType='3'
+					this.consume.costType = '3'
 				}
 			},
 			//feedback employee information
@@ -125,7 +125,7 @@
 				}
 				console.log('员工：' + this.consume.empId)
 			},
-			
+
 			//feedback consumeStype information
 			psChange: function(param) {
 				if (this.isBlank(param)) {
@@ -145,7 +145,7 @@
 			//the event of addtional button
 			addFee() {
 				console.log('the event of addtional button')
-				
+
 				if (this.isBlank(this.consume.memNum)) {
 					alert("会员卡号不能为空")
 					return
@@ -158,22 +158,22 @@
 					alert("维护人不能为空")
 					return
 				}
-				
+
 				if (!this.isBlank(this.consume.rechargetime)) {
 					this.consume.rechargetime = this.moment(this.consume.rechargetime, 'YYYY-MM-DD HH:mm:ss.000')
 				}
-				
-				if(this.consume.consumeType=='2' && this.consume.balance < this.consume.momey){
+
+				if (this.consume.consumeType == '2' && this.consume.balance < this.consume.momey) {
 					alert("您的余额不足，请充值")
 					return
 				}
-				if(this.consume.consumeType=='3' && this.consume.balance < this.consume.momey){
+				if (this.consume.consumeType == '3' && this.consume.balance < this.consume.momey) {
 					alert("您的余额不足，请查询余额后在进行退款")
 					return
 				}
-				
-				
-				
+
+
+
 				var url = this.url + '/accountRecordAction/addAccountRecord'
 				this.$ajax({
 					method: 'POST',
@@ -189,8 +189,25 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						$("#addFee").modal("show")
-					}else{
+						switch (this.title) {
+							case "充值":
+								this.$router.push({
+									name: 'Charge',
+								});
+								break;
+							case "消费":
+								this.$router.push({
+									name: 'SettleSummary',
+								});
+								break;
+							case "退费":
+								this.$router.push({
+									name: 'Charge',
+								});
+								break;
+						}
+						$("#addFee").modal("hide")
+					} else {
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
@@ -222,18 +239,18 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						console.log('查到了'+JSON.stringify(res))
-						
-						this.consume.memNum=res.retData[0].memNum
-						this.consume.memName=res.retData[0].memName
-						this.consume.phone=res.retData[0].phone
-						this.consume.balance=res.retData[0].balance
+						console.log('查到了' + JSON.stringify(res))
+
+						this.consume.memNum = res.retData[0].memNum
+						this.consume.memName = res.retData[0].memName
+						this.consume.phone = res.retData[0].phone
+						this.consume.balance = res.retData[0].balance
 					} else {
 						console.log('没有查到会员信息，请添加会员后充值')
-						this.consume.memName=''
-						this.consume.phone=''
+						this.consume.memName = ''
+						this.consume.phone = ''
 					}
-							
+
 				}).catch((error) => {
 					console.log('会员查询请求失败')
 				});

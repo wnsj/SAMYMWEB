@@ -78,13 +78,13 @@
 						</thead>
 						<tbody>
 							<tr v-for="(item,index1) in chargeLsit" :key="index1">
-								<td class="sign">{{item.HOSP_NUM}}</td>
-								<td class="sign">{{item.HOSP_TIME | dateFormatFilter('YYYY-MM-DD')}}</td>
+								<td class="sign">{{item.memNum}}</td>
+								<td class="sign">{{item.memName}}</td>
 								<td>{{item.NAME}}</td>
-								<td>{{item.SEX==1 ? '男' : '女'}}</td>
+								<td>{{item.empName}}</td>
 								<td>{{item.DEPTNAME}}</td>
-								<td>{{item.PATITYPENAME}}</td>
-								<td>{{item.PATITYPENAME}}</td>
+								<td>{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+								<td>{{item.momey}}</td>
 								<td class="text-center" style="padding:0" v-if="has(2)"><button type="button" class="btn btn-warning"
 									 v-on:click="modifyPatientCharge(patient)">编辑</button></td>
 							</tr>

@@ -90,8 +90,8 @@
 					}
 				}else if(param=='modify'){
 					console.log('Initialization order’s content, which modifies order')
-					this.order = order;
 					this.title='修改'
+					Object.assign(this.order,order)
 					
 				}
 			},

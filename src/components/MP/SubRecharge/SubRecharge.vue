@@ -12,7 +12,7 @@
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员卡号</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="consume.memNum" v-on:change="checkMemNum(consume.memNum)">
+							<input type="text" class="form-control" v-model="consume.memNum" v-on:change="checkMemNum(consume.memNum)" placeholder="卡号/预约号">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
@@ -36,11 +36,11 @@
 							<input type="text" class="form-control" v-model="consume.momey" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<!-- <div class="col-md-6 form-group clearfix">
 						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">时间</label><span
 						 class="sign-left">:</span>
 						<dPicker class="col-md-7" style="width:59%;" v-model="consume.rechargetime" disabled="disabled"></dPicker>
-					</div>
+					</div> -->
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">维护人</label><span
 						 class="sign-left">:</span>
@@ -240,15 +240,16 @@
 					var res = response.data
 					if (res.retCode == '0000') {
 						console.log('查到了' + JSON.stringify(res))
-
-						this.consume.memNum = res.retData[0].memNum
-						this.consume.memName = res.retData[0].memName
-						this.consume.phone = res.retData[0].phone
-						this.consume.balance = res.retData[0].balance
-					} else {
-						console.log('没有查到会员信息，请添加会员后充值')
-						this.consume.memName = ''
-						this.consume.phone = ''
+						if(res.retData.length>0){
+							this.consume.memNum = res.retData[0].memNum
+							this.consume.memName = res.retData[0].memName
+							this.consume.phone = res.retData[0].phone
+							this.consume.balance = res.retData[0].balance
+						}else{
+							console.log('没有查到会员信息，请添加会员后充值')
+							this.consume.memName = ''
+							this.consume.phone = ''
+						}
 					}
 
 				}).catch((error) => {

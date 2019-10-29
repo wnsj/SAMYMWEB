@@ -8,6 +8,14 @@
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>店铺：</p>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<Store></Store>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p>会员卡号：</p>
 				</div>
 				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" ></div>
@@ -79,9 +87,11 @@
 <script>
 
 	import SubMemberRun from '../MP/SubMemberRun/SubMemberRun.vue'
+	import Store from '../common/Store.vue'
 	export default {
 		components: {
-			SubMemberRun
+			SubMemberRun,
+			Store,
 		},
 		data() {
 			return {

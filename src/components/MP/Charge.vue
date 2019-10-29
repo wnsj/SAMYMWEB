@@ -15,6 +15,18 @@
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>费用类型：</p>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<select class="form-control" v-model="costType">
+						<option value="1">充值</option>
+						<option value="2">消费</option>
+						<option value="3">退款</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p>姓　　名：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
@@ -73,7 +85,6 @@
 								<th class="text-center" rowspan='2'>推荐人岗位</th>
 								<th class="text-center" rowspan='2'>充值时间</th>
 								<th class="text-center" rowspan='2'>充值金额(退款)</th>
-								<th class="text-center" rowspan='2'>操作</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -85,8 +96,6 @@
 								<td>{{item.DEPTNAME}}</td>
 								<td>{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td>{{item.momey}}</td>
-								<td class="text-center" style="padding:0" v-if="has(2)"><button type="button" class="btn btn-warning"
-									 v-on:click="modifyPatientCharge(patient)">编辑</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -116,20 +125,7 @@
 		data() {
 			return {
 				chargeLsit: [],
-				patient: {},
-				projectList: [],
-				hospNum: '',
-				name: '',
-				deptId: '',
-				patitypeid: '',
-				mitypeid: '',
-				patientList: [],
-				inHosp: '0', //是否在院
-				sex: '0', //性别
-				hospTime: '',
-				outHosp: '',
-				fixedHeader: false,
-				// endDate:this.endDate('2019-01-01',10),
+				costType:'1',//费用类型（1.充值，  2.消费，3.退款）
 			};
 		},
 		methods: {
@@ -185,7 +181,7 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-
+						costType:this.costType,
 					},
 					dataType: 'json',
 				}).then((response) => {

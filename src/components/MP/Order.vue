@@ -101,7 +101,8 @@
 								
 								<td class="text-center" v-if="has(2)">
 									<button type="button" class="btn btn-warning" v-on:click="updateOrder(item)">修改</button>
-									<button type="button" class="btn btn-primary" v-on:click="updateOrder(item)">取消</button>
+									<button type="button" class="btn btn-primary" v-on:click="caAction(item,'cancel')">{{item.state=='0' ? '已取消' : '未取消'}}</button>
+									<button type="button" class="btn btn-primary" v-on:click="caAction(item,'arrival')">{{item.arrival=='0' ? '未到店' : '已到店'}}</button>
 								</td>
 							</tr>
 						</tbody>
@@ -150,15 +151,52 @@
 				$("#orderContent").modal('show')
 			},
 			updateOrder(item) {
-				this.$refs.order.initData('modify',item);
-				$("#orderContent").modal('show');
+				if(item.state=='0' || item.arrival == '1'){
+					alert("已取消或者已到店，不能进行修改")
+				}else{
+					this.$refs.order.initData('modify',item);
+					$("#orderContent").modal('show');
+				}
 			},
 			//feedback from adding and modifying view
 			feedBack() {
 				this.checkOrderList()
 				$("#orderContent").modal('hide')
 			},
-
+			caAction(item,param){
+				var url = this.url + '/appointmentAction/updateAppointment'
+				
+				if(param=='cancel'){
+					if(item.state != '0'){
+						item.state='0'
+					}else{
+						alert("已取消,不能修改")
+						return
+					}
+				} else if(param=='arrival'){
+					if(item.arrival != '1'){
+						item.arrival='1'
+					}else{
+						alert("已到店，不能修改")
+						return
+					}
+				}
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data:item,
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					alert(res.retMsg)
+				}).catch((error) => {
+					console.log('预约相关提交请求失败')
+				});
+			},
 			//check the list of orderContent
 			checkOrderList() {
 				var url = this.url + '/appointmentAction/queryAppointment'

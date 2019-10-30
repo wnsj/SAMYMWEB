@@ -8,7 +8,7 @@
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>会员卡号：</p>
+					<p>预约号：</p>
 				</div>
 				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memNum"></div>
 			</div>
@@ -38,6 +38,30 @@
 					</select>
 				</div>
 			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-right" style="padding: 0; line-height: 34px;">
+					<p>是否到店：</p>
+				</div>
+				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+					<select class="form-control" v-model="arrival">
+						<option value="">未选择</option>
+						<option value="0">未到店</option>
+						<option value="1">已到店</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-right" style="padding: 0; line-height: 34px;">
+					<p>是否取消：</p>
+				</div>
+				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+					<select class="form-control" v-model="state">
+						<option value="">未选择</option>
+						<option value="1">未取消</option>
+						<option value="0">已取消</option>
+					</select>
+				</div>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
@@ -45,13 +69,13 @@
 					<p>来电时间：</p>
 				</div>
 				<div class="col-md-4 col-lg-4">
-					<dPicker style="width:100%" v-model="telTimeBegin" v-on:change="dateAction('0')"></dPicker>
+					<dPicker style="width:100%" v-model="begCreateDate"></dPicker>
 				</div>
 				<div style="padding: 0; line-height: 34px; float:left">
 					~
 				</div>
 				<div class="col-md-4 col-lg-4">
-					<dPicker style="width:100%" v-model="telTimeEnd" v-on:change="dateAction('1')"></dPicker>
+					<dPicker style="width:100%" v-model="endCreateDate"></dPicker>
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
@@ -59,13 +83,13 @@
 					<p>预约时间：</p>
 				</div>
 				<div class="col-md-4 col-lg-4">
-					<dPicker style="width:100%" v-model="orderTimeBegin" v-on:change="dateAction('0')"></dPicker>
+					<dPicker style="width:100%" v-model="begAppDate" ></dPicker>
 				</div>
 				<div style="padding: 0; line-height: 34px; float:left">
 					~
 				</div>
 				<div class="col-md-4 col-lg-4">
-					<dPicker style="width:100%" v-model="orderTimeEnd" v-on:change="dateAction('1')"></dPicker>
+					<dPicker style="width:100%" v-model="endAppDate"></dPicker>
 				</div>
 			</div>
 		</div>
@@ -81,24 +105,27 @@
 					<table class="table table-bordered table-hover" id="datatable" >
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">会员卡号</th>
+								<th class="text-center">预约号</th>
 								<th class="text-center">姓名</th>
 								<th class="text-center">手机号</th>
 								<th class="text-center">访问类型</th>
 								<th class="text-center">来电时间</th>
 								<th class="text-center">预约时间</th>
+								<th class="text-center">是否到店</th>
+								<th class="text-center">是否取消</th>
 								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr v-for="(item,index) in orderList" :key="index" v-on:dblclick="updateOrder(item)">
-								<td class="text-center">{{index}}</td>
+								<td class="text-center">{{item.memNum}}</td>
 								<td class="text-center">{{item.appName}}</td>
 								<td class="text-center">{{item.phone}}</td>
 								<td class="text-center">{{item.visitType=='0' ? "初访" : "复访"}}</td>
 								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td class="text-center">{{item.appDate | dateFormatFilter("YYYY-MM-DD")}}</td>
-								
+								<td class="text-center">{{item.state=='0' ? '已取消' : '未取消'}}</td>
+								<td class="text-center">{{item.arrival=='0' ? '未到店' : '已到店'}}</td>
 								<td class="text-center" v-if="has(2)">
 									<button type="button" class="btn btn-warning" v-on:click="updateOrder(item)">修改</button>
 									<button type="button" class="btn btn-primary" v-on:click="caAction(item,'cancel')">{{item.state=='0' ? '已取消' : '未取消'}}</button>
@@ -137,11 +164,13 @@
 				appName:"",
 				phone:"",
 				visitType:"",
-				telTimeBegin:"",
-				telTimeEnd:"",
-				orderTimeBegin:"",
-				orderTimeEnd:"",
-				orderList: ["",],	
+				begCreateDate:"",
+				endCreateDate:"",
+				begAppDate:"",
+				endAppDate:"",
+				orderList: ["",],
+				arrival:'0',
+				state:'1',
 			};
 		},
 		methods: {
@@ -167,17 +196,35 @@
 				var url = this.url + '/appointmentAction/updateAppointment'
 				
 				if(param=='cancel'){
-					if(item.state != '0'){
-						item.state='0'
-					}else{
-						alert("已取消,不能修改")
+					if(item.arrival == '1'){
+						alert("已到店，不能修改")
 						return
+					}else{
+						if(item.state != '0'){
+							if(confirm('是否确认取消')){
+								item.state='0'
+							}else{
+								return
+							}
+						}else{
+							alert("已取消,不能修改")
+							return
+						}
 					}
 				} else if(param=='arrival'){
-					if(item.arrival != '1'){
-						item.arrival='1'
+					if(item.state == '1'){
+						if(item.arrival != '1'){
+							if(confirm('请确认到店后，点确定')){
+								item.arrival='1'
+							}else{
+								return
+							}
+						}else{
+							alert("已到店，不能修改")
+							return
+						}
 					}else{
-						alert("已到店，不能修改")
+						alert("已取消,不能修改")
 						return
 					}
 				}
@@ -200,6 +247,20 @@
 			//check the list of orderContent
 			checkOrderList() {
 				var url = this.url + '/appointmentAction/queryAppointment'
+				if(!this.isBlank(this.begCreateDate)){
+					this.begCreateDate=this.moment(this.begCreateDate,'YYYY-MM-DD 00:00:00.000')
+				}
+				if(!this.isBlank(this.endCreateDate)){
+					this.endCreateDate=this.moment(this.endCreateDate,'YYYY-MM-DD 00:00:00.000')
+				}
+				if(!this.isBlank(this.begAppDate)){
+					this.begAppDate=this.moment(this.begAppDate,'YYYY-MM-DD 00:00:00.000')
+				}
+				if(!this.isBlank(this.endAppDate)){
+					this.endAppDate=this.moment(this.endAppDate,'YYYY-MM-DD 00:00:00.000')
+				}
+				
+				
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -208,15 +269,16 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						memNum:this.index,
+						memNum:this.memNum,
 						appName:this.appName,
 						phone:this.phone,
 						visitType:this.visitType,
-						telTimeBegin:this.telTimeBegin,
-						telTimeEnd:this.telTimeEnd,
-						orderTimeBegin:this.orderTimeBegin,
-						orderTimeEnd:this.orderTimeEnd,
-						
+						arrival:this.arrival,
+						state:this.state,
+						begCreateDate:this.begCreateDate,
+						endCreateDate:this.endCreateDate,
+						begAppDate:this.begAppDate,
+						endAppDate:this.endAppDate,
 					},
 					dataType: 'json',
 				}).then((response) => {

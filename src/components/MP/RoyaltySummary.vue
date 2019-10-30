@@ -8,13 +8,13 @@
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p>员工工号：</p>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="hospNum"></div>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" ></div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p>姓　　名：</p>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="name"></div>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" ></div>
 			</div>
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -22,7 +22,7 @@
 					<p>岗　　位：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<department ref='department' @departChange='departChange'></department>
+					
 				</div>
 			</div>
 		</div>

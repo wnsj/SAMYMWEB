@@ -85,7 +85,6 @@
 					balance: '',
 				},
 				title: '',
-				accountId: this.accountId(),
 			};
 		},
 		methods: {
@@ -100,6 +99,7 @@
 					rechargetime: this.moment('', 'YYYY-MM-DD HH:mm:ss.000'),
 					costType: '',
 					balance: '',
+					storeId:'',
 				}
 				if (param == 'recharge') {
 					console.log('new increasing recharge')
@@ -109,6 +109,7 @@
 					console.log('new increasing consume')
 					this.title = '消费'
 					this.consume.costType = '2'
+					this.consume.storeId=this.storeId()
 				} else if (param == 'refund') {
 					console.log('new increasing refund')
 					this.title = '退费'

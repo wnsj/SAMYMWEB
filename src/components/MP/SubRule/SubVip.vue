@@ -34,8 +34,8 @@
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">消费额度</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="FWRoyalty.royProcess">
-								<option value="1">0%</option>
-								<option value="2">70%</option>
+								<option value="0">0%</option>
+								<option value="1">70%</option>
 								<option value="2">100%</option>
 							</select>
 						</div>

@@ -48,6 +48,16 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
+						<label for="sex" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">岗位级别：</label>
+						<div class="col-md-8">
+							<select class="form-control" v-model="employee.level">
+								<option value="0">资深级</option>
+								<option value="1">专家级</option>
+								<option value="2">高级专家级</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
 						<label for="gh" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">上级：</label>
 						<div class="col-md-8">
 							<emp ref="emp" @employeeChange="employeeChange"></emp>
@@ -93,6 +103,7 @@
 					leaderId:'',
 					birthday:'',
 					storeId:'',
+					level:'0',
 				},
 				title: '新增',
 			};
@@ -112,6 +123,7 @@
 						isuse: '1',
 						leaderId:'',
 						storeId:'',
+						level:'0',
 					}
 					this.$refs.pos.setPos(this.employee.posId)
 					this.$refs.emp.setPosId(this.employee.posId)

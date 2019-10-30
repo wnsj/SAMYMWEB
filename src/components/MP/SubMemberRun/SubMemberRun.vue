@@ -42,6 +42,12 @@
 							</select>
 						</div>
 					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">员工工号</label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<emp ref='emp' @></emp>
+						</div>
+					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
 							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addFWRoyalty()">确认</button>
@@ -57,10 +63,12 @@
 <script>
 	import dPicker from 'vue2-datepicker'
 	import pos from '../../common/Position.vue'
+	import emp from '../../common/Employee.vue'
 	export default {
 		components:{
 			pos,
 			dPicker,
+			emp,
 		},
 		data() {
 			return {
@@ -87,8 +95,10 @@
 						turRoy:'0',
 						flowSmall:'0',
 						consumeType:'3',
+						empId:'0',
 					}
 					this.$refs.pos.setPos('0')
+					this.$refs.emp.setEmp('0')
 				}else if(param=='modify'){
 					console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
 					this.type='modify'
@@ -106,6 +116,19 @@
 					this.FWRoyalty.posId=param.posId
 				}
 				console.log('岗位4：'+this.FWRoyalty.posId)
+			},
+			
+			//feedback employee information
+			empChange:function(param){
+				// console.log('岗位3：'+JSON.stringify(param))
+				if(this.isBlank(param)){
+					this.FWRoyalty.empId=""
+					this.FWRoyalty.storeId=""
+				}else{
+					this.FWRoyalty.empId=param.empId
+					this.FWRoyalty.storeId=param.storeId
+				}
+				// console.log('岗位4：'+this.FWRoyalty.empId)
 			},
 			
 			//the event of addtional button
@@ -141,14 +164,14 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						$("#SubCharg").modal("hide")
+						this.$emit('certainAction')
 					}
 				}).catch((error) => {
 					console.log('添加流水规则失败')
 				});
 			},
 			closeCurrentPage(){
-				$("#SubCharg").modal("hide")
+				$("#memberContent").modal("hide")
 				console.log('close the flowWater rule')
 			},
 		}

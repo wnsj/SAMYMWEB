@@ -24,10 +24,14 @@
 		methods: {
 			//员工列表
 			employeeChange: function() {
-				console.log('员工：' + this.empObj.empId)
-				this.empObj = this.exchangeEmpName(this.empId)
-				console.log('员工：' + this.empObj.empId)
-				this.$emit('employeeChange', this.empObj)
+				if(this.empId=='0'){
+					this.$emit('employeeChange', '')
+				}else{
+					this.empObj = this.exchangeEmpName(this.empId)
+					this.$emit('employeeChange', this.empObj)
+				}
+				
+				
 			},
 			setEmp: function(empId) {
 				this.empId = empId

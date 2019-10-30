@@ -76,7 +76,7 @@
 						</thead>
 						<tbody>
 							<tr v-for="(item,index) in employeeList" :key="index" v-on:dblclick="modifyEmp(item)">
-								<td class="text-center">{{item.empId}}</td>
+								<td class="text-center">{{item.storeName}}</td>
 								<td class="text-center">{{item.posName}}</td>
 								<!-- <td class="text-center">{{item.empId}}</td> -->
 								<td class="text-center">{{item.empName}}</td>
@@ -178,7 +178,7 @@
 						posId: this.posId,
 						storeId: this.storeId,
 						empName: this.empName,
-						isuse: '1',
+						isuse: this.isuse,
 					},
 					dataType: 'json',
 				}).then((response) => {

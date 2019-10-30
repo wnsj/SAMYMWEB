@@ -11,7 +11,7 @@
 					<p>商铺名：</p>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-					<input class="form-control" type="text" v-model="name">
+					<input class="form-control" type="text" v-model="storeName">
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -85,7 +85,7 @@
 			return {
 				storeList: [],
 				isuse: '1',
-				name: '',
+				storeName: '',
 				fixedHeader: false,
 			};
 		},
@@ -122,8 +122,8 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						storeName: '',
-						isuse: '1',
+						storeName: this.storeName,
+						isuse: this.isuse,
 					},
 					dataType: 'json',
 				}).then((response) => {

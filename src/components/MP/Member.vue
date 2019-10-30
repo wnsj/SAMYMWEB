@@ -38,7 +38,7 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="addDepartment()"  v-if="has(2)">添加会员</button>
+			 v-on:click="addMember()"  v-if="has(2)">添加会员</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="checkMember()">查询</button>
 		</div>
@@ -58,14 +58,14 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in memberList" :key="index" v-on:dblclick="modifyDepartment(item)">
+							<tr v-for="(item,index) in memberList" :key="index" v-on:dblclick="modifyMember(item)">
 								<td class="text-center">{{item.memNum}}</td>
 								<td class="text-center">{{item.memName}}</td>
 								<td class="text-center">{{item.phone}}</td>
 								<td class="text-center">{{item.sex}}</td>
 								<td class="text-center">{{item.birthday}}</td>
 								<td class="text-center">{{item.isuse==true ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyDepartment(item,index)">修改</button></td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyMember(item,index)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -73,9 +73,9 @@
 			</div>
 		</div>
 		<div class="row row_edit">
-			<div class="modal fade" id="departmentContent">
+			<div class="modal fade" id="memberContent">
 				<div class="modal-dialog">
-					<SubMemberRun ref='dc' @addDepartment='feedBack'></SubMemberRun>
+					<SubMemberRun ref='dc' @certainAction='feedBack'></SubMemberRun>
 				</div>
 			</div>
 		</div>
@@ -102,26 +102,25 @@
 			};
 		},
 		methods: {
-			//modify the cotent of department
-			addDepartment() {
-				console.log('modify the cotent of department')
+			//modify the cotent of member
+			addMember() {
+				console.log('modify the cotent of member')
 				//this.$refs.dc.initData('add')
-				$("#departmentContent").modal('show')
+				$("#memberContent").modal('show')
 			},
-			//modify the cotent of department
-			modifyDepartment(item) {
+			//modify the cotent of member
+			modifyMember(item) {
 				if(!this.has(2)){
 				alert("暂无权限修改!");
 				return;
 				}
-				console.log('modify the cotent of department')
+				console.log('modify the cotent of member')
 				//this.$refs.dc.initData('modify', item)
-				$("#departmentContent").modal('show')
+				$("#memberContent").modal('show')
 			},
-			//feedback from adding and modifying view
-			feedBack() {
-				this.checkDepartment()
-				$("#departmentContent").modal('hide')
+			feedBack(){
+				this.checkMember()
+				$("#memberContent").modal('hide')
 			},
 			//check the list of member
 			checkMember() {

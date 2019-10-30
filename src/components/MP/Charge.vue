@@ -10,7 +10,7 @@
 					<p>会员卡号：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<input class="form-control" type="text" value="" v-model="hospNum">
+					<input class="form-control" type="text" value="" v-model="memNum">
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -20,48 +20,41 @@
 				<div class="col-md-8 col-lg-8">
 					<select class="form-control" v-model="costType">
 						<option value="1">充值</option>
-						<option value="2">消费</option>
+						<!-- <option value="2">消费</option> -->
 						<option value="3">退款</option>
 					</select>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>姓　　名：</p>
+					<p>会员姓名：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<input class="form-control" type="text" value="" v-model="name">
+					<input class="form-control" type="text" value="" v-model="memName">
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>推荐人姓名：</p>
+					<p>推荐人：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<input class="form-control" type="text" value="" v-model="name">
-				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>推荐人岗位：</p>
-				</div>
-				<div class="col-md-8 col-lg-8">
-					<input class="form-control" type="text" value="" v-model="name">
+					<emp ref="emp" @employeeChange='empChange'></emp>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="col-md-1 col-lg-1 text-right" style="padding: 0; line-height: 34px;">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
+				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;">
 					<p>充值时间：</p>
 				</div>
-				<div class="col-md-8 col-lg-8 text-left">
-					<span>
-						<dPicker></dPicker>
-					</span> —
-					<span>
-						<dPicker></dPicker>
-					</span>
+				<div class="col-md-4 col-lg-4">
+					<dPicker style="width:100%" v-model="begCreateDate"></dPicker>
+				</div>
+				<div style="padding: 0; line-height: 34px; float:left">
+					~
+				</div>
+				<div class="col-md-4 col-lg-4">
+					<dPicker style="width:100%" v-model="endCreateDate"></dPicker>
 				</div>
 			</div>
 			<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xs-offset-7 col-sm-offset-7 col-md-offset-7 col-lg-offset-7"
@@ -80,10 +73,8 @@
 							<tr class="datatr_1">
 								<th class="text-center" rowspan='2'>会员卡号</th>
 								<th class="text-center" rowspan='2'>姓名</th>
-								<th class="text-center" rowspan='2'>手机号</th>
 								<th class="text-center" rowspan='2'>推荐人姓名</th>
-								<th class="text-center" rowspan='2'>推荐人岗位</th>
-								<th class="text-center" rowspan='2'>充值时间</th>
+								<th class="text-center" rowspan='2'>充值时间(退款)</th>
 								<th class="text-center" rowspan='2'>充值金额(退款)</th>
 							</tr>
 						</thead>
@@ -91,9 +82,7 @@
 							<tr v-for="(item,index1) in chargeLsit" :key="index1">
 								<td class="sign">{{item.memNum}}</td>
 								<td class="sign">{{item.memName}}</td>
-								<td>{{item.NAME}}</td>
 								<td>{{item.empName}}</td>
-								<td>{{item.DEPTNAME}}</td>
 								<td>{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td>{{item.momey}}</td>
 							</tr>
@@ -116,16 +105,24 @@
 	import dPicker from 'vue2-datepicker'
 	import adding from '../MP/Charge/Addingfees'
 	import SubRecharge from '../MP/SubRecharge/SubRecharge.vue'
+	import emp from '../common/Employee.vue'
 	export default {
 		components: {
 			dPicker,
 			adding,
 			SubRecharge,
+			emp,
 		},
 		data() {
 			return {
 				chargeLsit: [],
 				costType:'1',//费用类型（1.充值，  2.消费，3.退款）
+				memNum:'',
+				memName:'',
+				empId:'',
+				begCreateDate:'',
+				endCreateDate:'',
+				
 			};
 		},
 		methods: {
@@ -141,23 +138,13 @@
 				$("#addFee").modal("show")
 				console.log('进入添加患者界面')
 			},
-			//date formatting
-			dateAction(param) {
-				if (param == '0') {
-					if (!this.isBlank(this.hospTime)) {
-						this.hospTime = this.moment(this.hospTime, 'YYYY-MM-DD HH:mm:ss.000')
-					}
-				} else if (param == '1') {
-					if (!this.isBlank(this.outHosp)) {
-						this.outHosp = this.moment(this.outHosp, 'YYYY-MM-DD HH:mm:ss.000')
-					}
-				}
-			},
-			departChange(param) {
+			
+			empChange(param) {
+				console.log('员工信息：'+JSON.stringify(param))
 				if (this.isBlank(param)) {
-					this.deptId = ""
+					this.empId = ""
 				} else {
-					this.deptId = param.deptId
+					this.empId = param.empId
 				}
 			},
 			
@@ -172,6 +159,12 @@
 			//the list , which is detail infomation of patient,was checked.
 			conditionCheck: function() {
 				console.log('querying based on multiple conditions')
+				if(!this.isBlank(this.begCreateDate)){
+					this.begCreateDate=this.moment(this.begCreateDate,'YYYY-MM-DD 00:00:00.000')
+				}
+				if(!this.isBlank(this.endCreateDate)){
+					this.endCreateDate=this.moment(this.endCreateDate,'YYYY-MM-DD 23:59:59.000')
+				}
 				var url = this.url + '/accountRecordAction/queryAccountRecord'
 				this.$ajax({
 					method: 'POST',
@@ -181,6 +174,11 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
+						memNum:this.memNum,
+						memName:this.memName,
+						empId:this.empId,
+						begCreateDate:this.begCreateDate,
+						endCreateDate:this.endCreateDate,
 						costType:this.costType,
 					},
 					dataType: 'json',

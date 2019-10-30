@@ -18,6 +18,7 @@ constant.has = function(param) {
   //未登录
   if (this.isBlank(jsonString)) return false;
   var accountData = JSON.parse(jsonString);
+	// console.log(jsonString)
   var permission = accountData.accountType;
   if (param == 1) {
     return permission >= 1;
@@ -45,5 +46,17 @@ constant.accountId = function() {
 	var accountId = accountData.accountId;
 	return accountId
 }
+//账户的姓名
+constant.storeId = function() {
+  //未传值
+  var jsonString = Cookies.get("accountData");
+  //未登录
+	// console.log('基础信息'+jsonString)
+  if (this.isBlank(jsonString)) return false;
+  var accountData = JSON.parse(jsonString);
+	var storeId = accountData.storeId;
+	return storeId
+}
+
 
 export default constant;

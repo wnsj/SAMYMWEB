@@ -11,20 +11,20 @@
 					<p>店铺：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<Store></Store>
+					<Store ref='store' @storeChange='storeChange'></Store>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p>会员卡号：</p>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" ></div>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memNum" ></div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p>姓　　名：</p>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" ></div>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memName"></div>
 			</div>
 			
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -32,7 +32,7 @@
 					<p>手机号：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<input class="form-control" type="text" value="">
+					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
 			</div>
 		</div>
@@ -50,10 +50,12 @@
 							<tr>
 								<th class="text-center">会员卡号</th>
 								<th class="text-center">姓名</th>
+								<th class="text-center">店铺</th>
 								<th class="text-center">手机号</th>
 								<th class="text-center">性别</th>
 								<th class="text-center">生日</th>
 								<th class="text-center">是否停用</th>
+								<th class="text-center">推荐人</th>
 								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
@@ -61,11 +63,13 @@
 							<tr v-for="(item,index) in memberList" :key="index" v-on:dblclick="modifyMember(item)">
 								<td class="text-center">{{item.memNum}}</td>
 								<td class="text-center">{{item.memName}}</td>
+								<td class="text-center">{{item.storeName}}</td>
 								<td class="text-center">{{item.phone}}</td>
 								<td class="text-center">{{item.sex}}</td>
 								<td class="text-center">{{item.birthday}}</td>
 								<td class="text-center">{{item.isuse==true ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyMember(item,index)">修改</button></td>
+								<td class="text-center">{{item.empName}}</td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -75,7 +79,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="memberContent">
 				<div class="modal-dialog">
-					<SubMemberRun ref='dc' @certainAction='feedBack'></SubMemberRun>
+					<SubMemberRun ref='subMemR' @certainAction='feedBack'></SubMemberRun>
 				</div>
 			</div>
 		</div>
@@ -97,7 +101,10 @@
 			return {
 				memberList: [],
 				isuse: '1',
-				name: '',
+				storeId:'',
+				memNum:'',
+				memName: '',
+				phone:'',
 				fixedHeader: false,
 			};
 		},
@@ -105,7 +112,7 @@
 			//modify the cotent of member
 			addMember() {
 				console.log('modify the cotent of member')
-				//this.$refs.dc.initData('add')
+				this.$refs.subMemR.initData('add')
 				$("#memberContent").modal('show')
 			},
 			//modify the cotent of member
@@ -115,8 +122,15 @@
 				return;
 				}
 				console.log('modify the cotent of member')
-				//this.$refs.dc.initData('modify', item)
+				this.$refs.subMemR.initData('modify', item)
 				$("#memberContent").modal('show')
+			},
+			storeChange(param){
+				if(this.isBlank(param)){
+					this.storeId=""
+				}else{
+					this.storeId=param.storeId
+				}
 			},
 			feedBack(){
 				this.checkMember()
@@ -126,6 +140,7 @@
 			checkMember() {
 				console.log('checkMember')
 				var url = this.url + '/memberAction/queryVagueMember'
+				
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -134,8 +149,11 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						name: '',
-						isuse: '',
+						storeId:this.storeId,
+						memNum:this.memNum,
+						memName: this.memName,
+						isuse: this.isuse,
+						phone:this.phone,
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -163,7 +181,9 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						name: this.name,
+						storeId:this.storeId,
+						memNum:this.memNum,
+						memName: this.memName,
 						isuse: this.isuse,
 					},
 					dataType: 'json',

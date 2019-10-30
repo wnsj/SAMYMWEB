@@ -72,7 +72,7 @@
 			initData(param,FWRoyalty) {
 				if(param=='add'){
 					console.log('Initialization patient’s content, which adds patient')
-					this.type='add'
+					
 					this.title='新增'
 					this.FWRoyalty={
 						posId:'0',
@@ -83,9 +83,9 @@
 					}
 					this.$refs.pos.setPos('0')
 				}else if(param=='modify'){
-					this.type='modify';
+					
 					this.title='修改';
-					this.FWRoyalty =  FWRoyalty;
+					Object.assign(this.FWRoyalty,FWRoyalty)
 					this.$refs.pos.setPos(FWRoyalty.posId)	
 				}
 			},

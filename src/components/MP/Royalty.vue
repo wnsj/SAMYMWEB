@@ -28,7 +28,7 @@
 							<tbody>
 								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='0'" v-on:dblclick="updateRoyalty(item)">
 									<td class="text-center">{{item.posName}}</td>
-									<td class="text-center">{{item.flowSmall}}~{{item.flowBig}} 万</td>
+									<td class="text-center">{{item.flowSmall+'万'}}{{item.flowBig >0 ? ' ~ '+item.flowBig+'万' : "以上"}}</td>
 									<td class="text-center">{{item.turRoy}}%</td>
 								</tr>
 							</tbody>
@@ -63,7 +63,9 @@
 									<td class="text-center">{{item.posName}}</td>
 									<td class="text-center">{{item.consumeType=='1' ? "初办" : "再续"}}</td>
 									<td class="text-center">{{item.memRoy}}%</td>
-									<td class="text-center">{{item.royProcess}}%</td>
+									<td class="text-center"v-if="item.royProcess=='0'">0%</td>
+									<td class="text-center"v-else-if="item.royProcess=='1'">70%</td>
+									<td class="text-center"v-else-if="item.royProcess=='2'">100%</td>
 									<td class="text-center">{{item.memProportion}}%</td>
 								</tr>
 							</tbody>
@@ -98,7 +100,7 @@
 							<tbody>
 								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='3'" v-on:dblclick="updateSubVipRefund(item)">
 									<td class="text-center">{{item.posName}}</td>
-									<td class="text-center">{{item.flowSmall}}~{{item.flowBig}} 万</td>
+									<td class="text-center">{{item.flowSmall+'万'}}{{item.flowBig >0 ? ' ~ '+item.flowBig+'万' : "以上"}}</td>
 									<td class="text-center">{{item.refundProportion}}%</td>
 								</tr>
 							</tbody>
@@ -131,7 +133,7 @@
 							<tbody>
 								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='5' || item.consumeType=='6'" v-on:dblclick="updateSubVipOrder(item)">
 									<td class="text-center">{{item.posName}}</td>
-									<td class="text-center">{{item.orderSmall}} ~ {{item.orderBig}}</td>
+									<td class="text-center">{{item.orderSmall+'人'}}{{item.orderBig >0 ? ' ~ '+item.orderBig+'人' : "以上"}}</td>
 									<td class="text-center">{{item.consumeType=='5' ? "初访" : "复访"}}</td>
 									<td class="text-center">{{item.visRoy}}</td>
 								</tr>
@@ -166,7 +168,7 @@
 							<tbody>
 								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='4'" v-on:dblclick="updateSubCharg(item)">
 									<td class="text-center">{{item.posName}}</td>
-									<td class="text-center">{{item.orderSmall}} ~ {{item.orderBig}}</td>
+									<td class="text-center">{{item.orderSmall+'人'}}{{item.orderBig >0 ? ' ~ '+item.orderBig+'人' : "以上"}}</td>
 									<td class="text-center">{{item.visRoy}}</td>
 								</tr>
 							</tbody>

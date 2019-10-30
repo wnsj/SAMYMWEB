@@ -43,14 +43,14 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">员工工号</label><span class="sign-left">:</span>
+						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">推荐人</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<emp ref='emp' @></emp>
+							<emp ref='emp' @employeeChange='empChange'></emp>
 						</div>
 					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addFWRoyalty()">确认</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
 						</div>
 					</div>
@@ -62,11 +62,9 @@
 
 <script>
 	import dPicker from 'vue2-datepicker'
-	import pos from '../../common/Position.vue'
 	import emp from '../../common/Employee.vue'
 	export default {
 		components:{
-			pos,
 			dPicker,
 			emp,
 		},
@@ -87,7 +85,6 @@
 			initData(param,FWRoyalty) {
 				if(param=='add'){
 					console.log('Initialization FWRoyalty’s content, which adds FWRoyalty')
-					this.type='add'
 					this.title='新增'
 					this.FWRoyalty={
 						posId:'0',
@@ -97,30 +94,21 @@
 						consumeType:'3',
 						empId:'0',
 					}
-					this.$refs.pos.setPos('0')
 					this.$refs.emp.setEmp('0')
 				}else if(param=='modify'){
 					console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
-					this.type='modify'
-					this.title='修改'
 					
+					this.title='修改'
+					Object.assign(this.FWRoyalty,FWRoyalty)
+					console.log(JSON.stringify(this.FWRoyalty))
+					this.$refs.emp.setEmp(this.FWRoyalty.empId)
 				}
 			},
 			
-			//feedback position information
-			posChange:function(param){
-				console.log('岗位3：'+JSON.stringify(param))
-				if(this.isBlank(param)){
-					this.FWRoyalty.posId=""
-				}else{
-					this.FWRoyalty.posId=param.posId
-				}
-				console.log('岗位4：'+this.FWRoyalty.posId)
-			},
+			
 			
 			//feedback employee information
 			empChange:function(param){
-				// console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.FWRoyalty.empId=""
 					this.FWRoyalty.storeId=""
@@ -128,7 +116,6 @@
 					this.FWRoyalty.empId=param.empId
 					this.FWRoyalty.storeId=param.storeId
 				}
-				// console.log('岗位4：'+this.FWRoyalty.empId)
 			},
 			
 			//the event of addtional button
@@ -136,20 +123,28 @@
 				console.log('the event of addtional button')
 				
 				
-				if(this.isBlank(this.FWRoyalty.posId) || this.FWRoyalty.posId=='0'){
-					alert("岗位类型不能为空")
+				if(this.isBlank(this.FWRoyalty.memName)){
+					alert("姓名不能为空")
 					return
 				}
-				if(this.isBlank(this.FWRoyalty.flowBig)){
-					alert("大额度不能为空")
+				if(this.isBlank(this.FWRoyalty.phone)){
+					alert("手机号不能为空")
 					return
+				} 
+				
+				if(!this.isBlank(this.FWRoyalty.birthday)){
+					this.FWRoyalty.birthday=this.moment(this.FWRoyalty.birthday,'YYYY-MM-DD 00:00:00.000')
 				}
-				if(this.isBlank(this.FWRoyalty.turRoy)){
-					alert("提成点数不能为空")
-					return
+				var url
+				switch(this.title){
+					case "新增":
+						url = this.url + '/memberAction/addMember'
+						break;
+					case "修改":
+						url = this.url + '/memberAction//updateMember'
+						break;
 				}
 				
-				var url = this.url + '/royaltyAction/addRoyalty'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -167,7 +162,7 @@
 						this.$emit('certainAction')
 					}
 				}).catch((error) => {
-					console.log('添加流水规则失败')
+					console.log('会员相关操作失败')
 				});
 			},
 			closeCurrentPage(){

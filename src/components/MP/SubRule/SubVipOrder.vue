@@ -90,7 +90,7 @@
 				}else if(param=='modify'){
 					console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
 					this.title='修改'
-					this.FWRoyalty = FWRoyalty
+					Object.assign(this.FWRoyalty,FWRoyalty)
 					this.$refs.pos.setPos(FWRoyalty.posId)
 					
 				}

@@ -81,9 +81,9 @@
 					this.$refs.pos.setPos('0')
 				}else if(param=='modify'){
 					console.log('Initialization patient’s content, which modifies patient')
-					this.type='modify'
+					
 					this.title='修改'
-					this.FWRoyalty = FWRoyalty
+					Object.assign(this.FWRoyalty,FWRoyalty)
 					this.$refs.pos.setPos(FWRoyalty.posId)
 				}
 			},

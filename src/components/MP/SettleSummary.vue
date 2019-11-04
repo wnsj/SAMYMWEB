@@ -8,13 +8,13 @@
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p>会员卡号：</p>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="hospNum"></div>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memNum"></div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p>姓　　名：</p>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="name"></div>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memName"></div>
 			</div>
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -22,7 +22,7 @@
 					<p>手机号：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<input class="form-control" type="text" value="" v-model="tel">
+					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
 			</div>
 		</div> 
@@ -66,7 +66,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item2,index2) in consumList" :key="index2" v-on:dblclick="viewDetails(item2)">
+								<tr v-for="(item2,index2) in consumeList" :key="index2" v-on:dblclick="viewDetails(item2)">
 									<td>{{item2.MEM_NUM}}</td>
 									<td>{{item2.MEM_NAME}}</td>
 									<td>{{item2.age}}</td>
@@ -82,13 +82,13 @@
 				</nobr>
 			</div>
 		</div>
-		<!--<div class="row row_edit">
-			<div class="modal fade" id="addPatient">
+		<div class="row row_edit">
+			<div class="modal fade" id="addConsume">
 				<div class="modal-dialog">
-					<SubConsume ref="patient" @addPatient='feedback'></SubConsume>
+					<SubConsume ref="consume"></SubConsume>
 				</div>
 			</div>
-		</div>-->
+		</div>
 	</div>
 </template>
 
@@ -104,10 +104,10 @@
 		},
 		data() {
 			return {
-				hospNum: '',
-				name: '',
-				tel:'',
-				consumList:[],
+				memNum: '',
+				memName: '',
+				phone:'',
+				consumeList:[],
 				hospTime: '',
 				outHosp: '',
 				singleData:{},	
@@ -116,9 +116,7 @@
 
 		methods: {
 			conditionCheck: function() {
-				console.log('this.hospNum:'+this.hospNum)
-				console.log('this.name:'+this.name)
-				console.log('this.tel:'+this.tel)
+				
 				var url = this.url + '/accountRecordAction/queryAccountRecordTotal'
 				this.$ajax({
 					method: 'POST',
@@ -128,49 +126,31 @@
 						'Access-Token': this.accessToken
 					},
 					data:{
-						MEM_NAME:this.name,
-						MEM_NUM:this.hospNum,
-						PHONE:this.tel
+						memName:this.memName,
+						memNum:this.memNum,
+						phone:this.phone,
+						
+						accountId: this.accountId(),
+						modelGrade:'2',
+						modelType:'',
+						operateType:'',
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					console.log(res);
 					if (res.retCode == '0000') {
-						this.consumList = res.retData;
+						this.consumeList = res.retData;
 					}
 				}).catch((error) => {
 					console.log('请求失败处理')
 				});
 			},
 			viewDetails: function(item) {
-				$("#addPatient").modal('show');
-				this.singleData = {
-					memNum:item.MEM_NUM,
-					memName:item.MEM_NAME,
-					phone:item.PHONE,
-				}
-				var url = this.url + 'accountRecordAction/queryAccountRecord'
-				this.$ajax({
-					method: 'POST',
-					url: url,
-					headers: {
-						'Content-Type': this.contentType,
-						'Access-Token': this.accessToken
-					},
-					data:this.singleData,
-					dataType: 'json',
-				}).then((response) => {
-					var res = response.data
-					console.log(res)
-					
-				}).catch((error) => {
-					console.log('请求失败处理')
-				});
+				this.$refs.consume.conditionCheck(item)
+				$("#addConsume").modal('show');
 			},
-			feedBack() {
-				$("#addPatient").modal('hide');
-			},
+			
 			handleScroll(e) {
 				var self = this
 				var etop = e.target.scrollTop

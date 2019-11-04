@@ -303,7 +303,12 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data: {},
+					data: {
+						accountId: this.accountId(),
+						modelGrade:'2',
+						modelType:'',
+						operateType:'',
+					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data

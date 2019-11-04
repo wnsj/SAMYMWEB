@@ -55,6 +55,7 @@
 					sex:'1',
 					age:'',
 				},
+				patientList:[],
 				type:'',
 				title:'新增',
 				isModify:false,

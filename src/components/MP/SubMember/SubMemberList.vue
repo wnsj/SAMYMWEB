@@ -57,7 +57,6 @@
 			},
 			//Query patient's information based on the hosNum
 			conditionCheck(param){
-				console.log('checkhosNum')
 				if(this.isBlank(param)){
 					return
 				}

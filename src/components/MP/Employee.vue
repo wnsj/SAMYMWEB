@@ -179,6 +179,11 @@
 						storeId: this.storeId,
 						empName: this.empName,
 						isuse: this.isuse,
+						
+						accountId: this.accountId(),
+						modelGrade:'2',
+						modelType:'',
+						operateType:'',
 					},
 					dataType: 'json',
 				}).then((response) => {

@@ -1,0 +1,271 @@
+<template>
+	<div>
+		<div class="col-md-12 col-lg-12 main-title">
+			<h1 class="titleCss">权限管理</h1>
+		</div>
+		<div class="row" style="margin-top: 40px;">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>账户名：</p>
+				</div>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="accountName"></div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>员工姓名：</p>
+				</div>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="empName"></div>
+			</div>
+
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>账户类型：</p>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<select class="form-control" v-model="employeeType">
+						<option value="">未选择</option>
+						<option value="0">超级管理员</option>
+						<option value="1">店铺管理员</option>
+						<option value="2">管理员</option>
+						<option value="3">收银管理员</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>模块：</p>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<select class="form-control" v-model="modelId">
+						<option value="0">未选择</option>
+						<option value="1">员工管理</option>
+						<option value="2">充值管理</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>模块级别：</p>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<select class="form-control" v-model="modelGrade">
+						<option value="0">未选择</option>
+						<option value="0">一级</option>
+						<option value="1">二级</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p>操作类型：</p>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<select class="form-control" v-model="operateType">
+						<option value="0">未选择</option>
+						<option value="1">增</option>
+						<option value="2">删</option>
+						<option value="3">改</option>
+						<option value="4">查</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
+			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+			 v-on:click="addRule()" v-if="has(2)">添加</button>
+			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+			 v-on:click="conditionCheck()">查询</button>
+		</div>
+		<div>
+			<div class="col-md-12 col-lg-12">
+				<nobr class="widthmax">
+					<div class="table-responsive pre-scrollable" style=" max-height:464px">
+						<table class="table table-bordered table-hover user-table" id="datatable">
+
+							<thead class="datathead">
+								<tr>
+									<th class="text-center">账户</th>
+									<th class="text-center">员工姓名</th>
+									<th class="text-center">账户类型</th>
+									<th class="text-center">模块级别</th>
+									<th class="text-center">模块</th>
+									<th class="text-center">操作类型</th>
+									<th class="text-center">权限删除</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(item,index) in ruleList" :key="index">
+									<td>{{item.accountNum}}</td>
+									<td>{{item.empName}}</td>
+									<td v-show="item.employeeType=='1'">超级管理员</td>
+									<td v-show="item.employeeType=='2'">店铺管理员</td>
+									<td v-show="item.employeeType=='3'">财务</td>
+									<td>{{item.moduleGrade=='1' ? "第一层级" : "第二层级"}}</td>
+									<td>{{item.moduleId > 0 ? item.moduleName : "所有"}}</td>
+									<td v-show="item.operateType=='1'">添加功能</td>
+									<td v-show="item.operateType=='2'">删除功能</td>
+									<td v-show="item.operateType=='3'">修改功能</td>
+									<td v-show="item.operateType=='4'">查询功能</td>
+									<td v-show="item.operateType !='1' && item.operateType !='2' && item.operateType !='3' && item.operateType !='4'">所有</td>
+									<td><button type="button" class="btn btn-warning">取消</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</nobr>
+			</div>
+		</div>
+		<div class="row row_edit">
+			<div class="modal fade" id="rm">
+				<div class="modal-dialog">
+					<SubRm ref="rm" @addPatient='feedback'></SubRm>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+
+<script>
+	import axios from 'axios'
+	import dPicker from 'vue2-datepicker'
+	import SubRm from '../MP/SubRm/SubRm'
+	export default {
+		name: 'employee',
+		components: {
+			dPicker,
+			SubRm,
+		},
+		data() {
+			return {
+				ruleList: [],
+				accountName: '0',
+				employeeType: '0',
+				empName:'',
+				modelId: '0',
+				modelGrade: '0',
+				operateType: '0',
+			}
+		},
+
+		methods: {
+			addRule() {
+				$("#rm").modal('show');
+			},
+			//feedback project information
+			projectChange: function(param) {
+				console.log('返回项目的全部信息')
+			},
+			//feedback department information
+			departChange: function(param) {
+				if (this.isBlank(param)) {
+					this.deptId = ""
+				} else {
+					this.deptId = param.deptId
+				}
+			},
+			//feedback PatientStype information
+			psChange: function(param) {
+				if (this.isBlank(param)) {
+					this.patitypeid = ""
+				} else {
+					this.patitypeid = param.patitypeid
+				}
+				console.log('PatientStype' + this.patitypeid)
+			},
+			//feedback MedicalInsuranceStype information
+			misChange: function(param) {
+				if (this.isBlank(param)) {
+					this.mitypeid = ""
+				} else {
+					this.mitypeid = param.mitypeid
+				}
+				console.log('MedicalInsuranceStype' + this.mitypeid)
+			},
+
+			feedback() {
+				this.conditionCheck()
+				$("#addPatient").modal('hide')
+			},
+
+
+			//the list , which is detail infomation of patient,was checked.
+			conditionCheck: function() {
+				console.log('querying based on multiple conditions')
+				var url = this.url + '/ruleAction/queryRuleList'
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: {
+// 						accountId:'0',
+// 						accountName: this.accountName,
+// 						employeeType: this.employeeType,
+// 						moduleId: this.modelId,
+// 						modelGrade:'0',
+// 						operateType: this.operateType,
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					console.log(JSON.stringify(res))
+					if (res.retCode == '0000') {
+						this.ruleList = res.retData;
+					}
+				}).catch((error) => {
+					console.log('请求失败处理')
+				});
+			},
+
+		},
+		mounted() {
+			window.addEventListener('scroll', this.handleScroll, true)
+			if (window.performance.navigation.type == 1) {
+				console.log("页面被刷新")
+			} else {
+				console.log("首次被加载")
+			}
+		},
+		created() {
+			this.conditionCheck()
+		},
+
+	}
+</script>
+
+
+<style scoped="scoped">
+	.widthmax {
+		width: auto;
+		overflow-x: scroll;
+	}
+
+	#datatable {
+		position: relative;
+	}
+
+	#fHeader {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: #eeeeee;
+		overflow: hidden;
+	}
+
+	#fHeader div.text-center {
+		float: left;
+		display: inline-block;
+		padding: 8px;
+		border: 1px solid #ddd;
+		font-weight: bold;
+	}
+
+	@media print {
+		#fHeader {
+			display: none
+		}
+	}
+</style>

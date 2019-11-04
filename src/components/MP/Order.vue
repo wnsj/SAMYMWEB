@@ -279,6 +279,11 @@
 						endCreateDate:this.endCreateDate,
 						begAppDate:this.begAppDate,
 						endAppDate:this.endAppDate,
+						
+						accountId: this.accountId(),
+						modelGrade:'2',
+						modelType:'',
+						operateType:'',
 					},
 					dataType: 'json',
 				}).then((response) => {

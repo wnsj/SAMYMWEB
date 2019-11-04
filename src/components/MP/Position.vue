@@ -120,6 +120,15 @@
 					data: {
 						posName: this.posName,
 						isuse: this.isuse,
+						accountId: this.accountId(),
+						modelGrade:'2',
+						modelType:'',
+						operateType:'',
+						
+						accountId: this.accountId(),
+						modelGrade:'1',
+						modelType:'',
+						operateType:'',
 					},
 					dataType: 'json',
 				}).then((response) => {

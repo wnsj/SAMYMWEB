@@ -121,6 +121,7 @@ Vue.prototype.accountId = function() {
 Vue.prototype.storeId = function() {
   return constant.storeId();
 }
+
 /*
  **权限判断使用方法:
  ** 1.<div v-has='1'> 测试内容1</div>

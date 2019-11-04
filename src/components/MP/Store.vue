@@ -124,6 +124,11 @@
 					data: {
 						storeName: this.storeName,
 						isuse: this.isuse,
+						
+						accountId: this.accountId(),
+						modelGrade:'2',
+						modelType:'',
+						operateType:'',
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -166,7 +171,7 @@
 		window.addEventListener('scroll',this.handleScroll,true)
 		},
 		created() {
-		  this.checkStore()
+		  // this.checkStore()
 		}
 	}
 </script>

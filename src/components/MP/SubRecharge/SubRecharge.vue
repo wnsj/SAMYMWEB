@@ -12,7 +12,8 @@
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员卡号</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="consume.memNum" v-on:change="checkMemNum(consume.memNum)" placeholder="卡号/预约号">
+							<input type="text" class="form-control" v-model="consume.memNum" v-on:change="checkMemNum(consume.memNum)"
+							 placeholder="卡号/预约号">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
@@ -81,8 +82,10 @@
 					empId: '',
 					empName: '',
 					phone: '',
-					costType: '1',
+					rechargetime: '',
+					costType: '',
 					balance: '',
+					storeId: '',
 				},
 				title: '',
 			};
@@ -92,28 +95,25 @@
 			initData(param) {
 				this.consume = {
 					memNum: '',
+					memName: '',
 					momey: '',
 					empId: '',
 					empName: '',
 					phone: '',
-					rechargetime: this.moment('', 'YYYY-MM-DD HH:mm:ss.000'),
+					rechargetime: '',
 					costType: '',
 					balance: '',
-					storeId:'',
+					storeId: '',
 				}
 				if (param == 'recharge') {
 					console.log('new increasing recharge')
-					this.title = '充值'
-					this.consume.costType = '1'
+					this.title = "充值"
 				} else if (param == 'consume') {
 					console.log('new increasing consume')
 					this.title = '消费'
-					this.consume.costType = '2'
-					this.consume.storeId=this.storeId()
 				} else if (param == 'refund') {
 					console.log('new increasing refund')
 					this.title = '退费'
-					this.consume.costType = '3'
 				}
 			},
 			//feedback employee information
@@ -124,29 +124,27 @@
 				} else {
 					this.consume.empId = param.empId
 				}
+				console.log('费用类型：' + this.consume.costType)
 				console.log('员工：' + this.consume.empId)
 			},
 
-			//feedback consumeStype information
-			psChange: function(param) {
-				if (this.isBlank(param)) {
-					this.consume.patitypeid = ''
-				} else {
-					this.consume.patitypeid = param.patitypeid
-				}
-			},
-			//feedback MedicalInsuranceStype information
-			misChange: function(param) {
-				if (this.isBlank(param)) {
-					this.consume.mitypeid = ''
-				} else {
-					this.consume.mitypeid = param.mitypeid
-				}
-			},
 			//the event of addtional button
 			addFee() {
 				console.log('the event of addtional button')
 
+				switch (this.title) {
+					case "充值":
+						this.consume.costType = '1'
+						break;
+					case "消费":
+						this.consume.costType = '2'
+						this.consume.storeId = this.storeId()
+						break;
+					case "退费":
+						this.consume.costType = '3'
+						break;
+				}
+				console.log('费用类型：' + this.consume.costType)
 				if (this.isBlank(this.consume.memNum)) {
 					alert("会员卡号不能为空")
 					return
@@ -225,6 +223,7 @@
 				if (this.isBlank(param)) {
 					return
 				}
+				console.log('费用类型3：' + this.consume.costType)
 				var url = this.url + '/memberAction/queryMember'
 				this.$ajax({
 					method: 'POST',
@@ -240,13 +239,14 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						console.log('查到了' + JSON.stringify(res))
-						if(res.retData.length>0){
+						// console.log('查到了' + JSON.stringify(res))
+						if (res.retData.length > 0) {
 							this.consume.memNum = res.retData[0].memNum
 							this.consume.memName = res.retData[0].memName
 							this.consume.phone = res.retData[0].phone
 							this.consume.balance = res.retData[0].balance
-						}else{
+							
+						} else {
 							console.log('没有查到会员信息，请添加会员后充值')
 							this.consume.memName = ''
 							this.consume.phone = ''

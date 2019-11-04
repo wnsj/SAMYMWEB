@@ -144,6 +144,11 @@
 					},
 					data: {
 						memNum:'0',
+						
+						accountId: this.accountId(),
+						modelGrade:'2',
+						modelType:'',
+						operateType:'',
 					},
 					dataType: 'json',
 				}).then((response) => {

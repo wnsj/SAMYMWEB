@@ -222,6 +222,11 @@
 						sex: this.sex,
 						hospTime: this.hospTime,
 						outHosp: this.outHosp,
+						
+						accountId: this.accountId(),
+						modelGrade:'2',
+						modelType:'',
+						operateType:'',
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -372,7 +377,7 @@
 			}
 		},
 		created() {
-			this.conditionCheck()
+			// this.conditionCheck()
 		},
 
 	}

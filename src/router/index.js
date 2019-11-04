@@ -13,6 +13,7 @@ import SettleSummary from '../components/MP/SettleSummary.vue'
 import MemberSummary from '../components/MP/MemberSummary.vue'
 import RoyaltySummary from '../components/MP/RoyaltySummary.vue'
 import Store from '../components/MP/Store.vue'
+import RuleManager from '../components/MP/RuleManager.vue'
 
 Vue.use(Router)
 
@@ -77,7 +78,11 @@ export default new Router({
 				  name: 'Store',
 				  component: Store,
 				},
-        
+        {
+          path: '/MP/RuleManager',
+          name: 'RuleManager',
+          component: RuleManager,
+        },
       ],
       redirect: '/MP/RoyaltySummary'
     }]

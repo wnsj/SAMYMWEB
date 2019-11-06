@@ -8,7 +8,7 @@
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p>账户名：</p>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="accountName"></div>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="accountNum"></div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
@@ -23,11 +23,10 @@
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<select class="form-control" v-model="employeeType">
-						<option value="">未选择</option>
-						<option value="0">超级管理员</option>
-						<option value="1">店铺管理员</option>
-						<option value="2">管理员</option>
-						<option value="3">收银管理员</option>
+						<option value="0">未选择</option>
+						<option value="1">超级管理员</option>
+						<option value="2">店铺管理员</option>
+						<option value="3">财务</option>
 					</select>
 				</div>
 			</div>
@@ -36,11 +35,7 @@
 					<p>模块：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<select class="form-control" v-model="modelId">
-						<option value="0">未选择</option>
-						<option value="1">员工管理</option>
-						<option value="2">充值管理</option>
-					</select>
+					<mod ref="mod" @moduleChange="moduleChange"></mod>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -48,7 +43,7 @@
 					<p>模块级别：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<select class="form-control" v-model="modelGrade">
+					<select class="form-control" v-model="moduleGrade">
 						<option value="0">未选择</option>
 						<option value="0">一级</option>
 						<option value="1">二级</option>
@@ -107,7 +102,7 @@
 									<td v-show="item.operateType=='3'">修改功能</td>
 									<td v-show="item.operateType=='4'">查询功能</td>
 									<td v-show="item.operateType !='1' && item.operateType !='2' && item.operateType !='3' && item.operateType !='4'">所有</td>
-									<td><button type="button" class="btn btn-warning">取消</button></td>
+									<td><button type="button" class="btn btn-warning" v-on:click="deleteRule(item)">取消</button></td>
 								</tr>
 							</tbody>
 						</table>
@@ -118,7 +113,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="rm">
 				<div class="modal-dialog">
-					<SubRm ref="rm" @addPatient='feedback'></SubRm>
+					<SubRm ref="rm" @addRule='feedback'></SubRm>
 				</div>
 			</div>
 		</div>
@@ -130,20 +125,22 @@
 	import axios from 'axios'
 	import dPicker from 'vue2-datepicker'
 	import SubRm from '../MP/SubRm/SubRm'
+	import mod from '../common/Model.vue'
 	export default {
 		name: 'employee',
 		components: {
 			dPicker,
 			SubRm,
+			mod,
 		},
 		data() {
 			return {
 				ruleList: [],
-				accountName: '0',
+				accountNum: '',
 				employeeType: '0',
-				empName:'',
-				modelId: '0',
-				modelGrade: '0',
+				empName: '',
+				moduleId: '0',
+				moduleGrade: '0',
 				operateType: '0',
 			}
 		},
@@ -152,40 +149,46 @@
 			addRule() {
 				$("#rm").modal('show');
 			},
-			//feedback project information
-			projectChange: function(param) {
-				console.log('返回项目的全部信息')
-			},
+			
 			//feedback department information
-			departChange: function(param) {
+			moduleChange: function(param) {
 				if (this.isBlank(param)) {
-					this.deptId = ""
+					this.moduleId = ""
 				} else {
-					this.deptId = param.deptId
+					this.moduleId = param.moduleId
 				}
 			},
-			//feedback PatientStype information
-			psChange: function(param) {
-				if (this.isBlank(param)) {
-					this.patitypeid = ""
-				} else {
-					this.patitypeid = param.patitypeid
-				}
-				console.log('PatientStype' + this.patitypeid)
+			deleteRule(item) {
+				console.log("权限ID："+item.ruleId)
+				var url = this.url + '/ruleAction/deleteRule'
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: {
+						ruleId:item.ruleId
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						alert(res.retMsg)
+						this.conditionCheck()
+					} else {
+						alert(res.retMsg)
+					}
+				}).catch((error) => {
+					console.log('请求失败处理')
+				});
 			},
-			//feedback MedicalInsuranceStype information
-			misChange: function(param) {
-				if (this.isBlank(param)) {
-					this.mitypeid = ""
-				} else {
-					this.mitypeid = param.mitypeid
-				}
-				console.log('MedicalInsuranceStype' + this.mitypeid)
-			},
+
 
 			feedback() {
 				this.conditionCheck()
-				$("#addPatient").modal('hide')
+				$("#rm").modal('hide')
 			},
 
 
@@ -201,17 +204,19 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-// 						accountId:'0',
-// 						accountName: this.accountName,
-// 						employeeType: this.employeeType,
-// 						moduleId: this.modelId,
-// 						modelGrade:'0',
-// 						operateType: this.operateType,
+						accountNum: this.accountNum,
+						empName:this.empName,
+						employeeType: this.employeeType,
+						moduleId: this.moduleId,
+						moduleGrade: this.moduleGrade,
+						operateType: this.operateType,
+						
+						// accountId:this.accountId()
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(JSON.stringify(res))
+					// console.log(JSON.stringify(res))
 					if (res.retCode == '0000') {
 						this.ruleList = res.retData;
 					}

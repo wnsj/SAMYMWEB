@@ -2,7 +2,7 @@
   <select class="form-control" v-model="accountId" v-on:change="accountChange()">
     <option value="0">--未选择--</option>
     <option v-for="(item,index) in accountList" :key="index" v-bind:value="item.accountId">
-      {{item.accountName}}
+      {{item.accountNum}}
     </option>
   </select>
 </template>

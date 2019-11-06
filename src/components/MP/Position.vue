@@ -29,7 +29,7 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="addPosition()"  v-if="has(2)">添加</button>
+			 v-on:click="selectRule('1')"  v-if="has(2)">添加</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="checkPosition()">查询</button>
 		</div>
@@ -43,15 +43,15 @@
 								<th class="text-center">ID</th>
 								<th class="text-center">岗位名称</th>
 								<th class="text-center">是否停用</th>
-								<th class="text-center" v-if="has(2)">修改</th>
+								<th class="text-center">修改</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in positionList" :key="index" v-on:dblclick="modifyPosition(item)">
+							<tr v-for="(item,index) in positionList" :key="index" v-on:dblclick="selectRule('3',item)">
 								<td class="text-center">{{item.posId}}</td>
 								<td class="text-center">{{item.posName}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyPosition(item,index)">修改</button></td>
+								<td class="text-center"><button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -86,25 +86,51 @@
 			};
 		},
 		methods: {
-			//modify the cotent of position
-			addPosition() {
-				console.log('modify the cotent of position')
-				this.$refs.subPost.initData('add')
-				$("#positionContent").modal('show')
-			},
-			//modify the cotent of position
-			modifyPosition(item) {
-				if(!this.has(2)){
-				alert("暂无权限修改!");
-				return;
-				}
-				this.$refs.subPost.initData('modify',item)
-				$("#positionContent").modal('show')
-			},
+			
 			//feedback from adding and modifying view
 			feedBack() {
 				this.checkPosition()
 				$("#positionContent").modal('hide')
+			},
+			// check the adding and modifying rule of account
+			selectRule(param,item){
+				var url = this.url + '/ruleAction/queryRule'
+				
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: {
+						accountId: this.accountId(),
+						moduleGrade:'2',
+						urlName:'Position',
+						operateType:param,
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						if(res.retData=='0010'){
+							if(param=="1"){
+								this.$refs.subPost.initData('add')
+								$("#positionContent").modal('show')
+							}else if(param=="3"){
+								this.$refs.subPost.initData('modify',item)
+								$("#positionContent").modal('show')
+							}
+						}else{
+							alert('您没有此权限，请联系管理员！！')
+						}
+					} else {
+						alert(res.retMsg)
+					}
+				
+				}).catch((error) => {
+					console.log('商铺查询请求失败')
+				});
 			},
 			//check the list of position
 			checkPosition() {
@@ -120,15 +146,11 @@
 					data: {
 						posName: this.posName,
 						isuse: this.isuse,
-						accountId: this.accountId(),
-						modelGrade:'2',
-						modelType:'',
-						operateType:'',
 						
 						accountId: this.accountId(),
-						modelGrade:'1',
-						modelType:'',
-						operateType:'',
+						moduleGrade:'2',
+						urlName:'Position',
+						operateType:'4',
 					},
 					dataType: 'json',
 				}).then((response) => {

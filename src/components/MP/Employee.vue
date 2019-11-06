@@ -53,7 +53,7 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="addEmp()" v-if="has(2)">添加员工</button>
+			 v-on:click="selectRule('1')">添加员工</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="checkEmp()">查询</button>
 		</div>
@@ -75,7 +75,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in employeeList" :key="index" v-on:dblclick="modifyEmp(item)">
+							<tr v-for="(item,index) in employeeList" :key="index" v-on:dblclick="selectRule('3',item)">
 								<td class="text-center">{{item.storeName}}</td>
 								<td class="text-center">{{item.posName}}</td>
 								<!-- <td class="text-center">{{item.empId}}</td> -->
@@ -84,7 +84,7 @@
 								<td class="text-center">{{item.sex=='1' ? '男':'女'}}</td>
 								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.isuse==true ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyEmp(item,index)">修改</button></td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -163,6 +163,46 @@
 				this.checkEmp()
 				$("#emp").modal('hide')
 			},
+			// check the adding and modifying rule of account
+			selectRule(param,item){
+				var url = this.url + '/ruleAction/queryRule'
+				
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: {
+						accountId: this.accountId(),
+						moduleGrade:'2',
+						urlName:'Employee',
+						operateType:param,
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						if(res.retData=='0010'){
+							if(param=="1"){
+								this.$refs.emp.initData('add')
+								$("#emp").modal('show')
+							}else if(param=="3"){
+								this.$refs.emp.initData('modify', item)
+								$("#emp").modal('show')
+							}
+						}else{
+							alert('您没有此权限，请联系管理员！！')
+						}
+					} else {
+						alert(res.retMsg)
+					}
+				
+				}).catch((error) => {
+					console.log('商铺查询请求失败')
+				});
+			},
 			//check the list of department
 			checkEmp() {
 				console.log('checkEmp')
@@ -181,9 +221,9 @@
 						isuse: this.isuse,
 						
 						accountId: this.accountId(),
-						modelGrade:'2',
-						modelType:'',
-						operateType:'',
+						moduleGrade:'2',
+						urlName:'Employee',
+						operateType:'4',
 					},
 					dataType: 'json',
 				}).then((response) => {

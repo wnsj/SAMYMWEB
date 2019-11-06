@@ -1,8 +1,8 @@
 <template>
-  <select class="form-control" v-model="modelId" v-on:change="modelChange()">
+  <select class="form-control" v-model="moduleId" v-on:change="moduleChange()">
     <option value="0">--未选择--</option>
-    <option v-for="(item,index) in modelList" :key="index" v-bind:value="item.modelId">
-      {{item.modelName}}
+    <option v-for="(item,index) in moduleList" :key="index" v-bind:value="item.moduleId">
+      {{item.moduleName}}
     </option>
   </select>
 </template>
@@ -10,42 +10,41 @@
 <script>
  
   export default {
-    name: 'department',
     data() {
       return {
-        modelName: '',
-        modelId: '0',
-        modelList: [],
-				modelObj:{
-					modelId:'0',
-					modelName: '',
+        moduleName: '',
+        moduleId: '0',
+        moduleList: [],
+				moduleObj:{
+					moduleId:'0',
+					moduleName: '',
 				},
       };
     },
     methods: {
       //提交岗位名称和ID
-      modelChange: function () {
-				// console.log('岗位1：'+this.ModelObj.ModelId)
-        this.modelObj = this.exchangeModelName(this.modelId)
-				// console.log('岗位2：'+this.ModelObj.ModelId)
-        this.$emit('modelChange', this.modelObj)
+      moduleChange: function () {
+				// console.log('岗位1：'+this.moduleObj.moduleId)
+        this.moduleObj = this.exchangeModuleName(this.moduleId)
+				// console.log('岗位2：'+this.moduleObj.moduleId)
+        this.$emit('moduleChange', this.moduleObj)
       },
-      setModel: function (modelId) {
-        this.modelId = modelId
-				// console.log('设置岗位'+this.ModelId)
+      setModule: function (moduleId) {
+        this.moduleId = moduleId
+				// console.log('设置岗位'+this.ModuleId)
       },
       //添加前缀的部门名字兑换原来的名字
-      exchangeModelName: function (param) {
-        var model = {}
-        for (var i = 0; i < this.modelList.length; i++) {
-          model = this.modelList[i];
-          if (model.modelId == param) {
-            return model
+      exchangeModuleName: function (param) {
+        var mObj = {}
+        for (var i = 0; i < this.moduleList.length; i++) {
+          mObj = this.moduleList[i];
+          if (mObj.moduleId == param) {
+            return mObj
           }
         }
       },
      
-      async getModel() {
+      async getModule() {
         var url = this.url + '/moduleAction/queryModule'
         this.$ajax({
         	method: 'POST',
@@ -62,7 +61,7 @@
         	var res = response.data
         	if (res.retCode == '0000') {
         		if (res.retData.length > 0) {
-        			this.modelList = res.retData
+        			this.moduleList = res.retData
         		}
         	} else {
         		alert(res.retMsg)
@@ -75,7 +74,7 @@
 
     },
     created() {
-      this.getModel()
+      this.getModule()
     },
   }
 </script>

@@ -11,7 +11,7 @@
 						<h3>流水提成规则</h3>
 					</div>
 					<div class="col-md-4 col-lg-4 pull-right">
-						<button type="button" class="btn btn-warning pos1" v-on:click="addRoyalty('add')">添加</button>
+						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('Royalty','1')">添加</button>
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
@@ -26,7 +26,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='0'" v-on:dblclick="updateRoyalty(item)">
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='0'" v-on:dblclick="selectRule('Royalty','3',item)">
 									<td class="text-center">{{item.posName}}</td>
 									<td class="text-center">{{item.flowSmall+'万'}}{{item.flowBig >0 ? ' ~ '+item.flowBig+'万' : "以上"}}</td>
 									<td class="text-center">{{item.turRoy}}%</td>
@@ -42,7 +42,7 @@
 						<h3>会员卡提成规则</h3>
 					</div>
 					<div class="col-md-4 col-lg-4 pull-right">
-						<button type="button" class="btn btn-warning pos1" v-on:click="addSubVip()">添加</button>
+						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubVip','1')">添加</button>
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
@@ -59,7 +59,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='1' || item.consumeType=='2'" v-on:dblclick="updateSubVip(item)">
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='1' || item.consumeType=='2'" v-on:dblclick="selectRule('SubVip','3',item)">
 									<td class="text-center">{{item.posName}}</td>
 									<td class="text-center">{{item.consumeType=='1' ? "初办" : "再续"}}</td>
 									<td class="text-center">{{item.memRoy}}%</td>
@@ -83,7 +83,7 @@
 						<h3>会员卡退费扣提成规则</h3>
 					</div>
 					<div class="col-md-4 col-lg-4 pull-right">
-						<button type="button" class="btn btn-warning pos1" v-on:click="addSubVipRefund()">添加</button>
+						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubVipRefund','1')">添加</button>
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
@@ -98,7 +98,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='3'" v-on:dblclick="updateSubVipRefund(item)">
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='3'" v-on:dblclick="selectRule('SubVipRefund','3',item)">
 									<td class="text-center">{{item.posName}}</td>
 									<td class="text-center">{{item.flowSmall+'万'}}{{item.flowBig >0 ? ' ~ '+item.flowBig+'万' : "以上"}}</td>
 									<td class="text-center">{{item.refundProportion}}%</td>
@@ -115,7 +115,7 @@
 						<h3>预约人数提成规则</h3>
 					</div>
 					<div class="col-md-4 col-lg-4 pull-right">
-						<button type="button" class="btn btn-warning pos1" v-on:click="addSubVipOrder()">添加</button>
+						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubVipOrder','1')">添加</button>
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
@@ -131,7 +131,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='5' || item.consumeType=='6'" v-on:dblclick="updateSubVipOrder(item)">
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='5' || item.consumeType=='6'" v-on:dblclick="selectRule('SubVipOrder','3',item)">
 									<td class="text-center">{{item.posName}}</td>
 									<td class="text-center">{{item.orderSmall+'人'}}{{item.orderBig >0 ? ' ~ '+item.orderBig+'人' : "以上"}}</td>
 									<td class="text-center">{{item.consumeType=='5' ? "初访" : "复访"}}</td>
@@ -151,7 +151,7 @@
 						<h3>退号扣提成规则</h3>
 					</div>
 					<div class="col-md-4 col-lg-4 pull-right">
-						<button type="button" class="btn btn-warning pos1" v-on:click="addSubCharg()">添加</button>
+						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubCharg','1')">添加</button>
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
@@ -166,7 +166,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='4'" v-on:dblclick="updateSubCharg(item)">
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='4'" v-on:dblclick="selectRule('SubCharg','3',item)">
 									<td class="text-center">{{item.posName}}</td>
 									<td class="text-center">{{item.orderSmall+'人'}}{{item.orderBig >0 ? ' ~ '+item.orderBig+'人' : "以上"}}</td>
 									<td class="text-center">{{item.visRoy}}</td>
@@ -242,47 +242,7 @@
 			};
 		},
 		methods: {
-			//modify the cotent of Royalty
-			addRoyalty() {
-				this.$refs.flowWater.initData('add');
-				$("#SubFlowWater").modal('show');
-			},
-			updateRoyalty(item) {
-				this.$refs.flowWater.initData('modify',item);
-				$("#SubFlowWater").modal('show');
-			},
-			addSubVip() {
-				this.$refs.vip.initData('add');
-				$("#SubVip").modal('show');
-			},
-			updateSubVip(item) {
-				this.$refs.vip.initData('modify',item);
-				$("#SubVip").modal('show');
-			},
-			addSubVipRefund() {
-				this.$refs.refund.initData('add');
-				$("#SubVipRefund").modal('show');
-			},
-			updateSubVipRefund(item) {
-				this.$refs.refund.initData('modify',item);
-				$("#SubVipRefund").modal('show')
-			},
-			addSubVipOrder() {
-				this.$refs.order.initData('add');
-				$("#SubVipOrder").modal('show')
-			},
-			updateSubVipOrder(item) {
-				this.$refs.order.initData('modify',item);
-				$("#SubVipOrder").modal('show')
-			},
-			addSubCharg() {
-				this.$refs.charg.initData('add');
-				$("#SubCharg").modal('show')
-			},
-			updateSubCharg(item) {
-				this.$refs.charg.initData('modify',item);
-				$("#SubCharg").modal('show')
-			},
+			
 			//feedback from adding and modifying view
 			feedBack() {
 				this.checkRoyaltyList()
@@ -291,6 +251,67 @@
 				$("#SubVipRefund").modal('hide')
 				$("#SubVipOrder").modal('hide')
 				$("#SubCharg").modal('hide')
+			},
+			// check the adding and modifying rule of account
+			selectRule(module,operateType,item){
+				var url = this.url + '/ruleAction/queryRule'
+				
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: {
+						accountId: this.accountId(),
+						moduleGrade:'2',
+						urlName:'Royalty',
+						operateType:operateType,
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						if(res.retData=='0010'){
+							
+							if(operateType=="1"){
+								operateName='add'
+							}else if(operateType=="3"){
+								operateName='modify'
+							}
+							switch(module){
+								case 'Royalty':
+									this.$refs.flowWater.initData(operateName,item);
+									$("#SubFlowWater").modal('show');
+									break;
+								case 'SubVip':
+									this.$refs.vip.initData(operateName,item);
+									$("#SubVip").modal('show');
+									break;
+								case 'SubVipRefund':
+									this.$refs.refund.initData(operateName,item);
+									$("#SubVipRefund").modal('show');
+									break;
+								case 'SubVipOrder':
+									this.$refs.order.initData(operateName,item);
+									$("#SubVipOrder").modal('show')
+									break;
+								case 'SubCharg':
+									this.$refs.charg.initData(operateName,item);
+									$("#SubCharg").modal('show')
+									break;
+							}
+						}else{
+							alert('您没有此权限，请联系管理员！！')
+						}
+					} else {
+						alert(res.retMsg)
+					}
+				
+				}).catch((error) => {
+					console.log('商铺查询请求失败')
+				});
 			},
 			//check the list of department
 			checkRoyaltyList() {
@@ -305,9 +326,9 @@
 					},
 					data: {
 						accountId: this.accountId(),
-						modelGrade:'2',
-						modelType:'',
-						operateType:'',
+						moduleGrade:'2',
+						urlName:'Royalty',
+						operateType:'4',
 					},
 					dataType: 'json',
 				}).then((response) => {

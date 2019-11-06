@@ -29,7 +29,7 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="addStore()"  v-if="has(2)">添加</button>
+			 v-on:click="selectRule('1')">添加</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="checkStore()">查询</button>
 		</div>
@@ -49,13 +49,13 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in storeList" :key="index" v-on:dblclick="modifyStore(item)">
+							<tr v-for="(item,index) in storeList" :key="index" v-on:dblclick="selectRule('3',item)">
 								<td class="text-center">{{item.storeName}}</td>
 								<td class="text-center">{{item.connecter}}</td>
 								<td class="text-center">{{item.phone}}</td>
 								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
 								<td class="text-center">{{item.address}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyStore(item,index)">修改</button></td>
+								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -90,25 +90,51 @@
 			};
 		},
 		methods: {
-			//modify the cotent of store
-			addStore() {
-				console.log('modify the cotent of store')
-				this.$refs.store.initData('add')
-				$("#storeContent").modal('show')
-			},
-			//modify the cotent of store
-			modifyStore(item) {
-				if(!this.has(2)){
-				alert("暂无权限修改!");
-				return;
-				}
-				this.$refs.store.initData('modify',item)
-				$("#storeContent").modal('show')
-			},
+			
 			//feedback from adding and modifying view
 			feedBack() {
 				this.checkStore()
 				$("#storeContent").modal('hide')
+			},
+			// check the adding and modifying rule of account
+			selectRule(param,item){
+				var url = this.url + '/ruleAction/queryRule'
+				
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: {
+						accountId: this.accountId(),
+						moduleGrade:'2',
+						urlName:'Store',
+						operateType:param,
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						if(res.retData=='0010'){
+							if(param=="1"){
+								this.$refs.store.initData('add')
+								$("#storeContent").modal('show')
+							}else if(param=="3"){
+								this.$refs.store.initData('modify',item)
+								$("#storeContent").modal('show')
+							}
+						}else{
+							alert('您没有此权限，请联系管理员！！')
+						}
+					} else {
+						alert(res.retMsg)
+					}
+				
+				}).catch((error) => {
+					console.log('商铺查询请求失败')
+				});
 			},
 			//check the list of store
 			checkStore() {
@@ -126,9 +152,9 @@
 						isuse: this.isuse,
 						
 						accountId: this.accountId(),
-						modelGrade:'2',
-						modelType:'',
-						operateType:'',
+						moduleGrade:'2',
+						urlName:'Store',
+						operateType:'4',
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -171,7 +197,7 @@
 		window.addEventListener('scroll',this.handleScroll,true)
 		},
 		created() {
-		  // this.checkStore()
+		  this.checkStore()
 		}
 	}
 </script>

@@ -24,41 +24,45 @@
 							<p style=" font-size: 30px; " aria-hidden="true">功能列表</p>
 						</li>
 						<li class="li-active" v-if="has(1)">
-							<router-link to="/MP/MemberSummary"><i class="fa fa-table" aria-hidden="true" v-on:click="selectRule()">　会员总表</i></router-link>
+							<i class="fa fa-table" aria-hidden="true" v-on:click="selectRule('MemberSummary')">　会员总表</i>
 						</li>
 
 						<li v-if="has(1)">
-							<router-link to="/MP/SettleSummary"><i class="fa fa-table" aria-hidden="false" v-on:click="selectRule()">　消费管理</i></router-link>
+							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('SettleSummary')">　消费管理</i>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/RoyaltySummary"><i class="fa fa-table fa-circle" aria-hidden="false" v-on:click="selectRule()">　提成汇总</i></router-link>
+							<i class="fa fa-table fa-circle" aria-hidden="false" v-on:click="selectRule('RoyaltySummary')">　提成汇总</i>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/Member"><i class="fa fa-table" aria-hidden="false" v-on:click="selectRule()">　会员管理</i></router-link>
+							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Member')">　会员管理</i>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/Charge"><i class="fa fa-table" aria-hidden="false" v-on:click="selectRule()">　充值管理(退费)</i></router-link>
+							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Charge')">　充值管理(退费)</i>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/Order"><i class="fa fa-table" aria-hidden="false" v-on:click="selectRule()">　预约管理</i></router-link>
+							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Order')">　预约管理</i>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/Employee"><i class="fa fa-table" aria-hidden="false" v-on:click="selectRule()">　员工管理</i></router-link>
+							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Employee')">　员工管理</i>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/Royalty"><i class="fa fa-table" aria-hidden="false" v-on:click="selectRule()">　提成规则管理</i></router-link>
+							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Royalty')">　提成规则管理</i>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/Position"><i class="fa fa-table" aria-hidden="false" v-on:click="selectRule()">　岗位管理</i></router-link>
+							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Position')">　岗位管理</i>
 						</li>
 						<li v-if="has(1)">
 							<!-- <router-link to="/MP/Store"><i class="fa fa-table" aria-hidden="false" v-on:click="selectRule()">　商铺管理</i></router-link> -->
-							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule()">　商铺管理</i>
+							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Store')">　商铺管理</i>
 						</li>
 						<li v-if="has(1)">
-							<router-link to="/MP/RuleManager"><i class="fa fa-table" aria-hidden="false">　权限管理</i></router-link>
-							<!-- <i class="fa fa-table" aria-hidden="false" v-on:click="selectRule()">　商铺管理</i> -->
+							<!-- <router-link to="/MP/RuleManager"><i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('43')">　权限管理</i></router-link> -->
+							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('RuleManager')">　权限管理</i>
 						</li>
+						<!-- <li v-if="has(1)">
+							<router-link to="/MP/test"><i class="fa fa-table" aria-hidden="false">　权限管理</i></router-link>
+							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('43')">　权限管理</i>
+						</li> -->
 
 					</ul>
 				</div>
@@ -103,39 +107,38 @@
 				console.log('param:'+param)
 				this.title=param
 			},
-			selectRule(){
-// 				var url = this.url + '/ruleAction/queryRule'
-// 				this.$ajax({
-// 					method: 'POST',
-// 					url: url,
-// 					headers: {
-// 						'Content-Type': this.contentType,
-// 						'Access-Token': this.accessToken
-// 					},
-// 					data: {
-// 						accountId: this.accountId(),
-// 						modelGrade:'1',
-// 						modelType:'',
-// 						operateType:'',
-// 					},
-// 					dataType: 'json',
-// 				}).then((response) => {
-// 					var res = response.data
-// 					if (res.retCode == '0000') {
-// 						if(res.retData=='0010'){
-// 							this.$router.push({
-// 								name: 'Store',
-// 							});
-// 						}else{
-// 							alert('您没有此权限，请联系管理员！！')
-// 						}
-// 					} else {
-// 						alert(res.retMsg)
-// 					}
-// 				
-// 				}).catch((error) => {
-// 					console.log('商铺查询请求失败')
-// 				});
+			selectRule(param){
+				var url = this.url + '/ruleAction/queryRule'
+				
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: {
+						accountId: this.accountId(),
+						moduleGrade:'1',
+						urlName:param,
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						if(res.retData=='0010'){
+							this.$router.push({ name: param, });
+							
+						}else{
+							alert('您没有此权限，请联系管理员！！')
+						}
+					} else {
+						alert(res.retMsg)
+					}
+				
+				}).catch((error) => {
+					console.log('商铺查询请求失败')
+				});
 			},
 			//用户退出
 			loginOut() {

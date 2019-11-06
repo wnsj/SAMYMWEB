@@ -1,79 +1,124 @@
+<!-- the page of department management -->
 <template>
-  <div style="width: 800px;">
-        <div class="table-head">
-            <table align="center">
-                <thead>
-                    <tr>
-                        <th>序号</th>
-                        <th>内容</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>我只是用来测试的</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>我只是用来测试的</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>我只是用来测试的</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>我只是用来测试的</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>我只是用来测试的</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>我只是用来测试的</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>我只是用来测试的</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>我只是用来测试的</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+
+	<div>
+		<div class="col-md-12 col-lg-12 main-title">
+			<h1 class="titleCss">商铺管理</h1>
+		</div>
+		
+		<div class="">
+			<div class="col-md-12 col-lg-12">
+				<div v-for="(item1,index1) in problemList">
+					<div>
+						<p>{{item1.problem}}</p>
+					</div>
+					<div v-for="(item2,index2) in item1.answer">
+						<!-- 选择框 -->
+						<p>{{item2.answerContent1}}</p>
+						<p>{{item2.answerContent2}}</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		
+	</div>
+
 </template>
 
 
 <script>
-  
+	import SubStore from '../MP/SubStore/SubStore.vue'
+	export default {
+		components: {
+			SubStore,
+		},
+		data() {
+			return {
+				problemList: [{
+						problem: '问题1？',
+						answer: [{
+								isSelect: '0',
+								answerContent1: 'a',
+								answerContent2: '',
+							},
+							{
+								isSelect: '0',
+								answerContent1: 'b',
+								answerContent2: '',
+							},
+							{
+								isSelect: '0',
+								answerContent1: 'c',
+								answerContent2: '',
+							},
+							{
+								isSelect: '0',
+								answerContent1: 'd',
+								answerContent2: '空白',
+							},
+							{
+								isSelect: '0',
+								answerContent1: 'e',
+								answerContent2: '空白',
+							}
+						]
+					},
+					{
+						problem: '问题2？',
+						answer: [{
+								isSelect: '0',
+								answerContent1: 'a',
+								answerContent2: '',
+							},
+							{
+								isSelect: '0',
+								answerContent1: 'b',
+								answerContent2: '',
+							},
+							{
+								isSelect: '0',
+								answerContent1: 'c',
+								answerContent2: '',
+							},
+							{
+								isSelect: '0',
+								answerContent1: 'd',
+								answerContent2: '空白',
+							},
+							{
+								isSelect: '0',
+								answerContent1: 'e',
+								answerContent2: '空白',
+							}
+						]
+					}
+				]
+			};
+		},
+		methods: {
+
+			btnAction() {
+				for(var i=0;i<this.problemList.length;i++){
+					var answerList=this.problemList[i].answer
+					for(var j = 1; j < answerList.length;j++){
+						var answer = answerList[j]
+						// 1、你的上半部分
+						// 2、取值
+						alert(answer.isSelect)
+						alert(answer.answerContent1)
+						alert(answer.answerContent2)
+						// 3、你的post请求
+					}
+				}
+			},
+
+
+		},
+
+	}
 </script>
 
-
 <style>
-/* table tbody {
-            display: block;
-            height: 200px;
-            overflow-y: scroll;
-        }
-  
-        table thead,
-        table tbody tr {
-            display: table;
-            width: 100%;
-            table-layout: fixed; 
-            text-align: center;
-        }
-  
-       thead th,
-        tbody td {
-            width: 50px;
-        }
-  
-        table thead {
-            width: calc( 100% - 1em);
-        } */
+
 </style>

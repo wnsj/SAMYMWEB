@@ -154,11 +154,6 @@
 						memName: this.memName,
 						isuse: this.isuse,
 						phone:this.phone,
-						
-						accountId: this.accountId(),
-						modelGrade:'2',
-						modelType:'',
-						operateType:'',
 					},
 					dataType: 'json',
 				}).then((response) => {

@@ -18,18 +18,18 @@
 						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">账户类型：</label>
 						<div class="col-md-8">
 							<select class="form-control" v-model="ruleContent.employeeType">
-								<option value="">未选择</option>
-								<option value="0">超级管理员</option>
-								<option value="1">店铺管理员</option>
-								<option value="2">财务管理员</option>
-								<option value="3">普通员</option>
+								<option value="0">未选择</option>
+								<option value="1">超级管理员</option>
+								<option value="2">店铺管理员</option>
+								<option value="3">财务管理员</option>
+								<option value="4">普通员</option>
 							</select>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">模块级别：</label>
 						<div class="col-md-8">
-							<select class="form-control" v-model="ruleContent.modelGrade">
+							<select class="form-control" v-model="ruleContent.moduleGrade">
 								<option value="">未选择</option>
 								<option value="1">第一级模块</option>
 								<option value="2">第二级模块</option>
@@ -40,7 +40,7 @@
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">模块：</label>
 						<div class="col-md-8">
-							<mod ref="mod" @modelChange='moduleChange'></mod>
+							<mod ref="mod" @moduleChange='moduleChange'></mod>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
@@ -91,12 +91,9 @@
 		data() {
 			return {
 				ruleContent: {
-					empId: '',
-					empName: '',
-					posId: '0',
 					employeeType: '0',
 					modelGrade:'',
-					modelId:'',
+					moduleId:'',
 					accountId:'',
 					operateType:'0',
 				},
@@ -109,12 +106,9 @@
 				this.title = '新增'
 				
 				this.ruleContent = {
-					empId: '',
-					empName: '',
-					posId: '0',
 					employeeType: '0',
-					modelGrade:'',
-					modelId:'',
+					moduleGrade:'',
+					moduleId:'',
 					accountId:'',
 					operateType:'0',
 				}
@@ -124,16 +118,16 @@
 			
 			//feedback department information
 			moduleChange: function(param) {
-				console.log(JSON.stringify(param))
+				// console.log(JSON.stringify(param))
 				if (this.isBlank(param)) {
-					this.ruleContent.modelId = ""
+					this.ruleContent.moduleId = ""
 				} else {
-					this.ruleContent.modelId = param.modelId
+					this.ruleContent.moduleId = param.moduleId
 				}
 			},
 			//feedback employeeStype information
 			accountChange: function(param) {
-				console.log(JSON.stringify(param))
+				// console.log(JSON.stringify(param))
 				if (this.isBlank(param)) {
 					this.ruleContent.accountId = ''
 				} else {
@@ -147,11 +141,11 @@
 					alert("账户不能为空")
 					return
 				}
-				if (this.isBlank(this.ruleContent.modelGrade)) {
+				if (this.isBlank(this.ruleContent.moduleGrade)) {
 					alert("模块级别不能为空")
 					return
 				}
-				if (this.isBlank(this.ruleContent.accountId)) {
+				if (this.isBlank(this.ruleContent.moduleId)) {
 					alert("模块不能为空")
 					return
 				}
@@ -181,51 +175,7 @@
 				$("#rm").modal("hide")
 				console.log('关闭添加权限界面')
 			},
-			//Query employee's information based on the hosNum
-			conditionCheck(param) {
-				console.log('checkhosNum')
-				if (this.isBlank(param)) {
-					return
-				}
-				var url = this.url + '/employeeAction/queryemployeeByHospNum'
-				this.$ajax({
-					method: 'POST',
-					url: url,
-					headers: {
-						'Content-Type': this.contentType,
-						'Access-Token': this.accessToken
-					},
-					data: {
-						hospNum: param
-					},
-					dataType: 'json',
-				}).then((response) => {
-					var res = response.data
-					console.log(res)
-					if (res.retCode == '0000') {
-						if (res.retData != null) {
-							this.employee = res.retData
-							this.isExist = '1'
-
-							this.$refs.dept.setDpart(this.employee.deptId)
-							this.$refs.ps.setObjId(this.employee.patitypeid)
-							this.$refs.mis.setObjId(this.employee.mitypeid)
-						} else {
-							this.employee = {}
-							this.employee.sex = '1'
-							this.employee.inHosp = '1'
-							this.isExist = '0'
-							this.$refs.dept.setDpart('0')
-							this.$refs.ps.setObjId('0')
-							this.$refs.mis.setObjId('0')
-							alert("没有查到此住院号,可以进行添加")
-						}
-					}
-				}).catch((error) => {
-					console.log('请求失败处理')
-				});
-			},
-
+			
 		}
 
 	}

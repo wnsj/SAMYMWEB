@@ -40,7 +40,7 @@
 					<p>开始时间：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<dPicker style="width:100%"  v-on:change="dateAction('0')"></dPicker>
+					<dPicker style="width:100%" v-model="hospTime" v-on:change="dateAction('0')"></dPicker>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -48,7 +48,7 @@
 					<p>结束时间：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<dPicker style="width:100%" v-on:change="dateAction('1')"></dPicker>
+					<dPicker style="width:100%" v-model="outHosp" v-on:change="dateAction('1')"></dPicker>
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px; padding-bottom:1.5%;">
@@ -111,11 +111,13 @@
 		components: {
 			dPicker,
 			SubMember,
-			Store,
+			Store
 		},
 		data() {
 			return {
 				memCostList: [],
+				hospTime: '',
+				outHosp: ''
 			}
 		},
 
@@ -130,7 +132,18 @@
 				this.conditionCheck()
 				$("#detailMember").modal('hide')
 			},
-
+			//date formatting
+			dateAction(param) {
+				if (param == '0') {
+					if (!this.isBlank(this.hospTime)) {
+						this.hospTime = this.moment(this.hospTime, 'YYYY-MM-DD HH:mm:ss.000')
+					}
+				} else if (param == '1') {
+					if (!this.isBlank(this.outHosp)) {
+						this.outHosp = this.moment(this.outHosp, 'YYYY-MM-DD HH:mm:ss.000')
+					}
+				}
+			},
 			//the list , which is detail infomation of member,was checked.
 			conditionCheck: function() {
 				console.log('querying based on multiple conditions')

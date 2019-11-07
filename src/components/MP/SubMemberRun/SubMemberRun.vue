@@ -37,8 +37,8 @@
 						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否启用</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="FWRoyalty.isuse">
-								<option value="1">是</option>
-								<option value="0">否</option>
+								<option value="1">在用</option>
+								<option value="0">停用</option>
 							</select>
 						</div>
 					</div>

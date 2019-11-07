@@ -45,8 +45,8 @@
 				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 					<select class="form-control" v-model="isuse">
 						<option value="">全部</option>
-						<option value="1">是</option>
-						<option value="0">否</option>
+						<option value="1">在用</option>
+						<option value="0">停用</option>
 					</select>
 				</div>
 			</div>

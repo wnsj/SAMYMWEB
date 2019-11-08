@@ -48,6 +48,13 @@
 							<emp ref='emp' @employeeChange='empChange'></emp>
 						</div>
 					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;"></label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<input type="radio" v-bind:name="entityEmp" v-model="FWRoyalty.empType" value="1" class="form-control">
+							<input type="radio" v-bind:name="entityEmp" v-model="FWRoyalty.empType" value="0" class="form-control">
+						</div>
+					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
 							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>

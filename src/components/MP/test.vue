@@ -5,7 +5,6 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">商铺管理</h1>
 		</div>
-		
 		<div class="">
 			<div class="col-md-12 col-lg-12">
 				<div v-for="(item1,index1) in problemList">
@@ -13,7 +12,8 @@
 						<p>{{item1.problem}}</p>
 					</div>
 					<div v-for="(item2,index2) in item1.answer">
-						<!-- 选择框 -->
+						
+						<input type="radio" v-bind:name="index1" v-model="item2.isSelect" v-on:click="inputAction(item1,item2.isSelect)" />
 						<p>{{item2.answerContent1}}</p>
 						<p>{{item2.answerContent2}}</p>
 					</div>
@@ -21,7 +21,7 @@
 			</div>
 
 		</div>
-		
+		<button v-on:click="btnAction()">都选了啥</button>
 	</div>
 
 </template>
@@ -37,28 +37,29 @@
 			return {
 				problemList: [{
 						problem: '问题1？',
+						selectedAnswer:'',
 						answer: [{
-								isSelect: '0',
+								isSelect: 'a',
 								answerContent1: 'a',
 								answerContent2: '',
 							},
 							{
-								isSelect: '0',
+								isSelect: 'b',
 								answerContent1: 'b',
 								answerContent2: '',
 							},
 							{
-								isSelect: '0',
+								isSelect: 'c',
 								answerContent1: 'c',
 								answerContent2: '',
 							},
 							{
-								isSelect: '0',
+								isSelect: 'd',
 								answerContent1: 'd',
 								answerContent2: '空白',
 							},
 							{
-								isSelect: '0',
+								isSelect: 'e',
 								answerContent1: 'e',
 								answerContent2: '空白',
 							}
@@ -66,28 +67,29 @@
 					},
 					{
 						problem: '问题2？',
+						selectedAnswer:'',
 						answer: [{
-								isSelect: '0',
+								isSelect: 'a',
 								answerContent1: 'a',
 								answerContent2: '',
 							},
 							{
-								isSelect: '0',
+								isSelect: 'b',
 								answerContent1: 'b',
 								answerContent2: '',
 							},
 							{
-								isSelect: '0',
+								isSelect: 'c',
 								answerContent1: 'c',
 								answerContent2: '',
 							},
 							{
-								isSelect: '0',
+								isSelect: 'd',
 								answerContent1: 'd',
 								answerContent2: '空白',
 							},
 							{
-								isSelect: '0',
+								isSelect: 'e',
 								answerContent1: 'e',
 								answerContent2: '空白',
 							}
@@ -97,19 +99,14 @@
 			};
 		},
 		methods: {
+			inputAction(item1,isSelect) {
+				item1.selectedAnswer=isSelect
+			},
 
 			btnAction() {
-				for(var i=0;i<this.problemList.length;i++){
-					var answerList=this.problemList[i].answer
-					for(var j = 1; j < answerList.length;j++){
-						var answer = answerList[j]
-						// 1、你的上半部分
-						// 2、取值
-						alert(answer.isSelect)
-						alert(answer.answerContent1)
-						alert(answer.answerContent2)
-						// 3、你的post请求
-					}
+				for (var i = 0; i < this.problemList.length; i++) {
+					var selectedAnswer = this.problemList[i].selectedAnswer
+					alert(selectedAnswer)
 				}
 			},
 

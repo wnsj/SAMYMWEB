@@ -43,6 +43,10 @@
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Order')">　预约管理</i>
 						</li>
 						<li v-if="has(1)">
+							<router-link to="/MP/CashDeposit"><i class="fa fa-table" aria-hidden="false">　定金管理</i></router-link>
+							<!-- <i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('CashDeposit')">　权限管理</i> -->
+						</li>
+						<li v-if="has(1)">
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Employee')">　员工管理</i>
 						</li>
 						<li v-if="has(1)">
@@ -52,11 +56,9 @@
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Position')">　岗位管理</i>
 						</li>
 						<li v-if="has(1)">
-							<!-- <router-link to="/MP/Store"><i class="fa fa-table" aria-hidden="false" v-on:click="selectRule()">　商铺管理</i></router-link> -->
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Store')">　商铺管理</i>
 						</li>
 						<li v-if="has(1)">
-							<!-- <router-link to="/MP/RuleManager"><i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('43')">　权限管理</i></router-link> -->
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('RuleManager')">　权限管理</i>
 						</li>
 						<!-- <li v-if="has(1)">

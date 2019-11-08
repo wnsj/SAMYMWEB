@@ -26,7 +26,7 @@
 				</div>
 			</div>
 		</div> 
-		<div class="row">
+		<div class="row"> 
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:10px;">
 				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;">
 					<p>消费时间：</p>
@@ -100,7 +100,7 @@
 		name: 'employee',
 		components: {
 			dPicker,
-			SubConsume,
+			SubConsume
 		},
 		data() {
 			return {

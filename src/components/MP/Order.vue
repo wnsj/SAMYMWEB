@@ -128,8 +128,8 @@
 								<td class="text-center">{{item.arrival=='0' ? '未到店' : '已到店'}}</td>
 								<td class="text-center" v-if="has(2)">
 									<button type="button" class="btn btn-warning" v-on:click="updateOrder(item)">修改</button>
-									<button type="button" class="btn btn-primary" v-on:click="caAction(item,'cancel')">{{item.state=='0' ? '已取消' : '未取消'}}</button>
-									<button type="button" class="btn btn-primary" v-on:click="caAction(item,'arrival')">{{item.arrival=='0' ? '未到店' : '已到店'}}</button>
+									<button type="button" class="btn btn-primary" v-on:click="caAction(item,'cancel')">{{item.state=='0' ? '已取消' : '点击取消'}}</button>
+									<button type="button" class="btn btn-primary" v-on:click="caAction(item,'arrival')">{{item.arrival=='0' ? '点击到店' : '已到店'}}</button>
 								</td>
 							</tr>
 						</tbody>

@@ -49,10 +49,16 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;"></label><span class="sign-left">实卡用户:</span>
-						<div class="col-md-8">
-							是：<input type="radio" name="entityEmp" v-model="FWRoyalty.memType" value="1" class="form-control">
-							否：<input type="radio" name="entityEmp" v-model="FWRoyalty.memType" value="0" class="form-control">
+						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">实卡用户</label><span class="sign-left">:</span>
+						<div class="col-md-8" style="text-align:left; line-height:34px;">
+							<label class="bui-radios-label">
+								<input type="radio" name="entityEmp" v-model="FWRoyalty.memType" value="1"/><i class="bui-radios"></i> 是
+							</label>
+							<label class="bui-radios-label">
+								<input type="radio" name="entityEmp" v-model="FWRoyalty.memType" value="0"/><i class="bui-radios"></i> 否
+							</label>
+							<!--是：<input type="radio" name="entityEmp" v-model="FWRoyalty.memType" value="1" class="form-control">
+							否：<input type="radio" name="entityEmp" v-model="FWRoyalty.memType" value="0" class="form-control">-->
 						</div>
 					</div>
 					<div class="form-group clearfix">
@@ -87,6 +93,7 @@
 					memType:'0',
 				},
 				title:'新增',
+				item:[]
 			};
 		},
 		methods:{
@@ -115,7 +122,11 @@
 					this.$refs.emp.setEmp(this.FWRoyalty.empId)
 				}
 			},
-			
+			CheckItem(item){
+				item.value = !item.value;
+				$('#hahah').val(item.value)
+				console.log($('#hahah').val());
+			},
 			dateAction(){
 				if(!this.isBlank(this.FWRoyalty.birthday)){
 					this.FWRoyalty.birthday = this.moment(this.FWRoyalty.birthday,'YYYY-MM-DD 00:00:00.000')
@@ -185,7 +196,6 @@
 				console.log('close the flowWater rule')
 			},
 		}
-		
 	}
 </script>
 
@@ -199,4 +209,47 @@
     	-ms-user-select:none;
     	user-select:none;
 	}
+	label.bui-radios-label{
+		 position:relative;
+		 margin-right:10px;
+	}
+	label.bui-radios-label input {
+		position: absolute;
+		opacity: 0;
+		visibility: hidden; 
+	}
+	label.bui-radios-label .bui-radios {
+		display: inline-block;
+		position: relative;
+		width: 13px;
+		height: 13px;
+		background: #FFFFFF;
+		border: 1px solid #979797;
+		border-radius: 50%;
+		vertical-align: -2px; 
+		box-sizing:content-box;
+	}
+	label.bui-radios-label input:checked + .bui-radios:after {
+		position: absolute;
+		content: "";
+		width: 7px;
+		height: 7px;
+		background-color: #fff;
+		border-radius: 50%;
+		top: 3px;
+		left: 3px; 
+	}
+	label.bui-radios-label input:checked + .bui-radios {
+		background: #00B066;
+		border: 1px solid #00B066; 
+	}
+	label.bui-radios-label input:disabled + .bui-radios {
+		background-color: #e8e8e8;
+		border: solid 1px #979797; 
+	}
+	label.bui-radios-label input:disabled:checked + .bui-radios:after {
+		background-color: #c1c1c1; 
+	}
+
+	
 </style>

@@ -20,11 +20,11 @@
 							<input type="text" class="form-control" v-model="FWRoyalty.orderSmall" placeholder="">
 							<span class="pos-ab pos-tr">人</span>
 						</div> 
-						<div style="line-height:34px; float:left;">~</div>
+						<!-- <div style="line-height:34px; float:left;">~</div>
 						<div class="col-md-4 pos-re">
 							<input type="text" class="form-control" v-model="FWRoyalty.orderBig" placeholder="">
 							<span class="pos-ab pos-tr">人</span>
-						</div>
+						</div> -->
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">扣款金额</label><span class="sign-left">:</span>

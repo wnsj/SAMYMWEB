@@ -14,6 +14,7 @@ import MemberSummary from '../components/MP/MemberSummary.vue'
 import RoyaltySummary from '../components/MP/RoyaltySummary.vue'
 import Store from '../components/MP/Store.vue'
 import RuleManager from '../components/MP/RuleManager.vue'
+import CashDeposit from '../components/MP/CashDeposit.vue'
 import test from '../components/MP/test.vue'
 
 Vue.use(Router)
@@ -85,11 +86,16 @@ export default new Router({
           component: RuleManager,
         },
 				{
+				  path: '/MP/CashDeposit',
+				  name: 'CashDeposit',
+				  component: CashDeposit,
+				},
+				{
 				  path: '/MP/test',
 				  name: 'test',
 				  component: test,
 				},
       ],
-      redirect: '/MP/RoyaltySummary'
+      redirect: '/MP/MemberSummary'
     }]
 })

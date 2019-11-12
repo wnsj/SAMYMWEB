@@ -1,12 +1,12 @@
 <template>
-	<div>
+	<div> 
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">会员汇总</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>商铺：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">商铺</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<Store></Store>
@@ -14,20 +14,20 @@
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>会员卡号：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value=""></div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>姓　　名：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" ></div>
 			</div>
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>手机号：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<input class="form-control" type="text" value="" >
@@ -37,18 +37,18 @@
 		<div class="row">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>开始时间：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px;padding-left:20px;">开始时间</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<dPicker style="width:100%"  v-on:change="dateAction('0')"></dPicker>
+					<dPicker style="width:100%" v-model="hospTime" v-on:change="dateAction('0')"></dPicker>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>结束时间：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">结束时间</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<dPicker style="width:100%" v-on:change="dateAction('1')"></dPicker>
+					<dPicker style="width:100%" v-model="outHosp" v-on:change="dateAction('1')"></dPicker>
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px; padding-bottom:1.5%;">
@@ -67,7 +67,6 @@
 									<th class="text-center">会员卡号</th>
 									<th class="text-center">姓名</th>
 									<th class="text-center">手机号</th>
-
 									<th class="text-center">交费总额</th>
 									<th class="text-center">消费总额</th>
 									<th class="text-center">退费总额</th>
@@ -111,11 +110,13 @@
 		components: {
 			dPicker,
 			SubMember,
-			Store,
+			Store
 		},
 		data() {
 			return {
 				memCostList: [],
+				hospTime: '',
+				outHosp: ''
 			}
 		},
 
@@ -130,7 +131,18 @@
 				this.conditionCheck()
 				$("#detailMember").modal('hide')
 			},
-
+			//date formatting
+			dateAction(param) {
+				if (param == '0') {
+					if (!this.isBlank(this.hospTime)) {
+						this.hospTime = this.moment(this.hospTime, 'YYYY-MM-DD HH:mm:ss.000')
+					}
+				} else if (param == '1') {
+					if (!this.isBlank(this.outHosp)) {
+						this.outHosp = this.moment(this.outHosp, 'YYYY-MM-DD HH:mm:ss.000')
+					}
+				}
+			},
 			//the list , which is detail infomation of member,was checked.
 			conditionCheck: function() {
 				console.log('querying based on multiple conditions')

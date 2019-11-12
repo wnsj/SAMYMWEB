@@ -8,28 +8,28 @@
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>预约号：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">预约号</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memNum"></div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>姓　　名：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="appName"></div>
 			</div>
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>手	机	号：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
 			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-right" style="padding: 0; line-height: 34px;">
-					<p>访问类型：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">访问类型</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					<select class="form-control" v-model="visitType">
@@ -37,10 +37,10 @@
 						<option value="1">再访</option>
 					</select>
 				</div>
-			</div>
+			</div> -->
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-right" style="padding: 0; line-height: 34px;">
-					<p>是否到店：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否到店</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					<select class="form-control" v-model="arrival">
@@ -52,7 +52,7 @@
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-right" style="padding: 0; line-height: 34px;">
-					<p>是否取消：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否取消</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					<select class="form-control" v-model="state">
@@ -66,7 +66,7 @@
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
 				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;">
-					<p>来电时间：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">来电时间</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-4 col-lg-4">
 					<dPicker style="width:100%" v-model="begCreateDate"></dPicker>
@@ -80,7 +80,7 @@
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
 				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;">
-					<p>预约时间：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">预约时间</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-4 col-lg-4">
 					<dPicker style="width:100%" v-model="begAppDate" ></dPicker>
@@ -108,7 +108,7 @@
 								<th class="text-center">预约号</th>
 								<th class="text-center">姓名</th>
 								<th class="text-center">手机号</th>
-								<th class="text-center">访问类型</th>
+								<!-- <th class="text-center">访问类型</th> -->
 								<th class="text-center">来电时间</th>
 								<th class="text-center">预约时间</th>
 								<th class="text-center">是否到店</th>
@@ -121,15 +121,15 @@
 								<td class="text-center">{{item.memNum}}</td>
 								<td class="text-center">{{item.appName}}</td>
 								<td class="text-center">{{item.phone}}</td>
-								<td class="text-center">{{item.visitType=='0' ? "初访" : "复访"}}</td>
+								<!-- <td class="text-center">{{item.visitType=='0' ? "初访" : "复访"}}</td> -->
 								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td class="text-center">{{item.appDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td class="text-center">{{item.state=='0' ? '已取消' : '未取消'}}</td>
 								<td class="text-center">{{item.arrival=='0' ? '未到店' : '已到店'}}</td>
 								<td class="text-center" v-if="has(2)">
 									<button type="button" class="btn btn-warning" v-on:click="updateOrder(item)">修改</button>
-									<button type="button" class="btn btn-primary" v-on:click="caAction(item,'cancel')">{{item.state=='0' ? '已取消' : '未取消'}}</button>
-									<button type="button" class="btn btn-primary" v-on:click="caAction(item,'arrival')">{{item.arrival=='0' ? '未到店' : '已到店'}}</button>
+									<button type="button" class="btn btn-primary" v-on:click="caAction(item,'cancel')">{{item.state=='0' ? '已取消' : '点击取消'}}</button>
+									<button type="button" class="btn btn-primary" v-on:click="caAction(item,'arrival')">{{item.arrival=='0' ? '点击到店' : '已到店'}}</button>
 								</td>
 							</tr>
 						</tbody>

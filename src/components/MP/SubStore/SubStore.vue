@@ -30,8 +30,8 @@
 						<label for="erpzh" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">是否停用：</label>
 						<div class="col-md-8">
 							<select class="form-control" v-model="store.isuse">
-								<option value="1">是</option>
-								<option value="0">否</option>
+								<option value="1">在用</option>
+								<option value="0">停用</option>
 							</select>
 						</div>
 					</div>

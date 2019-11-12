@@ -26,7 +26,7 @@
 							<input type="text" class="form-control" v-model="order.phone" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<!-- <div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">访问类型</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="order.visitType">
@@ -34,10 +34,24 @@
 								<option value="1">再访</option>
 							</select>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预约时间</label><span class="sign-left">:</span>
 						<dPicker class="col-md-8" style="width:65%;" v-model="order.appDate" v-on:change="dateAction('1')"></dPicker>
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">文员</label><span
+						 class="sign-left">:</span>
+						<div class="col-md-7">
+							<emp ref="clerkEmp" @employeeChange="clerkEmpChange"></emp>
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
+						 class="sign-left">:</span>
+						<div class="col-md-7">
+							<emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
+						</div>
 					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
@@ -55,9 +69,11 @@
 
 <script>
 	import dPicker from 'vue2-datepicker'
+	import emp from '../../common/Employee.vue'
 	export default {
 		components:{
 			dPicker,
+			emp,
 		},
 		data() {
 			return {
@@ -69,6 +85,8 @@
 					appDate:'',
 					empId:'1',//操作人
 					createDate:'',
+					clerkEmpId:'',
+					counlorEmpId:'',
 				},
 				title:'新增',
 				
@@ -87,12 +105,19 @@
 						visitType:'0',
 						appDate:this.moment('','YYYY-MM-DD HH:mm:ss.000'),
 						empId:'1',//操作人
+						clerkEmpId:'',//文员
+						counlorEmpId:'',//咨询师
 					}
+					this.$refs.clerkEmp.setPosName('文员')
+					this.$refs.counlorEmp.setPosName('咨询师')
 				}else if(param=='modify'){
 					console.log('Initialization order’s content, which modifies order')
 					this.title='修改'
 					Object.assign(this.order,order)
-					
+					this.$refs.clerkEmp.setPosName('文员')
+					this.$refs.counlorEmp.setPosName('咨询师')
+					this.$refs.clerkEmp.setPosId(this.order.clerkEmpId)
+					this.$refs.counlorEmp.setPosId(this.order.counlorEmpId)
 				}
 			},
 			//date formatting 
@@ -111,32 +136,29 @@
 					}
 				}
 			},
-			//feedback department information
-			departChange:function(param){
+			//feedback employee information
+			clerkEmpChange: function(param) {
 				// console.log('科室：'+JSON.stringify(param))
-				if(this.isBlank(param)){
-					this.order.deptId=""
-				}else{
-					this.order.deptId=param.deptId
+				if (this.isBlank(param)) {
+					this.consume.empId = ""
+				} else {
+					this.consume.empId = param.empId
 				}
-				console.log('科室：'+this.order.deptId)
+				console.log('费用类型：' + this.consume.costType)
+				console.log('员工：' + this.consume.empId)
 			},
-			//feedback orderStype information
-			psChange:function(param){
-				if(this.isBlank(param)){
-					this.order.patitypeid=''
-				}else{
-					this.order.patitypeid=param.patitypeid
+			//feedback employee information
+			counlorEmpChange: function(param) {
+				// console.log('科室：'+JSON.stringify(param))
+				if (this.isBlank(param)) {
+					this.consume.clerkId = ""
+				} else {
+					this.consume.clerkId = param.empId
 				}
+				console.log('费用类型：' + this.consume.costType)
+				console.log('员工：' + this.consume.clerkId)
 			},
-			//feedback MedicalInsuranceStype information
-			misChange:function(param){
-				if(this.isBlank(param)){
-					this.order.mitypeid=''
-				}else{
-					this.order.mitypeid=param.mitypeid
-				}
-			},
+			
 			//the event of addtional button
 			addOrder(param){
 				if(this.isBlank(this.order.appName)){
@@ -145,6 +167,10 @@
 				}
 				if(this.isBlank(this.order.phone)){
 					alert("手机号不能为空")
+					return
+				}
+				if(!this.isBlank(this.order.clerkEmpId) || !this.isBlank(this.order.counlorEmpId)){
+					alert('文员和咨询师至少选择一个')
 					return
 				}
 				if(!this.isBlank(this.order.appDate)){

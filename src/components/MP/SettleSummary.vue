@@ -6,30 +6,30 @@
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>会员卡号：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memNum"></div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>姓　　名：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memName"></div>
 			</div>
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>手机号：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
 			</div>
 		</div> 
-		<div class="row">
+		<div class="row"> 
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:10px;">
 				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;">
-					<p>消费时间：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">消费时间</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-4 col-lg-4">
 					<dPicker style="width:100%" v-model="hospTime" v-on:change="dateAction('0')"></dPicker>
@@ -66,7 +66,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item2,index2) in consumeList" :key="index2" v-on:dblclick="viewDetails(item2)">
+								<tr v-for="(item2,index2) in consumeList" :key="index2"  v-on:dblclick="viewDetails(item2)">
 									<td>{{item2.MEM_NUM}}</td>
 									<td>{{item2.MEM_NAME}}</td>
 									<td>{{item2.age}}</td>
@@ -100,7 +100,7 @@
 		name: 'employee',
 		components: {
 			dPicker,
-			SubConsume,
+			SubConsume
 		},
 		data() {
 			return {
@@ -147,6 +147,11 @@
 				});
 			},
 			viewDetails: function(item) {
+				
+				if(this.isBlank(item.MEM_NUM)){
+					alert('非会员没有消费详情')
+					return
+				}
 				this.$refs.consume.conditionCheck(item)
 				$("#addConsume").modal('show');
 			},

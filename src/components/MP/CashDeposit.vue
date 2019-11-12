@@ -3,28 +3,15 @@
 
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">会员管理</h1>
+			<h1 class="titleCss">定金管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">店铺</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-md-8 col-lg-8">
-					<Store ref='store' @storeChange='storeChange'></Store>
-				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memNum" ></div>
-			</div>
+			
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memName"></div>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="cashName"></div>
 			</div>
 			
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -35,10 +22,34 @@
 					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
 			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">开始时间</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<dPicker style="width:100%" v-model="beginDate"></dPicker>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">结束时间</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<dPicker style="width:100%" v-model="endDate"></dPicker>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">店铺</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<Store ref='store' @storeChange='storeChange'></Store>
+				</div>
+			</div>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="addMember()"  v-if="has(2)">添加会员</button>
+			 v-on:click="addMember()">添加定金</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="checkMember()">查询</button>
 		</div>
@@ -48,29 +59,21 @@
 					<table class="table table-bordered table-hover" id="datatable" >
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">会员卡号</th>
+								<th class="text-center">店铺</th>
 								<th class="text-center">姓名</th>
-								<th class="text-center">店铺名</th>
-								<th class="text-center">是否实卡用户</th>
 								<th class="text-center">手机号</th>
-								<th class="text-center">性别</th>
-								<th class="text-center">生日</th>
-								<th class="text-center">是否停用</th>
-								<th class="text-center">推荐人</th>
+								<th class="text-center">定金金额</th>
+								<th class="text-center">交定金时间</th>
 								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in memberList" :key="index" v-on:dblclick="modifyMember(item)">
-								<td class="text-center">{{item.memNum}}</td>
-								<td class="text-center">{{item.memName}}</td>
+							<tr v-for="(item,index) in cashList" :key="index" v-on:dblclick="modifyMember(item)">
 								<td class="text-center">{{item.storeName}}</td>
-								<td class="text-center">{{item.memType == '1' ? "是" : "否"}}</td>
+								<td class="text-center">{{item.cashName}}</td>
 								<td class="text-center">{{item.phone}}</td>
-								<td class="text-center">{{item.sex}}</td>
-								<td class="text-center">{{item.birthday}}</td>
-								<td class="text-center">{{item.isuse==true ? "在用" : "停用"}}</td>
-								<td class="text-center">{{item.empName}}</td>
+								<td class="text-center">{{item.money}}</td>
+								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button></td>
 							</tr>
 						</tbody>
@@ -79,9 +82,9 @@
 			</div>
 		</div>
 		<div class="row row_edit">
-			<div class="modal fade" id="memberContent">
+			<div class="modal fade" id="cdContent">
 				<div class="modal-dialog">
-					<SubMemberRun ref='subMemR' @certainAction='feedBack'></SubMemberRun>
+					<SubCd ref='subCd' @certainAction='feedBack'></SubCd>
 				</div>
 			</div>
 		</div>
@@ -91,31 +94,31 @@
 
 
 <script>
-
-	import SubMemberRun from '../MP/SubMemberRun/SubMemberRun.vue'
+	import dPicker from 'vue2-datepicker'
+	import SubCd from '../MP/SubCd/SubCd.vue'
 	import Store from '../common/Store.vue'
 	export default {
 		components: {
-			SubMemberRun,
+			dPicker,
+			SubCd,
 			Store,
 		},
 		data() {
 			return {
-				memberList: [],
-				isuse: '1',
-				storeId:'',
-				memNum:'',
-				memName: '',
+				cashList:[],
+				cashName: '',
 				phone:'',
-				fixedHeader: false,
+				beginDate:'',
+				endDate: '',
+				storeId:'0',
 			};
 		},
 		methods: {
 			//modify the cotent of member
 			addMember() {
 				console.log('modify the cotent of member')
-				this.$refs.subMemR.initData('add')
-				$("#memberContent").modal('show')
+				this.$refs.subCd.initData('add')
+				$("#cdContent").modal('show')
 			},
 			//modify the cotent of member
 			modifyMember(item) {
@@ -124,8 +127,8 @@
 				return;
 				}
 				console.log('modify the cotent of member')
-				this.$refs.subMemR.initData('modify', item)
-				$("#memberContent").modal('show')
+				this.$refs.subCd.initData('modify', item)
+				$("#cdContent").modal('show')
 			},
 			storeChange(param){
 				if(this.isBlank(param)){
@@ -136,12 +139,12 @@
 			},
 			feedBack(){
 				this.checkMember()
-				$("#memberContent").modal('hide')
+				$("#cdContent").modal('hide')
 			},
 			//check the list of member
 			checkMember() {
 				console.log('checkMember')
-				var url = this.url + '/memberAction/queryVagueMember'
+				var url = this.url + '/cashAction/queryCash'
 				
 				this.$ajax({
 					method: 'POST',
@@ -151,57 +154,27 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						storeId:this.storeId,
-						memNum:this.memNum,
-						memName: this.memName,
-						isuse: this.isuse,
+						cashName:this.cashName,
 						phone:this.phone,
+						beginDate: this.beginDate,
+						endDate: this.endDate,
+						storeId:this.storeId,
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
+					// console.log(res)
 					if (res.retCode == '0000') {
-						this.memberList = res.retData
+						this.cashList = res.retData
 					} else {
 						alert(res.retMsg)
 					}
 			
 				}).catch((error) => {
-					console.log('请求失败处理')
+					console.log('定金查询失败')
 				});
 			},
-			//check the list of department
-			checkDepartment() {
-				console.log('checkDepartment')
-				var url = this.url + '/memberAction/queryDepartment'
-				this.$ajax({
-					method: 'POST',
-					url: url,
-					headers: {
-						'Content-Type': this.contentType,
-						'Access-Token': this.accessToken
-					},
-					data: {
-						storeId:this.storeId,
-						memNum:this.memNum,
-						memName: this.memName,
-						isuse: this.isuse,
-					},
-					dataType: 'json',
-				}).then((response) => {
-					var res = response.data
-					console.log(res)
-					if (res.retCode == '0000') {
-						this.departmentList = res.retData
-					} else {
-						alert(res.retMsg)
-					}
-
-				}).catch((error) => {
-					console.log('请求失败处理')
-				});
-			},
+			
 			handleScroll(e){
 				var self=this
 				var etop = e.target.scrollTop

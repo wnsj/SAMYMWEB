@@ -37,16 +37,18 @@
 							<input type="text" class="form-control" v-model="consume.momey" placeholder="">
 						</div>
 					</div>
-					<!-- <div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">时间</label><span
-						 class="sign-left">:</span>
-						<dPicker class="col-md-7" style="width:59%;" v-model="consume.rechargetime" disabled="disabled"></dPicker>
-					</div> -->
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">维护人</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<emp ref="emp" @employeeChange="empChange"></emp>
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">文员</label><span
+						 class="sign-left">:</span>
+						<div class="col-md-7">
+							<emp ref="clerkEmp" @employeeChange="clerkEmpChange"></emp>
 						</div>
 					</div>
 					<div class="form-group clearfix">
@@ -86,6 +88,7 @@
 					costType: '',
 					balance: '',
 					storeId: '',
+					clerkId:'',
 				},
 				title: '',
 				isShow:true,
@@ -106,6 +109,7 @@
 					costType: '',
 					balance: '',
 					storeId: '',
+					clerkId:'',
 				}
 				if (param == 'recharge') {
 					console.log('new increasing recharge')
@@ -115,6 +119,7 @@
 					console.log('new increasing consume')
 					this.title = '消费'
 					this.isShow = false
+					this.$refs.clerkEmp.setPosId('5')
 				} else if (param == 'refund') {
 					console.log('new increasing refund')
 					this.title = '退费'
@@ -131,6 +136,17 @@
 				}
 				console.log('费用类型：' + this.consume.costType)
 				console.log('员工：' + this.consume.empId)
+			},
+			//feedback employee information
+			clerkEmpChange: function(param) {
+				// console.log('科室：'+JSON.stringify(param))
+				if (this.isBlank(param)) {
+					this.consume.clerkId = ""
+				} else {
+					this.consume.clerkId = param.empId
+				}
+				console.log('费用类型：' + this.consume.costType)
+				console.log('员工：' + this.consume.clerkId)
 			},
 
 			//the event of addtional button
@@ -210,7 +226,7 @@
 								});
 								break;
 						}
-						$("#addFee").modal("close")
+						$("#addFee").modal("hide")
 					} else {
 						alert(res.retMsg)
 					}

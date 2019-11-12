@@ -24,14 +24,13 @@
 							<p style=" font-size: 30px; " aria-hidden="true">功能列表</p>
 						</li>
 						<li class="li-active" v-if="has(1)">
-							<i class="fa fa-table" aria-hidden="true" v-on:click="selectRule('MemberSummary')">　会员总表</i>
+							<i class="fa fa-table fa-circle" aria-hidden="true" v-on:click="selectRule('MemberSummary')">　会员总表</i>
 						</li>
-
 						<li v-if="has(1)">
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('SettleSummary')">　消费管理</i>
 						</li>
 						<li v-if="has(1)">
-							<i class="fa fa-table fa-circle" aria-hidden="false" v-on:click="selectRule('RoyaltySummary')">　提成汇总</i>
+							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('RoyaltySummary')">　提成汇总</i>
 						</li>
 						<li v-if="has(1)">
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Member')">　会员管理</i>
@@ -110,9 +109,7 @@
 				this.title=param
 			},
 			selectRule(param){
-				console.log(param);
 				var url = this.url + '/ruleAction/queryRule'
-				
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -158,6 +155,7 @@
 		},
 		mounted() {
 			init();
+			this.selectRule('MemberSummary');
 		},
 	}
 </script>

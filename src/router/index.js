@@ -96,6 +96,6 @@ export default new Router({
 				  component: test,
 				},
       ],
-      redirect: '/MP/RoyaltySummary'
+      redirect: '/MP/MemberSummary'
     }]
 })

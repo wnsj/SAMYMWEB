@@ -1,12 +1,12 @@
 <template>
-	<div>
+	<div> 
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">会员汇总</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>商铺：</p>
+					<p>商　　铺：</p>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<Store></Store>

@@ -96,7 +96,7 @@
 			// Initialization consume’s content
 			initData(param) {
 				this.consume = {
-					memNum: '',
+					memNum: '', 
 					memName: '',
 					momey: '',
 					empId: '',
@@ -109,7 +109,7 @@
 				}
 				if (param == 'recharge') {
 					console.log('new increasing recharge')
-					this.title = '充值'
+					this.title = '充值';
 					this.isShow = true
 				} else if (param == 'consume') {
 					console.log('new increasing consume')

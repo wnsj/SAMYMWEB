@@ -7,7 +7,7 @@
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>会员卡号：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<input class="form-control" type="text" value="" v-model="memNum">
@@ -15,7 +15,7 @@
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>费用类型：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">费用类型</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<select class="form-control" v-model="costType">
@@ -27,7 +27,7 @@
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>会员姓名：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员姓名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<input class="form-control" type="text" value="" v-model="memName">
@@ -35,7 +35,7 @@
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p>推荐人：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">推荐人</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<emp ref="emp" @employeeChange='empChange'></emp>
@@ -45,7 +45,7 @@
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
 				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;">
-					<p>充值时间：</p>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">充值时间</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-4 col-lg-4">
 					<dPicker style="width:100%" v-model="begCreateDate"></dPicker>

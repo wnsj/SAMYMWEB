@@ -32,7 +32,7 @@
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">开始时间</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<dPicker style="width:100%" :value-formate="YYYY-MM" v-model="hospTime"></dPicker>
+					<dPicker style="width:100%" v-model="hospTime"></dPicker>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">

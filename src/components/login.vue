@@ -112,7 +112,8 @@
 	.loincss01 {
 		position: relative;
 		top: 50%;
-		margin: -111px auto 0;
+		left:20%;
+		margin: 0px auto;
 		width: 20%;
 		border-radius: 15px;
 	}

@@ -39,7 +39,7 @@
 						<li v-if="has(1)" v-on:click="selectRule('Order')">
 							<i class="fa fa-table" aria-hidden="false" >　预约管理</i>
 						</li>
-						<li v-if="has(1)">
+						<li>
 							<router-link to="/MP/CashDeposit"><i class="fa fa-table" aria-hidden="false">　定金管理</i></router-link>
 							<!-- <i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('CashDeposit')">　权限管理</i> -->
 						</li>

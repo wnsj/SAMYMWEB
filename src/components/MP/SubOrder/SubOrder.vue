@@ -140,23 +140,21 @@
 			clerkEmpChange: function(param) {
 				// console.log('科室：'+JSON.stringify(param))
 				if (this.isBlank(param)) {
-					this.consume.empId = ""
+					this.order.clerkEmpId = ""
 				} else {
-					this.consume.empId = param.empId
+					this.order.clerkEmpId = param.empId
 				}
-				console.log('费用类型：' + this.consume.costType)
-				console.log('员工：' + this.consume.empId)
+				console.log('员工：' + this.order.empId)
 			},
 			//feedback employee information
 			counlorEmpChange: function(param) {
 				// console.log('科室：'+JSON.stringify(param))
 				if (this.isBlank(param)) {
-					this.consume.clerkId = ""
+					this.order.counlorEmpId = ""
 				} else {
-					this.consume.clerkId = param.empId
+					this.order.counlorEmpId = param.empId
 				}
-				console.log('费用类型：' + this.consume.costType)
-				console.log('员工：' + this.consume.clerkId)
+				console.log('员工：' + this.order.counlorEmpId)
 			},
 			
 			//the event of addtional button
@@ -169,7 +167,8 @@
 					alert("手机号不能为空")
 					return
 				}
-				if(!this.isBlank(this.order.clerkEmpId) || !this.isBlank(this.order.counlorEmpId)){
+				
+				if(this.isBlank(this.order.clerkEmpId) && this.isBlank(this.order.counlorEmpId)){
 					alert('文员和咨询师至少选择一个')
 					return
 				}

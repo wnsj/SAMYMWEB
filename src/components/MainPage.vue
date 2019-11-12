@@ -23,41 +23,41 @@
 						<li>
 							<p style=" font-size: 30px; " aria-hidden="true">功能列表</p>
 						</li>
-						<li class="li-active" v-if="has(1)">
+						<li class="li-active">
 							<i class="fa fa-table fa-circle" aria-hidden="true" v-on:click="selectRule('MemberSummary')">　会员总表</i>
 						</li>
-						<li v-if="has(1)">
+						<li>
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('SettleSummary')">　消费管理</i>
 						</li>
-						<li v-if="has(1)">
+						<li>
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('RoyaltySummary')">　提成汇总</i>
 						</li>
-						<li v-if="has(1)">
+						<li>
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Member')">　会员管理</i>
 						</li>
-						<li v-if="has(1)">
+						<li>
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Charge')">　充值管理(退费)</i>
 						</li>
-						<li v-if="has(1)">
+						<li>
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Order')">　预约管理</i>
 						</li>
-						<li v-if="has(1)">
+						<li>
 							<router-link to="/MP/CashDeposit"><i class="fa fa-table" aria-hidden="false">　定金管理</i></router-link>
 							<!-- <i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('CashDeposit')">　权限管理</i> -->
 						</li>
-						<li v-if="has(1)">
+						<li>
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Employee')">　员工管理</i>
 						</li>
-						<li v-if="has(1)">
+						<li>
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Royalty')">　提成规则管理</i>
 						</li>
-						<li v-if="has(1)">
+						<li>
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Position')">　岗位管理</i>
 						</li>
-						<li v-if="has(1)">
+						<li>
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('Store')">　商铺管理</i>
 						</li>
-						<li v-if="has(1)">
+						<li>
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('RuleManager')">　权限管理</i>
 						</li>
 						<!-- <li v-if="has(1)">

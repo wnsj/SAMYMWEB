@@ -1,27 +1,15 @@
 <template>
 	<div class="g-center login-page container-fluid" @keyup.enter="login()" id="loincss">
-		<div class="loincss01 row bg-logo">
+		<div class="loincss01 row bg-logo" style="width:400px; padding:0 40px;">
 			<!-- <h1 class="main-title">圣安收费管理系统</h1> -->
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style=" margin-top:30px; line-height: 34px;">
-					账号：
-				</div>
-				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" style="margin-top:30px;">
-					<input class="form-control" type="text" placeholder="请输入账号" v-model="accountName" style="width:100%" />
-				</div>
+			<div style="width:100%;margin-top:30px;">
+				<input class="form-control boBo" type="text" placeholder="账号" v-model="accountName" style="width:100%; background-color:transparent;" />
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style=" margin-top:30px; line-height: 34px;">
-					密码：
-				</div>
-				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" style=" margin-top:30px; ">
-					<input class="form-control" placeholder="请输入密码" type="password" v-model="accountPwd" style="width:100%" />
-				</div>
+			<div style="width:100%;margin-top:30px;">
+				<input class="form-control boBo" placeholder="密码" type="password" v-model="accountPwd" style="width:100%; background-color:transparent;" />
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style=" margin-top:30px; margin-bottom:30px; ">
-				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 col-xs-offset-4 col-sm-offset-4 col-md-offset-4 col-xs-offset-4">
-					<button class="btn btn-primary" style="width:100%" @click="login()">{{btnText}}</button>
-				</div>
+				<button class="btn btn-primary" style="width:100%" @click="login()">{{btnText}}</button>
 			</div>
 		</div>
 	</div>
@@ -119,5 +107,13 @@
 	}
 	.bg-logo{
 		background: rgba(255, 255, 255, 0.8)
+	}
+	.boBo{
+		border-top:none;
+		border-left:none;
+		border-right:none;
+		border-bottom:#999 solid 1px;
+		border-radius:0;
+		box-shadow: none;
 	}
 </style>

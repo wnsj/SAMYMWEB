@@ -27,7 +27,7 @@
 					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
 			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-right" style="padding: 0; line-height: 34px;">
 					<p>访问类型：</p>
 				</div>
@@ -37,7 +37,7 @@
 						<option value="1">再访</option>
 					</select>
 				</div>
-			</div>
+			</div> -->
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-right" style="padding: 0; line-height: 34px;">
 					<p>是否到店：</p>
@@ -108,7 +108,7 @@
 								<th class="text-center">预约号</th>
 								<th class="text-center">姓名</th>
 								<th class="text-center">手机号</th>
-								<th class="text-center">访问类型</th>
+								<!-- <th class="text-center">访问类型</th> -->
 								<th class="text-center">来电时间</th>
 								<th class="text-center">预约时间</th>
 								<th class="text-center">是否到店</th>
@@ -121,7 +121,7 @@
 								<td class="text-center">{{item.memNum}}</td>
 								<td class="text-center">{{item.appName}}</td>
 								<td class="text-center">{{item.phone}}</td>
-								<td class="text-center">{{item.visitType=='0' ? "初访" : "复访"}}</td>
+								<!-- <td class="text-center">{{item.visitType=='0' ? "初访" : "复访"}}</td> -->
 								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td class="text-center">{{item.appDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td class="text-center">{{item.state=='0' ? '已取消' : '未取消'}}</td>

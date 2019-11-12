@@ -67,7 +67,6 @@
 			<nobr class="widthmax">
 				<div class="table-responsive pre-scrollable" style="max-height:464px">
 					<table class="table table-bordered table-hover user-table" id="datatable">
-
 						<thead class="datathead">
 							<tr class="datatr_1">
 								<th class="text-center" rowspan='2'>会员卡号</th>
@@ -90,24 +89,15 @@
 				</div>
 			</nobr>
 		</div>
-		<div class="row row_edit">
-			<div class="modal fade" id="addFee">
-				<div class="modal-dialog">
-					<SubRecharge ref='fee' @feedbackCharge="feedBack"></SubRecharge>
-				</div>
-			</div>
-		</div>
 	</div>
 </template>
 
 <script>
 	import dPicker from 'vue2-datepicker'
-	import SubRecharge from '../MP/SubRecharge/SubRecharge.vue'
 	import emp from '../common/Employee.vue'
 	export default {
 		components: {
 			dPicker,
-			SubRecharge,
 			emp,
 		},
 		data() {
@@ -122,20 +112,7 @@
 				
 			};
 		},
-		methods: {
-			//go into the view of added patient charge
-			addPatientCharge: function() {
-				//this.$refs.fee.initData('add')
-				$("#addFee").modal("show")
-				console.log('进入添加患者界面')
-			},
-			//go into the view of modified patient charge
-			modifyPatientCharge: function(param) {
-				//this.$refs.fee.initData('modify',param)
-				$("#addFee").modal("show")
-				console.log('进入添加患者界面')
-			},
-			
+		methods: {	
 			empChange(param) {
 				console.log('员工信息：'+JSON.stringify(param))
 				if (this.isBlank(param)) {

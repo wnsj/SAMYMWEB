@@ -110,6 +110,7 @@
 				this.title=param
 			},
 			selectRule(param){
+				console.log(param);
 				var url = this.url + '/ruleAction/queryRule'
 				
 				this.$ajax({

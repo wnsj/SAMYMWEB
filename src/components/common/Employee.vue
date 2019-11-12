@@ -14,6 +14,7 @@
 				empName: '',
 				empId: '0',
 				posId:'',
+				posName:'',
 				employeeList: [],
 				empObj: {
 					empId: '0',
@@ -30,8 +31,6 @@
 					this.empObj = this.exchangeEmpName(this.empId)
 					this.$emit('employeeChange', this.empObj)
 				}
-				
-				
 			},
 			setEmp: function(empId) {
 				this.empId = empId
@@ -48,10 +47,20 @@
 				}
 			},
 			setPosId(posId){
+				console.log('posId:'+posId)
 				if(this.isBlank(posId)){
 					this.posId=''
 				}else{
 					this.posId=posId
+				}
+				this.getEmployeeList()
+			},
+			setPosName(posName){
+				console.log('posName:'+posName)
+				if(this.isBlank(posName)){
+					this.posName=''
+				}else{
+					this.posName=posName
 				}
 				this.getEmployeeList()
 			},
@@ -66,15 +75,14 @@
 					},
 					data: {
 						posId:this.posId,
+						posName:this.posName,
 						isuse: '1'
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						if (res.retData.length > 0) {
-							this.employeeList = res.retData
-						}
+						this.employeeList = res.retData
 					} else {
 						alert(res.retMsg)
 					}

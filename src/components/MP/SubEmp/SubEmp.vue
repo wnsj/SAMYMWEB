@@ -63,6 +63,15 @@
 							<emp ref="emp" @employeeChange="employeeChange"></emp>
 						</div>
 					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label for="sex" class="col-md-4 control-label text-right nopad" style="padding:0;line-height:34px;">是否在用：</label>
+						<div class="col-md-8">
+							<select class="form-control" v-model="employee.isuse">
+								<option value="0">否</option>
+								<option value="1">是</option>
+							</select>
+						</div>
+					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
 							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"

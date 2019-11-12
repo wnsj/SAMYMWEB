@@ -13,21 +13,21 @@
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="consume.memNum" v-on:change="checkMemNum(consume.memNum)"
-							 placeholder="卡号/预约号">
+							 placeholder="卡号/手机号">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="consume.memName" disabled="disabled">
+							<input type="text" class="form-control" v-model="consume.memName" :disabled="isShow">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="consume.phone" disabled="disabled">
+							<input type="text" class="form-control" v-model="consume.phone" :disabled="isShow">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
@@ -88,6 +88,8 @@
 					storeId: '',
 				},
 				title: '',
+				isShow:true,
+				
 			};
 		},
 		methods: {
@@ -107,13 +109,16 @@
 				}
 				if (param == 'recharge') {
 					console.log('new increasing recharge')
-					this.title = "充值"
+					this.title = '充值'
+					this.isShow = true
 				} else if (param == 'consume') {
 					console.log('new increasing consume')
 					this.title = '消费'
+					this.isShow = false
 				} else if (param == 'refund') {
 					console.log('new increasing refund')
 					this.title = '退费'
+					this.isShow = true
 				}
 			},
 			//feedback employee information
@@ -205,7 +210,7 @@
 								});
 								break;
 						}
-						$("#addFee").modal("hide")
+						$("#addFee").modal("close")
 					} else {
 						alert(res.retMsg)
 					}

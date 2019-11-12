@@ -31,7 +31,7 @@
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">生日</label><span class="sign-left">:</span>
-						<dPicker class="col-md-8" style="width:65%;" v-model="FWRoyalty.birthday" v-on:change="dateAction('1')"></dPicker>
+						<dPicker class="col-md-8" style="width:65%;" v-model="FWRoyalty.birthday" v-on:change="dateAction()"></dPicker>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否启用</label><span class="sign-left">:</span>
@@ -49,10 +49,10 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;"></label><span class="sign-left">:</span>
+						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;"></label><span class="sign-left">实卡用户:</span>
 						<div class="col-md-8">
-							<input type="radio" v-bind:name="entityEmp" v-model="FWRoyalty.empType" value="1" class="form-control">
-							<input type="radio" v-bind:name="entityEmp" v-model="FWRoyalty.empType" value="0" class="form-control">
+							是：<input type="radio" name="entityEmp" v-model="FWRoyalty.memType" value="1" class="form-control">
+							否：<input type="radio" name="entityEmp" v-model="FWRoyalty.memType" value="0" class="form-control">
 						</div>
 					</div>
 					<div class="form-group clearfix">
@@ -83,6 +83,8 @@
 					turRoy:'0',
 					flowSmall:'0',
 					consumeType:'0',
+					storeId:'',
+					memType:'0',
 				},
 				title:'新增',
 			};
@@ -100,6 +102,8 @@
 						flowSmall:'0',
 						consumeType:'3',
 						empId:'0',
+						storeId:this.storeId(),
+						memType:'0',
 					}
 					this.$refs.emp.setEmp('0')
 				}else if(param=='modify'){
@@ -112,7 +116,11 @@
 				}
 			},
 			
-			
+			dateAction(){
+				if(!this.isBlank(this.FWRoyalty.birthday)){
+					this.FWRoyalty.birthday = this.moment(this.FWRoyalty.birthday,'YYYY-MM-DD 00:00:00.000')
+				}
+			},
 			
 			//feedback employee information
 			empChange:function(param){

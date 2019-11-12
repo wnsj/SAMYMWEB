@@ -66,7 +66,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item2,index2) in consumeList" :key="index2" v-on:dblclick="viewDetails(item2)">
+								<tr v-for="(item2,index2) in consumeList" :key="index2"  v-on:dblclick="viewDetails(item2)">
 									<td>{{item2.MEM_NUM}}</td>
 									<td>{{item2.MEM_NAME}}</td>
 									<td>{{item2.age}}</td>
@@ -147,6 +147,11 @@
 				});
 			},
 			viewDetails: function(item) {
+				
+				if(this.isBlank(item.MEM_NUM)){
+					alert('非会员没有消费详情')
+					return
+				}
 				this.$refs.consume.conditionCheck(item)
 				$("#addConsume").modal('show');
 			},

@@ -21,14 +21,14 @@
 							<thead class="datathead">
 								<tr>
 									<th class="text-center col-md-2">岗位</th>
-									<th class="text-center col-md-4">额度级别</th>
+									<th class="text-center col-md-4">额度级别(大于)</th>
 									<th class="text-center col-md-3">提点</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='0'" v-on:dblclick="selectRule('Royalty','3',item)">
 									<td class="text-center">{{item.posName}}</td>
-									<td class="text-center">{{item.flowSmall+'万'}}{{item.flowBig >0 ? ' ~ '+item.flowBig+'万' : "以上"}}</td>
+									<td class="text-center">{{item.flowSmall}} 万</td>
 									<td class="text-center">{{item.turRoy}}%</td>
 								</tr>
 							</tbody>
@@ -93,14 +93,14 @@
 							<thead class="datathead">
 								<tr>
 									<th class="text-center col-md-2">岗位</th>
-									<th class="text-center col-md-4">额度级别</th>
+									<th class="text-center col-md-4">额度级别(大于)</th>
 									<th class="text-center col-md-3">扣款比例</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='3'" v-on:dblclick="selectRule('SubVipRefund','3',item)">
 									<td class="text-center">{{item.posName}}</td>
-									<td class="text-center">{{item.flowSmall+'万'}}{{item.flowBig >0 ? ' ~ '+item.flowBig+'万' : "以上"}}</td>
+									<td class="text-center">{{item.flowSmall}} 万</td>
 									<td class="text-center">{{item.refundProportion}}%</td>
 								</tr>
 							</tbody>
@@ -125,15 +125,15 @@
 							<thead class="datathead">
 								<tr>
 									<th class="text-center col-md-2">岗位</th>
-									<th class="text-center col-md-3">预约人数(人)</th>
+									<th class="text-center col-md-3">预约人数(大于)</th>
 									<th class="text-center col-md-3">访问类型</th>
-									<th class="text-center col-md-5">提成金额(每人/元)</th>
+									<th class="text-center col-md-5">提成金额(元/人)</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='5' || item.consumeType=='6'" v-on:dblclick="selectRule('SubVipOrder','3',item)">
 									<td class="text-center">{{item.posName}}</td>
-									<td class="text-center">{{item.orderSmall+'人'}}{{item.orderBig >0 ? ' ~ '+item.orderBig+'人' : "以上"}}</td>
+									<td class="text-center">{{item.orderSmall}} 人</td>
 									<td class="text-center">{{item.consumeType=='5' ? "初访" : "复访"}}</td>
 									<td class="text-center">{{item.visRoy}}</td>
 								</tr>
@@ -161,14 +161,14 @@
 							<thead class="datathead">
 								<tr>
 									<th class="text-center col-md-2">岗位</th>
-									<th class="text-center col-md-4">退号人数</th>
+									<th class="text-center col-md-4">退号人数(大于)</th>
 									<th class="text-center col-md-3">扣款金额</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='4'" v-on:dblclick="selectRule('SubCharg','3',item)">
 									<td class="text-center">{{item.posName}}</td>
-									<td class="text-center">{{item.orderSmall+'人'}}{{item.orderBig >0 ? ' ~ '+item.orderBig+'人' : "以上"}}</td>
+									<td class="text-center">{{item.orderSmall}} 人</td>
 									<td class="text-center">{{item.visRoy}}</td>
 								</tr>
 							</tbody>

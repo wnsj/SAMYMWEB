@@ -50,7 +50,8 @@
 							<tr>
 								<th class="text-center">会员卡号</th>
 								<th class="text-center">姓名</th>
-								<th class="text-center">店铺</th>
+								<th class="text-center">店铺名</th>
+								<th class="text-center">是否实卡用户</th>
 								<th class="text-center">手机号</th>
 								<th class="text-center">性别</th>
 								<th class="text-center">生日</th>
@@ -64,6 +65,7 @@
 								<td class="text-center">{{item.memNum}}</td>
 								<td class="text-center">{{item.memName}}</td>
 								<td class="text-center">{{item.storeName}}</td>
+								<td class="text-center">{{item.memType == '1' ? "是" : "否"}}</td>
 								<td class="text-center">{{item.phone}}</td>
 								<td class="text-center">{{item.sex}}</td>
 								<td class="text-center">{{item.birthday}}</td>

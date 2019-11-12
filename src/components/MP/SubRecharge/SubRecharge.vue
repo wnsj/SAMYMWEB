@@ -44,7 +44,7 @@
 							<emp ref="emp" @employeeChange="empChange"></emp>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix" v-show="isShow==false">
 						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">文员</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
@@ -111,6 +111,7 @@
 					storeId: '',
 					clerkId:'',
 				}
+				this.$refs.emp.setEmp(this.consume.empId)
 				if (param == 'recharge') {
 					console.log('new increasing recharge')
 					this.title = '充值';
@@ -119,7 +120,7 @@
 					console.log('new increasing consume')
 					this.title = '消费'
 					this.isShow = false
-					this.$refs.clerkEmp.setPosId('5')
+					this.$refs.clerkEmp.setPosName('文员')
 				} else if (param == 'refund') {
 					console.log('new increasing refund')
 					this.title = '退费'

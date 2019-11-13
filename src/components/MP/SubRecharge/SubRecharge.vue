@@ -111,7 +111,9 @@
 					storeId: '',
 					clerkId:'',
 				}
+				console.log('文员：'+this.consume.clerkId)
 				this.$refs.emp.setEmp(this.consume.empId)
+				this.$refs.emp.setEmp(this.consume.clerkId)
 				if (param == 'recharge') {
 					console.log('new increasing recharge')
 					this.title = '充值';

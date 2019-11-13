@@ -1,20 +1,22 @@
 <template>
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-				<h1 class="titleCss">提成管理</h1>
+			<h1 class="titleCss">提成管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">员工工号</p><span class="sign-left">:</span>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">店铺</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" ></div>
+				<div class="col-md-8 col-lg-8">
+					<store ref='store' @storeChange='storeChange'></store>
+				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" ></div>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="empName"></div>
 			</div>
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -22,28 +24,20 @@
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">岗位</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					
+					<pos ref='pos' @positionChange='positionChange'></pos>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">月份</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<dPicker style="width:100%" v-model="month" v-on:change='dateAction()'></dPicker>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">开始时间</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-md-8 col-lg-8">
-					<dPicker style="width:100%" :value-formate="YYYY-MM" v-model="hospTime"></dPicker>
-				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">结束时间</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-md-8 col-lg-8">
-					<dPicker style="width:100%" v-model="outHosp" v-on:change="dateAction('1')"></dPicker>
-				</div>
-			</div>
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px; padding-bottom:1.5%;">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-right:30px; padding-bottom:1.5%;">
 				<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 				 v-on:click="conditionCheck()">查询</button>
 			</div>
@@ -54,21 +48,9 @@
 				<nobr class="widthmax">
 					<div class="table-responsive pre-scrollable" style=" max-height:464px">
 						<table class="table table-bordered table-hover user-table" id="datatable">
-							<div id="fHeader" v-show="fixedHeader">
-								<div class="text-center">员工工号</div>
-								<div class="text-center">姓名</div>
-								<div class="text-center">年龄</div>
-								<div class="text-center">岗位</div>
-								<div class="text-center">提成总额</div>
-								<div class="text-center">扣费总额</div>
-								<div class="text-center">合计总额</div>
-								<div class="text-center">在职</div>
-							</div>
 							<thead class="datathead">
 								<tr>
-									<th class="text-center">员工号</th>
 									<th class="text-center">姓名</th>
-									<th class="text-center">年龄</th>
 									<th class="text-center">岗位</th>
 									<th class="text-center">在职</th>
 									<th class="text-center">提成总额</th>
@@ -77,15 +59,13 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item2,index2) in patientList" :key="index2" v-on:dblclick="modifyPatient(item2)">
-									<td>{{item2.hospNum}}</td>
-									<td>{{item2.name}}</td>
-									<td>{{item2.age}}</td>
-									<td>{{item2.DEPTNAME}}</td>
-									<td>{{item2.patitypename}}</td>
-									<td>{{item2.mitypename}}</td>
-									<td>{{item2.mitypename}}</td>
-									<td>{{item2.inHosp==1 ? '在' : '否'}}</td>
+								<tr v-for="(item,index) in royaltyList" :key="index">
+									<td>{{item.empName}}</td>
+									<td>{{item.posName}}</td>
+									<td>{{item.isuse == 1 ? "在职" : "离职"}}</td>
+									<td>{{item.royalty > 0 ? item.royalty : ""}}</td>
+									<td>{{item.refund > 0 ? item.refund : ""}}</td>
+									<td>{{item.balance > 0 ? item.balance : ""}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -108,31 +88,24 @@
 	import axios from 'axios'
 	import dPicker from 'vue2-datepicker'
 	import SubRoy from '../MP/SubRoySum/SubRoyList'
+	import store from '../common/Store.vue'
+	import pos from '../common/Position.vue'
 	export default {
 		name: 'employee',
 		components: {
 			dPicker,
 			SubRoy,
+			store,
+			pos,
 		},
 		data() {
 			return {
+				royaltyList: [],
 				patient: {},
-				projectList: [],
-				hospNum: '',
-				name: '',
-				deptId: '',
-				patitypeid: '',
-				mitypeid: '',
-				patientList: ["",""],
-				inHosp: '', //是否在院
-				sex: '0', //性别
-				hospTime: '',
-				outHosp: '',
-				totleCost: 0,
-				files: [],
-				uploadSuccess: 0,
-				fixedHeader: false,
-				
+				storeId: '',
+				empName: '',
+				posId: '',
+				month: '',
 			}
 		},
 
@@ -149,34 +122,29 @@
 					this.deptId = param.deptId
 				}
 			},
-			//feedback PatientStype information
-			psChange: function(param) {
+			//feedback store information
+			storeChange: function(param) {
 				if (this.isBlank(param)) {
-					this.patitypeid = ""
+					this.storeId = ""
 				} else {
-					this.patitypeid = param.patitypeid
+					this.storeId = param.storeId
 				}
-				console.log('PatientStype' + this.patitypeid)
+				console.log('store' + this.storeId)
 			},
 			//feedback MedicalInsuranceStype information
-			misChange: function(param) {
+			positionChange: function(param) {
 				if (this.isBlank(param)) {
-					this.mitypeid = ""
+					this.storeId = ""
 				} else {
-					this.mitypeid = param.mitypeid
+					this.storeId = param.storeId
 				}
-				console.log('MedicalInsuranceStype' + this.mitypeid)
+				console.log('store' + this.storeId)
 			},
 			//date formatting
 			dateAction(param) {
-				if (param == '0') {
-					if (!this.isBlank(this.hospTime)) {
-						this.hospTime = this.moment(this.hospTime, 'YYYY-MM-DD HH:mm:ss.000')
-					}
-				} else if (param == '1') {
-					if (!this.isBlank(this.outHosp)) {
-						this.outHosp = this.moment(this.outHosp, 'YYYY-MM-DD HH:mm:ss.000')
-					}
+				console.log('month:'+this.moment(this.month, 'YYYY-MM'))
+				if (!this.isBlank(this.month)) {
+					this.month = this.moment(this.month, 'YYYY-MM')
 				}
 			},
 			feedback() {
@@ -198,13 +166,13 @@
 			//modify the cotent of patient
 			modifyPatient(item) {
 				console.log(item);
-				
+
 				$("#addPatient").modal('show')
 			},
 			//the list , which is detail infomation of patient,was checked.
 			conditionCheck: function() {
 				console.log('querying based on multiple conditions')
-				var url = this.url + '/paymentAction/queryPatient'
+				var url = this.url + '/employeeAction/queryEmpRoyalty'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -213,167 +181,28 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						hospNum: this.hospNum,
-						name: this.name,
-						deptId: this.deptId,
-						mitypeid: this.mitypeid,
-						patitypeid: this.patitypeid,
-						inHosp: this.inHosp,
-						sex: this.sex,
-						hospTime: this.hospTime,
-						outHosp: this.outHosp,
-						
 						accountId: this.accountId(),
-						modelGrade:'2',
-						modelType:'',
-						operateType:'',
+						modelGrade: '2',
+						modelType: '',
+						operateType: '',
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					// console.log(res)
-					if (res.retCode == '0000') {
-						console.log("cd:" + res.retData.payment.length)
-						this.projectList = res.retData.payService;
-						this.patientList = res.retData.payment;
-					}
+
+					this.royaltyList = res.retData
 				}).catch((error) => {
-					console.log('请求失败处理')
+					console.log('提成信息查询失败')
 				});
 			},
-			dataChuLi(patient, index) {
-				// console.log("患者：" + index)
-				var fix = "";
-				var pId = "";
-				var f = "";
-				pId = this.projectList[index].payserviceId;
-
-				fix = "RECEIVABLE_";
-				f = fix.concat(pId);
-				if (!this.isBlank(patient[f]) && patient[f] > 0) {
-					return patient[f];
-				}
-			},
-			handlerUpload: function(e) {
-				//获取选定的文件
-				let tFiles = e.target.files;
-				let len = tFiles.length;
-				for (var i = 0; i < len; i++) {
-					//开始上传每一个文件
-					var item = {
-						name: tFiles[i].name,
-						uploadPercentage: 1,
-						size: this.formatFileSize(tFiles[i].size, 0),
-						uploadStatus: 0
-					}
-					console.log(item)
-					this.files.push(item);
-					//开始上传文件 新建一个formData
-					let param = new FormData();
-					param.append("name", tFiles[i].name);
-					param.append("accountId", this.accountId());
-					//通过append向form对象添加数据
-					param.append("file", tFiles[i]);
-					//FormData私有类对象，访问不到，可以通过get判断值是否传进去
-					console.log(param.get("file"));
-					//判断大小
-					if (!this.checkFileSize(tFiles[i].size)) {
-						item.uploadStatus = -3;
-						alert("文件大于2M!");
-						return false;
-					}
-					if (!this.checkFileType(tFiles[i].name.split('.')[1])) {
-						item.uploadStatus = -2;
-						alert("文件类型错误!")
-						return false;
-					}
-					//通过axios上传文件
-					//配置
-					let config = {
-						//添加请求头
-						headers: {
-							"Content-Type": "multipart/form-data"
-						},
-						//添加上传进度监听事件
-						onUploadProgress: e => {
-							var completeProgress = ((e.loaded / e.total * 100) | 0) + "%";
-							//console.log(this.files)
-							item.uploadPercentage = completeProgress;
-						}
-					};
-					var url = this.url + '/uploadAction/uploadPatient';
-					axios.post(url, param, config).then(function(response) {
-						console.log(response);
-						item.uploadStatus = 2;
-						if (response.data.retCode == '0000') {
-							alert("上传成功!")
-						} else {
-							alert(response.data.retMsg)
-						}
-					}).catch(function(error) {
-						console.log(error);
-						item.uploadStatus = -1;
-					});
-				}
-			},
-			formatFileSize: function(fileSize, idx) {
-				var units = ["B", "KB", "MB", "GB"];
-				idx = idx || 0;
-				if (fileSize < 1024 || idx === units.length - 1) {
-					return fileSize.toFixed(1) + units[idx];
-				}
-				return this.formatFileSize(fileSize / 1024, ++idx);
-			},
-			checkFileType: function(fileType) {
-				const acceptTypes = ['xlsx', 'xls'];
-				for (var i = 0; i < acceptTypes.length; i++) {
-					if (fileType === acceptTypes[i]) {
-						return true;
-					}
-				}
-				return false;
-			},
-			checkFileSize: function(fileSize) {
-				//2M
-				const MAX_SIZE = 2 * 1024 * 1024;
-				if (fileSize > MAX_SIZE) {
-					return false;
-				}
-				return true;
-			},
-			myFile: function() {
-				$("#myFile").click();
-			},
-			handleScroll(e) {
-				var self = this
-				var etop = e.target.scrollTop
-				var fHeaderwidth = $("#fHeader").width($(".datathead").width())
-				var fHeaderheight = $("#fHeader").height($(".datathead").height())
-				var theadheight = $(".datathead").height()
-				var thlength = $(".datathead tr th").length
-				for (var i = 0; i < thlength; i++) {
-					$("#fHeader div").eq(i).width(
-						$(".datathead tr th").eq(i).width()
-					)
-					$("#fHeader div").eq(i).height(
-						$(".datathead tr th").eq(i).height()
-					)
-				}
-				if (etop > 0) {
-					self.fixedHeader = true
-					$("#fHeader").css("top", etop)
-				} else {
-					self.fixedHeader = false
-				}
-			}
-
+			
 		},
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true)
 			if (window.performance.navigation.type == 1) {
-        console.log("页面被刷新")
-      }else{
-        console.log("首次被加载")
+				console.log("页面被刷新")
+			} else {
+				console.log("首次被加载")
 			}
 		},
 		created() {
@@ -415,5 +244,4 @@
 			display: none
 		}
 	}
-
 </style>

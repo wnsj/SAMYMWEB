@@ -31,13 +31,13 @@
 				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">消费时间</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-4 col-lg-4">
+				<div class="col-md-4 col-lg-4" style="text-align:left;width:31.5%;">
 					<dPicker style="width:100%" v-model="hospTime" v-on:change="dateAction('0')"></dPicker>
 				</div>
 				<div style="padding: 0; line-height: 34px; float:left">
 					~
 				</div>
-				<div class="col-md-4 col-lg-4">
+				<div class="col-md-4 col-lg-4" style="text-align:left;width:31.5%;">
 					<dPicker style="width:100%" v-model="outHosp" v-on:change="dateAction('1')"></dPicker>
 				</div>
 				

@@ -37,19 +37,20 @@
 					</div> -->
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预约时间</label><span class="sign-left">:</span>
-						<dPicker class="col-md-8" style="width:65%;" v-model="order.appDate" v-on:change="dateAction('1')"></dPicker>
+						<div class="col-md-8">
+							<dPicker v-model="order.appDate" v-on:change="dateAction('1')" style="width:100%;"></dPicker>
+						</div>	
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">文员</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
+						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">文员</label><span class="sign-left">:</span>
+						<div class="col-md-8">
 							<emp ref="clerkEmp" @employeeChange="clerkEmpChange"></emp>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
+						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
 						 class="sign-left">:</span>
-						<div class="col-md-7">
+						<div class="col-md-8">
 							<emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
 						</div>
 					</div>

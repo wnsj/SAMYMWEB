@@ -94,7 +94,7 @@ Vue.prototype.moment = function(targetDate, format) {
   return momentObj.format(formatStr);
 }
 // Vue.prototype.endDate = function(beginDate,index){
-// 	
+//
 // 	return utilDate.calculateEndDate(beginDate,index);
 // }
 /**

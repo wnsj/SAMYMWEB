@@ -14,11 +14,10 @@
 								<th class="text-center">会员卡号</th>
 								<th class="text-center">姓名</th>
 								<th class="text-center">年龄</th>
-								<th class="text-center">岗位</th>
 								<th class="text-center">消费金额(退款)</th>
 								<th class="text-center">提成金额(扣款)</th>
-								<th class="text-center">扣费总额</th>
-								<th class="text-center">合计总额</th>
+								<th class="text-center">扣费金额</th>
+								<th class="text-center">合计提成总额</th>
 							</tr>
 						</thead> 
 						<tbody>
@@ -26,7 +25,6 @@
 								<td>{{item2.hospNum}}</td>
 								<td>{{item2.name}}</td>
 								<td>{{item2.age}}</td>
-								<td>{{item2.DEPTNAME}}</td>
 								<td>{{item2.patitypename}}</td>
 								<td>{{item2.mitypename}}</td>
 								<td>{{item2.mitypename}}</td>

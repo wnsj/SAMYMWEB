@@ -155,7 +155,7 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						memNum:'0',
+						memNum:'',
 						
 						accountId: this.accountId(),
 						modelGrade:'2',

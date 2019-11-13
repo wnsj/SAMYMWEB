@@ -169,10 +169,7 @@
 						break;
 				}
 				console.log('费用类型：' + this.consume.costType)
-				if (this.isBlank(this.consume.memNum)) {
-					alert("会员卡号不能为空")
-					return
-				}
+				
 				if (this.isBlank(this.consume.momey)) {
 					alert("金额不能为空")
 					return

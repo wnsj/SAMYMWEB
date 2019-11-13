@@ -6,214 +6,180 @@
 			<h4 id="myModalLabel">提成列表</h4>
 		</div>
 		<div class="tableContent">
+			
 			<nobr class="widthmax">
-				<div class="table-responsive pre-scrollable" style=" max-height:464px">
-					<table class="table table-bordered table-hover user-table" id="datatable">
+				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
+				v-show="posType=='店长' || posType=='店长助理' || posType=='咨询师' || posType=='咨询顾问'">
+					<div class="modal-header">
+						<h4 class="pull-left">会员消费提成</h4>
+					</div>
+					<table class="table table-bordered table-hover user-table">
 						<thead>
 							<tr>
 								<th class="text-center">会员卡号</th>
 								<th class="text-center">姓名</th>
-								<th class="text-center">年龄</th>
-								<th class="text-center">消费金额(退款)</th>
 								<th class="text-center">提成金额(扣款)</th>
 								<th class="text-center">扣费金额</th>
-								<th class="text-center">合计提成总额</th>
 							</tr>
-						</thead> 
+						</thead>
 						<tbody>
-							<tr v-for="(item2,index2) in patientList" :key="index2">
-								<td>{{item2.hospNum}}</td>
-								<td>{{item2.name}}</td>
-								<td>{{item2.age}}</td>
-								<td>{{item2.patitypename}}</td>
-								<td>{{item2.mitypename}}</td>
-								<td>{{item2.mitypename}}</td>
-								<td>{{item2.inHosp==1 ? '在' : '否'}}</td>
+							<tr v-for="(item,index) in memRoy" :key="index">
+								<td>{{item.empId}}</td>
+								<td>{{item.empName}}</td>
+								<td>{{item.royalty}}</td>
+								<td>{{item.refund}}</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
+				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
+				v-show="posType=='店长' || posType=='店长助理' || posType=='咨询师' || posType=='咨询顾问'">
+					<div class="modal-header">
+						<h4 class="pull-left">退费扣款</h4>
+					</div>
+					<table class="table table-bordered table-hover user-table">
+						
+						<thead>
+							<tr>
+								<th class="text-center">退费金额</th>
+								<th class="text-center">扣费金额</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{refund.balance}}</td>
+								<td>{{refund.refund}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
+				v-show="posType=='文员'">
+					<table  class="table table-bordered table-hover user-table" id="datatable">
+						<thead>
+							<tr>
+								<th class="text-center">岗位名称</th>
+								<th class="text-center">姓名</th>
+								<th class="text-center">初访人数</th>
+								<th class="text-center">初访提成</th>
+								<th class="text-center">复访人数</th>
+								<th class="text-center">复访提成</th>
+								<th class="text-center">合计提成总额</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{clerkFirstRoy.balance}}</td>
+								<td>{{clerkFirstRoy.balance}}</td>
+								<td>{{clerkFirstRoy.balance}}</td>
+								<td>{{clerkFirstRoy.royalty}}</td>
+								<td>{{clerkTwoRoy.balance}}</td>
+								<td>{{clerkTwoRoy.royalty}}</td>
+								<td>{{clerkFirstRoy.royalty+clerkTwoRoy.royalty}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+					
+				
 			</nobr>
 		</div>
-		
+
 	</div>
 </template>
 
 <script>
-	import dPicker from 'vue2-datepicker'
 	export default {
-		components:{
-			dPicker,
-		},
+
 		data() {
 			return {
-				patient:{
-					hospTime:'',
-					name:'',
-					outHosp:'',
-					sex:'1',
-					age:'',
+				memRoy: [],
+
+				// 员工流水提成 
+				summaryRoy: {
+					"royalty": '', //提成总额
+					"balance": '', //总流水
 				},
-				patientList:[],
-				type:'',
-				title:'新增',
-				isModify:false,
-				projectList:[],
-				hospNum:'',
-				isExist:'0',
-				accountId:this.accountId(),
+
+				// 退费扣款 
+				refund: {
+					"refund": '', //扣款总额
+					"balance": '', //退费总额
+				},
+
+				// 文员初访提成 
+				clerkFirstRoy: {
+					royalty: '', //提成
+					balance: '', //总人数
+				},
+
+				// 文员再访提成 
+				clerkTwoRoy: {
+					"royalty": '', //提成
+					"balance": '', //总人数
+				},
+
+				// 文员退号扣款 
+				clerkRefund: {
+					"refund": '', //扣费总额
+					"balance": '', //总人数
+				},
+
+				// 咨询师助理退号扣款 
+				counlorRefund: {
+					"refund": '', //扣费总额
+					"balance": '', //总人数
+				},
+				posType: '',
 			};
-		}, 
-		methods:{
+		},
+		methods: {
 			// Initialization patient’s content
-			initData(param,patient) {
-				if(param=='add'){
-					console.log('Initialization patient’s content, which adds patient')
-					this.type='add'
-					this.title='新增'
-					this.isExist='0'
-					this.isModify=false
-					this.patient={}
-					this.$refs.dept.setDpart('0')
-					this.$refs.ps.setObjId('0')
-					this.$refs.mis.setObjId('0')
-					this.hospNum=''
-					this.patient.sex='1'
-					this.patient.inHosp='1'
-					// this.patient.hospTime=this.moment('','YYYY-MM-DD HH:mm:ss.000')
-				}else if(param=='modify'){
-					console.log('Initialization patient’s content, which modifies patient')
-					this.type='modify'
-					this.isExist='1'
-					this.isModify=true
-					this.title='修改'
-					// console.log("patient"+JSON.stringify(patient))
-					Object.assign(this.patient,patient)
-					this.hospNum=this.patient.hospNum
-					this.$refs.dept.setDpart(this.patient.deptId)
-					this.$refs.ps.setObjId(this.patient.patitypeid)
-					this.$refs.mis.setObjId(this.patient.mitypeid)
+			initData(param) {
+				this.memRoy= []
+				
+				// 员工流水提成 
+				this.summaryRoy= {
+					"royalty": '', //提成总额
+					"balance": '', //总流水
 				}
-			},
-			//date formatting 
-			dateAction(param){
-				if(param=='1'){
-					if(!this.isBlank(this.patient.hospTime)){
-						this.patient.hospTime=this.moment(this.patient.hospTime,'YYYY-MM-DD HH:mm:ss.000')
-					}else{
-						this.patient.hospTime=''
-					}
-				}else if(param=='2'){
-					if(!this.isBlank(this.patient.outHosp)){
-						this.patient.outHosp=this.moment(this.patient.outHosp,'YYYY-MM-DD HH:mm:ss.000')
-					}else{
-						this.patient.outHosp=''
-					}
+				
+				// 退费扣款 
+				this.refund= {
+					"refund": '', //扣款总额
+					"balance": '', //退费总额
 				}
-			},
-			//feedback department information
-			departChange:function(param){
-				// console.log('科室：'+JSON.stringify(param))
-				if(this.isBlank(param)){
-					this.patient.deptId=""
-				}else{
-					this.patient.deptId=param.deptId
+				
+				// 文员初访提成 
+				this.clerkFirstRoy= {
+					royalty: '', //提成
+					balance: '', //总人数
 				}
-				console.log('科室：'+this.patient.deptId)
-			},
-			//feedback PatientStype information
-			psChange:function(param){
-				if(this.isBlank(param)){
-					this.patient.patitypeid=''
-				}else{
-					this.patient.patitypeid=param.patitypeid
+				
+				// 文员再访提成 
+				this.clerkTwoRoy= {
+					"royalty": '', //提成
+					"balance": '', //总人数
 				}
-			},
-			//feedback MedicalInsuranceStype information
-			misChange:function(param){
-				if(this.isBlank(param)){
-					this.patient.mitypeid=''
-				}else{
-					this.patient.mitypeid=param.mitypeid
+				
+				// 文员退号扣款 
+				this.clerkRefund= {
+					"refund": '', //扣费总额
+					"balance": '', //总人数
 				}
+				
+				// 咨询师助理退号扣款 
+				this.counlorRefund= {
+					"refund": '', //扣费总额
+					"balance": '', //总人数
+				}
+				this.posType = param.posName
+				this.checkDetail(param)
 			},
-			//the event of addtional button
-			addPatient(){
+			checkDetail(param) {
 				console.log('the event of addtional button')
-				if(this.isExist=='1'){
-					if(!confirm("是否确定提交，提交将覆盖原有患者数据！！！")){
-						return
-					}
-				}
-				this.patient.hospNum=this.hospNum
-				if(this.isBlank(this.patient.hospNum)){
-					alert("住院号不能为空")
-					return
-				}
-				if(this.isBlank(this.patient.patitypeid)){
-					alert("患者类型不能为空")
-					return
-				}
-				if(this.isBlank(this.patient.mitypeid)){
-					alert("医保类型不能为空")
-					return
-				}
-				if(this.isBlank(this.patient.name) ){
-					alert("姓名不能为空")
-					return
-				}
-				if(this.isBlank(this.patient.deptId)){
-					alert("科室不能为空")
-					return
-				}
-				if(this.patient.inHosp != '1' && this.patient.inHosp != '0'){
-					alert("是否在院不能为空")
-					return
-				}
-				if(!this.isBlank(this.patient.outHosp)){
-					this.patient.outHosp=this.moment(this.patient.outHosp,'YYYY-MM-DD HH:mm:ss.000')
-				}
-				if(!this.isBlank(this.patient.hospTime)){
-					this.patient.hospTime=this.moment(this.patient.hospTime,'YYYY-MM-DD HH:mm:ss.000')
-				}else{
-					alert("入院时间不能为空")
-					return
-				}
-				this.patient.paymentList=this.projectList
-				this.patient.accountId=this.accountId
-				// console.log('the event of addtional button'+JSON.stringify(this.patient))
-				var url = this.url + '/patientAction/addPatient'
-				this.$ajax({
-					method: 'POST',
-					url: url,
-					headers: {
-						'Content-Type': this.contentType,
-						'Access-Token': this.accessToken
-					},
-					data:this.patient,
-					dataType: 'json',
-				}).then((response) => {
-					var res = response.data
-					console.log(res)
-					if (res.retCode == '0000') {
-						alert(res.retMsg)
-						this.$emit('addPatient')
-					}
-				}).catch((error) => {
-					console.log('请求失败处理')
-				});
-			},
-			closeCurrentPage(){
-				$("#addPatient").modal("hide")
-				console.log('关闭添加患者界面')
-			},
-			//Query patient's information based on the hosNum
-			conditionCheck(param){
-				console.log('checkhosNum')
-				if(this.isBlank(param)){
-					return
-				}
-				var url = this.url + '/patientAction/queryPatientByHospNum'
+
+				var url = this.url + '/employeeAction/queryEmpRoyaltyInfo'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -222,38 +188,40 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						hospNum:param
+						empId: param.empId,
 					},
 					dataType: 'json',
 				}).then((response) => {
-					var res = response.data
-					console.log(res)
-					if (res.retCode == '0000') {
-						if (res.retData != null) {
-							this.patient = res.retData
-							this.isExist = '1'
-							
-							this.$refs.dept.setDpart(this.patient.deptId)
-							this.$refs.ps.setObjId(this.patient.patitypeid)
-							this.$refs.mis.setObjId(this.patient.mitypeid)
-						}else{
-							this.patient={}
-							this.patient.sex='1'
-							this.patient.inHosp='1'
-							this.isExist = '0'
-							this.$refs.dept.setDpart('0')
-							this.$refs.ps.setObjId('0')
-							this.$refs.mis.setObjId('0')
-							alert("没有查到此住院号,可以进行添加")
-						}
+					var retData = response.data.retData
+					if(retData.memRoy.length > 0){
+						this.memRoy=retData.memRoy
 					}
+					if(!this.isBlank(retData.summaryRoy)){
+						this.summaryRoy=retData.summaryRoy
+					}
+					if(!this.isBlank(retData.refund)){
+						this.refund=retData.refund
+					}
+					if(!this.isBlank(retData.clerkTwoRoy)){
+						this.clerkTwoRoy=retData.clerkTwoRoy
+					}
+					if(!this.isBlank(retData.clerkTwoRoy)){
+						this.clerkTwoRoy=retData.clerkTwoRoy
+					}
+					if(!this.isBlank(retData.counlorRefund)){
+						this.counlorRefund=retData.counlorRefund
+					}
+
 				}).catch((error) => {
 					console.log('请求失败处理')
 				});
 			},
-			
+			closeCurrentPage() {
+				$("#subRoy").modal("hide")
+				console.log('关闭添加患者界面')
+			},
 		}
-		
+
 	}
 </script>
 

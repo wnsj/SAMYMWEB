@@ -32,7 +32,7 @@
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">月份</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<dPicker style="width:100%" v-model="month" v-on:change='dateAction()'></dPicker>
+					<dPicker style="width:100%" type="month" format="YYYY-MM" v-model="createDate"></dPicker>
 				</div>
 			</div>
 		</div>
@@ -59,7 +59,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index">
+								<tr v-for="(item,index) in royaltyList" :key="index" v-on:dblclick="checkDetail(item)">
 									<td>{{item.empName}}</td>
 									<td>{{item.posName}}</td>
 									<td>{{item.isuse == 1 ? "在职" : "离职"}}</td>
@@ -74,9 +74,9 @@
 			</div>
 		</div>
 		<div class="row row_edit">
-			<div class="modal fade" id="addPatient">
+			<div class="modal fade" id="subRoy">
 				<div class="modal-dialog">
-					<SubRoy ref="patient" @addPatient='feedback'></SubRoy>
+					<SubRoy ref="subRoy"></SubRoy>
 				</div>
 			</div>
 		</div>
@@ -101,27 +101,14 @@
 		data() {
 			return {
 				royaltyList: [],
-				patient: {},
 				storeId: '',
 				empName: '',
 				posId: '',
-				month: '',
+				createDate: '',
 			}
 		},
 
 		methods: {
-			//feedback project information
-			projectChange: function(param) {
-				console.log('返回项目的全部信息')
-			},
-			//feedback department information
-			departChange: function(param) {
-				if (this.isBlank(param)) {
-					this.deptId = ""
-				} else {
-					this.deptId = param.deptId
-				}
-			},
 			//feedback store information
 			storeChange: function(param) {
 				if (this.isBlank(param)) {
@@ -134,16 +121,17 @@
 			//feedback MedicalInsuranceStype information
 			positionChange: function(param) {
 				if (this.isBlank(param)) {
-					this.storeId = ""
+					this.posId = ""
 				} else {
-					this.storeId = param.storeId
+					this.posId = param.posId
 				}
-				console.log('store' + this.storeId)
+				console.log('store' + this.posId)
 			},
 			//date formatting
 			dateAction(param) {
-				console.log('month:'+this.moment(this.month, 'YYYY-MM'))
+				console.log($("#"))
 				if (!this.isBlank(this.month)) {
+					console.log('month:'+this.moment(this.month, 'YYYY-MM'))
 					this.month = this.moment(this.month, 'YYYY-MM')
 				}
 			},
@@ -151,27 +139,16 @@
 				this.conditionCheck()
 				$("#addPatient").modal('hide')
 			},
-			//date filter
-			dateFilter(param) {
-				if (!this.isBlank(param)) {
-					return this.moment(param, 'YYYY-MM-DD')
-				}
-			},
-			//go into the view of added patient
-			addPatient: function() {
-				this.$refs.patient.initData('add')
-				$("#addPatient").modal("show")
-				console.log('进入添加患者界面')
-			},
+			
 			//modify the cotent of patient
-			modifyPatient(item) {
-				console.log(item);
-
-				$("#addPatient").modal('show')
+			checkDetail(item) {
+				this.$refs.subRoy.initData(item)
+				$("#subRoy").modal('show')
 			},
 			//the list , which is detail infomation of patient,was checked.
 			conditionCheck: function() {
 				console.log('querying based on multiple conditions')
+				console.log(this.moment(this.createDate,'YYYY-MM-DD 00:00:00.000'))
 				var url = this.url + '/employeeAction/queryEmpRoyalty'
 				this.$ajax({
 					method: 'POST',
@@ -181,10 +158,18 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
+						
+						storeId:this.storeId,
+						posId:this.posId,
+						empName:this.empName,
+						createDate:this.createDate,
+						
+						
 						accountId: this.accountId(),
 						modelGrade: '2',
 						modelType: '',
 						operateType: '',
+						
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -206,7 +191,7 @@
 			}
 		},
 		created() {
-			// this.conditionCheck()
+			this.conditionCheck()
 		},
 
 	}

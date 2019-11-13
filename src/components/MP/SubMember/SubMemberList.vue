@@ -60,7 +60,7 @@
 				if(this.isBlank(param)){
 					return
 				}
-				var url = this.url + '/accountRecordAction/queryAccountRecord'
+				var url = this.url + '/accountRecordAction/queryAccountSummary'
 				this.$ajax({
 					method: 'POST',
 					url: url,

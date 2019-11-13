@@ -22,7 +22,7 @@ Vue.config.productionTip = false
 
 // 路由卫士
 router.beforeEach((to, from, next) => {
-  // console.log("to:" + to.path + ",from:" + from.path)
+  console.log("to:" + to.path + ",from:" + from.path)
   if (to.path == '/login' && from.path == '/MainPage') {
     next();
   } else if (to.path == '/login') {
@@ -74,6 +74,13 @@ Vue.filter('dateFormatFilter', function(time, format) {
     return null;
   } else {
     formatStr = constant.isBlank(format) ? formatStr : format;
+    return moment(time).format(formatStr)
+  }
+})
+Vue.filter('month', function(time, formatStr = 'YYYY-MM') {
+  if (constant.isBlank(time)) {
+    return null
+  } else {
     return moment(time).format(formatStr)
   }
 })

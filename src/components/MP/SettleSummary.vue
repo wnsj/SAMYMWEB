@@ -57,7 +57,6 @@
 								<tr>
 									<th class="text-center">会员卡号</th>
 									<th class="text-center">姓名</th>
-									<th class="text-center">年龄</th>
 									<th class="text-center">手机号</th>
 									<th class="text-center">交费总额</th>
 									<th class="text-center">消费总额</th>
@@ -69,7 +68,6 @@
 								<tr v-for="(item2,index2) in consumeList" :key="index2"  v-on:dblclick="viewDetails(item2)">
 									<td>{{item2.MEM_NUM}}</td>
 									<td>{{item2.MEM_NAME}}</td>
-									<td>{{item2.age}}</td>
 									<td>{{item2.PHONE}}</td>
 									<td>{{item2.TOTAL_RECHARGE}}</td>
 									<td>{{item2.TOTAL_CONSUMPTION}}</td>

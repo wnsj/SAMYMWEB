@@ -19,6 +19,12 @@ import test from '../components/MP/test.vue'
 
 Vue.use(Router)
 
+//解决路由多次跳转同一页面报错
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err);
+}
+
 export default new Router({
     routes: [
 			{

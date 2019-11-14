@@ -1,4 +1,4 @@
-<!-- add and modify FWRoyalty -->
+<!-- add and modify member -->
 <template>
 	<div class="modal-content">
 		<div class="modal-header">
@@ -11,19 +11,19 @@
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="FWRoyalty.memName" placeholder="">
+							<input type="text" class="form-control" v-model="member.memName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="FWRoyalty.phone" placeholder="">
+							<input type="text" class="form-control" v-model="member.phone" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">性别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<select class="form-control" v-model="FWRoyalty.sex">
+							<select class="form-control" v-model="member.sex">
 								<option value="1">男</option>
 								<option value="2">女</option>
 							</select>
@@ -31,12 +31,12 @@
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">生日</label><span class="sign-left">:</span>
-						<dPicker class="col-md-8" style="width:65%;" v-model="FWRoyalty.birthday" v-on:change="dateAction()"></dPicker>
+						<dPicker class="col-md-8" style="width:65%;" v-model="member.birthday" v-on:change="dateAction()"></dPicker>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否启用</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<select class="form-control" v-model="FWRoyalty.isuse">
+							<select class="form-control" v-model="member.isuse">
 								<option value="1">在用</option>
 								<option value="0">停用</option>
 							</select>
@@ -52,13 +52,13 @@
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">实卡用户</label><span class="sign-left">:</span>
 						<div class="col-md-8" style="text-align:left; line-height:34px;">
 							<label class="bui-radios-label">
-								<input type="radio" name="entityEmp" v-model="FWRoyalty.memType" value="1"/><i class="bui-radios"></i> 是
+								<input type="radio" name="entityEmp" v-model="member.memType" :disabled="isShow" value="1"/><i class="bui-radios"></i> 是
 							</label>
 							<label class="bui-radios-label">
-								<input type="radio" name="entityEmp" v-model="FWRoyalty.memType" value="0"/><i class="bui-radios"></i> 否
+								<input type="radio" name="entityEmp" v-model="member.memType" :disabled="isShow" value="0"/><i class="bui-radios"></i> 否
 							</label>
-							<!--是：<input type="radio" name="entityEmp" v-model="FWRoyalty.memType" value="1" class="form-control">
-							否：<input type="radio" name="entityEmp" v-model="FWRoyalty.memType" value="0" class="form-control">-->
+							<!--是：<input type="radio" name="entityEmp" v-model="member.memType" value="1" class="form-control">
+							否：<input type="radio" name="entityEmp" v-model="member.memType" value="0" class="form-control">-->
 						</div>
 					</div>
 					<div class="form-group clearfix">
@@ -83,47 +83,45 @@
 		},
 		data() {
 			return {
-				FWRoyalty:{
-					posId:'0',
-					flowBig:'0',
-					turRoy:'0',
-					flowSmall:'0',
-					consumeType:'0',
+				member:{
+					memName:'',
+					phone:'',
 					storeId:'',
+					empId:'',
 					memType:'0',
 					sex:'1',
 					isuse:'1',
+					
 				},
 				title:'新增',
-				item:[]
+				item:[],
+				isShow:true,
 			};
 		},
 		methods:{
-			// Initialization FWRoyalty’s content
-			initData(param,FWRoyalty) {
+			// Initialization member’s content
+			initData(param,member) {
+				this.member={
+					memName:'',
+					phone:'',
+					posId:'0',
+					empId:'0',
+					storeId:this.storeId(),
+					memType:'0',
+					sex:'1',
+					isuse:'1',
+				}
 				if(param=='add'){
-					console.log('Initialization FWRoyalty’s content, which adds FWRoyalty')
+					console.log('Initialization member’s content, which adds member')
 					this.title='新增'
-					this.FWRoyalty={
-						posId:'0',
-						flowBig:'0',
-						turRoy:'0',
-						flowSmall:'0',
-						consumeType:'3',
-						empId:'0',
-						storeId:this.storeId(),
-						memType:'0',
-						sex:'1',
-						isuse:'1',
-					}
+					
 					this.$refs.emp.setEmp('0')
 				}else if(param=='modify'){
-					console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
-					
+					console.log('Initialization member’s content, which modifies member')
 					this.title='修改'
-					Object.assign(this.FWRoyalty,FWRoyalty)
-					console.log(JSON.stringify(this.FWRoyalty))
-					this.$refs.emp.setEmp(this.FWRoyalty.empId)
+					Object.assign(this.member,member)
+					this.$refs.emp.setEmp(this.member.empId)
+					this.conditionCheck()
 				}
 			},
 			CheckItem(item){
@@ -132,19 +130,19 @@
 				console.log($('#hahah').val());
 			},
 			dateAction(){
-				if(!this.isBlank(this.FWRoyalty.birthday)){
-					this.FWRoyalty.birthday = this.moment(this.FWRoyalty.birthday,'YYYY-MM-DD 00:00:00.000')
+				if(!this.isBlank(this.member.birthday)){
+					this.member.birthday = this.moment(this.member.birthday,'YYYY-MM-DD 00:00:00.000')
 				}
 			},
 			
 			//feedback employee information
 			empChange:function(param){
 				if(this.isBlank(param)){
-					this.FWRoyalty.empId=""
-					this.FWRoyalty.storeId=""
+					this.member.empId=""
+					this.member.storeId=""
 				}else{
-					this.FWRoyalty.empId=param.empId
-					this.FWRoyalty.storeId=param.storeId
+					this.member.empId=param.empId
+					this.member.storeId=param.storeId
 				}
 			},
 			
@@ -153,17 +151,17 @@
 				console.log('the event of addtional button')
 				
 				
-				if(this.isBlank(this.FWRoyalty.memName)){
+				if(this.isBlank(this.member.memName)){
 					alert("姓名不能为空")
 					return
 				}
-				if(this.isBlank(this.FWRoyalty.phone)){
+				if(this.isBlank(this.member.phone)){
 					alert("手机号不能为空")
 					return
 				} 
 				
-				if(!this.isBlank(this.FWRoyalty.birthday)){
-					this.FWRoyalty.birthday=this.moment(this.FWRoyalty.birthday,'YYYY-MM-DD 00:00:00.000')
+				if(!this.isBlank(this.member.birthday)){
+					this.member.birthday=this.moment(this.member.birthday,'YYYY-MM-DD 00:00:00.000')
 				}
 				var url
 				switch(this.title){
@@ -182,7 +180,7 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data:this.FWRoyalty,
+					data:this.member,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
@@ -198,6 +196,41 @@
 			closeCurrentPage(){
 				$("#memberContent").modal("hide")
 				console.log('close the flowWater rule')
+			},
+			//the list , which is detail infomation of reCharge,was checked.
+			conditionCheck: function() {
+				console.log('querying based on multiple conditions')
+				
+				var url = this.url + '/accountRecordAction/queryAccountRecord'
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data:{
+						memNum:this.member.memNum,
+						
+						accountId: this.accountId(),
+						modelGrade:'2',
+						modelType:'',
+						operateType:'',
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					// console.log(res)
+					if (res.retCode == '0000') {
+						if(res.retData.length>0){
+							this.isShow=true
+						}else{
+							this.isShow=false
+						}
+					}
+				}).catch((error) => {
+					console.log('充值查询请求失败')
+				});
 			},
 		}
 	}

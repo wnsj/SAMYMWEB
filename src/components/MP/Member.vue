@@ -92,11 +92,11 @@
 
 <script>
 
-	import SubMemberRun from '../MP/SubMemberRun/SubMemberRun.vue'
+	import SubMem from '../MP/SubMem/SubMem.vue'
 	import Store from '../common/Store.vue'
 	export default {
 		components: {
-			SubMemberRun,
+			SubMem,
 			Store,
 		},
 		data() {

@@ -92,7 +92,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="detailMember">
 				<div class="modal-dialog">
-					<SubMember ref="member" @addmember='feedback'></SubMember>
+					<member ref="member" @addmember='feedback'></member>
 				</div>
 			</div>
 		</div>
@@ -103,13 +103,13 @@
 <script>
 	import axios from 'axios'
 	import dPicker from 'vue2-datepicker'
-	import SubMember from '../MP/SubMember/SubMemberList'
+	import memSum from '../MP/SubMemSum/SubMemSum'
 	import Store from '../common/Store.vue'
 	export default {
 		name: 'employee',
 		components: {
 			dPicker,
-			SubMember,
+			memSum,
 			Store
 		},
 		data() {

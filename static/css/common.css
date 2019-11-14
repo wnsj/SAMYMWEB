@@ -87,18 +87,17 @@ body{
 }
 
 .aside-logo{
-    /* background-color: #283643; */
-	background-color: #66ccff;
+    /* background-color: #283643; 
+    background-color: #66ccff;*/
+    background-color:rgba(166, 132, 74, 0.57);
     padding:10px 0;
     min-height: 50px;
     width: 100%;
 }
 .aside-logo h2{
     margin: 0px;
-    color: #1b4fa3;
+    color: #9a773b;
     text-align: center;
-    line-height: 50px;
-    font-size: 26px;
 }
 .aside-logo h2 span{
     color: #fff;

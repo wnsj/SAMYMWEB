@@ -52,7 +52,7 @@
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px; padding-bottom:1.5%;">
-				<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+				<button type="button" class="btn btn-primary pull-right m_r_10"  data-toggle="modal"
 				 v-on:click="conditionCheck()">查询</button>
 			</div>
 		</div>

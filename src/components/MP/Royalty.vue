@@ -2,7 +2,7 @@
 <template>
 	<div class="clearfix" style="height:100%">
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">提成规则管理</h1>
+			<h1 class="titleCss" style="margin-top:-80px;">提成规则管理</h1>
 		</div>
 		<div>
 			<div class="col-md-5 col-lg-5 part">

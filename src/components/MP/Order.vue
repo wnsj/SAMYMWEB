@@ -50,18 +50,6 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否取消</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-					<select class="form-control" v-model="state">
-						<option value="">未选择</option>
-						<option value="1">未取消</option>
-						<option value="0">已取消</option>
-					</select>
-				</div>
-			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
@@ -93,8 +81,20 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
-			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+		<div class="row" style="padding-bottom:1.5%;">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-right" style="padding: 0; line-height: 34px;">
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否取消</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+					<select class="form-control" v-model="state">
+						<option value="">未选择</option>
+						<option value="1">未取消</option>
+						<option value="0">已取消</option>
+					</select>
+				</div>
+			</div>
+			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
 			 v-on:click="addOrder()">添加预约</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="checkOrderList()">查询</button>

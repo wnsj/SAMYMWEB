@@ -134,13 +134,13 @@
 						storeId:'',
 						level:'0',
 					}
-					this.$refs.pos.setPos(this.employee.posId)
+					this.$refs.pos.setPosId(this.employee.posId)
 					this.$refs.emp.setPosId(this.employee.posId)
 				} else if (param == 'modify') {
 					console.log('Initialization employee’s content, which modifies employee')
 					this.title='修改'
 					Object.assign(this.employee,employee)
-					this.$refs.pos.setPos(this.employee.posId)
+					this.$refs.pos.setPosId(this.employee.posId)
 					this.$refs.emp.setPosId(this.employee.posId)
 					this.$refs.store.setStore(this.employee.storeId)
 				}

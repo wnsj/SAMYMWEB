@@ -65,7 +65,7 @@
 								<td class="text-center">{{item.memNum}}</td>
 								<td class="text-center">{{item.memName}}</td>
 								<td class="text-center">{{item.storeName}}</td>
-								<td class="text-center">{{item.memType == '1' ? "是" : "否"}}</td>
+								<td class="text-center">{{item.memType == 1 ? "是" : "否"}}</td>
 								<td class="text-center">{{item.phone}}</td>
 								<td class="text-center">{{item.sex}}</td>
 								<td class="text-center">{{item.birthday}}</td>

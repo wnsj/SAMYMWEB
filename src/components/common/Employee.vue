@@ -47,7 +47,7 @@
 				}
 			},
 			setPosId(posId){
-				console.log('posId:'+posId)
+				// console.log('posId:'+posId)
 				if(this.isBlank(posId)){
 					this.posId=''
 				}else{
@@ -56,7 +56,7 @@
 				this.getEmployeeList()
 			},
 			setPosName(posName){
-				console.log('posName:'+posName)
+				// console.log('posName:'+posName)
 				if(this.isBlank(posName)){
 					this.posName=''
 				}else{

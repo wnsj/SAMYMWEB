@@ -91,6 +91,8 @@
 					consumeType:'0',
 					storeId:'',
 					memType:'0',
+					sex:'1',
+					isuse:'1',
 				},
 				title:'新增',
 				item:[]
@@ -111,6 +113,8 @@
 						empId:'0',
 						storeId:this.storeId(),
 						memType:'0',
+						sex:'1',
+						isuse:'1',
 					}
 					this.$refs.emp.setEmp('0')
 				}else if(param=='modify'){

@@ -185,10 +185,11 @@
 					var res = response.data
 					if (res.retCode == '0000') {
 						if(res.retData=='0010'){
-							if(param=="1"){
-								this.$refs.emp.initData('add')
+							console.log('param:'+param)
+							if(param==1){
+								this.$refs.emp.initData('add','')
 								$("#emp").modal('show')
-							}else if(param=="3"){
+							}else if(param==3){
 								this.$refs.emp.initData('modify', item)
 								$("#emp").modal('show')
 							}

@@ -4,7 +4,7 @@
       <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
         <h2 class="pull-left" style=" padding:10px 0">
           <img style="width: 50px; height: 50px;" src="../assets/img/logo1.png" /> <strong style=" display:inline-block;font-size: 35px; line-height:40px;">
-            圣安米悦</strong>
+            圣安米悦</strong><br />
           <font style=" disply:block; font-size:26px;line-height:30px;">提 成 管 理 系 统</font>
         </h2>
       </div>

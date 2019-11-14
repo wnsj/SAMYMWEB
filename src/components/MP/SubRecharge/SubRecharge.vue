@@ -115,16 +115,17 @@
 				this.$refs.emp.setEmp(this.consume.empId)
 				this.$refs.emp.setEmp(this.consume.clerkId)
 				if (param == 'recharge') {
-					console.log('new increasing recharge')
+					// console.log('new increasing recharge')
 					this.title = '充值';
 					this.isShow = true
 				} else if (param == 'consume') {
-					console.log('new increasing consume')
+					// console.log('new increasing consume')
 					this.title = '消费'
 					this.isShow = false
+					this.$refs.clerkEmp.setEmp('0')
 					this.$refs.clerkEmp.setPosName('文员')
 				} else if (param == 'refund') {
-					console.log('new increasing refund')
+					// console.log('new increasing refund')
 					this.title = '退费'
 					this.isShow = true
 				}

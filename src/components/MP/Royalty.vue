@@ -11,7 +11,7 @@
 						<h3>流水提成规则</h3>
 					</div>
 					<div class="col-md-4 col-lg-4 pull-right">
-						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('Royalty','1')">添加</button>
+						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('Royalty','1','')">添加</button>
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
@@ -42,7 +42,7 @@
 						<h3>会员卡提成规则</h3>
 					</div>
 					<div class="col-md-4 col-lg-4 pull-right">
-						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubVip','1')">添加</button>
+						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubVip','1','')">添加</button>
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
@@ -83,7 +83,7 @@
 						<h3>会员卡退费扣提成规则</h3>
 					</div>
 					<div class="col-md-4 col-lg-4 pull-right">
-						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubVipRefund','1')">添加</button>
+						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubVipRefund','1','')">添加</button>
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
@@ -115,7 +115,7 @@
 						<h3>预约人数提成规则</h3>
 					</div>
 					<div class="col-md-4 col-lg-4 pull-right">
-						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubVipOrder','1')">添加</button>
+						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubVipOrder','1','')">添加</button>
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
@@ -151,7 +151,7 @@
 						<h3>退号扣提成规则</h3>
 					</div>
 					<div class="col-md-4 col-lg-4 pull-right">
-						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubCharg','1')">添加</button>
+						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubCharg','1','')">添加</button>
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
@@ -274,7 +274,7 @@
 					var res = response.data
 					if (res.retCode == '0000') {
 						if(res.retData=='0010'){
-							
+							var operateName=''
 							if(operateType=="1"){
 								operateName='add'
 							}else if(operateType=="3"){
@@ -310,7 +310,7 @@
 					}
 				
 				}).catch((error) => {
-					console.log('商铺查询请求失败')
+					console.log('提成规则查询请求失败')
 				});
 			},
 			//check the list of department

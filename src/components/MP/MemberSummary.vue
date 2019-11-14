@@ -9,20 +9,20 @@
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">商铺</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<Store></Store>
+					<Store ref="store" @storeChange="storeChange"></Store>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value=""></div>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memNum"></div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" ></div>
+				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memName"></div>
 			</div>
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -30,7 +30,7 @@
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<input class="form-control" type="text" value="" >
+					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
 			</div>
 		</div>
@@ -40,7 +40,7 @@
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px;padding-left:20px;">开始时间</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<dPicker style="width:100%" v-model="hospTime" v-on:change="dateAction('0')"></dPicker>
+					<dPicker style="width:100%" v-model="begCreateDate"></dPicker>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -48,7 +48,7 @@
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">结束时间</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<dPicker style="width:100%" v-model="outHosp" v-on:change="dateAction('1')"></dPicker>
+					<dPicker style="width:100%" v-model="endCreateDate"></dPicker>
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px; padding-bottom:1.5%;">
@@ -115,8 +115,12 @@
 		data() {
 			return {
 				memCostList: [],
-				hospTime: '',
-				outHosp: ''
+				storeId: '',
+				memNum: '',
+				memName:'',
+				phone:'',
+				begCreateDate:'',
+				endCreateDate:'',
 			}
 		},
 
@@ -131,21 +135,26 @@
 				this.conditionCheck()
 				$("#detailMember").modal('hide')
 			},
-			//date formatting
-			dateAction(param) {
-				if (param == '0') {
-					if (!this.isBlank(this.hospTime)) {
-						this.hospTime = this.moment(this.hospTime, 'YYYY-MM-DD HH:mm:ss.000')
-					}
-				} else if (param == '1') {
-					if (!this.isBlank(this.outHosp)) {
-						this.outHosp = this.moment(this.outHosp, 'YYYY-MM-DD HH:mm:ss.000')
-					}
+			//feedback store information
+			storeChange: function(param) {
+				if (this.isBlank(param)) {
+					this.storeId = ""
+				} else {
+					this.storeId = param.storeId
 				}
+				console.log('store' + this.storeId)
 			},
 			//the list , which is detail infomation of member,was checked.
 			conditionCheck: function() {
 				console.log('querying based on multiple conditions')
+				
+				if(!this.isBlank(this.begCreateDate)){
+					this.begCreateDate = this.moment(this.begCreateDate,'YYYY-MM-DD 00:00:00.000')
+				}
+				if(!this.isBlank(this.endCreateDate)){
+					this.endCreateDate = this.moment(this.endCreateDate,'YYYY-MM-DD 23:59:00.000')
+				}
+				
 				var url = this.url + '/accountRecordAction/queryAccountRecordTotal'
 				this.$ajax({
 					method: 'POST',
@@ -155,7 +164,12 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						memNum:'',
+						storeId: this.storeId,
+						memNum: this.memNum,
+						memName:this.memName,
+						phone:this.phone,
+						begCreateDate:this.begCreateDate,
+						endCreateDate:this.endCreateDate,
 						
 						accountId: this.accountId(),
 						modelGrade:'2',

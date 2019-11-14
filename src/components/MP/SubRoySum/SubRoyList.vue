@@ -6,7 +6,6 @@
 			<h4 id="myModalLabel">提成列表</h4>
 		</div>
 		<div class="tableContent">
-			
 			<nobr class="widthmax">
 				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
 				v-show="posType=='店长' || posType=='店长助理' || posType=='咨询师' || posType=='咨询顾问'">
@@ -33,12 +32,11 @@
 					</table>
 				</div>
 				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
-				v-show="posType=='店长' || posType=='店长助理' || posType=='咨询师' || posType=='咨询顾问'">
+				v-show="(posType=='店长' || posType=='店长助理' || posType=='咨询师' || posType=='咨询顾问') && refund.balance > 0">
 					<div class="modal-header">
 						<h4 class="pull-left">退费扣款</h4>
 					</div>
 					<table class="table table-bordered table-hover user-table">
-						
 						<thead>
 							<tr>
 								<th class="text-center">退费金额</th>
@@ -49,6 +47,27 @@
 							<tr>
 								<td>{{refund.balance}}</td>
 								<td>{{refund.refund}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
+				v-show="(posType=='店长' || posType=='店长助理' || posType=='咨询师' || posType=='咨询顾问') && summaryRoy.royalty > 0">
+					<div class="modal-header">
+						<h4 class="pull-left">流水提成</h4>
+					</div>
+					<table class="table table-bordered table-hover user-table">
+						
+						<thead>
+							<tr>
+								<th class="text-center">流水金额</th>
+								<th class="text-center">提成金额</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{summaryRoy.balance}}</td>
+								<td>{{summaryRoy.royalty}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -202,8 +221,8 @@
 					if(!this.isBlank(retData.refund)){
 						this.refund=retData.refund
 					}
-					if(!this.isBlank(retData.clerkTwoRoy)){
-						this.clerkTwoRoy=retData.clerkTwoRoy
+					if(!this.isBlank(retData.clerkFirstRoy)){
+						this.clerkFirstRoy=retData.clerkFirstRoy
 					}
 					if(!this.isBlank(retData.clerkTwoRoy)){
 						this.clerkTwoRoy=retData.clerkTwoRoy

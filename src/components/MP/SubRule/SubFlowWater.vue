@@ -86,19 +86,20 @@
 					
 					this.title='修改';
 					Object.assign(this.FWRoyalty,FWRoyalty)
-					this.$refs.pos.setPos(FWRoyalty.posId)	
+					// console.log('posId:'+FWRoyalty.posId)
+					this.$refs.pos.setPosId(FWRoyalty.posId)	
 				}
 			},
 			
 			//feedback position information
 			posChange:function(param){
-				console.log('岗位3：'+JSON.stringify(param))
+				// console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.FWRoyalty.posId=""
 				}else{
 					this.FWRoyalty.posId=param.posId
 				}
-				console.log('岗位4：'+this.FWRoyalty.posId)
+				// console.log('岗位4：'+this.FWRoyalty.posId)
 			},
 			
 			//the event of addtional button

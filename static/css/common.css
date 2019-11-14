@@ -137,3 +137,8 @@ body{
 .modal-header{
     border-bottom: none;
 }
+.con-cen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

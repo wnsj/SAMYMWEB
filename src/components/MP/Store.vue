@@ -5,7 +5,7 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">商铺管理</h1>
 		</div>
-		<div class="row" style="margin-top: 40px;">
+		<div class="row" style="margin-top: 40px;padding-bottom:1.5%;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">商铺名</p><span class="sign-left">:</span>
@@ -26,8 +26,6 @@
 					</select>
 				</div>
 			</div>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="selectRule('1')">添加</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"

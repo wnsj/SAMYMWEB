@@ -17,7 +17,7 @@
         posId: '0',
         positionList: [],
 				posObj:{
-					posId:'0',
+					posId:'',
 					posName: '',
 				},
       };
@@ -30,9 +30,10 @@
 				// console.log('岗位2：'+this.posObj.posId)
         this.$emit('positionChange', this.posObj)
       },
-      setPos: function (posId) {
+      setPosId: function (posId) {
+				console.log('设置岗位'+posId)
         this.posId = posId
-				// console.log('设置岗位'+this.posId)
+				console.log('设置岗位'+this.posId)
       },
       //添加前缀的部门名字兑换原来的名字
       exchangePosName: function (param) {

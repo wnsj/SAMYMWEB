@@ -32,13 +32,13 @@
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">消费时间</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-4 col-lg-4" style="text-align:left;width:31.5%;">
-					<dPicker style="width:100%" v-model="hospTime" v-on:change="dateAction('0')"></dPicker>
+					<dPicker style="width:100%" v-model="begCreateDate"></dPicker>
 				</div>
 				<div style="padding: 0; line-height: 34px; float:left">
 					~
 				</div>
 				<div class="col-md-4 col-lg-4" style="text-align:left;width:31.5%;">
-					<dPicker style="width:100%" v-model="outHosp" v-on:change="dateAction('1')"></dPicker>
+					<dPicker style="width:100%" v-model="endCreateDate"></dPicker>
 				</div>
 				
 			</div>
@@ -109,11 +109,20 @@
 				hospTime: '',
 				outHosp: '',
 				singleData:{},	
+				begCreateDate:'',
+				endCreateDate:'',
 			}
 		},
 
 		methods: {
 			conditionCheck: function() {
+				
+				if(!this.isBlank(this.begCreateDate)){
+					this.begCreateDate = this.moment(this.begCreateDate,'YYYY-MM-DD 00:00:00.000')
+				}
+				if(!this.isBlank(this.endCreateDate)){
+					this.endCreateDate = this.moment(this.endCreateDate,'YYYY-MM-DD 23:59:00.000')
+				}
 				
 				var url = this.url + '/accountRecordAction/queryAccountRecordTotal'
 				this.$ajax({
@@ -127,6 +136,8 @@
 						memName:this.memName,
 						memNum:this.memNum,
 						phone:this.phone,
+						begCreateDate:this.begCreateDate,
+						endCreateDate:this.endCreateDate,
 						
 						accountId: this.accountId(),
 						modelGrade:'2',

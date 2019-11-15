@@ -121,6 +121,7 @@
 				}else if(param=='modify'){
 					console.log('Initialization member’s content, which modifies member')
 					this.title='修改'
+					console.log(JSON.stringify(member))
 					Object.assign(this.member,member)
 					this.$refs.emp.setEmp(this.member.empId)
 					this.conditionCheck()

@@ -131,11 +131,12 @@
 						sex: '1',
 						isuse: '1',
 						leaderId:'',
-						storeId:'',
+						storeId:'0',
 						level:'0',
 					}
 					this.$refs.pos.setPosId(this.employee.posId)
 					this.$refs.emp.setPosId(this.employee.posId)
+					this.$refs.store.setStore(this.employee.storeId)
 				} else if (param == 'modify') {
 					console.log('Initialization employee’s content, which modifies employee')
 					this.title='修改'
@@ -170,6 +171,7 @@
 			},
 			//feedback department information
 			positionChange: function(param) {
+				this.employee.level='0'
 				if (this.isBlank(param)) {
 					this.employee.posId = ""
 				} else {

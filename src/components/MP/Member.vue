@@ -57,6 +57,7 @@
 								<th class="text-center">生日</th>
 								<th class="text-center">是否停用</th>
 								<th class="text-center">推荐人</th>
+								<th class="text-center">余额</th>
 								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>
@@ -67,11 +68,12 @@
 								<td class="text-center">{{item.storeName}}</td>
 								<td class="text-center">{{item.memType == 1 ? "是" : "否"}}</td>
 								<td class="text-center">{{item.phone}}</td>
-								<td class="text-center">{{item.sex}}</td>
+								<td class="text-center">{{item.sex == 1 ? "男" : "女"}}</td>
 								<td class="text-center">{{item.birthday}}</td>
 								<td class="text-center">{{item.isuse==true ? "在用" : "停用"}}</td>
 								<td class="text-center">{{item.empName}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button></td>
+								<td class="text-center">{{item.balance}}</td>
+								<td class="text-center"><button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>

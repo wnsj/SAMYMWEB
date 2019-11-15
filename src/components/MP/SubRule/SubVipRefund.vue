@@ -78,13 +78,13 @@
 						flowSmall:'0',
 						consumeType:'3',
 					}
-					this.$refs.pos.setPos('0')
+					this.$refs.pos.setPosId('0')
 				}else if(param=='modify'){
 					console.log('Initialization patient’s content, which modifies patient')
 					
 					this.title='修改'
 					Object.assign(this.FWRoyalty,FWRoyalty)
-					this.$refs.pos.setPos(FWRoyalty.posId)
+					this.$refs.pos.setPosId(FWRoyalty.posId)
 				}
 			},
 			

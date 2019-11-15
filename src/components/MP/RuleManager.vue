@@ -23,7 +23,7 @@
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<select class="form-control" v-model="employeeType">
-						<option value="0">未选择</option>
+						<option value="0">--未选择--</option>
 						<option value="1">超级管理员</option>
 						<option value="2">店铺管理员</option>
 						<option value="3">财务</option>
@@ -47,7 +47,7 @@
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<select class="form-control" v-model="moduleGrade">
-						<option value="0">未选择</option>
+						<option value="0">--未选择--</option>
 						<option value="0">一级</option>
 						<option value="1">二级</option>
 					</select>
@@ -59,7 +59,7 @@
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<select class="form-control" v-model="operateType">
-						<option value="0">未选择</option>
+						<option value="0">--未选择--</option>
 						<option value="1">增</option>
 						<option value="2">删</option>
 						<option value="3">改</option>
@@ -68,7 +68,7 @@
 				</div>
 			</div>
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
-			 v-on:click="addRule()" v-if="has(2)">添加</button>
+			 v-on:click="addRule()">添加</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="conditionCheck()">查询</button>
 		</div>

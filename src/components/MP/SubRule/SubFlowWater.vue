@@ -81,7 +81,7 @@
 						flowSmall:'0',
 						consumeType:'0',
 					}
-					this.$refs.pos.setPos('0')
+					this.$refs.pos.setPosId('0')
 				}else if(param=='modify'){
 					
 					this.title='修改';

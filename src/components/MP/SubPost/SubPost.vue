@@ -80,7 +80,7 @@
 					Object.assign(this.position,posContent)
 					console.log(JSON.stringify(this.position))
 					if(this.position.parentId>0){
-						this.$refs.position.setPos(this.position.parentId)
+						this.$refs.position.setPosId(this.position.parentId)
 					}
 				}
 			},

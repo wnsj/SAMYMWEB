@@ -31,7 +31,7 @@
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">生日</label><span class="sign-left">:</span>
-						<dPicker class="col-md-8" style="width:65%;" v-model="member.birthday" v-on:change="dateAction()"></dPicker>
+						<dPicker class="col-md-8" style="width:65%;" v-model="member.birthday"></dPicker>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否启用</label><span class="sign-left">:</span>
@@ -91,6 +91,7 @@
 					memType:'0',
 					sex:'1',
 					isuse:'1',
+					birthday:'',
 					
 				},
 				title:'新增',
@@ -110,6 +111,7 @@
 					memType:'0',
 					sex:'1',
 					isuse:'1',
+					birthday:'',
 				}
 				if(param=='add'){
 					console.log('Initialization member’s content, which adds member')
@@ -128,11 +130,6 @@
 				item.value = !item.value;
 				$('#hahah').val(item.value)
 				console.log($('#hahah').val());
-			},
-			dateAction(){
-				if(!this.isBlank(this.member.birthday)){
-					this.member.birthday = this.moment(this.member.birthday,'YYYY-MM-DD 00:00:00.000')
-				}
 			},
 			
 			//feedback employee information

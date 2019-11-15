@@ -280,6 +280,7 @@
 							}else if(operateType=="3"){
 								operateName='modify'
 							}
+							console.log('operateName:'+operateName)
 							switch(module){
 								case 'Royalty':
 									this.$refs.flowWater.initData(operateName,item);

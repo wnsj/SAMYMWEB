@@ -111,7 +111,7 @@
 					accountId:'',
 					operateType:'0',
 				}
-				this.$refs.pos.setPos(this.employee.posId)
+				this.$refs.pos.setPosId(this.employee.posId)
 				this.$refs.emp.setPosId(this.employee.posId)
 			},
 			

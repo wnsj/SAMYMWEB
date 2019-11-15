@@ -38,7 +38,7 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:1.5%;">
 			<button type="button" class="btn btn-warning pull-right m_r_10"  data-toggle="modal"
-			 v-on:click="addMember()"  v-if="has(2)">添加会员</button>
+			 v-on:click="addMember()">添加会员</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="checkMember()">查询</button>
 		</div>
@@ -81,7 +81,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="memberContent">
 				<div class="modal-dialog">
-					<SubMemberRun ref='subMemR' @certainAction='feedBack'></SubMemberRun>
+					<SubMem ref='subMemR' @certainAction='feedBack'></SubMem>
 				</div>
 			</div>
 		</div>

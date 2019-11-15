@@ -92,7 +92,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="detailMember">
 				<div class="modal-dialog">
-					<member ref="member" @addmember='feedback'></member>
+					<memSum ref="member" @addmember='feedback'></memSum>
 				</div>
 			</div>
 		</div>

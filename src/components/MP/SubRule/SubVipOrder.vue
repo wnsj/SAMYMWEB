@@ -86,12 +86,12 @@
 						visRoy:'0',
 						consumeType:'5',
 					}
-					this.$refs.pos.setPos('0')
+					this.$refs.pos.setPosId('0')
 				}else if(param=='modify'){
 					console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
 					this.title='修改'
 					Object.assign(this.FWRoyalty,FWRoyalty)
-					this.$refs.pos.setPos(FWRoyalty.posId)
+					this.$refs.pos.setPosId(FWRoyalty.posId)
 					
 				}
 			},

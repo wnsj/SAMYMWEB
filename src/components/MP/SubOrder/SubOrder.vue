@@ -48,7 +48,7 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
+						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询顾问</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
@@ -110,13 +110,13 @@
 						counlorEmpId:'',//咨询师
 					}
 					this.$refs.clerkEmp.setPosName('文员')
-					this.$refs.counlorEmp.setPosName('咨询师')
+					this.$refs.counlorEmp.setPosName('咨询顾问')
 				}else if(param=='modify'){
 					console.log('Initialization order’s content, which modifies order')
 					this.title='修改'
 					Object.assign(this.order,order)
 					this.$refs.clerkEmp.setPosName('文员')
-					this.$refs.counlorEmp.setPosName('咨询师')
+					this.$refs.counlorEmp.setPosName('咨询顾问')
 					this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
 					this.$refs.counlorEmp.setEmp(this.order.counlorEmpId)
 				}

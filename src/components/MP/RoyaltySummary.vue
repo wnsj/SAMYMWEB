@@ -32,7 +32,7 @@
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">月份</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<dPicker style="width:100%" type="month" format="YYYY-MM" v-model="createDate"></dPicker>
+					<dPicker style="width:100%" format="YYYY-MM" v-model="createDate"></dPicker>
 				</div>
 			</div>
 		</div>
@@ -127,14 +127,7 @@
 				}
 				console.log('store' + this.posId)
 			},
-			//date formatting
-			dateAction(param) {
-				console.log($("#"))
-				if (!this.isBlank(this.month)) {
-					console.log('month:'+this.moment(this.month, 'YYYY-MM'))
-					this.month = this.moment(this.month, 'YYYY-MM')
-				}
-			},
+			
 			feedback() {
 				this.conditionCheck()
 				$("#addPatient").modal('hide')

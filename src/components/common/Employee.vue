@@ -46,6 +46,7 @@
 					}
 				}
 			},
+			
 			setPosId(posId){
 				// console.log('posId:'+posId)
 				if(this.isBlank(posId)){
@@ -76,7 +77,8 @@
 					data: {
 						posId:this.posId,
 						posName:this.posName,
-						isuse: '1'
+						storeId:this.storeId(),
+						isuse: '1',
 					},
 					dataType: 'json',
 				}).then((response) => {

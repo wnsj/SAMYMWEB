@@ -117,8 +117,8 @@
 					Object.assign(this.order,order)
 					this.$refs.clerkEmp.setPosName('文员')
 					this.$refs.counlorEmp.setPosName('咨询师')
-					this.$refs.clerkEmp.setPosId(this.order.clerkEmpId)
-					this.$refs.counlorEmp.setPosId(this.order.counlorEmpId)
+					this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
+					this.$refs.counlorEmp.setEmp(this.order.counlorEmpId)
 				}
 			},
 			//date formatting 

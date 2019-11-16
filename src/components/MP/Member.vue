@@ -58,7 +58,7 @@
 								<th class="text-center">是否停用</th>
 								<th class="text-center">推荐人</th>
 								<th class="text-center">余额</th>
-								<th class="text-center" v-if="has(2)">修改</th>
+								<th class="text-center">修改</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -121,11 +121,6 @@
 			},
 			//modify the cotent of member
 			modifyMember(item) {
-				if(!this.has(2)){
-				alert("暂无权限修改!");
-				return;
-				}
-				console.log('modify the cotent of member')
 				this.$refs.subMemR.initData('modify', item)
 				$("#memberContent").modal('show')
 			},

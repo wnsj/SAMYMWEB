@@ -148,7 +148,7 @@
 			//the list , which is detail infomation of patient,was checked.
 			conditionCheck: function() {
 				console.log('querying based on multiple conditions')
-				console.log(this.moment(this.createDate,'YYYY-MM-DD 00:00:00.000'))
+				this.createDate = this.moment(this.createDate,'YYYY-MM-DD 00:00:00.000')
 				var url = this.url + '/employeeAction/queryEmpRoyalty'
 				this.$ajax({
 					method: 'POST',

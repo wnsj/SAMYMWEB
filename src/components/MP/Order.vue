@@ -44,7 +44,7 @@
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					<select class="form-control" v-model="arrival">
-						<option value="">未选择</option>
+						<option value="">--未选择--</option>
 						<option value="0">未到店</option>
 						<option value="1">已到店</option>
 					</select>
@@ -88,7 +88,7 @@
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					<select class="form-control" v-model="state">
-						<option value="">未选择</option>
+						<option value="">--未选择--</option>
 						<option value="1">未取消</option>
 						<option value="0">已取消</option>
 					</select>

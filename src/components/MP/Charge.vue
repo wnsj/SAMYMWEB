@@ -137,7 +137,7 @@
 				if(!this.isBlank(this.endCreateDate)){
 					this.endCreateDate=this.moment(this.endCreateDate,'YYYY-MM-DD 23:59:59.000')
 				}
-				var url = this.url + '/accountRecordAction/queryAccountRecord'
+				var url = this.url + '/accountRecordAction/queryAccountSummary'
 				this.$ajax({
 					method: 'POST',
 					url: url,

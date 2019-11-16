@@ -21,42 +21,41 @@
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 my-aside clear-mp" id="Adiv" style="padding-top: 10px;">
           <p style=" display:block; width:190px; height:50px;margin:0 auto; line-height:50px; font-size: 30px;font-weight: bold;color: #1b4fa3;text-align: left; margin-bottom:10px;">功能列表</p>
           <ul id="aside-menu">
-            <li class="li-active" v-if="has(1)" v-on:click="selectRule('MemberSummary')">
-              <router-link to="/MP/MemberSummary"><i class="fa fa-table fa-circle" aria-hidden="true">　会员总表</i></router-link>
+            <li class="li-active" v-on:click="selectRule('MemberSummary')">
+              <i class="fa fa-table fa-circle" aria-hidden="true">　会员总表</i>
             </li>
-            <li v-if="has(1)" v-on:click="selectRule('SettleSummary')">
-              <router-link to="/MP/SettleSummary"><i class="fa fa-table" aria-hidden="false">　消费管理</i></router-link>
+            <li v-on:click="selectRule('SettleSummary')">
+              <i class="fa fa-table" aria-hidden="false">　消费管理</i>
             </li>
-            <li v-if="has(1)" v-on:click="selectRule('RoyaltySummary')">
-              <router-link to="/MP/RoyaltySummary"><i class="fa fa-table" aria-hidden="false">　提成汇总</i></router-link>
+            <li v-on:click="selectRule('RoyaltySummary')">
+              <i class="fa fa-table" aria-hidden="false">　提成汇总</i>
             </li>
-            <li v-if="has(1)" v-on:click="selectRule('Member')">
-              <router-link to="/MP/Member"><i class="fa fa-table" aria-hidden="false">　会员管理</i></router-link>
+            <li v-on:click="selectRule('Member')">
+              <i class="fa fa-table" aria-hidden="false">　会员管理</i>
             </li>
-            <li v-if="has(1)" v-on:click="selectRule('Charge')">
-              <router-link to="/MP/Charge"><i class="fa fa-table" aria-hidden="false">　充值管理(退费)</i></router-link>
+            <li v-on:click="selectRule('Charge')">
+              <i class="fa fa-table" aria-hidden="false">　充值管理(退费)</i>
             </li>
-            <li v-if="has(1)" v-on:click="selectRule('Order')">
-              <router-link to="/MP/Order"><i class="fa fa-table" aria-hidden="false">　预约管理</i></router-link>
+            <li v-on:click="selectRule('Order')">
+              <i class="fa fa-table" aria-hidden="false">　预约管理</i>
             </li>
             <li>
-              <router-link to="/MP/CashDeposit"><i class="fa fa-table" aria-hidden="false">　定金管理</i></router-link>
-              <!-- <i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('CashDeposit')">　权限管理</i> -->
+              <i class="fa fa-table" aria-hidden="false">　定金管理</i>
             </li>
-            <li v-if="has(1)" v-on:click="selectRule('Employee')">
-              <router-link to="/MP/Employee"><i class="fa fa-table" aria-hidden="false">　员工管理</i></router-link>
+            <li v-on:click="selectRule('Employee')">
+              <i class="fa fa-table" aria-hidden="false">　员工管理</i>
             </li>
-            <li v-if="has(1)" v-on:click="selectRule('Royalty')">
-              <router-link to="/MP/Royalty"><i class="fa fa-table" aria-hidden="false">　提成规则管理</i></router-link>
+            <li v-on:click="selectRule('Royalty')">
+              <i class="fa fa-table" aria-hidden="false">　提成规则管理</i>
             </li>
-            <li v-if="has(1)" v-on:click="selectRule('Position')">
-              <router-link to="/MP/Position"><i class="fa fa-table" aria-hidden="false">　岗位管理</i></router-link>
+            <li v-on:click="selectRule('Position')">
+              <i class="fa fa-table" aria-hidden="false">　岗位管理</i>
             </li>
-            <li v-if="has(1)" v-on:click="selectRule('Store')">
-              <router-link to="/MP/Store"><i class="fa fa-table" aria-hidden="false">　商铺管理</i></router-link>
+            <li v-on:click="selectRule('Store')">
+              <i class="fa fa-table" aria-hidden="false">　商铺管理</i>
             </li>
-            <li v-if="has(1)" v-on:click="selectRule('RuleManager')">
-              <router-link to="/MP/RuleManager"><i class="fa fa-table" aria-hidden="false">　权限管理</i></router-link>
+            <li v-on:click="selectRule('RuleManager')">
+              <i class="fa fa-table" aria-hidden="false">　权限管理</i>
             </li>
             <!-- <li v-if="has(1)">
 							<router-link to="/MP/test"><i class="fa fa-table" aria-hidden="false">　权限管理</i></router-link>

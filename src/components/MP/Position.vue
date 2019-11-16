@@ -77,7 +77,7 @@
 		},
 		data() {
 			return {
-				positionList: ["",],
+				positionList: [],
 				isuse: '1',
 				posName: '',
 				fixedHeader: false,

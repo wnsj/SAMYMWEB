@@ -167,6 +167,7 @@
 						storeId: this.storeId,
 						memNum: this.memNum,
 						memName:this.memName,
+						memNumNotNull:'1',//用来判断数据库的非空会员
 						phone:this.phone,
 						begCreateDate:this.begCreateDate,
 						endCreateDate:this.endCreateDate,

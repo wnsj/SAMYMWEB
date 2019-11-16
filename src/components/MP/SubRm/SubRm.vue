@@ -30,7 +30,7 @@
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">模块级别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="ruleContent.moduleGrade">
-								<option value="">未选择</option>
+								<option value="">--未选择--</option>
 								<option value="1">第一级模块</option>
 								<option value="2">第二级模块</option>
 							</select>

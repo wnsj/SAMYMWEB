@@ -39,7 +39,7 @@
             <li v-on:click="selectRule('Order')">
               <i class="fa fa-table" aria-hidden="false">　预约管理</i>
             </li>
-            <li>
+            <li v-on:click="selectRule('CashDeposit')">
               <i class="fa fa-table" aria-hidden="false">　定金管理</i>
             </li>
             <li v-on:click="selectRule('Employee')">

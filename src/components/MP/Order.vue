@@ -168,7 +168,7 @@
 				endCreateDate:"",
 				begAppDate:"",
 				endAppDate:"",
-				orderList: ["",],
+				orderList: [],
 				arrival:'0',
 				state:'1',
 			};

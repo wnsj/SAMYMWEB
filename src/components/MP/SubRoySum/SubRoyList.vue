@@ -76,12 +76,12 @@
 				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
 				v-show="(posType=='咨询师' || posType=='咨询顾问') && counlorRefund.balance > 0">
 					<div class="modal-header">
-						<h4 class="pull-left">退费扣款</h4>
+						<h4 class="pull-left">退号扣款</h4>
 					</div>
 					<table class="table table-bordered table-hover user-table">
 						<thead>
 							<tr>
-								<th class="text-center">退费金额</th>
+								<th class="text-center">退号人数</th>
 								<th class="text-center">扣费金额</th>
 							</tr>
 						</thead>
@@ -109,8 +109,8 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>{{clerkFirstRoy.empName}}</td>
-								<td>{{clerkFirstRoy.posName}}</td>
+								<td>{{clerkContent.empName}}</td>
+								<td>{{clerkContent.posName}}</td>
 								<td>{{clerkFirstRoy.balance}}</td>
 								<td>{{clerkFirstRoy.royalty}}</td>
 								<td>{{clerkTwoRoy.balance}}</td>
@@ -123,12 +123,12 @@
 				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
 				v-show="(posType=='文员') && clerkRefund.balance > 0">
 					<div class="modal-header">
-						<h4 class="pull-left">退费扣款</h4>
+						<h4 class="pull-left">退号扣款</h4>
 					</div>
 					<table class="table table-bordered table-hover user-table">
 						<thead>
 							<tr>
-								<th class="text-center">退费金额</th>
+								<th class="text-center">退号人数</th>
 								<th class="text-center">扣费金额</th>
 							</tr>
 						</thead>
@@ -190,6 +190,7 @@
 					"balance": '', //总人数
 				},
 				posType: '',
+				clerkContent:'',
 			}
 		},
 		methods: {
@@ -233,7 +234,8 @@
 					"balance": '', //总人数
 				}
 				this.posType = param.posName
-				// console.log(JSON.stringify(param))
+				console.log(JSON.stringify(param))
+				this.clerkContent = param
 				this.checkDetail(param)
 			},
 			checkDetail(param) {
@@ -267,6 +269,9 @@
 					}
 					if(!this.isBlank(retData.clerkTwoRoy)){
 						this.clerkTwoRoy=retData.clerkTwoRoy
+					}
+					if(!this.isBlank(retData.clerkRefund)){
+						this.clerkRefund=retData.clerkRefund
 					}
 					if(!this.isBlank(retData.counlorRefund)){
 						this.counlorRefund=retData.counlorRefund

@@ -24,17 +24,14 @@
             <li class="li-active" v-on:click="selectRule('MemberSummary')">
               <i class="fa fa-table fa-circle" aria-hidden="true">　会员总表</i>
             </li>
-            <li v-on:click="selectRule('SettleSummary')">
-              <i class="fa fa-table" aria-hidden="false">　消费管理</i>
-            </li>
-            <li v-on:click="selectRule('RoyaltySummary')">
-              <i class="fa fa-table" aria-hidden="false">　提成汇总</i>
-            </li>
             <li v-on:click="selectRule('Member')">
               <i class="fa fa-table" aria-hidden="false">　会员管理</i>
             </li>
+            <li v-on:click="selectRule('SettleSummary')">
+              <i class="fa fa-table" aria-hidden="false">　消费管理</i>
+            </li>
             <li v-on:click="selectRule('Charge')">
-              <i class="fa fa-table" aria-hidden="false">　充值管理(退费)</i>
+              <i class="fa fa-table" aria-hidden="false">　充值/退费管理</i>
             </li>
             <li v-on:click="selectRule('Order')">
               <i class="fa fa-table" aria-hidden="false">　预约管理</i>
@@ -42,11 +39,14 @@
             <li v-on:click="selectRule('CashDeposit')">
               <i class="fa fa-table" aria-hidden="false">　定金管理</i>
             </li>
-            <li v-on:click="selectRule('Employee')">
-              <i class="fa fa-table" aria-hidden="false">　员工管理</i>
+            <li v-on:click="selectRule('RoyaltySummary')">
+              <i class="fa fa-table" aria-hidden="false">　提成汇总</i>
             </li>
             <li v-on:click="selectRule('Royalty')">
               <i class="fa fa-table" aria-hidden="false">　提成规则管理</i>
+            </li> 
+            <li v-on:click="selectRule('Employee')">
+              <i class="fa fa-table" aria-hidden="false">　员工管理</i>
             </li>
             <li v-on:click="selectRule('Position')">
               <i class="fa fa-table" aria-hidden="false">　岗位管理</i>
@@ -164,5 +164,18 @@
 
   .li-active i {
     color: #f2ad4e;
+  }
+  .root{
+    width:100%; 
+    overflow-x:hidden;
+  }
+  .fa-table{
+    color:#337ab7;
+  }
+  .fa-table:hover{
+    color:#1b4fa3;
+  }
+  .fa-circle:hover{
+    color:#f2ad4e;
   }
 </style>

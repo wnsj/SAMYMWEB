@@ -7,12 +7,12 @@
 		</div>
 		<div class="tableContent">
 			<nobr class="widthmax">
-				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
+				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px;" 
 				v-show="posType=='店长' || posType=='店长助理' || posType=='咨询师' || posType=='咨询顾问'">
-					<div class="modal-header">
-						<h4 class="pull-left">会员消费提成</h4>
+					<div class="modal-header pd0">
+						<h4 class="pull-left mt0">会员消费提成</h4>
 					</div>
-					<table class="table table-bordered table-hover user-table">
+					<table class="table table-bordered table-hover user-table mb0">
 						<thead>
 							<tr>
 								<th class="text-center">会员卡号</th>
@@ -32,12 +32,12 @@
 					</table>
 				</div>
 				
-				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
+				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px;" 
 				v-show="(posType=='店长' || posType=='店长助理' || posType=='咨询师' || posType=='咨询顾问') && summaryRoy.royalty > 0">
-					<div class="modal-header">
-						<h4 class="pull-left">流水提成</h4>
+					<div class="modal-header pd0">
+						<h4 class="pull-left mt0">流水提成</h4>
 					</div>
-					<table class="table table-bordered table-hover user-table">
+					<table class="table table-bordered table-hover user-table mb0">
 						
 						<thead>
 							<tr>
@@ -53,12 +53,12 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
+				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px" 
 				v-show="(posType=='店长' || posType=='店长助理') && refund.balance > 0">
-					<div class="modal-header">
+					<div class="modal-header pd0">
 						<h4 class="pull-left">退费扣款</h4>
 					</div>
-					<table class="table table-bordered table-hover user-table">
+					<table class="table table-bordered table-hover user-table mb0">
 						<thead>
 							<tr>
 								<th class="text-center">退费金额</th>
@@ -73,12 +73,12 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
+				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px" 
 				v-show="(posType=='咨询师' || posType=='咨询顾问') && counlorRefund.balance > 0">
-					<div class="modal-header">
+					<div class="modal-header pd0">
 						<h4 class="pull-left">退号扣款</h4>
 					</div>
-					<table class="table table-bordered table-hover user-table">
+					<table class="table table-bordered table-hover user-table mb0">
 						<thead>
 							<tr>
 								<th class="text-center">退号人数</th>
@@ -93,7 +93,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
+				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px" 
 				v-show="posType=='文员'">
 					<table  class="table table-bordered table-hover user-table" id="datatable">
 						<thead>
@@ -120,12 +120,12 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
+				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px" 
 				v-show="(posType=='文员') && clerkRefund.balance > 0">
 					<div class="modal-header">
 						<h4 class="pull-left">退号扣款</h4>
 					</div>
-					<table class="table table-bordered table-hover user-table">
+					<table class="table table-bordered table-hover user-table mb0">
 						<thead>
 							<tr>
 								<th class="text-center">退号人数</th>
@@ -291,5 +291,8 @@
 </script>
 
 <style>
-
+	.pd0{ padding:0;}
+	.mb0{ margin-bottom:0;}
+	.mt0{ margin-top:0;}
+	.mb20{ margin-bottom:20px;}
 </style>

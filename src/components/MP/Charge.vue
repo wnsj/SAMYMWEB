@@ -71,8 +71,8 @@
 								<th class="text-center" rowspan='2'>会员卡号</th>
 								<th class="text-center" rowspan='2'>姓名</th>
 								<th class="text-center" rowspan='2'>推荐人姓名</th>
-								<th class="text-center" rowspan='2'>充值时间(退款)</th>
-								<th class="text-center" rowspan='2'>充值金额(退款)</th>
+								<th class="text-center" rowspan='2'>充值/退款时间</th>
+								<th class="text-center" rowspan='2'>充值/退款金额</th>
 							</tr>
 						</thead>
 						<tbody>

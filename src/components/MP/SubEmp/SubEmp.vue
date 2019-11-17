@@ -23,7 +23,7 @@
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="employee.name" placeholder="">
+							<input type="text" class="form-control" v-model="employee.phone" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
@@ -74,19 +74,17 @@
 					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-							 v-on:click="addEmp()">确认</button>
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 							 v-on:click="closeCurrentPage()">返回</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+							 v-on:click="addEmp()">确认</button>
 						</div>
 					</div>
-
 				</form>
 			</div>
-
 		</div>
 
-	</div>
+	</div> 
 </template>
 
 <script>
@@ -191,6 +189,7 @@
 			
 			//the event of addtional button
 			addEmp() {
+				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 				if (this.isBlank(this.employee.empName)) {
 					alert("员工的姓名不能为空")
 					return
@@ -201,6 +200,13 @@
 				}
 				if (this.isBlank(this.employee.storeId) && this.employee.storeId == '0') {
 					alert("店铺不能为空")
+					return
+				}
+				if(this.isBlank(this.employee.phone)){
+					alert("手机号不能为空")
+					return
+				}else if(reg.test(this.employee.phone)==false){
+					alert("不是完整的11位手机号或者正确的座机号！");
 					return
 				}
 				var url = this.url + '/employeeAction/addUpdateEmp';

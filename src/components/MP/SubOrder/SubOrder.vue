@@ -56,8 +56,8 @@
 					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addOrder(title)">确认</button>
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addOrder(title)">确认</button>
 						</div>
 					</div>
 				</form>
@@ -160,12 +160,16 @@
 			
 			//the event of addtional button
 			addOrder(param){
+				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 				if(this.isBlank(this.order.appName)){
 					alert("姓名不能为空")
 					return
 				}
 				if(this.isBlank(this.order.phone)){
 					alert("手机号不能为空")
+					return
+				}else if(reg.test(this.order.phone)==false){
+					alert("不是完整的11位手机号或者正确的座机号！");
 					return
 				}
 				

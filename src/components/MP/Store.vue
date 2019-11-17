@@ -60,7 +60,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row row_edit">
+		<div class="row row_edit"> 
 			<div class="modal fade" id="storeContent">
 				<div class="modal-dialog">
 					<SubStore ref='store' @certainAction='feedBack'></SubStore>

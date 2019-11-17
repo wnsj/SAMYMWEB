@@ -149,8 +149,7 @@
 			
 			//the event of addtional button
 			certainAction(){
-				console.log('the event of addtional button')
-				
+				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 				
 				if(this.isBlank(this.member.memName)){
 					alert("姓名不能为空")
@@ -158,6 +157,9 @@
 				}
 				if(this.isBlank(this.member.phone)){
 					alert("手机号不能为空")
+					return
+				}else if(reg.test(this.member.phone)==false){
+					alert("不是完整的11位手机号或者正确的座机号！");
 					return
 				} 
 				

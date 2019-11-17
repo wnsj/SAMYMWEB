@@ -60,8 +60,8 @@
 		<div class="">
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable" style="max-height:464px">
-					<table class="table table-bordered table-hover" id="datatable">
-						<thead class="datathead">
+					<table class="table table-bordered table-hover" id="datatable" style=" position:relative;">
+						<thead>
 							<tr>
 								<th class="text-center">店铺</th>
 								<th class="text-center">岗位</th>

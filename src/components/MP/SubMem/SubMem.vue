@@ -61,10 +61,13 @@
 							否：<input type="radio" name="entityEmp" v-model="member.memType" value="0" class="form-control">-->
 						</div>
 					</div>
+					<div class="col-md-12 form-group clearfix">
+						<p class="tips">* 未从微信公众号注册的会员，将不能使用微信消息模板推送，请操作员悉知并确认操作无误。</p>
+					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>	
 						</div>
 					</div>
 				</form>
@@ -285,6 +288,6 @@
 	label.bui-radios-label input:disabled:checked + .bui-radios:after {
 		background-color: #c1c1c1; 
 	}
-
+	.tips{ display:block; text-align:left; color:red; font-size:12px;}
 	
 </style>

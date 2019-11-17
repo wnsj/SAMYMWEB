@@ -96,7 +96,7 @@
 				},
 				title:'新增',
 				item:[],
-				isShow:true,
+				isShow:false,
 			};
 		},
 		methods:{

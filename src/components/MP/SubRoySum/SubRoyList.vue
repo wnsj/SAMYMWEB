@@ -81,6 +81,7 @@
 					<table class="table table-bordered table-hover user-table mb0">
 						<thead>
 							<tr>
+								<th class="text-center">初访人数</th>
 								<th class="text-center">退号人数</th>
 								<th class="text-center">扣费金额</th>
 							</tr>
@@ -93,54 +94,6 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px" 
-				v-show="posType=='文员'">
-					<table  class="table table-bordered table-hover user-table" id="datatable">
-						<thead>
-							<tr>
-								<th class="text-center">岗位名称</th>
-								<th class="text-center">姓名</th>
-								<th class="text-center">初访人数</th>
-								<th class="text-center">初访提成</th>
-								<th class="text-center">复访人数</th>
-								<th class="text-center">复访提成</th>
-								<th class="text-center">合计提成总额</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>{{clerkContent.empName}}</td>
-								<td>{{clerkContent.posName}}</td>
-								<td>{{clerkFirstRoy.balance}}</td>
-								<td>{{clerkFirstRoy.royalty}}</td>
-								<td>{{clerkTwoRoy.balance}}</td>
-								<td>{{clerkTwoRoy.royalty}}</td>
-								<td>{{clerkFirstRoy.royalty+clerkTwoRoy.royalty}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px" 
-				v-show="(posType=='文员') && clerkRefund.balance > 0">
-					<div class="modal-header">
-						<h4 class="pull-left">退号扣款</h4>
-					</div>
-					<table class="table table-bordered table-hover user-table mb0">
-						<thead>
-							<tr>
-								<th class="text-center">退号人数</th>
-								<th class="text-center">扣费金额</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>{{clerkRefund.balance}}</td>
-								<td>{{clerkRefund.refund}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				
 			</nobr>
 		</div>
 

@@ -119,6 +119,40 @@
 			<div class="col-md-5 col-lg-5 part pb0">
 				<div class="col-md-12 col-lg-12 main-title">
 					<div class="col-md-8 col-lg-8 text-left">
+						<h3>退号扣提成规则</h3>
+					</div>
+					<div class="col-md-4 col-lg-4 pull-right">
+						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubCharg','1','')">添加</button>
+					</div>
+				</div>
+				<div class="col-md-12 col-lg-12">
+					<div class="table-responsive pre-scrollable" ref="tab5">
+						<table class="table table-bordered table-hover mb0" id="datatable">
+			
+							<thead class="datathead">
+								<tr>
+									<th class="text-center col-md-2">岗位</th>
+									<th class="text-center col-md-4">退号比例(大于)</th>
+									<th class="text-center col-md-3">扣款金额</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='4'" v-on:dblclick="selectRule('SubCharg','3',item)">
+									<td class="text-center">{{item.posName}}</td>
+									<td class="text-center">{{item.orderSmall}} %</td>
+									<td class="text-center">{{item.visRoy}} ¥/人</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="col-md-12 col-lg-12">	
+					<p class="tips">* 双击单行，可对当前数据进行修改</p>
+				</div>
+			</div>
+			<!-- <div class="col-md-5 col-lg-5 part pb0">
+				<div class="col-md-12 col-lg-12 main-title">
+					<div class="col-md-8 col-lg-8 text-left">
 						<h3>预约人数提成规则</h3>
 					</div>
 					<div class="col-md-4 col-lg-4 pull-right">
@@ -150,44 +184,7 @@
 				<div class="col-md-12 col-lg-12">	
 					<p class="tips">* 双击单行，可对当前数据进行修改</p>
 				</div>
-			</div>
-			<div style="clear:both"></div>
-		</div>
-		<div>	
-			<div class="col-md-5 col-lg-5 part pb0">
-				<div class="col-md-12 col-lg-12 main-title">
-					<div class="col-md-8 col-lg-8 text-left">
-						<h3>退号扣提成规则</h3>
-					</div>
-					<div class="col-md-4 col-lg-4 pull-right">
-						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubCharg','1','')">添加</button>
-					</div>
-				</div>
-				<div class="col-md-12 col-lg-12">
-					<div class="table-responsive pre-scrollable" ref="tab5">
-						<table class="table table-bordered table-hover mb0" id="datatable">
-			
-							<thead class="datathead">
-								<tr>
-									<th class="text-center col-md-2">岗位</th>
-									<th class="text-center col-md-4">退号人数(大于)</th>
-									<th class="text-center col-md-3">扣款金额</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='4'" v-on:dblclick="selectRule('SubCharg','3',item)">
-									<td class="text-center">{{item.posName}}</td>
-									<td class="text-center">{{item.orderSmall}} 人</td>
-									<td class="text-center">{{item.visRoy}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="col-md-12 col-lg-12">	
-					<p class="tips">* 双击单行，可对当前数据进行修改</p>
-				</div>
-			</div>
+			</div> -->
 			<div style="clear:both"></div>
 		</div>
 		<div class="row row_edit">

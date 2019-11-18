@@ -111,6 +111,8 @@
 					}
 					this.$refs.clerkEmp.setPosName('文员')
 					this.$refs.counlorEmp.setPosName('咨询顾问')
+					this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
+					this.$refs.counlorEmp.setEmp(this.order.counlorEmpId)
 				}else if(param=='modify'){
 					console.log('Initialization order’s content, which modifies order')
 					this.title='修改'
@@ -174,7 +176,7 @@
 				}
 				
 				if(this.isBlank(this.order.clerkEmpId) && this.isBlank(this.order.counlorEmpId)){
-					alert('文员和咨询师至少选择一个')
+					alert('文员和咨询顾问至少选择一个')
 					return
 				}
 				if(!this.isBlank(this.order.appDate)){

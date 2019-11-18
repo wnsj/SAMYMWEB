@@ -1,6 +1,6 @@
 <template>
 	<select class="form-control" v-model="empId" v-on:change="employeeChange()">
-		<option value="0">--未选择--</option>
+		<option value="">--未选择--</option>
 		<option v-for="(item,index) in employeeList" :key="index" v-bind:value="item.empId">
 			{{item.empName}}
 		</option>

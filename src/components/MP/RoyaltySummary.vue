@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">提成管理</h1>
+			<h1 class="titleCss">提成汇总</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -65,7 +65,7 @@
 									<td>{{item.isuse == 1 ? "在职" : "离职"}}</td>
 									<td>{{item.royalty > 0 ? item.royalty : ""}}</td>
 									<td>{{item.refund > 0 ? item.refund : ""}}</td>
-									<td>{{item.balance > 0 ? item.balance : ""}}</td>
+									<td>{{item.balance != 0 ? item.balance : ""}}</td>
 								</tr>
 							</tbody>
 						</table>

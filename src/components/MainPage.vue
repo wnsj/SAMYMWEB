@@ -22,13 +22,13 @@
           <p style=" display:block; width:190px; height:50px;margin:0 auto; line-height:50px; font-size: 30px;font-weight: bold;color: #1b4fa3;text-align: left; margin-bottom:10px;">功能列表</p>
           <ul id="aside-menu">
             <li class="li-active" v-on:click="selectRule('MemberSummary')">
-              <i class="fa fa-table fa-circle" aria-hidden="true">　会员总表</i>
+              <i class="fa fa-table fa-circle" aria-hidden="true">　会员汇总</i>
             </li>
             <li v-on:click="selectRule('Member')">
               <i class="fa fa-table" aria-hidden="false">　会员管理</i>
             </li>
             <li v-on:click="selectRule('SettleSummary')">
-              <i class="fa fa-table" aria-hidden="false">　消费管理</i>
+              <i class="fa fa-table" aria-hidden="false">　消费汇总</i>
             </li>
             <li v-on:click="selectRule('Charge')">
               <i class="fa fa-table" aria-hidden="false">　充值/退费管理</i>

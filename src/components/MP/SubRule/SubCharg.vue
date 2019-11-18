@@ -15,7 +15,7 @@
 						</div>
 					</div>
 					<div class="col-md-9 form-group clearfix">
-						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预约人数</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">退号人数</label><span class="sign-left">:</span>
 						<div class="col-md-4 pos-re">
 							<input type="text" class="form-control" v-model="FWRoyalty.orderSmall" placeholder="">
 							<span class="pos-ab pos-tr">人</span>

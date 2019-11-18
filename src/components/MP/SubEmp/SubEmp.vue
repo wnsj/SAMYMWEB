@@ -226,6 +226,8 @@
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('addEmp')
+					}else{
+						alert(res.retMsg)
 					}
 				}).catch((error) => {
 					console.log('员工请求失败')

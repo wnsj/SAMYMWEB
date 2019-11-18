@@ -74,7 +74,7 @@
 								<td class="text-center">{{item.phone}}</td>
 								<td class="text-center">{{item.money}}</td>
 								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button></td>
+								<td class="text-center"><button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -122,11 +122,6 @@
 			},
 			//modify the cotent of member
 			modifyMember(item) {
-				if(!this.has(2)){
-				alert("暂无权限修改!");
-				return;
-				}
-				console.log('modify the cotent of member')
 				this.$refs.subCd.initData('modify', item)
 				$("#cdContent").modal('show')
 			},

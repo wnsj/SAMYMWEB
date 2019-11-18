@@ -3,12 +3,12 @@
 
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">商铺管理</h1>
+			<h1 class="titleCss">门店管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;padding-bottom:1.5%;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">商铺名</p><span class="sign-left">:</span>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					<input class="form-control" type="text" v-model="storeName">
@@ -38,11 +38,11 @@
 						
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">店铺名称</th>
+								<th class="text-center">门店名称</th>
 								<th class="text-center">联系人</th>
 								<th class="text-center">联系电话</th>
 								<th class="text-center">是否停用</th>
-								<th class="text-center">商铺地址</th>
+								<th class="text-center">门店地址</th>
 								<th class="text-center" v-if="has(2)">修改</th>
 							</tr>
 						</thead>

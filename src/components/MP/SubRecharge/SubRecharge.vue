@@ -12,7 +12,7 @@
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员卡号</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" style="font-size: 12px;" class="form-control" v-model="consume.memNum" v-on:change="checkMemNum(consume.memNum)"
+							<input type="text" class="form-control" v-model="consume.memNum" v-on:change="checkMemNum(consume.memNum)"
 							 placeholder="卡号/手机号后4位">
 						</div>
 					</div>
@@ -111,9 +111,8 @@
 					storeId: '',
 					clerkId:'',
 				}
-				console.log('文员：'+this.consume.clerkId)
-				this.$refs.emp.setEmp(this.consume.empId)
-				this.$refs.emp.setEmp(this.consume.clerkId)
+				console.log('文员：'+this.consume.empId)
+				this.$refs.emp.setEmp('0')
 				if (param == 'recharge') {
 					// console.log('new increasing recharge')
 					this.title = '充值';

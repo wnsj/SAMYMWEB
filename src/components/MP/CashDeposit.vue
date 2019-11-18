@@ -42,7 +42,7 @@
 		<div class="row" style="padding-bottom:1.5%;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">店铺</p><span class="sign-left">:</span>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<Store ref='store' @storeChange='storeChange'></Store>
@@ -59,7 +59,7 @@
 					<table class="table table-bordered table-hover" id="datatable" >
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">店铺</th>
+								<th class="text-center">门店</th>
 								<th class="text-center">姓名</th>
 								<th class="text-center">手机号</th>
 								<th class="text-center">定金金额</th>

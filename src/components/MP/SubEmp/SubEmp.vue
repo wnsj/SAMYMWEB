@@ -15,7 +15,7 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">店铺</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">门店</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<store ref="store" @storeChange='storeChange'></store>
 						</div>

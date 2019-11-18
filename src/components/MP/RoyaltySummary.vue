@@ -6,7 +6,7 @@
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">店铺</p><span class="sign-left">:</span>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<store ref='store' @storeChange='storeChange'></store>

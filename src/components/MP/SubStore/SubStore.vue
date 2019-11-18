@@ -3,13 +3,13 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h4 id="myModalLabel" class="modal-title">{{title}}商铺</h4>
+			<h4 id="myModalLabel" class="modal-title">{{title}}门店</h4>
 		</div>
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">商铺名称</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">门店名称</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="store.storeName" placeholder="">
 						</div>
@@ -35,9 +35,9 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">联系地址</label><span class="sign-left">:</span>
-						<div class="col-md-8">
+					<div class="col-md-12 form-group clearfix">
+						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline" style="width:12%;padding:0;line-height:34px;">联系地址</label><span class="sign-left">:</span>
+						<div class="col-md-10" style="width:84%;">
 							<input type="text" class="form-control" v-model="store.address" placeholder="">
 						</div>
 					</div>

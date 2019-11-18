@@ -8,7 +8,7 @@
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">店铺</p><span class="sign-left">:</span>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<Store ref='store' @storeChange='storeChange'></Store>
@@ -50,7 +50,7 @@
 							<tr>
 								<th class="text-center">会员卡号</th>
 								<th class="text-center">姓名</th>
-								<th class="text-center">店铺名</th>
+								<th class="text-center">门店名</th>
 								<th class="text-center">是否实卡用户</th>
 								<th class="text-center">手机号</th>
 								<th class="text-center">性别</th>

@@ -122,7 +122,7 @@
 					this.title = '消费'
 					this.isShow = false
 					this.$refs.clerkEmp.setEmp('0')
-					this.$refs.clerkEmp.setPosName('文员')
+					this.$refs.clerkEmp.setPosName('文员');
 				} else if (param == 'refund') {
 					// console.log('new increasing refund')
 					this.title = '退费'
@@ -162,7 +162,7 @@
 						break;
 					case "消费":
 						this.consume.costType = '2'
-						this.consume.storeId = this.storeId()
+						this.consume.storeId = this.storeId();
 						break;
 					case "退费":
 						this.consume.costType = '3'
@@ -214,16 +214,19 @@
 								this.$router.push({
 									name: 'Charge',
 								});
+								this.jumpLeft(3);
 								break;
 							case "消费":
 								this.$router.push({
 									name: 'SettleSummary',
 								});
+								this.jumpLeft(2);
 								break;
 							case "退费":
 								this.$router.push({
 									name: 'Charge',
 								});
+								this.jumpLeft(3);
 								break;
 						}
 						$("#addFee").modal("hide")
@@ -237,6 +240,10 @@
 			closeCurrentPage() {
 				$("#addFee").modal("hide")
 				console.log('关闭添加患者界面')
+			},
+			jumpLeft(index){
+				$("#aside-menu li").removeClass("li-active")
+				$("#aside-menu li").eq(index).addClass("li-active")
 			},
 			//Query member's information based on the memNum
 			checkMemNum(param) {

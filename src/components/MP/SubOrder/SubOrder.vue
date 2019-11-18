@@ -41,12 +41,12 @@
 							<dPicker v-model="order.appDate" v-on:change="dateAction('1')" style="width:100%;"></dPicker>
 						</div>	
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<!-- <div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">文员</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref="clerkEmp" @employeeChange="clerkEmpChange"></emp>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询顾问</label><span
 						 class="sign-left">:</span>
@@ -109,17 +109,17 @@
 						clerkEmpId:'',//文员
 						counlorEmpId:'',//咨询师
 					}
-					this.$refs.clerkEmp.setPosName('文员')
+					// this.$refs.clerkEmp.setPosName('文员')
 					this.$refs.counlorEmp.setPosName('咨询顾问')
-					this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
+					// this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
 					this.$refs.counlorEmp.setEmp(this.order.counlorEmpId)
 				}else if(param=='modify'){
 					console.log('Initialization order’s content, which modifies order')
 					this.title='修改'
 					Object.assign(this.order,order)
-					this.$refs.clerkEmp.setPosName('文员')
+					// this.$refs.clerkEmp.setPosName('文员')
 					this.$refs.counlorEmp.setPosName('咨询顾问')
-					this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
+					// this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
 					this.$refs.counlorEmp.setEmp(this.order.counlorEmpId)
 				}
 			},
@@ -175,8 +175,8 @@
 					return
 				}
 				
-				if(this.isBlank(this.order.clerkEmpId) && this.isBlank(this.order.counlorEmpId)){
-					alert('文员和咨询顾问至少选择一个')
+				if(this.isBlank(this.order.counlorEmpId)){
+					alert('咨询顾问不能为空')
 					return
 				}
 				if(!this.isBlank(this.order.appDate)){

@@ -191,6 +191,8 @@
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('certainAction')
+					}else{
+						alert(res.retMsg)
 					}
 				}).catch((error) => {
 					console.log('会员相关操作失败')

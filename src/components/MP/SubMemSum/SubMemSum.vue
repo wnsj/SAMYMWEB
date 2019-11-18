@@ -79,6 +79,8 @@
 						if (res.retData != null) {
 							this.memberList = res.retData
 						}
+					}else{
+						alert(res.retMsg)
 					}
 				}).catch((error) => {
 					console.log('会员消费详细信息请求失败')

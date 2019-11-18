@@ -82,6 +82,8 @@
 						if (res.retData != null) {
 							this.consumeList = res.retData
 						}
+					}else{
+						alert(res.retMsg)
 					}
 				}).catch((error) => {
 					console.log('消费详情插叙失败')

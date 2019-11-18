@@ -126,7 +126,7 @@
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-12">
-					<div class="table-responsive pre-scrollable" ref="tab5">
+					<div class="table-responsive pre-scrollable" ref="tab4">
 						<table class="table table-bordered table-hover mb0" id="datatable">
 			
 							<thead class="datathead">
@@ -380,14 +380,13 @@
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true);
 			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
-			let divH = (h-240)/3;
+			let divH = (h-240)/2;
 			let titH = this.$refs.tit.offsetHeight;
 			let maxH = divH-titH-30;
 			this.$refs.tab1.style="height:"+maxH+"px";
 			this.$refs.tab2.style="height:"+maxH+"px";
 			this.$refs.tab3.style="height:"+maxH+"px";
 			this.$refs.tab4.style="height:"+maxH+"px";
-			this.$refs.tab5.style="height:"+maxH+"px";
 		},
 		created() {
 			this.checkRoyaltyList()

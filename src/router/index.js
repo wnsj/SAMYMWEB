@@ -22,17 +22,18 @@ Vue.use(Router)
 //解决路由多次跳转同一页面报错
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch(err => err);
+  return originalPush.call(this, location).catch(err => {
+    //console.log("err：" + err)
+  });
 }
 
 export default new Router({
-    routes: [
-			{
-				path: '/login',
-				component: login,
-				hidden: true
-			},
-			{
+  routes: [{
+      path: '/login',
+      component: login,
+      hidden: true
+    },
+    {
       path: '/MainPage',
       name: 'MainPage',
       component: MainPage,
@@ -46,11 +47,11 @@ export default new Router({
           name: 'MemberSummary',
           component: MemberSummary,
         },
-				{
-				  path: '/MP/SettleSummary',
-				  name: 'SettleSummary',
-				  component: SettleSummary,
-				},
+        {
+          path: '/MP/SettleSummary',
+          name: 'SettleSummary',
+          component: SettleSummary,
+        },
         {
           path: '/MP/Employee',
           name: 'Employee',
@@ -71,37 +72,38 @@ export default new Router({
           name: 'Position',
           component: Position,
         },
-				{
-				  path: '/MP/Order',
-				  name: 'Order',
-				  component: Order,
-				},
-				{
-				  path: '/MP/Royalty',
-				  name: 'Royalty',
-				  component: Royalty,
-				},
-				{
-				  path: '/MP/Store',
-				  name: 'Store',
-				  component: Store,
-				},
+        {
+          path: '/MP/Order',
+          name: 'Order',
+          component: Order,
+        },
+        {
+          path: '/MP/Royalty',
+          name: 'Royalty',
+          component: Royalty,
+        },
+        {
+          path: '/MP/Store',
+          name: 'Store',
+          component: Store,
+        },
         {
           path: '/MP/RuleManager',
           name: 'RuleManager',
           component: RuleManager,
         },
-				{
-				  path: '/MP/CashDeposit',
-				  name: 'CashDeposit',
-				  component: CashDeposit,
-				},
-				{
-				  path: '/MP/test',
-				  name: 'test',
-				  component: test,
-				},
+        {
+          path: '/MP/CashDeposit',
+          name: 'CashDeposit',
+          component: CashDeposit,
+        },
+        {
+          path: '/MP/test',
+          name: 'test',
+          component: test,
+        },
       ],
       redirect: '/MP/MemberSummary'
-    }]
+    }
+  ]
 })

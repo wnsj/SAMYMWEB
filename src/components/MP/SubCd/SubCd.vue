@@ -59,6 +59,8 @@
 					money:'',
 					createDate:'',
 					storeId:'',
+					state:'',
+					operatorId:'',
 				},
 				title:'新增',
 			};
@@ -75,6 +77,8 @@
 					phone:'',
 					money:'',
 					storeId:this.storeId(),
+					state:'0',
+					operatorId:this.accountId(),
 				}
 					
 				}else if(param=='modify'){
@@ -82,6 +86,7 @@
 					
 					this.title='修改'
 					Object.assign(this.cash,cash)
+					this.cash.operatorId=this.accountId()
 					// console.log(JSON.stringify(this.cash))
 					
 				}

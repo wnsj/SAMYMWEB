@@ -64,7 +64,8 @@
 								<th class="text-center">手机号</th>
 								<th class="text-center">定金金额</th>
 								<th class="text-center">交定金时间</th>
-								<th class="text-center" v-if="has(2)">修改</th>
+								<th class="text-center">操作人</th>
+								<th class="text-center">修改</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -74,7 +75,11 @@
 								<td class="text-center">{{item.phone}}</td>
 								<td class="text-center">{{item.money}}</td>
 								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
-								<td class="text-center"><button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button></td>
+								<td class="text-center">{{item.operatorName}}</td>
+								<td class="text-center">
+									<button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button>
+									<button type="button" class="btn btn-default" v-on:click="cancelCush(item)">{{item.state==1 ? "已撤销" : "未撤销"}}</button>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -114,6 +119,7 @@
 				beginDate:'',
 				endDate: '',
 				storeId:'0',
+				state:'',
 			};
 		},
 		methods: {
@@ -125,6 +131,10 @@
 			},
 			//modify the cotent of member
 			modifyMember(item) {
+				if(item.state=='1'){
+					alert("已经撤销，不能进行修改")
+					return
+				}
 				this.$refs.subCd.initData('modify', item)
 				$("#cdContent").modal('show')
 			},
@@ -168,6 +178,38 @@
 						alert(res.retMsg)
 					}
 			
+				}).catch((error) => {
+					console.log('定金查询失败')
+				});
+			},
+			cancelCush(item){
+				var url = this.url + '/cashAction/updateCash'
+				if(item.state=='1'){
+					alert("已经撤销，不能进行修改")
+					return
+				}
+				
+				item.updateDate=this.moment('','YYYY-MM-DD 00:00:00.000')
+				
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data:{
+						state:'1',
+						cashId:item.cashId,
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					// console.log(res)
+					if (res.retCode == '0000') {
+						item.state = '1'
+					}
+							
 				}).catch((error) => {
 					console.log('定金查询失败')
 				});

@@ -39,6 +39,9 @@
             <li v-on:click="selectRule('CashDeposit')">
               <i class="fa fa-table" aria-hidden="false">　定金管理</i>
             </li>
+						<li v-on:click="selectRule('CurrentSummary')">
+						  <i class="fa fa-table" aria-hidden="false">　月入汇总</i>
+						</li>
             <li v-on:click="selectRule('RoyaltySummary')">
               <i class="fa fa-table" aria-hidden="false">　提成汇总</i>
             </li>

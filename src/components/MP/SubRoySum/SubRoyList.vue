@@ -88,6 +88,7 @@
 						</thead>
 						<tbody>
 							<tr>
+								<td>{{counlorRefund.royalty}}</td>
 								<td>{{counlorRefund.balance}}</td>
 								<td>{{counlorRefund.refund}}</td>
 							</tr>

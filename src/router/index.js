@@ -15,6 +15,7 @@ import RoyaltySummary from '../components/MP/RoyaltySummary.vue'
 import Store from '../components/MP/Store.vue'
 import RuleManager from '../components/MP/RuleManager.vue'
 import CashDeposit from '../components/MP/CashDeposit.vue'
+import CurrentSummary from '../components/MP/CurrentSummary.vue'
 import test from '../components/MP/test.vue'
 
 Vue.use(Router)
@@ -95,6 +96,11 @@ export default new Router({
 				  path: '/MP/CashDeposit',
 				  name: 'CashDeposit',
 				  component: CashDeposit,
+				},
+				{
+				  path: '/MP/CurrentSummary',
+				  name: 'CurrentSummary',
+				  component: CurrentSummary,
 				},
 				{
 				  path: '/MP/test',

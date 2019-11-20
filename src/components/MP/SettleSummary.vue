@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-				<h1 class="titleCss">消费管理</h1>
+				<h1 class="titleCss">消费汇总</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -78,6 +78,9 @@
 						</table>
 					</div>
 				</nobr>
+			</div>
+			<div class="col-md-12 col-lg-12">
+				<p class="tips">* 双击单行，可对当前数据进行修改</p>
 			</div>
 		</div>
 		<div class="row row_edit">

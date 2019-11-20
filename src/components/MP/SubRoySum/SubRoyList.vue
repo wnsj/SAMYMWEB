@@ -7,12 +7,12 @@
 		</div>
 		<div class="tableContent">
 			<nobr class="widthmax">
-				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
+				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px;" 
 				v-show="posType=='店长' || posType=='店长助理' || posType=='咨询师' || posType=='咨询顾问'">
-					<div class="modal-header">
-						<h4 class="pull-left">会员消费提成</h4>
+					<div class="modal-header pd0">
+						<h4 class="pull-left mt0">会员消费提成</h4>
 					</div>
-					<table class="table table-bordered table-hover user-table">
+					<table class="table table-bordered table-hover user-table mb0">
 						<thead>
 							<tr>
 								<th class="text-center">会员卡号</th>
@@ -31,32 +31,13 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
-				v-show="(posType=='店长' || posType=='店长助理' || posType=='咨询师' || posType=='咨询顾问') && refund.balance > 0">
-					<div class="modal-header">
-						<h4 class="pull-left">退费扣款</h4>
-					</div>
-					<table class="table table-bordered table-hover user-table">
-						<thead>
-							<tr>
-								<th class="text-center">退费金额</th>
-								<th class="text-center">扣费金额</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>{{refund.balance}}</td>
-								<td>{{refund.refund}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
+				
+				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px;" 
 				v-show="(posType=='店长' || posType=='店长助理' || posType=='咨询师' || posType=='咨询顾问') && summaryRoy.royalty > 0">
-					<div class="modal-header">
-						<h4 class="pull-left">流水提成</h4>
+					<div class="modal-header pd0">
+						<h4 class="pull-left mt0">流水提成</h4>
 					</div>
-					<table class="table table-bordered table-hover user-table">
+					<table class="table table-bordered table-hover user-table mb0">
 						
 						<thead>
 							<tr>
@@ -72,35 +53,47 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="table-responsive pre-scrollable" style=" max-height:464px" 
-				v-show="posType=='文员'">
-					<table  class="table table-bordered table-hover user-table" id="datatable">
+				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px" 
+				v-show="(posType=='店长' || posType=='店长助理') && refund.balance > 0">
+					<div class="modal-header pd0">
+						<h4 class="pull-left">退费扣款</h4>
+					</div>
+					<table class="table table-bordered table-hover user-table mb0">
 						<thead>
 							<tr>
-								<th class="text-center">岗位名称</th>
-								<th class="text-center">姓名</th>
-								<th class="text-center">初访人数</th>
-								<th class="text-center">初访提成</th>
-								<th class="text-center">复访人数</th>
-								<th class="text-center">复访提成</th>
-								<th class="text-center">合计提成总额</th>
+								<th class="text-center">退费金额</th>
+								<th class="text-center">扣费金额</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>{{clerkFirstRoy.balance}}</td>
-								<td>{{clerkFirstRoy.balance}}</td>
-								<td>{{clerkFirstRoy.balance}}</td>
-								<td>{{clerkFirstRoy.royalty}}</td>
-								<td>{{clerkTwoRoy.balance}}</td>
-								<td>{{clerkTwoRoy.royalty}}</td>
-								<td>{{clerkFirstRoy.royalty+clerkTwoRoy.royalty}}</td>
+								<td>{{refund.balance}}</td>
+								<td>{{refund.refund}}</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-					
-				
+				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px" 
+				v-show="(posType=='咨询师' || posType=='咨询顾问') && counlorRefund.balance > 0">
+					<div class="modal-header pd0">
+						<h4 class="pull-left">退号扣款</h4>
+					</div>
+					<table class="table table-bordered table-hover user-table mb0">
+						<thead>
+							<tr>
+								<th class="text-center">初访人数</th>
+								<th class="text-center">退号人数</th>
+								<th class="text-center">扣费金额</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{counlorRefund.balance}}</td>
+								<td>{{counlorRefund.refund}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</nobr>
 		</div>
 
@@ -150,7 +143,8 @@
 					"balance": '', //总人数
 				},
 				posType: '',
-			};
+				clerkContent:'',
+			}
 		},
 		methods: {
 			// Initialization patient’s content
@@ -193,6 +187,8 @@
 					"balance": '', //总人数
 				}
 				this.posType = param.posName
+				console.log(JSON.stringify(param))
+				this.clerkContent = param
 				this.checkDetail(param)
 			},
 			checkDetail(param) {
@@ -227,6 +223,9 @@
 					if(!this.isBlank(retData.clerkTwoRoy)){
 						this.clerkTwoRoy=retData.clerkTwoRoy
 					}
+					if(!this.isBlank(retData.clerkRefund)){
+						this.clerkRefund=retData.clerkRefund
+					}
 					if(!this.isBlank(retData.counlorRefund)){
 						this.counlorRefund=retData.counlorRefund
 					}
@@ -245,5 +244,8 @@
 </script>
 
 <style>
-
+	.pd0{ padding:0;}
+	.mb0{ margin-bottom:0;}
+	.mt0{ margin-top:0;}
+	.mb20{ margin-bottom:20px;}
 </style>

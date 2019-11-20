@@ -8,7 +8,7 @@
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">店铺</p><span class="sign-left">:</span>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					<store ref="store" @storeChange='storeChange'></store>
@@ -60,10 +60,10 @@
 		<div class="">
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable" style="max-height:464px">
-					<table class="table table-bordered table-hover" id="datatable">
-						<thead class="datathead">
+					<table class="table table-bordered table-hover" id="datatable" style=" position:relative;">
+						<thead>
 							<tr>
-								<th class="text-center">店铺</th>
+								<th class="text-center">门店</th>
 								<th class="text-center">岗位</th>
 								<!-- <th class="text-center">员工工号</th> -->
 								<th class="text-center">姓名</th>
@@ -89,6 +89,9 @@
 						</tbody>
 					</table>
 				</div>
+			</div>
+			<div class="col-md-12 col-lg-12">
+				<p class="tips">* 双击单行，可对当前数据进行修改</p>
 			</div>
 		</div>
 		<div class="row row_edit">

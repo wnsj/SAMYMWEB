@@ -6,7 +6,7 @@
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">商铺</p><span class="sign-left">:</span>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<Store ref="store" @storeChange="storeChange"></Store>
@@ -88,6 +88,9 @@
 					</div>
 				</nobr>
 			</div>
+			<div class="col-md-12 col-lg-12">
+				<p class="tips">* 双击单行，可对当前数据进行修改</p>
+			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="detailMember">
@@ -167,6 +170,7 @@
 						storeId: this.storeId,
 						memNum: this.memNum,
 						memName:this.memName,
+						memNumNotNull:'1',//用来判断数据库的非空会员
 						phone:this.phone,
 						begCreateDate:this.begCreateDate,
 						endCreateDate:this.endCreateDate,

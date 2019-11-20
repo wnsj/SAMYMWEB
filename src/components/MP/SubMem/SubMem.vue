@@ -61,10 +61,17 @@
 							否：<input type="radio" name="entityEmp" v-model="member.memType" value="0" class="form-control">-->
 						</div>
 					</div>
+					<div class="col-md-12 form-group clearfix">
+						
+						<p class="tips">* 注意：</p>
+						<p class="tips">1.未从微信公众号注册的会员，将不能使用微信消息模板推送，请操作员悉知并确认操作无误。</p>
+						<p class="tips">2.若客户之前已有实体会员卡，请勾选“是”，并将用户卡内余额充值到系统中。</p>
+						<p class="tips">  此项操作不可逆，若选“否”，客户将只能消耗实体卡，不能将卡内余额转入微信会员卡。请谨慎操作。</p>
+					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>	
 						</div>
 					</div>
 				</form>
@@ -96,7 +103,7 @@
 				},
 				title:'新增',
 				item:[],
-				isShow:true,
+				isShow:false,
 			};
 		},
 		methods:{
@@ -146,8 +153,7 @@
 			
 			//the event of addtional button
 			certainAction(){
-				console.log('the event of addtional button')
-				
+				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 				
 				if(this.isBlank(this.member.memName)){
 					alert("姓名不能为空")
@@ -155,6 +161,9 @@
 				}
 				if(this.isBlank(this.member.phone)){
 					alert("手机号不能为空")
+					return
+				}else if(reg.test(this.member.phone)==false){
+					alert("不是完整的11位手机号或者正确的座机号！");
 					return
 				} 
 				
@@ -186,6 +195,8 @@
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('certainAction')
+					}else{
+						alert(res.retMsg)
 					}
 				}).catch((error) => {
 					console.log('会员相关操作失败')
@@ -285,6 +296,6 @@
 	label.bui-radios-label input:disabled:checked + .bui-radios:after {
 		background-color: #c1c1c1; 
 	}
-
+	.tips{ display:block; text-align:left; color:red; font-size:12px;}
 	
 </style>

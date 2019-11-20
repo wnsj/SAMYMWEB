@@ -142,3 +142,10 @@ body{
     justify-content: center;
     align-items: center;
 }
+.tips{ 
+    display:block; 
+    text-align:left; 
+    color:red; 
+    font-size:12px; 
+    margin-top:15px;
+}

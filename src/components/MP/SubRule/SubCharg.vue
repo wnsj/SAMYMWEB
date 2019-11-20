@@ -15,27 +15,28 @@
 						</div>
 					</div>
 					<div class="col-md-9 form-group clearfix">
-						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预约人数</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">退号比例</label><span class="sign-left">:</span>
 						<div class="col-md-4 pos-re">
 							<input type="text" class="form-control" v-model="FWRoyalty.orderSmall" placeholder="">
-							<span class="pos-ab pos-tr">人</span>
+							<span class="pos-ab pos-tr">%</span>
 						</div> 
-						<!-- <div style="line-height:34px; float:left;">~</div>
+						<div style="line-height:34px; float:left;">~</div>
 						<div class="col-md-4 pos-re">
 							<input type="text" class="form-control" v-model="FWRoyalty.orderBig" placeholder="">
-							<span class="pos-ab pos-tr">人</span>
-						</div> -->
+							<span class="pos-ab pos-tr">%</span>
+						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">扣款金额</label><span class="sign-left">:</span>
-						<div class="col-md-8">
+						<div class="col-md-6 pos-re">
 							<input type="text" class="form-control" v-model="FWRoyalty.visRoy" placeholder="">
+							<span class="pos-ab pos-tr">¥/人</span>
 						</div>
 					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction(title)">确认</button>
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction(title)">确认</button>
 						</div>
 					</div>
 				</form>

@@ -12,7 +12,7 @@
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员卡号</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" style="font-size: 12px;" class="form-control" v-model="consume.memNum" v-on:change="checkMemNum(consume.memNum)"
+							<input type="text" class="form-control" v-model="consume.memNum" v-on:change="checkMemNum(consume.memNum)"
 							 placeholder="卡号/手机号后4位">
 						</div>
 					</div>
@@ -44,19 +44,19 @@
 							<emp ref="emp" @employeeChange="empChange"></emp>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix" v-show="isShow==false">
+					<!-- <div class="col-md-6 form-group clearfix" v-show="isShow==false">
 						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">文员</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<emp ref="clerkEmp" @employeeChange="clerkEmpChange"></emp>
 						</div>
-					</div>
+					</div> -->
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-							 v-on:click="addFee()">确认</button>
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 							 v-on:click="closeCurrentPage()">返回</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+							 v-on:click="addFee()">确认</button>
 						</div>
 					</div>
 
@@ -111,9 +111,9 @@
 					storeId: '',
 					clerkId:'',
 				}
-				console.log('文员：'+this.consume.clerkId)
-				this.$refs.emp.setEmp(this.consume.empId)
-				this.$refs.emp.setEmp(this.consume.clerkId)
+				console.log('文员：'+this.consume.empId)
+				this.$refs.emp.setEmp(this.consume.empId);
+				
 				if (param == 'recharge') {
 					// console.log('new increasing recharge')
 					this.title = '充值';
@@ -122,8 +122,7 @@
 					// console.log('new increasing consume')
 					this.title = '消费'
 					this.isShow = false
-					this.$refs.clerkEmp.setEmp('0')
-					this.$refs.clerkEmp.setPosName('文员')
+					
 				} else if (param == 'refund') {
 					// console.log('new increasing refund')
 					this.title = '退费'
@@ -215,16 +214,19 @@
 								this.$router.push({
 									name: 'Charge',
 								});
+								this.jumpLeft(3);
 								break;
 							case "消费":
 								this.$router.push({
 									name: 'SettleSummary',
 								});
+								this.jumpLeft(2);
 								break;
 							case "退费":
 								this.$router.push({
 									name: 'Charge',
 								});
+								this.jumpLeft(3);
 								break;
 						}
 						$("#addFee").modal("hide")
@@ -238,6 +240,12 @@
 			closeCurrentPage() {
 				$("#addFee").modal("hide")
 				console.log('关闭添加患者界面')
+			},
+			jumpLeft(index){
+				$("#aside-menu li").removeClass("li-active");
+				$("#aside-menu li").find("i.fa-table").removeClass("fa-circle");
+				$("#aside-menu li").eq(index).addClass("li-active");
+				$("#aside-menu li").eq(index).find("i.fa-table").addClass("fa-circle")
 			},
 			//Query member's information based on the memNum
 			checkMemNum(param) {

@@ -12,7 +12,7 @@
 						<thead>
 							<tr>
 								<th class="text-center">会员卡号</th>
-								<th class="text-center">消费商铺</th>
+								<th class="text-center">消费门店</th>
 								<th class="text-center">姓名</th>
 								<th class="text-center">时间</th>
 								<th class="text-center">维护人</th>
@@ -82,6 +82,8 @@
 						if (res.retData != null) {
 							this.consumeList = res.retData
 						}
+					}else{
+						alert(res.retMsg)
 					}
 				}).catch((error) => {
 					console.log('消费详情插叙失败')

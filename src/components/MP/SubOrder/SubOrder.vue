@@ -41,14 +41,14 @@
 							<dPicker v-model="order.appDate" v-on:change="dateAction('1')" style="width:100%;"></dPicker>
 						</div>	
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<!-- <div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">文员</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref="clerkEmp" @employeeChange="clerkEmpChange"></emp>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
+						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询顾问</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
@@ -56,8 +56,8 @@
 					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addOrder(title)">确认</button>
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addOrder(title)">确认</button>
 						</div>
 					</div>
 				</form>
@@ -109,15 +109,17 @@
 						clerkEmpId:'',//文员
 						counlorEmpId:'',//咨询师
 					}
-					this.$refs.clerkEmp.setPosName('文员')
-					this.$refs.counlorEmp.setPosName('咨询师')
+					// this.$refs.clerkEmp.setPosName('文员')
+					this.$refs.counlorEmp.setPosName('咨询顾问')
+					// this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
+					this.$refs.counlorEmp.setEmp(this.order.counlorEmpId)
 				}else if(param=='modify'){
 					console.log('Initialization order’s content, which modifies order')
 					this.title='修改'
 					Object.assign(this.order,order)
-					this.$refs.clerkEmp.setPosName('文员')
-					this.$refs.counlorEmp.setPosName('咨询师')
-					this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
+					// this.$refs.clerkEmp.setPosName('文员')
+					this.$refs.counlorEmp.setPosName('咨询顾问')
+					// this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
 					this.$refs.counlorEmp.setEmp(this.order.counlorEmpId)
 				}
 			},
@@ -160,6 +162,7 @@
 			
 			//the event of addtional button
 			addOrder(param){
+				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 				if(this.isBlank(this.order.appName)){
 					alert("姓名不能为空")
 					return
@@ -167,10 +170,13 @@
 				if(this.isBlank(this.order.phone)){
 					alert("手机号不能为空")
 					return
+				}else if(reg.test(this.order.phone)==false){
+					alert("不是完整的11位手机号或者正确的座机号！");
+					return
 				}
 				
-				if(this.isBlank(this.order.clerkEmpId) && this.isBlank(this.order.counlorEmpId)){
-					alert('文员和咨询师至少选择一个')
+				if(this.isBlank(this.order.counlorEmpId)){
+					alert('咨询顾问不能为空')
 					return
 				}
 				if(!this.isBlank(this.order.appDate)){

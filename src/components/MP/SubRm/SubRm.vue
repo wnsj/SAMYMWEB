@@ -30,7 +30,7 @@
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">模块级别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="ruleContent.moduleGrade">
-								<option value="">未选择</option>
+								<option value="">--未选择--</option>
 								<option value="1">第一级模块</option>
 								<option value="2">第二级模块</option>
 							</select>
@@ -56,10 +56,10 @@
 					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-							 v-on:click="addRule()">确认</button>
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 							 v-on:click="closeCurrentPage()">返回</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+							 v-on:click="addRule()">确认</button>
 						</div>
 					</div>
 

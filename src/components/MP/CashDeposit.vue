@@ -42,7 +42,7 @@
 		<div class="row" style="padding-bottom:1.5%;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">店铺</p><span class="sign-left">:</span>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<Store ref='store' @storeChange='storeChange'></Store>
@@ -59,7 +59,7 @@
 					<table class="table table-bordered table-hover" id="datatable" >
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">店铺</th>
+								<th class="text-center">门店</th>
 								<th class="text-center">姓名</th>
 								<th class="text-center">手机号</th>
 								<th class="text-center">定金金额</th>
@@ -74,11 +74,14 @@
 								<td class="text-center">{{item.phone}}</td>
 								<td class="text-center">{{item.money}}</td>
 								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button></td>
+								<td class="text-center"><button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
+			</div>
+			<div class="col-md-12 col-lg-12">
+				<p class="tips">* 双击单行，可对当前数据进行修改</p>
 			</div>
 		</div>
 		<div class="row row_edit">
@@ -122,11 +125,6 @@
 			},
 			//modify the cotent of member
 			modifyMember(item) {
-				if(!this.has(2)){
-				alert("暂无权限修改!");
-				return;
-				}
-				console.log('modify the cotent of member')
 				this.$refs.subCd.initData('modify', item)
 				$("#cdContent").modal('show')
 			},

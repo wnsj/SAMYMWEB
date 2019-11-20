@@ -113,7 +113,7 @@
 								<th class="text-center">预约时间</th>
 								<th class="text-center">是否到店</th>
 								<th class="text-center">是否取消</th>
-								<th class="text-center" v-if="has(2)">修改</th>
+								<th class="text-center">修改</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -126,7 +126,7 @@
 								<td class="text-center">{{item.appDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td class="text-center">{{item.state=='0' ? '已取消' : '未取消'}}</td>
 								<td class="text-center">{{item.arrival=='0' ? '未到店' : '已到店'}}</td>
-								<td class="text-center" v-if="has(2)">
+								<td class="text-center">
 									<button type="button" class="btn btn-warning" v-on:click="updateOrder(item)">修改</button>
 									<button type="button" class="btn btn-primary" v-on:click="caAction(item,'cancel')">{{item.state=='0' ? '已取消' : '点击取消'}}</button>
 									<button type="button" class="btn btn-primary" v-on:click="caAction(item,'arrival')">{{item.arrival=='0' ? '点击到店' : '已到店'}}</button>
@@ -135,6 +135,9 @@
 						</tbody>
 					</table>
 				</div>
+			</div>
+			<div class="col-md-12 col-lg-12">
+				<p class="tips">* 双击单行，可对当前数据进行修改</p>
 			</div>
 		</div>
 		<div class="row row_edit">
@@ -168,7 +171,7 @@
 				endCreateDate:"",
 				begAppDate:"",
 				endAppDate:"",
-				orderList: ["",],
+				orderList: [],
 				arrival:'0',
 				state:'1',
 			};

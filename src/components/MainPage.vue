@@ -19,40 +19,40 @@
     <div class="container-fluid clear-mp" id="Odiv">
       <div class="row clear-mp">
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 my-aside clear-mp" id="Adiv" style="padding-top: 10px;">
-          <p style=" display:block; width:190px; height:50px;margin:0 auto; line-height:50px; font-size: 30px;font-weight: bold;color: #1b4fa3;text-align: left; margin-bottom:10px;">功能列表</p>
+          <p style=" display:block; width:190px; height:50px;margin:0 auto; line-height:50px; font-size: 30px;font-weight: bold;color: #795548;text-align: left; margin-bottom:10px;">功能列表</p>
           <ul id="aside-menu">
             <li class="li-active" v-on:click="selectRule('MemberSummary')">
-              <i class="fa fa-table fa-circle" aria-hidden="true">　会员总表</i>
-            </li>
-            <li v-on:click="selectRule('SettleSummary')">
-              <i class="fa fa-table" aria-hidden="false">　消费管理</i>
-            </li>
-            <li v-on:click="selectRule('RoyaltySummary')">
-              <i class="fa fa-table" aria-hidden="false">　提成汇总</i>
+              <i class="fa fa-table fa-circle" aria-hidden="true">　会员汇总</i>
             </li>
             <li v-on:click="selectRule('Member')">
               <i class="fa fa-table" aria-hidden="false">　会员管理</i>
             </li>
+            <li v-on:click="selectRule('SettleSummary')">
+              <i class="fa fa-table" aria-hidden="false">　消费汇总</i>
+            </li>
             <li v-on:click="selectRule('Charge')">
-              <i class="fa fa-table" aria-hidden="false">　充值管理(退费)</i>
+              <i class="fa fa-table" aria-hidden="false">　充值/退费管理</i>
             </li>
             <li v-on:click="selectRule('Order')">
               <i class="fa fa-table" aria-hidden="false">　预约管理</i>
             </li>
-            <li>
+            <li v-on:click="selectRule('CashDeposit')">
               <i class="fa fa-table" aria-hidden="false">　定金管理</i>
             </li>
-            <li v-on:click="selectRule('Employee')">
-              <i class="fa fa-table" aria-hidden="false">　员工管理</i>
+            <li v-on:click="selectRule('RoyaltySummary')">
+              <i class="fa fa-table" aria-hidden="false">　提成汇总</i>
             </li>
             <li v-on:click="selectRule('Royalty')">
               <i class="fa fa-table" aria-hidden="false">　提成规则管理</i>
+            </li> 
+            <li v-on:click="selectRule('Employee')">
+              <i class="fa fa-table" aria-hidden="false">　员工管理</i>
             </li>
             <li v-on:click="selectRule('Position')">
               <i class="fa fa-table" aria-hidden="false">　岗位管理</i>
             </li>
             <li v-on:click="selectRule('Store')">
-              <i class="fa fa-table" aria-hidden="false">　商铺管理</i>
+              <i class="fa fa-table" aria-hidden="false">　门店管理</i>
             </li>
             <li v-on:click="selectRule('RuleManager')">
               <i class="fa fa-table" aria-hidden="false">　权限管理</i>
@@ -98,14 +98,15 @@
 		},
 		methods:{
 			chargeManager: function(param) {
-				this.$refs.fee.initData(param)
-				$("#addFee").modal("show")
+				this.$refs.fee.initData(param);
+				$("#addFee").modal("show");
 			},
 			titleChange(param){
 				console.log('param:'+param)
 				this.title=param
 			},
 			selectRule(param){
+        console.log(1);
 				var url = this.url + '/ruleAction/queryRule'
 				this.$ajax({
 					method: 'POST',
@@ -164,5 +165,18 @@
 
   .li-active i {
     color: #f2ad4e;
+  }
+  .root{
+    width:100%; 
+    overflow-x:hidden;
+  }
+  .fa-table{
+    color:#795548;
+  }
+  .fa-table:hover{
+    color:#9a773b;
+  }
+  .fa-circle:hover{
+    color:#f2ad4e;
   }
 </style>

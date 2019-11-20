@@ -12,7 +12,7 @@
 						<thead>
 							<tr>
 								<th class="text-center">会员卡号</th>
-								<th class="text-center">所属商铺</th>
+								<th class="text-center">所属门店</th>
 								<th class="text-center">姓名</th>
 								<th class="text-center">时间</th>
 								<th class="text-center">费用类型</th>
@@ -79,6 +79,8 @@
 						if (res.retData != null) {
 							this.memberList = res.retData
 						}
+					}else{
+						alert(res.retMsg)
 					}
 				}).catch((error) => {
 					console.log('会员消费详细信息请求失败')

@@ -1,12 +1,12 @@
 <template>
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">提成管理</h1>
+			<h1 class="titleCss">提成汇总</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">店铺</p><span class="sign-left">:</span>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<store ref='store' @storeChange='storeChange'></store>
@@ -32,7 +32,7 @@
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">月份</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
-					<dPicker style="width:100%" type="month" format="YYYY-MM" v-model="createDate"></dPicker>
+					<dPicker style="width:100%" format="YYYY-MM" v-model="createDate"></dPicker>
 				</div>
 			</div>
 		</div>
@@ -65,12 +65,15 @@
 									<td>{{item.isuse == 1 ? "在职" : "离职"}}</td>
 									<td>{{item.royalty > 0 ? item.royalty : ""}}</td>
 									<td>{{item.refund > 0 ? item.refund : ""}}</td>
-									<td>{{item.balance > 0 ? item.balance : ""}}</td>
+									<td>{{item.balance != 0 ? item.balance : ""}}</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</nobr>
+			</div>
+			<div class="col-md-12 col-lg-12">
+				<p class="tips">* 双击单行，可对当前数据进行修改</p>
 			</div>
 		</div>
 		<div class="row row_edit">
@@ -127,14 +130,7 @@
 				}
 				console.log('store' + this.posId)
 			},
-			//date formatting
-			dateAction(param) {
-				console.log($("#"))
-				if (!this.isBlank(this.month)) {
-					console.log('month:'+this.moment(this.month, 'YYYY-MM'))
-					this.month = this.moment(this.month, 'YYYY-MM')
-				}
-			},
+			
 			feedback() {
 				this.conditionCheck()
 				$("#addPatient").modal('hide')

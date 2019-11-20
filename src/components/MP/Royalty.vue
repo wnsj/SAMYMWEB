@@ -5,7 +5,7 @@
 			<h1 class="titleCss" style="margin-top:-80px;">提成规则管理</h1>
 		</div>
 		<div>
-			<div class="col-md-5 col-lg-5 part">
+			<div class="col-md-5 col-lg-5 part pb0">
 				<div class="col-md-12 col-lg-12 main-title" ref="tit">
 					<div class="col-md-8 col-lg-8 text-left">
 						<h3>流水提成规则</h3>
@@ -16,7 +16,7 @@
 				</div>
 				<div class="col-md-12 col-lg-12">
 					<div class="table-responsive pre-scrollable" ref="tab1">
-						<table class="table table-bordered table-hover" id="datatable">
+						<table class="table table-bordered table-hover mb0" id="datatable">
 
 							<thead class="datathead">
 								<tr>
@@ -35,8 +35,11 @@
 						</table>
 					</div>
 				</div>
+				<div class="col-md-12 col-lg-12">	
+					<p class="tips">* 双击单行，可对当前数据进行修改</p>
+				</div>
 			</div>
-			<div class="col-md-5 col-lg-5 part">
+			<div class="col-md-5 col-lg-5 part pb0">
 				<div class="col-md-12 col-lg-12 main-title">
 					<div class="col-md-8 col-lg-8 text-left">
 						<h3>会员卡提成规则</h3>
@@ -47,7 +50,7 @@
 				</div>
 				<div class="col-md-12 col-lg-12">
 					<div class="table-responsive pre-scrollable" ref="tab2">
-						<table class="table table-bordered table-hover" id="datatable">
+						<table class="table table-bordered table-hover mb0" id="datatable">
 			
 							<thead class="datathead">
 								<tr>
@@ -72,11 +75,14 @@
 						</table>
 					</div>
 				</div>
+				<div class="col-md-12 col-lg-12">	
+					<p class="tips">* 双击单行，可对当前数据进行修改</p>
+				</div>
 			</div>
 			<div style="clear:both"></div>
 		</div>
 		<div>
-			<div class="col-md-5 col-lg-5 part">
+			<div class="col-md-5 col-lg-5 part pb0">
 				<div class="col-md-12 col-lg-12 main-title">
 					
 					<div class="col-md-8 col-lg-8 text-left">
@@ -88,8 +94,7 @@
 				</div>
 				<div class="col-md-12 col-lg-12">
 					<div class="table-responsive pre-scrollable" ref="tab3">
-						<table class="table table-bordered table-hover" id="datatable">
-			
+						<table class="table table-bordered table-hover mb0" id="datatable">
 							<thead class="datathead">
 								<tr>
 									<th class="text-center col-md-2">岗位</th>
@@ -107,10 +112,46 @@
 						</table>
 					</div>
 				</div>
+				<div class="col-md-12 col-lg-12">	
+					<p class="tips">* 双击单行，可对当前数据进行修改</p>
+				</div>
 			</div>
-			<div class="col-md-5 col-lg-5 part">
+			<div class="col-md-5 col-lg-5 part pb0">
 				<div class="col-md-12 col-lg-12 main-title">
-					
+					<div class="col-md-8 col-lg-8 text-left">
+						<h3>退号扣提成规则</h3>
+					</div>
+					<div class="col-md-4 col-lg-4 pull-right">
+						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubCharg','1','')">添加</button>
+					</div>
+				</div>
+				<div class="col-md-12 col-lg-12">
+					<div class="table-responsive pre-scrollable" ref="tab4">
+						<table class="table table-bordered table-hover mb0" id="datatable">
+			
+							<thead class="datathead">
+								<tr>
+									<th class="text-center col-md-2">岗位</th>
+									<th class="text-center col-md-4">退号比例(大于)</th>
+									<th class="text-center col-md-3">扣款金额</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='4'" v-on:dblclick="selectRule('SubCharg','3',item)">
+									<td class="text-center">{{item.posName}}</td>
+									<td class="text-center">{{item.orderSmall}} %</td>
+									<td class="text-center">{{item.visRoy}} ¥/人</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="col-md-12 col-lg-12">	
+					<p class="tips">* 双击单行，可对当前数据进行修改</p>
+				</div>
+			</div>
+			<!-- <div class="col-md-5 col-lg-5 part pb0">
+				<div class="col-md-12 col-lg-12 main-title">
 					<div class="col-md-8 col-lg-8 text-left">
 						<h3>预约人数提成规则</h3>
 					</div>
@@ -120,8 +161,7 @@
 				</div>
 				<div class="col-md-12 col-lg-12">
 					<div class="table-responsive pre-scrollable" ref="tab4">
-						<table class="table table-bordered table-hover" id="datatable">
-			
+						<table class="table table-bordered table-hover mb0" id="datatable">		
 							<thead class="datathead">
 								<tr>
 									<th class="text-center col-md-2">岗位</th>
@@ -141,41 +181,10 @@
 						</table>
 					</div>
 				</div>
-			</div>
-			<div style="clear:both"></div>
-		</div>
-		<div>	
-			<div class="col-md-5 col-lg-5 part">
-				<div class="col-md-12 col-lg-12 main-title">
-					<div class="col-md-8 col-lg-8 text-left">
-						<h3>退号扣提成规则</h3>
-					</div>
-					<div class="col-md-4 col-lg-4 pull-right">
-						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubCharg','1','')">添加</button>
-					</div>
+				<div class="col-md-12 col-lg-12">	
+					<p class="tips">* 双击单行，可对当前数据进行修改</p>
 				</div>
-				<div class="col-md-12 col-lg-12">
-					<div class="table-responsive pre-scrollable" ref="tab5">
-						<table class="table table-bordered table-hover" id="datatable">
-			
-							<thead class="datathead">
-								<tr>
-									<th class="text-center col-md-2">岗位</th>
-									<th class="text-center col-md-4">退号人数(大于)</th>
-									<th class="text-center col-md-3">扣款金额</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr v-for="(item,index) in royaltyList" :key="index" v-if="item.consumeType=='4'" v-on:dblclick="selectRule('SubCharg','3',item)">
-									<td class="text-center">{{item.posName}}</td>
-									<td class="text-center">{{item.orderSmall}} 人</td>
-									<td class="text-center">{{item.visRoy}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+			</div> -->
 			<div style="clear:both"></div>
 		</div>
 		<div class="row row_edit">
@@ -371,14 +380,13 @@
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true);
 			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
-			let divH = (h-240)/3;
+			let divH = (h-240)/2;
 			let titH = this.$refs.tit.offsetHeight;
-			let maxH = divH-titH;
+			let maxH = divH-titH-30;
 			this.$refs.tab1.style="height:"+maxH+"px";
 			this.$refs.tab2.style="height:"+maxH+"px";
 			this.$refs.tab3.style="height:"+maxH+"px";
 			this.$refs.tab4.style="height:"+maxH+"px";
-			this.$refs.tab5.style="height:"+maxH+"px";
 		},
 		created() {
 			this.checkRoyaltyList()
@@ -431,5 +439,18 @@
 	}
 	th{
 		background:#eee;
+	}
+	.tips{ 
+		display:block; 
+		text-align:left; 
+		color:red; 
+		font-size:12px; 
+		margin-top:15px;
+	}
+	.mb0{ 
+		margin-bottom:0;
+	}
+	.pb0{ 
+		padding-bottom:0;
 	}
 </style>

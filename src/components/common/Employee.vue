@@ -1,6 +1,6 @@
 <template>
 	<select class="form-control" v-model="empId" v-on:change="employeeChange()">
-		<option value="0">--未选择--</option>
+		<option value="">--未选择--</option>
 		<option v-for="(item,index) in employeeList" :key="index" v-bind:value="item.empId">
 			{{item.empName}}
 		</option>
@@ -46,6 +46,7 @@
 					}
 				}
 			},
+			
 			setPosId(posId){
 				// console.log('posId:'+posId)
 				if(this.isBlank(posId)){
@@ -76,7 +77,8 @@
 					data: {
 						posId:this.posId,
 						posName:this.posName,
-						isuse: '1'
+						storeId:this.storeId(),
+						isuse: '1',
 					},
 					dataType: 'json',
 				}).then((response) => {

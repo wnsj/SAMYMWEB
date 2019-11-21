@@ -80,7 +80,7 @@
 				</nobr>
 			</div>
 			<div class="col-md-12 col-lg-12">
-				<p class="tips">* 双击单行，可对当前数据进行修改</p>
+				<p class="tips">* 双击单行，可查看会员详细的消费情况；非会员流水没有明细</p>
 			</div>
 		</div>
 		<div class="row row_edit">

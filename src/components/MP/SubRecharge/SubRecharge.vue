@@ -89,6 +89,7 @@
 					balance: '',
 					storeId: '',
 					clerkId:'',
+					operatorId:'',
 				},
 				title: '',
 				isShow:true,
@@ -110,6 +111,7 @@
 					balance: '',
 					storeId: '',
 					clerkId:'',
+					operatorId:this.accountId(),
 				}
 				console.log('文员：'+this.consume.empId)
 				this.$refs.emp.setEmp(this.consume.empId);

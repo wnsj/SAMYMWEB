@@ -88,6 +88,7 @@
 					createDate:'',
 					clerkEmpId:'',
 					counlorEmpId:'',
+					operatorId:'',
 				},
 				title:'新增',
 				
@@ -108,6 +109,7 @@
 						empId:'1',//操作人
 						clerkEmpId:'',//文员
 						counlorEmpId:'',//咨询师
+						operatorId:this.accountId(),//操作人
 					}
 					// this.$refs.clerkEmp.setPosName('文员')
 					this.$refs.counlorEmp.setPosName('咨询顾问')
@@ -117,6 +119,7 @@
 					console.log('Initialization order’s content, which modifies order')
 					this.title='修改'
 					Object.assign(this.order,order)
+					this.operatorId = this.accountId()
 					// this.$refs.clerkEmp.setPosName('文员')
 					this.$refs.counlorEmp.setPosName('咨询顾问')
 					// this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)

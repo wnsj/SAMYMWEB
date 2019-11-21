@@ -113,6 +113,7 @@
 								<th class="text-center">预约时间</th>
 								<th class="text-center">是否到店</th>
 								<th class="text-center">是否取消</th>
+								<th class="text-center">操作人</th>
 								<th class="text-center">修改</th>
 							</tr>
 						</thead>
@@ -126,6 +127,7 @@
 								<td class="text-center">{{item.appDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td class="text-center">{{item.state=='0' ? '已取消' : '未取消'}}</td>
 								<td class="text-center">{{item.arrival=='0' ? '未到店' : '已到店'}}</td>
+								<td class="text-center">{{item.operatorName}}</td>
 								<td class="text-center">
 									<button type="button" class="btn btn-warning" v-on:click="updateOrder(item)">修改</button>
 									<button type="button" class="btn btn-primary" v-on:click="caAction(item,'cancel')">{{item.state=='0' ? '已取消' : '点击取消'}}</button>

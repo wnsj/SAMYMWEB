@@ -61,7 +61,7 @@
 									<th class="text-center">项目</th>
 									<th class="text-center">单价</th>
 									<th class="text-center">课时（次）</th>
-									<th class="text-center">折扣</th>
+									<th class="text-center">折扣(%)</th>
 									<th class="text-center">赠送金额</th>
 									<th class="text-center">赠送课时</th>
 									<th class="text-center">总金额</th>

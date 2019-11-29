@@ -10,9 +10,9 @@
       </div>
       <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-right">
         <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，提成管理系统</p>
-        <button class="btn btn-warning m_r_10" style="margin-top: 40px;" v-on:click="chargeManager('recharge')">充值</button>
-        <button class="btn btn-success m_r_10" style="margin-top: 40px;" v-on:click="chargeManager('consume')">消费</button>
-        <button class="btn btn-danger m_r_10" style="margin-top: 40px;" v-on:click="chargeManager('refund')">退费</button>
+        <button class="btn btn-warning m_r_10" style="margin-top: 40px;" v-on:click="chargeManager()">课程购买</button>
+        <button class="btn btn-success m_r_10" style="margin-top: 40px;" v-on:click="customAction()">课程消费</button>
+        <button class="btn btn-danger m_r_10" style="margin-top: 40px;" v-on:click="refundAction()">课程退费</button>
         <button class="btn btn-default m_r_10" style="margin-top: 40px;" v-on:click="loginOut()">退出</button>
       </div>
     </div>
@@ -31,7 +31,7 @@
               <i class="fa fa-table" aria-hidden="false">　消费汇总</i>
             </li>
             <li v-on:click="selectRule('Charge')">
-              <i class="fa fa-table" aria-hidden="false">　充值/退费管理</i>
+              <i class="fa fa-table" aria-hidden="false">　购买课程管理</i>
             </li>
             <li v-on:click="selectRule('Order')">
               <i class="fa fa-table" aria-hidden="false">　预约管理</i>
@@ -45,6 +45,9 @@
             <li v-on:click="selectRule('RoyaltySummary')">
               <i class="fa fa-table" aria-hidden="false">　提成汇总</i>
             </li>
+						<li v-on:click="selectRule('Project')">
+							<i class="fa fa-table" aria-hidden="false">　课程管理</i>
+						</li>
             <li v-on:click="selectRule('Royalty')">
               <i class="fa fa-table" aria-hidden="false">　提成规则管理</i>
             </li> 
@@ -60,6 +63,7 @@
             <li v-on:click="selectRule('RuleManager')">
               <i class="fa fa-table" aria-hidden="false">　权限管理</i>
             </li>
+						
             <!-- <li v-if="has(1)">
 							<router-link to="/MP/test"><i class="fa fa-table" aria-hidden="false">　权限管理</i></router-link>
 							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('43')">　权限管理</i>
@@ -79,12 +83,28 @@
         </div>
       </div>
     </div>
+		<div class="row row_edit">
+		  <div class="modal fade" id="addRefund">
+		    <div class="modal-dialog">
+		      <refund ref="refund"></refund>
+		    </div>
+		  </div>
+		</div>
+		<div class="row row_edit">
+		  <div class="modal fade" id="addCustom">
+		    <div class="modal-dialog">
+		      <custom ref="custom"></custom>
+		    </div>
+		  </div>
+		</div>
   </div>
 
 </template>
 
 <script type="module">
   import SubRecharge from '../components/MP/SubRecharge/SubRecharge.vue'
+	import refund from '../components/MP/SubRecharge/Refund.vue'
+	import custom from '../components/MP/SubRecharge/Custom.vue'
 	import axios from 'axios'
 	import Cookies from 'js-cookie'
 	import {
@@ -93,6 +113,8 @@
 	export default {
 		components: {
 			SubRecharge,
+			refund,
+			custom,
 		},
 		data() {
 			return {
@@ -100,9 +122,17 @@
 			}
 		},
 		methods:{
-			chargeManager: function(param) {
-				this.$refs.fee.initData(param);
+			chargeManager: function() {
+				this.$refs.fee.initData();
 				$("#addFee").modal("show");
+			},
+			refundAction(){
+				this.$refs.refund.initData();
+				$("#addRefund").modal("show");
+			},
+			customAction(){
+				this.$refs.custom.initData();
+				$("#addCustom").modal("show");
 			},
 			titleChange(param){
 				console.log('param:'+param)

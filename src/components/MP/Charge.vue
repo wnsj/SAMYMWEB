@@ -2,7 +2,7 @@
 <template>
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">充值管理</h1>
+			<h1 class="titleCss">购买课程管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -15,18 +15,6 @@
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">费用类型</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-md-8 col-lg-8">
-					<select class="form-control" v-model="costType">
-						<option value="1">充值</option>
-						<!-- <option value="2">消费</option> -->
-						<option value="3">退款</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员姓名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
@@ -35,7 +23,7 @@
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">推荐人</p><span class="sign-left">:</span>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<emp ref="emp" @employeeChange='empChange'></emp>
@@ -70,18 +58,30 @@
 							<tr class="datatr_1">
 								<th class="text-center" rowspan='2'>会员卡号</th>
 								<th class="text-center" rowspan='2'>姓名</th>
-								<th class="text-center" rowspan='2'>推荐人姓名</th>
-								<th class="text-center" rowspan='2'>充值/退款时间</th>
-								<th class="text-center" rowspan='2'>充值/退款金额</th>
+								<th class="text-center" rowspan='2'>已购课程名称</th>
+								<th class="text-center" rowspan='2'>咨询师</th>
+								<th class="text-center" rowspan='2'>购买单价(¥/次)</th>
+								<th class="text-center" rowspan='2'>购买课时(次)</th>
+								<th class="text-center" rowspan='2'>赠送课时(次)</th>
+								<th class="text-center" rowspan='2'>购买折扣(%)</th>
+								<th class="text-center" rowspan='2'>购买时间</th>
+								<th class="text-center" rowspan='2'>实交金额</th>
+								<th class="text-center" rowspan='2'>操作人</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr v-for="(item,index1) in chargeLsit" :key="index1">
-								<td class="sign">{{item.memNum}}</td>
-								<td class="sign">{{item.memName}}</td>
-								<td>{{item.empName}}</td>
+								<td>{{item.memNum}}</td>
+								<td>{{item.memName}}</td>
+								<td>{{item.proName}}</td>
+								<td>{{item.counselorName}}</td>
+								<td>{{item.price}}</td>
+								<td>{{item.actualCount}}</td>
+								<td>{{item.giveCount}}</td>
+								<td>{{item.discount}}</td>
 								<td>{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
-								<td>{{item.momey}}</td>
+								<td>{{item.realCross}}</td>
+								<td>{{item.operatorName}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -137,7 +137,7 @@
 				if(!this.isBlank(this.endCreateDate)){
 					this.endCreateDate=this.moment(this.endCreateDate,'YYYY-MM-DD 23:59:59.000')
 				}
-				var url = this.url + '/accountRecordAction/queryAccountSummary'
+				var url = this.url + '/purchasedItemsAction/queryPurchasedItems'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -151,7 +151,6 @@
 						empId:this.empId,
 						begCreateDate:this.begCreateDate,
 						endCreateDate:this.endCreateDate,
-						costType:this.costType,
 						
 						accountId: this.accountId(),
 						modelGrade:'2',
@@ -161,7 +160,6 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					// console.log(res)
 					if (res.retCode == '0000') {
 						this.chargeLsit = res.retData
 					}
@@ -170,6 +168,10 @@
 				});
 			},
 			
+		},
+		mounted(){
+			this.$refs.emp.setPosName("咨询师")
+			this.$refs.emp.setEmp("")
 		},
 		created() {
 			this.conditionCheck()

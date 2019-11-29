@@ -3,7 +3,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h2 id="myModalLabel" class="modal-title">课程购买</h2>
+			<h2 id="myModalLabel" class="modal-title">课程消费</h2>
 		</div>
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop" id="basic">
@@ -30,16 +30,6 @@
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="member.phone" :disabled="isShow==true">
 						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix" v-show="member.balance>0">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预购余额</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="member.balance" :disabled="isShow==true">
-						</div>
-					</div>
-					<div class="col-md-12 col-lg-12">
-						<p class="tips">* 预购余额：只是用来作为变更咨询师时，购买项目使用；此会员购买项目咨询师未发生变更，此项不做任何参考</p>
 					</div>
 					<div class="col-md-12 form-group clearfix text-left">
 						<h4 id="myModalLabel" class="modal-title">课程：</h4>
@@ -135,28 +125,10 @@
 						</div>
 					</div>
 			</div>
-			<div class="tab-pane fade in active martop" id="basic" v-show="isShow==true">
-				<div class="col-md-12 form-group clearfix text-left">
-					<div class="col-md-12 clearfix">
-						<h4 id="myModalLabel" class="modal-title">客户：</h4>
+			<div class="tab-pane fade in active martop" id="basic">
+					<div class="col-md-12 form-group clearfix text-left">
+						<h4 id="myModalLabel" class="modal-title">第{{(consume.consumCount)+1}}次消费</h4>
 					</div>
-				</div>
-				<div class="col-md-6 clearfix">
-					<div class="col-md-3">
-						<input type="checkbox" class="form-control" v-model="isSelect" disabled="disabled">
-					</div>
-					<label for="cyname" class="col-md-9 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预购余额抵扣</label><span
-					 class="sign-left">:</span>
-				</div>
-				<div class="col-md-6 clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">应交总额</label><span
-					 class="sign-left">:</span>
-					<div class="col-md-7">
-						<input type="text" class="form-control" v-model="consumeReceivable" disabled="disabled">
-					</div>
-				</div>
-					
-					
 			</div>
 			<div class="form-group clearfix">
 				<div class="col-md-12">
@@ -256,14 +228,14 @@
 					operatorId:this.accountId(),//操作人
 					firstCharge: '',/** 1:实体卡首充（不计算提成） 0:计算 */
 					consumCount: '0',//消费次数
+					balance:'0.0',//会员余额
 				}
 				this.consumeReceivable='0.0'
 				this.$refs.counselorEmp.setPosName("咨询师")
+				this.$refs.counselorEmp.setEmp("0")
 				this.$refs.emp.setPosName("咨询顾问")
-				this.$refs.counselorEmp.setEmp("")
 				this.$refs.project.setEmpId("0")
-				
-				this.isShow = true
+				this.isShow = false
 				
 			},
 			//咨询师
@@ -283,25 +255,18 @@
 			},
 			//课程
 			projectChange: function(param) {
-				
+				console.log(JSON.stringify(param))
 				if (this.isBlank(param)) {
 					this.consume.proId = ""
 				} else {
 					this.consume.proId = param.proId
-					this.consume.price = param.price//折前单价
-					this.consume.disPrice=param.price*param.discount/100//折后单价
-					this.consume.actualCount = param.frequency//实际次数
-					this.consume.discount= param.discount//折扣
-					this.consume.receivable=param.price*param.frequency//应交
-					this.consume.realCross=param.price*param.frequency*param.discount/100//实缴
-					
-				
-					
-					if(this.member.counselorEmpId != this.consume.counselor){
-						this.consumeReceivable=this.consume.realCross-this.member.balance
-					}else{
-						this.consumeReceivable=this.consume.realCross
-					}
+					this.consume.price = param.price
+					this.consume.actualCount = param.frequency
+					this.consume.discount= param.discount
+					this.consume.receivable=param.price*param.frequency
+					this.consume.realCross=param.price*param.frequency*param.discount/100
+					console.log(this.consume.balance)
+					this.consumeReceivable=this.consume.realCross-this.consume.balance
 				}
 			},
 			//feedback employee information
@@ -312,29 +277,17 @@
 					this.consume.empId = param.empId
 				}
 			},
+			
+			
+
 			//the event of addtional button
 			addFee() {
 				console.log('the event of addtional button')
-				
-				if(!this.isBlank(this.member.counselorEmpId) && this.member.counselorEmpId != this.consume.counselor){
-					if(!confirm("您给客户选择了不同咨询师的课程，是否继续？如果继续，将使用之前咨询师课程的余额进行购买新的项目，否则，请取消！！！")){
-						return
-					}
-				}
-				
-				this.consume.totalCount=this.consume.actualCount+this.consume.giveProId//总次数
+
 				
 				
-				if (this.isBlank(this.consume.memNum)) {
-					alert("会员号不能为空")
-					return
-				}
-				if (this.isBlank(this.consume.counselor)) {
-					alert("咨询师不能为空")
-					return
-				}
-				if (this.isBlank(this.consume.proId)) {
-					alert("购买课程不能为空")
+				if (this.isBlank(this.consume.momey)) {
+					alert("金额不能为空")
 					return
 				}
 				if (this.isBlank(this.consume.empId)) {
@@ -342,7 +295,22 @@
 					return
 				}
 
-				var url = this.url + '/purchasedItemsAction/purchasedItems'
+				if (!this.isBlank(this.consume.rechargetime)) {
+					this.consume.rechargetime = this.moment(this.consume.rechargetime, 'YYYY-MM-DD HH:mm:ss.000')
+				}
+
+				if (this.consume.consumeType == '2' && this.consume.balance < this.consume.momey) {
+					alert("您的余额不足，请充值")
+					return
+				}
+				if (this.consume.consumeType == '3' && this.consume.balance < this.consume.momey) {
+					alert("您的余额不足，请查询余额后在进行退款")
+					return
+				}
+
+
+
+				var url = this.url + '/purchasedItemsAction/consum'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -386,7 +354,7 @@
 				});
 			},
 			closeCurrentPage() {
-				$("#addFee").modal("hide")
+				$("#addCustom").modal("hide")
 				console.log('关闭添加患者界面')
 			},
 			jumpLeft(index){
@@ -406,8 +374,7 @@
 				if (this.isBlank(param)) {
 					return
 				}
-				console.log('费用类型3：' + this.consume.costType)
-				var url = this.url + '/memberAction/queryMember'
+				var url = this.url + '/purchasedItemsAction/queryPurchasedItems'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -422,22 +389,7 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						if (res.retData.length > 0) {
-							
-							this.member = res.retData[0]
-							console.log(JSON.stringify(this.member))
-							this.setCustom(this.member)
-						}else{
-							this.member={
-								memNum: '',//会员号
-								memName: '',//会员名
-								phone: '',//手机
-								balance:'',
-								counselorEmpId:'',
-							}
-						}
-					}else{
-						alert(res.retMsg)
+						this.consume=res.retData
 					}
 
 				}).catch((error) => {

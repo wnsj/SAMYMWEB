@@ -15,6 +15,7 @@
 				empId: '0',
 				posId:'',
 				posName:'',
+				leader:'',
 				employeeList: [],
 				empObj: {
 					empId: '0',
@@ -65,6 +66,20 @@
 				}
 				this.getEmployeeList()
 			},
+			setPosNameAndLeader(posName,leader){
+				// console.log('posName:'+posName)
+				if(this.isBlank(posName)){
+					this.posName=''
+				}else{
+					this.posName=posName
+				}
+				if(this.isBlank(leader)){
+					this.leader=''
+				}else{
+					this.leader=leader
+				}
+				this.getEmployeeList()
+			},
 			async getEmployeeList() {
 				var url = this.url + '/employeeAction/queryEmp'
 				this.$ajax({
@@ -77,6 +92,7 @@
 					data: {
 						posId:this.posId,
 						posName:this.posName,
+						leader:this.leader,
 						storeId:this.storeId(),
 						isuse: '1',
 					},

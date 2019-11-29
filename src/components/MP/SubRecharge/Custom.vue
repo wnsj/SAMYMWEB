@@ -267,8 +267,9 @@
 					this.consume.discount= param.discount
 					this.consume.receivable=param.price*param.frequency
 					this.consume.realCross=param.price*param.frequency*param.discount/100
-					if(this.counselorList != null){
+					if(this.counselorList != null && this.counselorList.length > 0){
 						var isSame=0
+						console.log("counselorList:"+JSON.stringify(this.counselorList))
 						for(var i=0;i < this.counselorList[0].proList.length;i++ ){
 							var project = this.counselorList[0].proList[i]
 							if(this.consume.proId==project.proId){
@@ -301,11 +302,19 @@
 			//the event of addtional button
 			addFee() {
 				console.log('the event of addtional button')
-
-				if (this.isBlank(this.consume.memNum)) {
-					alert("会员号不能为空")
+				
+				this.consume.memName=this.member.memName
+				this.consume.phone=this.member.phone
+				
+				if (this.isBlank(this.consume.memName)) {
+					alert("姓名不能为空")
 					return
 				}
+				if (this.isBlank(this.consume.phone)) {
+					alert("手机号不能为空")
+					return
+				}
+				
 				if (this.isBlank(this.consume.counselor)) {
 					alert("咨询师不能为空")
 					return
@@ -335,7 +344,7 @@
 						this.$router.push({
 							name: 'SettleSummary',
 						});	
-						$("#addFee").modal("hide")
+						$("#addCustom").modal("hide")
 					} else {
 						alert(res.retMsg)
 					}

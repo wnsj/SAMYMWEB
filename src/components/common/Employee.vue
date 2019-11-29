@@ -35,6 +35,7 @@
 			},
 			setEmp: function(empId) {
 				this.empId = empId
+				this.employeeChange()
 				console.log('员工' + this.empId)
 			},
 			//添加前缀的部门名字兑换原来的名字

@@ -53,35 +53,35 @@
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">单价</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="consume.memNum" v-on:change="checkMemNum(consume.memNum)">
+							<input type="text" class="form-control" v-model="consume.memNum" disabled="disabled">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">课时(次)</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="consume.memNum" v-on:change="checkMemNum(consume.memNum)">
+							<input type="text" class="form-control" v-model="consume.memNum" disabled="disabled">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">折扣比例</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="consume.memNum" v-on:change="checkMemNum(consume.memNum)">
+							<input type="text" class="form-control" v-model="consume.memNum" disabled="disabled">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">已用课时</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="consume.memNum" v-on:change="checkMemNum(consume.memNum)">
+							<input type="text" class="form-control" v-model="consume.memNum" disabled="disabled">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">折后总额</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">折前总额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="consume.memNum" v-on:change="checkMemNum(consume.memNum)">
+							<input type="text" class="form-control" v-model="consume.memNum" disabled="disabled">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">

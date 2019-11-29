@@ -58,21 +58,27 @@
 									<th class="text-center">会员卡号</th>
 									<th class="text-center">姓名</th>
 									<th class="text-center">手机号</th>
-									<th class="text-center">交费总额</th>
-									<th class="text-center">消费总额</th>
-									<th class="text-center">退费总额</th>
-									<th class="text-center">剩余总额</th>
+									<th class="text-center">项目</th>
+									<th class="text-center">单价</th>
+									<th class="text-center">课时（次）</th>
+									<th class="text-center">折扣</th>
+									<th class="text-center">赠送金额</th>
+									<th class="text-center">赠送课时</th>
+									<th class="text-center">总金额</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(item2,index2) in consumeList" :key="index2"  v-on:dblclick="viewDetails(item2)">
-									<td>{{item2.MEM_NUM}}</td>
-									<td>{{item2.MEM_NAME}}</td>
-									<td>{{item2.PHONE}}</td>
-									<td>{{item2.TOTAL_RECHARGE}}</td>
-									<td>{{item2.TOTAL_CONSUMPTION}}</td>
-									<td>{{item2.TOTAL_REFUND}}</td>
-									<td>{{item2.TOTAL_BALANCE}}</td>
+								<tr v-for="(item2,index2) in consumeList" :key="index2">
+									<td>{{item2.memNum}}</td>
+									<td>{{item2.memName}}</td>
+									<td>{{item2.phone}}</td>
+									<td>{{item2.proName}}</td>
+									<td>{{item2.disPrice}}</td>
+									<td>{{item2.actualCount}}</td>
+									<td>{{item2.discount}}</td>
+									<td>{{item2.giveMoney}}</td>
+									<td>{{item2.giveCount}}</td>
+									<td>{{item2.realCross}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -80,7 +86,9 @@
 				</nobr>
 			</div>
 			<div class="col-md-12 col-lg-12">
-				<p class="tips">* 双击单行，可查看会员详细的消费情况；非会员流水没有明细</p>
+				<p class="tips">
+          <!--* 双击单行，可查看会员详细的消费情况；非会员流水没有明细-->
+        </p>
 			</div>
 		</div>
 		<div class="row row_edit">
@@ -127,7 +135,7 @@
 					this.endCreateDate = this.moment(this.endCreateDate,'YYYY-MM-DD 23:59:00.000')
 				}
 				
-				var url = this.url + '/accountRecordAction/queryAccountRecordTotal'
+				var url = this.url + '/accountRecordAction/consumptionSummary'
 				this.$ajax({
 					method: 'POST',
 					url: url,

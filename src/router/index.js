@@ -16,6 +16,7 @@ import Store from '../components/MP/Store.vue'
 import RuleManager from '../components/MP/RuleManager.vue'
 import CashDeposit from '../components/MP/CashDeposit.vue'
 import CurrentSummary from '../components/MP/CurrentSummary.vue'
+import Project from '../components/MP/Project.vue'
 import test from '../components/MP/test.vue'
 
 Vue.use(Router)
@@ -102,6 +103,11 @@ export default new Router({
 				  path: '/MP/CurrentSummary',
 				  name: 'CurrentSummary',
 				  component: CurrentSummary,
+				},
+				{
+				  path: '/MP/Project',
+				  name: 'Project',
+				  component: Project,
 				},
 				{
 				  path: '/MP/test',

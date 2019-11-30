@@ -67,21 +67,21 @@
 									<th class="text-center">会员卡号</th>
 									<th class="text-center">姓名</th>
 									<th class="text-center">手机号</th>
-									<th class="text-center">交费总额</th>
-									<th class="text-center">消费总额</th>
-									<th class="text-center">退费总额</th>
-									<th class="text-center">剩余总额</th>
+									<th class="text-center">购项次数</th>
+									<th class="text-center">课时总数</th>
+									<th class="text-center">已使用课时</th>
+									<th class="text-center">剩余课时</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in memCostList" :key="index" v-on:dblclick="detailAction(item)">
-									<td>{{item.MEM_NUM}}</td>
-									<td>{{item.MEM_NAME}}</td>
-									<td>{{item.PHONE}}</td>
-									<td>{{item.TOTAL_RECHARGE}}</td>
-									<td>{{item.TOTAL_CONSUMPTION}}</td>
-									<td>{{item.TOTAL_REFUND}}</td>
-									<td>{{item.TOTAL_BALANCE}}</td>
+									<td>{{item.memNum}}</td>
+									<td>{{item.memName}}</td>
+									<td>{{item.phone}}</td>
+									<td>{{item.itemNums}}</td>
+									<td>{{item.numberOfContracts}}</td>
+									<td>{{item.consumptionTimes}}</td>
+									<td>{{item.residualTimes}}</td>
 								</tr>
 							</tbody>
 						</table>

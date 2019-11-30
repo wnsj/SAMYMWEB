@@ -12,23 +12,27 @@
 						<thead>
 							<tr>
 								<th class="text-center">会员卡号</th>
-								<th class="text-center">所属门店</th>
-								<th class="text-center">姓名</th>
+								<th class="text-center">会员姓名</th>
+								<th class="text-center">咨询师姓名</th>
+								<th class="text-center">项目名</th>
+								<th class="text-center">单价</th>
+								<th class="text-center">课时</th>
 								<th class="text-center">时间</th>
-								<th class="text-center">费用类型</th>
-								<th class="text-center">金额</th>
+								<th class="text-center">操作类型</th>
 							</tr>
 						</thead> 
 						<tbody>
 							<tr v-for="(item,index) in memberList" :key="index">
 								<td>{{item.memNum}}</td>
-								<td>{{item.storeName}}</td>
 								<td>{{item.memName}}</td>
+								<td>{{item.empName}}</td>
+								<td>{{item.proName}}</td>
+								<td>{{item.disPrice}}</td>
+								<td v-if="item.type=='购买'">共{{item.numberOfContracts}}课时</td>
+								<td v-else-if="item.type=='消费'">第{{item.numberOfContracts}}课时</td>
+								<td v-else-if="item.type=='退费'">退{{item.numberOfContracts}}课时</td>
 								<td>{{item.createDate | dateFormatFilter('YYYY-MM-DD')}}</td>
-								<td v-if="item.costType=='1'">{{item.isfirst=='1'? '首充' : '续费'}}</td>
-								<td v-else-if="item.costType=='2'">消费</td>
-								<td v-else-if="item.costType=='3'">退费</td>
-								<td>{{item.momey}}</td>
+								<td>{{item.type}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -60,7 +64,7 @@
 				if(this.isBlank(param)){
 					return
 				}
-				var url = this.url + '/accountRecordAction/queryAccountSummary'
+				var url = this.url + '/accountRecordAction/queryMemberDetails'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -69,7 +73,7 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						memNum:param.MEM_NUM,
+						memNum:param.memNum,
 					},
 					dataType: 'json',
 				}).then((response) => {

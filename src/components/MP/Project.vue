@@ -3,15 +3,31 @@
 
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">岗位管理</h1>
+			<h1 class="titleCss">课程管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;padding-bottom:1.5%;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<store ref='store' @storeChange='storeChange'></store>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">岗位名</p><span class="sign-left">:</span>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">课程名称</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-					<input class="form-control" type="text" v-model="posName">
+					<input class="form-control" type="text" v-model="proName">
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-8 col-lg-8">
+					<emp ref='emp' @employeeChange='empChange'></emp>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -27,9 +43,9 @@
 				</div>
 			</div>
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="selectRule('1')">添加</button>
+			 v-on:click="selectRule('1')" >添加</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="checkPosition()">查询</button>
+			 v-on:click="checkProject()">查询</button>
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
@@ -39,16 +55,24 @@
 						<thead class="datathead">
 							<tr>
 								<th class="text-center">ID</th>
-								<th class="text-center">岗位名称</th>
-								<th class="text-center">是否停用</th>
+								<th class="text-center">店铺</th>
+								<th class="text-center">咨询师</th>
+								<th class="text-center">课程名称</th>
+								<th class="text-center">单价</th>
+								<th class="text-center">课时(次)</th>
+								<th class="text-center">优惠比例(%)</th>
 								<th class="text-center">修改</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in positionList" :key="index" v-on:dblclick="selectRule('3',item)">
-								<td class="text-center">{{item.posId}}</td>
-								<td class="text-center">{{item.posName}}</td>
-								<td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
+							<tr v-for="(item,index) in projectList" :key="index" v-on:dblclick="selectRule('3',item)">
+								<td class="text-center">{{item.proId}}</td>
+								<td class="text-center">{{item.storeName}}</td>
+								<td class="text-center">{{item.empName}}</td>
+								<td class="text-center">{{item.proName}}</td>
+								<td class="text-center">{{item.price}}</td>
+								<td class="text-center">{{item.frequency}}</td>
+								<td class="text-center">{{item.discount}}</td>
 								<td class="text-center"><button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改</button></td>
 							</tr>
 						</tbody>
@@ -60,9 +84,9 @@
 			</div>
 		</div>
 		<div class="row row_edit">
-			<div class="modal fade" id="positionContent">
+			<div class="modal fade" id="projectContent">
 				<div class="modal-dialog">
-					<SubPost ref='subPost' @certainAction='feedBack'></SubPost>
+					<SubProject ref='subProject' @certainAction='feedBack'></SubProject>
 				</div>
 			</div>
 		</div>
@@ -72,26 +96,49 @@
 
 
 <script>
-
-	import SubPost from '../MP/SubPost/SubPost.vue'
+	import store from '../common/Store.vue'
+	import emp from '../common/Employee.vue'
+	import SubProject from '../MP/SubProject/SubProject.vue'
 	export default {
 		components: {
-			SubPost,
+			store,
+			emp,
+			SubProject,
 		},
 		data() {
 			return {
-				positionList: [],
+				projectList: [],
 				isuse: '1',
-				posName: '',
-				fixedHeader: false,
+				name: '',
+				storeId:'',
+				empId:'',
 			};
 		},
 		methods: {
 			
+			initData(){
+				this.$refs.emp.setPosName("咨询师")
+				this.$refs.emp.setEmp("")
+			},
 			//feedback from adding and modifying view
 			feedBack() {
-				this.checkPosition()
-				$("#positionContent").modal('hide')
+				this.checkProject()
+				$("#projectContent").modal('hide')
+			},
+			
+			storeChange(param){
+				if(this.isBlank(param)){
+					this.storeId=""
+				}else{
+					this.storeId=param.storeId
+				}
+			},
+			empChange(param){
+				if(this.isBlank(param)){
+					this.empId=""
+				}else{
+					this.empId=param.empId
+				}
 			},
 			// check the adding and modifying rule of account
 			selectRule(param,item){
@@ -107,7 +154,7 @@
 					data: {
 						accountId: this.accountId(),
 						moduleGrade:'2',
-						urlName:'Position',
+						urlName:'Project',
 						operateType:param,
 					},
 					dataType: 'json',
@@ -116,11 +163,11 @@
 					if (res.retCode == '0000') {
 						if(res.retData=='0010'){
 							if(param=="1"){
-								this.$refs.subPost.initData('add')
-								$("#positionContent").modal('show')
+								this.$refs.subProject.initData('add')
+								$("#projectContent").modal('show')
 							}else if(param=="3"){
-								this.$refs.subPost.initData('modify',item)
-								$("#positionContent").modal('show')
+								this.$refs.subProject.initData('modify',item)
+								$("#projectContent").modal('show')
 							}
 						}else{
 							alert('您没有此权限，请联系管理员！！')
@@ -130,13 +177,13 @@
 					}
 				
 				}).catch((error) => {
-					console.log('商铺查询请求失败')
+					console.log('课程添加修改失败')
 				});
 			},
 			//check the list of position
-			checkPosition() {
+			checkProject() {
 				console.log('checkPosition')
-				var url = this.url + '/positionAction/queryPosition'
+				var url = this.url + '/projects/queryAllByParams'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -145,19 +192,22 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						posName: this.posName,
-						isuse: this.isuse,
+						proName: this.name,
+						state: this.isuse,
+						empId:this.empId,
+						storeId:this.storeId,
+						
 						
 						accountId: this.accountId(),
 						moduleGrade:'2',
-						urlName:'Position',
+						urlName:'Project',
 						operateType:'4',
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						this.positionList = res.retData
+						this.projectList = res.retData
 					} else {
 						alert(res.retMsg)
 					}
@@ -191,10 +241,11 @@
 			}
 		},
 		mounted () {
-		window.addEventListener('scroll',this.handleScroll,true)
+			this.initData()
+			window.addEventListener('scroll',this.handleScroll,true)
 		},
 		created() {
-		  this.checkPosition()
+		  this.checkProject()
 		}
 	}
 </script>

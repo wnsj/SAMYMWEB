@@ -143,21 +143,20 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						
-						if(this.isBlank(res.retData.grossInfo)){
+						if(res.retData.grossInfo != null){
 							this.earningList = res.retData.grossInfo;
 						}else{
 							this.earningList = [];
 						}
-						if(this.isBlank(res.retData.gross)){
+						
+						if(res.retData.gross != null){
 							this.earningTotle = res.retData.gross
+							console.log("剩余："+this.earningTotle.BALANCE)
 						}else{
 							this.earningTotle = {
 								BALANCE:'',
 							}
 						}
-						
-						
 					}
 				}).catch((error) => {
 					console.log('月入账目查询失败')

@@ -32,21 +32,21 @@
 						</div>
 					</div>
 					
-					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">维护人</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<emp ref="emp" @employeeChange="empChange"></emp>
-						</div>
-					</div>
 					<div class="col-md-12 form-group clearfix text-left">
 						<h4 id="myModalLabel" class="modal-title">课程：</h4>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">项目</label><span
+						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<emp ref="emp" @employeeChange="empChange"></emp>
+							<emp ref="counselorEmp" @employeeChange="counselorEmpChange"></emp>
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">课程</label><span
+						 class="sign-left">:</span>
+						<div class="col-md-7">
+							<project ref="project" @projectChange="projectChange"></project>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
@@ -141,10 +141,12 @@
 <script>
 	import dPicker from 'vue2-datepicker'
 	import emp from '../../common/Employee.vue'
+	import project from '../../common/Project.vue'
 	export default {
 		components: {
 			dPicker,
 			emp,
+			project,
 		},
 		data() {
 			return {
@@ -209,45 +211,14 @@
 			addFee() {
 				console.log('the event of addtional button')
 
-				switch (this.title) {
-					case "购买":
-						this.consume.costType = '1'
-						break;
-					case "消费":
-						this.consume.costType = '2'
-						this.consume.storeId = this.storeId()
-						break;
-					case "退费":
-						this.consume.costType = '3'
-						break;
-				}
-				console.log('费用类型：' + this.consume.costType)
-				
+				this.consume.storeId = this.storeId()
+						
 				if (this.isBlank(this.consume.momey)) {
 					alert("金额不能为空")
 					return
 				}
-				if (this.isBlank(this.consume.empId)) {
-					alert("维护人不能为空")
-					return
-				}
-
-				if (!this.isBlank(this.consume.rechargetime)) {
-					this.consume.rechargetime = this.moment(this.consume.rechargetime, 'YYYY-MM-DD HH:mm:ss.000')
-				}
-
-				if (this.consume.consumeType == '2' && this.consume.balance < this.consume.momey) {
-					alert("您的余额不足，请充值")
-					return
-				}
-				if (this.consume.consumeType == '3' && this.consume.balance < this.consume.momey) {
-					alert("您的余额不足，请查询余额后在进行退款")
-					return
-				}
-
-
-
-				var url = this.url + '/accountRecordAction/addAccountRecord'
+				
+				var url = this.url + '/purchasedItemsAction/refund'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -327,7 +298,6 @@
 							this.consume.memNum = res.retData[0].memNum
 							this.consume.memName = res.retData[0].memName
 							this.consume.phone = res.retData[0].phone
-							this.consume.balance = res.retData[0].balance
 							
 						} else {
 							console.log('没有查到会员信息，请添加会员后充值')

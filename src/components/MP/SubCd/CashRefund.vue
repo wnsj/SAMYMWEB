@@ -9,12 +9,6 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员号</label><span class="sign-left">:</span>
-						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="cash.memNum" placeholder="">
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="cash.cashName" placeholder="">
@@ -163,8 +157,7 @@
 				});
 			},
 			closeCurrentPage(){
-				$("#cdContent").modal("hide")
-				console.log('close the flowWater rule')
+				$("#crContent").modal("hide")
 			},
 		}
 		

@@ -109,7 +109,7 @@
 			return {
 				projectList: [],
 				isuse: '1',
-				name: '',
+				proName: '',
 				storeId:'',
 				empId:'',
 			};

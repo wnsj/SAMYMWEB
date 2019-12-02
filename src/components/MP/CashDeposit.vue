@@ -64,6 +64,7 @@
 								<th class="text-center">手机号</th>
 								<th class="text-center">定金金额</th>
 								<th class="text-center">交定金时间</th>
+								<th class="text-center">定金余额</th>
 								<th class="text-center">操作人</th>
 								<th class="text-center">修改</th>
 							</tr>
@@ -76,9 +77,11 @@
 								<td class="text-center">{{item.money}}</td>
 								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td class="text-center">{{item.operatorName}}</td>
+								<td class="text-center">{{item.money}}</td>
 								<td class="text-center">
 									<button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button>
-									<button type="button" class="btn btn-default" v-on:click="cancelCush(item)">{{item.state==1 ? "已撤销" : "未撤销"}}</button>
+									<button type="button" class="btn btn-success" v-on:click="addConsume(item)">消费</button>
+									<button type="button" class="btn btn-danger" v-on:click="addRefund(item)">退费</button>
 								</td>
 							</tr>
 						</tbody>
@@ -96,6 +99,20 @@
 				</div>
 			</div>
 		</div>
+		<div class="row row_edit">
+			<div class="modal fade" id="ccContent">
+				<div class="modal-dialog">
+					<SubCc ref='subCc' @certainAction='feedBack'></SubCc>
+				</div>
+			</div>
+		</div>
+		<div class="row row_edit">
+			<div class="modal fade" id="crContent">
+				<div class="modal-dialog">
+					<SubCr ref='subCr' @certainAction='feedBack'></SubCr>
+				</div>
+			</div>
+		</div>
 	</div>
 
 </template>
@@ -104,12 +121,16 @@
 <script>
 	import dPicker from 'vue2-datepicker'
 	import SubCd from '../MP/SubCd/SubCd.vue'
+	import SubCc from '../MP/SubCd/CashConsume.vue'
+	import SubCr from '../MP/SubCd/CashRefund.vue'
 	import Store from '../common/Store.vue'
 	export default {
 		components: {
 			dPicker,
 			SubCd,
 			Store,
+			SubCc,
+			SubCr,
 		},
 		data() {
 			return {
@@ -128,6 +149,14 @@
 				console.log('modify the cotent of member')
 				this.$refs.subCd.initData('add')
 				$("#cdContent").modal('show')
+			},
+			addConsume() {
+				this.$refs.subCc.initData('add')
+				$("#ccContent").modal('show')
+			},
+			addRefund() {
+				this.$refs.subCr.initData('add')
+				$("#crContent").modal('show')
 			},
 			//modify the cotent of member
 			modifyMember(item) {

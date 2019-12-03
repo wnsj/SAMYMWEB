@@ -293,7 +293,7 @@
             }
           }
           //实际交的钱大于定金剩余的钱
-          if(this.consume.realCross>this.initDataParam.balance){
+          if(parseFloat(this.consume.realCross)>parseFloat(this.initDataParam.balance)){
             alert("实际交的钱大于定金剩余的钱,需要补交金额");
             this.consume.balance="0";
             this.consume.makeUpMoney=this.consume.realCross-this.initDataParam.balance;
@@ -385,6 +385,7 @@
             // this.$router.push({
             //   name: 'SettleSummary',
             // });
+            alert(res.retMsg);
             this.$emit('queryAction')
             //$("#addCustom").modal("hide")
           } else {
@@ -396,7 +397,7 @@
       },
       closeCurrentPage() {
         this.$emit('queryAction')
-        console.log('关闭订单消费界面')
+        console.log('关闭定金消费界面')
       },
       jumpLeft(index){
         $("#aside-menu li").removeClass("li-active");

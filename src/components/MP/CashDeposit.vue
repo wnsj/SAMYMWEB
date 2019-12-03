@@ -40,6 +40,18 @@
 			</div>
 		</div>
 		<div class="row" style="padding-bottom:1.5%;">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+          <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">余额状态</p><span class="sign-left">:</span>
+        </div>
+        <div class="col-md-8 col-lg-8">
+          <select class="form-control" v-model="balanceState">
+            <option value="1">全部</option>
+            <option value="2">有余额</option>
+            <option value="3">无余额</option>
+          </select>
+        </div>
+      </div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
@@ -81,7 +93,7 @@
 								<td class="text-center">
 									<button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button>
                   <button type="button" class="btn btn-success" v-on:click="consumptionModel(item)">消费</button>
-                  <button type="button" class="btn btn-danger" v-on:click="modifyMember(item)">退费</button>
+                  <button type="button" class="btn btn-danger" v-on:click="refundModel(item)">退费</button>
 									<button type="button" class="btn btn-default" v-on:click="cancelCush(item)">{{item.state==1 ? "已撤销" : "未撤销"}}</button>
 								</td>
 							</tr>
@@ -108,6 +120,14 @@
         </div>
       </div>
     </div>
+
+    <div class="row row_edit">
+      <div class="modal fade" id="tfContent">
+        <div class="modal-dialog">
+          <SubCdRefund ref='subCdRefund' @refundAction='refundFeedBack'></SubCdRefund>
+        </div>
+      </div>
+    </div>
 	</div>
 
 </template>
@@ -118,12 +138,14 @@
 	import SubCd from '../MP/SubCd/SubCd.vue'
 	import Store from '../common/Store.vue'
   import SubCdConsumption from  '../MP/SubCd/SubCdConsumption'
+  import SubCdRefund from  '../MP/SubCd/SubCdRefund'
 	export default {
 		components: {
 			dPicker,
 			SubCd,
 			Store,
       SubCdConsumption,
+      SubCdRefund,
 		},
 		data() {
 			return {
@@ -134,6 +156,7 @@
 				endDate: '',
 				storeId:'0',
 				state:'',
+        balanceState:"2",
 			};
 		},
 		methods: {
@@ -149,12 +172,21 @@
           alert("已经撤销，不能进行消费")
           return
         }
-        // if(this.isBlank(item.memNum)){
-        //   alert("会员不可直接消费");
-        //   return
-        // }
+        if(!this.isBlank(item.memNum)){
+          alert("会员不可直接消费");
+          return
+        }
         this.$refs.subCdConsumption.initData(item);
         $("#xfContent").modal('show');
+      },
+      //退费模态框
+      refundModel(item){
+        if(item.state=='1'){
+          alert("已经撤销，不能进行消费");
+          return
+        }
+        this.$refs.subCdRefund.initData(item);
+        $("#tfContent").modal('show');
       },
 			//modify the cotent of member
 			modifyMember(item) {
@@ -184,6 +216,10 @@
         this.checkMember()
         $("#xfContent").modal('hide')
       },
+      refundFeedBack(){
+			  this.checkMember()
+        $("#tfContent").modal('hide')
+      },
 			//check the list of member
 			checkMember() {
 				console.log('checkMember')
@@ -202,6 +238,7 @@
 						beginDate: this.beginDate,
 						endDate: this.endDate,
 						storeId:this.storeId,
+            balanceState:this.balanceState,
 					},
 					dataType: 'json',
 				}).then((response) => {

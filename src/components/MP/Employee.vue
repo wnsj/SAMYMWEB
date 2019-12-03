@@ -180,7 +180,7 @@
 					data: {
 						accountId: this.accountId(),
 						moduleGrade:'2',
-						urlName:'Employee',
+						urlName:'/MP/Employee',
 						operateType:param,
 					},
 					dataType: 'json',
@@ -226,7 +226,7 @@
 						
 						accountId: this.accountId(),
 						moduleGrade:'2',
-						urlName:'Employee',
+						urlName:'/MP/Employee',
 						operateType:'4',
 					},
 					dataType: 'json',

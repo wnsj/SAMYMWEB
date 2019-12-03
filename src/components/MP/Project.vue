@@ -154,7 +154,7 @@
 					data: {
 						accountId: this.accountId(),
 						moduleGrade:'2',
-						urlName:'Project',
+						urlName:'/MP/Project',
 						operateType:param,
 					},
 					dataType: 'json',
@@ -200,7 +200,7 @@
 						
 						accountId: this.accountId(),
 						moduleGrade:'2',
-						urlName:'Project',
+						urlName:'/MP/Project',
 						operateType:'4',
 					},
 					dataType: 'json',

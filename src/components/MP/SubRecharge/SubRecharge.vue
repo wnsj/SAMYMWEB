@@ -94,20 +94,6 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">赠送课时</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="consume.giveCount" :disabled="isShow==false">
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">赠送金额</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="consume.giveMoney" :disabled="isShow==false">
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">维护人</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
@@ -126,27 +112,27 @@
 							<input type="text" class="form-control" v-model="consume.realCross">
 						</div>
 					</div>
-					
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">赠送总额</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="consume.giveMoney">
-						</div>
-					</div>
 			</div>
 			<div class="tab-pane fade in active martop" id="basic" v-show="isShow==true">
 				<div class="col-md-12 form-group clearfix text-left">
-					<div class="col-md-12 clearfix">
-						<h4 id="myModalLabel" class="modal-title">客户：</h4>
-					</div>
+					<h4 id="myModalLabel" class="modal-title">客户：</h4>
 				</div>
 				<div class="col-md-6 clearfix">
 					<div class="col-md-3">
 						<input type="checkbox" class="form-control" v-model="isSelect" disabled="disabled">
 					</div>
-					<label for="cyname" class="col-md-9 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预购余额抵扣</label><span
+					<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预购余额抵扣</label><span
 					 class="sign-left">:</span>
+				</div>
+				<div class="col-md-6 clearfix">
+					<div class="col-md-3">
+						<input type="checkbox" class="form-control" v-model="isSelect" disabled="disabled">
+					</div>
+					<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">定金余额抵扣</label><span
+					 class="sign-left">:</span>
+					 <div class="col-md-6">
+					 	<input type="text" class="form-control" v-model="isSelect" disabled="disabled">
+					 </div>
 				</div>
 				<div class="col-md-6 clearfix">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">应交总额</label><span
@@ -299,7 +285,11 @@
 				
 					
 					if(this.member.counselorEmpId != this.consume.counselor){
-						this.consumeReceivable=this.consume.realCross-this.member.balance
+						if(param.proType==1){
+							this.consumeReceivable=this.consume.realCross
+						}else{
+							this.consumeReceivable=this.consume.realCross-this.member.balance
+						}
 					}else{
 						this.consumeReceivable=this.consume.realCross
 					}
@@ -358,26 +348,10 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						switch (this.title) {
-							case "充值":
-								this.$router.push({
-									name: 'Charge',
-								});
-								this.jumpLeft(3);
-								break;
-							case "消费":
-								this.$router.push({
-									name: 'SettleSummary',
-								});
-								this.jumpLeft(2);
-								break;
-							case "退费":
-								this.$router.push({
-									name: 'Charge',
-								});
-								this.jumpLeft(3);
-								break;
-						}
+						this.$router.push({
+							name: 'Charge',
+						});
+						this.jumpLeft(3);
 						$("#addFee").modal("hide")
 					} else {
 						alert(res.retMsg)
@@ -407,7 +381,6 @@
 				if (this.isBlank(param)) {
 					return
 				}
-				console.log('费用类型3：' + this.consume.costType)
 				var url = this.url + '/memberAction/queryMember'
 				this.$ajax({
 					method: 'POST',

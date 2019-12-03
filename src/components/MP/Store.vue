@@ -111,7 +111,7 @@
 					data: {
 						accountId: this.accountId(),
 						moduleGrade:'2',
-						urlName:'Store',
+						urlName:'/MP/Store',
 						operateType:param,
 					},
 					dataType: 'json',
@@ -154,7 +154,7 @@
 						
 						accountId: this.accountId(),
 						moduleGrade:'2',
-						urlName:'Store',
+						urlName:'/MP/Store',
 						operateType:'4',
 					},
 					dataType: 'json',

@@ -212,7 +212,6 @@
 						moduleGrade: this.moduleGrade,
 						operateType: this.operateType,
 						
-						// accountId:this.accountId()
 					},
 					dataType: 'json',
 				}).then((response) => {

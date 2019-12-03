@@ -47,6 +47,15 @@
 							</select>
 						</div>
 					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否停用</label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<select class="form-control" v-model="project.proType">
+								<option value="1">是</option>
+								<option value="0">否</option>
+							</select>
+						</div>
+					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
@@ -80,7 +89,7 @@
 					price:'0',
 					frequency:'',
 					discount:'',
-					
+					proType:'0',
 				},
 				title: '',
 			};
@@ -131,7 +140,7 @@
 					alert("咨询师不能为空")
 					return
 				}
-				if (this.isBlank(this.project.price) || this.project.price==0) {
+				if (this.isBlank(this.project.price) || this.project.price < 0) {
 					alert("课时单价不能为空")
 					return
 				}

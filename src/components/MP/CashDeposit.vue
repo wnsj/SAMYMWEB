@@ -40,24 +40,24 @@
 			</div>
 		</div>
 		<div class="row" style="padding-bottom:1.5%;">
-      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
-          <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">余额状态</p><span class="sign-left">:</span>
-        </div>
-        <div class="col-md-8 col-lg-8">
-          <select class="form-control" v-model="balanceState">
-            <option value="1">全部</option>
-            <option value="2">有余额</option>
-            <option value="3">无余额</option>
-          </select>
-        </div>
-      </div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-8 col-lg-8">
 					<Store ref='store' @storeChange='storeChange'></Store>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">状态</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+					<select class="form-control" v-model="balanceState">
+						<option value="1">全部</option>
+						<option value="2">未用完</option>
+						<option value="3">已用完</option>
+					</select>
 				</div>
 			</div>
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
@@ -76,7 +76,7 @@
 								<th class="text-center">手机号</th>
 								<th class="text-center">定金金额</th>
 								<th class="text-center">交定金时间</th>
-								<th class="text-center">剩余余额</th>
+								<th class="text-center">定金余额</th>
 								<th class="text-center">操作人</th>
 								<th class="text-center">修改</th>
 							</tr>
@@ -94,7 +94,6 @@
 									<button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button>
                   <button type="button" class="btn btn-success" v-on:click="consumptionModel(item)">消费</button>
                   <button type="button" class="btn btn-danger" v-on:click="refundModel(item)">退费</button>
-									<button type="button" class="btn btn-default" v-on:click="cancelCush(item)">{{item.state==1 ? "已撤销" : "未撤销"}}</button>
 								</td>
 							</tr>
 						</tbody>
@@ -321,22 +320,29 @@
 </script>
 
 <style>
-  #datatable{position:relative;}
-  #fHeader {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #eeeeee;
-    overflow: hidden;
-  }
-  #fHeader div.text-center{
-    float: left;
-    display: inline-block;
-    padding:8px;
-    border: 1px solid #ddd;
-    font-weight: bold;
-  }
-  @media print {
-    #fHeader{display:none}
-  }
+	#datatable {
+		position: relative;
+	}
+
+	#fHeader {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: #eeeeee;
+		overflow: hidden;
+	}
+
+	#fHeader div.text-center {
+		float: left;
+		display: inline-block;
+		padding: 8px;
+		border: 1px solid #ddd;
+		font-weight: bold;
+	}
+
+	@media print {
+		#fHeader {
+			display: none
+		}
+	}
 </style>

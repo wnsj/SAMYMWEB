@@ -8,6 +8,13 @@
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
+          <div class="col-md-6 form-group clearfix">
+            <label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员卡号</label><span
+            class="sign-left">:</span>
+            <div class="col-md-8">
+              <input type="text" class="form-control" v-model="cash.memNum">
+            </div>
+          </div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
@@ -61,6 +68,7 @@
 					storeId:'',
 					state:'',
 					operatorId:'',
+          memNum:'',
 				},
 				title:'新增',
 			};

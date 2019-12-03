@@ -64,6 +64,7 @@
 								<th class="text-center">手机号</th>
 								<th class="text-center">定金金额</th>
 								<th class="text-center">交定金时间</th>
+								<th class="text-center">剩余余额</th>
 								<th class="text-center">操作人</th>
 								<th class="text-center">修改</th>
 							</tr>
@@ -75,9 +76,12 @@
 								<td class="text-center">{{item.phone}}</td>
 								<td class="text-center">{{item.money}}</td>
 								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+								<td class="text-center">{{item.balance}}</td>
 								<td class="text-center">{{item.operatorName}}</td>
 								<td class="text-center">
 									<button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button>
+                  <button type="button" class="btn btn-success" v-on:click="consumptionModel(item)">消费</button>
+                  <button type="button" class="btn btn-danger" v-on:click="modifyMember(item)">退费</button>
 									<button type="button" class="btn btn-default" v-on:click="cancelCush(item)">{{item.state==1 ? "已撤销" : "未撤销"}}</button>
 								</td>
 							</tr>
@@ -96,6 +100,14 @@
 				</div>
 			</div>
 		</div>
+
+    <div class="row row_edit">
+      <div class="modal fade" id="xfContent">
+        <div class="modal-dialog">
+          <SubCdConsumption ref='subCdConsumption' @queryAction='consumptionFeedBack'></SubCdConsumption>
+        </div>
+      </div>
+    </div>
 	</div>
 
 </template>
@@ -105,11 +117,13 @@
 	import dPicker from 'vue2-datepicker'
 	import SubCd from '../MP/SubCd/SubCd.vue'
 	import Store from '../common/Store.vue'
+  import SubCdConsumption from  '../MP/SubCd/SubCdConsumption'
 	export default {
 		components: {
 			dPicker,
 			SubCd,
 			Store,
+      SubCdConsumption,
 		},
 		data() {
 			return {
@@ -129,14 +143,31 @@
 				this.$refs.subCd.initData('add')
 				$("#cdContent").modal('show')
 			},
+      //消费模态框
+      consumptionModel(item){
+        if(item.state=='1'){
+          alert("已经撤销，不能进行消费")
+          return
+        }
+        // if(this.isBlank(item.memNum)){
+        //   alert("会员不可直接消费");
+        //   return
+        // }
+        this.$refs.subCdConsumption.initData(item);
+        $("#xfContent").modal('show');
+      },
 			//modify the cotent of member
 			modifyMember(item) {
 				if(item.state=='1'){
 					alert("已经撤销，不能进行修改")
 					return
 				}
+        if(item.isConsume=='1'){
+          alert("已经消费过，不能进行修改")
+          return
+        }
 				this.$refs.subCd.initData('modify', item)
-				$("#cdContent").modal('show')
+				$("#cdContent").modal('show');
 			},
 			storeChange(param){
 				if(this.isBlank(param)){
@@ -149,6 +180,10 @@
 				this.checkMember()
 				$("#cdContent").modal('hide')
 			},
+      consumptionFeedBack(){
+        this.checkMember()
+        $("#xfContent").modal('hide')
+      },
 			//check the list of member
 			checkMember() {
 				console.log('checkMember')

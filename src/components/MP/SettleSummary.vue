@@ -62,8 +62,6 @@
 									<th class="text-center">单价</th>
 									<th class="text-center">课时（次）</th>
 									<th class="text-center">折扣(%)</th>
-									<th class="text-center">赠送金额</th>
-									<th class="text-center">赠送课时</th>
 									<th class="text-center">总金额</th>
 								</tr>
 							</thead>
@@ -76,8 +74,6 @@
 									<td>{{item2.disPrice}}</td>
 									<td>{{item2.actualCount}}</td>
 									<td>{{item2.discount}}</td>
-									<td>{{item2.giveMoney}}</td>
-									<td>{{item2.giveCount}}</td>
 									<td>{{item2.realCross}}</td>
 								</tr>
 							</tbody>

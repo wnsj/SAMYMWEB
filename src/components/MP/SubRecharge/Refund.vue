@@ -306,11 +306,12 @@
 				}else{
 					this.refund.piId = this.consume.piId
 				}
+				
 				if (!this.isBlank(this.refund.consumCount) && this.refund.consumCount>=0 
 					&& this.refund.consumCount <= (this.consume.actualCount-this.consume.consumCount)) {
 					
 				}else{
-					alert("退多少课时或者退费金额至少一个大于0")
+					alert("退费课时填写不正确")
 					return
 				}
 				if (this.refund.realCross<=0 && this.refund.balance <= 0) {

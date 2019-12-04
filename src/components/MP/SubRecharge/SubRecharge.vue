@@ -113,7 +113,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="tab-pane fade in active martop" v-show="isShow==true">
+			<div class="tab-pane fade in active martop">
 				<div class="col-md-12 form-group clearfix text-left">
 					<h4 id="myModalLabel" class="modal-title">客户：</h4>
 				</div>

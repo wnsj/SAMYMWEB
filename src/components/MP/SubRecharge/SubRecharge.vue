@@ -303,7 +303,8 @@
 			},
 			//课程
 			projectChange: function(param) {
-
+				
+				console.log(JSON.stringify(param))
 				if (this.isBlank(param)) {
 					this.consume.proId = ""
 				} else {
@@ -314,7 +315,7 @@
 					this.consume.discount = param.discount //折扣
 					this.consume.receivable = param.price * param.frequency //应交
 					this.consume.realCross = param.price * param.frequency * param.discount / 100 //实缴
-
+					this.consume.proType = param.proType
 
 
 					if (this.member.counselorEmpId != this.consume.counselor) {

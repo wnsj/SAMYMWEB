@@ -48,11 +48,11 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否停用</label><span class="sign-left">:</span>
+						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">体验课</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="project.proType">
-								<option value="1">是</option>
-								<option value="0">否</option>
+								<option value="1">否</option>
+								<option value="0">是</option>
 							</select>
 						</div>
 					</div>
@@ -87,8 +87,8 @@
 					empId: '',
 					state: '1',
 					price:'0',
-					frequency:'',
-					discount:'',
+					frequency:'0',
+					discount:'0',
 					proType:'0',
 				},
 				title: '',
@@ -105,9 +105,9 @@
 						empId: '',
 						state: '1',
 						price:'0',
-						proType:'0',
-						frequency:'',
-						discount:'',
+						proType:'1',
+						frequency:'0',
+						discount:'0',
 						storeId:this.storeId()
 					}
 					this.$refs.emp.setPosName("咨询师")

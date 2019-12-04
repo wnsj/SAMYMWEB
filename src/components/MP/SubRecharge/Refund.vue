@@ -228,6 +228,7 @@
 					piId:'',//课程Id
 					realCross:'',//应退金额
 					balance:'',//违约金
+					operatorId:this.accountId(),//操作人
 				},
 				this.consume = {
 					memNum: '',//会员名
@@ -393,6 +394,7 @@
 						if(this.counselorList.length>0){
 							this.proList=this.counselorList[0].proList
 							this.consume.counselorName = this.counselorList[0].counselorName
+							this.refund.counselor = this.counselorList[0].counselorName
 						}else{
 							alert("无可退费课程")
 						}

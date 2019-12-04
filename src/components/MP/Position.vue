@@ -107,7 +107,7 @@
 					data: {
 						accountId: this.accountId(),
 						moduleGrade:'2',
-						urlName:'Position',
+						urlName:'/MP/Position',
 						operateType:param,
 					},
 					dataType: 'json',
@@ -150,7 +150,7 @@
 						
 						accountId: this.accountId(),
 						moduleGrade:'2',
-						urlName:'Position',
+						urlName:'/MP/Position',
 						operateType:'4',
 					},
 					dataType: 'json',

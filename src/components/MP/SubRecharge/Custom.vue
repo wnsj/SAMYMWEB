@@ -84,20 +84,6 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">赠送课时</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="consume.giveCount" :disabled="isShow==false">
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">赠送金额</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="consume.giveMoney" :disabled="isShow==false">
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">维护人</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
@@ -114,14 +100,6 @@
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="consume.realCross">
-						</div>
-					</div>
-					
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">赠送总额</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="consume.giveMoney">
 						</div>
 					</div>
 			</div>

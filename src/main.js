@@ -20,9 +20,13 @@ Vue.prototype.url = process.env.API_HOST
 Vue.config.productionTip = false
 
 
+//权限判断方法（包含返回true，反之false）
+Vue.prototype.has = function(param) {
+  return constant.has(param);
+}
+
 // 路由卫士
 router.beforeEach((to, from, next) => {
-  console.log("to:" + to.path + ",from:" + from.path)
   if (to.path == '/login' && from.path == '/MainPage') {
     next();
   } else if (to.path == '/login') {
@@ -40,7 +44,24 @@ router.beforeEach((to, from, next) => {
     } else if (to.path == '/sam/dist/index.html') {
       next('/MainPage');
     } else {
-      next();
+			let jsonString=Cookies.get('itemList');
+			let itemRuleList=JSON.parse(jsonString);
+			let hasRule = false;
+			for (var i=0; i < itemRuleList.length;i++){
+				let item = itemRuleList[i];
+				if(to.path == item.urlName){
+					hasRule=true
+					console.log("hasRule:"+hasRule)
+					break;
+				}
+			}
+			console.log("main:"+to.path+from.path)
+			if(hasRule==true){
+				next()
+			}else{
+				next('/MainPage')
+				alert("您还没有此模块权限，请联系管理员添加权限")
+			}
     }
   }
 });
@@ -112,10 +133,7 @@ Vue.prototype.exportTableToExcel = function(tbId, fileName) {
 }
 
 
-//权限判断方法（包含返回true，反之false）
-Vue.prototype.has = function(param) {
-  return constant.has(param);
-}
+
 //账户的名字
 Vue.prototype.accountName = function() {
   return constant.accountName();

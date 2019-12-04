@@ -48,6 +48,18 @@
 					<Store ref='store' @storeChange='storeChange'></Store>
 				</div>
 			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">状态</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+					<select class="form-control" v-model="balanceState">
+						<option value="1">全部</option>
+						<option value="2">未用完</option>
+						<option value="3">已用完</option>
+					</select>
+				</div>
+			</div>
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
 			 v-on:click="addMember()">添加定金</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
@@ -64,6 +76,7 @@
 								<th class="text-center">手机号</th>
 								<th class="text-center">定金金额</th>
 								<th class="text-center">交定金时间</th>
+								<th class="text-center">定金余额</th>
 								<th class="text-center">操作人</th>
 								<th class="text-center">修改</th>
 							</tr>
@@ -75,10 +88,12 @@
 								<td class="text-center">{{item.phone}}</td>
 								<td class="text-center">{{item.money}}</td>
 								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+								<td class="text-center">{{item.balance}}</td>
 								<td class="text-center">{{item.operatorName}}</td>
 								<td class="text-center">
 									<button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button>
-									<button type="button" class="btn btn-default" v-on:click="cancelCush(item)">{{item.state==1 ? "已撤销" : "未撤销"}}</button>
+                  <button type="button" class="btn btn-success" v-on:click="consumptionModel(item)">消费</button>
+                  <button type="button" class="btn btn-danger" v-on:click="refundModel(item)">退费</button>
 								</td>
 							</tr>
 						</tbody>
@@ -96,6 +111,22 @@
 				</div>
 			</div>
 		</div>
+
+    <div class="row row_edit">
+      <div class="modal fade" id="xfContent">
+        <div class="modal-dialog">
+          <SubCdConsumption ref='subCdConsumption' @queryAction='consumptionFeedBack'></SubCdConsumption>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row_edit">
+      <div class="modal fade" id="tfContent">
+        <div class="modal-dialog">
+          <SubCdRefund ref='subCdRefund' @refundAction='refundFeedBack'></SubCdRefund>
+        </div>
+      </div>
+    </div>
 	</div>
 
 </template>
@@ -105,11 +136,15 @@
 	import dPicker from 'vue2-datepicker'
 	import SubCd from '../MP/SubCd/SubCd.vue'
 	import Store from '../common/Store.vue'
+  import SubCdConsumption from  '../MP/SubCd/SubCdConsumption'
+  import SubCdRefund from  '../MP/SubCd/SubCdRefund'
 	export default {
 		components: {
 			dPicker,
 			SubCd,
 			Store,
+      SubCdConsumption,
+      SubCdRefund,
 		},
 		data() {
 			return {
@@ -120,6 +155,7 @@
 				endDate: '',
 				storeId:'0',
 				state:'',
+        balanceState:"2",
 			};
 		},
 		methods: {
@@ -129,14 +165,40 @@
 				this.$refs.subCd.initData('add')
 				$("#cdContent").modal('show')
 			},
+      //消费模态框
+      consumptionModel(item){
+        if(item.state=='1'){
+          alert("已经撤销，不能进行消费")
+          return
+        }
+        if(!this.isBlank(item.memNum)){
+          alert("会员不可直接消费");
+          return
+        }
+        this.$refs.subCdConsumption.initData(item);
+        $("#xfContent").modal('show');
+      },
+      //退费模态框
+      refundModel(item){
+        if(item.state=='1'){
+          alert("已经撤销，不能进行消费");
+          return
+        }
+        this.$refs.subCdRefund.initData(item);
+        $("#tfContent").modal('show');
+      },
 			//modify the cotent of member
 			modifyMember(item) {
 				if(item.state=='1'){
 					alert("已经撤销，不能进行修改")
 					return
 				}
+        if(item.isConsume=='1'){
+          alert("已经消费过，不能进行修改")
+          return
+        }
 				this.$refs.subCd.initData('modify', item)
-				$("#cdContent").modal('show')
+				$("#cdContent").modal('show');
 			},
 			storeChange(param){
 				if(this.isBlank(param)){
@@ -149,6 +211,14 @@
 				this.checkMember()
 				$("#cdContent").modal('hide')
 			},
+      consumptionFeedBack(){
+        this.checkMember()
+        $("#xfContent").modal('hide')
+      },
+      refundFeedBack(){
+			  this.checkMember()
+        $("#tfContent").modal('hide')
+      },
 			//check the list of member
 			checkMember() {
 				console.log('checkMember')
@@ -167,6 +237,7 @@
 						beginDate: this.beginDate,
 						endDate: this.endDate,
 						storeId:this.storeId,
+            balanceState:this.balanceState,
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -249,22 +320,29 @@
 </script>
 
 <style>
-  #datatable{position:relative;}
-  #fHeader {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #eeeeee;
-    overflow: hidden;
-  }
-  #fHeader div.text-center{
-    float: left;
-    display: inline-block;
-    padding:8px;
-    border: 1px solid #ddd;
-    font-weight: bold;
-  }
-  @media print {
-    #fHeader{display:none}
-  }
+	#datatable {
+		position: relative;
+	}
+
+	#fHeader {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: #eeeeee;
+		overflow: hidden;
+	}
+
+	#fHeader div.text-center {
+		float: left;
+		display: inline-block;
+		padding: 8px;
+		border: 1px solid #ddd;
+		font-weight: bold;
+	}
+
+	@media print {
+		#fHeader {
+			display: none
+		}
+	}
 </style>

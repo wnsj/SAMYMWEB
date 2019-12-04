@@ -64,9 +64,8 @@
               <i class="fa fa-table" aria-hidden="false">　权限管理</i>
             </li>
 						
-            <!-- <li v-if="has(1)">
+            <!-- <li>
 							<router-link to="/MP/test"><i class="fa fa-table" aria-hidden="false">　权限管理</i></router-link>
-							<i class="fa fa-table" aria-hidden="false" v-on:click="selectRule('43')">　权限管理</i>
 						</li> -->
 
           </ul>
@@ -119,6 +118,7 @@
 		data() {
 			return {
 				accountName:this.accountName(),
+				itemList:[],
 			}
 		},
 		methods:{
@@ -150,8 +150,9 @@
 					},
 					data: {
 						accountId: this.accountId(),
-						moduleGrade:'1',
-						urlName:param,
+						modelGrade:'1',
+						modelType:'',
+						operateType:'',
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -159,12 +160,11 @@
 					if (res.retCode == '0000') {
 						if(res.retData=='0010'){
 							this.$router.push({ name: param, });
-
 						}else{
 							alert('您没有此权限，请联系管理员！！')
 						}
 					} else {
-						alert(res.retMsg)
+						alert('您没有此权限，请联系管理员！！')
 					}
 
 				}).catch((error) => {

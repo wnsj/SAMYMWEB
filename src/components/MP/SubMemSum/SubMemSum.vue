@@ -15,7 +15,6 @@
 								<th class="text-center">会员姓名</th>
 								<th class="text-center">咨询师姓名</th>
 								<th class="text-center">项目名</th>
-								<th class="text-center">单价</th>
 								<th class="text-center">课时</th>
 								<th class="text-center">时间</th>
 								<th class="text-center">操作类型</th>
@@ -27,7 +26,6 @@
 								<td>{{item.memName}}</td>
 								<td>{{item.empName}}</td>
 								<td>{{item.proName}}</td>
-								<td>{{item.disPrice}}</td>
 								<td v-if="item.type=='购买'">共{{item.numberOfContracts}}课时</td>
 								<td v-else-if="item.type=='消费'">第{{item.numberOfContracts}}课时</td>
 								<td v-else-if="item.type=='退费'">退{{item.numberOfContracts}}课时</td>

@@ -15,21 +15,24 @@ constant.isBlank = function(value) {
 }
 
 //权限判断方法（包含返回true，反之false）
-// {"accountId":"1","accountNum":"admin","accountPwd":"","accountName":"小强","accountState":"1","accountType":"2"}
 constant.has = function(param) {
 	//未传值
 	if (this.isBlank(param)) return false;
-	var jsonString = Cookies.get("accountData");
+	var jsonString = Cookies.get("itemList");
 	//未登录
-	if (this.isBlank(jsonString)) return false;
-	var accountData = JSON.parse(jsonString);
-	// console.log(jsonString)
-	var permission = accountData.accountType;
-	if (param == 1) {
-		return permission >= 1;
-	} else {
-		return permission > 1;
+	if (this.isBlank(jsonString)){
+		alert("您还没有任何权限，请联系管理员添加权限")
+		return false;
+	} 
+	var itemRuleList = [];
+	 itemRuleList=JSON.parse(jsonString);
+	for (var i=0; i < itemRuleList.length;i++){
+		var item = itemRuleList[i];
+		if(item.urlName == param){
+			return true;
+		}
 	}
+	return false;
 }
 //账户的姓名
 constant.accountName = function() {

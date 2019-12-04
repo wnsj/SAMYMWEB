@@ -275,7 +275,7 @@
 					data: {
 						accountId: this.accountId(),
 						moduleGrade:'2',
-						urlName:'Royalty',
+						urlName:'/MP/Royalty',
 						operateType:operateType,
 					},
 					dataType: 'json',
@@ -337,7 +337,7 @@
 					data: {
 						accountId: this.accountId(),
 						moduleGrade:'2',
-						urlName:'Royalty',
+						urlName:'/MP/Royalty',
 						operateType:'4',
 					},
 					dataType: 'json',

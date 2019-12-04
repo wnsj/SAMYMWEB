@@ -28,6 +28,14 @@
         </div>
 
         <div class="col-md-6 form-group clearfix">
+          <label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
+          class="sign-left">:</span>
+          <div class="col-md-7">
+            <emp ref="counselorEmp" @employeeChange="counselorEmpChange"></emp>
+          </div>
+        </div>
+
+        <div class="col-md-6 form-group clearfix">
           <label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">课程</label><span
           class="sign-left">:</span>
           <div class="col-md-7">
@@ -69,6 +77,14 @@
             <input type="text" class="form-control" v-model="consume.realCross" disabled="disabled">
           </div>
         </div>
+        <div class="col-md-6 form-group clearfix">
+          <label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">维护人</label><span
+          class="sign-left">:</span>
+          <div class="col-md-7">
+            <emp ref="emp" @employeeChange="empChange"></emp>
+          </div>
+        </div>
+
         <div class="col-md-6 form-group clearfix">
           <label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">定金剩余</label><span
           class="sign-left">:</span>
@@ -153,8 +169,8 @@
           price: '',//折前单价
           disPrice: '',//折后单价
           actualCount: '',//实际次数
-          //counselor: '',//咨询师id
-          //empId: '',//咨询师助理id
+          counselor: '',//咨询师id
+          empId: '',//咨询师助理id
           storeId: '',//店铺
           operatorId: '', //操作人
           balance:'0',
@@ -192,8 +208,8 @@
             price: '0.0',//折前单价
             disPrice: '',//折后单价
             actualCount: '0',//实际次数
-            //counselor: '',//咨询师id
-            //empId: '',//咨询师助理id
+            counselor: '',//咨询师id
+            empId: '',//咨询师助理id
             storeId: param.storeId,//店铺
             operatorId:this.accountId(),//操作人
             piId:'',
@@ -204,15 +220,16 @@
 
           }
         this.consumeReceivable='0.0'
-        //this.$refs.counselorEmp.setPosName("咨询师")
-        //this.$refs.counselorEmp.setEmp("")
-        //this.$refs.emp.setPosName("咨询顾问")
-        //this.$refs.project.setEmpId("0")
+        this.$refs.counselorEmp.setPosName("咨询师")
+        this.$refs.counselorEmp.setEmp("")
+        this.$refs.emp.setPosName("咨询顾问")
+        this.$refs.project.setEmpId("0")
 
       },
       //参数初始化
       paramInit(){
         this.$refs.project.setProject("0")
+        this.$refs.emp.setEmp("")
         this.member={
           memNum: '',//会员号
             cashName: '',//会员名
@@ -230,8 +247,8 @@
             price: '',//折前单价
             disPrice: '',//折后单价
             actualCount: '',//实际次数
-            //counselor: '',//咨询师id
-            //empId: '',//咨询师助理id
+            counselor: '',//咨询师id
+            empId: '',//咨询师助理id
             storeId: '',//店铺
             operatorId: '', //操作人
             balance:'0',
@@ -293,7 +310,7 @@
             }
           }
           //实际交的钱大于定金剩余的钱
-          if(this.consume.realCross>this.initDataParam.balance){
+          if(parseFloat(this.consume.realCross)>parseFloat(this.initDataParam.balance)){
             alert("实际交的钱大于定金剩余的钱,需要补交金额");
             this.consume.balance="0";
             this.consume.makeUpMoney=this.consume.realCross-this.initDataParam.balance;
@@ -385,6 +402,7 @@
             // this.$router.push({
             //   name: 'SettleSummary',
             // });
+            alert(res.retMsg);
             this.$emit('queryAction')
             //$("#addCustom").modal("hide")
           } else {
@@ -396,7 +414,7 @@
       },
       closeCurrentPage() {
         this.$emit('queryAction')
-        console.log('关闭订单消费界面')
+        console.log('关闭定金消费界面')
       },
       jumpLeft(index){
         $("#aside-menu li").removeClass("li-active");

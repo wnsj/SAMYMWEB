@@ -93,14 +93,14 @@
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">退费课时</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="refund.consumCount">
+							<input type="text" class="form-control" v-model="refund.consumCount" v-on:change="receivableAction(refund.consumCount)">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">退费金额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="refund.receivable">
+							<input type="text" class="form-control" v-model="refund.receivable" disabled="disabled">
 						</div>
 					</div>
 					<div class="col-md-12 col-lg-12">
@@ -292,6 +292,12 @@
 				}
 			},
 
+			receivableAction(param){
+				if(param>=0){
+					this.refund.receivable=param*this.consume.price*this.consume.discount/100
+				}
+			},
+
 			//the event of addtional button
 			addFee() {
 				console.log('the event of addtional button')
@@ -320,10 +326,6 @@
 					alert("实退金额和违约金至少一个大于0")
 					return
 				}
-				
-				
-				
-				
 				
 				
 				var url = this.url + '/purchasedItemsAction/refund'
@@ -395,7 +397,7 @@
 						if(this.counselorList.length>0){
 							this.proList=this.counselorList[0].proList
 							this.consume.counselorName = this.counselorList[0].counselorName
-							this.refund.counselor = this.counselorList[0].counselorName
+							this.refund.counselor = this.counselorList[0].counselor
 						}else{
 							alert("无可退费课程")
 						}

@@ -38,7 +38,7 @@
 						<input type="text" class="form-control" v-model="member.balance" :disabled="isShow==true">
 					</div>
 				</div>
-				<div class="col-md-12 col-lg-12">
+				<div class="col-md-12 col-lg-12" v-show="member.balance>0">
 					<p class="tips">* 预购余额：只是用来作为变更咨询师时，购买项目使用；此会员购买项目咨询师未发生变更，此项不做任何参考</p>
 				</div>
 				<div class="col-md-12 form-group clearfix text-left">
@@ -118,7 +118,7 @@
 					<div class="col-md-6 clearfix" >
 						<h4 id="myModalLabel" class="modal-title" style="line-height:39px;">客户：</h4>
 					</div>
-					<div class="col-md-6 clearfix">
+					<div class="col-md-6 clearfix"  v-show="member.balance>0">
 						<label class="bui-radios-label col-md-4 end-aline" style="padding:0; margin-right:0;">
 							<input type="checkbox" v-model="isSelect" disabled="disabled"/><i class="bui-radios"></i> 预购抵扣
 						</label>
@@ -220,7 +220,7 @@
 				title: '',
 				isShow: true,
 				consumeReceivable: '',
-				isSelect: true,
+				isSelect: false,
 				cashSelect: true,
 			};
 		},
@@ -231,7 +231,7 @@
 						memNum: '', //会员号
 						memName: '', //会员名
 						phone: '', //手机
-						balance: '',
+						balance: '0',
 						counselorEmpId: '',
 					},
 					this.cash = {
@@ -278,6 +278,7 @@
 				this.$refs.emp.setEmp("")
 				this.$refs.project.setEmpId("0")
 				this.isShow = true
+				this.isSelect=false
 
 			},
 			//咨询师
@@ -297,7 +298,7 @@
 			},
 			//课程
 			projectChange: function(param) {
-				console.log(JSON.stringify(param))
+				// console.log(JSON.stringify(param))
 				if (this.isBlank(param)) {
 					this.consume.proId = ""
 				} else {
@@ -312,12 +313,15 @@
 
 
 					if (this.member.counselorEmpId != this.consume.counselor) {
-						if (param.proType == 1) {
+						if (param.proType == 0) {
+							this.isSelect = false
 							this.consumeReceivable = this.consume.realCross
 						} else {
+							this.isSelect = true
 							this.consumeReceivable = this.consume.realCross - this.member.balance
 						}
 					} else {
+						this.isSelect = false
 						this.consumeReceivable = this.consume.realCross
 					}
 				}
@@ -331,16 +335,23 @@
 				}
 			},
 
-			cashAction() {
-					
-			},
 			count(event) {
 				if(Number(this.cash.select)>Number(this.cash.balance)){
-					console.log(1)
 					this.cash.select = this.cash.balance;
 					$("#earn").val(this.cash.select);
 				}
-				this.consumeReceivable =  this.consume.realCross - this.member.balance - this.cash.select;
+				if (this.member.counselorEmpId != this.consume.counselor) {
+					if (param.proType == 0) {
+						this.isSelect = false
+						this.consumeReceivable = this.consume.realCross
+					} else {
+						this.isSelect = true
+						this.consumeReceivable = this.consume.realCross - this.member.balance - this.cash.select;
+					}
+				} else {
+					this.isSelect = false
+					this.consumeReceivable =  this.consume.realCross - this.cash.select;
+				}
 			},
 			//the event of addtional button
 			addFee() {

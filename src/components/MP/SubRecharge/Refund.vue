@@ -272,6 +272,7 @@
 					this.consume.proId = ""
 				} else {
 					this.consume = this.exchangeProjectId(param)
+					console.log(JSON.stringify(this.consume))
 				}
 			},
 			//feedback employee information

@@ -113,42 +113,33 @@
 					</div>
 				</div>
 			</div>
-			<div class="tab-pane fade in active martop">
-				<div class="col-md-12 form-group clearfix text-left">
-					<h4 id="myModalLabel" class="modal-title">客户：</h4>
-				</div>
-				<div class="col-md-12 clearfix" v-show="member.balance>0">
-					<div class="col-md-6 clearfix">
-						<div class="col-md-3">
-							<input type="checkbox" class="form-control" v-model="isSelect" disabled="disabled">
-						</div>
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预购余额抵扣</label><span
-						 class="sign-left">:</span>
+			<div class="tab-pane fade in active martop" v-show="isShow==true">
+				<div class="col-md-12 form-group clearfix text-left" style="padding:0;">
+					<div class="col-md-6 clearfix" >
+						<h4 id="myModalLabel" class="modal-title" style="line-height:39px;">客户：</h4>
 					</div>
 					<div class="col-md-6 clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预购余额</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="member.balance" disabled="disabled">
-						</div>
+						<label class="bui-radios-label col-md-4 end-aline" style="padding:0; margin-right:0;">
+							<input type="checkbox" v-model="isSelect" disabled="disabled"/><i class="bui-radios"></i> 预购抵扣
+						</label>
+						
 					</div>
 				</div>
-				<div class="col-md-12 clearfix" v-show="cash.balance>0">
+				<div class="col-md-12 clearfix" v-show="cash.balance>0" style="padding:0;">
 					<div class="col-md-6 clearfix" v-show="cash.balance>0">
-						<div class="col-md-3" style="margin: 0px 10px 0px 5px; padding: 0px; width: 20px;height: 20px;">
-							<input type="checkbox" class="form-control" v-model="cashSelect" v-on:change="cashAction(cashSelect)" >
-						</div>
-						<label for="cyname" class="col-md-5 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">定金余额抵扣</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-4" style="margin: 0px 10px 0px 5px; padding: 0px;">
-							<input type="text" class="form-control" v-model="cash.balance">
+						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">
+							定金抵扣
+						</label>
+						<span class="sign-left">:</span>
+						<div class="col-md-7">
+							<input type="text" class="form-control" v-model="cash.select" id="earn" @keyup.enter="count" @input="count($event)"/>
 						</div>
 					</div>
 					<div class="col-md-6 clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">定金余额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="cash.balance" disabled="disabled">
+							<input type="text" class="form-control" v-model="cash.balance" id="cash" disabled="disabled">
 						</div>
 					</div>
 				</div>
@@ -157,7 +148,7 @@
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">应交总额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
-						<input type="text" class="form-control" v-model="consumeReceivable" disabled="disabled">
+						<input type="text" class="form-control" v-model="consumeReceivable"  disabled="disabled">
 					</div>
 				</div>
 			</div>
@@ -223,6 +214,8 @@
 					cashId:'',
 					memNum: '',
 					balance: '',
+					select:'',
+					btn: false,
 				},
 				title: '',
 				isShow: true,
@@ -245,6 +238,8 @@
 						cashId:'',
 						memNum: '',
 						balance: '0',
+						select: '0',
+						btn: false
 					},
 					this.consume = {
 						memNum: '', //会员名
@@ -282,7 +277,6 @@
 				this.$refs.counselorEmp.setEmp("")
 				this.$refs.emp.setEmp("")
 				this.$refs.project.setEmpId("0")
-
 				this.isShow = true
 
 			},
@@ -303,7 +297,6 @@
 			},
 			//课程
 			projectChange: function(param) {
-				
 				console.log(JSON.stringify(param))
 				if (this.isBlank(param)) {
 					this.consume.proId = ""
@@ -338,8 +331,16 @@
 				}
 			},
 
-			cashAction(param) {
-
+			cashAction() {
+					
+			},
+			count(event) {
+				if(Number(this.cash.select)>Number(this.cash.balance)){
+					console.log(1)
+					this.cash.select = this.cash.balance;
+					$("#earn").val(this.cash.select);
+				}
+				this.consumeReceivable =  this.consume.realCross - this.member.balance - this.cash.select;
 			},
 			//the event of addtional button
 			addFee() {
@@ -481,6 +482,7 @@
 					if (res.retCode == '0000') {
 						if (res.retData.length > 0) {
 							this.cash = res.retData[0]
+							this.cash.select = '0.0' 
 						} else {
 							this.cash = {
 								memNum: '', //会员号
@@ -496,11 +498,54 @@
 				});
 			},
 
-		}
+		},
+		mounted() {
+			
+		},
 
 	}
 </script>
 
 <style>
-
+	label.bui-radios-label{
+		 position:relative;
+		  line-height:34px;
+	}
+	label.bui-radios-label input {
+		position: absolute;
+		opacity: 0;
+		visibility: hidden; 
+	}
+	label.bui-radios-label .bui-radios {
+		display: inline-block;
+		position: relative;
+		width: 13px;
+		height: 13px;
+		background: #FFFFFF;
+		border: 1px solid #979797;
+		border-radius: 50%;
+		vertical-align: -2px; 
+		box-sizing:content-box;
+	}
+	label.bui-radios-label input:checked + .bui-radios:after {
+		position: absolute;
+		content: "";
+		width: 7px;
+		height: 7px;
+		background-color: #fff;
+		border-radius: 50%;
+		top: 3px;
+		left: 3px; 
+	}
+	label.bui-radios-label input:checked + .bui-radios {
+		background: #00B066;
+		border: 1px solid #00B066; 
+	}
+	label.bui-radios-label input:disabled + .bui-radios {
+		background-color: #e8e8e8;
+		border: solid 1px #979797; 
+	}
+	label.bui-radios-label input:disabled:checked + .bui-radios:after {
+		background-color: #c1c1c1; 
+	}
 </style>

@@ -175,6 +175,12 @@
           alert("会员不可直接消费");
           return
         }
+        if(parseFloat(item.balance)<=parseFloat('0')){
+          alert("余额为0,不可消费");
+          return
+        }
+
+
         this.$refs.subCdConsumption.initData(item);
         $("#xfContent").modal('show');
       },
@@ -182,6 +188,10 @@
       refundModel(item){
         if(item.state=='1'){
           alert("已经撤销，不能进行消费");
+          return
+        }
+        if(parseFloat(item.balance)<=parseFloat('0')){
+          alert("余额为0,没有可退费用");
           return
         }
         this.$refs.subCdRefund.initData(item);

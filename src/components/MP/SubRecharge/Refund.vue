@@ -93,14 +93,14 @@
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">退费课时</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="refund.consumCount">
+							<input type="text" class="form-control" v-model="refund.consumCount" v-on:change="receivableAction(refund.consumCount)">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">退费金额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="refund.receivable">
+							<input type="text" class="form-control" v-model="refund.receivable" disabled="disabled">
 						</div>
 					</div>
 					<div class="col-md-12 col-lg-12">
@@ -228,6 +228,7 @@
 					piId:'',//课程Id
 					realCross:'',//应退金额
 					balance:'',//违约金
+					operatorId:this.accountId(),//操作人
 				},
 				this.consume = {
 					memNum: '',//会员名
@@ -271,6 +272,7 @@
 					this.consume.proId = ""
 				} else {
 					this.consume = this.exchangeProjectId(param)
+					console.log(JSON.stringify(this.consume))
 				}
 			},
 			//feedback employee information
@@ -290,6 +292,12 @@
 				}
 			},
 
+			receivableAction(param){
+				if(param>=0){
+					this.refund.receivable=param*this.consume.price*this.consume.discount/100
+				}
+			},
+
 			//the event of addtional button
 			addFee() {
 				console.log('the event of addtional button')
@@ -306,21 +314,18 @@
 				}else{
 					this.refund.piId = this.consume.piId
 				}
+				
 				if (!this.isBlank(this.refund.consumCount) && this.refund.consumCount>=0 
 					&& this.refund.consumCount <= (this.consume.actualCount-this.consume.consumCount)) {
 					
 				}else{
-					alert("退多少课时或者退费金额至少一个大于0")
+					alert("退费课时填写不正确")
 					return
 				}
 				if (this.refund.realCross<=0 && this.refund.balance <= 0) {
 					alert("实退金额和违约金至少一个大于0")
 					return
 				}
-				
-				
-				
-				
 				
 				
 				var url = this.url + '/purchasedItemsAction/refund'
@@ -392,6 +397,7 @@
 						if(this.counselorList.length>0){
 							this.proList=this.counselorList[0].proList
 							this.consume.counselorName = this.counselorList[0].counselorName
+							this.refund.counselor = this.counselorList[0].counselor
 						}else{
 							alert("无可退费课程")
 						}

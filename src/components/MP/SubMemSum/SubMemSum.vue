@@ -1,13 +1,13 @@
 <!-- add and modify patient -->
 <template>
-	<div class="modal-content">
+	<div class="modal-content" style="width:620px">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
 			<h4 id="myModalLabel">会员列表</h4>
 		</div>
 		<div class="tableContent">
 			<nobr class="widthmax">
-				<div class="table-responsive pre-scrollable" style=" max-height:464px">
+				<div class="table-responsive pre-scrollable" style=" max-height:464px;">
 					<table class="table table-bordered table-hover user-table" id="datatable">
 						<thead>
 							<tr>

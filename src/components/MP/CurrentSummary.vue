@@ -37,24 +37,29 @@
 									<th class="text-center">手机号</th>
 									<th class="text-center">时间</th>
 									<th class="text-center">类型</th>
-									<th class="text-center">已收金额</th>
+									<th class="text-center">金额</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in earningList" :key="index">
-									<td>{{item.MEM_NUM}}</td>
-									<td>{{item.MEM_NAME}}</td>
-									<td>{{item.PHONE}}</td>
-									<td>{{item.CREATE_DATE | dateFormatFilter("YYYY-MM-DD")}}</td>
-									<td v-show="item.TYPE==1">充值</td>
-									<td v-show="item.TYPE==2">流水消费</td>
-									<td v-show="item.TYPE==3">定金</td>
-									<td v-show="item.TYPE==4">撤销的定金</td>
-									<td>{{item.MOMEY}}</td>
+									<td>{{item.memNum}}</td>
+									<td>{{item.name}}</td>
+									<td>{{item.phone}}</td>
+									<td>{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+									<td v-show="item.type==1">定金收入</td>
+									<td v-show="item.type==2">定金退费</td>
+									<td v-show="item.type==3">充值</td>
+									<td v-show="item.type==4">流水消费</td>
+									<td v-show="item.type==5">项目退费</td>
+									<td v-show="item.type==1">+{{item.money}}</td>
+									<td v-show="item.type==2">-{{item.money}}</td>
+									<td v-show="item.type==3">+{{item.money}}</td>
+									<td v-show="item.type==4">+{{item.money}}</td>
+									<td v-show="item.type==5">-{{item.money}}</td>
 								</tr>
 								<tr>
 									<td>月总收入</td>
-									<td>{{earningTotle.BALANCE}} 元</td>
+									<td>{{allMoney}} 元</td>
 								</tr>
 							</tbody>
 						</table>
@@ -93,6 +98,7 @@
 					BALANCE:'',
 				},
 				createDate:'',
+        allMoney:'',
 			}
 		},
 
@@ -121,7 +127,9 @@
 				
 				if(!this.isBlank(this.createDate)){
 					this.createDate = this.moment(this.createDate,'YYYY-MM-DD 00:00:00.000')
-				}
+				}else {
+				  this.createDate=this.moment(new Date(),'YYYY-MM-DD 00:00:00.000')
+        }
 				var url = this.url + '/accountRecordAction/queryGrossMomey'
 				this.$ajax({
 					method: 'POST',
@@ -135,9 +143,9 @@
 						createDate:this.createDate,
 						
 						accountId: this.accountId(),
-						modelGrade:'2',
-						modelType:'',
-						operateType:'',
+						// modelGrade:'2',
+						// modelType:'',
+						// operateType:'',
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -150,12 +158,10 @@
 						}
 						
 						if(res.retData.gross != null){
-							this.earningTotle = res.retData.gross
+							this.allMoney = res.retData.gross.allMoney
 							console.log("剩余："+this.earningTotle.BALANCE)
 						}else{
-							this.earningTotle = {
-								BALANCE:'',
-							}
+              this.allMoney=''
 						}
 					}
 				}).catch((error) => {

@@ -56,11 +56,12 @@
 							<dPicker></dPicker>
 						</div>
 					</div>
-					<div class="col-md-3 form-group clearfix" v-for="(item,index) in timeArray" :key="index">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{item}}</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-8">
-							<input type="checkbox" class="form-control" v-model="order.phone" placeholder="">
+					<div class="col-md-12 form-group clearfix">
+						<div class="col-md-3 form-group clearfix" v-for="(item,index) in timeArray" :key="index" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{item}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control" v-model="order.phone" placeholder="">
+							</div>
 						</div>
 					</div>
 					<div class="form-group clearfix">

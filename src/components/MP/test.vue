@@ -12,7 +12,7 @@
 						<p>{{item1.problem}}</p>
 					</div>
 					<div v-for="(item2,index2) in item1.answer">
-						
+
 						<input type="radio" v-bind:name="index1" v-model="item2.isSelect" v-on:click="inputAction(item1,item2.isSelect)" />
 						<p>{{item2.answerContent1}}</p>
 						<p>{{item2.answerContent2}}</p>

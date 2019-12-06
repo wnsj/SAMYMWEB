@@ -50,7 +50,7 @@
 						</li>
             <li v-on:click="selectRule('Royalty')">
               <i class="fa fa-table" aria-hidden="false">　提成规则管理</i>
-            </li> 
+            </li>
             <li v-on:click="selectRule('Employee')">
               <i class="fa fa-table" aria-hidden="false">　员工管理</i>
             </li>
@@ -63,7 +63,7 @@
             <li v-on:click="selectRule('RuleManager')">
               <i class="fa fa-table" aria-hidden="false">　权限管理</i>
             </li>
-						
+
             <!-- <li>
 							<router-link to="/MP/test"><i class="fa fa-table" aria-hidden="false">　权限管理</i></router-link>
 						</li> -->
@@ -200,7 +200,7 @@
     color: #f2ad4e;
   }
   .root{
-    width:100%; 
+    width:100%;
     overflow-x:hidden;
   }
   .fa-table{

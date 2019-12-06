@@ -1,5 +1,5 @@
 <template>
-	<div> 
+	<div>
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">会员汇总</h1>
 		</div>
@@ -128,12 +128,12 @@
 		},
 
 		methods: {
-			
+
 			detailAction(param){
 				this.$refs.member.conditionCheck(param)
 				$("#detailMember").modal('show')
 			},
-		
+
 			feedback() {
 				this.conditionCheck()
 				$("#detailMember").modal('hide')
@@ -150,14 +150,14 @@
 			//the list , which is detail infomation of member,was checked.
 			conditionCheck: function() {
 				console.log('querying based on multiple conditions')
-				
+
 				if(!this.isBlank(this.begCreateDate)){
 					this.begCreateDate = this.moment(this.begCreateDate,'YYYY-MM-DD 00:00:00.000')
 				}
 				if(!this.isBlank(this.endCreateDate)){
 					this.endCreateDate = this.moment(this.endCreateDate,'YYYY-MM-DD 23:59:00.000')
 				}
-				
+
 				var url = this.url + '/accountRecordAction/queryAccountRecordTotal'
 				this.$ajax({
 					method: 'POST',
@@ -174,7 +174,7 @@
 						phone:this.phone,
 						begCreateDate:this.begCreateDate,
 						endCreateDate:this.endCreateDate,
-						
+
 						accountId: this.accountId(),
 						modelGrade:'2',
 						modelType:'',

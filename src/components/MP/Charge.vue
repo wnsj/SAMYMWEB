@@ -62,7 +62,6 @@
 								<th class="text-center" rowspan='2'>咨询师</th>
 								<th class="text-center" rowspan='2'>购买单价(¥/次)</th>
 								<th class="text-center" rowspan='2'>购买课时(次)</th>
-								<th class="text-center" rowspan='2'>赠送课时(次)</th>
 								<th class="text-center" rowspan='2'>购买折扣(%)</th>
 								<th class="text-center" rowspan='2'>购买时间</th>
 								<th class="text-center" rowspan='2'>实交金额</th>
@@ -77,7 +76,6 @@
 								<td>{{item.counselorName}}</td>
 								<td>{{item.price}}</td>
 								<td>{{item.actualCount}}</td>
-								<td>{{item.giveCount}}</td>
 								<td>{{item.discount}}</td>
 								<td>{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td>{{item.realCross}}</td>

@@ -1,6 +1,6 @@
 <!-- add and modify patient -->
 <template>
-	<div class="modal-content" style="width:620px">
+	<div class="modal-content" style="width:720px">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
 			<h4 id="myModalLabel">会员列表</h4>

@@ -26,32 +26,41 @@
 							<input type="text" class="form-control" v-model="order.phone" placeholder="">
 						</div>
 					</div>
-					<!-- <div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">访问类型</label><span class="sign-left">:</span>
-						<div class="col-md-8">
-							<select class="form-control" v-model="order.visitType">
-								<option value="0">初访</option>
-								<option value="1">再访</option>
-							</select>
-						</div>
-					</div> -->
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预约时间</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<dPicker v-model="order.appDate" v-on:change="dateAction('1')" style="width:100%;"></dPicker>
 						</div>	
 					</div>
-					<!-- <div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">文员</label><span class="sign-left">:</span>
-						<div class="col-md-8">
-							<emp ref="clerkEmp" @employeeChange="clerkEmpChange"></emp>
-						</div>
-					</div> -->
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询顾问</label><span
+						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">课程</label><span
+						 class="sign-left">:</span>
+						<div class="col-md-8">
+							<emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
+						</div>
+					</div>
+					<div class="col-md-12 form-group clearfix">
+						<h4 id="myModalLabel" class="modal-title pull-left">预约时间</h4>
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">时间</label><span
+						 class="sign-left">:</span>
+						<div class="col-md-8">
+							<dPicker></dPicker>
+						</div>
+					</div>
+					<div class="col-md-3 form-group clearfix" v-for="(item,index) in timeArray" :key="index">
+						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{item}}</label><span
+						 class="sign-left">:</span>
+						<div class="col-md-8">
+							<input type="checkbox" class="form-control" v-model="order.phone" placeholder="">
 						</div>
 					</div>
 					<div class="form-group clearfix">
@@ -78,6 +87,24 @@
 		},
 		data() {
 			return {
+				timeArray:[
+					'8:30 - 9:00',
+					'9:00 - 9:30',
+					'9:30 - 10:00',
+					'10:00 - 10:30',
+					'10:30 - 11:00',
+					'11:00 - 11:30',
+					'11:30 - 12:00',
+					'13:00 - 13:30',
+					'13:30 - 14:00',
+					'14:00 - 14:30',
+					'14:30 - 15:00',
+					'15:00 - 15:30',
+					'15:30 - 16:00',
+					'16:00 - 16:30',
+					'16:30 - 17:00',
+					'17:00 - 17:30',
+				],
 				order:{
 					memNum:'',
 					appName:'',

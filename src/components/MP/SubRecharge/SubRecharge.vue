@@ -288,6 +288,7 @@
 				} else {
 					this.consume.counselor = param.empId
 					this.$refs.project.setEmpId(this.consume.counselor)
+					this.$refs.project.setProject("0")
 					this.consume.price = '0'
 					this.consume.actualCount = '0'
 					this.consume.discount = '0'
@@ -450,7 +451,7 @@
 						if (res.retData.length > 0) {
 
 							this.member = res.retData[0]
-							console.log(JSON.stringify(this.member))
+							// console.log(JSON.stringify(this.member))
 							this.setCustom(this.member)
 							this.checkMemCash(this.member.memNum)
 						} else {

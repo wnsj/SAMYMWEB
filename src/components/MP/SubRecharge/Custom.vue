@@ -328,6 +328,7 @@
 						this.$router.push({
 							name: 'SettleSummary',
 						});
+						this.jumpLeft(2);
 						$("#addCustom").modal("hide")
 					} else {
 						alert(res.retMsg)

@@ -235,34 +235,6 @@
 			initData(param,order) {
 				Object.assign(this.orderCounselorOld,this.order)
 				Object.assign(this.orderClick,this.order)
-				this.order={
-					memNum:'',
-					appName:'',
-					phone:'',
-					visitType:'0',
-					appDate:'',
-					empId:'1',//操作人
-					createDate:'',
-					clerkEmpId:'',
-					counlorEmpId:'',
-					operatorId:'',
-					time1:false,
-					time2:false,
-					time3:true,
-					time4:false,
-					time5:false,
-					time6:false,
-					time7:true,
-					time8:false,
-					time9:false,
-					time10:false,
-					time11:false,
-					time12:false,
-					time13:false,
-					time14:false,
-					time15:false,
-					time16:false,
-				}
 				if(param=='add'){
 					console.log('Initialization order’s content, which adds order')
 					this.title='新增'
@@ -291,6 +263,7 @@
 					// this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
 					this.$refs.counlorEmp.setEmp(this.order.counlorEmpId)
 				}
+				this.checkEmpSchedule()
 			},
 			itemAction(item,index){
 				console.log("item:"+JSON.stringify(item)+index)
@@ -395,6 +368,40 @@
 			closeCurrentPage(){
 				$("#orderContent").modal("hide")
 				console.log('关闭添加患者界面')
+			},
+			//咨询师排班
+			checkEmpSchedule() {
+				
+				var url = this.url + '/schedulingAction/querySchedulingByEmpIdOrTime'
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: {
+						empId: '34',
+						schedulingDate:'2019-12-10',
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						console.log('查到了'+JSON.stringify(res))
+						
+						this.order.memNum=res.retData[0].memNum
+						this.order.appName=res.retData[0].memName
+						this.order.phone=res.retData[0].phone
+					} else {
+						console.log('没有查到会员信息，请添加会员后充值')
+						this.consume.appName=''
+						this.consume.phone=''
+					}
+							
+				}).catch((error) => {
+					console.log('会员查询请求失败')
+				});
 			},
 			//Query member's information based on the memNum
 			checkMemNum(param) {

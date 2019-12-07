@@ -57,10 +57,100 @@
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<div class="col-md-3 form-group clearfix" v-for="(item,index) in timeArray" :key="index" style="padding-left:0;padding-right:0">
-							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{item}}</label>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[0]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" class="form-control" v-model="order.phone" placeholder="">
+								<input type="checkbox" style="margin:0;" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[1]}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[2]}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[3]}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[4]}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[5]}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[6]}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[7]}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[8]}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[9]}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[10]}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[11]}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[12]}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[13]}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[14]}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
+							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[15]}}</label>
+							<div class="col-md-4" style='line-height:34px;'>
+								<input type="checkbox" style="margin:0;" class="form-control">
 							</div>
 						</div>
 					</div>
@@ -119,6 +209,7 @@
 					operatorId:'',
 				},
 				title:'新增',
+				testParam:true,
 				
 			};
 		},
@@ -153,6 +244,9 @@
 					// this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
 					this.$refs.counlorEmp.setEmp(this.order.counlorEmpId)
 				}
+			},
+			itemAction(item,index){
+				console.log("item:"+JSON.stringify(item)+index)
 			},
 			//date formatting 
 			dateAction(param){

@@ -110,24 +110,24 @@
 								<!-- <th class="text-center">访问类型</th> -->
 								<th class="text-center">来电时间</th>
 								<th class="text-center">预约时间</th>
-								<th class="text-center">是否到店1</th>
-								<th class="text-center">是否到店1</th>
-								<th class="text-center">是否到店1</th>
-								<th class="text-center">是否到店1</th>
-								
-								<th class="text-center">是否到店1</th>
-								<th class="text-center">是否到店1</th>
-								<th class="text-center">是否到店1</th>
-								<th class="text-center">是否到店1</th>
-								<th class="text-center">是否到店1</th>
-								<th class="text-center">是否到店1</th>
-								<th class="text-center">是否到店1</th>
-								<th class="text-center">是否到店1</th>
-								<th class="text-center">是否到店1</th>
-								<th class="text-center">是否到店1</th>
-								<th class="text-center">是否到店1</th>
-								<th class="text-center">是否到店1</th>
+								<th class="text-center">8:30 - 9:00</th>
+								<th class="text-center">9:00 - 9:30</th>
+								<th class="text-center">9:30 - 10:00</th>
+								<th class="text-center">10:00 - 10:30</th>
+								<th class="text-center">10:30 - 11:00</th>
+								<th class="text-center">11:00 - 11:30</th>
+								<th class="text-center">11:30 - 12:00</th>
+								<th class="text-center">13:00 - 13:30</th>
+								<th class="text-center">13:30 - 14:00</th>
+								<th class="text-center">14:00 - 14:30</th>
+								<th class="text-center">14:30 - 15:00</th>
+								<th class="text-center">15:00 - 15:30</th>
+								<th class="text-center">15:30 - 16:00</th>
+								<th class="text-center">16:00 - 16:30</th>
+								<th class="text-center">16:30 - 17:00</th>
+								<th class="text-center">17:00 - 17:30</th>
 								<th class="text-center">是否取消</th>
+								<th class="text-center">是否到店</th>
 								<th class="text-center">操作人</th>
 								<th class="text-center">修改</th>
 							</tr>
@@ -140,6 +140,22 @@
 								<!-- <td class="text-center">{{item.visitType=='0' ? "初访" : "复访"}}</td> -->
 								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td class="text-center">{{item.appDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+								<td class="text-center">{{item.time1==true ? "√" : "×"}}</td>
+								<td class="text-center">{{item.time2==true ? "√" : "×"}}</td>
+								<td class="text-center">{{item.time3==true ? "√" : "×"}}</td>
+								<td class="text-center">{{item.time4==true ? "√" : "×"}}</td>
+								<td class="text-center">{{item.time5==true ? "√" : "×"}}</td>
+								<td class="text-center">{{item.time6==true ? "√" : "×"}}</td>
+								<td class="text-center">{{item.time7==true ? "√" : "×"}}</td>
+								<td class="text-center">{{item.time8==true ? "√" : "×"}}</td>
+								<td class="text-center">{{item.time9==true ? "√" : "×"}}</td>
+								<td class="text-center">{{item.time10==true ? "√" : "×"}}</td>
+								<td class="text-center">{{item.time11==true ? "√" : "×"}}</td>
+								<td class="text-center">{{item.time12==true ? "√" : "×"}}</td>
+								<td class="text-center">{{item.time13==true ? "√" : "×"}}</td>
+								<td class="text-center">{{item.time14==true ? "√" : "×"}}</td>
+								<td class="text-center">{{item.time15==true ? "√" : "×"}}</td>
+								<td class="text-center">{{item.time16==true ? "√" : "×"}}</td>
 								<td class="text-center">{{item.state=='0' ? '已取消' : '未取消'}}</td>
 								<td class="text-center">{{item.arrival=='0' ? '未到店' : '已到店'}}</td>
 								<td class="text-center">{{item.operatorName}}</td>

@@ -3,17 +3,11 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h4 id="myModalLabel" class="modal-title">{{title}}预约</h4>
+			<h4 id="myModalLabel" class="modal-title">{{title}}排班</h4>
 		</div>
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员号</label><span class="sign-left">:</span>
-						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="order.memNum" v-on:change="checkMemNum(order.memNum)">
-						</div>
-					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
@@ -47,23 +41,23 @@
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<h4 id="myModalLabel" class="modal-title pull-left">预约时间</h4>
+						<h4 id="myModalLabel" class="modal-title pull-left">排班时间</h4>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">时间</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-8">
-							<dPicker></dPicker>
+							<dPicker v-model="value6" type="week" placeholder="Select week"></dPicker>
 						</div>
 					</div>
-					<div class="col-md-12 form-group clearfix">
-						<div class="col-md-3 form-group clearfix" v-for="(item,index) in timeArray" :key="index" style="padding-left:0;padding-right:0">
+					<!-- <div class="col-md-12 form-group clearfix">
+						<div class="col-md-3 form-group clearfix" v-for="n in 7" :key="n" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{item}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
 								<input type="checkbox" style="margin:0;" class="form-control" v-model="order.phone" placeholder="">
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div class="form-group clearfix">
 						<div class="col-md-12">
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
@@ -88,24 +82,6 @@
 		},
 		data() {
 			return {
-				timeArray:[
-					'8:30 - 9:00',
-					'9:00 - 9:30',
-					'9:30 - 10:00',
-					'10:00 - 10:30',
-					'10:30 - 11:00',
-					'11:00 - 11:30',
-					'11:30 - 12:00',
-					'13:00 - 13:30',
-					'13:30 - 14:00',
-					'14:00 - 14:30',
-					'14:30 - 15:00',
-					'15:00 - 15:30',
-					'15:30 - 16:00',
-					'16:00 - 16:30',
-					'16:30 - 17:00',
-					'17:00 - 17:30',
-				],
 				order:{
 					memNum:'',
 					appName:'',
@@ -119,7 +95,7 @@
 					operatorId:'',
 				},
 				title:'新增',
-				
+				value6:null,
 			};
 		},
 		methods:{
@@ -245,7 +221,7 @@
 				});
 			},
 			closeCurrentPage(){
-				$("#orderContent").modal("hide")
+				$("#scheduleContent").modal("hide")
 				console.log('关闭添加患者界面')
 			},
 			//Query member's information based on the memNum

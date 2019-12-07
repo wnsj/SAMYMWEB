@@ -341,12 +341,7 @@
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
-					if (res.retCode == '0000') {
-						this.$router.push({
-							name: 'Charge',
-						});
-						this.jumpLeft(3);
-								
+					if (res.retCode == '0000') {	
 						$("#addRefund").modal("hide")
 					} else {
 						alert(res.retMsg)

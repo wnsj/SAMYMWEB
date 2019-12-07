@@ -1,6 +1,5 @@
 <!-- the page of department management -->
 <template>
-
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">预约管理</h1>
@@ -111,7 +110,23 @@
 								<!-- <th class="text-center">访问类型</th> -->
 								<th class="text-center">来电时间</th>
 								<th class="text-center">预约时间</th>
-								<th class="text-center">是否到店</th>
+								<th class="text-center">是否到店1</th>
+								<th class="text-center">是否到店1</th>
+								<th class="text-center">是否到店1</th>
+								<th class="text-center">是否到店1</th>
+								
+								<th class="text-center">是否到店1</th>
+								<th class="text-center">是否到店1</th>
+								<th class="text-center">是否到店1</th>
+								<th class="text-center">是否到店1</th>
+								<th class="text-center">是否到店1</th>
+								<th class="text-center">是否到店1</th>
+								<th class="text-center">是否到店1</th>
+								<th class="text-center">是否到店1</th>
+								<th class="text-center">是否到店1</th>
+								<th class="text-center">是否到店1</th>
+								<th class="text-center">是否到店1</th>
+								<th class="text-center">是否到店1</th>
 								<th class="text-center">是否取消</th>
 								<th class="text-center">操作人</th>
 								<th class="text-center">修改</th>

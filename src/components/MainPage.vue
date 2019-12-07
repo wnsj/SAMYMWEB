@@ -54,6 +54,9 @@
             <li v-on:click="selectRule('Employee')">
               <i class="fa fa-table" aria-hidden="false">　员工管理</i>
             </li>
+						<li>
+							<router-link to="/MP/ScheduleEmp"><i class="fa fa-table" aria-hidden="false">　排班管理</i></router-link>
+						</li>
             <li v-on:click="selectRule('Position')">
               <i class="fa fa-table" aria-hidden="false">　岗位管理</i>
             </li>

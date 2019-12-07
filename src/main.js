@@ -45,6 +45,9 @@ router.beforeEach((to, from, next) => {
       next('/MainPage');
     } else {
 			let jsonString=Cookies.get('itemList');
+			if(constant.isBlank(jsonString)){
+				next('/login');
+			}
 			let itemRuleList=JSON.parse(jsonString);
 			let hasRule = false;
 			for (var i=0; i < itemRuleList.length;i++){

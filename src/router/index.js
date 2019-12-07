@@ -4,6 +4,7 @@ import login from '@/components/login.vue'
 import MainPage from '@/components/MainPage.vue'
 /*------------*/
 import Employee from '../components/MP/Employee.vue'
+import ScheduleEmp from '../components/MP/ScheduleEmp.vue'
 import Member from '../components/MP/Member.vue'
 import Charge from '../components/MP/Charge.vue'
 import Position from '../components/MP/Position.vue'
@@ -59,6 +60,11 @@ export default new Router({
           name: 'Employee',
           component: Employee,
         },
+				{
+				  path: '/MP/ScheduleEmp',
+				  name: 'ScheduleEmp',
+				  component: ScheduleEmp,
+				},
         {
           path: '/MP/Charge',
           name: 'Charge',

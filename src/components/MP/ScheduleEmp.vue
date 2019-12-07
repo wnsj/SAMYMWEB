@@ -3,7 +3,7 @@
 
 	<div>
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">员工管理</h1>
+			<h1 class="titleCss">排班管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -30,30 +30,10 @@
 					<input class="form-control" type="text" v-model="iphone">
 				</div>
 			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">岗位</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-					<pos ref="pos" @positionChange='positionChange'></pos>
-				</div>
-			</div>
 		</div>
 		<div class="row" style="padding-bottom:1.5%;">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否在用</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-					<select class="form-control" v-model="isuse">
-						<option value="">全部</option>
-						<option value="1">在用</option>
-						<option value="0">停用</option>
-					</select>
-				</div>
-			</div>
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
-			 v-on:click="selectRule('1')">添加员工</button>
+			 v-on:click="selectRule('1')">添加排班</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="checkEmp()">查询</button>
 		</div>
@@ -95,9 +75,9 @@
 			</div>
 		</div>
 		<div class="row row_edit">
-			<div class="modal fade" id="emp">
+			<div class="modal fade" id="scheduleContent">
 				<div class="modal-dialog">
-					<emp ref='emp' @addEmp='feedBack'></emp>
+					<schedule ref='schedule' @addEmp='feedBack'></schedule>
 				</div>
 			</div>
 		</div>
@@ -107,12 +87,12 @@
 
 
 <script>
-	import emp from '../MP/SubEmp/SubEmp.vue'
+	import schedule from '../MP/SubSm/Schedule.vue'
 	import store from '../common/Store.vue'
 	import pos from '../common/Position.vue'
 	export default {
 		components: {
-			emp,
+			schedule,
 			pos,
 			store,
 		},
@@ -132,14 +112,14 @@
 			
 			addEmp() {
 				console.log('modify the cotent of department')
-				this.$refs.emp.initData('add')
-				$("#emp").modal('show')
+				this.$refs.schedule.initData('add')
+				$("#scheduleContent").modal('show')
 			},
 			//modify the cotent of department
 			modifyEmp(item) {
 				console.log('modify the cotent of department')
-				this.$refs.emp.initData('modify', item)
-				$("#emp").modal('show')
+				this.$refs.schedule.initData('modify', item)
+				$("#scheduleContent").modal('show')
 			},
 			
 			storeChange:function(param){
@@ -186,11 +166,11 @@
 						if(res.retData=='0010'){
 							console.log('param:'+param)
 							if(param==1){
-								this.$refs.emp.initData('add','')
-								$("#emp").modal('show')
+								this.$refs.schedule.initData('add','')
+								$("#scheduleContent").modal('show')
 							}else if(param==3){
-								this.$refs.emp.initData('modify', item)
-								$("#emp").modal('show')
+								this.$refs.schedule.initData('modify', item)
+								$("#scheduleContent").modal('show')
 							}
 						}else{
 							alert('您没有此权限，请联系管理员！！')

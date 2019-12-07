@@ -233,58 +233,72 @@
 		methods:{
 			// Initialization order’s content
 			initData(param,order) {
+				this.orderClick={
+					memNum:'',
+					appName:'',
+					phone:'',
+					appDate:'',
+					empId:'',
+					proId:'',
+					frequency:'',
+				}
+				this.order={
+					afternoon:'',
+					createDate:'',
+					empId:'',
+					morning:'0',
+					operatorId:this.accountId(),
+					schId:'1',
+					schedulingDate:this.moment('','YYYY-MM-DD 00:00:00.000'),
+					time1:false,
+					time2:false,
+					time3:false,
+					time4:false,
+					time5:false,
+					time6:false,
+					time7:false,
+					time8:false,
+					time9:false,
+					time10:false,
+					time11:false,
+					time12:false,
+					time13:false,
+					time14:false,
+					time15:false,
+					time16:false,
+				}
 				if(param=='add'){
 					console.log('Initialization order’s content, which adds order')
 					this.title='新增'
-					this.orderClick={
-						memNum:'',
-						appName:'',
-						phone:'',
-						appDate:'',
-						empId:'',
-						proId:'',
-					}
-					this.order={
-						afternoon:'',
-						createDate:'',
-						empId:'',
-						morning:'0',
-						operatorId:this.accountId(),
-						schId:'1',
-						schedulingDate:this.moment('','YYYY-MM-DD 00:00:00.000'),
-						time1:false,
-						time2:false,
-						time3:false,
-						time4:false,
-						time5:false,
-						time6:false,
-						time7:false,
-						time8:false,
-						time9:false,
-						time10:false,
-						time11:false,
-						time12:false,
-						time13:false,
-						time14:false,
-						time15:false,
-						time16:false,
-					}
+					
 					this.counselorList=[]
 					Object.assign(this.orderClick,this.order)
 					this.$refs.counlorEmp.setPosName('咨询师')
 					this.$refs.counlorEmp.setEmp("")
 					this.$refs.project.setEmpId("0")
+					this.$refs.project.setProject("0")
 				}else if(param=='modify'){
 					console.log('Initialization order’s content, which modifies order')
 					this.title='修改'
-					Object.assign(this.order,order)
+					Object.assign(this.orderClick,order)
+					this.checkEmpSchedule()
+					
 					this.operatorId = this.accountId()
-					this.$refs.counlorEmp.setPosName('咨询顾问')
-					this.$refs.counlorEmp.setEmp(this.order.empId)
+					this.$refs.counlorEmp.setPosName('咨询师')
+					this.$refs.counlorEmp.setEmp(this.orderClick.empId)
 				}
 			},
 			itemAction(item,index){
 				console.log("item:"+JSON.stringify(item)+index)
+			},
+			modifyOrder(){
+				for(var i=1;i <= 16; i++){
+					var timeParam = 'time'.concat(i)
+					if(this.orderClick[timeParam]==true){
+						this.orderCounselorOld[timeParam]=false
+					}
+				}
+				console.log('orderCounselorOld:'+JSON.stringify(this.orderCounselorOld))
 			},
 			setOrder(index,value){
 				console.log("param:"+index+value)
@@ -305,7 +319,7 @@
 						for (var i = 0; i < this.counselorList[0].proList.length; i++) {
 							var project = this.counselorList[0].proList[i]
 							if (this.consume.proId == project.proId) {
-								this.orderClick.consumCount = project.consumCount + 1
+								this.orderClick.frequency = project.frequency + 1
 								break;
 							}
 						}
@@ -416,6 +430,8 @@
 						if(res.retData.length>0){
 							this.order=res.retData[0]
 							Object.assign(this.orderCounselorOld,this.order)
+							
+							this.modifyOrder()
 						}else{
 							this.orderClick.empId=''
 							this.$refs.counlorEmp.setEmp("")

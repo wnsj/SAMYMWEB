@@ -60,97 +60,97 @@
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[5]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="order.time1"  class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time1"  class="form-control" :disabled="orderCounselorOld.time1" v-on:change="setOrder(1,order.time1)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[0]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="order.time2" class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time2" class="form-control" :disabled="orderCounselorOld.time2" v-on:change="setOrder(2,order.time2)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[1]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="time3" class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time3" class="form-control" :disabled="orderCounselorOld.time3" v-on:change="setOrder(3,order.time3)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[2]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="time4" class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time4" class="form-control" :disabled="orderCounselorOld.time4" v-on:change="setOrder(4,order.time4)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[3]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="time5"  class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time5"  class="form-control" :disabled="orderCounselorOld.time5" v-on:change="setOrder(5,order.time5)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[4]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="time6"  class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time6"  class="form-control" :disabled="orderCounselorOld.time6" v-on:change="setOrder(6,order.time6)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[6]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="time7"  class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time7"  class="form-control" :disabled="orderCounselorOld.time7" v-on:change="setOrder(7,order.time7)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[7]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="time8"  class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time8"  class="form-control" :disabled="orderCounselorOld.time8" v-on:change="setOrder(8,order.time8)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[8]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="time9"  class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time9"  class="form-control" :disabled="orderCounselorOld.time9" v-on:change="setOrder(9,order.time9)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[9]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="time10"  class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time10"  class="form-control" :disabled="orderCounselorOld.time10" v-on:change="setOrder(10,order.time10)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[10]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="time11"  class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time11"  class="form-control" :disabled="orderCounselorOld.time11" v-on:change="setOrder(11,order.time11)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[11]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="time12"  class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time12"  class="form-control" :disabled="orderCounselorOld.time12" v-on:change="setOrder(12,order.time12)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[12]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="time13"  disabled="time13" class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time13"  class="form-control"  :disabled="orderCounselorOld.time13" v-on:change="setOrder(13,order.time13)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[13]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="time14"  class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time14" class="form-control"  :disabled="orderCounselorOld.time14" v-on:change="setOrder(14,order.time14)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[14]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="time15"  class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time15"  class="form-control" :disabled="orderCounselorOld.time15" v-on:change="setOrder(15,order.time15)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix" style="padding-left:0;padding-right:0">
 							<label class="col-md-8 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">{{timeArray[15]}}</label>
 							<div class="col-md-4" style='line-height:34px;'>
-								<input type="checkbox" style="margin:0;" v-model="time16"  class="form-control">
+								<input type="checkbox" style="margin:0;" v-model="order.time16" class="form-control" :disabled="orderCounselorOld.time16" v-on:change="setOrder(16,order.time16)">
 							</div>
 						</div>
 					</div>
@@ -234,6 +234,35 @@
 			// Initialization order’s content
 			initData(param,order) {
 				Object.assign(this.orderCounselorOld,this.order)
+				Object.assign(this.orderClick,this.order)
+				this.order={
+					memNum:'',
+					appName:'',
+					phone:'',
+					visitType:'0',
+					appDate:'',
+					empId:'1',//操作人
+					createDate:'',
+					clerkEmpId:'',
+					counlorEmpId:'',
+					operatorId:'',
+					time1:false,
+					time2:false,
+					time3:true,
+					time4:false,
+					time5:false,
+					time6:false,
+					time7:true,
+					time8:false,
+					time9:false,
+					time10:false,
+					time11:false,
+					time12:false,
+					time13:false,
+					time14:false,
+					time15:false,
+					time16:false,
+				}
 				if(param=='add'){
 					console.log('Initialization order’s content, which adds order')
 					this.title='新增'
@@ -266,8 +295,12 @@
 			itemAction(item,index){
 				console.log("item:"+JSON.stringify(item)+index)
 			},
-			setOrder(inex,value){
+			setOrder(index,value){
+				console.log("param:"+index+value)
+				var timeParam = 'time'.concat(index)
 				
+				this.orderClick[timeParam]=value
+				console.log('orderClick:'+JSON.stringify(this.orderClick))
 			},
 			//date formatting 
 			dateAction(param){

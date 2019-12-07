@@ -1,43 +1,43 @@
 <template>
-	<div>
+	<div  id="wraper" ref='wraper'>
 		<div class="col-md-12 col-lg-12 main-title">
 				<h1 class="titleCss">消费汇总</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memNum"></div>
+				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memNum"></div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memName"></div>
+				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memName"></div>
 			</div>
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-7 col-lg-7">
 					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
 			</div>
 		</div> 
 		<div class="row"> 
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:10px;">
-				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-3 col-lg-3 text-right" style="padding: 0; line-height: 34px; width:20.5%;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">消费时间</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-4 col-lg-4" style="text-align:left;width:31.5%;">
+				<div class="col-md-4 col-lg-4" style="text-align:left;width:27%;">
 					<dPicker style="width:100%" v-model="begCreateDate"></dPicker>
 				</div>
 				<div style="padding: 0; line-height: 34px; float:left">
 					~
 				</div>
-				<div class="col-md-4 col-lg-4" style="text-align:left;width:31.5%;">
+				<div class="col-md-4 col-lg-4" style="text-align:left;width:27%;">
 					<dPicker style="width:100%" v-model="endCreateDate"></dPicker>
 				</div>
 				
@@ -51,7 +51,7 @@
 		<div>
 			<div class="col-md-12 col-lg-12">
 				<nobr class="widthmax">
-					<div class="table-responsive pre-scrollable" style=" max-height:464px">
+					<div class="table-responsive pre-scrollable" ref='showMainTab'>
 						<table class="table table-bordered table-hover user-table" id="datatable">
 							<thead class="datathead">
 								<tr>
@@ -203,6 +203,11 @@
 			}else{
 				console.log("首次被加载")
 			}
+			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
+			let realH = (h-767)*2/3+580+'px';
+			let tabH = (h-767)/3+400+'px';
+			this.$refs.wraper.style="height:"+realH;
+			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
 		created() {
 			this.conditionCheck()

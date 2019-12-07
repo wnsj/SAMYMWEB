@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div id="wraper" ref='wraper'>
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">提成汇总</h1>
 		</div>
@@ -185,6 +185,11 @@
 			} else {
 				console.log("首次被加载")
 			}
+			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
+			let realH = (h-767)*2/3+580+'px';
+			let tabH = (h-767)/3+400+'px';
+			this.$refs.wraper.style="height:"+realH;
+			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
 		created() {
 			this.conditionCheck()

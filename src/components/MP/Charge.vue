@@ -1,6 +1,6 @@
 <!-- 充值管理页 -->
 <template>
-	<div>
+	<div id="wraper" ref='wraper'>
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">购买课程管理</h1>
 		</div>
@@ -170,6 +170,11 @@
 		mounted(){
 			this.$refs.emp.setPosName("咨询师")
 			this.$refs.emp.setEmp("")
+			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
+			let realH = (h-767)*2/3+580+'px';
+			let tabH = (h-767)/3+400+'px';
+			this.$refs.wraper.style="height:"+realH;
+			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
 		created() {
 			this.conditionCheck()

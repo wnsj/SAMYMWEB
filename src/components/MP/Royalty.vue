@@ -379,7 +379,7 @@
 		},
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true);
-			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
+			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;  
 			let divH = (h-240)/2;
 			let titH = this.$refs.tit.offsetHeight;
 			let maxH = divH-titH-30;

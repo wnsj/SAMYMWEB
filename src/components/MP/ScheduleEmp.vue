@@ -1,7 +1,7 @@
 <!-- the page of department management -->
 <template>
 
-	<div>
+	<div id="wraper" ref='wraper'>
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">排班管理</h1>
 		</div>
@@ -279,6 +279,11 @@
 		},
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true)
+			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
+			let realH = (h-767)*2/3+580+'px';
+			let tabH = (h-767)/3+400+'px';
+			this.$refs.wraper.style="height:"+realH;
+			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
 		created() {
 			this.checkEmp()

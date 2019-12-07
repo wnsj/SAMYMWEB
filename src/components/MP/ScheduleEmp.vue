@@ -8,18 +8,19 @@
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">时间</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-					<store ref="store" @storeChange='storeChange'></store>
+          <dPicker style="width:100%" v-model="thisDate"></dPicker>
+					<!--<store ref="store" @storeChange='storeChange'></store>-->
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-					<input class="form-control" type="text" v-model="empName">
+          <!--<emp ref="emp" @employeeChange="counselorEmpChange"></emp>-->
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -39,32 +40,55 @@
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" style="max-height:464px">
+				<div class="table-responsive pre-scrollable" style="max-height:464px;">
 					<table class="table table-bordered table-hover" id="datatable" style=" position:relative;">
 						<thead>
 							<tr>
-								<th class="text-center">门店</th>
-								<th class="text-center">岗位</th>
-								<!-- <th class="text-center">员工工号</th> -->
 								<th class="text-center">姓名</th>
-								<th class="text-center">手机号</th>
-								<th class="text-center">性别</th>
-								<th class="text-center">入职时间</th>
-								<th class="text-center">是否停用</th>
-								<th class="text-center" v-if="has(2)">修改</th>
+                <template v-for="(value, key, index) in schedulingListTitle">
+                  <template v-for='val,index in morningOrAfternoon'>
+                    <th v-if="key=='schedulingDate1'" class="text-center">{{value}}{{val}}</th>
+                  </template>
+                  <template v-for='val,index in morningOrAfternoon'>
+                    <th v-if="key=='schedulingDate2'" class="text-center">{{value}}{{val}}</th>
+                  </template>
+                  <template v-for='val,index in morningOrAfternoon'>
+                    <th v-if="key=='schedulingDate3'" class="text-center">{{value}}{{val}}</th>
+                  </template>
+                  <template v-for='val,index in morningOrAfternoon'>
+                    <th v-if="key=='schedulingDate4'" class="text-center">{{value}}{{val}}</th>
+                  </template>
+                  <template v-for='val,index in morningOrAfternoon'>
+                    <th v-if="key=='schedulingDate5'" class="text-center">{{value}}{{val}}</th>
+                  </template>
+                  <template v-for='val,index in morningOrAfternoon'>
+                    <th v-if="key=='schedulingDate6'" class="text-center">{{value}}{{val}}</th>
+                  </template>
+                  <template v-for='val,index in morningOrAfternoon'>
+                    <th v-if="key=='schedulingDate7'" class="text-center">{{value}}{{val}}</th>
+                  </template>
+                </template>
+								<!--<th class="text-center" v-if="has(2)">修改</th>-->
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in employeeList" :key="index" v-on:dblclick="selectRule('3',item)">
-								<td class="text-center">{{item.storeName}}</td>
-								<td class="text-center">{{item.posName}}</td>
-								<!-- <td class="text-center">{{item.empId}}</td> -->
-								<td class="text-center">{{item.empName}}</td>
+							<tr v-for="(item,index) in schedulingList" :key="index" v-on:dblclick="selectRule('3',item)">
 								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.sex=='1' ? '男':'女'}}</td>
-								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.isuse==true ? "在用" : "停用"}}</td>
-								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改</button></td>
+								<td class="text-center">{{item.morning1=='0'?'歇班':'上班'}}</td>
+								<td class="text-center">{{item.afternoon1=='0'?'歇班':'上班'}}</td>
+								<td class="text-center">{{item.morning2=='0'?'歇班':'上班'}}</td>
+								<td class="text-center">{{item.afternoon2=='0'?'歇班':'上班'}}</td>
+								<td class="text-center">{{item.morning3=='0'?'歇班':'上班'}}</td>
+								<td class="text-center">{{item.afternoon3=='0'?'歇班':'上班'}}</td>
+                <td class="text-center">{{item.morning4=='0'?'歇班':'上班'}}</td>
+                <td class="text-center">{{item.afternoon4=='0'?'歇班':'上班'}}</td>
+                <td class="text-center">{{item.morning5=='0'?'歇班':'上班'}}</td>
+                <td class="text-center">{{item.afternoon5=='0'?'歇班':'上班'}}</td>
+                <td class="text-center">{{item.morning6=='0'?'歇班':'上班'}}</td>
+                <td class="text-center">{{item.afternoon6=='0'?'歇班':'上班'}}</td>
+                <td class="text-center">{{item.morning7=='0'?'歇班':'上班'}}</td>
+                <td class="text-center">{{item.afternoon7=='0'?'歇班':'上班'}}</td>
+								<!--<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改</button></td>-->
 							</tr>
 						</tbody>
 					</table>
@@ -90,21 +114,30 @@
 	import schedule from '../MP/SubSm/Schedule.vue'
 	import store from '../common/Store.vue'
 	import pos from '../common/Position.vue'
+  import dPicker from 'vue2-datepicker'
+  // import emp from '../../common/Employee.vue'
 	export default {
 		components: {
 			schedule,
 			pos,
 			store,
+      dPicker,
+      // emp,
 		},
 		data() {
 			return {
-				employeeList: [],
+        schedulingList: [],
 				isuse: '1',
 				empName: '',
 				iphone:'',
 				fixedHeader: false,
 				posId:'',
 				storeId:'',
+        schedulingListTitle:{},
+        morningOrAfternoon:['上午','下午'],
+        thisDate:'',
+         // empId:'',
+
 			};
 		},
 		methods: {
@@ -121,7 +154,16 @@
 				this.$refs.schedule.initData('modify', item)
 				$("#scheduleContent").modal('show')
 			},
-			
+      //咨询师
+      // counselorEmpChange: function(param) {
+      //   if (this.isBlank(param)) {
+      //     this.empId = ""
+      //   } else {
+      //     this.empId = param.empId
+      //     this.$refs.emp.setEmp('咨询师')
+      //
+      //   }
+      // },
 			storeChange:function(param){
 				if (this.isBlank(param)) {
 					this.storeId = ""
@@ -186,7 +228,7 @@
 			//check the list of department
 			checkEmp() {
 				console.log('checkEmp')
-				var url = this.url + '/employeeAction/queryEmp'
+				var url = this.url + '/schedulingAction/queryScheduling'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -195,22 +237,15 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						posId: this.posId,
-						storeId: this.storeId,
-						empName: this.empName,
-						isuse: this.isuse,
-						
-						accountId: this.accountId(),
-						moduleGrade:'2',
-						urlName:'/MP/Employee',
-						operateType:'4',
+            thisDate:this.thisDate
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
-						this.employeeList = res.retData
+						this.schedulingListTitle = res.retData[0];
+						this.schedulingList=res.retData;
 					} else {
 						alert(res.retMsg)
 					}

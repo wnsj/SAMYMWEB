@@ -40,8 +40,16 @@
 							<emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
 						</div>
 					</div>
-					<div class="col-md-12 form-group clearfix">
-						<h4 id="myModalLabel" class="modal-title pull-left">排班时间</h4>
+					<div class="col-md-12 form-group clearfix" style="padding-right:0;">
+						<div class="col-md-6" style="padding:0;">
+							<h4 id="myModalLabel" class="modal-title pull-left">排班时间</h4>
+						</div>
+						<div class="col-md-6" style="padding:0;">
+							<div class="case" style="float:right;">
+								<input type="checkbox" id="allCheckbox" />
+								<label for="allCheckbox">全选</label>
+							</div>
+						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
 						<div class="row schDate"><b v-for="value in allDate">{{value}}</b></div>
@@ -107,10 +115,9 @@
 							</div>
 						</div>
 					</div>
-					
 					<div class="form-group clearfix">
-						<div class="col-md-12">
-							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+						<div class="col-md-12" style="padding-right:0;">
+							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:.7%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
 							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addOrder(title)">确认</button>
 						</div>
 					</div>
@@ -475,7 +482,7 @@
 		font-size:12px;
 		color:#A9A9AC;
 	}
-	.schDate .case{
+	.case{
 		position:relative;
 		width:76px;
 		height:34px;
@@ -485,7 +492,7 @@
 		color:#999;
 		overflow:hidden;
 	}
-	.schDate .case label{
+	.case label{
 		position:relative;
 		display:block;
 		width:100%;
@@ -498,7 +505,7 @@
 		-ms-user-select: none; /* Internet Explorer/Edge */
 		user-select: none; /* Non-prefixed version, currently */
 	}
-	.schDate .case input{
+	.case input{
 		position:absolute;
 		left:0;
 		top:0;
@@ -508,13 +515,13 @@
 		opacity:0;
 		margin-top:0;
 	}
-	.schDate .case input:checked + label{
+	.case input:checked + label{
 		box-sizing:border-box;
 		border:#F2AD4E solid 1px;
 		background:#FFF5EA;
 		color:#EBCFA9;
 	}
-	.schDate .case input:checked + label:after{
+	.case input:checked + label:after{
 		position:absolute;
 		right:-15px;
 		top:-15px;;

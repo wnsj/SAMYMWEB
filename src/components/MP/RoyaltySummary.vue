@@ -1,37 +1,37 @@
 <template>
-	<div>
+	<div id="wraper" ref='wraper'>
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">提成汇总</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-7 col-lg-7">
 					<store ref='store' @storeChange='storeChange'></store>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="empName"></div>
+				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="empName"></div>
 			</div>
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">岗位</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-7 col-lg-7">
 					<pos ref='pos' @positionChange='positionChange'></pos>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">月份</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-7 col-lg-7">
 					<dPicker style="width:100%" format="YYYY-MM" v-model="createDate"></dPicker>
 				</div>
 			</div>
@@ -46,7 +46,7 @@
 		<div>
 			<div class="col-md-12 col-lg-12">
 				<nobr class="widthmax">
-					<div class="table-responsive pre-scrollable" style=" max-height:464px">
+					<div class="table-responsive pre-scrollable"  ref="showMainTab">
 						<table class="table table-bordered table-hover user-table" id="datatable">
 							<thead class="datathead">
 								<tr>
@@ -72,7 +72,7 @@
 					</div>
 				</nobr>
 			</div>
-			<div class="col-md-12 col-lg-12">
+			<div class="col-md-12 col-lg-12 posAb">
 				<p class="tips">* 双击单行，可查看详情提成情况和扣款情况</p>
 			</div>
 		</div>
@@ -185,6 +185,11 @@
 			} else {
 				console.log("首次被加载")
 			}
+			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
+			let realH = (h-767)*2/3+580+'px';
+			let tabH = (h-767)/3+380+'px';
+			this.$refs.wraper.style="height:"+realH;
+			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
 		created() {
 			this.conditionCheck()

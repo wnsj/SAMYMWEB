@@ -197,6 +197,7 @@
           this.clearData();
 					this.title='新增'
 					this.$refs.counlorEmp.setPosName('咨询师')
+					this.$refs.counlorEmp.setEmp('')
 					// this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
 					//this.$refs.counlorEmp.setEmp('')
 				}else if(param=='modify'){

@@ -1,22 +1,22 @@
 <!-- the page of department management -->
 <template>
 
-	<div>
+	<div id="wraper" ref='wraper'>
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">排班管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
+				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">时间</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
           <dPicker style="width:100%" v-model="thisDate"></dPicker>
 					<!--<store ref="store" @storeChange='storeChange'></store>-->
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
+				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
@@ -32,8 +32,8 @@
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" style="max-height:464px;">
-					<table class="table table-bordered table-hover" id="datatable" style=" position:relative;">
+				<div class="table-responsive pre-scrollable" ref='showMainTab'>
+					<table class="table table-bordered table-hover" id="datatable" style="width:1800px; position:relative;">
 						<thead>
 							<tr>
 								<th class="text-center">姓名</th>
@@ -79,21 +79,21 @@
 								<td class="text-center">{{item.afternoon2=='0'?'歇班':'上班'}}</td>
 								<td class="text-center">{{item.morning3=='0'?'歇班':'上班'}}</td>
 								<td class="text-center">{{item.afternoon3=='0'?'歇班':'上班'}}</td>
-                <td class="text-center">{{item.morning4=='0'?'歇班':'上班'}}</td>
-                <td class="text-center">{{item.afternoon4=='0'?'歇班':'上班'}}</td>
-                <td class="text-center">{{item.morning5=='0'?'歇班':'上班'}}</td>
-                <td class="text-center">{{item.afternoon5=='0'?'歇班':'上班'}}</td>
-                <td class="text-center">{{item.morning6=='0'?'歇班':'上班'}}</td>
-                <td class="text-center">{{item.afternoon6=='0'?'歇班':'上班'}}</td>
-                <td class="text-center">{{item.morning7=='0'?'歇班':'上班'}}</td>
-                <td class="text-center">{{item.afternoon7=='0'?'歇班':'上班'}}</td>
+								<td class="text-center">{{item.morning4=='0'?'歇班':'上班'}}</td>
+								<td class="text-center">{{item.afternoon4=='0'?'歇班':'上班'}}</td>
+								<td class="text-center">{{item.morning5=='0'?'歇班':'上班'}}</td>
+								<td class="text-center">{{item.afternoon5=='0'?'歇班':'上班'}}</td>
+								<td class="text-center">{{item.morning6=='0'?'歇班':'上班'}}</td>
+								<td class="text-center">{{item.afternoon6=='0'?'歇班':'上班'}}</td>
+								<td class="text-center">{{item.morning7=='0'?'歇班':'上班'}}</td>
+								<td class="text-center">{{item.afternoon7=='0'?'歇班':'上班'}}</td>
 								<!--<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改</button></td>-->
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
-			<div class="col-md-12 col-lg-12">
+			<div class="col-md-12 col-lg-12 posAb">
 				<p class="tips">* 双击单行，可对当前数据进行修改</p>
 			</div>
 		</div>
@@ -408,6 +408,11 @@
       let today = this.addDate();
       this.getWeekStartAndEnd(today);
 			window.addEventListener('scroll', this.handleScroll, true)
+			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			let realH = (h-767)*2/3+580+'px';
+			let tabH = (h-767)/3+380+'px';
+			this.$refs.wraper.style="height:"+realH;
+			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
 		created() {
 

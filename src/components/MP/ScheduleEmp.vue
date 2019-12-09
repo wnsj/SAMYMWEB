@@ -20,21 +20,13 @@
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-          <!--<emp ref="emp" @employeeChange="counselorEmpChange"></emp>-->
-				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-					<input class="form-control" type="text" v-model="iphone">
+          <emp ref="counselorChange" @employeeChange="counselorEmpChange"></emp>
 				</div>
 			</div>
 		</div>
 		<div class="row" style="padding-bottom:1.5%;">
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
-			 v-on:click="selectRule('1')">添加排班</button>
+			 v-on:click="showAddSchedule()">添加排班</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="checkEmp()">查询</button>
 		</div>
@@ -45,34 +37,41 @@
 						<thead>
 							<tr>
 								<th class="text-center">姓名</th>
-                <template v-for="(value, key, index) in schedulingListTitle">
+                <!--<template v-for="(value, key, index) in schedulingListTitle">-->
+                  <!--<template v-for='val,index in morningOrAfternoon'>-->
+                    <!--<th v-if="key=='schedulingDate1'" class="text-center">{{value}}{{val}}</th>-->
+                  <!--</template>-->
+                  <!--<template v-for='val,index in morningOrAfternoon'>-->
+                    <!--<th v-if="key=='schedulingDate2'" class="text-center">{{value}}{{val}}</th>-->
+                  <!--</template>-->
+                  <!--<template v-for='val,index in morningOrAfternoon'>-->
+                    <!--<th v-if="key=='schedulingDate3'" class="text-center">{{value}}{{val}}</th>-->
+                  <!--</template>-->
+                  <!--<template v-for='val,index in morningOrAfternoon'>-->
+                    <!--<th v-if="key=='schedulingDate4'" class="text-center">{{value}}{{val}}</th>-->
+                  <!--</template>-->
+                  <!--<template v-for='val,index in morningOrAfternoon'>-->
+                    <!--<th v-if="key=='schedulingDate5'" class="text-center">{{value}}{{val}}</th>-->
+                  <!--</template>-->
+                  <!--<template v-for='val,index in morningOrAfternoon'>-->
+                    <!--<th v-if="key=='schedulingDate6'" class="text-center">{{value}}{{val}}</th>-->
+                  <!--</template>-->
+                  <!--<template v-for='val,index in morningOrAfternoon'>-->
+                    <!--<th v-if="key=='schedulingDate7'" class="text-center">{{value}}{{val}}</th>-->
+                  <!--</template>-->
+                <!--</template>-->
+
+
+                <template v-for="(value,index) in schedulingListTitle">
                   <template v-for='val,index in morningOrAfternoon'>
-                    <th v-if="key=='schedulingDate1'" class="text-center">{{value}}{{val}}</th>
-                  </template>
-                  <template v-for='val,index in morningOrAfternoon'>
-                    <th v-if="key=='schedulingDate2'" class="text-center">{{value}}{{val}}</th>
-                  </template>
-                  <template v-for='val,index in morningOrAfternoon'>
-                    <th v-if="key=='schedulingDate3'" class="text-center">{{value}}{{val}}</th>
-                  </template>
-                  <template v-for='val,index in morningOrAfternoon'>
-                    <th v-if="key=='schedulingDate4'" class="text-center">{{value}}{{val}}</th>
-                  </template>
-                  <template v-for='val,index in morningOrAfternoon'>
-                    <th v-if="key=='schedulingDate5'" class="text-center">{{value}}{{val}}</th>
-                  </template>
-                  <template v-for='val,index in morningOrAfternoon'>
-                    <th v-if="key=='schedulingDate6'" class="text-center">{{value}}{{val}}</th>
-                  </template>
-                  <template v-for='val,index in morningOrAfternoon'>
-                    <th v-if="key=='schedulingDate7'" class="text-center">{{value}}{{val}}</th>
+                    <th class="text-center">{{value}}{{val}}</th>
                   </template>
                 </template>
 								<!--<th class="text-center" v-if="has(2)">修改</th>-->
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in schedulingList" :key="index" v-on:dblclick="selectRule('3',item)">
+							<tr v-for="(item,index) in schedulingList" :key="index" v-on:dblclick="showUpdateSchedule(item)">
 								<td class="text-center">{{item.name}}</td>
 								<td class="text-center">{{item.morning1=='0'?'歇班':'上班'}}</td>
 								<td class="text-center">{{item.afternoon1=='0'?'歇班':'上班'}}</td>
@@ -101,7 +100,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="scheduleContent">
 				<div class="modal-dialog">
-					<schedule ref='schedule' @addEmp='feedBack'></schedule>
+					<schedule ref='schedule' @addSchedule='feedBack'></schedule>
 				</div>
 			</div>
 		</div>
@@ -115,55 +114,43 @@
 	import store from '../common/Store.vue'
 	import pos from '../common/Position.vue'
   import dPicker from 'vue2-datepicker'
-  // import emp from '../../common/Employee.vue'
+  import emp from '../common/Employee.vue'
 	export default {
 		components: {
 			schedule,
 			pos,
 			store,
       dPicker,
-      // emp,
+      emp,
 		},
 		data() {
 			return {
         schedulingList: [],
 				isuse: '1',
 				empName: '',
-				iphone:'',
 				fixedHeader: false,
 				posId:'',
 				storeId:'',
-        schedulingListTitle:{},
+        schedulingListTitle:[],
         morningOrAfternoon:['上午','下午'],
         thisDate:'',
-         // empId:'',
+        empId:'',
 
 			};
 		},
 		methods: {
-			//modify the cotent of department
-			
-			addEmp() {
-				console.log('modify the cotent of department')
-				this.$refs.schedule.initData('add')
-				$("#scheduleContent").modal('show')
-			},
-			//modify the cotent of department
-			modifyEmp(item) {
-				console.log('modify the cotent of department')
-				this.$refs.schedule.initData('modify', item)
-				$("#scheduleContent").modal('show')
-			},
+
       //咨询师
-      // counselorEmpChange: function(param) {
-      //   if (this.isBlank(param)) {
-      //     this.empId = ""
-      //   } else {
-      //     this.empId = param.empId
-      //     this.$refs.emp.setEmp('咨询师')
-      //
-      //   }
-      // },
+      counselorEmpChange: function(param) {
+        if (this.isBlank(param)) {
+          this.empId = ""
+        } else {
+          this.$refs.counselorChange.setPosName('咨询师')
+          // this.$refs.counselorChange.setEmp('咨询师')
+          this.empId = param.empId
+
+        }
+      },
 			storeChange:function(param){
 				if (this.isBlank(param)) {
 					this.storeId = ""
@@ -182,51 +169,25 @@
 			//feedback from adding and modifying view
 			feedBack() {
 				this.checkEmp()
-				$("#emp").modal('hide')
+        $("#scheduleContent").modal('hide');
 			},
 			// check the adding and modifying rule of account
-			selectRule(param,item){
-				var url = this.url + '/ruleAction/queryRule'
-				
-				this.$ajax({
-					method: 'POST',
-					url: url,
-					headers: {
-						'Content-Type': this.contentType,
-						'Access-Token': this.accessToken
-					},
-					data: {
-						accountId: this.accountId(),
-						moduleGrade:'2',
-						urlName:'/MP/Employee',
-						operateType:param,
-					},
-					dataType: 'json',
-				}).then((response) => {
-					var res = response.data
-					if (res.retCode == '0000') {
-						if(res.retData=='0010'){
-							console.log('param:'+param)
-							if(param==1){
-								this.$refs.schedule.initData('add','')
-								$("#scheduleContent").modal('show')
-							}else if(param==3){
-								this.$refs.schedule.initData('modify', item)
-								$("#scheduleContent").modal('show')
-							}
-						}else{
-							alert('您没有此权限，请联系管理员！！')
-						}
-					} else {
-						alert(res.retMsg)
-					}
-				
-				}).catch((error) => {
-					console.log('商铺查询请求失败')
-				});
+			showAddSchedule(){
+          this.$refs.schedule.initData('add','')
+          $("#scheduleContent").modal('show')
+
 			},
+      showUpdateSchedule(item){
+        this.$refs.schedule.initData('modify', item)
+        $("#scheduleContent").modal('show')
+      },
 			//check the list of department
 			checkEmp() {
+        console.log("时间为"+this.moment(this.thisDate,'YYYY-MM-DD'));
+        if(!this.isBlank(this.thisDate)){
+          this.schedulingListTitle=this.getWeekDay(this.moment(this.thisDate,'YYYY-MM-DD'));
+          this.thisDate=this.moment(this.thisDate,'YYYY-MM-DD');
+        }
 				console.log('checkEmp')
 				var url = this.url + '/schedulingAction/queryScheduling'
 				this.$ajax({
@@ -237,14 +198,16 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-            thisDate:this.thisDate
+            thisDate:this.thisDate,
+            empId:this.empId
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
-						this.schedulingListTitle = res.retData[0];
+            //this.getWeekStartAndEnd(this.addDate(res.retData[0].schedulingDate1));
+						//this.schedulingListTitle = res.retData[0];
 						this.schedulingList=res.retData;
 					} else {
 						alert(res.retMsg)
@@ -275,13 +238,181 @@
 				} else {
 					self.fixedHeader = false
 				}
-			}
+			},
+      formatDate(date) {
+        var myyear = date.getFullYear();
+        var mymonth = date.getMonth() + 1;
+        var myweekday = date.getDate();
+        if (mymonth < 10) {
+          mymonth = "0" + mymonth;
+        }
+        if (myweekday < 10) {
+          myweekday = "0" + myweekday;
+        }
+        return mymonth + "." + myweekday
+      },
+      // 获取指定日期的那一周的开始、结束日期
+      getWeekStartAndEnd(val) {
+        let now = '';
+        if(val) {
+          now = new Date(val); // 日期
+        } else {
+          now = new Date(); // 日期
+        }
+        let nowDayOfWeek = now.getDay(); // 本周的第几天
+        let nowDay = now.getDate(); // 当前日
+        let nowMonth = now.getMonth(); // 当前月
+        let nowYear = now.getYear(); // 当前年
+        let date = new Date()
+        let fullYear = date.getFullYear();
+        let weekStart = fullYear + '.' + this.getWeekStartDate(nowYear, nowMonth, nowDay, nowDayOfWeek)
+        let weekEnd = fullYear + '.' + this.getWeekEndDate(nowYear, nowMonth, nowDay, nowDayOfWeek)
+        let alldate = this.getAll(weekStart,weekEnd);
+        //let result = this.chinaDate(alldate);
+        this.schedulingListTitle = alldate;
+
+      },
+      //日期转换
+      chinaDate(array){
+        var newArr = [];
+        for(var i=0;i<array.length;i++){
+          newArr[i] = array[i].replace('/','月')+'日';
+        }
+        return newArr;
+      },
+      // 获得某一周的开始日期
+      getWeekStartDate(nowYear, nowMonth, nowDay, nowDayOfWeek) {
+        let weekStartDate = new Date(nowYear, nowMonth, nowDay - (nowDayOfWeek-1))
+        return this.formatDate(weekStartDate)
+      },
+      // 获得某一周的结束日期
+      getWeekEndDate(nowYear, nowMonth, nowDay, nowDayOfWeek) {
+        let weekEndDate = new Date(nowYear, nowMonth, nowDay + (7 - nowDayOfWeek))
+        return this.formatDate(weekEndDate)
+      },
+      // 计算续住的总日期列表
+      getAll(begin, end) {
+        let arr1= begin.split(".");
+        let arr2= end.split(".");
+        let arr1_= new Date();
+        let arrTime = [];
+        arr1_.setUTCFullYear(arr1[0], arr1[1] - 1, arr1[2]);
+        let arr2_= new Date();
+        arr2_.setUTCFullYear(arr2[0], arr2[1] - 1, arr2[2]);
+        let unixDb = arr1_.getTime();
+        let unixDe = arr2_.getTime();
+        for (let k = unixDb; k <= unixDe;) {
+          arrTime.push(this.datetimeparse(k, 'YYYY-MM-DD'));
+          k = k + 24 * 60 * 60 * 1000;
+        }
+        return arrTime;
+      },
+
+      // 时间格式处理
+      datetimeparse (timestamp, format, prefix) {
+        if (typeof timestamp =='string'){
+          timestamp=Number(timestamp)
+        };
+        //转换时区
+        let currentZoneTime = new Date (timestamp);
+        let currentTimestamp = currentZoneTime.getTime ();
+        let offsetZone = currentZoneTime.getTimezoneOffset () / 60;//如果offsetZone>0是西区，西区晚
+        let offset = null;
+        //客户端时间与服务器时间保持一致，固定北京时间东八区。
+        offset = offsetZone + 8;
+        currentTimestamp = currentTimestamp + offset * 3600 * 1000
+
+        let newtimestamp = null;
+        if (currentTimestamp) {
+          if (currentTimestamp.toString ().length === 13) {
+            newtimestamp = currentTimestamp.toString ()
+          } else if (currentTimestamp.toString ().length === 10) {
+            newtimestamp = currentTimestamp + '000'
+          } else {
+            newtimestamp = null
+          }
+        } else {
+          newtimestamp = null
+        }
+        ;
+        let dateobj = newtimestamp ? new Date (parseInt (newtimestamp)) : new Date ()
+        let YYYY = dateobj.getFullYear ()
+        let MM = dateobj.getMonth () > 8 ? dateobj.getMonth () + 1 : '0' + (dateobj.getMonth () + 1)
+        let DD = dateobj.getDate () > 9 ? dateobj.getDate () : '0' + dateobj.getDate ()
+        let HH = dateobj.getHours () > 9 ? dateobj.getHours () : '0' + dateobj.getHours ()
+        let mm = dateobj.getMinutes () > 9 ? dateobj.getMinutes () : '0' + dateobj.getMinutes ()
+        let ss = dateobj.getSeconds () > 9 ? dateobj.getSeconds () : '0' + dateobj.getSeconds ()
+        let output = '';
+        let separator = '/'
+        if (format) {
+          separator = format.match (/-/) ? '-' : '/'
+          output += format.match (/yy/i) ? YYYY : ''
+          output += format.match (/MM/) ? (output.length ? separator : '') + MM : ''
+          output += format.match (/dd/i) ? (output.length ? separator : '') + DD : ''
+          output += format.match (/hh/i) ? (output.length ? ' ' : '') + HH : ''
+          output += format.match (/mm/) ? (output.length ? ':' : '') + mm : ''
+          output += format.match (/ss/i) ? (output.length ? ':' : '') + ss : ''
+        } else {
+          output += YYYY + separator + MM + separator + DD
+        }
+        output = prefix ? (prefix + output) : output
+
+        return newtimestamp ? output : ''
+      },
+      addDate(param) {
+        //let nowDate = new Date();
+        //let nowDate = new Date(param.replace(/-/,"/")) ;
+        let nowDate = new Date() ;
+        let date2 = new Date(nowDate);
+        //date2.setDate(nowDate.getDate()+1)
+        let date = {
+          year: nowDate.getFullYear(),
+          month: nowDate.getMonth() + 1,
+          date: nowDate.getDate(),
+          weekday:date2.getDay()
+        }
+        let systemDate ="";
+        if(date.weekday === 0){
+          systemDate = date.year + '-'  + date.month + '-' + date.date;
+        }else{
+          date2.setDate(nowDate.getDate()+7);
+          systemDate = date2.getFullYear()+"-"+(date2.getMonth()+1)+"-"+date2.getDate();
+        }
+        return systemDate;
+
+      },
+      getWeekDay(dateString) {
+    let dateStringReg = /^\d{4}[/-]\d{1,2}[/-]\d{1,2}$/;
+
+    if (dateString.match(dateStringReg)) {
+      let presentDate = new Date(dateString),
+        today = presentDate.getDay() !== 0 ? presentDate.getDay() : 7;
+
+      return Array.from(new Array(7), function(val, index) {
+        return formatDate(new Date(presentDate.getTime() - (today - index-1) * 24 * 60 * 60 * 1000));
+      });
+
+    } else {
+      throw new Error('dateString should be like "yyyy-mm-dd" or "yyyy/mm/dd"');
+    }
+
+    function formatDate(date) {
+      return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    }
+  }
 		},
+
 		mounted() {
+        this.$refs.counselorChange.setPosName("咨询师")
+        this.$refs.counselorChange.setEmp("")
+      let today = this.addDate();
+      this.getWeekStartAndEnd(today);
 			window.addEventListener('scroll', this.handleScroll, true)
 		},
 		created() {
-			this.checkEmp()
+
+			this.checkEmp();
+
 		}
 	}
 </script>

@@ -8,51 +8,51 @@
 		<div class="row" style="margin-top: 40px;">
 			
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="cashName"></div>
+				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="cashName"></div>
 			</div>
 			
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-7 col-lg-7">
 					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">开始时间</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-7 col-lg-7">
 					<dPicker style="width:100%" v-model="beginDate"></dPicker>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">结束时间</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-7 col-lg-7">
 					<dPicker style="width:100%" v-model="endDate"></dPicker>
 				</div>
 			</div>
 		</div>
 		<div class="row" style="padding-bottom:1.5%;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-7 col-lg-7">
 					<Store ref='store' @storeChange='storeChange'></Store>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
+				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">状态</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 					<select class="form-control" v-model="balanceState">
 						<option value="1">全部</option>
 						<option value="2">未用完</option>
@@ -67,7 +67,7 @@
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" style="max-height:464px">
+				<div class="table-responsive pre-scrollable"  ref="showMainTab">
 					<table class="table table-bordered table-hover" id="datatable" >
 						<thead class="datathead">
 							<tr>
@@ -83,14 +83,14 @@
 						</thead>
 						<tbody>
 							<tr v-for="(item,index) in cashList" :key="index" v-on:dblclick="modifyMember(item)">
-								<td class="text-center">{{item.storeName}}</td>
-								<td class="text-center">{{item.cashName}}</td>
-								<td class="text-center">{{item.phone}}</td>
-								<td class="text-center">{{item.money}}</td>
-								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
-								<td class="text-center">{{item.balance}}</td>
-								<td class="text-center">{{item.operatorName}}</td>
-								<td class="text-center">
+								<td class="text-center" style="line-height:33px">{{item.storeName}}</td>
+								<td class="text-center" style="line-height:33px">{{item.cashName}}</td>
+								<td class="text-center" style="line-height:33px">{{item.phone}}</td>
+								<td class="text-center" style="line-height:33px">{{item.money}}</td>
+								<td class="text-center" style="line-height:33px">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+								<td class="text-center" style="line-height:33px">{{item.balance}}</td>
+								<td class="text-center" style="line-height:33px">{{item.operatorName}}</td>
+								<td class="text-center" >
 									<button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button>
                   <button type="button" class="btn btn-success" v-on:click="consumptionModel(item)">消费</button>
                   <button type="button" class="btn btn-danger" v-on:click="refundModel(item)">退费</button>
@@ -100,7 +100,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="col-md-12 col-lg-12">
+			<div class="col-md-12 col-lg-12 posAb">
 				<p class="tips">* 双击单行，可对当前数据进行修改</p>
 			</div>
 		</div>
@@ -324,7 +324,7 @@
 			window.addEventListener('scroll',this.handleScroll,true)
 			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
 			let realH = (h-767)*2/3+580+'px';
-			let tabH = (h-767)/3+400+'px';
+			let tabH = (h-767)/3+360+'px';
 			this.$refs.wraper.style="height:"+realH;
 			this.$refs.showMainTab.style="max-height:"+tabH;
 			

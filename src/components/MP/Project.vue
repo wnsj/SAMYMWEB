@@ -7,34 +7,34 @@
 		</div>
 		<div class="row" style="margin-top: 40px;padding-bottom:1.5%;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-7 col-lg-7">
 					<store ref='store' @storeChange='storeChange'></store>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
+				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">课程名称</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 					<input class="form-control" type="text" v-model="proName">
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-7 col-lg-7">
 					<emp ref='emp' @employeeChange='empChange'></emp>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0; line-height: 34px;">
+				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否在用</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 					<select class="form-control" v-model="isuse">
 						<option value="">全部</option>
 						<option value="1">在用</option>
@@ -49,7 +49,7 @@
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" style="max-height:464px">
+				<div class="table-responsive pre-scrollable" ref='showMainTab'>
 					<table class="table table-bordered table-hover" id="datatable" >
 						
 						<thead class="datathead">
@@ -66,20 +66,20 @@
 						</thead>
 						<tbody>
 							<tr v-for="(item,index) in projectList" :key="index" v-on:dblclick="selectRule('3',item)">
-								<td class="text-center">{{item.proId}}</td>
-								<td class="text-center">{{item.storeName}}</td>
-								<td class="text-center">{{item.empName}}</td>
-								<td class="text-center">{{item.proName}}</td>
-								<td class="text-center">{{item.price}}</td>
-								<td class="text-center">{{item.frequency}}</td>
-								<td class="text-center">{{item.discount}}</td>
-								<td class="text-center"><button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改</button></td>
+								<td class="text-center" style="line-height:33px;">{{item.proId}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.storeName}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.empName}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.proName}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.price}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.frequency}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.discount}}</td>
+								<td class="text-center" style="line-height:33px;"><button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改</button></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
-			<div class="col-md-12 col-lg-12">
+			<div class="col-md-12 col-lg-12 posAb">
 				<p class="tips">* 双击单行，可对当前数据进行修改</p>
 			</div>
 		</div>
@@ -245,7 +245,7 @@
 			window.addEventListener('scroll',this.handleScroll,true)
 			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
 			let realH = (h-767)*2/3+580+'px';
-			let tabH = (h-767)/3+400+'px';
+			let tabH = (h-767)/3+380+'px';
 			this.$refs.wraper.style="height:"+realH;
 			this.$refs.showMainTab.style="max-height:"+tabH;
 		},

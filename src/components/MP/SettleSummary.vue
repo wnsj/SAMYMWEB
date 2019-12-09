@@ -31,13 +31,13 @@
 				<div class="col-md-3 col-lg-3 text-right" style="padding: 0; line-height: 34px; width:20.5%;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">消费时间</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-4 col-lg-4" style="text-align:left;width:27%;">
+				<div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
 					<dPicker style="width:100%" v-model="begCreateDate"></dPicker>
 				</div>
 				<div style="padding: 0; line-height: 34px; float:left">
 					~
 				</div>
-				<div class="col-md-4 col-lg-4" style="text-align:left;width:27%;">
+				<div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
 					<dPicker style="width:100%" v-model="endCreateDate"></dPicker>
 				</div>
 				

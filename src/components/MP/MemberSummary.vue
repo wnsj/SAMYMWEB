@@ -60,7 +60,7 @@
 		<div>
 			<div class="col-md-12 col-lg-12">
 				<nobr class="widthmax">
-					<div class="table-responsive pre-scrollable" style=" max-height:464px">
+					<div class="table-responsive pre-scrollable" ref="showMainTab">
 						<table class="table table-bordered table-hover user-table" id="datatable">
 							<thead class="datathead">
 								<tr>
@@ -88,8 +88,8 @@
 					</div>
 				</nobr>
 			</div>
-			<div class="col-md-12 col-lg-12">
-				<p class="tips">* 双击单行，可查看会员的充值、消费、退费详情</p>
+			<div class="col-md-12 col-lg-12 posAb">
+				<p class="tips ">* 双击单行，可查看会员的充值、消费、退费详情</p>
 			</div>
 		</div>
 		<div class="row row_edit">
@@ -194,7 +194,9 @@
 		mounted() {
 			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
 			let realH = (h-767)*2/3+580+'px';
+			let tabH = (h-767)/3+380+'px';
 			this.$refs.wraper.style="height:"+realH;
+			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
 		created() {
 			this.conditionCheck();
@@ -237,10 +239,16 @@
 		}
 	}
 	#wraper{
+		position:relative;
 		box-shadow: -5px 0 5px #ccc, 5px 0 5px #ccc, 0 -5px 5px #ccc, 0 5px 5px #ccc;
 		width:95%; 
 		background:#fff; 
 		margin:30px auto;
 		padding:10px 10px 20px 10px;
+	}
+	.posAb{
+		position:absolute;
+		bottom:20px;
+		left:0;
 	}
 </style>

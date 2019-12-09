@@ -79,7 +79,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="col-md-12 col-lg-12">
+			<div class="col-md-12 col-lg-12 posAb">
 				<p class="tips">* 双击单行，可对当前数据进行修改</p>
 			</div>
 		</div>
@@ -230,7 +230,7 @@
 			window.addEventListener('scroll',this.handleScroll,true);
 			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
 			let realH = (h-767)*2/3+580+'px';
-			let tabH = (h-767)/3+400+'px';
+			let tabH = (h-767)/3+380+'px';
 			this.$refs.wraper.style="height:"+realH;
 			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
@@ -241,29 +241,35 @@
 </script>
 
 <style>
-  #datatable{position:relative;}
-  #fHeader {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #eeeeee;
-    overflow: hidden;
-  }
-  #fHeader div.text-center{
-    float: left;
-    display: inline-block;
-    padding:8px;
-    border: 1px solid #ddd;
-    font-weight: bold;
-  }
-  @media print {
-    #fHeader{display:none}
-  }
+	#datatable{position:relative;}
+	#fHeader {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: #eeeeee;
+		overflow: hidden;
+	}
+	#fHeader div.text-center{
+		float: left;
+		display: inline-block;
+		padding:8px;
+		border: 1px solid #ddd;
+		font-weight: bold;
+	}
+	@media print {
+		#fHeader{display:none}
+	}
   	#wraper{
+		position:relative;
 		box-shadow: -5px 0 5px #ccc, 5px 0 5px #ccc, 0 -5px 5px #ccc, 0 5px 5px #ccc;
 		width:95%; 
 		background:#fff; 
 		margin:30px auto;
 		padding:10px 10px 20px 10px;
+	}
+	.posAb{
+		position:absolute;
+		bottom:20px;
+		left:0;
 	}
 </style>

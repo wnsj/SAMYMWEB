@@ -6,31 +6,31 @@
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">预约号</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="memNum"></div>
+				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memNum"></div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8"><input class="form-control" type="text" value="" v-model="appName"></div>
+				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="appName"></div>
 			</div>
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-7 col-lg-7">
 					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
 			</div>
 			<!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">访问类型</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 					<select class="form-control" v-model="visitType">
 						<option value="0">初访</option>
 						<option value="1">再访</option>
@@ -38,10 +38,10 @@
 				</div>
 			</div> -->
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否到店</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 					<select class="form-control" v-model="arrival">
 						<option value="">--未选择--</option>
 						<option value="0">未到店</option>
@@ -52,40 +52,40 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
-				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px; width:20.5%">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">来电时间</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-4 col-lg-4" style="text-align:left;width:31.5%;">
+				<div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
 					<dPicker style="width:100%" v-model="begCreateDate"></dPicker>
 				</div>
 				<div style="padding: 0; line-height: 34px; float:left">
 					~
 				</div>
-				<div class="col-md-4 col-lg-4" style="text-align:left;width:31.5%;">
+				<div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
 					<dPicker style="width:100%" v-model="endCreateDate"></dPicker>
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
-				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;width:20.5%">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">预约时间</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-4 col-lg-4" style="text-align:left;width:31.5%;">
+				<div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
 					<dPicker style="width:100%" v-model="begAppDate" ></dPicker>
 				</div>
 				<div style="padding: 0; line-height: 34px; float:left">
 					~
 				</div>
-				<div class="col-md-4 col-lg-4" style="text-align:left;width:31.5%;">
+				<div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
 					<dPicker style="width:100%" v-model="endAppDate"></dPicker>
 				</div>
 			</div>
 		</div>
 		<div class="row" style="padding-bottom:1.5%;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否取消</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 					<select class="form-control" v-model="state">
 						<option value="">--未选择--</option>
 						<option value="1">未取消</option>
@@ -100,8 +100,8 @@
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" style="max-height:464px">
-					<table class="table table-bordered table-hover" id="datatable" >
+				<div class="table-responsive pre-scrollable" ref='showMainTab'>
+					<table class="table table-bordered table-hover" id="datatable" style="width:2500px;">
 						<thead class="datathead">
 							<tr>
 								<th class="text-center">预约号</th>
@@ -134,31 +134,31 @@
 						</thead>
 						<tbody>
 							<tr v-for="(item,index) in orderList" :key="index" v-on:dblclick="updateOrder(item)">
-								<td class="text-center">{{item.memNum}}</td>
-								<td class="text-center">{{item.appName}}</td>
-								<td class="text-center">{{item.phone}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.memNum}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.appName}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.phone}}</td>
 								<!-- <td class="text-center">{{item.visitType=='0' ? "初访" : "复访"}}</td> -->
-								<td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
-								<td class="text-center">{{item.appDate | dateFormatFilter("YYYY-MM-DD")}}</td>
-								<td class="text-center">{{item.time1==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.time2==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.time3==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.time4==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.time5==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.time6==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.time7==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.time8==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.time9==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.time10==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.time11==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.time12==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.time13==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.time14==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.time15==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.time16==true ? "√" : "×"}}</td>
-								<td class="text-center">{{item.state=='0' ? '已取消' : '未取消'}}</td>
-								<td class="text-center">{{item.arrival=='0' ? '未到店' : '已到店'}}</td>
-								<td class="text-center">{{item.operatorName}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.appDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time1==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time2==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time3==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time4==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time5==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time6==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time7==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time8==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time9==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time10==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time11==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time12==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time13==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time14==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time15==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.time16==true ? "√" : "×"}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.state=='0' ? '已取消' : '未取消'}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.arrival=='0' ? '未到店' : '已到店'}}</td>
+								<td class="text-center" style="line-height:33px;">{{item.operatorName}}</td>
 								<td class="text-center">
 									<button type="button" class="btn btn-warning" v-on:click="updateOrder(item)">修改</button>
 									<button type="button" class="btn btn-primary" v-on:click="caAction(item,'cancel')">{{item.state=='0' ? '已取消' : '点击取消'}}</button>
@@ -169,7 +169,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="col-md-12 col-lg-12">
+			<div class="col-md-12 col-lg-12 posAb">
 				<p class="tips">* 双击单行，可对当前数据进行修改</p>
 			</div>
 		</div>
@@ -363,7 +363,7 @@
 			window.addEventListener('scroll',this.handleScroll,true)
 			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
 			let realH = (h-767)*2/3+580+'px';
-			let tabH = (h-767)/3+400+'px';
+			let tabH = (h-767)/3+320+'px';
 			this.$refs.wraper.style="height:"+realH;
 			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
@@ -392,4 +392,17 @@
   @media print {
     #fHeader{display:none}
   }
+  #wraper{
+		position:relative;
+		box-shadow: -5px 0 5px #ccc, 5px 0 5px #ccc, 0 -5px 5px #ccc, 0 5px 5px #ccc;
+		width:95%; 
+		background:#fff; 
+		margin:30px auto;
+		padding:10px 10px 20px 10px;
+	}
+	.posAb{
+		position:absolute;
+		bottom:20px;
+		left:0;
+	}
 </style>

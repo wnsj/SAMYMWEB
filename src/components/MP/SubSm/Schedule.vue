@@ -9,32 +9,7 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span class="sign-left">:</span>
-						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="order.appName" placeholder="">
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span class="sign-left">:</span>
-						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="order.phone" placeholder="">
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预约时间</label><span class="sign-left">:</span>
-						<div class="col-md-8">
-							<dPicker v-model="order.appDate" v-on:change="dateAction('1')" style="width:100%;"></dPicker>
-						</div>	
-					</div>
-					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-8">
-							<emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">课程</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>

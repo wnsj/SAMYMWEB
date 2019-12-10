@@ -62,7 +62,7 @@ router.beforeEach((to, from, next) => {
 			if(hasRule==true){
 				next()
 			}else{
-				next('/MainPage')
+				next(from.path)
 				alert("您还没有此模块权限，请联系管理员添加权限")
 			}
     }

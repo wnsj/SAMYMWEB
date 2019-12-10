@@ -114,17 +114,28 @@
 		},
 		data() {
 			return {
-				order:{
-					memNum:'',
-					appName:'',
-					phone:'',
-					visitType:'0',
-					appDate:'',
-					empId:'1',//操作人
-					createDate:'',
-					clerkEmpId:'',
-					counlorEmpId:'',
+				schedule:{
+					empId:'',
+					schedulingDate:'',
+					morning:'',
+					afternoon:'0',
 					operatorId:'',
+					time1:'',
+					time2:'',
+					time3:'',
+					time4:'',
+					time5:'',
+					time6:'',
+					time7:'',
+					time8:'',
+					time9:'',
+					time10:'',
+					time11:'',
+					time12:'',
+					time13:'',
+					time14:'',
+					time15:'',
+					time16:'',
 				},
 				title:'新增',
 				value6:null,
@@ -203,35 +214,18 @@
 			
 			//the event of addtional button
 			addOrder(param){
-				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
-				if(this.isBlank(this.order.appName)){
-					alert("姓名不能为空")
-					return
-				}
-				if(this.isBlank(this.order.phone)){
-					alert("手机号不能为空")
-					return
-				}else if(reg.test(this.order.phone)==false){
-					alert("不是完整的11位手机号或者正确的座机号！");
-					return
-				}
+				
 				
 				if(this.isBlank(this.order.counlorEmpId)){
 					alert('咨询顾问不能为空')
 					return
 				}
-				if(!this.isBlank(this.order.appDate)){
-					this.order.appDate=this.moment(this.order.appDate,'YYYY-MM-DD HH:mm:ss.000')
-				}else{
-					alert("预约时间不能为空")
-					return
-				}
 				switch(param){
 					case '新增':
-						var url = this.url + '/appointmentAction/addAppointment';
+						var url = this.url + '/schedulingAction/addScheduling';
 						break;
 					case '修改':
-						var url = this.url + '/appointmentAction/updateAppointment'
+						var url = this.url + '/schedulingAction/updateSchedulingTime'
 						break;	
 				}
 				this.$ajax({

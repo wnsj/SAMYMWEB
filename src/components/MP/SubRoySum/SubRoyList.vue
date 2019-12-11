@@ -17,7 +17,7 @@
 							<tr>
 								<th class="text-center">会员卡号</th>
 								<th class="text-center">姓名</th>
-								<th class="text-center">提成金额(扣款)</th>
+								<th class="text-center">提成金额</th>
 							</tr>
 						</thead>
 						<tbody>

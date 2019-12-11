@@ -12,17 +12,16 @@
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-8">
-							<emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
+							<emp ref="emp" @employeeChange="empChange"></emp>
 						</div>
 					</div>
-
 					<div class="col-md-12 form-group clearfix" style="padding-right:0;">
 						<div class="col-md-6" style="padding:0;">
 							<h4 id="myModalLabel" class="modal-title pull-left">排班时间</h4>
 						</div>
 						<div class="col-md-6" style="padding:0;">
 							<div class="case" style="float:right;">
-								<input type="checkbox" id="allCheckbox" @change="allAdd" v-model="allAddValueState"/>
+								<input type="checkbox" id="allCheckbox" />
 								<label for="allCheckbox">全选</label>
 							</div>
 						</div>
@@ -30,85 +29,71 @@
 					<div class="col-md-12 form-group clearfix">
 						<div class="row schDate"><b v-for="value in allDate">{{value}}</b></div>
 						<div class="row schDate" style="margin-bottom:10px;"><span  v-for="value in allWeek">{{value}}</span></div>
-						<div id="allCheckboxState" class="row schDate" style="margin-bottom:4px;">
-              <div class="case" v-for="(item,index) in dateList">
-                <input type="checkbox" :id="'checkbox'+(index+1)" @change="changeSchedule(item.morning)" v-model="item.morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>
-                <label :for="'checkbox'+(index+1)">上午</label>
-              </div>
-
-
-							<!--<div class="case">-->
-								<!--<input type="checkbox" id="checkbox1" @change="changeSchedule(dateList[0].morning)" v-model="dateList[0].morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-								<!--<label for="checkbox1">上午</label>-->
-							<!--</div>-->
-							<!--<div class="case">-->
-								<!--<input type="checkbox" id="checkbox2" @change="changeSchedule(dateList[1].morning)" v-model="dateList[1].morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-								<!--<label for="checkbox2">上午</label>-->
-							<!--</div>-->
-							<!--<div class="case">-->
-								<!--<input type="checkbox" id="checkbox3" @change="changeSchedule(dateList[2].morning)" v-model="dateList[2].morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-								<!--<label for="checkbox3">上午</label>-->
-							<!--</div>-->
-							<!--<div class="case">-->
-								<!--<input type="checkbox" id="checkbox4" @change="changeSchedule(dateList[3].morning)" v-model="dateList[3].morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-								<!--<label for="checkbox4">上午</label>-->
-							<!--</div>-->
-							<!--<div class="case">-->
-								<!--<input type="checkbox" id="checkbox5" @change="changeSchedule(dateList[4].morning)" v-model="dateList[4].morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-								<!--<label for="checkbox5">上午</label>-->
-							<!--</div>-->
-							<!--<div class="case">-->
-								<!--<input type="checkbox" id="checkbox6" @change="changeSchedule(dateList[5].morning)" v-model="dateList[5].morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-								<!--<label for="checkbox6">上午</label>-->
-							<!--</div>-->
-							<!--<div class="case">-->
-								<!--<input type="checkbox" id="checkbox7" @change="changeSchedule(dateList[6].morning)" v-model="dateList[6].morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-								<!--<label for="checkbox7">上午</label>-->
-							<!--</div>-->
+						<div class="row schDate" style="margin-bottom:4px;">
+							<div class="case">
+								<input type="checkbox" id="checkbox1" />
+								<label for="checkbox1">上午</label>
+							</div>
+							<div class="case">
+								<input type="checkbox" id="checkbox2"/>
+								<label for="checkbox2">上午</label>
+							</div>
+							<div class="case">
+								<input type="checkbox" id="checkbox3"/>
+								<label for="checkbox3">上午</label>
+							</div>
+							<div class="case">
+								<input type="checkbox" id="checkbox4"/>
+								<label for="checkbox4">上午</label>
+							</div>
+							<div class="case">
+								<input type="checkbox" id="checkbox5"/>
+								<label for="checkbox5">上午</label>
+							</div>
+							<div class="case">
+								<input type="checkbox" id="checkbox6"/>
+								<label for="checkbox6">上午</label>
+							</div>
+							<div class="case">
+								<input type="checkbox" id="checkbox7"/>
+								<label for="checkbox7">上午</label>
+							</div>
 						</div>
 						<div class="row schDate">
-              <div class="case" v-for="(item,index) in dateList">
-                <input type="checkbox" :id="'checkbox'+(index+8)" @change="changeSchedule(item.afternoon)" v-model="item.afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>
-                <label :for="'checkbox'+(index+8)">下午</label>
-              </div>
-
-
-
-
-							<!--<div class="case">-->
-								<!--<input type="checkbox" id="checkbox8" v-model="dateList[0].afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-								<!--<label for="checkbox8">下午</label>-->
-							<!--</div>-->
-							<!--<div class="case">-->
-								<!--<input type="checkbox" id="checkbox9" v-model="dateList[1].afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-								<!--<label for="checkbox9">下午</label>-->
-							<!--</div>-->
-							<!--<div class="case">-->
-								<!--<input type="checkbox" id="checkbox10" v-model="dateList[2].afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-								<!--<label for="checkbox10">下午</label>-->
-							<!--</div>-->
-							<!--<div class="case">-->
-								<!--<input type="checkbox" id="checkbox11" v-model="dateList[3].afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-								<!--<label for="checkbox11">下午</label>-->
-							<!--</div>-->
-							<!--<div class="case">-->
-								<!--<input type="checkbox" id="checkbox12" v-model="dateList[4].afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-								<!--<label for="checkbox12">下午</label>-->
-							<!--</div>-->
-							<!--<div class="case">-->
-								<!--<input type="checkbox" id="checkbox13" v-model="dateList[5].afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-								<!--<label for="checkbox13">下午</label>-->
-							<!--</div>-->
-							<!--<div class="case">-->
-								<!--<input type="checkbox" id="checkbox14" v-model="dateList[6].afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-								<!--<label for="checkbox14">下午</label>-->
-							<!--</div>-->
+							<div class="case">
+								<input type="checkbox" id="checkbox8"/>
+								<label for="checkbox8">下午</label>
+							</div>
+							<div class="case">
+								<input type="checkbox" id="checkbox9"/>
+								<label for="checkbox9">下午</label>
+							</div>
+							<div class="case">
+								<input type="checkbox" id="checkbox10"/>
+								<label for="checkbox10">下午</label>
+							</div>
+							<div class="case">
+								<input type="checkbox" id="checkbox11"/>
+								<label for="checkbox11">下午</label>
+							</div>
+							<div class="case">
+								<input type="checkbox" id="checkbox12"/>
+								<label for="checkbox12">下午</label>
+							</div>
+							<div class="case">
+								<input type="checkbox" id="checkbox13"/>
+								<label for="checkbox13">下午</label>
+							</div>
+							<div class="case">
+								<input type="checkbox" id="checkbox14"/>
+								<label for="checkbox14">下午</label>
+							</div>
 						</div>
 					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12" style="padding-right:0;">
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:.7%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addOrder(title)">确认</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addSchedule(title)">确认</button>
 						</div>
 					</div>
 				</form>
@@ -129,207 +114,100 @@
 		},
 		data() {
 			return {
+				schedule:{
+					empId:'',
+					schedulingDate:'',
+					morning:'',
+					afternoon:'0',
+					operatorId:'',
+					time1:'',
+					time2:'',
+					time3:'',
+					time4:'',
+					time5:'',
+					time6:'',
+					time7:'',
+					time8:'',
+					time9:'',
+					time10:'',
+					time11:'',
+					time12:'',
+					time13:'',
+					time14:'',
+					time15:'',
+					time16:'',
+				},
 				title:'新增',
+				value6:null,
 				allDate:[],
 				allWeek:['星期一','星期二','星期三','星期四','星期五','星期六','星期日'],
-        allAddValueState:'',
-        empId:'',
-        dateList:[
-          {
-            empId:"",
-            morning:"0",
-            afternoon:"0",
-            operatorId:this.accountId(),
-            createDate:this.moment(new Date(),'YYYY-MM-DD HH:mm:ss.000'),
-            schedulingDate:""
-          },{
-            empId:"",
-            morning:"0",
-            afternoon:"0",
-            operatorId:this.accountId(),
-            createDate:this.moment(new Date(),'YYYY-MM-DD HH:mm:ss.000'),
-            schedulingDate:""
-          },{
-            empId:"",
-            morning:"0",
-            afternoon:"0",
-            operatorId:this.accountId(),
-            createDate:this.moment(new Date(),'YYYY-MM-DD HH:mm:ss.000'),
-            schedulingDate:""
-          },{
-            empId:"",
-            morning:"0",
-            afternoon:"0",
-            operatorId:this.accountId(),
-            createDate:this.moment(new Date(),'YYYY-MM-DD HH:mm:ss.000'),
-            schedulingDate:""
-          },{
-            empId:"",
-            morning:"0",
-            afternoon:"0",
-            operatorId:this.accountId(),
-            createDate:this.moment(new Date(),'YYYY-MM-DD HH:mm:ss.000'),
-            schedulingDate:""
-          },{
-            empId:"",
-            morning:"0",
-            afternoon:"0",
-            operatorId:this.accountId(),
-            createDate:this.moment(new Date(),'YYYY-MM-DD HH:mm:ss.000'),
-            schedulingDate:""
-          },{
-            empId:"",
-            morning:"0",
-            afternoon:"0",
-            operatorId:this.accountId(),
-            createDate:this.moment(new Date(),'YYYY-MM-DD HH:mm:ss.000'),
-            schedulingDate:""
-          }
-        ],
+				
 			};
 		},
 		methods:{
+			// Initialization order’s content
 			initData(param,schedule) {
-
-
 				if(param=='add'){
-          //初始化数据
-          this.clearData();
+					console.log('Initialization schedule’s content, which adds schedule')
 					this.title='新增'
-					this.$refs.counlorEmp.setPosName('咨询师')
-					this.$refs.counlorEmp.setEmp('')
-					// this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
-					//this.$refs.counlorEmp.setEmp('')
+					this.schedule={
+						empId:'',
+						schedulingDate:'',
+						morning:'',
+						afternoon:'0',
+						operatorId:'',
+						time1:'0',
+						time2:'0',
+						time3:'0',
+						time4:'0',
+						time5:'0',
+						time6:'0',
+						time7:'0',
+						time8:'0',
+						time9:'0',
+						time10:'0',
+						time11:'0',
+						time12:'0',
+						time13:'0',
+						time14:'0',
+						time15:'0',
+						time16:'0',
+					}
 				}else if(param=='modify'){
+					console.log('Initialization order’s content, which modifies order')
 					this.title='修改'
-					//为参数赋值
-          this.dateList[0].morning=schedule.morning1;
-          this.dateList[1].morning=schedule.morning2;
-          this.dateList[2].morning=schedule.morning3;
-          this.dateList[3].morning=schedule.morning4;
-          this.dateList[4].morning=schedule.morning5;
-          this.dateList[5].morning=schedule.morning6;
-          this.dateList[6].morning=schedule.morning7;
-          this.dateList[0].afternoon=schedule.afternoon1;
-          this.dateList[1].afternoon=schedule.afternoon2;
-          this.dateList[2].afternoon=schedule.afternoon3;
-          this.dateList[3].afternoon=schedule.afternoon4;
-          this.dateList[4].afternoon=schedule.afternoon5;
-          this.dateList[5].afternoon=schedule.afternoon6;
-          this.dateList[6].afternoon=schedule.afternoon7;
-
-          this.allDate=[]
-          this.allDate.push(schedule.schedulingDate1)
-          this.allDate.push(schedule.schedulingDate2)
-          this.allDate.push(schedule.schedulingDate3)
-          this.allDate.push(schedule.schedulingDate4)
-          this.allDate.push(schedule.schedulingDate5)
-          this.allDate.push(schedule.schedulingDate6)
-          this.allDate.push(schedule.schedulingDate7)
-
-					//this.operatorId = this.accountId()
-					this.$refs.counlorEmp.setPosName('咨询师')
-					this.$refs.counlorEmp.setEmp(schedule.empId)
-          $("input[type=checkbox]").each(function(){
-            $(this).attr("disabled",false);
-          });
-
-
-          var today=this.moment(new Date(),'YYYY-MM-DD')
-          console.log("今天是："+today)
-          for(var i1=0;i1<this.allDate.length;i1++){
-            if(Date.parse(today)>=Date.parse(this.allDate[i1])){
-              console.log("Date.parse(today):"+Date.parse(today))
-              console.log("Date.parse(this.allDate[i1]):"+Date.parse(this.allDate[i1]))
-              console.log("当前时间大于"+this.allDate[i1])
-              console.log("#checkbox"+i1+1)
-              $("#checkbox"+(i1+1)).attr("disabled",true);
-              $("#checkbox"+(i1+8)).attr("disabled",true);
-              $("#allCheckbox").attr("disabled",true);
-            }
-          }
-          for(var i=0;i<this.dateList.length;i++){
-            if(!this.dateList[i].morning=="1"||!this.dateList[i].afternoon=="1"){
-              return
-            }
-          }
-          this.allAddValueState=true;
-
-
-
+					Object.assign(this.order,order)
+					this.operatorId = this.accountId()
+					// this.$refs.clerkEmp.setPosName('文员')
+					this.$refs.counlorEmp.setPosName('咨询顾问')
+					// this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
+					this.$refs.counlorEmp.setEmp(this.order.counlorEmpId)
 				}
-			},
-      clearData(){
-        this.allAddValueState=''
-        this.empId=''
-        for(var i=0;i<this.dateList.length;i++){
-          this.dateList[i].morning="0"
-          this.dateList[i].afternoon="0"
-          this.dateList[i].empId=""
-        }
-      },
-      //全选
-      allAdd(){
-			  if(this.allAddValueState){
-          for(var i=0;i<this.dateList.length;i++){
-            this.dateList[i].morning="1";
-            this.dateList[i].afternoon="1";
-          }
-        }else {
-          for(var i=0;i<this.dateList.length;i++){
-            this.dateList[i].morning="0";
-            this.dateList[i].afternoon="0";
-          }
-        }
-
-      },
-      changeSchedule(item){
-			  console.log("item的值为"+item)
-			  if(item=="0"){
-          this.allAddValueState=false;
-        }
-        var index=0
-        if(item=="1"){
-          for(var i=0;i<this.dateList.length;i++){
-            if (this.dateList[i].morning == "1" && this.dateList[i].afternoon == "1") {
-              index++
-            }
-          }
-          if(index==7){
-            this.allAddValueState=true;
-          }
-        }
-      },
-
-			//feedback employee information
-			counlorEmpChange: function(param) {
-
-				if (this.isBlank(param)) {
-          this.empId="";
-				} else {
-				  this.empId=param.empId;
-          for(var i=0;i<this.dateList.length;i++){
-            this.dateList[i].empId=param.empId;
-          }
-				}
-				console.log('员工：' + this.empId)
 			},
 			
+			//feedback employee information
+			empChange: function(param) {
+				// console.log('科室：'+JSON.stringify(param))
+				if (this.isBlank(param)) {
+					this.schedule.empId = ""
+				} else {
+					this.schedule.empId = param.empId
+				}
+			},
+			
+			
 			//the event of addtional button
-			addOrder(param){
-        for(var i=0;i<this.dateList.length;i++){
-          if (this.isBlank(this.dateList[i].empId)) {
-            alert("咨询师不能为空");
-            return
-          }
-        }
-
+			addSchedule(param){
+				if(this.isBlank(this.schedule.empId)){
+					alert('咨询顾问不能为空')
+					return
+				}
 				switch(param){
 					case '新增':
 						var url = this.url + '/schedulingAction/addScheduling';
 						break;
 					case '修改':
-						var url = this.url + '/schedulingAction/updateScheduling'
+						var url = this.url + '/schedulingAction/updateSchedulingTime'
 						break;	
 				}
 				this.$ajax({
@@ -339,25 +217,58 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data:{
-					  list:this.dateList
-          },
+					data:this.schedule,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						this.$emit('addSchedule')
-						//$("#orderContent").modal("hide");
-					}else {
-					  alert(res.retMsg);
-          }
+// 						this.$emit('addSchedule')
+// 						$("#scheduleContent").modal("hide");
+					}
 				}).catch((error) => {
 					console.log('预约提交请求失败')
 				});
 			},
 			closeCurrentPage(){
-        this.$emit('addSchedule')
+				$("#scheduleContent").modal("hide")
+				console.log('关闭添加患者界面')
+			},
+			//Query member's information based on the memNum
+			checkMemNum(param) {
+				console.log('checkMemNum')
+				if (this.isBlank(param)) {
+					return
+				}
+				var url = this.url + '/memberAction/queryMember'
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: {
+						memNum: param,
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						console.log('查到了'+JSON.stringify(res))
+						
+						this.order.memNum=res.retData[0].memNum
+						this.order.appName=res.retData[0].memName
+						this.order.phone=res.retData[0].phone
+					} else {
+						console.log('没有查到会员信息，请添加会员后充值')
+						this.consume.appName=''
+						this.consume.phone=''
+					}
+							
+				}).catch((error) => {
+					console.log('会员查询请求失败')
+				});
 			},
 			formatDate(date) {
 				var myyear = date.getFullYear();
@@ -388,11 +299,8 @@
 				let weekStart = fullYear + '.' + this.getWeekStartDate(nowYear, nowMonth, nowDay, nowDayOfWeek)
 				let weekEnd = fullYear + '.' + this.getWeekEndDate(nowYear, nowMonth, nowDay, nowDayOfWeek)
 				let alldate = this.getAll(weekStart,weekEnd);
-				//let result = this.chinaDate(alldate);
-				this.allDate = alldate;
-        for(var i=0;i<alldate.length;i++){
-          this.dateList[i].schedulingDate=alldate[i];
-        }
+				let result = this.chinaDate(alldate);
+				this.allDate = result
 			},
 			//日期转换
 			chinaDate(array){
@@ -424,7 +332,7 @@
 				let unixDb = arr1_.getTime();
 				let unixDe = arr2_.getTime();
 				for (let k = unixDb; k <= unixDe;) {
-					arrTime.push(this.datetimeparse(k, 'YYYY-MM-DD'));
+					arrTime.push(this.datetimeparse(k, 'MM/DD'));
 					k = k + 24 * 60 * 60 * 1000;
 				}
 				return arrTime;
@@ -482,9 +390,7 @@
 				return newtimestamp ? output : ''
 			},
 			addDate() {
-				//let nowDate = new Date();
-				//let nowDate = new Date('2019-12-21'.replace(/-/,"/")) ;
-				let nowDate = new Date() ;
+				let nowDate = new Date();
 				let date2 = new Date(nowDate);
 				//date2.setDate(nowDate.getDate()+1)
 				let date = {
@@ -502,12 +408,14 @@
 				}
 				return systemDate;
 				
-			},
+			}
+				
 		},
 		mounted() {
 			let today = this.addDate();
 			this.getWeekStartAndEnd(today);
 		}
+		
 	}
 </script>
 

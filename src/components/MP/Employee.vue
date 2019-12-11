@@ -22,14 +22,14 @@
 					<input class="form-control" type="text" v-model="empName">
 				</div>
 			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 					<input class="form-control" type="text" v-model="iphone">
 				</div>
-			</div>
+			</div> -->
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">岗位</p><span class="sign-left">:</span>
@@ -67,7 +67,7 @@
 								<th class="text-center">岗位</th>
 								<!-- <th class="text-center">员工工号</th> -->
 								<th class="text-center">姓名</th>
-								<th class="text-center">手机号</th>
+								<!-- <th class="text-center">手机号</th> -->
 								<th class="text-center">性别</th>
 								<th class="text-center">入职时间</th>
 								<th class="text-center">是否停用</th>
@@ -80,9 +80,9 @@
 								<td class="text-center">{{item.posName}}</td>
 								<!-- <td class="text-center">{{item.empId}}</td> -->
 								<td class="text-center">{{item.empName}}</td>
-								<td class="text-center">{{item.name}}</td>
+								<!-- <td class="text-center">{{item.name}}</td> -->
 								<td class="text-center">{{item.sex=='1' ? '男':'女'}}</td>
-								<td class="text-center">{{item.name}}</td>
+								<td class="text-center">{{item.createDate | dateFormatFilter('YYYY-MM-DD')}}</td>
 								<td class="text-center">{{item.isuse==true ? "在用" : "停用"}}</td>
 								<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改</button></td>
 							</tr>

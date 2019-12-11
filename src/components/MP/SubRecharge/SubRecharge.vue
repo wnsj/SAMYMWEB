@@ -342,7 +342,7 @@
 					$("#earn").val(this.cash.select);
 				}
 				if (this.member.counselorEmpId != this.consume.counselor) {
-					if (param.proType == 0) {
+					if (this.consume.proType == 0) {
 						this.isSelect = false
 						this.consumeReceivable = this.consume.realCross
 					} else {

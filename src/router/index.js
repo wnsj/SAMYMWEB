@@ -19,6 +19,7 @@ import CashDeposit from '../components/MP/CashDeposit.vue'
 import CurrentSummary from '../components/MP/CurrentSummary.vue'
 import Project from '../components/MP/Project.vue'
 import test from '../components/MP/test.vue'
+import newtree from '../components/MP/newtree.vue'
 
 Vue.use(Router)
 
@@ -49,21 +50,21 @@ export default new Router({
           name: 'MemberSummary',
           component: MemberSummary,
         },
-				{
-				  path: '/MP/SettleSummary',
-				  name: 'SettleSummary',
-				  component: SettleSummary,
-				},
+		{
+			path: '/MP/SettleSummary',
+			name: 'SettleSummary',
+			component: SettleSummary,
+		},
         {
           path: '/MP/Employee',
           name: 'Employee',
           component: Employee,
         },
-				{
-				  path: '/MP/ScheduleEmp',
-				  name: 'ScheduleEmp',
-				  component: ScheduleEmp,
-				},
+		{
+			path: '/MP/ScheduleEmp',
+			name: 'ScheduleEmp',
+			component: ScheduleEmp,
+		},
         {
           path: '/MP/Charge',
           name: 'Charge',
@@ -79,46 +80,51 @@ export default new Router({
           name: 'Position',
           component: Position,
         },
-				{
-				  path: '/MP/Order',
-				  name: 'Order',
-				  component: Order,
-				},
-				{
-				  path: '/MP/Royalty',
-				  name: 'Royalty',
-				  component: Royalty,
-				},
-				{
-				  path: '/MP/Store',
-				  name: 'Store',
-				  component: Store,
-				},
+		{
+			path: '/MP/Order',
+			name: 'Order',
+			component: Order,
+		},
+		{
+			path: '/MP/Royalty',
+			name: 'Royalty',
+			component: Royalty,
+		},
+		{
+			path: '/MP/Store',
+			name: 'Store',
+			component: Store,
+		},
         {
           path: '/MP/RuleManager',
           name: 'RuleManager',
           component: RuleManager,
         },
-				{
-				  path: '/MP/CashDeposit',
-				  name: 'CashDeposit',
-				  component: CashDeposit,
-				},
-				{
-				  path: '/MP/CurrentSummary',
-				  name: 'CurrentSummary',
-				  component: CurrentSummary,
-				},
-				{
-				  path: '/MP/Project',
-				  name: 'Project',
-				  component: Project,
-				},
-				{
-				  path: '/MP/test',
-				  name: 'test',
-				  component: test,
-				},
+		{
+			path: '/MP/CashDeposit',
+			name: 'CashDeposit',
+			component: CashDeposit,
+		},
+		{
+			path: '/MP/CurrentSummary',
+			name: 'CurrentSummary',
+			component: CurrentSummary,
+		},
+		{
+			path: '/MP/Project',
+			name: 'Project',
+			component: Project,
+		},
+		{
+			path: '/MP/test',
+			name: 'test',
+			component: test,
+		},
+		{
+			path: '/MP/newtree',
+			name: 'newtree',
+			component: newtree,
+		},
       ],
       redirect: '/MP/MemberSummary'
     }]

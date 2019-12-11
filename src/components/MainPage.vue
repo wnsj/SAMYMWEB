@@ -23,128 +23,86 @@
           	 <div id="aside-menu">
 				<dl v-bind:class="{noShow:num == 0}">
 					<dt @click="onShow(0)">
-						<i class="fa" v-bind:class="{bg1:num==0,bg2:num!=0,'fa-minus-square':num==0,'fa-plus-square':num!=0}" aria-hidden="true">
-							<span class="fa fa-square-o" aria-hidden="true">会员管理模块</span>
+						<i class="fa" v-bind:class="{'fa-folder-open':num==0,'fa-folder':num!=0}" aria-hidden="true">
+							会员管理模块
 						</i>
 					</dt>
-					<dd v-on:click="selectRule('MemberSummary')">
-						<i class="bg3 fa fa-square-o" aria-hidden="true">会员汇总</i>
+					<dd v-on:click="selectRule('MemberSummary')" v-bind:class="{'li-active':onString == 'MemberSummary'}">
+						<i class="fa" aria-hidden="true">会员汇总</i>
 					</dd>
-					<dd v-on:click="selectRule('Member')">
-						<i class="bg4 fa fa-square-o" aria-hidden="true">会员基本信息</i>
+					<dd v-on:click="selectRule('Member')"  v-bind:class="{'li-active':onString == 'Member'}">
+						<i class="fa" aria-hidden="true">会员基本信息</i>
 					</dd>
 				</dl>
 				<dl v-bind:class="{noShow:num == 1}">
 					<dt @click="onShow(1)">
-						<i class="fa fa-plus-square" v-bind:class="{bg5:num==1,bg8:num!=1,'fa-minus-square':num==1,'fa-plus-square':num!=1}" aria-hidden="true">
-							<span class="fa fa-square-o" aria-hidden="true">消费管理模块</span>
+						<i class="fa" v-bind:class="{'fa-folder-open':num==1,'fa-folder':num!=1}" aria-hidden="true">
+							消费管理模块
 						</i>
 					</dt>
-					<dd v-on:click="selectRule('SettleSummary')">
-						<i class="bg3 fa fa-square-o" aria-hidden="true">消费汇总</i>
+					<dd v-on:click="selectRule('SettleSummary')" v-bind:class="{'li-active':onString == 'SettleSummary'}">
+						<i class="fa" aria-hidden="true">消费汇总</i>
 					</dd>
-					<dd v-on:click="selectRule('Charge')">
-						<i class="bg3 fa fa-square-o" aria-hidden="true">已购课程管理</i>
+					<dd v-on:click="selectRule('Charge')" v-bind:class="{'li-active':onString == 'Charge'}">
+						<i class="fa" aria-hidden="true">已购课程管理</i>
 					</dd>
-					<dd v-on:click="selectRule('Order')">
-						<i class="bg3 fa fa-square-o" aria-hidden="true">预约管理</i>
+					<dd v-on:click="selectRule('Order')" v-bind:class="{'li-active':onString == 'Order'}">
+						<i class="fa" aria-hidden="true">预约管理</i>
 					</dd>
-					<dd v-on:click="selectRule('CashDeposit')">
-						<i class="bg4 fa fa-square-o" aria-hidden="true">定金管理</i>
+					<dd v-on:click="selectRule('CashDeposit')" v-bind:class="{'li-active':onString == 'CashDeposit'}">
+						<i class="fa" aria-hidden="true">定金管理</i>
 					</dd>	
 				</dl>
 				<dl v-bind:class="{noShow:num == 2}">
 					<dt @click="onShow(2)">
-						<i class="fa" v-bind:class="{bg5:num==2,bg8:num!=2,'fa-minus-square':num==2,'fa-plus-square':num!=2}" aria-hidden="true">
-							<span class="fa fa-square-o" aria-hidden="true">基础设置</span>
+						<i class="fa" v-bind:class="{'fa-folder-open':num==2,'fa-folder':num!=2}" aria-hidden="true">
+							基础设置
 						</i>
 					</dt>
-					<dd v-on:click="selectRule('Employee')">
-						<i class="bg3 fa fa-square-o" aria-hidden="true">员工管理</i>
+					<dd v-on:click="selectRule('Employee')" v-bind:class="{'li-active':onString == 'Employee'}">
+						<i class="fa" aria-hidden="true">员工管理</i>
 					</dd>
-					<dd v-on:click="selectRule('ScheduleEmp')">
-						<i class="bg3 fa fa-square-o" aria-hidden="true">排班管理</i>
+					<dd v-on:click="selectRule('ScheduleEmp')" v-bind:class="{'li-active':onString == 'ScheduleEmp'}">
+						<i class="fa" aria-hidden="true">排班管理</i>
 					</dd>
-					<dd v-on:click="selectRule('Position')">
-						<i class="bg3 fa fa-square-o" aria-hidden="true">岗位管理</i>
+					<dd v-on:click="selectRule('Position')" v-bind:class="{'li-active':onString == 'Position'}">
+						<i class="fa" aria-hidden="true">岗位管理</i>
 					</dd>
-					<dd v-on:click="selectRule('Position')">
-						<i class="bg3 fa fa-square-o" aria-hidden="true">门店管理</i>
+					<dd v-on:click="selectRule('Store')" v-bind:class="{'li-active':onString == 'Store'}">
+						<i class="fa" aria-hidden="true">门店管理</i>
 					</dd>
-					<dd v-on:click="selectRule('RuleManager')">
-						<i class="bg3 fa fa-square-o" aria-hidden="true">权限管理</i>
+					<dd v-on:click="selectRule('RuleManager')" v-bind:class="{'li-active':onString == 'RuleManager'}">
+						<i class="fa" aria-hidden="true">权限管理</i>
 					</dd>
-					<dd v-on:click="selectRule('Royalty')">
-						<i class="bg3 fa fa-square-o" aria-hidden="true">提成规则管理</i>
+					<dd v-on:click="selectRule('Royalty')" v-bind:class="{'li-active':onString == 'Royalty'}">
+						<i class="fa" aria-hidden="true">提成规则管理</i>
 					</dd>
-					<dd v-on:click="selectRule('Project')">
-						<i class="bg4 fa fa-square-o" aria-hidden="true">课程管理</i>
+					<dd v-on:click="selectRule('Project')" v-bind:class="{'li-active':onString == 'Project'}">
+						<i class="fa" aria-hidden="true">课程管理</i>
 					</dd>
 				</dl>
 				<dl>
-					<dt v-on:click="selectRule('CurrentSummary')">
-						<i class="bg6 fa fa-minus-square" aria-hidden="true">
-							<span class="fa fa-square-o" aria-hidden="true">月入汇总</span>
+					<dt v-on:click="selectRule('CurrentSummary')" v-bind:class="{'li-active':onString == 'CurrentSummary'}">
+						<i class="fa fa-folder-open" aria-hidden="true">
+							月入汇总
 						</i>
 					</dt>
 				</dl>
 				<dl>
-					<dt v-on:click="selectRule('RoyaltySummary')">
-						<i class="bg7 fa fa-minus-square" aria-hidden="true">
-							<span class="fa fa-square-o" aria-hidden="true">提成汇总</span>
+					<dt v-on:click="selectRule('RoyaltySummary')" v-bind:class="{'li-active':onString == 'RoyaltySummary'}">
+						<i class="fa fa-folder-open" aria-hidden="true">
+							提成汇总
+						</i>
+					</dt>
+				</dl>
+				<dl>
+					<dt v-on:click="selectRule('newtree')" v-bind:class="{'li-active':onString == 'newtree'}">
+						<i class="fa fa-folder-open" aria-hidden="true">
+							new权限
 						</i>
 					</dt>
 				</dl>
 		  	</div>
-		  
-		  
-		 <!--<ul id="aside-menu">
-            <li class="li-active" v-on:click="selectRule('MemberSummary')">
-              <i class="fa fa-table fa-circle" aria-hidden="true">　会员汇总</i>
-            </li>
-            <li v-on:click="selectRule('Member')">
-              <i class="fa fa-table" aria-hidden="false">　会员管理</i>
-            </li>
-            <li v-on:click="selectRule('SettleSummary')">
-              <i class="fa fa-table" aria-hidden="false">　消费汇总</i>
-            </li>
-            <li v-on:click="selectRule('Charge')">
-              <i class="fa fa-table" aria-hidden="false">　购买课程管理</i>
-            </li>
-            <li v-on:click="selectRule('Order')">
-              <i class="fa fa-table" aria-hidden="false">　预约管理</i>
-            </li>
-            <li v-on:click="selectRule('CashDeposit')">
-              <i class="fa fa-table" aria-hidden="false">　定金管理</i>
-            </li>
-						<li v-on:click="selectRule('CurrentSummary')">
-						  <i class="fa fa-table" aria-hidden="false">　月入汇总</i>
-						</li>
-            <li v-on:click="selectRule('RoyaltySummary')">
-              <i class="fa fa-table" aria-hidden="false">　提成汇总</i>
-            </li>
-						<li v-on:click="selectRule('Project')">
-							<i class="fa fa-table" aria-hidden="false">　课程管理</i>
-						</li>
-            <li v-on:click="selectRule('Royalty')">
-              <i class="fa fa-table" aria-hidden="false">　提成规则管理</i>
-            </li> 
-            <li v-on:click="selectRule('Employee')">
-              <i class="fa fa-table" aria-hidden="false">　员工管理</i>
-            </li>
-						<li>
-							<router-link to="/MP/ScheduleEmp"><i class="fa fa-table" aria-hidden="false">　排班管理</i></router-link>
-						</li>
-            <li v-on:click="selectRule('Position')">
-              <i class="fa fa-table" aria-hidden="false">　岗位管理</i>
-            </li>
-            <li v-on:click="selectRule('Store')">
-              <i class="fa fa-table" aria-hidden="false">　门店管理</i>
-            </li>
-            <li v-on:click="selectRule('RuleManager')">
-              <i class="fa fa-table" aria-hidden="false">　权限管理</i>
-            </li>
-          </ul>-->
         </div>
         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 embed-responsive embed-responsive-16by9" style="overflow: inherit; background-color:">
           <router-view />
@@ -195,12 +153,8 @@
 			return {
 				accountName:this.accountName(),
 				itemList:[],
-				onOff:[
-					false,
-					true,
-					true,
-				],
 				num:0,
+				onString:'MemberSummary'
 			}
 		},
 		methods:{
@@ -222,10 +176,9 @@
 			},
 			onShow(index){			
 				this.num= index;
-			
 			},
 			selectRule(param){
-        console.log(1);
+				this.onString = param;
 				var url = this.url + '/ruleAction/queryRule'
 				this.$ajax({
 					method: 'POST',
@@ -281,42 +234,15 @@
 </script>
 
 <style>
-	#aside-menu{}
-	#aside-menu dl{ margin-bottom:0; height:50px;overflow:hidden; color:#795548;font-size:20px; }
+	#aside-menu{border-top:1px solid #ccc;}
+	#aside-menu dl{ margin-bottom:0; height:50px;overflow:hidden; color:#795548;font-size:20px; background:#f1f1f1; }
 	#aside-menu dl.noShow{height:auto; }
-	#aside-menu dl dt{height:50px;text-align:center;}
-	#aside-menu dl dd{height:50px;text-align:center;}
-	#aside-menu dl i{ display:inline-block;width:200px;height:50px;text-align:left;line-height:50px;}
-	#aside-menu dl i.bg1{background:url(../assets/img/sub_bg1.jpg)}
-	#aside-menu dl i.bg2{background:url(../assets/img/sub_bg2.jpg)}
-	#aside-menu dl i.bg3{background:url(../assets/img/sub_bg3.jpg)}
-	#aside-menu dl i.bg4{background:url(../assets/img/sub_bg4.jpg)}
-	#aside-menu dl i.bg5{background:url(../assets/img/sub_bg5.jpg)}
-	#aside-menu dl i.bg6{background:url(../assets/img/sub_bg6.jpg)}
-	#aside-menu dl i.bg7{background:url(../assets/img/sub_bg7.jpg)}
-	#aside-menu dl i.bg8{background:url(../assets/img/sub_bg8.jpg)}
-	#aside-menu dl i:before{ margin-right:10px;}
-	#aside-menu dl span{ display:inline-block; line-height:50px;}
-	#aside-menu dl span:before{ margin-right:8px;}
-	#aside-menu dl dd i{ text-indent:27px;}
-  .li-active {
-    color: #f2ad4e;
-  }
-
-  .li-active i {
-    color: #f2ad4e;
-  }
-  .root{
-    width:100%; 
-    overflow-x:hidden;
-  }
-  .fa-table{
-    color:#795548;
-  }
-  .fa-table:hover{
-    color:#9a773b;
-  }
-  .fa-circle:hover{
-    color:#f2ad4e;
-  }
+	#aside-menu dl dt{height:50px;text-align:center;background:#e6e6e6;border-bottom:1px solid #ccc;}
+	#aside-menu dl dd{height:50px;text-align:center;border-bottom:1px solid #ccc;}
+	#aside-menu dl dd:hover{background:#f5f5f5;color:#603b2c;}
+	#aside-menu dl i{ position:relative; display:inline-block;width:200px;height:50px;text-align:left;line-height:50px;text-indent:25px;}
+	#aside-menu dl i:before{position:absolute;left:-25px; display:block;}
+ 	#aside-menu dl dd.li-active {background:#fff}
+  	.li-active i {color: #f2ad4e;}
+	.root{width:100%; overflow-x:hidden;}
 </style>

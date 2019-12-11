@@ -7,12 +7,6 @@
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">预约号</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memNum"></div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="appName"></div>
@@ -101,35 +95,35 @@
 		<div class="">
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable" ref='showMainTab'>
-					<table class="table table-bordered table-hover" id="datatable" style="width:2500px;">
+					<table class="table table-bordered table-hover" id="datatable" style="width:1680px;">
 						<thead class="datathead">
 							<tr>
-								<th class="text-center">预约号</th>
-								<th class="text-center">姓名</th>
-								<th class="text-center">手机号</th>
+								<th class="text-center" style="line-height:40px;">预约号</th>
+								<th class="text-center" style="line-height:40px;">姓名</th>
+								<th class="text-center" style="line-height:40px;">手机号</th>
 								<!-- <th class="text-center">访问类型</th> -->
-								<th class="text-center">来电时间</th>
-								<th class="text-center">预约时间</th>
-								<th class="text-center">8:30 - 9:00</th>
-								<th class="text-center">9:00 - 9:30</th>
-								<th class="text-center">9:30 - 10:00</th>
-								<th class="text-center">10:00 - 10:30</th>
-								<th class="text-center">10:30 - 11:00</th>
-								<th class="text-center">11:00 - 11:30</th>
-								<th class="text-center">11:30 - 12:00</th>
-								<th class="text-center">13:00 - 13:30</th>
-								<th class="text-center">13:30 - 14:00</th>
-								<th class="text-center">14:00 - 14:30</th>
-								<th class="text-center">14:30 - 15:00</th>
-								<th class="text-center">15:00 - 15:30</th>
-								<th class="text-center">15:30 - 16:00</th>
-								<th class="text-center">16:00 - 16:30</th>
-								<th class="text-center">16:30 - 17:00</th>
-								<th class="text-center">17:00 - 17:30</th>
-								<th class="text-center">是否取消</th>
-								<th class="text-center">是否到店</th>
-								<th class="text-center">操作人</th>
-								<th class="text-center">修改</th>
+								<th class="text-center" style="line-height:40px;">来电时间</th>
+								<th class="text-center" style="line-height:40px;">预约时间</th>
+								<th class="text-center">8:30<br/>9:00</th>
+								<th class="text-center">9:00<br/>9:30</th>
+								<th class="text-center">9:30<br/>10:00</th>
+								<th class="text-center">10:00<br/>10:30</th>
+								<th class="text-center">10:30<br/>11:00</th>
+								<th class="text-center">11:00<br/>11:30</th>
+								<th class="text-center">11:30<br/>12:00</th>
+								<th class="text-center">13:00<br/>13:30</th>
+								<th class="text-center">13:30<br/>14:00</th>
+								<th class="text-center">14:00<br/>14:30</th>
+								<th class="text-center">14:30<br/>15:00</th>
+								<th class="text-center">15:00<br/>15:30</th>
+								<th class="text-center">15:30<br/>16:00</th>
+								<th class="text-center">16:00<br/>16:30</th>
+								<th class="text-center">16:30<br/>17:00</th>
+								<th class="text-center">17:00<br/>17:30</th>
+								<th class="text-center" style="line-height:40px;">取消</th>
+								<th class="text-center" style="line-height:40px;">到店</th>
+								<th class="text-center" style="line-height:40px;">操作人</th>
+								<th class="text-center" style="line-height:40px;">修改</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -140,24 +134,24 @@
 								<!-- <td class="text-center">{{item.visitType=='0' ? "初访" : "复访"}}</td> -->
 								<td class="text-center" style="line-height:33px;">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td class="text-center" style="line-height:33px;">{{item.appDate | dateFormatFilter("YYYY-MM-DD")}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time1==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time2==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time3==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time4==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time5==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time6==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time7==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time8==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time9==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time10==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time11==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time12==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time13==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time14==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time15==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.time16==true ? "√" : "×"}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.state=='0' ? '已取消' : '未取消'}}</td>
-								<td class="text-center" style="line-height:33px;">{{item.arrival=='0' ? '未到店' : '已到店'}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time1}" style="line-height:33px;">{{item.time1==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time2}" style="line-height:33px;">{{item.time2==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time3}" style="line-height:33px;">{{item.time3==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time4}" style="line-height:33px;">{{item.time4==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time5}" style="line-height:33px;">{{item.time5==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time6}" style="line-height:33px;">{{item.time6==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time7}" style="line-height:33px;">{{item.time7==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time8}" style="line-height:33px;">{{item.time8==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time9}" style="line-height:33px;">{{item.time9==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time10}" style="line-height:33px;">{{item.time10==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time11}" style="line-height:33px;">{{item.time11==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time12}" style="line-height:33px;">{{item.time12==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time13}" style="line-height:33px;">{{item.time13==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time14}" style="line-height:33px;">{{item.time14==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time15}" style="line-height:33px;">{{item.time15==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ trueDate:item.time16}" style="line-height:33px;">{{item.time16==true ? "√" : "×"}}</td>
+								<td class="text-center" v-bind:class="{ onOffState:!item.state}" style="line-height:33px;">{{item.state=='0' ? '已取消' : '未取消'}}</td>
+								<td class="text-center" v-bind:class="{ onOffArrival:!item.arrival}" style="line-height:33px;">{{item.arrival=='0' ? '未到店' : '已到店'}}</td>
 								<td class="text-center" style="line-height:33px;">{{item.operatorName}}</td>
 								<td class="text-center">
 									<button type="button" class="btn btn-warning" v-on:click="updateOrder(item)">修改</button>
@@ -404,5 +398,17 @@
 		position:absolute;
 		bottom:20px;
 		left:0;
+	}
+	.trueDate{
+		background:#6CA1BF;
+		color:#fff;
+	}
+	.onOffState{
+		background:#D9524E;
+		color:#fff;
+	}
+	.onOffArrival{
+		background:#5CB95C;
+		color:#fff;
 	}
 </style>

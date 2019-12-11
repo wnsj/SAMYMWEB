@@ -12,7 +12,7 @@
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-8">
-							<emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
+							<emp ref="emp" @employeeChange="empChange"></emp>
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix" style="padding-right:0;">
@@ -93,7 +93,7 @@
 					<div class="form-group clearfix">
 						<div class="col-md-12" style="padding-right:0;">
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:.7%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addOrder(title)">确认</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addSchedule(title)">确认</button>
 						</div>
 					</div>
 				</form>
@@ -140,30 +140,39 @@
 				title:'新增',
 				value6:null,
 				allDate:[],
-				allWeek:['星期一','星期二','星期三','星期四','星期五','星期六','星期日']
+				allWeek:['星期一','星期二','星期三','星期四','星期五','星期六','星期日'],
+				
 			};
 		},
 		methods:{
 			// Initialization order’s content
-			initData(param,order) {
+			initData(param,schedule) {
 				if(param=='add'){
-					console.log('Initialization order’s content, which adds order')
+					console.log('Initialization schedule’s content, which adds schedule')
 					this.title='新增'
-					this.order={
-						memNum:'',
-						appName:'',
-						phone:'',
-						visitType:'0',
-						appDate:this.moment('','YYYY-MM-DD HH:mm:ss.000'),
-						empId:'1',//操作人
-						clerkEmpId:'',//文员
-						counlorEmpId:'',//咨询师
-						operatorId:this.accountId(),//操作人
+					this.schedule={
+						empId:'',
+						schedulingDate:'',
+						morning:'',
+						afternoon:'0',
+						operatorId:'',
+						time1:'0',
+						time2:'0',
+						time3:'0',
+						time4:'0',
+						time5:'0',
+						time6:'0',
+						time7:'0',
+						time8:'0',
+						time9:'0',
+						time10:'0',
+						time11:'0',
+						time12:'0',
+						time13:'0',
+						time14:'0',
+						time15:'0',
+						time16:'0',
 					}
-					// this.$refs.clerkEmp.setPosName('文员')
-					this.$refs.counlorEmp.setPosName('咨询顾问')
-					// this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
-					this.$refs.counlorEmp.setEmp(this.order.counlorEmpId)
 				}else if(param=='modify'){
 					console.log('Initialization order’s content, which modifies order')
 					this.title='修改'
@@ -175,48 +184,21 @@
 					this.$refs.counlorEmp.setEmp(this.order.counlorEmpId)
 				}
 			},
-			//date formatting 
-			dateAction(param){
-				if(param=='1'){
-					if(!this.isBlank(this.order.appDate)){
-						this.order.appDate=this.moment(this.order.appDate,'YYYY-MM-DD HH:mm:ss.000')
-					}else{
-						this.order.appDate=''
-					}
-				}else if(param=='2'){
-					if(!this.isBlank(this.order.outHosp)){
-						this.order.outHosp=this.moment(this.order.outHosp,'YYYY-MM-DD HH:mm:ss.000')
-					}else{
-						this.order.outHosp=''
-					}
-				}
-			},
+			
 			//feedback employee information
-			clerkEmpChange: function(param) {
+			empChange: function(param) {
 				// console.log('科室：'+JSON.stringify(param))
 				if (this.isBlank(param)) {
-					this.order.clerkEmpId = ""
+					this.schedule.empId = ""
 				} else {
-					this.order.clerkEmpId = param.empId
+					this.schedule.empId = param.empId
 				}
-				console.log('员工：' + this.order.empId)
-			},
-			//feedback employee information
-			counlorEmpChange: function(param) {
-				// console.log('科室：'+JSON.stringify(param))
-				if (this.isBlank(param)) {
-					this.order.counlorEmpId = ""
-				} else {
-					this.order.counlorEmpId = param.empId
-				}
-				console.log('员工：' + this.order.counlorEmpId)
 			},
 			
+			
 			//the event of addtional button
-			addOrder(param){
-				
-				
-				if(this.isBlank(this.order.counlorEmpId)){
+			addSchedule(param){
+				if(this.isBlank(this.schedule.empId)){
 					alert('咨询顾问不能为空')
 					return
 				}
@@ -235,14 +217,14 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data:this.order,
+					data:this.schedule,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						this.$emit('addOrder')
-						$("#orderContent").modal("hide");
+// 						this.$emit('addSchedule')
+// 						$("#scheduleContent").modal("hide");
 					}
 				}).catch((error) => {
 					console.log('预约提交请求失败')

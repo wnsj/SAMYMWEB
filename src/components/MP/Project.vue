@@ -192,7 +192,7 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						proName: this.name,
+						proName: this.proName,
 						state: this.isuse,
 						empId:this.empId,
 						storeId:this.storeId,

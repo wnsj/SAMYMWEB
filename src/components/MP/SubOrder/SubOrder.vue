@@ -29,7 +29,7 @@
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预约时间</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<dPicker v-model="orderClick.appDate" format="YYYY-MM-DD" style="width:100%;"></dPicker>
+							<dPicker v-model="orderClick.appDate" format="YYYY-MM-DD" style="width:100%;" v-on:change="checkEmpSchedule()"></dPicker>
 						</div>	
 					</div>
 					<div class="col-md-6 form-group clearfix">
@@ -363,9 +363,8 @@
 					alert('咨询师课程不能为空')
 					return
 				}
-				if(!this.isBlank(this.order.schedulingDate)){
-					this.order.schedulingDate=this.moment(this.order.schedulingDate,'YYYY-MM-DD 00:00:00.000')
-					this.orderClick.appDate = this.order.schedulingDate
+				if(!this.isBlank(this.orderClick.appDate)){
+					this.orderClick.appDate=this.moment(this.orderClick.appDate,'YYYY-MM-DD 00:00:00.000')
 				}else{
 					alert("预约时间不能为空")
 					return
@@ -393,6 +392,8 @@
 						alert(res.retMsg)
 						this.$emit('addOrder')
 						$("#orderContent").modal("hide");
+					}else{
+						alert(res.retMsg)
 					}
 				}).catch((error) => {
 					console.log('预约提交请求失败')

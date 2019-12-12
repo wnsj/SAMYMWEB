@@ -33,7 +33,7 @@
 		<div class="">
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable" ref='showMainTab'>
-					<table class="table table-bordered table-hover" id="datatable" style="width:1800px; position:relative;">
+					<table class="table table-bordered table-hover" id="datatable" style="width:2000px; position:relative;">
 						<thead>
 							<tr>
 								<th class="text-center">姓名</th>

@@ -95,7 +95,7 @@
 		<div class="">
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable" ref='showMainTab'>
-					<table class="table table-bordered table-hover" id="datatable" style="width:1680px;">
+					<table class="table table-bordered table-hover" id="datatable" style="width:1720px;">
 						<thead class="datathead">
 							<tr>
 								<th class="text-center" style="line-height:40px;">预约号</th>

@@ -21,9 +21,9 @@
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 my-aside clear-mp" id="Adiv" style="padding-top: 10px;">
         	<p style=" display:block; width:190px; height:50px;margin:0 auto; line-height:50px; font-size: 30px;font-weight: bold;color: #795548;text-align: left; margin-bottom:10px;">功能列表</p>
           	 <div id="aside-menu">
-				<dl v-bind:class="{noShow:num == 0}">
-					<dt @click="onShow(0)">
-						<i class="fa" v-bind:class="{'fa-folder-open':num==0,'fa-folder':num!=0}" aria-hidden="true">
+				<dl v-bind:class="{h15:bool1}">
+					<dt @click="onShow(0)" v-bind:class="{'li-active':bool1}">
+						<i class="fa" v-bind:class="{'fa-folder-open':bool1,'fa-folder':!bool1}" aria-hidden="true">
 							会员管理模块
 						</i>
 					</dt>
@@ -34,9 +34,9 @@
 						<i class="fa" aria-hidden="true">会员基本信息</i>
 					</dd>
 				</dl>
-				<dl v-bind:class="{noShow:num == 1}">
-					<dt @click="onShow(1)">
-						<i class="fa" v-bind:class="{'fa-folder-open':num==1,'fa-folder':num!=1}" aria-hidden="true">
+				<dl v-bind:class="{h25:bool2}">
+					<dt @click="onShow(1)" v-bind:class="{'li-active':bool2}">
+						<i class="fa" v-bind:class="{'fa-folder-open':bool2,'fa-folder':!bool2}" aria-hidden="true">
 							消费管理模块
 						</i>
 					</dt>
@@ -53,9 +53,9 @@
 						<i class="fa" aria-hidden="true">定金管理</i>
 					</dd>	
 				</dl>
-				<dl v-bind:class="{noShow:num == 2}">
-					<dt @click="onShow(2)">
-						<i class="fa" v-bind:class="{'fa-folder-open':num==2,'fa-folder':num!=2}" aria-hidden="true">
+				<dl v-bind:class="{h40:bool3}">
+					<dt @click="onShow(2)" v-bind:class="{'li-active':bool3}">
+						<i class="fa" v-bind:class="{'fa-folder-open':bool3,'fa-folder':!bool3}" aria-hidden="true">
 							基础设置
 						</i>
 					</dt>
@@ -81,20 +81,31 @@
 						<i class="fa" aria-hidden="true">课程管理</i>
 					</dd>
 				</dl>
-				<dl>
-					<dt v-on:click="selectRule('CurrentSummary')" v-bind:class="{'li-active':onString == 'CurrentSummary'}">
-						<i class="fa fa-folder-open" aria-hidden="true">
+				<dl v-bind:class="{h10:bool4}">
+					<dt @click="onShow(3)" v-bind:class="{'li-active':bool4}">
+						<i class="fa" v-bind:class="{'fa-folder-open':bool4,'fa-folder':!bool4}" aria-hidden="true">
 							月入汇总
 						</i>
 					</dt>
+					<dd v-on:click="selectRule('CurrentSummary')" v-bind:class="{'li-active':onString == 'CurrentSummary'}">
+						<i class="fa" aria-hidden="true">
+							月入汇总
+						</i>
+					</dd>
 				</dl>
-				<dl>
-					<dt v-on:click="selectRule('RoyaltySummary')" v-bind:class="{'li-active':onString == 'RoyaltySummary'}">
-						<i class="fa fa-folder-open" aria-hidden="true">
+				<dl v-bind:class="{h10:bool5}">
+					<dt @click="onShow(4)" v-bind:class="{'li-active':bool5}">
+						<i class="fa" v-bind:class="{'fa-folder-open':bool5,'fa-folder':!bool5}" aria-hidden="true">
 							提成汇总
 						</i>
 					</dt>
+					<dd v-on:click="selectRule('RoyaltySummary')" v-bind:class="{'li-active':onString == 'RoyaltySummary'}">
+						<i class="fa" aria-hidden="true">
+							提成汇总
+						</i>
+					</dd>
 				</dl>
+				
 				<dl>
 					<dt v-on:click="selectRule('newtree')" v-bind:class="{'li-active':onString == 'newtree'}">
 						<i class="fa fa-folder-open" aria-hidden="true">
@@ -153,7 +164,11 @@
 			return {
 				accountName:this.accountName(),
 				itemList:[],
-				num:0,
+				bool1:true,
+				bool2:false,
+				bool3:false,
+				bool4:false,
+				bool5:false,
 				onString:'MemberSummary'
 			}
 		},
@@ -175,7 +190,24 @@
 				this.title=param
 			},
 			onShow(index){			
-				this.num= index;
+				switch(index){
+					case 0:
+						this.bool1 = !this.bool1;
+						break;
+					case 1:
+						this.bool2 = !this.bool2;
+						break;
+					case 2:
+						this.bool3 = !this.bool3;
+						break;
+					case 3:
+						this.bool4 = !this.bool4;
+						break;
+					case 4:
+						this.bool5 = !this.bool5;
+						break;
+				}
+
 			},
 			gainFun(data){
 				this.onString = data.str1;
@@ -243,8 +275,12 @@
 
 <style>
 	#aside-menu{border-top:1px solid #ccc;}
-	#aside-menu dl{ margin-bottom:0; height:50px;overflow:hidden; color:#795548;font-size:20px; background:#f1f1f1; }
-	#aside-menu dl.noShow{height:auto; }
+	#aside-menu dl{ margin-bottom:0; height:50px;overflow:hidden; color:#795548;font-size:20px; background:#f1f1f1;transition:height .5s }
+	#aside-menu dl.noShow{color:#f2ad4e }
+	#aside-menu dl.h10{height:100px; }
+	#aside-menu dl.h15{height:150px; }
+	#aside-menu dl.h25{height:250px; }
+	#aside-menu dl.h40{height:400px; }
 	#aside-menu dl dt{height:50px;text-align:center;background:#e6e6e6;border-bottom:1px solid #ccc;}
 	#aside-menu dl dd{height:50px;text-align:center;border-bottom:1px solid #ccc;}
 	#aside-menu dl dd:hover{background:#f5f5f5;color:#603b2c;}

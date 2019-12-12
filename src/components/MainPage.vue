@@ -210,12 +210,12 @@
 
 			},
 			gainFun(data){
-				this.onString = data.str1;
-				this.num = data.str2;	
+				this.onString = data;
+				this.bool2 = true;
 			},
 			gainFun2(data){
-				this.onString = data.str1;
-				this.num = data.str2;	
+				this.onString = data;
+				this.bool2 = true;	
 			},
 			selectRule(param){
 				this.onString = param;

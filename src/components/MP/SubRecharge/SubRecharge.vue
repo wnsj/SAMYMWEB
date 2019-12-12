@@ -404,6 +404,7 @@
 						});
 						this.jumpLeft(3);
 						$("#addFee").modal("hide")
+             			this.$emit('func',{str1:'Charge',str2:1})
 					} else {
 						alert(res.retMsg)
 					}

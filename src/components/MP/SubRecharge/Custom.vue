@@ -330,6 +330,7 @@
 						});
 						this.jumpLeft(2);
 						$("#addCustom").modal("hide")
+						this.$emit('func2',{str1:'SettleSummary',str2:1})
 					} else {
 						alert(res.retMsg)
 					}

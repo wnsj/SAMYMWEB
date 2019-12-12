@@ -112,7 +112,7 @@
     <div class="row row_edit">
       <div class="modal fade" id="addFee">
         <div class="modal-dialog">
-          <SubRecharge ref="fee"></SubRecharge>
+          <SubRecharge ref="fee" @func="gainFun"></SubRecharge>
         </div>
       </div>
     </div>
@@ -126,7 +126,7 @@
 		<div class="row row_edit">
 		  <div class="modal fade" id="addCustom">
 		    <div class="modal-dialog">
-		      <custom ref="custom"></custom>
+		      <custom ref="custom" @func2="gainFun2"></custom>
 		    </div>
 		  </div>
 		</div>
@@ -135,7 +135,7 @@
 </template>
 
 <script type="module">
-  import SubRecharge from '../components/MP/SubRecharge/SubRecharge.vue'
+  	import SubRecharge from '../components/MP/SubRecharge/SubRecharge.vue'
 	import refund from '../components/MP/SubRecharge/Refund.vue'
 	import custom from '../components/MP/SubRecharge/Custom.vue'
 	import axios from 'axios'
@@ -176,6 +176,14 @@
 			},
 			onShow(index){			
 				this.num= index;
+			},
+			gainFun(data){
+				this.onString = data.str1;
+				this.num = data.str2;	
+			},
+			gainFun2(data){
+				this.onString = data.str1;
+				this.num = data.str2;	
 			},
 			selectRule(param){
 				this.onString = param;

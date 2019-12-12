@@ -165,6 +165,8 @@
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('addRule')
+					}else{
+						alert(res.retMsg)
 					}
 				}).catch((error) => {
 					console.log('员工请求失败')

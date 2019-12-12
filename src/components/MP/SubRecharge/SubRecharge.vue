@@ -209,6 +209,8 @@
 					operatorId: '', //操作人
 					consumCount: '0', //消费次数
 					balance: '0',
+          cashId:'',//使用定金
+          cashMoney:''//使用定金的金额
 				},
 				cash: {
 					cashId:'',
@@ -357,7 +359,8 @@
 			//the event of addtional button
 			addFee() {
 				console.log('the event of addtional button')
-
+        this.consume.cashId=this.cash.cashId;
+				this.consume.cashMoney=this.cash.select;
 				if (!this.isBlank(this.member.counselorEmpId) && this.member.counselorEmpId != this.consume.counselor) {
 					if (!confirm("您给客户选择了不同咨询师的课程，是否继续？如果继续，将使用之前咨询师课程的余额进行购买新的项目，否则，请取消！！！")) {
 						return

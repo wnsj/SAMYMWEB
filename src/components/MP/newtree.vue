@@ -3,69 +3,80 @@
 
 	<div id="wraper" ref='wraper'>
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">权限管理</h1>
+			<h1 class="titleCss">权限</h1>
 		</div>
 		<div id="tree">
 			<dl v-bind:class="{noShow:bool1}">
-				<dt  v-bind:class="{bg1:num==0,bg2:num!=0}">
-					<i class="fa" @click="onShow(1)" v-bind:class="{'fa-minus-square':num==0,'fa-plus-square':num!=0}" aria-hidden="true"></i>
-					<span class="fa" @click="onShow(0)" v-bind:class="{'fa-square-o':num==0,'fa-square-o':num!=0}" aria-hidden="true"></span>
-					<b>会员管理模块</b>
-					<div style="clear:both"></div>	
+				<dt  v-bind:class="{bg1:bool1,bg2:!bool1}">
+					<i class="fa" @click="onShow(1)" v-bind:class="{'fa-minus-square':bool1,'fa-plus-square':!bool1}" aria-hidden="true"></i>
+					<span>
+						<input type="checkbox" id="checkbox1"/>
+						<label for="checkbox1" class="fa fa-check-square-o" aria-hidden="true"></label>
+            			<label for="checkbox1" class="fa fa-square-o" aria-hidden="true"></label>
+					</span>
+					<b>会员管理</b>	
 				</dt>
-				<dd>
-					<span class="fa" @click="onShow(0)" v-bind:class="{'fa-minus-square':num==0,'fa-plus-square':num!=0}" aria-hidden="true"></span>
-					会员汇总
+				<dd class="bg3">
+					<span>
+						<input type="checkbox" id="checkbox2"/>
+						<label for="checkbox2" class="fa fa-check-square-o" aria-hidden="true"></label>
+            			<label for="checkbox2" class="fa fa-square-o" aria-hidden="true"></label>
+					</span>
+					<b>会员汇总</b>
 				</dd>
-				<dd>
-					<span class="fa" @click="onShow(0)" v-bind:class="{'fa-minus-square':num==0,'fa-plus-square':num!=0}" aria-hidden="true"></span>
-					会员基本信息
+				<dd class="bg4">
+					<span>
+						<input type="checkbox" id="checkbox3"/>
+						<label for="checkbox3" class="fa fa-check-square-o" aria-hidden="true"></label>
+            			<label for="checkbox3" class="fa fa-square-o" aria-hidden="true"></label>
+					</span>
+					<b>会员基本</b>
 				</dd>
 			</dl>
 			<dl v-bind:class="{noShow:bool2}">
-				<dt v-bind:class="{bg5:num==1,bg8:num!=1}">
-					<i class="fa" @click="onShow(2)" v-bind:class="{'fa-minus-square':num==1,'fa-plus-square':num!=1}" aria-hidden="true"></i>
-					<span class="fa" @click="onShow(0)" v-bind:class="{'fa-minus-square':num==1,'fa-square-o':num!=1}" aria-hidden="true"></span>
-					<b>消费管理模块</b>
+				<dt v-bind:class="{bg5:bool2,bg8:!bool2}">
+					<i class="fa" @click="onShow(2)" v-bind:class="{'fa-minus-square':bool2,'fa-plus-square':!bool2}" aria-hidden="true"></i>
+					<span>
+						<input type="checkbox" id="checkbox4"/>
+						<label for="checkbox4" class="fa fa-check-square-o" aria-hidden="true"></label>
+            			<label for="checkbox4" class="fa fa-square-o" aria-hidden="true"></label>
+					</span>
+					<b>消费管理</b>
 				</dt>
-				<dd>
-					<span class="fa" @click="onShow(0)" v-bind:class="{'fa-minus-square':num==1,'fa-plus-square':num!=1}" aria-hidden="true"></span>
-					消费管理模块
+				<dd class="bg4">
+					<span>
+						<input type="checkbox" id="checkbox5"/>
+						<label for="checkbox5" class="fa fa-check-square-o" aria-hidden="true"></label>
+            			<label for="checkbox5" class="fa fa-square-o" aria-hidden="true"></label>
+					</span>
+					<b>消费管理</b>
 				</dd>
-				<dd>
-					<span class="fa" @click="onShow(0)" v-bind:class="{'fa-minus-square':num==1,'fa-plus-square':num!=1}" aria-hidden="true"></span>
-					消费管理模块
-				</dd>
-				<dd>
-					<span class="fa" @click="onShow(0)" v-bind:class="{'fa-minus-square':num==1,'fa-plus-square':num!=1}" aria-hidden="true"></span>
-					消费管理模块
-				</dd>
-				<dd>
-					<span class="fa" @click="onShow(0)" v-bind:class="{'fa-minus-square':num==1,'fa-plus-square':num!=1}" aria-hidden="true"></span>
-					消费管理模块
-				</dd>	
 			</dl>
 			<dl v-bind:class="{noShow:bool3}">
-				<dt v-bind:class="{bg5:num==2,bg8:num!=2}">
-					<i class="fa" @click="onShow(3)" v-bind:class="{'fa-minus-square':num==1,'fa-plus-square':num!=1}" aria-hidden="true"></i>
-					<span class="fa" @click="onShow(0)" v-bind:class="{'fa-minus-square':num==1,'fa-square-o':num!=1}" aria-hidden="true"></span>
+				<dt v-bind:class="{bg5:bool3,bg7:!bool3}">
+					<i class="fa" @click="onShow(3)" v-bind:class="{'fa-minus-square':bool3,'fa-plus-square':!bool3}" aria-hidden="true"></i>
+					<span>
+						<input type="checkbox" id="checkbox6"/>
+						<label for="checkbox6" class="fa fa-check-square-o" aria-hidden="true"></label>
+            			<label for="checkbox6" class="fa fa-square-o" aria-hidden="true"></label>
+					</span>
 					<b>基础设备</b>
 				</dt>
-				<dd>
-					<span class="fa" @click="onShow(0)" v-bind:class="{'fa-minus-square':num==1,'fa-plus-square':num!=1}" aria-hidden="true"></span>
-					消费管理模块
+				<dd class="bg3">
+					<span>
+						<input type="checkbox" id="checkbox7"/>
+						<label for="checkbox7" class="fa fa-check-square-o" aria-hidden="true"></label>
+            			<label for="checkbox7" class="fa fa-square-o" aria-hidden="true"></label>
+					</span>
+					<b>消费管理</b>
 				</dd>
-				<dd>
-					<span class="fa" @click="onShow(0)" v-bind:class="{'fa-minus-square':num==1,'fa-plus-square':num!=1}" aria-hidden="true"></span>
-					消费管理模块
-				</dd>
-				<dd>
-					<span class="fa" @click="onShow(0)" v-bind:class="{'fa-minus-square':num==1,'fa-plus-square':num!=1}" aria-hidden="true"></span>
-					消费管理模块
-				</dd>
-				<dd>
-					<span class="fa" @click="onShow(0)" v-bind:class="{'fa-minus-square':num==1,'fa-plus-square':num!=1}" aria-hidden="true"></span>
-					消费管理模块
+				<dd class="bg4">
+					<span>
+						<input type="checkbox" id="checkbox8"/>
+						<label for="checkbox8" class="fa fa-check-square-o" aria-hidden="true"></label>
+            			<label for="checkbox8" class="fa fa-square-o" aria-hidden="true"></label>
+					</span>
+					<b>消费管理</b>
 				</dd>
 			</dl>
 		</div>
@@ -83,7 +94,7 @@
 			return {
 				bool1:false,
 				bool2:false,
-				bool3:false,
+				bool3:false
 			};
 		},
 		methods: {
@@ -102,9 +113,7 @@
 			window.addEventListener('scroll',this.handleScroll,true);
 			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
 			let realH = (h-767)*2/3+580+'px';
-			let tabH = (h-767)/3+400+'px';
 			this.$refs.wraper.style="height:"+realH;
-			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
 		created() {
 		 
@@ -113,15 +122,19 @@
 </script>
 
 <style>
-	#tree{width:200px;border:1px solid #ccc;}
+	#tree{width:200px; margin-top:50px;}
 	#tree dl{ margin-bottom:0; height:50px;overflow:hidden; color:#795548;font-size:20px; background:#fff; }
 	#tree dl.noShow{height:auto; }
 	#tree dl dt{height:50px;overflow:hidden;}
-	#tree dl dt i{display:block;width:18px;height:50px;text-align:left;line-height:50px; float:left; margin-right:8px;}
-	#tree dl dt span{display:block;width:16px;height:50px;text-align:left;line-height:52px; float:left;margin-right:8px;}
+	#tree dl dt i{display:block;width:18px;height:50px;text-align:left;line-height:50px; float:left; margin-right:8px;overflow:hidden;}
+	#tree dl span{position:relative;display:block;width:16px;height:16px;padding:17px 0;float:left;margin-right:8px;}
+	#tree dl span input{position:absolute; left:0;top:17px; margin-top:0;opacity:0; z-index:9;}
+	#tree dl span label{position:absolute; left:0;top:16px;}
+	#tree dl span label.fa-check-square-o{display:none;}
+	#tree dl span input:checked + label.fa-check-square-o{display:block;}
 	#tree dl dt b{display:block;width:130px;height:50px;text-align:left;line-height:50px; float:left;}
-	#tree dl dd{height:50px;text-align:center;}
-	#tree dl dd:hover{background:#f5f5f5;color:#603b2c;}
+	#tree dl dd{height:50px;text-align:left; text-indent:26px; overflow:hidden;}
+	#tree dl dd b{display:block;width:150px;height:50px;text-align:left;line-height:50px; float:left;font-weight:normal}
 	
 	.bg1{background:url(../../assets/img/sub_bg1.jpg)}
 	.bg2{background:url(../../assets/img/sub_bg2.jpg)}

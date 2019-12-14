@@ -7,33 +7,8 @@
 		</div>
 		<div id="tree">
 			<dl v-bind:class="{noShow:bool1}">
-				<dt  v-bind:class="{bg1:bool1,bg2:!bool1}">
-					<i class="fa" @click="onShow(1)" v-bind:class="{'fa-minus-square':bool1,'fa-plus-square':!bool1}" aria-hidden="true"></i>
-					<span>
-						<input type="checkbox" id="checkbox1"/>
-						<label for="checkbox1" class="fa fa-check-square-o" aria-hidden="true"></label>
-            			<label for="checkbox1" class="fa fa-square-o" aria-hidden="true"></label>
-					</span>
-					<b>会员管理</b>	
-				</dt>
-				<dd class="bg3">
-					<span>
-						<input type="checkbox" id="checkbox2"/>
-						<label for="checkbox2" class="fa fa-check-square-o" aria-hidden="true"></label>
-            			<label for="checkbox2" class="fa fa-square-o" aria-hidden="true"></label>
-					</span>
-					<b>会员汇总</b>
-				</dd>
-				<dd class="bg4">
-					<span>
-						<input type="checkbox" id="checkbox3"/>
-						<label for="checkbox3" class="fa fa-check-square-o" aria-hidden="true"></label>
-            			<label for="checkbox3" class="fa fa-square-o" aria-hidden="true"></label>
-					</span>
-					<b>会员基本</b>
-				</dd>
 			</dl>
-			<dl v-bind:class="{noShow:bool2}">
+			<dl v-for="(item , index) in moduleList" :key='index' v-bind:class="{noShow:bool2}">
 				<dt v-bind:class="{bg5:bool2,bg8:!bool2}">
 					<i class="fa" @click="onShow(2)" v-bind:class="{'fa-minus-square':bool2,'fa-plus-square':!bool2}" aria-hidden="true"></i>
 					<span>
@@ -41,18 +16,18 @@
 						<label for="checkbox4" class="fa fa-check-square-o" aria-hidden="true"></label>
             			<label for="checkbox4" class="fa fa-square-o" aria-hidden="true"></label>
 					</span>
-					<b>消费管理</b>
+					<b>{{item.name}}</b>
 				</dt>
-				<dd class="bg4">
+				<dd class="bg4" v-for="(item1,index1) in item.subMList" :key='index'>
 					<span>
 						<input type="checkbox" id="checkbox5"/>
 						<label for="checkbox5" class="fa fa-check-square-o" aria-hidden="true"></label>
             			<label for="checkbox5" class="fa fa-square-o" aria-hidden="true"></label>
 					</span>
-					<b>消费管理</b>
+					<b>{{item1.name}}</b>
 				</dd>
 			</dl>
-			<dl v-bind:class="{noShow:bool3}">
+			<!-- <dl v-bind:class="{noShow:bool3}">
 				<dt v-bind:class="{bg5:bool3,bg7:!bool3}">
 					<i class="fa" @click="onShow(3)" v-bind:class="{'fa-minus-square':bool3,'fa-plus-square':!bool3}" aria-hidden="true"></i>
 					<span>
@@ -78,7 +53,7 @@
 					</span>
 					<b>消费管理</b>
 				</dd>
-			</dl>
+			</dl> -->
 		</div>
 	</div>
 
@@ -92,6 +67,50 @@
 		},
 		data() {
 			return {
+				moduleList:[
+					{
+						name:"目录1",
+						subMList:[
+							{
+								name:'目录1——1'
+							},
+							{
+								name:'目录1——2'
+							},
+							{
+								name:'目录1——3'
+							}
+						],
+					},
+					{
+						name:"目录1",
+						subMList:[
+							{
+								name:'目录1——1'
+							},
+							{
+								name:'目录1——2'
+							},
+							{
+								name:'目录1——3'
+							}
+						],
+					},
+					{
+						name:"目录1",
+						subMList:[
+							{
+								name:'目录1——1'
+							},
+							{
+								name:'目录1——2'
+							},
+							{
+								name:'目录1——3'
+							}
+						],
+					}
+				],
 				bool1:false,
 				bool2:false,
 				bool3:false

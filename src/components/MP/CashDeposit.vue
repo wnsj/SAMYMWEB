@@ -330,7 +330,7 @@
 			
 		},
 		created() {
-		  this.checkMember()
+		  // this.checkMember()
 		}
 	}
 </script>

@@ -416,7 +416,7 @@
 		},
 		created() {
 
-			this.checkEmp();
+			// this.checkEmp();
 
 		}
 	}

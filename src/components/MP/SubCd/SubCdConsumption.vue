@@ -216,7 +216,7 @@
             balance:param.balance,//定金剩余金额
             makeUpMoney:"0",//定金不够，需要补交的金额
             cashId:param.cashId,
-            cashName:'',
+            cashName:param.cashName,
 
           }
         this.consumeReceivable='0.0'

@@ -235,7 +235,7 @@
 			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
 		created() {
-			this.checkMember();
+			// this.checkMember();
 		}
 	}
 </script>

@@ -18,14 +18,14 @@
 					</span>
 					<b>{{item.name}}</b>
 				</dt>
-				<dd class="bg4" v-for="(item1,index1) in item.subMList" :key='index'>
+				<!-- <dd class="bg4" v-for="(item1,index1) in item.subMList" :key='index'>
 					<span>
 						<input type="checkbox" id="checkbox5"/>
 						<label for="checkbox5" class="fa fa-check-square-o" aria-hidden="true"></label>
             			<label for="checkbox5" class="fa fa-square-o" aria-hidden="true"></label>
 					</span>
 					<b>{{item1.name}}</b>
-				</dd>
+				</dd> -->
 			</dl>
 			<!-- <dl v-bind:class="{noShow:bool3}">
 				<dt v-bind:class="{bg5:bool3,bg7:!bool3}">

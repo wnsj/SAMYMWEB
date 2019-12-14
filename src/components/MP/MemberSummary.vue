@@ -199,7 +199,7 @@
 			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
 		created() {
-			this.conditionCheck();
+			// this.conditionCheck();
 			
 		},
 

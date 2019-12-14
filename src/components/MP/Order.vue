@@ -362,7 +362,7 @@
 			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
 		created() {
-		  this.checkOrderList()
+		  // this.checkOrderList()
 		}
 	}
 </script>

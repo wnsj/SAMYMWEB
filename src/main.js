@@ -7,12 +7,14 @@ import axios from 'axios'
 import moment from 'moment'
 import Cookies from 'js-cookie'
 import constant from '../src/assets/js/constant'
+import vueBeauty from 'vue-beauty'
+    
 // import utilDate from '../src/assets/js/utilDate'
 import {
   exportTableToExcel
 } from 'vendor/Export2Excel.js'
 
-
+Vue.use(vueBeauty)
 Vue.prototype.$ajax = axios
 Vue.prototype.url = process.env.API_HOST
 

@@ -26,7 +26,7 @@
 				</div>
 			</div>
 		</div> 
-		<div class="row"> 
+		<div class="row" style="margin-top: 15px;"> 
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:10px;">
 				<div class="col-md-3 col-lg-3 text-right" style="padding: 0; line-height: 34px; width:20.5%;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">消费时间</p><span class="sign-left">:</span>

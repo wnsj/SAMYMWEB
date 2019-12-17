@@ -193,17 +193,37 @@
 				switch(index){
 					case 0:
 						this.bool1 = !this.bool1;
+						this.bool2 = false;
+						this.bool3 = false;
+						this.bool4 = false;
+						this.bool5 = false;
 						break;
 					case 1:
+						this.bool1 = false;
 						this.bool2 = !this.bool2;
+						this.bool3 = false;
+						this.bool4 = false;
+						this.bool5 = false;
 						break;
 					case 2:
+						this.bool1 = false;
+						this.bool2 = false;
 						this.bool3 = !this.bool3;
+						this.bool4 = false;
+						this.bool5 = false;
 						break;
 					case 3:
+						this.bool1 = false;
+						this.bool2 = false;
+						this.bool3 = false;
 						this.bool4 = !this.bool4;
+						this.bool5 = false;
 						break;
 					case 4:
+						this.bool1 = false;
+						this.bool2 = false;
+						this.bool3 = false;
+						this.bool4 = false;
 						this.bool5 = !this.bool5;
 						break;
 				}
@@ -274,7 +294,7 @@
 </script>
 
 <style>
-	#aside-menu{border-top:1px solid #ccc;}
+	#aside-menu{border-top:1px solid #ccc;height:640px; overflow-y:auto; overflow-x:hidden;}
 	#aside-menu dl{ margin-bottom:0; height:50px;overflow:hidden; color:#795548;font-size:20px; background:#f1f1f1;transition:height .5s }
 	#aside-menu dl.noShow{color:#f2ad4e }
 	#aside-menu dl.h10{height:100px; }

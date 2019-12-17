@@ -6,9 +6,9 @@
 		</div>
 		<div>
 			<div class="col-md-5 col-lg-5 part pb0">
-				<div class="col-md-12 col-lg-12 main-title" ref="tit">
+				<div class="col-md-12 col-lg-12 main-title" ref="tit" style="height:60px; overflow:hidden;">
 					<div class="col-md-8 col-lg-8 text-left">
-						<h3>流水提成规则</h3>
+						<h3 style="line-height:72px;">流水提成规则</h3>
 					</div>
 					<div class="col-md-4 col-lg-4 pull-right">
 						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('Royalty','1','')">添加</button>
@@ -40,9 +40,9 @@
 				</div>
 			</div>
 			<div class="col-md-5 col-lg-5 part pb0">
-				<div class="col-md-12 col-lg-12 main-title">
+				<div class="col-md-12 col-lg-12 main-title" style="height:60px; overflow:hidden;">
 					<div class="col-md-8 col-lg-8 text-left">
-						<h3>会员卡提成规则</h3>
+						<h3  style="line-height:72px;">会员卡提成规则</h3>
 					</div>
 					<div class="col-md-4 col-lg-4 pull-right">
 						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubVip','1','')">添加</button>
@@ -83,10 +83,10 @@
 		</div>
 		<div>
 			<div class="col-md-5 col-lg-5 part pb0">
-				<div class="col-md-12 col-lg-12 main-title">
+				<div class="col-md-12 col-lg-12 main-title" style="height:60px; overflow:hidden;">
 					
 					<div class="col-md-8 col-lg-8 text-left">
-						<h3>会员卡退费扣提成规则</h3>
+						<h3  style="line-height:72px;">会员卡退费扣提成规则</h3>
 					</div>
 					<div class="col-md-4 col-lg-4 pull-right">
 						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubVipRefund','1','')">添加</button>
@@ -117,9 +117,9 @@
 				</div>
 			</div>
 			<div class="col-md-5 col-lg-5 part pb0">
-				<div class="col-md-12 col-lg-12 main-title">
+				<div class="col-md-12 col-lg-12 main-title" style="height:60px; overflow:hidden;">
 					<div class="col-md-8 col-lg-8 text-left">
-						<h3>退号扣提成规则</h3>
+						<h3  style="line-height:72px;">退号扣提成规则</h3>
 					</div>
 					<div class="col-md-4 col-lg-4 pull-right">
 						<button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubCharg','1','')">添加</button>

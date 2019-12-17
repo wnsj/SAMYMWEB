@@ -90,7 +90,7 @@
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
 			 v-on:click="addOrder()">添加预约</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="checkOrderList()">查询</button>
+			 v-on:click="checkOrderList(1)">查询</button>
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
@@ -162,6 +162,11 @@
 						</tbody>
 					</table>
 				</div>
+        <!--分页插件-->
+        <div class="page">
+          <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
+          <paging ref="paging" @change="pageChange"></paging>
+        </div>
 			</div>
 			<div class="col-md-12 col-lg-12 posAb">
 				<p class="tips">* 双击单行，可对当前数据进行修改</p>
@@ -183,10 +188,12 @@
 
 	import SubOrder from '../MP/SubOrder/SubOrder.vue'
 	import dPicker from 'vue2-datepicker'
+  import Paging from '../common/paging'
 	export default {
 		components: {
 			SubOrder,
 			dPicker,
+      Paging
 		},
 		data() {
 			return {
@@ -201,9 +208,20 @@
 				orderList: [],
 				arrival:'0',
 				state:'1',
+
+        //分页需要的数据
+        pages: '', //总页数
+        current: 1, //当前页码
+        size: 10, //一页显示的数量
+        total: '', //数据的数量
 			};
 		},
 		methods: {
+      //子级传值到父级上来的动态拿去
+      pageChange: function(page) {
+        this.current = page
+        this.checkOrderList(page);
+      },
 			//modify the cotent of orderContent
 			addOrder() {
 				this.$refs.order.initData('add')
@@ -219,7 +237,7 @@
 			},
 			//feedback from adding and modifying view
 			feedBack() {
-				this.checkOrderList()
+				this.checkOrderList(1)
 				$("#orderContent").modal('hide')
 			},
 			caAction(item,param){
@@ -275,8 +293,8 @@
 				});
 			},
 			//check the list of orderContent
-			checkOrderList() {
-				var url = this.url + '/appointmentAction/queryAppointment'
+			checkOrderList(page) {
+				var url = this.url + '/appointmentAction/queryAppointment/'+page+'/'+this.size
 				if(!this.isBlank(this.begCreateDate)){
 					this.begCreateDate=this.moment(this.begCreateDate,'YYYY-MM-DD 00:00:00.000')
 				}
@@ -309,6 +327,7 @@
 						endCreateDate:this.endCreateDate,
 						begAppDate:this.begAppDate,
 						endAppDate:this.endAppDate,
+						//storeId:this.storeId(),
 						
 						accountId: this.accountId(),
 						modelGrade:'2',
@@ -320,7 +339,12 @@
 					var res = response.data
 					//console.log(JSON.stringify(res))
 					if (res.retCode == '0000') {
-						this.orderList = res.retData
+            this.pages=res.retData.pages //总页数
+            this.current=res.retData.current //当前页码
+            this.size=res.retData.size//一页显示的数量  必须是奇数
+            this.total=res.retData.total //数据的数量
+            this.$refs.paging.setParam(this.pages,this.current,this.total)
+						this.orderList = res.retData.records
 					} else {
 						alert(res.retMsg)
 					}
@@ -362,7 +386,7 @@
 			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
 		created() {
-		  // this.checkOrderList()
+		 this.checkOrderList(1)
 		}
 	}
 </script>

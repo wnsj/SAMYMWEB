@@ -14,7 +14,7 @@
 							<input type="text" class="form-control" v-model="employee.empName" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix" v-show="accountType==true">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">门店</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<store ref="store" @storeChange='storeChange'></store>
@@ -109,7 +109,8 @@
 					isuse: '1',
 					leaderId:'',
 					birthday:'',
-					storeId:'',
+					storeId:this.storeId(),
+					accountType:this.accountType(),
 					level:'0',
 				},
 				title: '新增',
@@ -129,19 +130,19 @@
 						sex: '1',
 						isuse: '1',
 						leaderId:'',
-						storeId:'0',
+						storeId:this.storeId(),
 						level:'0',
 					}
 					this.$refs.pos.setPosId(this.employee.posId)
 					this.$refs.emp.setPosId(this.employee.posId)
-					this.$refs.store.setStore(this.employee.storeId)
+					// this.$refs.store.setStore(this.employee.storeId)
 				} else if (param == 'modify') {
 					console.log('Initialization employee’s content, which modifies employee')
 					this.title='修改'
 					Object.assign(this.employee,employee)
 					this.$refs.pos.setPosId(this.employee.posId)
 					this.$refs.emp.setPosId(this.employee.posId)
-					this.$refs.store.setStore(this.employee.storeId)
+					// this.$refs.store.setStore(this.employee.storeId)
 				}
 			},
 			//date formatting 

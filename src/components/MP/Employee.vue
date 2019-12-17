@@ -6,7 +6,7 @@
 			<h1 class="titleCss">员工管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
 				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
@@ -124,7 +124,8 @@
 				iphone:'',
 				fixedHeader: false,
 				posId:'',
-				storeId:'',
+				storeId:this.storeId(),
+				accountType:this.accountType(),
 			};
 		},
 		methods: {

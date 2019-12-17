@@ -6,7 +6,7 @@
 			<h1 class="titleCss">会员管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
@@ -115,11 +115,12 @@
 			return {
 				memberList: [],
 				isuse: '1',
-				storeId:'',
+				storeId:this.storeId(),
 				memNum:'',
 				memName: '',
 				phone:'',
 				fixedHeader: false,
+				accountType:this.accountType(),
 
 
         //分页需要的数据

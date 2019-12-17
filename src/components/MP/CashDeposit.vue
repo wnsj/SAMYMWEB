@@ -6,14 +6,14 @@
 			<h1 class="titleCss">定金管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
-			
+
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="cashName"></div>
 			</div>
-			
+
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
@@ -67,8 +67,8 @@
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable"  ref="showMainTab">
-					<table class="table table-bordered table-hover" id="datatable" >
+				<div class="table-responsive pre-scrollable" ref="showMainTab">
+					<table class="table table-bordered table-hover" id="datatable">
 						<thead class="datathead">
 							<tr>
 								<th class="text-center">门店</th>
@@ -90,10 +90,10 @@
 								<td class="text-center" style="line-height:33px">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td class="text-center" style="line-height:33px">{{item.balance}}</td>
 								<td class="text-center" style="line-height:33px">{{item.operatorName}}</td>
-								<td class="text-center" >
+								<td class="text-center">
 									<button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button>
-                  <button type="button" class="btn btn-success" v-on:click="consumptionModel(item)">消费</button>
-                  <button type="button" class="btn btn-danger" v-on:click="refundModel(item)">退费</button>
+									<button type="button" class="btn btn-success" v-on:click="consumptionModel(item)">消费</button>
+									<button type="button" class="btn btn-danger" v-on:click="refundModel(item)">退费</button>
 								</td>
 							</tr>
 						</tbody>
@@ -117,21 +117,21 @@
 			</div>
 		</div>
 
-    <div class="row row_edit">
-      <div class="modal fade" id="xfContent">
-        <div class="modal-dialog">
-          <SubCdConsumption ref='subCdConsumption' @queryAction='consumptionFeedBack'></SubCdConsumption>
-        </div>
-      </div>
-    </div>
+		<div class="row row_edit">
+			<div class="modal fade" id="xfContent">
+				<div class="modal-dialog">
+					<SubCdConsumption ref='subCdConsumption' @queryAction='consumptionFeedBack'></SubCdConsumption>
+				</div>
+			</div>
+		</div>
 
-    <div class="row row_edit">
-      <div class="modal fade" id="tfContent">
-        <div class="modal-dialog">
-          <SubCdRefund ref='subCdRefund' @refundAction='refundFeedBack'></SubCdRefund>
-        </div>
-      </div>
-    </div>
+		<div class="row row_edit">
+			<div class="modal fade" id="tfContent">
+				<div class="modal-dialog">
+					<SubCdRefund ref='subCdRefund' @refundAction='refundFeedBack'></SubCdRefund>
+				</div>
+			</div>
+		</div>
 	</div>
 
 </template>
@@ -149,20 +149,23 @@
 			dPicker,
 			SubCd,
 			Store,
+
       SubCdConsumption,
       SubCdRefund,
       Paging
 		},
 		data() {
 			return {
-				cashList:[],
+				cashList: [],
 				cashName: '',
-				phone:'',
-				beginDate:'',
+				phone: '',
+				beginDate: '',
 				endDate: '',
-				storeId:'0',
-				state:'',
-        balanceState:"2",
+				storeId: this.storeId(),
+				state: '',
+				balanceState: "2",
+				accountType:this.accountType(),
+				
 
         //分页需要的数据
         pages: '', //总页数
@@ -183,75 +186,76 @@
 				this.$refs.subCd.initData('add')
 				$("#cdContent").modal('show')
 			},
-      //消费模态框
-      consumptionModel(item){
-        if(item.state=='1'){
-          alert("已经撤销，不能进行消费")
-          return
-        }
-        if(!this.isBlank(item.memNum)){
-          alert("会员不可直接消费");
-          return
-        }
-        if(parseFloat(item.balance)<=parseFloat('0')){
-          alert("余额为0,不可消费");
-          return
-        }
+			//消费模态框
+			consumptionModel(item) {
+				if (item.state == '1') {
+					alert("已经撤销，不能进行消费")
+					return
+				}
+				if (!this.isBlank(item.memNum)) {
+					alert("会员不可直接消费");
+					return
+				}
+				if (parseFloat(item.balance) <= parseFloat('0')) {
+					alert("余额为0,不可消费");
+					return
+				}
 
 
-        this.$refs.subCdConsumption.initData(item);
-        $("#xfContent").modal('show');
-      },
-      //退费模态框
-      refundModel(item){
-        if(item.state=='1'){
-          alert("已经撤销，不能进行消费");
-          return
-        }
-        if(parseFloat(item.balance)<=parseFloat('0')){
-          alert("余额为0,没有可退费用");
-          return
-        }
-        this.$refs.subCdRefund.initData(item);
-        $("#tfContent").modal('show');
-      },
+				this.$refs.subCdConsumption.initData(item);
+				$("#xfContent").modal('show');
+			},
+			//退费模态框
+			refundModel(item) {
+				if (item.state == '1') {
+					alert("已经撤销，不能进行消费");
+					return
+				}
+				if (parseFloat(item.balance) <= parseFloat('0')) {
+					alert("余额为0,没有可退费用");
+					return
+				}
+				this.$refs.subCdRefund.initData(item);
+				$("#tfContent").modal('show');
+			},
 			//modify the cotent of member
 			modifyMember(item) {
-				if(item.state=='1'){
+				if (item.state == '1') {
 					alert("已经撤销，不能进行修改")
 					return
 				}
-        if(item.isConsume=='1'){
-          alert("已经消费过，不能进行修改")
-          return
-        }
+				if (item.isConsume == '1') {
+					alert("已经消费过，不能进行修改")
+					return
+				}
 				this.$refs.subCd.initData('modify', item)
 				$("#cdContent").modal('show');
 			},
-			storeChange(param){
-				if(this.isBlank(param)){
-					this.storeId=""
-				}else{
-					this.storeId=param.storeId
+			storeChange(param) {
+				if (this.isBlank(param)) {
+					this.storeId = ""
+				} else {
+					this.storeId = param.storeId
 				}
 			},
+
 			feedBack(){
 				this.checkMember(1)
 				$("#cdContent").modal('hide')
 			},
-      consumptionFeedBack(){
-        this.checkMember()
-        $("#xfContent").modal('hide')
-      },
-      refundFeedBack(){
-			  this.checkMember()
-        $("#tfContent").modal('hide')
-      },
+			consumptionFeedBack() {
+				this.checkMember()
+				$("#xfContent").modal('hide')
+			},
+			refundFeedBack() {
+				this.checkMember()
+				$("#tfContent").modal('hide')
+			},
 			//check the list of member
 			checkMember(page) {
 				console.log('checkMember')
 				var url = this.url + '/cashAction/queryCash/'+page+'/'+this.size
-				
+			
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -260,12 +264,12 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						cashName:this.cashName,
-						phone:this.phone,
+						cashName: this.cashName,
+						phone: this.phone,
 						beginDate: this.beginDate,
 						endDate: this.endDate,
-						storeId:this.storeId,
-            balanceState:this.balanceState,
+						storeId: this.storeId,
+						balanceState: this.balanceState,
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -281,20 +285,20 @@
 					} else {
 						alert(res.retMsg)
 					}
-			
+
 				}).catch((error) => {
 					console.log('定金查询失败')
 				});
 			},
-			cancelCush(item){
+			cancelCush(item) {
 				var url = this.url + '/cashAction/updateCash'
-				if(item.state=='1'){
+				if (item.state == '1') {
 					alert("已经撤销，不能进行修改")
 					return
 				}
-				
-				item.updateDate=this.moment('','YYYY-MM-DD 00:00:00.000')
-				
+
+				item.updateDate = this.moment('', 'YYYY-MM-DD 00:00:00.000')
+
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -302,9 +306,9 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data:{
-						state:'1',
-						cashId:item.cashId,
+					data: {
+						state: '1',
+						cashId: item.cashId,
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -313,47 +317,46 @@
 					if (res.retCode == '0000') {
 						item.state = '1'
 					}
-							
+
 				}).catch((error) => {
 					console.log('定金查询失败')
 				});
 			},
-			
-			handleScroll(e){
-				var self=this
+
+			handleScroll(e) {
+				var self = this
 				var etop = e.target.scrollTop
 				var fHeaderwidth = $("#fHeader").width($(".datathead").width())
 				var fHeaderheight = $("#fHeader").height($(".datathead").height())
 				var theadheight = $(".datathead").height()
 				var thlength = $(".datathead tr th").length
-				for (var i=0;i<thlength;i++)
-				{
+				for (var i = 0; i < thlength; i++) {
 					$("#fHeader div").eq(i).width(
-					$(".datathead tr th").eq(i).width()
+						$(".datathead tr th").eq(i).width()
 					)
 					$("#fHeader div").eq(i).height(
-					$(".datathead tr th").eq(i).height()
+						$(".datathead tr th").eq(i).height()
 					)
 				}
-				if(etop > 0){
-					self.fixedHeader=true
-					$("#fHeader").css("top",etop)
-				}else{
-					self.fixedHeader=false
+				if (etop > 0) {
+					self.fixedHeader = true
+					$("#fHeader").css("top", etop)
+				} else {
+					self.fixedHeader = false
 				}
 			}
 		},
-		mounted () {
-			window.addEventListener('scroll',this.handleScroll,true)
-			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
-			let realH = (h-767)*2/3+580+'px';
-			let tabH = (h-767)/3+360+'px';
-			this.$refs.wraper.style="height:"+realH;
-			this.$refs.showMainTab.style="max-height:"+tabH;
-			
+		mounted() {
+			window.addEventListener('scroll', this.handleScroll, true)
+			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			let realH = (h - 767) * 2 / 3 + 580 + 'px';
+			let tabH = (h - 767) / 3 + 360 + 'px';
+			this.$refs.wraper.style = "height:" + realH;
+			this.$refs.showMainTab.style = "max-height:" + tabH;
+
 		},
 		created() {
-		   this.checkMember(1)
+
 		}
 	}
 </script>

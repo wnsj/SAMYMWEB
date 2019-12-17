@@ -146,6 +146,11 @@ Vue.prototype.accountName = function() {
 Vue.prototype.accountId = function() {
   return constant.accountId();
 }
+//账户的类型
+Vue.prototype.accountType = function() {
+	if(!constant.isBlank(constant.accountType()) && constant.accountType()==1) return true;
+	else return false;
+}
 //商铺ID
 Vue.prototype.storeId = function() {
   return constant.storeId();

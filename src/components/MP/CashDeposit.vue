@@ -40,7 +40,7 @@
 			</div>
 		</div>
 		<div class="row" style="padding-bottom:1.5%;">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
@@ -153,9 +153,10 @@
 				phone: '',
 				beginDate: '',
 				endDate: '',
-				storeId: '0',
+				storeId: this.storeId(),
 				state: '',
 				balanceState: "2",
+				accountType:this.accountType(),
 			};
 		},
 		methods: {

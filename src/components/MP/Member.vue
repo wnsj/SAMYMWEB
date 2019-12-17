@@ -132,7 +132,7 @@
 		methods: {
       //子级传值到父级上来的动态拿去
       pageChange: function(page) {
-        this.cur = page
+        this.current = page
         this.checkMember(page);
       },
 			//modify the cotent of member

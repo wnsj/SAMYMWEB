@@ -47,7 +47,7 @@
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px;padding-bottom:1.5%;">
 				<button type="button" class="btn btn-primary pull-right m_r_10" data-toggle="modal"
-				 v-on:click="conditionCheck()">查询</button>
+				 v-on:click="conditionCheck(1)">查询</button>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -84,6 +84,11 @@
 						</tbody>
 					</table>
 				</div>
+        <!--分页插件-->
+        <div class="page">
+          <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
+          <paging ref="paging" @change="pageChange"></paging>
+        </div>
 			</nobr>
 		</div>
 	</div>
@@ -92,10 +97,12 @@
 <script>
 	import dPicker from 'vue2-datepicker'
 	import emp from '../common/Employee.vue'
+  import Paging from '../common/paging'
 	export default {
 		components: {
 			dPicker,
 			emp,
+      Paging,
 		},
 		data() {
 			return {
@@ -106,10 +113,21 @@
 				empId:'',
 				begCreateDate:'',
 				endCreateDate:'',
-				
+
+
+        //分页需要的数据
+        pages: '', //总页数
+        current: 1, //当前页码
+        size: 10, //一页显示的数量
+        total: '', //数据的数量
 			};
 		},
-		methods: {	
+		methods: {
+      //子级传值到父级上来的动态拿去
+      pageChange: function(page) {
+        this.current = page
+        this.conditionCheck(page);
+      },
 			empChange(param) {
 				console.log('员工信息：'+JSON.stringify(param))
 				if (this.isBlank(param)) {
@@ -127,7 +145,7 @@
 
 			
 			//the list , which is detail infomation of patient,was checked.
-			conditionCheck: function() {
+			conditionCheck: function(page) {
 				console.log('querying based on multiple conditions')
 				if(!this.isBlank(this.begCreateDate)){
 					this.begCreateDate=this.moment(this.begCreateDate,'YYYY-MM-DD 00:00:00.000')
@@ -135,7 +153,7 @@
 				if(!this.isBlank(this.endCreateDate)){
 					this.endCreateDate=this.moment(this.endCreateDate,'YYYY-MM-DD 23:59:59.000')
 				}
-				var url = this.url + '/purchasedItemsAction/queryPurchasedItems'
+				var url = this.url + '/purchasedItemsAction/queryPurchasedItems/'+page+'/'+this.size
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -159,7 +177,12 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						this.chargeLsit = res.retData
+            this.pages=res.retData.pages //总页数
+            this.current=res.retData.current //当前页码
+            this.size=res.retData.size//一页显示的数量  必须是奇数
+            this.total=res.retData.total //数据的数量
+            this.$refs.paging.setParam(this.pages,this.current,this.total)
+						this.chargeLsit = res.retData.records
 					}
 				}).catch((error) => {
 					console.log('充值查询请求失败')
@@ -177,7 +200,7 @@
 			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
 		created() {
-			this.conditionCheck()
+			this.conditionCheck(1)
 		}
 
 
@@ -185,6 +208,14 @@
 </script>
 
 <style>
+  /*分页需要的样式*/
+  .page {
+    width: 100%;
+    min-width: 1068px;
+    height: 36px;
+    margin: 40px auto;
+  }
+
 	.widthmax {
 		width: auto;
 		overflow-x: scroll;

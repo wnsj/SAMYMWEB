@@ -63,7 +63,7 @@
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
 			 v-on:click="addMember()">添加定金</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="checkMember()">查询</button>
+			 v-on:click="checkMember(1)">查询</button>
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
@@ -99,6 +99,11 @@
 						</tbody>
 					</table>
 				</div>
+        <!--分页插件-->
+        <div class="page">
+          <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
+          <paging ref="paging" @change="pageChange"></paging>
+        </div>
 			</div>
 			<div class="col-md-12 col-lg-12 posAb">
 				<p class="tips">* 双击单行，可对当前数据进行修改</p>
@@ -136,15 +141,18 @@
 	import dPicker from 'vue2-datepicker'
 	import SubCd from '../MP/SubCd/SubCd.vue'
 	import Store from '../common/Store.vue'
-	import SubCdConsumption from '../MP/SubCd/SubCdConsumption'
-	import SubCdRefund from '../MP/SubCd/SubCdRefund'
+  import SubCdConsumption from  '../MP/SubCd/SubCdConsumption'
+  import SubCdRefund from  '../MP/SubCd/SubCdRefund'
+  import Paging from '../common/paging'
 	export default {
 		components: {
 			dPicker,
 			SubCd,
 			Store,
-			SubCdConsumption,
-			SubCdRefund,
+
+      SubCdConsumption,
+      SubCdRefund,
+      Paging
 		},
 		data() {
 			return {
@@ -157,9 +165,21 @@
 				state: '',
 				balanceState: "2",
 				accountType:this.accountType(),
+				
+
+        //分页需要的数据
+        pages: '', //总页数
+        current: 1, //当前页码
+        size: 10, //一页显示的数量
+        total: '', //数据的数量
 			};
 		},
 		methods: {
+      //子级传值到父级上来的动态拿去
+      pageChange: function(page) {
+        this.current = page
+        this.checkMember(page);
+      },
 			//modify the cotent of member
 			addMember() {
 				console.log('modify the cotent of member')
@@ -218,8 +238,9 @@
 					this.storeId = param.storeId
 				}
 			},
-			feedBack() {
-				this.checkMember()
+
+			feedBack(){
+				this.checkMember(1)
 				$("#cdContent").modal('hide')
 			},
 			consumptionFeedBack() {
@@ -231,10 +252,10 @@
 				$("#tfContent").modal('hide')
 			},
 			//check the list of member
-			checkMember() {
+			checkMember(page) {
 				console.log('checkMember')
-				var url = this.url + '/cashAction/queryCash'
-
+				var url = this.url + '/cashAction/queryCash/'+page+'/'+this.size
+			
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -255,7 +276,12 @@
 					var res = response.data
 					// console.log(res)
 					if (res.retCode == '0000') {
-						this.cashList = res.retData
+            this.pages=res.retData.pages //总页数
+            this.current=res.retData.current //当前页码
+            this.size=res.retData.size//一页显示的数量  必须是奇数
+            this.total=res.retData.total //数据的数量
+            this.$refs.paging.setParam(this.pages,this.current,this.total)
+						this.cashList = res.retData.records
 					} else {
 						alert(res.retMsg)
 					}
@@ -330,7 +356,7 @@
 
 		},
 		created() {
-			// this.checkMember()
+
 		}
 	}
 </script>

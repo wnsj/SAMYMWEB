@@ -36,7 +36,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-right:30px; padding-bottom:1.5%;">
 				<button type="button" class="btn btn-primary pull-right m_r_10" data-toggle="modal"
 				 v-on:click="conditionCheck()">查询</button>

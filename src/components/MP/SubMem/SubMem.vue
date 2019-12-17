@@ -176,7 +176,7 @@
 						url = this.url + '/memberAction/addMember'
 						break;
 					case "修改":
-						url = this.url + '/memberAction//updateMember'
+						url = this.url + '/memberAction/updateMember'
 						break;
 				}
 				

@@ -1,5 +1,5 @@
 <template>
-	<div  id="wraper" ref='wraper'>
+	<div  class="wraper">
 		<div class="col-md-12 col-lg-12 main-title">
 				<h1 class="titleCss">消费汇总</h1>
 		</div>
@@ -59,7 +59,7 @@
 		<div>
 			<div class="col-md-12 col-lg-12">
 				<nobr class="widthmax">
-					<div class="table-responsive pre-scrollable" ref='showMainTab'>
+					<div class="table-responsive pre-scrollable">
 						<table class="table table-bordered table-hover user-table" id="datatable">
 							<thead class="datathead">
 								<tr>
@@ -115,8 +115,11 @@
 	import axios from 'axios'
 	import dPicker from 'vue2-datepicker'
 	import SubConsume from '../MP/SubConsume/SubConsumeList.vue'
-  import Paging from '../common/paging'
   import store from '../common/Store.vue'
+  	import Paging from '../common/paging'
+	import {
+		init
+	} from '@/../static/js/common.js'
 	export default {
 		name: 'employee',
 		components: {
@@ -252,11 +255,7 @@
 			}else{
 				console.log("首次被加载")
 			}
-			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
-			let realH = (h-767)*2/3+580+'px';
-			let tabH = (h-767)/3+400+'px';
-			this.$refs.wraper.style="height:"+realH;
-			this.$refs.showMainTab.style="max-height:"+tabH;
+			init();
 		},
 		created() {
 			 this.conditionCheck(1)

@@ -35,74 +35,12 @@
                 <input type="checkbox" :id="'checkbox'+(index+1)" @change="changeSchedule(item.morning)" v-model="item.morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>
                 <label :for="'checkbox'+(index+1)">上午</label>
               </div>
-
-
-              <!--<div class="case">-->
-              <!--<input type="checkbox" id="checkbox1" @change="changeSchedule(dateList[0].morning)" v-model="dateList[0].morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-              <!--<label for="checkbox1">上午</label>-->
-              <!--</div>-->
-              <!--<div class="case">-->
-              <!--<input type="checkbox" id="checkbox2" @change="changeSchedule(dateList[1].morning)" v-model="dateList[1].morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-              <!--<label for="checkbox2">上午</label>-->
-              <!--</div>-->
-              <!--<div class="case">-->
-              <!--<input type="checkbox" id="checkbox3" @change="changeSchedule(dateList[2].morning)" v-model="dateList[2].morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-              <!--<label for="checkbox3">上午</label>-->
-              <!--</div>-->
-              <!--<div class="case">-->
-              <!--<input type="checkbox" id="checkbox4" @change="changeSchedule(dateList[3].morning)" v-model="dateList[3].morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-              <!--<label for="checkbox4">上午</label>-->
-              <!--</div>-->
-              <!--<div class="case">-->
-              <!--<input type="checkbox" id="checkbox5" @change="changeSchedule(dateList[4].morning)" v-model="dateList[4].morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-              <!--<label for="checkbox5">上午</label>-->
-              <!--</div>-->
-              <!--<div class="case">-->
-              <!--<input type="checkbox" id="checkbox6" @change="changeSchedule(dateList[5].morning)" v-model="dateList[5].morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-              <!--<label for="checkbox6">上午</label>-->
-              <!--</div>-->
-              <!--<div class="case">-->
-              <!--<input type="checkbox" id="checkbox7" @change="changeSchedule(dateList[6].morning)" v-model="dateList[6].morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-              <!--<label for="checkbox7">上午</label>-->
-              <!--</div>-->
             </div>
             <div class="row schDate">
               <div class="case" v-for="(item,index) in dateList">
                 <input type="checkbox" :id="'checkbox'+(index+8)" @change="changeSchedule(item.afternoon)" v-model="item.afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>
                 <label :for="'checkbox'+(index+8)">下午</label>
               </div>
-
-
-
-
-              <!--<div class="case">-->
-              <!--<input type="checkbox" id="checkbox8" v-model="dateList[0].afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-              <!--<label for="checkbox8">下午</label>-->
-              <!--</div>-->
-              <!--<div class="case">-->
-              <!--<input type="checkbox" id="checkbox9" v-model="dateList[1].afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-              <!--<label for="checkbox9">下午</label>-->
-              <!--</div>-->
-              <!--<div class="case">-->
-              <!--<input type="checkbox" id="checkbox10" v-model="dateList[2].afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-              <!--<label for="checkbox10">下午</label>-->
-              <!--</div>-->
-              <!--<div class="case">-->
-              <!--<input type="checkbox" id="checkbox11" v-model="dateList[3].afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-              <!--<label for="checkbox11">下午</label>-->
-              <!--</div>-->
-              <!--<div class="case">-->
-              <!--<input type="checkbox" id="checkbox12" v-model="dateList[4].afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-              <!--<label for="checkbox12">下午</label>-->
-              <!--</div>-->
-              <!--<div class="case">-->
-              <!--<input type="checkbox" id="checkbox13" v-model="dateList[5].afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-              <!--<label for="checkbox13">下午</label>-->
-              <!--</div>-->
-              <!--<div class="case">-->
-              <!--<input type="checkbox" id="checkbox14" v-model="dateList[6].afternoon" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>-->
-              <!--<label for="checkbox14">下午</label>-->
-              <!--</div>-->
             </div>
           </div>
           <div class="form-group clearfix">
@@ -562,7 +500,7 @@
     box-sizing:border-box;
     border:#F2AD4E solid 1px;
     background:#FFF5EA;
-    color:#EBCFA9;
+    color:#d47b00;
   }
   .case input:checked + label:after{
     position:absolute;

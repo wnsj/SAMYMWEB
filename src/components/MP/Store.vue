@@ -1,7 +1,7 @@
 <!-- the page of department management -->
 <template>
 
-	<div id="wraper" ref='wraper'>
+	<div class="wraper">
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">门店管理</h1>
 		</div>
@@ -33,7 +33,7 @@
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" ref='showMainTab'>
+				<div class="table-responsive pre-scrollable">
 					<table class="table table-bordered table-hover" id="datatable" >
 						
 						<thead class="datathead">
@@ -78,6 +78,9 @@
 <script>
 
 	import SubStore from '../MP/SubStore/SubStore.vue'
+	import {
+		init
+	} from '@/../static/js/common.js'
 	export default {
 		components: {
 			SubStore,
@@ -196,11 +199,7 @@
 		},
 		mounted () {
 			window.addEventListener('scroll',this.handleScroll,true);
-			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
-			let realH = (h-767)*2/3+580+'px';
-			let tabH = (h-767)/3+400+'px';
-			this.$refs.wraper.style="height:"+realH;
-			this.$refs.showMainTab.style="max-height:"+tabH;
+			init();
 		},
 		created() {
 		  this.checkStore()

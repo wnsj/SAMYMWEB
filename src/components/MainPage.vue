@@ -295,6 +295,7 @@
 
 <style>
 	#aside-menu{border-top:1px solid #ccc;height:640px; overflow-y:auto; overflow-x:hidden;}
+	#aside-menu::-webkit-scrollbar { display:none;}
 	#aside-menu dl{ margin-bottom:0; height:50px;overflow:hidden; color:#795548;font-size:20px; background:#f1f1f1;transition:height .5s }
 	#aside-menu dl.noShow{color:#f2ad4e }
 	#aside-menu dl.h10{height:100px; }

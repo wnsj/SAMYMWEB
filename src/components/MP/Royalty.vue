@@ -116,6 +116,8 @@
 					<p class="tips">* 双击单行，可对当前数据进行修改</p>
 				</div>
 			</div>
+
+			<!-- 
 			<div class="col-md-5 col-lg-5 part pb0">
 				<div class="col-md-12 col-lg-12 main-title" style="height:60px; overflow:hidden;">
 					<div class="col-md-8 col-lg-8 text-left">
@@ -149,7 +151,7 @@
 				<div class="col-md-12 col-lg-12">	
 					<p class="tips">* 双击单行，可对当前数据进行修改</p>
 				</div>
-			</div>
+			</div> -->
 			<!-- <div class="col-md-5 col-lg-5 part pb0">
 				<div class="col-md-12 col-lg-12 main-title">
 					<div class="col-md-8 col-lg-8 text-left">

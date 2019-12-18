@@ -149,3 +149,16 @@ body{
     font-size:12px; 
     margin-top:15px;
 }
+.wraper{
+    position:relative;
+    box-shadow: -5px 0 5px #ccc, 5px 0 5px #ccc, 0 -5px 5px #ccc, 0 5px 5px #ccc;
+    width:95%; 
+    background:#fff; 
+    margin:30px auto;
+    padding:10px 10px 20px 10px;
+}
+.posAb{
+    position:absolute;
+    bottom:20px;
+    left:0;
+}

@@ -1,7 +1,7 @@
 <!-- the page of department management -->
 <template>
 
-	<div id="wraper" ref='wraper'>
+	<div class="wraper">
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">定金管理</h1>
 		</div>
@@ -67,7 +67,7 @@
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" ref="showMainTab">
+				<div class="table-responsive pre-scrollable">
 					<table class="table table-bordered table-hover" id="datatable">
 						<thead class="datathead">
 							<tr>
@@ -141,9 +141,12 @@
 	import dPicker from 'vue2-datepicker'
 	import SubCd from '../MP/SubCd/SubCd.vue'
 	import Store from '../common/Store.vue'
-  import SubCdConsumption from  '../MP/SubCd/SubCdConsumption'
-  import SubCdRefund from  '../MP/SubCd/SubCdRefund'
-  import Paging from '../common/paging'
+	import SubCdConsumption from  '../MP/SubCd/SubCdConsumption'
+	import SubCdRefund from  '../MP/SubCd/SubCdRefund'
+	import Paging from '../common/paging'
+	import {
+		init
+	} from '@/../static/js/common.js'
 	export default {
 		components: {
 			dPicker,
@@ -349,13 +352,8 @@
 			}
 		},
 		mounted() {
-			window.addEventListener('scroll', this.handleScroll, true)
-			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			let realH = (h - 767) * 2 / 3 + 580 + 'px';
-			let tabH = (h - 767) / 3 + 360 + 'px';
-			this.$refs.wraper.style = "height:" + realH;
-			this.$refs.showMainTab.style = "max-height:" + tabH;
-
+			window.addEventListener('scroll', this.handleScroll, true);
+			init();
 		},
 		created() {
       this.checkMember(1)

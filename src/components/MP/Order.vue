@@ -1,6 +1,6 @@
 <!-- the page of department management -->
 <template>
-	<div id="wraper" ref='wraper'>
+	<div class="wraper">
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">预约管理</h1>
 		</div>
@@ -94,7 +94,7 @@
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" ref='showMainTab'>
+				<div class="table-responsive pre-scrollable">
 					<table class="table table-bordered table-hover" id="datatable" style="width:1720px;">
 						<thead class="datathead">
 							<tr>
@@ -188,7 +188,10 @@
 
 	import SubOrder from '../MP/SubOrder/SubOrder.vue'
 	import dPicker from 'vue2-datepicker'
-  import Paging from '../common/paging'
+  	import Paging from '../common/paging'
+	import {
+		init
+	} from '@/../static/js/common.js'
 	export default {
 		components: {
 			SubOrder,
@@ -327,7 +330,7 @@
 						endCreateDate:this.endCreateDate,
 						begAppDate:this.begAppDate,
 						endAppDate:this.endAppDate,
-						//storeId:this.storeId(),
+						storeId:this.storeId(),
 						
 						accountId: this.accountId(),
 						modelGrade:'2',
@@ -378,12 +381,8 @@
 			}
 		},
 		mounted () {
-			window.addEventListener('scroll',this.handleScroll,true)
-			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
-			let realH = (h-767)*2/3+580+'px';
-			let tabH = (h-767)/3+320+'px';
-			this.$refs.wraper.style="height:"+realH;
-			this.$refs.showMainTab.style="max-height:"+tabH;
+			window.addEventListener('scroll',this.handleScroll,true);
+			init();
 		},
 		created() {
 		 this.checkOrderList(1)
@@ -392,36 +391,23 @@
 </script>
 
 <style>
-  #datatable{position:relative;}
-  #fHeader {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #eeeeee;
-    overflow: hidden;
-  }
-  #fHeader div.text-center{
-    float: left;
-    display: inline-block;
-    padding:8px;
-    border: 1px solid #ddd;
-    font-weight: bold;
-  }
-  @media print {
-    #fHeader{display:none}
-  }
-  #wraper{
-		position:relative;
-		box-shadow: -5px 0 5px #ccc, 5px 0 5px #ccc, 0 -5px 5px #ccc, 0 5px 5px #ccc;
-		width:95%; 
-		background:#fff; 
-		margin:30px auto;
-		padding:10px 10px 20px 10px;
+	#datatable{position:relative;}
+	#fHeader {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: #eeeeee;
+		overflow: hidden;
 	}
-	.posAb{
-		position:absolute;
-		bottom:20px;
-		left:0;
+	#fHeader div.text-center{
+		float: left;
+		display: inline-block;
+		padding:8px;
+		border: 1px solid #ddd;
+		font-weight: bold;
+	}
+	@media print {
+		#fHeader{display:none}
 	}
 	.trueDate{
 		background:#6CA1BF;

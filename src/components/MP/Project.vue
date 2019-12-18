@@ -112,7 +112,7 @@
 				projectList: [],
 				isuse: '1',
 				proName: '',
-				storeId:'',
+				storeId:this.storeId(),
 				empId:'',
 			};
 		},

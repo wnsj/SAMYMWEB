@@ -113,6 +113,7 @@
 				empId:'',
 				begCreateDate:'',
 				endCreateDate:'',
+				storeId:this.storeId(),
 
 
         //分页需要的数据
@@ -167,6 +168,7 @@
 						empId:this.empId,
 						begCreateDate:this.begCreateDate,
 						endCreateDate:this.endCreateDate,
+						storeId:this.storeId,
 						
 						accountId: this.accountId(),
 						modelGrade:'2',

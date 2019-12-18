@@ -126,6 +126,7 @@
 				singleData:{},	
 				begCreateDate:'',
 				endCreateDate:'',
+				storeId:this.storeId(),
         //分页需要的数据
         pages: '', //总页数
         current: 1, //当前页码
@@ -166,6 +167,7 @@
 						phone:this.phone,
 						begCreateDate:this.begCreateDate,
 						endCreateDate:this.endCreateDate,
+						storeId:this.storeId,
 						
 						accountId: this.accountId(),
 						modelGrade:'2',

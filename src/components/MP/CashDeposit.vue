@@ -256,7 +256,12 @@
 			checkMember(page) {
 				console.log('checkMember')
 				var url = this.url + '/cashAction/queryCash'
-
+                if (!this.isBlank(this.beginDate)) {
+                    this.beginDate = this.moment(this.beginDate, 'YYYY-MM-DD 00:00:00.000')
+                }
+                if (!this.isBlank(this.endDate)) {
+                    this.endDate = this.moment(this.endDate, 'YYYY-MM-DD 23:59:00.000')
+                }
 				this.$ajax({
 					method: 'POST',
 					url: url,

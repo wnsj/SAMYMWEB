@@ -34,7 +34,7 @@
             <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
                     v-on:click="showAddSchedule()">添加排班</button>
             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-                    v-on:click="checkEmp()">查询</button>
+                    v-on:click="checkEmp(1)">查询</button>
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
@@ -75,6 +75,11 @@
                         </tbody>
                     </table>
                 </div>
+                <!--分页插件-->
+                <div class="page">
+                    <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
+                    <paging ref="paging" @change="pageChange"></paging>
+                </div>
             </div>
             <div class="col-md-12 col-lg-12 posAb">
                 <p class="tips">* 双击单行，可对当前数据进行修改</p>
@@ -98,6 +103,7 @@
     import pos from '../common/Position.vue'
     import dPicker from 'vue2-datepicker'
     import emp from '../common/Employee.vue'
+    import Paging from '../common/paging'
     import {
         init
     } from '@/../static/js/common.js'
@@ -108,6 +114,7 @@
             store,
             dPicker,
             emp,
+            Paging
         },
         data() {
             return {
@@ -123,10 +130,19 @@
                 thisDate:'',
                 empId:'',
 
+                //分页需要的数据
+                pages: '', //总页数
+                current: 1, //当前页码
+                size: 10*7, //一页显示的数量
+                total: '', //数据的数量
             };
         },
         methods: {
-
+            //子级传值到父级上来的动态拿去
+            pageChange: function(page) {
+                this.current = page
+                this.checkEmp(page);
+            },
             //咨询师
             counselorEmpChange: function(param) {
                 if (this.isBlank(param)) {
@@ -155,7 +171,7 @@
             },
             //feedback from adding and modifying view
             feedBack() {
-                this.checkEmp()
+                this.checkEmp(1)
                 $("#scheduleContent").modal('hide');
             },
             // check the adding and modifying rule of account
@@ -169,7 +185,7 @@
                 $("#scheduleContent").modal('show')
             },
             //check the list of department
-            checkEmp() {
+            checkEmp(page) {
                 console.log("时间为"+this.moment(this.thisDate,'YYYY-MM-DD'));
                 if(!this.isBlank(this.thisDate)){
                     this.schedulingListTitle=this.getWeekDay(this.moment(this.thisDate,'YYYY-MM-DD'));
@@ -187,7 +203,9 @@
                     data: {
                         thisDate:this.thisDate,
                         empId:this.empId,
-                        storeId:this.storeId
+                        storeId:this.storeId,
+                        page: page.toString(),
+                        pageSize: this.size
                     },
                     dataType: 'json',
                 }).then((response) => {
@@ -195,7 +213,12 @@
                     if (res.retCode == '0000') {
                         //this.getWeekStartAndEnd(this.addDate(res.retData[0].schedulingDate1));
                         //this.schedulingListTitle = res.retData[0];
-                        this.schedulingList=res.retData;
+                        this.pages = res.retData.pages //总页数
+                        this.current = res.retData.current //当前页码
+                        this.size = res.retData.size*7 //一页显示的数量  必须是奇数
+                        this.total = res.retData.total //数据的数量
+                        this.$refs.paging.setParam(this.pages, this.current, this.total)
+                        this.schedulingList=res.retData.records;
                     } else {
                         alert(res.retMsg)
                     }
@@ -400,7 +423,7 @@
         },
         created() {
 
-            // this.checkEmp();
+            this.checkEmp(1);
 
         }
     }

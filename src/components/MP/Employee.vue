@@ -1,6 +1,6 @@
 <!-- the page of department management -->
 <template>
-
+	
 	<div class="wraper">
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">员工管理</h1>

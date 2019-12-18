@@ -136,8 +136,8 @@
 
         //分页需要的数据
         pages: '', //总页数
-        current: 1, //当前页码
-        size: 10, //一页显示的数量
+        current: '1', //当前页码
+        size: '10', //一页显示的数量
         total: '', //数据的数量
 			};
 		},
@@ -225,7 +225,7 @@
 			//check the list of department
 			checkEmp(page) {
 				console.log('checkEmp')
-				var url = this.url + '/employeeAction/queryEmp/'+page+'/'+this.size
+				var url = this.url + '/employeeAction/queryEmp'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -243,6 +243,8 @@
 						moduleGrade:'2',
 						urlName:'/MP/Employee',
 						operateType:'4',
+            page:page.toString(),
+            pageSize:this.size
 					},
 					dataType: 'json',
 				}).then((response) => {

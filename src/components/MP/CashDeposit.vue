@@ -1,12 +1,10 @@
 <!-- the page of department management -->
 <template>
-
 	<div class="wraper">
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">定金管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
-
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
@@ -99,11 +97,11 @@
 						</tbody>
 					</table>
 				</div>
-        <!--分页插件-->
-        <div class="page">
-          <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
-          <paging ref="paging" @change="pageChange"></paging>
-        </div>
+				<!--分页插件-->
+				<div class="page">
+					<!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
+					<paging ref="paging" @change="pageChange"></paging>
+				</div>
 			</div>
 			<div class="col-md-12 col-lg-12 posAb">
 				<p class="tips">* 双击单行，可对当前数据进行修改</p>
@@ -141,8 +139,8 @@
 	import dPicker from 'vue2-datepicker'
 	import SubCd from '../MP/SubCd/SubCd.vue'
 	import Store from '../common/Store.vue'
-	import SubCdConsumption from  '../MP/SubCd/SubCdConsumption'
-	import SubCdRefund from  '../MP/SubCd/SubCdRefund'
+	import SubCdConsumption from '../MP/SubCd/SubCdConsumption'
+	import SubCdRefund from '../MP/SubCd/SubCdRefund'
 	import Paging from '../common/paging'
 	import {
 		init
@@ -153,9 +151,9 @@
 			SubCd,
 			Store,
 
-      SubCdConsumption,
-      SubCdRefund,
-      Paging
+			SubCdConsumption,
+			SubCdRefund,
+			Paging
 		},
 		data() {
 			return {
@@ -167,22 +165,22 @@
 				storeId: this.storeId(),
 				state: '',
 				balanceState: "2",
-				accountType:this.accountType(),
-				
+				accountType: this.accountType(),
 
-        //分页需要的数据
-        pages: '', //总页数
-        current: 1, //当前页码
-        size: 10, //一页显示的数量
-        total: '', //数据的数量
+
+				//分页需要的数据
+				pages: '', //总页数
+				current: 1, //当前页码
+				size: 10, //一页显示的数量
+				total: '', //数据的数量
 			};
 		},
 		methods: {
-      //子级传值到父级上来的动态拿去
-      pageChange: function(page) {
-        this.current = page
-        this.checkMember(page);
-      },
+			//子级传值到父级上来的动态拿去
+			pageChange: function(page) {
+				this.current = page
+				this.checkMember(page);
+			},
 			//modify the cotent of member
 			addMember() {
 				console.log('modify the cotent of member')
@@ -242,23 +240,23 @@
 				}
 			},
 
-			feedBack(){
+			feedBack() {
 				this.checkMember(1)
 				$("#cdContent").modal('hide')
 			},
 			consumptionFeedBack() {
-				this.checkMember()
+				this.checkMember(1)
 				$("#xfContent").modal('hide')
 			},
 			refundFeedBack() {
-				this.checkMember()
+				this.checkMember(1)
 				$("#tfContent").modal('hide')
 			},
 			//check the list of member
 			checkMember(page) {
 				console.log('checkMember')
 				var url = this.url + '/cashAction/queryCash'
-			
+
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -273,19 +271,19 @@
 						endDate: this.endDate,
 						storeId: this.storeId,
 						balanceState: this.balanceState,
-            page:page.toString(),
-            pageSize:this.size
+						page: page.toString(),
+						pageSize: this.size
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					// console.log(res)
 					if (res.retCode == '0000') {
-            this.pages=res.retData.pages //总页数
-            this.current=res.retData.current //当前页码
-            this.size=res.retData.size//一页显示的数量  必须是奇数
-            this.total=res.retData.total //数据的数量
-            this.$refs.paging.setParam(this.pages,this.current,this.total)
+						this.pages = res.retData.pages //总页数
+						this.current = res.retData.current //当前页码
+						this.size = res.retData.size //一页显示的数量  必须是奇数
+						this.total = res.retData.total //数据的数量
+						this.$refs.paging.setParam(this.pages, this.current, this.total)
 						this.cashList = res.retData.records
 					} else {
 						alert(res.retMsg)
@@ -356,7 +354,7 @@
 			init();
 		},
 		created() {
-      this.checkMember(1)
+			this.checkMember(1)
 		}
 	}
 </script>

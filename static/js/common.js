@@ -10,6 +10,7 @@ function boxheight() {
 	//通过Document对body进行检测，获取浏览器可视化高度
 	if (document.documentElement && document.documentElement.clientHeight)
 		winHeight = document.documentElement.clientHeight;
+
 	
 	//DIV高度为浏览器窗口高度
 	document.getElementById("Odiv").style.height = winHeight + "px";
@@ -24,17 +25,18 @@ function boxheight() {
 
 function setClick() {
 	$(document).ready(function() {
-		
+
 		// $(this).addClass("li-active")
-				
+
 		var menuArray = $("#aside-menu>li")
 
 
 		$(menuArray[0]).on("click", function() {
 			$(this).addClass("li-active")
 		})
-		
+
 		console.log('0')
+
 		function clearClass() {
 			$("#aside-menu .li-active").find("i.fa-table").removeClass("fa-circle");
 			$("#aside-menu .li-active").removeClass("li-active")
@@ -52,8 +54,9 @@ function setClick() {
 }
 
 
-exports.init = function () {
-	console.log("init调用成功");
+
+exports.init = function() {
+
 	$(function() {
 		boxheight(); //执行函数
 		window.onresize = boxheight; //窗口或框架被调整大小时执行

@@ -156,7 +156,7 @@
 				if(!this.isBlank(this.endCreateDate)){
 					this.endCreateDate=this.moment(this.endCreateDate,'YYYY-MM-DD 23:59:59.000')
 				}
-				var url = this.url + '/purchasedItemsAction/queryPurchasedItems/'+page+'/'+this.size
+				var url = this.url + '/purchasedItemsAction/queryPurchasedItems'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -175,6 +175,8 @@
 						modelGrade:'2',
 						modelType:'',
 						operateType:'',
+            page:page.toString(),
+            pageSize:this.size
 					},
 					dataType: 'json',
 				}).then((response) => {

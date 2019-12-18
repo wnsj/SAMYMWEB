@@ -51,8 +51,8 @@ router.beforeEach((to, from, next) => {
 				next('/login');
 			}
 			let itemRuleList=JSON.parse(jsonString);
-      //let hasRule = false;
-      let hasRule = true;
+      let hasRule = false;
+      //let hasRule = true;
 			for (var i=0; i < itemRuleList.length;i++){
 				let item = itemRuleList[i];
 				if(to.path == item.urlName){

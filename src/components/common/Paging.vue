@@ -175,8 +175,8 @@
 
   .page-bar .li_a a:hover {
     background-color: #eee;
-    border: 1px solid #40A9FF;
-    color: #40A9FF;
+    border: 1px solid #c4b190;
+    color: #c4b190;
   }
 
   .page-bar a.banclick {
@@ -186,8 +186,8 @@
   .page-bar .active a {
     color: #fff;
     cursor: default;
-    background-color: #1890FF;
-    border-color: #1890FF;
+    background-color: #c4b190;
+    border-color: #c4b190;
   }
 
   .page-bar i {

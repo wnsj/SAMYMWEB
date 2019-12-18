@@ -562,7 +562,7 @@
     box-sizing:border-box;
     border:#F2AD4E solid 1px;
     background:#FFF5EA;
-    color:#EBCFA9;
+    color:#d47b00;
   }
   .case input:checked + label:after{
     position:absolute;

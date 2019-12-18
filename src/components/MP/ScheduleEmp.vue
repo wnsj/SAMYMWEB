@@ -23,6 +23,14 @@
                     <emp ref="counselorChange" @employeeChange="counselorEmpChange"></emp>
                 </div>
             </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
+                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+                </div>
+                <div class="col-md-7 col-lg-7">
+                    <store ref='store' @storeChange='storeChange'></store>
+                </div>
+            </div>
             <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
                     v-on:click="showAddSchedule()">添加排班</button>
             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
@@ -108,7 +116,8 @@
                 empName: '',
                 fixedHeader: false,
                 posId:'',
-                storeId:'',
+                storeId: this.storeId(),
+                accountType:this.accountType(),
                 schedulingListTitle:[],
                 morningOrAfternoon:['上午','下午','上午','下午','上午','下午','上午','下午','上午','下午','上午','下午','上午','下午'],
                 thisDate:'',
@@ -177,7 +186,8 @@
                     },
                     data: {
                         thisDate:this.thisDate,
-                        empId:this.empId
+                        empId:this.empId,
+                        storeId:this.storeId
                     },
                     dataType: 'json',
                 }).then((response) => {

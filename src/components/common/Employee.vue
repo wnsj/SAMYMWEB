@@ -81,7 +81,13 @@
 				}
 				this.getEmployeeList()
 			},
-			async getEmployeeList() {
+			getEmployeeList() {
+				var storeId=''
+				if(this.accountType!=1){
+					storeId = this.storeId()
+				}else{
+					storeId = ''
+				}
 				var url = this.url + '/employeeAction/queryEmp'
 				this.$ajax({
 					method: 'POST',
@@ -94,7 +100,7 @@
 						posId:this.posId,
 						posName:this.posName,
 						leader:this.leader,
-						storeId:this.storeId(),
+						storeId:storeId,
 						isuse: '1',
 					},
 					dataType: 'json',
@@ -112,7 +118,7 @@
 			},
 
 		},
-		created() {
+		mounted() {
 			this.getEmployeeList()
 		},
 	}

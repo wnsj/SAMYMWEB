@@ -20,12 +20,12 @@
 							<store ref="store" @storeChange='storeChange'></store>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<!-- <div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="employee.phone" placeholder="">
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">年龄</label><span class="sign-left">:</span>
 						<div class="col-md-8">
@@ -203,13 +203,13 @@
 					alert("店铺不能为空")
 					return
 				}
-				if(this.isBlank(this.employee.phone)){
-					alert("手机号不能为空")
-					return
-				}else if(reg.test(this.employee.phone)==false){
-					alert("不是完整的11位手机号或者正确的座机号！");
-					return
-				}
+// 				if(this.isBlank(this.employee.phone)){
+// 					alert("手机号不能为空")
+// 					return
+// 				}else if(reg.test(this.employee.phone)==false){
+// 					alert("不是完整的11位手机号或者正确的座机号！");
+// 					return
+// 				}
 				var url = this.url + '/employeeAction/addUpdateEmp';
 				 
 				this.$ajax({

@@ -1,7 +1,7 @@
 <!-- the page of department management -->
 <template>
 <div>
-	<div id="wraper" ref='wraper'>
+	<div class="wraper">
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">权限</h1>
 		</div>
@@ -17,6 +17,9 @@
 
 <script>
 	import Vue from 'vue'
+	import {
+		init
+	} from '@/../static/js/common.js'
     //import css
     import 'vue-beauty/package/style/vue-beauty.min.css'
     //import components
@@ -176,9 +179,7 @@
 		},
 		mounted () {
 			window.addEventListener('scroll',this.handleScroll,true);
-			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
-			let realH = (h-767)*2/3+580+'px';
-			this.$refs.wraper.style="height:"+realH;
+			init();
 		},
 		created() {
 		 this.getModule()

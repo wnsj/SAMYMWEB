@@ -5,7 +5,7 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">排班管理</h1>
 		</div>
-		<div class="row" style="margin-top: 40px;">
+		<div class="row" style="margin-top: 40px;padding-bottom:1.5%;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">时间</p><span class="sign-left">:</span>
@@ -23,9 +23,7 @@
           <emp ref="counselorChange" @employeeChange="counselorEmpChange"></emp>
 				</div>
 			</div>
-		</div>
-		<div class="row" style="padding-bottom:1.5%;">
-			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
+      <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
 			 v-on:click="showAddSchedule()">添加排班</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="checkEmp()">查询</button>
@@ -36,57 +34,34 @@
 					<table class="table table-bordered table-hover" id="datatable" style="width:2000px; position:relative;">
 						<thead>
 							<tr>
-								<th class="text-center">姓名</th>
-                <!--<template v-for="(value, key, index) in schedulingListTitle">-->
-                  <!--<template v-for='val,index in morningOrAfternoon'>-->
-                    <!--<th v-if="key=='schedulingDate1'" class="text-center">{{value}}{{val}}</th>-->
-                  <!--</template>-->
-                  <!--<template v-for='val,index in morningOrAfternoon'>-->
-                    <!--<th v-if="key=='schedulingDate2'" class="text-center">{{value}}{{val}}</th>-->
-                  <!--</template>-->
-                  <!--<template v-for='val,index in morningOrAfternoon'>-->
-                    <!--<th v-if="key=='schedulingDate3'" class="text-center">{{value}}{{val}}</th>-->
-                  <!--</template>-->
-                  <!--<template v-for='val,index in morningOrAfternoon'>-->
-                    <!--<th v-if="key=='schedulingDate4'" class="text-center">{{value}}{{val}}</th>-->
-                  <!--</template>-->
-                  <!--<template v-for='val,index in morningOrAfternoon'>-->
-                    <!--<th v-if="key=='schedulingDate5'" class="text-center">{{value}}{{val}}</th>-->
-                  <!--</template>-->
-                  <!--<template v-for='val,index in morningOrAfternoon'>-->
-                    <!--<th v-if="key=='schedulingDate6'" class="text-center">{{value}}{{val}}</th>-->
-                  <!--</template>-->
-                  <!--<template v-for='val,index in morningOrAfternoon'>-->
-                    <!--<th v-if="key=='schedulingDate7'" class="text-center">{{value}}{{val}}</th>-->
-                  <!--</template>-->
-                <!--</template>-->
-
-
+								<th class="text-center" rowspan="2" style="line-height:52px;">姓名</th>
                 <template v-for="(value,index) in schedulingListTitle">
-                  <template v-for='val,index in morningOrAfternoon'>
-                    <th class="text-center">{{value}}{{val}}</th>
-                  </template>
+                  <th class="text-center" colspan="2">{{value}}</th>
                 </template>
-								<!--<th class="text-center" v-if="has(2)">修改</th>-->
 							</tr>
+              <tr>
+                <template v-for='(val,index) in morningOrAfternoon'>
+                  <th class="text-center">{{val}}</th>
+                </template>
+              </tr>
 						</thead>
 						<tbody>
 							<tr v-for="(item,index) in schedulingList" :key="index" v-on:dblclick="showUpdateSchedule(item)">
 								<td class="text-center">{{item.name}}</td>
-								<td class="text-center">{{item.morning1=='0'?'歇班':'上班'}}</td>
-								<td class="text-center">{{item.afternoon1=='0'?'歇班':'上班'}}</td>
-								<td class="text-center">{{item.morning2=='0'?'歇班':'上班'}}</td>
-								<td class="text-center">{{item.afternoon2=='0'?'歇班':'上班'}}</td>
-								<td class="text-center">{{item.morning3=='0'?'歇班':'上班'}}</td>
-								<td class="text-center">{{item.afternoon3=='0'?'歇班':'上班'}}</td>
-								<td class="text-center">{{item.morning4=='0'?'歇班':'上班'}}</td>
-								<td class="text-center">{{item.afternoon4=='0'?'歇班':'上班'}}</td>
-								<td class="text-center">{{item.morning5=='0'?'歇班':'上班'}}</td>
-								<td class="text-center">{{item.afternoon5=='0'?'歇班':'上班'}}</td>
-								<td class="text-center">{{item.morning6=='0'?'歇班':'上班'}}</td>
-								<td class="text-center">{{item.afternoon6=='0'?'歇班':'上班'}}</td>
-								<td class="text-center">{{item.morning7=='0'?'歇班':'上班'}}</td>
-								<td class="text-center">{{item.afternoon7=='0'?'歇班':'上班'}}</td>
+								<td class="text-center" v-bind:class="{'restBg':!item.morning1}">{{item.morning1=='0'?'歇班':'上班'}}</td>
+								<td class="text-center" v-bind:class="{'restBg':!item.afternoon1}">{{item.afternoon1=='0'?'歇班':'上班'}}</td>
+								<td class="text-center" v-bind:class="{'restBg':!item.morning2}">{{item.morning2=='0'?'歇班':'上班'}}</td>
+								<td class="text-center" v-bind:class="{'restBg':!item.afternoon2}">{{item.afternoon2=='0'?'歇班':'上班'}}</td>
+								<td class="text-center" v-bind:class="{'restBg':!item.morning3}">{{item.morning3=='0'?'歇班':'上班'}}</td>
+								<td class="text-center" v-bind:class="{'restBg':!item.afternoon3}">{{item.afternoon3=='0'?'歇班':'上班'}}</td>
+								<td class="text-center" v-bind:class="{'restBg':!item.morning4}">{{item.morning4=='0'?'歇班':'上班'}}</td>
+								<td class="text-center" v-bind:class="{'restBg':!item.afternoon4}">{{item.afternoon4=='0'?'歇班':'上班'}}</td>
+								<td class="text-center" v-bind:class="{'restBg':!item.morning5}">{{item.morning5=='0'?'歇班':'上班'}}</td>
+								<td class="text-center" v-bind:class="{'restBg':!item.afternoon5}">{{item.afternoon5=='0'?'歇班':'上班'}}</td>
+								<td class="text-center" v-bind:class="{'restBg':!item.morning6}">{{item.morning6=='0'?'歇班':'上班'}}</td>
+								<td class="text-center" v-bind:class="{'restBg':!item.afternoon6}">{{item.afternoon6=='0'?'歇班':'上班'}}</td>
+								<td class="text-center" v-bind:class="{'restBg':!item.morning7}">{{item.morning7=='0'?'歇班':'上班'}}</td>
+								<td class="text-center" v-bind:class="{'restBg':!item.afternoon7}">{{item.afternoon7=='0'?'歇班':'上班'}}</td>
 								<!--<td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改</button></td>-->
 							</tr>
 						</tbody>
@@ -132,7 +107,7 @@
 				posId:'',
 				storeId:'',
         schedulingListTitle:[],
-        morningOrAfternoon:['上午','下午'],
+        morningOrAfternoon:['上午','下午','上午','下午','上午','下午','上午','下午','上午','下午','上午','下午','上午','下午'],
         thisDate:'',
         empId:'',
 
@@ -204,7 +179,6 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
 					if (res.retCode == '0000') {
             //this.getWeekStartAndEnd(this.addDate(res.retData[0].schedulingDate1));
 						//this.schedulingListTitle = res.retData[0];
@@ -270,6 +244,7 @@
         let alldate = this.getAll(weekStart,weekEnd);
         //let result = this.chinaDate(alldate);
         this.schedulingListTitle = alldate;
+        console.log(this.schedulingListTitle);
 
       },
       //日期转换
@@ -442,7 +417,13 @@
 		border: 1px solid #ddd;
 		font-weight: bold;
 	}
-
+  th{
+    background:#efefef;
+  }
+  .restBg{
+    background:#ccc;
+		color:#000;
+  }
 	@media print {
 		#fHeader {
 			display: none

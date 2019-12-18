@@ -55,7 +55,7 @@
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
 			 v-on:click="selectRule('1')">添加员工</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="checkEmp()">查询</button>
+			 v-on:click="checkEmp(1)">查询</button>
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
@@ -89,6 +89,11 @@
 						</tbody>
 					</table>
 				</div>
+        <!--分页插件-->
+        <div class="page">
+          <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
+          <paging ref="paging" @change="pageChange"></paging>
+        </div>
 			</div>
 			<div class="col-md-12 col-lg-12 posAb">
 				<p class="tips">* 双击单行，可对当前数据进行修改</p>
@@ -110,11 +115,13 @@
 	import emp from '../MP/SubEmp/SubEmp.vue'
 	import store from '../common/Store.vue'
 	import pos from '../common/Position.vue'
+  import Paging from '../common/paging'
 	export default {
 		components: {
 			emp,
 			pos,
 			store,
+      Paging,
 		},
 		data() {
 			return {
@@ -126,9 +133,20 @@
 				posId:'',
 				storeId:this.storeId(),
 				accountType:this.accountType(),
+
+        //分页需要的数据
+        pages: '', //总页数
+        current: 1, //当前页码
+        size: 10, //一页显示的数量
+        total: '', //数据的数量
 			};
 		},
 		methods: {
+      //子级传值到父级上来的动态拿去
+      pageChange: function(page) {
+        this.current = page
+        this.checkEmp(page);
+      },
 			//modify the cotent of department
 			
 			addEmp() {
@@ -160,7 +178,7 @@
 			},
 			//feedback from adding and modifying view
 			feedBack() {
-				this.checkEmp()
+				this.checkEmp(1)
 				$("#emp").modal('hide')
 			},
 			// check the adding and modifying rule of account
@@ -205,9 +223,9 @@
 				});
 			},
 			//check the list of department
-			checkEmp() {
+			checkEmp(page) {
 				console.log('checkEmp')
-				var url = this.url + '/employeeAction/queryEmp'
+				var url = this.url + '/employeeAction/queryEmp/'+page+'/'+this.size
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -231,7 +249,12 @@
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
-						this.employeeList = res.retData
+            this.pages=res.retData.pages //总页数
+            this.current=res.retData.current //当前页码
+            this.size=res.retData.size//一页显示的数量  必须是奇数
+            this.total=res.retData.total //数据的数量
+            this.$refs.paging.setParam(this.pages,this.current,this.total)
+						this.employeeList = res.retData.records
 					} else {
 						alert(res.retMsg)
 					}
@@ -272,7 +295,7 @@
 			this.$refs.showMainTab.style="max-height:"+tabH;
 		},
 		created() {
-			this.checkEmp()
+			this.checkEmp(1)
 		}
 	}
 </script>

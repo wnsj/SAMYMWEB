@@ -244,11 +244,11 @@
 				$("#cdContent").modal('hide')
 			},
 			consumptionFeedBack() {
-				this.checkMember()
+				this.checkMember(1)
 				$("#xfContent").modal('hide')
 			},
 			refundFeedBack() {
-				this.checkMember()
+				this.checkMember(1)
 				$("#tfContent").modal('hide')
 			},
 			//check the list of member

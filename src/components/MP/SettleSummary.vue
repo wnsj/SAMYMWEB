@@ -4,6 +4,14 @@
 				<h1 class="titleCss">消费汇总</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+          <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+        </div>
+        <div class="col-md-7 col-lg-7">
+          <store ref='store' @storeChange='storeChange'></store>
+        </div>
+      </div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span class="sign-left">:</span>
@@ -108,15 +116,18 @@
 	import dPicker from 'vue2-datepicker'
 	import SubConsume from '../MP/SubConsume/SubConsumeList.vue'
   import Paging from '../common/paging'
+  import store from '../common/Store.vue'
 	export default {
 		name: 'employee',
 		components: {
 			dPicker,
 			SubConsume,
       Paging,
+      store
 		},
 		data() {
 			return {
+        storeId:'',
 				memNum: '',
 				memName: '',
 				phone:'',
@@ -140,6 +151,13 @@
         this.current = page
         this.conditionCheck(page);
       },
+      storeChange(param){
+        if(this.isBlank(param)){
+          this.storeId=""
+        }else{
+          this.storeId=param.storeId
+        }
+      },
 			conditionCheck: function(page) {
 				
 				if(!this.isBlank(this.begCreateDate)){
@@ -151,7 +169,7 @@
 				if(this.isBlank(page)){
 				  page=1
         }
-				var url = this.url + '/accountRecordAction/consumptionSummary/'+page+'/'+this.size
+				var url = this.url + '/accountRecordAction/consumptionSummary'
         console.log("page="+page)
 				this.$ajax({
 					method: 'POST',
@@ -161,6 +179,7 @@
 						'Access-Token': this.accessToken
 					},
 					data:{
+					  storeId:this.storeId,
 						memName:this.memName,
 						memNum:this.memNum,
 						phone:this.phone,
@@ -171,6 +190,8 @@
 						modelGrade:'2',
 						modelType:'',
 						operateType:'',
+            page:page.toString(),
+            pageSize:this.size
 					},
 					dataType: 'json',
 				}).then((response) => {

@@ -254,7 +254,7 @@
 			//check the list of member
 			checkMember(page) {
 				console.log('checkMember')
-				var url = this.url + '/cashAction/queryCash/'+page+'/'+this.size
+				var url = this.url + '/cashAction/queryCash'
 			
 				this.$ajax({
 					method: 'POST',
@@ -270,6 +270,8 @@
 						endDate: this.endDate,
 						storeId: this.storeId,
 						balanceState: this.balanceState,
+            page:page.toString(),
+            pageSize:this.size
 					},
 					dataType: 'json',
 				}).then((response) => {

@@ -15,6 +15,12 @@ function boxheight() {
 	//DIV高度为浏览器窗口高度
 	document.getElementById("Odiv").style.height = winHeight + "px";
 	document.getElementById("Adiv").style.height = winHeight + "px";
+	
+	var aWraper = document.getElementsByClassName("wraper");
+	var len = aWraper.length;
+	for (var i=0;i<len;i++){
+		aWraper[i].style.height = winHeight*590/767 + "px";
+	} 
 }
 
 function setClick() {
@@ -48,7 +54,9 @@ function setClick() {
 }
 
 
+
 exports.init = function() {
+
 	$(function() {
 		boxheight(); //执行函数
 		window.onresize = boxheight; //窗口或框架被调整大小时执行

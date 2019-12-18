@@ -1,6 +1,7 @@
 <!-- the page of department management -->
 <template>
-	<div id="wraper" ref='wraper'>
+
+	<div class="wraper">
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">new权限管理</h1>
 		</div>
@@ -23,7 +24,12 @@
 
 
 <script>
+
 	import emp from '../common/Employee.vue'
+	import Vue from 'vue'
+	import {
+		init
+	} from '@/../static/js/common.js'
 	export default {
 		components: {
 			emp,
@@ -144,11 +150,10 @@
 			},
 
 		},
-		mounted() {
-			window.addEventListener('scroll', this.handleScroll, true);
-			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			let realH = (h - 767) * 2 / 3 + 580 + 'px';
-			this.$refs.wraper.style = "height:" + realH;
+
+		mounted () {
+			window.addEventListener('scroll',this.handleScroll,true);
+			init();
 		},
 		created() {
 			this.getModule()

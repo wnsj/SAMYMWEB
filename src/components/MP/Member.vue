@@ -1,7 +1,7 @@
 <!-- the page of department management -->
 <template>
 
-	<div id="wraper" ref='wraper'>
+	<div class="wraper">
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">会员管理</h1>
 		</div>
@@ -44,7 +44,7 @@
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
-				<div class="table-responsive pre-scrollable" ref='showMainTab'>
+				<div class="table-responsive pre-scrollable">
 					<table class="table table-bordered table-hover" id="datatable" >
 						<thead class="datathead">
 							<tr>
@@ -104,7 +104,10 @@
 
 	import SubMem from '../MP/SubMem/SubMem.vue'
 	import Store from '../common/Store.vue'
-  import Paging from '../common/paging'
+	import Paging from '../common/paging'
+	import {
+		init
+	} from '@/../static/js/common.js'
 	export default {
 		components: {
 			SubMem,
@@ -161,7 +164,7 @@
 			//check the list of member
 			checkMember(page) {
 				console.log('checkMember')
-				var url = this.url + '/memberAction/queryVagueMember'+'/'+page+'/'+this.size
+				var url = this.url + '/memberAction/queryVagueMember'
 				
 				this.$ajax({
 					method: 'POST',
@@ -176,6 +179,8 @@
 						memName: this.memName,
 						isuse: this.isuse,
 						phone:this.phone,
+            page:page.toString(),
+            pageSize:this.size
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -253,11 +258,7 @@
 		},
 		mounted () {
 			window.addEventListener('scroll',this.handleScroll,true);
-			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
-			let realH = (h-767)*2/3+580+'px';
-			let tabH = (h-767)/3+380+'px';
-			this.$refs.wraper.style="height:"+realH;
-			this.$refs.showMainTab.style="max-height:"+tabH;
+			init();
 		},
 		created() {
 			 this.checkMember(1);
@@ -291,18 +292,5 @@
 	}
 	@media print {
 		#fHeader{display:none}
-	}
-  	#wraper{
-		position:relative;
-		box-shadow: -5px 0 5px #ccc, 5px 0 5px #ccc, 0 -5px 5px #ccc, 0 5px 5px #ccc;
-		width:95%; 
-		background:#fff; 
-		margin:30px auto;
-		padding:10px 10px 20px 10px;
-	}
-	.posAb{
-		position:absolute;
-		bottom:20px;
-		left:0;
 	}
 </style>

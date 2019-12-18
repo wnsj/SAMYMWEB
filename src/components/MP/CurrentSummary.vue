@@ -1,5 +1,5 @@
 <template>
-	<div id="wraper" ref='wraper'> 
+	<div class="wraper"> 
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">月入汇总</h1>
 		</div>
@@ -43,7 +43,7 @@
 		<div>
 			<div class="col-md-12 col-lg-12">
 				<nobr class="widthmax">
-					<div class="table-responsive pre-scrollable"  ref="showMainTab">
+					<div class="table-responsive pre-scrollable">
 						<table class="table table-bordered table-hover user-table" id="datatable">
 							<thead class="datathead">
 								<tr>
@@ -98,6 +98,9 @@
 	import dPicker from 'vue2-datepicker'
 	import memSum from '../MP/SubMemSum/SubMemSum'
 	import Store from '../common/Store.vue'
+	import {
+		init
+	} from '@/../static/js/common.js'
 	export default {
 		name: 'employee',
 		components: {
@@ -190,12 +193,7 @@
 			},
 		},
 		mounted () {
-			let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
-			let realH = (h-767)*2/3+580+'px';
-			let tabH = (h-767)/3+400+'px';
-			this.$refs.wraper.style="height:"+realH;
-			this.$refs.showMainTab.style="max-height:"+tabH;
-			
+			init();
 		},
 		created() {
 			this.conditionCheck()

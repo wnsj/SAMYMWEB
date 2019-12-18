@@ -356,7 +356,7 @@
 
 		},
 		created() {
-
+      this.checkMember(1)
 		}
 	}
 </script>

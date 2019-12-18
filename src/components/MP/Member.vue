@@ -161,7 +161,7 @@
 			//check the list of member
 			checkMember(page) {
 				console.log('checkMember')
-				var url = this.url + '/memberAction/queryVagueMember'+'/'+page+'/'+this.size
+				var url = this.url + '/memberAction/queryVagueMember'
 				
 				this.$ajax({
 					method: 'POST',
@@ -176,6 +176,8 @@
 						memName: this.memName,
 						isuse: this.isuse,
 						phone:this.phone,
+            page:page.toString(),
+            pageSize:this.size
 					},
 					dataType: 'json',
 				}).then((response) => {

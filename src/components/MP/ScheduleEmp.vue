@@ -133,7 +133,7 @@
                 //分页需要的数据
                 pages: '', //总页数
                 current: 1, //当前页码
-                pageSize: '70', //一页显示的数量
+                pageSize: 10*7, //一页显示的数量
                 total: '', //数据的数量
             };
         },
@@ -187,6 +187,8 @@
             //check the list of department
             checkEmp(page) {
                 console.log("时间为"+this.moment(this.thisDate,'YYYY-MM-DD'));
+                console.log("this.size:"+this.size);
+                console.group("this.current:"+this.current);
                 if(!this.isBlank(this.thisDate)){
                     this.schedulingListTitle=this.getWeekDay(this.moment(this.thisDate,'YYYY-MM-DD'));
                     this.thisDate=this.moment(this.thisDate,'YYYY-MM-DD');

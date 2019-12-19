@@ -171,7 +171,7 @@
 				//分页需要的数据
 				pages: '', //总页数
 				current: 1, //当前页码
-				size: 10, //一页显示的数量
+                pageSize: 10, //一页显示的数量
 				total: '', //数据的数量
 			};
 		},
@@ -277,7 +277,7 @@
 						storeId: this.storeId,
 						balanceState: this.balanceState,
 						page: page.toString(),
-						pageSize: this.size
+						pageSize: this.pageSize
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -286,7 +286,7 @@
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
 						this.current = res.retData.current //当前页码
-						this.size = res.retData.size //一页显示的数量  必须是奇数
+						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.$refs.paging.setParam(this.pages, this.current, this.total)
 						this.cashList = res.retData.records

@@ -42,12 +42,12 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix"> 
+					<!-- <div class="col-md-6 form-group clearfix"> 
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">推荐人</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref='emp' @employeeChange='empChange'></emp>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">实卡用户</label><span class="sign-left">:</span>
 						<div class="col-md-8" style="text-align:left; line-height:34px;">

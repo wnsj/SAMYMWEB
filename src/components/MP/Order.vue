@@ -312,7 +312,7 @@
 				if (!this.isBlank(this.endAppDate)) {
 					this.endAppDate = this.moment(this.endAppDate, 'YYYY-MM-DD 00:00:00.000')
 				}
-
+				
 				if(this.accountType!=1){
 					this.storeId = this.storeId()
 				}else{

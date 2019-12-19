@@ -155,7 +155,10 @@ Vue.prototype.accountType = function() {
 }
 //商铺ID
 Vue.prototype.storeId = function() {
+	if(!constant.isBlank(constant.storeId()))
   return constant.storeId();
+	else
+	return '';
 }
 
 /*

@@ -220,7 +220,7 @@
                         this.$refs.paging.setParam(this.pages, this.current, this.total)
                         this.schedulingList=res.retData.records;
                     } else {
-                        alert(res.retMsg)
+                        alert(res.retMsg);
                     }
 
                 }).catch((error) => {

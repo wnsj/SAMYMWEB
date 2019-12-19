@@ -106,13 +106,13 @@
                             </dd>
                         </dl>
 
-                        <dl>
+                        <!-- <dl>
                             <dt v-on:click="selectRule('newtree')" v-bind:class="{'li-active':onString == 'newtree'}">
                                 <i class="fa fa-folder-open" aria-hidden="true">
                                     new权限
                                 </i>
                             </dt>
-                        </dl>
+                        </dl> -->
                     </div>
                 </div>
                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 embed-responsive embed-responsive-16by9" style="overflow: inherit; background-color:">

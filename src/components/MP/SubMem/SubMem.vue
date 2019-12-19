@@ -42,12 +42,12 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix"> 
+					<!-- <div class="col-md-6 form-group clearfix"> 
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">推荐人</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref='emp' @employeeChange='empChange'></emp>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">实卡用户</label><span class="sign-left">:</span>
 						<div class="col-md-8" style="text-align:left; line-height:34px;">
@@ -64,9 +64,9 @@
 					<div class="col-md-12 form-group clearfix">
 						
 						<p class="tips">* 注意：</p>
-						<p class="tips">1.未从微信公众号注册的会员，将不能使用微信消息模板推送，请操作员悉知并确认操作无误。</p>
-						<p class="tips">2.若客户之前已有实体会员卡，请勾选“是”，并将用户卡内余额充值到系统中。</p>
-						<p class="tips">  此项操作不可逆，若选“否”，客户将只能消耗实体卡，不能将卡内余额转入微信会员卡。请谨慎操作。</p>
+						<p class="tips">1.未从微信公众号注册的会员，将不能推送微信消息，请操作员悉知并确认操作无误。</p>
+						<p class="tips">2.若客户之前已有实体会员卡，请勾选“是”，并将用户已经购买的课程通过“课程购买”进行购买。</p>
+						<p class="tips">  此项操作不可逆，若选“否”，客户可以正常上课，但是将会影响提成数据。请谨慎操作。</p>
 					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
@@ -176,7 +176,7 @@
 						url = this.url + '/memberAction/addMember'
 						break;
 					case "修改":
-						url = this.url + '/memberAction//updateMember'
+						url = this.url + '/memberAction/updateMember'
 						break;
 				}
 				

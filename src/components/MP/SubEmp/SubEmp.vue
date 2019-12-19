@@ -14,18 +14,18 @@
 							<input type="text" class="form-control" v-model="employee.empName" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix" v-show="accountType==true">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">门店</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<store ref="store" @storeChange='storeChange'></store>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<!-- <div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="employee.phone" placeholder="">
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">年龄</label><span class="sign-left">:</span>
 						<div class="col-md-8">
@@ -51,9 +51,9 @@
 						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">岗位级别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="employee.level">
-								<option value="0">资深级</option>
-								<option value="1">专家级</option>
-								<option value="2">高级专家级</option>
+								<option value="1">资深级</option>
+								<option value="2">专家级</option>
+								<option value="3">高级专家级</option>
 							</select>
 						</div>
 					</div>
@@ -109,7 +109,8 @@
 					isuse: '1',
 					leaderId:'',
 					birthday:'',
-					storeId:'',
+					storeId:this.storeId(),
+					accountType:this.accountType(),
 					level:'0',
 				},
 				title: '新增',
@@ -129,19 +130,19 @@
 						sex: '1',
 						isuse: '1',
 						leaderId:'',
-						storeId:'0',
+						storeId:this.storeId(),
 						level:'0',
 					}
 					this.$refs.pos.setPosId(this.employee.posId)
 					this.$refs.emp.setPosId(this.employee.posId)
-					this.$refs.store.setStore(this.employee.storeId)
+					// this.$refs.store.setStore(this.employee.storeId)
 				} else if (param == 'modify') {
 					console.log('Initialization employee’s content, which modifies employee')
 					this.title='修改'
 					Object.assign(this.employee,employee)
 					this.$refs.pos.setPosId(this.employee.posId)
 					this.$refs.emp.setPosId(this.employee.posId)
-					this.$refs.store.setStore(this.employee.storeId)
+					// this.$refs.store.setStore(this.employee.storeId)
 				}
 			},
 			//date formatting 
@@ -202,13 +203,13 @@
 					alert("店铺不能为空")
 					return
 				}
-				if(this.isBlank(this.employee.phone)){
-					alert("手机号不能为空")
-					return
-				}else if(reg.test(this.employee.phone)==false){
-					alert("不是完整的11位手机号或者正确的座机号！");
-					return
-				}
+// 				if(this.isBlank(this.employee.phone)){
+// 					alert("手机号不能为空")
+// 					return
+// 				}else if(reg.test(this.employee.phone)==false){
+// 					alert("不是完整的11位手机号或者正确的座机号！");
+// 					return
+// 				}
 				var url = this.url + '/employeeAction/addUpdateEmp';
 				 
 				this.$ajax({

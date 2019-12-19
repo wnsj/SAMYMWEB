@@ -7,12 +7,14 @@ import axios from 'axios'
 import moment from 'moment'
 import Cookies from 'js-cookie'
 import constant from '../src/assets/js/constant'
+import vueBeauty from 'vue-beauty'
+    
 // import utilDate from '../src/assets/js/utilDate'
 import {
   exportTableToExcel
 } from 'vendor/Export2Excel.js'
 
-
+Vue.use(vueBeauty)
 Vue.prototype.$ajax = axios
 Vue.prototype.url = process.env.API_HOST
 
@@ -49,7 +51,8 @@ router.beforeEach((to, from, next) => {
 				next('/login');
 			}
 			let itemRuleList=JSON.parse(jsonString);
-			let hasRule = false;
+      let hasRule = false;
+      //let hasRule = true;
 			for (var i=0; i < itemRuleList.length;i++){
 				let item = itemRuleList[i];
 				if(to.path == item.urlName){
@@ -62,7 +65,7 @@ router.beforeEach((to, from, next) => {
 			if(hasRule==true){
 				next()
 			}else{
-				next('/MainPage')
+				next(from.path)
 				alert("您还没有此模块权限，请联系管理员添加权限")
 			}
     }
@@ -145,9 +148,17 @@ Vue.prototype.accountName = function() {
 Vue.prototype.accountId = function() {
   return constant.accountId();
 }
+//账户的类型
+Vue.prototype.accountType = function() {
+	if(!constant.isBlank(constant.accountType()) && constant.accountType()==1) return true;
+	else return false;
+}
 //商铺ID
 Vue.prototype.storeId = function() {
+	if(!constant.isBlank(constant.storeId()))
   return constant.storeId();
+	else
+	return '';
 }
 
 /*

@@ -221,6 +221,7 @@
 				this.$refs.counselorEmp.setPosName("咨询师")
 				this.$refs.counselorEmp.setEmp("")
 				this.$refs.emp.setPosName("咨询顾问")
+				this.$refs.emp.setEmp("")
 				this.$refs.project.setEmpId("0")
 
 			},
@@ -330,6 +331,7 @@
 						});
 						this.jumpLeft(2);
 						$("#addCustom").modal("hide")
+						this.$emit('func2','SettleSummary')
 					} else {
 						alert(res.retMsg)
 					}

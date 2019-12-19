@@ -1,26 +1,41 @@
 <template>
-	<div> 
+	<div class="wraper"> 
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">月入汇总</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-7 col-lg-7">
 					<Store ref="store" @storeChange="storeChange"></Store>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-4 col-lg-4 text-right" style="padding: 0; line-height: 34px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">月份</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-7 col-lg-7">
 					<dPicker style="width:100%" format="YYYY-MM" v-model="createDate"></dPicker>
 				</div>
 			</div>
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px; padding-bottom:1.5%;">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right" style="padding: 0; line-height: 34px;">
+            <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">类型</p><span class="sign-left">:</span>
+        </div>  
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+          <select class="form-control" v-model="type">
+            <option value="">--未选择--</option>
+            <option value="1">定金收入</option>
+            <option value="2">定金退费</option>
+            <option value="3">充值</option>
+            <option value="4">流水消费</option>
+            <option value="5">项目退费</option>
+          </select>
+        </div>
+      </div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-right:30px; padding-bottom:1.5%;">
 				<button type="button" class="btn btn-primary pull-right m_r_10"  data-toggle="modal"
 				 v-on:click="conditionCheck()">查询</button>
 			</div>
@@ -28,7 +43,7 @@
 		<div>
 			<div class="col-md-12 col-lg-12">
 				<nobr class="widthmax">
-					<div class="table-responsive pre-scrollable" style=" max-height:464px">
+					<div class="table-responsive pre-scrollable">
 						<table class="table table-bordered table-hover user-table" id="datatable">
 							<thead class="datathead">
 								<tr>
@@ -59,7 +74,7 @@
 								</tr>
 								<tr>
 									<td>月总收入</td>
-									<td>{{allMoney}} 元</td>
+									<td>{{symbols}}{{allMoney}} 元</td>
 								</tr>
 							</tbody>
 						</table>
@@ -83,6 +98,9 @@
 	import dPicker from 'vue2-datepicker'
 	import memSum from '../MP/SubMemSum/SubMemSum'
 	import Store from '../common/Store.vue'
+	import {
+		init
+	} from '@/../static/js/common.js'
 	export default {
 		name: 'employee',
 		components: {
@@ -93,12 +111,16 @@
 		data() {
 			return {
 				earningList: [],
-				storeId: '',
+				storeId: this.storeId(),
+				accountType:this.accountType(),
 				earningTotle:{
 					BALANCE:'',
 				},
 				createDate:'',
         allMoney:'',
+
+        type:'',//类型
+        symbols:''//用来判断总额是“+”还是“-”
 			}
 		},
 
@@ -143,6 +165,7 @@
 						createDate:this.createDate,
 						
 						accountId: this.accountId(),
+            type:this.type
 						// modelGrade:'2',
 						// modelType:'',
 						// operateType:'',
@@ -159,7 +182,7 @@
 						
 						if(res.retData.gross != null){
 							this.allMoney = res.retData.gross.allMoney
-							console.log("剩余："+this.earningTotle.BALANCE)
+              this.symbols=this.type=='2'||this.type=='5'?"-":"+"
 						}else{
               this.allMoney=''
 						}
@@ -168,6 +191,9 @@
 					console.log('月入账目查询失败')
 				});
 			},
+		},
+		mounted () {
+			init();
 		},
 		created() {
 			this.conditionCheck()

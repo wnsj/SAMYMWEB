@@ -3,7 +3,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h4 id="myModalLabel">提成列表</h4>
+			<h3 id="myModalLabel">提成列表</h3>
 		</div>
 		<div class="tableContent">
 			<nobr class="widthmax">
@@ -17,7 +17,7 @@
 							<tr>
 								<th class="text-center">会员卡号</th>
 								<th class="text-center">姓名</th>
-								<th class="text-center">提成金额(扣款)</th>
+								<th class="text-center">提成金额</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -243,6 +243,7 @@
 </script>
 
 <style>
+	h3{font-weight: 800 !important; font-size: 30px;}
 	.pd0{ padding:0;}
 	.mb0{ margin-bottom:0;}
 	.mt0{ margin-top:0;}

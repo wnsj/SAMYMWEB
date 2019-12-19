@@ -55,6 +55,17 @@ constant.accountId = function() {
 	// console.log('accountId:'+accountId)
 	return accountId
 }
+//账户的类型
+constant.accountType = function() {
+	//未传值
+	var jsonString = Cookies.get("accountData");
+	//未登录
+	if (this.isBlank(jsonString)) return false;
+	var accountData = JSON.parse(jsonString);
+	var accountType = accountData.accountType;
+	console.log('accountType:'+accountType)
+	return accountType
+}
 //账户的姓名
 constant.storeId = function() {
 	//未传值

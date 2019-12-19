@@ -133,7 +133,7 @@
                 //分页需要的数据
                 pages: '', //总页数
                 current: 1, //当前页码
-                size: 10*7, //一页显示的数量
+                pageSize: 2*7, //一页显示的数量
                 total: '', //数据的数量
             };
         },
@@ -187,6 +187,8 @@
             //check the list of department
             checkEmp(page) {
                 console.log("时间为"+this.moment(this.thisDate,'YYYY-MM-DD'));
+                console.log("this.size:"+this.size);
+                console.group("this.current:"+this.current);
                 if(!this.isBlank(this.thisDate)){
                     this.schedulingListTitle=this.getWeekDay(this.moment(this.thisDate,'YYYY-MM-DD'));
                     this.thisDate=this.moment(this.thisDate,'YYYY-MM-DD');
@@ -205,7 +207,7 @@
                         empId:this.empId,
                         storeId:this.storeId,
                         page: page.toString(),
-                        pageSize: this.size
+                        pageSize: this.pageSize
                     },
                     dataType: 'json',
                 }).then((response) => {
@@ -215,7 +217,7 @@
                         //this.schedulingListTitle = res.retData[0];
                         this.pages = res.retData.pages //总页数
                         this.current = res.retData.current //当前页码
-                        this.size = res.retData.size*7 //一页显示的数量  必须是奇数
+                        this.pageSize = res.retData.size*7 //一页显示的数量  必须是奇数
                         this.total = res.retData.total //数据的数量
                         this.$refs.paging.setParam(this.pages, this.current, this.total)
                         this.schedulingList=res.retData.records;

@@ -129,12 +129,10 @@
                 morningOrAfternoon:['上午','下午','上午','下午','上午','下午','上午','下午','上午','下午','上午','下午','上午','下午'],
                 thisDate:'',
                 empId:'',
-
-                //分页需要的数据
-                pages: '', //总页数
-                current: 1, //当前页码
-                size: 10*7, //一页显示的数量
-                total: '', //数据的数量
+                pages: '', 
+                current: 1, 
+                size: 7*10, 
+                total: '', 
             };
         },
         methods: {
@@ -187,6 +185,7 @@
             //check the list of department
             checkEmp(page) {
                 console.log("时间为"+this.moment(this.thisDate,'YYYY-MM-DD'));
+                console.log(this.size1);
                 if(!this.isBlank(this.thisDate)){
                     this.schedulingListTitle=this.getWeekDay(this.moment(this.thisDate,'YYYY-MM-DD'));
                     this.thisDate=this.moment(this.thisDate,'YYYY-MM-DD');

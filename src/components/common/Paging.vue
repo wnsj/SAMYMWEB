@@ -66,16 +66,18 @@
         this.$emit('change',  this.cur)
       },
       setParam: function(all,cur,dataNum) {
-				if(this.isBlank(all)){
-					this.all='0'
-				}else{
-					this.all=parseInt(all)
-				}
-        if(this.isBlank(cur)){
-        	this.cur='0'
-        }else{
-        	this.cur=parseInt(cur)
-        }
+// 				if(this.isBlank(all)){
+// 					this.all='0'
+// 				}else{
+// 					this.all=parseInt(all)
+// 				}
+//         if(this.isBlank(cur)){
+//         	this.cur='0'
+//         }else{
+//         	this.cur=parseInt(cur)
+//         }
+				this.all=parseInt(all)
+				this.cur=parseInt(cur)
         this.dataNum=parseInt(dataNum)
       },
     },

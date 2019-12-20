@@ -198,6 +198,7 @@
 				isShow: true,
 				consumeReceivable: '',
 				isSelect: true,
+				sameProject:false,
                 //proList:[],//有剩余的课程信息
 			};
 		},
@@ -244,7 +245,8 @@
 						piId: '',
 
 					}
-                //this.proList=[]//购买的课程初始化为空
+                
+				this.sameProject=false
                 this.counselorList=[]
 				this.isShow=true
 				this.isSelect=true
@@ -290,6 +292,7 @@
 							var project = this.counselorList[0].proList[i]
 							if (this.consume.proId == project.proId) {
 								this.isShow = false
+								this.sameProject=true
 								this.consume.piId = project.piId
 								this.consume.consumedCount = project.consumCount
 								this.$refs.emp.setEmp(project.empId)
@@ -343,11 +346,17 @@
 					alert("维护人不能为空")
 					return
 				}
-				if(this.isBlank(this.consume.consumCount) 
-				|| this.consume.consumCount > this.consume.actualCount-this.consume.consumedCount || this.consume.consumCount<=0){
-					alert("此次消费不能为空，且不能大于剩余课程次数,也必须大于0")
-					return
+				console.log('sameProject:'+this.sameProject)
+				if(this.sameProject==true){
+					if(this.isBlank(this.consume.consumCount) 
+					|| this.consume.consumCount > this.consume.actualCount-this.consume.consumedCount || this.consume.consumCount<=0){
+						alert("此次消费不能为空，且不能大于剩余课程次数,也必须大于0")
+						return
+					}
+				}else{
+					this.consume.consumCount=this.consume.actualCount
 				}
+				
 				
 				
 				

@@ -123,7 +123,7 @@
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">已消费课时</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
-						<input type="text" class="form-control" v-model="consume.consumedCount">
+						<input type="text" class="form-control" v-model="consume.consumedCount" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
@@ -344,8 +344,8 @@
 					return
 				}
 				if(this.isBlank(this.consume.consumCount) 
-				|| this.consume.consumCount > this.consume.actualCount-this.consume.consumedCount){
-					alert("此次消费不能为空，且不能大于剩余课程次数")
+				|| this.consume.consumCount > this.consume.actualCount-this.consume.consumedCount || this.consume.consumCount<=0){
+					alert("此次消费不能为空，且不能大于剩余课程次数,也必须大于0")
 					return
 				}
 				
@@ -365,12 +365,14 @@
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
+						
 						this.$router.push({
 							name: 'SettleSummary',
 						});
 						this.jumpLeft(2);
 						$("#addCustom").modal("hide")
 						this.$emit('func2','SettleSummary')
+						alert(res.retMsg)
 					} else {
 						alert(res.retMsg)
 					}
@@ -417,15 +419,20 @@
 							this.consume.memNum = this.member.memNum
 							this.consume.memName = this.member.memName
 							this.consume.phone = this.member.phone
+						}else{
+							this.member = {
+								memNum: '', //会员号
+								memName: '', //会员名
+								phone: '', //手机
+								balance: '',
+								counselorEmpId: '',
+							}
+							this.$refs.counselorEmp.setEmp('0')
 						}
 						if (this.counselorList.length > 0) {
 							console.log("有未完成的项目")
 							var counselorEmpId = this.counselorList[0].counselor
 							this.$refs.counselorEmp.setEmp(counselorEmpId)
-                            // if(this.counselorList[0].proList.length>0){
-                            //     this.proList=this.counselorList[0].proList
-                            // }
-
 						}
 					}
 

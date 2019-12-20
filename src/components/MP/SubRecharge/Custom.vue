@@ -99,13 +99,6 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">消费课时</label><span
-					 class="sign-left">:</span>
-					<div class="col-md-7">
-						<input type="text" class="form-control" v-model="consume.actualCount" placeholder="0.5小时=1">
-					</div>
-				</div>
-				<div class="col-md-6 form-group clearfix">
 					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">维护人</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
@@ -130,14 +123,14 @@
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">已消费课时</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
-						<input type="text" class="form-control" v-model="consume.consumCount">
+						<input type="text" class="form-control" v-model="consume.consumedCount">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">此次消费课时</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
-						<input type="text" class="form-control" v-model="consume.currentCount">
+						<input type="text" class="form-control" v-model="consume.consumCount">
 					</div>
 				</div>
 			</div>
@@ -188,7 +181,7 @@
 					disPrice: '', //折后单价
 					totalCount: '', //总次数
 					actualCount: '', //实际次数
-					currentCount:'',//当前消费次数
+					consumedCount:'',//已经消费次数
 					giveCount: '', //赠送次数
 					giveProId: '', //赠送项目
 					giveMoney: '', //赠送金额
@@ -231,6 +224,7 @@
 						disPrice: '', //折后单价
 						totalCount: '0', //总次数
 						actualCount: '0', //实际次数
+						consumedCount:'',//已经消费次数
 						giveCount: '0', //赠送次数
 						giveProId: '', //赠送项目
 						giveMoney: '0.0', //赠送金额
@@ -297,7 +291,7 @@
 							if (this.consume.proId == project.proId) {
 								this.isShow = false
 								this.consume.piId = project.piId
-								this.consume.consumCount = project.consumCount + 1
+								this.consume.consumedCount = project.consumCount
 								this.$refs.emp.setEmp(project.empId)
 								isSame = 1
 								break;
@@ -349,8 +343,8 @@
 					alert("维护人不能为空")
 					return
 				}
-				if(this.isBlank(this.consume.currentCount) 
-				|| this.consume.currentCount > this.consume.actualCount-this.consume.consumCount){
+				if(this.isBlank(this.consume.consumCount) 
+				|| this.consume.consumCount > this.consume.actualCount-this.consume.consumedCount){
 					alert("此次消费不能为空，且不能大于剩余课程次数")
 					return
 				}

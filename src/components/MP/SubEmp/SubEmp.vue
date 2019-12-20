@@ -111,7 +111,7 @@
 					birthday:'',
 					storeId:this.storeId(),
 					accountType:this.accountType(),
-					level:'0',
+					level:'1',
 				},
 				title: '新增',
 			};
@@ -131,7 +131,7 @@
 						isuse: '1',
 						leaderId:'',
 						storeId:this.storeId(),
-						level:'0',
+						level:'1',
 					}
 					this.$refs.pos.setPosId(this.employee.posId)
 					this.$refs.emp.setPosId(this.employee.posId)
@@ -170,7 +170,7 @@
 			},
 			//feedback department information
 			positionChange: function(param) {
-				this.employee.level='0'
+				this.employee.level='1'
 				if (this.isBlank(param)) {
 					this.employee.posId = ""
 				} else {

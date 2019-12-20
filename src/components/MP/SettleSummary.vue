@@ -71,6 +71,7 @@
 									<th class="text-center">课时(小时)</th>
 									<th class="text-center">折扣(%)</th>
 									<th class="text-center">消费金额</th>
+									<th class="text-center">消费时间</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -79,15 +80,21 @@
 									<td>{{item2.memName}}</td>
 									<td>{{item2.phone}}</td>
 									<td>{{item2.proName}}</td>
-									<td>{{item2.disPrice}}</td>
-									<td>{{item2.actualCount}}</td>
+									<td>{{item2.price}}</td>
+									<td>{{item2.consumCount}}</td>
 									<td>{{item2.discount}}</td>
-									<td>{{item2.realCross}}</td>
+									<td>{{item2.zsum}}</td>
+									<td>{{item2.creatDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3">
+                            <p class="tips" style="font-size: 20px">总课时数：{{consumCountTotal}}</p>
+                            <p class="tips" style="font-size: 20px">总消费额：{{sumTotal}}</p>
+                        </div>
+                    </div>
 					<!--分页插件-->
 					<div class="page">
 						<!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
@@ -146,6 +153,9 @@
 				current: 1, //当前页码
                 pageSize: 10, //一页显示的数量
 				total: '', //数据的数量
+
+                sumTotal:'0',//消费的总金额
+                consumCountTotal:'0'//消费的总课时
 			}
 		},
 
@@ -203,13 +213,14 @@
 					console.log(res);
 					if (res.retCode == '0000') {
 
-						this.pages = res.retData.pages //总页数
-						this.current = res.retData.current //当前页码
-						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
-						this.total = res.retData.total //数据的数量
+						this.pages = res.retData.pageRows.pages //总页数
+						this.current = res.retData.pageRows.current //当前页码
+						this.pageSize = res.retData.pageRows.size //一页显示的数量  必须是奇数
+						this.total = res.retData.pageRows.total //数据的数量
 						this.$refs.paging.setParam(this.pages, this.current, this.total)
-						this.consumeList = res.retData.records;
-
+						this.consumeList = res.retData.pageRows.records;
+                        this.consumCountTotal=res.retData.poolSum.consumCountTotal
+                        this.sumTotal=res.retData.poolSum.sumTotal
 					}
 				}).catch((error) => {
 					console.log('请求失败处理')

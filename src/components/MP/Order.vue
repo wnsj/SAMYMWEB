@@ -20,17 +20,7 @@
 					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
 			</div>
-			<!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">访问类型</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-					<select class="form-control" v-model="visitType">
-						<option value="0">初访</option>
-						<option value="1">再访</option>
-					</select>
-				</div>
-			</div> -->
+			
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否到店</p><span class="sign-left">:</span>
@@ -83,6 +73,14 @@
 				</div>
 				<div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
 					<dPicker style="width:100%" v-model="endAppDate"></dPicker>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true" style=" margin-top: 15px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-7 col-lg-7">
+					<store ref='store' @storeChange='storeChange'></store>
 				</div>
 			</div>
 		</div>
@@ -186,6 +184,7 @@
 
 
 <script>
+	import store from '../common/Store.vue'
 	import SubOrder from '../MP/SubOrder/SubOrder.vue'
 	import dPicker from 'vue2-datepicker'
 	import Paging from '../common/paging'
@@ -196,7 +195,9 @@
 		components: {
 			SubOrder,
 			dPicker,
-			Paging
+			Paging,
+			store,
+			
 		},
 		data() {
 			return {
@@ -238,6 +239,13 @@
 				} else {
 					this.$refs.order.initData('modify', item);
 					$("#orderContent").modal('show');
+				}
+			},
+			storeChange(param){
+				if(this.isBlank(param)){
+					this.storeId=""
+				}else{
+					this.storeId=param.storeId
 				}
 			},
 			//feedback from adding and modifying view
@@ -313,11 +321,11 @@
 					this.endAppDate = this.moment(this.endAppDate, 'YYYY-MM-DD 00:00:00.000')
 				}
 				
-				if(this.accountType!=1){
-					this.storeId = this.storeId()
-				}else{
-					this.storeId = ""
-				}
+// 				if(this.accountType!=1){
+// 					this.storeId = this.storeId()
+// 				}else{
+// 					this.storeId = ""
+// 				}
 
 				this.$ajax({
 					method: 'POST',

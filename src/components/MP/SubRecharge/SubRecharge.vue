@@ -476,27 +476,14 @@
 								balance: '',
 								counselorEmpId: '',
 							}
+							this.$refs.counselorEmp.setEmp("")
 						}
 						if (this.counselorList.length > 0) {
 							console.log("有未完成的项目")
 							// var counselorEmpId = this.counselorList[0].counselor
 							this.member.counselorEmpId = this.counselorList[0].counselor
 						}
-						// 						if (res.retData.length > 0) {
-						// 
-						// 							this.member = res.retData[0]
-						// 							console.log(JSON.stringify(this.member))
-						// 							this.setCustom(this.member)
-						// 							this.checkMemCash(this.member.memNum)
-						// 						} else {
-						// 							this.member = {
-						// 								memNum: '', //会员号
-						// 								memName: '', //会员名
-						// 								phone: '', //手机
-						// 								balance: '',
-						// 								counselorEmpId: '',
-						// 							}
-						// 						}
+						
 					} else {
 						alert(res.retMsg)
 					}

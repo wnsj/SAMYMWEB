@@ -285,7 +285,7 @@
 					this.consume.realCross = param.price * param.frequency * param.discount / 100
 					if (this.counselorList != null && this.counselorList.length > 0) {
 						var isSame = 0
-						console.log("counselorList:" + JSON.stringify(this.counselorList))
+						// console.log("counselorList:" + JSON.stringify(this.counselorList))
 						for (var i = 0; i < this.counselorList[0].proList.length; i++) {
 							var project = this.counselorList[0].proList[i]
 							if (this.consume.proId == project.proId) {
@@ -427,7 +427,7 @@
 								balance: '',
 								counselorEmpId: '',
 							}
-							this.$refs.counselorEmp.setEmp('0')
+							this.$refs.counselorEmp.setEmp("")
 						}
 						if (this.counselorList.length > 0) {
 							console.log("有未完成的项目")

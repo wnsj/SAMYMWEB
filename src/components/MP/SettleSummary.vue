@@ -68,9 +68,9 @@
 									<th class="text-center">手机号</th>
 									<th class="text-center">项目</th>
 									<th class="text-center">单价</th>
-									<th class="text-center">课时（次）</th>
+									<th class="text-center">课时(小时)</th>
 									<th class="text-center">折扣(%)</th>
-									<th class="text-center">总金额</th>
+									<th class="text-center">消费金额</th>
 								</tr>
 							</thead>
 							<tbody>

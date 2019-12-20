@@ -115,14 +115,14 @@
 			</div>
 			<div class="tab-pane fade in active martop" v-show="isShow==true">
 				<div class="col-md-12 form-group clearfix text-left" style="padding:0;">
-					<div class="col-md-6 clearfix" >
+					<div class="col-md-6 clearfix">
 						<h4 id="myModalLabel" class="modal-title" style="line-height:39px;">客户：</h4>
 					</div>
-					<div class="col-md-6 clearfix"  v-show="member.balance>0">
+					<div class="col-md-6 clearfix" v-show="member.balance>0">
 						<label class="bui-radios-label col-md-4 end-aline" style="padding:0; margin-right:0;">
-							<input type="checkbox" v-model="isSelect" disabled="disabled"/><i class="bui-radios"></i> 预购抵扣
+							<input type="checkbox" v-model="isSelect" disabled="disabled" /><i class="bui-radios"></i> 预购抵扣
 						</label>
-						
+
 					</div>
 				</div>
 				<div class="col-md-12 clearfix" v-show="cash.balance>0" style="padding:0;">
@@ -132,7 +132,7 @@
 						</label>
 						<span class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="cash.select" id="earn" @keyup.enter="count" @input="count($event)"/>
+							<input type="text" class="form-control" v-model="cash.select" id="earn" @keyup.enter="count" @input="count($event)" />
 						</div>
 					</div>
 					<div class="col-md-6 clearfix">
@@ -143,12 +143,12 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="col-md-6 clearfix">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">应交总额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
-						<input type="text" class="form-control" v-model="consumeReceivable"  disabled="disabled">
+						<input type="text" class="form-control" v-model="consumeReceivable" disabled="disabled">
 					</div>
 				</div>
 			</div>
@@ -209,14 +209,14 @@
 					operatorId: '', //操作人
 					consumCount: '0', //消费次数
 					balance: '0',
-          cashId:'',//使用定金
-          cashMoney:''//使用定金的金额
+					cashId: '', //使用定金
+					cashMoney: '' //使用定金的金额
 				},
 				cash: {
-					cashId:'',
+					cashId: '',
 					memNum: '',
 					balance: '',
-					select:'',
+					select: '',
 					btn: false,
 				},
 				title: '',
@@ -237,7 +237,7 @@
 						counselorEmpId: '',
 					},
 					this.cash = {
-						cashId:'',
+						cashId: '',
 						memNum: '',
 						balance: '0',
 						select: '0',
@@ -280,7 +280,7 @@
 				this.$refs.emp.setEmp("")
 				this.$refs.project.setEmpId("0")
 				this.isShow = true
-				this.isSelect=false
+				this.isSelect = false
 
 			},
 			//咨询师
@@ -313,17 +313,22 @@
 					this.consume.receivable = param.price * param.frequency //应交
 					this.consume.realCross = param.price * param.frequency * param.discount / 100 //实缴
 					this.consume.proType = param.proType
+					this.cash.select='0'
 
-
+					console.log("count1-1")
 					if (this.member.counselorEmpId != this.consume.counselor) {
+						console.log("count1-2" + this.member.counselorEmpId + this.consume.counselor)
 						if (param.proType == 0) {
+							console.log("count1-3")
 							this.isSelect = false
 							this.consumeReceivable = this.consume.realCross
 						} else {
+							console.log("count1-4")
 							this.isSelect = true
 							this.consumeReceivable = this.consume.realCross - this.member.balance
 						}
 					} else {
+						console.log("count1-5")
 						this.isSelect = false
 						this.consumeReceivable = this.consume.realCross
 					}
@@ -339,28 +344,33 @@
 			},
 
 			count(event) {
-				if(Number(this.cash.select)>Number(this.cash.balance)){
+				if (Number(this.cash.select) > Number(this.cash.balance)) {
 					this.cash.select = this.cash.balance;
 					$("#earn").val(this.cash.select);
 				}
+				console.log("count1")
 				if (this.member.counselorEmpId != this.consume.counselor) {
+					console.log("count2")
 					if (this.consume.proType == 0) {
+						console.log("count4")
 						this.isSelect = false
 						this.consumeReceivable = this.consume.realCross
 					} else {
+						console.log("count5")
 						this.isSelect = true
 						this.consumeReceivable = this.consume.realCross - this.member.balance - this.cash.select;
 					}
 				} else {
+					console.log("count3")
 					this.isSelect = false
-					this.consumeReceivable =  this.consume.realCross - this.cash.select;
+					this.consumeReceivable = this.consume.realCross - this.cash.select;
 				}
 			},
 			//the event of addtional button
 			addFee() {
 				console.log('the event of addtional button')
-        this.consume.cashId=this.cash.cashId;
-				this.consume.cashMoney=this.cash.select;
+				this.consume.cashId = this.cash.cashId;
+				this.consume.cashMoney = this.cash.select;
 				if (!this.isBlank(this.member.counselorEmpId) && this.member.counselorEmpId != this.consume.counselor) {
 					if (!confirm("您给客户选择了不同咨询师的课程，是否继续？如果继续，将使用之前咨询师课程的余额进行购买新的项目，否则，请取消！！！")) {
 						return
@@ -407,7 +417,7 @@
 						});
 						this.jumpLeft(3);
 						$("#addFee").modal("hide")
-             			this.$emit('func','Charge')
+						this.$emit('func', 'Charge')
 					} else {
 						alert(res.retMsg)
 					}
@@ -437,7 +447,7 @@
 				if (this.isBlank(param)) {
 					return
 				}
-				var url = this.url + '/memberAction/queryMember'
+				var url = this.url + '/purchasedItemsAction/queryMemUnfinished'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -452,10 +462,10 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						if (res.retData.length > 0) {
 
-							this.member = res.retData[0]
-							// console.log(JSON.stringify(this.member))
+						this.member = res.retData.mem
+						this.counselorList = res.retData.counselorList
+						if (this.member != null) {
 							this.setCustom(this.member)
 							this.checkMemCash(this.member.memNum)
 						} else {
@@ -467,6 +477,26 @@
 								counselorEmpId: '',
 							}
 						}
+						if (this.counselorList.length > 0) {
+							console.log("有未完成的项目")
+							// var counselorEmpId = this.counselorList[0].counselor
+							this.member.counselorEmpId = this.counselorList[0].counselor
+						}
+						// 						if (res.retData.length > 0) {
+						// 
+						// 							this.member = res.retData[0]
+						// 							console.log(JSON.stringify(this.member))
+						// 							this.setCustom(this.member)
+						// 							this.checkMemCash(this.member.memNum)
+						// 						} else {
+						// 							this.member = {
+						// 								memNum: '', //会员号
+						// 								memName: '', //会员名
+						// 								phone: '', //手机
+						// 								balance: '',
+						// 								counselorEmpId: '',
+						// 							}
+						// 						}
 					} else {
 						alert(res.retMsg)
 					}
@@ -498,7 +528,7 @@
 					if (res.retCode == '0000') {
 						if (res.retData.length > 0) {
 							this.cash = res.retData[0]
-							this.cash.select = '0.0' 
+							this.cash.select = '0.0'
 						} else {
 							this.cash = {
 								memNum: '', //会员号
@@ -516,22 +546,24 @@
 
 		},
 		mounted() {
-			
+
 		},
 
 	}
 </script>
 
 <style>
-	label.bui-radios-label{
-		 position:relative;
-		  line-height:34px;
+	label.bui-radios-label {
+		position: relative;
+		line-height: 34px;
 	}
+
 	label.bui-radios-label input {
 		position: absolute;
 		opacity: 0;
-		visibility: hidden; 
+		visibility: hidden;
 	}
+
 	label.bui-radios-label .bui-radios {
 		display: inline-block;
 		position: relative;
@@ -540,10 +572,11 @@
 		background: #FFFFFF;
 		border: 1px solid #979797;
 		border-radius: 50%;
-		vertical-align: -2px; 
-		box-sizing:content-box;
+		vertical-align: -2px;
+		box-sizing: content-box;
 	}
-	label.bui-radios-label input:checked + .bui-radios:after {
+
+	label.bui-radios-label input:checked+.bui-radios:after {
 		position: absolute;
 		content: "";
 		width: 7px;
@@ -551,17 +584,20 @@
 		background-color: #fff;
 		border-radius: 50%;
 		top: 3px;
-		left: 3px; 
+		left: 3px;
 	}
-	label.bui-radios-label input:checked + .bui-radios {
+
+	label.bui-radios-label input:checked+.bui-radios {
 		background: #00B066;
-		border: 1px solid #00B066; 
+		border: 1px solid #00B066;
 	}
-	label.bui-radios-label input:disabled + .bui-radios {
+
+	label.bui-radios-label input:disabled+.bui-radios {
 		background-color: #e8e8e8;
-		border: solid 1px #979797; 
+		border: solid 1px #979797;
 	}
-	label.bui-radios-label input:disabled:checked + .bui-radios:after {
-		background-color: #c1c1c1; 
+
+	label.bui-radios-label input:disabled:checked+.bui-radios:after {
+		background-color: #c1c1c1;
 	}
 </style>

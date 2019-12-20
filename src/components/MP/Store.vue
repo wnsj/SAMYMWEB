@@ -29,7 +29,7 @@
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="selectRule('1')">添加</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-			 v-on:click="checkStore()">查询</button>
+			 v-on:click="checkStore(1)">查询</button>
 		</div>
 		<div class="">
 			<div class="col-md-12 col-lg-12">
@@ -58,6 +58,11 @@
 						</tbody>
 					</table>
 				</div>
+                <!--分页插件-->
+                <div class="page">
+                    <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
+                    <paging ref="paging" @change="pageChange"></paging>
+                </div>
 			</div>
 			<div class="col-md-12 col-lg-12 posAb">
 				<p class="tips">* 双击单行，可对当前数据进行修改</p>
@@ -78,12 +83,15 @@
 <script>
 
 	import SubStore from '../MP/SubStore/SubStore.vue'
+    import Paging from '../common/paging'
 	import {
 		init
 	} from '@/../static/js/common.js'
+
 	export default {
 		components: {
 			SubStore,
+            Paging
 		},
 		data() {
 			return {
@@ -91,13 +99,23 @@
 				isuse: '1',
 				storeName: '',
 				fixedHeader: false,
+
+                //分页需要的数据
+                pages: '', //总页数
+                current: 1, //当前页码
+                pageSize: 10, //一页显示的数量
+                total: '', //数据的数量
 			};
 		},
 		methods: {
-			
+            //子级传值到父级上来的动态拿去
+            pageChange: function(page) {
+                this.current = page
+                this.checkStore(page);
+            },
 			//feedback from adding and modifying view
 			feedBack() {
-				this.checkStore()
+				this.checkStore(1)
 				$("#storeContent").modal('hide')
 			},
 			// check the adding and modifying rule of account
@@ -141,7 +159,7 @@
 				});
 			},
 			//check the list of store
-			checkStore() {
+			checkStore(page) {
 				console.log('checkStore')
 				var url = this.url + '/storeAction/queryStore'
 				this.$ajax({
@@ -159,12 +177,19 @@
 						moduleGrade:'2',
 						urlName:'/MP/Store',
 						operateType:'4',
+                        page:page.toString(),
+                        pageSize:this.pageSize
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						this.storeList = res.retData
+                        this.pages=res.retData.pages //总页数
+                        this.current=res.retData.current //当前页码
+                        this.pageSize=res.retData.size//一页显示的数量
+                        this.total=res.retData.total //数据的数量
+                        this.$refs.paging.setParam(this.pages,this.current,this.total)
+						this.storeList = res.retData.records
 					} else {
 						alert(res.retMsg)
 					}
@@ -202,7 +227,7 @@
 			init();
 		},
 		created() {
-		  this.checkStore()
+		  this.checkStore(1)
 		}
 	}
 </script>

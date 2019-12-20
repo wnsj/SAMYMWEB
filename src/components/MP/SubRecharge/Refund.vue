@@ -341,7 +341,8 @@
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
-					if (res.retCode == '0000') {	
+					if (res.retCode == '0000') {
+						alert(res.retMsg)
 						$("#addRefund").modal("hide")
 					} else {
 						alert(res.retMsg)

@@ -12,7 +12,7 @@
                         <label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
-                            <emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
+                            <emp ref="counlorEmp" @employeeChange="counlorEmpChange" :disabled="isSelete"></emp>
                         </div>
                     </div>
 
@@ -72,6 +72,7 @@
                 allWeek:['星期一','星期二','星期三','星期四','星期五','星期六','星期日'],
                 allAddValueState:'',
                 empId:'',
+				isSelete:false,
                 dateList:[
                     {
                         empId:"",
@@ -133,6 +134,7 @@
                 if(param=='add'){
                     //初始化数据
                     this.clearData();
+					this.isSelete=false
                     this.title='新增'
                     this.$refs.counlorEmp.setPosName('咨询师')
                     this.$refs.counlorEmp.setEmp('')
@@ -140,6 +142,7 @@
                     //this.$refs.counlorEmp.setEmp('')
                 }else if(param=='modify'){
                     this.title='修改'
+					this.isSelete=true
                     //为参数赋值
                     this.dateList[0].morning=schedule.morning1;
                     this.dateList[1].morning=schedule.morning2;

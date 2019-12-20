@@ -6,6 +6,13 @@
         </div>
         <div class="modal-body  pos_r">
             <div class="tab-pane fade in active martop" id="basic">
+                <div class="col-md-6 form-group clearfix">
+                    <label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员号</label><span
+                    class="sign-left">:</span>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" v-model="memNum" v-on:change="checkMemNum(memNum)">
+                    </div>
+                </div>
 
                 <div class="col-md-6 form-group clearfix">
                     <label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span
@@ -23,13 +30,6 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 form-group clearfix">
-                    <label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员号</label><span
-                    class="sign-left">:</span>
-                    <div class="col-md-7">
-                        <input type="text" class="form-control" v-model="memNum">
-                    </div>
-                </div>
                 <div class="col-md-12 col-lg-12">
                     <p class="tips">注意：如果该会员号绑定的姓名与手机号和定金的姓名和手机号不对应，需要人工确认</p>
                 </div>
@@ -56,21 +56,66 @@
                 cashId:'',
                 cashName:'',
                 phone:'',
-                memNum:''
+                memNum:'',
+                item:{}
             }
         },
         methods:{
             initData(item){
-                this.cashId=item.cashId
-                this.cashName=item.cashName
-                this.phone=item.phone
+                this.memNum=''
+                this.cashId=''
+                this.cashName=''
+                this.phone=''
+                this.item=item
             },
             // 关闭模态框
             closeCurrentPage(){
                 this.$emit('closeToMember');
             },
+            checkMemNum(param) {
+                console.log('checkMemNum')
+                if (this.isBlank(param)) {
+                    return
+                }
+                var url = this.url + '/memberAction/queryMember'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        memNum: param,
+                    },
+                    dataType: 'json',
+                }).then((response) => {
+                    var res = response.data
+                    if (res.retCode == '0000') {
+                        if (res.retData.length > 0) {
+                            this.cashName = res.retData[0].memName
+                            this.phone=res.retData[0].phone
+                            this.memNum=res.retData[0].memNum
+                        }
+                    }else{
+                        alert(res.retMsg)
+                    }
+
+                }).catch((error) => {
+                    console.log('会员查询请求失败')
+                });
+            },
             //提交表单
             transferMember(){
+                if(this.item.cashName!=this.cashName||this.item.phone!=this.phone){
+                    if(confirm("注意：该会员姓名,手机号与交定金人员姓名，手机号不相符，确定转为会员？")){
+                        this.submitForm()
+                    }else {
+                        return
+                    }
+                }
+            },
+            submitForm(){
                 var url = this.url + '/cashAction/toMember'
                 this.$ajax({
                     method: 'POST',
@@ -80,7 +125,7 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        cashId:this.cashId,
+                        cashId:this.item.cashId,
                         cashName:this.cashName,
                         phone:this.phone,
                         memNum:this.memNum

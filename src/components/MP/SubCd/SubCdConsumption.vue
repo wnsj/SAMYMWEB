@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="col-md-6 form-group clearfix">
-          <label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">课时(次)</label><span
+          <label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">课时(小时)</label><span
           class="sign-left">:</span>
           <div class="col-md-7">
             <input type="text" class="form-control" v-model="consume.actualCount" disabled="disabled">
@@ -360,7 +360,7 @@
           return
         }
         if (this.isBlank(this.consume.actualCount)) {
-          alert("课时（次）不能为空")
+          alert("课时（小时）不能为空")
           return
         }
         if (this.isBlank(this.consume.discount)) {

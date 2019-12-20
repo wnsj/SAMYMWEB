@@ -181,7 +181,7 @@
                     this.endCreateDate = this.moment(this.endCreateDate,'YYYY-MM-DD 23:59:00.000')
                 }
 
-                var url = this.url + '/accountRecordAction/queryAccountRecordTotal/'+page+'/'+this.pageSize
+                var url = this.url + '/accountRecordAction/queryAccountRecordTotal'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -202,6 +202,8 @@
                         modelGrade:'2',
                         modelType:'',
                         operateType:'',
+                        page:page.toString(),
+                        pageSize:this.pageSize
                     },
                     dataType: 'json',
                 }).then((response) => {

@@ -218,7 +218,7 @@
 				//分页需要的数据
 				pages: '', //总页数
 				current: 1, //当前页码
-				pageSize: 10, //一页显示的数量
+				pageSize: 2, //一页显示的数量
 				total: '', //数据的数量
 			};
 		},
@@ -307,7 +307,7 @@
 			},
 			//check the list of orderContent
 			checkOrderList(page) {
-				var url = this.url + '/appointmentAction/queryAppointment/' + page + '/' + this.pageSize
+				var url = this.url + '/appointmentAction/queryAppointment'
 				if (!this.isBlank(this.begCreateDate)) {
 					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
 				}
@@ -346,11 +346,12 @@
 						begAppDate: this.begAppDate,
 						endAppDate: this.endAppDate,
 						storeId: this.storeId,
-
 						accountId: this.accountId(),
 						modelGrade: '2',
 						modelType: '',
 						operateType: '',
+                        page:page.toString(),
+                        pageSize:this.pageSize
 					},
 					dataType: 'json',
 				}).then((response) => {

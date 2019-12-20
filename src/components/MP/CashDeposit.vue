@@ -92,7 +92,7 @@
 									<button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button>
 									<button type="button" class="btn btn-success" v-on:click="consumptionModel(item)">消费</button>
 									<button type="button" class="btn btn-danger" v-on:click="refundModel(item)">退费</button>
-									<button v-show="item.memNum==null||item.memNum==''" type="button" class="btn btn-primary" v-on:click="transferMember(item)">转会员</button>
+									<button v-if="item.memNum==null||item.memNum==''" type="button" class="btn btn-primary" v-on:click="transferMember(item)">转会员</button>
 								</td>
 							</tr>
 						</tbody>

@@ -219,8 +219,14 @@
 						this.total = res.retData.pageRows.total //数据的数量
 						this.$refs.paging.setParam(this.pages, this.current, this.total)
 						this.consumeList = res.retData.pageRows.records;
-                        this.consumCountTotal=res.retData.poolSum.consumCountTotal
-                        this.sumTotal=res.retData.poolSum.sumTotal
+						if(res.retData.poolSum!=null){
+                            this.consumCountTotal=res.retData.poolSum.consumCountTotal
+                            this.sumTotal=res.retData.poolSum.sumTotal
+                        }else {
+                            this.consumCountTotal='0'
+                            this.sumTotal='0'
+                        }
+
 					}
 				}).catch((error) => {
 					console.log('请求失败处理')

@@ -30,7 +30,9 @@
                         <input type="text" class="form-control" v-model="memNum">
                     </div>
                 </div>
-
+                <div class="col-md-12 col-lg-12">
+                    <p class="tips">注意：如果该会员号绑定的姓名与手机号和定金的姓名和手机号不对应，需要人工确认</p>
+                </div>
             </div>
 
             <div class="form-group clearfix">

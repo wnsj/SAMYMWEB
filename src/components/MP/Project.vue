@@ -61,7 +61,7 @@
 								<th class="text-center">咨询师</th>
 								<th class="text-center">课程名称</th>
 								<th class="text-center">单价</th>
-								<th class="text-center">课时(次)</th>
+								<th class="text-center">课时(小时)</th>
 								<th class="text-center">优惠比例(%)</th>
 								<th class="text-center">修改</th>
 							</tr>

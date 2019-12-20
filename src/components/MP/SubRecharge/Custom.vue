@@ -99,6 +99,13 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">消费课时</label><span
+					 class="sign-left">:</span>
+					<div class="col-md-7">
+						<input type="text" class="form-control" v-model="consume.actualCount" placeholder="0.5小时=1">
+					</div>
+				</div>
+				<div class="col-md-6 form-group clearfix">
 					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">维护人</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
@@ -119,8 +126,19 @@
 				</div>
 			</div>
 			<div class="tab-pane fade in active martop" id="basic" v-show="isShow==false">
-				<div class="col-md-12 form-group clearfix text-left">
-					<h4 id="myModalLabel" class="modal-title">第{{consume.consumCount}}次消费</h4>
+				<div class="col-md-6 form-group clearfix">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">已消费课时</label><span
+					 class="sign-left">:</span>
+					<div class="col-md-7">
+						<input type="text" class="form-control" v-model="consume.consumCount">
+					</div>
+				</div>
+				<div class="col-md-6 form-group clearfix">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">此次消费课时</label><span
+					 class="sign-left">:</span>
+					<div class="col-md-7">
+						<input type="text" class="form-control" v-model="consume.currentCount">
+					</div>
 				</div>
 			</div>
 			<div class="form-group clearfix">
@@ -170,6 +188,7 @@
 					disPrice: '', //折后单价
 					totalCount: '', //总次数
 					actualCount: '', //实际次数
+					currentCount:'',//当前消费次数
 					giveCount: '', //赠送次数
 					giveProId: '', //赠送项目
 					giveMoney: '', //赠送金额
@@ -330,6 +349,14 @@
 					alert("维护人不能为空")
 					return
 				}
+				if(this.isBlank(this.consume.currentCount) 
+				|| this.consume.currentCount > this.consume.actualCount-this.consume.consumCount){
+					alert("此次消费不能为空，且不能大于剩余课程次数")
+					return
+				}
+				
+				
+				
 				var url = this.url + '/purchasedItemsAction/consum'
 				this.$ajax({
 					method: 'POST',

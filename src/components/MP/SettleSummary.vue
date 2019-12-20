@@ -68,9 +68,9 @@
 									<th class="text-center">手机号</th>
 									<th class="text-center">项目</th>
 									<th class="text-center">单价</th>
-									<th class="text-center">课时（次）</th>
+									<th class="text-center">课时(小时)</th>
 									<th class="text-center">折扣(%)</th>
-									<th class="text-center">总金额</th>
+									<th class="text-center">消费金额</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -144,7 +144,7 @@
 				//分页需要的数据
 				pages: '', //总页数
 				current: 1, //当前页码
-				size: 10, //一页显示的数量
+                pageSize: 10, //一页显示的数量
 				total: '', //数据的数量
 			}
 		},
@@ -195,7 +195,7 @@
 						modelType: '',
 						operateType: '',
 						page: page.toString(),
-						pageSize: this.size
+						pageSize: this.pageSize
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -205,7 +205,7 @@
 
 						this.pages = res.retData.pages //总页数
 						this.current = res.retData.current //当前页码
-						this.size = res.retData.size //一页显示的数量  必须是奇数
+						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.$refs.paging.setParam(this.pages, this.current, this.total)
 						this.consumeList = res.retData.records;

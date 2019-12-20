@@ -12,7 +12,7 @@
 		data() {
 			return {
 				empName: '',
-				empId: '0',
+				empId: '',
 				posId:'',
 				posName:'',
 				leader:'',

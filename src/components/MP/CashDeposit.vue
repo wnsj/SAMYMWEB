@@ -38,7 +38,7 @@
 			</div>
 		</div>
 		<div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
@@ -92,6 +92,7 @@
 									<button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button>
 									<button type="button" class="btn btn-success" v-on:click="consumptionModel(item)">消费</button>
 									<button type="button" class="btn btn-danger" v-on:click="refundModel(item)">退费</button>
+									<button v-if="item.memNum==null||item.memNum==''" type="button" class="btn btn-primary" v-on:click="transferMember(item)">转会员</button>
 								</td>
 							</tr>
 						</tbody>
@@ -130,6 +131,14 @@
 				</div>
 			</div>
 		</div>
+        <!--转会员-->
+        <div class="row row_edit">
+            <div class="modal fade" id="toMember">
+                <div class="modal-dialog">
+                    <SubTransferMember ref='toMember' @closeToMember='closeToMemberFeedBack'></SubTransferMember>
+                </div>
+            </div>
+        </div>
 	</div>
 
 </template>
@@ -142,6 +151,7 @@
 	import SubCdConsumption from '../MP/SubCd/SubCdConsumption'
 	import SubCdRefund from '../MP/SubCd/SubCdRefund'
 	import Paging from '../common/paging'
+    import SubTransferMember from '../MP/SubCd/SubTransferMember'
 	import {
 		init
 	} from '@/../static/js/common.js'
@@ -153,7 +163,8 @@
 
 			SubCdConsumption,
 			SubCdRefund,
-			Paging
+			Paging,
+            SubTransferMember
 		},
 		data() {
 			return {
@@ -171,7 +182,7 @@
 				//分页需要的数据
 				pages: '', //总页数
 				current: 1, //当前页码
-				size: 10, //一页显示的数量
+                pageSize: 10, //一页显示的数量
 				total: '', //数据的数量
 			};
 		},
@@ -187,6 +198,15 @@
 				this.$refs.subCd.initData('add')
 				$("#cdContent").modal('show')
 			},
+            transferMember(item){
+			    console.log(item)
+                this.$refs.toMember.initData(item)
+                $("#toMember").modal('show')
+            },
+            closeToMemberFeedBack(){
+			  this.checkMember(1)
+                $("#toMember").modal('hide')
+            },
 			//消费模态框
 			consumptionModel(item) {
 				if (item.state == '1') {
@@ -277,7 +297,7 @@
 						storeId: this.storeId,
 						balanceState: this.balanceState,
 						page: page.toString(),
-						pageSize: this.size
+						pageSize: this.pageSize
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -286,7 +306,7 @@
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
 						this.current = res.retData.current //当前页码
-						this.size = res.retData.size //一页显示的数量  必须是奇数
+						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.$refs.paging.setParam(this.pages, this.current, this.total)
 						this.cashList = res.retData.records

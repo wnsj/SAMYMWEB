@@ -14,10 +14,10 @@
     data() {
       return {
         storeName: '',
-        storeId: '0',
+        storeId: this.storeId(),
         storeList: [],
 				storeObj:{
-					storeId:'0',
+					storeId:this.storeId(),
 					storeName: '',
 				},
       };

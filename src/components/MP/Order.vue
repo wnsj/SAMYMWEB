@@ -20,17 +20,7 @@
 					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
 			</div>
-			<!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">访问类型</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-					<select class="form-control" v-model="visitType">
-						<option value="0">初访</option>
-						<option value="1">再访</option>
-					</select>
-				</div>
-			</div> -->
+			
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否到店</p><span class="sign-left">:</span>
@@ -83,6 +73,14 @@
 				</div>
 				<div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
 					<dPicker style="width:100%" v-model="endAppDate"></dPicker>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true" style=" margin-top: 15px;">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-7 col-lg-7">
+					<store ref='store' @storeChange='storeChange'></store>
 				</div>
 			</div>
 		</div>
@@ -186,6 +184,7 @@
 
 
 <script>
+	import store from '../common/Store.vue'
 	import SubOrder from '../MP/SubOrder/SubOrder.vue'
 	import dPicker from 'vue2-datepicker'
 	import Paging from '../common/paging'
@@ -196,7 +195,9 @@
 		components: {
 			SubOrder,
 			dPicker,
-			Paging
+			Paging,
+			store,
+			
 		},
 		data() {
 			return {
@@ -217,7 +218,7 @@
 				//分页需要的数据
 				pages: '', //总页数
 				current: 1, //当前页码
-				size: 10, //一页显示的数量
+				pageSize: 10, //一页显示的数量
 				total: '', //数据的数量
 			};
 		},
@@ -238,6 +239,13 @@
 				} else {
 					this.$refs.order.initData('modify', item);
 					$("#orderContent").modal('show');
+				}
+			},
+			storeChange(param){
+				if(this.isBlank(param)){
+					this.storeId=""
+				}else{
+					this.storeId=param.storeId
 				}
 			},
 			//feedback from adding and modifying view
@@ -299,7 +307,7 @@
 			},
 			//check the list of orderContent
 			checkOrderList(page) {
-				var url = this.url + '/appointmentAction/queryAppointment/' + page + '/' + this.size
+				var url = this.url + '/appointmentAction/queryAppointment'
 				if (!this.isBlank(this.begCreateDate)) {
 					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
 				}
@@ -313,11 +321,11 @@
 					this.endAppDate = this.moment(this.endAppDate, 'YYYY-MM-DD 00:00:00.000')
 				}
 				
-				if(this.accountType!=1){
-					this.storeId = this.storeId()
-				}else{
-					this.storeId = ""
-				}
+// 				if(this.accountType!=1){
+// 					this.storeId = this.storeId()
+// 				}else{
+// 					this.storeId = ""
+// 				}
 
 				this.$ajax({
 					method: 'POST',
@@ -338,11 +346,12 @@
 						begAppDate: this.begAppDate,
 						endAppDate: this.endAppDate,
 						storeId: this.storeId,
-
 						accountId: this.accountId(),
 						modelGrade: '2',
 						modelType: '',
 						operateType: '',
+                        page:page.toString(),
+                        pageSize:this.pageSize
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -351,7 +360,7 @@
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
 						this.current = res.retData.current //当前页码
-						this.size = res.retData.size //一页显示的数量  必须是奇数
+						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.$refs.paging.setParam(this.pages, this.current, this.total)
 						this.orderList = res.retData.records

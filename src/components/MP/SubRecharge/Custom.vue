@@ -31,6 +31,20 @@
 						<input type="text" class="form-control" v-model="member.phone">
 					</div>
 				</div>
+                <template v-show="counselorList.length>0">
+                    <div v-show="counselorList.length>0" class="col-md-12 form-group clearfix text-left">
+                        <h4 id="myModalLabel" class="modal-title">购买的课程：</h4>
+                    </div>
+                    <div v-show="counselorList.length>0" class="col-md-12 form-group clearfix text-left">
+                        <template v-for="(item,index) in counselorList">
+                            <template v-for="(ite,index) in item.proList">
+                                <div class="col-md-3 form-group clearfix">
+                                    <input type="text" class="form-control" :value="ite.proName" disabled="disabled">
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                </template>
 				<div class="col-md-12 form-group clearfix text-left">
 					<h4 id="myModalLabel" class="modal-title">课程：</h4>
 				</div>
@@ -42,6 +56,7 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
+
 					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">课程</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
@@ -105,8 +120,19 @@
 				</div>
 			</div>
 			<div class="tab-pane fade in active martop" id="basic" v-show="isShow==false">
-				<div class="col-md-12 form-group clearfix text-left">
-					<h4 id="myModalLabel" class="modal-title">第{{consume.consumCount}}次消费</h4>
+				<div class="col-md-6 form-group clearfix">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">已消费课时</label><span
+					 class="sign-left">:</span>
+					<div class="col-md-7">
+						<input type="text" class="form-control" v-model="consume.consumedCount" disabled="disabled">
+					</div>
+				</div>
+				<div class="col-md-6 form-group clearfix">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">此次消费课时</label><span
+					 class="sign-left">:</span>
+					<div class="col-md-7">
+						<input type="text" class="form-control" v-model="consume.consumCount">
+					</div>
 				</div>
 			</div>
 			<div class="form-group clearfix">
@@ -156,6 +182,7 @@
 					disPrice: '', //折后单价
 					totalCount: '', //总次数
 					actualCount: '', //实际次数
+					consumedCount:'',//已经消费次数
 					giveCount: '', //赠送次数
 					giveProId: '', //赠送项目
 					giveMoney: '', //赠送金额
@@ -172,6 +199,8 @@
 				isShow: true,
 				consumeReceivable: '',
 				isSelect: true,
+				sameProject:false,
+                //proList:[],//有剩余的课程信息
 			};
 		},
 		methods: {
@@ -197,6 +226,7 @@
 						disPrice: '', //折后单价
 						totalCount: '0', //总次数
 						actualCount: '0', //实际次数
+						consumedCount:'',//已经消费次数
 						giveCount: '0', //赠送次数
 						giveProId: '', //赠送项目
 						giveMoney: '0.0', //赠送金额
@@ -216,6 +246,9 @@
 						piId: '',
 
 					}
+                
+				this.sameProject=false
+                this.counselorList=[]
 				this.isShow=true
 				this.isSelect=true
 				this.consumeReceivable = '0.0'
@@ -255,13 +288,14 @@
 					this.consume.realCross = param.price * param.frequency * param.discount / 100
 					if (this.counselorList != null && this.counselorList.length > 0) {
 						var isSame = 0
-						console.log("counselorList:" + JSON.stringify(this.counselorList))
+						// console.log("counselorList:" + JSON.stringify(this.counselorList))
 						for (var i = 0; i < this.counselorList[0].proList.length; i++) {
 							var project = this.counselorList[0].proList[i]
 							if (this.consume.proId == project.proId) {
 								this.isShow = false
+								this.sameProject=true
 								this.consume.piId = project.piId
-								this.consume.consumCount = project.consumCount + 1
+								this.consume.consumedCount = project.consumCount
 								this.$refs.emp.setEmp(project.empId)
 								isSame = 1
 								break;
@@ -313,6 +347,20 @@
 					alert("维护人不能为空")
 					return
 				}
+				console.log('sameProject:'+this.sameProject)
+				if(this.sameProject==true){
+					if(this.isBlank(this.consume.consumCount) 
+					|| this.consume.consumCount > this.consume.actualCount-this.consume.consumedCount || this.consume.consumCount<=0){
+						alert("此次消费不能为空，且不能大于剩余课程次数,也必须大于0")
+						return
+					}
+				}else{
+					this.consume.consumCount=this.consume.actualCount
+				}
+				
+				
+				
+				
 				var url = this.url + '/purchasedItemsAction/consum'
 				this.$ajax({
 					method: 'POST',
@@ -327,12 +375,14 @@
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
+						
 						this.$router.push({
 							name: 'SettleSummary',
 						});
 						this.jumpLeft(2);
 						$("#addCustom").modal("hide")
 						this.$emit('func2','SettleSummary')
+						alert(res.retMsg)
 					} else {
 						alert(res.retMsg)
 					}
@@ -379,12 +429,20 @@
 							this.consume.memNum = this.member.memNum
 							this.consume.memName = this.member.memName
 							this.consume.phone = this.member.phone
+						}else{
+							this.member = {
+								memNum: '', //会员号
+								memName: '', //会员名
+								phone: '', //手机
+								balance: '',
+								counselorEmpId: '',
+							}
+							this.$refs.counselorEmp.setEmp("")
 						}
 						if (this.counselorList.length > 0) {
 							console.log("有未完成的项目")
 							var counselorEmpId = this.counselorList[0].counselor
 							this.$refs.counselorEmp.setEmp(counselorEmpId)
-
 						}
 					}
 

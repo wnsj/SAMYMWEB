@@ -56,6 +56,7 @@
 					data: {
 						state: '1',
 						empId: this.empId,
+						storeId:this.storeId(),
 					},
 					dataType: 'json',
 				}).then((response) => {

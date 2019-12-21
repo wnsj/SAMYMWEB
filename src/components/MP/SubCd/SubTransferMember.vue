@@ -113,7 +113,9 @@
                     }else {
                         return
                     }
-                }
+                }else{
+					this.submitForm()
+				}
             },
             submitForm(){
                 var url = this.url + '/cashAction/toMember'

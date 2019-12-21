@@ -80,8 +80,9 @@
 				<div class="col-md-6 form-group clearfix">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">折扣比例</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7 pos-re">
 						<input type="text" class="form-control" v-model="consume.discount" disabled="disabled">
+						<span class="pos-ab pos-tr">%</span>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">

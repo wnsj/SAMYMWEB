@@ -330,8 +330,9 @@
 					alert("姓名不能为空")
 					return
 				}
-				if (this.isBlank(this.consume.phone)) {
-					alert("手机号不能为空")
+				console.log('phone:'+this.consume.phone)
+				if (!this.phoneNum(this.consume.phone)) {
+					alert("手机号输入不正确，请重新输入")
 					return
 				}
 

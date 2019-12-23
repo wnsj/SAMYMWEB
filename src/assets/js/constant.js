@@ -14,6 +14,14 @@ constant.isBlank = function(value) {
 	return false;
 }
 
+/*判断手机号，是空返回true*/
+constant.phone = function(phoneNum) {
+	if(this.isBlank(phoneNum))return false;
+	var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
+	if(reg.test(phoneNum)==false) return false
+	return true;
+}
+
 //权限判断方法（包含返回true，反之false）
 constant.has = function(param) {
 	//未传值

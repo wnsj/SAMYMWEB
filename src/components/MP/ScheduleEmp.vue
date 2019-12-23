@@ -11,7 +11,7 @@
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">时间</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <dPicker style="width:100%" v-model="thisDate"></dPicker>
+                    <dPicker style="width:100%" format="YYYY-MM-DD" v-model="thisDate"></dPicker>
                     <!--<store ref="store" @storeChange='storeChange'></store>-->
                 </div>
             </div>

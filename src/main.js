@@ -160,6 +160,10 @@ Vue.prototype.storeId = function() {
 	else
 	return '';
 }
+//手机号判断
+Vue.prototype.phoneNum = function(phoneNum) {
+  return constant.phone(phoneNum);
+}
 
 /*
  **权限判断使用方法:

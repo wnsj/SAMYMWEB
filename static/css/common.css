@@ -162,3 +162,12 @@ body{
     bottom:20px;
     left:0;
 }
+.pos-tr{ 
+    top:0;
+    right:20px; 
+    line-height:34px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}

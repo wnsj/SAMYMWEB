@@ -192,7 +192,7 @@
                     this.schedulingListTitle=this.getWeekDay(this.moment(this.thisDate,'YYYY-MM-DD'));
                     this.thisDate=this.moment(this.thisDate,'YYYY-MM-DD');
                 }
-                console.log('checkEmp')
+                console.log('checkEmp:')
                 var url = this.url + '/schedulingAction/queryScheduling'
                 this.$ajax({
                     method: 'POST',
@@ -281,7 +281,7 @@
                 let alldate = this.getAll(weekStart,weekEnd);
                 //let result = this.chinaDate(alldate);
                 this.schedulingListTitle = alldate;
-                console.log(this.schedulingListTitle);
+                //console.log('12:'+this.getAll('2019.12.30','2019.01.05'));
 
             },
             //日期转换
@@ -315,7 +315,7 @@
                 let unixDe = arr2_.getTime();
                 for (let k = unixDb; k <= unixDe;) {
                     arrTime.push(this.datetimeparse(k, 'YYYY-MM-DD'));
-                    k = k + 24 * 60 * 60 * 1000;
+                    k = k + 24 * 60 * 60 * 1000;               
                 }
                 return arrTime;
             },
@@ -423,9 +423,7 @@
             init();
         },
         created() {
-
             this.checkEmp(1);
-
         }
     }
 </script>

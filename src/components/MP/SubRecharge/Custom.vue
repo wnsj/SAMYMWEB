@@ -33,12 +33,15 @@
 				</div>
                 <template v-show="counselorList.length>0">
                     <div v-show="counselorList.length>0" class="col-md-12 form-group clearfix text-left">
-                        <h4 id="myModalLabel" class="modal-title">购买的课程：</h4>
+                        <h4 id="myModalLabel" class="modal-title">已购买的课程：</h4>
                     </div>
                     <div v-show="counselorList.length>0" class="col-md-12 form-group clearfix text-left">
                         <template v-for="(item,index) in counselorList">
+							<div class="col-md-4 text-left">
+							    <label style="margin-left: -15px;padding-top: 5px;font-size: 14px;">{{item.counselorName}}:</label>
+							</div>
                             <template v-for="(ite,index) in item.proList">
-                                <div class="col-md-3 form-group clearfix">
+                                <div class="col-md-3">
                                     <input type="text" class="form-control" :value="ite.proName" disabled="disabled">
                                 </div>
                             </template>
@@ -121,7 +124,7 @@
 			</div>
 			<div class="tab-pane fade in active martop" id="basic" v-show="isShow==false">
 				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">已消费课时</label><span
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">剩余课时</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.consumedCount" disabled="disabled">
@@ -295,7 +298,7 @@
 								this.isShow = false
 								this.sameProject=true
 								this.consume.piId = project.piId
-								this.consume.consumedCount = project.consumCount
+								this.consume.consumedCount = project.actualCount-project.consumCount
 								this.$refs.emp.setEmp(project.empId)
 								isSame = 1
 								break;
@@ -351,7 +354,7 @@
 				console.log('sameProject:'+this.sameProject)
 				if(this.sameProject==true){
 					if(this.isBlank(this.consume.consumCount) 
-					|| this.consume.consumCount > this.consume.actualCount-this.consume.consumedCount || this.consume.consumCount<=0){
+					|| this.consume.consumCount <=0 || this.consume.consumCount> this.consume.consumedCount){
 						alert("此次消费不能为空，且不能大于剩余课程次数,也必须大于0")
 						return
 					}

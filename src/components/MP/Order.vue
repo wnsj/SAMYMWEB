@@ -271,7 +271,7 @@
 						if (item.arrival != '1') {
 							if (confirm('请确认到店后，点确定')) {
 								item.arrival = '1'
-                                url=this.url + '/appointmentAction/updateAppointment'
+                                url=this.url + '/appointmentAction/updateArrival'
 							} else {
 								return
 							}

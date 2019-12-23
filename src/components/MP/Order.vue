@@ -33,18 +33,18 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否取消</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-					<select class="form-control" v-model="state">
-						<option value="">--未选择--</option>
-						<option value="1">未取消</option>
-						<option value="0">已取消</option>
-					</select>
-				</div>
-			</div>
+			<!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">-->
+				<!--<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right" style="padding: 0; line-height: 34px;">-->
+					<!--<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否取消</p><span class="sign-left">:</span>-->
+				<!--</div>-->
+				<!--<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">-->
+					<!--<select class="form-control" v-model="state">-->
+						<!--<option value="">&#45;&#45;未选择&#45;&#45;</option>-->
+						<!--<option value="1">未取消</option>-->
+						<!--<option value="0">已取消</option>-->
+					<!--</select>-->
+				<!--</div>-->
+			<!--</div>-->
 		</div>
 		<div class="row" style="margin-top: 15px;">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
@@ -234,8 +234,8 @@
 				$("#orderContent").modal('show')
 			},
 			updateOrder(item) {
-				if (item.state == '0' || item.arrival == '1') {
-					alert("已取消或者已到店，不能进行修改")
+				if (item.arrival == '1') {
+					alert("已到店，不能进行修改")
 				} else {
 					this.$refs.order.initData('modify', item);
 					$("#orderContent").modal('show');
@@ -254,29 +254,24 @@
 				$("#orderContent").modal('hide')
 			},
 			caAction(item, param) {
-				var url = this.url + '/appointmentAction/updateAppointment'
+				var url = ''
 
 				if (param == 'cancel') {
 					if (item.arrival == '1') {
 						alert("已到店，不能修改")
 						return
 					} else {
-						if (item.state != '0') {
 							if (confirm('是否确认取消')) {
-								item.state = '0'
+                                url=this.url + '/appointmentAction/deleteAppointment'
 							} else {
 								return
 							}
-						} else {
-							alert("已取消,不能修改")
-							return
-						}
 					}
 				} else if (param == 'arrival') {
-					if (item.state == '1') {
 						if (item.arrival != '1') {
 							if (confirm('请确认到店后，点确定')) {
 								item.arrival = '1'
+                                url=this.url + '/appointmentAction/updateArrival'
 							} else {
 								return
 							}
@@ -284,10 +279,6 @@
 							alert("已到店，不能修改")
 							return
 						}
-					} else {
-						alert("已取消,不能修改")
-						return
-					}
 				}
 				this.$ajax({
 					method: 'POST',
@@ -301,6 +292,7 @@
 				}).then((response) => {
 					var res = response.data
 					alert(res.retMsg)
+                    this.checkOrderList(1)
 				}).catch((error) => {
 					console.log('预约相关提交请求失败')
 				});

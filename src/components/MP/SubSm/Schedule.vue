@@ -135,11 +135,17 @@
                     //初始化数据
                     this.clearData();
 					this.isSelete=false
+                    $("#allCheckbox").attr("disabled",false);
                     this.title='新增'
                     this.$refs.counlorEmp.setPosName('咨询师')
                     this.$refs.counlorEmp.setEmp('')
                     // this.$refs.clerkEmp.setEmp(this.order.clerkEmpId)
                     //this.$refs.counlorEmp.setEmp('')
+                    this.allDate=this.getWeekDay(this.moment(this.addDate(new Date(),7),'YYYY-MM-DD'));
+                    for(var i=0;i<this.allDate.length;i++){
+                        this.dateList[i].schedulingDate=this.allDate[i]
+                    }
+
                 }else if(param=='modify'){
                     this.title='修改'
 					this.isSelete=true
@@ -167,7 +173,9 @@
                     this.allDate.push(schedule.schedulingDate5)
                     this.allDate.push(schedule.schedulingDate6)
                     this.allDate.push(schedule.schedulingDate7)
-
+                    for(var i=0;i<this.allDate.length;i++){
+                        this.dateList[i].schedulingDate=this.allDate[i]
+                    }
                     //this.operatorId = this.accountId()
                     this.$refs.counlorEmp.setPosName('咨询师')
                     this.$refs.counlorEmp.setEmp(schedule.empId)
@@ -312,6 +320,25 @@
                 }
                 return mymonth + "." + myweekday
             },
+            getWeekDay(dateString) {
+                let dateStringReg = /^\d{4}[/-]\d{1,2}[/-]\d{1,2}$/;
+
+                if (dateString.match(dateStringReg)) {
+                    let presentDate = new Date(dateString),
+                        today = presentDate.getDay() !== 0 ? presentDate.getDay() : 7;
+
+                    return Array.from(new Array(7), function(val, index) {
+                        return formatDate(new Date(presentDate.getTime() - (today - index-1) * 24 * 60 * 60 * 1000));
+                    });
+
+                } else {
+                    throw new Error('dateString should be like "yyyy-mm-dd" or "yyyy/mm/dd"');
+                }
+
+                function formatDate(date) {
+                    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+                }
+            },
             // 获取指定日期的那一周的开始、结束日期
             getWeekStartAndEnd(val) {
                 let now = '';
@@ -444,6 +471,20 @@
                 return systemDate;
 
             },
+            addDate(date, days) {
+                var d = new Date(date);
+                d.setDate(d.getDate() + days);
+                var month = d.getMonth() + 1;
+                var day = d.getDate();
+                if (month < 10) {
+                    month = "0" + month;
+                }
+                if (day < 10) {
+                    day = "0" + day;
+                }
+                var val = d.getFullYear() + "-" + month + "-" + day;
+                return val;
+            }
         },
         mounted() {
             let today = this.addDate();

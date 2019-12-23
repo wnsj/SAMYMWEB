@@ -91,8 +91,8 @@
 					</div>
                     <div class="row">
                         <div class="col-md-3 col-lg-3">
-                            <p class="tips" style="font-size: 20px">总课时数：{{consumCountTotal}}</p>
-                            <p class="tips" style="font-size: 20px">总消费额：{{sumTotal}}</p>
+                            <p class="tips" style="font-size: 20px">总课时数：{{consumCountTotal}} 小时</p>
+                            <p class="tips" style="font-size: 20px">总消费额：{{sumTotal}} 元</p>
                         </div>
                     </div>
 					<!--分页插件-->

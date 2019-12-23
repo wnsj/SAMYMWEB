@@ -184,8 +184,8 @@
 
                         accountId: this.accountId(),
                         type:this.type,
-                        page:page.toString(),
-                        pageSize: this.pageSize.toString()
+                        page:page,
+                        pageSize: this.pageSize
                         // modelGrade:'2',
                         // modelType:'',
                         // operateType:'',
@@ -198,7 +198,7 @@
                         if(res.retData.grossInfo != null){
                             this.pages = res.retData.grossInfo.pages //总页数
                             this.current = res.retData.grossInfo.current //当前页码
-                            this.pageSize = res.retData.grossInfo.size //一页显示的数量  必须是奇数
+                            //this.pageSize = res.retData.grossInfo.size //一页显示的数量  必须是奇数
                             this.total = res.retData.grossInfo.total //数据的数量
                             this.$refs.paging.setParam(this.pages, this.current, this.total)
                             this.earningList = res.retData.grossInfo.records;

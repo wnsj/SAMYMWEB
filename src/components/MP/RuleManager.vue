@@ -239,7 +239,7 @@
 			init();
 		},
 		created() {
-			this.conditionCheck()
+			// this.conditionCheck()
 		},
 
 	}

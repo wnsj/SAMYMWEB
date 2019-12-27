@@ -397,7 +397,7 @@
 						this.orderCounselorOld[timeParam] = false
 					}
 				}
-				console.log('orderCounselorOld:' + JSON.stringify(this.orderCounselorOld))
+				// console.log('orderCounselorOld:' + JSON.stringify(this.orderCounselorOld))
 			},
 			setOrder(index, value) {
 				console.log("param:" + index + value)
@@ -431,8 +431,8 @@
 				} else {
 					this.numArr.push(index)
 				}
-				this.orderClick[timeParam] = value
-				console.log('orderClick:'+JSON.stringify(this.orderClick))
+				this.orderClick[timeParam] = !value
+				// console.log('orderClick:'+JSON.stringify(this.orderClick))
 			},
 
 			//feedback employee information

@@ -146,6 +146,48 @@
 								<input type="checkbox"	v-model="order.time16" class="form-control" :disabled="orderCounselorOld.time16" v-on:change="setOrder(16,order.time16)">
 							</div>
 						</div>
+						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;">
+							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[16]}}</label>
+							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+								<input type="checkbox"	v-model="order.time17" class="form-control" :disabled="orderCounselorOld.time17" v-on:change="setOrder(17,order.time17)">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;">
+							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[17]}}</label>
+							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+								<input type="checkbox"	v-model="order.time18" class="form-control" :disabled="orderCounselorOld.time18" v-on:change="setOrder(18,order.time18)">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;">
+							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[18]}}</label>
+							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+								<input type="checkbox"	v-model="order.time19" class="form-control" :disabled="orderCounselorOld.time19" v-on:change="setOrder(19,order.time19)">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;">
+							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[19]}}</label>
+							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+								<input type="checkbox"	v-model="order.time20" class="form-control" :disabled="orderCounselorOld.time20" v-on:change="setOrder(20,order.time20)">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;">
+							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[20]}}</label>
+							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+								<input type="checkbox"	v-model="order.time21" class="form-control" :disabled="orderCounselorOld.time21" v-on:change="setOrder(21,order.time21)">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;">
+							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[21]}}</label>
+							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+								<input type="checkbox"	v-model="order.time22" class="form-control" :disabled="orderCounselorOld.time22" v-on:change="setOrder(22,order.time22)">
+							</div>
+						</div>
+						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;">
+							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[22]}}</label>
+							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+								<input type="checkbox"	v-model="order.time23" class="form-control" :disabled="orderCounselorOld.time23" v-on:change="setOrder(23,order.time23)">
+							</div>
+						</div>
 					</div>
 					<div class="form-group clearfix">
 						<div class="col-md-12">
@@ -190,6 +232,13 @@
 					'16:00 - 16:30',
 					'16:30 - 17:00',
 					'17:00 - 17:30',
+					'17:30 - 18:00',
+					'18:00 - 18:30',
+					'18:30 - 19:00',
+					'19:00 - 19:30',
+					'19:30 - 20:00',
+					'20:00 - 20:30',
+					'20:30 - 21:00',
 				],
 				order:{
 					afternoon:'',
@@ -216,6 +265,13 @@
 					time14:false,
 					time15:false,
 					time16:false,
+					time17:false,
+					time18:false,
+					time19:false,
+					time20:false,
+					time21:false,
+					time22:false,
+					time23:false,
 				},
 				title:'新增',
 				testParam:true,
@@ -270,6 +326,13 @@
 					time14:false,
 					time15:false,
 					time16:false,
+					time17:false,
+					time18:false,
+					time19:false,
+					time20:false,
+					time21:false,
+					time22:false,
+					time23:false,
 				}
 				if(param=='add'){
 					console.log('Initialization order’s content, which adds order')
@@ -296,7 +359,7 @@
 				console.log("item:"+JSON.stringify(item)+index)
 			},
 			modifyOrder(){
-				for(var i=1;i <= 16; i++){
+				for(var i=1;i <= 23; i++){
 					var timeParam = 'time'.concat(i)
 					if(this.orderClick[timeParam]==true){
 						this.orderCounselorOld[timeParam]=false

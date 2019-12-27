@@ -319,15 +319,15 @@
 					this.orderClick.proId = ""
 				} else {
 					this.orderClick.proId = param.proId
-					if (this.counselorList != null && this.counselorList.length > 0) {
-						for (var i = 0; i < this.counselorList[0].proList.length; i++) {
-							var project = this.counselorList[0].proList[i]
-							if (this.consume.proId == project.proId) {
-								this.orderClick.frequency = project.frequency + 1
-								break;
-							}
-						}
-					}
+// 					if (this.counselorList != null && this.counselorList.length > 0) {
+// 						for (var i = 0; i < this.counselorList[0].proList.length; i++) {
+// 							var project = this.counselorList[0].proList[i]
+// 							if (this.consume.proId == project.proId) {
+// 								this.orderClick.frequency = project.frequency + 1
+// 								break;
+// 							}
+// 						}
+// 					}
 				}
 			},
 			//feedback employee information
@@ -346,7 +346,7 @@
 			addOrder(param){
 				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 				
-				console.log('orderClick:'+JSON.stringify(this.orderClick))
+				// console.log('orderClick:'+JSON.stringify(this.orderClick))
 				if(this.isBlank(this.orderClick.appName)){
 					alert("姓名不能为空")
 					return
@@ -472,17 +472,17 @@
 					var res = response.data
 					if (res.retCode == '0000') {
 						var member = res.retData.mem
-						console.log('member'+JSON.stringify(member))
+						// console.log('member'+JSON.stringify(member))
 						var counselorList = res.retData.counselorList
 						if (member != null) {
 							this.orderClick.memNum=member.memNum
 							this.orderClick.appName=member.memName
 							this.orderClick.phone=member.phone
 						}
-						if (this.counselorList.length > 0) {
+						if (counselorList.length > 0) {
 							console.log("有未完成的项目")
-							this.orderClick.empId = this.counselorList[0].counselor
-							this.$refs.counselorEmp.setEmp(counselorEmpId)
+							this.orderClick.empId = counselorList[0].counselor
+							this.$refs.counlorEmp.setEmp(this.orderClick.empId)
 						}else{
 							alert("没有未完成的项目，可以直接进行预约")
 						}

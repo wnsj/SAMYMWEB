@@ -11,7 +11,7 @@
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">时间</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <dPicker style="width:100%" v-model="thisDate"></dPicker>
+                    <dPicker style="width:100%" format="YYYY-MM-DD" v-model="thisDate"></dPicker>
                     <!--<store ref="store" @storeChange='storeChange'></store>-->
                 </div>
             </div>
@@ -39,7 +39,7 @@
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive pre-scrollable">
-                    <table class="table table-bordered table-hover" id="datatable" style="width:2000px; position:relative;">
+                    <table class="table table-bordered table-hover" id="datatable" style="width:100%; position:relative;">
                         <thead>
                         <tr>
                             <th class="text-center" rowspan="2" style="line-height:52px;">姓名</th>
@@ -190,9 +190,9 @@
                 console.log("时间为"+this.moment(this.thisDate,'YYYY-MM-DD'));
                 if(!this.isBlank(this.thisDate)){
                     this.schedulingListTitle=this.getWeekDay(this.moment(this.thisDate,'YYYY-MM-DD'));
+                    console.log("这个时间为"+this.getWeekDay(this.moment(this.thisDate,'YYYY-MM-DD')));
                     this.thisDate=this.moment(this.thisDate,'YYYY-MM-DD');
                 }
-                console.log('checkEmp')
                 var url = this.url + '/schedulingAction/queryScheduling'
                 this.$ajax({
                     method: 'POST',
@@ -281,7 +281,7 @@
                 let alldate = this.getAll(weekStart,weekEnd);
                 //let result = this.chinaDate(alldate);
                 this.schedulingListTitle = alldate;
-                console.log(this.schedulingListTitle);
+                //console.log('12:'+this.getAll('2019.12.30','2019.01.05'));
 
             },
             //日期转换
@@ -315,7 +315,7 @@
                 let unixDe = arr2_.getTime();
                 for (let k = unixDb; k <= unixDe;) {
                     arrTime.push(this.datetimeparse(k, 'YYYY-MM-DD'));
-                    k = k + 24 * 60 * 60 * 1000;
+                    k = k + 24 * 60 * 60 * 1000;               
                 }
                 return arrTime;
             },
@@ -411,21 +411,34 @@
                 function formatDate(date) {
                     return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
                 }
+            },
+             addDate(date, days) {
+                var d = new Date(date);
+                d.setDate(d.getDate() + days);
+                var month = d.getMonth() + 1;
+                var day = d.getDate();
+                if (month < 10) {
+                    month = "0" + month;
+                }
+                if (day < 10) {
+                    day = "0" + day;
+                }
+                var val = d.getFullYear() + "-" + month + "-" + day;
+                return val;
             }
         },
 
         mounted() {
             this.$refs.counselorChange.setPosName("咨询师")
             this.$refs.counselorChange.setEmp("")
-            let today = this.addDate();
-            this.getWeekStartAndEnd(today);
+            //let today = this.addDate();
+            //this.getWeekStartAndEnd(today);
+            this.schedulingListTitle=this.getWeekDay(this.moment(this.addDate(new Date(),7),'YYYY-MM-DD'));
             window.addEventListener('scroll', this.handleScroll, true)
             init();
         },
         created() {
-
             this.checkEmp(1);
-
         }
     }
 </script>

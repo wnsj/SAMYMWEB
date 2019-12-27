@@ -246,15 +246,6 @@
 </script>
 
 <style>
-	.pos-tr{ 
-		top:0;
-		right:20px; 
-		line-height:34px;
-		-webkit-user-select:none;
-    	-moz-user-select:none;
-    	-ms-user-select:none;
-    	user-select:none;
-	}
 	label.bui-radios-label{
 		 position:relative;
 		 margin-right:10px;

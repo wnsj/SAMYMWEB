@@ -497,19 +497,13 @@
 				if(this.numArr.length>0){
 					var num=null
 					var copyNum=null
-					for(var i=0;i < this.numArr.length;i++){
-						var isContinnue=false
-						num=this.numArr[i]
-						for(var j=0;j < this.numArr.length;j++){
-							copyNum=this.numArr[j]
-							if(num-copyNum==1 || num-copyNum==-1){
-								isContinnue=true
-							}
-						}
-						if(isContinnue==false){
-							alert('请选择连续的预约时间')
-							return
-						}
+					this.numArr=this.numArr.sort(function(a,b){
+						return a-b;
+					})
+					console.log(this.numArr)
+					if(this.numArr[this.numArr.length-1]-this.numArr[0]!=this.numArr.length-1){
+						alert('预约时间之间不能有间隔')
+						return
 					}
 				}else{
 					alert('没有预约时间，请选择预约时间')

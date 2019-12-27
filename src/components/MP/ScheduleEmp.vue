@@ -39,7 +39,7 @@
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive pre-scrollable">
-                    <table class="table table-bordered table-hover" id="datatable" style="width:2000px; position:relative;">
+                    <table class="table table-bordered table-hover" id="datatable" style="width:100%; position:relative;">
                         <thead>
                         <tr>
                             <th class="text-center" rowspan="2" style="line-height:52px;">姓名</th>

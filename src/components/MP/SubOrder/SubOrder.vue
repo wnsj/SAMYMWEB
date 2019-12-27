@@ -83,7 +83,7 @@
 						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
 							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[5]}}</label>
 							<div class="col-md-4" style='line-height:34px;padding-right:0; '>
-								<input type="checkbox" v-model="order.time6"  class="form-control" :disabled="orderCounselorOld.time6" v-on:change="setOrder(6,order.time6)">
+								<input type="checkbox" :checked="order.time6"  class="form-control" :disabled="orderCounselorOld.time6" v-on:change="setOrder(6,order.time6)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
@@ -179,13 +179,13 @@
 						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;margin-right:4%;">
 							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[21]}}</label>
 							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
-								<input type="checkbox"	v-model="order.time22" class="form-control" :disabled="orderCounselorOld.time22" v-on:change="setOrder(22,order.time22)">
+								<input type="checkbox" v-model="order.time22" class="form-control" :disabled="orderCounselorOld.time22" v-on:change="setOrder(22,order.time22)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;margin-right:4%;">
 							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[22]}}</label>
 							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
-								<input type="checkbox"	v-model="order.time23" class="form-control" :disabled="orderCounselorOld.time23" v-on:change="setOrder(23,order.time23)">
+								<input type="checkbox" v-model="order.time23" class="form-control" :disabled="orderCounselorOld.time23" v-on:change="setOrder(23,order.time23)">
 							</div>
 						</div>
 					</div>
@@ -276,6 +276,7 @@
 				title:'新增',
 				testParam:true,
 				orderCounselorOld:{},
+				isContinnue:'0',
 				orderClick:{
 					memNum:'',
 					appName:'',
@@ -286,6 +287,7 @@
 					proId:'',
 				},
 				counselorList:[],
+				numArr:[],//记录被选中的时间
 			};
 		},
 		methods:{
@@ -369,6 +371,36 @@
 			},
 			setOrder(index,value){
 				console.log("param:"+index+value)
+				
+				var isContain=false 		//是否包含,false:不包含，true：包含，
+				var isContinnue=false		//false：非连续数字,true:连续数字
+				var numIndex=0				//第几个
+				if(this.numArr.length>0){
+					for(var i=0;i<this.numArr.length;i++){
+						var num = this.numArr[i]
+						if(num==index){
+							isContain=true
+							numIndex=i
+						}
+						if(num-index==1 || num-index ==-1){
+							isContinnue=true
+						}
+					}
+					if(isContain==true){
+						this.numArr.splice(numIndex,1)
+					}else {
+						if(isContinnue==true){
+							this.numArr.push(index)
+						}else{
+							alert("请预约连续的时间段")
+							this.order.time6=false
+							return
+						}
+					}
+				}else{
+					this.numArr.push(index)
+				}
+				console.log(this.numArr)
 				var timeParam = 'time'.concat(index)
 				
 				this.orderClick[timeParam]=value

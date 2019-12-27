@@ -391,10 +391,12 @@
 				console.log("item:" + JSON.stringify(item) + index)
 			},
 			modifyOrder() {
+				this.numArr=[]
 				for (var i = 1; i <= 23; i++) {
 					var timeParam = 'time'.concat(i)
 					if (this.orderClick[timeParam] == true) {
 						this.orderCounselorOld[timeParam] = false
+						this.numArr.push(i)
 					}
 				}
 				// console.log('orderCounselorOld:' + JSON.stringify(this.orderCounselorOld))
@@ -403,7 +405,6 @@
 				console.log("param:" + index + value)
 				var timeParam = 'time'.concat(index)
 				var isContain = false //是否包含,false:不包含，true：包含，
-				var isContinnue = false //false：非连续数字,true:连续数字
 				var numIndex = 0 //第几个
 				if (this.numArr.length > 0) {
 					for (var i = 0; i < this.numArr.length; i++) {
@@ -411,23 +412,15 @@
 						if (num == index) {
 							isContain = true
 							numIndex = i
-						}
-						if (num - index == 1 || num - index == -1) {
-							isContinnue = true
+							break
 						}
 					}
 					if (isContain == true) {
 						this.numArr.splice(numIndex, 1)
 					} else {
-						if (isContinnue == true) {
-							this.numArr.push(index)
-						} else {
-							alert("请预约连续的时间段")
-							this.order[timeParam] = null
-							console.log(this.order.time6)
-							return
-						}
+						this.numArr.push(index)
 					}
+					console.log(this.numArr)
 				} else {
 					this.numArr.push(index)
 				}

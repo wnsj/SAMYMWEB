@@ -276,6 +276,7 @@
 				title:'新增',
 				testParam:true,
 				orderCounselorOld:{},
+				isContinnue:'0',
 				orderClick:{
 					memNum:'',
 					appName:'',
@@ -286,6 +287,7 @@
 					proId:'',
 				},
 				counselorList:[],
+				numArr:[],//记录被选中的时间
 			};
 		},
 		methods:{
@@ -369,6 +371,31 @@
 			},
 			setOrder(index,value){
 				console.log("param:"+index+value)
+				
+				var isContain=0 //是否包含,0:不包含，1：包含，2：非连续数字,3:连续数字
+				var numIndex=0		//第几个
+				if(this.numArr.length>0){
+					for(var i=0;i<this.numArr.length;i++){
+						var num = this.numArr[i]
+						if(num==index){
+							isContain=1
+							numIndex=i
+						}
+						if(num-index==1 || num-index ==-1){
+							isContain==3
+						}
+					}
+					if(isContain==1){
+						this.numArr.splice(numIndex,1)
+					}else if(isContain==3 || isContain==0){
+						this.numArr.push(index)
+					}else{
+						alert("请选择连续课程进行预约")
+						return
+					}
+				}else{
+					this.numArr.push(index)
+				}
 				var timeParam = 'time'.concat(index)
 				
 				this.orderClick[timeParam]=value

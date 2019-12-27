@@ -426,10 +426,10 @@
 					alert('咨询师不能为空')
 					return
 				}
-				if(this.isBlank(this.orderClick.proId) || this.orderClick.proId=='0'){
-					alert('咨询师课程不能为空')
-					return
-				}
+// 				if(this.isBlank(this.orderClick.proId) || this.orderClick.proId=='0'){
+// 					alert('咨询师课程不能为空')
+// 					return
+// 				}
 				if(!this.isBlank(this.orderClick.appDate)){
 					this.orderClick.appDate=this.moment(this.orderClick.appDate,'YYYY-MM-DD 00:00:00.000')
 				}else{

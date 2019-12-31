@@ -391,10 +391,12 @@
 				console.log("item:" + JSON.stringify(item) + index)
 			},
 			modifyOrder() {
+				this.numArr=[]
 				for (var i = 1; i <= 23; i++) {
 					var timeParam = 'time'.concat(i)
 					if (this.orderClick[timeParam] == true) {
 						this.orderCounselorOld[timeParam] = false
+						this.numArr.push(i)
 					}
 				}
 				// console.log('orderCounselorOld:' + JSON.stringify(this.orderCounselorOld))
@@ -403,7 +405,6 @@
 				console.log("param:" + index + value)
 				var timeParam = 'time'.concat(index)
 				var isContain = false //是否包含,false:不包含，true：包含，
-				var isContinnue = false //false：非连续数字,true:连续数字
 				var numIndex = 0 //第几个
 				if (this.numArr.length > 0) {
 					for (var i = 0; i < this.numArr.length; i++) {
@@ -411,23 +412,15 @@
 						if (num == index) {
 							isContain = true
 							numIndex = i
-						}
-						if (num - index == 1 || num - index == -1) {
-							isContinnue = true
+							break
 						}
 					}
 					if (isContain == true) {
 						this.numArr.splice(numIndex, 1)
 					} else {
-						if (isContinnue == true) {
-							this.numArr.push(index)
-						} else {
-							alert("请预约连续的时间段")
-							this.order[timeParam] = null
-							console.log(this.order.time6)
-							return
-						}
+						this.numArr.push(index)
 					}
+					console.log(this.numArr)
 				} else {
 					this.numArr.push(index)
 				}
@@ -504,19 +497,13 @@
 				if(this.numArr.length>0){
 					var num=null
 					var copyNum=null
-					for(var i=0;i < this.numArr.length;i++){
-						var isContinnue=false
-						num=this.numArr[i]
-						for(var j=0;j < this.numArr.length;j++){
-							copyNum=this.numArr[j]
-							if(num-copyNum==1 || num-copyNum==-1){
-								isContinnue=true
-							}
-						}
-						if(isContinnue==false){
-							alert('请选择连续的预约时间')
-							return
-						}
+					this.numArr=this.numArr.sort(function(a,b){
+						return a-b;
+					})
+					console.log(this.numArr)
+					if(this.numArr[this.numArr.length-1]-this.numArr[0]!=this.numArr.length-1){
+						alert('预约时间之间不能有间隔')
+						return
 					}
 				}else{
 					alert('没有预约时间，请选择预约时间')

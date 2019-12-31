@@ -50,7 +50,15 @@
 				</div>
 
 			</div>
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px; padding-bottom:1.5%;">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span class="sign-left">:</span>
+                </div>
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <emp ref="counlorEmp" @employeeChange="counlorEmpChange" v-on:change="selectHours()"></emp>
+                </div>
+            </div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-right:30px; padding-bottom:1.5%;">
 				<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 				 v-on:click="conditionCheck(1)">查询</button>
 			</div>
@@ -71,6 +79,7 @@
 									<th class="text-center">课时(小时)</th>
 									<th class="text-center">折扣(%)</th>
 									<th class="text-center">消费金额</th>
+									<th class="text-center">咨询师</th>
 									<th class="text-center">消费时间</th>
 								</tr>
 							</thead>
@@ -84,6 +93,7 @@
 									<td>{{item2.consumCount}}</td>
 									<td>{{item2.discount}}</td>
 									<td>{{item2.zsum}}</td>
+									<td>{{item2.empName}}</td>
 									<td>{{item2.creatDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								</tr>
 							</tbody>
@@ -92,7 +102,15 @@
                     <div class="row">
                         <div class="col-md-3 col-lg-3">
                             <p class="tips" style="font-size: 20px">总课时数：{{consumCountTotal}} 小时</p>
+                        </div>
+                        <div class="col-md-3 col-lg-3">
                             <p class="tips" style="font-size: 20px">总消费额：{{sumTotal}} 元</p>
+                        </div>
+                        <div class="col-md-3 col-lg-3" v-show="showHours">
+                            <p class="tips" style="font-size: 20px">已消费课时：{{consumptionHours}} 小时</p>
+                        </div>
+                        <div class="col-md-3 col-lg-3" v-show="showHours">
+                            <p class="tips" style="font-size: 20px">未消费课时：{{unusedHours}} 小时</p>
                         </div>
                     </div>
 					<!--分页插件-->
@@ -124,6 +142,7 @@
 	import SubConsume from '../MP/SubConsume/SubConsumeList.vue'
 	import store from '../common/Store.vue'
 	import Paging from '../common/paging'
+    import emp from '../common/Employee.vue'
 	import {
 		init
 	} from '@/../static/js/common.js'
@@ -133,10 +152,12 @@
 			dPicker,
 			SubConsume,
 			Paging,
-			store
+			store,
+            emp
 		},
 		data() {
 			return {
+                empId:'',
 				storeId: this.storeId(),
 				memNum: '',
 				memName: '',
@@ -155,7 +176,11 @@
 				total: '', //数据的数量
 
                 sumTotal:'0',//消费的总金额
-                consumCountTotal:'0'//消费的总课时
+                consumCountTotal:'0',//消费的总课时
+
+                showHours:false,//控制显示咨询师已消费课时，未消费课时
+                consumptionHours:'',//已消费课时
+                unusedHours:'',//未消费课时
 			}
 		},
 
@@ -165,6 +190,69 @@
 				this.current = page
 				this.conditionCheck(page);
 			},
+            //咨询师
+            counlorEmpChange: function(param) {
+			    console.log(param)
+                // if (this.isBlank(param)) {
+                //     this.empId = ""
+                // } else {
+                //     this.$refs.counlorEmp.setPosName("咨询师")
+                //     this.$refs.counlorEmp.setEmp("")
+                //     this.empId = param.empId
+                //
+                // }
+                console.log("进入了这个方法")
+                if (this.isBlank(param)) {
+                    this.empId = ""
+                    this.showHours=false
+                } else {
+                    this.empId = param.empId
+
+                    //this.$refs.counlorEmp.setEmpId(this.empId)
+                    var url = this.url + '/accountRecordAction/queryhours'
+                    this.$ajax({
+                        method: 'POST',
+                        url: url,
+                        headers: {
+                            'Content-Type': this.contentType,
+                            'Access-Token': this.accessToken
+                        },
+                        data: {
+                            empId:this.empId,
+                        },
+                        dataType: 'json',
+                    }).then((response) => {
+                        var res = response.data
+                        console.log(res)
+                        if (res.retCode == '0000') {
+                            //咨询师消费课时，未消费课时
+                            if(res.retData==null){
+                                this.showHours=false
+                            }else {
+                                if(res.retData.consumptionHours==null){
+                                    this.consumptionHours='0'
+                                }else {
+                                    this.consumptionHours=res.retData.consumptionHours
+                                }
+                                if(res.retData.unusedHours==null){
+                                    this.unusedHours='0'
+                                }else {
+                                    this.unusedHours=res.retData.unusedHours
+                                }
+                                this.showHours=true
+                            }
+
+                        } else {
+                            alert(res.retMsg)
+                        }
+                    }).catch((error) => {
+                        console.log('请求失败处理')
+                    });
+                }
+            },
+            selectHours(){
+			  alert("hhhhhhhhhhh"+this.empId)
+            },
 			storeChange(param) {
 				if (this.isBlank(param)) {
 					this.storeId = ""
@@ -205,7 +293,8 @@
 						modelType: '',
 						operateType: '',
 						page: page.toString(),
-						pageSize: this.pageSize
+						pageSize: this.pageSize,
+                        empId:this.empId
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -226,6 +315,7 @@
                             this.consumCountTotal='0'
                             this.sumTotal='0'
                         }
+
 
 					}
 				}).catch((error) => {
@@ -274,6 +364,8 @@
 				console.log("首次被加载")
 			}
 			init();
+            this.$refs.counlorEmp.setPosName("咨询师")
+            this.$refs.counlorEmp.setEmp("")
 		},
 		created() {
 			this.conditionCheck(1)

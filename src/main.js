@@ -72,9 +72,9 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-//token存储在cookie中的过期时间10个小时
-Vue.prototype.accessTokenLife = 24/10
-Vue.prototype.accountDataLife = 24/10
+//token存储在cookie中的过期时间1天，必须是整数
+Vue.prototype.accessTokenLife = 0.01
+Vue.prototype.accountDataLife = 0.01
 //是否使用前端设置cookie
 Vue.prototype.isUseSetCookie = true
 

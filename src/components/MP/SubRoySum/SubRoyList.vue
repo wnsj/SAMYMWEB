@@ -52,20 +52,20 @@
 					</table>
 				</div>
 				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px" 
-				v-show="(posType=='店长' || posType=='店长助理') && refund.royalty > 0">
+				v-show="(posType=='店长' || posType=='店长助理'||posType=='咨询师' || posType=='咨询顾问') && refund.royalty > 0">
 					<div class="modal-header pd0">
 						<h4 class="pull-left">退费扣提成</h4>
 					</div>
 					<table class="table table-bordered table-hover user-table mb0">
 						<thead>
 							<tr>
-								<th class="text-center">退费金额</th>
+								<!-- <th class="text-center">退费金额</th> -->
 								<th class="text-center">扣提成金额</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>{{refund.balance}}</td>
+								<!-- <td>{{refund.balance}}</td> -->
 								<td>{{refund.royalty}}</td>
 							</tr>
 						</tbody>

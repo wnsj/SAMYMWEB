@@ -53,9 +53,9 @@
 						//后台写入cookie不成功，先由前端代替
 						if(this.isUseSetCookie){
 							//cookie存储大小为4k左右，进行cookie瘦身
-							Cookies.set('accessToken', this.accountData.accessToken, { expires: this.accessTokenLife });
-							Cookies.set('accountData', this.accountData.accountData, { expires: this.accountDataLife });
-							Cookies.set('itemList', this.accountData.itemList, { expires: this.accountDataLife });
+							Cookies.set('accessToken', this.accountData.accessToken,"30MIN");
+							Cookies.set('accountData', this.accountData.accountData, "30MIN");
+							Cookies.set('itemList', this.accountData.itemList, "30MIN");
 						}
 						// alert("登录成功！"); //添加成功
 						this.$parent.setRouter("/MainPage");

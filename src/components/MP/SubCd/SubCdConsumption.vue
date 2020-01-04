@@ -375,7 +375,8 @@
           alert("折后总额不能为空")
           return
         }
-        if (this.isBlank(this.consume.balance)) {
+        console.log(this.consume.balance)
+        if (this.consume.balance<0) {
           alert("剩余定金不能为空")
           return
         }

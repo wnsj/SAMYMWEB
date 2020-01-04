@@ -12,6 +12,13 @@
 				<button class="btn btn-primary" style="width:100%" @click="login()">{{btnText}}</button>
 			</div>
 		</div>
+		<div class="row row_edit">
+			<div class="modal fade" id="modifyPwd">
+				<div class="modal-dialog">
+					<modPwd></modPwd>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 <style>
@@ -21,8 +28,12 @@
 <script>
 	import axios from 'axios';
 	import Cookies from 'js-cookie'
+	import modPwd from './MP/SubPwd/ModifyPwd.vue'
 	var vm = null;
 	export default {
+		components:{
+			modPwd,
+		},
 		data() {
 			return {
 				accountName: '',
@@ -57,8 +68,9 @@
 							Cookies.set('accountData', this.accountData.accountData, "30MIN");
 							Cookies.set('itemList', this.accountData.itemList, "30MIN");
 						}
+						$("#modifyPwd").modal('show')
 						// alert("登录成功！"); //添加成功
-						this.$parent.setRouter("/MainPage");
+						// this.$parent.setRouter("/MainPage");
 					} else {
 						this.btnText = '登录';
 						alert(response.data.retMsg);

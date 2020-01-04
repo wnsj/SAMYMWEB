@@ -52,6 +52,9 @@
                             <dd v-on:click="selectRule('CashDeposit')" v-bind:class="{'li-active':onString == 'CashDeposit'}">
                                 <i class="fa" aria-hidden="true">定金管理</i>
                             </dd>
+                            <dd v-on:click="selectRule('ZxsSummary')" v-bind:class="{'li-active':onString == 'ZxsSummary'}">
+                                <i class="fa" aria-hidden="true">咨询师汇总</i>
+                            </dd>
                         </dl>
                         <dl v-bind:class="{h40:bool3}">
                             <dt @click="onShow(2)" v-bind:class="{'li-active':bool3}">
@@ -300,7 +303,7 @@
     #aside-menu dl.noShow{color:#f2ad4e }
     #aside-menu dl.h10{height:100px; }
     #aside-menu dl.h15{height:150px; }
-    #aside-menu dl.h25{height:250px; }
+    #aside-menu dl.h25{height:300px; }
     #aside-menu dl.h40{height:400px; }
     #aside-menu dl dt{height:50px;text-align:center;background:#e6e6e6;border-bottom:1px solid #ccc;}
     #aside-menu dl dd{height:50px;text-align:center;border-bottom:1px solid #ccc;}

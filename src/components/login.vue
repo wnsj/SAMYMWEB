@@ -15,7 +15,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="modifyPwd">
 				<div class="modal-dialog">
-					<modPwd></modPwd>
+					<modPwd ref="modPwd" @certainAction="modifyPwdBack"></modPwd>
 				</div>
 			</div>
 		</div>
@@ -43,6 +43,12 @@
 			};
 		},
 		methods: {
+			
+			modifyPwdBack(){
+				this.$parent.setRouter("/MainPage");
+				$("#modifyPwd").modal('hide')
+			},
+			
 			login() {
 				this.btnText = '登录中...';
 				var url = this.url + "/accountAction/login";
@@ -68,9 +74,12 @@
 							Cookies.set('accountData', this.accountData.accountData, "30MIN");
 							Cookies.set('itemList', this.accountData.itemList, "30MIN");
 						}
-						$("#modifyPwd").modal('show')
-						// alert("登录成功！"); //添加成功
-						// this.$parent.setRouter("/MainPage");
+						if(this.accountPwd=='123456'){
+							$("#modifyPwd").modal('show')
+							this.$refs.modPwd.initData(this.accountData.accountData)
+						}else{
+							this.$parent.setRouter("/MainPage");
+						}
 					} else {
 						this.btnText = '登录';
 						alert(response.data.retMsg);

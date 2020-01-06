@@ -39,7 +39,8 @@
 				accountName: '',
 				accountPwd: '',
 				accountData: {},
-				btnText: '登录'
+				btnText: '登录',
+				cip:'',
 			};
 		},
 		methods: {
@@ -48,7 +49,6 @@
 				this.$parent.setRouter("/MainPage");
 				$("#modifyPwd").modal('hide')
 			},
-			
 			login() {
 				this.btnText = '登录中...';
 				var url = this.url + "/accountAction/login";
@@ -61,7 +61,8 @@
 					},
 					data: {
 						"accountNum": this.accountName,
-						"accountPwd": this.accountPwd
+						"accountPwd": this.accountPwd,
+						"ipaddress":returnCitySN.cip,
 					},
 					dataType: "json"
 				}).then((response) => {

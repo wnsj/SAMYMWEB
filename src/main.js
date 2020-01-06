@@ -167,6 +167,11 @@ Vue.prototype.storeId = function() {
 Vue.prototype.phoneNum = function(phoneNum) {
   return constant.phone(phoneNum);
 }
+//获取IP地址
+Vue.prototype.ipAddress = function(){
+	return constant.ipAddress();
+}
+
 
 /*
  **权限判断使用方法:

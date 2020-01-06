@@ -84,7 +84,8 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						this.$parent.$parent.setRouter("/MainPage");
+						this.$emit("certainAction")
+						$(".modal-backdrop").hide();
 					}
 				}).catch((error) => {
 					console.log('课程信息请提交失败')

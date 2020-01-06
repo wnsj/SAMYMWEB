@@ -7,6 +7,11 @@ const constant = {
 
 
 
+/*获取IP*/
+constant.ipAddress = function(){
+	return returnCitySN.cip;
+}
+
 /*判断值是否为空，是空返回true*/
 constant.isBlank = function(value) {
 	if (value == '' || value == null || value == undefined || (value.length >

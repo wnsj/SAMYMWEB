@@ -66,22 +66,27 @@
                             <tr>
                                 <th class="text-center">会员卡号</th>
                                 <th class="text-center">姓名</th>
-                                <th class="text-center">手机号</th>
-                                <th class="text-center">购项次数</th>
-                                <th class="text-center">课时总数</th>
-                                <th class="text-center">已使用课时</th>
+                                <th class="text-center">咨询师</th>
+                                <th class="text-center">项目</th>
+                                <th class="text-center">购买课时</th>
+                                <th class="text-center">消费课时</th>
+                                <th class="text-center">退费课时</th>
                                 <th class="text-center">剩余课时</th>
+                                <th class="text-center">购买时间</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr v-for="(item,index) in memCostList" :key="index" v-on:dblclick="detailAction(item)">
-                                <td>{{item.memNum}}</td>
-                                <td>{{item.memName}}</td>
-                                <td>{{item.phone}}</td>
-                                <td>{{item.itemNums}}</td>
-                                <td>{{item.numberOfContracts}}</td>
-                                <td>{{item.consumptionTimes}}</td>
-                                <td>{{item.residualTimes}}</td>
+                                <td>{{item.MEM_NUM}}</td>
+                                <td>{{item.MEM_NAME}}</td>
+                                <td>{{item.EMP_NAME}}</td>
+                                <td>{{item.PRO_NAME}}</td>
+                                <td>{{item.ACTUAL_COUNT}}</td>
+                                <td>{{item.CONSUM_COUNT}}</td>
+                                <td>{{item.REF_COUNT}}</td>
+                                <td>{{item.REMAINING_CLASS_HOUR}}</td>
+                                <td>{{item.CREATE_DATE | dateFormatFilter("YYYY-MM-DD")}}</td>
+
                             </tr>
                             </tbody>
                         </table>
@@ -209,6 +214,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
+                    console.log(res)
                     if (res.retCode == '0000') {
                         this.pages=res.retData.pages //总页数
                         this.current=res.retData.current //当前页码

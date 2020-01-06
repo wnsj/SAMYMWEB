@@ -69,7 +69,8 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						memNum:param.memNum,
+						memNum:param.MEM_NUM,
+                        piId:param.PI_ID
 					},
 					dataType: 'json',
 				}).then((response) => {

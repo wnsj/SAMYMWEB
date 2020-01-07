@@ -204,15 +204,13 @@
 						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;margin-right:4%;">
 							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[21]}}</label>
 							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
-								<input type="checkbox" v-model="order.time22" class="form-control" :disabled="orderCounselorOld.time22"
-								 v-on:click="setOrder(22,order.time22)">
+								<input type="checkbox" v-model="order.time22" class="form-control" :disabled="orderCounselorOld.time22" v-on:click="setOrder(22,order.time22)">
 							</div>
 						</div>
 						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;margin-right:4%;">
 							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[22]}}</label>
 							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
-								<input type="checkbox" v-model="order.time23" class="form-control" :disabled="orderCounselorOld.time23"
-								 v-on:click="setOrder(23,order.time23)">
+								<input type="checkbox" v-model="order.time23" class="form-control" :disabled="orderCounselorOld.time23" v-on:click="setOrder(23,order.time23)">
 							</div>
 						</div>
 					</div>
@@ -415,6 +413,7 @@
 							break
 						}
 					}
+
 					if (isContain == true) {
 						this.numArr.splice(numIndex, 1)
 					} else {

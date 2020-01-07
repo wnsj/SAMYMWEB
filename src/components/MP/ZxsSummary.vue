@@ -3,22 +3,20 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">咨询师汇总</h1>
         </div>
-        <!--<div class="row" style="margin-top: 40px;">-->
-            <!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">-->
-                <!--<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">-->
-                    <!--<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>-->
-                <!--</div>-->
-                <!--<div class="col-md-7 col-lg-7">-->
-                    <!--<store ref='store' @storeChange='storeChange'></store>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
         <div class="row" style="margin-top: 15px;">
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:10px;">
-                <div class="col-md-3 col-lg-3 text-right" style="padding: 0; line-height: 34px; width:20.5%;">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
+                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+                </div>
+                <div class="col-md-7 col-lg-7">
+                    <store ref='store' @storeChange='storeChange'></store>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-left:10px;">
+                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">开始月份</p><span class="sign-left">:</span>
                 </div>
-                <div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
+                <div class="col-md-7 col-lg-7">
                     <dPicker style="width:100%" format="YYYY-MM" v-model="beginDate"></dPicker>
                 </div>
             </div>
@@ -30,7 +28,7 @@
                     <emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
                 </div>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-right:30px; padding-bottom:1.5%;">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding-right:30px; padding-bottom:1.5%;">
                 <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
                         v-on:click="queryZxsSummary(1)">查询</button>
             </div>
@@ -139,6 +137,8 @@
                 isShowSummary:false,//是否显示汇总信息
                 beginDate:'',
                 empId:'',
+                accountType: this.accountType(),
+                storeId: this.storeId(),
 
                 //分页需要的数据
                 pages: '', //总页数
@@ -152,6 +152,13 @@
             pageChange: function(page) {
                 this.current = page
                 this.queryZxsSummary(page);
+            },
+            storeChange(param) {
+                if (this.isBlank(param)) {
+                    this.storeId = ""
+                } else {
+                    this.storeId = param.storeId
+                }
             },
             //咨询师
             counlorEmpChange: function(param) {
@@ -177,7 +184,8 @@
                     },
                     data: {
                         empId:this.empId,
-                        beginDate:beginDate
+                        beginDate:beginDate,
+                        storeId:this.storeId
                     },
                     dataType: 'json',
                 }).then((response) => {
@@ -216,7 +224,8 @@
                         empId:this.empId,
                         beginDate:beginDate,
                         page:page+"",
-                        pageSize:this.pageSize+""
+                        pageSize:this.pageSize+"",
+                        storeId:this.storeId
                     },
                     dataType: 'json',
                 }).then((response) => {

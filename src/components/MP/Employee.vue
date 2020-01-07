@@ -196,7 +196,7 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        accountId: this.accountId(),
+                        posId: this.accountPosId(),
                         moduleGrade:'2',
                         urlName:'/MP/Employee',
                         operateType:param,
@@ -222,7 +222,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('商铺查询请求失败')
+                    console.log('员工权限查询请求失败')
                 });
             },
             //check the list of department
@@ -242,10 +242,6 @@
                         empName: this.empName,
                         isuse: this.isuse,
 
-                        accountId: this.accountId(),
-                        moduleGrade:'2',
-                        urlName:'/MP/Employee',
-                        operateType:'4',
                         page:page.toString(),
                         pageSize:this.pageSize
                     },

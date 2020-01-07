@@ -125,7 +125,7 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						accountId: this.accountId(),
+						posId: this.accountPosId(),
 						moduleGrade:'2',
 						urlName:'/MP/Position',
 						operateType:param,

@@ -39,7 +39,8 @@
 				accountName: '',
 				accountPwd: '',
 				accountData: {},
-				btnText: '登录'
+				btnText: '登录',
+				cip:'',
 			};
 		},
 		methods: {
@@ -48,7 +49,6 @@
 				this.$parent.setRouter("/MainPage");
 				$("#modifyPwd").modal('hide')
 			},
-			
 			login() {
 				this.btnText = '登录中...';
 				var url = this.url + "/accountAction/login";
@@ -61,7 +61,8 @@
 					},
 					data: {
 						"accountNum": this.accountName,
-						"accountPwd": this.accountPwd
+						"accountPwd": this.accountPwd,
+						"ipaddress":returnCitySN.cip,
 					},
 					dataType: "json"
 				}).then((response) => {
@@ -72,6 +73,7 @@
 							//cookie存储大小为4k左右，进行cookie瘦身
 							Cookies.set('accessToken', this.accountData.accessToken,"30MIN");
 							Cookies.set('accountData', this.accountData.accountData, "30MIN");
+							Cookies.set('empData', this.accountData.empData, "30MIN");
 							Cookies.set('itemList', this.accountData.itemList, "30MIN");
 						}
 						if(this.accountPwd=='123456'){

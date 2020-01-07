@@ -84,7 +84,7 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-						this.$parent.$parent.setRouter("/MainPage");
+						this.$emit("certainAction")
 						$(".modal-backdrop").hide();
 					}
 				}).catch((error) => {

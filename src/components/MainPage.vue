@@ -276,6 +276,8 @@
     #aside-menu dl dd.li-active {background:#fff}
     .li-active i {color: #f2ad4e;}
     .root{width:100%; overflow-x:hidden;}
+	a{color: #795548;}
+	a:hover{color: #795548;}
 </style>
 <host>
 	

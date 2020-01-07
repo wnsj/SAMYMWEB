@@ -27,10 +27,10 @@
                                     会员管理模块
                                 </i>
                             </dt>
-                            <dd v-bind:class="{'li-active':onString == 'MemberSummary'}">
+                            <dd class="li-active">
 								<router-link to="/MP/MemberSummary"><i class="fa" aria-hidden="true">会员汇总</i></router-link>
                             </dd>
-                            <dd v-bind:class="{'li-active':onString == 'Member'}">
+                            <dd>
 								<router-link to="/MP/Member"><i class="fa" aria-hidden="true">会员基本信息</i></router-link>
                             </dd>
                         </dl>
@@ -40,19 +40,19 @@
                                     消费管理模块
                                 </i>
                             </dt>
-                            <dd v-bind:class="{'li-active':onString == 'SettleSummary'}">
+                            <dd>
 								<router-link to="/MP/SettleSummary"><i class="fa" aria-hidden="true">消费汇总</i></router-link>
                             </dd>
-                            <dd v-bind:class="{'li-active':onString == 'Charge'}">
+                            <dd>
 								<router-link to="/MP/Charge"><i class="fa" aria-hidden="true">已购课程管理</i></router-link>
                             </dd>
-                            <dd v-bind:class="{'li-active':onString == 'Order'}">
+                            <dd>
 								<router-link to="/MP/Order"><i class="fa" aria-hidden="true">预约管理</i></router-link>
                             </dd>
-                            <dd v-bind:class="{'li-active':onString == 'CashDeposit'}">
+                            <dd>
 								<router-link to="/MP/CashDeposit"><i class="fa" aria-hidden="true">定金管理</i></router-link>
                             </dd>
-                            <dd v-bind:class="{'li-active':onString == 'ZxsSummary'}">
+                            <dd>
 								<router-link to="/MP/ZxsSummary"><i class="fa" aria-hidden="true">咨询师汇总</i></router-link>
                             </dd>
                         </dl>
@@ -62,25 +62,25 @@
                                     基础设置
                                 </i>
                             </dt>
-                            <dd v-bind:class="{'li-active':onString == 'Employee'}">
+                            <dd>
                                 <router-link to="/MP/Employee"><i class="fa" aria-hidden="true">员工管理</i></router-link>
                             </dd>
-                            <dd v-bind:class="{'li-active':onString == 'ScheduleEmp'}">
+                            <dd>
 								<router-link to="/MP/ScheduleEmp"><i class="fa" aria-hidden="true">排班管理</i></router-link>
                             </dd>
-                            <dd v-bind:class="{'li-active':onString == 'Position'}">
+                            <dd>
 								<router-link to="/MP/Position"><i class="fa" aria-hidden="true">岗位管理</i></router-link>
                             </dd>
-                            <dd v-bind:class="{'li-active':onString == 'Store'}">
+                            <dd>
 								<router-link to="/MP/Store"><i class="fa" aria-hidden="true">门店管理</i></router-link>
                             </dd>
-                            <dd v-bind:class="{'li-active':onString == 'RuleManager'}">
+                            <dd>
 								<router-link to="/MP/RuleManager"><i class="fa" aria-hidden="true">权限管理</i></router-link>
                             </dd>
-                            <dd v-bind:class="{'li-active':onString == 'Royalty'}">
+                            <dd>
 								<router-link to="/MP/Royalty"><i class="fa" aria-hidden="true">提成规则管理</i></router-link>
                             </dd>
-                            <dd v-bind:class="{'li-active':onString == 'Project'}">
+                            <dd>
 								<router-link to="/MP/Project"><i class="fa" aria-hidden="true">课程管理</i></router-link>
                             </dd>
                         </dl>
@@ -90,7 +90,7 @@
                                     月入汇总
                                 </i>
                             </dt>
-                            <dd v-bind:class="{'li-active':onString == 'CurrentSummary'}">
+                            <dd>
 								<router-link to="/MP/CurrentSummary"><i class="fa" aria-hidden="true">月入汇总</i></router-link>
                             </dd>
                         </dl>
@@ -100,7 +100,7 @@
                                     提成汇总
                                 </i>
                             </dt>
-                            <dd v-bind:class="{'li-active':onString == '/MP/RoyaltySummary'}">
+                            <dd>
 								<router-link to="/MP/RoyaltySummary"><i class="fa" aria-hidden="true">提成汇总</i></router-link>
                             </dd>
                         </dl>
@@ -252,6 +252,10 @@
         },
         mounted() {
             init();
+            $("#aside-menu dd").click(function(){
+                $(this).addClass("li-active").siblings().removeClass("li-active");
+                $(this).parent().find("dt").addClass("li-active").siblings().find("dt").removeClass("li-active");
+            })
         },
         created() {
 

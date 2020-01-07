@@ -20,6 +20,8 @@ import CurrentSummary from '../components/MP/CurrentSummary.vue'
 import Project from '../components/MP/Project.vue'
 import test from '../components/MP/test.vue'
 import newtree from '../components/MP/newtree.vue'
+import ZxsSummary from '../components/MP/ZxsSummary.vue'
+
 
 Vue.use(Router)
 
@@ -125,6 +127,11 @@ export default new Router({
 			name: 'newtree',
 			component: newtree,
 		},
+          {
+              path: '/MP/ZxsSummary',
+              name: 'ZxsSummary',
+              component: ZxsSummary,
+          },
       ],
       redirect: '/MP/MemberSummary'
     }]

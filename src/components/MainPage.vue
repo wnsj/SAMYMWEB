@@ -5,11 +5,11 @@
                 <h2 class="pull-left" style="padding:10px 0; height:100%;">
                     <img style="width: 50px; height: 50px;" src="../assets/img/logo1.png" /> <strong style=" display:inline-block;font-size: 35px; line-height:40px;">
                     圣安米悦</strong><br />
-                    <font style=" disply:block; font-size:26px;line-height:30px;">提 成 管 理 系 统</font>
+                    <font style=" disply:block; font-size:26px;line-height:30px;">会 员 管 理 系 统</font>
                 </h2>
             </div>
             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-right">
-                <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，提成管理系统</p>
+                <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，会员管理系统</p>
                 <button class="btn btn-warning m_r_10" style="margin-top: 40px;" v-on:click="chargeManager()">课程购买</button>
                 <button class="btn btn-success m_r_10" style="margin-top: 40px;" v-on:click="customAction()">课程消费</button>
                 <button class="btn btn-danger m_r_10" style="margin-top: 40px;" v-on:click="refundAction()">课程退费</button>
@@ -51,6 +51,9 @@
                             </dd>
                             <dd v-on:click="selectRule('CashDeposit')" v-bind:class="{'li-active':onString == 'CashDeposit'}">
                                 <i class="fa" aria-hidden="true">定金管理</i>
+                            </dd>
+                            <dd v-on:click="selectRule('ZxsSummary')" v-bind:class="{'li-active':onString == 'ZxsSummary'}">
+                                <i class="fa" aria-hidden="true">咨询师汇总</i>
                             </dd>
                         </dl>
                         <dl v-bind:class="{h40:bool3}">
@@ -300,7 +303,7 @@
     #aside-menu dl.noShow{color:#f2ad4e }
     #aside-menu dl.h10{height:100px; }
     #aside-menu dl.h15{height:150px; }
-    #aside-menu dl.h25{height:250px; }
+    #aside-menu dl.h25{height:300px; }
     #aside-menu dl.h40{height:400px; }
     #aside-menu dl dt{height:50px;text-align:center;background:#e6e6e6;border-bottom:1px solid #ccc;}
     #aside-menu dl dd{height:50px;text-align:center;border-bottom:1px solid #ccc;}
@@ -311,3 +314,6 @@
     .li-active i {color: #f2ad4e;}
     .root{width:100%; overflow-x:hidden;}
 </style>
+<host>
+	
+</host>

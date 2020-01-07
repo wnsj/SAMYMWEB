@@ -38,6 +38,9 @@ router.beforeEach((to, from, next) => {
     let accountData = Cookies.get('accountData');
     //console.log("token:" + token + ",accountData:" + accountData);
     if (constant.isBlank(token) || constant.isBlank(accountData)) {
+			if (from.path == '/login') {
+			  alert('没有查到用户信息，或者用户信息存储失败')
+			}
       next('/login');
     } else if (to.path == '/') {
       next('/MainPage');
@@ -72,9 +75,9 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-//token存储在cookie中的过期时间10个小时
-Vue.prototype.accessTokenLife = 24/10
-Vue.prototype.accountDataLife = 24/10
+//token存储在cookie中的过期时间1天，必须是整数
+Vue.prototype.accessTokenLife = 0.01
+Vue.prototype.accountDataLife = 0.01
 //是否使用前端设置cookie
 Vue.prototype.isUseSetCookie = true
 
@@ -187,3 +190,4 @@ new Vue({
   },
   template: '<App/>'
 })
+

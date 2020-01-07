@@ -179,7 +179,8 @@
             //the list , which is detail infomation of member,was checked.
             conditionCheck: function(page) {
                 console.log('querying based on multiple conditions')
-
+				console.log('accountPosId:'+this.accountPosId())
+				
                 if(!this.isBlank(this.begCreateDate)){
                     this.begCreateDate = this.moment(this.begCreateDate,'YYYY-MM-DD 00:00:00.000')
                 }
@@ -204,10 +205,6 @@
                         begCreateDate:this.begCreateDate,
                         endCreateDate:this.endCreateDate,
 
-                        accountId: this.accountId(),
-                        modelGrade:'2',
-                        modelType:'',
-                        operateType:'',
                         page:page.toString(),
                         pageSize:this.pageSize
                     },

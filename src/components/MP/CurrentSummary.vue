@@ -182,13 +182,9 @@
                         storeId: this.storeId,
                         createDate:this.createDate,
 
-                        accountId: this.accountId(),
                         type:this.type,
                         page:page,
                         pageSize: this.pageSize
-                        // modelGrade:'2',
-                        // modelType:'',
-                        // operateType:'',
                     },
                     dataType: 'json',
                 }).then((response) => {

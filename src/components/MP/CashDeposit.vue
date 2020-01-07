@@ -59,7 +59,7 @@
 				</div>
 			</div>
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
-			 v-on:click="addMember()">添加定金</button>
+			 v-on:click="selectRule('1')">添加定金</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="checkMember(1)">查询</button>
 		</div>
@@ -133,14 +133,14 @@
 				</div>
 			</div>
 		</div>
-        <!--转会员-->
-        <div class="row row_edit">
-            <div class="modal fade" id="toMember">
-                <div class="modal-dialog">
-                    <SubTransferMember ref='toMember' @closeToMember='closeToMemberFeedBack'></SubTransferMember>
-                </div>
-            </div>
-        </div>
+		<!--转会员-->
+		<div class="row row_edit">
+			<div class="modal fade" id="toMember">
+				<div class="modal-dialog">
+					<SubTransferMember ref='toMember' @closeToMember='closeToMemberFeedBack'></SubTransferMember>
+				</div>
+			</div>
+		</div>
 	</div>
 
 </template>
@@ -153,7 +153,7 @@
 	import SubCdConsumption from '../MP/SubCd/SubCdConsumption'
 	import SubCdRefund from '../MP/SubCd/SubCdRefund'
 	import Paging from '../common/paging'
-    import SubTransferMember from '../MP/SubCd/SubTransferMember'
+	import SubTransferMember from '../MP/SubCd/SubTransferMember'
 	import {
 		init
 	} from '@/../static/js/common.js'
@@ -166,7 +166,7 @@
 			SubCdConsumption,
 			SubCdRefund,
 			Paging,
-            SubTransferMember
+			SubTransferMember
 		},
 		data() {
 			return {
@@ -184,7 +184,7 @@
 				//分页需要的数据
 				pages: '', //总页数
 				current: 1, //当前页码
-                pageSize: 10, //一页显示的数量
+				pageSize: 10, //一页显示的数量
 				total: '', //数据的数量
 			};
 		},
@@ -194,21 +194,56 @@
 				this.current = page
 				this.checkMember(page);
 			},
-			//modify the cotent of member
-			addMember() {
-				console.log('modify the cotent of member')
-				this.$refs.subCd.initData('add')
-				$("#cdContent").modal('show')
+			selectRule(param,item){
+			    var url = this.url + '/ruleAction/queryRule'
+			
+			    this.$ajax({
+			        method: 'POST',
+			        url: url,
+			        headers: {
+			            'Content-Type': this.contentType,
+			            'Access-Token': this.accessToken
+			        },
+			        data: {
+			            posId: this.accountPosId(),
+			            moduleGrade:'2',
+			            urlName:'/MP/CashDeposit',
+			            operateType:param,
+			        },
+			        dataType: 'json',
+			    }).then((response) => {
+			        var res = response.data
+			        if (res.retCode == '0000') {
+			            if(res.retData=='0010'){
+			                console.log('param:'+param)
+			                if(param==1){
+			                    this.$refs.subCd.initData('add','')
+			                    $("#cdContent").modal('show')
+			                }else if(param==3){
+			                    this.$refs.subCd.initData('modify', item)
+			                    $("#cdContent").modal('show')
+			                }
+			            }else{
+			                alert('您没有此权限，请联系管理员！！')
+			            }
+			        } else {
+			            alert(res.retMsg)
+			        }
+			
+			    }).catch((error) => {
+			        console.log('员工权限查询请求失败')
+			    });
 			},
-            transferMember(item){
-			    console.log(item)
-                this.$refs.toMember.initData(item)
-                $("#toMember").modal('show')
-            },
-            closeToMemberFeedBack(){
-			  this.checkMember(1)
-                $("#toMember").modal('hide')
-            },
+			
+			transferMember(item) {
+				console.log(item)
+				this.$refs.toMember.initData(item)
+				$("#toMember").modal('show')
+			},
+			closeToMemberFeedBack() {
+				this.checkMember(1)
+				$("#toMember").modal('hide')
+			},
 			//消费模态框
 			consumptionModel(item) {
 				if (item.state == '1') {
@@ -251,8 +286,7 @@
 					alert("已经消费过，不能进行修改")
 					return
 				}
-				this.$refs.subCd.initData('modify', item)
-				$("#cdContent").modal('show');
+				this.selectRule('3',item)
 			},
 			storeChange(param) {
 				if (this.isBlank(param)) {
@@ -278,12 +312,12 @@
 			checkMember(page) {
 				console.log('checkMember')
 				var url = this.url + '/cashAction/queryCash'
-                if (!this.isBlank(this.beginDate)) {
-                    this.beginDate = this.moment(this.beginDate, 'YYYY-MM-DD 00:00:00.000')
-                }
-                if (!this.isBlank(this.endDate)) {
-                    this.endDate = this.moment(this.endDate, 'YYYY-MM-DD 23:59:00.000')
-                }
+				if (!this.isBlank(this.beginDate)) {
+					this.beginDate = this.moment(this.beginDate, 'YYYY-MM-DD 00:00:00.000')
+				}
+				if (!this.isBlank(this.endDate)) {
+					this.endDate = this.moment(this.endDate, 'YYYY-MM-DD 23:59:00.000')
+				}
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -297,6 +331,7 @@
 						beginDate: this.beginDate,
 						endDate: this.endDate,
 						storeId: this.storeId,
+					
 						balanceState: this.balanceState,
 						page: page.toString(),
 						pageSize: this.pageSize

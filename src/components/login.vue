@@ -73,6 +73,7 @@
 							//cookie存储大小为4k左右，进行cookie瘦身
 							Cookies.set('accessToken', this.accountData.accessToken,"30MIN");
 							Cookies.set('accountData', this.accountData.accountData, "30MIN");
+							Cookies.set('empData', this.accountData.empData, "30MIN");
 							Cookies.set('itemList', this.accountData.itemList, "30MIN");
 						}
 						if(this.accountPwd=='123456'){

@@ -68,6 +68,20 @@ constant.accountId = function() {
 	// console.log('accountId:'+accountId)
 	return accountId
 }
+
+//账户的岗位
+constant.accountPosId = function() {
+	//未传值
+	var jsonString = Cookies.get("empData");
+	//未登录
+	if (this.isBlank(jsonString)) return false;
+	var empData = JSON.parse(jsonString);
+	// console.log('empData:'+jsonString)
+	var accountPosId = empData.posId;
+	// console.log('accountId:'+accountId)
+	return accountPosId
+}
+
 //账户的类型
 constant.accountType = function() {
 	//未传值
@@ -76,7 +90,7 @@ constant.accountType = function() {
 	if (this.isBlank(jsonString)) return false;
 	var accountData = JSON.parse(jsonString);
 	var accountType = accountData.accountType;
-	console.log('accountType:'+accountType)
+	// console.log('accountType:'+accountType)
 	return accountType
 }
 //账户的姓名
@@ -88,7 +102,7 @@ constant.storeId = function() {
 	if (this.isBlank(jsonString)) return false;
 	var accountData = JSON.parse(jsonString);
 	var storeId = accountData.storeId;
-	console.log('基础信息' + storeId)
+	// console.log('基础信息' + storeId)
 	return storeId
 }
 

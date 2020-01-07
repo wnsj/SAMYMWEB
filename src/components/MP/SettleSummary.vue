@@ -193,14 +193,7 @@
             //咨询师
             counlorEmpChange: function(param) {
 			    console.log(param)
-                // if (this.isBlank(param)) {
-                //     this.empId = ""
-                // } else {
-                //     this.$refs.counlorEmp.setPosName("咨询师")
-                //     this.$refs.counlorEmp.setEmp("")
-                //     this.empId = param.empId
-                //
-                // }
+                
                 console.log("进入了这个方法")
                 if (this.isBlank(param)) {
                     this.empId = ""
@@ -288,10 +281,6 @@
 						begCreateDate: this.begCreateDate,
 						endCreateDate: this.endCreateDate,
 
-						accountId: this.accountId(),
-						modelGrade: '2',
-						modelType: '',
-						operateType: '',
 						page: page.toString(),
 						pageSize: this.pageSize,
                         empId:this.empId

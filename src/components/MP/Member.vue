@@ -38,7 +38,7 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 15px;padding-bottom:1.5%;">
             <button type="button" class="btn btn-warning pull-right m_r_10"  data-toggle="modal"
-                    v-on:click="addMember()">添加会员</button>
+                    v-on:click="selectRule('1')">添加会员</button>
             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
                     v-on:click="checkMember(1)">查询</button>
         </div>
@@ -62,7 +62,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="(item,index) in memberList" :key="index" v-on:dblclick="modifyMember(item)">
+                        <tr v-for="(item,index) in memberList" :key="index" v-on:dblclick="selectRule('3',item)">
                             <td class="text-center">{{item.memNum}}</td>
                             <td class="text-center">{{item.memName}}</td>
                             <td class="text-center">{{item.storeName}}</td>
@@ -73,7 +73,7 @@
                             <td class="text-center">{{item.isuse==true ? "在用" : "停用"}}</td>
                             <!-- <td class="text-center">{{item.empName}}</td> -->
                             <td class="text-center">{{item.balance}}</td>
-                            <td class="text-center"><button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改</button></td>
+                            <td class="text-center"><button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改</button></td>
                         </tr>
                         </tbody>
                     </table>
@@ -139,17 +139,47 @@
                 this.current = page
                 this.checkMember(page);
             },
-            //modify the cotent of member
-            addMember() {
-                console.log('modify the cotent of member')
-                this.$refs.subMemR.initData('add')
-                $("#memberContent").modal('show')
-            },
-            //modify the cotent of member
-            modifyMember(item) {
-                this.$refs.subMemR.initData('modify', item)
-                $("#memberContent").modal('show')
-            },
+			selectRule(param,item){
+			    var url = this.url + '/ruleAction/queryRule'
+			
+			    this.$ajax({
+			        method: 'POST',
+			        url: url,
+			        headers: {
+			            'Content-Type': this.contentType,
+			            'Access-Token': this.accessToken
+			        },
+			        data: {
+			            posId: this.accountPosId(),
+			            moduleGrade:'2',
+			            urlName:'/MP/ScheduleEmp',
+			            operateType:param,
+			        },
+			        dataType: 'json',
+			    }).then((response) => {
+			        var res = response.data
+			        if (res.retCode == '0000') {
+			            if(res.retData=='0010'){
+			                console.log('param:'+param)
+			                if(param==1){
+			                    this.$refs.subMemR.initData('add','')
+			                    $("#memberContent").modal('show')
+			                }else if(param==3){
+			                    this.$refs.subMemR.initData('modify', item)
+			                    $("#memberContent").modal('show')
+			                }
+			            }else{
+			                alert('您没有此权限，请联系管理员！！')
+			            }
+			        } else {
+			            alert(res.retMsg)
+			        }
+			
+			    }).catch((error) => {
+			        console.log('员工权限查询请求失败')
+			    });
+			},
+            
             storeChange(param){
                 if(this.isBlank(param)){
                     this.storeId=""
@@ -179,6 +209,8 @@
                         memName: this.memName,
                         isuse: this.isuse,
                         phone:this.phone,
+						
+						
                         page:page.toString(),
                         pageSize:this.pageSize
                     },

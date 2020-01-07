@@ -151,6 +151,10 @@ Vue.prototype.accountName = function() {
 Vue.prototype.accountId = function() {
   return constant.accountId();
 }
+//账户岗位的ID
+Vue.prototype.accountPosId = function() {
+  return constant.accountPosId();
+}
 //账户的类型
 Vue.prototype.accountType = function() {
 	if(!constant.isBlank(constant.accountType()) && constant.accountType()==1) return true;

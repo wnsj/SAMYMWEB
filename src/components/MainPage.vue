@@ -27,11 +27,11 @@
                                     会员管理模块
                                 </i>
                             </dt>
-                            <dd v-on:click="selectRule('MemberSummary')" v-bind:class="{'li-active':onString == 'MemberSummary'}">
-                                <i class="fa" aria-hidden="true">会员汇总</i>
+                            <dd v-bind:class="{'li-active':onString == 'MemberSummary'}">
+								<router-link to="/MP/MemberSummary"><i class="fa" aria-hidden="true">会员汇总</i></router-link>
                             </dd>
-                            <dd v-on:click="selectRule('Member')"  v-bind:class="{'li-active':onString == 'Member'}">
-                                <i class="fa" aria-hidden="true">会员基本信息</i>
+                            <dd v-bind:class="{'li-active':onString == 'Member'}">
+								<router-link to="/MP/Member"><i class="fa" aria-hidden="true">会员基本信息</i></router-link>
                             </dd>
                         </dl>
                         <dl v-bind:class="{h25:bool2}">
@@ -40,20 +40,20 @@
                                     消费管理模块
                                 </i>
                             </dt>
-                            <dd v-on:click="selectRule('SettleSummary')" v-bind:class="{'li-active':onString == 'SettleSummary'}">
-                                <i class="fa" aria-hidden="true">消费汇总</i>
+                            <dd v-bind:class="{'li-active':onString == 'SettleSummary'}">
+								<router-link to="/MP/SettleSummary"><i class="fa" aria-hidden="true">消费汇总</i></router-link>
                             </dd>
-                            <dd v-on:click="selectRule('Charge')" v-bind:class="{'li-active':onString == 'Charge'}">
-                                <i class="fa" aria-hidden="true">已购课程管理</i>
+                            <dd v-bind:class="{'li-active':onString == 'Charge'}">
+								<router-link to="/MP/Charge"><i class="fa" aria-hidden="true">已购课程管理</i></router-link>
                             </dd>
-                            <dd v-on:click="selectRule('Order')" v-bind:class="{'li-active':onString == 'Order'}">
-                                <i class="fa" aria-hidden="true">预约管理</i>
+                            <dd v-bind:class="{'li-active':onString == 'Order'}">
+								<router-link to="/MP/Order"><i class="fa" aria-hidden="true">预约管理</i></router-link>
                             </dd>
-                            <dd v-on:click="selectRule('CashDeposit')" v-bind:class="{'li-active':onString == 'CashDeposit'}">
-                                <i class="fa" aria-hidden="true">定金管理</i>
+                            <dd v-bind:class="{'li-active':onString == 'CashDeposit'}">
+								<router-link to="/MP/CashDeposit"><i class="fa" aria-hidden="true">定金管理</i></router-link>
                             </dd>
-                            <dd v-on:click="selectRule('ZxsSummary')" v-bind:class="{'li-active':onString == 'ZxsSummary'}">
-                                <i class="fa" aria-hidden="true">咨询师汇总</i>
+                            <dd v-bind:class="{'li-active':onString == 'ZxsSummary'}">
+								<router-link to="/MP/ZxsSummary"><i class="fa" aria-hidden="true">咨询师汇总</i></router-link>
                             </dd>
                         </dl>
                         <dl v-bind:class="{h40:bool3}">
@@ -62,26 +62,26 @@
                                     基础设置
                                 </i>
                             </dt>
-                            <dd v-on:click="selectRule('Employee')" v-bind:class="{'li-active':onString == 'Employee'}">
-                                <i class="fa" aria-hidden="true">员工管理</i>
+                            <dd v-bind:class="{'li-active':onString == 'Employee'}">
+                                <router-link to="/MP/Employee"><i class="fa" aria-hidden="true">员工管理</i></router-link>
                             </dd>
-                            <dd v-on:click="selectRule('ScheduleEmp')" v-bind:class="{'li-active':onString == 'ScheduleEmp'}">
-                                <i class="fa" aria-hidden="true">排班管理</i>
+                            <dd v-bind:class="{'li-active':onString == 'ScheduleEmp'}">
+								<router-link to="/MP/ScheduleEmp"><i class="fa" aria-hidden="true">排班管理</i></router-link>
                             </dd>
-                            <dd v-on:click="selectRule('Position')" v-bind:class="{'li-active':onString == 'Position'}">
-                                <i class="fa" aria-hidden="true">岗位管理</i>
+                            <dd v-bind:class="{'li-active':onString == 'Position'}">
+								<router-link to="/MP/Position"><i class="fa" aria-hidden="true">岗位管理</i></router-link>
                             </dd>
-                            <dd v-on:click="selectRule('Store')" v-bind:class="{'li-active':onString == 'Store'}">
-                                <i class="fa" aria-hidden="true">门店管理</i>
+                            <dd v-bind:class="{'li-active':onString == 'Store'}">
+								<router-link to="/MP/Store"><i class="fa" aria-hidden="true">门店管理</i></router-link>
                             </dd>
-                            <dd v-on:click="selectRule('RuleManager')" v-bind:class="{'li-active':onString == 'RuleManager'}">
-                                <i class="fa" aria-hidden="true">权限管理</i>
+                            <dd v-bind:class="{'li-active':onString == 'RuleManager'}">
+								<router-link to="/MP/RuleManager"><i class="fa" aria-hidden="true">权限管理</i></router-link>
                             </dd>
-                            <dd v-on:click="selectRule('Royalty')" v-bind:class="{'li-active':onString == 'Royalty'}">
-                                <i class="fa" aria-hidden="true">提成规则管理</i>
+                            <dd v-bind:class="{'li-active':onString == 'Royalty'}">
+								<router-link to="/MP/Royalty"><i class="fa" aria-hidden="true">提成规则管理</i></router-link>
                             </dd>
-                            <dd v-on:click="selectRule('Project')" v-bind:class="{'li-active':onString == 'Project'}">
-                                <i class="fa" aria-hidden="true">课程管理</i>
+                            <dd v-bind:class="{'li-active':onString == 'Project'}">
+								<router-link to="/MP/Project"><i class="fa" aria-hidden="true">课程管理</i></router-link>
                             </dd>
                         </dl>
                         <dl v-bind:class="{h10:bool4}">
@@ -90,10 +90,8 @@
                                     月入汇总
                                 </i>
                             </dt>
-                            <dd v-on:click="selectRule('CurrentSummary')" v-bind:class="{'li-active':onString == 'CurrentSummary'}">
-                                <i class="fa" aria-hidden="true">
-                                    月入汇总
-                                </i>
+                            <dd v-bind:class="{'li-active':onString == 'CurrentSummary'}">
+								<router-link to="/MP/CurrentSummary"><i class="fa" aria-hidden="true">月入汇总</i></router-link>
                             </dd>
                         </dl>
                         <dl v-bind:class="{h10:bool5}">
@@ -102,10 +100,8 @@
                                     提成汇总
                                 </i>
                             </dt>
-                            <dd v-on:click="selectRule('RoyaltySummary')" v-bind:class="{'li-active':onString == 'RoyaltySummary'}">
-                                <i class="fa" aria-hidden="true">
-                                    提成汇总
-                                </i>
+                            <dd v-bind:class="{'li-active':onString == '/MP/RoyaltySummary'}">
+								<router-link to="/MP/RoyaltySummary"><i class="fa" aria-hidden="true">提成汇总</i></router-link>
                             </dd>
                         </dl>
 
@@ -116,6 +112,7 @@
                                 </i>
                             </dt>
                         </dl> -->
+						<!-- <router-link to="/MP/PatientStype"><i class="fa fa-table" aria-hidden="false" v-on:click="titleChange('患者类型')">　患者类型</i></router-link> -->
                     </div>
                 </div>
                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 embed-responsive embed-responsive-16by9" style="overflow: inherit; background-color:">
@@ -240,39 +237,6 @@
                 this.onString = data;
                 this.bool2 = true;
             },
-            selectRule(param){
-                this.onString = param;
-                var url = this.url + '/ruleAction/queryRule'
-                this.$ajax({
-                    method: 'POST',
-                    url: url,
-                    headers: {
-                        'Content-Type': this.contentType,
-                        'Access-Token': this.accessToken
-                    },
-                    data: {
-                        accountId: this.accountId(),
-                        modelGrade:'1',
-                        modelType:'',
-                        operateType:'',
-                    },
-                    dataType: 'json',
-                }).then((response) => {
-                    var res = response.data
-                    if (res.retCode == '0000') {
-                        if(res.retData=='0010'){
-                            this.$router.push({ name: param, });
-                        }else{
-                            alert('您没有此权限，请联系管理员！！')
-                        }
-                    } else {
-                        alert('您没有此权限，请联系管理员！！')
-                    }
-
-                }).catch((error) => {
-                    console.log('商铺查询请求失败')
-                });
-            },
             //用户退出
             loginOut() {
                 if (confirm("确定退出?") == false) {
@@ -288,7 +252,6 @@
         },
         mounted() {
             init();
-            this.selectRule('MemberSummary');
         },
         created() {
 

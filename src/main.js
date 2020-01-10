@@ -29,6 +29,7 @@ Vue.prototype.has = function(param) {
 
 // 路由卫士
 router.beforeEach((to, from, next) => {
+	console.log(to.path+'---'+from.path)
   if (to.path == '/login' && from.path == '/MainPage') {
     next();
   } else if (to.path == '/login') {

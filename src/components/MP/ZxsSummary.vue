@@ -54,6 +54,7 @@
                                 <th class="text-center">本月消费金额</th>
                                 <th class="text-center">退费金额</th>
                                 <th class="text-center">剩余金额</th>
+                                <th class="text-center">时间</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -71,6 +72,7 @@
                                 <td>{{item2.CONSUM_MONEY}}</td>
                                 <td>{{item2.REAL_REFUND}}</td>
                                 <td>{{item2.BALANCE_MONEY}}</td>
+                                <td>{{item2.CREATE_DATE | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -143,7 +145,7 @@
                 //分页需要的数据
                 pages: '', //总页数
                 current: 1, //当前页码
-                pageSize: '10', //一页显示的数量
+                pageSize: 10, //一页显示的数量
                 total: '', //数据的数量
             }
         },
@@ -224,7 +226,7 @@
                         empId:this.empId,
                         beginDate:beginDate,
                         page:page+"",
-                        pageSize:this.pageSize+"",
+                        pageSize:'10',
                         storeId:this.storeId
                     },
                     dataType: 'json',

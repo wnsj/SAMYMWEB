@@ -27,13 +27,13 @@
                                     咨客管理模块
                                 </i>
                             </dt>
-                            <dd class="li-active">
+                            <dd @click="addCheck('MemberSummary')" v-bind:class="{'li-active':onString=='MemberSummary'}">
 								<router-link to="/MP/MemberSummary"><i class="fa" aria-hidden="true">会员汇总</i></router-link>
                             </dd>
-                            <dd>
+                            <dd @click="addCheck('Member')" v-bind:class="{'li-active':onString=='Member'}">
 								<router-link to="/MP/Member"><i class="fa" aria-hidden="true">会员管理</i></router-link>
                             </dd>
-							<dd>
+							<dd @click="addCheck('Visitor')" v-bind:class="{'li-active':onString=='Visitor'}">
 								<router-link to="/MP/Visitor"><i class="fa" aria-hidden="true">咨客管理</i></router-link>
 							</dd>
                         </dl>
@@ -43,19 +43,19 @@
                                     消费管理模块
                                 </i>
                             </dt>
-                            <dd>
+                            <dd @click="addCheck('SettleSummary')" v-bind:class="{'li-active':onString=='SettleSummary'}">
 								<router-link to="/MP/SettleSummary"><i class="fa" aria-hidden="true">消费汇总</i></router-link>
                             </dd>
-                            <dd>
+                            <dd @click="addCheck('Charge')" v-bind:class="{'li-active':onString=='Charge'}">
 								<router-link to="/MP/Charge"><i class="fa" aria-hidden="true">已购课程管理</i></router-link>
                             </dd>
-                            <dd>
+                            <dd @click="addCheck('Order')" v-bind:class="{'li-active':onString=='Order'}">
 								<router-link to="/MP/Order"><i class="fa" aria-hidden="true">预约管理</i></router-link>
                             </dd>
-                            <dd>
+                            <dd @click="addCheck('CashDeposit')" v-bind:class="{'li-active':onString=='CashDeposit'}">
 								<router-link to="/MP/CashDeposit"><i class="fa" aria-hidden="true">定金管理</i></router-link>
                             </dd>
-                            <dd>
+                            <dd @click="addCheck('ZxsSummary')" v-bind:class="{'li-active':onString=='ZxsSummary'}">
 								<router-link to="/MP/ZxsSummary"><i class="fa" aria-hidden="true">咨询师汇总</i></router-link>
                             </dd>
                         </dl>
@@ -65,25 +65,25 @@
                                     基础设置
                                 </i>
                             </dt>
-                            <dd>
+                            <dd @click="addCheck('Employee')" v-bind:class="{'li-active':onString=='Employee'}">
                                 <router-link to="/MP/Employee"><i class="fa" aria-hidden="true">员工管理</i></router-link>
                             </dd>
-                            <dd>
+                            <dd @click="addCheck('ScheduleEmp')" v-bind:class="{'li-active':onString=='ScheduleEmp'}">
 								<router-link to="/MP/ScheduleEmp"><i class="fa" aria-hidden="true">排班管理</i></router-link>
                             </dd>
-                            <dd>
+                            <dd @click="addCheck('Position')" v-bind:class="{'li-active':onString=='Position'}">
 								<router-link to="/MP/Position"><i class="fa" aria-hidden="true">岗位管理</i></router-link>
                             </dd>
-                            <dd>
+                            <dd @click="addCheck('Store')" v-bind:class="{'li-active':onString=='Store'}">
 								<router-link to="/MP/Store"><i class="fa" aria-hidden="true">门店管理</i></router-link>
                             </dd>
-                            <dd>
+                            <dd @click="addCheck('RuleManager')" v-bind:class="{'li-active':onString=='RuleManager'}">
 								<router-link to="/MP/RuleManager"><i class="fa" aria-hidden="true">权限管理</i></router-link>
                             </dd>
-                            <dd>
+                            <dd @click="addCheck('Royalty')" v-bind:class="{'li-active':onString=='Royalty'}">
 								<router-link to="/MP/Royalty"><i class="fa" aria-hidden="true">提成规则管理</i></router-link>
                             </dd>
-                            <dd>
+                            <dd @click="addCheck('Project')" v-bind:class="{'li-active':onString=='Project'}">
 								<router-link to="/MP/Project"><i class="fa" aria-hidden="true">课程管理</i></router-link>
                             </dd>
                         </dl>
@@ -93,7 +93,7 @@
                                     月入汇总
                                 </i>
                             </dt>
-                            <dd>
+                            <dd @click="addCheck('CurrentSummary')" v-bind:class="{'li-active':onString=='CurrentSummary'}">
 								<router-link to="/MP/CurrentSummary"><i class="fa" aria-hidden="true">月入汇总</i></router-link>
                             </dd>
                         </dl>
@@ -103,7 +103,7 @@
                                     提成汇总
                                 </i>
                             </dt>
-                            <dd>
+                            <dd @click="addCheck('RoyaltySummary')" v-bind:class="{'li-active':onString=='RoyaltySummary'}">
 								<router-link to="/MP/RoyaltySummary"><i class="fa" aria-hidden="true">提成汇总</i></router-link>
                             </dd>
                         </dl>
@@ -232,6 +232,10 @@
                 }
 
             },
+            addCheck(string){
+                this.onString = string;
+                console.log(string)
+            },
             gainFun(data){
                 this.onString = data;
                 this.bool2 = true;
@@ -255,13 +259,10 @@
         },
         mounted() {
             init();
-            $("#aside-menu dd").click(function(){
-                $(this).addClass("li-active").siblings().removeClass("li-active");
-                $(this).parent().find("dt").addClass("li-active").siblings().find("dt").removeClass("li-active");
-            })
+
         },
         created() {
-
+            this.$parent.setRouter("/MainPage");
         }
     }
 </script>
@@ -287,5 +288,5 @@
 	a:hover{color: #795548 !important;}
 </style>
 <host>
-	
+
 </host>

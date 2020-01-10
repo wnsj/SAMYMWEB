@@ -26,7 +26,6 @@
 			    </div>
 			    <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="vistorName"></div>
 			</div>
-			
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 			    <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 			        <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
@@ -35,6 +34,8 @@
 			        <input class="form-control" type="text" value="" v-model="phone">
 			    </div>
 			</div>
+        </div>
+        <div class="row" style="margin-top: 15px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 			    <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 			        <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">访问类型</p><span class="sign-left">:</span>
@@ -76,40 +77,45 @@
             	</div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin: 15px 0px 0px -25px;padding-bottom:1.5%;">
+
+        <div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-			    <div class="col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-			        <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px;">开始时间</p><span class="sign-left">:</span>
+			    <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+			        <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">开始时间</p><span class="sign-left">:</span>
 			    </div>
 			    <div class="col-md-7 col-lg-7">
 			        <dPicker style="width:100%" value-type="format" format="YYYY-MM-DD" v-model="begDate"></dPicker>
 			    </div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-			    <div class="col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-			        <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px;">结束时间</p><span class="sign-left">:</span>
+			    <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+			        <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">结束时间</p><span class="sign-left">:</span>
 			    </div>
 			    <div class="col-md-7 col-lg-7">
 			        <dPicker style="width:100%" value-type="format" format="YYYY-MM-DD" v-model="endDate"></dPicker>
 			    </div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-			    <div class="col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-			        <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px;">生日</p><span class="sign-left">:</span>
+			    <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+			        <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">生日</p><span class="sign-left">:</span>
 			    </div>
 			    <div class="col-md-7 col-lg-7">
 			        <dPicker style="width:100%" value-type="format" format="DD" v-model="birthday"></dPicker>
 			    </div>
 			</div>
-            <button type="button" class="btn btn-warning pull-right m_r_10"  data-toggle="modal"
-                    v-on:click="selectRule('1')">添加咨客</button>
-            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-                    v-on:click="checkVisitor(1)">查询</button>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="col-md-12 col-lg-12">
+                <button type="button" class="btn btn-warning pull-right m_r_10"  data-toggle="modal"
+                        v-on:click="selectRule('1')">添加咨客</button>
+                <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+                        v-on:click="checkVisitor(1)">查询</button>
+                </div>
+            </div>
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive pre-scrollable">
-                    <table class="table table-bordered table-hover" id="datatable" >
+                    <table class="table table-bordered table-hover" id="datatable" style="width: 2400px;" >
                         <thead class="datathead">
                         <tr>
                             <th class="text-center">姓名</th>
@@ -196,8 +202,8 @@
     import Store from '../common/Store.vue'
 	import emp from '../common/Employee.vue'
 	import cha from '../common/Channel.vue'
-	
-	
+
+
 	import dPicker from 'vue2-datepicker'
     import Paging from '../common/paging'
     import {
@@ -247,7 +253,7 @@
             },
 			selectRule(param,item){
 			    var url = this.url + '/ruleAction/queryRule'
-			
+
 			    this.$ajax({
 			        method: 'POST',
 			        url: url,
@@ -280,12 +286,12 @@
 			        } else {
 			            alert(res.retMsg)
 			        }
-			
+
 			    }).catch((error) => {
 			        console.log('员工权限查询请求失败')
 			    });
 			},
-            
+
 			//转会员
 			tranferMember(item){
 				if(item.isMem==1){
@@ -296,7 +302,7 @@
 					$("#memContent").modal('show')
 				}
 			},
-			
+
 			employeeChange(param){
 			    if(this.isBlank(param)){
 			        this.empId=""
@@ -353,8 +359,8 @@
 						begDate:this.begDate,
 						endDate:this.endDate,
 						birthday:this.birthday,
-						
-						
+
+
                         page:page.toString(),
                         pageSize:this.pageSize
                     },

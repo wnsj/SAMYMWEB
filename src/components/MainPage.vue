@@ -24,7 +24,7 @@
                         <dl v-bind:class="{h15:bool1}">
                             <dt @click="onShow(0)" v-bind:class="{'li-active':bool1}">
                                 <i class="fa" v-bind:class="{'fa-folder-open':bool1,'fa-folder':!bool1}" aria-hidden="true">
-                                    咨客管理模块
+                                    会员管理模块
                                 </i>
                             </dt>
                             <dd @click="addCheck('MemberSummary')" v-bind:class="{'li-active':onString=='MemberSummary'}">
@@ -33,9 +33,9 @@
                             <dd @click="addCheck('Member')" v-bind:class="{'li-active':onString=='Member'}">
 								<router-link to="/MP/Member"><i class="fa" aria-hidden="true">会员管理</i></router-link>
                             </dd>
-							<dd @click="addCheck('Visitor')" v-bind:class="{'li-active':onString=='Visitor'}">
+							<!-- <dd @click="addCheck('Visitor')" v-bind:class="{'li-active':onString=='Visitor'}">
 								<router-link to="/MP/Visitor"><i class="fa" aria-hidden="true">咨客管理</i></router-link>
-							</dd>
+							</dd> -->
                         </dl>
                         <dl v-bind:class="{h25:bool2}">
                             <dt @click="onShow(1)" v-bind:class="{'li-active':bool2}">
@@ -55,9 +55,9 @@
                             <dd @click="addCheck('CashDeposit')" v-bind:class="{'li-active':onString=='CashDeposit'}">
 								<router-link to="/MP/CashDeposit"><i class="fa" aria-hidden="true">定金管理</i></router-link>
                             </dd>
-                            <dd @click="addCheck('ZxsSummary')" v-bind:class="{'li-active':onString=='ZxsSummary'}">
+                            <!-- <dd @click="addCheck('ZxsSummary')" v-bind:class="{'li-active':onString=='ZxsSummary'}">
 								<router-link to="/MP/ZxsSummary"><i class="fa" aria-hidden="true">咨询师汇总</i></router-link>
-                            </dd>
+                            </dd> -->
                         </dl>
                         <dl v-bind:class="{h40:bool3}">
                             <dt @click="onShow(2)" v-bind:class="{'li-active':bool3}">
@@ -115,7 +115,6 @@
                                 </i>
                             </dt>
                         </dl> -->
-						<!-- <router-link to="/MP/PatientStype"><i class="fa fa-table" aria-hidden="false" v-on:click="titleChange('患者类型')">　患者类型</i></router-link> -->
                     </div>
                 </div>
                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 embed-responsive embed-responsive-16by9" style="overflow: inherit; background-color:">
@@ -273,8 +272,8 @@
     #aside-menu dl{ margin-bottom:0; height:50px;overflow:hidden; color:#795548;font-size:20px; background:#f1f1f1;transition:height .5s }
     #aside-menu dl.noShow{color:#f2ad4e }
     #aside-menu dl.h10{height:100px; }
-    #aside-menu dl.h15{height:200px; }
-    #aside-menu dl.h25{height:300px; }
+    #aside-menu dl.h15{height:150px; }
+    #aside-menu dl.h25{height:250px; }
     #aside-menu dl.h40{height:400px; }
     #aside-menu dl dt{height:50px;text-align:center;background:#e6e6e6;border-bottom:1px solid #ccc;}
     #aside-menu dl dd{height:50px;text-align:center;border-bottom:1px solid #ccc;}

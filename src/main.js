@@ -34,6 +34,8 @@ router.beforeEach((to, from, next) => {
     next();
   } else if (to.path == '/login') {
     next();
+	} else if (to.path == '/MemberTotle') {
+		  next();
   } else {
     let token = Cookies.get('accessToken');
     let accountData = Cookies.get('accountData');

@@ -22,6 +22,7 @@ import test from '../components/MP/test.vue'
 import newtree from '../components/MP/newtree.vue'
 import ZxsSummary from '../components/MP/ZxsSummary.vue'
 import Visitor from '../components/MP/Visitor.vue'
+import MemberTotle from '../components/MP/MemberTotle.vue'
 
 
 Vue.use(Router)
@@ -136,6 +137,11 @@ export default new Router({
 					path: '/MP/ZxsSummary',
 					name: 'ZxsSummary',
 					component: ZxsSummary,
+				},
+				{
+					path: '/MP/MemberTotle',
+					name: 'MemberTotle',
+					component: MemberTotle,
 				},
 			],
 			redirect: '/MP/MemberSummary'

@@ -13,7 +13,7 @@ import elementUiCss from 'element-ui/lib/theme-chalk/index.css'
 
 // import utilDate from '../src/assets/js/utilDate'
 import {
-    exportTableToExcel
+	exportTableToExcel
 } from 'vendor/Export2Excel.js'
 
 Vue.use(vueBeauty)
@@ -28,87 +28,69 @@ Vue.config.productionTip = false
 
 //权限判断方法（包含返回true，反之false）
 Vue.prototype.has = function(param) {
-    return constant.has(param);
+	return constant.has(param);
 }
 
 // 路由卫士
 router.beforeEach((to, from, next) => {
-<<<<<<< HEAD
-	console.log(to.path+'---'+from.path)
-  if (to.path == '/login' && from.path == '/MainPage') {
-    next();
-  } else if (to.path == '/login') {
-    next();
+	console.log(to.path + '---' + from.path)
+	if (to.path == '/login' && from.path == '/MainPage') {
+		next();
+	} else if (to.path == '/login') {
+		next();
 	} else if (to.path == '/MemberTotle') {
-		  next();
-  } else {
-    let token = Cookies.get('accessToken');
-    let accountData = Cookies.get('accountData');
-    //console.log("token:" + token + ",accountData:" + accountData);
-    if (constant.isBlank(token) || constant.isBlank(accountData)) {
+		next();
+	} else {
+		let token = Cookies.get('accessToken');
+		let accountData = Cookies.get('accountData');
+		//console.log("token:" + token + ",accountData:" + accountData);
+		if (constant.isBlank(token) || constant.isBlank(accountData)) {
 			if (from.path == '/login') {
-			  alert('没有查到用户信息，或者用户信息存储失败')
+				alert('没有查到用户信息，或者用户信息存储失败')
 			}
-      next('/login');
-    } else if (to.path == '/') {
-      next('/MainPage');
-=======
-    if (to.path == '/login' && from.path == '/MainPage') {
-        next();
->>>>>>> fbe1387cc77fb31bf97c5a341a0cd565decfe956
-    } else if (to.path == '/login') {
-        next();
-    } else {
-        let token = Cookies.get('accessToken');
-        let accountData = Cookies.get('accountData');
-        //console.log("token:" + token + ",accountData:" + accountData);
-        if (constant.isBlank(token) || constant.isBlank(accountData)) {
-            if (from.path == '/login') {
-                alert('没有查到用户信息，或者用户信息存储失败')
-            }
-            next('/login');
-        } else if (to.path == '/') {
-            next('/MainPage');
-        } else if (to.path == '/login') {
-            next();
-        } else {
-            let token = Cookies.get('accessToken');
-            let accountData = Cookies.get('accountData');
-            //console.log("token:" + token + ",accountData:" + accountData);
-            if (constant.isBlank(token) || constant.isBlank(accountData)) {
-                next('/login');
-            } else if (to.path == '/') {
-                next('/MainPage');
-            } else if (to.path == '/login') {
-                next('/MainPage');
-            } else if (to.path == '/sam/dist/index.html') {
-                next('/MainPage');
-            } else {
-                let jsonString = Cookies.get('itemList');
-                if (constant.isBlank(jsonString)) {
-                    next('/login');
-                }
-                let itemRuleList = JSON.parse(jsonString);
-                //let hasRule = false;
-                let hasRule = true;
-                for (var i = 0; i < itemRuleList.length; i++) {
-                    let item = itemRuleList[i];
-                    if (to.path == item.urlName) {
-                        hasRule = true
-                        console.log("hasRule:" + hasRule)
-                        break;
-                    }
-                }
-                console.log("main:" + to.path + from.path)
-                if (hasRule == true) {
-                    next()
-                } else {
-                    next(from.path)
-                    alert("您还没有此模块权限，请联系管理员添加权限")
-                }
-            }
-        }
-    }
+			next('/login');
+		} else if (to.path == '/') {
+			next('/MainPage');
+		} else if (to.path == '/login') {
+			next();
+		} else {
+			let token = Cookies.get('accessToken');
+			let accountData = Cookies.get('accountData');
+			//console.log("token:" + token + ",accountData:" + accountData);
+			if (constant.isBlank(token) || constant.isBlank(accountData)) {
+				next('/login');
+			} else if (to.path == '/') {
+				next('/MainPage');
+			} else if (to.path == '/login') {
+				next('/MainPage');
+			} else if (to.path == '/sam/dist/index.html') {
+				next('/MainPage');
+			} else {
+				let jsonString = Cookies.get('itemList');
+				if (constant.isBlank(jsonString)) {
+					next('/login');
+				}
+				let itemRuleList = JSON.parse(jsonString);
+				//let hasRule = false;
+				let hasRule = true;
+				for (var i = 0; i < itemRuleList.length; i++) {
+					let item = itemRuleList[i];
+					if (to.path == item.urlName) {
+						hasRule = true
+						console.log("hasRule:" + hasRule)
+						break;
+					}
+				}
+				console.log("main:" + to.path + from.path)
+				if (hasRule == true) {
+					next()
+				} else {
+					next(from.path)
+					alert("您还没有此模块权限，请联系管理员添加权限")
+				}
+			}
+		}
+	}
 });
 
 //token存储在cookie中的过期时间1天，必须是整数
@@ -123,42 +105,42 @@ Vue.prototype.contentType = 'application/json;charset=utf-8'
  * 判断是否为null
  */
 Vue.prototype.isBlank = function(param) {
-    return constant.isBlank(param)
+	return constant.isBlank(param)
 }
 /**
  * 时间过滤器
  */
 Vue.filter('dateFormat', function(time, formatStr = 'YYYY-MM-DD HH:mm') {
-    if (constant.isBlank(time)) {
-        return null
-    } else {
-        return moment(time).format(formatStr)
-    }
+	if (constant.isBlank(time)) {
+		return null
+	} else {
+		return moment(time).format(formatStr)
+	}
 })
 Vue.filter('dateFormatFilter', function(time, format) {
-    var formatStr = 'YYYY-MM-DD HH:mm'
-    if (constant.isBlank(time)) {
-        return null;
-    } else {
-        formatStr = constant.isBlank(format) ? formatStr : format;
-        return moment(time).format(formatStr)
-    }
+	var formatStr = 'YYYY-MM-DD HH:mm'
+	if (constant.isBlank(time)) {
+		return null;
+	} else {
+		formatStr = constant.isBlank(format) ? formatStr : format;
+		return moment(time).format(formatStr)
+	}
 })
 Vue.filter('month', function(time, formatStr = 'YYYY-MM') {
-    if (constant.isBlank(time)) {
-        return null
-    } else {
-        return moment(time).format(formatStr)
-    }
+	if (constant.isBlank(time)) {
+		return null
+	} else {
+		return moment(time).format(formatStr)
+	}
 })
 Vue.prototype.moment = function(targetDate, format) {
-    var formatStr = "YYYY-MM-DD HH:mm:ss"
-    var momentObj = moment();
-    if (!constant.isBlank(targetDate)) {
-        momentObj = moment(targetDate);
-    }
-    if (!constant.isBlank(format)) formatStr = format;
-    return momentObj.format(formatStr);
+	var formatStr = "YYYY-MM-DD HH:mm:ss"
+	var momentObj = moment();
+	if (!constant.isBlank(targetDate)) {
+		momentObj = moment(targetDate);
+	}
+	if (!constant.isBlank(format)) formatStr = format;
+	return momentObj.format(formatStr);
 }
 // Vue.prototype.endDate = function(beginDate,index){
 //
@@ -168,49 +150,49 @@ Vue.prototype.moment = function(targetDate, format) {
  * 导出表格
  */
 Vue.prototype.exportTableToExcel = function(tbId, fileName) {
-    if (!confirm("确定导出?")) {
-        return;
-    }
-    var myDate = new Date();
-    var year = myDate.getFullYear();
-    var month = myDate.getMonth() + 1;
-    var date = myDate.getDate();
-    exportTableToExcel(tbId, fileName + '_' + year + '_' + month + '_' + date);
+	if (!confirm("确定导出?")) {
+		return;
+	}
+	var myDate = new Date();
+	var year = myDate.getFullYear();
+	var month = myDate.getMonth() + 1;
+	var date = myDate.getDate();
+	exportTableToExcel(tbId, fileName + '_' + year + '_' + month + '_' + date);
 }
 
 
 
 //账户的名字
 Vue.prototype.accountName = function() {
-    return constant.accountName();
+	return constant.accountName();
 }
 //账户的ID
 Vue.prototype.accountId = function() {
-    return constant.accountId();
+	return constant.accountId();
 }
 //账户岗位的ID
 Vue.prototype.accountPosId = function() {
-    return constant.accountPosId();
+	return constant.accountPosId();
 }
 //账户的类型
 Vue.prototype.accountType = function() {
-    if (!constant.isBlank(constant.accountType()) && constant.accountType() == 1) return true;
-    else return false;
+	if (!constant.isBlank(constant.accountType()) && constant.accountType() == 1) return true;
+	else return false;
 }
 //商铺ID
 Vue.prototype.storeId = function() {
-    if (!constant.isBlank(constant.storeId()))
-        return constant.storeId();
-    else
-        return '';
+	if (!constant.isBlank(constant.storeId()))
+		return constant.storeId();
+	else
+		return '';
 }
 //手机号判断
 Vue.prototype.phoneNum = function(phoneNum) {
-    return constant.phone(phoneNum);
+	return constant.phone(phoneNum);
 }
 //获取IP地址
 Vue.prototype.ipAddress = function() {
-    return constant.ipAddress();
+	return constant.ipAddress();
 }
 
 
@@ -221,18 +203,18 @@ Vue.prototype.ipAddress = function() {
  */
 //自定义指令v-has(不包含则删除该标签)
 Vue.directive('has', {
-    inserted: function(el, binding) {
-        if (!constant.has(binding.value)) {
-            el.parentNode.removeChild(el);
-        }
-    }
+	inserted: function(el, binding) {
+		if (!constant.has(binding.value)) {
+			el.parentNode.removeChild(el);
+		}
+	}
 });
 /* eslint-disable no-new */
 new Vue({
-    el: '#app',
-    router,
-    components: {
-        App
-    },
-    template: '<App/>'
+	el: '#app',
+	router,
+	components: {
+		App
+	},
+	template: '<App/>'
 })

@@ -87,9 +87,14 @@
                                     月入汇总
                                 </i>
                             </dt>
-                            <dd v-on:click="selectRule('CurrentSummary')" v-bind:class="{'li-active':onString == 'CurrentSummary'}">
+                            <!-- <dd v-on:click="selectRule('CurrentSummary')" v-bind:class="{'li-active':onString == 'CurrentSummary'}">
                                 <i class="fa" aria-hidden="true">
                                     月入汇总
+                                </i>
+                            </dd> -->
+                              <dd v-on:click="selectRule('Schedule2')" v-bind:class="{'li-active':onString == 'Schedule2'}">
+                                <i class="fa" aria-hidden="true">
+                                    排班2
                                 </i>
                             </dd>
                         </dl>

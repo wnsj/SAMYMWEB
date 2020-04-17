@@ -174,7 +174,7 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						accountId: this.accountId(),
+						posId: this.accountPosId(),
 						moduleGrade:'2',
 						urlName:'/MP/Project',
 						operateType:param,
@@ -219,11 +219,6 @@
 						empId:this.empId,
 						storeId:this.storeId,
 						
-						
-						accountId: this.accountId(),
-						moduleGrade:'2',
-						urlName:'/MP/Project',
-						operateType:'4',
                         page:page.toString(),
                         pageSize:this.pageSize
 					},

@@ -8,24 +8,28 @@
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="">
-					<div class="col-md-6 form-group clearfix">
+					<!-- <div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">账户名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<acc ref="acc" @accountChange="accountChange"></acc>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">岗位类型</label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<pos ref="pos" @positionChange='positionChange'></pos>
+						</div>
+					</div>
+					<!-- <div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">账户类型</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="ruleContent.employeeType">
 								<option value="0">未选择</option>
-								<option value="1">超级管理员</option>
-								<option value="2">店铺管理员</option>
-								<option value="3">财务管理员</option>
-								<option value="4">普通员</option>
+								<option value="1">集团账户</option>
+								<option value="2">店铺账户</option>
 							</select>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">模块级别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
@@ -90,8 +94,8 @@
 		data() {
 			return {
 				ruleContent: {
-					employeeType: '0',
 					modelGrade:'',
+					posId:'0',
 					moduleId:'',
 					accountId:'',
 					operateType:'0',
@@ -105,16 +109,22 @@
 				this.title = '新增'
 				
 				this.ruleContent = {
-					employeeType: '0',
 					moduleGrade:'',
 					moduleId:'',
+					posId:'0',
 					accountId:'',
 					operateType:'0',
 				}
-				this.$refs.pos.setPosId(this.employee.posId)
-				this.$refs.emp.setPosId(this.employee.posId)
+				this.$refs.pos.setPosId(this.ruleContent.posId)
+				// this.$refs.emp.setPosId(this.employee.posId)
 			},
-			
+			positionChange: function(param) {
+			    if (this.isBlank(param)) {
+			        this.ruleContent.posId = "0"
+			    } else {
+			        this.ruleContent.posId = param.posId
+			    }
+			},
 			//feedback department information
 			moduleChange: function(param) {
 				// console.log(JSON.stringify(param))
@@ -136,16 +146,20 @@
 			
 			//the event of addtional button
 			addRule() {
-				if (this.isBlank(this.ruleContent.accountId)) {
-					alert("账户不能为空")
-					return
-				}
+// 				if (this.isBlank(this.ruleContent.accountId)) {
+// 					alert("账户不能为空")
+// 					return
+// 				}
 				if (this.isBlank(this.ruleContent.moduleGrade)) {
 					alert("模块级别不能为空")
 					return
 				}
 				if (this.isBlank(this.ruleContent.moduleId)) {
 					alert("模块不能为空")
+					return
+				}
+				if (this.isBlank(this.ruleContent.posId) || this.ruleContent.posId==0) {
+					alert("请选择要设置权限的岗位")
 					return
 				}
 				var url = this.url + '/ruleAction/addRule';

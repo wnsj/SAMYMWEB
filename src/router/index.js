@@ -20,7 +20,13 @@ import CurrentSummary from '../components/MP/CurrentSummary.vue'
 import Project from '../components/MP/Project.vue'
 import test from '../components/MP/test.vue'
 import newtree from '../components/MP/newtree.vue'
+
 import Schedule2 from '@/components/MP/SubSm/Schedule2.vue'
+
+import ZxsSummary from '../components/MP/ZxsSummary.vue'
+import Visitor from '../components/MP/Visitor.vue'
+
+
 
 Vue.use(Router)
 
@@ -49,6 +55,11 @@ export default new Router({
                     path: '/MP/MemberSummary',
                     name: 'MemberSummary',
                     component: MemberSummary,
+                },
+                {
+                    path: '/MP/Visitor',
+                    name: 'Visitor',
+                    component: Visitor,
                 },
                 {
                     path: '/MP/SettleSummary',
@@ -126,7 +137,12 @@ export default new Router({
                     component: newtree,
                 },
                 {
-                    path: '/Schedule2',
+                    path: '/MP/ZxsSummary',
+                    name: 'ZxsSummary',
+                    component: ZxsSummary,
+                },
+                {
+                    path: '/MP/Schedule2',
                     name: 'Schedule2',
                     component: Schedule2,
                 }

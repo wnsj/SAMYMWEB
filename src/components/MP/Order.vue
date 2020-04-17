@@ -87,7 +87,7 @@
 		<div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
 			
 			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
-			 v-on:click="addOrder()">添加预约</button>
+			 v-on:click="selectRule('1')">添加预约</button>
 			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 			 v-on:click="checkOrderList(1)">查询</button>
 		</div>
@@ -244,17 +244,52 @@
 				this.current = page
 				this.checkOrderList(page);
 			},
-			//modify the cotent of orderContent
-			addOrder() {
-				this.$refs.order.initData('add')
-				$("#orderContent").modal('show')
+			selectRule(param,item){
+			    var url = this.url + '/ruleAction/queryRule'
+			
+			    this.$ajax({
+			        method: 'POST',
+			        url: url,
+			        headers: {
+			            'Content-Type': this.contentType,
+			            'Access-Token': this.accessToken
+			        },
+			        data: {
+			            posId: this.accountPosId(),
+			            moduleGrade:'2',
+			            urlName:'/MP/Order',
+			            operateType:param,
+			        },
+			        dataType: 'json',
+			    }).then((response) => {
+			        var res = response.data
+			        if (res.retCode == '0000') {
+			            if(res.retData=='0010'){
+			                console.log('param:'+param)
+			                if(param==1){
+			                    this.$refs.order.initData('add','')
+			                    $("#orderContent").modal('show')
+			                }else if(param==3){
+			                    this.$refs.order.initData('modify', item)
+			                    $("#orderContent").modal('show')
+			                }
+			            }else{
+			                alert('您没有此权限，请联系管理员！！')
+			            }
+			        } else {
+			            alert(res.retMsg)
+			        }
+			
+			    }).catch((error) => {
+			        console.log('员工权限查询请求失败')
+			    });
 			},
+			
 			updateOrder(item) {
 				if (item.arrival == '1') {
 					alert("已到店，不能进行修改")
 				} else {
-					this.$refs.order.initData('modify', item);
-					$("#orderContent").modal('show');
+					this.selectRule('3',item)
 				}
 			},
 			storeChange(param){
@@ -354,10 +389,7 @@
 						begAppDate: this.begAppDate,
 						endAppDate: this.endAppDate,
 						storeId: this.storeId,
-						accountId: this.accountId(),
-						modelGrade: '2',
-						modelType: '',
-						operateType: '',
+						
                         page:page.toString(),
                         pageSize:this.pageSize
 					},

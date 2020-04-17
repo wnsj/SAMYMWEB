@@ -32,7 +32,7 @@
                 </div>
             </div>
             <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
-                    v-on:click="showAddSchedule()">添加排班</button>
+                    v-on:click="selectRule('1')">添加排班</button>
             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
                     v-on:click="checkEmp(1)">查询</button>
         </div>
@@ -54,7 +54,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="(item,index) in schedulingList" :key="index" v-on:dblclick="showUpdateSchedule(item)">
+                        <tr v-for="(item,index) in schedulingList" :key="index" v-on:dblclick="selectRule('3',item)">
                             <td class="text-center">{{item.name}}</td>
                             <td class="text-center" v-bind:class="{'restBg':!item.morning1}">{{item.morning1=='0'?'歇班':'上班'}}</td>
                             <td class="text-center" v-bind:class="{'restBg':!item.afternoon1}">{{item.afternoon1=='0'?'歇班':'上班'}}</td>
@@ -178,16 +178,47 @@
                 this.checkEmp(1)
                 $("#scheduleContent").modal('hide');
             },
-            // check the adding and modifying rule of account
-            showAddSchedule(){
-                this.$refs.schedule.initData('add','')
-                $("#scheduleContent").modal('show')
-
-            },
-            showUpdateSchedule(item){
-                this.$refs.schedule.initData('modify', item)
-                $("#scheduleContent").modal('show')
-            },
+			selectRule(param,item){
+			    var url = this.url + '/ruleAction/queryRule'
+			
+			    this.$ajax({
+			        method: 'POST',
+			        url: url,
+			        headers: {
+			            'Content-Type': this.contentType,
+			            'Access-Token': this.accessToken
+			        },
+			        data: {
+			            posId: this.accountPosId(),
+			            moduleGrade:'2',
+			            urlName:'/MP/CashDeposit',
+			            operateType:param,
+			        },
+			        dataType: 'json',
+			    }).then((response) => {
+			        var res = response.data
+			        if (res.retCode == '0000') {
+			            if(res.retData=='0010'){
+			                console.log('param:'+param)
+			                if(param==1){
+			                    this.$refs.schedule.initData('add','')
+			                    $("#scheduleContent").modal('show')
+			                }else if(param==3){
+			                    this.$refs.schedule.initData('modify', item)
+			                    $("#scheduleContent").modal('show')
+			                }
+			            }else{
+			                alert('您没有此权限，请联系管理员！！')
+			            }
+			        } else {
+			            alert(res.retMsg)
+			        }
+			
+			    }).catch((error) => {
+			        console.log('员工权限查询请求失败')
+			    });
+			},
+            
             //check the list of department
             checkEmp(page) {
                 console.log("时间为"+this.moment(this.thisDate,'YYYY-MM-DD'));
@@ -208,6 +239,7 @@
                         thisDate:this.thisDate,
                         empId:this.empId,
                         storeId:this.storeId,
+						
                         page: page.toString(),
                         pageSize: this.pageSize
                     },

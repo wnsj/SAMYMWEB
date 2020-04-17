@@ -165,10 +165,10 @@
 						createDate:this.createDate,
 						
 						
-						accountId: this.accountId(),
-						modelGrade: '2',
-						modelType: '',
-						operateType: '',
+// 						accountId: this.accountId(),
+// 						moduleGrade:'2',
+// 						urlName:'/MP/RoyaltySummary',
+// 						operateType:'4',
 						
 					},
 					dataType: 'json',

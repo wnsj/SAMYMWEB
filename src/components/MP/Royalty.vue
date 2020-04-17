@@ -275,10 +275,10 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						accountId: this.accountId(),
+						posId: this.accountPosId(),
 						moduleGrade:'2',
 						urlName:'/MP/Royalty',
-						operateType:operateType,
+						operateType:'4',
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -337,10 +337,10 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						accountId: this.accountId(),
-						moduleGrade:'2',
-						urlName:'/MP/Royalty',
-						operateType:'4',
+// 						posId: this.accountPosId(),
+// 						moduleGrade:'2',
+// 						urlName:'/MP/Royalty',
+// 						operateType:'4',
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -388,7 +388,7 @@
 			this.$refs.tab1.style="height:"+maxH+"px";
 			this.$refs.tab2.style="height:"+maxH+"px";
 			this.$refs.tab3.style="height:"+maxH+"px";
-			this.$refs.tab4.style="height:"+maxH+"px";
+			// this.$refs.tab4.style="height:"+maxH+"px";
 		},
 		created() {
 			this.checkRoyaltyList()

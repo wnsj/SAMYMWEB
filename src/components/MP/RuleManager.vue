@@ -4,7 +4,7 @@
 			<h1 class="titleCss">权限管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">账户名</p><span class="sign-left">:</span>
 				</div>
@@ -15,6 +15,15 @@
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">员工姓名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="empName"></div>
+			</div> -->
+
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">岗位类型</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-7 col-lg-7">
+					<pos ref="pos" @positionChange='positionChange'></pos>
+				</div>
 			</div>
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -80,9 +89,10 @@
 
 							<thead class="datathead">
 								<tr>
-									<th class="text-center">账户</th>
+									<!-- <th class="text-center">账户</th>
 									<th class="text-center">员工姓名</th>
-									<th class="text-center">账户类型</th>
+									<th class="text-center">账户类型</th> -->
+									<th class="text-center">岗位类型</th>
 									<th class="text-center">模块级别</th>
 									<th class="text-center">模块</th>
 									<th class="text-center">操作类型</th>
@@ -91,11 +101,12 @@
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in ruleList" :key="index">
-									<td>{{item.accountNum}}</td>
+									<!-- <td>{{item.accountNum}}</td>
 									<td>{{item.empName}}</td>
 									<td v-show="item.employeeType=='1'">超级管理员</td>
 									<td v-show="item.employeeType=='2'">店铺管理员</td>
-									<td v-show="item.employeeType=='3'">财务</td>
+									<td v-show="item.employeeType=='3'">财务</td> -->
+									<td>{{item.posName}}</td>
 									<td>{{item.moduleGrade=='1' ? "第一层级" : "第二层级"}}</td>
 									<td>{{item.moduleId > 0 ? item.moduleName : "所有"}}</td>
 									<td v-show="item.operateType=='1'">添加功能</td>
@@ -127,6 +138,7 @@
 	import dPicker from 'vue2-datepicker'
 	import SubRm from '../MP/SubRm/SubRm'
 	import mod from '../common/Model.vue'
+	import pos from '../common/Position.vue'
 	import {
 		init
 	} from '@/../static/js/common.js'
@@ -136,6 +148,7 @@
 			dPicker,
 			SubRm,
 			mod,
+			pos,
 		},
 		data() {
 			return {
@@ -143,6 +156,7 @@
 				accountNum: '',
 				employeeType: '0',
 				empName: '',
+				posId:'0',
 				moduleId: '0',
 				moduleGrade: '0',
 				operateType: '0',
@@ -154,6 +168,13 @@
 				$("#rm").modal('show');
 			},
 			
+			positionChange: function(param) {
+			    if (this.isBlank(param)) {
+			        this.posId = ""
+			    } else {
+			        this.posId = param.posId
+			    }
+			},
 			//feedback department information
 			moduleChange: function(param) {
 				if (this.isBlank(param)) {
@@ -208,9 +229,10 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						accountNum: this.accountNum,
-						empName:this.empName,
-						employeeType: this.employeeType,
+// 						accountNum: this.accountNum,
+// 						empName:this.empName,
+// 						employeeType: this.employeeType,
+						posId:this.posId,
 						moduleId: this.moduleId,
 						moduleGrade: this.moduleGrade,
 						operateType: this.operateType,

@@ -12,6 +12,13 @@
 				<button class="btn btn-primary" style="width:100%" @click="login()">{{btnText}}</button>
 			</div>
 		</div>
+		<div class="row row_edit">
+			<div class="modal fade" id="modifyPwd">
+				<div class="modal-dialog">
+					<modPwd ref="modPwd" @certainAction="modifyPwdBack"></modPwd>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 <style>
@@ -21,17 +28,27 @@
 <script>
 	import axios from 'axios';
 	import Cookies from 'js-cookie'
+	import modPwd from './MP/SubPwd/ModifyPwd.vue'
 	var vm = null;
 	export default {
+		components:{
+			modPwd,
+		},
 		data() {
 			return {
 				accountName: '',
 				accountPwd: '',
 				accountData: {},
-				btnText: '登录'
+				btnText: '登录',
+				cip:'',
 			};
 		},
 		methods: {
+			
+			modifyPwdBack(){
+				this.$parent.setRouter("/MainPage");
+				$("#modifyPwd").modal('hide')
+			},
 			login() {
 				this.btnText = '登录中...';
 				var url = this.url + "/accountAction/login";
@@ -44,7 +61,8 @@
 					},
 					data: {
 						"accountNum": this.accountName,
-						"accountPwd": this.accountPwd
+						"accountPwd": this.accountPwd,
+						"ipaddress":returnCitySN.cip,
 					},
 					dataType: "json"
 				}).then((response) => {
@@ -53,12 +71,17 @@
 						//后台写入cookie不成功，先由前端代替
 						if(this.isUseSetCookie){
 							//cookie存储大小为4k左右，进行cookie瘦身
-							Cookies.set('accessToken', this.accountData.accessToken, { expires: this.accessTokenLife });
-							Cookies.set('accountData', this.accountData.accountData, { expires: this.accountDataLife });
-							Cookies.set('itemList', this.accountData.itemList, { expires: this.accountDataLife });
+							Cookies.set('accessToken', this.accountData.accessToken,"30MIN");
+							Cookies.set('accountData', this.accountData.accountData, "30MIN");
+							Cookies.set('empData', this.accountData.empData, "30MIN");
+							Cookies.set('itemList', this.accountData.itemList, "30MIN");
 						}
-						// alert("登录成功！"); //添加成功
-						this.$parent.setRouter("/MainPage");
+						if(this.accountPwd=='123456'){
+							$("#modifyPwd").modal('show')
+							this.$refs.modPwd.initData(this.accountData.accountData)
+						}else{
+							this.$parent.setRouter("/MainPage");
+						}
 					} else {
 						this.btnText = '登录';
 						alert(response.data.retMsg);

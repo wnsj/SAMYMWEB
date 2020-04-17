@@ -42,43 +42,58 @@ router.beforeEach((to, from, next) => {
         let accountData = Cookies.get('accountData');
         //console.log("token:" + token + ",accountData:" + accountData);
         if (constant.isBlank(token) || constant.isBlank(accountData)) {
+            if (from.path == '/login') {
+                alert('没有查到用户信息，或者用户信息存储失败')
+            }
             next('/login');
         } else if (to.path == '/') {
             next('/MainPage');
         } else if (to.path == '/login') {
-            next('/MainPage');
-        } else if (to.path == '/sam/dist/index.html') {
-            next('/MainPage');
+            next();
         } else {
-            let jsonString = Cookies.get('itemList');
-            if (constant.isBlank(jsonString)) {
+            let token = Cookies.get('accessToken');
+            let accountData = Cookies.get('accountData');
+            //console.log("token:" + token + ",accountData:" + accountData);
+            if (constant.isBlank(token) || constant.isBlank(accountData)) {
                 next('/login');
-            }
-            let itemRuleList = JSON.parse(jsonString);
-            //let hasRule = false;
-            let hasRule = true;
-            for (var i = 0; i < itemRuleList.length; i++) {
-                let item = itemRuleList[i];
-                if (to.path == item.urlName) {
-                    hasRule = true
-                    console.log("hasRule:" + hasRule)
-                    break;
-                }
-            }
-            console.log("main:" + to.path + from.path)
-            if (hasRule == true) {
-                next()
+            } else if (to.path == '/') {
+                next('/MainPage');
+            } else if (to.path == '/login') {
+                next('/MainPage');
+            } else if (to.path == '/sam/dist/index.html') {
+                next('/MainPage');
             } else {
-                next(from.path)
-                alert("您还没有此模块权限，请联系管理员添加权限")
+                let jsonString = Cookies.get('itemList');
+                if (constant.isBlank(jsonString)) {
+                    next('/login');
+                }
+                let itemRuleList = JSON.parse(jsonString);
+                //let hasRule = false;
+                let hasRule = true;
+                for (var i = 0; i < itemRuleList.length; i++) {
+                    let item = itemRuleList[i];
+                    if (to.path == item.urlName) {
+                        hasRule = true
+                        console.log("hasRule:" + hasRule)
+                        break;
+                    }
+                }
+                console.log("main:" + to.path + from.path)
+                if (hasRule == true) {
+                    next()
+                } else {
+                    next(from.path)
+                    alert("您还没有此模块权限，请联系管理员添加权限")
+                }
             }
         }
     }
 });
 
-//token存储在cookie中的过期时间10个小时
-Vue.prototype.accessTokenLife = 24 / 10
-Vue.prototype.accountDataLife = 24 / 10
+//token存储在cookie中的过期时间1天，必须是整数
+Vue.prototype.accessTokenLife = 0.01
+Vue.prototype.accountDataLife = 0.01
+
 //是否使用前端设置cookie
 Vue.prototype.isUseSetCookie = true
 
@@ -152,6 +167,10 @@ Vue.prototype.accountName = function() {
 Vue.prototype.accountId = function() {
     return constant.accountId();
 }
+//账户岗位的ID
+Vue.prototype.accountPosId = function() {
+    return constant.accountPosId();
+}
 //账户的类型
 Vue.prototype.accountType = function() {
     if (!constant.isBlank(constant.accountType()) && constant.accountType() == 1) return true;
@@ -168,6 +187,11 @@ Vue.prototype.storeId = function() {
 Vue.prototype.phoneNum = function(phoneNum) {
     return constant.phone(phoneNum);
 }
+//获取IP地址
+Vue.prototype.ipAddress = function() {
+    return constant.ipAddress();
+}
+
 
 /*
  **权限判断使用方法:

@@ -130,7 +130,7 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						accountId: this.accountId(),
+						posId: this.accountPosId(),
 						moduleGrade:'2',
 						urlName:'/MP/Store',
 						operateType:param,
@@ -173,10 +173,6 @@
 						storeName: this.storeName,
 						isuse: this.isuse,
 						
-						accountId: this.accountId(),
-						moduleGrade:'2',
-						urlName:'/MP/Store',
-						operateType:'4',
                         page:page.toString(),
                         pageSize:this.pageSize
 					},

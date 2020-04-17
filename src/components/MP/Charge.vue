@@ -172,10 +172,6 @@
 						endCreateDate: this.endCreateDate,
 						storeId: this.storeId,
 
-						accountId: this.accountId(),
-						modelGrade: '2',
-						modelType: '',
-						operateType: '',
 						page: page.toString(),
 						pageSize: this.size
 					},

@@ -88,7 +88,8 @@
         <div class="row row_edit">
             <div class="modal fade" id="scheduleContent">
                 <div class="modal-dialog">
-                    <schedule ref='schedule' @addSchedule='feedBack'></schedule>
+                   <!-- <schedule ref='schedule' @addSchedule='feedBack'></schedule> -->
+                   <Schedule2 ref='schedule' @addSchedule='feedBack'></Schedule2>
                 </div>
             </div>
         </div>
@@ -99,6 +100,7 @@
 
 <script>
     import schedule from '../MP/SubSm/Schedule.vue'
+    import Schedule2 from '../MP/SubSm/Schedule2.vue'
     import store from '../common/Store.vue'
     import pos from '../common/Position.vue'
     import dPicker from 'vue2-datepicker'
@@ -114,7 +116,8 @@
             store,
             dPicker,
             emp,
-            Paging
+            Paging,
+            Schedule2
         },
         data() {
             return {
@@ -347,7 +350,7 @@
                 let unixDe = arr2_.getTime();
                 for (let k = unixDb; k <= unixDe;) {
                     arrTime.push(this.datetimeparse(k, 'YYYY-MM-DD'));
-                    k = k + 24 * 60 * 60 * 1000;               
+                    k = k + 24 * 60 * 60 * 1000;
                 }
                 return arrTime;
             },

@@ -20,9 +20,13 @@ import CurrentSummary from '../components/MP/CurrentSummary.vue'
 import Project from '../components/MP/Project.vue'
 import test from '../components/MP/test.vue'
 import newtree from '../components/MP/newtree.vue'
+
+import Schedule2 from '@/components/MP/SubSm/Schedule2.vue'
+
 import ZxsSummary from '../components/MP/ZxsSummary.vue'
 import Visitor from '../components/MP/Visitor.vue'
 import MemberTotle from '../components/MP/MemberTotle.vue'
+
 
 
 Vue.use(Router)
@@ -30,121 +34,126 @@ Vue.use(Router)
 //解决路由多次跳转同一页面报错
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
-	return originalPush.call(this, location).catch(err => err);
+    return originalPush.call(this, location).catch(err => err);
 }
 
 export default new Router({
-	routes: [{
-			path: '/login',
-			component: login,
-			hidden: true
-		},
-		{
-			path: '/MainPage',
-			name: 'MainPage',
-			component: MainPage,
-			children: [{
-					path: '/MP/RoyaltySummary',
-					name: 'RoyaltySummary',
-					component: RoyaltySummary,
-				},
-				{
-					path: '/MP/MemberSummary',
-					name: 'MemberSummary',
-					component: MemberSummary,
-				},
-				{
-					path: '/MP/Visitor',
-					name: 'Visitor',
-					component: Visitor,
-				},
-				{
-					path: '/MP/SettleSummary',
-					name: 'SettleSummary',
-					component: SettleSummary,
-				},
-				{
-					path: '/MP/Employee',
-					name: 'Employee',
-					component: Employee,
-				},
-				{
-					path: '/MP/ScheduleEmp',
-					name: 'ScheduleEmp',
-					component: ScheduleEmp,
-				},
-				{
-					path: '/MP/Charge',
-					name: 'Charge',
-					component: Charge,
-				},
-				{
-					path: '/MP/Member',
-					name: 'Member',
-					component: Member,
-				},
-				{
-					path: '/MP/Position',
-					name: 'Position',
-					component: Position,
-				},
-				{
-					path: '/MP/Order',
-					name: 'Order',
-					component: Order,
-				},
-				{
-					path: '/MP/Royalty',
-					name: 'Royalty',
-					component: Royalty,
-				},
-				{
-					path: '/MP/Store',
-					name: 'Store',
-					component: Store,
-				},
-				{
-					path: '/MP/RuleManager',
-					name: 'RuleManager',
-					component: RuleManager,
-				},
-				{
-					path: '/MP/CashDeposit',
-					name: 'CashDeposit',
-					component: CashDeposit,
-				},
-				{
-					path: '/MP/CurrentSummary',
-					name: 'CurrentSummary',
-					component: CurrentSummary,
-				},
-				{
-					path: '/MP/Project',
-					name: 'Project',
-					component: Project,
-				},
-				{
-					path: '/MP/test',
-					name: 'test',
-					component: test,
-				},
-				{
-					path: '/MP/newtree',
-					name: 'newtree',
-					component: newtree,
-				},
-				{
-					path: '/MP/ZxsSummary',
-					name: 'ZxsSummary',
-					component: ZxsSummary,
-				},
+    routes: [{
+            path: '/login',
+            component: login,
+            hidden: true
+        },
+        {
+            path: '/MainPage',
+            name: 'MainPage',
+            component: MainPage,
+            children: [{
+                    path: '/MP/RoyaltySummary',
+                    name: 'RoyaltySummary',
+                    component: RoyaltySummary,
+                },
+                {
+                    path: '/MP/MemberSummary',
+                    name: 'MemberSummary',
+                    component: MemberSummary,
+                },
+                {
+                    path: '/MP/Visitor',
+                    name: 'Visitor',
+                    component: Visitor,
+                },
+                {
+                    path: '/MP/SettleSummary',
+                    name: 'SettleSummary',
+                    component: SettleSummary,
+                },
+                {
+                    path: '/MP/Employee',
+                    name: 'Employee',
+                    component: Employee,
+                },
+                {
+                    path: '/MP/ScheduleEmp',
+                    name: 'ScheduleEmp',
+                    component: ScheduleEmp,
+                },
+                {
+                    path: '/MP/Charge',
+                    name: 'Charge',
+                    component: Charge,
+                },
+                {
+                    path: '/MP/Member',
+                    name: 'Member',
+                    component: Member,
+                },
+                {
+                    path: '/MP/Position',
+                    name: 'Position',
+                    component: Position,
+                },
+                {
+                    path: '/MP/Order',
+                    name: 'Order',
+                    component: Order,
+                },
+                {
+                    path: '/MP/Royalty',
+                    name: 'Royalty',
+                    component: Royalty,
+                },
+                {
+                    path: '/MP/Store',
+                    name: 'Store',
+                    component: Store,
+                },
+                {
+                    path: '/MP/RuleManager',
+                    name: 'RuleManager',
+                    component: RuleManager,
+                },
+                {
+                    path: '/MP/CashDeposit',
+                    name: 'CashDeposit',
+                    component: CashDeposit,
+                },
+                {
+                    path: '/MP/CurrentSummary',
+                    name: 'CurrentSummary',
+                    component: CurrentSummary,
+                },
+                {
+                    path: '/MP/Project',
+                    name: 'Project',
+                    component: Project,
+                },
+                {
+                    path: '/MP/test',
+                    name: 'test',
+                    component: test,
+                },
+                {
+                    path: '/MP/newtree',
+                    name: 'newtree',
+                    component: newtree,
+                },
+                {
+                    path: '/MP/ZxsSummary',
+                    name: 'ZxsSummary',
+                    component: ZxsSummary,
+                },
 				{
 					path: '/MP/MemberTotle',
 					name: 'MemberTotle',
 					component: MemberTotle,
 				},
-			],
-			redirect: '/MP/MemberSummary'
-		}
-	]
+                {
+                    path: '/MP/Schedule2',
+                    name: 'Schedule2',
+                    component: Schedule2,
+                }
+            ],
+            redirect: '/MP/MemberSummary'
+        }
+    ]
 })

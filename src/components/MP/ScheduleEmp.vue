@@ -510,6 +510,7 @@
                 this.checkEmp(1)
                 $("#scheduleContent").modal('hide');
             },
+<<<<<<< HEAD
             selectRule(param, item) {
                 var url = this.url + '/ruleAction/queryRule'
 
@@ -552,6 +553,49 @@
                 });
             },
 
+=======
+			selectRule(param,item){
+			    var url = this.url + '/ruleAction/queryRule'
+
+			    this.$ajax({
+			        method: 'POST',
+			        url: url,
+			        headers: {
+			            'Content-Type': this.contentType,
+			            'Access-Token': this.accessToken
+			        },
+			        data: {
+			           accountPosId: this.accountPosId(),
+			            moduleGrade:'2',
+			            urlName:'/MP/CashDeposit',
+			            operateType:param,
+			        },
+			        dataType: 'json',
+			    }).then((response) => {
+			        var res = response.data
+			        if (res.retCode == '0000') {
+			            if(res.retData=='0010'){
+			                console.log('param:'+param)
+			                if(param==1){
+			                    this.$refs.schedule.initData('add','')
+			                    $("#scheduleContent").modal('show')
+			                }else if(param==3){
+			                    this.$refs.schedule.initData('modify', item)
+			                    $("#scheduleContent").modal('show')
+			                }
+			            }else{
+			                alert('您没有此权限，请联系管理员！！')
+			            }
+			        } else {
+			            alert(res.retMsg)
+			        }
+
+			    }).catch((error) => {
+			        console.log('员工权限查询请求失败')
+			    });
+			},
+
+>>>>>>> d23d876b7647c66bb3f3e052290c675defeb4e7b
             //check the list of department
             checkEmp(page) {
                 console.log("时间为" + this.moment(this.thisDate, 'YYYY-MM-DD'));

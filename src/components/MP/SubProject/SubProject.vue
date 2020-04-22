@@ -24,12 +24,14 @@
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">单价</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="project.price" placeholder="">
+							<span class="pos-ab pos-tr">¥</span>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">课时</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="project.frequency">
+							<span class="pos-ab pos-tr">H</span>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">

@@ -249,7 +249,6 @@
             },
             selectRule(param, item) {
                 var url = this.url + '/ruleAction/queryRule'
-
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -281,12 +280,10 @@
                     } else {
                         alert(res.retMsg)
                     }
-
                 }).catch((error) => {
-                    console.log('员工权限查询请求失败')
+                    console.log('预约相关提交请求失败')
                 });
             },
-
             updateOrder(item) {
                 if (item.arrival == '1') {
                     alert("已到店，不能进行修改")

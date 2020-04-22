@@ -24,7 +24,7 @@
                         <dl v-bind:class="{h15:bool1}">
                             <dt @click="onShow(0)" v-bind:class="{'li-active':bool1}">
                                 <i class="fa" v-bind:class="{'fa-folder-open':bool1,'fa-folder':!bool1}" aria-hidden="true">
-                                    咨客管理模块
+                                    会员管理模块
                                 </i>
                             </dt>
                             <dd @click="addCheck('MemberSummary')" v-bind:class="{'li-active':onString=='MemberSummary'}">
@@ -36,6 +36,12 @@
                             <dd @click="addCheck('Visitor')" v-bind:class="{'li-active':onString=='Visitor'}">
                                 <router-link to="/MP/Visitor"><i class="fa" aria-hidden="true">咨客管理</i></router-link>
                             </dd>
+<<<<<<< HEAD
+							<!-- <dd @click="addCheck('Visitor')" v-bind:class="{'li-active':onString=='Visitor'}">
+								<router-link to="/MP/Visitor"><i class="fa" aria-hidden="true">咨客管理</i></router-link>
+							</dd> -->
+=======
+>>>>>>> fbe1387cc77fb31bf97c5a341a0cd565decfe956
                         </dl>
                         <dl v-bind:class="{h25:bool2}">
                             <dt @click="onShow(1)" v-bind:class="{'li-active':bool2}">
@@ -118,7 +124,6 @@
                                 </i>
                             </dt>
                         </dl> -->
-                        <!-- <router-link to="/MP/PatientStype"><i class="fa fa-table" aria-hidden="false" v-on:click="titleChange('患者类型')">　患者类型</i></router-link> -->
                     </div>
                 </div>
                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 embed-responsive embed-responsive-16by9" style="overflow: inherit; background-color:">
@@ -271,101 +276,25 @@
 </script>
 
 <style>
-    #aside-menu {
-        border-top: 1px solid #ccc;
-        height: 640px;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
 
-    #aside-menu::-webkit-scrollbar {
-        display: none;
-    }
-
-    #aside-menu dl {
-        margin-bottom: 0;
-        height: 50px;
-        overflow: hidden;
-        color: #795548;
-        font-size: 20px;
-        background: #f1f1f1;
-        transition: height .5s
-    }
-
-    #aside-menu dl.noShow {
-        color: #f2ad4e
-    }
-
-    #aside-menu dl.h10 {
-        height: 100px;
-    }
-
-    #aside-menu dl.h15 {
-        height: 200px;
-    }
-
-    #aside-menu dl.h25 {
-        height: 300px;
-    }
-
-    #aside-menu dl.h40 {
-        height: 400px;
-    }
-
-    #aside-menu dl dt {
-        height: 50px;
-        text-align: center;
-        background: #e6e6e6;
-        border-bottom: 1px solid #ccc;
-    }
-
-    #aside-menu dl dd {
-        height: 50px;
-        text-align: center;
-        border-bottom: 1px solid #ccc;
-    }
-
-    #aside-menu dl dd:hover {
-        background: #f5f5f5;
-        color: #603b2c;
-    }
-
-    #aside-menu dl i {
-        position: relative;
-        display: inline-block;
-        width: 200px;
-        height: 50px;
-        text-align: left;
-        line-height: 50px;
-        text-indent: 25px;
-    }
-
-    #aside-menu dl i:before {
-        position: absolute;
-        left: -25px;
-        display: block;
-    }
-
-    #aside-menu dl dd.li-active {
-        background: #fff
-    }
-
-    .li-active i {
-        color: #f2ad4e;
-    }
-
-    .root {
-        width: 100%;
-        overflow-x: hidden;
-    }
-
-    a {
-        color: #795548;
-    }
-
-    a:hover {
-        color: #795548;
-    }
+    #aside-menu{border-top:1px solid #ccc;height:640px; overflow-y:auto; overflow-x:hidden;}
+    #aside-menu::-webkit-scrollbar { display:none;}
+    #aside-menu dl{ margin-bottom:0; height:50px;overflow:hidden; color:#795548;font-size:20px; background:#f1f1f1;transition:height .5s }
+    #aside-menu dl.noShow{color:#f2ad4e }
+    #aside-menu dl.h10{height:100px; }
+    #aside-menu dl.h15{height:150px; }
+    #aside-menu dl.h25{height:250px; }
+    #aside-menu dl.h40{height:400px; }
+    #aside-menu dl dt{height:50px;text-align:center;background:#e6e6e6;border-bottom:1px solid #ccc;}
+    #aside-menu dl dd{height:50px;text-align:center;border-bottom:1px solid #ccc;}
+    #aside-menu dl dd:hover{background:#f5f5f5;color:#603b2c;}
+    #aside-menu dl i{ position:relative; display:inline-block;width:200px;height:50px;text-align:left;line-height:50px;text-indent:25px;}
+    #aside-menu dl i:before{position:absolute;left:-25px; display:block;}
+    #aside-menu dl dd.li-active {background:#fff}
+    .li-active i {color: #f2ad4e;}
+    .root{width:100%; overflow-x:hidden;}
+	a{color: #795548 !important;}
+	a:hover{color: #795548 !important;}
 </style>
 <host>
 

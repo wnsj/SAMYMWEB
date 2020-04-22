@@ -130,7 +130,7 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						posId: this.accountPosId(),
+						accountPosId: this.accountPosId(),
 						moduleGrade:'2',
 						urlName:'/MP/Store',
 						operateType:param,

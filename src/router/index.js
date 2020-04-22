@@ -25,6 +25,7 @@ import Schedule2 from '@/components/MP/SubSm/Schedule2.vue'
 
 import ZxsSummary from '../components/MP/ZxsSummary.vue'
 import Visitor from '../components/MP/Visitor.vue'
+import MemberTotle from '../components/MP/MemberTotle.vue'
 
 
 
@@ -141,6 +142,11 @@ export default new Router({
                     name: 'ZxsSummary',
                     component: ZxsSummary,
                 },
+				{
+					path: '/MP/MemberTotle',
+					name: 'MemberTotle',
+					component: MemberTotle,
+				},
                 {
                     path: '/MP/Schedule2',
                     name: 'Schedule2',

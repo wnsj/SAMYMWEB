@@ -191,6 +191,14 @@ Vue.prototype.phoneNum = function(phoneNum) {
 Vue.prototype.ipAddress = function() {
     return constant.ipAddress();
 }
+//获取员工信息
+Vue.prototype.getEmpData = function() {
+    return constant.getEmpData()
+}
+//获取员工Id
+Vue.prototype.getEmpId = function() {
+    return constant.getEmpId()
+}
 
 
 /*

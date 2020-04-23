@@ -3,63 +3,73 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-            <h4 id="myModalLabel" class="modal-title">{{title}}预约</h4>
+            <h4 class="modal-title">{{title}}预约</h4>
         </div>
         <div class="modal-body  pos_r">
             <div class="tab-pane fade in active martop" id="basic">
                 <form action="" class="clearfix">
                     <div class="col-md-6 form-group clearfix">
-                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员号</label><span
-                            class="sign-left">:</span>
+                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
+                               style="padding:0;line-height:34px;">会员号</label><span
+                        class="sign-left">:</span>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" v-model="orderClick.memNum" v-on:change="checkMemNum(orderClick.memNum)">
+                            <input type="text" class="form-control" v-model="orderClick.memNum"
+                                   v-on:change="checkMemNum(orderClick.memNum)">
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span
-                            class="sign-left">:</span>
+                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
+                               style="padding:0;line-height:34px;">姓名</label><span
+                        class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="orderClick.appName" placeholder="">
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span
-                            class="sign-left">:</span>
+                        <label class="col-md-3 control-label text-right nopad end-aline"
+                               style="padding:0;line-height:34px;">手机号</label><span
+                        class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="orderClick.phone" placeholder="">
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预约时间</label><span
-                            class="sign-left">:</span>
+                        <label class="col-md-3 control-label text-right nopad end-aline"
+                               style="padding:0;line-height:34px;">预约时间</label><span
+                        class="sign-left">:</span>
                         <div class="col-md-8">
-                            <dPicker v-model="orderClick.appDate" format="YYYY-MM-DD" style="width:100%;" v-on:change="checkEmpSchedule()"></dPicker>
+                            <dPicker v-model="orderClick.appDate" format="YYYY-MM-DD" style="width:100%;"
+                                     v-on:change="checkEmpSchedule()"></dPicker>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
-                            class="sign-left">:</span>
+                        <label class="col-md-3 control-label text-right nopad end-aline"
+                               style="padding:0;line-height:34px;">咨询师</label><span
+                        class="sign-left">:</span>
                         <div class="col-md-8">
                             <emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">课程</label><span
-                            class="sign-left">:</span>
+                        <label class="col-md-3 control-label text-right nopad end-aline"
+                               style="padding:0;line-height:34px;">课程</label><span
+                        class="sign-left">:</span>
                         <div class="col-md-8">
                             <project ref="project" @projectChange="projectChange"></project>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询室</label><span
-                            class="sign-left">:</span>
+                        <label class="col-md-3 control-label text-right nopad end-aline"
+                               style="padding:0;line-height:34px;">咨询室</label><span
+                        class="sign-left">:</span>
                         <div class="col-md-8">
                             <CounseRoom :disabled="true" ref="CounseRoomRef"></CounseRoom>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">渠道</label><span
-                            class="sign-left">:</span>
+                        <label class="col-md-3 control-label text-right nopad end-aline"
+                               style="padding:0;line-height:34px;">渠道</label><span
+                        class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="orderClick.channel">
                                 <option value="1">线上电话</option>
@@ -72,62 +82,78 @@
                         <h4 id="myModalLabel" class="modal-title pull-left">预约时间</h4>
                     </div>
                     <div class="col-md-12 form-group clearfix">
-                        <div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
                             <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[0]}}</label>
                             <div class="col-md-4" style='line-height:34px;padding-right:0;'>
-                                <input type="checkbox" v-model="order.time1" class="form-control" :disabled="order.time1Mod"
-                                    v-on:click="setOrder(1,order)">
+                                <input type="checkbox" v-model="order.time1" class="form-control"
+                                       :disabled="order.time1Mod"
+                                       v-on:click="setOrder(1,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
                             <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[1]}}</label>
                             <div class="col-md-4" style='line-height:34px;padding-right:0;'>
-                                <input type="checkbox" v-model="order.time2" class="form-control" :disabled="order.time2Mod"
-                                    v-on:click="setOrder(2,order)">
+                                <input type="checkbox" v-model="order.time2" class="form-control"
+                                       :disabled="order.time2Mod"
+                                       v-on:click="setOrder(2,order)">
                             </div>
                         </div>
 
-                        <div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
                             <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[2]}}</label>
                             <div class="col-md-4" style='line-height:34px;padding-right:0;'>
-                                <input type="checkbox" v-model="order.time3" class="form-control" :disabled="order.time3Mod"
-                                    v-on:click="setOrder(3,order)">
+                                <input type="checkbox" v-model="order.time3" class="form-control"
+                                       :disabled="order.time3Mod"
+                                       v-on:click="setOrder(3,order)">
                             </div>
                         </div>
 
-                        <div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
                             <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[3]}}</label>
                             <div class="col-md-4" style='line-height:34px;padding-right:0;'>
-                                <input type="checkbox" v-model="order.time4" class="form-control" :disabled="order.time4Mod"
-                                    v-on:click="setOrder(4,order)">
+                                <input type="checkbox" v-model="order.time4" class="form-control"
+                                       :disabled="order.time4Mod"
+                                       v-on:click="setOrder(4,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
                             <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[4]}}</label>
                             <div class="col-md-4" style='line-height:34px;padding-right:0;'>
-                                <input type="checkbox" v-model="order.time5" class="form-control" :disabled="order.time5Mod"
-                                    v-on:click="setOrder(5,order)">
+                                <input type="checkbox" v-model="order.time5" class="form-control"
+                                       :disabled="order.time5Mod"
+                                       v-on:click="setOrder(5,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
                             <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[5]}}</label>
                             <div class="col-md-4" style='line-height:34px;padding-right:0;'>
-                                <input type="checkbox" v-model="order.time6" class="form-control" :disabled="order.time6Mod"
-                                    v-on:click="setOrder(6,order)">
+                                <input type="checkbox" v-model="order.time6" class="form-control"
+                                       :disabled="order.time6Mod"
+                                       v-on:click="setOrder(6,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
                             <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[6]}}</label>
                             <div class="col-md-4" style='line-height:34px;padding-right:0;'>
-                                <input type="checkbox" v-model="order.time7" class="form-control" :disabled="order.time7Mod"
-                                    v-on:click="setOrder(7,order)">
+                                <input type="checkbox" v-model="order.time7" class="form-control"
+                                       :disabled="order.time7Mod"
+                                       v-on:click="setOrder(7,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
                             <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[7]}}</label>
                             <div class="col-md-4" style='line-height:34px;padding-right:0;'>
-                                <input type="checkbox" v-model="order.time8" class="form-control" :disabled="order.time8Mod"
-                                    v-on:click="setOrder(8,order)">
+                                <input type="checkbox" v-model="order.time8" class="form-control"
+                                       :disabled="order.time8Mod"
+                                       v-on:click="setOrder(8,order)">
                             </div>
                         </div>
                     </div>
@@ -135,9 +161,11 @@
                     <div class="form-group clearfix">
                         <div class="col-md-12">
                             <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;"
-                                data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+                                    data-toggle="modal" v-on:click="closeCurrentPage()">返回
+                            </button>
                             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
-                                data-toggle="modal" v-on:click="addOrder(title)">确认</button>
+                                    data-toggle="modal" v-on:click="addOrder(title)">确认
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -153,6 +181,7 @@
     import emp from '../../common/Employee.vue'
     import project from '../../common/Project.vue'
     import CounseRoom from '../../common/CounseRoom.vue'
+
     export default {
         components: {
             dPicker,
@@ -218,47 +247,63 @@
             };
         },
         methods: {
-            initData() {
+            initData(param) {
                 this.numArr = []
-                this.$refs.counlorEmp.setPosName("咨询师")
-                this.$refs.counlorEmp.setEmp("")
-                this.$refs.project.setProject(0)
-                this.order = { //预约数据
-                    afternoon: '',
-                    createDate: '',
-                    empId: '',
-                    morning: '0',
-                    storeId: this.storeId(),
-                    operatorId: '',
-                    schId: '1',
-                    schedulingDate: this.moment('', 'YYYY-MM-DD'),
-                    "time1": true,
-                    "time1Mod": true,
-                    "time2": true,
-                    "time2Mod": true,
-                    "time3": true,
-                    "time3Mod": true,
-                    "time4": true,
-                    "time4Mod": true,
-                    "time5": true,
-                    "time5Mod": true,
-                    "time6": true,
-                    "time6Mod": true,
-                    "time7": true,
-                    "time7Mod": true,
-                    "time8": true,
-                    "time8Mod": true,
-                    "consultantRoomList": []
-                }
-                this.orderClick = {
-                    memNum: '',
-                    appName: '',
-                    phone: '',
-                    storeId: this.storeId(),
-                    appDate: new Date(),
-                    empId: '',
-                    proId: '',
-                    channel: 3
+                if (!this.isBlank(param)) {
+                    this.$refs.counlorEmp.setPosName("咨询师")
+                    this.$refs.counlorEmp.setEmp(param.empId)
+                    this.$refs.project.setProject(param.proId)
+                    this.orderClick = {
+                        memNum: param.memNum,
+                        appName: param.appName,
+                        phone: param.phone,
+                        storeId: this.storeId(),
+                        appDate: param.appDate,
+                        empId: param.empId,
+                        proId: param.proId,
+                        channel: param.channel
+                    }
+                } else {
+                    this.$refs.counlorEmp.setPosName("咨询师")
+                    this.$refs.counlorEmp.setEmp("")
+                    this.$refs.project.setProject(0)
+                    this.order = { //预约数据
+                        afternoon: '',
+                        createDate: '',
+                        empId: '',
+                        morning: '0',
+                        storeId: this.storeId(),
+                        operatorId: '',
+                        schId: '1',
+                        schedulingDate: this.moment('', 'YYYY-MM-DD'),
+                        "time1": true,
+                        "time1Mod": true,
+                        "time2": true,
+                        "time2Mod": true,
+                        "time3": true,
+                        "time3Mod": true,
+                        "time4": true,
+                        "time4Mod": true,
+                        "time5": true,
+                        "time5Mod": true,
+                        "time6": true,
+                        "time6Mod": true,
+                        "time7": true,
+                        "time7Mod": true,
+                        "time8": true,
+                        "time8Mod": true,
+                        "consultantRoomList": []
+                    }
+                    this.orderClick = {
+                        memNum: '',
+                        appName: '',
+                        phone: '',
+                        storeId: this.storeId(),
+                        appDate: new Date(),
+                        empId: '',
+                        proId: '',
+                        channel: 3
+                    }
                 }
             },
             itemAction(item, index) {
@@ -278,7 +323,7 @@
             },
 
             //feedback employee information
-            projectChange: function(param) {
+            projectChange: function (param) {
                 // console.log('科室：'+JSON.stringify(param))
                 if (this.isBlank(param)) {
                     this.orderClick.proId = ""
@@ -296,7 +341,7 @@
                 }
             },
             //feedback employee information
-            counlorEmpChange: function(param) {
+            counlorEmpChange: function (param) {
                 // console.log('科室：'+JSON.stringify(param))
                 if (this.isBlank(param)) {
                     this.orderClick.empId = ""
@@ -344,7 +389,7 @@
                     alert('没有预约时间，请选择预约时间')
                     return
                 } else {
-                    this.numArr = this.numArr.sort(function(a, b) {
+                    this.numArr = this.numArr.sort(function (a, b) {
                         return a - b;
                     })
 

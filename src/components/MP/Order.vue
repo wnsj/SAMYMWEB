@@ -8,7 +8,7 @@
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span
-                        class="sign-left">:</span>
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="appName"></div>
             </div>
@@ -16,7 +16,7 @@
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span
-                        class="sign-left">:</span>
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
                     <input class="form-control" type="text" value="" v-model="phone">
@@ -26,7 +26,7 @@
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否到店</p><span
-                        class="sign-left">:</span>
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                     <select class="form-control" v-model="arrival">
@@ -67,7 +67,7 @@
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
                 <div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;width:20.5%">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">预约时间</p><span
-                        class="sign-left">:</span>
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
                     <dPicker style="width:100%" v-model="begAppDate"></dPicker>
@@ -82,7 +82,7 @@
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true" style=" margin-top: 15px;">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
-                        class="sign-left">:</span>
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
                     <store ref='store' @storeChange='storeChange'></store>
@@ -92,7 +92,7 @@
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true" style=" margin-top: 15px;">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span
-                        class="sign-left">:</span>
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
                     <emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
@@ -102,7 +102,7 @@
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true" style=" margin-top: 15px;">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">渠道</p><span
-                        class="sign-left">:</span>
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
                     <select class="form-control" v-model="channel">
@@ -115,55 +115,71 @@
             </div>
         </div>
         <div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
-            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
-                @click="selectRule('1')">添加预约</button>
-            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-                @click="checkOrderList(1)">查询</button>
+            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"
+                    data-toggle="modal"
+                    @click="selectRule('1')">添加预约
+            </button>
+            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+                    data-toggle="modal"
+                    @click="checkOrderList(1)">查询
+            </button>
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive pre-scrollable">
                     <table class="table table-bordered table-hover" id="datatable" style="width:2000px;">
                         <thead class="datathead">
-                            <tr>
-                                <th class="text-center" style="line-height:40px;">预约号</th>
-                                <th class="text-center" style="line-height:40px;">姓名</th>
-                                <th class="text-center" style="line-height:40px;">手机号</th>
-                                <!-- <th class="text-center">访问类型</th> -->
-                                <th class="text-center" style="line-height:40px;">咨询师</th>
-                                <th class="text-center" style="line-height:40px;">预约时间</th>
-                                <th class="text-center" style="line-height:40px;">咨询室</th>
-                                <th class="text-center" style="line-height:40px;">渠道</th>
-                                <th class="text-center" style="line-height:40px;">来电时间</th>
-                                <!--  <th class="text-center" style="line-height:40px;">取消</th> -->
-                                <th class="text-center" style="line-height:40px;">到店</th>
-                                <th class="text-center" style="line-height:40px;">操作人</th>
-                                <th class="text-center" style="line-height:40px;">修改</th>
-                            </tr>
+                        <tr>
+                            <th class="text-center" style="line-height:40px;">预约号</th>
+                            <th class="text-center" style="line-height:40px;">姓名</th>
+                            <th class="text-center" style="line-height:40px;">手机号</th>
+                            <!-- <th class="text-center">访问类型</th> -->
+                            <th class="text-center" style="line-height:40px;">咨询师</th>
+                            <th class="text-center" style="line-height:40px;">预约时间</th>
+                            <th class="text-center" style="line-height:40px;">咨询室</th>
+                            <th class="text-center" style="line-height:40px;">渠道</th>
+                            <th class="text-center" style="line-height:40px;">来电时间</th>
+                            <!--  <th class="text-center" style="line-height:40px;">取消</th> -->
+                            <th class="text-center" style="line-height:40px;">到店</th>
+                            <th class="text-center" style="line-height:40px;">操作人</th>
+                            <th class="text-center" style="line-height:40px;">修改</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(item,index) in orderList" :key="index" @dblclick="updateOrder(item)">
-                                <td class="text-center" style="line-height:33px;">{{item.memNum}}</td>
-                                <td class="text-center" style="line-height:33px;">{{item.appName}}</td>
-                                <td class="text-center" style="line-height:33px;">{{item.phone}}</td>
-                                <td class="text-center" style="line-height:33px;">{{item.empName}}</td>
-                                <!-- <td class="text-center">{{item.visitType=='0' ? "初访" : "复访"}}</td> -->
-                                <td class="text-center" style="line-height:33px;">{{item.appDate | dateFormatFilter("YYYY-MM-DD")}}
-                                    {{retDate(1,item.begAppDate)}}--{{retDate(2,item.endAppDate)}}</td>
-                                <td class="text-center" style="line-height:33px;">{{item.crName}}</td>
-                                <td class="text-center" style="line-height:33px;">{{item.channel == 1 ? '线上电话' : item.channel == 2 ? '线上面对面' : '门店' }}</td>
-                                <td class="text-center" style="line-height:33px;">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}
-                                </td>
+                        <tr v-for="(item,index) in orderList" :key="index" @dblclick="updateOrder(item)">
+                            <td class="text-center" style="line-height:33px;">{{item.memNum}}</td>
+                            <td class="text-center" style="line-height:33px;">{{item.appName}}</td>
+                            <td class="text-center" style="line-height:33px;">{{item.phone}}</td>
+                            <td class="text-center" style="line-height:33px;">{{item.empName}}</td>
+                            <!-- <td class="text-center">{{item.visitType=='0' ? "初访" : "复访"}}</td> -->
+                            <td class="text-center" style="line-height:33px;">{{item.appDate |
+                                dateFormatFilter("YYYY-MM-DD")}}
+                                {{retDate(1,item.begAppDate)}}--{{retDate(2,item.endAppDate)}}
+                            </td>
+                            <td class="text-center" style="line-height:33px;">{{item.crName}}</td>
+                            <td class="text-center" style="line-height:33px;">{{item.channel == 1 ? '线上电话' :
+                                item.channel == 2 ? '线上面对面' : '门店' }}
+                            </td>
+                            <td class="text-center" style="line-height:33px;">{{item.createDate |
+                                dateFormatFilter("YYYY-MM-DD")}}
+                            </td>
 
-                                <!--            <td class="text-center" v-bind:class="{ onOffState:!item.state}" style="line-height:33px;">{{item.state=='0' ? '已取消' : '未取消'}}</td> -->
-                                <td class="text-center" :class="{ onOffArrival:!item.arrival}" style="line-height:33px;">{{item.arrival=='0' ? '未到店' : '已到店'}}</td>
-                                <td class="text-center" style="line-height:33px;">{{item.operatorName}}</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-warning" @click="updateOrder(item)">修改</button>
-                                    <button type="button" class="btn btn-primary" @click="caAction(item,'cancel')">{{item.state=='0' ? '已取消' : '点击取消'}}</button>
-                                    <button type="button" class="btn btn-primary" @click="caAction(item,'arrival')">{{item.arrival=='0' ? '点击到店' : '已到店'}}</button>
-                                </td>
-                            </tr>
+                            <!--            <td class="text-center" v-bind:class="{ onOffState:!item.state}" style="line-height:33px;">{{item.state=='0' ? '已取消' : '未取消'}}</td> -->
+                            <td class="text-center" :class="{ onOffArrival:!item.arrival}" style="line-height:33px;">
+                                {{item.arrival=='0' ? '未到店' : '已到店'}}
+                            </td>
+                            <td class="text-center" style="line-height:33px;">{{item.operatorName}}</td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-warning" @click="updateOrder(item)">修改</button>
+                                <button type="button" class="btn btn-primary" @click="caAction(item,'cancel')">
+                                    {{item.state=='0' ? '已取消' : '点击取消'}}
+                                </button>
+                                <button type="button" class="btn btn-primary" @click="caAction(item,'arrival')">
+                                    {{item.arrival=='0' ? '点击到店' : '已到店'}}
+                                </button>
+                                <button type="button" class="btn btn-primary" @click="againAdd(item)">再来一条</button>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -206,6 +222,7 @@
     import {
         init
     } from '@/../static/js/common.js'
+
     export default {
         components: {
             SubOrder,
@@ -243,7 +260,7 @@
         },
         methods: {
             //子级传值到父级上来的动态拿去
-            pageChange: function(page) {
+            pageChange: function (page) {
                 this.current = page
                 this.checkOrderList(page);
             },
@@ -461,12 +478,16 @@
                 ]
                 return type == 1 ? begDateArr[date - 1] : endDateArr[date - 1]
             },
-            counlorEmpChange: function(param) {
+            counlorEmpChange: function (param) {
                 if (this.isBlank(param)) {
                     this.empId = ""
                 } else {
                     this.empId = param.empId
                 }
+            },
+            againAdd(item) {
+                this.$refs.AddSubOrderRef.initData(item)
+                $("#addAppointContent").modal('show')
             }
         },
         mounted() {

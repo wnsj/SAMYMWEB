@@ -267,6 +267,7 @@
                     this.$refs.counlorEmp.setPosName("咨询师")
                     this.$refs.counlorEmp.setEmp("")
                     this.$refs.project.setProject(0)
+                    this.$refs.CounseRoomRef.setChaId(0)
                     this.order = { //预约数据
                         afternoon: '',
                         createDate: '',

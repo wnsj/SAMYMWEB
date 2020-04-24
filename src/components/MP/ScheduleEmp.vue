@@ -9,7 +9,7 @@
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">时间</p><span
-                        class="sign-left">:</span>
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                     <dPicker style="width:100%" format="YYYY-MM-DD" v-model="thisDate"></dPicker>
@@ -19,7 +19,7 @@
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span
-                        class="sign-left">:</span>
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                     <emp ref="counselorChange" @employeeChange="counselorEmpChange"></emp>
@@ -28,36 +28,45 @@
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
-                        class="sign-left">:</span>
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
                     <store ref='store' @storeChange='storeChange'></store>
                 </div>
             </div>
-            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
-                v-on:click="selectRule('1')">添加排班</button>
-            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-                v-on:click="checkEmp(1)">查询</button>
+            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"
+                    data-toggle="modal"
+                    v-on:click="selectRule('1')">添加排班
+            </button>
+            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+                    data-toggle="modal"
+                    v-on:click="checkEmp(1)">查询
+            </button>
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive pre-scrollable">
-                    <table class="table table-bordered table-hover" id="datatable" style="width:100%; position:relative;">
+                    <table class="table table-bordered table-hover" id="datatable"
+                           style="width:100%; position:relative;">
                         <thead>
-                            <tr>
-                                <th class="text-center" rowspan="2" style="line-height:52px;">姓名</th>
-                                <th class="text-center" rowspan="2" style="line-height:52px;">日期</th>
-                                <th class="text-center" rowspan="2" style="line-height:52px;">上午</th>
-                                <th class="text-center" rowspan="2" style="line-height:52px;">下午</th>
-                            </tr>
+                        <tr>
+                            <th class="text-center" rowspan="2" style="line-height:52px;">姓名</th>
+                            <th class="text-center" rowspan="2" style="line-height:52px;">日期</th>
+                            <th class="text-center" rowspan="2" style="line-height:52px;">上午</th>
+                            <th class="text-center" rowspan="2" style="line-height:52px;">下午</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(item,index) in schedulingList" :key="index" v-on:dblclick="selectRule('3',item)">
-                                <td class="text-center">{{item.empName}}</td>
-                                <td class="text-center">{{item.schedulingDate}}</td>
-                                <td class="text-center" v-bind:class="{'restBg':!item.morning}">{{item.morning=='0'?'歇班':'上班'}}</td>
-                                <td class="text-center" v-bind:class="{'restBg':!item.afternoon}">{{item.afternoon=='0'?'歇班':'上班'}}</td>
-                            </tr>
+                        <tr v-for="(item,index) in schedulingList" :key="index" v-on:dblclick="selectRule('3',item)">
+                            <td class="text-center">{{item.empName}}</td>
+                            <td class="text-center">{{item.schedulingDate}}</td>
+                            <td class="text-center" v-bind:class="{'restBg':!item.morning}">
+                                {{item.morning=='0'?'歇班':'上班'}}
+                            </td>
+                            <td class="text-center" v-bind:class="{'restBg':!item.afternoon}">
+                                {{item.afternoon=='0'?'歇班':'上班'}}
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -102,6 +111,7 @@
     import {
         init
     } from '@/../static/js/common.js'
+
     export default {
         components: {
             schedule,
@@ -137,12 +147,12 @@
         },
         methods: {
             //子级传值到父级上来的动态拿去
-            pageChange: function(page) {
+            pageChange: function (page) {
                 this.current = page
                 this.checkEmp(page);
             },
             //咨询师
-            counselorEmpChange: function(param) {
+            counselorEmpChange: function (param) {
                 if (this.isBlank(param)) {
                     this.empId = ""
                 } else {
@@ -150,7 +160,7 @@
                     this.empId = param.empId
                 }
             },
-            storeChange: function(param) {
+            storeChange: function (param) {
                 if (this.isBlank(param)) {
                     this.storeId = ""
                 } else {
@@ -158,7 +168,7 @@
                 }
             },
             //feedback department information
-            positionChange: function(param) {
+            positionChange: function (param) {
                 if (this.isBlank(param)) {
                     this.posId = ""
                 } else {

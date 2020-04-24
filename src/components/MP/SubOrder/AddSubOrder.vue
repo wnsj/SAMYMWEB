@@ -156,6 +156,159 @@
                                        v-on:click="setOrder(8,order)">
                             </div>
                         </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[8]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time9" class="form-control"
+                                       :disabled="order.time9Mod"
+                                       v-on:click="setOrder(9,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[9]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time10" class="form-control"
+                                       :disabled="order.time10Mod"
+                                       v-on:click="setOrder(10,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[10]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time11" class="form-control"
+                                       :disabled="order.time11Mod"
+                                       v-on:click="setOrder(11,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[11]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time12" class="form-control"
+                                       :disabled="order.time12Mod"
+                                       v-on:click="setOrder(12,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[12]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time13" class="form-control"
+                                       :disabled="order.time13Mod"
+                                       v-on:click="setOrder(13,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[13]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time14" class="form-control"
+                                       :disabled="order.time14Mod"
+                                       v-on:click="setOrder(14,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[14]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time15" class="form-control"
+                                       :disabled="order.time15Mod"
+                                       v-on:click="setOrder(15,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[15]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time16" class="form-control"
+                                       :disabled="order.time16Mod"
+                                       v-on:click="setOrder(16,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[13]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time14" class="form-control"
+                                       :disabled="order.time14Mod"
+                                       v-on:click="setOrder(14,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[14]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time15" class="form-control"
+                                       :disabled="order.time15Mod"
+                                       v-on:click="setOrder(15,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[15]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time16" class="form-control"
+                                       :disabled="order.time16Mod"
+                                       v-on:click="setOrder(16,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[16]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time17" class="form-control"
+                                       :disabled="order.time17Mod"
+                                       v-on:click="setOrder(17,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[17]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time18" class="form-control"
+                                       :disabled="order.time18Mod"
+                                       v-on:click="setOrder(18,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[18]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time19" class="form-control"
+                                       :disabled="order.time19Mod"
+                                       v-on:click="setOrder(19,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[19]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time20" class="form-control"
+                                       :disabled="order.time20Mod"
+                                       v-on:click="setOrder(20,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[20]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time21" class="form-control"
+                                       :disabled="order.time21Mod"
+                                       v-on:click="setOrder(21,order)">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[21]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time22" class="form-control"
+                                       :disabled="order.time22Mod"
+                                       v-on:click="setOrder(22,order)">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group clearfix">
@@ -216,6 +369,34 @@
                     "time7Mod": true,
                     "time8": true,
                     "time8Mod": true,
+                    "time9": true,
+                    "time9Mod": true,
+                    "time10": true,
+                    "time10Mod": true,
+                    "time11": true,
+                    "time11Mod": true,
+                    "time12": true,
+                    "time12Mod": true,
+                    "time13": true,
+                    "time13Mod": true,
+                    "time14": true,
+                    "time14Mod": true,
+                    "time15": true,
+                    "time15Mod": true,
+                    "time16": true,
+                    "time16Mod": true,
+                    "time17": true,
+                    "time17Mod": true,
+                    "time18": true,
+                    "time18Mod": true,
+                    "time19": true,
+                    "time19Mod": true,
+                    "time20": true,
+                    "time20Mod": true,
+                    "time21": true,
+                    "time21Mod": true,
+                    "time22": true,
+                    "time22Mod": true,
                     "consultantRoomList": []
                 },
                 title: '新增',
@@ -235,14 +416,28 @@
                 counselorList: [],
                 numArr: [], //记录被选中的时间
                 timeArr: [
-                    "9:00-10:00",
-                    "10:00-11:00",
-                    "11:00-12:00",
-                    "13:00-14:00",
-                    "14:00-15:00",
-                    "15:00-16:00",
-                    "16:00-17:00",
-                    "17:00-18:00",
+                    '08:00-08:30',
+                    '08:30-09:00',
+                    '09:00-09:30',
+                    '09:30-10:00',
+                    '10:00-10:30',
+                    '10:30-11:00',
+                    '11:00-11:30',
+                    '11:30-12:00',
+                    '13:00-13:30',
+                    '13:30-14:00',
+                    '14:00-14:30',
+                    '14:30-15:00',
+                    '15:00-15:30',
+                    '15:30-16:00',
+                    '16:00-16:30',
+                    '16:30-17:00',
+                    '17:00-17:30',
+                    '17:30-18:00',
+                    '18:00-18:30',
+                    '18:30-19:00',
+                    '19:00-19:30',
+                    '19:30-20:00',
                 ]
             };
         },
@@ -293,6 +488,34 @@
                         "time7Mod": true,
                         "time8": true,
                         "time8Mod": true,
+                        "time9": true,
+                        "time9Mod": true,
+                        "time10": true,
+                        "time10Mod": true,
+                        "time11": true,
+                        "time11Mod": true,
+                        "time12": true,
+                        "time12Mod": true,
+                        "time13": true,
+                        "time13Mod": true,
+                        "time14": true,
+                        "time14Mod": true,
+                        "time15": true,
+                        "time15Mod": true,
+                        "time16": true,
+                        "time16Mod": true,
+                        "time17": true,
+                        "time17Mod": true,
+                        "time18": true,
+                        "time18Mod": true,
+                        "time19": true,
+                        "time19Mod": true,
+                        "time20": true,
+                        "time20Mod": true,
+                        "time21": true,
+                        "time21Mod": true,
+                        "time22": true,
+                        "time22Mod": true,
                         "consultantRoomList": []
                     }
                     this.orderClick = {

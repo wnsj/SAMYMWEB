@@ -127,7 +127,7 @@
                         </dl> -->
                     </div>
                 </div>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 embed-responsive embed-responsive-16by9" style="overflow: inherit; background-color:">
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 embed-responsive embed-responsive-16by9" style="overflow: inherit;">
                     <router-view />
                 </div>
             </div>

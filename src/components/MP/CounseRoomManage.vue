@@ -4,9 +4,8 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">咨询室管理</h1>
         </div>
-        <div class="row" style="margin-top: 40px;">
-
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true" style=" margin-top: 15px;">
+        <div class="row" style="margin-top: 40px;" v-show="retActType">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"  style=" margin-top: 15px;">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
                     class="sign-left">:</span>
@@ -15,7 +14,6 @@
                     <store ref='store' @storeChange='storeChange'></store>
                 </div>
             </div>
-
         </div>
         <div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
             <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"
@@ -40,10 +38,10 @@
                         </thead>
                         <tbody>
                         <tr v-for="(item,index) in orderList" :key="index">
-                            <td class="text-center">{{item.memNum}}</td>
-                            <td class="text-center">{{item.appName}}</td>
+                            <td class="text-center">{{item.crName}}</td>
+                            <td class="text-center">{{item.storeName}}</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-warning">修改</button>
+                                <button type="button" class="btn btn-warning" @click="selectRule('3',item)">编辑</button>
                             </td>
                         </tr>
                         </tbody>
@@ -52,7 +50,7 @@
                 <!--分页插件-->
                 <div class="page">
                     <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
-                    <paging ref="paging" @change="pageChange"></paging>
+                    <!--                    <paging ref="paging" @change="pageChange"></paging>-->
                 </div>
             </div>
             <div class="col-md-12 col-lg-12 posAb">
@@ -60,15 +58,14 @@
             </div>
         </div>
         <div class="row row_edit">
-            <div class="modal fade" id="orderContent">
+            <div class="modal fade" id="addCounseRoomContent">
                 <div class="modal-dialog">
-                    <!-- <SubOrder ref='order' @addOrder='feedBack'></SubOrder> -->
-                    <UpdateSubOrder ref="UpdateSubOrderRef" @addOrder='feedBack'></UpdateSubOrder>
+                    <addCounseRoom @addOrder='feedBack' ref="addCounseRoomRef"></addCounseRoom>
                 </div>
             </div>
-            <div class="modal fade" id="addAppointContent">
+            <div class="modal fade" id="updateCounseRoomContent">
                 <div class="modal-dialog">
-                    <AddSubOrder ref="AddSubOrderRef" @addOrder='feedBack'></AddSubOrder>
+                    <updateCounseRoom @addOrder='feedBack' ref="updateCounseRoomRef"></updateCounseRoom>
                 </div>
             </div>
         </div>
@@ -79,10 +76,9 @@
 
 <script>
     import store from '../common/Store.vue'
-    import SubOrder from '../MP/SubOrder/SubOrder.vue'
-    import AddSubOrder from '../MP/SubOrder/AddSubOrder.vue'
-    import UpdateSubOrder from '../MP/SubOrder/UpdateSubOrder.vue'
     import emp from '@/components/common/Employee.vue'
+    import addCounseRoom from '../MP/SubCounseRoom/addCounseRoom'
+    import updateCounseRoom from '../MP/SubCounseRoom/updateCounseRoom'
     import dPicker from 'vue2-datepicker'
     import Paging from '../common/paging'
     import {
@@ -91,17 +87,17 @@
 
     export default {
         components: {
-            SubOrder,
             dPicker,
             Paging,
             store,
-            AddSubOrder,
-            UpdateSubOrder,
-            emp
+            emp,
+            addCounseRoom,
+            updateCounseRoom
         },
         data() {
             return {
-                storeId: this.storeId(),
+                stId: '',
+                orderList: [],
                 //分页需要的数据
                 pages: '', //总页数
                 current: 1, //当前页码
@@ -134,13 +130,14 @@
                 }).then((response) => {
                     var res = response.data
                     if (res.retCode == '0000') {
+                        res.retData = '0010'
                         if (res.retData == '0010') {
                             if (param == 1) {
-                                this.$refs.AddSubOrderRef.initData()
-                                $("#addAppointContent").modal('show')
+                                this.$refs.addCounseRoomRef.initData()
+                                $("#addCounseRoomContent").modal('show')
                             } else if (param == 3) {
-                                this.$refs.UpdateSubOrderRef.initData(item)
-                                $("#orderContent").modal('show')
+                                this.$refs.updateCounseRoomRef.initData(item)
+                                $("#updateCounseRoomContent").modal('show')
                             }
                         } else {
                             alert('您没有此权限，请联系管理员！！')
@@ -154,20 +151,26 @@
             },
             storeChange(param) {
                 if (this.isBlank(param)) {
-                    this.storeId = ""
+                    this.stId = ""
                 } else {
-                    this.storeId = param.storeId
+                    this.stId = param.storeId
                 }
             },
             //feedback from adding and modifying view
             feedBack() {
                 this.checkOrderList(1)
-                $("#orderContent").modal('hide')
-                $("#addAppointContent").modal('hide')
+                $("#addCounseRoomContent").modal('hide')
+                $("#updateCounseRoomContent").modal('hide')
             },
             //check the list of orderContent
             checkOrderList(page) {
-                var url = this.url + '/appointmentAction/queryAppointment'
+                var sId = ''
+                if (this.accountType() == false) {
+                    sId = this.storeId()
+                } else {
+                    sId = this.stId
+                }
+                var url = this.url + '/counseRoomAction/queryCounseRoom'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -176,7 +179,7 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        storeId: this.storeId,
+                        storeId: sId,
                         page: page.toString(),
                         pageSize: this.pageSize
                     },
@@ -185,12 +188,12 @@
                     var res = response.data
                     //console.log(JSON.stringify(res))
                     if (res.retCode == '0000') {
-                        this.pages = res.retData.pages //总页数
-                        this.current = res.retData.current //当前页码
-                        this.pageSize = res.retData.size //一页显示的数量  必须是奇数
-                        this.total = res.retData.total //数据的数量
-                        this.$refs.paging.setParam(this.pages, this.current, this.total)
-                        this.orderList = res.retData.records
+                        // this.pages = res.retData.pages //总页数
+                        // this.current = res.retData.current //当前页码
+                        // this.pageSize = res.retData.size //一页显示的数量  必须是奇数
+                        // this.total = res.retData.total //数据的数量
+                        // this.$refs.paging.setParam(this.pages, this.current, this.total)
+                        this.orderList = res.retData
                     } else {
                         alert(res.retMsg)
                     }
@@ -227,6 +230,9 @@
                 } else {
                     this.empId = param.empId
                 }
+            },
+            retActType(){
+                return this.accountType();
             }
         },
         mounted() {

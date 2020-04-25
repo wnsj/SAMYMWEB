@@ -21,7 +21,7 @@
                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 my-aside clear-mp" id="Adiv" style="padding-top: 10px;">
                     <p style=" display:block; width:190px; height:50px;margin:0 auto; line-height:50px; font-size: 30px;font-weight: bold;color: #795548;text-align: left; margin-bottom:10px;">功能列表</p>
                     <div id="aside-menu">
-                        <dl v-bind:class="{h15:bool1}">
+                        <dl v-bind:class="{h25:bool1}">
                             <dt @click="onShow(0)" v-bind:class="{'li-active':bool1}">
                                 <i class="fa" v-bind:class="{'fa-folder-open':bool1,'fa-folder':!bool1}" aria-hidden="true">
                                     会员管理模块
@@ -36,12 +36,6 @@
                             <dd @click="addCheck('Visitor')" v-bind:class="{'li-active':onString=='Visitor'}">
                                 <router-link to="/MP/Visitor"><i class="fa" aria-hidden="true">咨客管理</i></router-link>
                             </dd>
-<<<<<<< HEAD
-							<!-- <dd @click="addCheck('Visitor')" v-bind:class="{'li-active':onString=='Visitor'}">
-								<router-link to="/MP/Visitor"><i class="fa" aria-hidden="true">咨客管理</i></router-link>
-							</dd> -->
-=======
->>>>>>> fbe1387cc77fb31bf97c5a341a0cd565decfe956
                         </dl>
                         <dl v-bind:class="{h25:bool2}">
                             <dt @click="onShow(1)" v-bind:class="{'li-active':bool2}">

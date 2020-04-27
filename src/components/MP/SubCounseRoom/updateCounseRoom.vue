@@ -38,7 +38,7 @@
                             <tr v-for="(item,index) in counseRoom.consultantRoomBeanList" :key="index">
                                 <td class="text-center" v-show="!isBlank(item.empName)">{{item.empName}}</td>
                                 <td class="text-center" v-show="isBlank(item.empName)">
-                                    <emp ref="counlorEmp" @employeeChange="counlorEmpChange" :pn = "pn"></emp>
+                                    <emp ref="counlorEmp" @employeeChange="counlorEmpChange" :pn="pn"></emp>
                                 </td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-warning" v-show="isBlank(item.empName)"
@@ -73,7 +73,7 @@
                 crName: '',
                 counseRoom: {},
                 itemObj: {},
-                pn:'咨询师'
+                pn: '咨询师'
             };
         },
         methods: {
@@ -146,8 +146,16 @@
                 this.$emit('addOrder')
             },
             addConsultantRoomBtn() {
+                let consultantRoomBeanList = this.counseRoom.consultantRoomBeanList;
+                if (consultantRoomBeanList.length > 0) {
+                    let obj = consultantRoomBeanList[consultantRoomBeanList.length - 1]
+                    if (this.isBlank(obj.conrId)) {
+                        alert("请先保存数据后再进行添加!");
+                        return
+                    }
+                }
                 this.itemObj = {}
-                this.counseRoom.consultantRoomBeanList.push(this.itemObj)
+                consultantRoomBeanList.push(this.itemObj)
             },
             counlorEmpChange: function (param) {
                 if (this.isBlank(param)) {
@@ -184,7 +192,7 @@
                     console.log('预约提交请求失败')
                 });
             },
-            deleteConsultantRoom(item){
+            deleteConsultantRoom(item) {
                 var url = this.url + '/consultantRoomAction/deleteConsultantRoom';
                 this.$ajax({
                     method: 'POST',
@@ -213,7 +221,6 @@
         },
         mounted() {
         }
-
     }
 </script>
 

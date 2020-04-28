@@ -21,7 +21,7 @@
                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 my-aside clear-mp" id="Adiv" style="padding-top: 10px;">
                     <p style=" display:block; width:190px; height:50px;margin:0 auto; line-height:50px; font-size: 30px;font-weight: bold;color: #795548;text-align: left; margin-bottom:10px;">功能列表</p>
                     <div id="aside-menu">
-                        <dl v-bind:class="{h25:bool1}">
+                        <dl v-bind:class="{h15:bool1}">
                             <dt @click="onShow(0)" v-bind:class="{'li-active':bool1}">
                                 <i class="fa" v-bind:class="{'fa-folder-open':bool1,'fa-folder':!bool1}" aria-hidden="true">
                                     会员管理模块

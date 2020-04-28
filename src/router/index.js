@@ -20,6 +20,7 @@ import CurrentSummary from '../components/MP/CurrentSummary.vue'
 import Project from '../components/MP/Project.vue'
 import test from '../components/MP/test.vue'
 import newtree from '../components/MP/newtree.vue'
+import CounseRoomManage from '../components/MP/CounseRoomManage.vue'
 
 import Schedule2 from '@/components/MP/SubSm/Schedule2.vue'
 
@@ -151,6 +152,10 @@ export default new Router({
                     path: '/MP/Schedule2',
                     name: 'Schedule2',
                     component: Schedule2,
+                },{
+                    path: '/MP/CounseRoomManage',
+                    name: 'CounseRoomManage',
+                    component: CounseRoomManage,
                 }
             ],
             redirect: '/MP/MemberSummary'

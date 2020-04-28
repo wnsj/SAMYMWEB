@@ -36,6 +36,7 @@
                             <dd @click="addCheck('Visitor')" v-bind:class="{'li-active':onString=='Visitor'}">
                                 <router-link to="/MP/Visitor"><i class="fa" aria-hidden="true">咨客管理</i></router-link>
                             </dd>
+
                         </dl>
                         <dl v-bind:class="{h25:bool2}">
                             <dt @click="onShow(1)" v-bind:class="{'li-active':bool2}">
@@ -86,6 +87,9 @@
                             <dd @click="addCheck('Project')" v-bind:class="{'li-active':onString=='Project'}">
                                 <router-link to="/MP/Project"><i class="fa" aria-hidden="true">课程管理</i></router-link>
                             </dd>
+                            <dd @click="addCheck('CounseRoomManage')" v-bind:class="{'li-active':onString=='CounseRoomManage'}">
+                                <router-link to="/MP/CounseRoomManage"><i class="fa" aria-hidden="true">咨询室管理</i></router-link>
+                            </dd>
                         </dl>
                         <dl v-bind:class="{h10:bool4}">
                             <dt @click="onShow(3)" v-bind:class="{'li-active':bool4}">
@@ -120,7 +124,7 @@
                         </dl> -->
                     </div>
                 </div>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 embed-responsive embed-responsive-16by9" style="overflow: inherit; background-color:">
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 embed-responsive embed-responsive-16by9" style="overflow: inherit;">
                     <router-view />
                 </div>
             </div>
@@ -278,7 +282,7 @@
     #aside-menu dl.h10{height:100px; }
     #aside-menu dl.h15{height:150px; }
     #aside-menu dl.h25{height:250px; }
-    #aside-menu dl.h40{height:400px; }
+    #aside-menu dl.h40{height:450px; }
     #aside-menu dl dt{height:50px;text-align:center;background:#e6e6e6;border-bottom:1px solid #ccc;}
     #aside-menu dl dd{height:50px;text-align:center;border-bottom:1px solid #ccc;}
     #aside-menu dl dd:hover{background:#f5f5f5;color:#603b2c;}

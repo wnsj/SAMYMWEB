@@ -21,13 +21,11 @@ import Project from '../components/MP/Project.vue'
 import test from '../components/MP/test.vue'
 import newtree from '../components/MP/newtree.vue'
 import CounseRoomManage from '../components/MP/CounseRoomManage.vue'
-
 import Schedule2 from '@/components/MP/SubSm/Schedule2.vue'
-
 import ZxsSummary from '../components/MP/ZxsSummary.vue'
 import Visitor from '../components/MP/Visitor.vue'
 import MemberTotle from '../components/MP/MemberTotle.vue'
-
+import CounseRoomTimeTotal from '../components/MP/CounseRoomTimeTotal.vue'
 
 
 Vue.use(Router)
@@ -40,19 +38,19 @@ Router.prototype.push = function push(location) {
 
 export default new Router({
     routes: [{
-            path: '/login',
-            component: login,
-            hidden: true
-        },
+        path: '/login',
+        component: login,
+        hidden: true
+    },
         {
             path: '/MainPage',
             name: 'MainPage',
             component: MainPage,
             children: [{
-                    path: '/MP/RoyaltySummary',
-                    name: 'RoyaltySummary',
-                    component: RoyaltySummary,
-                },
+                path: '/MP/RoyaltySummary',
+                name: 'RoyaltySummary',
+                component: RoyaltySummary,
+            },
                 {
                     path: '/MP/MemberSummary',
                     name: 'MemberSummary',
@@ -143,19 +141,23 @@ export default new Router({
                     name: 'ZxsSummary',
                     component: ZxsSummary,
                 },
-				{
-					path: '/MP/MemberTotle',
-					name: 'MemberTotle',
-					component: MemberTotle,
-				},
+                {
+                    path: '/MP/MemberTotle',
+                    name: 'MemberTotle',
+                    component: MemberTotle,
+                },
                 {
                     path: '/MP/Schedule2',
                     name: 'Schedule2',
                     component: Schedule2,
-                },{
+                }, {
                     path: '/MP/CounseRoomManage',
                     name: 'CounseRoomManage',
                     component: CounseRoomManage,
+                }, {
+                    path: '/MP/CounseRoomTimeTotal',
+                    name: 'CounseRoomTimeTotal',
+                    component: CounseRoomTimeTotal,
                 }
             ],
             redirect: '/MP/MemberSummary'

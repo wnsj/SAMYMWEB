@@ -90,6 +90,10 @@
                             <dd @click="addCheck('CounseRoomManage')" v-bind:class="{'li-active':onString=='CounseRoomManage'}">
                                 <router-link to="/MP/CounseRoomManage"><i class="fa" aria-hidden="true">咨询室管理</i></router-link>
                             </dd>
+
+                            <dd @click="addCheck('CounseRoomTimeTotal')" v-bind:class="{'li-active':onString=='CounseRoomTimeTotal'}">
+                                <router-link to="/MP/CounseRoomTimeTotal"><i class="fa" aria-hidden="true">咨询室总览</i></router-link>
+                            </dd>
                         </dl>
                         <dl v-bind:class="{h10:bool4}">
                             <dt @click="onShow(3)" v-bind:class="{'li-active':bool4}">
@@ -282,7 +286,7 @@
     #aside-menu dl.h10{height:100px; }
     #aside-menu dl.h15{height:150px; }
     #aside-menu dl.h25{height:250px; }
-    #aside-menu dl.h40{height:450px; }
+    #aside-menu dl.h40{height:500px; }
     #aside-menu dl dt{height:50px;text-align:center;background:#e6e6e6;border-bottom:1px solid #ccc;}
     #aside-menu dl dd{height:50px;text-align:center;border-bottom:1px solid #ccc;}
     #aside-menu dl dd:hover{background:#f5f5f5;color:#603b2c;}

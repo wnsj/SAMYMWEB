@@ -36,9 +36,6 @@
                             <dd @click="addCheck('Visitor')" v-bind:class="{'li-active':onString=='Visitor'}">
                                 <router-link to="/MP/Visitor"><i class="fa" aria-hidden="true">咨客管理</i></router-link>
                             </dd>
-							<!-- <dd @click="addCheck('Visitor')" v-bind:class="{'li-active':onString=='Visitor'}">
-								<router-link to="/MP/Visitor"><i class="fa" aria-hidden="true">咨客管理</i></router-link>
-							</dd> -->
 
                         </dl>
                         <dl v-bind:class="{h25:bool2}">

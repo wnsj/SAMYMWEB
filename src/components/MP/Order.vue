@@ -285,7 +285,6 @@
                 }).then((response) => {
                     var res = response.data
                     if (res.retCode == '0000') {
-                        res.retData = '0010'
                         if (res.retData == '0010') {
                             if (param == 1) {
                                 this.$refs.AddSubOrderRef.initData()

@@ -455,6 +455,7 @@
                 if (!this.isBlank(param)) {
                     this.$refs.counlorEmp.setPosName("咨询师")
                     this.$refs.counlorEmp.setEmp(param.empId)
+					console.log(param)
                     this.$refs.project.setProject(param.proId)
                     this.orderClick = {
                         memNum: param.memNum,

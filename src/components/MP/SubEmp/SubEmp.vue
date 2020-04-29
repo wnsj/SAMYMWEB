@@ -114,6 +114,7 @@
 					level:'1',
 				},
 				title: '新增',
+				
 			};
 		},
 		methods: {
@@ -210,7 +211,14 @@
 // 					alert("不是完整的11位手机号或者正确的座机号！");
 // 					return
 // 				}
-				var url = this.url + '/employeeAction/addUpdateEmp';
+				switch(this.title){
+					case '新增':
+						var url = this.url+'/employeeAction/addEmp'
+						break;
+					case '修改':
+						var url = this.url+'/employeeAction/updateEmp'
+						break;
+				}
 				 
 				this.$ajax({
 					method: 'POST',
@@ -219,7 +227,7 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data: [this.employee],
+					data: this.employee,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data

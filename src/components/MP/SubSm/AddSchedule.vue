@@ -94,9 +94,9 @@
             },
 			setCheckBox:function(){
 				console.log('1')
-				var startDate = moment(this.curDate).startOf('month')
-				var endDate = moment(this.curDate).endOf('month')
-				$("input[type='checkbox']").attr("checked",false); 
+// 				var startDate = moment(this.curDate).startOf('month')
+// 				var endDate = moment(this.curDate).endOf('month')
+// 				$("input[type='checkbox']").attr("checked",false); 
 			},
             //the event of addtional button
             addOrder() {

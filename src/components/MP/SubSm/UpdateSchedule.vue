@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="col-md-12 form-group clearfix" style="padding-right:0;">
-                        <el-calendar v-model='curDate' ref="elCalendarRef" :disabled="true">
+                        <el-calendar v-model='curDate' ref="elCalendarRef">
                             <template slot="dateCell" slot-scope="{date, data}">
                                 <div>
                                     <center>{{dateStrParseInt(data)}}</center>

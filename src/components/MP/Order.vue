@@ -141,6 +141,7 @@
                             <th class="text-center" style="line-height:40px;">来电时间</th>
                             <!--  <th class="text-center" style="line-height:40px;">取消</th> -->
                             <th class="text-center" style="line-height:40px;">到店</th>
+                            <th class="text-center" style="line-height:40px;">备注</th>
                             <th class="text-center" style="line-height:40px;">操作人</th>
                             <th class="text-center" style="line-height:40px;">修改</th>
                         </tr>
@@ -168,6 +169,7 @@
                             <td class="text-center" :class="{ onOffArrival:!item.arrival}" style="line-height:33px;">
                                 {{item.arrival=='0' ? '未到店' : '已到店'}}
                             </td>
+                            <td class="text-center" style="line-height:33px;">{{item.remark}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.operatorName}}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-warning" @click="updateOrder(item)">修改</button>

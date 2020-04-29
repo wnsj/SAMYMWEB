@@ -77,6 +77,13 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-md-6 form-group clearfix">
+                        <label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">备注</label><span class="sign-left">:</span>
+                        <div class="col-md-8">
+                            <textarea class="form-control" v-model="order.remark">
+                            </textarea>
+                        </div>
+                    </div>
                     <div class="col-md-12 form-group clearfix">
                         <h4 class="modal-title pull-left">预约时间</h4>
                     </div>
@@ -363,7 +370,8 @@
                     "time21Mod": true,
                     "time22": true,
                     "time22Mod": true,
-                    "consultantRoomList": []
+                    "consultantRoomList": [],
+                    "remark":''
                 },
                 title: '修改',
                 testParam: true,
@@ -517,8 +525,6 @@
                 this.numArr = []
                 for (var i = 1; i < 9; i++) {
                     var timeParam = 'time'.concat(i)
-                    console.log(timeParam + "#" + this.order[timeParam])
-                    console.log(timeParam + "##" + this.order[timeParam + 'Mod'])
                     if (this.order[timeParam] == true && this.order[timeParam + 'Mod'] == false) {
                         this.numArr.push(i);
                     }
@@ -557,6 +563,7 @@
                     item.channel = this.order.channel
                     item.createDate = this.order.createDate
                     item.storeId = this.order.storeId
+                    item.remark = this.order.remark
                     dataList.push(item)
 
                     //item.frequency

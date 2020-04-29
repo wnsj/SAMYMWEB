@@ -78,6 +78,13 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-md-6 form-group clearfix">
+                        <label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">备注</label><span class="sign-left">:</span>
+                        <div class="col-md-8">
+                            <textarea class="form-control" v-model="orderClick.remark">
+                            </textarea>
+                        </div>
+                    </div>
                     <div class="col-md-12 form-group clearfix">
                         <h4 id="myModalLabel" class="modal-title pull-left">预约时间</h4>
                     </div>
@@ -411,7 +418,8 @@
                     appDate: new Date(),
                     empId: '',
                     proId: '',
-                    channel: 3
+                    channel: 3,
+                    remark:''
                 },
                 counselorList: [],
                 numArr: [], //记录被选中的时间
@@ -456,7 +464,8 @@
                         appDate: param.appDate,
                         empId: param.empId,
                         proId: param.proId,
-                        channel: param.channel
+                        channel: param.channel,
+                        remark: param.remark
                     }
                 } else {
                     this.$refs.counlorEmp.setPosName("咨询师")
@@ -526,7 +535,8 @@
                         appDate: new Date(),
                         empId: '',
                         proId: '',
-                        channel: 3
+                        channel: 3,
+                        remark:''
                     }
                 }
             },
@@ -641,6 +651,7 @@
                     item.crId = this.orderClick.crId
                     item.atId = this.numArr[i]
                     item.channel = this.orderClick.channel
+                    item.remark = this.orderClick.remark
                     dataList.push(item)
                     //item.frequency
                     //item.visitType =

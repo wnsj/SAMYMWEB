@@ -221,30 +221,6 @@
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg"
                              style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[13]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
-                                <input type="checkbox" v-model="order.time14" class="form-control"
-                                       :disabled="order.time14Mod">
-                            </div>
-                        </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[14]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
-                                <input type="checkbox" v-model="order.time15" class="form-control"
-                                       :disabled="order.time15Mod">
-                            </div>
-                        </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[15]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
-                                <input type="checkbox" v-model="order.time16" class="form-control"
-                                       :disabled="order.time16Mod">
-                            </div>
-                        </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
                             <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[16]}}</label>
                             <div class="col-md-4" style='line-height:34px;padding-right:0;'>
                                 <input type="checkbox" v-model="order.time17" class="form-control"
@@ -281,6 +257,13 @@
                             <div class="col-md-4" style='line-height:34px;padding-right:0;'>
                                 <input type="checkbox" v-model="order.time21" class="form-control"
                                        :disabled="order.time21Mod">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group clearfix btnBg"
+                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
+                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[21]}}</label>
+                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                                <input type="checkbox" v-model="order.time22" class="form-control" :disabled="order.time22Mod">
                             </div>
                         </div>
                     </div>
@@ -418,8 +401,8 @@
         methods: {
             initData(data) {
                 this.numArr = []
-                this.$refs.counlorEmp.setPosName("咨询师")
-                this.$refs.counlorEmp.setEmp("")
+                // this.$refs.counlorEmp.setPosName("咨询师")
+                // this.$refs.counlorEmp.setEmp("")
                 this.$refs.project.setProject(0)
                 this.order = { //预约数据
                     afternoon: '',

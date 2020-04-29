@@ -79,7 +79,8 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">备注</label><span class="sign-left">:</span>
+                        <label class="col-md-3 control-label text-right nopad end-aline"
+                               style="padding:0;line-height:34px;">备注</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <textarea class="form-control" v-model="orderClick.remark">
                             </textarea>
@@ -206,33 +207,6 @@
                                 <input type="checkbox" v-model="order.time13" class="form-control"
                                        :disabled="order.time13Mod"
                                        v-on:click="setOrder(13,order)">
-                            </div>
-                        </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[13]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
-                                <input type="checkbox" v-model="order.time14" class="form-control"
-                                       :disabled="order.time14Mod"
-                                       v-on:click="setOrder(14,order)">
-                            </div>
-                        </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[14]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
-                                <input type="checkbox" v-model="order.time15" class="form-control"
-                                       :disabled="order.time15Mod"
-                                       v-on:click="setOrder(15,order)">
-                            </div>
-                        </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[15]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
-                                <input type="checkbox" v-model="order.time16" class="form-control"
-                                       :disabled="order.time16Mod"
-                                       v-on:click="setOrder(16,order)">
                             </div>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg"
@@ -419,7 +393,7 @@
                     empId: '',
                     proId: '',
                     channel: 3,
-                    remark:''
+                    remark: ''
                 },
                 counselorList: [],
                 numArr: [], //记录被选中的时间
@@ -536,7 +510,7 @@
                         empId: '',
                         proId: '',
                         channel: 3,
-                        remark:''
+                        remark: ''
                     }
                 }
             },
@@ -577,6 +551,7 @@
             //feedback employee information
             counlorEmpChange: function (param) {
                 // console.log('科室：'+JSON.stringify(param))
+                this.numArr = []
                 if (this.isBlank(param)) {
                     this.orderClick.empId = ""
                 } else {
@@ -696,6 +671,7 @@
                     return
                 }
                 this.orderClick.appDate = this.moment(this.orderClick.appDate, 'YYYY-MM-DD')
+                this.numArr = []
 
                 var url = this.url + '/appointmentAction/queryAppointmentBySched'
                 this.$ajax({

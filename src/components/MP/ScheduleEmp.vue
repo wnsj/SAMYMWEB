@@ -199,7 +199,7 @@
                 }).then((response) => {
                     var res = response.data
                     if (res.retCode == '0000') {
-                        if (res.retData == '0011') {
+                        // if (res.retData == '0011') {
                             console.log('param:' + param)
                             if (param == 1) {
                                 //this.$refs.schedule.initData('add','')
@@ -208,9 +208,9 @@
                                 this.$refs.UpdateScheduleRef.initData(item)
                                 $("#updateScheduleContent").modal('show')
                             }
-                        } else {
-                            alert('您没有此权限，请联系管理员！！')
-                        }
+//                         } else {
+//                             alert('您没有此权限，请联系管理员！！')
+//                         }
                     } else {
                         alert(res.retMsg)
                     }

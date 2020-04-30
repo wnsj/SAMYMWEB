@@ -37,6 +37,32 @@
                     <emp ref="counselorChange" @employeeChange="counselorEmpChange"></emp>
                 </div>
             </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否歇班</p><span
+                    class="sign-left">:</span>
+                </div>
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <select v-model="offDuty" class="form-control" >
+                        <option value="">--未选择--</option>
+                        <option value="0">歇班</option>
+                        <option value="1">上班</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否启用</p><span
+                    class="sign-left">:</span>
+                </div>
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <select v-model="empIsUse" class="form-control" >
+                        <option value="">--未选择--</option>
+                        <option value="0">未启用</option>
+                        <option value="1">启用</option>
+                    </select>
+                </div>
+            </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
@@ -150,6 +176,8 @@
                 thisDate: new Date(),
                 empId: '',
                 searchType: 0,
+                offDuty:'',
+                empIsUse:'',
 
                 //分页需要的数据
                 pages: '', //总页数
@@ -254,6 +282,8 @@
                         begDate: startDate,
                         endDate: endDate,
                         empId: this.empId,
+                        offDuty:this.offDuty,
+                        empIsUse: this.empIsUse,
                         storeId: this.storeId,
                         page: page.toString(),
                         pageSize: this.pageSize

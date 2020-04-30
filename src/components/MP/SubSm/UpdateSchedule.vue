@@ -9,8 +9,9 @@
             <div class="tab-pane fade in active martop" id="basic">
                 <form action="" class="clearfix">
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
-                            class="sign-left">:</span>
+                        <label class="col-md-3 control-label text-right nopad end-aline"
+                               style="padding:0;line-height:34px;">咨询师</label><span
+                        class="sign-left">:</span>
                         <div class="col-md-8">
                             <emp ref="counlorEmp" @employeeChange="counlorEmpChange" :disabled="isSelete"></emp>
                         </div>
@@ -26,11 +27,13 @@
                                     <input type="hidden" :id="data.inputSchId" :value="data.schId">
                                     <div>
                                         <center><input type="checkbox" v-model="data.morning" :id="data.inputMon"
-                                                :disabled="data.monModif == 1">上午</center>
+                                                       :disabled="data.monModif == 1">上午
+                                        </center>
                                     </div>
                                     <div>
                                         <center><input type="checkbox" v-model="data.afternoon" :id="data.inputAft"
-                                                :disabled="data.aftModif == 1">下午</center>
+                                                       :disabled="data.aftModif == 1">下午
+                                        </center>
                                     </div>
                                 </div>
                             </template>
@@ -40,9 +43,11 @@
                     <div class="form-group clearfix">
                         <div class="col-md-12" style="padding-right:0;">
                             <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:.7%;"
-                                data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+                                    data-toggle="modal" v-on:click="closeCurrentPage()">返回
+                            </button>
                             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
-                                data-toggle="modal" v-on:click="addOrder()">确认</button>
+                                    data-toggle="modal" v-on:click="addOrder()">确认
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -82,12 +87,12 @@
         methods: {
             initData(obj) {
                 this.isSelete = true;
-                this.curDate = obj.schedulingDate,
-                    this.$refs.counlorEmp.setEmp(obj.empId)
+                this.curDate = obj.schedulingDate;
+                this.$refs.counlorEmp.setEmp(obj.empId)
                 this.querySched()
             },
             //feedback employee information
-            counlorEmpChange: function(param) {
+            counlorEmpChange: function (param) {
                 if (this.isBlank(param)) {
                     this.empId = "";
                 } else {
@@ -284,18 +289,17 @@
         margin-top: 0;
     }
 
-    .case input:checked+label {
+    .case input:checked + label {
         box-sizing: border-box;
         border: #F2AD4E solid 1px;
         background: #FFF5EA;
         color: #d47b00;
     }
 
-    .case input:checked+label:after {
+    .case input:checked + label:after {
         position: absolute;
         right: -15px;
-        top: -15px;
-        ;
+        top: -15px;;
         display: block;
         width: 30px;
         height: 30px;

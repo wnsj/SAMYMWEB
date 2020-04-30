@@ -8,6 +8,18 @@
         <div class="row" style="margin-top: 40px;padding-bottom:1.5%;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">查询方式</p><span
+                    class="sign-left">:</span>
+                </div>
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <select v-model="searchType" class="form-control" >
+                        <option value="0">按月查询</option>
+                        <option value="1">按日查询</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">时间</p><span
                     class="sign-left">:</span>
                 </div>
@@ -137,6 +149,7 @@
                 morningOrAfternoon: ['上午', '下午', '上午', '下午', '上午', '下午', '上午', '下午', '上午', '下午', '上午', '下午', '上午', '下午'],
                 thisDate: new Date(),
                 empId: '',
+                searchType: 0,
 
                 //分页需要的数据
                 pages: '', //总页数
@@ -200,14 +213,14 @@
                     var res = response.data
                     if (res.retCode == '0000') {
                         // if (res.retData == '0011') {
-                            console.log('param:' + param)
-                            if (param == 1) {
-                                //this.$refs.schedule.initData('add','')
-                                $("#scheduleContent").modal('show')
-                            } else if (param == 3) {
-                                this.$refs.UpdateScheduleRef.initData(item)
-                                $("#updateScheduleContent").modal('show')
-                            }
+                        console.log('param:' + param)
+                        if (param == 1) {
+                            //this.$refs.schedule.initData('add','')
+                            $("#scheduleContent").modal('show')
+                        } else if (param == 3) {
+                            this.$refs.UpdateScheduleRef.initData(item)
+                            $("#updateScheduleContent").modal('show')
+                        }
 //                         } else {
 //                             alert('您没有此权限，请联系管理员！！')
 //                         }
@@ -223,11 +236,12 @@
             checkEmp(page) {
                 var startDate = '';
                 var endDate = '';
-                if (!this.isBlank(this.thisDate)) {
-                    startDate = moment(this.thisDate).startOf('month').format("YYYY-MM-DD")
-                    endDate = moment(this.thisDate).endOf('month').format("YYYY-MM-DD")
+                if (this.isBlank(this.thisDate)) {
+                    alert("时间不能为空!")
+                    return
                 }
-
+                startDate = this.searchType == 0 ? moment(this.thisDate).startOf('month').format("YYYY-MM-DD") : moment(this.thisDate).format("YYYY-MM-DD")
+                endDate = this.searchType == 0 ? moment(this.thisDate).endOf('month').format("YYYY-MM-DD") : moment(this.thisDate).format("YYYY-MM-DD")
                 var url = this.url + '/schedulingAction/querySched'
                 this.$ajax({
                     method: 'POST',

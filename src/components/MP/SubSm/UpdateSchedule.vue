@@ -89,6 +89,7 @@
                 this.isSelete = true;
                 this.curDate = obj.schedulingDate;
                 this.$refs.counlorEmp.setEmp(obj.empId)
+                this.empId = obj.empId
                 this.querySched()
             },
             //feedback employee information

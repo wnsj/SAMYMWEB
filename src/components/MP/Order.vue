@@ -285,7 +285,7 @@
                 }).then((response) => {
                     var res = response.data
                     if (res.retCode == '0000') {
-                        if (res.retData == '0011') {
+                        if (res.retData == '0010') {
                             if (param == 1) {
                                 this.$refs.AddSubOrderRef.initData()
                                 $("#addAppointContent").modal('show')

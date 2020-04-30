@@ -43,8 +43,10 @@
                                 data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
                             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
                                 data-toggle="modal" v-on:click="addOrder()">确认</button>
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
-							    data-toggle="modal" v-on:click="setCheckBox()">全选/取消</button>
+							<button type="button" class="btn btn-success pull-right m_r_10" style="margin-right:1.5%;"
+							    data-toggle="modal" v-on:click="setCheckBox(1)">全选</button>
+								<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;"
+								    data-toggle="modal" v-on:click="setCheckBox(0)">取消</button>
                         </div>
                     </div>
                 </form>
@@ -92,11 +94,13 @@
                     }
                 }
             },
-			setCheckBox:function(){
+			setCheckBox:function(param){
 				console.log('1')
-// 				var startDate = moment(this.curDate).startOf('month')
-// 				var endDate = moment(this.curDate).endOf('month')
-// 				$("input[type='checkbox']").attr("checked",false); 
+				if(param==1){
+					$("input[type='checkbox']").prop("checked","checked");
+				}else{
+					$("input[type='checkbox']").attr("checked",false);
+				}
 			},
             //the event of addtional button
             addOrder() {

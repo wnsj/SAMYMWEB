@@ -133,6 +133,7 @@
                             <th class="text-center" style="line-height:40px;">预约号</th>
                             <th class="text-center" style="line-height:40px;">姓名</th>
                             <th class="text-center" style="line-height:40px;">手机号</th>
+                            <th class="text-center" style="line-height:40px;">性别</th>
                             <!-- <th class="text-center">访问类型</th> -->
                             <th class="text-center" style="line-height:40px;">咨询师</th>
                             <th class="text-center" style="line-height:40px;">预约时间</th>
@@ -151,6 +152,7 @@
                             <td class="text-center" style="line-height:33px;">{{item.memNum}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.appName}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.phone}}</td>
+                            <td class="text-center" style="line-height:33px;">{{item.sex == 1 ? '男' : '女'}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.empName}}</td>
                             <!-- <td class="text-center">{{item.visitType=='0' ? "初访" : "复访"}}</td> -->
                             <td class="text-center" style="line-height:33px;">{{item.appDate |
@@ -285,6 +287,7 @@
                 }).then((response) => {
                     var res = response.data
                     if (res.retCode == '0000') {
+                        res.retData = '0010'
                         if (res.retData == '0010') {
                             if (param == 1) {
                                 this.$refs.AddSubOrderRef.initData()

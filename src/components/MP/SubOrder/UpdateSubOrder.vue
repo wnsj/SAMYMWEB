@@ -78,6 +78,16 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
+                        <label class="col-md-3 control-label text-right nopad end-aline"
+                               style="padding:0;line-height:34px;">性别</label><span class="sign-left">:</span>
+                        <div class="col-md-8">
+                            <select class="form-control" v-model="order.sex">
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group clearfix">
                         <label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">备注</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <textarea class="form-control" v-model="order.remark">
@@ -354,7 +364,8 @@
                     "time22": true,
                     "time22Mod": true,
                     "consultantRoomList": [],
-                    "remark":''
+                    "remark":'',
+                    sex:1
                 },
                 title: '修改',
                 testParam: true,
@@ -401,8 +412,8 @@
         methods: {
             initData(data) {
                 this.numArr = []
-                // this.$refs.counlorEmp.setPosName("咨询师")
-                // this.$refs.counlorEmp.setEmp("")
+                this.$refs.counlorEmp.setPosName("咨询师")
+                this.$refs.counlorEmp.setEmp("")
                 this.$refs.project.setProject(0)
                 this.order = { //预约数据
                     afternoon: '',
@@ -429,7 +440,8 @@
                     "time7Mod": true,
                     "time8": true,
                     "time8Mod": true,
-                    "consultantRoomList": []
+                    "consultantRoomList": [],
+                    sex:1
                 }
                 this.order.empId = data.empId
                 this.order.appDate = data.appDate
@@ -547,6 +559,7 @@
                     item.createDate = this.order.createDate
                     item.storeId = this.order.storeId
                     item.remark = this.order.remark
+                    item.sex = this.order.sex
                     dataList.push(item)
 
                     //item.frequency

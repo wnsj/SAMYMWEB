@@ -80,6 +80,16 @@
                     </div>
                     <div class="col-md-6 form-group clearfix">
                         <label class="col-md-3 control-label text-right nopad end-aline"
+                               style="padding:0;line-height:34px;">性别</label><span class="sign-left">:</span>
+                        <div class="col-md-8">
+                            <select class="form-control" v-model="orderClick.sex">
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group clearfix">
+                        <label class="col-md-3 control-label text-right nopad end-aline"
                                style="padding:0;line-height:34px;">备注</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <textarea class="form-control" v-model="orderClick.remark">
@@ -393,7 +403,8 @@
                     empId: '',
                     proId: '',
                     channel: 3,
-                    remark: ''
+                    remark: '',
+                    sex:1
                 },
                 counselorList: [],
                 numArr: [], //记录被选中的时间
@@ -439,7 +450,8 @@
                         empId: param.empId,
                         proId: param.proId,
                         channel: param.channel,
-                        remark: param.remark
+                        remark: param.remark,
+                        sex:param.sex
                     }
                 } else {
                     this.$refs.counlorEmp.setPosName("咨询师")
@@ -510,7 +522,8 @@
                         empId: '',
                         proId: '',
                         channel: 3,
-                        remark: ''
+                        remark: '',
+                        sex:1
                     }
                 }
             },
@@ -627,6 +640,7 @@
                     item.atId = this.numArr[i]
                     item.channel = this.orderClick.channel
                     item.remark = this.orderClick.remark
+                    item.sex = this.orderClick.sex
                     dataList.push(item)
                     //item.frequency
                     //item.visitType =

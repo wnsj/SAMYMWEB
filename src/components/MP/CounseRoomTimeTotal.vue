@@ -38,8 +38,8 @@
                         <thead class="datathead">
                         <tr>
                             <th class="text-center" id="lineTd">
-                                <span style="float:left;margin-top:20px;">时间</span>
-                                <span style="float:right;margin-top:-10px;">咨询室</span>
+                                <span style="float:left;margin-top:22px;">咨询室</span>
+                                <span style="float:right;margin-top:0;">时间</span>
                             </th>
                             <th class="text-center" v-for="(item,index) in timeArr" :key="index">
                                 {{timeArr[index]}}
@@ -310,5 +310,9 @@
 
     #lineTd {
         background: #fff url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxsaW5lIHgxPSIwIiB5MT0iMCIgeDI9IjEwMCUiIHkyPSIxMDAlIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=) no-repeat 100% center;
+        width: 85px!important;
+        height: 55px;
+        display: inline-block;
+        border: none;
     }
 </style>

@@ -36,6 +36,16 @@
                     </select>
                 </div>
             </div>
+
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true" >
+                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
+                    class="sign-left">:</span>
+                </div>
+                <div class="col-md-7 col-lg-7">
+                    <store ref='store' @storeChange='storeChange'></store>
+                </div>
+            </div>
             <!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">-->
             <!--<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right" style="padding: 0; line-height: 34px;">-->
             <!--<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否取消</p><span class="sign-left">:</span>-->
@@ -64,6 +74,31 @@
 					<dPicker style="width:100%" v-model="endCreateDate"></dPicker>
 				</div>
 			</div> -->
+            
+
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true" >
+                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span
+                    class="sign-left">:</span>
+                </div>
+                <div class="col-md-7 col-lg-7">
+                    <emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
+                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">渠道</p><span
+                    class="sign-left">:</span>
+                </div>
+                <div class="col-md-7 col-lg-7">
+                    <select class="form-control" v-model="channel">
+                        <option value="">--未选择--</option>
+                        <option value="1">线上电话</option>
+                        <option value="2">线上面对面</option>
+                        <option value="3">门店</option>
+                    </select>
+                </div>
+            </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
                 <div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px;width:20.5%">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">预约时间</p><span
@@ -79,41 +114,8 @@
                     <dPicker style="width:100%" v-model="endAppDate"></dPicker>
                 </div>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true" style=" margin-top: 15px;">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <store ref='store' @storeChange='storeChange'></store>
-                </div>
-            </div>
-
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true" style=" margin-top: 15px;">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
-                </div>
-            </div>
-
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style=" margin-top: 15px;">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">渠道</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <select class="form-control" v-model="channel">
-                        <option value="">--未选择--</option>
-                        <option value="1">线上电话</option>
-                        <option value="2">线上面对面</option>
-                        <option value="3">门店</option>
-                    </select>
-                </div>
-            </div>
         </div>
+
         <div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
             <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"
                     data-toggle="modal"

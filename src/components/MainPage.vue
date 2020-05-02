@@ -101,9 +101,9 @@
                                     月入汇总
                                 </i>
                             </dt>
-                            <dd @click="addCheck('Schedule2')" v-bind:class="{'li-active':onString=='Schedule2'}">
-                                <router-link to="/MP/Schedule2"><i class="fa" aria-hidden="true"> 排班2</i></router-link>
-                            </dd>
+<!--                            <dd @click="addCheck('Schedule2')" v-bind:class="{'li-active':onString=='Schedule2'}">-->
+<!--                                <router-link to="/MP/Schedule2"><i class="fa" aria-hidden="true"> 排班2</i></router-link>-->
+<!--                            </dd>-->
                             <dd @click="addCheck('CurrentSummary')" v-bind:class="{'li-active':onString=='CurrentSummary'}">
                                 <router-link to="/MP/CurrentSummary"><i class="fa" aria-hidden="true">月入汇总</i></router-link>
                             </dd>

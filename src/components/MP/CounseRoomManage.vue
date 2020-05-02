@@ -37,7 +37,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="(item,index) in orderList" :key="index">
+                        <tr v-for="(item,index) in orderList" :key="index" @dblclick="selectRule('3',item)">
                             <td class="text-center">{{item.crName}}</td>
                             <td class="text-center">{{item.storeName}}</td>
                             <td class="text-center">

@@ -179,7 +179,7 @@
                 empId: '',
                 searchType: 0,
                 offDuty:'',
-                empIsUse:'',
+                empIsUse:'1',
 
                 //分页需要的数据
                 pages: '', //总页数

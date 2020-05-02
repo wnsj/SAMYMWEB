@@ -37,7 +37,7 @@
                 </div>
             </div>
 
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true" >
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
                     class="sign-left">:</span>
@@ -74,9 +74,9 @@
 					<dPicker style="width:100%" v-model="endCreateDate"></dPicker>
 				</div>
 			</div> -->
-            
 
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true" >
+
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span
                     class="sign-left">:</span>
@@ -85,7 +85,7 @@
                     <emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
                 </div>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">渠道</p><span
                     class="sign-left">:</span>
@@ -142,6 +142,7 @@
                             <th class="text-center" style="line-height:40px;">咨询室</th>
                             <th class="text-center" style="line-height:40px;">渠道</th>
                             <th class="text-center" style="line-height:40px;">来电时间</th>
+                            <th class="text-center" style="line-height:40px;">门店</th>
                             <!--  <th class="text-center" style="line-height:40px;">取消</th> -->
                             <th class="text-center" style="line-height:40px;">到店</th>
                             <th class="text-center" style="line-height:40px;">备注</th>
@@ -167,6 +168,8 @@
                             </td>
                             <td class="text-center" style="line-height:33px;">{{item.createDate |
                                 dateFormatFilter("YYYY-MM-DD")}}
+                            </td>
+                            <td class="text-center" style="line-height:33px;">{{item.storeName}}
                             </td>
 
                             <!--            <td class="text-center" v-bind:class="{ onOffState:!item.state}" style="line-height:33px;">{{item.state=='0' ? '已取消' : '未取消'}}</td> -->

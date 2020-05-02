@@ -48,6 +48,12 @@
                             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
                                     data-toggle="modal" v-on:click="addOrder()">确认
                             </button>
+                            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:.7%;"
+                                    data-toggle="modal" v-on:click="selectBox(2)">取消
+                            </button>
+                            <button type="button" class="btn btn-success pull-right m_r_10" style="margin-right:.7%;"
+                                    data-toggle="modal" v-on:click="selectBox(1)">全选
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -81,12 +87,14 @@
                 isSelete: false,
                 dateList: [],
                 curDate: new Date(),
-                updateList: []
+                updateList: [],
+                tempDate: ''
             };
         },
         methods: {
             initData(obj) {
                 this.isSelete = true;
+                this.tempDate = obj.schedulingDate;
                 this.curDate = obj.schedulingDate;
                 this.$refs.counlorEmp.setEmp(obj.empId)
                 this.empId = obj.empId
@@ -109,6 +117,10 @@
                 if (this.isBlank(this.empId)) {
                     alert("咨询师不能为空");
                     return
+                }
+                if (moment(this.curDate).format("YYYY-MM") !=  moment(this.tempDate).format("YYYY-MM")) {
+                    alert("不可修改排班月份!");
+                    return;
                 }
                 this.updateList = []
                 var startDate = moment(this.curDate).startOf('month')
@@ -179,7 +191,6 @@
                         data.inputSchId = "inputSchId_" + day
                     }
                 }
-
                 //this.dateList.push(data)
                 //dateList2.push(data)
             },
@@ -223,6 +234,23 @@
                 }).catch((error) => {
                     console.log('预约提交请求失败')
                 });
+            },
+            selectBox(param) {
+                var startDate = moment(this.curDate).startOf('month')
+                var endDate = moment(this.curDate).endOf('month')
+                if (param == 1) {
+                    for (var i = 1; i <= endDate.get('date'); i++) {
+                        $("#inputSchMon_" + i).prop("checked", true);
+                        $("#inputSchAft_" + i).prop("checked", true);
+                    }
+                } else {
+                    for (var i = 1; i <= endDate.get('date'); i++) {
+                        var inputMon = $("#inputSchMon_" + i).prop("disabled");
+                        var inputAft = $("#inputSchAft_" + i).prop("disabled");
+                        if (inputMon == false) $("#inputSchMon_" + i).prop("checked", false);
+                        if (inputAft == false) $("#inputSchAft_" + i).prop("checked", false);
+                    }
+                }
             }
         },
         mounted() {

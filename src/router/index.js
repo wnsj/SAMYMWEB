@@ -27,7 +27,6 @@ import Visitor from '../components/MP/Visitor.vue'
 import MemberTotle from '../components/MP/MemberTotle.vue'
 import CounseRoomTimeTotal from '../components/MP/CounseRoomTimeTotal.vue'
 
-
 Vue.use(Router)
 
 //解决路由多次跳转同一页面报错

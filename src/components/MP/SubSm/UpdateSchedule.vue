@@ -26,13 +26,21 @@
                                     <div>{{createDateObj(data)}}</div>
                                     <input type="hidden" :id="data.inputSchId" :value="data.schId">
                                     <div>
-                                        <center><input type="checkbox" v-model="data.morning" :id="data.inputMon"
+                                        <!-- <center><input type="checkbox" v-model="data.morning" :id="data.inputMon"
                                                        :disabled="data.monModif == 1">上午
+                                        </center> -->
+                                        <center class="swxw">
+                                            <input type="checkbox" v-model="data.morning" :id="data.inputMon" :disabled="data.monModif == 1">
+                                            <label :for="data.inputMon">上午</label>
                                         </center>
                                     </div>
                                     <div>
-                                        <center><input type="checkbox" v-model="data.afternoon" :id="data.inputAft"
+                                        <!-- <center><input type="checkbox" v-model="data.afternoon" :id="data.inputAft"
                                                        :disabled="data.aftModif == 1">下午
+                                        </center> -->
+                                        <center class="swxw">
+                                            <input type="checkbox" v-model="data.afternoon" :id="data.inputAft" :disabled="data.aftModif == 1">
+                                            <label :for="data.inputAft">下午</label>
                                         </center>
                                     </div>
                                 </div>
@@ -344,4 +352,36 @@
         font-family: Verdana, Geneva, sans-serif;
         font-weight: normal;
     }
+
+
+    .swxw input[type="checkbox"] + label::before {
+         content: "\a0";
+         display: inline-block;
+         /* vertical-align: .2em; */
+         width: 1em;
+         height: 1em;
+         margin-right: .2em;
+         border-radius: .2em;
+         background-color: #ccc;
+         /* text-indent: .15em; */
+         line-height: 1em;
+     }
+     .swxw input[type="checkbox"]:checked + label::before {
+         content: "\2713";
+         background-color: #409eff;
+     	color: #fff;
+     	font-size: 1em;
+     }
+     .swxw input {
+         position: absolute;
+         visibility: hidden;
+     }
+     .swxw input[type="checkbox"]:focus + label::before {
+         box-shadow: 0 0 .1em .1em #58a;
+     }
+     .swxw input[type="checkbox"]:disabled + label::before {
+         background-color: gray;
+         box-shadow: none;
+         color: #555;
+     }
 </style>

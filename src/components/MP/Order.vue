@@ -134,7 +134,7 @@
                         <tr>
                             <th class="text-center" style="line-height:40px;">预约号</th>
                             <th class="text-center" style="line-height:40px;">姓名</th>
-                            <th class="text-center" style="line-height:40px;">手机号</th>
+                            <!--                            <th class="text-center" style="line-height:40px;">手机号</th>-->
                             <th class="text-center" style="line-height:40px;">性别</th>
                             <!-- <th class="text-center">访问类型</th> -->
                             <th class="text-center" style="line-height:40px;">咨询师</th>
@@ -154,7 +154,7 @@
                         <tr v-for="(item,index) in orderList" :key="index" @dblclick="updateOrder(item)">
                             <td class="text-center" style="line-height:33px;">{{item.memNum}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.appName}}</td>
-                            <td class="text-center" style="line-height:33px;">{{item.phone}}</td>
+                            <!--                            <td class="text-center" style="line-height:33px;">{{item.phone}}</td>-->
                             <td class="text-center" style="line-height:33px;">{{item.sex == 1 ? '男' : '女'}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.empName}}</td>
                             <!-- <td class="text-center">{{item.visitType=='0' ? "初访" : "复访"}}</td> -->
@@ -186,6 +186,7 @@
                                 <button type="button" class="btn btn-primary" @click="caAction(item,'arrival')">
                                     {{item.arrival=='0' ? '点击到店' : '已到店'}}
                                 </button>
+                                <button type="button" class="btn btn-primary" @click="queryPhone(item)">查看手机号码</button>
                                 <button type="button" class="btn btn-primary" @click="againAdd(item)">再来一条</button>
                             </td>
                         </tr>
@@ -214,9 +215,40 @@
                     <AddSubOrder ref="AddSubOrderRef" @addOrder='feedBack'></AddSubOrder>
                 </div>
             </div>
+            <div class="modal fade" id="showPhoneContent">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
+                            <h4 id="myModalLabel" class="modal-title">电话</h4>
+                        </div>
+                        <div class="modal-body  pos_r">
+                            <div class="tab-pane fade in active martop" id="basic">
+                                <form action="" class="clearfix">
+                                    <div class="col-md-6 form-group clearfix">
+                                        <label class="col-md-3 control-label text-right nopad end-aline"
+                                               style="padding:0;line-height:34px;">电话号</label><span
+                                        class="sign-left">:</span>
+                                        <div class="col-md-8">
+                                            <label class="form-control">{{phoneNoX}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 form-group clearfix">
+                                        <label class="col-md-3 control-label text-right nopad end-aline"
+                                               style="padding:0;line-height:34px;">分机号</label><span
+                                        class="sign-left">:</span>
+                                        <div class="col-md-8">
+                                            <label class="form-control">{{extension}}</label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
 </template>
 
 
@@ -259,6 +291,9 @@
                 accountType: this.accountType(),
                 empId: '',
                 channel: '',
+                phoneNoX: '',
+                extension: '',
+
 
                 //分页需要的数据
                 pages: '', //总页数
@@ -525,6 +560,38 @@
             againAdd(item) {
                 this.$refs.AddSubOrderRef.initData(item)
                 $("#addAppointContent").modal('show')
+            },
+            queryPhone(item) {
+                var url = this.url + '/bindPhoneAction/bindPhone'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        phonea: item.phone,
+                        storeId: item.storeId,
+                    },
+                    dataType: 'json',
+                }).then((response) => {
+                    var res = response.data
+                    //console.log(JSON.stringify(res))
+                    if (res.retCode == '0000') {
+                        this.phoneNoX = res.retData.phoneNoX
+                        this.extension = res.retData.extension
+                        $("#showPhoneContent").modal('show')
+                    } else {
+                        alert(res.retMsg)
+                    }
+
+                }).catch((error) => {
+                    console.log('请求失败处理')
+                });
+            },
+            closeCurrentPage() {
+                $("#showPhoneContent").modal('hide')
             }
         },
         mounted() {

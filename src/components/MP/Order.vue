@@ -219,13 +219,14 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
+                            <button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×
+                            </button>
                             <h4 id="myModalLabel" class="modal-title">电话</h4>
                         </div>
                         <div class="modal-body  pos_r">
                             <div class="tab-pane fade in active martop" id="basic">
                                 <form action="" class="clearfix">
-                                    <div class="col-md-6 form-group clearfix">
+                                    <div class="col-md-12 form-group clearfix">
                                         <label class="col-md-3 control-label text-right nopad end-aline"
                                                style="padding:0;line-height:34px;">电话号</label><span
                                         class="sign-left">:</span>
@@ -233,13 +234,25 @@
                                             <label class="form-control">{{phoneNoX}}</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 form-group clearfix">
+                                    <div class="col-md-12 form-group clearfix">
                                         <label class="col-md-3 control-label text-right nopad end-aline"
                                                style="padding:0;line-height:34px;">分机号</label><span
                                         class="sign-left">:</span>
                                         <div class="col-md-8">
                                             <label class="form-control">{{extension}}</label>
                                         </div>
+                                    </div>
+                                    <div class="col-md-12 form-group clearfix">
+                                        <label class="col-md-3 control-label text-right nopad end-aline"
+                                               style="padding:0;line-height:34px;">失效时间</label><span
+                                        class="sign-left">:</span>
+                                        <div class="col-md-8">
+                                            <label class="form-control">{{endDate}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left">
+                                        <p style="margin-left:1.5%; color:red ;">注：拨打手机号，听到提示后输入分机号，按#号结束。</p>
+                                        <p style="margin-left:1.5%; color:red ;">	过了失效时间，通过这个手机号将无法联系到客户。</p>
                                     </div>
                                 </form>
                             </div>
@@ -293,6 +306,7 @@
                 channel: '',
                 phoneNoX: '',
                 extension: '',
+                endDate: '',
 
 
                 //分页需要的数据
@@ -573,6 +587,8 @@
                     data: {
                         phonea: item.phone,
                         storeId: item.storeId,
+                        accId: this.accountId(),
+                        projectType: 0
                     },
                     dataType: 'json',
                 }).then((response) => {
@@ -581,6 +597,7 @@
                     if (res.retCode == '0000') {
                         this.phoneNoX = res.retData.phoneNoX
                         this.extension = res.retData.extension
+                        this.endDate = res.retData.endDate
                         $("#showPhoneContent").modal('show')
                     } else {
                         alert(res.retMsg)

@@ -26,6 +26,7 @@ import ZxsSummary from '../components/MP/ZxsSummary.vue'
 import Visitor from '../components/MP/Visitor.vue'
 import MemberTotle from '../components/MP/MemberTotle.vue'
 import CounseRoomTimeTotal from '../components/MP/CounseRoomTimeTotal.vue'
+import NewRuleManager from '../components/MP/NewRuleManager.vue'
 
 Vue.use(Router)
 
@@ -60,6 +61,11 @@ export default new Router({
                     name: 'Visitor',
                     component: Visitor,
                 },
+				{
+				    path: '/MP/NewRuleManager',
+				    name: 'NewRuleManager',
+				    component: NewRuleManager,
+				},
                 {
                     path: '/MP/SettleSummary',
                     name: 'SettleSummary',

@@ -91,8 +91,8 @@
                                 <router-link to="/MP/CounseRoomManage"><i class="fa" aria-hidden="true">咨询室管理</i></router-link>
                             </dd>
 
-                            <dd @click="addCheck('CounseRoomTimeTotal')" v-bind:class="{'li-active':onString=='CounseRoomTimeTotal'}">
-                                <router-link to="/MP/CounseRoomTimeTotal"><i class="fa" aria-hidden="true">咨询室总览</i></router-link>
+                            <dd @click="addCheck('NewRuleManager')" v-bind:class="{'li-active':onString=='NewRuleManager'}">
+                                <router-link to="/MP/NewRuleManager"><i class="fa" aria-hidden="true">权限管理</i></router-link>
                             </dd>
                         </dl>
                         <dl v-bind:class="{h10:bool4}">

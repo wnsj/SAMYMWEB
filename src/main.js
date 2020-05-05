@@ -10,6 +10,11 @@ import constant from '../src/assets/js/constant'
 import vueBeauty from 'vue-beauty'
 import elementUi from 'element-ui'
 import elementUiCss from 'element-ui/lib/theme-chalk/index.css'
+// import TreeTable from '@weilan/el-tree-table'
+import 'xe-utils'
+import VXETable from 'vxe-table'
+import 'vxe-table/lib/index.css'
+
 
 // import utilDate from '../src/assets/js/utilDate'
 import {
@@ -17,10 +22,14 @@ import {
 } from 'vendor/Export2Excel.js'
 
 Vue.use(vueBeauty)
+Vue.use(VXETable)
 Vue.use(elementUi)
 Vue.use(elementUiCss)
 Vue.prototype.$ajax = axios
 Vue.prototype.url = process.env.API_HOST
+
+// 给 vue 实例挂载全局窗口对象
+Vue.prototype.$XModal = VXETable.modal
 
 
 Vue.config.productionTip = false

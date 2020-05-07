@@ -42,7 +42,7 @@ constant.has = function(param) {
     itemRuleList = JSON.parse(jsonString);
     for (var i = 0; i < itemRuleList.length; i++) {
         var item = itemRuleList[i];
-        if (item.urlName == param) {
+        if (item.upValue == param) {
             return true;
         }
     }

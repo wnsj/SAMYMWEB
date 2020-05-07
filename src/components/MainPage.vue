@@ -36,7 +36,6 @@
                             <dd @click="addCheck('Visitor')" v-bind:class="{'li-active':onString=='Visitor'}">
                                 <router-link to="/MP/Visitor"><i class="fa" aria-hidden="true">咨客管理</i></router-link>
                             </dd>
-
                         </dl>
                         <dl v-bind:class="{h25:bool2}">
                             <dt @click="onShow(1)" v-bind:class="{'li-active':bool2}">
@@ -284,8 +283,8 @@
     #aside-menu dl{ margin-bottom:0; height:50px;overflow:hidden; color:#795548;font-size:20px; background:#f1f1f1;transition:height .5s }
     #aside-menu dl.noShow{color:#f2ad4e }
     #aside-menu dl.h10{height:100px; }
-    #aside-menu dl.h15{height:150px; }
-    #aside-menu dl.h25{height:250px; }
+    #aside-menu dl.h15{height:200px; }
+    #aside-menu dl.h25{height:300px; }
     #aside-menu dl.h40{height:500px; }
     #aside-menu dl dt{height:50px;text-align:center;background:#e6e6e6;border-bottom:1px solid #ccc;}
     #aside-menu dl dd{height:50px;text-align:center;border-bottom:1px solid #ccc;}

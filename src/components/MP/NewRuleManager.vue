@@ -1,32 +1,44 @@
 <template>
-    <div class="hello">
+    <div class="wraper">
+        <div class="col-md-12 col-lg-12 main-title">
+            <h1 class="titleCss">角色管理</h1>
+        </div>
+
         <div class="roleBox">
-            <el-header>角色管理</el-header>
-            <div class="btns">
-                <label>门店:</label>
-                <store ref='store' @storeChange='storeChange' v-if="accountType"></store>
-                <label>是否启用:</label>
-                <el-select v-model="urStatus">
-                    <el-option value="1" label="启用">启用</el-option>
-                    <el-option value="0" label="未启用">未启用</el-option>
-                </el-select>
-                <el-button type="primary" @click="queryRole"><i
-                    class="el-icon-circle-plus-outline"></i>查询
-                </el-button>
-                <el-button type="primary" @click="dialogAddRole = true,roleData = {}"><i
-                    class="el-icon-circle-plus-outline"></i>添加
-                </el-button>
-            </div>
+
+            <el-row style="margin: 15px 0;">
+                <el-col :md="6" :lg="5" :xl="5">
+                    <label>门店: </label>
+                    <store style="width: 180px;height: 40px; display: inline;" ref='store' @storeChange='storeChange' v-if="accountType"></store>
+                </el-col>
+                <el-col :md="8" :lg="8" :xl="8">
+                    <label>是否启用: </label>
+                    <el-select v-model="urStatus">
+                        <el-option value="1" label="启用">启用</el-option>
+                        <el-option value="0" label="未启用">未启用</el-option>
+                    </el-select>
+                </el-col>
+                <el-col :md="6" :lg="5" :xl="4" style="float: right;">
+                    <el-button type="primary" @click="queryRole"><i
+                        class="el-icon-zoom-in"></i> 查询
+                    </el-button>
+                    <el-button type="warning" @click="dialogAddRole = true,roleData = {}"><i
+                        class="el-icon-circle-plus-outline"></i> 添加
+                    </el-button>
+                </el-col>
+            </el-row>
+
+
             <vxe-table border ref="xTable1" :data="tableData" @checkbox-change="selectChangeEvent">
                 <!--@checkbox-all="selectAllEvent"		<vxe-table-column type="checkbox" width="40"></vxe-table-column>-->
-                <vxe-table-column field="urName" width="80" title="角色名"></vxe-table-column>
-                <vxe-table-column field="urDesc" width="80" title="描述"></vxe-table-column>
+                <vxe-table-column field="urName" width="160" title="角色名"></vxe-table-column>
+                <vxe-table-column field="urDesc" width="160" title="描述"></vxe-table-column>
                 <vxe-table-column field="storeName" title="门店"></vxe-table-column>
                 <vxe-table-column field="urStatus" title="状态" :formatter="formatterStatus"></vxe-table-column>
                 <vxe-table-column>
                     <template v-slot="{ row }">
                         <vxe-button status="primary" @click="queryPermission(row)">查看权限</vxe-button>
-                        <vxe-button status="primary" @click="initUpdateRole(row)">修改</vxe-button>
+                        <vxe-button status="warning" @click="initUpdateRole(row)">修改</vxe-button>
                     </template>
                 </vxe-table-column>
 
@@ -46,7 +58,7 @@
                     </el-form-item>
                 </el-form>
                 <div slot="footer" class="dialog-footer">
-                    <el-button @click="dialogAddRole = false">取 消</el-button>
+                    <el-button type="warning" @click="dialogAddRole = false">取 消</el-button>
                     <el-button type="primary" @click="addRole">确 定</el-button>
                 </div>
             </el-dialog>
@@ -69,41 +81,31 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×
-                            </button>
+                            <button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
+                            <h4 id="myModalLabel" class="modal-title">修改角色权限</h4>
                         </div>
                         <div class="modal-body  pos_r">
-                            <div class="tab-pane fade in active martop" id="basic">
-                                <el-col :md="18" :lg="18" :xl="18">
-                                    <div class="limitsBox">
-                                        <el-header class="bg-purple">权限设置</el-header>
-                                        <div class="btns">
-                                            <el-button status="primary" @click="addUpdatePermission"><i
-                                                class="el-icon-folder-checked"></i> 保存
-                                            </el-button>
-                                            <!--                                            <el-button status="primary"><i class="el-icon-refresh-right"></i> 重置-->
-                                            <!--                                            </el-button>-->
-                                            <!--                                            <el-button status="primary"><i class="el-icon-circle-check"></i> 全选-->
-                                            <!--                                            </el-button>-->
-                                            <!--                                            <el-button type="danger"><i class="el-icon-remove-outline"></i> 全不选-->
-                                            <!--                                            </el-button>-->
-                                        </div>
-
-                                        <vxe-table resizable :tree-config="{children: 'umsPermissionBeanList'}"
-                                                   :data="umsPermissionList.permissionData"
-                                                   row-id="upId"
-                                                   :checkbox-config="{labelField: 'upName', highlight: true,checkRowKeys: umsPermissionList.checkRowKeysList}"
-                                                   @checkbox-change="selectChangeEvent"
-                                                   v-if="hackRest"
-                                                   ref="permissionVxeTableRef">
-                                            <vxe-table-column type="checkbox" title="权限名" width="280"
-                                                              tree-node></vxe-table-column>
-                                            <!--                                            <vxe-table-column field="roleStatus" title="状态"></vxe-table-column>-->
-                                            <!--                                            <vxe-table-column field="roleKey" title="关键字"></vxe-table-column>-->
-                                            <!--                                            <vxe-table-column field="roleDesc" title="描述"></vxe-table-column>-->
-                                        </vxe-table>
-                                    </div>
-                                </el-col>
+                            <vxe-table resizable :tree-config="{children: 'umsPermissionBeanList'}"
+                                       :data="umsPermissionList.permissionData"
+                                       row-id="upId"
+                                       :checkbox-config="{labelField: 'upName', highlight: true,checkRowKeys: umsPermissionList.checkRowKeysList}"
+                                       @checkbox-change="selectChangeEvent"
+                                       v-if="hackRest"
+                                       ref="permissionVxeTableRef">
+                                <vxe-table-column type="checkbox" title="权限名" width="280"
+                                                  tree-node></vxe-table-column>
+                                <!-- <vxe-table-column field="roleStatus" title="状态"></vxe-table-column>-->
+                                <!-- <vxe-table-column field="roleKey" title="关键字"></vxe-table-column>-->
+                                <!-- <vxe-table-column field="roleDesc" title="描述"></vxe-table-column>-->
+                            </vxe-table>
+                            <div class="btns" style="text-align: right;">
+                                <el-button type="primary" @click="addUpdatePermission"><i class="el-icon-folder-checked"></i> 保存</el-button>
+                                <!-- <el-button status="primary"><i class="el-icon-refresh-right"></i> 重置-->
+                                <!-- </el-button>-->
+                                <!-- <el-button status="primary"><i class="el-icon-circle-check"></i> 全选-->
+                                <!-- </el-button>-->
+                                <!-- <el-button type="danger"><i class="el-icon-remove-outline"></i> 全不选-->
+                                <!-- </el-button>-->
                             </div>
                         </div>
                     </div>
@@ -114,9 +116,10 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×
-                            </button>
+                            <button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
+                            <h4 id="myModalLabel" class="modal-title">修改角色</h4>
                         </div>
+
                         <div class="modal-body  pos_r">
                             <div class="tab-pane fade in active martop">
                                 <el-form label-width="80px" label-position="left">
@@ -130,15 +133,15 @@
                                         <el-input v-model="updateRoleData.urDesc"></el-input>
                                     </el-form-item>
                                     <el-form-item label="启用">
-                                        <el-select v-model="updateRoleData.urStatus">
+                                        <el-select v-model="updateRoleData.urStatus" style="width: 100%;">
                                             <el-option value="1" label="启用">启用</el-option>
                                             <el-option value="0" label="未启用">未启用</el-option>
                                         </el-select>
                                     </el-form-item>
                                 </el-form>
-                                <div slot="footer" class="dialog-footer">
-                                    <el-button @click="closeCurrentPage">取 消</el-button>
-                                    <el-button status="primary" @click="updateRole">确 定</el-button>
+                                <div slot="footer" class="dialog-footer" style="text-align: right;">
+                                    <el-button type="warning" @click="closeCurrentPage">取 消</el-button>
+                                    <el-button type="primary" @click="updateRole">确 定</el-button>
                                 </div>
                             </div>
                         </div>
@@ -154,6 +157,9 @@
     import store from '@/components/common/Store.vue'
     import addRoleStore from '@/components/common/Store.vue'
     import updateRoleStore from '@/components/common/Store.vue'
+    import {
+        init
+    } from '@/../static/js/common.js'
 
     export default {
         name: 'HelloWorld',

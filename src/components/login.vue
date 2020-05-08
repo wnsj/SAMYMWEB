@@ -84,7 +84,8 @@
 							Cookies.set('accessToken', this.accountData.accessToken, "30MIN");
 							Cookies.set('accountData', this.accountData.accountData, "30MIN");
 							Cookies.set('empData', this.accountData.empData, "30MIN");
-							Cookies.set('itemList', this.accountData.itemList, "30MIN");
+							Cookies.set('upUriList', this.accountData.upUriList, "30MIN");
+                            Cookies.set('upValueList', this.accountData.upValueList, "30MIN");
 						}
 						// 						if(this.accountPwd=='123456'){
 						// 							$("#modifyPwd").modal('show')

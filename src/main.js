@@ -42,7 +42,7 @@ Vue.prototype.has = function (param) {
 
 // 路由卫士
 router.beforeEach((to, from, next) => {
-    console.log(to.path + '---' + from.path)
+
     if (to.path == '/login' && from.path == '/MainPage') {
         next();
     } else if (to.path == '/login') {
@@ -72,10 +72,12 @@ router.beforeEach((to, from, next) => {
                 next('/MainPage');
             } else if (to.path == '/login') {
                 next('/MainPage');
-            } else if (to.path == '/sam/dist/index.html') {
+            } else if (to.path == '/MainPage') {
+                next();
+            } else if (to.path == '/samy/dist/index.html') {
                 next('/MainPage');
             } else {
-                let jsonString = Cookies.get('itemList');
+                let jsonString = Cookies.get('upUriList');
                 if (constant.isBlank(jsonString)) {
                     next('/login');
                 }
@@ -84,19 +86,17 @@ router.beforeEach((to, from, next) => {
 
                 for (var i = 0; i < itemRuleList.length; i++) {
                     let item = itemRuleList[i];
-                    if (to.path == item.upUri) {
+                    if (to.path == item) {
                         hasRule = true
-                        console.log("hasRule:" + hasRule)
                         break;
                     }
                 }
-                hasRule = true
-                // console.log("main:" + to.path + from.path)
-                if (hasRule == true) {
+                console.log("main:" + to.path + from.path)
+                if (hasRule) {
                     next()
                 } else {
                     next(from.path)
-                    alert("您还没有此模块权限，请联系管理员添加权限")
+                    alert("您还没有此模块权限，请联系管理员添加权限!")
                 }
             }
         }

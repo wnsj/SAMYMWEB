@@ -10,9 +10,9 @@
             </div>
             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-right">
                 <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，会员管理系统</p>
-                <button class="btn btn-warning m_r_10" style="margin-top: 40px;" v-on:click="chargeManager()">课程购买</button>
-                <button class="btn btn-success m_r_10" style="margin-top: 40px;" v-on:click="customAction()">课程消费</button>
-                <button class="btn btn-danger m_r_10" style="margin-top: 40px;" v-on:click="refundAction()">课程退费</button>
+                <button class="btn btn-warning m_r_10" style="margin-top: 40px;" v-on:click="chargeManager()" v-has="'SAMY:MP:CoursePurchase'">课程购买</button>
+                <button class="btn btn-success m_r_10" style="margin-top: 40px;" v-on:click="customAction()" v-has="'SAMY:MP:CourseConsum'">课程消费</button>
+                <button class="btn btn-danger m_r_10" style="margin-top: 40px;" v-on:click="refundAction()" v-has="'SAMY:MP:CourseRefund'">课程退费</button>
                 <button class="btn btn-default m_r_10" style="margin-top: 40px;" v-on:click="loginOut()">退出</button>
             </div>
         </div>
@@ -77,9 +77,9 @@
                             <dd @click="addCheck('Store')" v-bind:class="{'li-active':onString=='Store'}">
                                 <router-link to="/MP/Store"><i class="fa" aria-hidden="true">门店管理</i></router-link>
                             </dd>
-                            <dd @click="addCheck('RuleManager')" v-bind:class="{'li-active':onString=='RuleManager'}">
-                                <router-link to="/MP/RuleManager"><i class="fa" aria-hidden="true">权限管理</i></router-link>
-                            </dd>
+<!--                            <dd @click="addCheck('RuleManager')" v-bind:class="{'li-active':onString=='RuleManager'}">-->
+<!--                                <router-link to="/MP/RuleManager"><i class="fa" aria-hidden="true">权限管理</i></router-link>-->
+<!--                            </dd>-->
                             <dd @click="addCheck('Royalty')" v-bind:class="{'li-active':onString=='Royalty'}">
                                 <router-link to="/MP/Royalty"><i class="fa" aria-hidden="true">提成规则管理</i></router-link>
                             </dd>
@@ -91,7 +91,10 @@
                             </dd>
 
                             <dd @click="addCheck('NewRuleManager')" v-bind:class="{'li-active':onString=='NewRuleManager'}">
-                                <router-link to="/MP/NewRuleManager"><i class="fa" aria-hidden="true">权限管理</i></router-link>
+                                <router-link to="/MP/NewRuleManager"><i class="fa" aria-hidden="true">角色管理</i></router-link>
+                            </dd>
+                            <dd @click="addCheck('CounseRoomTimeTotal')" v-bind:class="{'li-active':onString=='CounseRoomTimeTotal'}">
+                                <router-link to="/MP/CounseRoomTimeTotal"><i class="fa" aria-hidden="true">咨询室总览</i></router-link>
                             </dd>
                         </dl>
                         <dl v-bind:class="{h10:bool4}">
@@ -261,6 +264,9 @@
                     //删除cookie
                     Cookies.remove("accountData");
                     Cookies.remove("accessToken");
+                    Cookies.remove("empData");
+                    Cookies.remove("upUriList");
+                    Cookies.remove("upValueList");
                     this.$parent.setRouter("/login");
                     this.accountId = '';
                 }

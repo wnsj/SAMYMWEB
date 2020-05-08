@@ -12,7 +12,7 @@
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <select v-model="searchType" class="form-control" >
+                    <select v-model="searchType" class="form-control">
                         <option value="0">按月查询</option>
                         <option value="1">按日查询</option>
                     </select>
@@ -43,14 +43,14 @@
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <select v-model="offDuty" class="form-control" >
+                    <select v-model="offDuty" class="form-control">
                         <option value="">--未选择--</option>
                         <option value="0">歇班</option>
                         <option value="1">上班</option>
                     </select>
                 </div>
             </div>
-         </div>
+        </div>
         <div class="row" style="margin-top:5px;padding-bottom:2.5%;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
@@ -58,7 +58,7 @@
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <select v-model="empIsUse" class="form-control" >
+                    <select v-model="empIsUse" class="form-control">
                         <option value="">--未选择--</option>
                         <option value="0">未启用</option>
                         <option value="1">启用</option>
@@ -76,7 +76,7 @@
             </div>
             <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"
                     data-toggle="modal"
-                    v-on:click="selectRule('1')">添加排班
+                    v-on:click="selectRule('1')" v-has="'SAMY:MP:ScheduleEmp:Add'">添加排班
             </button>
             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
                     data-toggle="modal"
@@ -178,8 +178,8 @@
                 thisDate: new Date(),
                 empId: '',
                 searchType: 0,
-                offDuty:'',
-                empIsUse:'1',
+                offDuty: '',
+                empIsUse: '1',
 
                 //分页需要的数据
                 pages: '', //总页数
@@ -224,42 +224,17 @@
                 $("#scheduleContent").modal('hide');
             },
             selectRule(param, item) {
-                var url = this.url + '/ruleAction/queryRule'
-                this.$ajax({
-                    method: 'POST',
-                    url: url,
-                    headers: {
-                        'Content-Type': this.contentType,
-                        'Access-Token': this.accessToken
-                    },
-                    data: {
-                        posId: this.accountPosId(),
-                        moduleGrade: '2',
-                        urlName: '/MP/CashDeposit',
-                        operateType: param,
-                    },
-                    dataType: 'json',
-                }).then((response) => {
-                    var res = response.data
-                    if (res.retCode == '0000') {
-                        // if (res.retData == '0011') {
-                        console.log('param:' + param)
-                        if (param == 1) {
-                            //this.$refs.schedule.initData('add','')
-                            $("#scheduleContent").modal('show')
-                        } else if (param == 3) {
-                            this.$refs.UpdateScheduleRef.initData(item)
-                            $("#updateScheduleContent").modal('show')
-                        }
-//                         } else {
-//                             alert('您没有此权限，请联系管理员！！')
-//                         }
-                    } else {
-                        alert(res.retMsg)
+                if (param == 1) {
+                    //this.$refs.schedule.initData('add','')
+                    $("#scheduleContent").modal('show')
+                } else if (param == 3) {
+                    if (!this.has("SAMY:MP:ScheduleEmp:Update")) {
+                        alert("暂无权限!");
+                        return
                     }
-                }).catch((error) => {
-                    console.log('员工权限查询请求失败')
-                });
+                    this.$refs.UpdateScheduleRef.initData(item)
+                    $("#updateScheduleContent").modal('show')
+                }
             },
 
             //check the list of department
@@ -284,7 +259,7 @@
                         begDate: startDate,
                         endDate: endDate,
                         empId: this.empId,
-                        offDuty:this.offDuty,
+                        offDuty: this.offDuty,
                         empIsUse: this.empIsUse,
                         storeId: this.storeId,
                         page: page.toString(),

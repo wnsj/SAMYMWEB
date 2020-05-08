@@ -7,9 +7,9 @@
         <div class="roleBox">
 
             <el-row style="margin: 15px 0;">
-                <el-col :md="6" :lg="5" :xl="5">
+                <el-col :md="6" :lg="5" :xl="5" v-if="accountType">
                     <label>门店: </label>
-                    <store style="width: 180px;height: 40px; display: inline;" ref='store' @storeChange='storeChange' v-if="accountType"></store>
+                    <store style="width: 180px;height: 40px; display: inline;" ref='store' @storeChange='storeChange' ></store>
                 </el-col>
                 <el-col :md="8" :lg="8" :xl="8">
                     <label>是否启用: </label>
@@ -22,7 +22,7 @@
                     <el-button type="primary" @click="queryRole"><i
                         class="el-icon-zoom-in"></i> 查询
                     </el-button>
-                    <el-button type="warning" @click="dialogAddRole = true,roleData = {}"><i
+                    <el-button type="warning" @click="dialogAddRole = true,roleData = {}" v-has="'SAMY:MP:NewRuleManager:Add'"><i
                         class="el-icon-circle-plus-outline"></i> 添加
                     </el-button>
                 </el-col>
@@ -37,8 +37,8 @@
                 <vxe-table-column field="urStatus" title="状态" :formatter="formatterStatus"></vxe-table-column>
                 <vxe-table-column>
                     <template v-slot="{ row }">
-                        <vxe-button status="primary" @click="queryPermission(row)">查看权限</vxe-button>
-                        <vxe-button status="warning" @click="initUpdateRole(row)">修改</vxe-button>
+                        <vxe-button status="primary" @click="queryPermission(row)" v-has="'SAMY:MP:NewRuleManager:PermissionQuery'">查看权限</vxe-button>
+                        <vxe-button status="warning" @click="initUpdateRole(row)" v-has="'SAMY:MP:NewRuleManager:Update'">修改</vxe-button>
                     </template>
                 </vxe-table-column>
 
@@ -162,7 +162,7 @@
     } from '@/../static/js/common.js'
 
     export default {
-        name: 'HelloWorld',
+        name: 'NewRuleManager',
         components: {store, addRoleStore, updateRoleStore},
         data() {
             return {
@@ -315,6 +315,7 @@
                 this.requestData(url, param).then((responseData) => {
                     if (responseData.retCode == '0000') {
                         alert(responseData.retMsg);
+                        this.closeCurrentPage();
                     } else {
                         alert(responseData.retMsg);
                     }

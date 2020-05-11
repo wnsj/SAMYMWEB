@@ -308,7 +308,6 @@
                     Cookies.remove("upUriList");
                     Cookies.remove("upValueList");
                     this.$parent.setRouter("/login");
-                    this.accountId = '';
                 }
             },
             modPwd() {
@@ -329,7 +328,6 @@
                 Cookies.remove("upUriList");
                 Cookies.remove("upValueList");
                 this.$parent.setRouter("/login");
-                this.accountId = '';
             }
         },
         mounted() {

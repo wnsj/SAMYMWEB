@@ -66,7 +66,6 @@
                 Cookies.remove("upUriList");
                 Cookies.remove("upValueList");
                 this.$parent.setRouter("/login");
-                this.accountId = '';
                 $("#modifyPwd").modal('hide')
             },
             login() {

@@ -211,6 +211,10 @@ Vue.prototype.getEmpData = function () {
 Vue.prototype.getEmpId = function () {
     return constant.getEmpId()
 }
+//获取账户信息
+Vue.prototype.getAccData = function () {
+    return constant.getAccData()
+}
 
 
 /*

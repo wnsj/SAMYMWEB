@@ -78,7 +78,7 @@
 
 					<vxe-table resizable :tree-config="{children: 'childrens'}" :data="tableData1.roleData" :checkbox-config="{labelField: 'roleName', highlight: true}"
 					 @checkbox-change="selectChangeEvent">
-						<vxe-table-column type="checkbox" title="权限名" width="280" tree-node></vxe-table-column>
+						<vxe-table-column type="checkbox" title="权限名" field="isSelected" width="280" tree-node></vxe-table-column>
 						<vxe-table-column field="roleStatus" title="状态"></vxe-table-column>
 						<vxe-table-column field="roleKey" title="关键字"></vxe-table-column>
 						<vxe-table-column field="roleDesc" title="描述"></vxe-table-column>
@@ -93,7 +93,7 @@
 </template>
 
 <script>
-	import treeTable from "./../treeTable"
+	// import treeTable from "./../treeTable"
 	export default {
 
 		name: 'HelloWorld',
@@ -107,6 +107,7 @@
 							roleName: '会员管理',
 							roleStatus: '02',
 							roleKey: '01',
+							isSelected:true,
 							roleDesc: '基础设置11',
 							childrens: [{
 									roleName: '会员管理',
@@ -114,10 +115,16 @@
 									roleKey: '01',
 									roleDesc: '基础设置11',
 									childrens: [{
-											roleName: '增加会员',
+											roleName: '查询会员',
 											roleStatus: '02',
 											roleKey: '01',
 											roleDesc: '高级设置11'
+										},
+										{
+												roleName: '增加会员',
+												roleStatus: '02',
+												roleKey: '01',
+												roleDesc: '高级设置11'
 										},
 										{
 											roleName: '修改会员',

@@ -8,7 +8,8 @@
         <div class="row" style="margin-top: 40px;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
                     <Store ref='store' @storeChange='storeChange'></Store>
@@ -16,20 +17,23 @@
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span class="sign-left">:</span>
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span
+                    class="sign-left">:</span>
                 </div>
-                <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memNum" ></div>
+                <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memNum"></div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memName"></div>
             </div>
 
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
                     <input class="form-control" type="text" value="" v-model="phone">
@@ -37,15 +41,18 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 15px;padding-bottom:1.5%;">
-            <button type="button" class="btn btn-warning pull-right m_r_10"  data-toggle="modal"
-                    v-on:click="selectRule('1')">添加会员</button>
-            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-                    v-on:click="checkMember(1)">查询</button>
+            <button type="button" class="btn btn-warning pull-right m_r_10" data-toggle="modal"
+                    v-on:click="selectRule('1')" v-has="'SAMY:MP:Member:Add'">添加会员
+            </button>
+            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+                    data-toggle="modal"
+                    v-on:click="checkMember(1)">查询
+            </button>
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive pre-scrollable">
-                    <table class="table table-bordered table-hover" id="datatable" >
+                    <table class="table table-bordered table-hover" id="datatable">
                         <thead class="datathead">
                         <tr>
                             <th class="text-center">会员卡号</th>
@@ -58,7 +65,7 @@
                             <th class="text-center">是否停用</th>
                             <!-- <th class="text-center">推荐人</th> -->
                             <th class="text-center">余额</th>
-                            <th class="text-center">修改</th>
+                            <th class="text-center" v-has="'SAMY:MP:Member:Update'">修改</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -73,7 +80,10 @@
                             <td class="text-center">{{item.isuse==true ? "在用" : "停用"}}</td>
                             <!-- <td class="text-center">{{item.empName}}</td> -->
                             <td class="text-center">{{item.balance}}</td>
-                            <td class="text-center"><button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改</button></td>
+                            <td class="text-center" v-has="'SAMY:MP:Member:Update'">
+                                <button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改
+                                </button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -108,6 +118,7 @@
     import {
         init
     } from '@/../static/js/common.js'
+
     export default {
         components: {
             SubMem,
@@ -118,12 +129,12 @@
             return {
                 memberList: [],
                 isuse: '1',
-                storeId:this.storeId(),
-                memNum:'',
+                storeId: this.storeId(),
+                memNum: '',
                 memName: '',
-                phone:'',
+                phone: '',
                 fixedHeader: false,
-                accountType:this.accountType(),
+                accountType: this.accountType(),
 
 
                 //分页需要的数据
@@ -135,59 +146,32 @@
         },
         methods: {
             //子级传值到父级上来的动态拿去
-            pageChange: function(page) {
+            pageChange: function (page) {
                 this.current = page
                 this.checkMember(page);
             },
-			selectRule(param,item){
-			    var url = this.url + '/ruleAction/queryRule'
-			
-			    this.$ajax({
-			        method: 'POST',
-			        url: url,
-			        headers: {
-			            'Content-Type': this.contentType,
-			            'Access-Token': this.accessToken
-			        },
-			        data: {
-			            accountPosId: this.accountPosId(),
-			            moduleGrade:'2',
-			            urlName:'/MP/ScheduleEmp',
-			            operateType:param,
-			        },
-			        dataType: 'json',
-			    }).then((response) => {
-			        var res = response.data
-			        if (res.retCode == '0000') {
-			            if(res.retData=='0010'){
-			                console.log('param:'+param)
-			                if(param==1){
-			                    this.$refs.subMemR.initData('add','')
-			                    $("#memberContent").modal('show')
-			                }else if(param==3){
-			                    this.$refs.subMemR.initData('modify', item)
-			                    $("#memberContent").modal('show')
-			                }
-			            }else{
-			                alert('您没有此权限，请联系管理员！！')
-			            }
-			        } else {
-			            alert(res.retMsg)
-			        }
-			
-			    }).catch((error) => {
-			        console.log('员工权限查询请求失败')
-			    });
-			},
-            
-            storeChange(param){
-                if(this.isBlank(param)){
-                    this.storeId=""
-                }else{
-                    this.storeId=param.storeId
+            selectRule(param, item) {
+                if (param == 1) {
+                    this.$refs.subMemR.initData('add', '')
+                    $("#memberContent").modal('show')
+                } else if (param == 3) {
+                    if (!this.has('SAMY:MP:Member:Update')){
+                        alert("暂无权限!")
+                        return
+                    }
+                    this.$refs.subMemR.initData('modify', item)
+                    $("#memberContent").modal('show')
                 }
             },
-            feedBack(){
+
+            storeChange(param) {
+                if (this.isBlank(param)) {
+                    this.storeId = ""
+                } else {
+                    this.storeId = param.storeId
+                }
+            },
+            feedBack() {
                 this.checkMember(1)
                 $("#memberContent").modal('hide')
             },
@@ -204,26 +188,26 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        storeId:this.storeId,
-                        memNum:this.memNum,
+                        storeId: this.storeId,
+                        memNum: this.memNum,
                         memName: this.memName,
                         isuse: this.isuse,
-                        phone:this.phone,
-						
-						
-                        page:page.toString(),
-                        pageSize:this.pageSize
+                        phone: this.phone,
+
+
+                        page: page.toString(),
+                        pageSize: this.pageSize
                     },
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
                     console.log(res)
                     if (res.retCode == '0000') {
-                        this.pages=res.retData.pages //总页数
-                        this.current=res.retData.current //当前页码
-                        this.pageSize=res.retData.size//一页显示的数量  必须是奇数
-                        this.total=res.retData.total //数据的数量
-                        this.$refs.paging.setParam(this.pages,this.current,this.total)
+                        this.pages = res.retData.pages //总页数
+                        this.current = res.retData.current //当前页码
+                        this.pageSize = res.retData.size//一页显示的数量  必须是奇数
+                        this.total = res.retData.total //数据的数量
+                        this.$refs.paging.setParam(this.pages, this.current, this.total)
                         this.memberList = res.retData.records
                     } else {
                         alert(res.retMsg)
@@ -245,8 +229,8 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        storeId:this.storeId,
-                        memNum:this.memNum,
+                        storeId: this.storeId,
+                        memNum: this.memNum,
                         memName: this.memName,
                         isuse: this.isuse,
                     },
@@ -264,15 +248,14 @@
                     console.log('请求失败处理')
                 });
             },
-            handleScroll(e){
-                var self=this
+            handleScroll(e) {
+                var self = this
                 var etop = e.target.scrollTop
                 var fHeaderwidth = $("#fHeader").width($(".datathead").width())
                 var fHeaderheight = $("#fHeader").height($(".datathead").height())
                 var theadheight = $(".datathead").height()
                 var thlength = $(".datathead tr th").length
-                for (var i=0;i<thlength;i++)
-                {
+                for (var i = 0; i < thlength; i++) {
                     $("#fHeader div").eq(i).width(
                         $(".datathead tr th").eq(i).width()
                     )
@@ -280,16 +263,16 @@
                         $(".datathead tr th").eq(i).height()
                     )
                 }
-                if(etop > 0){
-                    self.fixedHeader=true
-                    $("#fHeader").css("top",etop)
-                }else{
-                    self.fixedHeader=false
+                if (etop > 0) {
+                    self.fixedHeader = true
+                    $("#fHeader").css("top", etop)
+                } else {
+                    self.fixedHeader = false
                 }
             }
         },
-        mounted () {
-            window.addEventListener('scroll',this.handleScroll,true);
+        mounted() {
+            window.addEventListener('scroll', this.handleScroll, true);
             init();
         },
         created() {
@@ -307,7 +290,10 @@
         margin: 40px auto;
     }
 
-    #datatable{position:relative;}
+    #datatable {
+        position: relative;
+    }
+
     #fHeader {
         position: absolute;
         top: 0;
@@ -315,14 +301,18 @@
         background: #eeeeee;
         overflow: hidden;
     }
-    #fHeader div.text-center{
+
+    #fHeader div.text-center {
         float: left;
         display: inline-block;
-        padding:8px;
+        padding: 8px;
         border: 1px solid #ddd;
         font-weight: bold;
     }
+
     @media print {
-        #fHeader{display:none}
+        #fHeader {
+            display: none
+        }
     }
 </style>

@@ -18,7 +18,7 @@
         <div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
             <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"
                     data-toggle="modal"
-                    @click="selectRule('1')">添加咨询室
+                    @click="selectRule('1')" v-has="'SAMY:MP:CounseRoomManage:Add'">添加咨询室
             </button>
             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
                     data-toggle="modal"
@@ -33,15 +33,15 @@
                         <tr>
                             <th class="text-center">咨询室</th>
                             <th class="text-center">门店</th>
-                            <th class="text-center"></th>
+                            <th class="text-center" v-has="'SAMY:MP:CounseRoomManage:Update'"></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr v-for="(item,index) in orderList" :key="index" @dblclick="selectRule('3',item)">
                             <td class="text-center">{{item.crName}}</td>
                             <td class="text-center">{{item.storeName}}</td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-warning" @click="selectRule('3',item)">编辑</button>
+                            <td class="text-center" v-has="'SAMY:MP:CounseRoomManage:Update'">
+                                <button type="button" class="btn btn-warning" @click="selectRule('3',item)" >编辑</button>
                             </td>
                         </tr>
                         </tbody>
@@ -112,42 +112,17 @@
                 this.checkOrderList(page);
             },
             selectRule(param, item) {
-                var url = this.url + '/ruleAction/queryRule'
-                this.$ajax({
-                    method: 'POST',
-                    url: url,
-                    headers: {
-                        'Content-Type': this.contentType,
-                        'Access-Token': this.accessToken
-                    },
-                    data: {
-                        posId: this.accountPosId(),
-                        moduleGrade: '2',
-                        urlName: '/MP/CounseRoomManage',
-                        operateType: param,
-                    },
-                    dataType: 'json',
-                }).then((response) => {
-                    var res = response.data
-                    if (res.retCode == '0000') {
-                        res.retData = '0010'
-                        if (res.retData == '0010') {
-                            if (param == 1) {
-                                this.$refs.addCounseRoomRef.initData()
-                                $("#addCounseRoomContent").modal('show')
-                            } else if (param == 3) {
-                                this.$refs.updateCounseRoomRef.initData(item)
-                                $("#updateCounseRoomContent").modal('show')
-                            }
-                        } else {
-                            alert('您没有此权限，请联系管理员！！')
-                        }
-                    } else {
-                        alert(res.retMsg)
-                    }
-                }).catch((error) => {
-                    console.log('预约相关提交请求失败')
-                });
+                if (param == 1) {
+                    this.$refs.addCounseRoomRef.initData()
+                    $("#addCounseRoomContent").modal('show')
+                } else if (param == 3) {
+                   if (!this.has('SAMY:MP:CounseRoomManage:Update')){
+                       alert("暂无权限!")
+                       return
+                   }
+                    this.$refs.updateCounseRoomRef.initData(item)
+                    $("#updateCounseRoomContent").modal('show')
+                }
             },
             storeChange(param) {
                 if (this.isBlank(param)) {

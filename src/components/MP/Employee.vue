@@ -8,7 +8,8 @@
         <div class="row" style="margin-top: 40px;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-8=7">
                     <store ref="store" @storeChange='storeChange'></store>
@@ -16,7 +17,8 @@
             </div>
             <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                     <input class="form-control" type="text" v-model="empName">
@@ -32,7 +34,8 @@
             </div> -->
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">岗位</p><span class="sign-left">:</span>
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">岗位</p><span
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                     <pos ref="pos" @positionChange='positionChange'></pos>
@@ -42,7 +45,8 @@
         <div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否在用</p><span class="sign-left">:</span>
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否在用</p><span
+                    class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                     <select class="form-control" v-model="isuse">
@@ -52,10 +56,14 @@
                     </select>
                 </div>
             </div>
-            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
-                    v-on:click="selectRule('1')">添加员工</button>
-            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-                    v-on:click="checkEmp(1)">查询</button>
+            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"
+                    data-toggle="modal"
+                    v-on:click="selectRule('1')" v-has="'SAMY:MP:Employee:Add'">添加员工
+            </button>
+            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+                    data-toggle="modal"
+                    v-on:click="checkEmp(1)">查询
+            </button>
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
@@ -71,7 +79,7 @@
                             <th class="text-center">性别</th>
                             <th class="text-center">入职时间</th>
                             <th class="text-center">是否停用</th>
-                            <th class="text-center" v-if="has(2)">修改</th>
+                            <th class="text-center" v-has="'SAMY:MP:Employee:Update'">修改</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -84,7 +92,10 @@
                             <td class="text-center">{{item.sex=='1' ? '男':'女'}}</td>
                             <td class="text-center">{{item.createDate | dateFormatFilter('YYYY-MM-DD')}}</td>
                             <td class="text-center">{{item.isuse==true ? "在用" : "停用"}}</td>
-                            <td class="text-center" v-if="has(2)"><button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改</button></td>
+                            <td class="text-center" v-has="'SAMY:MP:Employee:Update'">
+                                <button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改
+                                </button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -119,6 +130,7 @@
         init
     } from '@/../static/js/common.js'
     import Paging from '../common/paging'
+
     export default {
         components: {
             emp,
@@ -131,11 +143,11 @@
                 employeeList: [],
                 isuse: '1',
                 empName: '',
-                iphone:'',
+                iphone: '',
                 fixedHeader: false,
-                posId:'',
-                storeId:this.storeId(),
-                accountType:this.accountType(),
+                posId: '',
+                storeId: this.storeId(),
+                accountType: this.accountType(),
 
                 //分页需要的数据
                 pages: '', //总页数
@@ -146,7 +158,7 @@
         },
         methods: {
             //子级传值到父级上来的动态拿去
-            pageChange: function(page) {
+            pageChange: function (page) {
                 this.current = page
                 this.checkEmp(page);
             },
@@ -164,7 +176,7 @@
                 $("#emp").modal('show')
             },
 
-            storeChange:function(param){
+            storeChange: function (param) {
                 if (this.isBlank(param)) {
                     this.storeId = ""
                 } else {
@@ -172,7 +184,7 @@
                 }
             },
             //feedback department information
-            positionChange: function(param) {
+            positionChange: function (param) {
                 if (this.isBlank(param)) {
                     this.posId = ""
                 } else {
@@ -185,45 +197,19 @@
                 $("#emp").modal('hide')
             },
             // check the adding and modifying rule of account
-            selectRule(param,item){
-                var url = this.url + '/ruleAction/queryRule'
+            selectRule(param, item) {
 
-                this.$ajax({
-                    method: 'POST',
-                    url: url,
-                    headers: {
-                        'Content-Type': this.contentType,
-                        'Access-Token': this.accessToken
-                    },
-                    data: {
-                        accountPosId: this.accountPosId(),
-                        moduleGrade:'2',
-                        urlName:'/MP/Employee',
-                        operateType:param,
-                    },
-                    dataType: 'json',
-                }).then((response) => {
-                    var res = response.data
-                    if (res.retCode == '0000') {
-                        if(res.retData=='0010'){
-                            console.log('param:'+param)
-                            if(param==1){
-                                this.$refs.emp.initData('add','')
-                                $("#emp").modal('show')
-                            }else if(param==3){
-                                this.$refs.emp.initData('modify', item)
-                                $("#emp").modal('show')
-                            }
-                        }else{
-                            alert('您没有此权限，请联系管理员！！')
-                        }
-                    } else {
-                        alert(res.retMsg)
+                if (param == 1) {
+                    this.$refs.emp.initData('add', '')
+                    $("#emp").modal('show')
+                } else if (param == 3) {
+                    if (!this.has('SAMY:MP:Employee:Update')) {
+                        alert("暂无权限!")
+                        return
                     }
-
-                }).catch((error) => {
-                    console.log('员工权限查询请求失败')
-                });
+                    this.$refs.emp.initData('modify', item)
+                    $("#emp").modal('show')
+                }
             },
             //check the list of department
             checkEmp(page) {
@@ -242,19 +228,19 @@
                         empName: this.empName,
                         isuse: this.isuse,
 
-                        page:page.toString(),
-                        pageSize:this.pageSize
+                        page: page.toString(),
+                        pageSize: this.pageSize
                     },
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
                     console.log(res)
                     if (res.retCode == '0000') {
-                        this.pages=res.retData.pages //总页数
-                        this.current=res.retData.current //当前页码
-                        this.pageSize=res.retData.size//一页显示的数量  必须是奇数
-                        this.total=res.retData.total //数据的数量
-                        this.$refs.paging.setParam(this.pages,this.current,this.total)
+                        this.pages = res.retData.pages //总页数
+                        this.current = res.retData.current //当前页码
+                        this.pageSize = res.retData.size//一页显示的数量  必须是奇数
+                        this.total = res.retData.total //数据的数量
+                        this.$refs.paging.setParam(this.pages, this.current, this.total)
                         this.employeeList = res.retData.records
                     } else {
                         alert(res.retMsg)

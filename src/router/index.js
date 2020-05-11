@@ -165,7 +165,7 @@ export default new Router({
                     component: CounseRoomTimeTotal,
                 }
             ],
-            redirect: '/MP/MemberSummary'
+            //redirect: '/MainPage'
         }
     ]
 })

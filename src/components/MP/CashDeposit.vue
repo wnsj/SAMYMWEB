@@ -67,7 +67,7 @@
             </div>
             <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"
                     data-toggle="modal"
-                    v-on:click="selectRule('1')">添加定金
+                    v-on:click="selectRule('1')" v-has="'SAMY:MP:CashDeposit:Add'">添加定金
             </button>
             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
                     data-toggle="modal"
@@ -88,7 +88,7 @@
                             <th class="text-center">交定金时间</th>
                             <th class="text-center">定金余额</th>
                             <th class="text-center">操作人</th>
-                            <th class="text-center">修改</th>
+                            <th class="text-center"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -104,13 +104,13 @@
                             <td class="text-center" style="line-height:33px">{{item.balance}}</td>
                             <td class="text-center" style="line-height:33px">{{item.operatorName}}</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-warning" v-on:click="modifyMember(item)">修改
+                                <button type="button" class="btn btn-warning" v-on:click="modifyMember(item)" v-has="'SAMY:MP:CashDeposit:Update'">修改
                                 </button>
-                                <button type="button" class="btn btn-success" v-on:click="consumptionModel(item)">消费
+                                <button type="button" class="btn btn-success" v-on:click="consumptionModel(item)" v-has="'SAMY:MP:CashDeposit:Consum'">消费
                                 </button>
-                                <button type="button" class="btn btn-danger" v-on:click="refundModel(item)">退费</button>
+                                <button type="button" class="btn btn-danger" v-on:click="refundModel(item)" v-has="'SAMY:MP:CashDeposit:Refund'">退费</button>
                                 <button v-if="item.memNum==null||item.memNum==''" type="button" class="btn btn-primary"
-                                        v-on:click="transferMember(item)">转会员
+                                        v-on:click="transferMember(item)" v-has="'SAMY:MP:CashDeposit:ZhuanMember'">转会员
                                 </button>
                             </td>
                         </tr>
@@ -213,44 +213,13 @@
                 this.checkMember(page);
             },
             selectRule(param, item) {
-                var url = this.url + '/ruleAction/queryRule'
-
-                this.$ajax({
-                    method: 'POST',
-                    url: url,
-                    headers: {
-                        'Content-Type': this.contentType,
-                        'Access-Token': this.accessToken
-                    },
-                    data: {
-                        accountPosId: this.accountPosId(),
-                        moduleGrade: '2',
-                        urlName: '/MP/CashDeposit',
-                        operateType: param,
-                    },
-                    dataType: 'json',
-                }).then((response) => {
-                    var res = response.data
-                    if (res.retCode == '0000') {
-                        if (res.retData == '0010') {
-                            console.log('param:' + param)
-                            if (param == 1) {
-                                this.$refs.subCd.initData('add', '')
-                                $("#cdContent").modal('show')
-                            } else if (param == 3) {
-                                this.$refs.subCd.initData('modify', item)
-                                $("#cdContent").modal('show')
-                            }
-                        } else {
-                            alert('您没有此权限，请联系管理员！！')
-                        }
-                    } else {
-                        alert(res.retMsg)
-                    }
-
-                }).catch((error) => {
-                    console.log('员工权限查询请求失败')
-                });
+                if (param == 1) {
+                    this.$refs.subCd.initData('add', '')
+                    $("#cdContent").modal('show')
+                } else if (param == 3) {
+                    this.$refs.subCd.initData('modify', item)
+                    $("#cdContent").modal('show')
+                }
             },
 
             transferMember(item) {
@@ -303,6 +272,10 @@
                 if (item.isConsume == '1') {
                     alert("已经消费过，不能进行修改")
                     return
+                }
+                if (!this.has("SAMY:MP:CashDeposit:Update")){
+                    alert("暂无权限!");
+                    return;
                 }
                 this.selectRule('3', item)
             },

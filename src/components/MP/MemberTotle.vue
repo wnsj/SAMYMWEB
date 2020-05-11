@@ -132,7 +132,7 @@
                 <p class="tips ">* 双击单行，可查看会员的充值、消费、退费详情</p>
             </div>
         </div>
-		
+
         <div class="row row_edit">
             <div class="modal fade" id="detailMember">
                 <div class="modal-dialog">
@@ -142,8 +142,6 @@
         </div>
     </div>
 </template>
-
-</script>
 <script>
     import axios from 'axios'
     import dPicker from 'vue2-datepicker'
@@ -210,7 +208,7 @@
             conditionCheck: function(page) {
                 console.log('querying based on multiple conditions')
 				console.log('accountPosId:'+this.accountPosId())
-				
+
                 if(!this.isBlank(this.begCreateDate)){
                     this.begCreateDate = this.moment(this.begCreateDate,'YYYY-MM-DD 00:00:00.000')
                 }

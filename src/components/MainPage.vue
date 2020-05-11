@@ -10,9 +10,9 @@
             </div>
             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-right">
                 <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，会员管理系统</p>
-                <button class="btn btn-warning m_r_10" style="margin-top: 40px;" v-on:click="chargeManager()">课程购买</button>
-                <button class="btn btn-success m_r_10" style="margin-top: 40px;" v-on:click="customAction()">课程消费</button>
-                <button class="btn btn-danger m_r_10" style="margin-top: 40px;" v-on:click="refundAction()">课程退费</button>
+                <button class="btn btn-warning m_r_10" style="margin-top: 40px;" v-on:click="chargeManager()" v-has="'SAMY:MP:CoursePurchase'">课程购买</button>
+                <button class="btn btn-success m_r_10" style="margin-top: 40px;" v-on:click="customAction()" v-has="'SAMY:MP:CourseConsum'">课程消费</button>
+                <button class="btn btn-danger m_r_10" style="margin-top: 40px;" v-on:click="refundAction()" v-has="'SAMY:MP:CourseRefund'">课程退费</button>
                 <button class="btn btn-default m_r_10" style="margin-top: 40px;" v-on:click="loginOut()">退出</button>
             </div>
         </div>
@@ -36,7 +36,6 @@
                             <dd @click="addCheck('Visitor')" v-bind:class="{'li-active':onString=='Visitor'}">
                                 <router-link to="/MP/Visitor"><i class="fa" aria-hidden="true">咨客管理</i></router-link>
                             </dd>
-
                         </dl>
                         <dl v-bind:class="{h25:bool2}">
                             <dt @click="onShow(1)" v-bind:class="{'li-active':bool2}">
@@ -78,9 +77,9 @@
                             <dd @click="addCheck('Store')" v-bind:class="{'li-active':onString=='Store'}">
                                 <router-link to="/MP/Store"><i class="fa" aria-hidden="true">门店管理</i></router-link>
                             </dd>
-                            <dd @click="addCheck('RuleManager')" v-bind:class="{'li-active':onString=='RuleManager'}">
-                                <router-link to="/MP/RuleManager"><i class="fa" aria-hidden="true">权限管理</i></router-link>
-                            </dd>
+<!--                            <dd @click="addCheck('RuleManager')" v-bind:class="{'li-active':onString=='RuleManager'}">-->
+<!--                                <router-link to="/MP/RuleManager"><i class="fa" aria-hidden="true">权限管理</i></router-link>-->
+<!--                            </dd>-->
                             <dd @click="addCheck('Royalty')" v-bind:class="{'li-active':onString=='Royalty'}">
                                 <router-link to="/MP/Royalty"><i class="fa" aria-hidden="true">提成规则管理</i></router-link>
                             </dd>
@@ -92,7 +91,10 @@
                             </dd>
 
                             <dd @click="addCheck('NewRuleManager')" v-bind:class="{'li-active':onString=='NewRuleManager'}">
-                                <router-link to="/MP/NewRuleManager"><i class="fa" aria-hidden="true">权限管理</i></router-link>
+                                <router-link to="/MP/NewRuleManager"><i class="fa" aria-hidden="true">角色管理</i></router-link>
+                            </dd>
+                            <dd @click="addCheck('CounseRoomTimeTotal')" v-bind:class="{'li-active':onString=='CounseRoomTimeTotal'}">
+                                <router-link to="/MP/CounseRoomTimeTotal"><i class="fa" aria-hidden="true">咨询室总览</i></router-link>
                             </dd>
                         </dl>
                         <dl v-bind:class="{h10:bool4}">
@@ -262,6 +264,9 @@
                     //删除cookie
                     Cookies.remove("accountData");
                     Cookies.remove("accessToken");
+                    Cookies.remove("empData");
+                    Cookies.remove("upUriList");
+                    Cookies.remove("upValueList");
                     this.$parent.setRouter("/login");
                     this.accountId = '';
                 }
@@ -284,8 +289,8 @@
     #aside-menu dl{ margin-bottom:0; height:50px;overflow:hidden; color:#795548;font-size:20px; background:#f1f1f1;transition:height .5s }
     #aside-menu dl.noShow{color:#f2ad4e }
     #aside-menu dl.h10{height:100px; }
-    #aside-menu dl.h15{height:150px; }
-    #aside-menu dl.h25{height:250px; }
+    #aside-menu dl.h15{height:200px; }
+    #aside-menu dl.h25{height:300px; }
     #aside-menu dl.h40{height:500px; }
     #aside-menu dl dt{height:50px;text-align:center;background:#e6e6e6;border-bottom:1px solid #ccc;}
     #aside-menu dl dd{height:50px;text-align:center;border-bottom:1px solid #ccc;}

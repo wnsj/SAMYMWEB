@@ -119,7 +119,7 @@
         <div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
             <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"
                     data-toggle="modal"
-                    @click="selectRule('1')">添加预约
+                    @click="selectRule('1')" v-has="'SAMY:MP:Order:Add'">添加预约
             </button>
             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
                     data-toggle="modal"
@@ -147,7 +147,7 @@
                             <th class="text-center" style="line-height:40px;">到店</th>
                             <th class="text-center" style="line-height:40px;">备注</th>
                             <th class="text-center" style="line-height:40px;">操作人</th>
-                            <th class="text-center" style="line-height:40px;">修改</th>
+                            <th class="text-center" style="line-height:40px;"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -179,15 +179,15 @@
                             <td class="text-center" style="line-height:33px;">{{item.remark}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.operatorName}}</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-warning" @click="updateOrder(item)">修改</button>
+                                <button type="button" class="btn btn-warning" @click="updateOrder(item)" v-has="'SAMY:MP:Order:Update'">修改</button>
                                 <button type="button" class="btn btn-primary" @click="caAction(item,'cancel')">
                                     {{item.state=='0' ? '已取消' : '点击取消'}}
                                 </button>
                                 <button type="button" class="btn btn-primary" @click="caAction(item,'arrival')">
                                     {{item.arrival=='0' ? '点击到店' : '已到店'}}
                                 </button>
-                                <button type="button" class="btn btn-primary" @click="queryPhone(item)">查看手机号码</button>
-                                <button type="button" class="btn btn-primary" @click="againAdd(item)">再来一条</button>
+                                <button type="button" class="btn btn-primary" @click="queryPhone(item)" v-has="'SAMY:MP:Order:QueryPhone'">查看手机号码</button>
+                                <button type="button" class="btn btn-primary" @click="againAdd(item)"  v-has="'SAMY:MP:Order:Add'">再来一条</button>
                             </td>
                         </tr>
                         </tbody>
@@ -323,41 +323,18 @@
                 this.checkOrderList(page);
             },
             selectRule(param, item) {
-                var url = this.url + '/ruleAction/queryRule'
-                this.$ajax({
-                    method: 'POST',
-                    url: url,
-                    headers: {
-                        'Content-Type': this.contentType,
-                        'Access-Token': this.accessToken
-                    },
-                    data: {
-                        posId: this.accountPosId(),
-                        moduleGrade: '2',
-                        urlName: '/MP/Order',
-                        operateType: param,
-                    },
-                    dataType: 'json',
-                }).then((response) => {
-                    var res = response.data
-                    if (res.retCode == '0000') {
-                        if (res.retData == '0010') {
-                            if (param == 1) {
-                                this.$refs.AddSubOrderRef.initData()
-                                $("#addAppointContent").modal('show')
-                            } else if (param == 3) {
-                                this.$refs.UpdateSubOrderRef.initData(item)
-                                $("#orderContent").modal('show')
-                            }
-                        } else {
-                            alert('您没有此权限，请联系管理员！！')
-                        }
-                    } else {
-                        alert(res.retMsg)
+
+                if (param == 1) {
+                    this.$refs.AddSubOrderRef.initData()
+                    $("#addAppointContent").modal('show')
+                } else if (param == 3) {
+                    if(!this.has("SAMY:MP:Order:Update")){
+                        alert("暂无权限!")
+                        return
                     }
-                }).catch((error) => {
-                    console.log('预约相关提交请求失败')
-                });
+                    this.$refs.UpdateSubOrderRef.initData(item)
+                    $("#orderContent").modal('show')
+                }
             },
             updateOrder(item) {
                 if (item.arrival == '1') {

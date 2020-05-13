@@ -8,7 +8,7 @@
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
-					
+
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">新密码</label><span class="sign-left">:</span>
 						<div class="col-md-8">
@@ -24,7 +24,7 @@
 					<div class="form-group clearfix">
 						<div class="col-md-12">
 							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-							 v-on:click="certainAction()">确认</button>							
+							 v-on:click="certainAction()">确认</button>
 						</div>
 					</div>
 				</form>
@@ -37,7 +37,7 @@
 
 <script>
 	export default {
-		
+
 		data() {
 			return {
 				accountPwd: '',
@@ -52,24 +52,28 @@
 				this.accountPwd=''
 				this.accountPwdCopy=''
 			},
-			
+
 			//the event of addtional button
 			certainAction() {
-				
+
 				if (this.isBlank(this.accountPwd)&&this.accountPwd == '123456') {
 					alert("密码不能为空,且不能与原密码相同")
 					return
 				}
 				if (!this.isBlank(this.accountPwdCopy) && this.accountPwdCopy==this.accountPwd) {
-					
+
 				}else{
 					alert("两次密码不一致")
 					return
 				}
+				if (this.accountPwd == '123456'){
+				    alert("不能为初始密码!");
+				    return;
+                }
 				console.log(JSON.stringify(this.accountData))
 				this.accountData.accountPwd=this.accountPwd
 				var url = this.url+'/accountAction/updateAccount'
-				
+
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -83,7 +87,7 @@
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
-						alert(res.retMsg)
+						alert("修改成功,请重新登录!")
 						this.$emit("certainAction")
 						$(".modal-backdrop").hide();
 					}

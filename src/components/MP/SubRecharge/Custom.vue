@@ -246,7 +246,7 @@
 						firstCharge: '',
 						/** 1:实体卡首充（不计算提成） 0:计算 */
 						consumCount: '0', //消费次数
-						piId: '',
+						// piId: '',
 
 					}
                 

@@ -133,8 +133,8 @@
                     <table class="table table-bordered table-hover" id="datatable" style="width: 2400px;">
                         <thead class="datathead">
                         <tr>
+							<th class="text-center">序号</th>
                             <th class="text-center">姓名</th>
-                            <th class="text-center">手机号</th>
                             <th class="text-center">性别</th>
                             <th class="text-center">生日</th>
                             <th class="text-center">会员卡号</th>
@@ -157,8 +157,8 @@
                         </thead>
                         <tbody>
                         <tr v-for="(item,index) in visitorList" :key="index" v-on:dblclick="selectRule('3',item)">
+							<td class="text-center">{{item.visId}}</td>
                             <td class="text-center">{{item.visitorName}}</td>
-                            <td class="text-center">{{item.phone}}</td>
                             <td class="text-center">{{item.sex==1? "男":"女"}}</td>
                             <td class="text-center">{{item.birthday | dateFormatFilter("YYYY-MM-DD")}}</td>
                             <td class="text-center">{{item.memNum}}</td>

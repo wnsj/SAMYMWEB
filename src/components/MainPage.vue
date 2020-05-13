@@ -121,6 +121,12 @@
                                 <router-link to="/MP/CounseRoomTimeTotal"><i class="fa" aria-hidden="true">咨询室总览</i>
                                 </router-link>
                             </dd>
+                            <dd @click="addCheck('UmsPermissionManage')"
+                                v-bind:class="{'li-active':onString=='UmsPermissionManage'}">
+                                <router-link to="/MP/UmsPermissionManage"><i class="fa" aria-hidden="true">权限管理</i>
+                                </router-link>
+                            </dd>
+
                         </dl>
                         <dl v-bind:class="{h10:bool4}">
                             <dt @click="onShow(3)" v-bind:class="{'li-active':bool4}">
@@ -379,7 +385,7 @@
     }
 
     #aside-menu dl.h40 {
-        height: 500px;
+        height: 550px;
     }
 
     #aside-menu dl dt {

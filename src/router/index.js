@@ -27,6 +27,7 @@ import Visitor from '../components/MP/Visitor.vue'
 import MemberTotle from '../components/MP/MemberTotle.vue'
 import CounseRoomTimeTotal from '../components/MP/CounseRoomTimeTotal.vue'
 import NewRuleManager from '../components/MP/NewRuleManager.vue'
+import UmsPermissionManage from '../components/MP/UmsPermissionManage.vue'
 
 Vue.use(Router)
 
@@ -61,11 +62,11 @@ export default new Router({
                     name: 'Visitor',
                     component: Visitor,
                 },
-				{
-				    path: '/MP/NewRuleManager',
-				    name: 'NewRuleManager',
-				    component: NewRuleManager,
-				},
+                {
+                    path: '/MP/NewRuleManager',
+                    name: 'NewRuleManager',
+                    component: NewRuleManager,
+                },
                 {
                     path: '/MP/SettleSummary',
                     name: 'SettleSummary',
@@ -163,6 +164,11 @@ export default new Router({
                     path: '/MP/CounseRoomTimeTotal',
                     name: 'CounseRoomTimeTotal',
                     component: CounseRoomTimeTotal,
+                },
+                {
+                    path: '/MP/UmsPermissionManage',
+                    name: 'UmsPermissionManage',
+                    component: UmsPermissionManage,
                 }
             ],
             //redirect: '/MainPage'

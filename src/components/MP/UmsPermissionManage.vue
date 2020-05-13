@@ -37,7 +37,7 @@
                     <el-input placeholder="/MP/Project" v-model="addPermissionObj.upUri"></el-input>
                 </el-form-item>
                 <el-form-item label="上级">
-                    <UmsPermission ref="addUmsPermissionRef" disabled="true" :permisUpId="parentId"></UmsPermission>
+						<UmsPermission ref="addUmsPermissionRef" disabled="true" :permisUpId="parentId"></UmsPermission>
                 </el-form-item>
                 <el-form-item label="状态">
                     <el-switch
@@ -150,7 +150,10 @@
                 // this.parentId = upId
                 // this.addPermissionObj.parentId = upId
                 this.dialogAddPermission = true
-                this.$refs.addUmsPermissionRef.setUpId(upId)
+				setTimeout(()=>{
+					this.$refs.addUmsPermissionRef.setUpId(upId)
+				},0)
+                
             }
         },
         created() {

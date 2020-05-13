@@ -24,7 +24,7 @@
         },
         data() {
             return {
-                upId: 0,
+                upId: this.permisUpId,
                 umsPermissionList: [],
                 status: this.permisStatus
             }
@@ -85,9 +85,9 @@
         }, created() {
             this.queryUmsPermission()
         }, computed: {
-            updateUpId(){
-                return this.upId = this.permisUpId
-            }
+            // updateUpId(){
+            //     return this.permisUpId
+            // }
         }
     }
 </script>

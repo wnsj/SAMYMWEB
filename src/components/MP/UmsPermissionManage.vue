@@ -1,12 +1,14 @@
 <template>
     <div class="wraper">
-        <!--        <div class="col-md-12 col-lg-12 main-title">-->
-        <!--            <h1 class="titleCss">权限管理</h1>-->
-        <!--        </div>-->
+               <div class="col-md-12 col-lg-12 main-title">
+                   <h1 class="titleCss">权限管理</h1>
+               </div>
         <div>
+			<div class="rightBox">
             <el-button type="primary" @click="queryPermission"><i class="el-icon-zoom-in"></i>查询</el-button>
             <el-button type="primary" @click="permissionDialog(1,0)"><i class="el-icon-circle-plus-outline"></i>添加
             </el-button>
+			</div>
             <vxe-table border
                        resizable
                        :tree-config="{children: 'umsPermissionBeanList', accordion: true}"
@@ -231,5 +233,8 @@
 </script>
 
 <style scoped>
-
+	.rightBox{
+		display: flex;
+		justify-content: flex-end;
+	}
 </style>

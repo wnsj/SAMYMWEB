@@ -83,6 +83,9 @@
                                     基础设置
                                 </i>
                             </dt>
+							<dd @click="addCheck('Project')" v-bind:class="{'li-active':onString=='Project'}">
+							    <router-link to="/MP/Project"><i class="fa" aria-hidden="true">产品管理</i></router-link>
+							</dd>
                             <dd @click="addCheck('Employee')" v-bind:class="{'li-active':onString=='Employee'}">
                                 <router-link to="/MP/Employee"><i class="fa" aria-hidden="true">员工管理</i></router-link>
                             </dd>
@@ -102,8 +105,8 @@
                             <dd @click="addCheck('Royalty')" v-bind:class="{'li-active':onString=='Royalty'}">
                                 <router-link to="/MP/Royalty"><i class="fa" aria-hidden="true">提成规则管理</i></router-link>
                             </dd>
-                            <dd @click="addCheck('Project')" v-bind:class="{'li-active':onString=='Project'}">
-                                <router-link to="/MP/Project"><i class="fa" aria-hidden="true">课程管理</i></router-link>
+                            <dd @click="addCheck('VisitState')" v-bind:class="{'li-active':onString=='VisitState'}">
+                                <router-link to="/MP/VisitState"><i class="fa" aria-hidden="true">状态管理</i></router-link>
                             </dd>
                             <dd @click="addCheck('CounseRoomManage')"
                                 v-bind:class="{'li-active':onString=='CounseRoomManage'}">

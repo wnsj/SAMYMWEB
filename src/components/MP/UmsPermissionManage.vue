@@ -4,7 +4,7 @@
                    <h1 class="titleCss">权限管理</h1>
                </div>
         <div>
-			<div class="rightBox">
+			<div class="rightBox margin-10">
             <el-button type="primary" @click="queryPermission"><i class="el-icon-zoom-in"></i>查询</el-button>
             <el-button type="primary" @click="permissionDialog(1,0)"><i class="el-icon-circle-plus-outline"></i>添加
             </el-button>
@@ -15,7 +15,8 @@
                        :data="umsPermissionList.permissionData"
                        row-id="upId"
                        v-if="hackRest"
-                       ref="permissionVxeTableRef">
+                       ref="permissionVxeTableRef" 
+					   max-height="650">
                 <vxe-table-column field="upName" width="160" title="权限名" tree-node></vxe-table-column>
                 <vxe-table-column>
                     <template v-slot="{ row }">

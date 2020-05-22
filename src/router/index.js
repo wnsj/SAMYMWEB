@@ -24,6 +24,7 @@ import CounseRoomManage from '../components/MP/CounseRoomManage.vue'
 import Schedule2 from '@/components/MP/SubSm/Schedule2.vue'
 import ZxsSummary from '../components/MP/ZxsSummary.vue'
 import Visitor from '../components/MP/Visitor.vue'
+import VisitState from '../components/MP/VisitState.vue'
 import MemberTotle from '../components/MP/MemberTotle.vue'
 import CounseRoomTimeTotal from '../components/MP/CounseRoomTimeTotal.vue'
 import NewRuleManager from '../components/MP/NewRuleManager.vue'
@@ -62,6 +63,11 @@ export default new Router({
                     name: 'Visitor',
                     component: Visitor,
                 },
+				{
+				    path: '/MP/VisitState',
+				    name: 'VisitState',
+				    component: VisitState,
+				},
                 {
                     path: '/MP/NewRuleManager',
                     name: 'NewRuleManager',

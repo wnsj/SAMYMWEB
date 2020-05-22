@@ -20,6 +20,20 @@
 							<emp ref='emp' @employeeChange='empChange'></emp>
 						</div>
 					</div>
+                    <div class="col-md-6 form-group clearfix">
+                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">总价</label><span class="sign-left">:</span>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" v-model="project.price" placeholder="">
+                            <span class="pos-ab pos-tr">¥</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group clearfix">
+                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">优惠后总价</label><span class="sign-left">:</span>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" v-model="project.price" placeholder="">
+                            <span class="pos-ab pos-tr">¥</span>
+                        </div>
+                    </div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">单价</label><span class="sign-left">:</span>
 						<div class="col-md-8">
@@ -51,11 +65,11 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">体验课</label><span class="sign-left">:</span>
+						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否可退款</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="project.proType">
-								<option value="1">否</option>
-								<option value="0">是</option>
+								<option value="0">否</option>
+								<option value="1">是</option>
 							</select>
 						</div>
 					</div>
@@ -64,7 +78,7 @@
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 							 v-on:click="closeCurrentPage()">返回</button>
 							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-							 v-on:click="certainAction()">确认</button>							
+							 v-on:click="certainAction()">确认</button>
 						</div>
 					</div>
 				</form>
@@ -123,7 +137,7 @@
 					this.$refs.emp.setEmp(this.project.empId)
 				}
 			},
-			
+
 			empChange(param){
 				if(this.isBlank(param)){
 					this.project.empId=""
@@ -134,7 +148,7 @@
 			//the event of addtional button
 			certainAction() {
 				console.log('the event of addtional button')
-				
+
 				if (this.isBlank(this.project.proName)) {
 					alert("课程名称不能为空")
 					return
@@ -163,7 +177,7 @@
 						var url = this.url+'/projects/updateProjectName'
 						break;
 				}
-				
+
 				this.$ajax({
 					method: 'POST',
 					url: url,

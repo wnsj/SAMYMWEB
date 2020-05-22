@@ -58,6 +58,12 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
+						<label for="gh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">角色</label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<role ref="role" @urChange='roleChange'></role>
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
 						<label for="gh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">上级</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref="emp" @employeeChange="employeeChange"></emp>
@@ -92,12 +98,14 @@
 	import pos from '../../common/Position.vue'
 	import emp from '../../common/Employee.vue'
 	import store from '../../common/Store.vue'
+	import role from '../../common/Role.vue'
 	export default {
 		components: {
 			dPicker,
 			pos,
 			emp,
 			store,
+			role,
 		},
 		data() {
 			return {
@@ -109,8 +117,8 @@
 					isuse: '1',
 					leaderId:'',
 					birthday:'',
+					roleId:'0',
 					storeId:this.storeId(),
-					accountType:this.accountType(),
 					level:'1',
 				},
 				title: '新增',
@@ -119,7 +127,7 @@
 		},
 		methods: {
 			// Initialization employee’s content
-			initData(param, employee) {
+			initData(param, param2) {
 				if (param == 'add') {
 					console.log('Initialization employee’s content, which adds employee')
 					this.title = '新增'
@@ -131,20 +139,36 @@
 						sex: '1',
 						isuse: '1',
 						leaderId:'',
+						roleId:'0',
 						storeId:this.storeId(),
 						level:'1',
 					}
+					this.$refs.role.setUr(this.employee.roleId)
 					this.$refs.pos.setPosId(this.employee.posId)
 					this.$refs.emp.setPosId(this.employee.posId)
 					// this.$refs.store.setStore(this.employee.storeId)
 				} else if (param == 'modify') {
 					console.log('Initialization employee’s content, which modifies employee')
 					this.title='修改'
-					Object.assign(this.employee,employee)
+					
+					Object.assign(this.employee,param2)
+					if(!this.isBlank(this.employee.roleId)){
+						this.$refs.role.setUr(this.employee.roleId)
+					}else{
+						this.$refs.role.setUr('0')
+					}
 					this.$refs.pos.setPosId(this.employee.posId)
-					this.$refs.emp.setPosId(this.employee.posId)
+					this.$refs.emp.setPosId(this.employee.empId)
 					// this.$refs.store.setStore(this.employee.storeId)
 				}
+			},
+			roleChange(param){
+				if(this.isBlank(param)){
+					this.employee.roleId='0'
+				}else{
+					this.employee.roleId=param.urId
+				}
+				
 			},
 			//date formatting 
 			dateAction(param) {
@@ -204,13 +228,6 @@
 					alert("店铺不能为空")
 					return
 				}
-// 				if(this.isBlank(this.employee.phone)){
-// 					alert("手机号不能为空")
-// 					return
-// 				}else if(reg.test(this.employee.phone)==false){
-// 					alert("不是完整的11位手机号或者正确的座机号！");
-// 					return
-// 				}
 				switch(this.title){
 					case '新增':
 						var url = this.url+'/employeeAction/addEmp'
@@ -219,7 +236,7 @@
 						var url = this.url+'/employeeAction/updateEmp'
 						break;
 				}
-				 
+				
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -266,7 +283,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
+					// console.log(res)
 					if (res.retCode == '0000') {
 						if (res.retData != null) {
 							this.employee = res.retData

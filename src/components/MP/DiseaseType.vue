@@ -3,16 +3,16 @@
 
     <div class="wraper">
         <div class="col-md-12 col-lg-12 main-title">
-            <h1 class="titleCss">来访状态</h1>
+            <h1 class="titleCss">咨询方向</h1>
         </div>
         <div class="row" style="margin-top: 40px;padding-bottom:1.5%;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">状态名</p><span
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询类型</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <input class="form-control" type="text" v-model="vsName">
+                    <input class="form-control" type="text" v-model="dtName">
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -34,7 +34,7 @@
             </button>
             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
                     data-toggle="modal"
-                    v-on:click="queryVisitStateList()">查询
+                    v-on:click="queryDtList()">查询
             </button>
         </div>
         <div class="">
@@ -44,9 +44,8 @@
 
                         <thead class="datathead">
                         <tr>
-                            <th class="text-center">访问类型</th>
-                            <th class="text-center">状态类型</th>
-                            <th class="text-center">类型名</th>
+                            <th class="text-center">方向ID</th>
+                            <th class="text-center">咨询方向</th>
                             <th class="text-center">是否停用</th>
                             <th class="text-center">修改</th>
 							 <!-- v-has="'SAMY:MP:Store:Update'" -->
@@ -54,9 +53,8 @@
                         </thead>
                         <tbody>
                         <tr v-for="(item,index) in objList" :key="index" v-on:dblclick="selectRule('3',item)">
-                            <td class="text-center">{{item.vsType==1 ? "初诊" : "复诊"}}</td>
-                            <td class="text-center">{{item.stateType==1 ? "咨客判定" : "续流状态"}}</td>
-							<td class="text-center">{{item.vsName}}</td>
+                            <td class="text-center">{{item.dtId}}</td>
+                            <td class="text-center">{{item.dtName}}</td>
                             <td class="text-center">{{item.isUse==1 ? "在用" : "停用"}}</td>
                             <td class="text-center">
 								 <!-- v-has="'SAMY:MP:Store:Update'" -->
@@ -73,9 +71,9 @@
             </div>
         </div>
         <div class="row row_edit">
-            <div class="modal fade" id="vsContent">
+            <div class="modal fade" id="dtContent">
                 <div class="modal-dialog">
-                    <SubVs ref='vs' @certainAction='feedBack'></SubVs>
+                    <SubDt ref='dt' @certainAction='feedBack'></SubDt>
                 </div>
             </div>
         </div>
@@ -86,20 +84,20 @@
 
 <script>
 
-    import SubVs from '../MP/SubVs/SubVs.vue'
+    import SubDt from '../MP/SubDt/SubDt.vue'
     import {
         init
     } from '@/../static/js/common.js'
 
     export default {
         components: {
-            SubVs,
+            SubDt,
         },
         data() {
             return {
                 objList: [],
                 isUse: '1',
-                vsName: '',
+                dtName: '',
                 fixedHeader: false,
             };
         },
@@ -107,26 +105,26 @@
             
             //feedback from adding and modifying view
             feedBack() {
-                this.queryVisitStateList()
-                $("#vsContent").modal('hide')
+                this.queryDtList()
+                $("#dtContent").modal('hide')
             },
             // check the adding and modifying rule of account
             selectRule(param, item) {
                 if (param == "1") {
-                    this.$refs.vs.initData('add')
-                    $("#vsContent").modal('show')
+                    this.$refs.dt.initData('add')
+                    $("#dtContent").modal('show')
                 } else if (param == "3") {
 //                     if (!this.has('SAMY:MP:Store:Update')) {
 //                         alert("暂无权限!");
 //                         return
 //                     }
-                    this.$refs.vs.initData('modify', item)
-                    $("#vsContent").modal('show')
+                    this.$refs.dt.initData('modify', item)
+                    $("#dtContent").modal('show')
                 }
             },
             //check the list of store
-            queryVisitStateList() {
-                var url = this.url + '/visitState/queryVisitState'
+            queryDtList() {
+                var url = this.url + '/diseaseType/queryDiseaseType'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -136,7 +134,7 @@
                     },
                     data: {
                         isUse: this.isUse,
-						vsName:this.vsName,
+						dtName:this.dtName,
                     },
                     dataType: 'json',
                 }).then((response) => {

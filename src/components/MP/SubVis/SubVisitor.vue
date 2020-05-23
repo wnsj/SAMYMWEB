@@ -44,7 +44,7 @@
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询方向</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="visitor.consDirection" placeholder="">
+							<dt ref="dt" @objectChange="dtChange"></dt>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
@@ -53,15 +53,12 @@
 							<emp ref="emp" @employeeChange="empChange"></emp>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">客户类型</label><span class="sign-left">:</span>
+					<!-- <div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">初诊类型</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<select class="form-control" v-model="visitor.visType">
-								<option value="1">初访</option>
-								<option value="2">复访</option>
-							</select>
+							<visState ref="visState" @objChange = "backObjChange"></visState>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">行业</label><span class="sign-left">:</span>
 						<div class="col-md-8">
@@ -123,6 +120,8 @@
 	import ind from '../../common/Industry.vue'
 	import cha from '../../common/Channel.vue'
 	import emp from '../../common/Employee.vue'
+	// import visState from '../../common/VisitState.vue'
+	import dt from '../../common/DiseaseType.vue'
 	
 	import dPicker from 'vue2-datepicker'
 	export default {
@@ -131,6 +130,8 @@
 			ind,
 			cha,
 			emp,
+			dt,
+			// visState,
 		},
 		data() {
 			return {
@@ -141,7 +142,7 @@
 					chaId:'',
 					consDirection:'',
 					empId:'',
-					visType:'1',
+					// visType:'1',
 					indId:'',
 					storeId:this.storeId(),
 					urgentName:'',
@@ -168,6 +169,7 @@
 						phone:'',
 						chaId:'',
 						consDirection:'',
+						dtId:'',
 						empId:'',
 						visType:'1',
 						indId:'',
@@ -179,6 +181,7 @@
 						address:'',
 						marker:'',
 					}
+					// this.$refs.visState.getObj('1','1')
 					this.$refs.cha.setChaId('0')
 					this.$refs.ind.setInd('0')
 					this.$refs.emp.setEmp("")
@@ -194,10 +197,17 @@
 					this.$refs.emp.setEmp(this.visitor.empId)
 				}
 			},
-			
+			dtChange:function(param){
+				console.log('岗位3：'+JSON.stringify(param))
+				if(this.isBlank(param)){
+					this.visitor.dtId=""
+				}else{
+					this.visitor.dtId=param.dtId
+				}
+			},
 			//feedback position information
 			indChange:function(param){
-				console.log('岗位3：'+JSON.stringify(param))
+				// console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.visitor.indId=""
 				}else{
@@ -305,8 +315,7 @@
 				});
 			},
 			
-		}
-		
+		},
 	}
 </script>
 

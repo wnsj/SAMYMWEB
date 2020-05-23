@@ -5,7 +5,19 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">咨客管理</h1>
 		</div>
-		<div class="row" style="margin-top: 40px;">
+		<div class="row">
+			 <div class="col-xs-12 col-sm-12 col-md-2 col-lg-12" style="margin-bottom: 10px;">
+			 	<button type="button" class="btn btn-default pull-left" style="margin-right:1.5%;width: 100px;" 
+			 	 v-on:click="btnAction('5')">退  费</button>
+			 	<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" 
+			 	 v-on:click="btnAction('4')">预  约</button>
+			 	<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;"
+			 	 v-on:click="btnAction('3')">定  金</button>
+			 	<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" 
+			 	 v-on:click="btnAction('2')">消  费</button>
+			 	<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" 
+			 	 v-on:click="btnAction('1')">购  买</button>
+			 </div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
@@ -115,14 +127,14 @@
 				</div>
 			</div>
 		</div>
-		<el-table :data="visitorList" style="width: 100%">
+		<!-- <el-table :data="visitorList" style="width: 100%">
 			<el-table-column prop="visId" label="序号" width="180">
 			</el-table-column>
 			<el-table-column prop="visitorName" label="姓名" width="180">
 			</el-table-column>
 			<el-table-column prop="address" label="会员卡号">
 			</el-table-column>
-		</el-table>
+		</el-table> -->
 		<div class="">
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable">
@@ -155,8 +167,9 @@
 						<tbody>
 							<tr v-for="(item,index) in visitorList" :key="index" v-on:dblclick="selectRule('3',item)">
 								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'">
-									<button type="button" class="btn btn-warning" v-on:click="editorAction(item)">编辑
-									</button>
+									<!-- <button type="button" class="btn btn-warning" v-on:click="editorAction(item)">编辑
+									</button> -->
+									<input type="radio" style="border-radius:5px;" name="复选框" v-on:click="editorAction(item)"/>
 								</td>
 								<td class="text-center">{{item.visId}}</td>
 								<td class="text-center">{{item.visitorName}}</td>
@@ -248,38 +261,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row row_edit">
-			<div class="modal fade" id="editorContent">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" aria-hidden="true" class="close" v-on:click="editorClose()">×</button>
-							<h4 id="myModalLabel" class="modal-title">编辑操作</h4>
-						</div>
-						<div class="modal-body  pos_r">
-							<div class="form-group clearfix">
-								<div class="col-md-12">
-									<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-									 v-on:click="editorClose()">返回</button>
-									<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-									 v-on:click="certainAction()">确认</button>
-									<button type="button" class="btn btn-success pull-right m_r_10" style="margin-right:10%;" data-toggle="modal"
-									 v-on:click="btnAction('5')">退费</button>
-									<button type="button" class="btn btn-success pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-									 v-on:click="btnAction('4')">预约</button>
-									<button type="button" class="btn btn-success pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-									 v-on:click="btnAction('3')">定金</button>
-									<button type="button" class="btn btn-success pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-									 v-on:click="btnAction('2')">消费</button>
-									<button type="button" class="btn btn-success pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-									 v-on:click="btnAction('1')">购买</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 	</div>
 </template>
 
@@ -442,7 +424,6 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
 						this.current = res.retData.current //当前页码

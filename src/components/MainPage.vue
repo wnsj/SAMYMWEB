@@ -108,6 +108,9 @@
                             <dd @click="addCheck('VisitState')" v-bind:class="{'li-active':onString=='VisitState'}">
                                 <router-link to="/MP/VisitState"><i class="fa" aria-hidden="true">状态管理</i></router-link>
                             </dd>
+							<dd @click="addCheck('DiseaseType')" v-bind:class="{'li-active':onString=='DiseaseType'}">
+							    <router-link to="/MP/DiseaseType"><i class="fa" aria-hidden="true">咨询方向</i></router-link>
+							</dd>
                             <dd @click="addCheck('CounseRoomManage')"
                                 v-bind:class="{'li-active':onString=='CounseRoomManage'}">
                                 <router-link to="/MP/CounseRoomManage"><i class="fa" aria-hidden="true">咨询室管理</i>

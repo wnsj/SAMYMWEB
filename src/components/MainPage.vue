@@ -391,7 +391,7 @@
     }
 
     #aside-menu dl.h40 {
-        height: 550px;
+        height: 600px;
     }
 
     #aside-menu dl dt {

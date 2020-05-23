@@ -46,6 +46,35 @@
                     </select>
                 </div>
             </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师等级</p>
+                    <span
+                        class="sign-left">:</span>
+                </div>
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <select class="form-control" v-model="empLevel">
+                        <option value="">--未选择--</option>
+                        <option value="1">资深级</option>
+                        <option value="2">专家级</option>
+                        <option value="3">高级</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否可退款</p>
+                    <span
+                        class="sign-left">:</span>
+                </div>
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <select class="form-control" v-model="isRefund">
+                        <option value="">--未选择--</option>
+                        <option value="0">否</option>
+                        <option value="1">是</option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
             <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;"
@@ -67,10 +96,15 @@
                             <th class="text-center">ID</th>
                             <th class="text-center">店铺</th>
                             <th class="text-center">咨询师</th>
+                            <th class="text-center">咨询师等级</th>
                             <th class="text-center">课程名称</th>
-                            <th class="text-center">单价</th>
+                            <th class="text-center">总价(¥)</th>
+                            <th class="text-center">优惠后总价(¥)</th>
+                            <th class="text-center">单价(¥)</th>
                             <th class="text-center">课时(小时)</th>
                             <th class="text-center">优惠比例(%)</th>
+                            <th class="text-center">是否可退款</th>
+                            <th class="text-center">到期日期(天)</th>
                             <th class="text-center" v-has="'SAMY:MP:Project:Update'">修改</th>
                         </tr>
                         </thead>
@@ -79,10 +113,16 @@
                             <td class="text-center" style="line-height:33px;">{{item.proId}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.storeName}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.empName}}</td>
+                            <td class="text-center" style="line-height:33px;">{{item.empLevelName}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.proName}}</td>
+                            <td class="text-center" style="line-height:33px;">{{item.totalPrice}}</td>
+                            <td class="text-center" style="line-height:33px;">{{item.discouAmount}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.price}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.frequency}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.discount}}</td>
+                            <td class="text-center" style="line-height:33px;">{{item.isRefund == 1 ? '是' : '否'}}</td>
+                            <td class="text-center" style="line-height:33px;">{{item.endDay == 0 ? '' : item.endDay}}
+                            </td>
                             <td class="text-center" style="line-height:33px;" v-has="'SAMY:MP:Project:Update'">
                                 <button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改
                                 </button>
@@ -137,6 +177,8 @@
                 storeId: this.storeId(),
                 accountType: this.accountType(),
                 empId: '',
+                empLevel: '',
+                isRefund:'',
                 //分页需要的数据
                 pages: '', //总页数
                 current: 1, //当前页码
@@ -204,7 +246,8 @@
                         state: this.isuse,
                         empId: this.empId,
                         storeId: this.storeId,
-
+                        empLevel: this.empLevel,
+                        isRefund:this.isRefund,
                         page: page.toString(),
                         pageSize: this.pageSize
                     },

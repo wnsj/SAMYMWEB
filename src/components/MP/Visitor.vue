@@ -169,7 +169,7 @@
 								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'">
 									<!-- <button type="button" class="btn btn-warning" v-on:click="editorAction(item)">编辑
 									</button> -->
-									<input type="radio" style="border-radius:5px;" name="复选框" v-on:click="editorAction(item)"/>
+									<input type="radio" style="border-radius:5px;" name="复选框" :value="index" v-model="checkedValue"/>
 								</td>
 								<td class="text-center">{{item.visId}}</td>
 								<td class="text-center">{{item.visitorName}}</td>
@@ -317,6 +317,7 @@
 				endDate: '',
 				birthday: '',
 				fixedHeader: false,
+				checkedValue:-1,
 				accountType: this.accountType(),
 
 
@@ -463,16 +464,20 @@
 			},
 			editorAction(item) {
 				this.objectContent = item
-				$("#editorContent").modal('show')
 			},
 			editorClose() {
 				$("#editorContent").modal('hide')
 			},
 			btnAction(index) {
-				this.editorClose()
+				if(this.checkedValue>-1){
+					this.objectContent = this.visitorList[this.checkedValue]
+				}else{
+					this.objectContent=''
+				}
 				switch (index) {
 					case '1':
 						this.$refs.sr.initData('add', this.objectContent)
+						console.log(JSON.stringify(this.objectContent))
 						$("#srContent").modal('show')
 						break;
 					case '2':

@@ -230,6 +230,7 @@
 		methods: {
 			// Initialization consume’s content
 			initData(param) {
+				console.log(JSON.stringify(param))
 				this.member = {
 						memNum: '', //会员号
 						memName: '', //会员名

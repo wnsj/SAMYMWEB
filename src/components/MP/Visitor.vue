@@ -417,7 +417,7 @@
 						begDate: this.begDate,
 						endDate: this.endDate,
 						birthday: this.birthday,
-
+						isHidePhone:'1',
 
 						page: page.toString(),
 						pageSize: this.pageSize
@@ -469,6 +469,7 @@
 				$("#editorContent").modal('hide')
 			},
 			btnAction(index) {
+				console.log()
 				if(this.checkedValue>-1){
 					this.objectContent = this.visitorList[this.checkedValue]
 				}else{

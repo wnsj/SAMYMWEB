@@ -40,7 +40,7 @@
           }
         }
       },
-     
+     //vsType:1初访，2复访；stateType：1咨客判定，2续流状态
       getObj(vsType,stateType) {
 				console.log('vsType:'+vsType)
         var url = this.url + '/visitState/queryVisitState'

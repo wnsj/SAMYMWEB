@@ -98,6 +98,7 @@
                             <th class="text-center">咨询师</th>
                             <th class="text-center">咨询师等级</th>
                             <th class="text-center">课程名称</th>
+                            <th class="text-center">项目类型</th>
                             <th class="text-center">总价(¥)</th>
                             <th class="text-center">优惠后总价(¥)</th>
                             <th class="text-center">单价(¥)</th>
@@ -115,6 +116,7 @@
                             <td class="text-center" style="line-height:33px;">{{item.empName}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.empLevelName}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.proName}}</td>
+                            <td class="text-center" style="line-height:33px;">{{transforProType(item.proType)}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.totalPrice}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.discouAmount}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.price}}</td>
@@ -178,7 +180,7 @@
                 accountType: this.accountType(),
                 empId: '',
                 empLevel: '',
-                isRefund:'',
+                isRefund: '',
                 //分页需要的数据
                 pages: '', //总页数
                 current: 1, //当前页码
@@ -247,7 +249,7 @@
                         empId: this.empId,
                         storeId: this.storeId,
                         empLevel: this.empLevel,
-                        isRefund:this.isRefund,
+                        isRefund: this.isRefund,
                         page: page.toString(),
                         pageSize: this.pageSize
                     },
@@ -290,6 +292,15 @@
                 } else {
                     self.fixedHeader = false
                 }
+            },
+            //项目类型转换
+            transforProType(proType) {
+                if (proType == 0) return '普通'
+                else if (proType == 1) return '月卡'
+                else if (proType == 2) return '季卡'
+                else if (proType == 3) return '半年卡'
+                else if (proType == 4) return '年卡'
+                else if (proType == 5) return '测评'
             }
         },
         mounted() {

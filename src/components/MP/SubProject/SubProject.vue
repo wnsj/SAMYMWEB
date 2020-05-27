@@ -10,7 +10,7 @@
                 <form action="" class="clearfix">
                     <div class="col-md-6 form-group clearfix">
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">课程名称</label><span class="sign-left">:</span>
+                               style="padding:0;line-height:34px;">项目名称</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.proName" placeholder="">
                         </div>
@@ -101,6 +101,20 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-md-6 form-group clearfix">
+                        <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline"
+                               style="padding:0;line-height:34px;">项目类型</label><span class="sign-left">:</span>
+                        <div class="col-md-8">
+                            <select class="form-control" v-model="project.proType">
+                                <option value="0">普通</option>
+                                <option value="1">月卡</option>
+                                <option value="2">季卡</option>
+                                <option value="3">半年卡</option>
+                                <option value="4">年卡</option>
+                                <option value="5">测评</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group clearfix">
                         <div class="col-md-12">
                             <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;"
@@ -168,7 +182,8 @@
                         discouAmount: 0,
                         endDay: 0,
                         storeId: this.storeId(),
-                        empLevel: 1
+                        empLevel: 1,
+                        proType:0
                     }
                     this.$refs.emp.setPosName("咨询师")
                     this.$refs.emp.setEmp("")
@@ -213,6 +228,10 @@
                 //     alert("折扣不能为空")
                 //     return
                 // }
+                if(this.project.proType == 0 && this.isBlank(this.project.empId)){
+                    alert("普通项目必须关联咨询师!")
+                    return;
+                }
                 switch (this.title) {
                     case '新增':
                         var url = this.url + '/projects/addProjectName'

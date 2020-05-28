@@ -630,6 +630,7 @@
                     this.clickItemObj.count = this.clickItemObj.count + 1
                     if (item.proType != 0) {
                         this.modCounselor(item)
+                        this.counselorFlag = false
                     } else {
                         this.counselorFlag = true
                         this.$refs.counselorEmp.setPosName("咨询师")
@@ -654,6 +655,7 @@
                         } else {
                             if (item.proType != 0) {
                                 this.modCounselor(item)
+                                this.counselorFlag = false
                             } else {
                                 this.counselorFlag = true
                                 this.$refs.counselorEmp.setPosName("咨询师")
@@ -676,6 +678,7 @@
                         this.clickItemObj.count = 0
                         if (item.proType != 0) {
                             this.modCounselor(item)
+                            this.counselorFlag = false
                         } else {
                             this.counselorFlag = true
                             this.$refs.counselorEmp.setPosName("咨询师")
@@ -693,7 +696,6 @@
                     }
                 }
                 this.projectFlag = e.target.checked
-                this.counselorFlag = e.target.checked
             },
             //项目类型转换
             transforProType(proType) {

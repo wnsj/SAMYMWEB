@@ -65,6 +65,7 @@
 								<th class="text-center" rowspan='2'>购买时间</th>
 								<th class="text-center" rowspan='2'>实交金额</th>
 								<th class="text-center" rowspan='2'>操作人</th>
+								<th class="text-center" rowspan='2'>是否欠费</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -79,6 +80,10 @@
 								<td>{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td>{{item.realCross}}</td>
 								<td>{{item.operatorName}}</td>
+								<td v-show="item.isArrears=='0'">否</td>
+								<td v-show="item.isArrears=='1'"><button type="button" class="btn btn-warning" v-on:click="arrearsAaction(item)">是</button>
+								</td>
+								<td v-show="item.isArrears=='3'">已补交</td>
 							</tr>
 						</tbody>
 					</table>

@@ -3,14 +3,14 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-            <h4 id="myModalLabel" class="modal-title">{{title}}项目</h4>
+            <h4 id="myModalLabel" class="modal-title">{{title}}产品</h4>
         </div>
         <div class="modal-body  pos_r">
             <div class="tab-pane fade in active martop" id="basic">
                 <form action="" class="clearfix">
                     <div class="col-md-6 form-group clearfix">
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">项目名称</label><span class="sign-left">:</span>
+                               style="padding:0;line-height:34px;">产品名称</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.proName" placeholder="">
                         </div>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-md-6 form-group clearfix">
                         <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">项目类型</label><span class="sign-left">:</span>
+                               style="padding:0;line-height:34px;">产品类型</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.proType">
                                 <option value="0">普通</option>
@@ -209,7 +209,7 @@
                 console.log('the event of addtional button')
 
                 if (this.isBlank(this.project.proName)) {
-                    alert("课程名称不能为空!")
+                    alert("产品名称不能为空!")
                     return
                 }
                 if (this.isBlank(this.project.empId)) {
@@ -230,7 +230,7 @@
                 //     return
                 // }
                 // if(this.project.proType == 0 && this.isBlank(this.project.empId)){
-                //     alert("普通项目必须关联咨询师!")
+                //     alert("普通产品必须关联咨询师!")
                 //     return;
                 // }
                 switch (this.title) {
@@ -259,12 +259,12 @@
                         this.$emit('certainAction')
                     }
                 }).catch((error) => {
-                    console.log('课程信息请提交失败')
+                    console.log('产品信息请提交失败')
                 });
             },
             closeCurrentPage() {
                 $("#projectContent").modal("hide")
-                console.log('关闭添加课程界面')
+                console.log('关闭添加产品界面')
             },
         }
 

@@ -190,10 +190,11 @@ Vue.prototype.accountType = function () {
 }
 //商铺ID
 Vue.prototype.storeId = function () {
-    if (!constant.isBlank(constant.storeId()))
-        return constant.storeId();
-    else
-        return '';
+    if (!constant.isBlank(constant.storeId())){
+		return constant.storeId();
+	}else{
+		return '';
+	}    
 }
 //手机号判断
 Vue.prototype.phoneNum = function (phoneNum) {

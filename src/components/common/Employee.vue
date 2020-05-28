@@ -111,7 +111,7 @@
             },
             getEmployeeList() {
                 var storeId = ''
-                if (this.accountType == false) {
+                if (this.accountType() == false) {
                     storeId = this.storeId()
                 } else {
                     storeId = ''

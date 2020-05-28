@@ -50,7 +50,7 @@
                         <tr v-for="item in unfinishedProList">
                             <td><input type="radio" name="radioGroup" @click="radioClick($event,item)"/></td>
                             <td>{{item.proName}}</td>
-                            <td>{{item.empName}}</td>
+                            <td>{{item.counselorName}}</td>
                             <td>{{transforProType(item.proType)}}</td>
                         </tr>
                         </tbody>

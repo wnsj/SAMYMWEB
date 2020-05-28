@@ -554,7 +554,7 @@
                     console.log(res)
                     if (res.retCode == '0000') {
                         alert(res.retMsg)
-                        this.$emit('closeCurrentPage')
+                        this.closeCurrentPage()
                         this.$router.push({
                             name: 'Charge',
                         });
@@ -568,7 +568,8 @@
                 });
             },
             closeCurrentPage() {
-                $("#addFee").modal("hide")
+                this.$emit('closeCurrentPage')
+                //$("#addFee").modal("hide")
                 console.log('关闭添加患者界面')
             },
             jumpLeft(index) {

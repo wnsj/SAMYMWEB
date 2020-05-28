@@ -33,7 +33,7 @@
                         <input type="text" class="form-control" v-model="consume.phone" disabled="true">
                     </div>
                 </div>
-                <div class="col-md-6 form-group clearfix" v-show="unfinishedProList.length > 0">
+                <div v-show="unfinishedProList.length > 0">
                     <label for="cyname" class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">已购项目</label><span
                     class="sign-left">:</span>
@@ -188,6 +188,58 @@
                         <input type="text" class="form-control" v-model="consume.receipt">
                     </div>
                 </div>
+                <div class="col-md-6 form-group clearfix">
+                    <label class="col-md-4 control-label text-right nopad end-aline"
+                           style="padding:0;line-height:34px;">咨询方向</label><span
+                    class="sign-left">:</span>
+                    <div class="col-md-7">
+                        <DiseaseType @objectChange="diseaseTypeChange"></DiseaseType>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group clearfix">
+                    <label class="col-md-4 control-label text-right nopad end-aline"
+                           style="padding:0;line-height:34px;">咨询问题</label><span
+                    class="sign-left">:</span>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" v-model="consume.diseaseProblem">
+                    </div>
+                </div>
+                <div class="col-md-6 form-group clearfix">
+                    <label class="col-md-4 control-label text-right nopad end-aline"
+                           style="padding:0;line-height:34px;">咨询室</label><span
+                    class="sign-left">:</span>
+                    <div class="col-md-7">
+                        <CounseRoom @channelChange="counseRoomChange"></CounseRoom>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group clearfix">
+                    <label class="col-md-4 control-label text-right nopad end-aline"
+                           style="padding:0;line-height:34px;">开始-结束时间</label><span
+                    class="sign-left">:</span>
+                    <div class="col-md-7">
+                        <dPicker v-model="dateArr" type="format" format="YYYY-MM-DD" range>
+                            <template v-slot:header="{ emit }">
+                                <div style="text-align: left"></div>
+                            </template>
+                        </dPicker>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group clearfix">
+                    <label class="col-md-4 control-label text-right nopad end-aline"
+                           style="padding:0;line-height:34px;">陪同人</label><span
+                    class="sign-left">:</span>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" v-model="consume.accompany">
+                    </div>
+                </div>
+                <div class="col-md-6 form-group clearfix">
+                    <label class="col-md-4 control-label text-right nopad end-aline"
+                           style="padding:0;line-height:34px;">陪同人关系</label><span
+                    class="sign-left">:</span>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" v-model="consume.companionship">
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade in active martop" id="basic" v-show="isShow==true">
                 <div class="col-md-12 form-group clearfix text-left">
@@ -222,9 +274,7 @@
                     </button>
                 </div>
             </div>
-
         </div>
-
     </div>
 </template>
 
@@ -234,6 +284,8 @@
     import project from '../../common/Project.vue'
     import VisitState from '../../common/VisitState.vue'
     import ContinState from '../../common/VisitState.vue'
+    import DiseaseType from '../../common/DiseaseType.vue'
+    import CounseRoom from '../../common/CounseRoom.vue'
 
     export default {
         components: {
@@ -241,17 +293,12 @@
             emp,
             project,
             VisitState,
-            ContinState
+            ContinState,
+            DiseaseType,
+            CounseRoom
         },
         data() {
             return {
-                member: {
-                    memNum: '', //会员号
-                    memName: '', //会员名
-                    phone: '', //手机
-                    balance: '',
-                    counselorEmpId: '',
-                },
                 counselorList: [],
                 consume: {
                     memNum: '', //会员名
@@ -279,6 +326,14 @@
                     consumCount: '0', //消费次数
                     balance: '0',
                     piId: '',
+                    diseaseType: null,//咨询方向
+                    diseaseProblem: null,//咨询问题
+                    counseRoom: null,//咨询室
+                    actualBegDate: null,//实际开始时间
+                    actualEndDate: null,//实际结束时间
+                    cashId: null,//现金id
+                    accompany: null,//陪同人
+                    companionship: null,//陪同人关系
                 },
                 isShow: true,
                 consumeReceivable: '',
@@ -290,11 +345,14 @@
                     count: 0
                 },
                 //proList:[],//有剩余的课程信息
+                selectObj: {},
+                dateArr: []
             };
         },
         methods: {
             // Initialization consume’s content
             initData(param) {
+                $("input[name='radioGroup']").prop("checked", "");
                 this.consume = {
                     memNum: param.visId, //会员名
                     memName: param.visitorName,
@@ -329,6 +387,14 @@
                     receipt: null,//收据
                     visitState: null,//访问状态
                     continState: null,//续流状态
+                    diseaseType: null,//咨询方向
+                    diseaseProblem: null,//咨询问题
+                    counseRoom: null,//咨询室
+                    actualBegDate: null,//实际开始时间
+                    actualEndDate: null,//实际结束时间
+                    cashId: null,//现金id
+                    accompany: null,//陪同人
+                    companionship: null,//陪同人关系
                 }
 
                 this.sameProject = false
@@ -344,6 +410,7 @@
                 this.queryUnfinishedPro(param.visId)
                 this.$refs.VisitStateRef.getObj(1, 1)
                 this.$refs.ContinStateRef.getObj(1, 2)
+                this.selectObj = null
             },
             //咨询师
             counselorEmpChange: function (param) {
@@ -367,33 +434,14 @@
                     this.consume.proId = ""
                 } else {
                     this.consume.proId = param.proId
-                    this.consume.price = param.price
-                    this.consume.actualCount = param.frequency
-                    this.consume.discount = param.discount
-                    this.consume.receivable = param.price * param.frequency
-                    this.consume.realCross = param.price * param.frequency * param.discount / 100
-                    if (this.counselorList != null && this.counselorList.length > 0) {
-                        var isSame = 0
-                        // console.log("counselorList:" + JSON.stringify(this.counselorList))
-                        for (var i = 0; i < this.counselorList[0].proList.length; i++) {
-                            var project = this.counselorList[0].proList[i]
-                            if (this.consume.proId == project.proId) {
-                                this.isShow = false
-                                this.sameProject = true
-                                this.consume.piId = project.piId
-                                this.consume.consumedCount = project.actualCount - project.consumCount
-                                this.$refs.emp.setEmp(project.empId)
-                                isSame = 1
-                                break;
-                            }
-
-                        }
-                        if (isSame == 0) {
-                            this.isShow = true
-                            this.consume.consumCount = this.consume.consumCount + 1
-                            this.consume.piId = ''
-                        }
-                    }
+                    this.consume.price = param.price //折前单价
+                    //this.consume.disPrice = param.price * param.discount / 100 //折后单价
+                    this.consume.actualCount = param.frequency //实际次数
+                    this.consume.discount = param.discount //折扣
+                    this.consume.receivable = param.totalPrice //应交
+                    this.consume.realCross = param.discouAmount //实缴
+                    this.consume.proType = param.proType
+                    this.cash.select = '0'
                 }
             },
             //feedback employee information
@@ -407,21 +455,10 @@
 
             //the event of addtional button
             addFee() {
-                console.log('the event of addtional button')
-
-                this.consume.memName = this.member.memName
-                this.consume.phone = this.member.phone
-
                 if (this.isBlank(this.consume.memName)) {
                     alert("姓名不能为空")
                     return
                 }
-                console.log('phone:' + this.consume.phone)
-                if (!this.phoneNum(this.consume.phone)) {
-                    alert("手机号输入不正确，请重新输入")
-                    return
-                }
-
                 if (this.isBlank(this.consume.counselor)) {
                     alert("咨询师不能为空")
                     return
@@ -434,15 +471,26 @@
                     alert("维护人不能为空")
                     return
                 }
-                console.log('sameProject:' + this.sameProject)
-                if (this.sameProject == true) {
-                    if (this.isBlank(this.consume.consumCount)
-                        || this.consume.consumCount <= 0 || this.consume.consumCount > this.consume.consumedCount) {
-                        alert("此次消费不能为空，且不能大于剩余课程次数,也必须大于0")
-                        return
+                if (this.isBlank(this.consume.consumCount)) {
+                    alert("消费课程不可为空!");
+                    return;
+                }
+                //选择了已购买的项目
+                if (this.selectObj != null) {
+                    if (!this.isBlank(this.selectObj.counselor) && this.selectObj.counselor != this.consume.counselor) {
+                        alert("你选择的咨询师与已购买项目中选择的咨询师不一致!");
+                        return;
                     }
-                } else {
-                    this.consume.consumCount = this.consume.actualCount
+                    if (this.selectObj.proId != this.consume.proId) {
+                        alert("你选择的课程与已购买项目中选择的课程不一致!");
+                        return;
+                    }
+                    //if (this.consume.consumCount )
+                    this.consume.piId = this.selectObj.piId
+                }
+                if (this.dateArr.length > 1) {
+                    this.consume.actualBegDate = this.dateArr[0];
+                    this.consume.actualEndDate = this.dateArr[1];
                 }
 
                 var url = this.url + '/purchasedItemsAction/consum'
@@ -459,13 +507,12 @@
                     var res = response.data
                     console.log(res)
                     if (res.retCode == '0000') {
-
                         this.$router.push({
                             name: 'SettleSummary',
                         });
                         this.jumpLeft(2);
-                        $("#addCustom").modal("hide")
-                        this.$emit('func2', 'SettleSummary')
+                        this.closeCurrentPage()
+                        //this.$emit('func2', 'SettleSummary')
                         alert(res.retMsg)
                     } else {
                         alert(res.retMsg)
@@ -475,7 +522,8 @@
                 });
             },
             closeCurrentPage() {
-                $("#addCustom").modal("hide")
+                this.$emit('closeCurrentPage')
+                //$("#addCustom").modal("hide")
                 console.log('关闭添加患者界面')
             },
             jumpLeft(index) {
@@ -484,7 +532,6 @@
                 $("#aside-menu li").eq(index).addClass("li-active");
                 $("#aside-menu li").eq(index).find("i.fa-table").addClass("fa-circle")
             },
-
             //Query member's information based on the memNum
             checkMemNum(param) {
                 console.log('checkMemNum')
@@ -529,7 +576,6 @@
                             this.$refs.counselorEmp.setEmp(counselorEmpId)
                         }
                     }
-
                 }).catch((error) => {
                     console.log('会员查询请求失败')
                 });
@@ -563,15 +609,18 @@
             //单选框选中处理
             radioClick(e, item) {
                 if (this.clickItemObj.itemId == 0) {
+                    this.selectObj = item;
                     this.clickItemObj.itemId = item.piId
                     this.clickItemObj.count = this.clickItemObj.count + 1
                 } else {
                     if (this.clickItemObj.itemId == item.piId) {
                         if (this.clickItemObj.count % 2 == 0) {
                             e.target.checked = false
+                            this.selectObj = null
                         }
                         this.clickItemObj.count = this.clickItemObj.count + 1
                     } else {
+                        this.selectObj = item
                         this.clickItemObj.itemId = item.piId
                         this.clickItemObj.count = 0
                     }
@@ -603,6 +652,16 @@
                 if (this.isBlank(param)) this.consume.continState = null
                 else this.consume.continState = param.vsId
             },
+            //咨询方向切换
+            diseaseTypeChange(param) {
+                if (this.isBlank(param)) this.consume.diseaseType = null
+                else this.consume.diseaseType = param.dtId
+            },
+            //咨询室切换
+            counseRoomChange(param) {
+                if (this.isBlank(param)) this.consume.counseRoom = null
+                else this.consume.counseRoom = param.chaId
+            }
         }
 
     }

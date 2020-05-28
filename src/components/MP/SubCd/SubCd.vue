@@ -184,10 +184,11 @@
                 if (this.isBlank(this.cash.phone)) {
                     alert("手机号不能为空")
                     return
-                } else if (reg.test(this.cash.phone) == false) {
-                    alert("不是完整的11位手机号或者正确的座机号！");
-                    return
                 }
+                //else if (reg.test(this.cash.phone) == false) {
+                //     alert("不是完整的11位手机号或者正确的座机号！");
+                //     return
+                // }
 
                 if (this.isBlank(this.cash.money)) {
                     alert("定金不能为空")
@@ -223,7 +224,8 @@
                     var res = response.data
                     if (res.retCode == '0000') {
                         alert(res.retMsg)
-                        this.$emit('certainAction')
+                        this.closeCurrentPage()
+                        //this.$emit('certainAction')
                     } else {
                         alert(res.retMsg)
                     }
@@ -232,7 +234,8 @@
                 });
             },
             closeCurrentPage() {
-                $("#cdContent").modal("hide")
+                this.$emit('closeCurrentPage')
+                //$("#cdContent").modal("hide")
                 console.log('close the flowWater rule')
             },
         }

@@ -3,7 +3,7 @@
 
     <div class="wraper">
         <div class="col-md-12 col-lg-12 main-title">
-            <h1 class="titleCss">课程管理</h1>
+            <h1 class="titleCss">产品管理</h1>
         </div>
         <div class="row" style="margin-top: 40px;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
@@ -17,7 +17,7 @@
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">课程名称</p><span
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">产品名称</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
@@ -97,8 +97,8 @@
                             <th class="text-center">店铺</th>
                             <th class="text-center">咨询师</th>
                             <th class="text-center">咨询师等级</th>
-                            <th class="text-center">课程名称</th>
-                            <th class="text-center">项目类型</th>
+                            <th class="text-center">产品名称</th>
+                            <th class="text-center">产品类型</th>
                             <th class="text-center">总价(¥)</th>
                             <th class="text-center">优惠后总价(¥)</th>
                             <th class="text-center">单价(¥)</th>
@@ -293,7 +293,7 @@
                     self.fixedHeader = false
                 }
             },
-            //项目类型转换
+            //产品类型转换
             transforProType(proType) {
                 if (proType == 0) return '普通'
                 else if (proType == 1) return '月卡'

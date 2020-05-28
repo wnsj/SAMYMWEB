@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-md-6 form-group clearfix">
                         <label class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">课程</label><span
+                               style="padding:0;line-height:34px;">产品</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
                             <project ref="project" @projectChange="projectChange"></project>
@@ -599,7 +599,7 @@
                     return
                 }
                 // 				if(this.isBlank(this.orderClick.proId) || this.orderClick.proId=='0'){
-                // 					alert('咨询师课程不能为空')
+                // 					alert('咨询师产品不能为空')
                 // 					return
                 // 				}
                 if (!this.isBlank(this.orderClick.appDate)) {

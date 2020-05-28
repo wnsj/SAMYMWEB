@@ -10,16 +10,16 @@
                 </h2>
             </div>
             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-right">
-                <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，会员管理系统</p>
+                <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，会员管理系统</p><!-- 
                 <button class="btn btn-warning m_r_10" style="margin-top: 40px;" v-on:click="chargeManager()"
-                        v-has="'SAMY:MP:CoursePurchase'">课程购买
+                        v-has="'SAMY:MP:CoursePurchase'">产品购买
                 </button>
                 <button class="btn btn-success m_r_10" style="margin-top: 40px;" v-on:click="customAction()"
-                        v-has="'SAMY:MP:CourseConsum'">课程消费
+                        v-has="'SAMY:MP:CourseConsum'">产品消费
                 </button>
                 <button class="btn btn-danger m_r_10" style="margin-top: 40px;" v-on:click="refundAction()"
-                        v-has="'SAMY:MP:CourseRefund'">课程退费
-                </button>
+                        v-has="'SAMY:MP:CourseRefund'">产品退费
+                </button> -->
                 <button class="btn btn-danger m_r_10" style="margin-top: 40px;" v-on:click="modPwd()">修改密码</button>
                 <button class="btn btn-default m_r_10" style="margin-top: 40px;" v-on:click="loginOut()">退出</button>
             </div>
@@ -62,7 +62,7 @@
                                 </router-link>
                             </dd>
                             <dd @click="addCheck('Charge')" v-bind:class="{'li-active':onString=='Charge'}">
-                                <router-link to="/MP/Charge"><i class="fa" aria-hidden="true">已购课程管理</i></router-link>
+                                <router-link to="/MP/Charge"><i class="fa" aria-hidden="true">已购产品管理</i></router-link>
                             </dd>
                             <dd @click="addCheck('Order')" v-bind:class="{'li-active':onString=='Order'}">
                                 <router-link to="/MP/Order"><i class="fa" aria-hidden="true">预约管理</i></router-link>

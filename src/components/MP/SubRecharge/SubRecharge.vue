@@ -3,7 +3,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-            <h2 id="myModalLabel" class="modal-title">课程购买</h2>
+            <h2 id="myModalLabel" class="modal-title">产品购买</h2>
         </div>
         <div class="modal-body  pos_r">
             <div class="tab-pane fade in active martop" id="basic">
@@ -35,15 +35,15 @@
                 </div>
                 <div v-show="unfinishedProList.length > 0">
                     <label for="cyname" class="col-md-4 control-label text-right nopad end-aline"
-                           style="padding:0;line-height:34px;">已购项目</label><span
+                           style="padding:0;line-height:34px;">已购产品</label><span
                     class="sign-left">:</span>
                     <table class="table table-bordered table-hover">
                         <thead class="datathead">
                         <tr>
                             <td></td>
-                            <td>项目名</td>
+                            <td>产品名</td>
                             <td>咨询师名</td>
-                            <td>项目类型</td>
+                            <td>产品类型</td>
 							<td>余额</td>
                         </tr>
                         </thead>
@@ -66,10 +66,10 @@
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-12" v-show="member.balance>0">
-                    <p class="tips">* 预购余额：只是用来作为变更咨询师时，购买项目使用；此会员购买项目咨询师未发生变更，此项不做任何参考</p>
+                    <p class="tips">* 预购余额：只是用来作为变更咨询师时，购买产品使用；此会员购买产品咨询师未发生变更，此项不做任何参考</p>
                 </div>
                 <div class="col-md-12 form-group clearfix text-left">
-                    <h4 id="myModalLabel" class="modal-title">课程：</h4>
+                    <h4 id="myModalLabel" class="modal-title">产品：</h4>
                 </div>
                 <div class="col-md-6 form-group clearfix">
                     <label class="col-md-4 control-label text-right nopad end-aline"
@@ -81,7 +81,7 @@
                 </div>
                 <div class="col-md-6 form-group clearfix">
                     <label class="col-md-4 control-label text-right nopad end-aline"
-                           style="padding:0;line-height:34px;">课程</label><span
+                           style="padding:0;line-height:34px;">产品</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
                         <project ref="project" @projectChange="projectChange"></project>
@@ -300,14 +300,14 @@
                     appNum: '',
                     receivable: 0, //应交(折前)
                     realCross: '', //实缴（折后）
-                    proId: '', //项目id
+                    proId: '', //产品id
                     discount: '', //折扣
                     price: '', //折前单价
                     disPrice: '', //折后单价
                     totalCount: 0, //总次数
                     actualCount: 0, //实际次数
                     giveCount: 0, //赠送次数
-                    giveProId: 0, //赠送项目
+                    giveProId: 0, //赠送产品
                     giveMoney: 0, //赠送金额
                     counselor: '', //咨询师id
                     empId: '', //咨询师助理id
@@ -359,14 +359,14 @@
                     appNum: '',//预约号
                     receivable: '0.0', //应交
                     realCross: '0.0', //实缴
-                    proId: '', //项目id
+                    proId: '', //产品id
                     discount: '0', //折扣
                     price: '0.0', //折前单价
                     disPrice: '', //折后单价
                     totalCount: 0, //总次数
                     actualCount: 0, //实际次数
                     giveCount: 0, //赠送次数
-                    giveProId: 0, //赠送项目
+                    giveProId: 0, //赠送产品
                     giveMoney: '0.0', //赠送金额
                     counselor: '', //咨询师id
                     empId: '', //咨询师助理id
@@ -416,7 +416,7 @@
                     this.consumeReceivable = ''
                 }
             },
-            //课程
+            //产品
             projectChange: function (param) {
                 // console.log(JSON.stringify(param))
                 if (this.isBlank(param)) {
@@ -490,7 +490,7 @@
                 this.consume.cashId = this.cash.cashId;
                 this.consume.cashMoney = this.cash.select;
                 // if (!this.isBlank(this.member.counselorEmpId) && this.member.counselorEmpId != this.consume.counselor) {
-                //     if (!confirm("您给客户选择了不同咨询师的课程，是否继续？如果继续，将使用之前咨询师课程的余额进行购买新的项目，否则，请取消！！！")) {
+                //     if (!confirm("您给客户选择了不同咨询师的产品，是否继续？如果继续，将使用之前咨询师产品的余额进行购买新的产品，否则，请取消！！！")) {
                 //         return
                 //     }
                 // }
@@ -507,7 +507,7 @@
                     //this.consume.counselor = null
                 }
                 if (this.isBlank(this.consume.proId)) {
-                    alert("购买课程不能为空")
+                    alert("购买产品不能为空")
                     return
                 }
                 if (this.isBlank(this.consume.empId)) {
@@ -518,7 +518,7 @@
                     this.consume.cashId = null
                 }
                 // if (1 < this.projectObj.proType || this.projectObj.proType > 5) {
-                //     alert("非月、季、半年、年卡、测评项目咨询师必须选择!")
+                //     alert("非月、季、半年、年卡、测评产品咨询师必须选择!")
                 //     return;
                 // } else {
                 //     this.consume.counselor = null
@@ -619,7 +619,7 @@
                             this.$refs.counselorEmp.setEmp("")
                         }
                         if (this.counselorList.length > 0) {
-                            console.log("有未完成的项目")
+                            console.log("有未完成的产品")
                             // var counselorEmpId = this.counselorList[0].counselor
                             this.member.counselorEmpId = this.counselorList[0].counselor
                         }
@@ -684,7 +684,7 @@
                 if (this.isBlank(param)) this.consume.continState = null
                 else this.consume.continState = param.vsId
             },
-            //查询已购买课程
+            //查询已购买产品
             queryUnfinishedPro(param) {
                 if (this.isBlank(param)) return
                 var url = this.url + '/purchasedItemsAction/queryUnfinishedPro'
@@ -727,7 +727,7 @@
                     }
                 }
             },
-            //项目类型转换
+            //产品类型转换
             transforProType(proType) {
                 if (proType == 0) return '普通'
                 else if (proType == 1) return '月卡'

@@ -3,7 +3,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h2 id="myModalLabel" class="modal-title">课程退费</h2>
+			<h2 id="myModalLabel" class="modal-title">产品退费</h2>
 		</div>
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop" id="basic">
@@ -33,7 +33,7 @@
 					</div>
 					
 					<div class="col-md-12 form-group clearfix text-left">
-						<h4 id="myModalLabel" class="modal-title">课程：</h4>
+						<h4 id="myModalLabel" class="modal-title">产品：</h4>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
@@ -43,7 +43,7 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">课程</label><span
+						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">产品</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<select class="form-control" v-model="proId"  v-on:click="projectChange(proId)">
@@ -170,7 +170,7 @@
 					memNum: '',//会员号
 					memName: '',//会员名
 					phone: '',//手机
-					piId:'',//课程Id
+					piId:'',//产品Id
 					realCross:'',//应退金额
 					balance:'',//违约金
 				},
@@ -226,7 +226,7 @@
 					memNum: '',//会员号
 					memName: '',//会员名
 					phone: '',//手机
-					piId:'',//课程Id
+					piId:'',//产品Id
 					realCross:'',//应退金额
 					balance:'',//违约金
 					operatorId:this.accountId(),//操作人
@@ -266,7 +266,7 @@
 				}
 				return null
 			},
-			//课程
+			//产品
 			projectChange: function(param) {
 				
 				if (this.isBlank(param)) {
@@ -310,7 +310,7 @@
 					return
 				}
 				if (this.isBlank(this.consume.piId)) {
-					alert("课程不能为空")
+					alert("产品不能为空")
 					return
 				}else{
 					this.refund.piId = this.consume.piId
@@ -396,7 +396,7 @@
 							this.consume.counselorName = this.counselorList[0].counselorName
 							this.refund.counselor = this.counselorList[0].counselor
 						}else{
-							alert("无可退费课程")
+							alert("无可退费产品")
 						}
 					}
 			

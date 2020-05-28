@@ -44,7 +44,7 @@
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询方向</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<dt ref="dt" @objectChange="dtChange"></dt>
+							<DiseaseType ref="DiseaseType" @objectChange="dtChange"></DiseaseType>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
@@ -53,12 +53,18 @@
 							<emp ref="emp" @employeeChange="empChange"></emp>
 						</div>
 					</div>
-					<!-- <div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">初诊类型</label><span class="sign-left">:</span>
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨客判定</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<visState ref="visState" @objChange = "backObjChange"></visState>
+							<visStateJudge ref="visStateJudge" @objectChange = "judgeChange"></visStateJudge>
 						</div>
-					</div> -->
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">续流状态</label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<visStateFlow ref="visStateFlow" @objectChange = "flowChange"></visStateFlow>
+						</div>
+					</div>
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">行业</label><span class="sign-left">:</span>
 						<div class="col-md-8">
@@ -110,9 +116,7 @@
 					</div>
 				</form>
 			</div>
-	
 		</div>
-		
 	</div>
 </template>
 
@@ -120,8 +124,9 @@
 	import ind from '../../common/Industry.vue'
 	import cha from '../../common/Channel.vue'
 	import emp from '../../common/Employee.vue'
-	// import visState from '../../common/VisitState.vue'
-	import dt from '../../common/DiseaseType.vue'
+	import visStateJudge from '../../common/VisitState.vue'
+	import visStateFlow from '../../common/VisitState.vue'
+	import DiseaseType from '../../common/DiseaseType.vue'
 	
 	import dPicker from 'vue2-datepicker'
 	export default {
@@ -130,8 +135,9 @@
 			ind,
 			cha,
 			emp,
-			dt,
-			// visState,
+			DiseaseType,
+			visStateJudge,
+			visStateFlow,
 		},
 		data() {
 			return {
@@ -140,6 +146,8 @@
 					sex:'1',
 					phone:'',
 					chaId:'',
+					vsIdJudge:'',
+					vsIdFlow:'',
 					consDirection:'',
 					empId:'',
 					// visType:'1',
@@ -158,33 +166,39 @@
 		methods:{
 			// Initialization visitor’s content
 			initData(param,visitorContent) {
+				this.$refs.visStateJudge.getObj('1','1')
+				this.$refs.visStateFlow.getObj('1','2')
+				this.visitor={
+					visitorName:'',
+					sex:'1',
+					phone:'',
+					chaId:'',
+					vsIdJudge:'0',
+					vsIdFlow:'0',
+					consDirection:'',
+					dtId:'',
+					empId:'',
+					visType:'1',
+					indId:'0',
+					storeId:this.storeId(),
+					urgentName:'',
+					urgentPhone:'',
+					vNum:'',
+					email:'',
+					address:'',
+					marker:'',
+				}
 				if(param=='add'){
 					console.log('Initialization visitor’s content, which adds visitor')
 					
 					this.title='新增'
-					
-					this.visitor={
-						visitorName:'',
-						sex:'1',
-						phone:'',
-						chaId:'',
-						consDirection:'',
-						dtId:'',
-						empId:'',
-						visType:'1',
-						indId:'',
-						storeId:this.storeId(),
-						urgentName:'',
-						urgentPhone:'',
-						vNum:'',
-						email:'',
-						address:'',
-						marker:'',
-					}
 					// this.$refs.visState.getObj('1','1')
 					this.$refs.cha.setChaId('0')
-					this.$refs.ind.setInd('0')
+					this.$refs.DiseaseType.setObj('0')
 					this.$refs.emp.setEmp("")
+					this.$refs.visStateJudge.setObj('0')
+					this.$refs.visStateFlow.setObj('0')
+					this.$refs.ind.setInd('0')
 					
 				}else if(param=='modify'){
 					console.log('Initialization visitor’s content, which modifies visitor')
@@ -193,12 +207,29 @@
 					// console.log(JSON.stringify(visitorContent))
 					Object.assign(this.visitor,visitorContent)
 					this.$refs.cha.setChaId(this.visitor.chaId)
-					this.$refs.ind.setInd(this.visitor.indId)
+					this.$refs.DiseaseType.setObj(this.visitor.dtId)
 					this.$refs.emp.setEmp(this.visitor.empId)
+					this.$refs.visStateJudge.setObj(this.visitor.vsIdJudge)
+					this.$refs.visStateFlow.setObj(this.visitor.vsIdFlow)
+					this.$refs.ind.setInd(this.visitor.indId)
+				}
+			},
+			judgeChange:function(param){
+				// console.log(JSON.stringify(param))
+				if(this.isBlank(param)){
+					this.visitor.vsIdJudge=""
+				}else{
+					this.visitor.vsIdJudge=param.vsId
+				}
+			},
+			flowChange:function(param){
+				if(this.isBlank(param)){
+					this.visitor.vsIdFlow=""
+				}else{
+					this.visitor.vsIdFlow=param.vsId
 				}
 			},
 			dtChange:function(param){
-				console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.visitor.dtId=""
 				}else{
@@ -244,12 +275,12 @@
 				console.log('the event of addtional button')
 				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 			
-				
+				console.log(JSON.stringify(this.visitor))
 				if(this.isBlank(this.visitor.visitorName)){
 					alert("咨客姓名不能为空")
 					return
 				}
-				if(this.isBlank(this.visitor.consDirection)){
+				if(this.isBlank(this.visitor.dtId)){
 					alert("咨客的咨询方向不能为空")
 					return
 				}
@@ -265,19 +296,12 @@
 					alert("联系人电话不能为空")
 					return
 				}else if(reg.test(this.visitor.phone)==false){
-					alert("不是完整的11位手机号或者正确的座机号！");
-					return
-				}
-				if(this.isBlank(this.visitor.urgentPhone)){
-					alert("联系人电话不能为空")
-					return
-				}else if(reg.test(this.visitor.urgentPhone)==false){
-					alert("不是完整的11位手机号或者正确的座机号！");
-					return
-				}
-				if(this.visitor.address.length>20){
-					alert('地址的长度不能超过20个字')
-					return
+					if(this.title=='新增'){
+						alert("不是完整的11位手机号或者正确的座机号！");
+						return
+					}else{
+						this.visitor.phone=''
+					}
 				}
 				if(this.visitor.address.length>100){
 					alert('地址的长度不能超过100个字')
@@ -303,7 +327,6 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('certainAction')

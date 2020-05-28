@@ -209,7 +209,7 @@
                             <td class="text-center">{{item.createTime | dateFormatFilter("YYYY-MM-DD")}}</td>
                             <td class="text-center">{{item.marker}}</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-warning" v-on:click="tranferMember(item)">
+                                <button type="button" class="btn btn-warning" v-on:click="updateVisitorShiftMember(item)">
                                     {{item.isMem==1?"已转会员":"未转会员"}}
                                 </button>
                             </td>
@@ -260,16 +260,16 @@
             </div>
         </div>
         <div class="row row_edit">
-            <div class="modal fade" id="srContent">
+            <div class="modal fade" id="rechargeContent">
                 <div class="modal-dialog">
-                    <sr ref='sr' @closeCurrentPage='feedBack'></sr>
+                    <recharge ref='recharge' @closeCurrentPage='feedBack'></recharge>
                 </div>
             </div>
         </div>
         <div class="row row_edit">
-            <div class="modal fade" id="asoContent">
+            <div class="modal fade" id="addSubOrderContent">
                 <div class="modal-dialog">
-                    <aso ref='aso' @closeCurrentPage='feedBack'></aso>
+                    <addSubOrder ref='addSubOrder' @closeCurrentPage='feedBack'></addSubOrder>
                 </div>
             </div>
         </div>
@@ -294,8 +294,8 @@
 
     import custom from '../MP/SubRecharge/Custom.vue'
     import refund from '../MP/SubRecharge/Refund.vue'
-    import sr from '../MP/SubRecharge/SubRecharge.vue'
-    import aso from '../MP/SubOrder/AddSubOrder.vue'
+    import recharge from '../MP/SubRecharge/SubRecharge.vue'
+    import addSubOrder from '../MP/SubOrder/AddSubOrder.vue'
     import subCd from '../MP/SubCd/SubCd.vue'
 
 
@@ -316,8 +316,8 @@
             cha,
             custom,
             refund,
-            sr,
-            aso,
+            recharge,
+            addSubOrder,
             subCd,
         },
         data() {
@@ -379,49 +379,48 @@
                     $("#memContent").modal('show')
                 }
             },
-
-            employeeChange(param) {
-                if (this.isBlank(param)) {
-                    this.empId = ""
-                } else {
-                    this.empId = param.empId
-                }
-            },
-            chaChange(param) {
-                if (this.isBlank(param)) {
-                    this.chaId = ""
-                } else {
-                    this.chaId = param.chaId
-                }
-            },
-            storeChange(param) {
-                if (this.isBlank(param)) {
-                    this.storeId = ""
-                } else {
-                    this.storeId = param.storeId
-                }
-            },
-            feedBack() {
-                this.checkVisitor(1)
-                $("#subCdContent").modal('hide')
-                $("#asoContent").modal('hide')
-                $("#srContent").modal('hide')
-                $("#refundContent").modal('hide')
-                $("#customContent").modal('hide')
-                $("#visContent").modal('hide')
-                $("#memContent").modal('hide')
-            },
-            //check the list of member
-            checkVisitor(page) {
-                console.log('checkMember')
-                var url = this.url + '/visitorAction/queryVisitor'
-                if (this.isBlank(this.begDate)) {
-                    this.begDate = this.moment(this.begDate, "YYYY-MM-DD 00:00:00")
-                }
-                if (this.isBlank(this.endDate)) {
-                    this.endDate = this.moment(this.endDate, "YYYY-MM-DD 23:59:59")
-                }
-
+			employeeChange(param) {
+				if (this.isBlank(param)) {
+					this.empId = ""
+				} else {
+					this.empId = param.empId
+				}
+			},
+			chaChange(param) {
+				if (this.isBlank(param)) {
+					this.chaId = ""
+				} else {
+					this.chaId = param.chaId
+				}
+			},
+			storeChange(param) {
+				if (this.isBlank(param)) {
+					this.storeId = ""
+				} else {
+					this.storeId = param.storeId
+				}
+			},
+			feedBack() {
+			    this.checkVisitor(1)
+			    $("#subCdContent").modal('hide')
+			    $("#addSubOrderContent").modal('hide')
+			    $("#rechargeContent").modal('hide')
+			    $("#refundContent").modal('hide')
+			    $("#customContent").modal('hide')
+			    $("#visContent").modal('hide')
+			    $("#memContent").modal('hide')
+			},
+			//check the list of member
+			checkVisitor(page) {
+				console.log('checkMember')
+				var url = this.url + '/visitorAction/queryVisitor'
+				if (!this.isBlank(this.begDate)) {
+					this.begDate = this.moment(this.begDate, "YYYY-MM-DD 00:00:00")
+				}
+				if (!this.isBlank(this.endDate)) {
+					this.endDate = this.moment(this.endDate, "YYYY-MM-DD 23:59:59")
+				}
+			
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -430,17 +429,18 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        storeId: this.storeId,
-                        memNum: this.memNum,
-                        vistorName: this.vistorName,
-                        phone: this.phone,
-                        visType: this.visType,
-                        chaId: this.chaId,
-                        empId: this.empId,
-                        isMem: this.isMem,
-                        begDate: this.begDate,
-                        endDate: this.endDate,
-                        birthday: this.birthday,
+                    	storeId: this.storeId,
+                    	memNum: this.memNum,
+                    	vistorName: this.vistorName,
+                    	phone: this.phone,
+                    	visType: this.visType,
+                    	chaId: this.chaId,
+                    	empId: this.empId,
+                    	isMem: this.isMem,
+                    	begDate: this.begDate,
+                    	endDate: this.endDate,
+                    	birthday: this.birthday,
+                    	isHidePhone:'1',
 
                         page: page.toString(),
                         pageSize: this.pageSize
@@ -458,11 +458,52 @@
                     } else {
                         alert(res.retMsg)
                     }
-
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
             },
+			//添加会员号
+			updateVisitorShiftMember(item) {
+				var url = this.url + '/visitorAction/updateVisitorShiftMember'
+				if (this.isBlank(item.visitorName)) {
+					alert('咨客姓名不能为空')
+					return
+				}
+				if (this.isBlank(item.phone)) {
+					alert('咨客手机号不能为空')
+					return
+				}
+				if (this.isBlank(item.visId)) {
+					alert('咨客ID不能为空')
+					return
+				}
+				if (!this.isBlank(item.memNum)) {
+					alert('会员号已存在，无需重复生成！')
+					return
+				}
+			
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: item,
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						this.checkVisitor(1)
+						alert(res.retMsg)
+					} else {
+						alert(res.retMsg)
+					}
+			
+				}).catch((error) => {
+					console.log('转会员请求失败')
+				});
+			},
             handleScroll(e) {
                 var self = this
                 var etop = e.target.scrollTop
@@ -491,39 +532,38 @@
             editorClose() {
                 $("#editorContent").modal('hide')
             },
-            btnAction(index) {
-                if (this.checkedValue > -1) {
-                    this.objectContent = this.visitorList[this.checkedValue]
-                } else {
-                    this.objectContent = ''
-                }
-                switch (index) {
-                    case '1':
-                        this.$refs.sr.initData('add', this.objectContent)
-                        console.log(JSON.stringify(this.objectContent))
-                        $("#srContent").modal('show')
-                        break;
-                    case '2':
-                        this.$refs.custom.initData(this.objectContent)
-                        $("#customContent").modal('show')
-                        break;
-                    case '3':
-                        console.log(JSON.stringify(this.objectContent))
-                        this.$refs.subCd.initData('add', this.objectContent)
-                        $("#subCdContent").modal('show')
-                        break;
-                    case '4':
-                        this.$refs.aso.initData('add', this.objectContent)
-                        $("#asoContent").modal('show')
-                        break;
-                    case '5':
-                        this.$refs.refund.initData('add', this.objectContent)
-                        $("#refundContent").modal('show')
-                        break;
-                    default:
-                        break;
-                }
-            },
+			btnAction(index) {
+				if(this.checkedValue>-1){
+					this.objectContent = this.visitorList[this.checkedValue]
+				}else{
+					this.objectContent=''
+				}
+				switch (index) {
+					case '1':
+						this.$refs.recharge.initData('add', this.objectContent)
+						$("#rechargeContent").modal('show')
+						break;
+					case '2':
+						this.$refs.custom.initData(this.objectContent)
+						// console.log(JSON.stringify(this.objectContent))
+						$("#customContent").modal('show')
+						break;
+					case '3':
+						this.$refs.subCd.initData('add', this.objectContent)
+						$("#subCdContent").modal('show')
+						break;
+					case '4':
+						this.$refs.addSubOrder.initData('add', this.objectContent)
+						$("#addSubOrderContent").modal('show')
+						break;
+					case '5':
+						this.$refs.refund.initData('add', this.objectContent)
+						$("#refundContent").modal('show')
+						break;
+					default:
+						break;
+				}
+			},
         },
         mounted() {
             window.addEventListener('scroll', this.handleScroll, true);

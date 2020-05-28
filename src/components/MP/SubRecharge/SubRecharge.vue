@@ -44,6 +44,7 @@
                             <td>项目名</td>
                             <td>咨询师名</td>
                             <td>项目类型</td>
+							<td>余额</td>
                         </tr>
                         </thead>
                         <tbody>
@@ -52,6 +53,7 @@
                             <td>{{item.proName}}</td>
                             <td>{{item.counselorName}}</td>
                             <td>{{transforProType(item.proType)}}</td>
+							<td>{{item.balance}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -241,7 +243,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-6 clearfix">
                     <label for="cyname" class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">应交总额</label><span
@@ -268,6 +269,7 @@
 </template>
 
 <script>
+
     import dPicker from 'vue2-datepicker'
     import emp from '../../common/Employee.vue'
     import project from '../../common/Project.vue'
@@ -350,7 +352,6 @@
                 }
                 this.projectObj = {}
                 $("input[name='radioGroup']").prop("checked", "");
-                console.log(JSON.stringify(param))
                 this.consume = {
                     memNum: param.visId, //会员名
                     memName: param.visitorName,

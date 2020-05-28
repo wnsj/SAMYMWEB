@@ -77,7 +77,7 @@
                            style="padding:0;line-height:34px;">课程</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <project ref="project" @projectChange="projectChange"></project>
+                        <project ref="project" @projectChange="projectChange" :disabled="projectFlag"></project>
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
@@ -346,7 +346,8 @@
                 },
                 //proList:[],//有剩余的课程信息
                 selectObj: {},
-                dateArr: []
+                dateArr: [],
+                projectFlag:false,
             };
         },
         methods: {
@@ -411,6 +412,7 @@
                 this.$refs.VisitStateRef.getObj(1, 1)
                 this.$refs.ContinStateRef.getObj(1, 2)
                 this.selectObj = null
+                this.projectFlag = false
             },
             //咨询师
             counselorEmpChange: function (param) {
@@ -418,8 +420,10 @@
                     this.consume.counselor = ""
                 } else {
                     this.consume.counselor = param.empId
-                    this.$refs.project.setEmpId(this.consume.counselor)
-                    this.$refs.project.setProject("")
+                    if (!this.projectFlag){
+                        this.$refs.project.setEmpId(this.consume.counselor)
+                        this.$refs.project.setProject(0)
+                    }
                     this.consume.price = '0'
                     this.consume.actualCount = '0'
                     this.consume.discount = '0'
@@ -456,11 +460,11 @@
             //the event of addtional button
             addFee() {
                 if (this.isBlank(this.consume.memName)) {
-                    alert("姓名不能为空")
+                    alert("姓名不能为空!")
                     return
                 }
                 if (this.isBlank(this.consume.counselor)) {
-                    alert("咨询师不能为空")
+                    alert("咨询师不能为空!")
                     return
                 }
                 if (this.isBlank(this.consume.proId)) {
@@ -468,7 +472,7 @@
                     return
                 }
                 if (this.isBlank(this.consume.empId)) {
-                    alert("维护人不能为空")
+                    alert("维护人不能为空!")
                     return
                 }
                 if (this.isBlank(this.consume.consumCount)) {
@@ -477,10 +481,10 @@
                 }
                 //选择了已购买的项目
                 if (this.selectObj != null) {
-                    if (!this.isBlank(this.selectObj.counselor) && this.selectObj.counselor != this.consume.counselor) {
-                        alert("你选择的咨询师与已购买项目中选择的咨询师不一致!");
-                        return;
-                    }
+                    // if (!this.isBlank(this.selectObj.counselor) && this.selectObj.counselor != this.consume.counselor) {
+                    //     alert("你选择的咨询师与已购买项目中选择的咨询师不一致!");
+                    //     return;
+                    // }
                     if (this.selectObj.proId != this.consume.proId) {
                         alert("你选择的课程与已购买项目中选择的课程不一致!");
                         return;
@@ -611,6 +615,8 @@
                 if (this.clickItemObj.itemId == 0) {
                     this.selectObj = item;
                     this.clickItemObj.itemId = item.piId
+                    this.$refs.project.setEmpId(item.counselor)
+                    this.$refs.project.setProject(item.proId)
                     this.clickItemObj.count = this.clickItemObj.count + 1
                 } else {
                     if (this.clickItemObj.itemId == item.piId) {
@@ -619,12 +625,17 @@
                             this.selectObj = null
                         }
                         this.clickItemObj.count = this.clickItemObj.count + 1
+                        this.$refs.project.setEmpId(item.counselor)
+                        this.$refs.project.setProject(item.proId)
                     } else {
                         this.selectObj = item
                         this.clickItemObj.itemId = item.piId
                         this.clickItemObj.count = 0
+                        this.$refs.project.setEmpId(item.counselor)
+                        this.$refs.project.setProject(item.proId)
                     }
                 }
+                this.projectFlag = e.target.checked
             },
             //项目类型转换
             transforProType(proType) {

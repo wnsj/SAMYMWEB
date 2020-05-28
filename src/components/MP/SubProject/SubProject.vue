@@ -209,29 +209,30 @@
                 console.log('the event of addtional button')
 
                 if (this.isBlank(this.project.proName)) {
-                    alert("课程名称不能为空")
+                    alert("课程名称不能为空!")
                     return
                 }
                 if (this.isBlank(this.project.empId)) {
-                    //alert("咨询师不能为空")
-                    this.project.empId = null
+                    alert("咨询师不能为空!")
+                    return
+                    //this.project.empId = null
                 }
                 if (this.isBlank(this.project.price) || this.project.price < 0) {
-                    alert("课时单价不能为空")
+                    alert("课时单价不能为空!")
                     return
                 }
                 if (this.isBlank(this.project.frequency)) {
-                    alert("课时不能为空")
+                    alert("课时不能为空!")
                     return
                 }
                 // if (this.isBlank(this.project.discount)) {
                 //     alert("折扣不能为空")
                 //     return
                 // }
-                if(this.project.proType == 0 && this.isBlank(this.project.empId)){
-                    alert("普通项目必须关联咨询师!")
-                    return;
-                }
+                // if(this.project.proType == 0 && this.isBlank(this.project.empId)){
+                //     alert("普通项目必须关联咨询师!")
+                //     return;
+                // }
                 switch (this.title) {
                     case '新增':
                         var url = this.url + '/projects/addProjectName'

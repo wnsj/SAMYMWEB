@@ -33,7 +33,7 @@
                         <input type="text" class="form-control" v-model="consume.phone" :disabled="isShow==true">
                     </div>
                 </div>
-                <div class="col-md-6 form-group clearfix" v-show="unfinishedProList.length > 0">
+                <div v-show="unfinishedProList.length > 0">
                     <label for="cyname" class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">已购项目</label><span
                     class="sign-left">:</span>
@@ -217,7 +217,6 @@
                             <input type="checkbox" v-model="isSelect" disabled="disabled"/><i class="bui-radios"></i>
                             预购抵扣
                         </label>
-
                     </div>
                 </div>
                 <div class="col-md-12 clearfix" v-show="cash.balance>0" style="padding:0;">
@@ -264,9 +263,7 @@
                     </button>
                 </div>
             </div>
-
         </div>
-
     </div>
 </template>
 
@@ -504,9 +501,9 @@
                     return
                 }
                 if (this.isBlank(this.consume.counselor)) {
-                    // alert("咨询师不能为空")
-                    // return
-                    this.consume.counselor = null
+                    alert("咨询师不能为空")
+                    return
+                    //this.consume.counselor = null
                 }
                 if (this.isBlank(this.consume.proId)) {
                     alert("购买课程不能为空")
@@ -519,17 +516,12 @@
                 if (this.isBlank(this.consume.cashId)) {
                     this.consume.cashId = null
                 }
-                if (1 < this.projectObj.proType || this.projectObj.proType > 5) {
-                    alert("非月、季、半年、年卡、测评项目咨询师必须选择!")
-                    return;
-                } else {
-                    this.consume.counselor = null
-                }
-                //发生转卡，进余额抵扣
-                if (this.clickItemObj.count % 2 != 0) {
-                    this.consume.piId = this.clickItemObj.itemId
-                }
-
+                // if (1 < this.projectObj.proType || this.projectObj.proType > 5) {
+                //     alert("非月、季、半年、年卡、测评项目咨询师必须选择!")
+                //     return;
+                // } else {
+                //     this.consume.counselor = null
+                // }
                 if (this.isBlank(this.consume.visitState)) {
                     alert("客户判定不能为空!")
                     return;
@@ -537,6 +529,11 @@
                 if (this.isBlank(this.consume.continState)) {
                     alert("续流状态不能为空!")
                     return;
+                }
+
+                //发生转卡，进余额抵扣
+                if (this.clickItemObj.count % 2 != 0) {
+                    this.consume.piId = this.clickItemObj.itemId
                 }
 
                 var url = this.url + '/purchasedItemsAction/purchasedItemsProject'

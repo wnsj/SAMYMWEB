@@ -190,7 +190,7 @@
 								<td class="text-center">{{item.createTime | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td class="text-center">{{item.marker}}</td>
 								<td class="text-center">
-									<button type="button" class="btn btn-warning" v-on:click="tranferMember(item)">
+									<button type="button" class="btn btn-warning" v-on:click="updateVisitorShiftMember(item)">
 										{{item.isMem==1?"已转会员":"未转会员"}}
 									</button>
 								</td>
@@ -391,10 +391,10 @@
 			checkVisitor(page) {
 				console.log('checkMember')
 				var url = this.url + '/visitorAction/queryVisitor'
-				if (this.isBlank(this.begDate)) {
+				if (!this.isBlank(this.begDate)) {
 					this.begDate = this.moment(this.begDate, "YYYY-MM-DD 00:00:00")
 				}
-				if (this.isBlank(this.endDate)) {
+				if (!this.isBlank(this.endDate)) {
 					this.endDate = this.moment(this.endDate, "YYYY-MM-DD 23:59:59")
 				}
 
@@ -438,6 +438,48 @@
 
 				}).catch((error) => {
 					console.log('请求失败处理')
+				});
+			},
+			//添加会员号
+			updateVisitorShiftMember(item) {
+				var url = this.url + '/visitorAction/updateVisitorShiftMember'
+				if (this.isBlank(item.visitorName)) {
+					alert('咨客姓名不能为空')
+					return
+				}
+				if (this.isBlank(item.phone)) {
+					alert('咨客手机号不能为空')
+					return
+				}
+				if (this.isBlank(item.visId)) {
+					alert('咨客ID不能为空')
+					return
+				}
+				if (!this.isBlank(item.memNum)) {
+					alert('会员号已存在，无需重复生成！')
+					return
+				}
+			
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: item,
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						this.checkVisitor(1)
+						alert(res.retMsg)
+					} else {
+						alert(res.retMsg)
+					}
+			
+				}).catch((error) => {
+					console.log('转会员请求失败')
 				});
 			},
 			handleScroll(e) {

@@ -12,12 +12,12 @@
 					<store ref='store' @storeChange='storeChange'></store>
 				</div>
 			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memNum"></div>
-			</div>
+			</div> -->
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
@@ -32,6 +32,14 @@
 				<div class="col-md-7 col-lg-7">
 					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
+			        <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span class="sign-left">:</span>
+			    </div>
+			    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+			        <emp ref="counlorEmp" @employeeChange="counlorEmpChange" v-on:change="selectHours()"></emp>
+			    </div>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 15px;">
@@ -50,15 +58,7 @@
 				</div>
 
 			</div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span class="sign-left">:</span>
-                </div>
-                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <emp ref="counlorEmp" @employeeChange="counlorEmpChange" v-on:change="selectHours()"></emp>
-                </div>
-            </div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-right:30px; padding-bottom:1.5%;">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px; padding-bottom:1.5%;">
 				<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 				 v-on:click="conditionCheck(1)">查询</button>
 			</div>
@@ -71,10 +71,10 @@
 						<table class="table table-bordered table-hover user-table" id="datatable">
 							<thead class="datathead">
 								<tr>
-									<th class="text-center">会员卡号</th>
+									<!-- <th class="text-center">会员卡号</th> -->
 									<th class="text-center">姓名</th>
-									<th class="text-center">手机号</th>
-									<th class="text-center">项目</th>
+									<!-- <th class="text-center">手机号</th> -->
+									<th class="text-center">产品名称</th>
 									<th class="text-center">单价</th>
 									<th class="text-center">课时(小时)</th>
 									<th class="text-center">折扣(%)</th>
@@ -85,9 +85,9 @@
 							</thead>
 							<tbody>
 								<tr v-for="(item2,index2) in consumeList" :key="index2">
-									<td>{{item2.memNum}}</td>
+									<!-- <td>{{item2.memNum}}</td> -->
 									<td>{{item2.memName}}</td>
-									<td>{{item2.phone}}</td>
+									<!-- <td>{{item2.phone}}</td> -->
 									<td>{{item2.proName}}</td>
 									<td>{{item2.price}}</td>
 									<td>{{item2.consumCount}}</td>

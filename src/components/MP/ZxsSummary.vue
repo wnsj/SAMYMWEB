@@ -42,7 +42,7 @@
                             <thead class="datathead">
                             <tr>
                                 <th class="text-center">咨询师姓名</th>
-                                <th class="text-center">课程名</th>
+                                <th class="text-center">产品名</th>
                                 <th class="text-center">会员卡号</th>
                                 <th class="text-center">消费者姓名</th>
                                 <th class="text-center">单价</th>

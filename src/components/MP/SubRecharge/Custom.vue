@@ -3,7 +3,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-            <h2 id="myModalLabel" class="modal-title">课程消费</h2>
+            <h2 id="myModalLabel" class="modal-title">产品消费</h2>
         </div>
         <div class="modal-body  pos_r">
             <div class="tab-pane fade in active martop" id="basic">
@@ -61,7 +61,7 @@
                     </table>
                 </div>
                 <div class="col-md-12 form-group clearfix text-left">
-                    <h4 id="myModalLabel" class="modal-title">课程：</h4>
+                    <h4 id="myModalLabel" class="modal-title">产品：</h4>
                 </div>
                 <div class="col-md-6 form-group clearfix">
                     <label class="col-md-4 control-label text-right nopad end-aline"
@@ -74,7 +74,7 @@
                 <div class="col-md-6 form-group clearfix">
 
                     <label class="col-md-4 control-label text-right nopad end-aline"
-                           style="padding:0;line-height:34px;">课程</label><span
+                           style="padding:0;line-height:34px;">产品</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
                         <project ref="project" @projectChange="projectChange" :disabled="projectFlag"></project>
@@ -345,7 +345,7 @@
                     itemId: 0,
                     count: 0
                 },
-                //proList:[],//有剩余的课程信息
+                //proList:[],//有剩余的产品信息
                 selectObj: {},
                 dateArr: [],
                 projectFlag: false,
@@ -437,7 +437,7 @@
                     }
                 }
             },
-            //课程
+            //产品
             projectChange: function (param) {
                 if (this.isBlank(param)) {
                     this.consume.proId = ""
@@ -471,7 +471,7 @@
                     return
                 }
                 if (this.isBlank(this.consume.proId)) {
-                    alert("购买课程不能为空")
+                    alert("购买产品不能为空")
                     return
                 }
                 if (this.isBlank(this.consume.empId)) {
@@ -479,7 +479,7 @@
                     return
                 }
                 if (this.isBlank(this.consume.consumCount)) {
-                    alert("消费课程不可为空!");
+                    alert("消费产品不可为空!");
                     return;
                 }
                 if (this.consume.consumCount > this.consume.totalCount) {
@@ -493,7 +493,7 @@
                     //     return;
                     // }
                     if (this.selectObj.proId != this.consume.proId) {
-                        alert("你选择的课程与已购买项目中选择的课程不一致!");
+                        alert("你选择的产品与已购买项目中选择的产品不一致!");
                         return;
                     }
 
@@ -596,7 +596,7 @@
                     console.log('会员查询请求失败')
                 });
             },
-            //查询已购买课程
+            //查询已购买产品
             queryUnfinishedPro(param) {
                 if (this.isBlank(param)) return
                 var url = this.url + '/purchasedItemsAction/queryUnfinishedPro'

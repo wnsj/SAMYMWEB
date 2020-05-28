@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="col-md-12 form-group clearfix text-left">
-          <h4 id="myModalLabel" class="modal-title">课程：</h4>
+          <h4 id="myModalLabel" class="modal-title">产品：</h4>
         </div>
 
         <div class="col-md-6 form-group clearfix">
@@ -36,7 +36,7 @@
         </div>
 
         <div class="col-md-6 form-group clearfix">
-          <label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">课程</label><span
+          <label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">产品</label><span
           class="sign-left">:</span>
           <div class="col-md-7">
             <project ref="project" @projectChange="projectChange"></project>
@@ -276,7 +276,7 @@
           this.consumeReceivable=''
         }
       },
-      //课程
+      //产品
       projectChange: function(param) {
         if (this.isBlank(param)) {
           this.consume.proId = ""
@@ -352,7 +352,7 @@
         }
 
         if (this.isBlank(this.consume.proId)) {
-          alert("购买课程不能为空")
+          alert("购买产品不能为空")
           return
         }
         if (this.isBlank(this.consume.price)) {

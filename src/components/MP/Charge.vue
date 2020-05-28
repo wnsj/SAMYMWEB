@@ -2,7 +2,7 @@
 <template>
 	<div class="wraper">
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">购买课程管理</h1>
+			<h1 class="titleCss">购买产品管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -57,7 +57,7 @@
 							<tr class="datatr_1">
 								<th class="text-center" rowspan='2'>会员卡号</th>
 								<th class="text-center" rowspan='2'>姓名</th>
-								<th class="text-center" rowspan='2'>已购课程名称</th>
+								<th class="text-center" rowspan='2'>已购产品名称</th>
 								<th class="text-center" rowspan='2'>咨询师</th>
 								<th class="text-center" rowspan='2'>购买单价(¥/次)</th>
 								<th class="text-center" rowspan='2'>购买课时(次)</th>

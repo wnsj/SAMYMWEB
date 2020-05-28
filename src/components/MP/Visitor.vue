@@ -260,16 +260,16 @@
             </div>
         </div>
         <div class="row row_edit">
-            <div class="modal fade" id="srContent">
+            <div class="modal fade" id="rechargeContent">
                 <div class="modal-dialog">
-                    <sr ref='sr' @closeCurrentPage='feedBack'></sr>
+                    <recharge ref='recharge' @closeCurrentPage='feedBack'></recharge>
                 </div>
             </div>
         </div>
         <div class="row row_edit">
-            <div class="modal fade" id="asoContent">
+            <div class="modal fade" id="addSubOrderContent">
                 <div class="modal-dialog">
-                    <aso ref='aso' @closeCurrentPage='feedBack'></aso>
+                    <addSubOrder ref='addSubOrder' @closeCurrentPage='feedBack'></addSubOrder>
                 </div>
             </div>
         </div>
@@ -294,8 +294,8 @@
 
     import custom from '../MP/SubRecharge/Custom.vue'
     import refund from '../MP/SubRecharge/Refund.vue'
-    import sr from '../MP/SubRecharge/SubRecharge.vue'
-    import aso from '../MP/SubOrder/AddSubOrder.vue'
+    import recharge from '../MP/SubRecharge/SubRecharge.vue'
+    import addSubOrder from '../MP/SubOrder/AddSubOrder.vue'
     import subCd from '../MP/SubCd/SubCd.vue'
 
 
@@ -316,8 +316,8 @@
             cha,
             custom,
             refund,
-            sr,
-            aso,
+            recharge,
+            addSubOrder,
             subCd,
         },
         data() {
@@ -403,8 +403,8 @@
 			feedBack() {
 			    this.checkVisitor(1)
 			    $("#subCdContent").modal('hide')
-			    $("#asoContent").modal('hide')
-			    $("#srContent").modal('hide')
+			    $("#addSubOrderContent").modal('hide')
+			    $("#rechargeContent").modal('hide')
 			    $("#refundContent").modal('hide')
 			    $("#customContent").modal('hide')
 			    $("#visContent").modal('hide')
@@ -540,8 +540,8 @@
 				}
 				switch (index) {
 					case '1':
-						this.$refs.sr.initData('add', this.objectContent)
-						$("#srContent").modal('show')
+						this.$refs.recharge.initData('add', this.objectContent)
+						$("#rechargeContent").modal('show')
 						break;
 					case '2':
 						this.$refs.custom.initData(this.objectContent)
@@ -553,8 +553,8 @@
 						$("#subCdContent").modal('show')
 						break;
 					case '4':
-						this.$refs.aso.initData('add', this.objectContent)
-						$("#asoContent").modal('show')
+						this.$refs.addSubOrder.initData('add', this.objectContent)
+						$("#addSubOrderContent").modal('show')
 						break;
 					case '5':
 						this.$refs.refund.initData('add', this.objectContent)

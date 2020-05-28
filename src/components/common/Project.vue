@@ -57,7 +57,7 @@
                         state: '1',
                         empId: this.empId,
                         storeId: this.storeId(),
-                        empIdOrNull:'ALL'
+                        //empIdOrNull:'ALL'
                     },
                     dataType: 'json',
                 }).then((response) => {

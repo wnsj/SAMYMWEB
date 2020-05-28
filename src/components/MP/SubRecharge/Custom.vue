@@ -693,7 +693,6 @@
                     }
                 }
                 this.projectFlag = e.target.checked
-                this.counselorFlag = e.target.checked
             },
             //项目类型转换
             transforProType(proType) {

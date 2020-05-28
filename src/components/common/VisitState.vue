@@ -1,10 +1,10 @@
 <template>
-  <select class="form-control" v-model="vsId" v-on:change="objectChange()">
-    <option value="0">--未选择--</option>
-   <option v-for="(item,index) in objList" :key="index" v-bind:value="item.vsId">
-      {{item.vsName}}
-    </option>
-  </select>
+    <select class="form-control" v-model="vsId" v-on:change="objectChange()">
+        <option value="0">--未选择--</option>
+        <option v-for="(item,index) in objList" :key="index" v-bind:value="item.vsId">
+            {{item.vsName}}
+        </option>
+    </select>
 </template>
 
 <script>
@@ -35,8 +35,10 @@
         var obj = {}
         for (var i = 0; i < this.objList.length; i++) {
           obj = this.objList[i];
-          if (obj.vsId == param) {
-            return obj
+          if (param == 0) {
+              return null
+          } else if (obj.vsId == param) {
+              return obj
           }
         }
       },

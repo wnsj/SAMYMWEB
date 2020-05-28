@@ -52,7 +52,7 @@
                         <tr v-for="item in unfinishedProList">
                             <td><input type="radio" name="radioGroup" @click="radioClick($event,item)"/></td>
                             <td>{{item.proName}}</td>
-                            <td>{{item.empName}}</td>
+                            <td>{{item.counselorName}}</td>
                             <td>{{transforProType(item.proType)}}</td>
                             <td>{{item.totalCount}}</td>
                             <td>{{item.totalCount - item.consumCount}}</td>
@@ -68,7 +68,7 @@
                            style="padding:0;line-height:34px;">咨询师</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <emp ref="counselorEmp" @employeeChange="counselorEmpChange"></emp>
+                        <emp ref="counselorEmp" @employeeChange="counselorEmpChange" :disabled="counselorFlag"></emp>
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
@@ -93,7 +93,7 @@
                            style="padding:0;line-height:34px;">课时(次)</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" v-model="consume.actualCount" disabled="disabled">
+                        <input type="text" class="form-control" v-model="consume.totalCount" disabled="disabled">
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
@@ -217,7 +217,8 @@
                            style="padding:0;line-height:34px;">开始-结束时间</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <dPicker v-model="dateArr" type="format" format="YYYY-MM-DD" range>
+                        <dPicker v-model="dateArr" format="YYYY-MM-DD hh:mm:ss" style="width:100%"
+                                 type="datetime" valueType="format" range>
                             <template v-slot:header="{ emit }">
                                 <div style="text-align: left"></div>
                             </template>
@@ -347,13 +348,14 @@
                 //proList:[],//有剩余的课程信息
                 selectObj: {},
                 dateArr: [],
-                projectFlag:false,
+                projectFlag: false,
+                counselorFlag: false
             };
         },
         methods: {
             // Initialization consume’s content
             initData(param) {
-                $("input[name='radioGroup']").prop("checked", "");
+
                 this.consume = {
                     memNum: param.visId, //会员名
                     memName: param.visitorName,
@@ -413,6 +415,9 @@
                 this.$refs.ContinStateRef.getObj(1, 2)
                 this.selectObj = null
                 this.projectFlag = false
+                this.counselorFlag = false
+                this.dateArr = []
+                $("input[name='radioGroup']").prop("checked", "");
             },
             //咨询师
             counselorEmpChange: function (param) {
@@ -420,16 +425,16 @@
                     this.consume.counselor = ""
                 } else {
                     this.consume.counselor = param.empId
-                    if (!this.projectFlag){
+                    if (!this.projectFlag) {
                         this.$refs.project.setEmpId(this.consume.counselor)
                         this.$refs.project.setProject(0)
+                        this.consume.price = '0'
+                        this.consume.actualCount = '0'
+                        this.consume.discount = '0'
+                        this.consume.receivable = '0'
+                        this.consume.realCross = '0'
+                        this.consumeReceivable = ''
                     }
-                    this.consume.price = '0'
-                    this.consume.actualCount = '0'
-                    this.consume.discount = '0'
-                    this.consume.receivable = '0'
-                    this.consume.realCross = '0'
-                    this.consumeReceivable = ''
                 }
             },
             //课程
@@ -438,14 +443,12 @@
                     this.consume.proId = ""
                 } else {
                     this.consume.proId = param.proId
-                    this.consume.price = param.price //折前单价
-                    //this.consume.disPrice = param.price * param.discount / 100 //折后单价
-                    this.consume.actualCount = param.frequency //实际次数
-                    this.consume.discount = param.discount //折扣
-                    this.consume.receivable = param.totalPrice //应交
-                    this.consume.realCross = param.discouAmount //实缴
+                    this.consume.price = param.price
+                    this.consume.totalCount = param.frequency
+                    this.consume.discount = param.discount
+                    this.consume.receivable = param.totalPrice
+                    this.consume.realCross = param.discouAmount
                     this.consume.proType = param.proType
-                    this.cash.select = '0'
                 }
             },
             //feedback employee information
@@ -479,6 +482,10 @@
                     alert("消费课程不可为空!");
                     return;
                 }
+                if (this.consume.consumCount > this.consume.totalCount) {
+                    alert("此次消费课时大于总课时!")
+                    return;
+                }
                 //选择了已购买的项目
                 if (this.selectObj != null) {
                     // if (!this.isBlank(this.selectObj.counselor) && this.selectObj.counselor != this.consume.counselor) {
@@ -489,7 +496,12 @@
                         alert("你选择的课程与已购买项目中选择的课程不一致!");
                         return;
                     }
-                    //if (this.consume.consumCount )
+
+                    if (this.consume.consumCount > (this.selectObj.totalCount - this.selectObj.consumCount)) {
+                        alert("本次消费课时大于剩余课时!");
+                        return;
+                    }
+
                     this.consume.piId = this.selectObj.piId
                 }
                 if (this.dateArr.length > 1) {
@@ -497,7 +509,7 @@
                     this.consume.actualEndDate = this.dateArr[1];
                 }
 
-                var url = this.url + '/purchasedItemsAction/consum'
+                var url = this.url + '/purchasedItemsAction/consumProject'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -615,27 +627,73 @@
                 if (this.clickItemObj.itemId == 0) {
                     this.selectObj = item;
                     this.clickItemObj.itemId = item.piId
+                    this.clickItemObj.count = this.clickItemObj.count + 1
+                    if (item.proType != 0) {
+                        this.modCounselor(item)
+                    } else {
+                        this.counselorFlag = true
+                        this.$refs.counselorEmp.setPosName("咨询师")
+                        this.$refs.counselorEmp.setEmp(item.counselor)
+                    }
                     this.$refs.project.setEmpId(item.counselor)
                     this.$refs.project.setProject(item.proId)
-                    this.clickItemObj.count = this.clickItemObj.count + 1
+                    this.consume.proId = item.proId
+                    this.consume.price = item.price //折前单价
+                    this.consume.totalCount = item.totalCount //实际次数
+                    this.consume.discount = item.discount //折扣
+                    this.consume.receivable = item.receivable //应交
+                    this.consume.realCross = item.realCross //实缴
+                    this.consume.proType = item.proType
                 } else {
                     if (this.clickItemObj.itemId == item.piId) {
                         if (this.clickItemObj.count % 2 == 0) {
-                            e.target.checked = false
                             this.selectObj = null
+                            e.target.checked = false
+                            this.$refs.counselorEmp.setPosName("咨询师")
+                            this.$refs.counselorEmp.setEmp("")
+                        } else {
+                            if (item.proType != 0) {
+                                this.modCounselor(item)
+                            } else {
+                                this.counselorFlag = true
+                                this.$refs.counselorEmp.setPosName("咨询师")
+                                this.$refs.counselorEmp.setEmp(item.counselor)
+                            }
+                            this.$refs.project.setEmpId(item.counselor)
+                            this.$refs.project.setProject(item.proId)
+                            this.consume.proId = item.proId
+                            this.consume.price = item.price //折前单价
+                            this.consume.totalCount = item.totalCount //实际次数
+                            this.consume.discount = item.discount //折扣
+                            this.consume.receivable = item.receivable //应交
+                            this.consume.realCross = item.realCross //实缴
+                            this.consume.proType = item.proType
                         }
                         this.clickItemObj.count = this.clickItemObj.count + 1
-                        this.$refs.project.setEmpId(item.counselor)
-                        this.$refs.project.setProject(item.proId)
                     } else {
                         this.selectObj = item
                         this.clickItemObj.itemId = item.piId
                         this.clickItemObj.count = 0
+                        if (item.proType != 0) {
+                            this.modCounselor(item)
+                        } else {
+                            this.counselorFlag = true
+                            this.$refs.counselorEmp.setPosName("咨询师")
+                            this.$refs.counselorEmp.setEmp(item.counselor)
+                        }
                         this.$refs.project.setEmpId(item.counselor)
                         this.$refs.project.setProject(item.proId)
+                        this.consume.proId = item.proId
+                        this.consume.price = item.price //折前单价
+                        this.consume.totalCount = item.totalCount //实际次数
+                        this.consume.discount = item.discount //折扣
+                        this.consume.receivable = item.receivable //应交
+                        this.consume.realCross = item.realCross //实缴
+                        this.consume.proType = item.proType
                     }
                 }
                 this.projectFlag = e.target.checked
+                this.counselorFlag = e.target.checked
             },
             //项目类型转换
             transforProType(proType) {
@@ -672,6 +730,20 @@
             counseRoomChange(param) {
                 if (this.isBlank(param)) this.consume.counseRoom = null
                 else this.consume.counseRoom = param.chaId
+            },
+            //咨询师重新初始化
+            modCounselor(item) {
+                var param = {
+                    posId: null,
+                    posName: '咨询师',
+                    leader: null,
+                    storeId: this.storeId(),
+                    isuse: '1',
+                    level: null,
+                    lessThenEqual: item.counselorLevel,
+                }
+                this.$refs.counselorEmp.setQueryParam(param)
+                this.$refs.counselorEmp.setEmp(item.counselor)
             }
         }
 

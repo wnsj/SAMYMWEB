@@ -628,7 +628,7 @@
                     this.selectObj = item;
                     this.clickItemObj.itemId = item.piId
                     this.clickItemObj.count = this.clickItemObj.count + 1
-                    if (item.proType != 0) {
+                    if (item.proType != '0') {
                         this.modCounselor(item)
                         this.counselorFlag = false
                     } else {
@@ -648,10 +648,12 @@
                 } else {
                     if (this.clickItemObj.itemId == item.piId) {
                         if (this.clickItemObj.count % 2 == 0) {
+							console.log('4')
                             this.selectObj = null
                             e.target.checked = false
                             this.$refs.counselorEmp.setPosName("咨询师")
                             this.$refs.counselorEmp.setEmp("")
+							 this.counselorFlag = false
                         } else {
                             if (item.proType != 0) {
                                 this.modCounselor(item)

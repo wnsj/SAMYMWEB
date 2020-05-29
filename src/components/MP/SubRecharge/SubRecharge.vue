@@ -208,6 +208,25 @@
                         <input type="text" class="form-control" v-model="consume.realCross">
                     </div>
                 </div>
+				<div class="col-md-6 form-group clearfix">
+				    <label class="col-md-4 control-label text-right nopad end-aline"
+				           style="padding:0;line-height:34px;">是否欠费</label><span
+				    class="sign-left">:</span>
+				    <div class="col-md-7">
+				        <select class="form-control" v-model="consume.isArrears">
+				            <option value="0">否</option>
+				            <option value="1">是</option>
+				        </select>
+				    </div>
+				</div>
+				<div class="col-md-6 form-group clearfix">
+				    <label for="cyname" class="col-md-4 control-label text-right nopad end-aline"
+				           style="padding:0;line-height:34px;">欠费金额</label><span
+				    class="sign-left">:</span>
+				    <div class="col-md-7">
+				        <input type="text" class="form-control" v-model="consume.arrears">
+				    </div>
+				</div>
             </div>
             <div class="tab-pane fade in active martop" v-show="isShow==true">
                 <div class="col-md-12 form-group clearfix text-left" style="padding:0;">
@@ -322,6 +341,8 @@
                     payType: 1,//支付方式
                     serialNo: null,//流水单号
                     receipt: null,//收据
+					isArrears:'0',//是否欠费
+					arrears:'0',//欠费金额
                 },
                 cash: {
                     cashId: '',
@@ -386,6 +407,8 @@
                     receipt: null,//收据
                     visitState: null,//访问状态
                     continState: null,//续流状态
+					isArrears:'0',//是否欠费
+					arrears:'0',//欠费金额
                 }
                 this.consumeReceivable = '0.0'
                 this.$refs.counselorEmp.setPosName("咨询师")

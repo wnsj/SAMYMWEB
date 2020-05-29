@@ -29,6 +29,18 @@
 					<emp ref="emp" @employeeChange='empChange'></emp>
 				</div>
 			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			    <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+			    	<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否欠费</p><span class="sign-left">:</span>
+			    </div>
+			    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+			        <select class="form-control" v-model="isArrears">
+			            <option value="">全部</option>
+			            <option value="1">欠费</option>
+			            <option value="0">不欠费</option>
+			        </select>
+			    </div>
+			</div>
 		</div>
 		<div class="row" style="margin-top: 15px;">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
@@ -121,6 +133,7 @@
 				begCreateDate: '',
 				endCreateDate: '',
 				storeId: this.storeId(),
+				isArrears:'0',
 
 
 				//分页需要的数据
@@ -176,6 +189,7 @@
 						begCreateDate: this.begCreateDate,
 						endCreateDate: this.endCreateDate,
 						storeId: this.storeId,
+						isArrears:this.isArrears,
 
 						page: page.toString(),
 						pageSize: this.size

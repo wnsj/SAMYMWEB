@@ -379,18 +379,18 @@
                     memName: param.visitorName,
                     phone: param.phone,
                     appNum: '',//预约号
-                    receivable: '0.0', //应交
-                    realCross: '0.0', //实缴
-					actualCross: '0', //实交金额
+                    receivable: 0, //应交
+                    realCross: 0, //实缴
+					actualCross: 0, //实交金额
                     proId: '', //产品id
-                    discount: '0', //折扣
-                    price: '0.0', //折前单价
-                    disPrice: '', //折后单价
+                    discount: 0, //折扣
+                    price: 0, //折前单价
+                    disPrice:0, //折后单价
                     totalCount: 0, //总次数
                     actualCount: 0, //实际次数
                     giveCount: 0, //赠送次数
                     giveProId: 0, //赠送产品
-                    giveMoney: '0.0', //赠送金额
+                    giveMoney: 0, //赠送金额
                     counselor: '', //咨询师id
                     empId: '', //咨询师助理id
                     state: 0,
@@ -412,7 +412,6 @@
 					isArrears:'0',//是否欠费
 					arrears:'0',//欠费金额
                 }
-                this.consumeReceivable = '0.0'
                 this.$refs.counselorEmp.setPosName("咨询师")
                 this.$refs.emp.setPosName("咨询顾问")
                 this.$refs.counselorEmp.setEmp("")
@@ -433,12 +432,11 @@
                     this.consume.counselor = param.empId
                     this.$refs.project.setEmpId(this.consume.counselor)
                     this.$refs.project.setProject("0")
-                    this.consume.price = '0'
-                    this.consume.actualCount = '0'
-                    this.consume.discount = '0'
-                    this.consume.receivable = '0'
-                    this.consume.realCross = '0'
-                    this.consumeReceivable = ''
+                    this.consume.price = 0
+                    this.consume.actualCount = 0
+                    this.consume.discount = 0
+                    this.consume.receivable = 0
+                    this.consume.realCross = 0
                 }
             },
             //产品
@@ -519,8 +517,8 @@
                 //         return
                 //     }
                 // }
-
-                this.consume.totalCount = this.consume.actualCount + this.consume.giveCount //总次数
+                this.consume.totalCount = this.consume.actualCount
+                //this.consume.totalCount = this.consume.actualCount + this.consume.giveCount //总次数
 
                 if (this.isBlank(this.consume.memNum)) {
                     alert("会员号不能为空")

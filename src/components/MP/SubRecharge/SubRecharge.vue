@@ -205,7 +205,7 @@
                            style="padding:0;line-height:34px;">实交总额</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" v-model="consume.realCross">
+                        <input type="text" class="form-control" v-model="consume.actualCross">
                     </div>
                 </div>
 				<div class="col-md-6 form-group clearfix">
@@ -319,6 +319,7 @@
                     appNum: '',
                     receivable: 0, //应交(折前)
                     realCross: '', //实缴（折后）
+					actualCross: '0', //实交金额
                     proId: '', //产品id
                     discount: '', //折扣
                     price: '', //折前单价
@@ -380,6 +381,7 @@
                     appNum: '',//预约号
                     receivable: '0.0', //应交
                     realCross: '0.0', //实缴
+					actualCross: '0', //实交金额
                     proId: '', //产品id
                     discount: '0', //折扣
                     price: '0.0', //折前单价
@@ -559,7 +561,7 @@
                 if (this.clickItemObj.count % 2 != 0) {
                     this.consume.piId = this.clickItemObj.itemId
                 }
-
+				this.consume.realCross=this.consume.actualCross
                 var url = this.url + '/purchasedItemsAction/purchasedItemsProject'
                 this.$ajax({
                     method: 'POST',
@@ -719,7 +721,8 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        memNum: param
+                        memNum: param,
+						isArrears:'0',
                     },
                     dataType: 'json',
                 }).then((response) => {

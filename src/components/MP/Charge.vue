@@ -209,6 +209,34 @@
 					console.log('充值查询请求失败')
 				});
 			},
+			arrearsAaction(item){
+				if(confirm("是否是补交缴费，确认已经补交缴费？？")==false){
+					return
+				}
+				var url = this.url + '/payArrears/addPayArrears'
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: {
+						piId: item.piId,
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						alert(res.retMsg)
+						this.conditionCheck(1)
+					}else{
+						alert(res.retMsg)
+					}
+				}).catch((error) => {
+					console.log('补交费用请求失败')
+				});
+			},
 
 		},
 		mounted() {

@@ -21,6 +21,12 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">门店</label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<Store ref='store' @storeChange='storeChange'></Store>
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">生日</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<dPicker style="width:100%" v-model="visitor.birthday" value-type="format" format="YYYY-MM-DD"></dPicker>
@@ -127,6 +133,7 @@
 	import visStateJudge from '../../common/VisitState.vue'
 	import visStateFlow from '../../common/VisitState.vue'
 	import DiseaseType from '../../common/DiseaseType.vue'
+	import Store from '../../common/Store.vue'
 	
 	import dPicker from 'vue2-datepicker'
 	export default {
@@ -138,6 +145,7 @@
 			DiseaseType,
 			visStateJudge,
 			visStateFlow,
+			Store,
 		},
 		data() {
 			return {
@@ -199,6 +207,7 @@
 					this.$refs.visStateJudge.setObj('0')
 					this.$refs.visStateFlow.setObj('0')
 					this.$refs.ind.setInd('0')
+					this.$refs.store.setStore('0')
 					
 				}else if(param=='modify'){
 					console.log('Initialization visitor’s content, which modifies visitor')
@@ -212,6 +221,7 @@
 					this.$refs.visStateJudge.setObj(this.visitor.vsIdJudge)
 					this.$refs.visStateFlow.setObj(this.visitor.vsIdFlow)
 					this.$refs.ind.setInd(this.visitor.indId)
+					this.$refs.store.setStore(this.visitor.storeId)
 				}
 			},
 			judgeChange:function(param){
@@ -234,6 +244,13 @@
 					this.visitor.dtId=""
 				}else{
 					this.visitor.dtId=param.dtId
+				}
+			},
+			storeChange:function(param){
+				if(this.isBlank(param)){
+					this.visitor.storeId=""
+				}else{
+					this.visitor.storeId=param.storeId
 				}
 			},
 			//feedback position information
@@ -275,7 +292,7 @@
 				console.log('the event of addtional button')
 				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 			
-				console.log(JSON.stringify(this.visitor))
+				
 				if(this.isBlank(this.visitor.visitorName)){
 					alert("咨客姓名不能为空")
 					return

@@ -15,6 +15,7 @@
                 proId: '0',
                 projectList: [],
                 empId: '',
+				frequency:'',//课时数
                 projectObj: {
                     proId: '0',
                     proName: '',
@@ -40,7 +41,11 @@
                     }
                 }
             },
-            setEmpId: function (empId) {
+			//model：1购买
+            setEmpId: function (empId,model) {
+				if(model==1){
+					this.frequency=1
+				}
                 this.empId = empId
                 this.getProject()
             },
@@ -57,6 +62,7 @@
                         state: '1',
                         empId: this.empId,
                         storeId: this.storeId(),
+						frequency:this.frequency,
                         //empIdOrNull:'ALL'
                     },
                     dataType: 'json',

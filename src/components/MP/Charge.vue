@@ -67,7 +67,7 @@
 					<table class="table table-bordered table-hover user-table" id="datatable">
 						<thead class="datathead">
 							<tr class="datatr_1">
-								<th class="text-center" rowspan='2'>会员卡号</th>
+								<!-- <th class="text-center" rowspan='2'>会员卡号</th> -->
 								<th class="text-center" rowspan='2'>姓名</th>
 								<th class="text-center" rowspan='2'>已购产品名称</th>
 								<th class="text-center" rowspan='2'>咨询师</th>
@@ -82,7 +82,7 @@
 						</thead>
 						<tbody>
 							<tr v-for="(item,index1) in chargeLsit" :key="index1">
-								<td>{{item.memNum}}</td>
+								<!-- <td>{{item.memNum}}</td> -->
 								<td>{{item.memName}}</td>
 								<td>{{item.proName}}</td>
 								<td>{{item.counselorName}}</td>

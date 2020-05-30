@@ -6,11 +6,11 @@
                     <img style="width: 50px; height: 50px;" src="../assets/img/logo1.png"/> <strong
                     style=" display:inline-block;font-size: 35px; line-height:40px;">
                     圣安米悦</strong><br/>
-                    <font style=" disply:block; font-size:26px;line-height:30px;">会 员 管 理 系 统</font>
+                    <font style=" disply:block; font-size:26px;line-height:30px;">门 店 管 理 系 统</font>
                 </h2>
             </div>
             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-right">
-                <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，会员管理系统</p><!-- 
+                <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，门店管理系统</p><!-- 
                 <button class="btn btn-warning m_r_10" style="margin-top: 40px;" v-on:click="chargeManager()"
                         v-has="'SAMY:MP:CoursePurchase'">产品购买
                 </button>
@@ -34,48 +34,48 @@
                             <dt @click="onShow(0)" v-bind:class="{'li-active':bool1}">
                                 <i class="fa" v-bind:class="{'fa-folder-open':bool1,'fa-folder':!bool1}"
                                    aria-hidden="true">
-                                    会员管理模块
+                                    客户管理模块
                                 </i>
                             </dt>
-                            <dd @click="addCheck('MemberSummary')"
+                            <!-- <dd @click="addCheck('MemberSummary')"
                                 v-bind:class="{'li-active':onString=='MemberSummary'}">
                                 <router-link to="/MP/MemberSummary"><i class="fa" aria-hidden="true">会员汇总</i>
                                 </router-link>
                             </dd>
                             <dd @click="addCheck('Member')" v-bind:class="{'li-active':onString=='Member'}">
                                 <router-link to="/MP/Member"><i class="fa" aria-hidden="true">会员管理</i></router-link>
-                            </dd>
+                            </dd> -->
                             <dd @click="addCheck('Visitor')" v-bind:class="{'li-active':onString=='Visitor'}">
-                                <router-link to="/MP/Visitor"><i class="fa" aria-hidden="true">咨客管理</i></router-link>
+                                <router-link to="/MP/Visitor"><i class="fa" aria-hidden="true">客户管理</i></router-link>
                             </dd>
+							<dd @click="addCheck('SettleSummary')"
+							    v-bind:class="{'li-active':onString=='SettleSummary'}">
+							    <router-link to="/MP/SettleSummary"><i class="fa" aria-hidden="true">消费管理</i>
+							    </router-link>
+							</dd>
+							<dd @click="addCheck('Charge')" v-bind:class="{'li-active':onString=='Charge'}">
+							    <router-link to="/MP/Charge"><i class="fa" aria-hidden="true">已购产品管理</i></router-link>
+							</dd>
+							<dd @click="addCheck('Order')" v-bind:class="{'li-active':onString=='Order'}">
+							    <router-link to="/MP/Order"><i class="fa" aria-hidden="true">预约管理</i></router-link>
+							</dd>
+							<dd @click="addCheck('CashDeposit')" v-bind:class="{'li-active':onString=='CashDeposit'}">
+							    <router-link to="/MP/CashDeposit"><i class="fa" aria-hidden="true">定金管理</i>
+							    </router-link>
+							</dd>
                         </dl>
-                        <dl v-bind:class="{h25:bool2}">
+                        <!-- <dl v-bind:class="{h25:bool2}">
                             <dt @click="onShow(1)" v-bind:class="{'li-active':bool2}">
                                 <i class="fa" v-bind:class="{'fa-folder-open':bool2,'fa-folder':!bool2}"
                                    aria-hidden="true">
                                     消费管理模块
                                 </i>
                             </dt>
-                            <dd @click="addCheck('SettleSummary')"
-                                v-bind:class="{'li-active':onString=='SettleSummary'}">
-                                <router-link to="/MP/SettleSummary"><i class="fa" aria-hidden="true">消费汇总</i>
-                                </router-link>
-                            </dd>
-                            <dd @click="addCheck('Charge')" v-bind:class="{'li-active':onString=='Charge'}">
-                                <router-link to="/MP/Charge"><i class="fa" aria-hidden="true">已购产品管理</i></router-link>
-                            </dd>
-                            <dd @click="addCheck('Order')" v-bind:class="{'li-active':onString=='Order'}">
-                                <router-link to="/MP/Order"><i class="fa" aria-hidden="true">预约管理</i></router-link>
-                            </dd>
-                            <dd @click="addCheck('CashDeposit')" v-bind:class="{'li-active':onString=='CashDeposit'}">
-                                <router-link to="/MP/CashDeposit"><i class="fa" aria-hidden="true">定金管理</i>
-                                </router-link>
-                            </dd>
                             <dd @click="addCheck('ZxsSummary')" v-bind:class="{'li-active':onString=='ZxsSummary'}">
                                 <router-link to="/MP/ZxsSummary"><i class="fa" aria-hidden="true">咨询师汇总</i>
                                 </router-link>
                             </dd>
-                        </dl>
+                        </dl> -->
                         <dl v-bind:class="{h40:bool3}">
                             <dt @click="onShow(2)" v-bind:class="{'li-active':bool3}">
                                 <i class="fa" v-bind:class="{'fa-folder-open':bool3,'fa-folder':!bool3}"
@@ -138,12 +138,9 @@
                             <dt @click="onShow(3)" v-bind:class="{'li-active':bool4}">
                                 <i class="fa" v-bind:class="{'fa-folder-open':bool4,'fa-folder':!bool4}"
                                    aria-hidden="true">
-                                    月入汇总
+                                    汇总报表
                                 </i>
                             </dt>
-                            <!--                            <dd @click="addCheck('Schedule2')" v-bind:class="{'li-active':onString=='Schedule2'}">-->
-                            <!--                                <router-link to="/MP/Schedule2"><i class="fa" aria-hidden="true"> 排班2</i></router-link>-->
-                            <!--                            </dd>-->
                             <dd @click="addCheck('CurrentSummary')"
                                 v-bind:class="{'li-active':onString=='CurrentSummary'}">
                                 <router-link to="/MP/CurrentSummary"><i class="fa" aria-hidden="true">月入汇总</i>
@@ -383,7 +380,7 @@
     }
 
     #aside-menu dl.h15 {
-        height: 200px;
+        height: 300px;
     }
 
     #aside-menu dl.h25 {

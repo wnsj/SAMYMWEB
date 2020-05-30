@@ -310,7 +310,7 @@
 					this.selectObj = item
 				} else {
 					if (this.clickItemObj.itemId == item.piId) {
-						if (this.clickItemObj.count % 2 == 0) {
+						if (this.clickItemObj.count % 2 == 1) {
 							e.target.checked = false
 							this.selectObj = {
 								price: '',
@@ -319,6 +319,7 @@
 								actualCount: '',
 							}
 						}
+						this.clickItemObj.itemId = 0
 						this.clickItemObj.count = this.clickItemObj.count + 1
 					} else {
 						this.clickItemObj.itemId = item.piId
@@ -331,8 +332,12 @@
 			receivableAction() {
 				if (this.refund.consumCount != null && parseInt(this.refund.consumCount) > 0) {
 					if (this.selectObj.price != null && parseInt(this.selectObj.price) > 0) {
-						console.log('3')
-						this.refund.money = this.selectObj.price * parseInt(this.refund.consumCount)
+						if(parseInt(this.refund.consumCount)> parseInt(this.selectObj.totalCount) - parseInt(this.selectObj.consumCount)){
+							this.refund.consumCount=parseInt(this.selectObj.totalCount) - parseInt(this.selectObj.consumCount)
+							this.refund.money = this.selectObj.price * parseInt(this.refund.consumCount)
+						}else{
+							this.refund.money = this.selectObj.price * parseInt(this.refund.consumCount)
+						}
 					} else {
 						alert('请您先选择退费课程')
 					}

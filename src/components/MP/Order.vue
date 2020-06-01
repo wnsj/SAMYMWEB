@@ -117,10 +117,10 @@
         </div>
 
         <div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
-            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"
-                    data-toggle="modal"
-                    @click="selectRule('1')" v-has="'SAMY:MP:Order:Add'">添加预约
-            </button>
+<!--            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"-->
+<!--                    data-toggle="modal"-->
+<!--                    @click="selectRule('1')" v-has="'SAMY:MP:Order:Add'">添加预约-->
+<!--            </button>-->
             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
                     data-toggle="modal"
                     @click="checkOrderList(1)">查询

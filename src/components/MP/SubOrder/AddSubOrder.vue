@@ -8,21 +8,21 @@
         <div class="modal-body  pos_r">
             <div class="tab-pane fade in active martop" id="basic">
                 <form action="" class="clearfix">
-                    <div class="col-md-6 form-group clearfix">
-                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">会员号</label><span
-                        class="sign-left">:</span>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" v-model="orderClick.memNum"
-                                   v-on:change="checkMemNum(orderClick.memNum)">
-                        </div>
-                    </div>
+<!--                    <div class="col-md-6 form-group clearfix">-->
+<!--                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"-->
+<!--                               style="padding:0;line-height:34px;">会员号</label><span-->
+<!--                        class="sign-left">:</span>-->
+<!--                        <div class="col-md-8">-->
+<!--                            <input type="text" class="form-control" v-model="orderClick.memNum"-->
+<!--                                   v-on:change="checkMemNum(orderClick.memNum)">-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div class="col-md-6 form-group clearfix">
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
                                style="padding:0;line-height:34px;">姓名</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" v-model="orderClick.appName" placeholder="">
+                            <input type="text" class="form-control" v-model="orderClick.appName" placeholder="" disabled="true">
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
@@ -30,7 +30,7 @@
                                style="padding:0;line-height:34px;">手机号</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" v-model="orderClick.phone" placeholder="">
+                            <input type="text" class="form-control" v-model="orderClick.phone" placeholder="" disabled="true">
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
@@ -38,8 +38,7 @@
                                style="padding:0;line-height:34px;">预约时间</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
-                            <dPicker v-model="orderClick.appDate" format="YYYY-MM-DD" style="width:100%;"
-                                     v-on:change="checkEmpSchedule()"></dPicker>
+                            <dPicker v-model="orderClick.appDate" format="YYYY-MM-DD" style="width:100%;" v-on:change="checkEmpSchedule()"></dPicker>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
@@ -435,10 +434,10 @@
             };
         },
         methods: {
-            initData(param) {
+            initData(flag,param) {
                 this.numArr = []
 				console.log(param)
-                if (!this.isBlank(param)) {
+                if (flag == 'againAdd') {
                     this.$refs.counlorEmp.setPosName("咨询师")
                     this.$refs.counlorEmp.setEmp(param.empId)
 					console.log("参数"+param)
@@ -516,9 +515,9 @@
                         "consultantRoomList": []
                     }
                     this.orderClick = {
-                        memNum: '',
-                        appName: '',
-                        phone: '',
+                        memNum: param.visId, //会员名
+                        phone: param.phone,
+                        appName: param.visitorName,
                         storeId: this.storeId(),
                         appDate: new Date(),
                         empId: '',
@@ -667,7 +666,7 @@
                     var res = response.data
                     if (res.retCode == '0000') {
                         alert(res.retMsg)
-                        this.$emit('addOrder')
+                        this.closeCurrentPage()
                     } else {
                         alert(res.retMsg)
                     }
@@ -676,7 +675,7 @@
                 });
             },
             closeCurrentPage() {
-                this.$emit('addOrder')
+                this.$emit('closeCurrentPage')
             },
             //咨询师排班
             checkEmpSchedule() {

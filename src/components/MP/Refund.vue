@@ -40,18 +40,22 @@
                         <tr>
                             <th class="text-center">门店名称</th>
                             <th class="text-center">退款人</th>
-                            <th class="text-center">联系电话</th>
-                            <th class="text-center">是否停用</th>
-                            <th class="text-center">门店地址</th>
+                            <th class="text-center">咨询师</th>
+                            <th class="text-center">产品</th>
+                            <th class="text-center">退费课时</th>
+							<th class="text-center">退费金额</th>
+							<th class="text-center">时间</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr v-for="(item,index) in objList" :key="index">
                             <td class="text-center">{{item.storeName}}</td>
-                            <td class="text-center">{{item.connecter}}</td>
-                            <td class="text-center">{{item.phone}}</td>
-                            <td class="text-center">{{item.isuse==1 ? "在用" : "停用"}}</td>
-                            <td class="text-center">{{item.address}}</td>
+                            <td class="text-center">{{item.visitorName}}</td>
+                            <td class="text-center">{{item.proEmpName}}</td>
+							<td class="text-center">{{item.proName}}</td>
+							<td class="text-center">{{item.refCount}}</td>
+                            <td class="text-center">{{item.realRefund}}</td>
+                            <td class="text-center">{{item.createDate | dateFormatFilter('YYYY-MM-DD')}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -92,6 +96,8 @@
                 fixedHeader: false,
 				visitorName:'',
 				dateArr:'',
+				begDate:'',
+				endDate:'',
 
                 //分页需要的数据
                 pages: '', //总页数
@@ -110,6 +116,13 @@
             
             //check the list of store
             queryObjectList(page) {
+				if(this.dateArr.length > 0 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1]))	{
+					this.begDate = this.moment(this.dateArr[0],'YYYY-MM-DD 00:00:00')
+					this.endDate = this.moment(this.dateArr[1],'YYYY-MM-DD 23:59:59')
+				}else{
+					this.begDate=''
+					this.endDate=''
+				}
                 var url = this.url + '/refundAction/queryRefund'
                 this.$ajax({
                     method: 'POST',
@@ -120,6 +133,8 @@
                     },
                     data: {
 						visitorName:this.visitorName,
+						begDate:this.begDate,
+						endDate:this.endDate,
 						
                         page: page.toString(),
                         pageSize: this.pageSize

@@ -7,19 +7,19 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-2 col-lg-12" style="margin-bottom: 10px;">
-				<button type="button" class="btn btn-default pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('5')">退
+				<button type="button" class="btn btn-default pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('5')" v-has="'SAMY:MP:CourseRefund'">退
 					费
 				</button>
 				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('4')" v-has="'SAMY:MP:Order:Add'">预
 					约
 				</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('3')">定
+				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('3')" v-has="'SAMY:MP:CashDeposit:Add'">定
 					金
 				</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('2')">消
+				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('2')" v-has="'SAMY:MP:CourseConsum'">消
 					费
 				</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('1')">购
+				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('1')" v-has="'SAMY:MP:CoursePurchase'">购
 					买 产 品
 				</button>
 			</div>

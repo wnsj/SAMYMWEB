@@ -242,6 +242,28 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-12 clearfix" v-show="cash.balance>0" style="padding:0;">
+                <div class="col-md-6 clearfix" v-show="cash.balance>0">
+                    <label class="col-md-4 control-label text-right nopad end-aline"
+                           style="padding:0;line-height:34px;">
+                        定金抵扣
+                    </label>
+                    <span class="sign-left">:</span>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" v-model="cash.select" id="earn" @keyup.enter="count"
+                               @input="count($event)"/>
+                    </div>
+                </div>
+                <div class="col-md-6 clearfix">
+                    <label for="cyname" class="col-md-4 control-label text-right nopad end-aline"
+                           style="padding:0;line-height:34px;">定金余额</label><span
+                    class="sign-left">:</span>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" v-model="cash.balance" id="cash"
+                               disabled="disabled">
+                    </div>
+                </div>
+            </div>
             <div class="tab-pane fade in active martop" id="basic" v-show="isShow==true">
                 <div class="col-md-12 form-group clearfix text-left">
                     <h4 id="myModalLabel" class="modal-title">合计：</h4>
@@ -260,7 +282,7 @@
                        style="padding:0;line-height:34px;">此次消费课时</label><span
                 class="sign-left">:</span>
                 <div class="col-md-7">
-                    <input type="text" class="form-control" v-model="consume.consumCount">
+                    <input type="text" class="form-control" v-model="consume.consumCount" @blur="computedRealCross">
                 </div>
             </div>
             <div class="form-group clearfix">
@@ -349,29 +371,35 @@
                 selectObj: {},
                 dateArr: [],
                 projectFlag: false,
-                counselorFlag: false
+                counselorFlag: false,
+                cash: {
+                    cashId: '',
+                    memNum: '',
+                    balance: '',
+                    select: '',
+                    btn: false,
+                }
             };
         },
         methods: {
             // Initialization consume’s content
             initData(param) {
-
                 this.consume = {
                     memNum: param.visId, //会员名
                     memName: param.visitorName,
                     phone: param.phone,
                     appNum: '',//预约号
-                    receivable: '0.0', //应交
-                    realCross: '0.0', //实缴
+                    receivable: 0, //应交
+                    realCross: 0, //实缴
                     proId: '', //项目id
-                    discount: '0', //折扣
-                    price: '0.0', //折前单价
+                    discount: 0, //折扣
+                    price: 0, //折前单价
                     disPrice: '', //折后单价
                     totalCount: 0, //总次数
                     actualCount: 0, //实际次数
                     giveCount: 0, //赠送次数
                     giveProId: 0, //赠送项目
-                    giveMoney: '0.0', //赠送金额
+                    giveMoney: 0, //赠送金额
                     counselor: '', //咨询师id
                     empId: '', //咨询师助理id
                     state: 0,
@@ -383,7 +411,7 @@
                     operatorId: this.accountId(), //操作人
                     firstCharge: null,
                     /** 1:实体卡首充（不计算提成） 0:计算 */
-                    consumCount: '0', //消费次数
+                    consumCount: 0, //消费次数
                     visitType: 1,
                     payType: 1,//支付方式
                     serialNo: null,//流水单号
@@ -398,13 +426,21 @@
                     cashId: null,//现金id
                     accompany: null,//陪同人
                     companionship: null,//陪同人关系
+                    cashMoney:0
+                }
+                this.cash = {
+                    cashId: '',
+                    memNum: '',
+                    balance: '',
+                    select: '',
+                    btn: false,
                 }
 
                 this.sameProject = false
                 this.counselorList = []
                 this.isShow = true
                 this.isSelect = true
-                this.consumeReceivable = '0.0'
+                this.consumeReceivable = 0
                 this.$refs.counselorEmp.setPosName("咨询师")
                 this.$refs.counselorEmp.setEmp("")
                 this.$refs.emp.setPosName("咨询顾问")
@@ -418,6 +454,7 @@
                 this.counselorFlag = false
                 this.dateArr = []
                 $("input[name='radioGroup']").prop("checked", "");
+                this.checkMemCash(param.visId)
             },
             //咨询师
             counselorEmpChange: function (param) {
@@ -428,12 +465,12 @@
                     if (!this.projectFlag) {
                         this.$refs.project.setEmpId(this.consume.counselor)
                         this.$refs.project.setProject(0)
-                        this.consume.price = '0'
-                        this.consume.actualCount = '0'
-                        this.consume.discount = '0'
-                        this.consume.receivable = '0'
-                        this.consume.realCross = '0'
-                        this.consumeReceivable = ''
+                        this.consume.price = 0
+                        this.consume.actualCount = 0
+                        this.consume.discount = 0
+                        this.consume.receivable = 0
+                        this.consume.realCross = 0
+                        this.consumeReceivable = 0
                     }
                 }
             },
@@ -507,6 +544,10 @@
                 if (this.dateArr.length > 1) {
                     this.consume.actualBegDate = this.dateArr[0];
                     this.consume.actualEndDate = this.dateArr[1];
+                }
+                if (this.cash.select > 0) {
+                    this.consume.cashId = this.cash.cashId;
+                    this.consume.cashMoney = this.cash.select;
                 }
 
                 var url = this.url + '/purchasedItemsAction/consumProject'
@@ -671,6 +712,7 @@
                             this.consume.receivable = item.receivable //应交
                             this.consume.realCross = item.realCross //实缴
                             this.consume.proType = item.proType
+                            this.selectObj = item
                         }
                         this.clickItemObj.count = this.clickItemObj.count + 1
                     } else {
@@ -697,6 +739,7 @@
                     }
                 }
                 this.projectFlag = e.target.checked
+                this.consume.consumCount = 0
             },
             //项目类型转换
             transforProType(proType) {
@@ -747,8 +790,70 @@
                 }
                 this.$refs.counselorEmp.setQueryParam(param)
                 this.$refs.counselorEmp.setEmp(item.counselor)
-            }
-        }
+            },
+            computedRealCross() {
+                this.consume.realCross = this.consume.consumCount * this.consume.price
+            },
+            checkMemCash(param) {
+                if (this.isBlank(param)) {
+                    return
+                }
+                var url = this.url + '/cashAction/queryCash'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        memNum: param,
+                        balanceState: '2',
+                    },
+                    dataType: 'json',
+                }).then((response) => {
+                    var res = response.data
+                    if (res.retCode == '0000') {
+                        if (res.retData.length > 0) {
+                            this.cash = res.retData[0]
+                            this.cash.select = '0.0'
+                        } else {
+                            this.cash = {
+                                memNum: '', //会员号
+                                balance: '',
+                            }
+                        }
+                    } else {
+                        alert(res.retMsg)
+                    }
+                }).catch((error) => {
+                    console.log('会员查询请求失败')
+                });
+            },
+            count(event) {
+                if (Number(this.cash.select) > Number(this.cash.balance)) {
+                    this.cash.select = this.cash.balance;
+                    $("#earn").val(this.cash.select);
+                }
+                // console.log("count1")
+                // if (this.member.counselorEmpId != this.consume.counselor) {
+                //     console.log("count2")
+                //     if (this.consume.proType == 0) {
+                //         console.log("count4")
+                //         this.isSelect = false
+                //         this.consumeReceivable = this.consume.realCross
+                //     } else {
+                //         console.log("count5")
+                //         this.isSelect = true
+                //         this.consumeReceivable = this.consume.realCross - this.member.balance - this.cash.select;
+                //     }
+                // } else {
+                //     console.log("count3")
+                //     this.isSelect = false
+                //     this.consumeReceivable = this.consume.realCross - this.cash.select;
+                // }
+            },
+        },
 
     }
 </script>

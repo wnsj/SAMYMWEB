@@ -151,10 +151,10 @@ body{
 }
 .wraper{
     position:relative;
-    box-shadow: -5px 0 5px #ccc, 5px 0 5px #ccc, 0 -5px 5px #ccc, 0 5px 5px #ccc;
+    /* box-shadow: -5px 0 5px #ccc, 5px 0 5px #ccc, 0 -5px 5px #ccc, 0 5px 5px #ccc;
     width:95%; 
     background:#fff; 
-    margin:30px auto;
+    margin:30px auto; */
     padding:10px 10px 20px 10px;
 }
 .posAb{

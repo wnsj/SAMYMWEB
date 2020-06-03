@@ -41,7 +41,7 @@
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="vistorName">
+				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="visitorName">
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -312,7 +312,7 @@
 				isuse: '1',
 				storeId: this.storeId(),
 				memNum: '',
-				vistorName: '',
+				visitorName: '',
 				phone: '',
 				visType: '',
 				empId: '',
@@ -417,7 +417,7 @@
 					data: {
 						storeId: this.storeId,
 						memNum: this.memNum,
-						vistorName: this.vistorName,
+						visitorName: this.visitorName,
 						phone: this.phone,
 						visType: this.visType,
 						chaId: this.chaId,

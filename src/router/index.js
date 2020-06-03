@@ -30,6 +30,7 @@ import MemberTotle from '../components/MP/MemberTotle.vue'
 import CounseRoomTimeTotal from '../components/MP/CounseRoomTimeTotal.vue'
 import NewRuleManager from '../components/MP/NewRuleManager.vue'
 import UmsPermissionManage from '../components/MP/UmsPermissionManage.vue'
+import Refund from '../components/MP/Refund.vue'
 
 Vue.use(Router)
 
@@ -68,6 +69,11 @@ export default new Router({
 				    path: '/MP/VisitState',
 				    name: 'VisitState',
 				    component: VisitState,
+				},
+				{
+				    path: '/MP/Refund',
+				    name: 'Refund',
+				    component: Refund,
 				},
 				{
 				    path: '/MP/DiseaseType',

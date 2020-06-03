@@ -65,10 +65,6 @@
                     </select>
                 </div>
             </div>
-            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"
-                    data-toggle="modal"
-                    v-on:click="selectRule('1')" v-has="'SAMY:MP:CashDeposit:Add'">添加定金
-            </button>
             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
                     data-toggle="modal"
                     v-on:click="checkMember(1)">查询
@@ -105,8 +101,6 @@
                             <td class="text-center" style="line-height:33px">{{item.operatorName}}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-warning" v-on:click="modifyMember(item)" v-has="'SAMY:MP:CashDeposit:Update'">修改
-                                </button>
-                                <button type="button" class="btn btn-success" v-on:click="consumptionModel(item)" v-has="'SAMY:MP:CashDeposit:Consum'">消费
                                 </button>
                                 <button type="button" class="btn btn-danger" v-on:click="refundModel(item)" v-has="'SAMY:MP:CashDeposit:Refund'">退费</button>
                                 <button v-if="item.memNum==null||item.memNum==''" type="button" class="btn btn-primary"

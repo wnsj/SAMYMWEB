@@ -63,6 +63,10 @@
 							    <router-link to="/MP/CashDeposit"><i class="fa" aria-hidden="true">定金管理</i>
 							    </router-link>
 							</dd>
+							<dd @click="addCheck('Refund')" v-bind:class="{'li-active':onString=='Refund'}">
+							    <router-link to="/MP/Refund"><i class="fa" aria-hidden="true">退费管理</i>
+							    </router-link>
+							</dd>
                         </dl>
                         <!-- <dl v-bind:class="{h25:bool2}">
                             <dt @click="onShow(1)" v-bind:class="{'li-active':bool2}">
@@ -380,7 +384,7 @@
     }
 
     #aside-menu dl.h15 {
-        height: 300px;
+        height: 350px;
     }
 
     #aside-menu dl.h25 {

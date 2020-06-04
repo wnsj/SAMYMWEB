@@ -5,7 +5,7 @@
             <button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
             <h2 id="myModalLabel" class="modal-title">产品消费</h2>
         </div>
-        <div class="modal-body  pos_r">
+        <div class="modal-body  pos_r" style="max-height: 650px;overflow-y: scroll">
             <div class="tab-pane fade in active martop" id="basic">
                 <div class="col-md-6 form-group clearfix">
                     <label for="cyname" class="col-md-4 control-label text-right nopad end-aline"
@@ -34,31 +34,34 @@
                     </div>
                 </div>
                 <div v-show="unfinishedProList.length > 0">
-                    <label for="cyname" class="col-md-4 control-label text-right nopad end-aline"
-                           style="padding:0;line-height:34px;">已购项目</label><span
-                    class="sign-left">:</span>
-                    <table class="table table-bordered table-hover">
-                        <thead class="datathead">
-                        <tr>
-                            <td></td>
-                            <td>项目名</td>
-                            <td>咨询师名</td>
-                            <td>项目类型</td>
-                            <td>总课时</td>
-                            <td>剩余课时</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-for="item in unfinishedProList">
-                            <td><input type="radio" name="radioGroup" @click="radioClick($event,item)"/></td>
-                            <td>{{item.proName}}</td>
-                            <td>{{item.counselorName}}</td>
-                            <td>{{transforProType(item.proType)}}</td>
-                            <td>{{item.totalCount}}</td>
-                            <td>{{item.totalCount - item.consumCount}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="col-md-6 form-group clearfix">
+                        <label for="cyname" class="col-md-4 control-label text-right nopad end-aline"
+                           style="padding:0;line-height:34px;">已购项目</label><span class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-12 form-group clearfix text-left">
+                        <table class="table table-bordered table-hover">
+                            <thead class="datathead">
+                            <tr>
+                                <td></td>
+                                <td>项目名</td>
+                                <td>咨询师名</td>
+                                <td>项目类型</td>
+                                <td>总课时</td>
+                                <td>剩余课时</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="item in unfinishedProList">
+                                <td><input type="radio" name="radioGroup" @click="radioClick($event,item)"/></td>
+                                <td>{{item.proName}}</td>
+                                <td>{{item.counselorName}}</td>
+                                <td>{{transforProType(item.proType)}}</td>
+                                <td>{{item.totalCount}}</td>
+                                <td>{{item.totalCount - item.consumCount}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="col-md-12 form-group clearfix text-left">
                     <h4 id="myModalLabel" class="modal-title">产品：</h4>
@@ -516,7 +519,7 @@
                     return
                 }
                 if (this.isBlank(this.consume.consumCount)) {
-                    alert("消费产品不可为空!");
+                    alert("消费产品课时不可为空!");
                     return;
                 }
                 if (this.consume.consumCount > this.consume.totalCount) {

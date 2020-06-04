@@ -5,24 +5,18 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">客户管理</h1>
 		</div>
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="padding-left: 35px;">
+                <button type="button" class="btn btn-default pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('5')" v-has="'SAMY:MP:CourseRefund'">退费</button>
+                <button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('4')" v-has="'SAMY:MP:Order:Add'">预约</button>
+                <button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('3')" v-has="'SAMY:MP:CashDeposit:Add'">定金</button>
+                <button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('2')" v-has="'SAMY:MP:CourseConsum'">消费</button>
+                <button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('1')" v-has="'SAMY:MP:CoursePurchase'">购	买 产 品	</button>
+            </div>
+        </div>
+
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-2 col-lg-12" style="margin-bottom: 10px;">
-				<button type="button" class="btn btn-default pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('5')" v-has="'SAMY:MP:CourseRefund'">退
-					费
-				</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('4')" v-has="'SAMY:MP:Order:Add'">预
-					约
-				</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('3')" v-has="'SAMY:MP:CashDeposit:Add'">定
-					金
-				</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('2')" v-has="'SAMY:MP:CourseConsum'">消
-					费
-				</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('1')" v-has="'SAMY:MP:CoursePurchase'">购
-					买 产 品
-				</button>
-			</div>
+
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
@@ -157,6 +151,8 @@
 								<th class="text-center">咨询方向</th>
 								<th class="text-center">接待人</th>
 								<th class="text-center">访问类型</th>
+								<th class="text-center">客户判定</th>
+								<th class="text-center">续流状态</th>
 								<th class="text-center">行业</th>
 								<th class="text-center">紧急联系人</th>
                             <!-- <th class="text-center">联系人电话</th> -->
@@ -187,7 +183,9 @@
 								<td class="text-center">{{item.channelName}}</td>
 								<td class="text-center">{{item.consDirection}}</td>
 								<td class="text-center">{{item.empName}}</td>
-								<td class="text-center">{{item.visType==1?"初访":"复访"}}</td>
+								<td class="text-center">{{item.visType==1?'初诊':'复诊'}}</td>
+								<td class="text-center">{{item.vsIdJudgeName}}</td>
+								<td class="text-center">{{item.vsIdFlowName}}</td>
 								<td class="text-center">{{item.indName}}</td>
 								<td class="text-center">{{item.urgentName}}</td>
                             <!-- <td class="text-center">{{item.urgentPhone}}</td> -->

@@ -7,19 +7,24 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-2 col-lg-12" style="margin-bottom: 10px;">
-				<button type="button" class="btn btn-default pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('5')" v-has="'SAMY:MP:CourseRefund'">退
+				<button type="button" class="btn btn-default pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('5')"
+				 v-has="'SAMY:MP:CourseRefund'">退
 					费
 				</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('4')" v-has="'SAMY:MP:Order:Add'">预
+				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('4')"
+				 v-has="'SAMY:MP:Order:Add'">预
 					约
 				</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('3')" v-has="'SAMY:MP:CashDeposit:Add'">定
+				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('3')"
+				 v-has="'SAMY:MP:CashDeposit:Add'">定
 					金
 				</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('2')" v-has="'SAMY:MP:CourseConsum'">消
+				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('2')"
+				 v-has="'SAMY:MP:CourseConsum'">消
 					费
 				</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('1')" v-has="'SAMY:MP:CoursePurchase'">购
+				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('1')"
+				 v-has="'SAMY:MP:CoursePurchase'">购
 					买 产 品
 				</button>
 			</div>
@@ -159,25 +164,26 @@
 								<th class="text-center">访问类型</th>
 								<th class="text-center">客户判定</th>
 								<th class="text-center">续流状态</th>
-								<th class="text-center">行业</th>
+								<!-- <th class="text-center">行业</th>
 								<th class="text-center">紧急联系人</th>
-                            <!-- <th class="text-center">联系人电话</th> -->
-								<!-- <th class="text-center">微信号</th> -->
+								<th class="text-center">联系人电话</th>
+								<th class="text-center">微信号</th>
 								<th class="text-center">邮箱</th>
-								<th class="text-center">地址</th>
+								<th class="text-center">地址</th> -->
 								<th class="text-center">添加时间</th>
-								<th class="text-center">描述</th>
+								<!-- <th class="text-center">描述</th> -->
 								<th class="text-center">是否转会员</th>
 								<th class="text-center" v-has="'SAMY:MP:Visitor:Update'">修改</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr v-for="(item,index) in visitorList" :key="index" v-on:dblclick="selectRule('3',item)">
-								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'" style="position: relative;" >
+								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'" style="position: relative;">
 									<!-- <button type="button" class="btn btn-warning" v-on:click="editorAction(item)">编辑
                                 </button> -->
-									<input :id="'edit'+(index+1)" class="editradio" type="radio" style="border-radius:5px;" name="复选框" :value="index" v-model="checkedValue" />
-                                    <label :for="'edit'+(index+1)" class="editlabel" ></label>
+									<input :id="'edit'+(index+1)" class="editradio" type="radio" style="border-radius:5px;" name="复选框" :value="index"
+									 v-model="checkedValue" />
+									<label :for="'edit'+(index+1)" class="editlabel"></label>
 
 								</td>
 								<td class="text-center">{{item.visId}}</td>
@@ -192,14 +198,14 @@
 								<td class="text-center">{{item.visType==1?'初诊':'复诊'}}</td>
 								<td class="text-center">{{item.vsIdJudgeName}}</td>
 								<td class="text-center">{{item.vsIdFlowName}}</td>
-								<td class="text-center">{{item.indName}}</td>
+								<!-- <td class="text-center">{{item.indName}}</td>
 								<td class="text-center">{{item.urgentName}}</td>
-                            <!-- <td class="text-center">{{item.urgentPhone}}</td> -->
-								<!-- <td class="text-center">{{item.vnum}}</td> -->
+								<td class="text-center">{{item.urgentPhone}}</td>
+								<td class="text-center">{{item.vnum}}</td>
 								<td class="text-center">{{item.email}}</td>
-								<td class="text-center">{{item.address}}</td>
+								<td class="text-center">{{item.address}}</td> -->
 								<td class="text-center">{{item.createTime | dateFormatFilter("YYYY-MM-DD")}}</td>
-								<td class="text-center">{{item.marker}}</td>
+								<!-- <td class="text-center">{{item.marker}}</td> -->
 								<td class="text-center">
 									<button type="button" class="btn btn-warning" v-on:click="updateVisitorShiftMember(item)">
 										{{item.isMem==1?"已转会员":"未转会员"}}
@@ -578,41 +584,42 @@
 </script>
 
 <style>
-    input.editradio[type='radio']{
-       width: 20px;
-       height: 20px;
-      opacity: 0;
-    }
-    label.editlabel {
-      position: absolute;
-      left: 28px;
-      bottom: 12px;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 1px solid #999;
-      z-index: 99;
-    }
+	input.editradio[type='radio'] {
+		width: 20px;
+		height: 20px;
+		opacity: 0;
+	}
 
-    /*设置选中的input的样式*/
-    /* + 是兄弟选择器,获取选中后的label元素*/
-    input.editradio:checked+label.editlabel {
-      background-color: #3c86f1;
-      border: 1px solid #3c86f1;
-    }
+	label.editlabel {
+		position: absolute;
+		left: 28px;
+		bottom: 12px;
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		border: 1px solid #999;
+		z-index: 99;
+	}
 
-    input.editradio:checked+label.editlabel::after {
-      position: absolute;
-      content: '';
-      width: 5px;
-      height: 10px;
-      top: 3px;
-      left: 6px;
-      border: 2px solid #fff;
-      border-top: none;
-      border-left: none;
-      transform: rotate(45deg);
-    }
+	/*设置选中的input的样式*/
+	/* + 是兄弟选择器,获取选中后的label元素*/
+	input.editradio:checked+label.editlabel {
+		background-color: #3c86f1;
+		border: 1px solid #3c86f1;
+	}
+
+	input.editradio:checked+label.editlabel::after {
+		position: absolute;
+		content: '';
+		width: 5px;
+		height: 10px;
+		top: 3px;
+		left: 6px;
+		border: 2px solid #fff;
+		border-top: none;
+		border-left: none;
+		transform: rotate(45deg);
+	}
 
 
 	/*分页需要的样式*/
@@ -648,6 +655,4 @@
 			display: none
 		}
 	}
-
-
 </style>

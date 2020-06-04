@@ -79,16 +79,6 @@
                     </div>
                     <div class="col-md-6 form-group clearfix">
                         <label class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">性别</label><span class="sign-left">:</span>
-                        <div class="col-md-8">
-                            <select class="form-control" v-model="orderClick.sex">
-                                <option value="1">男</option>
-                                <option value="2">女</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline"
                                style="padding:0;line-height:34px;">备注</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <textarea class="form-control" v-model="orderClick.remark">
@@ -577,30 +567,10 @@
 
             //the event of addtional button
             addOrder(param) {
-                var reg =
-                    /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
-
-                // console.log('orderClick:'+JSON.stringify(this.orderClick))
-                if (this.isBlank(this.orderClick.appName)) {
-                    alert("姓名不能为空")
-                    return
-                }
-                if (this.isBlank(this.orderClick.phone)) {
-                    alert("手机号不能为空")
-                    return
-                } else if (reg.test(this.orderClick.phone) == false) {
-                    alert("不是完整的11位手机号或者正确的座机号！");
-                    return
-                }
-
                 if (this.isBlank(this.orderClick.empId)) {
                     alert('咨询师不能为空')
                     return
                 }
-                // 				if(this.isBlank(this.orderClick.proId) || this.orderClick.proId=='0'){
-                // 					alert('咨询师产品不能为空')
-                // 					return
-                // 				}
                 if (!this.isBlank(this.orderClick.appDate)) {
                     this.orderClick.appDate = this.moment(this.orderClick.appDate, 'YYYY-MM-DD')
                 } else {

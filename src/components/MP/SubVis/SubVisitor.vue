@@ -305,6 +305,14 @@
 					alert("咨客的来源渠道不能为空")
 					return
 				}
+				if(this.isBlank(this.visitor.vsIdJudge)){
+					alert("咨客判定不能为空")
+					return
+				}
+				if(this.isBlank(this.visitor.vsIdFlow)){
+					alert("续流状态不能为空")
+					return
+				}
 				if(this.isBlank(this.visitor.empId) || this.visitor.empId==0){
 					alert("接待人不能为空")
 					return

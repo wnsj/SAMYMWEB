@@ -516,7 +516,7 @@
                     return
                 }
                 if (this.isBlank(this.consume.consumCount)) {
-                    alert("消费产品不可为空!");
+                    alert("消费产品课时不可为空!");
                     return;
                 }
                 if (this.consume.consumCount > this.consume.totalCount) {

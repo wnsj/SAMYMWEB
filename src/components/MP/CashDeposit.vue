@@ -102,11 +102,7 @@
                             <td class="text-center">
                                 <button type="button" class="btn btn-warning" v-on:click="modifyMember(item)" v-has="'SAMY:MP:CashDeposit:Update'">修改
                                 </button>
-<<<<<<< HEAD
-=======
-<!--                                <button type="button" class="btn btn-success" v-on:click="consumptionModel(item)" v-has="'SAMY:MP:CashDeposit:Consum'">消费-->
-<!--                                </button>-->
->>>>>>> 5f223922fb3248343131be4f41779fb90b4ea39f
+
                                 <button type="button" class="btn btn-danger" v-on:click="refundModel(item)" v-has="'SAMY:MP:CashDeposit:Refund'">退费</button>
                                 <button v-if="item.memNum==null||item.memNum==''" type="button" class="btn btn-primary"
                                         v-on:click="transferMember(item)" v-has="'SAMY:MP:CashDeposit:ZhuanMember'">转会员

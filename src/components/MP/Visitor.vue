@@ -157,6 +157,8 @@
 								<th class="text-center">咨询方向</th>
 								<th class="text-center">接待人</th>
 								<th class="text-center">访问类型</th>
+								<th class="text-center">客户判定</th>
+								<th class="text-center">续流状态</th>
 								<th class="text-center">行业</th>
 								<th class="text-center">紧急联系人</th>
                             <!-- <th class="text-center">联系人电话</th> -->
@@ -187,7 +189,9 @@
 								<td class="text-center">{{item.channelName}}</td>
 								<td class="text-center">{{item.consDirection}}</td>
 								<td class="text-center">{{item.empName}}</td>
-								<td class="text-center">{{item.visType==1?"初访":"复访"}}</td>
+								<td class="text-center">{{item.visType==1?'初诊':'复诊'}}</td>
+								<td class="text-center">{{item.vsIdJudgeName}}</td>
+								<td class="text-center">{{item.vsIdFlowName}}</td>
 								<td class="text-center">{{item.indName}}</td>
 								<td class="text-center">{{item.urgentName}}</td>
                             <!-- <td class="text-center">{{item.urgentPhone}}</td> -->

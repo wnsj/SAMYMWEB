@@ -98,7 +98,7 @@
         methods: {
             // Initialization FWRoyalty’s content
             initData(param, cash) {
-                console.log(JSON.stringify(cash))
+                // console.log(JSON.stringify(cash))
                 if (param == 'add') {
                     console.log('Initialization FWRoyalty’s content, which adds FWRoyalty')
                     this.title = '新增'

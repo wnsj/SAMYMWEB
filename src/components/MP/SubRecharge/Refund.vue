@@ -157,6 +157,7 @@
         methods: {
             // Initialization consume’s content
             initData(param) {
+				$('#refundContent').modal({backdrop: 'static', keyboard: false});
                 this.refund = {
                     consumCount: 0, //退课时
                     receivable: '', //应退金额

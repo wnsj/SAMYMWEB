@@ -1,11 +1,11 @@
 <!-- add and modify consume -->
 <template>
-    <div class="modal-content">
+    <div class="modal-content" >
         <div class="modal-header">
             <button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
             <h2 id="myModalLabel" class="modal-title">产品购买</h2>
         </div>
-        <div class="modal-body  pos_r">
+        <div class="modal-body  pos_r" style="max-height: 650px;overflow-y: scroll" >
             <div class="tab-pane fade in active martop" id="basic">
 
                 <!--				<div class="col-md-6 form-group clearfix">-->
@@ -34,9 +34,11 @@
                     </div>
                 </div>
                 <div v-show="unfinishedProList.length > 0">
-                    <label for="cyname" class="col-md-4 control-label text-right nopad end-aline"
-                           style="padding:0;line-height:34px;">已购产品</label><span
-                    class="sign-left">:</span>
+                    <div class="col-md-6 form-group clearfix">
+                        <label for="cyname" class="col-md-4 control-label text-right nopad end-aline"
+                           style="padding:0;line-height:34px;">已购产品</label><span class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-12 col-lg-12">
                     <table class="table table-bordered table-hover">
                         <thead class="datathead">
                         <tr>
@@ -57,10 +59,12 @@
                         </tr>
                         </tbody>
                     </table>
-                    <div class="col-md-12 col-lg-12">
-                        <p class="tips">注：* 上面是已购产品列表，如发生余额抵扣购买新产品，则请选中已购产品；否则，请不要点选</p>
-                        <p class="tips">若已经勾选，则再次点击取消勾选</p>
                     </div>
+
+                    <div class="col-md-12 col-lg-12" style="margin-bottom: 20px;line-height: 25px;">
+                        <p class="tips">注：* 上面是已购产品列表，如发生余额抵扣购买新产品，则请选中已购产品；否则，请不要点选<br>若已经勾选，则再次点击取消勾选</p>
+                    </div>
+
                 </div>
                 <div class="col-md-6 form-group clearfix" v-show="member.balance>0">
                     <label for="cyname" class="col-md-4 control-label text-right nopad end-aline"
@@ -377,6 +381,7 @@
         methods: {
             // Initialization consume’s content
             initData(title, param) {
+				$('#rechargeContent').modal({backdrop: 'static', keyboard: false});
                 this.clickItemObj = {
                     itemId: 0,
                     count: 0

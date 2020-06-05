@@ -425,6 +425,7 @@
         },
         methods: {
             initData(flag,param) {
+				$('#addSubOrderContent').modal({backdrop: 'static', keyboard: false});
                 this.numArr = []
 				console.log(param)
                 if (flag == 'againAdd') {

@@ -166,6 +166,7 @@
 								<th class="text-center">添加时间</th>
 								<!-- <th class="text-center">描述</th> -->
 								<th class="text-center">是否转会员</th>
+								<th class="text-center">联系电话</th>
 								<th class="text-center" v-has="'SAMY:MP:Visitor:Update'">修改</th>
 							</tr>
 						</thead>
@@ -205,6 +206,10 @@
 									</button>
 								</td>
 								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'">
+									<button type="button" class="btn btn-warning" @click="queryPhone(item)">联系电话
+									</button>
+								</td>
+								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'">
 									<button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改
 									</button>
 								</td>
@@ -225,53 +230,94 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="visContent">
 				<div class="modal-dialog">
-					<subVis ref='subVis' @certainAction='feedBack'></subVis>
+					<subVis ref='subVis' @certainAction='feedBack6'></subVis>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="memContent">
 				<div class="modal-dialog">
-					<tm ref='tm' @closeCurrentPage='feedBack'></tm>
+					<tm ref='tm' @closeCurrentPage='feedBack7'></tm>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="customContent">
 				<div class="modal-dialog">
-					<custom ref='custom' @closeCurrentPage='feedBack'></custom>
+					<custom ref='custom' @closeCurrentPage='feedBack5'></custom>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="refundContent">
 				<div class="modal-dialog">
-					<refund ref='refund' @closeCurrentPage='feedBack'></refund>
+					<refund ref='refund' @closeCurrentPage='feedBack4'></refund>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="rechargeContent">
 				<div class="modal-dialog">
-					<recharge ref='recharge' @closeCurrentPage='feedBack'></recharge>
+					<recharge ref='recharge' @closeCurrentPage='feedBack3'></recharge>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="addSubOrderContent">
 				<div class="modal-dialog">
-					<addSubOrder ref='addSubOrder' @closeCurrentPage='feedBack'></addSubOrder>
+					<addSubOrder ref='addSubOrder' @closeCurrentPage='feedBack2'></addSubOrder>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="subCdContent">
 				<div class="modal-dialog">
-					<subCd ref='subCd' @closeCurrentPage='feedBack'></subCd>
+					<subCd ref='subCd' @closeCurrentPage='feedBack1'></subCd>
 				</div>
 			</div>
 		</div>
-
+		<div class="modal fade" id="showPhoneContent">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×
+						</button>
+						<h4 id="myModalLabel" class="modal-title">电话</h4>
+					</div>
+					<div class="modal-body  pos_r">
+						<div class="tab-pane fade in active martop" id="basic">
+							<form action="" class="clearfix">
+								<div class="col-md-12 form-group clearfix">
+									<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">电话号</label><span
+									 class="sign-left">:</span>
+									<div class="col-md-8">
+										<label class="form-control">{{phoneNoX}}</label>
+									</div>
+								</div>
+								<div class="col-md-12 form-group clearfix">
+									<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">分机号</label><span
+									 class="sign-left">:</span>
+									<div class="col-md-8">
+										<label class="form-control">{{extension}}</label>
+									</div>
+								</div>
+								<div class="col-md-12 form-group clearfix">
+									<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">失效时间</label><span
+									 class="sign-left">:</span>
+									<div class="col-md-8">
+										<label class="form-control">{{endUseDate}}</label>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left">
+									<p style="margin-left:1.5%; color:red ;">注：拨打手机号，听到提示后输入分机号，按#号结束。</p>
+									<p style="margin-left:1.5%; color:red ;"> 过了失效时间，通过这个手机号将无法联系到客户。</p>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -329,6 +375,10 @@
 				fixedHeader: false,
 				checkedValue: -1,
 				accountType: this.accountType(),
+
+				phoneNoX: '',
+				extension: '',
+				endUseDate: '',
 
 
 				//分页需要的数据
@@ -391,16 +441,36 @@
 					this.storeId = param.storeId
 				}
 			},
-			feedBack() {
+			
+			feedBack1() {
 				this.checkVisitor(1)
 				$("#subCdContent").modal('hide')
+			},
+			feedBack2() {
+				this.checkVisitor(1)
 				$("#addSubOrderContent").modal('hide')
+			},
+			feedBack3() {
+				this.checkVisitor(1)
 				$("#rechargeContent").modal('hide')
+			},
+			feedBack4() {
+				this.checkVisitor(1)
 				$("#refundContent").modal('hide')
+			},
+			feedBack5() {
+				this.checkVisitor(1)
 				$("#customContent").modal('hide')
+			},
+			feedBack6() {
+				this.checkVisitor(1)
 				$("#visContent").modal('hide')
+			},
+			feedBack7() {
+				this.checkVisitor(1)
 				$("#memContent").modal('hide')
 			},
+			
 			//check the list of member
 			checkVisitor(page) {
 				console.log('checkMember')
@@ -565,6 +635,36 @@
 						break;
 				}
 			},
+			queryPhone(item) {
+			    var url = this.url + '/visitorAction/requirePhone'
+			    this.$ajax({
+			        method: 'POST',
+			        url: url,
+			        headers: {
+			            'Content-Type': this.contentType,
+			            'Access-Token': this.accessToken
+			        },
+			        data: {
+			            visId: item.visId,
+			            accId: this.accountId()
+			        },
+			        dataType: 'json',
+			    }).then((response) => {
+			        var res = response.data
+			        //console.log(JSON.stringify(res))
+			        if (res.retCode == '0000') {
+			            this.phoneNoX = res.retData.phoneNoX
+			            this.extension = res.retData.extension
+			            this.endUseDate = res.retData.endDate
+			            $("#showPhoneContent").modal('show')
+			        } else {
+			            alert(res.retMsg)
+			        }
+			
+			    }).catch((error) => {
+			        console.log('请求失败处理')
+			    });
+			},
 		},
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true);
@@ -649,3 +749,13 @@
 		}
 	}
 </style>
+<!-- feedBack() {
+				this.checkVisitor(1)
+				$("#subCdContent").modal('hide')
+				$("#addSubOrderContent").modal('hide')
+				$("#rechargeContent").modal('hide')
+				$("#refundContent").modal('hide')
+				$("#customContent").modal('hide')
+				$("#visContent").modal('hide')
+				$("#memContent").modal('hide')
+			}, -->

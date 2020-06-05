@@ -76,7 +76,7 @@
                     <table class="table table-bordered table-hover" id="datatable">
                         <thead class="datathead">
                         <tr>
-                            <th class="text-center">门店</th>
+                            <th class="text-center">交费门店</th>
                             <th class="text-center">会员号</th>
                             <th class="text-center">姓名</th>
                             <th class="text-center">手机号</th>

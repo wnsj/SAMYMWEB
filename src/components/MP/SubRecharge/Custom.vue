@@ -540,6 +540,14 @@
 				    alert("咨询问题请不要超过100个字符")
 				    return;
 				}
+				if (this.isBlank(this.consume.visitState)) {
+				    alert("客户判定不能为空!")
+				    return;
+				}
+				if (this.isBlank(this.consume.continState)) {
+				    alert("续流状态不能为空!")
+				    return;
+				}
                 //选择了已购买的项目
                 if (this.selectObj != null) {
                     // if (!this.isBlank(this.selectObj.counselor) && this.selectObj.counselor != this.consume.counselor) {

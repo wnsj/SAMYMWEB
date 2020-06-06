@@ -280,7 +280,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×
+						<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPhonePage()">×
 						</button>
 						<h4 id="myModalLabel" class="modal-title">电话</h4>
 					</div>
@@ -664,6 +664,9 @@
 			    }).catch((error) => {
 			        console.log('请求失败处理')
 			    });
+			},
+			closeCurrentPhonePage(){
+				$("#showPhoneContent").modal('hide')
 			},
 		},
 		mounted() {

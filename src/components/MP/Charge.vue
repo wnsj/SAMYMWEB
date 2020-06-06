@@ -5,17 +5,17 @@
 			<h1 class="titleCss">购买产品管理</h1>
 		</div>
 		<div class="row" style="margin-top: 40px;">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span class="sign-left">:</span>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
-					<input class="form-control" type="text" value="" v-model="memNum">
+					<store ref='store' @storeChange='storeChange'></store>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员姓名</p><span class="sign-left">:</span>
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">客户姓名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<input class="form-control" type="text" value="" v-model="memName">
@@ -30,16 +30,16 @@
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-			    <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-			    	<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否欠费</p><span class="sign-left">:</span>
-			    </div>
-			    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-			        <select class="form-control" v-model="isArrears">
-			            <option value="">全部</option>
-			            <option value="1">欠费</option>
-			            <option value="0">不欠费</option>
-			        </select>
-			    </div>
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否欠费</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+					<select class="form-control" v-model="isArrears">
+						<option value="">全部</option>
+						<option value="1">欠费</option>
+						<option value="0">不欠费</option>
+					</select>
+				</div>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 15px;">
@@ -113,6 +113,7 @@
 <script>
 	import dPicker from 'vue2-datepicker'
 	import emp from '../common/Employee.vue'
+	import store from '../common/Store.vue'
 	import Paging from '../common/paging'
 	import {
 		init
@@ -122,6 +123,7 @@
 			dPicker,
 			emp,
 			Paging,
+			store,
 		},
 		data() {
 			return {
@@ -133,7 +135,8 @@
 				begCreateDate: '',
 				endCreateDate: '',
 				storeId: this.storeId(),
-				isArrears:'0',
+				isArrears: '0',
+				accountType:this.accountType(),
 
 
 				//分页需要的数据
@@ -157,7 +160,13 @@
 					this.empId = param.empId
 				}
 			},
-
+			storeChange(param) {
+				if (this.isBlank(param)) {
+					this.storeId = ""
+				} else {
+					this.storeId = param.storeId
+				}
+			},
 			//feedback from adding and modifying view
 			feedBack() {
 				this.conditionCheck()
@@ -183,13 +192,14 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
+						storeId: this.storeId,
 						memNum: this.memNum,
 						memName: this.memName,
 						empId: this.empId,
 						begCreateDate: this.begCreateDate,
 						endCreateDate: this.endCreateDate,
 						storeId: this.storeId,
-						isArrears:this.isArrears,
+						isArrears: this.isArrears,
 
 						page: page.toString(),
 						pageSize: this.size
@@ -209,8 +219,8 @@
 					console.log('充值查询请求失败')
 				});
 			},
-			arrearsAaction(item){
-				if(confirm("是否是补交缴费，确认已经补交缴费？？")==false){
+			arrearsAaction(item) {
+				if (confirm("是否是补交缴费，确认已经补交缴费？？") == false) {
 					return
 				}
 				var url = this.url + '/payArrears/addPayArrears'
@@ -230,7 +240,7 @@
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.conditionCheck(1)
-					}else{
+					} else {
 						alert(res.retMsg)
 					}
 				}).catch((error) => {

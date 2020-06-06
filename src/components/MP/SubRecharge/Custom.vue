@@ -536,7 +536,7 @@
                     alert("此次消费课时大于总课时!")
                     return;
                 }
-				if (this.consume.diseaseProblem.length > 100 ) {
+				if (!this.isBlank(this.consume.diseaseProblem) && this.consume.diseaseProblem.length > 100 ) {
 				    alert("咨询问题请不要超过100个字符")
 				    return;
 				}

@@ -234,9 +234,14 @@
                 });
             },
             closeCurrentPage() {
-                this.$emit('closeCurrentPage')
-                //$("#cdContent").modal("hide")
-                console.log('close the flowWater rule')
+				switch (this.title) {
+				    case "新增":
+				        this.$emit('closeCurrentPage')
+				        break;
+				    case "修改":
+				        $("#cdContent").modal("hide")
+				        break;
+				}
             },
         }
 

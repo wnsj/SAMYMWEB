@@ -6,6 +6,14 @@
             <h1 class="titleCss">退费明细</h1>
         </div>
         <div class="row" style="margin-top: 40px;padding-bottom:1.5%;">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
+				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-7 col-lg-7">
+					<store ref='store' @storeChange='storeChange'></store>
+				</div>
+			</div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
             	<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
             		<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
@@ -80,6 +88,7 @@
 
     
 	import dPicker from 'vue2-datepicker'
+	import store from '../common/Store.vue'
     import Paging from '../common/paging'
     import {
         init
@@ -89,6 +98,7 @@
         components: {
             Paging,
 			dPicker,
+			store,
         },
         data() {
             return {
@@ -98,6 +108,8 @@
 				dateArr:'',
 				begDate:'',
 				endDate:'',
+				storeId: this.storeId(),
+				accountType:this.accountType(),
 
                 //分页需要的数据
                 pages: '', //总页数
@@ -113,7 +125,13 @@
                 this.queryObjectList(page);
             },
             
-            
+            storeChange(param) {
+            	if (this.isBlank(param)) {
+            		this.storeId = ""
+            	} else {
+            		this.storeId = param.storeId
+            	}
+            },
             //check the list of store
             queryObjectList(page) {
 				if(this.dateArr.length > 0 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1]))	{
@@ -132,6 +150,7 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
+						storeId: this.storeId,
 						visitorName:this.visitorName,
 						begDate:this.begDate,
 						endDate:this.endDate,

@@ -515,7 +515,7 @@
                         proId: '',
                         channel: 3,
                         remark: '',
-                        sex:1
+                        sex:param.sex,
                     }
                 }
             },

@@ -206,7 +206,7 @@
 									</button>
 								</td>
 								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'">
-									<button type="button" class="btn btn-warning" @click="queryPhone(item)">联系电话
+									<button type="button" class="btn btn-warning" @click="queryPhone(item)">查询手机号码
 									</button>
 								</td>
 								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'">

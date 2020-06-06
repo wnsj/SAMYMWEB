@@ -209,7 +209,7 @@
                            style="padding:0;line-height:34px;">应交总额</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
+                        <input type="text" class="form-control" v-model="consume.realCross" disabled="disabled">
                     </div>
                 </div>
             </div>
@@ -575,6 +575,7 @@
                 if (this.clickItemObj.count % 2 != 0) {
                     this.consume.piId = this.clickItemObj.itemId
                 }
+				this.consume.receivable = this.consume.realCross
                 this.consume.realCross = this.consume.actualCross
                 var url = this.url + '/purchasedItemsAction/purchasedItemsProject'
                 this.$ajax({
@@ -737,6 +738,7 @@
                     data: {
                         memNum: param,
                         isArrears: '0',
+						proType:'0',
                     },
                     dataType: 'json',
                 }).then((response) => {

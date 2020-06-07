@@ -62,7 +62,8 @@
                     </div>
 
                     <div class="col-md-12 col-lg-12" style="margin-bottom: 20px;line-height: 25px;">
-                        <p class="tips">注：* 上面是已购产品列表，如发生余额抵扣购买新产品，则请选中已购产品；否则，请不要点选<br>若已经勾选，则再次点击取消勾选</p>
+                        <p class="tips">注：1、上面是已购产品列表，如发生余额抵扣购买新产品，则请选中已购产品；否则，请不要点选。若已经勾选，则再次点击取消勾选
+						<br>2、只能抵扣非欠费普通类型产品，月卡季卡等不可抵扣</p>
                     </div>
 
                 </div>
@@ -126,7 +127,7 @@
                            style="padding:0;line-height:34px;">折前总额</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
+                        <input type="text" class="form-control" v-model="consume.preFoldTotalPrice" disabled="disabled">
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
@@ -134,7 +135,7 @@
                            style="padding:0;line-height:34px;">折后总额</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" v-model="consume.realCross" disabled="disabled">
+                        <input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
                     </div>
                 </div>
             </div>
@@ -147,7 +148,7 @@
                            style="padding:0;line-height:34px;">实交总额</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" v-model="consume.actualCross">
+                        <input type="text" class="form-control" v-model="consume.realCross">
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
@@ -209,7 +210,7 @@
                            style="padding:0;line-height:34px;">应交总额</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" v-model="consume.realCross" disabled="disabled">
+                        <input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
                     </div>
                 </div>
             </div>
@@ -331,6 +332,7 @@
                     phone: '', //预约号
                     appNum: '',
                     receivable: 0, //应交(折前)
+					preFoldTotalPrice:'',//折前总价
                     realCross: '', //实缴（折后）
                     actualCross: '0', //实交金额
                     proId: '', //产品id
@@ -394,6 +396,7 @@
                     phone: param.phone,
                     appNum: '', //预约号
                     receivable: 0, //应交
+					preFoldTotalPrice:'',//折前总价
                     realCross: 0, //实缴
                     actualCross: 0, //实交金额
                     proId: '', //产品id
@@ -465,8 +468,9 @@
                     //this.consume.disPrice = param.price * param.discount / 100 //折后单价
                     this.consume.actualCount = param.frequency //实际次数
                     this.consume.discount = param.discount //折扣
-                    this.consume.receivable = param.totalPrice //应交
-                    this.consume.realCross = param.discouAmount //实缴
+					this.consume.preFoldTotalPrice = param.totalPrice//课程总额
+                    this.consume.receivable = param.discouAmount //应交
+                    // this.consume.realCross = param.discouAmount //实缴
                     this.consume.proType = param.proType
                     this.cash.select = '0'
                     this.projectObj = param
@@ -575,8 +579,7 @@
                 if (this.clickItemObj.count % 2 != 0) {
                     this.consume.piId = this.clickItemObj.itemId
                 }
-				this.consume.receivable = this.consume.realCross
-                this.consume.realCross = this.consume.actualCross
+                
                 var url = this.url + '/purchasedItemsAction/purchasedItemsProject'
                 this.$ajax({
                     method: 'POST',

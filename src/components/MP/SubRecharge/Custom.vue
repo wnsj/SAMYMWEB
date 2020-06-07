@@ -113,7 +113,7 @@
                            style="padding:0;line-height:34px;">折前总额</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
+                        <input type="text" class="form-control" v-model="consume.preFoldTotalPrice" disabled="disabled">
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
@@ -121,7 +121,7 @@
                            style="padding:0;line-height:34px;">折后总额</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" v-model="consume.realCross" disabled="disabled">
+                        <input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
@@ -341,6 +341,7 @@
                     phone: '', //预约号
                     appNum: '',
                     receivable: '', //应交(折前)
+					preFoldTotalPrice:'',//折前总价
                     realCross: '', //实缴（折后）
                     proId: '', //项目id
                     discount: '', //折扣
@@ -496,8 +497,8 @@
                     this.consume.price = param.price
                     this.consume.totalCount = param.frequency
                     this.consume.discount = param.discount
-                    this.consume.receivable = param.totalPrice
-                    this.consume.realCross = param.discouAmount
+                    this.consume.preFoldTotalPrice = param.totalPrice
+                    this.consume.receivable = param.discouAmount
                     this.consume.proType = param.proType
                 }
             },
@@ -709,7 +710,7 @@
                     this.consume.totalCount = item.totalCount //实际次数
                     this.consume.discount = item.discount //折扣
                     this.consume.receivable = item.receivable //应交
-                    this.consume.realCross = item.realCross //实缴
+                    this.consume.preFoldTotalPrice = parseInt(item.totalCount)*parseInt(item.price) //实缴
                     this.consume.proType = item.proType
                 } else {
                     if (this.clickItemObj.itemId == item.piId) {
@@ -765,6 +766,8 @@
                 }
                 this.projectFlag = e.target.checked
                 this.consume.consumCount = 0
+				
+				this.consume.realCross='0'//是否选中已购课程都清零
             },
             //项目类型转换
             transforProType(proType) {

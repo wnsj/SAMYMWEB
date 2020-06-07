@@ -646,7 +646,8 @@
 			        },
 			        data: {
 			            visId: item.visId,
-			            accId: this.accountId()
+			            accId: this.accountId(),
+						moduleId:'1',
 			        },
 			        dataType: 'json',
 			    }).then((response) => {

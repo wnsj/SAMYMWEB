@@ -113,7 +113,7 @@
                            style="padding:0;line-height:34px;">折前总额</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
+                        <input type="text" class="form-control" v-model="consume.preFoldTotalPrice" disabled="disabled">
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
@@ -121,10 +121,11 @@
                            style="padding:0;line-height:34px;">折后总额</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" v-model="consume.realCross" disabled="disabled">
+                        <input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
+                    <b>*</b>
                     <label class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">维护人</label><span
                     class="sign-left">:</span>
@@ -133,6 +134,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
+                    <b>*</b>
                     <label class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">访问类型</label><span
                     class="sign-left">:</span>
@@ -144,6 +146,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
+                    <b>*</b>
                     <label class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">客户判定</label><span
                     class="sign-left">:</span>
@@ -152,6 +155,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
+                    <b>*</b>
                     <label class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">续流状态</label><span
                     class="sign-left">:</span>
@@ -192,6 +196,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
+                    <b>*</b>
                     <label class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">咨询方向</label><span
                     class="sign-left">:</span>
@@ -217,6 +222,7 @@
                     </div>
                 </div> -->
                 <div class="col-md-6 form-group clearfix">
+                    <b>*</b>
                     <label class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">咨询室</label><span
                     class="sign-left">:</span>
@@ -225,6 +231,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
+                    <b>*</b>
                     <label class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">开始-结束时间</label><span
                     class="sign-left">:</span>
@@ -290,6 +297,7 @@
                 </div>
             </div>
             <div class="col-md-6 form-group clearfix">
+                <b>*</b>
                 <label for="cyname" class="col-md-4 control-label text-right nopad end-aline"
                        style="padding:0;line-height:34px;">此次消费课时</label><span
                 class="sign-left">:</span>
@@ -341,6 +349,7 @@
                     phone: '', //预约号
                     appNum: '',
                     receivable: '', //应交(折前)
+					preFoldTotalPrice:'',//折前总价
                     realCross: '', //实缴（折后）
                     proId: '', //项目id
                     discount: '', //折扣
@@ -496,8 +505,8 @@
                     this.consume.price = param.price
                     this.consume.totalCount = param.frequency
                     this.consume.discount = param.discount
-                    this.consume.receivable = param.totalPrice
-                    this.consume.realCross = param.discouAmount
+                    this.consume.preFoldTotalPrice = param.totalPrice
+                    this.consume.receivable = param.discouAmount
                     this.consume.proType = param.proType
                 }
             },
@@ -536,8 +545,16 @@
                     alert("此次消费课时大于总课时!")
                     return;
                 }
-				if (this.consume.diseaseProblem.length > 100 ) {
+				if (!this.isBlank(this.consume.diseaseProblem) && this.consume.diseaseProblem.length > 100 ) {
 				    alert("咨询问题请不要超过100个字符")
+				    return;
+				}
+				if (this.isBlank(this.consume.visitState)) {
+				    alert("客户判定不能为空!")
+				    return;
+				}
+				if (this.isBlank(this.consume.continState)) {
+				    alert("续流状态不能为空!")
 				    return;
 				}
                 //选择了已购买的项目
@@ -701,7 +718,7 @@
                     this.consume.totalCount = item.totalCount //实际次数
                     this.consume.discount = item.discount //折扣
                     this.consume.receivable = item.receivable //应交
-                    this.consume.realCross = item.realCross //实缴
+                    this.consume.preFoldTotalPrice = parseInt(item.totalCount)*parseInt(item.price) //实缴
                     this.consume.proType = item.proType
                 } else {
                     if (this.clickItemObj.itemId == item.piId) {
@@ -757,6 +774,8 @@
                 }
                 this.projectFlag = e.target.checked
                 this.consume.consumCount = 0
+				
+				this.consume.realCross='0'//是否选中已购课程都清零
             },
             //项目类型转换
             transforProType(proType) {
@@ -879,5 +898,5 @@
 </script>
 
 <style>
-
+    
 </style>

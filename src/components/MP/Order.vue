@@ -147,7 +147,7 @@
                             <th class="text-center" style="line-height:40px;">到店</th>
                             <th class="text-center" style="line-height:40px;">备注</th>
                             <th class="text-center" style="line-height:40px;">操作人</th>
-                            <th class="text-center" style="line-height:40px;"></th>
+                            <th class="text-center" style="line-height:40px;">编辑</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -553,7 +553,7 @@
                 $("#addAppointContent").modal('show')
             },
             queryPhone(item) {
-                var url = this.url + '/bindPhoneAction/bindPhone'
+                var url = this.url + '/visitorAction/requirePhone'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -562,10 +562,9 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        phonea: item.phone,
-                        storeId: item.storeId,
+                        visId: item.memNum,
                         accId: this.accountId(),
-                        projectType: 0
+                        moduleId:'2',
                     },
                     dataType: 'json',
                 }).then((response) => {

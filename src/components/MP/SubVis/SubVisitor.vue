@@ -167,6 +167,7 @@
 					email:'',
 					address:'',
 					marker:'',
+					birthday:'',
 				},
 				title:'',
 			};
@@ -181,8 +182,8 @@
 					sex:'1',
 					phone:'',
 					chaId:'',
-					vsIdJudge:'0',
-					vsIdFlow:'0',
+					vsIdJudge:'',
+					vsIdFlow:'',
 					consDirection:'',
 					dtId:'',
 					empId:'',
@@ -195,6 +196,7 @@
 					email:'',
 					address:'',
 					marker:'',
+					birthday:'',
 				}
 				if(param=='add'){
 					console.log('Initialization visitor’s content, which adds visitor')
@@ -305,11 +307,11 @@
 					alert("咨客的来源渠道不能为空")
 					return
 				}
-				if(this.isBlank(this.visitor.vsIdJudge)){
+				if(this.isBlank(this.visitor.vsIdJudge) || this.visitor.vsIdJudge=='0'){
 					alert("咨客判定不能为空")
 					return
 				}
-				if(this.isBlank(this.visitor.vsIdFlow)){
+				if(this.isBlank(this.visitor.vsIdFlow) || this.visitor.vsIdFlow=='0'){
 					alert("续流状态不能为空")
 					return
 				}
@@ -325,7 +327,7 @@
 						alert("不是完整的11位手机号或者正确的座机号！");
 						return
 					}else{
-						this.visitor.phone=''
+						this.visitor.phone=null
 					}
 				}
 				if(this.visitor.address.length>100){

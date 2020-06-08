@@ -76,8 +76,8 @@
                     <table class="table table-bordered table-hover" id="datatable">
                         <thead class="datathead">
                         <tr>
-                            <th class="text-center">门店</th>
-                            <th class="text-center">会员号</th>
+                            <th class="text-center">交费门店</th>
+                            <!-- <th class="text-center">会员号</th> -->
                             <th class="text-center">姓名</th>
                             <th class="text-center">手机号</th>
                             <th class="text-center">定金金额</th>
@@ -90,7 +90,7 @@
                         <tbody>
                         <tr v-for="(item,index) in cashList" :key="index" v-on:dblclick="modifyMember(item)">
                             <td class="text-center" style="line-height:33px">{{item.storeName}}</td>
-                            <td class="text-center" style="line-height:33px">{{item.memNum}}</td>
+                            <!-- <td class="text-center" style="line-height:33px">{{item.memNum}}</td> -->
                             <td class="text-center" style="line-height:33px">{{item.cashName}}</td>
                             <td class="text-center" style="line-height:33px">{{item.phone}}</td>
                             <td class="text-center" style="line-height:33px">{{item.money}}</td>

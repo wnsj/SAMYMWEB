@@ -229,8 +229,8 @@
                            style="padding:0;line-height:34px;">开始-结束时间</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <dPicker v-model="dateArr" format="YYYY-MM-DD hh:mm:ss" style="width:100%"
-                                 type="datetime" valueType="format" range>
+                        <dPicker v-model="dateArr" format="hh:mm:ss" style="width:100%"
+                                 type="time" valueType="format" range>
                             <template v-slot:header="{ emit }">
                                 <div style="text-align: left"></div>
                             </template>
@@ -567,14 +567,19 @@
 
                     this.consume.piId = this.selectObj.piId
                 }
-                if (this.dateArr.length > 1) {
+                if (this.dateArr.length > 1 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1])) {
                     this.consume.actualBegDate = this.dateArr[0];
                     this.consume.actualEndDate = this.dateArr[1];
-                }
+                }else{
+					alert('请选择本次消费的时间')
+					return
+				}
                 if (this.cash.select > 0) {
                     this.consume.cashId = this.cash.cashId;
                     this.consume.cashMoney = this.cash.select;
                 }
+				
+				
 
                 var url = this.url + '/purchasedItemsAction/consumProject'
                 this.$ajax({

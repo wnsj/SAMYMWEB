@@ -225,49 +225,49 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="visContent">
 				<div class="modal-dialog">
-					<subVis ref='subVis' @certainAction='feedBack'></subVis>
+					<subVis ref='subVis' @certainAction='feedBack7'></subVis>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="memContent">
 				<div class="modal-dialog">
-					<tm ref='tm' @closeCurrentPage='feedBack'></tm>
+					<tm ref='tm' @closeCurrentPage='feedBack6'></tm>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="customContent">
 				<div class="modal-dialog">
-					<custom ref='custom' @closeCurrentPage='feedBack'></custom>
+					<custom ref='custom' @closeCurrentPage='feedBack2'></custom>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="refundContent">
 				<div class="modal-dialog">
-					<refund ref='refund' @closeCurrentPage='feedBack'></refund>
+					<refund ref='refund' @closeCurrentPage='feedBack1'></refund>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="rechargeContent">
 				<div class="modal-dialog">
-					<recharge ref='recharge' @closeCurrentPage='feedBack'></recharge>
+					<recharge ref='recharge' @closeCurrentPage='feedBack3'></recharge>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="addSubOrderContent">
 				<div class="modal-dialog">
-					<addSubOrder ref='addSubOrder' @closeCurrentPage='feedBack'></addSubOrder>
+					<addSubOrder ref='addSubOrder' @closeCurrentPage='feedBack4'></addSubOrder>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="subCdContent">
 				<div class="modal-dialog">
-					<subCd ref='subCd' @closeCurrentPage='feedBack'></subCd>
+					<subCd ref='subCd' @closeCurrentPage='feedBack5'></subCd>
 				</div>
 			</div>
 		</div>
@@ -391,15 +391,33 @@
 					this.storeId = param.storeId
 				}
 			},
-			feedBack() {
+			feedBack1() {
+				this.checkVisitor(1)
+				$("#refundContent").modal('hide')
+			},
+			feedBack2() {
+				this.checkVisitor(1)
+				$("#customContent").modal('hide')
+			},
+			feedBack3() {
+				this.checkVisitor(1)
+				$("#rechargeContent").modal('hide')
+			},
+			feedBack4() {
+				this.checkVisitor(1)
+				$("#addSubOrderContent").modal('hide')
+			},
+			feedBack5() {
 				this.checkVisitor(1)
 				$("#subCdContent").modal('hide')
-				$("#addSubOrderContent").modal('hide')
-				$("#rechargeContent").modal('hide')
-				$("#refundContent").modal('hide')
-				$("#customContent").modal('hide')
-				$("#visContent").modal('hide')
+			},
+			feedBack6() {
+				this.checkVisitor(1)
 				$("#memContent").modal('hide')
+			},
+			feedBack7() {
+				this.checkVisitor(1)
+				$("#visContent").modal('hide')
 			},
 			//check the list of member
 			checkVisitor(page) {

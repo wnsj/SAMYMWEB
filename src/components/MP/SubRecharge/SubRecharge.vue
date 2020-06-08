@@ -497,7 +497,6 @@
                     this.consume.empId = param.empId
                 }
             },
-
             count(event) {
                 if (Number(this.cash.select) > Number(this.cash.balance)) {
                     this.cash.select = this.cash.balance;
@@ -778,7 +777,7 @@
             }
         },
         mounted() {
-
+           
         },
     }
 </script>

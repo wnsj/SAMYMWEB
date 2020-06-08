@@ -95,10 +95,11 @@
                 title: '新增',
             };
         },
-        methods: {
+        methods: { 
             // Initialization FWRoyalty’s content
             initData(param, cash) {
                 // console.log(JSON.stringify(cash))
+                $('#subCdContent').modal({backdrop: 'static', keyboard: false});
                 if (param == 'add') {
                     console.log('Initialization FWRoyalty’s content, which adds FWRoyalty')
                     this.title = '新增'
@@ -238,7 +239,10 @@
                 //$("#cdContent").modal("hide")
                 console.log('close the flowWater rule')
             },
-        }
+        },
+        mounted() {
+
+        },
 
     }
 </script>

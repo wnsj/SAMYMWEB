@@ -534,7 +534,6 @@
                     }
                 }
             },
-
             //feedback employee information
             projectChange: function (param) {
                 // console.log('科室：'+JSON.stringify(param))
@@ -741,7 +740,7 @@
 
         },
         mounted() {
-
+           
         }
 
     }

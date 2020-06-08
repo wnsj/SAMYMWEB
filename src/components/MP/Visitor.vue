@@ -441,7 +441,6 @@
 					this.storeId = param.storeId
 				}
 			},
-			
 			feedBack1() {
 				this.checkVisitor(1)
 				$("#subCdContent").modal('hide')
@@ -470,7 +469,6 @@
 				this.checkVisitor(1)
 				$("#memContent").modal('hide')
 			},
-			
 			//check the list of member
 			checkVisitor(page) {
 				console.log('checkMember')

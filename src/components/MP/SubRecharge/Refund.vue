@@ -358,6 +358,9 @@
                     this.refund.money = 0
                 }
             }
+        },
+        mounted() {
+            
         }
 
     }

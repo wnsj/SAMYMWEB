@@ -171,3 +171,14 @@ body{
     -ms-user-select:none;
     user-select:none;
 }
+.form-group{ 
+    position:relative;
+}
+.form-group b{ 
+    position:absolute;
+    left:0;
+    top:0;
+    line-height:34px;
+    text-indent:8px;
+    color:red;
+}

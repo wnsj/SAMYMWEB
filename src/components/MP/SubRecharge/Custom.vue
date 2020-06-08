@@ -125,6 +125,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
+                    <b>*</b>
                     <label class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">维护人</label><span
                     class="sign-left">:</span>
@@ -133,6 +134,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
+                    <b>*</b>
                     <label class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">访问类型</label><span
                     class="sign-left">:</span>
@@ -144,6 +146,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
+                    <b>*</b>
                     <label class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">客户判定</label><span
                     class="sign-left">:</span>
@@ -152,6 +155,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
+                    <b>*</b>
                     <label class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">续流状态</label><span
                     class="sign-left">:</span>
@@ -192,6 +196,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
+                    <b>*</b>
                     <label class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">咨询方向</label><span
                     class="sign-left">:</span>
@@ -217,6 +222,7 @@
                     </div>
                 </div> -->
                 <div class="col-md-6 form-group clearfix">
+                    <b>*</b>
                     <label class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">咨询室</label><span
                     class="sign-left">:</span>
@@ -225,6 +231,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 form-group clearfix">
+                    <b>*</b>
                     <label class="col-md-4 control-label text-right nopad end-aline"
                            style="padding:0;line-height:34px;">开始-结束时间</label><span
                     class="sign-left">:</span>
@@ -290,6 +297,7 @@
                 </div>
             </div>
             <div class="col-md-6 form-group clearfix">
+                <b>*</b>
                 <label for="cyname" class="col-md-4 control-label text-right nopad end-aline"
                        style="padding:0;line-height:34px;">此次消费课时</label><span
                 class="sign-left">:</span>
@@ -887,10 +895,13 @@
                 // }
             },
         },
+        mounted() {
+            
+        },
 
     }
 </script>
 
 <style>
-
+    
 </style>

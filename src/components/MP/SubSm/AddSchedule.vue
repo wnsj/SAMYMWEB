@@ -45,8 +45,7 @@
                         </el-calendar>
                     </div>
 
-                    <div class="form-group clearfix">
-                        <div class="col-md-12" style="padding-right:0;">
+                    <div class="col-md-12 form-group clearfix">
                             <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:.7%;"
                                 data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
                             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
@@ -55,7 +54,6 @@
 							    data-toggle="modal" v-on:click="setCheckBox(1)">全选</button>
 								<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;"
 								    data-toggle="modal" v-on:click="setCheckBox(0)">取消</button>
-                        </div>
                     </div>
                 </form>
             </div>

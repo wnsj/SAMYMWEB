@@ -30,11 +30,9 @@
 						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">交费时间</label><span class="sign-left">:</span>
 						<dPicker class="col-md-8" style="width:65%;" v-model="cash.createDate" v-on:click="dateAction()"></dPicker>
 					</div>
-					<div class="form-group clearfix">
-						<div class="col-md-12">
+					<div class="col-md-12 form-group clearfix">
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
 							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>
-						</div>
 					</div>
 				</form>
 			</div>

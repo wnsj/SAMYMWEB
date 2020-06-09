@@ -114,13 +114,26 @@
                     <dPicker style="width:100%" v-model="endAppDate"></dPicker>
                 </div>
             </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="margin-top: 15px">
+                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
+                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否取消</p><span
+                    class="sign-left">:</span>
+                </div>
+                <div class="col-md-7 col-lg-7">
+                    <select class="form-control" v-model="state">
+                        <option value="">--未选择--</option>
+                        <option value="1">未取消</option>
+                        <option value="0">已取消</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
         <div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
-<!--            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"-->
-<!--                    data-toggle="modal"-->
-<!--                    @click="selectRule('1')" v-has="'SAMY:MP:Order:Add'">添加预约-->
-<!--            </button>-->
+            <!--            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"-->
+            <!--                    data-toggle="modal"-->
+            <!--                    @click="selectRule('1')" v-has="'SAMY:MP:Order:Add'">添加预约-->
+            <!--            </button>-->
             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
                     data-toggle="modal"
                     @click="checkOrderList(1)">查询
@@ -180,16 +193,18 @@
                             <td class="text-center" style="line-height:33px;">{{item.operatorName}}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-warning" @click="updateOrder(item)"
-                                        v-has="'SAMY:MP:Order:Update'">修改
+                                        v-has="'SAMY:MP:Order:Update'" :disabled="item.state == 0">修改
                                 </button>
-                                <button type="button" class="btn btn-primary" @click="caAction(item,'cancel')">
+                                <button type="button" class="btn btn-primary" @click="caAction(item,'cancel')"
+                                        :disabled="item.state == 0">
                                     {{item.state=='0' ? '已取消' : '点击取消'}}
                                 </button>
-                                <button type="button" class="btn btn-primary" @click="caAction(item,'arrival')">
+                                <button type="button" class="btn btn-primary" @click="caAction(item,'arrival')"
+                                        :disabled="item.state == 0 || item.arrival == 1">
                                     {{item.arrival=='0' ? '点击到店' : '已到店'}}
                                 </button>
                                 <button type="button" class="btn btn-primary" @click="queryPhone(item)"
-                                        v-has="'SAMY:MP:Order:QueryPhone'">查看手机号码
+                                        v-has="'SAMY:MP:Order:QueryPhone'" :disabled="item.state == 0">查看手机号码
                                 </button>
                                 <button type="button" class="btn btn-primary" @click="againAdd(item)"
                                         v-has="'SAMY:MP:Order:Add'">再来一条
@@ -257,7 +272,7 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left">
-                                        <p style="margin-left:1.5%; color:red ;">注：拨打手机号，听到提示后输入分机号，按#号结束。</p>
+                                        <p style="margin-left:1.5%; color:#ff0000 ;">注：拨打手机号，听到提示后输入分机号，按#号结束。</p>
                                         <p style="margin-left:1.5%; color:red ;"> 过了失效时间，通过这个手机号将无法联系到客户。</p>
                                     </div>
                                 </form>
@@ -571,7 +586,7 @@
                     data: {
                         visId: item.memNum,
                         accId: this.accountId(),
-                        moduleId:'2',
+                        moduleId: '2',
                     },
                     dataType: 'json',
                 }).then((response) => {

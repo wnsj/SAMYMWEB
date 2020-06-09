@@ -125,13 +125,11 @@
           <!--<h4 id="myModalLabel" class="modal-title">第{{consume.consumCount}}次消费</h4>-->
         <!--</div>-->
       <!--</div>-->
-      <div class="form-group clearfix">
-        <div class="col-md-12">
+      <div class="col-md-12 form-group clearfix">
           <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
                   v-on:click="closeCurrentPage()">返回</button>
           <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
                   v-on:click="purchaseHistory()">确认</button>
-        </div>
       </div>
 
     </div>

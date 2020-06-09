@@ -68,11 +68,9 @@
 						<p class="tips">2.若客户之前已有实体会员卡，请勾选“是”，并将用户已经购买的产品通过“产品购买”进行购买。</p>
 						<p class="tips">  此项操作不可逆，若选“否”，客户可以正常上课，但是将会影响提成数据。请谨慎操作。</p>
 					</div>
-					<div class="form-group clearfix">
-						<div class="col-md-12">
+					<div class="col-md-12 form-group clearfix">
 							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
 							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>	
-						</div>
 					</div>
 				</form>
 			</div>

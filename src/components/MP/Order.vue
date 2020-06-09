@@ -179,15 +179,21 @@
                             <td class="text-center" style="line-height:33px;">{{item.remark}}</td>
                             <td class="text-center" style="line-height:33px;">{{item.operatorName}}</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-warning" @click="updateOrder(item)" v-has="'SAMY:MP:Order:Update'">修改</button>
+                                <button type="button" class="btn btn-warning" @click="updateOrder(item)"
+                                        v-has="'SAMY:MP:Order:Update'">修改
+                                </button>
                                 <button type="button" class="btn btn-primary" @click="caAction(item,'cancel')">
                                     {{item.state=='0' ? '已取消' : '点击取消'}}
                                 </button>
                                 <button type="button" class="btn btn-primary" @click="caAction(item,'arrival')">
                                     {{item.arrival=='0' ? '点击到店' : '已到店'}}
                                 </button>
-                                <button type="button" class="btn btn-primary" @click="queryPhone(item)" v-has="'SAMY:MP:Order:QueryPhone'">查看手机号码</button>
-                                <button type="button" class="btn btn-primary" @click="againAdd(item)"  v-has="'SAMY:MP:Order:Add'">再来一条</button>
+                                <button type="button" class="btn btn-primary" @click="queryPhone(item)"
+                                        v-has="'SAMY:MP:Order:QueryPhone'">查看手机号码
+                                </button>
+                                <button type="button" class="btn btn-primary" @click="againAdd(item)"
+                                        v-has="'SAMY:MP:Order:Add'">再来一条
+                                </button>
                             </td>
                         </tr>
                         </tbody>
@@ -252,7 +258,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left">
                                         <p style="margin-left:1.5%; color:red ;">注：拨打手机号，听到提示后输入分机号，按#号结束。</p>
-                                        <p style="margin-left:1.5%; color:red ;">	过了失效时间，通过这个手机号将无法联系到客户。</p>
+                                        <p style="margin-left:1.5%; color:red ;"> 过了失效时间，通过这个手机号将无法联系到客户。</p>
                                     </div>
                                 </form>
                             </div>
@@ -328,7 +334,7 @@
                     this.$refs.AddSubOrderRef.initData()
                     $("#addAppointContent").modal('show')
                 } else if (param == 3) {
-                    if(!this.has("SAMY:MP:Order:Update")){
+                    if (!this.has("SAMY:MP:Order:Update")) {
                         alert("暂无权限!")
                         return
                     }
@@ -372,6 +378,7 @@
                         if (!confirm('是否确认取消')) {
                             return
                         }
+                        obj.state = 1
                         url = this.url + '/appointmentAction/deleteAppointment'
                     }
                 } else if (param == 'arrival') {

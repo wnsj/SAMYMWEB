@@ -11,7 +11,6 @@
 					<table class="table table-bordered table-hover user-table" id="datatable">
 						<thead>
 							<tr>
-								<th class="text-center">会员卡号</th>
 								<th class="text-center">会员姓名</th>
 								<th class="text-center">咨询师姓名</th>
 								<th class="text-center">项目名</th>
@@ -22,7 +21,6 @@
 						</thead> 
 						<tbody>
 							<tr v-for="(item,index) in memberList" :key="index">
-								<td>{{item.memNum}}</td>
 								<td>{{item.memName}}</td>
 								<td>{{item.empName}}</td>
 								<td>{{item.proName}}</td>

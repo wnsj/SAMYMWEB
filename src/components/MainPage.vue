@@ -138,19 +138,24 @@
                             </dd>
 
                         </dl>
-                        <!-- <dl v-bind:class="{h10:bool4}">
+                        <dl v-bind:class="{h10:bool4}">
                             <dt @click="onShow(3)" v-bind:class="{'li-active':bool4}">
                                 <i class="fa" v-bind:class="{'fa-folder-open':bool4,'fa-folder':!bool4}"
                                    aria-hidden="true">
                                     汇总报表
                                 </i>
                             </dt>
-                            <dd @click="addCheck('CurrentSummary')"
+							<dd @click="addCheck('MemberSummary')"
+							    v-bind:class="{'li-active':onString=='MemberSummary'}">
+							    <router-link to="/MP/MemberSummary"><i class="fa" aria-hidden="true">会员汇总</i>
+							    </router-link>
+							</dd>
+                            <!-- <dd @click="addCheck('CurrentSummary')"
                                 v-bind:class="{'li-active':onString=='CurrentSummary'}">
                                 <router-link to="/MP/CurrentSummary"><i class="fa" aria-hidden="true">月入汇总</i>
                                 </router-link>
-                            </dd>
-                        </dl> -->
+                            </dd> -->
+                        </dl>
                         <!-- <dl v-bind:class="{h10:bool5}">
                             <dt @click="onShow(4)" v-bind:class="{'li-active':bool5}">
                                 <i class="fa" v-bind:class="{'fa-folder-open':bool5,'fa-folder':!bool5}"

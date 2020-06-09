@@ -36,8 +36,8 @@
 				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 					<select class="form-control" v-model="isArrears">
 						<option value="">全部</option>
-						<option value="1">欠费</option>
-						<option value="0">不欠费</option>
+						<option value="1">全款</option>
+						<option value="0">欠费</option>
 					</select>
 				</div>
 			</div>
@@ -77,7 +77,7 @@
 								<th class="text-center" rowspan='2'>购买时间</th>
 								<th class="text-center" rowspan='2'>实交金额</th>
 								<th class="text-center" rowspan='2'>操作人</th>
-								<th class="text-center" rowspan='2'>是否欠费</th>
+								<th class="text-center" rowspan='2'>是否全款</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -134,7 +134,7 @@
 				begCreateDate: '',
 				endCreateDate: '',
 				storeId: this.storeId(),
-				isArrears: '0',
+				isArrears: '1',
 				accountType:this.accountType(),
 
 
@@ -219,6 +219,10 @@
 				});
 			},
 			arrearsAaction(item) {
+				if (!this.has("SAMY:MP:Charge:AddArrears")) {
+					alert("暂无权限!")
+					return
+				}
 				if (confirm("是否是补交缴费，确认已经补交缴费？？") == false) {
 					return
 				}

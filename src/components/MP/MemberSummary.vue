@@ -14,12 +14,6 @@
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memNum"></div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memName"></div>
@@ -33,8 +27,6 @@
                     <input class="form-control" type="text" value="" v-model="phone">
                 </div>
             </div>
-        </div>
-        <div class="row" style="margin-top: 15px;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px;padding-left:20px;">开始时间</p><span class="sign-left">:</span>
@@ -51,7 +43,7 @@
                     <dPicker style="width:100%" v-model="endCreateDate"></dPicker>
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px; padding-bottom:1.5%;">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 15px; padding-right:30px; padding-bottom:1.5%;">
                 <button type="button" class="btn btn-primary pull-right m_r_10"  data-toggle="modal"
                         v-on:click="conditionCheck(1)">查询</button>
             </div>
@@ -64,7 +56,6 @@
                         <table class="table table-bordered table-hover user-table" id="datatable">
                             <thead class="datathead">
                             <tr>
-                                <th class="text-center">会员卡号</th>
                                 <th class="text-center">姓名</th>
                                 <th class="text-center">咨询师</th>
                                 <th class="text-center">项目</th>
@@ -77,7 +68,6 @@
                             </thead>
                             <tbody>
                             <tr v-for="(item,index) in memCostList" :key="index" v-on:dblclick="detailAction(item)">
-                                <td>{{item.MEM_NUM}}</td>
                                 <td>{{item.MEM_NAME}}</td>
                                 <td>{{item.EMP_NAME}}</td>
                                 <td>{{item.PRO_NAME}}</td>
@@ -86,7 +76,6 @@
                                 <td>{{item.REF_COUNT}}</td>
                                 <td>{{item.REMAINING_CLASS_HOUR}}</td>
                                 <td>{{item.CREATE_DATE | dateFormatFilter("YYYY-MM-DD")}}</td>
-
                             </tr>
                             </tbody>
                         </table>

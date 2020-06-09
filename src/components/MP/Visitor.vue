@@ -8,15 +8,15 @@
 		<div class="row" style="margin-bottom: 10px;">
 			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="padding-left: 35px;">
 				<button type="button" class="btn btn-default pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('5')"
-				 v-has="'SAMY:MP:CourseRefund'">退费</button>
+				 v-has="'SAMY:MP:Visitor:AddRefund'">退费</button>
 				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('4')"
-				 v-has="'SAMY:MP:Order:Add'">预约</button>
+				 v-has="'SAMY:MP:Visitor:AddOrder'">预约</button>
 				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('3')"
-				 v-has="'SAMY:MP:CashDeposit:Add'">定金</button>
+				 v-has="'SAMY:MP:Visitor:AddDush'">定金</button>
 				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('2')"
-				 v-has="'SAMY:MP:CourseConsum'">消费</button>
+				 v-has="'SAMY:MP:Visitor:AddConsum'">消费</button>
 				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('1')"
-				 v-has="'SAMY:MP:CoursePurchase'">购 买 产 品 </button>
+				 v-has="'SAMY:MP:Visitor:AddRecharge'">购 买 产 品 </button>
 			</div>
 		</div>
 
@@ -205,7 +205,7 @@
 										{{item.isMem==1?"已转会员":"未转会员"}}
 									</button>
 								</td>
-								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'">
+								<td class="text-center" v-has="'SAMY:MP:Visitor:QueryPhone'">
 									<button type="button" class="btn btn-warning" @click="queryPhone(item)">查询手机号码
 									</button>
 								</td>

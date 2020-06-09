@@ -202,7 +202,7 @@
 				</div>
 				<div class="col-md-6 form-group clearfix">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">维护人</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">顾问</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<emp ref="emp" @employeeChange="empChange"></emp>
@@ -333,7 +333,7 @@
 					payType: 1, //支付方式
 					serialNo: null, //流水单号
 					receipt: null, //收据
-					isArrears: '0', //是否欠费
+					isArrears: '1', //是否欠费
 					arrears: '0', //欠费金额
 				},
 				cash: {
@@ -405,7 +405,7 @@
 					receipt: null, //收据
 					visitState: null, //访问状态
 					continState: null, //续流状态
-					isArrears: '0', //是否欠费
+					isArrears: '1', //是否欠费
 					arrears: '0', //欠费金额
 				}
 				this.$refs.counselorEmp.setPosName("咨询师")
@@ -718,7 +718,7 @@
 					},
 					data: {
 						memNum: param,
-						isArrears: '0',
+						isArrears: '1',
 						proType: '0',
 					},
 					dataType: 'json',

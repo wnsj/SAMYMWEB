@@ -92,10 +92,9 @@
 								<td>{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td>{{item.realCross}}</td>
 								<td>{{item.operatorName}}</td>
-								<td v-show="item.isArrears=='0'">否</td>
-								<td v-show="item.isArrears=='1'"><button type="button" class="btn btn-warning" v-on:click="arrearsAaction(item)">是</button>
+								<td v-show="item.isArrears=='0'"><button type="button" class="btn btn-warning" v-on:click="arrearsAaction(item)">否</button></td>
+								<td v-show="item.isArrears=='1'">是
 								</td>
-								<td v-show="item.isArrears=='3'">已补交</td>
 							</tr>
 						</tbody>
 					</table>

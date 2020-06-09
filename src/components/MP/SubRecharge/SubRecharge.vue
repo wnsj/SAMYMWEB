@@ -141,7 +141,7 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否欠费</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否全额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<select class="form-control" v-model="consume.isArrears">

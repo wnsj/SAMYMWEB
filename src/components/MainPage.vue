@@ -63,6 +63,10 @@
 							    <router-link to="/MP/CashDeposit"><i class="fa" aria-hidden="true">定金管理</i>
 							    </router-link>
 							</dd>
+							<dd @click="addCheck('Refund')" v-bind:class="{'li-active':onString=='Refund'}">
+							    <router-link to="/MP/Refund"><i class="fa" aria-hidden="true">退费管理</i>
+							    </router-link>
+							</dd>
                         </dl>
                         <!-- <dl v-bind:class="{h25:bool2}">
                             <dt @click="onShow(1)" v-bind:class="{'li-active':bool2}">
@@ -102,9 +106,9 @@
                             <!--                            <dd @click="addCheck('RuleManager')" v-bind:class="{'li-active':onString=='RuleManager'}">-->
                             <!--                                <router-link to="/MP/RuleManager"><i class="fa" aria-hidden="true">权限管理</i></router-link>-->
                             <!--                            </dd>-->
-                            <dd @click="addCheck('Royalty')" v-bind:class="{'li-active':onString=='Royalty'}">
+                            <!-- <dd @click="addCheck('Royalty')" v-bind:class="{'li-active':onString=='Royalty'}">
                                 <router-link to="/MP/Royalty"><i class="fa" aria-hidden="true">提成规则管理</i></router-link>
-                            </dd>
+                            </dd> -->
                             <dd @click="addCheck('VisitState')" v-bind:class="{'li-active':onString=='VisitState'}">
                                 <router-link to="/MP/VisitState"><i class="fa" aria-hidden="true">状态管理</i></router-link>
                             </dd>
@@ -134,7 +138,7 @@
                             </dd>
 
                         </dl>
-                        <dl v-bind:class="{h10:bool4}">
+                        <!-- <dl v-bind:class="{h10:bool4}">
                             <dt @click="onShow(3)" v-bind:class="{'li-active':bool4}">
                                 <i class="fa" v-bind:class="{'fa-folder-open':bool4,'fa-folder':!bool4}"
                                    aria-hidden="true">
@@ -146,8 +150,8 @@
                                 <router-link to="/MP/CurrentSummary"><i class="fa" aria-hidden="true">月入汇总</i>
                                 </router-link>
                             </dd>
-                        </dl>
-                        <dl v-bind:class="{h10:bool5}">
+                        </dl> -->
+                        <!-- <dl v-bind:class="{h10:bool5}">
                             <dt @click="onShow(4)" v-bind:class="{'li-active':bool5}">
                                 <i class="fa" v-bind:class="{'fa-folder-open':bool5,'fa-folder':!bool5}"
                                    aria-hidden="true">
@@ -159,7 +163,7 @@
                                 <router-link to="/MP/RoyaltySummary"><i class="fa" aria-hidden="true">提成汇总</i>
                                 </router-link>
                             </dd>
-                        </dl>
+                        </dl> -->
 
                         <!-- <dl>
                             <dt v-on:click="selectRule('newtree')" v-bind:class="{'li-active':onString == 'newtree'}">
@@ -380,7 +384,7 @@
     }
 
     #aside-menu dl.h15 {
-        height: 300px;
+        height: 350px;
     }
 
     #aside-menu dl.h25 {

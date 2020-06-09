@@ -5,24 +5,22 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">客户管理</h1>
 		</div>
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-2 col-lg-12" style="margin-bottom: 10px;">
-				<button type="button" class="btn btn-default pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('5')" v-has="'SAMY:MP:CourseRefund'">退
-					费
-				</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('4')" v-has="'SAMY:MP:Order:Add'">预
-					约
-				</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('3')" v-has="'SAMY:MP:CashDeposit:Add'">定
-					金
-				</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('2')" v-has="'SAMY:MP:CourseConsum'">消
-					费
-				</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('1')" v-has="'SAMY:MP:CoursePurchase'">购
-					买 产 品
-				</button>
+		<div class="row" style="margin-bottom: 10px;">
+			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="padding-left: 35px;">
+				<button type="button" class="btn btn-default pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('5')"
+				 v-has="'SAMY:MP:CourseRefund'">退费</button>
+				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('4')"
+				 v-has="'SAMY:MP:Order:Add'">预约</button>
+				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('3')"
+				 v-has="'SAMY:MP:CashDeposit:Add'">定金</button>
+				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('2')"
+				 v-has="'SAMY:MP:CourseConsum'">消费</button>
+				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('1')"
+				 v-has="'SAMY:MP:CoursePurchase'">购 买 产 品 </button>
 			</div>
+		</div>
+
+		<div class="row">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
@@ -157,24 +155,30 @@
 								<th class="text-center">咨询方向</th>
 								<th class="text-center">接待人</th>
 								<th class="text-center">访问类型</th>
-								<th class="text-center">行业</th>
+								<th class="text-center">客户判定</th>
+								<th class="text-center">续流状态</th>
+								<!-- <th class="text-center">行业</th>
 								<th class="text-center">紧急联系人</th>
-                            <!-- <th class="text-center">联系人电话</th> -->
-								<!-- <th class="text-center">微信号</th> -->
+								<th class="text-center">联系人电话</th>
+								<th class="text-center">微信号</th>
 								<th class="text-center">邮箱</th>
-								<th class="text-center">地址</th>
+								<th class="text-center">地址</th> -->
 								<th class="text-center">添加时间</th>
-								<th class="text-center">描述</th>
+								<!-- <th class="text-center">描述</th> -->
 								<th class="text-center">是否转会员</th>
+								<th class="text-center">联系电话</th>
 								<th class="text-center" v-has="'SAMY:MP:Visitor:Update'">修改</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr v-for="(item,index) in visitorList" :key="index" v-on:dblclick="selectRule('3',item)">
-								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'">
+								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'" style="position: relative;">
 									<!-- <button type="button" class="btn btn-warning" v-on:click="editorAction(item)">编辑
                                 </button> -->
-									<input type="radio" style="border-radius:5px;" name="复选框" :value="index" v-model="checkedValue" />
+									<input :id="'edit'+(index+1)" class="editradio" type="radio" style="border-radius:5px;" name="复选框" :value="index"
+									 v-model="checkedValue" />
+									<label :for="'edit'+(index+1)" class="editlabel"></label>
+
 								</td>
 								<td class="text-center">{{item.visId}}</td>
 								<td class="text-center">{{item.visitorName}}</td>
@@ -185,18 +189,24 @@
 								<td class="text-center">{{item.channelName}}</td>
 								<td class="text-center">{{item.consDirection}}</td>
 								<td class="text-center">{{item.empName}}</td>
-								<td class="text-center">{{item.visType==1?"初访":"复访"}}</td>
-								<td class="text-center">{{item.indName}}</td>
+								<td class="text-center">{{item.visType==1?'初诊':'复诊'}}</td>
+								<td class="text-center">{{item.vsIdJudgeName}}</td>
+								<td class="text-center">{{item.vsIdFlowName}}</td>
+								<!-- <td class="text-center">{{item.indName}}</td>
 								<td class="text-center">{{item.urgentName}}</td>
-                            <!-- <td class="text-center">{{item.urgentPhone}}</td> -->
-								<!-- <td class="text-center">{{item.vnum}}</td> -->
+								<td class="text-center">{{item.urgentPhone}}</td>
+								<td class="text-center">{{item.vnum}}</td>
 								<td class="text-center">{{item.email}}</td>
-								<td class="text-center">{{item.address}}</td>
+								<td class="text-center">{{item.address}}</td> -->
 								<td class="text-center">{{item.createTime | dateFormatFilter("YYYY-MM-DD")}}</td>
-								<td class="text-center">{{item.marker}}</td>
+								<!-- <td class="text-center">{{item.marker}}</td> -->
 								<td class="text-center">
 									<button type="button" class="btn btn-warning" v-on:click="updateVisitorShiftMember(item)">
 										{{item.isMem==1?"已转会员":"未转会员"}}
+									</button>
+								</td>
+								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'">
+									<button type="button" class="btn btn-warning" @click="queryPhone(item)">查询手机号码
 									</button>
 								</td>
 								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'">
@@ -220,53 +230,94 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="visContent">
 				<div class="modal-dialog">
-					<subVis ref='subVis' @certainAction='feedBack'></subVis>
+					<subVis ref='subVis' @certainAction='feedBack6'></subVis>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="memContent">
 				<div class="modal-dialog">
-					<tm ref='tm' @closeCurrentPage='feedBack'></tm>
+					<tm ref='tm' @closeCurrentPage='feedBack7'></tm>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="customContent">
 				<div class="modal-dialog">
-					<custom ref='custom' @closeCurrentPage='feedBack'></custom>
+					<custom ref='custom' @closeCurrentPage='feedBack5'></custom>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="refundContent">
 				<div class="modal-dialog">
-					<refund ref='refund' @closeCurrentPage='feedBack'></refund>
+					<refund ref='refund' @closeCurrentPage='feedBack4'></refund>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="rechargeContent">
 				<div class="modal-dialog">
-					<recharge ref='recharge' @closeCurrentPage='feedBack'></recharge>
+					<recharge ref='recharge' @closeCurrentPage='feedBack3'></recharge>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="addSubOrderContent">
 				<div class="modal-dialog">
-					<addSubOrder ref='addSubOrder' @closeCurrentPage='feedBack'></addSubOrder>
+					<addSubOrder ref='addSubOrder' @closeCurrentPage='feedBack2'></addSubOrder>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="subCdContent">
 				<div class="modal-dialog">
-					<subCd ref='subCd' @closeCurrentPage='feedBack'></subCd>
+					<subCd ref='subCd' @closeCurrentPage='feedBack1'></subCd>
 				</div>
 			</div>
 		</div>
-
+		<div class="modal fade" id="showPhoneContent">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPhonePage()">×
+						</button>
+						<h4 id="myModalLabel" class="modal-title">电话</h4>
+					</div>
+					<div class="modal-body  pos_r">
+						<div class="tab-pane fade in active martop" id="basic">
+							<form action="" class="clearfix">
+								<div class="col-md-12 form-group clearfix">
+									<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">电话号</label><span
+									 class="sign-left">:</span>
+									<div class="col-md-8">
+										<label class="form-control">{{phoneNoX}}</label>
+									</div>
+								</div>
+								<div class="col-md-12 form-group clearfix">
+									<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">分机号</label><span
+									 class="sign-left">:</span>
+									<div class="col-md-8">
+										<label class="form-control">{{extension}}</label>
+									</div>
+								</div>
+								<div class="col-md-12 form-group clearfix">
+									<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">失效时间</label><span
+									 class="sign-left">:</span>
+									<div class="col-md-8">
+										<label class="form-control">{{endUseDate}}</label>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left">
+									<p style="margin-left:1.5%; color:red ;">注：拨打手机号，听到提示后输入分机号，按#号结束。</p>
+									<p style="margin-left:1.5%; color:red ;"> 过了失效时间，通过这个手机号将无法联系到客户。</p>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -324,6 +375,10 @@
 				fixedHeader: false,
 				checkedValue: -1,
 				accountType: this.accountType(),
+
+				phoneNoX: '',
+				extension: '',
+				endUseDate: '',
 
 
 				//分页需要的数据
@@ -386,14 +441,32 @@
 					this.storeId = param.storeId
 				}
 			},
-			feedBack() {
+			feedBack1() {
 				this.checkVisitor(1)
 				$("#subCdContent").modal('hide')
+			},
+			feedBack2() {
+				this.checkVisitor(1)
 				$("#addSubOrderContent").modal('hide')
+			},
+			feedBack3() {
+				this.checkVisitor(1)
 				$("#rechargeContent").modal('hide')
+			},
+			feedBack4() {
+				this.checkVisitor(1)
 				$("#refundContent").modal('hide')
+			},
+			feedBack5() {
+				this.checkVisitor(1)
 				$("#customContent").modal('hide')
+			},
+			feedBack6() {
+				this.checkVisitor(1)
 				$("#visContent").modal('hide')
+			},
+			feedBack7() {
+				this.checkVisitor(1)
 				$("#memContent").modal('hide')
 			},
 			//check the list of member
@@ -560,6 +633,40 @@
 						break;
 				}
 			},
+			queryPhone(item) {
+			    var url = this.url + '/visitorAction/requirePhone'
+			    this.$ajax({
+			        method: 'POST',
+			        url: url,
+			        headers: {
+			            'Content-Type': this.contentType,
+			            'Access-Token': this.accessToken
+			        },
+			        data: {
+			            visId: item.visId,
+			            accId: this.accountId(),
+						moduleId:'1',
+			        },
+			        dataType: 'json',
+			    }).then((response) => {
+			        var res = response.data
+			        //console.log(JSON.stringify(res))
+			        if (res.retCode == '0000') {
+			            this.phoneNoX = res.retData.phoneNoX
+			            this.extension = res.retData.extension
+			            this.endUseDate = res.retData.endDate
+			            $("#showPhoneContent").modal('show')
+			        } else {
+			            alert(res.retMsg)
+			        }
+			
+			    }).catch((error) => {
+			        console.log('请求失败处理')
+			    });
+			},
+			closeCurrentPhonePage(){
+				$("#showPhoneContent").modal('hide')
+			},
 		},
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true);
@@ -572,6 +679,44 @@
 </script>
 
 <style>
+	input.editradio[type='radio'] {
+		width: 20px;
+		height: 20px;
+		opacity: 0;
+	}
+
+	label.editlabel {
+		position: absolute;
+		left: 28px;
+		bottom: 12px;
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		border: 1px solid #999;
+		z-index: 99;
+	}
+
+	/*设置选中的input的样式*/
+	/* + 是兄弟选择器,获取选中后的label元素*/
+	input.editradio:checked+label.editlabel {
+		background-color: #3c86f1;
+		border: 1px solid #3c86f1;
+	}
+
+	input.editradio:checked+label.editlabel::after {
+		position: absolute;
+		content: '';
+		width: 5px;
+		height: 10px;
+		top: 3px;
+		left: 6px;
+		border: 2px solid #fff;
+		border-top: none;
+		border-left: none;
+		transform: rotate(45deg);
+	}
+
+
 	/*分页需要的样式*/
 	.page {
 		width: 100%;
@@ -606,3 +751,13 @@
 		}
 	}
 </style>
+<!-- feedBack() {
+				this.checkVisitor(1)
+				$("#subCdContent").modal('hide')
+				$("#addSubOrderContent").modal('hide')
+				$("#rechargeContent").modal('hide')
+				$("#refundContent").modal('hide')
+				$("#customContent").modal('hide')
+				$("#visContent").modal('hide')
+				$("#memContent").modal('hide')
+			}, -->

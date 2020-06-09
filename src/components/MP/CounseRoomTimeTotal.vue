@@ -4,7 +4,7 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">咨询室总览</h1>
         </div>
-        <div class="row" style="margin-top: 40px;">
+        <div class="row" style="margin-top: 40px;padding-bottom:1.5%;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style=" margin-top: 15px;">
                 <div class="col-md-3 col-lg-3 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">时间</p>
@@ -23,9 +23,7 @@
                     <store ref='store' @storeChange='storeChange'></store>
                 </div>
             </div>
-        </div>
-
-        <div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
+      
             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
                     data-toggle="modal"
                     @click="checkOrderList(1)">查询

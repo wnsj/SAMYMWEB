@@ -33,11 +33,9 @@
 							<span class="pos-ab pos-tr">万</span>
 						</div>
 					</div>
-					<div class="form-group clearfix">
-						<div class="col-md-12">
-							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction(title)">确认</button>
-						</div>
+					<div class="col-md-12 form-group clearfix">
+						<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+						<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction(title)">确认</button>
 					</div>
 				</form>
 			</div>

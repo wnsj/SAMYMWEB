@@ -114,11 +114,9 @@
 							<input type="text" class="form-control" v-model="visitor.marker" placeholder="">
 						</div>
 					</div>
-					<div class="form-group clearfix">
-						<div class="col-md-12">
-							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>	
-						</div>
+					<div class="col-md-12 form-group clearfix">
+						<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+						<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>	
 					</div>
 				</form>
 			</div>
@@ -167,6 +165,7 @@
 					email:'',
 					address:'',
 					marker:'',
+					birthday:'',
 				},
 				title:'',
 			};
@@ -181,8 +180,8 @@
 					sex:'1',
 					phone:'',
 					chaId:'',
-					vsIdJudge:'0',
-					vsIdFlow:'0',
+					vsIdJudge:'',
+					vsIdFlow:'',
 					consDirection:'',
 					dtId:'',
 					empId:'',
@@ -195,6 +194,7 @@
 					email:'',
 					address:'',
 					marker:'',
+					birthday:'',
 				}
 				if(param=='add'){
 					console.log('Initialization visitor’s content, which adds visitor')
@@ -305,6 +305,14 @@
 					alert("咨客的来源渠道不能为空")
 					return
 				}
+				if(this.isBlank(this.visitor.vsIdJudge) || this.visitor.vsIdJudge=='0'){
+					alert("咨客判定不能为空")
+					return
+				}
+				if(this.isBlank(this.visitor.vsIdFlow) || this.visitor.vsIdFlow=='0'){
+					alert("续流状态不能为空")
+					return
+				}
 				if(this.isBlank(this.visitor.empId) || this.visitor.empId==0){
 					alert("接待人不能为空")
 					return
@@ -317,7 +325,7 @@
 						alert("不是完整的11位手机号或者正确的座机号！");
 						return
 					}else{
-						this.visitor.phone=''
+						this.visitor.phone=null
 					}
 				}
 				if(this.visitor.address.length>100){

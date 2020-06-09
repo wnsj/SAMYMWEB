@@ -65,10 +65,6 @@
                     </select>
                 </div>
             </div>
-<!--            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"-->
-<!--                    data-toggle="modal"-->
-<!--                    v-on:click="selectRule('1')" v-has="'SAMY:MP:CashDeposit:Add'">添加定金-->
-<!--            </button>-->
             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
                     data-toggle="modal"
                     v-on:click="checkMember(1)">查询
@@ -80,8 +76,8 @@
                     <table class="table table-bordered table-hover" id="datatable">
                         <thead class="datathead">
                         <tr>
-                            <th class="text-center">门店</th>
-                            <th class="text-center">会员号</th>
+                            <th class="text-center">交费门店</th>
+                            <!-- <th class="text-center">会员号</th> -->
                             <th class="text-center">姓名</th>
                             <th class="text-center">手机号</th>
                             <th class="text-center">定金金额</th>
@@ -94,7 +90,7 @@
                         <tbody>
                         <tr v-for="(item,index) in cashList" :key="index" v-on:dblclick="modifyMember(item)">
                             <td class="text-center" style="line-height:33px">{{item.storeName}}</td>
-                            <td class="text-center" style="line-height:33px">{{item.memNum}}</td>
+                            <!-- <td class="text-center" style="line-height:33px">{{item.memNum}}</td> -->
                             <td class="text-center" style="line-height:33px">{{item.cashName}}</td>
                             <td class="text-center" style="line-height:33px">{{item.phone}}</td>
                             <td class="text-center" style="line-height:33px">{{item.money}}</td>
@@ -106,8 +102,7 @@
                             <td class="text-center">
                                 <button type="button" class="btn btn-warning" v-on:click="modifyMember(item)" v-has="'SAMY:MP:CashDeposit:Update'">修改
                                 </button>
-<!--                                <button type="button" class="btn btn-success" v-on:click="consumptionModel(item)" v-has="'SAMY:MP:CashDeposit:Consum'">消费-->
-<!--                                </button>-->
+
                                 <button type="button" class="btn btn-danger" v-on:click="refundModel(item)" v-has="'SAMY:MP:CashDeposit:Refund'">退费</button>
                                 <button v-if="item.memNum==null||item.memNum==''" type="button" class="btn btn-primary"
                                         v-on:click="transferMember(item)" v-has="'SAMY:MP:CashDeposit:ZhuanMember'">转会员

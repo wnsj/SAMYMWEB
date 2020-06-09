@@ -7,13 +7,13 @@
     <div class="modal-body  pos_r">
       <div class="tab-pane fade in active martop" id="basic">
 
-        <div class="col-md-6 form-group clearfix" v-if="memNumState">
+        <!-- <div class="col-md-6 form-group clearfix" v-if="memNumState">
           <label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员号</label><span
           class="sign-left">:</span>
           <div class="col-md-7">
             <input type="text" class="form-control" v-model="memNum" disabled="disabled">
           </div>
-        </div>
+        </div> -->
 
         <div class="col-md-6 form-group clearfix">
           <label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span
@@ -48,13 +48,11 @@
         </div>
       </div>
 
-      <div class="form-group clearfix">
-        <div class="col-md-12">
+      <div class="col-md-12 form-group clearfix">
           <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
                   v-on:click="closeCurrentPage()">返回</button>
           <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
                   v-on:click="purchaseHistory()">确认</button>
-        </div>
       </div>
 
     </div>

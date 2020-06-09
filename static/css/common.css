@@ -22,7 +22,7 @@ body{
 .titleCss{
 	color: #ffffff;
 	margin-top:35px;
-    margin-top: -120px;
+    margin-top: -80px;
     font-weight:bold;
     text-indent: -2em;
 	margin-right: 300px;
@@ -151,10 +151,10 @@ body{
 }
 .wraper{
     position:relative;
-    box-shadow: -5px 0 5px #ccc, 5px 0 5px #ccc, 0 -5px 5px #ccc, 0 5px 5px #ccc;
+    /* box-shadow: -5px 0 5px #ccc, 5px 0 5px #ccc, 0 -5px 5px #ccc, 0 5px 5px #ccc;
     width:95%; 
     background:#fff; 
-    margin:30px auto;
+    margin:30px auto; */
     padding:10px 10px 20px 10px;
 }
 .posAb{
@@ -170,4 +170,15 @@ body{
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
+}
+.form-group{ 
+    position:relative;
+}
+.form-group b{ 
+    position:absolute;
+    left:0;
+    top:0;
+    line-height:34px;
+    text-indent:8px;
+    color:red;
 }

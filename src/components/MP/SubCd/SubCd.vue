@@ -47,17 +47,15 @@
                         <dPicker class="col-md-8" style="width:65%;" v-model="cash.createDate"
                                  v-on:click="dateAction()"></dPicker>
                     </div>
-                    <div class="form-group clearfix">
-                        <div class="col-md-12">
-                            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;"
-                                    data-toggle="modal"
-                                    v-on:click="closeCurrentPage()">返回
-                            </button>
-                            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
-                                    data-toggle="modal"
-                                    v-on:click="certainAction()">确认
-                            </button>
-                        </div>
+                    <div class="col-md-12 form-group clearfix">
+                        <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;"
+                                data-toggle="modal"
+                                v-on:click="closeCurrentPage()">返回
+                        </button>
+                        <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+                                data-toggle="modal"
+                                v-on:click="certainAction()">确认
+                        </button>
                     </div>
                 </form>
             </div>
@@ -86,7 +84,7 @@
                     cashName: '',
                     phone: '',
                     money: '',
-                    createDate: '',
+                    createDate: this.moment(),
                     storeId: '',
                     state: '',
                     operatorId: '',
@@ -95,10 +93,11 @@
                 title: '新增',
             };
         },
-        methods: {
+        methods: { 
             // Initialization FWRoyalty’s content
             initData(param, cash) {
-                console.log(JSON.stringify(cash))
+                // console.log(JSON.stringify(cash))
+                $('#subCdContent').modal({backdrop: 'static', keyboard: false});
                 if (param == 'add') {
                     console.log('Initialization FWRoyalty’s content, which adds FWRoyalty')
                     this.title = '新增'
@@ -106,6 +105,7 @@
                         memNum: cash.visId,
                         cashId: '',
                         cashName: cash.visitorName,
+						createDate: this.moment(),
                         money: '',
                         storeId: this.storeId(),
                         state: '0',
@@ -234,11 +234,19 @@
                 });
             },
             closeCurrentPage() {
-                this.$emit('closeCurrentPage')
-                //$("#cdContent").modal("hide")
-                console.log('close the flowWater rule')
+				switch (this.title) {
+				    case "新增":
+				        this.$emit('closeCurrentPage')
+				        break;
+				    case "修改":
+				        $("#cdContent").modal("hide")
+				        break;
+				}
             },
-        }
+        },
+        mounted() {
+
+        },
 
     }
 </script>

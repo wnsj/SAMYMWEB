@@ -11,16 +11,27 @@ function boxheight() {
 	if (document.documentElement && document.documentElement.clientHeight)
 		winHeight = document.documentElement.clientHeight;
 
-	
+
 	//DIV高度为浏览器窗口高度
 	document.getElementById("Odiv").style.height = winHeight + "px";
 	document.getElementById("Adiv").style.height = winHeight + "px";
-	
+
+    var oTabel = document.getElementsByClassName("pre-scrollable")[0];
+    var len = document.getElementsByClassName("newRow").length;
+    oTabel.style.maxHeight = (winHeight*600/789 - 100-50*len)+'px';
+    console.log(oTabel.offsetHeight);
+    
+    if (oTabel.offsetHeight < (winHeight*600/789 - 100-50*len)) {
+        oTabel.style.overflowY = 'auto';
+    }
+
+
+
 	var aWraper = document.getElementsByClassName("wraper");
 	var len = aWraper.length;
 	for (var i=0;i<len;i++){
 		aWraper[i].style.height = winHeight*590/767 + "px";
-	} 
+	}
 }
 
 function setClick() {

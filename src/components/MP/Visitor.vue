@@ -5,7 +5,7 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">客户管理</h1>
 		</div>
-		<div class="row" style="margin-bottom: 10px;">
+		<div class="row newRow" style="margin-bottom: 10px;">
 			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="padding-left: 35px;">
 				<button type="button" class="btn btn-default pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('5')"
 				 v-has="'SAMY:MP:Visitor:AddRefund'">退费</button>
@@ -20,7 +20,7 @@
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row newRow">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
@@ -51,7 +51,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row" style="margin-top: 15px;">
+		<div class="row newRow" style="margin-top: 15px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">访问类型</p><span class="sign-left">:</span>
@@ -141,7 +141,7 @@
 		<div class="">
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable">
-					<table class="table table-bordered table-hover" id="datatable" style="width: 2400px;">
+					<table class="table table-bordered table-hover" id="datatable">
 						<thead class="datathead">
 							<tr>
 								<th class="text-center">编辑</th>
@@ -172,7 +172,7 @@
 						</thead>
 						<tbody>
 							<tr v-for="(item,index) in visitorList" :key="index" v-on:dblclick="selectRule('3',item)">
-								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'" style="position: relative;">
+								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'" style="position: relative;width: 50px;">
 									<!-- <button type="button" class="btn btn-warning" v-on:click="editorAction(item)">编辑
                                 </button> -->
 									<input :id="'edit'+(index+1)" class="editradio" type="radio" style="border-radius:5px;" name="复选框" :value="index"
@@ -659,7 +659,7 @@
 			        } else {
 			            alert(res.retMsg)
 			        }
-			
+
 			    }).catch((error) => {
 			        console.log('请求失败处理')
 			    });
@@ -687,8 +687,8 @@
 
 	label.editlabel {
 		position: absolute;
-		left: 28px;
-		bottom: 12px;
+		left: 13px;
+		bottom: 11px;
 		width: 20px;
 		height: 20px;
 		border-radius: 50%;

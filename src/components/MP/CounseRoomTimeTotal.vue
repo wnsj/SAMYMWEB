@@ -4,7 +4,7 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">咨询室总览</h1>
         </div>
-        <div class="row" style="margin-top: 40px;padding-bottom:1.5%;">
+        <div class="row newRow" style="margin-top: 40px;padding-bottom:1.5%;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style=" margin-top: 15px;">
                 <div class="col-md-3 col-lg-3 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">时间</p>

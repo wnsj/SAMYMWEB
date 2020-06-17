@@ -6,8 +6,8 @@
 			<h4 id="myModalLabel" class="modal-title">{{title}}员工</h4>
 		</div>
 		<div class="modal-body  pos_r">
-			<div class="tab-pane fade in active martop" id="basic">
-				<form action="">
+			<div class="tab-pane fade in active martop" id="basic" style="height: 300px;">
+
 					<div class="col-md-6 form-group clearfix">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
@@ -84,11 +84,11 @@
 						<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 							v-on:click="addEmp()">确认</button>
 					</div>
-				</form>
+
 			</div>
 		</div>
 
-	</div> 
+	</div>
 </template>
 
 <script>
@@ -120,7 +120,7 @@
 					level:'1',
 				},
 				title: '新增',
-				
+
 			};
 		},
 		methods: {
@@ -148,7 +148,7 @@
 				} else if (param == 'modify') {
 					//console.log('Initialization employee’s content, which modifies employee')
 					this.title='修改'
-					
+
 					Object.assign(this.employee,param2)
 					if(!this.isBlank(this.employee.roleId)){
 						this.$refs.role.setUr(this.employee.roleId)
@@ -166,9 +166,9 @@
 				}else{
 					this.employee.roleId=param.urId
 				}
-				
+
 			},
-			//date formatting 
+			//date formatting
 			dateAction(param) {
 				if (param == '1') {
 					if (!this.isBlank(this.employee.hospTime)) {
@@ -210,7 +210,7 @@
 					this.employee.leaderId = param.empId
 				}
 			},
-			
+
 			//the event of addtional button
 			addEmp() {
 				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
@@ -234,7 +234,7 @@
 						var url = this.url+'/employeeAction/updateEmp'
 						break;
 				}
-				
+
 				this.$ajax({
 					method: 'POST',
 					url: url,

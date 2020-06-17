@@ -214,8 +214,8 @@
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<select class="form-control" v-model="consume.visitType" @change="visitTypeChange">
-							<option value="1">初诊</option>
-							<option value="2">复诊</option>
+							<option value="1">初访</option>
+							<option value="2">复访</option>
 						</select>
 					</div>
 				</div>

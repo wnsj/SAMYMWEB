@@ -3,7 +3,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h4 id="myModalLabel" class="modal-title">{{title}}来访状态</h4>
+			<h4 id="myModalLabel" class="modal-title">{{title}}咨询方向</h4>
 		</div>
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop" id="basic">

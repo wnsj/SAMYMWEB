@@ -208,7 +208,7 @@ export default new Router({
                     component: UmsPermissionManage,
                 }
             ],
-            //redirect: '/MainPage'
+            redirect: '/MP/Visitor'
         }
     ]
 })

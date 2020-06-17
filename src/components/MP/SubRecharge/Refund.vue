@@ -288,7 +288,7 @@
 				var url = this.url + '/purchasedItemsAction/queryUnfinishedPro'
 				var data = {
 					memNum: param,
-					isArrears: '0',
+					isArrears: '1',
 				}
 				this.requestData(url, data).then((response) => {
 					if (response.retCode == '0000') {

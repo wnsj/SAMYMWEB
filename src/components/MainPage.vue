@@ -406,7 +406,7 @@
     }
 
     #aside-menu dl.h40 {
-        height: 750px;
+        height: 600px;
     }
 
     #aside-menu dl dt {

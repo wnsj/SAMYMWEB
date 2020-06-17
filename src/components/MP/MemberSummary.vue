@@ -3,7 +3,7 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">会员汇总</h1>
         </div>
-        <div class="row" style="margin-top: 40px;">
+        <div class="row newRow" style="margin-top: 40px;padding-bottom:1.5%;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
@@ -35,6 +35,8 @@
                     <dPicker style="width:100%" v-model="begCreateDate"></dPicker>
                 </div>
             </div>
+        </div>
+        <div class="row newRow" style="padding-bottom:1.5%;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">结束时间</p><span class="sign-left">:</span>
@@ -43,7 +45,7 @@
                     <dPicker style="width:100%" v-model="endCreateDate"></dPicker>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 15px; padding-right:30px; padding-bottom:1.5%;">
+            <div class="col-xs-13 col-sm-13 col-md-13 col-lg-13" style=" padding-right:30px; padding-bottom:1.5%;">
                 <button type="button" class="btn btn-primary pull-right m_r_10"  data-toggle="modal"
                         v-on:click="conditionCheck(1)">查询</button>
             </div>
@@ -91,7 +93,7 @@
                 <p class="tips ">* 双击单行，可查看会员的充值、消费、退费详情</p>
             </div>
         </div>
-		
+
         <div class="row row_edit">
             <div class="modal fade" id="detailMember">
                 <div class="modal-dialog">

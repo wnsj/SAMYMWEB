@@ -4,7 +4,7 @@
       <button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
       <h2 id="myModalLabel" class="modal-title">定金退费</h2>
     </div>
-    <div class="modal-body  pos_r">
+    <div class="modal-body  pos_r clearfix" >
       <div class="tab-pane fade in active martop" id="basic">
 
         <!-- <div class="col-md-6 form-group clearfix" v-if="memNumState">

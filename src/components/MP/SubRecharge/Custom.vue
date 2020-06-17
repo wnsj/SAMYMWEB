@@ -33,7 +33,7 @@
 				</div>
 				<div v-show="unfinishedProList.length > 0">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">已购项目</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">已购产品</label><span
 						 class="sign-left">:</span>
 					</div>
 					<div class="col-md-12 form-group clearfix text-left">
@@ -41,7 +41,7 @@
 							<thead class="datathead">
 								<tr>
 									<td></td>
-									<td>项目名</td>
+									<td>产品</td>
 									<td>咨询师名</td>
 									<td>项目类型</td>
 									<td>总课时</td>

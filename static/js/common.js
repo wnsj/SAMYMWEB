@@ -18,10 +18,10 @@ function boxheight() {
 
     var oTabel = document.getElementsByClassName("pre-scrollable")[0];
     var len = document.getElementsByClassName("newRow").length;
-    oTabel.style.maxHeight = (winHeight*600/789 - 100-50*len)+'px';
+    oTabel.style.maxHeight = (winHeight*600/789 - 100-30*len)+'px';
     console.log(oTabel.offsetHeight);
-    
-    if (oTabel.offsetHeight < (winHeight*600/789 - 100-50*len)) {
+
+    if (oTabel.offsetHeight < (winHeight*600/789 - 100-30*len)) {
         oTabel.style.overflowY = 'auto';
     }
 

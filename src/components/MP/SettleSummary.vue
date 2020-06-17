@@ -3,7 +3,7 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">消费管理</h1>
 		</div>
-		<div class="row newRow" style="margin-top: 40px;">
+		<div class="row newRow">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
@@ -42,7 +42,7 @@
 			    </div>
 			</div>
 		</div>
-		<div class="row newRow" style="margin-top: 15px;">
+		<div class="row newRow">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:10px;">
 				<div class="col-md-3 col-lg-3 text-right" style="padding: 0; line-height: 34px; width:20.5%;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">消费时间</p><span class="sign-left">:</span>
@@ -58,7 +58,7 @@
 				</div>
 
 			</div>
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px; padding-bottom:1.5%;">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
 				<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 				 v-on:click="conditionCheck(1)">查询</button>
 			</div>
@@ -193,7 +193,7 @@
             //咨询师
             counlorEmpChange: function(param) {
 			    console.log(param)
-                
+
                 console.log("进入了这个方法")
                 if (this.isBlank(param)) {
                     this.empId = ""
@@ -254,7 +254,7 @@
 				}
 			},
 			conditionCheck: function(page) {
-				
+
 				if (!this.isBlank(this.begCreateDate)) {
 					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
 				}
@@ -347,7 +347,7 @@
 		},
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true)
-			
+
 			init();
             this.$refs.counlorEmp.setPosName("咨询师")
             this.$refs.counlorEmp.setEmp("")

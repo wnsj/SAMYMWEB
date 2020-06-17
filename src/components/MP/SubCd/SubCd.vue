@@ -16,8 +16,7 @@
                     <!--						</div>-->
                     <!--					</div>-->
                     <div class="col-md-6 form-group clearfix">
-                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">姓名</label><span
+                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">姓名</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="cash.cashName" placeholder=""
@@ -25,24 +24,21 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">手机号</label><span
+                        <label class="col-md-3 control-label text-right nopad end-aline">手机号</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="cash.phone" placeholder="" disabled="true">
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">定金金额</label><span
+                        <label class="col-md-3 control-label text-right nopad end-aline">定金金额</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="cash.money" placeholder="">
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">交费时间</label><span
+                        <label class="col-md-3 control-label text-right nopad end-aline">交费时间</label><span
                         class="sign-left">:</span>
                         <dPicker class="col-md-8" style="width:65%;" v-model="cash.createDate"
                                  v-on:click="dateAction()"></dPicker>

@@ -15,7 +15,7 @@
                        :data="umsPermissionList.permissionData"
                        row-id="upId"
                        v-if="hackRest"
-                       ref="permissionVxeTableRef" 
+                       ref="permissionVxeTableRef"
 					   max-height="650">
                 <vxe-table-column field="upName" width="160" title="权限名" tree-node></vxe-table-column>
                 <vxe-table-column>
@@ -28,8 +28,8 @@
             </vxe-table>
         </div>
         <!-- 对话框：新建权限 -->
-        <el-dialog :title="title" width="30%" :visible.sync="permissionDialogFlag">
-            <el-form label-width="80px">
+        <el-dialog :title="title" width="40%" :visible.sync="permissionDialogFlag">
+            <el-form label-width="100px">
                 <el-form-item label="权限名">
                     <el-input v-model="permissionObj.upName"></el-input>
                 </el-form-item>

@@ -13,6 +13,9 @@ body{
     display: inline-block;
     text-align:justify;
     text-align-last:justify;
+    padding-right:5px;
+    padding-left:20px;
+    line-height:34px;
 }
 .sign-left{
     float: left;
@@ -66,14 +69,14 @@ body{
     display:inline-block;
     text-align: left;
     width:190px;
-}   
+}
 .my-aside ul li p{
     display:inline-block;
     text-align: left;
     width:190px;
 }
 .my-aside ul .li-active{
-    background-color: #fff; 
+    background-color: #fff;
 }
 .my-aside ul .li-active a{
     color: #f0ad4e;
@@ -87,7 +90,7 @@ body{
 }
 
 .aside-logo{
-    /* background-color: #283643; 
+    /* background-color: #283643;
     background-color: #66ccff;*/
     background-color:rgba(166, 132, 74, 0.57);
     padding:10px 0;
@@ -142,18 +145,18 @@ body{
     justify-content: center;
     align-items: center;
 }
-.tips{ 
-    display:block; 
-    text-align:left; 
-    color:red; 
-    font-size:12px; 
+.tips{
+    display:block;
+    text-align:left;
+    color:red;
+    font-size:12px;
     margin-top:15px;
 }
 .wraper{
     position:relative;
     /* box-shadow: -5px 0 5px #ccc, 5px 0 5px #ccc, 0 -5px 5px #ccc, 0 5px 5px #ccc;
-    width:95%; 
-    background:#fff; 
+    width:95%;
+    background:#fff;
     margin:30px auto; */
     padding:10px 10px 20px 10px;
 }
@@ -162,19 +165,19 @@ body{
     bottom:20px;
     left:0;
 }
-.pos-tr{ 
+.pos-tr{
     top:0;
-    right:20px; 
+    right:20px;
     line-height:34px;
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
 }
-.form-group{ 
+.form-group{
     position:relative;
 }
-.form-group b{ 
+.form-group b{
     position:absolute;
     left:0;
     top:0;
@@ -182,3 +185,5 @@ body{
     text-indent:8px;
     color:red;
 }
+
+.nopdd{padding: 0;}

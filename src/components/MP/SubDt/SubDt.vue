@@ -6,8 +6,7 @@
 			<h4 id="myModalLabel" class="modal-title">{{title}}咨询方向</h4>
 		</div>
 		<div class="modal-body  pos_r">
-			<div class="tab-pane fade in active martop" id="basic">
-
+			<div class="tab-pane fade in active martop clearfix" id="basic">
 				<div class="col-md-6 form-group clearfix">
 					<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">状态名称</label><span
 					 class="sign-left">:</span>
@@ -31,9 +30,7 @@
 						<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 						 v-on:click="certainAction()">确认</button>
 				</div>
-
 			</div>
-
 		</div>
 
 	</div>

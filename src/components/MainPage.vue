@@ -370,7 +370,7 @@
 
     #aside-menu {
         border-top: 1px solid #ccc;
-        height: 640px;
+        height: 705px;
         overflow-y: auto;
         overflow-x: hidden;
     }

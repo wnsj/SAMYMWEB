@@ -192,9 +192,9 @@
 			},
             //咨询师
             counlorEmpChange: function(param) {
-			    console.log(param)
+			    //console.log(param)
                 
-                console.log("进入了这个方法")
+                //console.log("进入了这个方法")
                 if (this.isBlank(param)) {
                     this.empId = ""
                     this.showHours=false
@@ -216,7 +216,7 @@
                         dataType: 'json',
                     }).then((response) => {
                         var res = response.data
-                        console.log(res)
+                        //console.log(res)
                         if (res.retCode == '0000') {
                             //咨询师消费课时，未消费课时
                             if(res.retData==null){
@@ -239,7 +239,7 @@
                             alert(res.retMsg)
                         }
                     }).catch((error) => {
-                        console.log('请求失败处理')
+                        //console.log('请求失败处理')
                     });
                 }
             },
@@ -265,7 +265,7 @@
 					page = 1
 				}
 				var url = this.url + '/accountRecordAction/consumptionSummary'
-				console.log("page=" + page)
+				//console.log("page=" + page)
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -288,7 +288,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res);
+					//console.log(res);
 					if (res.retCode == '0000') {
 
 						this.pages = res.retData.pageRows.pages //总页数
@@ -308,7 +308,7 @@
 
 					}
 				}).catch((error) => {
-					console.log('请求失败处理')
+					//console.log('请求失败处理')
 				});
 			},
 			viewDetails: function(item) {
@@ -353,7 +353,7 @@
             this.$refs.counlorEmp.setEmp("")
 		},
 		created() {
-			this.conditionCheck(1)
+			// this.conditionCheck(1)
 		},
 
 	}

@@ -162,7 +162,7 @@
                         alert(res.retMsg);
                     }
                 }).catch((error) => {
-                    console.log('预约提交请求失败')
+                    //console.log('预约提交请求失败')
                 });
             },
             closeCurrentPage() {
@@ -170,12 +170,12 @@
             },
             printLog(value) {
                 // var ch = this.$refs.elCalendarRef.$children[0].$children
-                // console.log(ch)
+                // //console.log(ch)
                 // for (var i = 0; i < ch.length; i++) {
                 //     ch[i].disabled = true
                 // }
                 //$(".el-calendar__button-group").attrs("")
-                console.log($(".el-calendar__button-group"))
+                //console.log($(".el-calendar__button-group"))
             },
             //创建日期对象
             createDateObj(data) {
@@ -238,7 +238,7 @@
                         alert(res.retMsg);
                     }
                 }).catch((error) => {
-                    console.log('预约提交请求失败')
+                    //console.log('预约提交请求失败')
                 });
             },
             selectBox(param) {

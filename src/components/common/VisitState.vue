@@ -44,7 +44,7 @@
       },
      //vsType:1初访，2复访；stateType：1咨客判定，2续流状态
       getObj(vsType,stateType) {
-				console.log('vsType:'+vsType)
+				//consolele.log('vsType:'+vsType)
         var url = this.url + '/visitState/queryVisitState'
         this.$ajax({
         	method: 'POST',
@@ -70,7 +70,7 @@
         	}
         
         }).catch((error) => {
-        	console.log('状态数据请求失败处理')
+        	//console.log('状态数据请求失败处理')
         });
       },
     },

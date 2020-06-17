@@ -109,7 +109,7 @@
                         alert(res.retMsg)
                     }
                 }).catch((error) => {
-                    console.log('预约提交请求失败')
+                    //console.log('预约提交请求失败')
                 });
             },
             queryCounseRoom() {
@@ -139,7 +139,7 @@
                         alert(res.retMsg)
                     }
                 }).catch((error) => {
-                    console.log('预约提交请求失败')
+                    //console.log('预约提交请求失败')
                 });
             },
             closeCurrentPage() {
@@ -189,7 +189,7 @@
                         alert(res.retMsg)
                     }
                 }).catch((error) => {
-                    console.log('预约提交请求失败')
+                    //console.log('预约提交请求失败')
                 });
             },
             deleteConsultantRoom(item) {
@@ -212,7 +212,7 @@
                         alert(res.retMsg)
                     }
                 }).catch((error) => {
-                    console.log('预约提交请求失败')
+                    //console.log('预约提交请求失败')
                 });
             }
         },

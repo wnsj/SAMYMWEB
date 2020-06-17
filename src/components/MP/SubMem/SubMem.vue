@@ -119,14 +119,14 @@
 					birthday:'',
 				}
 				if(param=='add'){
-					console.log('Initialization member’s content, which adds member')
+					//console.log('Initialization member’s content, which adds member')
 					this.title='新增'
 					
 					// this.$refs.emp.setEmp('0')
 				}else if(param=='modify'){
-					console.log('Initialization member’s content, which modifies member')
+					//console.log('Initialization member’s content, which modifies member')
 					this.title='修改'
-					console.log(JSON.stringify(member))
+					//console.log(JSON.stringify(member))
 					Object.assign(this.member,member)
 					// this.$refs.emp.setEmp(this.member.empId)
 					this.conditionCheck()
@@ -135,7 +135,7 @@
 			CheckItem(item){
 				item.value = !item.value;
 				$('#hahah').val(item.value)
-				console.log($('#hahah').val());
+				//console.log($('#hahah').val());
 			},
 			
 			//feedback employee information
@@ -189,7 +189,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
+					//console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('certainAction')
@@ -197,16 +197,16 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('会员相关操作失败')
+					//console.log('会员相关操作失败')
 				});
 			},
 			closeCurrentPage(){
 				$("#memberContent").modal("hide")
-				console.log('close the flowWater rule')
+				//console.log('close the flowWater rule')
 			},
 			//the list , which is detail infomation of reCharge,was checked.
 			conditionCheck: function() {
-				console.log('querying based on multiple conditions')
+				//console.log('querying based on multiple conditions')
 				
 				var url = this.url + '/accountRecordAction/queryAccountRecord'
 				this.$ajax({
@@ -227,7 +227,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					// console.log(res)
+					// //console.log(res)
 					if (res.retCode == '0000') {
 						if(res.retData.length>0){
 							this.isShow=true
@@ -236,7 +236,7 @@
 						}
 					}
 				}).catch((error) => {
-					console.log('充值查询请求失败')
+					//console.log('充值查询请求失败')
 				});
 			},
 		}

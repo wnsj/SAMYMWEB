@@ -61,7 +61,7 @@
                         this.umsPermissionList = responseData.retData;
                     }
                 }, (error) => {
-                    console.log("请求失败处理");
+                    //console.log("请求失败处理");
                 });
             },
             //切换权限

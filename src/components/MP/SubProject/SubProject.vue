@@ -165,7 +165,7 @@
             // Initialization projcet’s content
             initData(param, project) {
                 if (param == 'add') {
-                    console.log('Initialization project’s content, which adds project')
+                    //console.log('Initialization project’s content, which adds project')
                     this.title = '新增'
                     this.project = {
                         proName: '',
@@ -186,7 +186,7 @@
                     this.$refs.emp.setPosName("咨询师")
                     this.$refs.emp.setEmp("")
                 } else if (param == 'modify') {
-                    console.log('Initialization project’s content, which modifies project')
+                    //console.log('Initialization project’s content, which modifies project')
                     this.title = '修改'
                     Object.assign(this.project, project)
                     this.$refs.emp.setPosName("咨询师")
@@ -204,7 +204,7 @@
             },
             //the event of addtional button
             certainAction() {
-                console.log('the event of addtional button')
+                //console.log('the event of addtional button')
 
                 if (this.isBlank(this.project.proName)) {
                     alert("产品名称不能为空!")
@@ -251,18 +251,18 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    console.log(res)
+                    //console.log(res)
                     if (res.retCode == '0000') {
                         alert(res.retMsg)
                         this.$emit('certainAction')
                     }
                 }).catch((error) => {
-                    console.log('产品信息请提交失败')
+                    //console.log('产品信息请提交失败')
                 });
             },
             closeCurrentPage() {
                 $("#projectContent").modal("hide")
-                console.log('关闭添加产品界面')
+                //console.log('关闭添加产品界面')
             },
         }
 

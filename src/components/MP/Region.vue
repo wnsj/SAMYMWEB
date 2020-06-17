@@ -3,7 +3,7 @@
 
     <div class="wraper">
         <div class="col-md-12 col-lg-12 main-title">
-            <h1 class="titleCss">来访状态</h1>
+            <h1 class="titleCss">区域管理</h1>
         </div>
         <div class="row" style="margin-top: 40px;padding-bottom:1.5%;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -73,9 +73,9 @@
             </div>
         </div>
         <div class="row row_edit">
-            <div class="modal fade" id="vsContent">
+            <div class="modal fade" id="subRegionContent">
                 <div class="modal-dialog">
-                    <SubVs ref='vs' @certainAction='feedBack'></SubVs>
+                    <SubRegion ref='subRegion' @certainAction='feedBack'></SubRegion>
                 </div>
             </div>
         </div>
@@ -86,14 +86,14 @@
 
 <script>
 
-    import SubVs from '../MP/SubVs/SubVs.vue'
+    import SubRegion from '../MP/SubRegion/SubRegion.vue'
     import {
         init
     } from '@/../static/js/common.js'
 
     export default {
         components: {
-            SubVs,
+            SubRegion,
         },
         data() {
             return {
@@ -108,20 +108,20 @@
             //feedback from adding and modifying view
             feedBack() {
                 this.queryVisitStateList()
-                $("#vsContent").modal('hide')
+                $("#subRegionContent").modal('hide')
             },
             // check the adding and modifying rule of account
             selectRule(param, item) {
                 if (param == "1") {
-                    this.$refs.vs.initData('add')
-                    $("#vsContent").modal('show')
+                    this.$refs.subRegion.initData('add')
+                    $("#subRegionContent").modal('show')
                 } else if (param == "3") {
 //                     if (!this.has('SAMY:MP:Store:Update')) {
 //                         alert("暂无权限!");
 //                         return
 //                     }
-                    this.$refs.vs.initData('modify', item)
-                    $("#vsContent").modal('show')
+                    this.$refs.subRegion.initData('modify', item)
+                    $("#subRegionContent").modal('show')
                 }
             },
             //check the list of store

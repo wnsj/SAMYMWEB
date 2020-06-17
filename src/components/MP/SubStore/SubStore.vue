@@ -75,7 +75,7 @@
 			// Initialization store’s content
 			initData(param,storeContent) {
 				if(param=='add'){
-					console.log('Initialization store’s content, which adds store')
+					//console.log('Initialization store’s content, which adds store')
 					
 					this.title='新增'
 					
@@ -88,20 +88,20 @@
 					}
 					
 				}else if(param=='modify'){
-					console.log('Initialization store’s content, which modifies store')
+					//console.log('Initialization store’s content, which modifies store')
 					
 					this.title='修改'
-					console.log(JSON.stringify(storeContent))
+					//console.log(JSON.stringify(storeContent))
 					Object.assign(this.store,storeContent)
 				}
 			},
 			closeCurrentPage(){
 				$("#storeContent").modal("hide")
-				console.log('关闭添加患者界面')
+				//console.log('关闭添加患者界面')
 			},
 			//the event of addtional button
 			certainAction(){
-				console.log('the event of addtional button')
+				//console.log('the event of addtional button')
 				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 			
 				if(this.isBlank(this.store.storeName)){
@@ -138,7 +138,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
+					//console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('certainAction')
@@ -146,7 +146,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('添加商铺失败')
+					//console.log('添加商铺失败')
 				});
 			},
 			

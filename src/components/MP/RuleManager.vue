@@ -184,7 +184,7 @@
 				}
 			},
 			deleteRule(item) {
-				console.log("权限ID："+item.ruleId)
+				//console.log("权限ID："+item.ruleId)
 				var url = this.url + '/ruleAction/deleteRule'
 				this.$ajax({
 					method: 'POST',
@@ -206,7 +206,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('请求失败处理')
+					//console.log('请求失败处理')
 				});
 			},
 
@@ -219,7 +219,7 @@
 
 			//the list , which is detail infomation of patient,was checked.
 			conditionCheck: function() {
-				console.log('querying based on multiple conditions')
+				//console.log('querying based on multiple conditions')
 				var url = this.url + '/ruleAction/queryRuleList'
 				this.$ajax({
 					method: 'POST',
@@ -241,12 +241,12 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					// console.log(JSON.stringify(res))
+					// //console.log(JSON.stringify(res))
 					if (res.retCode == '0000') {
 						this.ruleList = res.retData;
 					}
 				}).catch((error) => {
-					console.log('请求失败处理')
+					//console.log('请求失败处理')
 				});
 			},
 
@@ -254,9 +254,9 @@
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true)
 			if (window.performance.navigation.type == 1) {
-				console.log("页面被刷新")
+				//console.log("页面被刷新")
 			} else {
-				console.log("首次被加载")
+				//console.log("首次被加载")
 			}
 			init();
 		},

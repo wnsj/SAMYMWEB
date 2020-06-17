@@ -280,7 +280,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('请求失败处理')
+                    //console.log('请求失败处理')
                 });
             },
             handleScroll(e) {
@@ -564,7 +564,7 @@
                     if (res.retCode == '0000') {
                         res.retData = '0010'
                         if (res.retData == '0010') {
-                            console.log('param:' + param)
+                            //console.log('param:' + param)
                             if (param == 1) {
                                 //this.$refs.schedule.initData('add','')
                                 $("#scheduleContent").modal('show')
@@ -580,7 +580,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('员工权限查询请求失败')
+                    //console.log('员工权限查询请求失败')
                 });
             },
 
@@ -606,7 +606,7 @@
 			        var res = response.data
 			        if (res.retCode == '0000') {
 			            if(res.retData=='0010'){
-			                console.log('param:'+param)
+			                //console.log('param:'+param)
 			                if(param==1){
 			                    this.$refs.schedule.initData('add','')
 			                    $("#scheduleContent").modal('show')
@@ -622,17 +622,17 @@
 			        }
 
 			    }).catch((error) => {
-			        console.log('员工权限查询请求失败')
+			        //console.log('员工权限查询请求失败')
 			    });
 			},
 
 >>>>>>> d23d876b7647c66bb3f3e052290c675defeb4e7b
             //check the list of department
             checkEmp(page) {
-                console.log("时间为" + this.moment(this.thisDate, 'YYYY-MM-DD'));
+                //console.log("时间为" + this.moment(this.thisDate, 'YYYY-MM-DD'));
                 if (!this.isBlank(this.thisDate)) {
                     this.schedulingListTitle = this.getWeekDay(this.moment(this.thisDate, 'YYYY-MM-DD'));
-                    console.log("这个时间为" + this.getWeekDay(this.moment(this.thisDate, 'YYYY-MM-DD')));
+                    //console.log("这个时间为" + this.getWeekDay(this.moment(this.thisDate, 'YYYY-MM-DD')));
                     this.thisDate = this.moment(this.thisDate, 'YYYY-MM-DD');
                 }
                 var url = this.url + '/schedulingAction/queryScheduling'
@@ -668,7 +668,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('请求失败处理')
+                    //console.log('请求失败处理')
                 });
             },
             handleScroll(e) {
@@ -724,7 +724,7 @@
                 let alldate = this.getAll(weekStart, weekEnd);
                 //let result = this.chinaDate(alldate);
                 this.schedulingListTitle = alldate;
-                //console.log('12:'+this.getAll('2019.12.30','2019.01.05'));
+                ////console.log('12:'+this.getAll('2019.12.30','2019.01.05'));
 
             },
             //日期转换

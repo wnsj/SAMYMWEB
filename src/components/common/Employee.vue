@@ -64,7 +64,7 @@
             setEmp: function (empId) {
                 this.empId = empId
                 this.employeeChange()
-                console.log('员工' + this.empId)
+                //consolele.log('员工' + this.empId)
             },
             //添加前缀的部门名字兑换原来的名字
             exchangeEmpName: function (param) {
@@ -78,7 +78,7 @@
             },
 
             setPosId(posId) {
-                // console.log('posId:'+posId)
+                // //console.log('posId:'+posId)
                 if (this.isBlank(posId)) {
                     this.posId = ''
                 } else {
@@ -87,7 +87,7 @@
                 this.getEmployeeList()
             },
             setPosName(posName) {
-                // console.log('posName:'+posName)
+                // //console.log('posName:'+posName)
                 if (this.isBlank(posName)) {
                     this.posName = ''
                 } else {
@@ -96,7 +96,7 @@
                 this.getEmployeeList()
             },
             setPosNameAndLeader(posName, leader) {
-                // console.log('posName:'+posName)
+                // //console.log('posName:'+posName)
                 if (this.isBlank(posName)) {
                     this.posName = ''
                 } else {
@@ -141,7 +141,7 @@
                         alert(response.retMsg)
                     }
                 }, (error) => {
-                    console.log("请求失败处理");
+                    //console.log("请求失败处理");
                 });
             },
             //设置查询条件[注:需要自己组装对象]
@@ -158,7 +158,7 @@
                         alert(response.retMsg)
                     }
                 }, (error) => {
-                    console.log("请求失败处理");
+                    //console.log("请求失败处理");
                 });
             }
         },

@@ -25,14 +25,14 @@
     methods: {
       //提交岗位名称和ID
       accountChange: function () {
-				// console.log('岗位1：'+this.AccountObj.AccountId)
+				// //console.log('岗位1：'+this.AccountObj.AccountId)
         this.accountObj = this.exchangeAccountName(this.accountId)
-				// console.log('岗位2：'+this.AccountObj.AccountId)
+				// //console.log('岗位2：'+this.AccountObj.AccountId)
         this.$emit('accountChange', this.accountObj)
       },
       setAccount: function (accountId) {
         this.accountId = accountId
-				// console.log('设置岗位'+this.accountId)
+				// //console.log('设置岗位'+this.accountId)
       },
       //添加前缀的部门名字兑换原来的名字
       exchangeAccountName: function (param) {
@@ -69,7 +69,7 @@
         	}
         
         }).catch((error) => {
-        	console.log('岗位数据请求失败处理')
+        	//console.log('岗位数据请求失败处理')
         });
       },
 

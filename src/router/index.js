@@ -31,6 +31,10 @@ import CounseRoomTimeTotal from '../components/MP/CounseRoomTimeTotal.vue'
 import NewRuleManager from '../components/MP/NewRuleManager.vue'
 import UmsPermissionManage from '../components/MP/UmsPermissionManage.vue'
 import Refund from '../components/MP/Refund.vue'
+import Region from '../components/MP/Region.vue'
+import Occupation from '../components/MP/Occupation.vue'
+import Education from '../components/MP/Education.vue'
+
 
 Vue.use(Router)
 
@@ -69,6 +73,21 @@ export default new Router({
 				    path: '/MP/VisitState',
 				    name: 'VisitState',
 				    component: VisitState,
+				},
+				{
+				    path: '/MP/Education',
+				    name: 'Education',
+				    component: Education,
+				},
+				{
+				    path: '/MP/Occupation',
+				    name: 'Occupation',
+				    component: Occupation,
+				},
+				{
+				    path: '/MP/Region',
+				    name: 'Region',
+				    component: Region,
 				},
 				{
 				    path: '/MP/Refund',

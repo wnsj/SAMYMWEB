@@ -52,7 +52,7 @@ router.beforeEach((to, from, next) => {
     } else {
         let token = Cookies.get('accessToken');
         let accountData = Cookies.get('accountData');
-        //console.log("token:" + token + ",accountData:" + accountData);
+        ////console.log("token:" + token + ",accountData:" + accountData);
         if (constant.isBlank(token) || constant.isBlank(accountData)) {
             if (from.path == '/login') {
                 alert('没有查到用户信息，或者用户信息存储失败')
@@ -65,7 +65,7 @@ router.beforeEach((to, from, next) => {
         } else {
             let token = Cookies.get('accessToken');
             let accountData = Cookies.get('accountData');
-            //console.log("token:" + token + ",accountData:" + accountData);
+            ////console.log("token:" + token + ",accountData:" + accountData);
             if (constant.isBlank(token) || constant.isBlank(accountData)) {
                 next('/login');
             } else if (to.path == '/') {
@@ -91,7 +91,7 @@ router.beforeEach((to, from, next) => {
                         break;
                     }
                 }
-                console.log("main:" + to.path + from.path)
+                //console.log("main:" + to.path + from.path)
                 if (hasRule) {
                     next()
                 } else {

@@ -251,7 +251,7 @@
 					this.consume.realCross=param.price*param.frequency*param.discount/100
 					if(this.counselorList != null && this.counselorList.length > 0){
 						var isSame=0
-						console.log("counselorList:"+JSON.stringify(this.counselorList))
+						//console.log("counselorList:"+JSON.stringify(this.counselorList))
 						for(var i=0;i < this.counselorList[0].proList.length;i++ ){
 							var project = this.counselorList[0].proList[i]
 							if(this.consume.proId==project.proId){
@@ -283,7 +283,7 @@
 			
 			//the event of addtional button
 			addFee() {
-				console.log('the event of addtional button')
+				//console.log('the event of addtional button')
 				
 				this.consume.memName=this.member.memName
 				this.consume.phone=this.member.phone
@@ -321,7 +321,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
+					//console.log(res)
 					if (res.retCode == '0000') {
 						this.$router.push({
 							name: 'SettleSummary',
@@ -331,7 +331,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('请求失败处理')
+					//console.log('请求失败处理')
 				});
 			},
 			closeCurrentPage() {
@@ -346,11 +346,11 @@
 			
 			//Query member's information based on the memNum
 			checkMemNum(param) {
-				console.log('checkMemNum')
+				//console.log('checkMemNum')
 				if (this.isBlank(param)) {
 					return
 				}
-				console.log('费用类型3：' + this.consume.costType)
+				//console.log('费用类型3：' + this.consume.costType)
 				var url = this.url + '/purchasedItemsAction/queryMemUnfinished'
 				this.$ajax({
 					method: 'POST',
@@ -374,7 +374,7 @@
 							this.consume.phone=this.member.phone
 						}
 						if(this.counselorList.length>0){
-							console.log("有未完成的项目")
+							//console.log("有未完成的项目")
 							var counselorEmpId = this.counselorList[0].counselor
 							this.$refs.counselorEmp.setEmp(counselorEmpId)
 							
@@ -382,7 +382,7 @@
 					}
 
 				}).catch((error) => {
-					console.log('会员查询请求失败')
+					//console.log('会员查询请求失败')
 				});
 			},
 

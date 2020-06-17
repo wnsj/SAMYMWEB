@@ -76,7 +76,7 @@
                         alert(res.retMsg)
                     }
                 }).catch((error) => {
-                    console.log('产品数据请求失败处理')
+                    //console.log('产品数据请求失败处理')
                 });
             },
         },

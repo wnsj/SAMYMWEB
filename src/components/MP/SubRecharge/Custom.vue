@@ -571,7 +571,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
+					//console.log(res)
 					if (res.retCode == '0000') {
 						this.$router.push({
 							name: 'SettleSummary',
@@ -584,13 +584,13 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('请求失败处理')
+					//console.log('请求失败处理')
 				});
 			},
 			closeCurrentPage() {
 				this.$emit('closeCurrentPage')
 				//$("#addCustom").modal("hide")
-				console.log('关闭添加患者界面')
+				//console.log('关闭添加患者界面')
 			},
 			jumpLeft(index) {
 				$("#aside-menu li").removeClass("li-active");
@@ -600,11 +600,11 @@
 			},
 			//Query member's information based on the memNum
 			checkMemNum(param) {
-				console.log('checkMemNum')
+				//console.log('checkMemNum')
 				if (this.isBlank(param)) {
 					return
 				}
-				console.log('费用类型3：' + this.consume.costType)
+				//console.log('费用类型3：' + this.consume.costType)
 				var url = this.url + '/purchasedItemsAction/queryMemUnfinished'
 				this.$ajax({
 					method: 'POST',
@@ -637,13 +637,13 @@
 							this.$refs.counselorEmp.setEmp("")
 						}
 						if (this.counselorList.length > 0) {
-							console.log("有未完成的项目")
+							//console.log("有未完成的项目")
 							var counselorEmpId = this.counselorList[0].counselor
 							this.$refs.counselorEmp.setEmp(counselorEmpId)
 						}
 					}
 				}).catch((error) => {
-					console.log('会员查询请求失败')
+					//console.log('会员查询请求失败')
 				});
 			},
 			//查询已购买产品
@@ -669,7 +669,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('会员查询请求失败')
+					//console.log('会员查询请求失败')
 				});
 			},
 			//单选框选中处理
@@ -843,7 +843,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('会员查询请求失败')
+					//console.log('会员查询请求失败')
 				});
 			},
 			count(event) {
@@ -851,20 +851,20 @@
 					this.cash.select = this.cash.balance;
 					$("#earn").val(this.cash.select);
 				}
-				// console.log("count1")
+				// //console.log("count1")
 				// if (this.member.counselorEmpId != this.consume.counselor) {
-				//     console.log("count2")
+				//     //console.log("count2")
 				//     if (this.consume.proType == 0) {
-				//         console.log("count4")
+				//         //console.log("count4")
 				//         this.isSelect = false
 				//         this.consumeReceivable = this.consume.realCross
 				//     } else {
-				//         console.log("count5")
+				//         //console.log("count5")
 				//         this.isSelect = true
 				//         this.consumeReceivable = this.consume.realCross - this.member.balance - this.cash.select;
 				//     }
 				// } else {
-				//     console.log("count3")
+				//     //console.log("count3")
 				//     this.isSelect = false
 				//     this.consumeReceivable = this.consume.realCross - this.cash.select;
 				// }

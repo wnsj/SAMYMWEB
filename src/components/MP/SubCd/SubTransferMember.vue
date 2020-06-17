@@ -71,7 +71,7 @@
                 this.$emit('closeToMember');
             },
             checkMemNum(param) {
-                console.log('checkMemNum')
+                //console.log('checkMemNum')
                 if (this.isBlank(param)) {
                     return
                 }
@@ -100,7 +100,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('会员查询请求失败')
+                    //console.log('会员查询请求失败')
                 });
             },
             //提交表单
@@ -141,7 +141,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('转会员请求失败')
+                    //console.log('转会员请求失败')
                 });
             }
         }

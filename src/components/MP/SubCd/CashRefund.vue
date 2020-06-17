@@ -67,7 +67,7 @@
 			// Initialization FWRoyalty’s content
 			initData(param,cash) {
 				if(param=='add'){
-					console.log('Initialization FWRoyalty’s content, which adds FWRoyalty')
+					//console.log('Initialization FWRoyalty’s content, which adds FWRoyalty')
 					this.title='新增'
 					this.cash={
 					cashId:'',
@@ -80,12 +80,12 @@
 				}
 					
 				}else if(param=='modify'){
-					console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
+					//console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
 					
 					this.title='修改'
 					Object.assign(this.cash,cash)
 					this.cash.operatorId=this.accountId()
-					// console.log(JSON.stringify(this.cash))
+					// //console.log(JSON.stringify(this.cash))
 					
 				}
 			},
@@ -97,7 +97,7 @@
 			
 			//the event of addtional button
 			certainAction(){
-				console.log('the event of addtional button')
+				//console.log('the event of addtional button')
 				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 				
 				if(this.isBlank(this.cash.cashName)){
@@ -151,7 +151,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('会员相关操作失败')
+					//console.log('会员相关操作失败')
 				});
 			},
 			closeCurrentPage(){

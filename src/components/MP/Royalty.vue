@@ -286,7 +286,7 @@
                         return
                     }
                 }
-                console.log('operateName:' + operateName)
+                //console.log('operateName:' + operateName)
                 switch (module) {
                     case 'Royalty':
                         this.$refs.flowWater.initData(operateName, item);
@@ -312,7 +312,7 @@
             },
             //check the list of department
             checkRoyaltyList() {
-                console.log('checkRoyaltyList')
+                //console.log('checkRoyaltyList')
                 var url = this.url + '/royaltyAction/queryRoyalty'
                 this.$ajax({
                     method: 'POST',
@@ -330,7 +330,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    console.log(res)
+                    //console.log(res)
                     if (res.retCode == '0000') {
                         this.royaltyList = res.retData
                     } else {
@@ -338,7 +338,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('提成规则数据请求失败')
+                    //console.log('提成规则数据请求失败')
                 });
             },
             handleScroll(e) {

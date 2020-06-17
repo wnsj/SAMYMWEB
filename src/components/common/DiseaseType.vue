@@ -65,7 +65,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('状态数据请求失败处理')
+                    //console.log('状态数据请求失败处理')
                 });
             },
         },

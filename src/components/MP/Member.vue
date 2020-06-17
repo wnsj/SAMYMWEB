@@ -177,7 +177,7 @@
             },
             //check the list of member
             checkMember(page) {
-                console.log('checkMember')
+                //console.log('checkMember')
                 var url = this.url + '/memberAction/queryVagueMember'
 
                 this.$ajax({
@@ -201,7 +201,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    console.log(res)
+                    //console.log(res)
                     if (res.retCode == '0000') {
                         this.pages = res.retData.pages //总页数
                         this.current = res.retData.current //当前页码
@@ -214,12 +214,12 @@
                     }
 
                 }).catch((error) => {
-                    console.log('请求失败处理')
+                    //console.log('请求失败处理')
                 });
             },
             //check the list of department
             checkDepartment() {
-                console.log('checkDepartment')
+                //console.log('checkDepartment')
                 var url = this.url + '/memberAction/queryDepartment'
                 this.$ajax({
                     method: 'POST',
@@ -237,7 +237,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    console.log(res)
+                    //console.log(res)
                     if (res.retCode == '0000') {
                         this.departmentList = res.retData
                     } else {
@@ -245,7 +245,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('请求失败处理')
+                    //console.log('请求失败处理')
                 });
             },
             handleScroll(e) {

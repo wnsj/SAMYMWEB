@@ -123,7 +123,7 @@
 				} else {
 					this.storeId = param.storeId
 				}
-				console.log('store' + this.storeId)
+				//console.log('store' + this.storeId)
 			},
 			//feedback MedicalInsuranceStype information
 			positionChange: function(param) {
@@ -132,7 +132,7 @@
 				} else {
 					this.posId = param.posId
 				}
-				console.log('store' + this.posId)
+				//console.log('store' + this.posId)
 			},
 			
 			feedback() {
@@ -147,7 +147,7 @@
 			},
 			//the list , which is detail infomation of patient,was checked.
 			conditionCheck: function() {
-				console.log('querying based on multiple conditions')
+				//console.log('querying based on multiple conditions')
 				this.createDate = this.moment(this.createDate,'YYYY-MM-DD 00:00:00.000')
 				var url = this.url + '/employeeAction/queryEmpRoyalty'
 				this.$ajax({
@@ -177,7 +177,7 @@
 
 					this.royaltyList = res.retData
 				}).catch((error) => {
-					console.log('提成信息查询失败')
+					//console.log('提成信息查询失败')
 				});
 			},
 			
@@ -185,9 +185,9 @@
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true)
 			if (window.performance.navigation.type == 1) {
-				console.log("页面被刷新")
+				//console.log("页面被刷新")
 			} else {
-				console.log("首次被加载")
+				//console.log("首次被加载")
 			}
 			init();
 		},

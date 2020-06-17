@@ -108,12 +108,12 @@
                     }
                 }).catch((error) => {
                     this.btnText = '登录';
-                    console.log("请求失败处理");
+                    //console.log("请求失败处理");
                 });
             },
             consoleLog() {
-                console.log("accountData:" + this.accountInfo + "##" + this.$root.accessToken)
-                console.log("Cookies:" + Cookies.get('accessToken'))
+                //console.log("accountData:" + this.accountInfo + "##" + this.$root.accessToken)
+                //console.log("Cookies:" + Cookies.get('accessToken'))
             }
         },
         created() {

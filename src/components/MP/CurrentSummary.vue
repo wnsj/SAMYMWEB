@@ -189,7 +189,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    console.log(res)
+                    //console.log(res)
                     if (res.retCode == '0000') {
                         if(res.retData.grossInfo != null){
                             this.pages = res.retData.grossInfo.pages //总页数
@@ -215,7 +215,7 @@
                         }
                     }
                 }).catch((error) => {
-                    console.log('月入账目查询失败')
+                    //console.log('月入账目查询失败')
                 });
             },
         },

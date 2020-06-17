@@ -167,13 +167,13 @@
             //modify the cotent of department
 
             addEmp() {
-                console.log('modify the cotent of department')
+                //console.log('modify the cotent of department')
                 this.$refs.emp.initData('add')
                 $("#emp").modal('show')
             },
             //modify the cotent of department
             modifyEmp(item) {
-                console.log('modify the cotent of department')
+                //console.log('modify the cotent of department')
                 this.$refs.emp.initData('modify', item)
                 $("#emp").modal('show')
             },
@@ -215,7 +215,7 @@
             },
             //check the list of department
             checkEmp(page) {
-                console.log('checkEmp')
+                //console.log('checkEmp')
                 var url = this.url + '/employeeAction/queryEmp'
                 this.$ajax({
                     method: 'POST',
@@ -236,7 +236,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    console.log(res)
+                    //console.log(res)
                     if (res.retCode == '0000') {
                         this.pages = res.retData.pages //总页数
                         this.current = res.retData.current //当前页码
@@ -249,7 +249,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('请求失败处理')
+                    //console.log('请求失败处理')
                 });
             },
             handleScroll(e) {

@@ -25,12 +25,12 @@
             //提交岗位名称和ID
             channelChange: function() {
                 this.channelObj = this.exchangeChannelName(this.crId)
-                // console.log('岗位2：'+this.storeObj.storeId)
+                // //console.log('岗位2：'+this.storeObj.storeId)
                 this.$emit('channelChange', this.channelObj)
             },
             setChaId: function(chaId) {
                 this.crId = chaId
-                // console.log('设置岗位'+this.chaId)
+                // //console.log('设置岗位'+this.chaId)
             },
             //添加前缀的部门名字兑换原来的名字
             exchangeChannelName: function(param) {
@@ -68,7 +68,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('渠道数据请求失败处理')
+                    //console.log('渠道数据请求失败处理')
                 });
             },
 

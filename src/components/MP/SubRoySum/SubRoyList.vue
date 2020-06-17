@@ -186,12 +186,12 @@
 					"balance": '', //总人数
 				}
 				this.posType = param.posName
-				console.log(JSON.stringify(param))
+				//console.log(JSON.stringify(param))
 				this.clerkContent = param
 				this.checkDetail(param)
 			},
 			checkDetail(param) {
-				console.log('the event of addtional button')
+				//console.log('the event of addtional button')
 
 				var url = this.url + '/employeeAction/queryEmpRoyaltyInfo'
 				this.$ajax({
@@ -230,12 +230,12 @@
 					}
 
 				}).catch((error) => {
-					console.log('请求失败处理')
+					//console.log('请求失败处理')
 				});
 			},
 			closeCurrentPage() {
 				$("#subRoy").modal("hide")
-				console.log('关闭添加患者界面')
+				//console.log('关闭添加患者界面')
 			},
 		}
 

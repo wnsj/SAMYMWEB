@@ -422,7 +422,7 @@
                     alert(res.retMsg)
                     this.checkOrderList(1)
                 }).catch((error) => {
-                    console.log('预约相关提交请求失败')
+                    //console.log('预约相关提交请求失败')
                 });
             },
             //check the list of orderContent
@@ -474,7 +474,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    //console.log(JSON.stringify(res))
+                    ////console.log(JSON.stringify(res))
                     if (res.retCode == '0000') {
                         this.pages = res.retData.pages //总页数
                         this.current = res.retData.current //当前页码
@@ -487,7 +487,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('请求失败处理')
+                    //console.log('请求失败处理')
                 });
             },
             handleScroll(e) {
@@ -591,7 +591,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    //console.log(JSON.stringify(res))
+                    ////console.log(JSON.stringify(res))
                     if (res.retCode == '0000') {
                         this.phoneNoX = res.retData.phoneNoX
                         this.extension = res.retData.extension
@@ -602,7 +602,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('请求失败处理')
+                    //console.log('请求失败处理')
                 });
             },
             closeCurrentPage() {
@@ -616,7 +616,7 @@
             this.$refs.counlorEmp.setEmp("")
         },
         created() {
-            this.checkOrderList(1)
+            // this.checkOrderList(1)
         }
     }
 </script>

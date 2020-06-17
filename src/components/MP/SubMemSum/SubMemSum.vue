@@ -51,7 +51,7 @@
 		methods:{
 			closeCurrentPage(){
 				$("#detailMember").modal("hide")
-				console.log('关闭添加患者界面')
+				//console.log('关闭添加患者界面')
 			},
 			//Query patient's information based on the hosNum
 			conditionCheck(param){
@@ -73,7 +73,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
+					//console.log(res)
 					if (res.retCode == '0000') {
 						if (res.retData != null) {
 							this.memberList = res.retData
@@ -82,7 +82,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('会员消费详细信息请求失败')
+					//console.log('会员消费详细信息请求失败')
 				});
 			},
 			

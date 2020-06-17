@@ -160,7 +160,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    //console.log(JSON.stringify(res))
+                    ////console.log(JSON.stringify(res))
                     if (res.retCode == '0000') {
                         // this.pages = res.retData.pages //总页数
                         // this.current = res.retData.current //当前页码
@@ -173,7 +173,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('请求失败处理')
+                    //console.log('请求失败处理')
                 });
             },
             handleScroll(e) {

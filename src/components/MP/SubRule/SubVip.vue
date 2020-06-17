@@ -81,7 +81,7 @@
 			// Initialization FWRoyalty’s content
 			initData(param,FWRoyalty) {
 				if(param=='add'){
-					console.log('Initialization FWRoyalty’s content, which adds FWRoyalty')
+					//console.log('Initialization FWRoyalty’s content, which adds FWRoyalty')
 			
 					this.title='新增'
 					this.FWRoyalty={
@@ -93,7 +93,7 @@
 					}
 					this.$refs.pos.setPosId('0')
 				}else if(param=='modify'){
-					console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
+					//console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
 					
 					this.title='修改'
 					Object.assign(this.FWRoyalty,FWRoyalty)
@@ -103,18 +103,18 @@
 			
 			//feedback position information
 			posChange:function(param){
-				console.log('岗位3：'+JSON.stringify(param))
+				//console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.FWRoyalty.posId=""
 				}else{
 					this.FWRoyalty.posId=param.posId
 				}
-				console.log('岗位4：'+this.FWRoyalty.posId)
+				//console.log('岗位4：'+this.FWRoyalty.posId)
 			},
 			
 			//the event of addtional button
 			certainAction(param){
-				console.log("1:"+this.FWRoyalty.memRoy)
+				//console.log("1:"+this.FWRoyalty.memRoy)
 				
 				
 				if(this.isBlank(this.FWRoyalty.posId) || this.FWRoyalty.posId=='0'){
@@ -156,18 +156,18 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
+					//console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('certainAction')
 					}
 				}).catch((error) => {
-					console.log('添加会员卡规则失败')
+					//console.log('添加会员卡规则失败')
 				});
 			},
 			closeCurrentPage(){
 				$("#SubVip").modal("hide")
-				console.log('close the flowWater rule')
+				//console.log('close the flowWater rule')
 			},
 		}
 		

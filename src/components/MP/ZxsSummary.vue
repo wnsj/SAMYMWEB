@@ -164,7 +164,7 @@
             },
             //咨询师
             counlorEmpChange: function(param) {
-                console.log(param)
+                //console.log(param)
                 if(typeof param == 'undefined'||this.isBlank(param.empId)){
                     this.empId=''
                     this.isShowSummary=false
@@ -175,7 +175,7 @@
                 if(!this.isBlank(this.beginDate)){
                     beginDate=this.moment(this.beginDate, 'YYYY-MM-01 00:00:00.000')
                 }
-                console.log("beginDate:"+beginDate)
+                //console.log("beginDate:"+beginDate)
                 var url = this.url + '/accountRecordAction/queryZxsSummary'
                 this.$ajax({
                     method: 'POST',
@@ -192,7 +192,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    console.log(res)
+                    //console.log(res)
                     if (res.retCode == '0000') {
                         if (res.retData.summaryMap == null) {
                             this.isShowSummary=false
@@ -204,7 +204,7 @@
                         alert(res.retMsg)
                     }
                 }).catch((error) => {
-                    console.log('请求失败处理')
+                    //console.log('请求失败处理')
                 });
 
             },
@@ -213,7 +213,7 @@
                 if(!this.isBlank(this.beginDate)){
                     beginDate=this.moment(this.beginDate, 'YYYY-MM-01 00:00:00.000')
                 }
-                console.log("beginDate:"+beginDate)
+                //console.log("beginDate:"+beginDate)
                 var url = this.url + '/accountRecordAction/queryZxsSummary'
                 this.$ajax({
                     method: 'POST',
@@ -232,9 +232,9 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    console.log(res)
+                    //console.log(res)
                     if (res.retCode == '0000') {
-                        //console.log(res.retData.queryList)
+                        ////console.log(res.retData.queryList)
                         this.pages = res.retData.queryList.pages //总页数
                         this.current = res.retData.queryList.current //当前页码
                         this.pageSize = res.retData.queryList.size //一页显示的数量  必须是奇数
@@ -252,7 +252,7 @@
                         alert(res.retMsg)
                     }
                 }).catch((error) => {
-                    console.log('请求失败处理')
+                    //console.log('请求失败处理')
                 });
             },
             handleScroll(e) {

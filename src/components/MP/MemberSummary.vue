@@ -163,12 +163,12 @@
                 } else {
                     this.storeId = param.storeId
                 }
-                console.log('store' + this.storeId)
+                //console.log('store' + this.storeId)
             },
             //the list , which is detail infomation of member,was checked.
             conditionCheck: function(page) {
-                console.log('querying based on multiple conditions')
-				console.log('accountPosId:'+this.accountPosId())
+                //console.log('querying based on multiple conditions')
+				//console.log('accountPosId:'+this.accountPosId())
 				
                 if(!this.isBlank(this.begCreateDate)){
                     this.begCreateDate = this.moment(this.begCreateDate,'YYYY-MM-DD 00:00:00.000')
@@ -200,7 +200,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    console.log(res)
+                    //console.log(res)
                     if (res.retCode == '0000') {
                         this.pages=res.retData.pages //总页数
                         this.current=res.retData.current //当前页码
@@ -210,7 +210,7 @@
                         this.memCostList = res.retData.records;
                     }
                 }).catch((error) => {
-                    console.log('会员账目查询失败')
+                    //console.log('会员账目查询失败')
                 });
             },
         },

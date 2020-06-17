@@ -146,7 +146,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('状态查询请求失败')
+                    //console.log('状态查询请求失败')
                 });
             },
             handleScroll(e) {

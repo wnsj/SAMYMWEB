@@ -4,7 +4,7 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">购买产品管理</h1>
 		</div>
-		<div class="row" style="margin-top: 40px;">
+		<div class="row newRow" style="margin-top: 40px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
 				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
@@ -36,13 +36,13 @@
 				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 					<select class="form-control" v-model="isArrears">
 						<option value="">全部</option>
-						<option value="1">欠费</option>
-						<option value="0">不欠费</option>
+						<option value="1">全款</option>
+						<option value="0">欠费</option>
 					</select>
 				</div>
 			</div>
 		</div>
-		<div class="row" style="margin-top: 15px;">
+		<div class="row newRow" style="margin-top: 15px;">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
 				<div class="col-md-3 col-lg-3 text-right" style="padding: 0; line-height: 34px;width:20.5%">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">购买时间</p><span class="sign-left">:</span>
@@ -77,7 +77,7 @@
 								<th class="text-center" rowspan='2'>购买时间</th>
 								<th class="text-center" rowspan='2'>实交金额</th>
 								<th class="text-center" rowspan='2'>操作人</th>
-								<th class="text-center" rowspan='2'>是否欠费</th>
+								<th class="text-center" rowspan='2'>是否全款</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -92,10 +92,9 @@
 								<td>{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td>{{item.realCross}}</td>
 								<td>{{item.operatorName}}</td>
-								<td v-show="item.isArrears=='0'">否</td>
-								<td v-show="item.isArrears=='1'"><button type="button" class="btn btn-warning" v-on:click="arrearsAaction(item)">是</button>
+								<td v-show="item.isArrears=='0'"><button type="button" class="btn btn-warning" v-on:click="arrearsAaction(item)">否</button></td>
+								<td v-show="item.isArrears=='1'">是
 								</td>
-								<td v-show="item.isArrears=='3'">已补交</td>
 							</tr>
 						</tbody>
 					</table>
@@ -135,7 +134,7 @@
 				begCreateDate: '',
 				endCreateDate: '',
 				storeId: this.storeId(),
-				isArrears: '0',
+				isArrears: '1',
 				accountType:this.accountType(),
 
 
@@ -220,6 +219,10 @@
 				});
 			},
 			arrearsAaction(item) {
+				if (!this.has("SAMY:MP:Charge:AddArrears")) {
+					alert("暂无权限!")
+					return
+				}
 				if (confirm("是否是补交缴费，确认已经补交缴费？？") == false) {
 					return
 				}

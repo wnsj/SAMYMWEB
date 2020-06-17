@@ -4,10 +4,10 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">预约管理</h1>
         </div>
-        <div class="row" style="margin-top: 40px;">
+        <div class="row newRow" style="margin-top: 40px;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span
+                    <p class="end-aline col-md-11 col-lg-11" >姓名</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="appName"></div>
@@ -15,7 +15,7 @@
 
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span
+                    <p class="end-aline col-md-11 col-lg-11" >手机号</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
@@ -25,7 +25,7 @@
 
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否到店</p><span
+                    <p class="end-aline col-md-11 col-lg-11" >是否到店</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
@@ -39,7 +39,7 @@
 
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
+                    <p class="end-aline col-md-11 col-lg-11" >门店</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
@@ -48,7 +48,7 @@
             </div>
             <!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">-->
             <!--<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right" style="padding: 0; line-height: 34px;">-->
-            <!--<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否取消</p><span class="sign-left">:</span>-->
+            <!--<p class="end-aline col-md-11 col-lg-11" >是否取消</p><span class="sign-left">:</span>-->
             <!--</div>-->
             <!--<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">-->
             <!--<select class="form-control" v-model="state">-->
@@ -59,7 +59,7 @@
             <!--</div>-->
             <!--</div>-->
         </div>
-        <div class="row" style="margin-top: 15px;">
+        <div class="row newRow" style="margin-top: 15px;">
             <!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
 				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px; width:20.5%">
 					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">来电时间</p><span class="sign-left">:</span>
@@ -78,7 +78,7 @@
 
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span
+                    <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
@@ -87,7 +87,7 @@
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">渠道</p><span
+                    <p class="end-aline col-md-11 col-lg-11" >渠道</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
@@ -114,9 +114,13 @@
                     <dPicker style="width:100%" v-model="endAppDate"></dPicker>
                 </div>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="margin-top: 15px">
+
+        </div>
+
+        <div class="row newRow" style="margin-top: 15px;padding-bottom:1.5%;">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否取消</p><span
+                    <p class="end-aline col-md-11 col-lg-11" >是否取消</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
@@ -127,9 +131,6 @@
                     </select>
                 </div>
             </div>
-        </div>
-
-        <div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
             <!--            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"-->
             <!--                    data-toggle="modal"-->
             <!--                    @click="selectRule('1')" v-has="'SAMY:MP:Order:Add'">添加预约-->
@@ -249,7 +250,7 @@
                                 <form action="" class="clearfix">
                                     <div class="col-md-12 form-group clearfix">
                                         <label class="col-md-3 control-label text-right nopad end-aline"
-                                               style="padding:0;line-height:34px;">电话号</label><span
+                                               style="padding:0;">电话号</label><span
                                         class="sign-left">:</span>
                                         <div class="col-md-8">
                                             <label class="form-control">{{phoneNoX}}</label>

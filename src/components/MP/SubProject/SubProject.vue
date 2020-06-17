@@ -6,8 +6,8 @@
             <h4 id="myModalLabel" class="modal-title">{{title}}产品</h4>
         </div>
         <div class="modal-body  pos_r">
-            <div class="tab-pane fade in active martop" id="basic">
-                <form action="" class="clearfix">
+            <div class="tab-pane fade in active martop clearfix" id="basic">
+
                     <div class="col-md-6 form-group clearfix">
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
                                style="padding:0;line-height:34px;">产品名称</label><span class="sign-left">:</span>
@@ -125,7 +125,7 @@
                                 v-on:click="certainAction()">确认
                         </button>
                     </div>
-                </form>
+                    <p class="tips col-md-12">到期时间为0天，表示的意思为时间一直有效</p>
             </div>
 
         </div>

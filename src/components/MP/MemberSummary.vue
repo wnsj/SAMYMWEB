@@ -3,7 +3,7 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">会员汇总</h1>
         </div>
-        <div class="row" style="margin-top: 40px;">
+        <div class="row newRow" style="margin-top: 40px;padding-bottom:1.5%;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
@@ -11,12 +11,6 @@
                 <div class="col-md-7 col-lg-7">
                     <Store ref="store" @storeChange="storeChange"></Store>
                 </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memNum"></div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
@@ -33,8 +27,6 @@
                     <input class="form-control" type="text" value="" v-model="phone">
                 </div>
             </div>
-        </div>
-        <div class="row" style="margin-top: 15px;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px;padding-left:20px;">开始时间</p><span class="sign-left">:</span>
@@ -43,6 +35,8 @@
                     <dPicker style="width:100%" v-model="begCreateDate"></dPicker>
                 </div>
             </div>
+        </div>
+        <div class="row newRow" style="padding-bottom:1.5%;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">结束时间</p><span class="sign-left">:</span>
@@ -51,7 +45,7 @@
                     <dPicker style="width:100%" v-model="endCreateDate"></dPicker>
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px; padding-bottom:1.5%;">
+            <div class="col-xs-13 col-sm-13 col-md-13 col-lg-13" style=" padding-right:30px; padding-bottom:1.5%;">
                 <button type="button" class="btn btn-primary pull-right m_r_10"  data-toggle="modal"
                         v-on:click="conditionCheck(1)">查询</button>
             </div>
@@ -64,7 +58,6 @@
                         <table class="table table-bordered table-hover user-table" id="datatable">
                             <thead class="datathead">
                             <tr>
-                                <th class="text-center">会员卡号</th>
                                 <th class="text-center">姓名</th>
                                 <th class="text-center">咨询师</th>
                                 <th class="text-center">项目</th>
@@ -77,7 +70,6 @@
                             </thead>
                             <tbody>
                             <tr v-for="(item,index) in memCostList" :key="index" v-on:dblclick="detailAction(item)">
-                                <td>{{item.MEM_NUM}}</td>
                                 <td>{{item.MEM_NAME}}</td>
                                 <td>{{item.EMP_NAME}}</td>
                                 <td>{{item.PRO_NAME}}</td>
@@ -86,7 +78,6 @@
                                 <td>{{item.REF_COUNT}}</td>
                                 <td>{{item.REMAINING_CLASS_HOUR}}</td>
                                 <td>{{item.CREATE_DATE | dateFormatFilter("YYYY-MM-DD")}}</td>
-
                             </tr>
                             </tbody>
                         </table>
@@ -102,7 +93,7 @@
                 <p class="tips ">* 双击单行，可查看会员的充值、消费、退费详情</p>
             </div>
         </div>
-		
+
         <div class="row row_edit">
             <div class="modal fade" id="detailMember">
                 <div class="modal-dialog">
@@ -180,7 +171,7 @@
             conditionCheck: function(page) {
                 console.log('querying based on multiple conditions')
 				console.log('accountPosId:'+this.accountPosId())
-				
+
                 if(!this.isBlank(this.begCreateDate)){
                     this.begCreateDate = this.moment(this.begCreateDate,'YYYY-MM-DD 00:00:00.000')
                 }

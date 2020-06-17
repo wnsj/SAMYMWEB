@@ -5,56 +5,56 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">客户管理</h1>
 		</div>
-		<div class="row" style="margin-bottom: 10px;">
+		<div class="row newRow" style="margin-bottom: 10px;">
 			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="padding-left: 35px;">
-				<button type="button" class="btn btn-default pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('5')"
-				 v-has="'SAMY:MP:CourseRefund'">退费</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('4')"
-				 v-has="'SAMY:MP:Order:Add'">预约</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('3')"
-				 v-has="'SAMY:MP:CashDeposit:Add'">定金</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('2')"
-				 v-has="'SAMY:MP:CourseConsum'">消费</button>
-				<button type="button" class="btn btn-success pull-left" style="margin-right:1.5%;width: 100px;" v-on:click="btnAction('1')"
-				 v-has="'SAMY:MP:CoursePurchase'">购 买 产 品 </button>
+				<button type="button" class="btn btn-default pull-left visbtn" style="" v-on:click="btnAction('5')"
+				 v-has="'SAMY:MP:Visitor:AddRefund'">退费</button>
+				<button type="button" class="btn btn-success pull-left visbtn" v-on:click="btnAction('4')"
+				 v-has="'SAMY:MP:Visitor:AddOrder'">预约</button>
+				<button type="button" class="btn btn-success pull-left visbtn" v-on:click="btnAction('3')"
+				 v-has="'SAMY:MP:Visitor:AddDush'">定金</button>
+				<button type="button" class="btn btn-success pull-left visbtn" v-on:click="btnAction('2')"
+				 v-has="'SAMY:MP:Visitor:AddConsum'">消费</button>
+				<button type="button" class="btn btn-success pull-left visbtn" v-on:click="btnAction('1')"
+				 v-has="'SAMY:MP:Visitor:AddRecharge'">购 买 产 品 </button>
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row newRow">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopdd">
+					<p class="end-aline col-md-11 col-lg-11" >门店</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<Store ref='store' @storeChange='storeChange'></Store>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopdd">
+					<p class="end-aline col-md-11 col-lg-11" >会员卡号</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memNum"></div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopdd">
+					<p class="end-aline col-md-11 col-lg-11" >姓名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="visitorName">
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopdd">
+					<p class="end-aline col-md-11 col-lg-11" >手机号</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
 			</div>
 		</div>
-		<div class="row" style="margin-top: 15px;">
+		<div class="row newRow" style="margin-top: 15px;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">访问类型</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopdd">
+					<p class="end-aline col-md-11 col-lg-11" >访问类型</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<select class="form-control" v-model="visType">
@@ -65,24 +65,24 @@
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">接待人</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopdd">
+					<p class="end-aline col-md-11 col-lg-11" >接待人</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<emp ref="emp" @employeeChange="employeeChange"></emp>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">渠道</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopdd">
+					<p class="end-aline col-md-11 col-lg-11" >渠道</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<cha ref="cha" @channelChange="chaChange"></cha>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">转会员</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopdd">
+					<p class="end-aline col-md-11 col-lg-11" >转会员</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<select class="form-control" v-model="isMem">
@@ -96,24 +96,24 @@
 
 		<div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">开始时间</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopdd">
+					<p class="end-aline col-md-11 col-lg-11" >开始时间</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<dPicker style="width:100%" value-type="format" format="YYYY-MM-DD" v-model="begDate"></dPicker>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">结束时间</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopdd">
+					<p class="end-aline col-md-11 col-lg-11" >结束时间</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<dPicker style="width:100%" value-type="format" format="YYYY-MM-DD" v-model="endDate"></dPicker>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">生日</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopdd">
+					<p class="end-aline col-md-11 col-lg-11" >生日</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<dPicker style="width:100%" value-type="format" format="DD" v-model="birthday"></dPicker>
@@ -141,7 +141,7 @@
 		<div class="">
 			<div class="col-md-12 col-lg-12">
 				<div class="table-responsive pre-scrollable">
-					<table class="table table-bordered table-hover" id="datatable" style="width: 2400px;">
+					<table class="table table-bordered table-hover" id="datatable">
 						<thead class="datathead">
 							<tr>
 								<th class="text-center">编辑</th>
@@ -172,7 +172,7 @@
 						</thead>
 						<tbody>
 							<tr v-for="(item,index) in visitorList" :key="index" v-on:dblclick="selectRule('3',item)">
-								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'" style="position: relative;">
+								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'" style="position: relative;width: 50px;">
 									<!-- <button type="button" class="btn btn-warning" v-on:click="editorAction(item)">编辑
                                 </button> -->
 									<input :id="'edit'+(index+1)" class="editradio" type="radio" style="border-radius:5px;" name="复选框" :value="index"
@@ -205,7 +205,7 @@
 										{{item.isMem==1?"已转会员":"未转会员"}}
 									</button>
 								</td>
-								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'">
+								<td class="text-center" v-has="'SAMY:MP:Visitor:QueryPhone'">
 									<button type="button" class="btn btn-warning" @click="queryPhone(item)">查询手机号码
 									</button>
 								</td>
@@ -308,10 +308,10 @@
 										<label class="form-control">{{endUseDate}}</label>
 									</div>
 								</div>
-								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left">
-									<p style="margin-left:1.5%; color:red ;">注：拨打手机号，听到提示后输入分机号，按#号结束。</p>
-									<p style="margin-left:1.5%; color:red ;"> 过了失效时间，通过这个手机号将无法联系到客户。</p>
-								</div>
+                                <p class="tips col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left">
+                                    注：拨打手机号，听到提示后输入分机号，按#号结束。<br>过了失效时间，通过这个手机号将无法联系到客户。
+                                </p>
+
 							</form>
 						</div>
 					</div>
@@ -659,7 +659,7 @@
 			        } else {
 			            alert(res.retMsg)
 			        }
-			
+
 			    }).catch((error) => {
 			        console.log('请求失败处理')
 			    });
@@ -687,8 +687,8 @@
 
 	label.editlabel {
 		position: absolute;
-		left: 28px;
-		bottom: 12px;
+		left: 13px;
+		bottom: 11px;
 		width: 20px;
 		height: 20px;
 		border-radius: 50%;
@@ -750,6 +750,8 @@
 			display: none
 		}
 	}
+    .visbtn{margin-right:1.5%;width: 100px;}
+    
 </style>
 <!-- feedBack() {
 				this.checkVisitor(1)

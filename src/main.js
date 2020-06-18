@@ -233,6 +233,25 @@ Vue.directive('has', {
         }
     }
 });
+// 孙云龙添加 拦截器 每次请求插入user参数
+axios.interceptors.request.use(
+
+    config =>{
+        //设置公共的请求参数
+        let test = config.data;
+        if(test){
+            if (JSON.parse(sessionStorage.getItem("user"))) {
+                config.data['user'] = JSON.parse(sessionStorage.getItem("user"))
+            }
+        }
+
+        return config;
+    },
+    err =>{
+        return Promise.reject(err);
+    }
+)
+// end
 /* eslint-disable no-new */
 new Vue({
     el: '#app',

@@ -3,23 +3,23 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">权限管理</h1>
 		</div>
-		<div class="row" style="margin-top: 40px;">
+		<div class="row newRow" >
 			<!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">账户名</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >账户名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="accountNum"></div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">员工姓名</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >员工姓名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="empName"></div>
 			</div> -->
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">岗位类型</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >岗位类型</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<pos ref="pos" @positionChange='positionChange'></pos>
@@ -27,8 +27,8 @@
 			</div>
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">账户类型</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >账户类型</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<select class="form-control" v-model="employeeType">
@@ -40,19 +40,19 @@
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">模块</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >模块</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<mod ref="mod" @moduleChange="moduleChange"></mod>
 				</div>
 			</div>
-			
+
 		</div>
-		<div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
+		<div class="row newRow">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">模块级别</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >模块级别</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<select class="form-control" v-model="moduleGrade">
@@ -63,8 +63,8 @@
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">操作类型</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >操作类型</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<select class="form-control" v-model="operateType">
@@ -76,9 +76,9 @@
 					</select>
 				</div>
 			</div>
-			<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;" data-toggle="modal"
+			<button type="button" class="btn btn-warning pull-right m_r_10 margin-right-25" data-toggle="modal"
 			 v-on:click="addRule()">添加</button>
-			<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+			<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
 			 v-on:click="conditionCheck()">查询</button>
 		</div>
 		<div>
@@ -167,7 +167,7 @@
 			addRule() {
 				$("#rm").modal('show');
 			},
-			
+
 			positionChange: function(param) {
 			    if (this.isBlank(param)) {
 			        this.posId = ""
@@ -236,7 +236,7 @@
 						moduleId: this.moduleId,
 						moduleGrade: this.moduleGrade,
 						operateType: this.operateType,
-						
+
 					},
 					dataType: 'json',
 				}).then((response) => {

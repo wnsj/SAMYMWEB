@@ -9,42 +9,42 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员号</label><span
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >会员号</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="orderClick.memNum" v-on:change="checkMemNum(orderClick.memNum)">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >姓名</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="orderClick.appName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span
+						<label class="col-md-3 control-label text-right nopad end-aline" >手机号</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="orderClick.phone" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">预约时间</label><span
+						<label class="col-md-3 control-label text-right nopad end-aline" >预约时间</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-8">
-							<dPicker v-model="orderClick.appDate" format="YYYY-MM-DD" style="width:100%;" v-on:change="checkEmpSchedule()"></dPicker>
+							<dPicker v-model="orderClick.appDate" format="YYYY-MM-DD" class="wd100" v-on:change="checkEmpSchedule()"></dPicker>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
+						<label class="col-md-3 control-label text-right nopad end-aline" >咨询师</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">产品</label><span
+						<label class="col-md-3 control-label text-right nopad end-aline" >产品</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-8">
 							<project ref="project" @projectChange="projectChange"></project>
@@ -54,170 +54,170 @@
 						<h4 id="myModalLabel" class="modal-title pull-left">预约时间</h4>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[0]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[0]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time1" class="form-control" :disabled="orderCounselorOld.time1"
 								 v-on:click="setOrder(1,order.time1)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[1]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[1]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time2" class="form-control" :disabled="orderCounselorOld.time2"
 								 v-on:click="setOrder(2,order.time2)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[2]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[2]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time3" class="form-control" :disabled="orderCounselorOld.time3"
 								 v-on:click="setOrder(3,order.time3)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[3]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[3]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time4" class="form-control" :disabled="orderCounselorOld.time4"
 								 v-on:click="setOrder(4,order.time4)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[4]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[4]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time5" class="form-control" :disabled="orderCounselorOld.time5"
 								 v-on:click="setOrder(5,order.time5)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[5]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0; '>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[5]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time6" class="form-control" :disabled="orderCounselorOld.time6"
 								 v-on:click="setOrder(6,order.time6)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[6]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[6]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time7" class="form-control" :disabled="orderCounselorOld.time7"
 								 v-on:click="setOrder(7,order.time7)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[7]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[7]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time8" class="form-control" :disabled="orderCounselorOld.time8"
 								 v-on:click="setOrder(8,order.time8)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[8]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[8]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time9" class="form-control" :disabled="orderCounselorOld.time9"
 								 v-on:click="setOrder(9,order.time9)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[9]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[9]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time10" class="form-control" :disabled="orderCounselorOld.time10"
 								 v-on:click="setOrder(10,order.time10)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[10]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[10]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time11" class="form-control" :disabled="orderCounselorOld.time11"
 								 v-on:click="setOrder(11,order.time11)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[11]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[11]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time12" class="form-control" :disabled="orderCounselorOld.time12"
 								 v-on:click="setOrder(12,order.time12)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[12]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[12]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time13" class="form-control" :disabled="orderCounselorOld.time13"
 								 v-on:click="setOrder(13,order.time13)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[13]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[13]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time14" class="form-control" :disabled="orderCounselorOld.time14"
 								 v-on:click="setOrder(14,order.time14)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[14]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[14]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time15" class="form-control" :disabled="orderCounselorOld.time15"
 								 v-on:click="setOrder(15,order.time15)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[15]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[15]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time16" class="form-control" :disabled="orderCounselorOld.time16"
 								 v-on:click="setOrder(16,order.time16)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[16]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[16]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time17" class="form-control" :disabled="orderCounselorOld.time17"
 								 v-on:click="setOrder(17,order.time17)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[17]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[17]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time18" class="form-control" :disabled="orderCounselorOld.time18"
 								 v-on:click="setOrder(18,order.time18)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[18]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[18]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time19" class="form-control" :disabled="orderCounselorOld.time19"
 								 v-on:click="setOrder(19,order.time19)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[19]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[19]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time20" class="form-control" :disabled="orderCounselorOld.time20"
 								 v-on:click="setOrder(20,order.time20)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[20]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[20]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time21" class="form-control" :disabled="orderCounselorOld.time21"
 								 v-on:click="setOrder(21,order.time21)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[21]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[21]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time22" class="form-control" :disabled="orderCounselorOld.time22" v-on:click="setOrder(22,order.time22)">
 							</div>
 						</div>
-						<div class="col-md-3 form-group clearfix btnBg" style="padding-left:0;padding-right:0;width:22%;margin-right:4%;">
-							<label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArray[22]}}</label>
-							<div class="col-md-4" style='line-height:34px;padding-right:0;'>
+						<div class="col-md-3 form-group clearfix btnBg suborder-btnBg">
+							<label class="col-md-8 control-label text-right nopad" >{{timeArray[22]}}</label>
+							<div class="col-md-4 suborder-lp">
 								<input type="checkbox" v-model="order.time23" class="form-control" :disabled="orderCounselorOld.time23" v-on:click="setOrder(23,order.time23)">
 							</div>
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+							<button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15" data-toggle="modal"
 							 v-on:click="closeCurrentPage()">返回</button>
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+							<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
 							 v-on:click="addOrder(title)">确认</button>
 					</div>
 				</form>
@@ -488,9 +488,9 @@
 
 					return
 				}
-				
-				
-				
+
+
+
 				if(this.numArr.length>0){
 					var num=null
 					var copyNum=null
@@ -506,8 +506,8 @@
 					alert('没有预约时间，请选择预约时间')
 					return
 				}
-				
-				
+
+
 				switch (param) {
 					case '新增':
 						var url = this.url + '/appointmentAction/addAppointment';
@@ -637,6 +637,12 @@
 </script>
 
 <style>
+    .suborder-btnBg{
+        padding-left:0;padding-right:0;width:22%; margin-right:4%;
+    }
+    .suborder-lp {
+        line-height:34px;padding-right:0;
+    }
 	.btnBg {
 		background: #f5f5f5;
 	}

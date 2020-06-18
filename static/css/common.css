@@ -162,7 +162,7 @@ body{
 }
 .posAb{
     position:absolute;
-    bottom:20px;
+    bottom:-15px;
     left:0;
 }
 .pos-tr{
@@ -186,4 +186,6 @@ body{
     color:red;
 }
 
-.nopdd{padding: 0;}
+.wd100{width:100%!important;}
+.nopad{padding: 0;}
+.newRow{padding-bottom: 15px;}

@@ -9,7 +9,7 @@
 			<div class="tab-pane fade in active martop " id="basic">
 
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline nopdd">姓名</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">姓名</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="refund.memName" :disabled="isShow">
@@ -17,7 +17,7 @@
 					</div>
 
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline nopdd">手机号</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">手机号</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="refund.phone" :disabled="isShow">
@@ -25,7 +25,7 @@
 					</div>
 
 					<div v-show="unfinishedProList.length > 0">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline nopdd">已购产品</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">已购产品</label><span
 						 class="sign-left">:</span>
 						<table class="table table-bordered table-hover">
 							<thead class="datathead">
@@ -54,19 +54,19 @@
 
 					<p class="tips col-md-12 col-lg-12">* 退费将按照原价收取课时费用，并收取违约金<br>* 退费总额 = 退费金额 - 违约金</p>
 
-					<div class="col-md-12 form-group clearfix text-left" style="padding-top: 20px;">
+					<div class="col-md-12 form-group clearfix text-left padding-top-20">
 						<h4 id="myModalLabel" class="modal-title">退费合计：</h4>
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<b>*</b>
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline nopdd">退费课时</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">退费课时</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="refund.consumCount" @change="receivableAction()">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline nopdd">退费金额</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">退费金额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="refund.money" disabled="disabled">
@@ -75,7 +75,7 @@
 
 					<div class="col-md-6 form-group clearfix">
 						<b>*</b>
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline nopdd">实退总额</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">实退总额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="refund.realCross">
@@ -84,7 +84,7 @@
 
 					<div class="col-md-6 form-group clearfix">
 						<b>*</b>
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline nopdd">违约总额</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">违约总额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="refund.balance">
@@ -92,10 +92,10 @@
 					</div>
 
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+						<button type="button" class="btn btn-warning pull-right margin-right-15" data-toggle="modal"
 						 v-on:click="closeCurrentPage()">返回
 						</button>
-						<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+						<button type="button" class="btn btn-primary pull-right margin-right-15" data-toggle="modal"
 						 v-on:click="addFee()">确认
 						</button>
 					</div>

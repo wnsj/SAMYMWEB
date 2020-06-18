@@ -8,82 +8,82 @@
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop" id="basic">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >姓名</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="consume.memName">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >手机号</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="consume.phone">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">定金余额</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >定金余额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="consume.phone">
 						</div>
 					</div>
-					
+
 					<div class="col-md-12 form-group clearfix text-left">
 						<h4 id="myModalLabel" class="modal-title">产品：</h4>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
+						<label class="col-md-4 control-label text-right nopad end-aline" >咨询师</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<emp ref="counselorEmp" @employeeChange="counselorEmpChange"></emp>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">产品</label><span
+						<label class="col-md-4 control-label text-right nopad end-aline" >产品</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<project ref="project" @projectChange="projectChange"></project>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">单价</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >单价</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="consume.price" disabled="disabled">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">课时(次)</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >课时(次)</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="consume.actualCount" disabled="disabled">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">折扣比例</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >折扣比例</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="consume.discount" disabled="disabled">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">折前总额</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >折前总额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">折后总额</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >折后总额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="consume.realCross" disabled="disabled">
 						</div>
 					</div>
-					
+
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">维护人</label><span
+						<label class="col-md-4 control-label text-right nopad end-aline" >维护人</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<emp ref="emp" @employeeChange="empChange"></emp>
@@ -98,26 +98,26 @@
 						<div class="col-md-3">
 							<input type="checkbox" class="form-control" v-model="isSelect">
 						</div>
-						<label for="cyname" class="col-md-9 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">使用定金</label><span
+						<label for="cyname" class="col-md-9 control-label text-right nopad end-aline" >使用定金</label><span
 						 class="sign-left">:</span>
 						 <div class="col-md-7" >
 						 	<input type="text" class="form-control" :disabled="isSelect" v-model="consume.realCross">
 						 </div>
 					</div>
-					
+
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">实交总额</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >实交总额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="consume.realCross">
 						</div>
 					</div>
-					
+
 			</div>
 			<div class="col-md-12 form-group clearfix">
-				<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+				<button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15" data-toggle="modal"
 					v-on:click="closeCurrentPage()">返回</button>
-				<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+				<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
 					v-on:click="addFee()">确认</button>
 			</div>
 
@@ -213,14 +213,14 @@
 					firstCharge: '',/** 1:实体卡首充（不计算提成） 0:计算 */
 					consumCount: '0',//消费次数
 					piId:'',
-					
+
 				}
 				this.consumeReceivable='0.0'
 				this.$refs.counselorEmp.setPosName("咨询师")
 				this.$refs.counselorEmp.setEmp("")
 				this.$refs.emp.setPosName("咨询顾问")
 				this.$refs.project.setEmpId("0")
-				
+
 			},
 			//咨询师
 			counselorEmpChange: function(param) {
@@ -262,7 +262,7 @@
 								isSame=1
 								break;
 							}
-							
+
 						}
 						if(isSame==0){
 							this.isShow=true
@@ -280,14 +280,14 @@
 					this.consume.empId = param.empId
 				}
 			},
-			
+
 			//the event of addtional button
 			addFee() {
 				console.log('the event of addtional button')
-				
+
 				this.consume.memName=this.member.memName
 				this.consume.phone=this.member.phone
-				
+
 				if (this.isBlank(this.consume.memName)) {
 					alert("姓名不能为空")
 					return
@@ -296,7 +296,7 @@
 					alert("手机号不能为空")
 					return
 				}
-				
+
 				if (this.isBlank(this.consume.counselor)) {
 					alert("咨询师不能为空")
 					return
@@ -325,7 +325,7 @@
 					if (res.retCode == '0000') {
 						this.$router.push({
 							name: 'SettleSummary',
-						});	
+						});
 						$("#addCustom").modal("hide")
 					} else {
 						alert(res.retMsg)
@@ -343,7 +343,7 @@
 				$("#aside-menu li").eq(index).addClass("li-active");
 				$("#aside-menu li").eq(index).find("i.fa-table").addClass("fa-circle")
 			},
-			
+
 			//Query member's information based on the memNum
 			checkMemNum(param) {
 				console.log('checkMemNum')
@@ -377,7 +377,7 @@
 							console.log("有未完成的项目")
 							var counselorEmpId = this.counselorList[0].counselor
 							this.$refs.counselorEmp.setEmp(counselorEmpId)
-							
+
 						}
 					}
 

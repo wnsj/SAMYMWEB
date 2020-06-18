@@ -5,10 +5,10 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">排班管理</h1>
         </div>
-        <div class="row newRow" style="margin-top: 40px;padding-bottom:1.5%;">
+        <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">查询方式</p><span
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+                    <p class="end-aline col-md-11 col-lg-11" >查询方式</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
@@ -19,18 +19,18 @@
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">时间</p><span
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+                    <p class="end-aline col-md-11 col-lg-11" >时间</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <dPicker style="width:100%" format="YYYY-MM-DD" v-model="thisDate"></dPicker>
+                    <dPicker class="wd100" format="YYYY-MM-DD" v-model="thisDate"></dPicker>
                     <!--<store ref="store" @storeChange='storeChange'></store>-->
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+                    <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
@@ -38,8 +38,8 @@
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否歇班</p><span
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+                    <p class="end-aline col-md-11 col-lg-11" >是否歇班</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
@@ -51,10 +51,10 @@
                 </div>
             </div>
         </div>
-        <div class="row newRow" style="margin-top:5px;padding-bottom:2.5%;">
+        <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否启用</p><span
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+                    <p class="end-aline col-md-11 col-lg-11" >是否启用</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
@@ -66,19 +66,19 @@
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
+                <div class="col-md-5 col-lg-5 text-right nopad">
+                    <p class="end-aline col-md-11 col-lg-11" >门店</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
                     <store ref='store' @storeChange='storeChange'></store>
                 </div>
             </div>
-            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"
+            <button type="button" class="btn btn-warning pull-right m_r_10 margin-right-25"
                     data-toggle="modal"
                     v-on:click="selectRule('1')" v-has="'SAMY:MP:ScheduleEmp:Add'">添加排班
             </button>
-            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+            <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15"
                     data-toggle="modal"
                     v-on:click="checkEmp(1)">查询
             </button>
@@ -86,14 +86,13 @@
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive pre-scrollable">
-                    <table class="table table-bordered table-hover" id="datatable"
-                           style="width:100%; position:relative;">
+                    <table class="table table-bordered table-hover" id="datatable">
                         <thead>
                         <tr>
-                            <th class="text-center" rowspan="2" style="line-height:52px;">姓名</th>
-                            <th class="text-center" rowspan="2" style="line-height:52px;">日期</th>
-                            <th class="text-center" rowspan="2" style="line-height:52px;">上午</th>
-                            <th class="text-center" rowspan="2" style="line-height:52px;">下午</th>
+                            <th class="text-center">姓名</th>
+                            <th class="text-center">日期</th>
+                            <th class="text-center">上午</th>
+                            <th class="text-center">下午</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -367,8 +366,8 @@
         </div>
         <div class="row" style="margin-top: 40px;padding-bottom:1.5%;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">时间</p><span
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+                    <p class="end-aline col-md-11 col-lg-11" >时间</p><span
                         class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
@@ -376,8 +375,8 @@
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+                    <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span
                         class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
@@ -386,7 +385,7 @@
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
+                    <p class="end-aline col-md-11 col-lg-11" >门店</p><span
                         class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">

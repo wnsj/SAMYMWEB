@@ -7,7 +7,7 @@
         <div class="modal-body  pos_r">
             <div class="tab-pane fade in active martop" id="basic">
                 <div class="col-md-6 form-group clearfix">
-                    <label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员号</label><span
+                    <label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >会员号</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
                         <input type="text" class="form-control" v-model="memNum" v-on:change="checkMemNum(memNum)">
@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="col-md-6 form-group clearfix">
-                    <label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span
+                    <label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >姓名</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
                         <input type="text" class="form-control" v-model="cashName" disabled="disabled">
@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="col-md-6 form-group clearfix">
-                    <label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span
+                    <label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >手机号</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
                         <input type="text" class="form-control" v-model="phone" disabled="disabled">
@@ -36,9 +36,9 @@
             </div>
 
             <div class="col-md-12 form-group clearfix">
-                    <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+                    <button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15" data-toggle="modal"
                             v-on:click="closeCurrentPage()">返回</button>
-                    <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+                    <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
                             v-on:click="transferMember()">确认</button>
             </div>
 

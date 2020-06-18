@@ -10,7 +10,7 @@
                 <form action="" class="clearfix">
 <!--                    <div class="col-md-6 form-group clearfix">-->
 <!--                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"-->
-<!--                               style="padding:0;line-height:34px;">会员号</label><span-->
+<!--                               >会员号</label><span-->
 <!--                        class="sign-left">:</span>-->
 <!--                        <div class="col-md-8">-->
 <!--                            <input type="text" class="form-control" v-model="orderClick.memNum"-->
@@ -18,56 +18,49 @@
 <!--                        </div>-->
 <!--                    </div>-->
                     <div class="col-md-6 form-group clearfix">
-                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">姓名</label><span
+                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">姓名</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="orderClick.appName" placeholder="" disabled="true">
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">手机号</label><span
+                        <label class="col-md-3 control-label text-right nopad end-aline">手机号</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="orderClick.phone" placeholder="" disabled="true">
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">预约时间</label><span
+                        <label class="col-md-3 control-label text-right nopad end-aline">预约时间</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
-                            <dPicker v-model="orderClick.appDate" format="YYYY-MM-DD" style="width:100%;" v-on:change="checkEmpSchedule()"></dPicker>
+                            <dPicker v-model="orderClick.appDate" format="YYYY-MM-DD" class="wd100" v-on:change="checkEmpSchedule()"></dPicker>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">咨询师</label><span
+                        <label class="col-md-3 control-label text-right nopad end-aline">咨询师</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
                             <emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">产品</label><span
+                        <label class="col-md-3 control-label text-right nopad end-aline">产品</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
                             <project ref="project" @projectChange="projectChange"></project>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">咨询室</label><span
+                        <label class="col-md-3 control-label text-right nopad end-aline">咨询室</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
                             <CounseRoom :disabled="true" ref="CounseRoomRef"></CounseRoom>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">渠道</label><span
+                        <label class="col-md-3 control-label text-right nopad end-aline">渠道</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="orderClick.channel">
@@ -78,8 +71,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">备注</label><span class="sign-left">:</span>
+                        <label class="col-md-3 control-label text-right nopad end-aline">备注</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <textarea class="form-control" v-model="orderClick.remark">
                             </textarea>
@@ -89,201 +81,179 @@
                         <h4 id="myModalLabel" class="modal-title pull-left">预约时间</h4>
                     </div>
                     <div class="col-md-12 form-group clearfix">
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[0]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[0]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time1" class="form-control"
                                        :disabled="order.time1Mod"
                                        v-on:click="setOrder(1,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[1]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[1]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time2" class="form-control"
                                        :disabled="order.time2Mod"
                                        v-on:click="setOrder(2,order)">
                             </div>
                         </div>
 
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[2]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[2]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time3" class="form-control"
                                        :disabled="order.time3Mod"
                                        v-on:click="setOrder(3,order)">
                             </div>
                         </div>
 
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[3]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[3]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time4" class="form-control"
                                        :disabled="order.time4Mod"
                                        v-on:click="setOrder(4,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[4]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[4]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time5" class="form-control"
                                        :disabled="order.time5Mod"
                                        v-on:click="setOrder(5,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[5]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[5]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time6" class="form-control"
                                        :disabled="order.time6Mod"
                                        v-on:click="setOrder(6,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[6]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[6]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time7" class="form-control"
                                        :disabled="order.time7Mod"
                                        v-on:click="setOrder(7,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[7]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[7]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time8" class="form-control"
                                        :disabled="order.time8Mod"
                                        v-on:click="setOrder(8,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[8]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[8]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time9" class="form-control"
                                        :disabled="order.time9Mod"
                                        v-on:click="setOrder(9,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[9]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[9]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time10" class="form-control"
                                        :disabled="order.time10Mod"
                                        v-on:click="setOrder(10,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[10]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[10]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time11" class="form-control"
                                        :disabled="order.time11Mod"
                                        v-on:click="setOrder(11,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[11]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[11]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time12" class="form-control"
                                        :disabled="order.time12Mod"
                                        v-on:click="setOrder(12,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[12]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[12]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time13" class="form-control"
                                        :disabled="order.time13Mod"
                                        v-on:click="setOrder(13,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[13]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[13]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time14" class="form-control"
                                        :disabled="order.time14Mod"
                                        v-on:click="setOrder(14,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[14]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[14]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time15" class="form-control"
                                        :disabled="order.time15Mod"
                                        v-on:click="setOrder(15,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[15]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[15]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time16" class="form-control"
                                        :disabled="order.time16Mod"
                                        v-on:click="setOrder(16,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[16]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[16]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time17" class="form-control"
                                        :disabled="order.time17Mod"
                                        v-on:click="setOrder(17,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[17]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[17]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time18" class="form-control"
                                        :disabled="order.time18Mod"
                                        v-on:click="setOrder(18,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[18]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[18]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time19" class="form-control"
                                        :disabled="order.time19Mod"
                                        v-on:click="setOrder(19,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[19]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[19]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time20" class="form-control"
                                        :disabled="order.time20Mod"
                                        v-on:click="setOrder(20,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[20]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[20]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time21" class="form-control"
                                        :disabled="order.time21Mod"
                                        v-on:click="setOrder(21,order)">
                             </div>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg"
-                             style="padding-left:0;padding-right:0;width:22%; margin-right:4%;">
-                            <label class="col-md-8 control-label text-right nopad" style="padding:0;line-height:34px;">{{timeArr[21]}}</label>
-                            <div class="col-md-4" style='line-height:34px;padding-right:0;'>
+                        <div class="col-md-3 form-group clearfix btnBg">
+                            <label class="col-md-8 control-label text-right nopad" >{{timeArr[21]}}</label>
+                            <div class="col-md-4" >
                                 <input type="checkbox" v-model="order.time22" class="form-control"
                                        :disabled="order.time22Mod"
                                        v-on:click="setOrder(22,order)">
@@ -292,10 +262,10 @@
                     </div>
 
                     <div class="col-md-12 form-group clearfix">
-                            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;"
+                            <button type="button" class="btn btn-warning pull-right margin-right-15"
                                     data-toggle="modal" v-on:click="closeCurrentPage()">返回
                             </button>
-                            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+                            <button type="button" class="btn btn-primary pull-right margin-right-15"
                                     data-toggle="modal" v-on:click="addOrder(title)">确认
                             </button>
                     </div>
@@ -738,7 +708,7 @@
 
         },
         mounted() {
-           
+
         }
 
     }
@@ -747,6 +717,7 @@
 <style>
     .btnBg {
         background: #f5f5f5;
+        padding-left:0;padding-right:0;width:22%; margin-right:4%;
     }
 
     .btnBg label {

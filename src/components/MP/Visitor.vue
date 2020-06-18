@@ -120,10 +120,10 @@
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-12 col-lg-12">
-					<button type="button" class="btn btn-warning pull-right m_r_10" data-toggle="modal" v-on:click="selectRule('1')"
+					<button type="button" class="btn btn-warning pull-right" data-toggle="modal" v-on:click="selectRule('1')"
 					 v-has="'SAMY:MP:Visitor:Add'">添加咨客
 					</button>
-					<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+					<button type="button" class="btn btn-primary pull-right margin-right-10"  data-toggle="modal"
 					 v-on:click="checkVisitor(1)">查询
 					</button>
 				</div>
@@ -171,10 +171,10 @@
 						</thead>
 						<tbody>
 							<tr v-for="(item,index) in visitorList" :key="index" v-on:dblclick="selectRule('3',item)">
-								<td class="text-center" v-has="'SAMY:MP:Visitor:Update'" style="position: relative;width: 50px;">
+								<td class="text-center editradio-box" v-has="'SAMY:MP:Visitor:Update'">
 									<!-- <button type="button" class="btn btn-warning" v-on:click="editorAction(item)">编辑
                                 </button> -->
-									<input :id="'edit'+(index+1)" class="editradio" type="radio" style="border-radius:5px;" name="复选框" :value="index"
+									<input :id="'edit'+(index+1)" class="editradio" type="radio" name="复选框" :value="index"
 									 v-model="checkedValue" />
 									<label :for="'edit'+(index+1)" class="editlabel"></label>
 
@@ -678,6 +678,7 @@
 </script>
 
 <style>
+    .editradio-box{position: relative;width: 50px;}
 	input.editradio[type='radio'] {
 		width: 20px;
 		height: 20px;

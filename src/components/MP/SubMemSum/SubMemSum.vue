@@ -1,13 +1,13 @@
 <!-- add and modify patient -->
 <template>
-	<div class="modal-content" style="width:720px">
+	<div class="modal-content mensum-w720" >
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
 			<h4 id="myModalLabel">会员列表</h4>
 		</div>
 		<div class="tableContent">
 			<nobr class="widthmax">
-				<div class="table-responsive pre-scrollable" style=" max-height:464px;">
+				<div class="table-responsive pre-scrollable mensum-mh464" >
 					<table class="table table-bordered table-hover user-table" id="datatable">
 						<thead>
 							<tr>
@@ -18,7 +18,7 @@
 								<th class="text-center">时间</th>
 								<th class="text-center">操作类型</th>
 							</tr>
-						</thead> 
+						</thead>
 						<tbody>
 							<tr v-for="(item,index) in memberList" :key="index">
 								<td>{{item.memName}}</td>
@@ -33,7 +33,7 @@
 				</div>
 			</nobr>
 		</div>
-		
+
 	</div>
 </template>
 
@@ -85,12 +85,13 @@
 					console.log('会员消费详细信息请求失败')
 				});
 			},
-			
+
 		}
-		
+
 	}
 </script>
 
 <style>
-
+.mensum-w720{width:720px}
+.mensum-mh464{max-height:464px;}
 </style>

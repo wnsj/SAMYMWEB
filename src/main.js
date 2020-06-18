@@ -65,9 +65,6 @@ router.beforeEach((to, from, next) => {
         } else if (to.path == '/login') {
             next();
         } else {
-            let token = Cookies.get('accessToken');
-            let accountData = Cookies.get('accountData');
-            //console.log("token:" + token + ",accountData:" + accountData);
             if (constant.isBlank(token) || constant.isBlank(accountData)) {
                 next('/login');
             } else if (to.path == '/') {
@@ -93,7 +90,7 @@ router.beforeEach((to, from, next) => {
                         break;
                     }
                 }
-                console.log("main:" + to.path + from.path)
+                // console.log("main:" + to.path + from.path)
                 if (hasRule) {
                     next()
                 } else {

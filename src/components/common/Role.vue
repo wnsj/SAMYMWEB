@@ -72,7 +72,7 @@
 
 		},
 		created() {
-			this.getUrRole()
+			// this.getUrRole()
 		},
 	}
 </script>

@@ -10,19 +10,19 @@
 				<form action="" class="clearfix">
 
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">新密码</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline">新密码</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="password" class="form-control" v-model="accountPwd" placeholder="新密码">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">重新输入</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline">重新输入</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="password" class="form-control" v-model="accountPwdCopy" placeholder="重新输入">
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+						<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
 							v-on:click="certainAction()">确认</button>
 					</div>
 				</form>

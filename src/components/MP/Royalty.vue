@@ -1,14 +1,14 @@
 <!-- the page of department management -->
 <template>
-    <div class="clearfix" style="height:100%">
+    <div class="clearfix roy-height">
         <div class="col-md-12 col-lg-12 main-title">
-            <h1 class="titleCss" style="margin-top:-80px;">提成规则管理</h1>
+            <h1 class="titleCss" >提成规则管理</h1>
         </div>
         <div>
             <div class="col-md-5 col-lg-5 part pb0">
-                <div class="col-md-12 col-lg-12 main-title" ref="tit" style="height:60px; overflow:hidden;">
+                <div class="col-md-12 col-lg-12 main-title roy-ht60" ref="tit">
                     <div class="col-md-8 col-lg-8 text-left">
-                        <h3 style="line-height:72px;">流水提成规则</h3>
+                        <h3 class="roy-lht72">流水提成规则</h3>
                     </div>
                     <div class="col-md-4 col-lg-4 pull-right">
                         <button type="button" class="btn btn-warning pos1" v-on:click="selectRule('Royalty','1','')"
@@ -43,9 +43,9 @@
                 </div>
             </div>
             <div class="col-md-5 col-lg-5 part pb0">
-                <div class="col-md-12 col-lg-12 main-title" style="height:60px; overflow:hidden;">
+                <div class="col-md-12 col-lg-12 main-title roy-ht60">
                     <div class="col-md-8 col-lg-8 text-left">
-                        <h3 style="line-height:72px;">会员卡提成规则</h3>
+                        <h3 class="roy-lht72">会员卡提成规则</h3>
                     </div>
                     <div class="col-md-4 col-lg-4 pull-right">
                         <button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubVip','1','')"
@@ -86,14 +86,14 @@
                     <p class="tips">* 双击单行，可对当前数据进行修改</p>
                 </div>
             </div>
-            <div style="clear:both"></div>
+            
         </div>
         <div>
             <div class="col-md-5 col-lg-5 part pb0">
-                <div class="col-md-12 col-lg-12 main-title" style="height:60px; overflow:hidden;">
+                <div class="col-md-12 col-lg-12 main-title roy-ht60">
 
                     <div class="col-md-8 col-lg-8 text-left">
-                        <h3 style="line-height:72px;">会员卡退费扣提成规则</h3>
+                        <h3 class="roy-lht72">会员卡退费扣提成规则</h3>
                     </div>
                     <div class="col-md-4 col-lg-4 pull-right">
                         <button type="button" class="btn btn-warning pos1"
@@ -129,9 +129,9 @@
 
             <!--
             <div class="col-md-5 col-lg-5 part pb0">
-                <div class="col-md-12 col-lg-12 main-title" style="height:60px; overflow:hidden;">
+                <div class="col-md-12 col-lg-12 main-title" class="roy-ht60">
                     <div class="col-md-8 col-lg-8 text-left">
-                        <h3  style="line-height:72px;">退号扣提成规则</h3>
+                        <h3  class="roy-lht72">退号扣提成规则</h3>
                     </div>
                     <div class="col-md-4 col-lg-4 pull-right">
                         <button type="button" class="btn btn-warning pos1" v-on:click="selectRule('SubCharg','1','')">添加</button>
@@ -197,7 +197,7 @@
                     <p class="tips">* 双击单行，可对当前数据进行修改</p>
                 </div>
             </div> -->
-            <div style="clear:both"></div>
+            
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="SubFlowWater">
@@ -382,6 +382,10 @@
 </script>
 
 <style>
+    .roy-height{height: 100%;}
+    .roy-lht72{ line-height:72px;}
+    .roy-ht60{height:60px; overflow:hidden;}
+
     #datatable {
         position: relative;
     }

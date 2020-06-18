@@ -9,21 +9,18 @@
             <div class="tab-pane fade in active martop">
                 <form action="" class="clearfix">
                     <div class="col-md-8 form-group clearfix">
-                        <label class="col-md-2 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">咨询室名</label>
+                        <label class="col-md-2 control-label text-right nopad end-aline">咨询室名</label>
                         <span class="sign-left">:</span>
                         <div class="col-md-6">
                             <input type="text" class="form-control" v-model="counseRoom.crName">
                         </div>
-                        <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
-                                data-toggle="modal" v-on:click="addOrder(title)">确认
-                        </button>
+                        <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal" v-on:click="addOrder(title)">确认</button>
                     </div>
                 </form>
                 <hr>
                 <form action="" class="clearfix">
                     <div class="col-md-12 form-group clearfix">
-                        <label style="padding:0;line-height:34px;">关联咨询师</label>
+                        <label class="nopad end-aline">关联咨询师</label>
                         <table class="table table-bordered table-hover" id="datatable">
                             <thead class="datathead">
                             <tr>

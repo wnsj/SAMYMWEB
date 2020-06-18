@@ -9,19 +9,19 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="member.memName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span class="sign-left">:</span>
+						<label class="col-md-3 control-label text-right nopad end-aline" >手机号</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="member.phone" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">性别</label><span class="sign-left">:</span>
+						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" >性别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="member.sex">
 								<option value="1">男</option>
@@ -30,11 +30,11 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">生日</label><span class="sign-left">:</span>
-						<dPicker class="col-md-8" style="width:65%;" v-model="member.birthday"></dPicker>
+						<label class="col-md-3 control-label text-right nopad end-aline" >生日</label><span class="sign-left">:</span>
+						<dPicker class="col-md-8 submen-h" v-model="member.birthday"></dPicker>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否启用</label><span class="sign-left">:</span>
+						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" >是否启用</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="member.isuse">
 								<option value="1">在用</option>
@@ -42,15 +42,15 @@
 							</select>
 						</div>
 					</div>
-					<!-- <div class="col-md-6 form-group clearfix"> 
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">推荐人</label><span class="sign-left">:</span>
+					<!-- <div class="col-md-6 form-group clearfix">
+						<label class="col-md-3 control-label text-right nopad end-aline" >推荐人</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref='emp' @employeeChange='empChange'></emp>
 						</div>
 					</div> -->
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">实卡用户</label><span class="sign-left">:</span>
-						<div class="col-md-8" style="text-align:left; line-height:34px;">
+						<label class="col-md-3 control-label text-right nopad end-aline" >实卡用户</label><span class="sign-left">:</span>
+						<div class="col-md-8 text-left" >
 							<label class="bui-radios-label">
 								<input type="radio" name="entityEmp" v-model="member.memType" :disabled="isShow" value="1"/><i class="bui-radios"></i> 是
 							</label>
@@ -62,15 +62,15 @@
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						
+
 						<p class="tips">* 注意：</p>
 						<p class="tips">1.未从微信公众号注册的会员，将不能推送微信消息，请操作员悉知并确认操作无误。</p>
 						<p class="tips">2.若客户之前已有实体会员卡，请勾选“是”，并将用户已经购买的产品通过“产品购买”进行购买。</p>
 						<p class="tips">  此项操作不可逆，若选“否”，客户可以正常上课，但是将会影响提成数据。请谨慎操作。</p>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>	
+							<button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal" v-on:click="certainAction()">确认</button>
 					</div>
 				</form>
 			</div>
@@ -97,7 +97,7 @@
 					sex:'1',
 					isuse:'1',
 					birthday:'',
-					
+
 				},
 				title:'新增',
 				item:[],
@@ -121,7 +121,7 @@
 				if(param=='add'){
 					console.log('Initialization member’s content, which adds member')
 					this.title='新增'
-					
+
 					// this.$refs.emp.setEmp('0')
 				}else if(param=='modify'){
 					console.log('Initialization member’s content, which modifies member')
@@ -137,7 +137,7 @@
 				$('#hahah').val(item.value)
 				console.log($('#hahah').val());
 			},
-			
+
 			//feedback employee information
 			empChange:function(param){
 				if(this.isBlank(param)){
@@ -148,11 +148,11 @@
 					this.member.storeId=param.storeId
 				}
 			},
-			
+
 			//the event of addtional button
 			certainAction(){
 				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
-				
+
 				if(this.isBlank(this.member.memName)){
 					alert("姓名不能为空")
 					return
@@ -163,8 +163,8 @@
 				}else if(reg.test(this.member.phone)==false){
 					alert("不是完整的11位手机号或者正确的座机号！");
 					return
-				} 
-				
+				}
+
 				if(!this.isBlank(this.member.birthday)){
 					this.member.birthday=this.moment(this.member.birthday,'YYYY-MM-DD 00:00:00.000')
 				}
@@ -177,7 +177,7 @@
 						url = this.url + '/memberAction/updateMember'
 						break;
 				}
-				
+
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -207,7 +207,7 @@
 			//the list , which is detail infomation of reCharge,was checked.
 			conditionCheck: function() {
 				console.log('querying based on multiple conditions')
-				
+
 				var url = this.url + '/accountRecordAction/queryAccountRecord'
 				this.$ajax({
 					method: 'POST',
@@ -218,7 +218,7 @@
 					},
 					data:{
 						memNum:this.member.memNum,
-						
+
 						accountId: this.accountId(),
 						modelGrade:'2',
 						modelType:'',
@@ -244,6 +244,7 @@
 </script>
 
 <style>
+    .submen-h{height: 65%;}
 	label.bui-radios-label{
 		 position:relative;
 		 margin-right:10px;
@@ -251,7 +252,7 @@
 	label.bui-radios-label input {
 		position: absolute;
 		opacity: 0;
-		visibility: hidden; 
+		visibility: hidden;
 	}
 	label.bui-radios-label .bui-radios {
 		display: inline-block;
@@ -261,7 +262,7 @@
 		background: #FFFFFF;
 		border: 1px solid #979797;
 		border-radius: 50%;
-		vertical-align: -2px; 
+		vertical-align: -2px;
 		box-sizing:content-box;
 	}
 	label.bui-radios-label input:checked + .bui-radios:after {
@@ -272,19 +273,19 @@
 		background-color: #fff;
 		border-radius: 50%;
 		top: 3px;
-		left: 3px; 
+		left: 3px;
 	}
 	label.bui-radios-label input:checked + .bui-radios {
 		background: #00B066;
-		border: 1px solid #00B066; 
+		border: 1px solid #00B066;
 	}
 	label.bui-radios-label input:disabled + .bui-radios {
 		background-color: #e8e8e8;
-		border: solid 1px #979797; 
+		border: solid 1px #979797;
 	}
 	label.bui-radios-label input:disabled:checked + .bui-radios:after {
-		background-color: #c1c1c1; 
+		background-color: #c1c1c1;
 	}
 	.tips{ display:block; text-align:left; color:red; font-size:12px;}
-	
+
 </style>

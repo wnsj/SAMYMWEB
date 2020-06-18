@@ -7,8 +7,8 @@
         </div>
         <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
+                <div class="col-md-5 col-lg-5 text-right nopad">
+                    <p class="end-aline col-md-11 col-lg-11" >门店</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
@@ -16,8 +16,8 @@
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">产品名称</p><span
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+                    <p class="end-aline col-md-11 col-lg-11" >产品名称</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
@@ -25,8 +25,8 @@
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span
+                <div class="col-md-5 col-lg-5 text-right nopad">
+                    <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
@@ -34,8 +34,8 @@
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否在用</p><span
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+                    <p class="end-aline col-md-11 col-lg-11" >是否在用</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
@@ -51,8 +51,8 @@
         </div>
         <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师等级</p>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+                    <p class="end-aline col-md-11 col-lg-11" >咨询师等级</p>
                     <span
                         class="sign-left">:</span>
                 </div>
@@ -66,8 +66,8 @@
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否可退款</p>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+                    <p class="end-aline col-md-11 col-lg-11" >是否可退款</p>
                     <span
                         class="sign-left">:</span>
                 </div>
@@ -80,11 +80,11 @@
                 </div>
             </div>
 
-            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;"
+            <button type="button" class="btn btn-warning pull-right m_r_10 margin-right-25"
                     data-toggle="modal"
                     v-on:click="selectRule('1')" v-has="'SAMY:MP:Project:Add'">添加
             </button>
-            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+            <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15"
                     data-toggle="modal"
                     v-on:click="checkProject(1)">查询
             </button>
@@ -114,21 +114,21 @@
                         </thead>
                         <tbody>
                         <tr v-for="(item,index) in projectList" :key="index" v-on:dblclick="selectRule('3',item)">
-                            <td class="text-center" style="line-height:33px;">{{item.proId}}</td>
-                            <td class="text-center" style="line-height:33px;">{{item.storeName}}</td>
-                            <td class="text-center" style="line-height:33px;">{{item.empName}}</td>
-                            <td class="text-center" style="line-height:33px;">{{item.empLevelName}}</td>
-                            <td class="text-center" style="line-height:33px;">{{item.proName}}</td>
-                            <td class="text-center" style="line-height:33px;">{{transforProType(item.proType)}}</td>
-                            <td class="text-center" style="line-height:33px;">{{item.totalPrice}}</td>
-                            <td class="text-center" style="line-height:33px;">{{item.discouAmount}}</td>
-                            <td class="text-center" style="line-height:33px;">{{item.price}}</td>
-                            <td class="text-center" style="line-height:33px;">{{item.frequency}}</td>
-                            <td class="text-center" style="line-height:33px;">{{item.discount}}</td>
-                            <td class="text-center" style="line-height:33px;">{{item.isRefund == 1 ? '是' : '否'}}</td>
-                            <td class="text-center" style="line-height:33px;">{{item.endDay == 0 ? '' : item.endDay}}
+                            <td class="text-center" >{{item.proId}}</td>
+                            <td class="text-center" >{{item.storeName}}</td>
+                            <td class="text-center" >{{item.empName}}</td>
+                            <td class="text-center" >{{item.empLevelName}}</td>
+                            <td class="text-center" >{{item.proName}}</td>
+                            <td class="text-center" >{{transforProType(item.proType)}}</td>
+                            <td class="text-center" >{{item.totalPrice}}</td>
+                            <td class="text-center" >{{item.discouAmount}}</td>
+                            <td class="text-center" >{{item.price}}</td>
+                            <td class="text-center" >{{item.frequency}}</td>
+                            <td class="text-center" >{{item.discount}}</td>
+                            <td class="text-center" >{{item.isRefund == 1 ? '是' : '否'}}</td>
+                            <td class="text-center" >{{item.endDay == 0 ? '' : item.endDay}}
                             </td>
-                            <td class="text-center" style="line-height:33px;" v-has="'SAMY:MP:Project:Update'">
+                            <td class="text-center"  v-has="'SAMY:MP:Project:Update'">
                                 <button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改
                                 </button>
                             </td>

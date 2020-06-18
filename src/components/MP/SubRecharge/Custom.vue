@@ -129,8 +129,8 @@
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<select class="form-control" v-model="consume.visitType" @change="visitTypeChange">
-							<option value="1">初诊</option>
-							<option value="2">复诊</option>
+							<option value="1">初访</option>
+							<option value="2">复访</option>
 						</select>
 					</div>
 				</div>
@@ -216,7 +216,7 @@
 					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">开始-结束时间</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
-						<dPicker v-model="dateArr" format="hh:mm:ss" style="width:100%" type="time" valueType="format" range>
+						<dPicker v-model="dateArr" format="HH:mm:ss" style="width:100%" type="time" valueType="format" range>
 							<template v-slot:header="{ emit }">
 								<div style="text-align: left"></div>
 							</template>

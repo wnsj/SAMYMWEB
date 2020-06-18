@@ -233,16 +233,22 @@ Vue.directive('has', {
         }
     }
 });
-// 孙云龙添加 拦截器 每次请求插入user参数
+// 孙云龙添加
+//http request拦截器
+var ip = sessionStorage.getItem("IP")
 axios.interceptors.request.use(
 
     config =>{
         //设置公共的请求参数
         let test = config.data;
         if(test){
+            if (ip) {
+                config.data['ip']= ip;
+            }
             if (JSON.parse(sessionStorage.getItem("user"))) {
                 config.data['user'] = JSON.parse(sessionStorage.getItem("user"))
             }
+
         }
 
         return config;

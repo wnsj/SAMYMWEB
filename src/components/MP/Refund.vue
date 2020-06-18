@@ -5,36 +5,35 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">退费明细</h1>
         </div>
-        <div class="row newRow" style="margin-top: 40px;padding-bottom:1.5%;">
+        <div class="row newRow">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11">门店</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<store ref='store' @storeChange='storeChange'></store>
 				</div>
 			</div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            	<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-            		<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
+            	<div class="col-md-5 col-lg-5 text-right nopad">
+            		<p class="end-aline col-md-11 col-lg-11">姓名</p><span class="sign-left">:</span>
             	</div>
             	<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="visitorName">
             	</div>
             </div>
            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-           	<div class="col-md-3 col-lg-3 text-right" style="padding: 0; line-height: 34px;">
-           		<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">日期范围</p><span class="sign-left">:</span>
+           	<div class="col-md-3 col-lg-3 text-right nopad">
+           		<p class="end-aline col-md-11 col-lg-11">日期范围</p><span class="sign-left">:</span>
            	</div>
            	<div class="col-md-9 col-lg-9">
-           		<dPicker style="width:100%" v-model="dateArr" type="format" format="YYYY-MM-DD" range>
+           		<dPicker class="wd100" v-model="dateArr" type="format" format="YYYY-MM-DD" range>
 					<template v-slot:header="{ emit }">
-						<div style="text-align: left">
-						</div>
+						<div class="text-left">	</div>
 					</template>
 				</dPicker>
            	</div>
            </div>
-            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+            <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15"
                     data-toggle="modal"
                     v-on:click="queryObjectList(1)">查询
             </button>
@@ -78,7 +77,7 @@
                 <p class="tips">* 双击单行，可对当前数据进行修改</p>
             </div>
         </div>
-        
+
     </div>
 
 </template>
@@ -86,7 +85,7 @@
 
 <script>
 
-    
+
 	import dPicker from 'vue2-datepicker'
 	import store from '../common/Store.vue'
     import Paging from '../common/paging'
@@ -124,7 +123,7 @@
                 this.current = page
                 this.queryObjectList(page);
             },
-            
+
             storeChange(param) {
             	if (this.isBlank(param)) {
             		this.storeId = ""
@@ -154,7 +153,7 @@
 						visitorName:this.visitorName,
 						begDate:this.begDate,
 						endDate:this.endDate,
-						
+
                         page: page.toString(),
                         pageSize: this.pageSize
                     },
@@ -204,7 +203,7 @@
             init();
         },
         created() {
-			
+
         }
     }
 </script>

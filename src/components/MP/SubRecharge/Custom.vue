@@ -8,14 +8,14 @@
 		<div class="modal-body  pos_r" style="max-height: 650px;overflow-y: scroll">
 			<div class="tab-pane fade in active martop" id="basic">
 				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >姓名</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.memName" disabled="true">
 					</div>
 				</div>
 				<!--				<div class="col-md-6 form-group clearfix">-->
-				<!--					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员卡号</label><span-->
+				<!--					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >会员卡号</label><span-->
 				<!--					 class="sign-left">:</span>-->
 				<!--					<div class="col-md-7">-->
 				<!--						<input type="text" class="form-control" v-model="member.memNum" v-on:change="checkMemNum(member.memNum)"-->
@@ -25,7 +25,7 @@
 
 
 				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >手机号</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.phone" disabled="true">
@@ -33,7 +33,7 @@
 				</div>
 				<div v-show="unfinishedProList.length > 0">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">已购产品</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >已购产品</label><span
 						 class="sign-left">:</span>
 					</div>
 					<div class="col-md-12 form-group clearfix text-left">
@@ -65,7 +65,7 @@
 					<h4 id="myModalLabel" class="modal-title">产品：</h4>
 				</div>
 				<div class="col-md-6 form-group clearfix">
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >咨询师</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<emp ref="counselorEmp" @employeeChange="counselorEmpChange" :disabled="counselorFlag"></emp>
@@ -73,28 +73,28 @@
 				</div>
 				<div class="col-md-6 form-group clearfix">
 
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">产品</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >产品</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<project ref="project" @projectChange="projectChange" :disabled="projectFlag"></project>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">单价</label><span
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >单价</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.price" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">课时(次)</label><span
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >课时(次)</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.totalCount" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">折扣比例</label><span
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >折扣比例</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7 pos-re">
 						<input type="text" class="form-control" v-model="consume.discount" disabled="disabled">
@@ -102,14 +102,14 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">折前总额</label><span
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >折前总额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.preFoldTotalPrice" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">折后总额</label><span
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >折后总额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
@@ -117,7 +117,7 @@
 				</div>
 				<div class="col-md-6 form-group clearfix">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">顾问</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >顾问</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<emp ref="emp" @employeeChange="empChange"></emp>
@@ -125,7 +125,7 @@
 				</div>
 				<div class="col-md-6 form-group clearfix">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">访问类型</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >访问类型</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<select class="form-control" v-model="consume.visitType" @change="visitTypeChange">
@@ -136,7 +136,7 @@
 				</div>
 				<div class="col-md-6 form-group clearfix">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">客户判定</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >客户判定</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<VisitState ref="VisitStateRef" @objectChange="visitStateChange"></VisitState>
@@ -144,14 +144,14 @@
 				</div>
 				<div class="col-md-6 form-group clearfix">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">续流状态</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >续流状态</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<ContinState ref="ContinStateRef" @objectChange="continStateChange"></ContinState>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">交费方式</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >交费方式</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<select class="form-control" v-model="consume.payType">
@@ -166,14 +166,14 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">流水单号</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >流水单号</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.serialNo">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">收据</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >收据</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.receipt">
@@ -181,14 +181,14 @@
 				</div>
 				<div class="col-md-6 form-group clearfix">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询方向</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >咨询方向</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<DiseaseType @objectChange="diseaseTypeChange"></DiseaseType>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询问题</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >咨询问题</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<textarea class="form-control" v-model="consume.diseaseProblem" placeholder="限制输入100个字">
@@ -197,7 +197,7 @@
 				</div>
 				<!-- <div class="col-md-6 form-group clearfix">
                     <label class="col-md-4 control-label text-right nopad end-aline"
-                           style="padding:0;line-height:34px;">咨询问题</label><span
+                           >咨询问题</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
                         <input type="text" class="form-control" v-model="consume.diseaseProblem">
@@ -205,7 +205,7 @@
                 </div> -->
 				<div class="col-md-6 form-group clearfix">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询室</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >咨询室</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<CounseRoom @channelChange="counseRoomChange"></CounseRoom>
@@ -213,10 +213,10 @@
 				</div>
 				<div class="col-md-6 form-group clearfix">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">开始-结束时间</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >开始-结束时间</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
-						<dPicker v-model="dateArr" format="HH:mm:ss" style="width:100%" type="time" valueType="format" range>
+						<dPicker class="wd100" v-model="dateArr" format="HH:mm:ss" type="time" valueType="format" range>
 							<template v-slot:header="{ emit }">
 								<div style="text-align: left"></div>
 							</template>
@@ -224,14 +224,14 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">陪同人</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >陪同人</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.accompany">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">陪同人关系</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >陪同人关系</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.companionship">
@@ -240,7 +240,7 @@
 			</div>
 			<div class="col-md-12 clearfix" v-show="cash.balance>0" style="padding:0;">
 				<div class="col-md-6 clearfix" v-show="cash.balance>0">
-					<label class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">
+					<label class="col-md-4 control-label text-right nopad end-aline" >
 						定金抵扣
 					</label>
 					<span class="sign-left">:</span>
@@ -249,7 +249,7 @@
 					</div>
 				</div>
 				<div class="col-md-6 clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">定金余额</label><span
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >定金余额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="cash.balance" id="cash" disabled="disabled">
@@ -261,7 +261,7 @@
 					<h4 id="myModalLabel" class="modal-title">合计：</h4>
 				</div>
 				<div class="col-md-6 form-group clearfix" v-show="counselorFlag==false">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">实交总额</label><span
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >实交总额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.realCross">
@@ -270,7 +270,7 @@
 			</div>
 			<div class="col-md-6 form-group clearfix">
 				<b>*</b>
-				<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">此次消费课时</label><span
+				<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >此次消费课时</label><span
 				 class="sign-left">:</span>
 				<div class="col-md-7">
 					<input type="text" class="form-control" v-model="consume.consumCount" @blur="computedRealCross">

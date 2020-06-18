@@ -7,7 +7,7 @@
 		</div>
 		<div class="tableContent">
 			<nobr class="widthmax">
-				<div class="table-responsive pre-scrollable" style=" max-height:464px">
+				<div class="table-responsive pre-scrollable subpostlist-mh">
 					<table class="table table-bordered table-hover user-table" id="datatable">
 						<thead>
 							<tr>
@@ -15,7 +15,7 @@
 								<th class="text-center">岗位名称</th>
 								<th class="text-center">是否停用</th>
 							</tr>
-						</thead> 
+						</thead>
 						<tbody>
 							<tr v-for="(item2,index2) in patientList" :key="index2">
 								<td>{{item2.hospNum}}</td>
@@ -32,7 +32,7 @@
 				</div>
 			</nobr>
 		</div>
-		
+
 	</div>
 </template>
 
@@ -91,7 +91,7 @@
 					this.$refs.mis.setObjId(this.patient.mitypeid)
 				}
 			},
-			//date formatting 
+			//date formatting
 			dateAction(param){
 				if(param=='1'){
 					if(!this.isBlank(this.patient.hospTime)){
@@ -228,7 +228,7 @@
 						if (res.retData != null) {
 							this.patient = res.retData
 							this.isExist = '1'
-							
+
 							this.$refs.dept.setDpart(this.patient.deptId)
 							this.$refs.ps.setObjId(this.patient.patitypeid)
 							this.$refs.mis.setObjId(this.patient.mitypeid)
@@ -247,12 +247,12 @@
 					//console.log('请求失败处理')
 				});
 			},
-			
+
 		}
-		
+
 	}
 </script>
 
 <style>
-
+.subpostlist-mh{max-height:464px}
 </style>

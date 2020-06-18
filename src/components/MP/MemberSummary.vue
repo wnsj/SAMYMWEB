@@ -3,7 +3,7 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">会员汇总</h1>
         </div>
-        <div class="row newRow" style="margin-top: 40px;padding-bottom:1.5%;">
+        <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div class="row newRow" style="padding-bottom:1.5%;">
+        <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">结束时间</p><span class="sign-left">:</span>

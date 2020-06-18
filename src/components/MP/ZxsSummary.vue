@@ -3,33 +3,33 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">咨询师汇总</h1>
         </div>
-        <div class="row" style="margin-top: 15px;">
+        <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+                <div class="col-md-5 col-lg-5 text-right nopad">
+                    <p class="end-aline col-md-11 col-lg-11" >门店</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
                     <store ref='store' @storeChange='storeChange'></store>
                 </div>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-left:10px;">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">开始月份</p><span class="sign-left">:</span>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 padding-left-10" >
+                <div class="col-md-5 col-lg-5 text-right nopad">
+                    <p class="end-aline col-md-11 col-lg-11">开始月份</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
-                    <dPicker style="width:100%" format="YYYY-MM" v-model="beginDate"></dPicker>
+                    <dPicker class="wd100" format="YYYY-MM" v-model="beginDate"></dPicker>
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span class="sign-left">:</span>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
+                    <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                     <emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
                 </div>
             </div>
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding-right:30px; padding-bottom:1.5%;">
-                <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 padding-right-25 padding-bottom-15" >
+                <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
                         v-on:click="queryZxsSummary(1)">查询</button>
             </div>
         </div>
@@ -79,22 +79,22 @@
                     </div>
                     <div class="row" v-show="isShowSummary">
                         <div class="col-md-2 col-lg-2">
-                            <p class="tips" style="font-size: 17px">本月消费课时：{{summaryMap.MONTH_CONSUM_COUNT}} 小时</p>
+                            <p class="tips tips-font">本月消费课时：{{summaryMap.MONTH_CONSUM_COUNT}} 小时</p>
                         </div>
                         <div class="col-md-2 col-lg-2">
-                            <p class="tips" style="font-size: 17px">退费课时：{{summaryMap.MONTH_REF_COUNT}} 小时</p>
+                            <p class="tips tips-font">退费课时：{{summaryMap.MONTH_REF_COUNT}} 小时</p>
                         </div>
                         <div class="col-md-2 col-lg-2">
-                            <p class="tips" style="font-size: 17px">剩余课时：{{summaryMap.MONTH_CHARGE_BALANCE}} 小时</p>
+                            <p class="tips tips-font">剩余课时：{{summaryMap.MONTH_CHARGE_BALANCE}} 小时</p>
                         </div>
                         <div class="col-md-2 col-lg-2">
-                            <p class="tips" style="font-size: 17px">本月消费：{{summaryMap.MONTH_CONSUM_MONEY}} 元</p>
+                            <p class="tips tips-font">本月消费：{{summaryMap.MONTH_CONSUM_MONEY}} 元</p>
                         </div>
                         <div class="col-md-2 col-lg-2">
-                            <p class="tips" style="font-size: 17px">本月退费：{{summaryMap.MONTH_REAL_REFUND}} 元</p>
+                            <p class="tips tips-font">本月退费：{{summaryMap.MONTH_REAL_REFUND}} 元</p>
                         </div>
                         <div class="col-md-2 col-lg-2">
-                            <p class="tips" style="font-size: 17px">剩余金额：{{summaryMap.MONTH_BALANCE_MONEY}} 元</p>
+                            <p class="tips tips-font">剩余金额：{{summaryMap.MONTH_BALANCE_MONEY}} 元</p>
                         </div>
                     </div>
                     <!--分页插件-->
@@ -337,4 +337,5 @@
             display: none
         }
     }
+    .tips-font{font-size: 17px}
 </style>

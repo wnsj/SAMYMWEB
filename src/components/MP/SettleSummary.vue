@@ -3,63 +3,63 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">消费管理</h1>
 		</div>
-		<div class="row newRow" style="margin-top: 40px;">
+		<div class="row newRow">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >门店</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<store ref='store' @storeChange='storeChange'></store>
 				</div>
 			</div>
 			<!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >会员卡号</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memNum"></div>
 			</div> -->
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >姓名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memName"></div>
 			</div>
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >手机号</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<input class="form-control" type="text" value="" v-model="phone">
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-			    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-			        <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span class="sign-left">:</span>
+			    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
+			        <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span class="sign-left">:</span>
 			    </div>
 			    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 			        <emp ref="counlorEmp" @employeeChange="counlorEmpChange" v-on:change="selectHours()"></emp>
 			    </div>
 			</div>
 		</div>
-		<div class="row newRow" style="margin-top: 15px;">
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:10px;">
-				<div class="col-md-3 col-lg-3 text-right" style="padding: 0; line-height: 34px; width:20.5%;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">消费时间</p><span class="sign-left">:</span>
+		<div class="row newRow">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 padding-left-10">
+				<div class="col-md-3 col-lg-3 text-right nopad SSwid20">
+					<p class="end-aline col-md-11 col-lg-11" >消费时间</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
-					<dPicker style="width:100%" v-model="begCreateDate"></dPicker>
+				<div class="col-md-4 col-lg-4 SSwid27">
+					<dPicker class="wd100" v-model="begCreateDate"></dPicker>
 				</div>
-				<div style="padding: 0; line-height: 34px; float:left">
+				<div class="pull-left end-aline nopad">
 					~
 				</div>
-				<div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
-					<dPicker style="width:100%" v-model="endCreateDate"></dPicker>
+				<div class="col-md-4 col-lg-4 SSwid27">
+					<dPicker class="wd100" v-model="endCreateDate"></dPicker>
 				</div>
 
 			</div>
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px; padding-bottom:1.5%;">
-				<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
+				<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
 				 v-on:click="conditionCheck(1)">查询</button>
 			</div>
 		</div>
@@ -101,16 +101,16 @@
 					</div>
                     <div class="row">
                         <div class="col-md-3 col-lg-3">
-                            <p class="tips" style="font-size: 20px">总课时数：{{consumCountTotal}} 小时</p>
+                            <p class="tips tips-font-20">总课时数：{{consumCountTotal}} 小时</p>
                         </div>
                         <div class="col-md-3 col-lg-3">
-                            <p class="tips" style="font-size: 20px">总消费额：{{sumTotal}} 元</p>
+                            <p class="tips tips-font-20">总消费额：{{sumTotal}} 元</p>
                         </div>
                         <div class="col-md-3 col-lg-3" v-show="showHours">
-                            <p class="tips" style="font-size: 20px">已消费课时：{{consumptionHours}} 小时</p>
+                            <p class="tips tips-font-20">已消费课时：{{consumptionHours}} 小时</p>
                         </div>
                         <div class="col-md-3 col-lg-3" v-show="showHours">
-                            <p class="tips" style="font-size: 20px">未消费课时：{{unusedHours}} 小时</p>
+                            <p class="tips tips-font-20">未消费课时：{{unusedHours}} 小时</p>
                         </div>
                     </div>
 					<!--分页插件-->
@@ -192,9 +192,6 @@
 			},
             //咨询师
             counlorEmpChange: function(param) {
-			    //console.log(param)
-                
-                //console.log("进入了这个方法")
                 if (this.isBlank(param)) {
                     this.empId = ""
                     this.showHours=false
@@ -254,7 +251,7 @@
 				}
 			},
 			conditionCheck: function(page) {
-				
+
 				if (!this.isBlank(this.begCreateDate)) {
 					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
 				}
@@ -347,7 +344,7 @@
 		},
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true)
-			
+
 			init();
             this.$refs.counlorEmp.setPosName("咨询师")
             this.$refs.counlorEmp.setEmp("")
@@ -407,4 +404,7 @@
 			display: none
 		}
 	}
+    .tips-font-20{font-size: 20px;}
+    .SSwid20{width: 20.5%;}
+    .SSwid27{width: 27.3%;}
 </style>

@@ -9,62 +9,54 @@
             <div class="tab-pane fade in active martop clearfix" id="basic">
 
                     <div class="col-md-6 form-group clearfix">
-                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">产品名称</label><span class="sign-left">:</span>
+                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">产品名称</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.proName" placeholder="">
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">咨询师</label><span class="sign-left">:</span>
+                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">咨询师</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <emp ref='emp' @employeeChange='empChange'></emp>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">总价</label><span class="sign-left">:</span>
+                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">总价</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.totalPrice" placeholder="">
                             <span class="pos-ab pos-tr">¥</span>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">优惠后总价</label><span class="sign-left">:</span>
+                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">优惠后总价</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.discouAmount" placeholder="">
                             <span class="pos-ab pos-tr">¥</span>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">单价</label><span class="sign-left">:</span>
+                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">单价</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.price" placeholder="">
                             <span class="pos-ab pos-tr">¥</span>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">课时</label><span class="sign-left">:</span>
+                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">课时</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.frequency">
                             <span class="pos-ab pos-tr">H</span>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">优惠比例</label><span class="sign-left">:</span>
+                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">优惠比例</label><span class="sign-left">:</span>
                         <div class="col-md-8 pos-re">
                             <input type="text" class="form-control" v-model="project.discount" placeholder="">
                             <span class="pos-ab pos-tr">%</span>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">是否停用</label><span class="sign-left">:</span>
+                        <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">是否停用</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.state">
                                 <option value="1">在用</option>
@@ -73,8 +65,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">是否可退款</label><span class="sign-left">:</span>
+                        <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">是否可退款</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.isRefund">
                                 <option value="0">否</option>
@@ -83,16 +74,14 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">到期时间</label><span class="sign-left">:</span>
+                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">到期时间</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.endDay">
                             <span class="pos-ab pos-tr">天</span>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">咨询师等级</label><span class="sign-left">:</span>
+                        <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">咨询师等级</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.empLevel">
                                 <option value="1">资深级</option>
@@ -102,8 +91,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
-                        <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline"
-                               style="padding:0;line-height:34px;">产品类型</label><span class="sign-left">:</span>
+                        <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">产品类型</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.proType">
                                 <option value="0">普通</option>
@@ -116,11 +104,11 @@
                         </div>
                     </div>
                     <div class="col-md-12 form-group clearfix">
-                        <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;"
+                        <button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15"
                                 data-toggle="modal"
                                 v-on:click="closeCurrentPage()">返回
                         </button>
-                        <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+                        <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15"
                                 data-toggle="modal"
                                 v-on:click="certainAction()">确认
                         </button>

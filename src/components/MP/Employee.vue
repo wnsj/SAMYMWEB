@@ -5,7 +5,7 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">员工管理</h1>
         </div>
-        <div class="row newRow" style="margin-top: 40px;">
+        <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
                     <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
@@ -56,7 +56,7 @@
             </div>
             
         </div>
-        <div class="row newRow" style="margin-top: 15px;padding-bottom:1.5%;">
+        <div class="row newRow">
             
             <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"
                     data-toggle="modal"

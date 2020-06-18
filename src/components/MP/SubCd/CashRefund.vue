@@ -9,30 +9,30 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="cash.cashName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span class="sign-left">:</span>
+						<label class="col-md-3 control-label text-right nopad end-aline" >手机号</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="cash.phone" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">定金金额</label><span class="sign-left">:</span>
+						<label class="col-md-3 control-label text-right nopad end-aline" >定金金额</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="cash.money" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">交费时间</label><span class="sign-left">:</span>
-						<dPicker class="col-md-8" style="width:65%;" v-model="cash.createDate" v-on:click="dateAction()"></dPicker>
+						<label class="col-md-3 control-label text-right nopad end-aline" >交费时间</label><span class="sign-left">:</span>
+						<dPicker class="col-md-8 cash-h65" v-model="cash.createDate" v-on:click="dateAction()"></dPicker>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>
+							<button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal" v-on:click="certainAction()">确认</button>
 					</div>
 				</form>
 			</div>
@@ -78,15 +78,11 @@
 					state:'0',
 					operatorId:this.accountId(),
 				}
-					
-				}else if(param=='modify'){
-					//console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
-					
+
+				}else if(param=='modify'){	
 					this.title='修改'
 					Object.assign(this.cash,cash)
 					this.cash.operatorId=this.accountId()
-					// //console.log(JSON.stringify(this.cash))
-					
 				}
 			},
 			dateAction(){
@@ -94,12 +90,12 @@
 					this.cash.createDate = this.moment(this.cash.createDate,"YYYY-MM-DD 00:00:00.000")
 				}
 			},
-			
+
 			//the event of addtional button
 			certainAction(){
 				//console.log('the event of addtional button')
 				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
-				
+
 				if(this.isBlank(this.cash.cashName)){
 					alert("姓名不能为空")
 					return
@@ -115,8 +111,8 @@
 				if(this.isBlank(this.cash.money)){
 					alert("定金不能为空")
 					return
-				} 
-				
+				}
+
 				if(!this.isBlank(this.cash.createDate)){
 					this.cash.createDate=this.moment(this.cash.createDate,'YYYY-MM-DD 00:00:00.000')
 				}else{
@@ -132,7 +128,7 @@
 						url = this.url + '/cashAction//updateCash'
 						break;
 				}
-				
+
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -158,14 +154,15 @@
 				$("#crContent").modal("hide")
 			},
 		}
-		
+
 	}
 </script>
 
 <style>
-	.pos-tr{ 
+    .cash-h65{width: 65%;}
+	.pos-tr{
 		top:0;
-		right:20px; 
+		right:20px;
 		line-height:34px;
 		-webkit-user-select:none;
     	-moz-user-select:none;

@@ -3,41 +3,41 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">提成汇总</h1>
 		</div>
-		<div class="row" style="margin-top: 40px;">
+		<div class="row newRow" >
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >门店</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<store ref='store' @storeChange='storeChange'></store>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >姓名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="empName"></div>
 			</div>
 
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">岗位</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >岗位</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<pos ref='pos' @positionChange='positionChange'></pos>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">月份</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >月份</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
-					<dPicker style="width:100%" format="YYYY-MM" v-model="createDate"></dPicker>
+					<dPicker  class="wd100" format="YYYY-MM" v-model="createDate"></dPicker>
 				</div>
 			</div>
 		</div>
-		<div class="row" style="margin-top: 15px;padding-bottom:1.5%;">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-right:30px; padding-bottom:1.5%;">
+		<div class="row newRow" >
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-right-25 padding-bottom-15" >
 				<button type="button" class="btn btn-primary pull-right m_r_10" data-toggle="modal"
 				 v-on:click="conditionCheck()">查询</button>
 			</div>
@@ -134,12 +134,12 @@
 				}
 				//console.log('store' + this.posId)
 			},
-			
+
 			feedback() {
 				this.conditionCheck()
 				$("#addPatient").modal('hide')
 			},
-			
+
 			//modify the cotent of patient
 			checkDetail(item) {
 				this.$refs.subRoy.initData(item)
@@ -158,18 +158,18 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						
+
 						storeId:this.storeId,
 						posId:this.posId,
 						empName:this.empName,
 						createDate:this.createDate,
-						
-						
+
+
 // 						accountId: this.accountId(),
 // 						moduleGrade:'2',
 // 						urlName:'/MP/RoyaltySummary',
 // 						operateType:'4',
-						
+
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -180,7 +180,7 @@
 					//console.log('提成信息查询失败')
 				});
 			},
-			
+
 		},
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true)

@@ -9,19 +9,19 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">岗位名称</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >岗位名称</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="position.posName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">上级</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >上级</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<position ref="position" @positionChange='posChange'></position>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否停用</label><span class="sign-left">:</span>
+						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" >是否停用</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="position.isuse">
 								<option value="1">在用</option>
@@ -30,10 +30,10 @@
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+						<button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15" data-toggle="modal"
 							v-on:click="closeCurrentPage()">返回</button>
-						<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
-							v-on:click="certainAction()">确认</button>							
+						<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
+							v-on:click="certainAction()">确认</button>
 					</div>
 				</form>
 			</div>
@@ -82,7 +82,7 @@
 					}
 				}
 			},
-			
+
 			posChange(param){
 				if(this.isBlank(param)){
 					this.position.parentId=""
@@ -92,8 +92,6 @@
 			},
 			//the event of addtional button
 			certainAction() {
-				//console.log('the event of addtional button')
-				
 				if (this.isBlank(this.position.posName)) {
 					alert("岗位名称不能为空")
 					return
@@ -106,7 +104,7 @@
 						var url = this.url+'/positionAction/updatePosition'
 						break;
 				}
-				
+
 				this.$ajax({
 					method: 'POST',
 					url: url,

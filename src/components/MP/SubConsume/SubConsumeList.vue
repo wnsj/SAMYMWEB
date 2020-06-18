@@ -7,7 +7,7 @@
 		</div>
 		<div class="tableContent">
 			<nobr class="widthmax">
-				<div class="table-responsive pre-scrollable" style=" max-height:464px">
+				<div class="table-responsive pre-scrollable csulist-mh">
 					<table class="table table-bordered table-hover user-table" id="datatable">
 						<thead>
 							<tr>
@@ -96,5 +96,5 @@
 </script>
 
 <style>
-
+.csulist-mh{max-height:464px}
 </style>

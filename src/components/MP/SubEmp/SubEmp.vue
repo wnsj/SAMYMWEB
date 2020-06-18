@@ -5,35 +5,35 @@
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
 			<h4 id="myModalLabel" class="modal-title">{{title}}员工</h4>
 		</div>
-		<div class="modal-body  pos_r">
-			<div class="tab-pane fade in active martop" id="basic" style="height: 300px;">
+		<div class="modal-body  pos_r clearfix">
+			<div class="tab-pane fade in active martop clearfix" id="basic">
 
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span class="sign-left">:</span>
+					<div class="col-md-6 form-group ">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="employee.empName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix" v-show="accountType==true">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">门店</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >门店</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<store ref="store" @storeChange='storeChange'></store>
 						</div>
 					</div>
 					<!-- <div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >手机号</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="employee.phone" placeholder="">
 						</div>
 					</div> -->
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">年龄</label><span class="sign-left">:</span>
+						<label class="col-md-3 control-label text-right nopad end-aline" >年龄</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="employee.age" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">性别</label><span class="sign-left">:</span>
+						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" >性别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="employee.sex">
 								<option value="1">男</option>
@@ -42,13 +42,13 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="gh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">岗位</label><span class="sign-left">:</span>
+						<label for="gh" class="col-md-3 control-label text-right nopad end-aline" >岗位</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<pos ref="pos" @positionChange='positionChange'></pos>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">岗位级别</label><span class="sign-left">:</span>
+						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" >岗位级别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="employee.level">
 								<option value="1">资深级</option>
@@ -58,19 +58,19 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="gh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">角色</label><span class="sign-left">:</span>
+						<label for="gh" class="col-md-3 control-label text-right nopad end-aline" >角色</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<role ref="role" @urChange='roleChange'></role>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="gh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">上级</label><span class="sign-left">:</span>
+						<label for="gh" class="col-md-3 control-label text-right nopad end-aline" >上级</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref="emp" @employeeChange="employeeChange"></emp>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否在用</label><span class="sign-left">:</span>
+						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" >是否在用</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="employee.isuse">
 								<option value="0">否</option>
@@ -79,9 +79,9 @@
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+						<button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15" data-toggle="modal"
 							v-on:click="closeCurrentPage()">返回</button>
-						<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+						<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
 							v-on:click="addEmp()">确认</button>
 					</div>
 

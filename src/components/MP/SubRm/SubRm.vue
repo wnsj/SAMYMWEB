@@ -125,7 +125,7 @@
 			},
 			//feedback department information
 			moduleChange: function(param) {
-				// console.log(JSON.stringify(param))
+				// //console.log(JSON.stringify(param))
 				if (this.isBlank(param)) {
 					this.ruleContent.moduleId = ""
 				} else {
@@ -134,7 +134,7 @@
 			},
 			//feedback employeeStype information
 			accountChange: function(param) {
-				// console.log(JSON.stringify(param))
+				// //console.log(JSON.stringify(param))
 				if (this.isBlank(param)) {
 					this.ruleContent.accountId = ''
 				} else {
@@ -173,7 +173,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
+					//console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('addRule')
@@ -181,12 +181,12 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('员工请求失败')
+					//console.log('员工请求失败')
 				});
 			},
 			closeCurrentPage() {
 				$("#rm").modal("hide")
-				console.log('关闭添加权限界面')
+				//console.log('关闭添加权限界面')
 			},
 			
 		}

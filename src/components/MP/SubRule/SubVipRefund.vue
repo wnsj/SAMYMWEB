@@ -67,7 +67,7 @@
 			// Initialization patient’s content
 			initData(param,FWRoyalty) {
 				if(param=='add'){
-					console.log('Initialization patient’s content, which adds patient')
+					//console.log('Initialization patient’s content, which adds patient')
 					this.title='新增'
 					this.FWRoyalty={
 						posId:'0',
@@ -78,7 +78,7 @@
 					}
 					this.$refs.pos.setPosId('0')
 				}else if(param=='modify'){
-					console.log('Initialization patient’s content, which modifies patient')
+					//console.log('Initialization patient’s content, which modifies patient')
 					
 					this.title='修改'
 					Object.assign(this.FWRoyalty,FWRoyalty)
@@ -88,18 +88,18 @@
 			
 			//feedback position information
 			posChange:function(param){
-				console.log('岗位3：'+JSON.stringify(param))
+				//console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.FWRoyalty.posId=""
 				}else{
 					this.FWRoyalty.posId=param.posId
 				}
-				console.log('岗位4：'+this.FWRoyalty.posId)
+				//console.log('岗位4：'+this.FWRoyalty.posId)
 			},
 			
 			//the event of addtional button
 			certainAction(param){
-				console.log('the event of addtional button')
+				//console.log('the event of addtional button')
 				
 				
 				if(this.isBlank(this.FWRoyalty.posId) || this.FWRoyalty.posId=='0'){
@@ -133,18 +133,18 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
+					//console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('certainAction')
 					}
 				}).catch((error) => {
-					console.log('添加流水规则失败')
+					//console.log('添加流水规则失败')
 				});
 			},
 			closeCurrentPage(){
 				$("#SubVipRefund").modal("hide")
-				console.log('close the flowWater rule')
+				//console.log('close the flowWater rule')
 			},
 		}
 		

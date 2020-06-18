@@ -92,10 +92,10 @@
         methods: {
             // Initialization FWRoyalty’s content
             initData(param, cash) {
-                // console.log(JSON.stringify(cash))
+                // //console.log(JSON.stringify(cash))
                 $('#subCdContent').modal({backdrop: 'static', keyboard: false});
                 if (param == 'add') {
-                    console.log('Initialization FWRoyalty’s content, which adds FWRoyalty')
+                    //console.log('Initialization FWRoyalty’s content, which adds FWRoyalty')
                     this.title = '新增'
                     this.cash = {
                         memNum: cash.visId,
@@ -110,12 +110,12 @@
                     }
 
                 } else if (param == 'modify') {
-                    console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
+                    //console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
 
                     this.title = '修改'
                     Object.assign(this.cash, cash)
                     this.cash.operatorId = this.accountId()
-                    // console.log(JSON.stringify(this.cash))
+                    // //console.log(JSON.stringify(this.cash))
 
                 }
             },
@@ -130,7 +130,7 @@
                 this.cash.phone = param.phone
             },
             checkMemNum(param) {
-                console.log('checkMemNum')
+                //console.log('checkMemNum')
                 if (this.isBlank(param)) {
                     return
                 }
@@ -164,12 +164,12 @@
                     }
 
                 }).catch((error) => {
-                    console.log('会员查询请求失败')
+                    //console.log('会员查询请求失败')
                 });
             },
             //the event of addtional button
             certainAction() {
-                console.log('the event of addtional button')
+                //console.log('the event of addtional button')
                 var reg =
                     /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 
@@ -226,7 +226,7 @@
                         alert(res.retMsg)
                     }
                 }).catch((error) => {
-                    console.log('会员相关操作失败')
+                    //console.log('会员相关操作失败')
                 });
             },
             closeCurrentPage() {

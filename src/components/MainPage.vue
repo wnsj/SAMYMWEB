@@ -100,6 +100,15 @@
                             <dd @click="addCheck('Position')" v-bind:class="{'li-active':onString=='Position'}">
                                 <router-link to="/MP/Position"><i class="fa" aria-hidden="true">岗位管理</i></router-link>
                             </dd>
+							<dd @click="addCheck('Occupation')" v-bind:class="{'li-active':onString=='Occupation'}">
+							    <router-link to="/MP/Occupation"><i class="fa" aria-hidden="true">职业管理</i></router-link>
+							</dd>
+							<dd @click="addCheck('Education')" v-bind:class="{'li-active':onString=='Education'}">
+							    <router-link to="/MP/Education"><i class="fa" aria-hidden="true">学历管理</i></router-link>
+							</dd>
+							<dd @click="addCheck('Region')" v-bind:class="{'li-active':onString=='Region'}">
+							    <router-link to="/MP/Region"><i class="fa" aria-hidden="true">区域管理</i></router-link>
+							</dd>
                             <dd @click="addCheck('Store')" v-bind:class="{'li-active':onString=='Store'}">
                                 <router-link to="/MP/Store"><i class="fa" aria-hidden="true">门店管理</i></router-link>
                             </dd>
@@ -259,7 +268,7 @@
                 $("#addCustom").modal("show");
             },
             titleChange(param) {
-                console.log('param:' + param)
+                //console.log('param:' + param)
                 this.title = param
             },
             onShow(index) {
@@ -304,7 +313,7 @@
             },
             addCheck(string) {
                 this.onString = string;
-                console.log(string)
+                //console.log(string)
             },
             gainFun(data) {
                 this.onString = data;
@@ -397,7 +406,7 @@
     }
 
     #aside-menu dl.h40 {
-        height: 600px;
+        height: 750px;
     }
 
     #aside-menu dl dt {

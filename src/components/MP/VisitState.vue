@@ -54,7 +54,7 @@
                         </thead>
                         <tbody>
                         <tr v-for="(item,index) in objList" :key="index" v-on:dblclick="selectRule('3',item)">
-                            <td class="text-center">{{item.vsType==1 ? "初诊" : "复诊"}}</td>
+                            <td class="text-center">{{item.vsType==1 ? "初访" : "复访"}}</td>
                             <td class="text-center">{{item.stateType==1 ? "咨客判定" : "续流状态"}}</td>
 							<td class="text-center">{{item.vsName}}</td>
                             <td class="text-center">{{item.isUse==1 ? "在用" : "停用"}}</td>
@@ -148,7 +148,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('状态查询请求失败')
+                    //console.log('状态查询请求失败')
                 });
             },
             handleScroll(e) {

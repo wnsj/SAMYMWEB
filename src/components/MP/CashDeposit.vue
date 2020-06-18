@@ -218,7 +218,7 @@
             },
 
             transferMember(item) {
-                console.log(item)
+                //console.log(item)
                 this.$refs.toMember.initData(item)
                 $("#toMember").modal('show')
             },
@@ -296,7 +296,7 @@
             },
             //check the list of member
             checkMember(page) {
-                console.log('checkMember')
+                //console.log('checkMember')
                 var url = this.url + '/cashAction/queryCash'
                 if (!this.isBlank(this.beginDate)) {
                     this.beginDate = this.moment(this.beginDate, 'YYYY-MM-DD 00:00:00.000')
@@ -325,7 +325,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    // console.log(res)
+                    // //console.log(res)
                     if (res.retCode == '0000') {
                         this.pages = res.retData.pages //总页数
                         this.current = res.retData.current //当前页码
@@ -338,7 +338,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('定金查询失败')
+                    //console.log('定金查询失败')
                 });
             },
             cancelCush(item) {
@@ -364,13 +364,13 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    // console.log(res)
+                    // //console.log(res)
                     if (res.retCode == '0000') {
                         item.state = '1'
                     }
 
                 }).catch((error) => {
-                    console.log('定金查询失败')
+                    //console.log('定金查询失败')
                 });
             },
 
@@ -402,7 +402,7 @@
             init();
         },
         created() {
-            this.checkMember(1)
+            // this.checkMember(1)
         }
     }
 </script>

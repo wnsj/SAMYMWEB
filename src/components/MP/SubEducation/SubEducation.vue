@@ -3,34 +3,28 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h4 id="myModalLabel" class="modal-title">{{title}}咨询方向</h4>
+			<h4 id="myModalLabel" class="modal-title">{{title}}学历</h4>
 		</div>
 		<div class="modal-body  pos_r">
-			<div class="tab-pane fade in active martop clearfix" id="basic">
-				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-3 control-label text-right nopad end-aline">状态名称</label><span
-					 class="sign-left">:</span>
-					<div class="col-md-8">
-						<input type="text" class="form-control" v-model="obj.dtName" placeholder="">
+			<div class="tab-pane fade in active martop" id="basic">
+				<form action="" class="clearfix">
+
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">学历名称</label><span
+						 class="sign-left">:</span>
+						<div class="col-md-8">
+							<input type="text" class="form-control" v-model="obj.eduName" placeholder="">
+						</div>
 					</div>
-				</div>
-				<div class="col-md-6 form-group clearfix">
-					<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">是否停用</label><span
-					 class="sign-left">:</span>
-					<div class="col-md-8">
-						<select class="form-control" v-model="obj.isUse">
-							<option value="1">在用</option>
-							<option value="0">停用</option>
-						</select>
-					</div>
-				</div>
-				<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15" data-toggle="modal"
+					<div class="col-md-12 form-group clearfix">
+						<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 						 v-on:click="closeCurrentPage()">返回</button>
-						<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
+						<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
 						 v-on:click="certainAction()">确认</button>
-				</div>
+					</div>
+				</form>
 			</div>
+
 		</div>
 
 	</div>
@@ -45,9 +39,8 @@
 		data() {
 			return {
 				obj: {
-					dtId: '',
-					dtName: '',
-					isUse: '1',
+					eduId: '',
+					eduName: '',
 				},
 				title: '',
 			};
@@ -61,9 +54,8 @@
 					this.title = '新增'
 
 					this.obj = {
-						dtId: '',
-						dtName: '',
-						isUse: '1',
+						eduId: '',
+						eduName: '',
 					}
 
 				} else if (param == 'modify') {
@@ -74,21 +66,21 @@
 				}
 			},
 			closeCurrentPage() {
-				$("#dtContent").modal("hide")
+				$("#subEducationContent").modal("hide")
 			},
 			//the event of addtional button
 			certainAction() {
 
-				if (this.isBlank(this.obj.dtName)) {
-					alert("咨询方向不能为空")
+				if (this.isBlank(this.obj.eduName)) {
+					alert("状态名不能为空")
 					return
 				}
 				switch (this.title) {
 					case '新增':
-						var url = this.url + '/diseaseType/addDiseaseType';
+						var url = this.url + '/education/addEducation';
 						break;
 					case '修改':
-						var url = this.url + '/diseaseType/updateDiseaseType'
+						var url = this.url + '/education/updateEducation'
 						break;
 				}
 				this.$ajax({
@@ -109,7 +101,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('添加或者修改咨询方向失败')
+					//console.log('添加或者修改状态失败')
 				});
 			},
 

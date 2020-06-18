@@ -54,14 +54,14 @@
 
 			closeCurrentPage() {
 				$("#addConsume").modal("hide")
-				console.log('关闭添加患者界面')
+				//console.log('关闭添加患者界面')
 			},
 			//Query patient's information based on the hosNum
 			conditionCheck(param) {
 				if (this.isBlank(param)) {
 					return
 				}
-				console.log('查询消费详情' + param.MEM_NUM)
+				//console.log('查询消费详情' + param.MEM_NUM)
 				var url = this.url + '/accountRecordAction/queryAccountRecord'
 				this.$ajax({
 					method: 'POST',
@@ -77,7 +77,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
+					//console.log(res)
 					if (res.retCode == '0000') {
 						if (res.retData != null) {
 							this.consumeList = res.retData
@@ -86,7 +86,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('消费详情插叙失败')
+					//console.log('消费详情插叙失败')
 				});
 			},
 

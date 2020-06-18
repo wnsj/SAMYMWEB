@@ -3,42 +3,16 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h4 id="myModalLabel" class="modal-title">{{title}}来访状态</h4>
+			<h4 id="myModalLabel" class="modal-title">{{title}}职业</h4>
 		</div>
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
+					
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">访问类型</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">职业名称</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<select class="form-control" v-model="obj.vsType">
-								<option value="1">初访</option>
-								<option value="2">复访</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">状态类型</label><span class="sign-left">:</span>
-						<div class="col-md-8">
-							<select class="form-control" v-model="obj.stateType">
-								<option value="1">咨客判定</option>
-								<option value="2">续流状态</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">状态名称</label><span class="sign-left">:</span>
-						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="obj.vsName" placeholder="">
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否停用</label><span class="sign-left">:</span>
-						<div class="col-md-8">
-							<select class="form-control" v-model="obj.isUse">
-								<option value="1">在用</option>
-								<option value="0">停用</option>
-							</select>
+							<input type="text" class="form-control" v-model="obj.occName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
@@ -62,11 +36,8 @@
 		data() {
 			return {
 				obj:{
-					vsId:'',
-					stateType:'1',
-					vsType:'1',
-					vsName:'',
-					isUse:'1',
+					occId:'',
+					occName:'1',
 				},
 				title:'',
 			};
@@ -80,11 +51,8 @@
 					this.title='新增'
 					
 					this.obj={
-						vsId:'',
-						stateType:'1',
-						vsType:'1',
-						vsName:'',
-						isUse:'1',
+						occId:'',
+						occName:'',
 					}
 					
 				}else if(param=='modify'){
@@ -95,30 +63,23 @@
 				}
 			},
 			closeCurrentPage(){
-				$("#vsContent").modal("hide")
+				$("#subOccupationContent").modal("hide")
 				//console.log('关闭添加患者界面')
 			},
 			//the event of addtional button
 			certainAction(){
 			
-				if(this.isBlank(this.obj.stateType)){
-					alert("状态类型不能为空")
-					return
-				}
-				if(this.isBlank(this.obj.vsType)){
-					alert("访问类型不能为空")
-					return
-				}
-				if(this.isBlank(this.obj.vsName)){
-					alert("状态名不能为空")
+				
+				if(this.isBlank(this.obj.occName)){
+					alert("职业名称不能为空")
 					return
 				}
 				switch(this.title){
 					case '新增':
-						var url = this.url + '/visitState/addVisitState';
+						var url = this.url + '/occupation/addOccupation';
 						break;
 					case '修改':
-						var url = this.url + '/visitState/updateVisitState'
+						var url = this.url + '/occupation/updateOccupation'
 						break;	
 				}
 				this.$ajax({

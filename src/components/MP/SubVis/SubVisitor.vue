@@ -197,7 +197,7 @@
 					birthday:'',
 				}
 				if(param=='add'){
-					console.log('Initialization visitor’s content, which adds visitor')
+					//console.log('Initialization visitor’s content, which adds visitor')
 					
 					this.title='新增'
 					// this.$refs.visState.getObj('1','1')
@@ -210,10 +210,10 @@
 					this.$refs.store.setStore('0')
 					
 				}else if(param=='modify'){
-					console.log('Initialization visitor’s content, which modifies visitor')
+					//console.log('Initialization visitor’s content, which modifies visitor')
 					
 					this.title='修改'
-					// console.log(JSON.stringify(visitorContent))
+					// //console.log(JSON.stringify(visitorContent))
 					Object.assign(this.visitor,visitorContent)
 					this.$refs.cha.setChaId(this.visitor.chaId)
 					this.$refs.DiseaseType.setObj(this.visitor.dtId)
@@ -225,7 +225,7 @@
 				}
 			},
 			judgeChange:function(param){
-				// console.log(JSON.stringify(param))
+				// //console.log(JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.visitor.vsIdJudge=""
 				}else{
@@ -255,41 +255,41 @@
 			},
 			//feedback position information
 			indChange:function(param){
-				// console.log('岗位3：'+JSON.stringify(param))
+				// //console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.visitor.indId=""
 				}else{
 					this.visitor.indId=param.indId
 				}
-				console.log('岗位4：'+this.visitor.indId)
+				//console.log('岗位4：'+this.visitor.indId)
 			},
 			//feedback position information
 			chaChange:function(param){
-				// console.log('岗位3：'+JSON.stringify(param))
+				// //console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.visitor.chaId=""
 				}else{
 					this.visitor.chaId=param.chaId
 				}
-				// console.log('岗位4：'+this.visitor.posId)
+				// //console.log('岗位4：'+this.visitor.posId)
 			},
 			//feedback position information
 			empChange:function(param){
-				// console.log('岗位3：'+JSON.stringify(param))
+				// //console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.visitor.empId=""
 				}else{
 					this.visitor.empId=param.empId
 				}
-				// console.log('岗位4：'+this.visitor.posId)
+				// //console.log('岗位4：'+this.visitor.posId)
 			},
 			closeCurrentPage(){
 				$("#visContent").modal("hide")
-				console.log('关闭添加患者界面')
+				//console.log('关闭添加患者界面')
 			},
 			//the event of addtional button
 			certainAction(){
-				console.log('the event of addtional button')
+				//console.log('the event of addtional button')
 				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 			
 				
@@ -359,7 +359,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('添加或者修改咨客信息失败')
+					//console.log('添加或者修改咨客信息失败')
 				});
 			},
 			

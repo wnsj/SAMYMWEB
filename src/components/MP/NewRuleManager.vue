@@ -213,17 +213,17 @@
                 });
             },
             selectAllEvent({checked, records}) {
-                console.log(checked ? '所有勾选事件' : '所有取消事件', records)
+                //console.log(checked ? '所有勾选事件' : '所有取消事件', records)
             },
             selectChangeEvent({
                                   checked,
                                   records
                               }) {
-                console.log(checked ? '勾选事件' : '取消事件', records)
-                console.log(JSON.stringify(this.umsPermissionList))
+                //console.log(checked ? '勾选事件' : '取消事件', records)
+                //console.log(JSON.stringify(this.umsPermissionList))
             },
             printLog(item) {
-                console.log("item:" + item)
+                //console.log("item:" + item)
                 alert(item)
             },
             //查询角色
@@ -245,7 +245,7 @@
                         alert(responseData.retMsg);
                     }
                 }, (error) => {
-                    console.log("请求失败处理");
+                    //console.log("请求失败处理");
                 });
             },
             //切换门店
@@ -282,7 +282,7 @@
                         alert(responseData.retMsg);
                     }
                 }, (error) => {
-                    console.log("请求失败处理");
+                    //console.log("请求失败处理");
                 });
             },
             //关闭弹窗
@@ -320,9 +320,9 @@
                         alert(responseData.retMsg);
                     }
                 }, (error) => {
-                    console.log("请求失败处理");
+                    //console.log("请求失败处理");
                 });
-                console.log(selectRecords)
+                //console.log(selectRecords)
             },
             //添加角色
             addRole() {
@@ -350,7 +350,7 @@
                         alert(responseData.retMsg);
                     }
                 }, (error) => {
-                    console.log("请求失败处理");
+                    //console.log("请求失败处理");
                 });
             },
             //初始化修改角色数据
@@ -386,7 +386,7 @@
                         alert(responseData.retMsg);
                     }
                 }, (error) => {
-                    console.log("请求失败处理");
+                    //console.log("请求失败处理");
                 });
             },
             //格式化表格内容

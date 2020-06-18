@@ -139,7 +139,7 @@
             },
             //check the list of position
             checkPosition(page) {
-                console.log('checkPosition')
+                //console.log('checkPosition')
                 var url = this.url + '/positionAction/queryPosition'
                 this.$ajax({
                     method: 'POST',
@@ -174,7 +174,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('请求失败处理')
+                    //console.log('请求失败处理')
                 });
             },
             handleScroll(e) {

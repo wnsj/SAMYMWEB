@@ -25,14 +25,14 @@
     methods: {
       //提交岗位名称和ID
       storeChange: function () {
-				// console.log('岗位1：'+this.storeObj.storeId)
+				// //console.log('岗位1：'+this.storeObj.storeId)
         this.storeObj = this.exchangeStoreName(this.storeId)
-				// console.log('岗位2：'+this.storeObj.storeId)
+				// //console.log('岗位2：'+this.storeObj.storeId)
         this.$emit('storeChange', this.storeObj)
       },
       setStore: function (storeId) {
         this.storeId = storeId
-				// console.log('设置岗位'+this.storeId)
+				// //console.log('设置岗位'+this.storeId)
       },
       //添加前缀的部门名字兑换原来的名字
       exchangeStoreName: function (param) {
@@ -69,7 +69,7 @@
         	}
         
         }).catch((error) => {
-        	console.log('岗位数据请求失败处理')
+        	//console.log('岗位数据请求失败处理')
         });
       },
 

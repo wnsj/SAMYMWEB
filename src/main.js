@@ -65,6 +65,8 @@ router.beforeEach((to, from, next) => {
         } else if (to.path == '/login') {
             next();
         } else {
+            let token = Cookies.get('accessToken');
+            let accountData = Cookies.get('accountData');
             //console.log("token:" + token + ",accountData:" + accountData);
             if (constant.isBlank(token) || constant.isBlank(accountData)) {
                 next('/login');
@@ -190,11 +192,11 @@ Vue.prototype.accountType = function () {
 }
 //商铺ID
 Vue.prototype.storeId = function () {
-    if (!constant.isBlank(constant.storeId())) {
-        return constant.storeId();
-    } else {
-        return '';
-    }
+    if (!constant.isBlank(constant.storeId())){
+		return constant.storeId();
+	}else{
+		return '';
+	}
 }
 //手机号判断
 Vue.prototype.phoneNum = function (phoneNum) {

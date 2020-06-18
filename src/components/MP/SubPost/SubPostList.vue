@@ -64,7 +64,7 @@
 			// Initialization patient’s content
 			initData(param,patient) {
 				if(param=='add'){
-					console.log('Initialization patient’s content, which adds patient')
+					//console.log('Initialization patient’s content, which adds patient')
 					this.type='add'
 					this.title='新增'
 					this.isExist='0'
@@ -78,12 +78,12 @@
 					this.patient.inHosp='1'
 					// this.patient.hospTime=this.moment('','YYYY-MM-DD HH:mm:ss.000')
 				}else if(param=='modify'){
-					console.log('Initialization patient’s content, which modifies patient')
+					//console.log('Initialization patient’s content, which modifies patient')
 					this.type='modify'
 					this.isExist='1'
 					this.isModify=true
 					this.title='修改'
-					// console.log("patient"+JSON.stringify(patient))
+					// //console.log("patient"+JSON.stringify(patient))
 					Object.assign(this.patient,patient)
 					this.hospNum=this.patient.hospNum
 					this.$refs.dept.setDpart(this.patient.deptId)
@@ -109,13 +109,13 @@
 			},
 			//feedback department information
 			departChange:function(param){
-				// console.log('科室：'+JSON.stringify(param))
+				// //console.log('科室：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.patient.deptId=""
 				}else{
 					this.patient.deptId=param.deptId
 				}
-				console.log('科室：'+this.patient.deptId)
+				//console.log('科室：'+this.patient.deptId)
 			},
 			//feedback PatientStype information
 			psChange:function(param){
@@ -135,7 +135,7 @@
 			},
 			//the event of addtional button
 			addPatient(){
-				console.log('the event of addtional button')
+				//console.log('the event of addtional button')
 				if(this.isExist=='1'){
 					if(!confirm("是否确定提交，提交将覆盖原有患者数据！！！")){
 						return
@@ -177,7 +177,7 @@
 				}
 				this.patient.paymentList=this.projectList
 				this.patient.accountId=this.accountId
-				// console.log('the event of addtional button'+JSON.stringify(this.patient))
+				// //console.log('the event of addtional button'+JSON.stringify(this.patient))
 				var url = this.url + '/patientAction/addPatient'
 				this.$ajax({
 					method: 'POST',
@@ -190,22 +190,22 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
+					//console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('addPatient')
 					}
 				}).catch((error) => {
-					console.log('请求失败处理')
+					//console.log('请求失败处理')
 				});
 			},
 			closeCurrentPage(){
 				$("#departmentContent").modal("hide")
-				console.log('关闭添加患者界面')
+				//console.log('关闭添加患者界面')
 			},
 			//Query patient's information based on the hosNum
 			conditionCheck(param){
-				console.log('checkhosNum')
+				//console.log('checkhosNum')
 				if(this.isBlank(param)){
 					return
 				}
@@ -223,7 +223,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
+					//console.log(res)
 					if (res.retCode == '0000') {
 						if (res.retData != null) {
 							this.patient = res.retData
@@ -244,7 +244,7 @@
 						}
 					}
 				}).catch((error) => {
-					console.log('请求失败处理')
+					//console.log('请求失败处理')
 				});
 			},
 

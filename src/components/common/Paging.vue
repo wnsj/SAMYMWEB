@@ -60,7 +60,7 @@
                 }
             },
             pageClick: function() {
-                console.log('现在在' + this.cur + '页');
+                //console.log('现在在' + this.cur + '页');
                 //父组件通过change方法来接受当前的页码
                 //这里是点击下一页执行函数
                 this.$emit('change',  this.cur)

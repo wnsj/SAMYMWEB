@@ -24,14 +24,14 @@
 		methods: {
 			//提交岗位名称和ID
 			industryChange: function() {
-				// console.log('岗位1：'+this.storeObj.storeId)
+				// //console.log('岗位1：'+this.storeObj.storeId)
 				this.indObj = this.exchangeIndName(this.indId)
-				// console.log('岗位2：'+this.storeObj.storeId)
+				// //console.log('岗位2：'+this.storeObj.storeId)
 				this.$emit('industryChange', this.indObj)
 			},
 			setInd: function(indId) {
 				this.indId = indId
-				// console.log('设置岗位'+this.storeId)
+				// //console.log('设置岗位'+this.storeId)
 			},
 			//添加前缀的部门名字兑换原来的名字
 			exchangeIndName: function(param) {
@@ -68,7 +68,7 @@
 					}
 
 				}).catch((error) => {
-					console.log('岗位数据请求失败处理')
+					//console.log('岗位数据请求失败处理')
 				});
 			},
 

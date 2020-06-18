@@ -66,7 +66,7 @@ constant.accountId = function() {
     if (this.isBlank(jsonString)) return false;
     var accountData = JSON.parse(jsonString);
     var accountId = accountData.accountId;
-    // console.log('accountId:'+accountId)
+    // //console.log('accountId:'+accountId)
     return accountId
 }
 
@@ -77,9 +77,9 @@ constant.accountPosId = function() {
     //未登录
     if (this.isBlank(jsonString)) return false;
     var empData = JSON.parse(jsonString);
-    // console.log('empData:'+jsonString)
+    // //console.log('empData:'+jsonString)
     var accountPosId = empData.posId;
-    // console.log('accountId:'+accountId)
+    // //console.log('accountId:'+accountId)
     return accountPosId
 }
 
@@ -91,7 +91,7 @@ constant.accountType = function() {
     if (this.isBlank(jsonString)) return false;
     var accountData = JSON.parse(jsonString);
     var accountType = accountData.accountType;
-    // console.log('accountType:'+accountType)
+    // //console.log('accountType:'+accountType)
     return accountType
 }
 //账户的姓名
@@ -99,11 +99,11 @@ constant.storeId = function() {
     //未传值
     var jsonString = Cookies.get("accountData");
     //未登录
-    // console.log('基础信息'+jsonString)
+    // //console.log('基础信息'+jsonString)
     if (this.isBlank(jsonString)) return false;
     var accountData = JSON.parse(jsonString);
     var storeId = accountData.storeId;
-    // console.log('基础信息' + storeId)
+    // //console.log('基础信息' + storeId)
     return storeId
 }
 

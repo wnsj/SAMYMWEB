@@ -227,7 +227,7 @@
 						alert(response.retMsg)
 					}
 				}, (error) => {
-					console.log("请求失败处理");
+					//console.log("请求失败处理");
 				})
 			},
 			closeCurrentPage() {
@@ -241,11 +241,11 @@
 			},
 			//Query member's information based on the memNum
 			checkMemNum(param) {
-				console.log('checkMemNum')
+				//console.log('checkMemNum')
 				if (this.isBlank(param)) {
 					return
 				}
-				console.log('费用类型3：' + this.consume.costType)
+				//console.log('费用类型3：' + this.consume.costType)
 				var url = this.url + '/purchasedItemsAction/queryMemUnfinished'
 				this.$ajax({
 					method: 'POST',
@@ -278,7 +278,7 @@
 					}
 
 				}).catch((error) => {
-					console.log('会员查询请求失败')
+					//console.log('会员查询请求失败')
 				});
 			},
 			//查询已购买产品
@@ -287,7 +287,7 @@
 				var url = this.url + '/purchasedItemsAction/queryUnfinishedPro'
 				var data = {
 					memNum: param,
-					isArrears: '0',
+					isArrears: '1',
 				}
 				this.requestData(url, data).then((response) => {
 					if (response.retCode == '0000') {
@@ -296,7 +296,7 @@
 						alert(response.retMsg)
 					}
 				}, (error) => {
-					console.log("请求失败处理");
+					//console.log("请求失败处理");
 				})
 			},
 			//产品类型转换

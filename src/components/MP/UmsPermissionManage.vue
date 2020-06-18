@@ -142,7 +142,7 @@
                         alert(responseData.retMsg);
                     }
                 }, (error) => {
-                    console.log("请求失败处理");
+                    //console.log("请求失败处理");
                 });
             },
             //权限弹窗初始化
@@ -201,7 +201,7 @@
                         alert(responseData.retMsg);
                     }
                 }, (error) => {
-                    console.log("请求失败处理");
+                    //console.log("请求失败处理");
                 });
             },
             //关闭弹窗
@@ -223,7 +223,7 @@
                         alert(responseData.retMsg);
                     }
                 }, (error) => {
-                    console.log("请求失败处理");
+                    //console.log("请求失败处理");
                 });
             }
         },

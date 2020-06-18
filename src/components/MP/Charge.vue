@@ -152,7 +152,7 @@
 				this.conditionCheck(page);
 			},
 			empChange(param) {
-				console.log('员工信息：' + JSON.stringify(param))
+				//console.log('员工信息：' + JSON.stringify(param))
 				if (this.isBlank(param)) {
 					this.empId = ""
 				} else {
@@ -175,7 +175,7 @@
 
 			//the list , which is detail infomation of patient,was checked.
 			conditionCheck: function(page) {
-				console.log('querying based on multiple conditions')
+				//console.log('querying based on multiple conditions')
 				if (!this.isBlank(this.begCreateDate)) {
 					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
 				}
@@ -215,7 +215,7 @@
 						this.chargeLsit = res.retData.records
 					}
 				}).catch((error) => {
-					console.log('充值查询请求失败')
+					//console.log('充值查询请求失败')
 				});
 			},
 			arrearsAaction(item) {
@@ -247,7 +247,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('补交费用请求失败')
+					//console.log('补交费用请求失败')
 				});
 			},
 
@@ -258,7 +258,7 @@
 			init();
 		},
 		created() {
-			this.conditionCheck(1)
+			// this.conditionCheck(1)
 		}
 	}
 </script>

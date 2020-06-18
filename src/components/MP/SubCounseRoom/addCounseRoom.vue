@@ -78,7 +78,7 @@
                         alert(res.retMsg)
                     }
                 }).catch((error) => {
-                    console.log('预约提交请求失败')
+                    //console.log('预约提交请求失败')
                 });
             },
             closeCurrentPage() {

@@ -24,14 +24,14 @@
     methods: {
       //提交岗位名称和ID
       moduleChange: function () {
-				// console.log('岗位1：'+this.moduleObj.moduleId)
+				// //console.log('岗位1：'+this.moduleObj.moduleId)
         this.moduleObj = this.exchangeModuleName(this.moduleId)
-				// console.log('岗位2：'+this.moduleObj.moduleId)
+				// //console.log('岗位2：'+this.moduleObj.moduleId)
         this.$emit('moduleChange', this.moduleObj)
       },
       setModule: function (moduleId) {
         this.moduleId = moduleId
-				// console.log('设置岗位'+this.ModuleId)
+				// //console.log('设置岗位'+this.ModuleId)
       },
       //添加前缀的部门名字兑换原来的名字
       exchangeModuleName: function (param) {
@@ -68,7 +68,7 @@
         	}
         
         }).catch((error) => {
-        	console.log('岗位数据请求失败处理')
+        	//console.log('岗位数据请求失败处理')
         });
       },
 

@@ -260,7 +260,7 @@
 				<div class="col-md-12 form-group clearfix text-left">
 					<h4 id="myModalLabel" class="modal-title">合计：</h4>
 				</div>
-				<div class="col-md-6 form-group clearfix" v-show="counselorFlag==false">
+				<div class="col-md-6 form-group clearfix" v-show="selectObj == null">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >实交总额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
@@ -544,6 +544,7 @@
 					}
 
 					this.consume.piId = this.selectObj.piId
+                    this.consume.realCross = this.consume.consumCount * this.consume.price
 				}
 				if (this.dateArr.length > 1 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1])) {
 					this.consume.actualBegDate = this.dateArr[0];
@@ -556,8 +557,6 @@
 					this.consume.cashId = this.cash.cashId;
 					this.consume.cashMoney = this.cash.select;
 				}
-
-
 
 				var url = this.url + '/purchasedItemsAction/consumProject'
 				this.$ajax({
@@ -749,8 +748,8 @@
 				}
 				this.projectFlag = e.target.checked
 				this.consume.consumCount = 0
-
-				this.consume.realCross = '0' //是否选中已购课程都清零
+                //是否选中已购课程都清零
+				//this.consume.realCross = '0'
 			},
 			//项目类型转换
 			transforProType(proType) {

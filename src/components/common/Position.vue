@@ -25,15 +25,15 @@
     methods: {
       //提交岗位名称和ID
       positionChange: function () {
-				// console.log('岗位1：'+this.posObj.posId)
+				// //console.log('岗位1：'+this.posObj.posId)
         this.posObj = this.exchangePosName(this.posId)
-				// console.log('岗位2：'+this.posObj.posId)
+				// //console.log('岗位2：'+this.posObj.posId)
         this.$emit('positionChange', this.posObj)
       },
       setPosId: function (posId) {
-				console.log('设置岗位'+posId)
+				//consolele.log('设置岗位'+posId)
         this.posId = posId
-				console.log('设置岗位'+this.posId)
+				//consolele.log('设置岗位'+this.posId)
       },
       //添加前缀的部门名字兑换原来的名字
       exchangePosName: function (param) {
@@ -70,7 +70,7 @@
         	}
         
         }).catch((error) => {
-        	console.log('岗位数据请求失败处理')
+        	//console.log('岗位数据请求失败处理')
         });
       },
 

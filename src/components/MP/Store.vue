@@ -143,7 +143,7 @@
             },
             //check the list of store
             checkStore(page) {
-                console.log('checkStore')
+                //console.log('checkStore')
                 var url = this.url + '/storeAction/queryStore'
                 this.$ajax({
                     method: 'POST',
@@ -174,7 +174,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('商铺查询请求失败')
+                    //console.log('商铺查询请求失败')
                 });
             },
             handleScroll(e) {

@@ -46,36 +46,8 @@
                     <store ref='store' @storeChange='storeChange'></store>
                 </div>
             </div>
-            <!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">-->
-            <!--<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right nopad">-->
-            <!--<p class="end-aline col-md-11 col-lg-11" >是否取消</p><span class="sign-left">:</span>-->
-            <!--</div>-->
-            <!--<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">-->
-            <!--<select class="form-control" v-model="state">-->
-            <!--<option value="">&#45;&#45;未选择&#45;&#45;</option>-->
-            <!--<option value="1">未取消</option>-->
-            <!--<option value="0">已取消</option>-->
-            <!--</select>-->
-            <!--</div>-->
-            <!--</div>-->
         </div>
         <div class="row newRow">
-            <!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
-				<div class="col-md-2 col-lg-2 text-right" style="padding: 0; line-height: 34px; width:20.5%">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">来电时间</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
-					<dPicker style="width:100%" v-model="begCreateDate"></dPicker>
-				</div>
-				<div style="padding: 0; line-height: 34px; float:left">
-					~
-				</div>
-				<div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
-					<dPicker style="width:100%" v-model="endCreateDate"></dPicker>
-				</div>
-			</div> -->
-
-
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
                 <div class="col-md-5 col-lg-5 text-right nopad">
                     <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span
@@ -130,10 +102,6 @@
                     </select>
                 </div>
             </div>
-            <!--            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"-->
-            <!--                    data-toggle="modal"-->
-            <!--                    @click="selectRule('1')" v-has="'SAMY:MP:Order:Add'">添加预约-->
-            <!--            </button>-->
             <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15"
                     data-toggle="modal"
                     @click="checkOrderList(1)">查询
@@ -416,7 +384,7 @@
                     alert(res.retMsg)
                     this.checkOrderList(1)
                 }).catch((error) => {
-                    console.log('预约相关提交请求失败')
+                    //console.log('预约相关提交请求失败')
                 });
             },
             //check the list of orderContent
@@ -468,7 +436,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    //console.log(JSON.stringify(res))
+                    ////console.log(JSON.stringify(res))
                     if (res.retCode == '0000') {
                         this.pages = res.retData.pages //总页数
                         this.current = res.retData.current //当前页码
@@ -481,7 +449,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('请求失败处理')
+                    //console.log('请求失败处理')
                 });
             },
             handleScroll(e) {
@@ -585,7 +553,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    //console.log(JSON.stringify(res))
+                    ////console.log(JSON.stringify(res))
                     if (res.retCode == '0000') {
                         this.phoneNoX = res.retData.phoneNoX
                         this.extension = res.retData.extension
@@ -596,7 +564,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('请求失败处理')
+                    //console.log('请求失败处理')
                 });
             },
             closeCurrentPage() {
@@ -610,7 +578,7 @@
             this.$refs.counlorEmp.setEmp("")
         },
         created() {
-            this.checkOrderList(1)
+            // this.checkOrderList(1)
         }
     }
 </script>

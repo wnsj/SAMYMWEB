@@ -48,69 +48,99 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">咨询方向</label><span class="sign-left">:</span>
+
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >咨询方向</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<DiseaseType ref="DiseaseType" @objectChange="dtChange"></DiseaseType>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">接待人</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >接待人</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref="emp" @employeeChange="empChange"></emp>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">咨客判定</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >咨客判定</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<visStateJudge ref="visStateJudge" @objectChange = "judgeChange"></visStateJudge>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">续流状态</label><span class="sign-left">:</span>
+
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >续流状态</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<visStateFlow ref="visStateFlow" @objectChange = "flowChange"></visStateFlow>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">行业</label><span class="sign-left">:</span>
+
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >行业</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<ind ref="ind" @industryChange="indChange"></ind>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">紧急联系人</label><span class="sign-left">:</span>
+
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >紧急联系人</label><span class="sign-left">:</span>
+
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.urgentName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">联系电话</label><span class="sign-left">:</span>
+
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >联系电话</label><span class="sign-left">:</span>
+
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.urgentPhone" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">微信号</label><span class="sign-left">:</span>
+
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >微信号</label><span class="sign-left">:</span>
+
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.vnum" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">邮箱地址</label><span class="sign-left">:</span>
+
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >邮箱地址</label><span class="sign-left">:</span>
+
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.email" placeholder="">
 						</div>
 					</div>
-					
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >学历</label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<Education ref="education" @objectChange="educationChange"></Education>
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >职业</label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<Occupation ref="occupation" @objectChange="occupationChange"></Occupation>
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >区域</label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<Region ref="region" @objectChange="regionChange"></Region>
+						</div>
+					</div>
 					<div class="col-md-12 form-group clearfix">
-						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline jh-ad-1">联系地址</label><span class="sign-left">:</span>
-						<div class="col-md-10 wd84">
+
+						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline jh-ad-1" >联系地址</label><span class="sign-left">:</span>
+						<div class="col-md-10" style="width:84%;">
 							<input type="text" class="form-control" v-model="visitor.address" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
 						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline jh-ad-1">备注</label><span class="sign-left">:</span>
 						<div class="col-md-10 wd84">
+
 							<input type="text" class="form-control" v-model="visitor.marker" placeholder="">
 						</div>
 					</div>
@@ -128,6 +158,9 @@
 	import ind from '../../common/Industry.vue'
 	import cha from '../../common/Channel.vue'
 	import emp from '../../common/Employee.vue'
+	import Education from '../../common/Education.vue'
+	import Occupation from '../../common/Occupation.vue'
+	import Region from '../../common/Region.vue'
 	import visStateJudge from '../../common/VisitState.vue'
 	import visStateFlow from '../../common/VisitState.vue'
 	import DiseaseType from '../../common/DiseaseType.vue'
@@ -144,6 +177,9 @@
 			visStateJudge,
 			visStateFlow,
 			Store,
+			Education,
+			Occupation,
+			Region,
 		},
 		data() {
 			return {
@@ -195,12 +231,13 @@
 					address:'',
 					marker:'',
 					birthday:'',
+					eduId:'',
+					reId:'',
+					occId:'',
 				}
 				if(param=='add'){
-					console.log('Initialization visitor’s content, which adds visitor')
 					
 					this.title='新增'
-					// this.$refs.visState.getObj('1','1')
 					this.$refs.cha.setChaId('0')
 					this.$refs.DiseaseType.setObj('0')
 					this.$refs.emp.setEmp("")
@@ -208,12 +245,12 @@
 					this.$refs.visStateFlow.setObj('0')
 					this.$refs.ind.setInd('0')
 					this.$refs.store.setStore('0')
+					this.$refs.education.setObj('0')
+					this.$refs.region.setObj('0')
+					this.$refs.occupation.setObj('0')
 					
 				}else if(param=='modify'){
-					console.log('Initialization visitor’s content, which modifies visitor')
-					
 					this.title='修改'
-					// console.log(JSON.stringify(visitorContent))
 					Object.assign(this.visitor,visitorContent)
 					this.$refs.cha.setChaId(this.visitor.chaId)
 					this.$refs.DiseaseType.setObj(this.visitor.dtId)
@@ -222,10 +259,19 @@
 					this.$refs.visStateFlow.setObj(this.visitor.vsIdFlow)
 					this.$refs.ind.setInd(this.visitor.indId)
 					this.$refs.store.setStore(this.visitor.storeId)
+					if(!this.isBlank(this.visitor.eduId)){
+						this.$refs.education.setObj(this.visitor.eduId)
+					}
+					if(!this.isBlank(this.visitor.occId)){
+						this.$refs.occupation.setObj(this.visitor.occId)
+					}
+					if(!this.isBlank(this.visitor.reId)){
+						this.$refs.region.setObj(this.visitor.reId)
+					}
 				}
 			},
 			judgeChange:function(param){
-				// console.log(JSON.stringify(param))
+				// //console.log(JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.visitor.vsIdJudge=""
 				}else{
@@ -253,43 +299,55 @@
 					this.visitor.storeId=param.storeId
 				}
 			},
-			//feedback position information
 			indChange:function(param){
-				// console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.visitor.indId=""
 				}else{
 					this.visitor.indId=param.indId
 				}
-				console.log('岗位4：'+this.visitor.indId)
 			},
-			//feedback position information
 			chaChange:function(param){
-				// console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.visitor.chaId=""
 				}else{
 					this.visitor.chaId=param.chaId
 				}
-				// console.log('岗位4：'+this.visitor.posId)
 			},
-			//feedback position information
 			empChange:function(param){
-				// console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.visitor.empId=""
 				}else{
 					this.visitor.empId=param.empId
 				}
-				// console.log('岗位4：'+this.visitor.posId)
+			},
+			educationChange:function(param){
+				if(this.isBlank(param)){
+					this.visitor.eduId=""
+				}else{
+					this.visitor.eduId=param.eduId
+				}
+			},
+			occupationChange:function(param){
+				if(this.isBlank(param)){
+					this.visitor.occId=""
+				}else{
+					this.visitor.occId=param.occId
+				}
+			},
+			regionChange:function(param){
+				if(this.isBlank(param)){
+					this.visitor.reId=""
+				}else{
+					this.visitor.reId=param.reId
+				}
 			},
 			closeCurrentPage(){
 				$("#visContent").modal("hide")
-				console.log('关闭添加患者界面')
+				//console.log('关闭添加患者界面')
 			},
 			//the event of addtional button
 			certainAction(){
-				console.log('the event of addtional button')
+				//console.log('the event of addtional button')
 				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 			
 				
@@ -359,7 +417,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('添加或者修改咨客信息失败')
+					//console.log('添加或者修改咨客信息失败')
 				});
 			},
 			

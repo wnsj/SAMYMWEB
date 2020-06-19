@@ -44,9 +44,9 @@
 			//model：1购买
             setEmpId: function (empId,model) {
 				if(model==1){
-					this.frequency=1
+					this.frequency='1'
 				}else if(model==2){
-					this.frequency=2
+					this.frequency='2'
 				}
                 this.empId = empId
                 this.getProject()
@@ -76,7 +76,7 @@
                         alert(res.retMsg)
                     }
                 }).catch((error) => {
-                    console.log('产品数据请求失败处理')
+                    //console.log('产品数据请求失败处理')
                 });
             },
         },

@@ -10,6 +10,8 @@ import constant from '../src/assets/js/constant'
 import vueBeauty from 'vue-beauty'
 import elementUi from 'element-ui'
 import elementUiCss from 'element-ui/lib/theme-chalk/index.css'
+
+
 // import TreeTable from '@weilan/el-tree-table'
 import 'xe-utils'
 import VXETable from 'vxe-table'
@@ -63,9 +65,6 @@ router.beforeEach((to, from, next) => {
         } else if (to.path == '/login') {
             next();
         } else {
-            let token = Cookies.get('accessToken');
-            let accountData = Cookies.get('accountData');
-            //console.log("token:" + token + ",accountData:" + accountData);
             if (constant.isBlank(token) || constant.isBlank(accountData)) {
                 next('/login');
             } else if (to.path == '/') {
@@ -91,7 +90,7 @@ router.beforeEach((to, from, next) => {
                         break;
                     }
                 }
-                console.log("main:" + to.path + from.path)
+                // console.log("main:" + to.path + from.path)
                 if (hasRule) {
                     next()
                 } else {
@@ -194,7 +193,7 @@ Vue.prototype.storeId = function () {
 		return constant.storeId();
 	}else{
 		return '';
-	}    
+	}
 }
 //手机号判断
 Vue.prototype.phoneNum = function (phoneNum) {
@@ -231,6 +230,31 @@ Vue.directive('has', {
         }
     }
 });
+// 孙云龙添加
+//http request拦截器
+var ip = sessionStorage.getItem("IP")
+axios.interceptors.request.use(
+
+    config =>{
+        //设置公共的请求参数
+        let test = config.data;
+        if(test){
+            if (ip) {
+                config.data['ip']= ip;
+            }
+            if (JSON.parse(sessionStorage.getItem("user"))) {
+                config.data['user'] = JSON.parse(sessionStorage.getItem("user"))
+            }
+
+        }
+
+        return config;
+    },
+    err =>{
+        return Promise.reject(err);
+    }
+)
+// end
 /* eslint-disable no-new */
 new Vue({
     el: '#app',

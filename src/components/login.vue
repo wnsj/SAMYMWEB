@@ -70,6 +70,9 @@
             },
             login() {
                 this.btnText = '登录中...';
+                // 孙云龙添加
+                sessionStorage.setItem("user",JSON.stringify(this.accountName))
+                // end
                 var url = this.url + "/accountAction/login";
                 axios({
                     method: "post",
@@ -108,12 +111,12 @@
                     }
                 }).catch((error) => {
                     this.btnText = '登录';
-                    console.log("请求失败处理");
+                    //console.log("请求失败处理");
                 });
             },
             consoleLog() {
-                console.log("accountData:" + this.accountInfo + "##" + this.$root.accessToken)
-                console.log("Cookies:" + Cookies.get('accessToken'))
+                //console.log("accountData:" + this.accountInfo + "##" + this.$root.accessToken)
+                //console.log("Cookies:" + Cookies.get('accessToken'))
             }
         },
         created() {

@@ -1,8 +1,8 @@
 <template>
-    <select class="form-control" v-model="vsId" v-on:change="objectChange()">
+    <select class="form-control" v-model="reId" v-on:change="objectChange()">
         <option value="0">--未选择--</option>
-        <option v-for="(item,index) in objList" :key="index" v-bind:value="item.vsId">
-            {{item.vsName}}
+        <option v-for="(item,index) in objList" :key="index" v-bind:value="item.reId">
+            {{item.reName}}
         </option>
     </select>
 </template>
@@ -13,22 +13,22 @@
     name: 'department',
     data() {
       return {
-        vsName: '',
-        vsId:'0',
+        reName: '',
+        reId:'0',
         objList: [],
 				obj:{
-					vsId:'',
-					vsName: '',
+					reId:'',
+					reName: '',
 				},
       };
     },
     methods: {
       objectChange: function () {
-        this.obj = this.exchangeObjName(this.vsId)
+        this.obj = this.exchangeObjName(this.reId)
         this.$emit('objectChange', this.obj)
       },
-      setObj: function (vsId) {
-        this.vsId = vsId
+      setObj: function (reId) {
+        this.reId = reId
       },
       //添加前缀的部门名字兑换原来的名字
       exchangeObjName: function (param) {
@@ -37,15 +37,13 @@
           obj = this.objList[i];
           if (param == 0) {
               return null
-          } else if (obj.vsId == param) {
+          } else if (obj.reId == param) {
               return obj
           }
         }
       },
-     //vsType:1初访，2复访；stateType：1咨客判定，2续流状态
-      getObj(vsType,stateType) {
-				//consolele.log('vsType:'+vsType)
-        var url = this.url + '/visitState/queryVisitState'
+      getObj() {
+        var url = this.url + '/regionBean/queryRegion'
         this.$ajax({
         	method: 'POST',
         	url: url,
@@ -54,9 +52,7 @@
         		'Access-Token': this.accessToken
         	},
         	data: {
-						vsType:vsType,
-						stateType:stateType,
-						isUse:'1'
+				reLevel:'3',
         	},
         	dataType: 'json',
         }).then((response) => {
@@ -70,7 +66,7 @@
         	}
         
         }).catch((error) => {
-        	//console.log('状态数据请求失败处理')
+        	console.log('状态数据请求失败处理')
         });
       },
     },

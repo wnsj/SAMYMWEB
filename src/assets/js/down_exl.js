@@ -1,4 +1,4 @@
-﻿
+
     window.onload = function () {
         tableToExcel('tableToExcel', '下载模板')
     };
@@ -35,5 +35,5 @@
         document.getElementById("excelOut").href = uri + base64(format(template, ctx));
     }
 
-    console.log("#tableToExcel")
+    //console
 

@@ -172,7 +172,7 @@
                     }
 
                 }).catch((error) => {
-                    console.log('商铺查询请求失败')
+                    //console.log('商铺查询请求失败')
                 });
             },
             handleScroll(e) {

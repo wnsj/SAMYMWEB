@@ -66,13 +66,13 @@
 					}
 
 				}).catch((error) => {
-					console.log('岗位数据请求失败处理')
+					//console.log('岗位数据请求失败处理')
 				});
 			},
 
 		},
 		created() {
-			this.getUrRole()
+			// this.getUrRole()
 		},
 	}
 </script>

@@ -186,7 +186,7 @@
 								<td class="text-center">{{item.memNum}}</td>
 								<td class="text-center">{{item.storeName}}</td>
 								<td class="text-center">{{item.channelName}}</td>
-								<td class="text-center">{{item.consDirection}}</td>
+								<td class="text-center">{{item.dtName}}</td>
 								<td class="text-center">{{item.empName}}</td>
 								<td class="text-center">{{item.visType==1?'初诊':'复诊'}}</td>
 								<td class="text-center">{{item.vsIdJudgeName}}</td>
@@ -470,7 +470,7 @@
 			},
 			//check the list of member
 			checkVisitor(page) {
-				console.log('checkMember')
+				//console.log('checkMember')
 				var url = this.url + '/visitorAction/queryVisitor'
 				if (!this.isBlank(this.begDate)) {
 					this.begDate = this.moment(this.begDate, "YYYY-MM-DD 00:00:00")
@@ -517,7 +517,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('请求失败处理')
+					//console.log('请求失败处理')
 				});
 			},
 			//添加会员号
@@ -559,7 +559,7 @@
 					}
 
 				}).catch((error) => {
-					console.log('转会员请求失败')
+					//console.log('转会员请求失败')
 				});
 			},
 			handleScroll(e) {
@@ -609,7 +609,7 @@
 						break;
 					case '2':
 						this.$refs.custom.initData(this.objectContent)
-						// console.log(JSON.stringify(this.objectContent))
+						// //console.log(JSON.stringify(this.objectContent))
 						$("#customContent").modal('show')
 						break;
 					case '3':
@@ -649,7 +649,7 @@
 			        dataType: 'json',
 			    }).then((response) => {
 			        var res = response.data
-			        //console.log(JSON.stringify(res))
+			        ////console.log(JSON.stringify(res))
 			        if (res.retCode == '0000') {
 			            this.phoneNoX = res.retData.phoneNoX
 			            this.extension = res.retData.extension
@@ -660,7 +660,7 @@
 			        }
 
 			    }).catch((error) => {
-			        console.log('请求失败处理')
+			        //console.log('请求失败处理')
 			    });
 			},
 			closeCurrentPhonePage(){
@@ -672,7 +672,7 @@
 			init();
 		},
 		created() {
-			this.checkVisitor(1);
+			// this.checkVisitor(1);
 		}
 	}
 </script>

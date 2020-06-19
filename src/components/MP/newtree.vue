@@ -42,10 +42,10 @@
 		},
 		methods: {
 			selectFn(item) {
-				// console.log(JSON.stringify(item))
+				// //console.log(JSON.stringify(item))
 			},
 			checkFn(item) {
-				console.log(JSON.stringify(item))
+				//console.log(JSON.stringify(item))
 			},
 			//feedback employee information
 			empChange: function(param) {
@@ -71,7 +71,7 @@
 					var res = response.data
 					alert(res.retMsg)
 				}).catch((error) => {
-					console.log('权限添加请求')
+					//console.log('权限添加请求')
 				});
 			},
 			getModule() {
@@ -99,7 +99,7 @@
 					}
 
 				}).catch((error) => {
-					console.log('岗位数据请求失败处理')
+					//console.log('岗位数据请求失败处理')
 				});
 			},
 			//构造权限数据

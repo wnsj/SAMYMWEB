@@ -94,18 +94,10 @@
                                        ref="permissionVxeTableRef">
                                 <vxe-table-column type="checkbox" title="权限名" width="280"
                                                   tree-node></vxe-table-column>
-                                <!-- <vxe-table-column field="roleStatus" title="状态"></vxe-table-column>-->
-                                <!-- <vxe-table-column field="roleKey" title="关键字"></vxe-table-column>-->
-                                <!-- <vxe-table-column field="roleDesc" title="描述"></vxe-table-column>-->
                             </vxe-table>
                             <div class="btns jh-te-r">
                                 <el-button type="primary" @click="addUpdatePermission"><i class="el-icon-folder-checked"></i> 保存</el-button>
-                                <!-- <el-button status="primary"><i class="el-icon-refresh-right"></i> 重置-->
-                                <!-- </el-button>-->
-                                <!-- <el-button status="primary"><i class="el-icon-circle-check"></i> 全选-->
-                                <!-- </el-button>-->
-                                <!-- <el-button type="danger"><i class="el-icon-remove-outline"></i> 全不选-->
-                                <!-- </el-button>-->
+                               
                             </div>
                         </div>
                     </div>

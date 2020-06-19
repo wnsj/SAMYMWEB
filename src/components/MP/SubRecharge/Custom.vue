@@ -5,7 +5,7 @@
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
 			<h2 id="myModalLabel" class="modal-title">产品消费</h2>
 		</div>
-		<div class="modal-body  pos_r" style="max-height: 650px;overflow-y: scroll">
+		<div class="modal-body pos_r jh-mh-sc">
 			<div class="tab-pane fade in active martop" id="basic">
 				<div class="col-md-6 form-group clearfix">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >姓名</label><span
@@ -218,7 +218,7 @@
 					<div class="col-md-7">
 						<dPicker class="wd100" v-model="dateArr" format="HH:mm:ss" type="time" valueType="format" range>
 							<template v-slot:header="{ emit }">
-								<div style="text-align: left"></div>
+								<div class="jh-ta-l"></div>
 							</template>
 						</dPicker>
 					</div>
@@ -238,7 +238,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-12 clearfix" v-show="cash.balance>0" style="padding:0;">
+			<div class="col-md-12 clearfix jh-ad-0" v-show="cash.balance>0">
 				<div class="col-md-6 clearfix" v-show="cash.balance>0">
 					<label class="col-md-4 control-label text-right nopad end-aline" >
 						定金抵扣
@@ -277,10 +277,10 @@
 				</div>
 			</div>
 			<div class="col-md-12 form-group clearfix">
-				<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+				<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1" data-toggle="modal"
 				 v-on:click="closeCurrentPage()">返回
 				</button>
-				<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+				<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal"
 				 v-on:click="addFee()">确认
 				</button>
 			</div>

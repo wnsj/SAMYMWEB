@@ -48,7 +48,7 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">咨询方向</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >咨询方向</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<DiseaseType ref="DiseaseType" @objectChange="dtChange"></DiseaseType>
 						</div>
@@ -84,7 +84,8 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">联系电话</label><span class="sign-left">:</span>
+
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >联系电话</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.urgentPhone" placeholder="">
 						</div>
@@ -96,7 +97,8 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">邮箱地址</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >邮箱地址</label><span class="sign-left">:</span>
+
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.email" placeholder="">
 						</div>
@@ -128,6 +130,7 @@
 					<div class="col-md-12 form-group clearfix">
 						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline jh-ad-1">备注</label><span class="sign-left">:</span>
 						<div class="col-md-10 wd84">
+
 							<input type="text" class="form-control" v-model="visitor.marker" placeholder="">
 						</div>
 					</div>

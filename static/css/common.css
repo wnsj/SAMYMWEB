@@ -189,3 +189,111 @@ body{
 .wd100{width:100%!important;}
 .nopad{padding: 0;}
 .newRow{padding-bottom: 15px;}
+
+.wd205{width:20.5%!important;}
+.wd84{width:84%!important;}
+.jh-ad-0{
+    padding: 0; 
+}
+.jh-ad-1{
+    padding: 0; 
+    line-height: 34px;
+}
+.jh-lh-33{
+    line-height:33px
+}
+.jh-lh-34{
+    line-height:34px
+}
+.jh-lh-39{
+    line-height:39px
+}
+.jh-pa-1{
+    padding-right:5px; 
+    padding-left:20px;
+}
+.jh-pa-2{
+    padding-right:30px;
+    padding-bottom:1.5%;
+}
+.jh-mp-1{
+    margin-top: 15px;
+    padding-bottom:1.5%;
+}
+.jh-mr0{
+    margin-right:0;
+}
+.jh-mr-0{
+    margin-right:.7%;
+}
+.jh-mr-1{
+    margin-right:1.5%;
+}
+.jh-mr-2{
+    margin-right:2.5%;
+}
+.jh-pl-1{
+    padding-left:0.8%;
+}
+.jh-tw-1{
+    text-align:left;
+    width:27.3%;
+}
+.jh-ta-l{
+    text-align:left;
+}
+.jh-fl{
+    float: left;
+}
+.jh-fr{
+    float:right;
+}
+.jh-mt-15{
+    margin-top: 15px;
+}
+.jh-mt-22{
+    margin-top: 22px;
+}
+.jh-mt-0{
+    margin-top: 0px;
+}
+.jh-mt-40{
+    margin-top: 40px;
+}
+.jh-mb-4{
+    margin-bottom: 4px;
+}
+.jh-mb-10{
+    margin-bottom: 10px;
+}
+.jh-fz-20{
+    font-size: 20px
+}
+.jh-po-re{
+    position:relative;
+}
+.jh-m-15{
+    margin: 15px 0;
+}
+.jh-new-store{
+    width: 180px;
+    height: 40px; 
+    display: inline;
+}
+.jh-te-r{
+    text-align: right;
+}
+.jh-pr-0{
+    padding-right:0;
+}
+.jh-max-464{
+    max-height:464px
+}
+.jh-mh-sc{
+    max-height: 650px;
+    overflow-y: scroll
+}
+.jh-mb10-lh25{
+    margin-bottom: 20px;
+    line-height: 25px;
+}

@@ -5,7 +5,7 @@
             <button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
             <h4 class="modal-title">{{title}}预约</h4>
         </div>
-        <div class="modal-body  pos_r">
+        <div class="modal-body  pos_r jh-mh-sc">
             <div class="tab-pane fade in active martop" id="basic">
                 <form action="" class="clearfix">
 <!--                    <div class="col-md-6 form-group clearfix">-->

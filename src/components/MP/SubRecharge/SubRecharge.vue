@@ -714,7 +714,9 @@
 			}
 		},
 		mounted() {
-
+			console.log("------------------------------")
+			var H = window.innerHeight;
+			$(".modal-body").css({'maxHeight':H*.81})
 		},
 	}
 </script>

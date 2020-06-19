@@ -7,7 +7,7 @@
 		</div>
 		<div class="tableContent">
 			<nobr class="widthmax">
-				<div class="table-responsive pre-scrollable" style=" max-height:464px">
+				<div class="table-responsive pre-scrollable jh-max-464">
 					<table class="table table-bordered table-hover user-table" id="datatable">
 						<thead>
 							<tr>

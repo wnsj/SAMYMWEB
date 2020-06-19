@@ -7,14 +7,14 @@
 		</div>
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop clearfix" id="basic">
-				<div class="col-md-6 form-group clearfix">
+				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-3 control-label text-right nopad end-aline">状态名称</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-8">
 						<input type="text" class="form-control" v-model="obj.dtName" placeholder="">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
+				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">是否停用</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-8">
@@ -25,7 +25,7 @@
 					</div>
 				</div>
 				<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15" data-toggle="modal"
+						<button type="button" class="btn btn-warning pull-right m_r_10 margin-right-45" data-toggle="modal"
 						 v-on:click="closeCurrentPage()">返回</button>
 						<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
 						 v-on:click="certainAction()">确认</button>

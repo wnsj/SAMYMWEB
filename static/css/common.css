@@ -185,13 +185,19 @@ body{
     text-indent:8px;
     color:red;
 }
-
+#myModalLabel.modal-title{
+    line-height: 1em;
+}
+.modal-body.jh-mh-sc{
+    padding-top: 0px;
+}
 .wd100{width:100%!important;}
 .nopad{padding: 0;}
 .newRow{padding-bottom: 15px;}
 
 .wd205{width:20.5%!important;}
 .wd84{width:84%!important;}
+.wd1000{width: 1000px !important;}
 .jh-ad-0{
     padding: 0; 
 }
@@ -220,6 +226,9 @@ body{
     margin-top: 15px;
     padding-bottom:1.5%;
 }
+.jh-mb-0{
+    margin-bottom:0;
+}
 .jh-mr0{
     margin-right:0;
 }
@@ -231,6 +240,18 @@ body{
 }
 .jh-mr-2{
     margin-right:2.5%;
+}
+.jh-mr-55{
+    margin-right:55px;
+}
+.jh-mr-35{
+    margin-right:35px;
+}
+.jh-mr-45{
+    margin-right:45px;
+}
+.jh-mr-25{
+    margin-right:25px;
 }
 .jh-pl-1{
     padding-left:0.8%;
@@ -250,6 +271,9 @@ body{
 }
 .jh-mt-15{
     margin-top: 15px;
+}
+.jh-mt-5{
+    margin-top: 5px;
 }
 .jh-mt-22{
     margin-top: 22px;
@@ -291,9 +315,10 @@ body{
 }
 .jh-mh-sc{
     max-height: 650px;
-    overflow-y: scroll
+    overflow-y: scroll;
 }
 .jh-mb10-lh25{
     margin-bottom: 20px;
     line-height: 25px;
 }
+.jh-wd-33{width:33% !important; margin-bottom: 10px !important;}

@@ -74,7 +74,7 @@
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="vsContent">
-                <div class="modal-dialog">
+                <div class="modal-dialog wd1000">
                     <SubVs ref='vs' @certainAction='feedBack'></SubVs>
                 </div>
             </div>

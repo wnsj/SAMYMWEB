@@ -124,7 +124,7 @@
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="cdContent">
-                <div class="modal-dialog">
+                <div class="modal-dialog wd1000">
                     <SubCd ref='subCd' @certainAction='feedBack'></SubCd>
                 </div>
             </div>

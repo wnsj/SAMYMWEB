@@ -57,7 +57,7 @@
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="subOccupationContent">
-                <div class="modal-dialog">
+                <div class="modal-dialog wd1000">
                     <SubOccupation ref='subOccupation' @certainAction='feedBack'></SubOccupation>
                 </div>
             </div>

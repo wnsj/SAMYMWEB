@@ -148,7 +148,7 @@
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="projectContent">
-                <div class="modal-dialog">
+                <div class="modal-dialog wd1000">
                     <SubProject ref='subProject' @certainAction='feedBack'></SubProject>
                 </div>
             </div>

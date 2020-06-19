@@ -228,7 +228,7 @@
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="visContent">
-				<div class="modal-dialog">
+				<div class="modal-dialog wd1000">
 					<subVis ref='subVis' @certainAction='feedBack6'></subVis>
 				</div>
 			</div>
@@ -242,35 +242,35 @@
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="customContent">
-				<div class="modal-dialog">
+				<div class="modal-dialog wd1000">
 					<custom ref='custom' @closeCurrentPage='feedBack5'></custom>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="refundContent">
-				<div class="modal-dialog">
+				<div class="modal-dialog wd1000">
 					<refund ref='refund' @closeCurrentPage='feedBack4'></refund>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="rechargeContent">
-				<div class="modal-dialog">
+				<div class="modal-dialog wd1000">
 					<recharge ref='recharge' @closeCurrentPage='feedBack3'></recharge>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="addSubOrderContent">
-				<div class="modal-dialog">
+				<div class="modal-dialog wd1000">
 					<addSubOrder ref='addSubOrder' @closeCurrentPage='feedBack2'></addSubOrder>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="subCdContent">
-				<div class="modal-dialog">
+				<div class="modal-dialog wd1000">
 					<subCd ref='subCd' @closeCurrentPage='feedBack1'></subCd>
 				</div>
 			</div>

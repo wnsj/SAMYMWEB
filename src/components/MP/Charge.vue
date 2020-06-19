@@ -258,7 +258,7 @@
 			init();
 		},
 		created() {
-			// this.conditionCheck(1)
+			this.conditionCheck(1)
 		}
 	}
 </script>

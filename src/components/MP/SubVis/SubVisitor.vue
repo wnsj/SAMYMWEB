@@ -101,7 +101,24 @@
 							<input type="text" class="form-control" v-model="visitor.email" placeholder="">
 						</div>
 					</div>
-					
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">学历</label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<Education ref="education" @objectChange="educationChange"></Education>
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">职业</label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<Occupation ref="occupation" @objectChange="occupationChange"></Occupation>
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">区域</label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<Region ref="region" @objectChange="regionChange"></Region>
+						</div>
+					</div>
 					<div class="col-md-12 form-group clearfix">
 						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline" style="width:12%;padding:0;line-height:34px;">联系地址</label><span class="sign-left">:</span>
 						<div class="col-md-10" style="width:84%;">
@@ -128,6 +145,9 @@
 	import ind from '../../common/Industry.vue'
 	import cha from '../../common/Channel.vue'
 	import emp from '../../common/Employee.vue'
+	import Education from '../../common/Education.vue'
+	import Occupation from '../../common/Occupation.vue'
+	import Region from '../../common/Region.vue'
 	import visStateJudge from '../../common/VisitState.vue'
 	import visStateFlow from '../../common/VisitState.vue'
 	import DiseaseType from '../../common/DiseaseType.vue'
@@ -144,6 +164,9 @@
 			visStateJudge,
 			visStateFlow,
 			Store,
+			Education,
+			Occupation,
+			Region,
 		},
 		data() {
 			return {
@@ -195,12 +218,13 @@
 					address:'',
 					marker:'',
 					birthday:'',
+					eduId:'',
+					reId:'',
+					occId:'',
 				}
 				if(param=='add'){
-					//console.log('Initialization visitor’s content, which adds visitor')
 					
 					this.title='新增'
-					// this.$refs.visState.getObj('1','1')
 					this.$refs.cha.setChaId('0')
 					this.$refs.DiseaseType.setObj('0')
 					this.$refs.emp.setEmp("")
@@ -208,12 +232,12 @@
 					this.$refs.visStateFlow.setObj('0')
 					this.$refs.ind.setInd('0')
 					this.$refs.store.setStore('0')
+					this.$refs.education.setObj('0')
+					this.$refs.region.setObj('0')
+					this.$refs.occupation.setObj('0')
 					
 				}else if(param=='modify'){
-					//console.log('Initialization visitor’s content, which modifies visitor')
-					
 					this.title='修改'
-					// //console.log(JSON.stringify(visitorContent))
 					Object.assign(this.visitor,visitorContent)
 					this.$refs.cha.setChaId(this.visitor.chaId)
 					this.$refs.DiseaseType.setObj(this.visitor.dtId)
@@ -222,6 +246,15 @@
 					this.$refs.visStateFlow.setObj(this.visitor.vsIdFlow)
 					this.$refs.ind.setInd(this.visitor.indId)
 					this.$refs.store.setStore(this.visitor.storeId)
+					if(!this.isBlank(this.visitor.eduId)){
+						this.$refs.education.setObj(this.visitor.eduId)
+					}
+					if(!this.isBlank(this.visitor.occId)){
+						this.$refs.occupation.setObj(this.visitor.occId)
+					}
+					if(!this.isBlank(this.visitor.reId)){
+						this.$refs.region.setObj(this.visitor.reId)
+					}
 				}
 			},
 			judgeChange:function(param){
@@ -253,35 +286,47 @@
 					this.visitor.storeId=param.storeId
 				}
 			},
-			//feedback position information
 			indChange:function(param){
-				// //console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.visitor.indId=""
 				}else{
 					this.visitor.indId=param.indId
 				}
-				//console.log('岗位4：'+this.visitor.indId)
 			},
-			//feedback position information
 			chaChange:function(param){
-				// //console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.visitor.chaId=""
 				}else{
 					this.visitor.chaId=param.chaId
 				}
-				// //console.log('岗位4：'+this.visitor.posId)
 			},
-			//feedback position information
 			empChange:function(param){
-				// //console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.visitor.empId=""
 				}else{
 					this.visitor.empId=param.empId
 				}
-				// //console.log('岗位4：'+this.visitor.posId)
+			},
+			educationChange:function(param){
+				if(this.isBlank(param)){
+					this.visitor.eduId=""
+				}else{
+					this.visitor.eduId=param.eduId
+				}
+			},
+			occupationChange:function(param){
+				if(this.isBlank(param)){
+					this.visitor.occId=""
+				}else{
+					this.visitor.occId=param.occId
+				}
+			},
+			regionChange:function(param){
+				if(this.isBlank(param)){
+					this.visitor.reId=""
+				}else{
+					this.visitor.reId=param.reId
+				}
 			},
 			closeCurrentPage(){
 				$("#visContent").modal("hide")

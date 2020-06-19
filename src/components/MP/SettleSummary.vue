@@ -350,7 +350,7 @@
             this.$refs.counlorEmp.setEmp("")
 		},
 		created() {
-			// this.conditionCheck(1)
+			this.conditionCheck(1)
 		},
 
 	}

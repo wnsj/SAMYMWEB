@@ -21,7 +21,7 @@
             </button>
             <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
                     data-toggle="modal"
-                    v-on:click="queryVisitStateList()">查询
+                    v-on:click="queryRegionList()">查询
             </button>
         </div>
         <div class="">
@@ -90,7 +90,7 @@
             
             //feedback from adding and modifying view
             feedBack() {
-                this.queryVisitStateList()
+                this.queryRegionList()
                 $("#subRegionContent").modal('hide')
             },
             // check the adding and modifying rule of account
@@ -108,7 +108,7 @@
                 }
             },
             //check the list of store
-            queryVisitStateList() {
+            queryRegionList() {
                 var url = this.url + '/regionBean/queryRegion'
                 this.$ajax({
                     method: 'POST',
@@ -118,8 +118,8 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        isUse: this.isUse,
-						vsName:this.vsName,
+						reName:this.reName,
+						reLevel:'3',
                     },
                     dataType: 'json',
                 }).then((response) => {

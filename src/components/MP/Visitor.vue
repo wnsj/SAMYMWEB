@@ -186,7 +186,7 @@
 								<td class="text-center">{{item.memNum}}</td>
 								<td class="text-center">{{item.storeName}}</td>
 								<td class="text-center">{{item.channelName}}</td>
-								<td class="text-center">{{item.consDirection}}</td>
+								<td class="text-center">{{item.dtName}}</td>
 								<td class="text-center">{{item.empName}}</td>
 								<td class="text-center">{{item.visType==1?'初诊':'复诊'}}</td>
 								<td class="text-center">{{item.vsIdJudgeName}}</td>

@@ -5,7 +5,7 @@
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
 			<h2 id="myModalLabel" class="modal-title">产品购买</h2>
 		</div>
-		<div class="modal-body  pos_r" style="max-height: 650px;overflow-y: scroll">
+		<div class="modal-body  pos_r" style="overflow-y: scroll">
 			<div class="tab-pane fade in active martop" id="basic">
 
 				<!--				<div class="col-md-6 form-group clearfix">-->
@@ -59,7 +59,7 @@
 						</table>
 					</div>
 
-					<div class="col-md-12 col-lg-12" style="margin-bottom: 20px;line-height: 25px;">
+					<div class="col-md-12 col-lg-12">
 						<p class="tips">注：1、上面是已购产品列表，如发生余额抵扣购买新产品，则请选中已购产品；否则，请不要点选。若已经勾选，则再次点击取消勾选
 							<br>2、只能抵扣非欠费普通类型产品，月卡季卡等不可抵扣</p>
 					</div>
@@ -159,18 +159,18 @@
 				</div>
 			</div>
 			<div class="tab-pane fade in active martop" v-show="isShow==true">
-				<div class="col-md-12 form-group clearfix text-left" style="padding:0;">
+				<div class="col-md-12 form-group clearfix text-left" >
 					<div class="col-md-6 clearfix">
-						<h4 id="myModalLabel" class="modal-title" style="line-height:39px;">客户：</h4>
+						<h4 id="myModalLabel" class="modal-title">客户：</h4>
 					</div>
 					<div class="col-md-6 clearfix" v-show="member.balance>0">
-						<label class="bui-radios-label col-md-4 end-aline" style="padding:0; margin-right:0;">
+						<label class="bui-radios-label col-md-4 end-aline">
 							<input type="checkbox" v-model="isSelect" disabled="disabled" /><i class="bui-radios"></i>
 							预购抵扣
 						</label>
 					</div>
 				</div>
-				<div class="col-md-12 clearfix" v-show="cash.balance>0" style="padding:0;">
+				<div class="col-md-12 clearfix" v-show="cash.balance>0">
 					<div class="col-md-6 clearfix" v-show="cash.balance>0">
 						<label class="col-md-4 control-label text-right nopad end-aline" >
 							定金抵扣
@@ -198,7 +198,7 @@
 			</div>
 			<div class="tab-pane fade in active martop" v-show="isShow==true">
 				<div class="col-md-12 text-left clearfix">
-					<h4 id="myModalLabel" class="modal-title" style="line-height:39px;">相关选择：</h4>
+					<h4 id="myModalLabel" class="modal-title" >相关选择：</h4>
 				</div>
 				<div class="col-md-6 form-group clearfix">
 					<b>*</b>
@@ -267,10 +267,10 @@
 				</div>
 			</div>
 			<div class="col-md-12 form-group clearfix">
-				<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+				<button type="button" class="btn btn-warning pull-right m_r_10" data-toggle="modal"
 				 v-on:click="closeCurrentPage()">返回
 				</button>
-				<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+				<button type="button" class="btn btn-primary pull-right m_r_10" data-toggle="modal"
 				 v-on:click="addFee()">确认
 				</button>
 			</div>

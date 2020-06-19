@@ -9,12 +9,14 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
+						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.visitorName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
+						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">手机号</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.phone" placeholder="">
@@ -42,36 +44,42 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
+						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">渠道</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<cha ref="cha" @channelChange="chaChange"></cha>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
+						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >咨询方向</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<DiseaseType ref="DiseaseType" @objectChange="dtChange"></DiseaseType>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
+						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">接待人</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref="emp" @employeeChange="empChange"></emp>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
+						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">咨客判定</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<visStateJudge ref="visStateJudge" @objectChange="judgeChange"></visStateJudge>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
+						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">续流状态</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<visStateFlow ref="visStateFlow" @objectChange="flowChange"></visStateFlow>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
+						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">行业</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<ind ref="ind" @industryChange="indChange"></ind>
@@ -224,6 +232,7 @@
 					eduId: '',
 					reId: '',
 					occId: '',
+					dtId:'',
 				}
 				if (param == 'add') {
 
@@ -345,6 +354,18 @@
 				if (this.isBlank(this.visitor.visitorName)) {
 					alert("咨客姓名不能为空")
 					return
+				}
+				if(this.isBlank(this.visitor.birthday)){
+					this.visitor.birthday=null
+				}
+				if(this.isBlank(this.visitor.eduId)){
+					this.visitor.eduId=null
+				}
+				if(this.isBlank(this.visitor.occId)){
+					this.visitor.occId=null
+				}
+				if(this.isBlank(this.visitor.reId)){
+					this.visitor.reId=null
 				}
 				if (this.isBlank(this.visitor.dtId)) {
 					alert("咨客的咨询方向不能为空")

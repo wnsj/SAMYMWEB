@@ -9,6 +9,7 @@
 			<div class="tab-pane fade in active martop clearfix" id="basic">
 
 					<div class="col-md-6 form-group ">
+						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="employee.empName" placeholder="">
@@ -42,6 +43,7 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
+						<b>*</b>
 						<label for="gh" class="col-md-3 control-label text-right nopad end-aline" >岗位</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<pos ref="pos" @positionChange='positionChange'></pos>

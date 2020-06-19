@@ -9,18 +9,21 @@
             <div class="tab-pane fade in active martop clearfix" id="basic">
 
                     <div class="col-md-6 form-group clearfix">
+						<b>*</b>
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">产品名称</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.proName" placeholder="">
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
+						<b>*</b>
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">咨询师</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <emp ref='emp' @employeeChange='empChange'></emp>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
+						<b>*</b>
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">总价</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.totalPrice" placeholder="">
@@ -28,6 +31,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
+						<b>*</b>
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">优惠后总价</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.discouAmount" placeholder="">
@@ -35,6 +39,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
+						<b>*</b>
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">单价</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.price" placeholder="">
@@ -42,6 +47,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
+						<b>*</b>
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">课时</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.frequency">
@@ -49,6 +55,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
+						<b>*</b>
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">优惠比例</label><span class="sign-left">:</span>
                         <div class="col-md-8 pos-re">
                             <input type="text" class="form-control" v-model="project.discount" placeholder="">
@@ -56,6 +63,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
+						<b>*</b>
                         <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">是否停用</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.state">
@@ -91,6 +99,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix">
+						<b>*</b>
                         <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">产品类型</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.proType">

@@ -200,7 +200,7 @@
 								<td class="text-center">{{item.createTime | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<!-- <td class="text-center">{{item.marker}}</td> -->
 								<td class="text-center">
-									<button type="button" class="btn btn-warning" v-on:click="updateVisitorShiftMember(item)">
+									<button type="button" class="btn" :class="item.isMem==1?'btn-success':'btn-warning'" v-on:click="updateVisitorShiftMember(item)">
 										{{item.isMem==1?"已转会员":"未转会员"}}
 									</button>
 								</td>

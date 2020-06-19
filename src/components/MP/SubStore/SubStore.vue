@@ -9,18 +9,21 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix jh-wd-33">
+						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">门店名称</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="store.storeName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix jh-wd-33">
+						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">联系人</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="store.connecter" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix jh-wd-33">
+						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">联系电话</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="store.phone" placeholder="">

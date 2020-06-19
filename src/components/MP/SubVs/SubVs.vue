@@ -12,8 +12,8 @@
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">访问类型</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="obj.vsType">
-								<option value="1">初诊</option>
-								<option value="2">复诊</option>
+								<option value="1">初访</option>
+								<option value="2">复访</option>
 							</select>
 						</div>
 					</div>

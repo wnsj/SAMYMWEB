@@ -31,6 +31,9 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">
+
+						<b>*</b>
+
                         <label class="col-md-3 control-label text-right nopad end-aline">定金金额</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
@@ -38,6 +41,9 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">
+
+						<b>*</b>
+
                         <label class="col-md-3 control-label text-right nopad end-aline">交费时间</label><span
                         class="sign-left">:</span>
                         <dPicker class="col-md-8 subcd-h65" v-model="cash.createDate"

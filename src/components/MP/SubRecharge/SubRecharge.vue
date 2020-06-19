@@ -6,7 +6,6 @@
 			<h2 id="myModalLabel" class="modal-title">产品购买</h2>
 		</div>
 		<div class="modal-body  pos_r jh-mh-sc">
-
 			<div class="tab-pane fade in active martop" id="basic">
 
 				<!--				<div class="col-md-6 form-group clearfix">-->
@@ -165,14 +164,18 @@
 						<h4 id="myModalLabel" class="modal-title jh-lh-39">客户：</h4>
 					</div>
 				</div>
-				<div class="col-md-6 clearfix jh-wd-33" v-show="member.balance>0">
+				<!-- <div class="col-md-6 clearfix jh-wd-33" v-show="member.balance>0">
 					<label class="bui-radios-label col-md-4 end-aline jh-ad-0 jh-mr0  ">
 						<input type="checkbox" v-model="isSelect" disabled="disabled" /><i class="bui-radios"></i>
 						预购抵扣
 					</label>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33" v-show="cash.balance>0">
-					<label class="col-md-4 control-label text-right nopad end-aline  " >
+				<div class="col-md-6 form-group clearfix jh-wd-33" v-show="cash.balance>0"> -->
+
+				<div class="col-md-12 clearfix jh-ad-0" v-show="cash.balance>0">
+					<div class="col-md-6 clearfix" v-show="cash.balance>0">
+						<label class="col-md-4 control-label text-right nopad end-aline" >
+
 							定金抵扣
 					</label>
 					<span class="sign-left">:</span>
@@ -266,11 +269,15 @@
 						<input type="text" class="form-control" v-model="consume.receipt">
 					</div>
 				</div>
+
 				<div class="col-md-6 form-group clearfix jh-wd-33"></div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-55" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
 				    <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-25" data-toggle="modal" v-on:click="addFee()">确认</button>
 				</div>
+
+			</div>
+			
 			</div>
 		</div>
 	</div>
@@ -435,7 +442,7 @@
 			},
 			//产品
 			projectChange: function(param) {
-				// //console.log(JSON.stringify(param))
+				// console.log(JSON.stringify(param))
 				if (this.isBlank(param)) {
 					this.consume.proId = ""
 					this.projectObj = {}
@@ -452,22 +459,6 @@
 					this.cash.select = '0'
 					this.projectObj = param
 
-					// if (this.member.counselorEmpId != this.consume.counselor) {
-					//     //console.log("count1-2" + this.member.counselorEmpId + this.consume.counselor)
-					//     if (param.proType == 0) {
-					//         //console.log("count1-3")
-					//         this.isSelect = false
-					//         this.consumeReceivable = this.consume.realCross
-					//     } else {
-					//         //console.log("count1-4")
-					//         this.isSelect = true
-					//         this.consumeReceivable = this.consume.realCross - this.member.balance
-					//     }
-					// } else {
-					//     //console.log("count1-5")
-					//     this.isSelect = false
-					//     this.consumeReceivable = this.consume.realCross
-					// }
 				}
 			},
 			//feedback employee information
@@ -483,38 +474,15 @@
 					this.cash.select = this.cash.balance;
 					$("#earn").val(this.cash.select);
 				}
-				// //console.log("count1")
-				// if (this.member.counselorEmpId != this.consume.counselor) {
-				//     //console.log("count2")
-				//     if (this.consume.proType == 0) {
-				//         //console.log("count4")
-				//         this.isSelect = false
-				//         this.consumeReceivable = this.consume.realCross
-				//     } else {
-				//         //console.log("count5")
-				//         this.isSelect = true
-				//         this.consumeReceivable = this.consume.realCross - this.member.balance - this.cash.select;
-				//     }
-				// } else {
-				//     //console.log("count3")
-				//     this.isSelect = false
-				//     this.consumeReceivable = this.consume.realCross - this.cash.select;
-				// }
 			},
 			//the event of addtional button
 			addFee() {
-				//console.log('the event of addtional button')
+				console.log('the event of addtional button')
 				if (this.cash.select > 0) {
 					this.consume.cashId = this.cash.cashId;
 					this.consume.cashMoney = this.cash.select;
 				}
-				// if (!this.isBlank(this.member.counselorEmpId) && this.member.counselorEmpId != this.consume.counselor) {
-				//     if (!confirm("您给客户选择了不同咨询师的产品，是否继续？如果继续，将使用之前咨询师产品的余额进行购买新的产品，否则，请取消！！！")) {
-				//         return
-				//     }
-				// }
 				this.consume.totalCount = this.consume.actualCount
-				//this.consume.totalCount = this.consume.actualCount + this.consume.giveCount //总次数
 
 				if (this.isBlank(this.consume.memNum)) {
 					alert("会员号不能为空")
@@ -523,7 +491,6 @@
 				if (this.isBlank(this.consume.counselor)) {
 					alert("咨询师不能为空")
 					return
-					//this.consume.counselor = null
 				}
 				if (this.isBlank(this.consume.proId)) {
 					alert("购买产品不能为空")
@@ -536,12 +503,6 @@
 				if (this.isBlank(this.consume.cashId)) {
 					this.consume.cashId = null
 				}
-				// if (1 < this.projectObj.proType || this.projectObj.proType > 5) {
-				//     alert("非月、季、半年、年卡、测评产品咨询师必须选择!")
-				//     return;
-				// } else {
-				//     this.consume.counselor = null
-				// }
 				if (this.isBlank(this.consume.visitState)) {
 					alert("客户判定不能为空!")
 					return;
@@ -568,7 +529,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					//console.log(res)
+					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.closeCurrentPage()
@@ -581,13 +542,13 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('请求失败处理')
+					console.log('请求失败处理')
 				});
 			},
 			closeCurrentPage() {
 				this.$emit('closeCurrentPage')
 				//$("#addFee").modal("hide")
-				//console.log('关闭添加患者界面')
+				console.log('关闭添加患者界面')
 			},
 			jumpLeft(index) {
 				$("#aside-menu li").removeClass("li-active");
@@ -603,7 +564,7 @@
 
 			//Query member's information based on the memNum
 			checkMemNum(param) {
-				//console.log('checkMemNum')
+				console.log('checkMemNum')
 				if (this.isBlank(param)) {
 					return
 				}
@@ -638,7 +599,7 @@
 							this.$refs.counselorEmp.setEmp("")
 						}
 						if (this.counselorList.length > 0) {
-							//console.log("有未完成的产品")
+							console.log("有未完成的产品")
 							// var counselorEmpId = this.counselorList[0].counselor
 							this.member.counselorEmpId = this.counselorList[0].counselor
 						}
@@ -646,7 +607,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('会员查询请求失败')
+					console.log('会员查询请求失败')
 				});
 			},
 			//Query member's based information of cash on the memNum
@@ -683,7 +644,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('会员查询请求失败')
+					console.log('会员查询请求失败')
 				});
 			},
 			//切换访问类型
@@ -727,7 +688,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('会员查询请求失败')
+					console.log('会员查询请求失败')
 				});
 			},
 			//单选框选中处理

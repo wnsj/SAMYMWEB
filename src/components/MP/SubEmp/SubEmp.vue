@@ -127,7 +127,7 @@
 			// Initialization employee’s content
 			initData(param, param2) {
 				if (param == 'add') {
-					//console.log('Initialization employee’s content, which adds employee')
+					console.log('Initialization employee’s content, which adds employee')
 					this.title = '新增'
 
 					this.employee = {
@@ -146,7 +146,7 @@
 					this.$refs.emp.setPosId(this.employee.posId)
 					// this.$refs.store.setStore(this.employee.storeId)
 				} else if (param == 'modify') {
-					//console.log('Initialization employee’s content, which modifies employee')
+					console.log('Initialization employee’s content, which modifies employee')
 					this.title='修改'
 
 					Object.assign(this.employee,param2)
@@ -198,7 +198,7 @@
 					this.employee.posId = ""
 				} else {
 					this.employee.posId = param.posId
-					// //console.log("父级ID"+param.parentId)
+					// console.log("父级ID"+param.parentId)
 					this.$refs.emp.setPosId(param.parentId)
 				}
 			},
@@ -246,7 +246,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					//console.log(res)
+					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('addEmp')
@@ -254,16 +254,16 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('员工请求失败')
+					console.log('员工请求失败')
 				});
 			},
 			closeCurrentPage() {
 				$("#emp").modal("hide")
-				//console.log('关闭添加员工界面')
+				console.log('关闭添加员工界面')
 			},
 			//Query employee's information based on the hosNum
 			conditionCheck(param) {
-				//console.log('checkhosNum')
+				console.log('checkhosNum')
 				if (this.isBlank(param)) {
 					return
 				}
@@ -281,7 +281,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					// //console.log(res)
+					// console.log(res)
 					if (res.retCode == '0000') {
 						if (res.retData != null) {
 							this.employee = res.retData
@@ -302,7 +302,7 @@
 						}
 					}
 				}).catch((error) => {
-					//console.log('请求失败处理')
+					console.log('请求失败处理')
 				});
 			},
 

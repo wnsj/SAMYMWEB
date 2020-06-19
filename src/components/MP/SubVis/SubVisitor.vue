@@ -9,31 +9,31 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">姓名</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.visitorName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">手机号</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">手机号</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.phone" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">门店</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">门店</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<Store ref='store' @storeChange='storeChange'></Store>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">生日</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">生日</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<dPicker style="width:100%" v-model="visitor.birthday" value-type="format" format="YYYY-MM-DD"></dPicker>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">性别</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">性别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="visitor.sex">
 								<option value="1">男</option>
@@ -42,91 +42,91 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">渠道</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">渠道</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<cha ref="cha" @channelChange="chaChange"></cha>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询方向</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >咨询方向</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<DiseaseType ref="DiseaseType" @objectChange="dtChange"></DiseaseType>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">接待人</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >接待人</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref="emp" @employeeChange="empChange"></emp>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨客判定</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >咨客判定</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<visStateJudge ref="visStateJudge" @objectChange = "judgeChange"></visStateJudge>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">续流状态</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >续流状态</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<visStateFlow ref="visStateFlow" @objectChange = "flowChange"></visStateFlow>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">行业</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >行业</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<ind ref="ind" @industryChange="indChange"></ind>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">紧急联系人</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >紧急联系人</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.urgentName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">联系电话</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >联系电话</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.urgentPhone" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">微信号</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >微信号</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.vnum" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">邮箱地址</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >邮箱地址</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.email" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">学历</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >学历</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<Education ref="education" @objectChange="educationChange"></Education>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">职业</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >职业</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<Occupation ref="occupation" @objectChange="occupationChange"></Occupation>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">区域</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >区域</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<Region ref="region" @objectChange="regionChange"></Region>
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline" style="width:12%;padding:0;line-height:34px;">联系地址</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline jh-ad-1" >联系地址</label><span class="sign-left">:</span>
 						<div class="col-md-10" style="width:84%;">
 							<input type="text" class="form-control" v-model="visitor.address" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline" style="width:12%;padding:0;line-height:34px;">备注</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline jh-ad-1" >备注</label><span class="sign-left">:</span>
 						<div class="col-md-10" style="width:84%;">
 							<input type="text" class="form-control" v-model="visitor.marker" placeholder="">
 						</div>

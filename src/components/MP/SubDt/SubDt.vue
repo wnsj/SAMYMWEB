@@ -3,7 +3,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h4 id="myModalLabel" class="modal-title">{{title}}咨询方向</h4>
+			<h4 id="myModalLabel" class="modal-title">{{title}}来访状态</h4>
 		</div>
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop clearfix" id="basic">
@@ -56,7 +56,7 @@
 			// Initialization store’s content
 			initData(param, objContent) {
 				if (param == 'add') {
-					//console.log('Initialization store’s content, which adds store')
+					console.log('Initialization store’s content, which adds store')
 
 					this.title = '新增'
 
@@ -67,7 +67,7 @@
 					}
 
 				} else if (param == 'modify') {
-					//console.log('Initialization store’s content, which modifies store')
+					console.log('Initialization store’s content, which modifies store')
 
 					this.title = '修改'
 					Object.assign(this.obj, objContent)
@@ -109,7 +109,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('添加或者修改咨询方向失败')
+					console.log('添加或者修改咨询方向失败')
 				});
 			},
 

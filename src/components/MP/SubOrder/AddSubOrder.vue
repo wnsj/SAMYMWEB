@@ -395,11 +395,11 @@
             initData(flag,param) {
 				$('#addSubOrderContent').modal({backdrop: 'static', keyboard: false});
                 this.numArr = []
-				//console.log(param)
+				console.log(param)
                 if (flag == 'againAdd') {
                     this.$refs.counlorEmp.setPosName("咨询师")
                     this.$refs.counlorEmp.setEmp(param.empId)
-					//console.log("参数"+param)
+					console.log("参数"+param)
                     this.$refs.project.setProject(param.proId)
                     this.orderClick = {
                         memNum: param.memNum,
@@ -488,7 +488,7 @@
                 }
             },
             itemAction(item, index) {
-                //console.log("item:" + JSON.stringify(item) + index)
+                console.log("item:" + JSON.stringify(item) + index)
             },
             setOrder(index, data) {
                 var timeParam = 'time'.concat(index)
@@ -504,7 +504,7 @@
             },
             //feedback employee information
             projectChange: function (param) {
-                // //console.log('科室：'+JSON.stringify(param))
+                // console.log('科室：'+JSON.stringify(param))
                 if (this.isBlank(param)) {
                     this.orderClick.proId = ""
                 } else {
@@ -522,7 +522,7 @@
             },
             //feedback employee information
             counlorEmpChange: function (param) {
-                // //console.log('科室：'+JSON.stringify(param))
+                // console.log('科室：'+JSON.stringify(param))
                 this.numArr = []
                 if (this.isBlank(param)) {
                     this.orderClick.empId = ""
@@ -609,7 +609,7 @@
                         alert(res.retMsg)
                     }
                 }).catch((error) => {
-                    //console.log('预约提交请求失败')
+                    console.log('预约提交请求失败')
                 });
             },
             closeCurrentPage() {
@@ -650,15 +650,15 @@
                             this.$refs.CounseRoomRef.setChaId(0)
                         }
                     } else {
-                        //console.log('没有查到员工排班信息')
+                        console.log('没有查到员工排班信息')
                     }
                 }).catch((error) => {
-                    //console.log('员工排班信息查询失败')
+                    console.log('员工排班信息查询失败')
                 });
             },
             //Query member's information based on the memNum
             checkMemNum(param) {
-                //console.log('checkMemNum')
+                console.log('checkMemNum')
                 if (this.isBlank(param)) {
                     return
                 }
@@ -678,7 +678,7 @@
                     var res = response.data
                     if (res.retCode == '0000') {
                         var member = res.retData.mem
-                        // //console.log('member'+JSON.stringify(member))
+                        // console.log('member'+JSON.stringify(member))
                         var counselorList = res.retData.counselorList
                         if (member != null) {
                             this.orderClick.memNum = member.memNum
@@ -686,20 +686,20 @@
                             this.orderClick.phone = member.phone
                         }
                         if (counselorList.length > 0) {
-                            //console.log("有未完成的项目")
+                            console.log("有未完成的项目")
                             this.orderClick.empId = counselorList[0].counselor
                             this.$refs.counlorEmp.setEmp(this.orderClick.empId)
                         } else {
                             alert("没有未完成的项目，可以直接进行预约")
                         }
                     } else {
-                        //console.log('没有查到会员信息，请添加会员后充值')
+                        console.log('没有查到会员信息，请添加会员后充值')
                         this.consume.appName = ''
                         this.consume.phone = ''
                     }
 
                 }).catch((error) => {
-                    //console.log('会员查询请求失败')
+                    console.log('会员查询请求失败')
                 });
             },
 

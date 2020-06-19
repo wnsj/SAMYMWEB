@@ -6,32 +6,32 @@
 		</div>
 		<div class="row newRow">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right jh-ad-1">
+					<p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<store ref='store' @storeChange='storeChange'></store>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">客户姓名</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right jh-ad-1">
+					<p class="end-aline col-md-11 col-lg-11 jh-pa-1">客户姓名</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<input class="form-control" type="text" value="" v-model="memName">
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">咨询师</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right jh-ad-1">
+					<p class="end-aline col-md-11 col-lg-11 jh-pa-1">咨询师</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
 					<emp ref="emp" @employeeChange='empChange'></emp>
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否欠费</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right jh-ad-1">
+					<p class="end-aline col-md-11 col-lg-11 jh-pa-1">是否欠费</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 					<select class="form-control" v-model="isArrears">
@@ -43,21 +43,21 @@
 			</div>
 		</div>
 		<div class="row newRow">
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0.8%;">
-				<div class="col-md-3 col-lg-3 text-right" style="padding: 0; line-height: 34px;width:20.5%">
-					<p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:25px;">购买时间</p><span class="sign-left">:</span>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 jh-pl-1">
+				<div class="col-md-3 col-lg-3 text-right jh-ad-1 wd205">
+					<p class="end-aline col-md-11 col-lg-11 jh-pa-1">购买时间</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
-					<dPicker style="width:100%" v-model="begCreateDate"></dPicker>
+				<div class="col-md-4 col-lg-4 jh-tw-1">
+					<dPicker class="wd100" v-model="begCreateDate"></dPicker>
 				</div>
-				<div style="padding: 0; line-height: 34px; float:left">
+				<div class="jh-ad-1 jh-fl">
 					~
 				</div>
-				<div class="col-md-4 col-lg-4" style="text-align:left;width:27.3%;">
-					<dPicker style="width:100%" v-model="endCreateDate"></dPicker>
+				<div class="col-md-4 col-lg-4 jh-tw-1">
+					<dPicker class="wd100" v-model="endCreateDate"></dPicker>
 				</div>
 			</div>
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:30px;padding-bottom:1.5%;">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 				<button type="button" class="btn btn-primary pull-right m_r_10" data-toggle="modal" v-on:click="conditionCheck(1)">查询</button>
 			</div>
 		</div>
@@ -152,7 +152,7 @@
 				this.conditionCheck(page);
 			},
 			empChange(param) {
-				//console.log('员工信息：' + JSON.stringify(param))
+				console.log('员工信息：' + JSON.stringify(param))
 				if (this.isBlank(param)) {
 					this.empId = ""
 				} else {
@@ -175,7 +175,7 @@
 
 			//the list , which is detail infomation of patient,was checked.
 			conditionCheck: function(page) {
-				//console.log('querying based on multiple conditions')
+				console.log('querying based on multiple conditions')
 				if (!this.isBlank(this.begCreateDate)) {
 					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
 				}
@@ -215,7 +215,7 @@
 						this.chargeLsit = res.retData.records
 					}
 				}).catch((error) => {
-					//console.log('充值查询请求失败')
+					console.log('充值查询请求失败')
 				});
 			},
 			arrearsAaction(item) {
@@ -247,7 +247,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('补交费用请求失败')
+					console.log('补交费用请求失败')
 				});
 			},
 

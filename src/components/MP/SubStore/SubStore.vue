@@ -9,25 +9,25 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">门店名称</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">门店名称</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="store.storeName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">联系人</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">联系人</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="store.connecter" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">联系电话</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">联系电话</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="store.phone" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否停用</label><span class="sign-left">:</span>
+						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">是否停用</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="store.isuse">
 								<option value="1">在用</option>
@@ -36,14 +36,14 @@
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline" style="width:12%;padding:0;line-height:34px;">联系地址</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline jh-ad-1">联系地址</label><span class="sign-left">:</span>
 						<div class="col-md-10" style="width:84%;">
 							<input type="text" class="form-control" v-model="store.address" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-						<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>	
+						<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+						<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="certainAction()">确认</button>	
 					</div>
 				</form>
 			</div>
@@ -75,7 +75,7 @@
 			// Initialization store’s content
 			initData(param,storeContent) {
 				if(param=='add'){
-					//console.log('Initialization store’s content, which adds store')
+					console.log('Initialization store’s content, which adds store')
 					
 					this.title='新增'
 					
@@ -88,20 +88,20 @@
 					}
 					
 				}else if(param=='modify'){
-					//console.log('Initialization store’s content, which modifies store')
+					console.log('Initialization store’s content, which modifies store')
 					
 					this.title='修改'
-					//console.log(JSON.stringify(storeContent))
+					console.log(JSON.stringify(storeContent))
 					Object.assign(this.store,storeContent)
 				}
 			},
 			closeCurrentPage(){
 				$("#storeContent").modal("hide")
-				//console.log('关闭添加患者界面')
+				console.log('关闭添加患者界面')
 			},
 			//the event of addtional button
 			certainAction(){
-				//console.log('the event of addtional button')
+				console.log('the event of addtional button')
 				var reg = /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 			
 				if(this.isBlank(this.store.storeName)){
@@ -138,7 +138,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					//console.log(res)
+					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('certainAction')
@@ -146,7 +146,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('添加商铺失败')
+					console.log('添加商铺失败')
 				});
 			},
 			

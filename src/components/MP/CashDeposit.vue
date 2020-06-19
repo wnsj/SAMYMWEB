@@ -6,8 +6,8 @@
         </div>
         <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11">姓名</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="cashName">
@@ -15,8 +15,8 @@
             </div>
 
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">手机号</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
@@ -24,28 +24,28 @@
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">开始时间</p><span
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">开始时间</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
-                    <dPicker style="width:100%" v-model="beginDate"></dPicker>
+                    <dPicker class="wd100" v-model="beginDate"></dPicker>
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">结束时间</p><span
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">结束时间</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
-                    <dPicker style="width:100%" v-model="endDate"></dPicker>
+                    <dPicker  class="wd100" v-model="endDate"></dPicker>
                 </div>
             </div>
         </div>
         <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
@@ -53,8 +53,8 @@
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">状态</p><span
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">状态</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
@@ -65,7 +65,7 @@
                     </select>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
                     data-toggle="modal"
                     v-on:click="checkMember(1)">查询
             </button>
@@ -89,16 +89,16 @@
                         </thead>
                         <tbody>
                         <tr v-for="(item,index) in cashList" :key="index" v-on:dblclick="modifyMember(item)">
-                            <td class="text-center" style="line-height:33px">{{item.storeName}}</td>
-                            <!-- <td class="text-center" style="line-height:33px">{{item.memNum}}</td> -->
-                            <td class="text-center" style="line-height:33px">{{item.cashName}}</td>
-                            <td class="text-center" style="line-height:33px">{{item.phone}}</td>
-                            <td class="text-center" style="line-height:33px">{{item.money}}</td>
-                            <td class="text-center" style="line-height:33px">{{item.createDate |
+                            <td class="text-center jh-lh-33">{{item.storeName}}</td>
+                            <!-- <td class="text-center jh-lh-33">{{item.memNum}}</td> -->
+                            <td class="text-center jh-lh-33">{{item.cashName}}</td>
+                            <td class="text-center jh-lh-33">{{item.phone}}</td>
+                            <td class="text-center jh-lh-33">{{item.money}}</td>
+                            <td class="text-center jh-lh-33">{{item.createDate |
                                 dateFormatFilter("YYYY-MM-DD")}}
                             </td>
-                            <td class="text-center" style="line-height:33px">{{item.balance}}</td>
-                            <td class="text-center" style="line-height:33px">{{item.operatorName}}</td>
+                            <td class="text-center jh-lh-33">{{item.balance}}</td>
+                            <td class="text-center jh-lh-33">{{item.operatorName}}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-warning" v-on:click="modifyMember(item)" v-has="'SAMY:MP:CashDeposit:Update'">修改
                                 </button>
@@ -218,7 +218,7 @@
             },
 
             transferMember(item) {
-                //console.log(item)
+                console.log(item)
                 this.$refs.toMember.initData(item)
                 $("#toMember").modal('show')
             },
@@ -296,7 +296,7 @@
             },
             //check the list of member
             checkMember(page) {
-                //console.log('checkMember')
+                console.log('checkMember')
                 var url = this.url + '/cashAction/queryCash'
                 if (!this.isBlank(this.beginDate)) {
                     this.beginDate = this.moment(this.beginDate, 'YYYY-MM-DD 00:00:00.000')
@@ -325,7 +325,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    // //console.log(res)
+                    // console.log(res)
                     if (res.retCode == '0000') {
                         this.pages = res.retData.pages //总页数
                         this.current = res.retData.current //当前页码
@@ -338,7 +338,7 @@
                     }
 
                 }).catch((error) => {
-                    //console.log('定金查询失败')
+                    console.log('定金查询失败')
                 });
             },
             cancelCush(item) {
@@ -364,13 +364,13 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    // //console.log(res)
+                    // console.log(res)
                     if (res.retCode == '0000') {
                         item.state = '1'
                     }
 
                 }).catch((error) => {
-                    //console.log('定金查询失败')
+                    console.log('定金查询失败')
                 });
             },
 
@@ -402,7 +402,7 @@
             init();
         },
         created() {
-            // this.checkMember(1)
+            this.checkMember(1)
         }
     }
 </script>

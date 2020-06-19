@@ -7,7 +7,7 @@
 		</div>
 		<div class="tableContent">
 			<nobr class="widthmax">
-				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px;" 
+				<div class="table-responsive pre-scrollable mb20 jh-max-464"
 				v-show="posType=='店长' || posType=='店长助理' || posType=='咨询师' || posType=='咨询顾问'">
 					<div class="modal-header pd0">
 						<h4 class="pull-left mt0">会员消费提成</h4>
@@ -30,7 +30,7 @@
 					</table>
 				</div>
 				
-				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px;" 
+				<div class="table-responsive pre-scrollable mb20 jh-max-464"
 				v-show="(posType=='店长' || posType=='店长助理' || posType=='咨询师' || posType=='咨询顾问') && summaryRoy.royalty > 0">
 					<div class="modal-header pd0">
 						<h4 class="pull-left mt0">流水提成</h4>
@@ -51,7 +51,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px" 
+				<div class="table-responsive pre-scrollable mb20 jh-max-464" 
 				v-show="(posType=='店长' || posType=='店长助理'||posType=='咨询师' || posType=='咨询顾问') && refund.royalty > 0">
 					<div class="modal-header pd0">
 						<h4 class="pull-left">退费扣提成</h4>
@@ -71,7 +71,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="table-responsive pre-scrollable mb20" style=" max-height:464px" 
+				<div class="table-responsive pre-scrollable mb20 jh-max-464"
 				v-show="(posType=='咨询师' || posType=='咨询顾问') && counlorRefund.balance > 0">
 					<div class="modal-header pd0">
 						<h4 class="pull-left">退号扣款</h4>
@@ -186,12 +186,12 @@
 					"balance": '', //总人数
 				}
 				this.posType = param.posName
-				//console.log(JSON.stringify(param))
+				console.log(JSON.stringify(param))
 				this.clerkContent = param
 				this.checkDetail(param)
 			},
 			checkDetail(param) {
-				//console.log('the event of addtional button')
+				console.log('the event of addtional button')
 
 				var url = this.url + '/employeeAction/queryEmpRoyaltyInfo'
 				this.$ajax({
@@ -230,12 +230,12 @@
 					}
 
 				}).catch((error) => {
-					//console.log('请求失败处理')
+					console.log('请求失败处理')
 				});
 			},
 			closeCurrentPage() {
 				$("#subRoy").modal("hide")
-				//console.log('关闭添加患者界面')
+				console.log('关闭添加患者界面')
 			},
 		}
 

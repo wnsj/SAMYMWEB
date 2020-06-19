@@ -5,47 +5,47 @@
         </div>
         <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
                     <Store ref="store" @storeChange="storeChange"></Store>
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span class="sign-left">:</span>
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">姓名</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memName"></div>
             </div>
 
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">手机号</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
                     <input class="form-control" type="text" value="" v-model="phone">
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px;padding-left:20px;">开始时间</p><span class="sign-left">:</span>
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">开始时间</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
-                    <dPicker style="width:100%" v-model="begCreateDate"></dPicker>
+                    <dPicker class="wdi100" v-model="begCreateDate"></dPicker>
                 </div>
             </div>
         </div>
         <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">结束时间</p><span class="sign-left">:</span>
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">结束时间</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
-                    <dPicker style="width:100%" v-model="endCreateDate"></dPicker>
+                    <dPicker class="wdi100" v-model="endCreateDate"></dPicker>
                 </div>
             </div>
-            <div class="col-xs-13 col-sm-13 col-md-13 col-lg-13" style=" padding-right:30px; padding-bottom:1.5%;">
+            <div class="col-xs-13 col-sm-13 col-md-13 col-lg-13 jh-pa-2">
                 <button type="button" class="btn btn-primary pull-right m_r_10"  data-toggle="modal"
                         v-on:click="conditionCheck(1)">查询</button>
             </div>
@@ -165,13 +165,13 @@
                 } else {
                     this.storeId = param.storeId
                 }
-                //console.log('store' + this.storeId)
+                console.log('store' + this.storeId)
             },
             //the list , which is detail infomation of member,was checked.
             conditionCheck: function(page) {
-                //console.log('querying based on multiple conditions')
-				//console.log('accountPosId:'+this.accountPosId())
-				
+                console.log('querying based on multiple conditions')
+				console.log('accountPosId:'+this.accountPosId())
+
                 if(!this.isBlank(this.begCreateDate)){
                     this.begCreateDate = this.moment(this.begCreateDate,'YYYY-MM-DD 00:00:00.000')
                 }
@@ -202,7 +202,7 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    //console.log(res)
+                    console.log(res)
                     if (res.retCode == '0000') {
                         this.pages=res.retData.pages //总页数
                         this.current=res.retData.current //当前页码
@@ -212,7 +212,7 @@
                         this.memCostList = res.retData.records;
                     }
                 }).catch((error) => {
-                    //console.log('会员账目查询失败')
+                    console.log('会员账目查询失败')
                 });
             },
         },

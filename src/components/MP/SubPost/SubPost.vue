@@ -65,7 +65,7 @@
 			// Initialization position’s content
 			initData(param, posContent) {
 				if (param == 'add') {
-					//console.log('Initialization position’s content, which adds position')
+					console.log('Initialization position’s content, which adds position')
 					this.title = '新增'
 					this.position = {
 						posName: '',
@@ -73,10 +73,10 @@
 						isuse: '1',
 					}
 				} else if (param == 'modify') {
-					//console.log('Initialization position’s content, which modifies position')
+					console.log('Initialization position’s content, which modifies position')
 					this.title = '修改'
 					Object.assign(this.position,posContent)
-					//console.log(JSON.stringify(this.position))
+					console.log(JSON.stringify(this.position))
 					if(this.position.parentId>0){
 						this.$refs.position.setPosId(this.position.parentId)
 					}
@@ -92,6 +92,8 @@
 			},
 			//the event of addtional button
 			certainAction() {
+				console.log('the event of addtional button')
+
 				if (this.isBlank(this.position.posName)) {
 					alert("岗位名称不能为空")
 					return
@@ -116,18 +118,18 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					//console.log(res)
+					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('certainAction')
 					}
 				}).catch((error) => {
-					//console.log('岗位信息请提交失败')
+					console.log('岗位信息请提交失败')
 				});
 			},
 			closeCurrentPage() {
 				$("#positionContent").modal("hide")
-				//console.log('关闭添加患者界面')
+				console.log('关闭添加患者界面')
 			},
 		}
 

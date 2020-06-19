@@ -719,7 +719,6 @@
 					data: {
 						memNum: param,
 						isArrears: '1',
-						proType: '0',
 					},
 					dataType: 'json',
 				}).then((response) => {

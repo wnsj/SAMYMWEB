@@ -9,7 +9,7 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">访问类型</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">访问类型</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="obj.vsType">
 								<option value="1">初诊</option>
@@ -18,7 +18,7 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">状态类型</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">状态类型</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="obj.stateType">
 								<option value="1">咨客判定</option>
@@ -27,13 +27,13 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">状态名称</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">状态名称</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="obj.vsName" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">是否停用</label><span class="sign-left">:</span>
+						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">是否停用</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="obj.isUse">
 								<option value="1">在用</option>
@@ -42,8 +42,8 @@
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-						<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>	
+						<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+						<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="certainAction()">确认</button>	
 					</div>
 				</form>
 			</div>

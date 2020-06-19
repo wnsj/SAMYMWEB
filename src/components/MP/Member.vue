@@ -5,10 +5,10 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">会员管理</h1>
         </div>
-        <div class="row" style="margin-top: 40px;">
+        <div class="row jh-mt-40">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
@@ -16,23 +16,23 @@
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">会员卡号</p><span
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">会员卡号</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memNum"></div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">姓名</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memName"></div>
             </div>
 
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">手机号</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
@@ -40,11 +40,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 15px;padding-bottom:1.5%;">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 jh-mp-1">
             <button type="button" class="btn btn-warning pull-right m_r_10" data-toggle="modal"
                     v-on:click="selectRule('1')" v-has="'SAMY:MP:Member:Add'">添加会员
             </button>
-            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
                     data-toggle="modal"
                     v-on:click="checkMember(1)">查询
             </button>

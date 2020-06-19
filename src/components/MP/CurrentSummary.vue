@@ -3,26 +3,26 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">月入汇总</h1>
         </div>
-        <div class="row" style="margin-top: 40px;">
+        <div class="row jh-mt-40">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span class="sign-left">:</span>
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
                     <Store ref="store" @storeChange="storeChange"></Store>
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">月份</p><span class="sign-left">:</span>
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">月份</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
-                    <dPicker style="width:100%" format="YYYY-MM" v-model="createDate"></dPicker>
+                    <dPicker class="wd100" format="YYYY-MM" v-model="createDate"></dPicker>
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">类型</p><span class="sign-left">:</span>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">类型</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                     <select class="form-control" v-model="type">
@@ -35,7 +35,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-right:30px; padding-bottom:1.5%;">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 jh-pa-2">
                 <button type="button" class="btn btn-primary pull-right m_r_10"  data-toggle="modal"
                         v-on:click="conditionCheck(1)">查询</button>
             </div>
@@ -77,7 +77,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3 col-lg-3">
-                            <p class="tips" style="font-size: 20px">月总收入：{{symbols}}{{allMoney}} 元</p>
+                            <p class="tips jh-fz-20">月总收入：{{symbols}}{{allMoney}} 元</p>
                         </div>
                     </div>
                     <!--分页插件-->

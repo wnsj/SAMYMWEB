@@ -5,18 +5,18 @@
             <h1 class="titleCss">咨询室总览</h1>
         </div>
         <div class="row newRow">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style=" margin-top: 15px;">
-                <div class="col-md-3 col-lg-3 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">时间</p>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 jh-mt-15">
+                <div class="col-md-3 col-lg-3 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">时间</p>
                     <span class="sign-left">:</span>
                 </div>
                 <div class="col-md-6 col-lg-6">
                     <dPicker type="date" value-type="format" format="YYYY-MM-DD" v-model="appDate"></dPicker>
                 </div>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style=" margin-top: 15px;" v-show="retActType">
-                <div class="col-md-3 col-lg-3 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 jh-mt-15" v-show="retActType">
+                <div class="col-md-3 col-lg-3 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p>
                     <span class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
@@ -24,7 +24,7 @@
                 </div>
             </div>
       
-            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
                     data-toggle="modal"
                     @click="checkOrderList(1)">查询
             </button>
@@ -36,8 +36,8 @@
                         <thead class="datathead">
                         <tr>
                             <th class="text-center" id="lineTd">
-                                <span style="float:left;margin-top:22px;">咨询室</span>
-                                <span style="float:right;margin-top:0;">时间</span>
+                                <span class="jh-mt-22 jh-fl">咨询室</span>
+                                <span class="jh-mt-0 jh-fr">时间</span>
                             </th>
                             <th class="text-center" v-for="(item,index) in timeArr" :key="index">
                                 {{timeArr[index]}}

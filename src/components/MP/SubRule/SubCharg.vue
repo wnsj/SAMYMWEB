@@ -9,33 +9,33 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">岗位</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">岗位</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<pos ref='pos' @positionChange='posChange'></pos>
 						</div>
 					</div>
 					<div class="col-md-9 form-group clearfix">
-						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">退号比例</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline jh-ad-1">退号比例</label><span class="sign-left">:</span>
 						<div class="col-md-4 pos-re">
 							<input type="text" class="form-control" v-model="FWRoyalty.orderSmall" placeholder="">
 							<span class="pos-ab pos-tr">%</span>
 						</div> 
-						<div style="line-height:34px; float:left;">~</div>
+						<div class="jh-lh-34 jh-fl">~</div>
 						<div class="col-md-4 pos-re">
 							<input type="text" class="form-control" v-model="FWRoyalty.orderBig" placeholder="">
 							<span class="pos-ab pos-tr">%</span>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">扣款金额</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">扣款金额</label><span class="sign-left">:</span>
 						<div class="col-md-6 pos-re">
 							<input type="text" class="form-control" v-model="FWRoyalty.visRoy" placeholder="">
 							<span class="pos-ab pos-tr">¥/人</span>
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-							<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-							<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction(title)">确认</button>
+							<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1"  data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+							<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"  data-toggle="modal" v-on:click="certainAction(title)">确认</button>
 					</div>
 				</form>
 			</div>

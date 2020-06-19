@@ -6,10 +6,10 @@
 
         <div class="roleBox">
 
-            <el-row style="margin: 15px 0;">
+            <el-row class="jh-m-15">
                 <el-col :md="6" :lg="5" :xl="5" v-if="accountType">
                     <label>门店: </label>
-                    <store style="width: 180px;height: 40px; display: inline;" ref='store' @storeChange='storeChange' ></store>
+                    <store class="jh-new-store" ref='store' @storeChange='storeChange' ></store>
                 </el-col>
                 <el-col :md="8" :lg="8" :xl="8">
                     <label>是否启用: </label>
@@ -18,7 +18,7 @@
                         <el-option value="0" label="未启用">未启用</el-option>
                     </el-select>
                 </el-col>
-                <el-col :md="6" :lg="5" :xl="4" style="float: right;">
+                <el-col :md="6" :lg="5" :xl="4" class="jh-fr">
                     <el-button type="primary" @click="queryRole"><i
                         class="el-icon-zoom-in"></i> 查询
                     </el-button>
@@ -98,7 +98,7 @@
                                 <!-- <vxe-table-column field="roleKey" title="关键字"></vxe-table-column>-->
                                 <!-- <vxe-table-column field="roleDesc" title="描述"></vxe-table-column>-->
                             </vxe-table>
-                            <div class="btns" style="text-align: right;">
+                            <div class="btns jh-te-r">
                                 <el-button type="primary" @click="addUpdatePermission"><i class="el-icon-folder-checked"></i> 保存</el-button>
                                 <!-- <el-button status="primary"><i class="el-icon-refresh-right"></i> 重置-->
                                 <!-- </el-button>-->
@@ -133,13 +133,13 @@
                                         <el-input v-model="updateRoleData.urDesc"></el-input>
                                     </el-form-item>
                                     <el-form-item label="启用">
-                                        <el-select v-model="updateRoleData.urStatus" style="width: 100%;">
+                                        <el-select v-model="updateRoleData.urStatus" class="wd100">
                                             <el-option value="1" label="启用">启用</el-option>
                                             <el-option value="0" label="未启用">未启用</el-option>
                                         </el-select>
                                     </el-form-item>
                                 </el-form>
-                                <div slot="footer" class="dialog-footer" style="text-align: right;">
+                                <div slot="footer" class="dialog-footer jh-te-r">
                                     <el-button type="warning" @click="closeCurrentPage">取 消</el-button>
                                     <el-button type="primary" @click="updateRole">确 定</el-button>
                                 </div>

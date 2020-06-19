@@ -9,19 +9,19 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="">
 					<!-- <div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">账户名</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">账户名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<acc ref="acc" @accountChange="accountChange"></acc>
 						</div>
 					</div> -->
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">岗位类型</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">岗位类型</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<pos ref="pos" @positionChange='positionChange'></pos>
 						</div>
 					</div>
 					<!-- <div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">账户类型</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">账户类型</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="ruleContent.employeeType">
 								<option value="0">未选择</option>
@@ -31,7 +31,7 @@
 						</div>
 					</div> -->
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">模块级别</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">模块级别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="ruleContent.moduleGrade">
 								<option value="">--未选择--</option>
@@ -41,13 +41,13 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">模块</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">模块</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<mod ref="mod" @moduleChange='moduleChange'></mod>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">操作类型</label><span class="sign-left">:</span>
+						<label for="sex" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">操作类型</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="ruleContent.operateType">
 								<option value="0">未选择</option>
@@ -59,9 +59,9 @@
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+						<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1"  data-toggle="modal"
 							v-on:click="closeCurrentPage()">返回</button>
-						<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal"
+						<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"  data-toggle="modal"
 							v-on:click="addRule()">确认</button>
 					</div>
 

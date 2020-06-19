@@ -6,8 +6,8 @@
         </div>
         <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="retActType">
-                <div class="col-md-5 col-lg-5 text-right" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
@@ -15,11 +15,11 @@
                 </div>
             </div>
 
-            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"
+            <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
                     data-toggle="modal"
                     @click="selectRule('1')" v-has="'SAMY:MP:CounseRoomManage:Add'">添加咨询室
             </button>
-            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
                     data-toggle="modal"
                     @click="checkOrderList(1)">查询
             </button>

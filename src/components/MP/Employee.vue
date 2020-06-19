@@ -7,8 +7,8 @@
         </div>
         <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">门店</p><span
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-8=7">
@@ -16,8 +16,8 @@
                 </div>
             </div>
             <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">姓名</p><span
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">姓名</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
@@ -25,16 +25,16 @@
                 </div>
             </div>
             <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">手机号</p><span class="sign-left">:</span>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">手机号</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                     <input class="form-control" type="text" v-model="iphone">
                 </div>
             </div> -->
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">岗位</p><span
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">岗位</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
@@ -42,8 +42,8 @@
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">是否在用</p><span
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">是否在用</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
@@ -58,11 +58,11 @@
         </div>
         <div class="row newRow">
             
-            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:2.5%;"
+            <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
                     data-toggle="modal"
                     v-on:click="selectRule('1')" v-has="'SAMY:MP:Employee:Add'">添加员工
             </button>
-            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
                     data-toggle="modal"
                     v-on:click="checkEmp(1)">查询
             </button>
@@ -70,7 +70,7 @@
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive pre-scrollable">
-                    <table class="table table-bordered table-hover" id="datatable" style=" position:relative;">
+                    <table class="table table-bordered table-hover jh-po-re" id="datatable">
                         <thead>
                         <tr>
                             <th class="text-center">门店</th>

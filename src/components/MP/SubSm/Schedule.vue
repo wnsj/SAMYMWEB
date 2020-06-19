@@ -9,19 +9,19 @@
             <div class="tab-pane fade in active martop" id="basic">
                 <form action="" class="clearfix">
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
+                        <label class="col-md-3 control-label text-right nopad end-aline jh-ad-1">咨询师</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
                             <emp ref="counlorEmp" @employeeChange="counlorEmpChange" :disabled="isSelete"></emp>
                         </div>
                     </div>
 
-                    <div class="col-md-12 form-group clearfix" style="padding-right:0;">
-                        <div class="col-md-6" style="padding:0;">
+                    <div class="col-md-12 form-group clearfix jh-pr-0">
+                        <div class="col-md-6 jh-pr-0">
                             <h4 id="myModalLabel" class="modal-title pull-left">排班时间</h4>
                         </div>
-                        <div class="col-md-6" style="padding:0;">
-                            <div class="case" style="float:right;">
+                        <div class="col-md-6 jh-pr-0">
+                            <div class="case jh-fr">
                                 <input type="checkbox" id="allCheckbox" @change="allAdd" v-model="allAddValueState"/>
                                 <label for="allCheckbox">全选</label>
                             </div>
@@ -29,8 +29,8 @@
                     </div>
                     <div class="col-md-12 form-group clearfix">
                         <div class="row schDate"><b v-for="value in allDate">{{value}}</b></div>
-                        <div class="row schDate" style="margin-bottom:10px;"><span  v-for="value in allWeek">{{value}}</span></div>
-                        <div id="allCheckboxState" class="row schDate" style="margin-bottom:4px;">
+                        <div class="row schDate jh-mb-10"><span  v-for="value in allWeek">{{value}}</span></div>
+                        <div id="allCheckboxState" class="row schDate jh-mb-4">
                             <div class="case" v-for="(item,index) in dateList">
                                 <input type="checkbox" :id="'checkbox'+(index+1)" @change="changeSchedule(item.morning)" v-model="item.morning" v-bind:true-value="'1'.toString()" v-bind:false-value="'0'.toString()"/>
                                 <label :for="'checkbox'+(index+1)">上午</label>
@@ -44,8 +44,8 @@
                         </div>
                     </div>
                     <div class="col-md-12 form-group clearfix">
-                        <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:.7%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-                        <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="addOrder(title)">确认</button>
+                        <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-0" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+                        <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="addOrder(title)">确认</button>
                     </div>
                 </form>
             </div>

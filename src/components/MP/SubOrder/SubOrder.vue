@@ -466,11 +466,15 @@
 					return
 				}
 				if (this.isBlank(this.orderClick.phone)) {
-					alert("手机号不能为空")
+					alert("联系人电话不能为空")
 					return
 				} else if (reg.test(this.orderClick.phone) == false) {
-					alert("不是完整的11位手机号或者正确的座机号！");
-					return
+					if (this.title == '新增') {
+						alert("不是完整的11位手机号或者正确的座机号！");
+						return
+					} else {
+						this.orderClick.phone = null
+					}
 				}
 
 				if (this.isBlank(this.orderClick.empId)) {

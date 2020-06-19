@@ -3,7 +3,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h4 id="myModalLabel" class="modal-title">{{title}}咨客</h4>
+			<h4 id="myModalLabel" class="modal-title">{{title}}客户</h4>
 		</div>
 		<div class="modal-body  pos_r jh-mh-sc">
 			<div class="tab-pane fade in active martop" id="basic">
@@ -66,7 +66,7 @@
 					</div>
 					<div class="col-md-6 form-group clearfix">
 						<b>*</b>
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">咨客判定</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">客户判定</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<visStateJudge ref="visStateJudge" @objectChange="judgeChange"></visStateJudge>
 						</div>
@@ -352,7 +352,7 @@
 
 
 				if (this.isBlank(this.visitor.visitorName)) {
-					alert("咨客姓名不能为空")
+					alert("客户姓名不能为空")
 					return
 				}
 				if(this.isBlank(this.visitor.birthday)){
@@ -368,15 +368,15 @@
 					this.visitor.reId=null
 				}
 				if (this.isBlank(this.visitor.dtId)) {
-					alert("咨客的咨询方向不能为空")
+					alert("客户的咨询方向不能为空")
 					return
 				}
 				if (this.isBlank(this.visitor.chaId)) {
-					alert("咨客的来源渠道不能为空")
+					alert("客户的来源渠道不能为空")
 					return
 				}
 				if (this.isBlank(this.visitor.vsIdJudge) || this.visitor.vsIdJudge == '0') {
-					alert("咨客判定不能为空")
+					alert("客户判定不能为空")
 					return
 				}
 				if (this.isBlank(this.visitor.vsIdFlow) || this.visitor.vsIdFlow == '0') {
@@ -429,7 +429,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('添加或者修改咨客信息失败')
+					//console.log('添加或者修改客户信息失败')
 				});
 			},
 

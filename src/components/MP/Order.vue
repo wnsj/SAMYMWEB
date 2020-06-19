@@ -355,8 +355,8 @@
                         if (!confirm('是否确认取消')) {
                             return
                         }
-                        obj.state = 1
-                        url = this.url + '/appointmentAction/deleteAppointment'
+                        obj.state = 0
+                        url = this.url + '/appointmentAction/updateAppoint'
                     }
                 } else if (param == 'arrival') {
                     if (item.arrival != '1') {

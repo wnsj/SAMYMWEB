@@ -99,10 +99,10 @@
                     this.$refs.subRegion.initData('add')
                     $("#subRegionContent").modal('show')
                 } else if (param == "3") {
-//                     if (!this.has('SAMY:MP:Store:Update')) {
-//                         alert("暂无权限!");
-//                         return
-//                     }
+                    if (!this.has('SAMY:MP:Region:Update')) {
+                        alert("暂无权限!");
+                        return
+                    }
                     this.$refs.subRegion.initData('modify', item)
                     $("#subRegionContent").modal('show')
                 }

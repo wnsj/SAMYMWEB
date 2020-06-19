@@ -121,7 +121,7 @@
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-12 col-lg-12">
 					<button type="button" class="btn btn-warning pull-right" data-toggle="modal" v-on:click="selectRule('1')"
-					 v-has="'SAMY:MP:Visitor:Add'">添加咨客
+					 v-has="'SAMY:MP:Visitor:Add'">添加客户
 					</button>
 					<button type="button" class="btn btn-primary pull-right margin-right-10"  data-toggle="modal"
 					 v-on:click="checkVisitor(1)">查询
@@ -506,15 +506,15 @@
 			updateVisitorShiftMember(item) {
 				var url = this.url + '/visitorAction/updateVisitorShiftMember'
 				if (this.isBlank(item.visitorName)) {
-					alert('咨客姓名不能为空')
+					alert('客户姓名不能为空')
 					return
 				}
 				if (this.isBlank(item.phone)) {
-					alert('咨客手机号不能为空')
+					alert('客户手机号不能为空')
 					return
 				}
 				if (this.isBlank(item.visId)) {
-					alert('咨客ID不能为空')
+					alert('客户ID不能为空')
 					return
 				}
 				if (!this.isBlank(item.memNum)) {
@@ -576,7 +576,7 @@
 				if (this.checkedValue > -1) {
 					this.objectContent = this.visitorList[this.checkedValue]
 				} else {
-					alert("请选择咨客后再操作!");
+					alert("请选择客户后再操作!");
 					return
 				}
 

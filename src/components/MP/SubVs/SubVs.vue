@@ -21,7 +21,7 @@
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">状态类型</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="obj.stateType">
-								<option value="1">咨客判定</option>
+								<option value="1">客户判定</option>
 								<option value="2">续流状态</option>
 							</select>
 						</div>

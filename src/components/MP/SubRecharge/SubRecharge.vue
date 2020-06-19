@@ -7,15 +7,6 @@
 		</div>
 		<div class="modal-body  pos_r jh-mh-sc">
 			<div class="tab-pane fade in active martop" id="basic">
-
-				<!--				<div class="col-md-6 form-group clearfix">-->
-				<!--					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >会员卡号</label><span-->
-				<!--					 class="sign-left">:</span>-->
-				<!--					<div class="col-md-7">-->
-				<!--						<input type="text" class="form-control" v-model="member.memNum" v-on:change="checkMemNum(member.memNum)"-->
-				<!--						 placeholder="卡号/手机号后4位">-->
-				<!--					</div>-->
-				<!--				</div>-->
 				<div class="col-md-6 form-group clearfix">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >姓名</label><span
 					 class="sign-left">:</span>

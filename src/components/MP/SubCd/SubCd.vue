@@ -8,14 +8,14 @@
         <div class="modal-body  pos_r">
             <div class="tab-pane fade in active martop" id="basic">
                 <form action="" class="clearfix">
-                    <!--					<div class="col-md-6 form-group clearfix">-->
+                    <!--					<div class="col-md-6 form-group clearfix jh-wd-33">-->
                     <!--						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员卡号</label><span-->
                     <!--						 class="sign-left">:</span>-->
                     <!--						<div class="col-md-8">-->
                     <!--							<input type="text" class="form-control" v-model="cash.memNum" v-on:change="checkMemNum(cash.memNum)">-->
                     <!--						</div>-->
                     <!--					</div>-->
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">姓名</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
@@ -23,34 +23,39 @@
                                    disabled="true">
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
                         <label class="col-md-3 control-label text-right nopad end-aline">手机号</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="cash.phone" placeholder="" disabled="true">
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+
 						<b>*</b>
+
                         <label class="col-md-3 control-label text-right nopad end-aline">定金金额</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="cash.money" placeholder="">
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+
 						<b>*</b>
+
                         <label class="col-md-3 control-label text-right nopad end-aline">交费时间</label><span
                         class="sign-left">:</span>
                         <dPicker class="col-md-8 subcd-h65" v-model="cash.createDate"
                                  v-on:click="dateAction()"></dPicker>
                     </div>
-                    <div class="col-md-12 form-group clearfix">
-                        <button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15"
+                    <div class="col-md-6 form-group clearfix jh-wd-33"></div>
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                        <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-35"
                                 data-toggle="modal"
                                 v-on:click="closeCurrentPage()">返回
                         </button>
-                        <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15"
+                        <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-25"
                                 data-toggle="modal"
                                 v-on:click="certainAction()">确认
                         </button>

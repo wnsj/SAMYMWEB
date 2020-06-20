@@ -15,7 +15,7 @@
 								<th class="text-center">消费门店</th>
 								<th class="text-center">姓名</th>
 								<th class="text-center">时间</th>
-								<th class="text-center">维护人</th>
+								<th class="text-center">顾问</th>
 								<th class="text-center">消费金额</th>
 
 							</tr>

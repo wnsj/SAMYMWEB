@@ -8,28 +8,28 @@
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">门店名称</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="store.storeName" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">联系人</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="store.connecter" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">联系电话</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="store.phone" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">是否停用</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="store.isuse">
@@ -45,7 +45,7 @@
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+						<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-45" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
 						<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="certainAction()">确认</button>	
 					</div>
 				</form>

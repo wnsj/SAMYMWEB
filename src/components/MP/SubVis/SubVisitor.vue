@@ -8,33 +8,34 @@
 		<div class="modal-body  pos_r jh-mh-sc">
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.visitorName" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">手机号</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.phone" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">门店</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<Store ref='store' @storeChange='storeChange'></Store>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">生日</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<dPicker class="wd100" v-model="visitor.birthday" value-type="format" format="YYYY-MM-DD"></dPicker>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">性别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="visitor.sex">
@@ -43,88 +44,110 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
+
 						<b>*</b>
+
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">渠道</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<cha ref="cha" @channelChange="chaChange"></cha>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<b>*</b>
+
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >咨询方向</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<DiseaseType ref="DiseaseType" @objectChange="dtChange"></DiseaseType>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">接待人</label><span class="sign-left">:</span>
+
 						<div class="col-md-8">
 							<emp ref="emp" @employeeChange="empChange"></emp>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">访问状态</label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<select class="form-control" v-model="visitor.visType">
+								<option value="1">初访</option>
+								<option value="2">复访</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<b>*</b>
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">客户判定</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">咨客判定</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<visStateJudge ref="visStateJudge" @objectChange="judgeChange"></visStateJudge>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">续流状态</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<visStateFlow ref="visStateFlow" @objectChange="flowChange"></visStateFlow>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">行业</label><span class="sign-left">:</span>
+
 						<div class="col-md-8">
 							<ind ref="ind" @industryChange="indChange"></ind>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">紧急联系人</label><span class="sign-left">:</span>
+
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.urgentName" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >联系电话</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.urgentPhone" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
+
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">微信号</label><span class="sign-left">:</span>
+
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.vnum" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
+
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >邮箱地址</label><span class="sign-left">:</span>
 
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="visitor.email" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">学历</label><span class="sign-left">:</span>
+
+					<div class="col-md-6 form-group clearfix jh-wd-33">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >学历</label><span class="sign-left">:</span>
+
 						<div class="col-md-8">
 							<Education ref="education" @objectChange="educationChange"></Education>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">职业</label><span class="sign-left">:</span>
+
+					<div class="col-md-6 form-group clearfix jh-wd-33">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >职业</label><span class="sign-left">:</span>
+
 						<div class="col-md-8">
 							<Occupation ref="occupation" @objectChange="occupationChange"></Occupation>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">区域</label><span class="sign-left">:</span>
+					<div class="col-md-6 form-group clearfix jh-wd-33">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >区域</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<Region ref="region" @objectChange="regionChange"></Region>
 						</div>
@@ -190,7 +213,7 @@
 					vsIdFlow: '',
 					consDirection: '',
 					empId: '',
-					// visType:'1',
+					visType:'1',
 					indId: '',
 					storeId: this.storeId(),
 					urgentName: '',
@@ -207,8 +230,6 @@
 		methods: {
 			// Initialization visitor’s content
 			initData(param, visitorContent) {
-				this.$refs.visStateJudge.getObj('1', '1')
-				this.$refs.visStateFlow.getObj('1', '2')
 				this.visitor = {
 					visitorName: '',
 					sex: '1',
@@ -240,6 +261,8 @@
 					this.$refs.cha.setChaId('0')
 					this.$refs.DiseaseType.setObj('0')
 					this.$refs.emp.setEmp("")
+					this.$refs.visStateJudge.getObj('1', '1')
+					this.$refs.visStateFlow.getObj('1', '2')
 					this.$refs.visStateJudge.setObj('0')
 					this.$refs.visStateFlow.setObj('0')
 					this.$refs.ind.setInd('0')
@@ -254,6 +277,8 @@
 					this.$refs.cha.setChaId(this.visitor.chaId)
 					this.$refs.DiseaseType.setObj(this.visitor.dtId)
 					this.$refs.emp.setEmp(this.visitor.empId)
+					this.$refs.visStateJudge.getObj(this.visitor.visType,'1')
+					this.$refs.visStateFlow.setObj(this.visitor.visType,'2')
 					this.$refs.visStateJudge.setObj(this.visitor.vsIdJudge)
 					this.$refs.visStateFlow.setObj(this.visitor.vsIdFlow)
 					this.$refs.ind.setInd(this.visitor.indId)
@@ -355,6 +380,17 @@
 					alert("客户姓名不能为空")
 					return
 				}
+				if (this.isBlank(this.visitor.phone)) {
+					alert("联系人电话不能为空")
+					return
+				} else if (reg.test(this.visitor.phone) == false) {
+					if (this.title == '新增') {
+						alert("不是完整的11位手机号或者正确的座机号！");
+						return
+					} else {
+						this.visitor.phone = null
+					}
+				}
 				if(this.isBlank(this.visitor.birthday)){
 					this.visitor.birthday=null
 				}
@@ -375,6 +411,10 @@
 					alert("客户的来源渠道不能为空")
 					return
 				}
+				if (this.isBlank(this.visitor.visType)) {
+					alert("访问状态不能为空")
+					return
+				}
 				if (this.isBlank(this.visitor.vsIdJudge) || this.visitor.vsIdJudge == '0') {
 					alert("客户判定不能为空")
 					return
@@ -387,17 +427,7 @@
 					alert("接待人不能为空")
 					return
 				}
-				if (this.isBlank(this.visitor.phone)) {
-					alert("联系人电话不能为空")
-					return
-				} else if (reg.test(this.visitor.phone) == false) {
-					if (this.title == '新增') {
-						alert("不是完整的11位手机号或者正确的座机号！");
-						return
-					} else {
-						this.visitor.phone = null
-					}
-				}
+				
 				if (this.visitor.address.length > 100) {
 					alert('地址的长度不能超过100个字')
 					return

@@ -8,19 +8,19 @@
 		<div class="modal-body  pos_r">
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >岗位名称</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="position.posName" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >上级</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<position ref="position" @positionChange='posChange'></position>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="erpzh" class="col-md-3 control-label text-right nopad end-aline" >是否停用</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="position.isuse">
@@ -30,7 +30,7 @@
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15" data-toggle="modal"
+						<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-45" data-toggle="modal"
 							v-on:click="closeCurrentPage()">返回</button>
 						<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
 							v-on:click="certainAction()">确认</button>
@@ -122,6 +122,8 @@
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('certainAction')
+					}else{
+						alert(res.retMsg)
 					}
 				}).catch((error) => {
 					console.log('岗位信息请提交失败')

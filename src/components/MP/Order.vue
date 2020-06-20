@@ -201,7 +201,7 @@
             </div>
             <div class="modal fade" id="addAppointContent">
                 <div class="modal-dialog">
-                    <AddSubOrder ref="AddSubOrderRef" @addOrder='feedBack'></AddSubOrder>
+                    <AddSubOrder ref="AddSubOrderRef" @closeCurrentPage='feedBack'></AddSubOrder>
                 </div>
             </div>
             <div class="modal fade" id="showPhoneContent">
@@ -533,7 +533,7 @@
                 }
             },
             againAdd(item) {
-                this.$refs.AddSubOrderRef.initData(item)
+                this.$refs.AddSubOrderRef.initData('againAdd',item)
                 $("#addAppointContent").modal('show')
             },
             queryPhone(item) {

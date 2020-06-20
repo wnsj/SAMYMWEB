@@ -7,28 +7,28 @@
 		</div>
 		<div class="modal-body  pos_r jh-mh-sc">
 			<div class="tab-pane fade in active martop" id="basic">
-				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >姓名</label><span
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >姓名</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.memName" :disabled="isShow==true">
 					</div>
 				</div>
 
-				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >手机号</label><span
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >手机号</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.phone" :disabled="isShow==true">
 					</div>
 				</div>
 				<div v-show="unfinishedProList.length > 0">
-					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >已购产品</label><span
+					<div class="col-md-12 col-lg-12 clearfix">
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >已购产品</label><span
 						 class="sign-left">:</span>
 					</div>
 					<div class="col-md-12 col-lg-12">
-						<table class="table table-bordered table-hover">
+						<table class="table table-bordered table-hover jh-mb-0">
 							<thead class="datathead">
 								<tr>
 									<td></td>
@@ -56,8 +56,8 @@
 					</div>
 
 				</div>
-				<div class="col-md-6 form-group clearfix" v-show="member.balance>0">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >预购余额</label><span
+				<div class="col-md-6 form-group clearfix jh-wd-33" v-show="member.balance>0">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >预购余额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="member.balance" :disabled="isShow==true">
@@ -66,171 +66,175 @@
 				<div class="col-md-12 col-lg-12" v-show="member.balance>0">
 					<p class="tips">* 预购余额：只是用来作为变更咨询师时，购买产品使用；此会员购买产品咨询师未发生变更，此项不做任何参考</p>
 				</div>
-				<div class="col-md-12 form-group clearfix text-left">
+				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 					<h4 id="myModalLabel" class="modal-title">产品：</h4>
 				</div>
-				<div class="col-md-6 form-group clearfix">
-					<label class="col-md-4 control-label text-right nopad end-aline" >咨询师</label><span
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label class="col-md-4 control-label text-right nopad end-aline  " >咨询师</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<emp ref="counselorEmp" @employeeChange="counselorEmpChange"></emp>
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
-					<label class="col-md-4 control-label text-right nopad end-aline" >产品</label><span
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label class="col-md-4 control-label text-right nopad end-aline  " >产品</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<project ref="project" @projectChange="projectChange"></project>
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >单价</label><span
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >单价</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.price" disabled="disabled">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >课时(次)</label><span
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >课时(次)</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.actualCount" disabled="disabled">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >折扣比例</label><span
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >折扣比例</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7 pos-re">
+					<div class="col-md-7   pos-re">
 						<input type="text" class="form-control" v-model="consume.discount" disabled="disabled">
 						<span class="pos-ab pos-tr">%</span>
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >折前总额</label><span
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >折前总额</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.preFoldTotalPrice" disabled="disabled">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >折后总额</label><span
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >折后总额</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
 					</div>
 				</div>
 			</div>
 			<div class="tab-pane fade in active martop" v-show="isShow==true">
-				<div class="col-md-12 form-group clearfix text-left">
+				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 					<h4 id="myModalLabel" class="modal-title">合计：</h4>
 				</div>
-				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >实交总额</label><span
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >实交总额</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.realCross">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
-					<label class="col-md-4 control-label text-right nopad end-aline" >是否全额</label><span
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label class="col-md-4 control-label text-right nopad end-aline  " >是否全额</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<select class="form-control" v-model="consume.isArrears">
 							<option value="0">否</option>
 							<option value="1">是</option>
 						</select>
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >欠费金额</label><span
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >欠费金额</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.arrears">
 					</div>
 				</div>
 			</div>
 			<div class="tab-pane fade in active martop" v-show="isShow==true">
-				<div class="col-md-12 form-group clearfix text-left jh-ad-0">
-					<div class="col-md-6 clearfix">
+				<div class="col-md-12 form-group clearfix text-left jh-ad-0 jh-mt-5">
+					<div class="col-md-6 clearfix jh-wd-33">
 						<h4 id="myModalLabel" class="modal-title jh-lh-39">客户：</h4>
 					</div>
-					<div class="col-md-6 clearfix" v-show="member.balance>0">
-						<label class="bui-radios-label col-md-4 end-aline jh-ad-0 jh-mr0">
-							<input type="checkbox" v-model="isSelect" disabled="disabled" /><i class="bui-radios"></i>
-							预购抵扣
-						</label>
-					</div>
 				</div>
+				<!-- <div class="col-md-6 clearfix jh-wd-33" v-show="member.balance>0">
+					<label class="bui-radios-label col-md-4 end-aline jh-ad-0 jh-mr0  ">
+						<input type="checkbox" v-model="isSelect" disabled="disabled" /><i class="bui-radios"></i>
+						预购抵扣
+					</label>
+				</div>
+				<div class="col-md-6 form-group clearfix jh-wd-33" v-show="cash.balance>0"> -->
+
 				<div class="col-md-12 clearfix jh-ad-0" v-show="cash.balance>0">
 					<div class="col-md-6 clearfix" v-show="cash.balance>0">
 						<label class="col-md-4 control-label text-right nopad end-aline" >
+
 							定金抵扣
-						</label>
-						<span class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="cash.select" id="earn" @keyup.enter="count" @input="count($event)" />
-						</div>
-					</div>
-					<div class="col-md-6 clearfix">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >定金余额</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="cash.balance" id="cash" disabled="disabled">
-						</div>
+					</label>
+					<span class="sign-left">:</span>
+					<div class="col-md-7  ">
+						<input type="text" class="form-control" v-model="cash.select" id="earn" @keyup.enter="count" @input="count($event)" />
 					</div>
 				</div>
-				<div class="col-md-6 clearfix">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >应交总额</label><span
+				<div class="col-md-6 form-group clearfix jh-wd-33" v-show="cash.balance>0">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >定金余额</label><span
+						 class="sign-left">:</span>
+					<div class="col-md-7  ">
+						<input type="text" class="form-control" v-model="cash.balance" id="cash" disabled="disabled">
+					</div>
+				</div>
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >应交总额</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
 					</div>
 				</div>
 			</div>
 			<div class="tab-pane fade in active martop" v-show="isShow==true">
-				<div class="col-md-12 text-left clearfix">
-					<h4 id="myModalLabel" class="modal-title jh-lh-39">相关选择：</h4>
+				<div class="col-md-12 form-group clearfix text-left jh-ad-0 jh-mt-5">
+					<div class="col-md-6 clearfix">
+						<h4 id="myModalLabel" class="modal-title jh-lh-39">相关选择：</h4>
+					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
+				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >顾问</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline  "  >顾问</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<emp ref="emp" @employeeChange="empChange"></emp>
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
+				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >访问类型</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline  " >访问类型</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<select class="form-control" v-model="consume.visitType" @change="visitTypeChange">
 							<option value="1">初访</option>
 							<option value="2">复访</option>
 						</select>
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
+				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >客户判定</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline  " >客户判定</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<VisitState ref="VisitStateRef" @objectChange="visitStateChange"></VisitState>
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
+				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >续流状态</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline  " >续流状态</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<ContinState ref="ContinStateRef" @objectChange="continStateChange"></ContinState>
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
+				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >交费方式</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline  " >交费方式</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<select class="form-control" v-model="consume.payType">
 							<option value="1">现金</option>
 							<option value="2">微信</option>
@@ -242,28 +246,29 @@
 						</select>
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
+				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label class="col-md-4 control-label text-right nopad end-aline" >流水单号</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.serialNo">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix">
+				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label class="col-md-4 control-label text-right nopad end-aline" >收据</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.receipt">
 					</div>
 				</div>
+
+				<div class="col-md-6 form-group clearfix jh-wd-33"></div>
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-55" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+				    <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-25" data-toggle="modal" v-on:click="addFee()">确认</button>
+				</div>
+
 			</div>
-			<div class="col-md-12 form-group clearfix">
-				<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1" data-toggle="modal"
-				 v-on:click="closeCurrentPage()">返回
-				</button>
-				<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal"
-				 v-on:click="addFee()">确认
-				</button>
+			
 			</div>
 		</div>
 	</div>
@@ -483,7 +488,7 @@
 					return
 				}
 				if (this.isBlank(this.consume.empId)) {
-					alert("维护人不能为空")
+					alert("顾问不能为空")
 					return
 				}
 				if (this.isBlank(this.consume.cashId)) {
@@ -705,7 +710,6 @@
 			}
 		},
 		mounted() {
-			console.log("------------------------------")
 			var H = window.innerHeight;
 			$(".modal-body").css({'maxHeight':H*.81})
 		},

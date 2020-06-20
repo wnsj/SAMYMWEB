@@ -9,7 +9,7 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">学历名称</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-8">

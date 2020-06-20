@@ -8,32 +8,34 @@
 		<div class="modal-body  pos_r clearfix">
 			<div class="tab-pane fade in active martop clearfix" id="basic">
 
-					<div class="col-md-6 form-group ">
+					<div class="col-md-6 form-group clearfix jh-wd-33 ">
+
 						<b>*</b>
+
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="employee.empName" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix" v-show="accountType==true">
+					<div class="col-md-6 form-group clearfix jh-wd-33" v-show="accountType==true">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >门店</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<store ref="store" @storeChange='storeChange'></store>
 						</div>
 					</div>
-					<!-- <div class="col-md-6 form-group clearfix">
+					<!-- <div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >手机号</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="employee.phone" placeholder="">
 						</div>
 					</div> -->
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label class="col-md-3 control-label text-right nopad end-aline" >年龄</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="employee.age" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" >性别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="employee.sex">
@@ -42,14 +44,16 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
+
 						<b>*</b>
+
 						<label for="gh" class="col-md-3 control-label text-right nopad end-aline" >岗位</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<pos ref="pos" @positionChange='positionChange'></pos>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" >岗位级别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="employee.level">
@@ -59,19 +63,19 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="gh" class="col-md-3 control-label text-right nopad end-aline" >角色</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<role ref="role" @urChange='roleChange'></role>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="gh" class="col-md-3 control-label text-right nopad end-aline" >上级</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref="emp" @employeeChange="employeeChange"></emp>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" >是否在用</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="employee.isuse">
@@ -81,7 +85,7 @@
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15" data-toggle="modal"
+						<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-45" data-toggle="modal"
 							v-on:click="closeCurrentPage()">返回</button>
 						<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
 							v-on:click="addEmp()">确认</button>

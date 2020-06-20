@@ -79,7 +79,7 @@
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="storeContent">
-                <div class="modal-dialog">
+                <div class="modal-dialog wd1000">
                     <SubStore ref='store' @certainAction='feedBack'></SubStore>
                 </div>
             </div>

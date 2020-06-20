@@ -114,7 +114,7 @@
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="emp">
-                <div class="modal-dialog">
+                <div class="modal-dialog wd1000">
                     <emp ref='emp' @addEmp='feedBack'></emp>
                 </div>
             </div>

@@ -8,14 +8,14 @@
         <div class="modal-body  pos_r">
             <div class="tab-pane fade in active martop" id="basic">
                 <form action="" class="clearfix">
-                    <!--					<div class="col-md-6 form-group clearfix">-->
+                    <!--					<div class="col-md-6 form-group clearfix jh-wd-33">-->
                     <!--						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">会员卡号</label><span-->
                     <!--						 class="sign-left">:</span>-->
                     <!--						<div class="col-md-8">-->
                     <!--							<input type="text" class="form-control" v-model="cash.memNum" v-on:change="checkMemNum(cash.memNum)">-->
                     <!--						</div>-->
                     <!--					</div>-->
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">姓名</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
@@ -23,32 +23,39 @@
                                    disabled="true">
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
                         <label class="col-md-3 control-label text-right nopad end-aline">手机号</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="cash.phone" placeholder="" disabled="true">
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+
+						<b>*</b>
+
                         <label class="col-md-3 control-label text-right nopad end-aline">定金金额</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="cash.money" placeholder="">
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+
+						<b>*</b>
+
                         <label class="col-md-3 control-label text-right nopad end-aline">交费时间</label><span
                         class="sign-left">:</span>
                         <dPicker class="col-md-8 subcd-h65" v-model="cash.createDate"
                                  v-on:click="dateAction()"></dPicker>
                     </div>
-                    <div class="col-md-12 form-group clearfix">
-                        <button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15"
+                    <div class="col-md-6 form-group clearfix jh-wd-33"></div>
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                        <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-35"
                                 data-toggle="modal"
                                 v-on:click="closeCurrentPage()">返回
                         </button>
-                        <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15"
+                        <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-25"
                                 data-toggle="modal"
                                 v-on:click="certainAction()">确认
                         </button>
@@ -92,10 +99,10 @@
         methods: {
             // Initialization FWRoyalty’s content
             initData(param, cash) {
-                // //console.log(JSON.stringify(cash))
+                // console.log(JSON.stringify(cash))
                 $('#subCdContent').modal({backdrop: 'static', keyboard: false});
                 if (param == 'add') {
-                    //console.log('Initialization FWRoyalty’s content, which adds FWRoyalty')
+                    console.log('Initialization FWRoyalty’s content, which adds FWRoyalty')
                     this.title = '新增'
                     this.cash = {
                         memNum: cash.visId,
@@ -110,12 +117,12 @@
                     }
 
                 } else if (param == 'modify') {
-                    //console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
+                    console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
 
                     this.title = '修改'
                     Object.assign(this.cash, cash)
                     this.cash.operatorId = this.accountId()
-                    // //console.log(JSON.stringify(this.cash))
+                    // console.log(JSON.stringify(this.cash))
 
                 }
             },
@@ -130,7 +137,7 @@
                 this.cash.phone = param.phone
             },
             checkMemNum(param) {
-                //console.log('checkMemNum')
+                console.log('checkMemNum')
                 if (this.isBlank(param)) {
                     return
                 }
@@ -164,12 +171,12 @@
                     }
 
                 }).catch((error) => {
-                    //console.log('会员查询请求失败')
+                    console.log('会员查询请求失败')
                 });
             },
             //the event of addtional button
             certainAction() {
-                //console.log('the event of addtional button')
+                console.log('the event of addtional button')
                 var reg =
                     /(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 
@@ -226,7 +233,7 @@
                         alert(res.retMsg)
                     }
                 }).catch((error) => {
-                    //console.log('会员相关操作失败')
+                    console.log('会员相关操作失败')
                 });
             },
             closeCurrentPage() {

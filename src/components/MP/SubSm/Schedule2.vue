@@ -9,13 +9,13 @@
             <div class="tab-pane fade in active martop" id="basic">
                 <form action="" class="clearfix">
                     <div class="col-md-6 form-group clearfix">
-                        <label class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">咨询师</label><span
+                        <label class="col-md-3 control-label text-right nopad end-aline jh-ad-1">咨询师</label><span
                             class="sign-left">:</span>
                         <div class="col-md-8">
                             <emp ref="counlorEmp" @employeeChange="counlorEmpChange" :disabled="isSelete"></emp>
                         </div>
                     </div>
-                    <div class="col-md-12 form-group clearfix" style="padding-right:0;">
+                    <div class="col-md-12 form-group clearfix jh-pr-0">
                         <el-calendar v-model="curDate" :disabled='true' ref="elCalendarRef">
                             <template slot="dateCell" slot-scope="{date, data}">
                                 <div>
@@ -36,9 +36,9 @@
                     </div>
 
                     <div class="col-md-12 form-group clearfix">
-                        <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:.7%;"
+                        <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-0"
                                 data-toggle="modal" v-on:click="printLog()">返回</button>
-                        <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+                        <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
                                 data-toggle="modal" v-on:click="addOrder(title)">确认</button>
                     </div>
                 </form>
@@ -128,13 +128,13 @@
                     });
 
                     var today = this.moment(new Date(), 'YYYY-MM-DD')
-                    //console.log("今天是：" + today)
+                    console.log("今天是：" + today)
                     for (var i1 = 0; i1 < this.allDate.length; i1++) {
                         if (Date.parse(today) >= Date.parse(this.allDate[i1])) {
-                            //console.log("Date.parse(today):" + Date.parse(today))
-                            //console.log("Date.parse(this.allDate[i1]):" + Date.parse(this.allDate[i1]))
-                            //console.log("当前时间大于" + this.allDate[i1])
-                            //console.log("#checkbox" + i1 + 1)
+                            console.log("Date.parse(today):" + Date.parse(today))
+                            console.log("Date.parse(this.allDate[i1]):" + Date.parse(this.allDate[i1]))
+                            console.log("当前时间大于" + this.allDate[i1])
+                            console.log("#checkbox" + i1 + 1)
                             $("#checkbox" + (i1 + 1)).attr("disabled", true);
                             $("#checkbox" + (i1 + 8)).attr("disabled", true);
                             $("#allCheckbox").attr("disabled", true);
@@ -158,7 +158,7 @@
                 }
             },
             changeSchedule(item) {
-                //console.log("item的值为" + item)
+                console.log("item的值为" + item)
                 if (item == "0") {
                     this.allAddValueState = false;
                 }
@@ -186,7 +186,7 @@
                         this.dateList[i].empId = param.empId;
                     }
                 }
-                //console.log('员工：' + this.empId)
+                console.log('员工：' + this.empId)
             },
 
             //the event of addtional button
@@ -227,7 +227,7 @@
                         alert(res.retMsg);
                     }
                 }).catch((error) => {
-                    //console.log('预约提交请求失败')
+                    console.log('预约提交请求失败')
                 });
             },
             closeCurrentPage() {
@@ -411,12 +411,12 @@
             },
             printLog(value) {
                 var ch = this.$refs.elCalendarRef.$children[0].$children
-                //console.log(ch)
+                console.log(ch)
                 for (var i = 0; i < ch.length; i++) {
                     ch[i].disabled = true
                 }
-                //console.log()
-                //console.log(this.curDate)
+                console.log()
+                console.log(this.curDate)
 
             },
             //创建日期对象

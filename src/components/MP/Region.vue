@@ -57,7 +57,7 @@
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="subRegionContent">
-                <div class="modal-dialog">
+                <div class="modal-dialog wd1000">
                     <SubRegion ref='subRegion' @certainAction='feedBack'></SubRegion>
                 </div>
             </div>

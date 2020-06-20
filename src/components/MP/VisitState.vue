@@ -46,7 +46,7 @@
                         <tr>
                             <th class="text-center">访问类型</th>
                             <th class="text-center">状态类型</th>
-                            <th class="text-center">类型名</th>
+                            <th class="text-center">状态名</th>
                             <th class="text-center">是否停用</th>
                             <th class="text-center">修改</th>
 							 <!-- v-has="'SAMY:MP:Store:Update'" -->
@@ -74,7 +74,7 @@
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="vsContent">
-                <div class="modal-dialog">
+                <div class="modal-dialog wd1000">
                     <SubVs ref='vs' @certainAction='feedBack'></SubVs>
                 </div>
             </div>

@@ -148,7 +148,6 @@
 								<th class="text-center">姓名</th>
 								<th class="text-center">性别</th>
 								<th class="text-center">生日</th>
-								<th class="text-center">会员卡号</th>
 								<th class="text-center">店铺</th>
 								<th class="text-center">渠道</th>
 								<th class="text-center">咨询方向</th>
@@ -156,14 +155,7 @@
 								<th class="text-center">访问类型</th>
 								<th class="text-center">客户判定</th>
 								<th class="text-center">续流状态</th>
-								<!-- <th class="text-center">行业</th>
-								<th class="text-center">紧急联系人</th>
-								<th class="text-center">联系人电话</th>
-								<th class="text-center">微信号</th>
-								<th class="text-center">邮箱</th>
-								<th class="text-center">地址</th> -->
 								<th class="text-center">添加时间</th>
-								<!-- <th class="text-center">描述</th> -->
 								<th class="text-center">是否转会员</th>
 								<th class="text-center">联系电话</th>
 								<th class="text-center" v-has="'SAMY:MP:Visitor:Update'">修改</th>
@@ -172,8 +164,6 @@
 						<tbody>
 							<tr v-for="(item,index) in visitorList" :key="index" v-on:dblclick="selectRule('3',item)">
 								<td class="text-center editradio-box" v-has="'SAMY:MP:Visitor:Update'">
-									<!-- <button type="button" class="btn btn-warning" v-on:click="editorAction(item)">编辑
-                                </button> -->
 									<input :id="'edit'+(index+1)" class="editradio" type="radio" name="复选框" :value="index"
 									 v-model="checkedValue" />
 									<label :for="'edit'+(index+1)" class="editlabel"></label>
@@ -183,24 +173,16 @@
 								<td class="text-center">{{item.visitorName}}</td>
 								<td class="text-center">{{item.sex==1? "男":"女"}}</td>
 								<td class="text-center">{{item.birthday | dateFormatFilter("YYYY-MM-DD")}}</td>
-								<td class="text-center">{{item.memNum}}</td>
 								<td class="text-center">{{item.storeName}}</td>
 								<td class="text-center">{{item.channelName}}</td>
 								<td class="text-center">{{item.dtName}}</td>
 								<td class="text-center">{{item.empName}}</td>
-								<td class="text-center">{{item.visType==1?'初诊':'复诊'}}</td>
+								<td class="text-center">{{item.visType==1?'初访':'复访'}}</td>
 								<td class="text-center">{{item.vsIdJudgeName}}</td>
 								<td class="text-center">{{item.vsIdFlowName}}</td>
-								<!-- <td class="text-center">{{item.indName}}</td>
-								<td class="text-center">{{item.urgentName}}</td>
-								<td class="text-center">{{item.urgentPhone}}</td>
-								<td class="text-center">{{item.vnum}}</td>
-								<td class="text-center">{{item.email}}</td>
-								<td class="text-center">{{item.address}}</td> -->
 								<td class="text-center">{{item.createTime | dateFormatFilter("YYYY-MM-DD")}}</td>
-								<!-- <td class="text-center">{{item.marker}}</td> -->
 								<td class="text-center">
-									<button type="button" class="btn btn-warning" v-on:click="updateVisitorShiftMember(item)">
+									<button type="button" class="btn" :class="item.isMem==1?'btn-success':'btn-warning'" v-on:click="updateVisitorShiftMember(item)">
 										{{item.isMem==1?"已转会员":"未转会员"}}
 									</button>
 								</td>
@@ -228,7 +210,7 @@
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="visContent">
-				<div class="modal-dialog">
+				<div class="modal-dialog wd1000">
 					<subVis ref='subVis' @certainAction='feedBack6'></subVis>
 				</div>
 			</div>
@@ -242,35 +224,35 @@
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="customContent">
-				<div class="modal-dialog">
+				<div class="modal-dialog wd1000">
 					<custom ref='custom' @closeCurrentPage='feedBack5'></custom>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="refundContent">
-				<div class="modal-dialog">
+				<div class="modal-dialog wd1000">
 					<refund ref='refund' @closeCurrentPage='feedBack4'></refund>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="rechargeContent">
-				<div class="modal-dialog">
+				<div class="modal-dialog wd1000">
 					<recharge ref='recharge' @closeCurrentPage='feedBack3'></recharge>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="addSubOrderContent">
-				<div class="modal-dialog">
+				<div class="modal-dialog wd1000">
 					<addSubOrder ref='addSubOrder' @closeCurrentPage='feedBack2'></addSubOrder>
 				</div>
 			</div>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="subCdContent">
-				<div class="modal-dialog">
+				<div class="modal-dialog wd1000">
 					<subCd ref='subCd' @closeCurrentPage='feedBack1'></subCd>
 				</div>
 			</div>

@@ -8,31 +8,34 @@
 		<div class="modal-body  pos_r clearfix">
 			<div class="tab-pane fade in active martop clearfix" id="basic">
 
-					<div class="col-md-6 form-group ">
+					<div class="col-md-6 form-group clearfix jh-wd-33 ">
+
+						<b>*</b>
+
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >姓名</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="employee.empName" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix" v-show="accountType==true">
+					<div class="col-md-6 form-group clearfix jh-wd-33" v-show="accountType==true">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >门店</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<store ref="store" @storeChange='storeChange'></store>
 						</div>
 					</div>
-					<!-- <div class="col-md-6 form-group clearfix">
+					<!-- <div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" >手机号</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="employee.phone" placeholder="">
 						</div>
 					</div> -->
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label class="col-md-3 control-label text-right nopad end-aline" >年龄</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<input type="text" class="form-control" v-model="employee.age" placeholder="">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" >性别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="employee.sex">
@@ -41,13 +44,16 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
+
+						<b>*</b>
+
 						<label for="gh" class="col-md-3 control-label text-right nopad end-aline" >岗位</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<pos ref="pos" @positionChange='positionChange'></pos>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" >岗位级别</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="employee.level">
@@ -57,19 +63,19 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="gh" class="col-md-3 control-label text-right nopad end-aline" >角色</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<role ref="role" @urChange='roleChange'></role>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="gh" class="col-md-3 control-label text-right nopad end-aline" >上级</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<emp ref="emp" @employeeChange="employeeChange"></emp>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" >是否在用</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="employee.isuse">
@@ -79,7 +85,7 @@
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15" data-toggle="modal"
+						<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-45" data-toggle="modal"
 							v-on:click="closeCurrentPage()">返回</button>
 						<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
 							v-on:click="addEmp()">确认</button>
@@ -127,7 +133,7 @@
 			// Initialization employee’s content
 			initData(param, param2) {
 				if (param == 'add') {
-					//console.log('Initialization employee’s content, which adds employee')
+					console.log('Initialization employee’s content, which adds employee')
 					this.title = '新增'
 
 					this.employee = {
@@ -146,7 +152,7 @@
 					this.$refs.emp.setPosId(this.employee.posId)
 					// this.$refs.store.setStore(this.employee.storeId)
 				} else if (param == 'modify') {
-					//console.log('Initialization employee’s content, which modifies employee')
+					console.log('Initialization employee’s content, which modifies employee')
 					this.title='修改'
 
 					Object.assign(this.employee,param2)
@@ -198,7 +204,7 @@
 					this.employee.posId = ""
 				} else {
 					this.employee.posId = param.posId
-					// //console.log("父级ID"+param.parentId)
+					// console.log("父级ID"+param.parentId)
 					this.$refs.emp.setPosId(param.parentId)
 				}
 			},
@@ -246,7 +252,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					//console.log(res)
+					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('addEmp')
@@ -254,16 +260,16 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('员工请求失败')
+					console.log('员工请求失败')
 				});
 			},
 			closeCurrentPage() {
 				$("#emp").modal("hide")
-				//console.log('关闭添加员工界面')
+				console.log('关闭添加员工界面')
 			},
 			//Query employee's information based on the hosNum
 			conditionCheck(param) {
-				//console.log('checkhosNum')
+				console.log('checkhosNum')
 				if (this.isBlank(param)) {
 					return
 				}
@@ -281,7 +287,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					// //console.log(res)
+					// console.log(res)
 					if (res.retCode == '0000') {
 						if (res.retData != null) {
 							this.employee = res.retData
@@ -302,7 +308,7 @@
 						}
 					}
 				}).catch((error) => {
-					//console.log('请求失败处理')
+					console.log('请求失败处理')
 				});
 			},
 

@@ -107,7 +107,7 @@
       },
       //the event of addtional button
       purchaseHistory() {
-        //console.log('the event of addtional button')
+        console.log('the event of addtional button')
         if (this.isBlank(this.refundMoney)) {
           alert("退费金额不能为空")
           return
@@ -119,8 +119,8 @@
           this.balance=this.balance2;
           return;
         }
-        //console.log("this.balance2"+this.balance2);
-        //console.log("this.refundMoney"+this.refundMoney);
+        console.log("this.balance2"+this.balance2);
+        console.log("this.refundMoney"+this.refundMoney);
         if(parseFloat(this.balance2)<parseFloat(this.refundMoney)){
           alert("超出定金余额范围")
           this.refundMoney="";
@@ -148,7 +148,7 @@
           dataType: 'json',
         }).then((response) => {
           var res = response.data
-          //console.log(res)
+          console.log(res)
           if (res.retCode == '0000') {
             alert(res.retMsg)
             this.$emit('refundAction')
@@ -156,12 +156,12 @@
             alert(res.retMsg)
           }
         }).catch((error) => {
-          //console.log('请求失败处理')
+          console.log('请求失败处理')
         });
       },
       closeCurrentPage() {
         this.$emit('refundAction')
-        //console.log('定金退款界面')
+        console.log('定金退款界面')
       },
       jumpLeft(index){
         $("#aside-menu li").removeClass("li-active");
@@ -172,11 +172,11 @@
 
       //Query member's information based on the memNum
       checkMemNum(param) {
-        //console.log('checkMemNum')
+        console.log('checkMemNum')
         if (this.isBlank(param)) {
           return
         }
-        //console.log('费用类型3：' + this.consume.costType)
+        console.log('费用类型3：' + this.consume.costType)
         var url = this.url + '/purchasedItemsAction/queryMemUnfinished'
         this.$ajax({
           method: 'POST',
@@ -200,7 +200,7 @@
               this.consume.phone=this.member.phone
             }
             if(this.counselorList.length>0){
-              //console.log("有未完成的项目")
+              console.log("有未完成的项目")
               var counselorEmpId = this.counselorList[0].counselor
               this.$refs.counselorEmp.setEmp(counselorEmpId)
 
@@ -208,7 +208,7 @@
           }
 
         }).catch((error) => {
-          //console.log('会员查询请求失败')
+          console.log('会员查询请求失败')
         });
       },
 

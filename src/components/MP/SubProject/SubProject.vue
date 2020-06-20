@@ -7,55 +7,72 @@
         </div>
         <div class="modal-body  pos_r">
             <div class="tab-pane fade in active martop clearfix" id="basic">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
 
-                    <div class="col-md-6 form-group clearfix">
+						<b>*</b>
+
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">产品名称</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.proName" placeholder="">
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+
+						<b>*</b>
+
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">咨询师</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <emp ref='emp' @employeeChange='empChange'></emp>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+
+						<b>*</b>
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">总价</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.totalPrice" placeholder="">
                             <span class="pos-ab pos-tr">¥</span>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+
+						<b>*</b>
+
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">优惠后总价</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.discouAmount" placeholder="">
                             <span class="pos-ab pos-tr">¥</span>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+						<b>*</b>
+
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">单价</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.price" placeholder="">
                             <span class="pos-ab pos-tr">¥</span>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+
+						<b>*</b>
+
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">课时</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.frequency">
                             <span class="pos-ab pos-tr">H</span>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+						<b>*</b>
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">优惠比例</label><span class="sign-left">:</span>
                         <div class="col-md-8 pos-re">
                             <input type="text" class="form-control" v-model="project.discount" placeholder="">
                             <span class="pos-ab pos-tr">%</span>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+						<b>*</b>
                         <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">是否停用</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.state">
@@ -64,7 +81,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
                         <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">是否可退款</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.isRefund">
@@ -73,14 +90,14 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">到期时间</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.endDay">
                             <span class="pos-ab pos-tr">天</span>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
                         <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">咨询师等级</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.empLevel">
@@ -90,7 +107,10 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix">
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+
+						<b>*</b>
+
                         <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">产品类型</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.proType">
@@ -104,7 +124,7 @@
                         </div>
                     </div>
                     <div class="col-md-12 form-group clearfix">
-                        <button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15"
+                        <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-45"
                                 data-toggle="modal"
                                 v-on:click="closeCurrentPage()">返回
                         </button>
@@ -153,7 +173,7 @@
             // Initialization projcet’s content
             initData(param, project) {
                 if (param == 'add') {
-                    //console.log('Initialization project’s content, which adds project')
+                    console.log('Initialization project’s content, which adds project')
                     this.title = '新增'
                     this.project = {
                         proName: '',
@@ -174,7 +194,7 @@
                     this.$refs.emp.setPosName("咨询师")
                     this.$refs.emp.setEmp("")
                 } else if (param == 'modify') {
-                    //console.log('Initialization project’s content, which modifies project')
+                    console.log('Initialization project’s content, which modifies project')
                     this.title = '修改'
                     Object.assign(this.project, project)
                     this.$refs.emp.setPosName("咨询师")
@@ -192,7 +212,7 @@
             },
             //the event of addtional button
             certainAction() {
-                //console.log('the event of addtional button')
+                console.log('the event of addtional button')
 
                 if (this.isBlank(this.project.proName)) {
                     alert("产品名称不能为空!")
@@ -239,18 +259,18 @@
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
-                    //console.log(res)
+                    console.log(res)
                     if (res.retCode == '0000') {
                         alert(res.retMsg)
                         this.$emit('certainAction')
                     }
                 }).catch((error) => {
-                    //console.log('产品信息请提交失败')
+                    console.log('产品信息请提交失败')
                 });
             },
             closeCurrentPage() {
                 $("#projectContent").modal("hide")
-                //console.log('关闭添加产品界面')
+                console.log('关闭添加产品界面')
             },
         }
 

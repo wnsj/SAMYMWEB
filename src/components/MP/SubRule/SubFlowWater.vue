@@ -9,33 +9,33 @@
 			<div class="tab-pane fade in active martop" id="basic">
 				<form action="" class="clearfix">
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">岗位</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">岗位</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<pos ref='pos' @positionChange='posChange'></pos>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">提点</label><span class="sign-left">:</span>
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">提点</label><span class="sign-left">:</span>
 						<div class="col-md-8 pos-re">
 							<input type="text" class="form-control" v-model="FWRoyalty.turRoy" placeholder="">
 							<span class="pos-ab pos-tr">%</span>
 						</div>
 					</div>
-					<div class="col-md-9 form-group clearfix" style="text-align:left;">
-						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline" style="padding:0;line-height:34px;">额度级别</label><span class="sign-left">:</span>
+					<div class="col-md-9 form-group clearfix jh-ta-l">
+						<label for="cyname" class="col-md-2 control-label text-right nopad end-aline jh-ad-1">额度级别</label><span class="sign-left">:</span>
 						<div class="col-md-4 pos-re">
 							<input type="text" class="form-control" v-model="FWRoyalty.flowSmall" placeholder="">
 							<span class="pos-ab pos-tr">万</span>
 						</div> 
-						<div style="line-height:34px; float:left;">~</div>
+						<div class="jh-lh-34 jh-fl">~</div>
 						<div class="col-md-4 pos-re">
 							<input type="text" class="form-control" v-model="FWRoyalty.flowBig" placeholder="">
 							<span class="pos-ab pos-tr">万</span>
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-						<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction(title)">确认</button>
+						<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1"  data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+						<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"  data-toggle="modal" v-on:click="certainAction(title)">确认</button>
 					</div>
 				</form>
 			</div>
@@ -68,7 +68,7 @@
 			// Initialization patient’s content
 			initData(param,FWRoyalty) {
 				if(param=='add'){
-					//console.log('Initialization patient’s content, which adds patient')
+					console.log('Initialization patient’s content, which adds patient')
 					
 					this.title='新增'
 					this.FWRoyalty={
@@ -83,20 +83,20 @@
 					
 					this.title='修改';
 					Object.assign(this.FWRoyalty,FWRoyalty)
-					// //console.log('posId:'+FWRoyalty.posId)
+					// console.log('posId:'+FWRoyalty.posId)
 					this.$refs.pos.setPosId(FWRoyalty.posId)	
 				}
 			},
 			
 			//feedback position information
 			posChange:function(param){
-				// //console.log('岗位3：'+JSON.stringify(param))
+				// console.log('岗位3：'+JSON.stringify(param))
 				if(this.isBlank(param)){
 					this.FWRoyalty.posId=""
 				}else{
 					this.FWRoyalty.posId=param.posId
 				}
-				// //console.log('岗位4：'+this.FWRoyalty.posId)
+				// console.log('岗位4：'+this.FWRoyalty.posId)
 			},
 			
 			//the event of addtional button
@@ -132,13 +132,13 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					//console.log(res)
+					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('certainAction')
 					}
 				}).catch((error) => {
-					//console.log('添加流水规则失败')
+					console.log('添加流水规则失败')
 				});
 			},
 			closeCurrentPage(){

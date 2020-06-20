@@ -57,7 +57,7 @@
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="subEducationContent">
-                <div class="modal-dialog">
+                <div class="modal-dialog wd1000">
                     <SubEducation ref='subEducation' @certainAction='feedBack'></SubEducation>
                 </div>
             </div>

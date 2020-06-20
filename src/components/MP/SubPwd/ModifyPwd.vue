@@ -68,7 +68,7 @@
 				    alert("不能为初始密码!");
 				    return;
                 }
-				//console.log(JSON.stringify(this.accountData))
+				console.log(JSON.stringify(this.accountData))
 				this.accountData.accountPwd=this.accountPwd
 				var url = this.url+'/accountAction/updateAccount'
 
@@ -83,19 +83,19 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					//console.log(res)
+					console.log(res)
 					if (res.retCode == '0000') {
 						alert("修改成功,请重新登录!")
 						this.$emit("certainAction")
 						$(".modal-backdrop").hide();
 					}
 				}).catch((error) => {
-					//console.log('课程信息请提交失败')
+					console.log('课程信息请提交失败')
 				});
 			},
 			closeCurrentPage() {
 				$("#modifyPwd").modal("hide")
-				//console.log('关闭修改密码界面')
+				console.log('关闭修改密码界面')
 			},
 		}
 

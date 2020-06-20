@@ -363,7 +363,7 @@
 					time23: false,
 				}
 				if (param == 'add') {
-					//console.log('Initialization order’s content, which adds order')
+					console.log('Initialization order’s content, which adds order')
 					this.title = '新增'
 
 					this.counselorList = []
@@ -373,7 +373,7 @@
 					this.$refs.project.setEmpId("0")
 					this.$refs.project.setProject("0")
 				} else if (param == 'modify') {
-					//console.log('Initialization order’s content, which modifies order')
+					console.log('Initialization order’s content, which modifies order')
 					this.title = '修改'
 					Object.assign(this.orderClick, order)
 					this.checkEmpSchedule()
@@ -384,7 +384,7 @@
 				}
 			},
 			itemAction(item, index) {
-				//console.log("item:" + JSON.stringify(item) + index)
+				console.log("item:" + JSON.stringify(item) + index)
 			},
 			modifyOrder() {
 				this.numArr=[]
@@ -395,10 +395,10 @@
 						this.numArr.push(i)
 					}
 				}
-				// //console.log('orderCounselorOld:' + JSON.stringify(this.orderCounselorOld))
+				// console.log('orderCounselorOld:' + JSON.stringify(this.orderCounselorOld))
 			},
 			setOrder(index, value) {
-				//console.log("param:" + index + value)
+				console.log("param:" + index + value)
 				var timeParam = 'time'.concat(index)
 				var isContain = false //是否包含,false:不包含，true：包含，
 				var numIndex = 0 //第几个
@@ -417,17 +417,17 @@
 					} else {
 						this.numArr.push(index)
 					}
-					//console.log(this.numArr)
+					console.log(this.numArr)
 				} else {
 					this.numArr.push(index)
 				}
 				this.orderClick[timeParam] = !value
-				// //console.log('orderClick:'+JSON.stringify(this.orderClick))
+				// console.log('orderClick:'+JSON.stringify(this.orderClick))
 			},
 
 			//feedback employee information
 			projectChange: function(param) {
-				// //console.log('科室：'+JSON.stringify(param))
+				// console.log('科室：'+JSON.stringify(param))
 				if (this.isBlank(param)) {
 					this.orderClick.proId = ""
 				} else {
@@ -445,7 +445,7 @@
 			},
 			//feedback employee information
 			counlorEmpChange: function(param) {
-				// //console.log('科室：'+JSON.stringify(param))
+				// console.log('科室：'+JSON.stringify(param))
 				if (this.isBlank(param)) {
 					this.orderClick.empId = ""
 				} else {
@@ -460,7 +460,7 @@
 				var reg =
 					/(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 
-				// //console.log('orderClick:'+JSON.stringify(this.orderClick))
+				// console.log('orderClick:'+JSON.stringify(this.orderClick))
 				if (this.isBlank(this.orderClick.appName)) {
 					alert("姓名不能为空")
 					return
@@ -497,7 +497,7 @@
 					this.numArr=this.numArr.sort(function(a,b){
 						return a-b;
 					})
-					//console.log(this.numArr)
+					console.log(this.numArr)
 					if(this.numArr[this.numArr.length-1]-this.numArr[0]!=this.numArr.length-1){
 						alert('预约时间之间不能有间隔')
 						return
@@ -535,12 +535,12 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('预约提交请求失败')
+					console.log('预约提交请求失败')
 				});
 			},
 			closeCurrentPage() {
 				$("#orderContent").modal("hide")
-				//console.log('关闭添加患者界面')
+				console.log('关闭添加患者界面')
 			},
 			//咨询师排班
 			checkEmpSchedule() {
@@ -549,7 +549,7 @@
 				} else {
 					this.order.appDate = ''
 				}
-				//console.log("schedulingDate:" + this.orderClick.appDate)
+				console.log("schedulingDate:" + this.orderClick.appDate)
 
 				var url = this.url + '/schedulingAction/querySchedulingByEmpIdOrTime'
 				this.$ajax({
@@ -578,15 +578,15 @@
 							alert("没有排班信息，请给咨询师排完班在进行预约")
 						}
 					} else {
-						//console.log('没有查到员工排班信息')
+						console.log('没有查到员工排班信息')
 					}
 				}).catch((error) => {
-					//console.log('员工排班信息查询失败')
+					console.log('员工排班信息查询失败')
 				});
 			},
 			//Query member's information based on the memNum
 			checkMemNum(param) {
-				//console.log('checkMemNum')
+				console.log('checkMemNum')
 				if (this.isBlank(param)) {
 					return
 				}
@@ -606,7 +606,7 @@
 					var res = response.data
 					if (res.retCode == '0000') {
 						var member = res.retData.mem
-						// //console.log('member'+JSON.stringify(member))
+						// console.log('member'+JSON.stringify(member))
 						var counselorList = res.retData.counselorList
 						if (member != null) {
 							this.orderClick.memNum = member.memNum
@@ -614,20 +614,20 @@
 							this.orderClick.phone = member.phone
 						}
 						if (counselorList.length > 0) {
-							//console.log("有未完成的项目")
+							console.log("有未完成的项目")
 							this.orderClick.empId = counselorList[0].counselor
 							this.$refs.counlorEmp.setEmp(this.orderClick.empId)
 						} else {
 							alert("没有未完成的项目，可以直接进行预约")
 						}
 					} else {
-						//console.log('没有查到会员信息，请添加会员后充值')
+						console.log('没有查到会员信息，请添加会员后充值')
 						this.consume.appName = ''
 						this.consume.phone = ''
 					}
 
 				}).catch((error) => {
-					//console.log('会员查询请求失败')
+					console.log('会员查询请求失败')
 				});
 			},
 

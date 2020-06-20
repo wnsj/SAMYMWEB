@@ -8,7 +8,7 @@
 		<div class="modal-body  pos_r clearfix">
 			<div class="tab-pane fade in active martop " id="basic">
 
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">姓名</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
@@ -16,7 +16,7 @@
 						</div>
 					</div>
 
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">手机号</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
@@ -57,7 +57,7 @@
 					<div class="col-md-12 form-group clearfix text-left padding-top-20">
 						<h4 id="myModalLabel" class="modal-title">退费合计：</h4>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<b>*</b>
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">退费课时</label><span
 						 class="sign-left">:</span>
@@ -65,7 +65,7 @@
 							<input type="text" class="form-control" v-model="refund.consumCount" @change="receivableAction()">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">退费金额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
@@ -73,7 +73,7 @@
 						</div>
 					</div>
 
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<b>*</b>
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">实退总额</label><span
 						 class="sign-left">:</span>
@@ -82,7 +82,7 @@
 						</div>
 					</div>
 
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<b>*</b>
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">违约总额</label><span
 						 class="sign-left">:</span>

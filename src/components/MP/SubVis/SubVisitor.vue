@@ -3,7 +3,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h4 id="myModalLabel" class="modal-title">{{title}}咨客</h4>
+			<h4 id="myModalLabel" class="modal-title">{{title}}客户</h4>
 		</div>
 		<div class="modal-body  pos_r jh-mh-sc">
 			<div class="tab-pane fade in active martop" id="basic">
@@ -62,8 +62,6 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1" >接待人</label><span class="sign-left">:</span>
-
 						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">接待人</label><span class="sign-left">:</span>
 
@@ -72,9 +70,17 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix jh-wd-33">
+						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">访问状态</label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<select class="form-control" v-model="visitor.visType">
+								<option value="1">初访</option>
+								<option value="2">复访</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">咨客判定</label><span class="sign-left">:</span>
-
 						<div class="col-md-8">
 							<visStateJudge ref="visStateJudge" @objectChange="judgeChange"></visStateJudge>
 						</div>
@@ -207,7 +213,7 @@
 					vsIdFlow: '',
 					consDirection: '',
 					empId: '',
-					// visType:'1',
+					visType:'1',
 					indId: '',
 					storeId: this.storeId(),
 					urgentName: '',
@@ -224,8 +230,6 @@
 		methods: {
 			// Initialization visitor’s content
 			initData(param, visitorContent) {
-				this.$refs.visStateJudge.getObj('1', '1')
-				this.$refs.visStateFlow.getObj('1', '2')
 				this.visitor = {
 					visitorName: '',
 					sex: '1',
@@ -257,6 +261,8 @@
 					this.$refs.cha.setChaId('0')
 					this.$refs.DiseaseType.setObj('0')
 					this.$refs.emp.setEmp("")
+					this.$refs.visStateJudge.getObj('1', '1')
+					this.$refs.visStateFlow.getObj('1', '2')
 					this.$refs.visStateJudge.setObj('0')
 					this.$refs.visStateFlow.setObj('0')
 					this.$refs.ind.setInd('0')
@@ -271,6 +277,8 @@
 					this.$refs.cha.setChaId(this.visitor.chaId)
 					this.$refs.DiseaseType.setObj(this.visitor.dtId)
 					this.$refs.emp.setEmp(this.visitor.empId)
+					this.$refs.visStateJudge.getObj(this.visitor.visType,'1')
+					this.$refs.visStateFlow.setObj(this.visitor.visType,'2')
 					this.$refs.visStateJudge.setObj(this.visitor.vsIdJudge)
 					this.$refs.visStateFlow.setObj(this.visitor.vsIdFlow)
 					this.$refs.ind.setInd(this.visitor.indId)
@@ -369,8 +377,19 @@
 
 
 				if (this.isBlank(this.visitor.visitorName)) {
-					alert("咨客姓名不能为空")
+					alert("客户姓名不能为空")
 					return
+				}
+				if (this.isBlank(this.visitor.phone)) {
+					alert("联系人电话不能为空")
+					return
+				} else if (reg.test(this.visitor.phone) == false) {
+					if (this.title == '新增') {
+						alert("不是完整的11位手机号或者正确的座机号！");
+						return
+					} else {
+						this.visitor.phone = null
+					}
 				}
 				if(this.isBlank(this.visitor.birthday)){
 					this.visitor.birthday=null
@@ -385,15 +404,19 @@
 					this.visitor.reId=null
 				}
 				if (this.isBlank(this.visitor.dtId)) {
-					alert("咨客的咨询方向不能为空")
+					alert("客户的咨询方向不能为空")
 					return
 				}
 				if (this.isBlank(this.visitor.chaId)) {
-					alert("咨客的来源渠道不能为空")
+					alert("客户的来源渠道不能为空")
+					return
+				}
+				if (this.isBlank(this.visitor.visType)) {
+					alert("访问状态不能为空")
 					return
 				}
 				if (this.isBlank(this.visitor.vsIdJudge) || this.visitor.vsIdJudge == '0') {
-					alert("咨客判定不能为空")
+					alert("客户判定不能为空")
 					return
 				}
 				if (this.isBlank(this.visitor.vsIdFlow) || this.visitor.vsIdFlow == '0') {
@@ -404,17 +427,7 @@
 					alert("接待人不能为空")
 					return
 				}
-				if (this.isBlank(this.visitor.phone)) {
-					alert("联系人电话不能为空")
-					return
-				} else if (reg.test(this.visitor.phone) == false) {
-					if (this.title == '新增') {
-						alert("不是完整的11位手机号或者正确的座机号！");
-						return
-					} else {
-						this.visitor.phone = null
-					}
-				}
+				
 				if (this.visitor.address.length > 100) {
 					alert('地址的长度不能超过100个字')
 					return
@@ -446,7 +459,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('添加或者修改咨客信息失败')
+					//console.log('添加或者修改客户信息失败')
 				});
 			},
 

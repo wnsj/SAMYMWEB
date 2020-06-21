@@ -55,7 +55,7 @@
                         <tbody>
                         <tr v-for="(item,index) in objList" :key="index" v-on:dblclick="selectRule('3',item)">
                             <td class="text-center">{{item.vsType==1 ? "初访" : "复访"}}</td>
-                            <td class="text-center">{{item.stateType==1 ? "咨客判定" : "续流状态"}}</td>
+                            <td class="text-center">{{item.stateType==1 ? "客户判定" : "续流状态"}}</td>
 							<td class="text-center">{{item.vsName}}</td>
                             <td class="text-center">{{item.isUse==1 ? "在用" : "停用"}}</td>
                             <td class="text-center">

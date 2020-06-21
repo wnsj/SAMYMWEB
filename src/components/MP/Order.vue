@@ -201,7 +201,7 @@
             </div>
             <div class="modal fade" id="addAppointContent">
                 <div class="modal-dialog wd1000">
-                    <AddSubOrder ref="AddSubOrderRef" @addOrder='feedBack'></AddSubOrder>
+                    <AddSubOrder ref="AddSubOrderRef" @closeCurrentPage='feedBack'></AddSubOrder>
                 </div>
             </div>
             <div class="modal fade" id="showPhoneContent">
@@ -355,8 +355,8 @@
                         if (!confirm('是否确认取消')) {
                             return
                         }
-                        obj.state = 1
-                        url = this.url + '/appointmentAction/deleteAppointment'
+                        obj.state = 0
+                        url = this.url + '/appointmentAction/updateAppoint'
                     }
                 } else if (param == 'arrival') {
                     if (item.arrival != '1') {
@@ -533,7 +533,7 @@
                 }
             },
             againAdd(item) {
-                this.$refs.AddSubOrderRef.initData(item)
+                this.$refs.AddSubOrderRef.initData('againAdd',item)
                 $("#addAppointContent").modal('show')
             },
             queryPhone(item) {

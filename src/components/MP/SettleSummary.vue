@@ -12,12 +12,6 @@
 					<store ref='store' @storeChange='storeChange'></store>
 				</div>
 			</div>
-			<!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right nopad">
-					<p class="end-aline col-md-11 col-lg-11" >会员卡号</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memNum"></div>
-			</div> -->
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right nopad">
 					<p class="end-aline col-md-11 col-lg-11" >姓名</p><span class="sign-left">:</span>
@@ -25,14 +19,6 @@
 				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memName"></div>
 			</div>
 
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right nopad">
-					<p class="end-aline col-md-11 col-lg-11" >手机号</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-md-7 col-lg-7">
-					<input class="form-control" type="text" value="" v-model="phone">
-				</div>
-			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 			    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
 			        <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span class="sign-left">:</span>
@@ -71,9 +57,7 @@
 						<table class="table table-bordered table-hover user-table" id="datatable">
 							<thead class="datathead">
 								<tr>
-									<!-- <th class="text-center">会员卡号</th> -->
 									<th class="text-center">姓名</th>
-									<!-- <th class="text-center">手机号</th> -->
 									<th class="text-center">产品名称</th>
 									<th class="text-center">单价</th>
 									<th class="text-center">课时(小时)</th>
@@ -85,22 +69,20 @@
 							</thead>
 							<tbody>
 								<tr v-for="(item2,index2) in consumeList" :key="index2">
-									<!-- <td>{{item2.memNum}}</td> -->
 									<td>{{item2.memName}}</td>
-									<!-- <td>{{item2.phone}}</td> -->
 									<td>{{item2.proName}}</td>
 									<td>{{item2.price}}</td>
 									<td>{{item2.consumCount}}</td>
 									<td>{{item2.discount}}</td>
-									<td>{{item2.zsum}}</td>
-									<td>{{item2.empName}}</td>
-									<td>{{item2.creatDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+									<td>{{item2.realCross}}</td>
+									<td>{{item2.counselorName}}</td>
+									<td>{{item2.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
                     <div class="row">
-                        <div class="col-md-3 col-lg-3">
+                        <!-- <div class="col-md-3 col-lg-3">
                             <p class="tips tips-font-20">总课时数：{{consumCountTotal}} 小时</p>
                         </div>
                         <div class="col-md-3 col-lg-3">
@@ -111,7 +93,7 @@
                         </div>
                         <div class="col-md-3 col-lg-3" v-show="showHours">
                             <p class="tips tips-font-20">未消费课时：{{unusedHours}} 小时</p>
-                        </div>
+                        </div> -->
                     </div>
 					<!--分页插件-->
 					<div class="page">
@@ -261,7 +243,7 @@
 				if (this.isBlank(page)) {
 					page = 1
 				}
-				var url = this.url + '/accountRecordAction/consumptionSummary'
+				var url = this.url + '/consumAction/queryConsum'
 				//console.log("page=" + page)
 				this.$ajax({
 					method: 'POST',
@@ -273,36 +255,37 @@
 					data: {
 						storeId: this.storeId,
 						memName: this.memName,
-						memNum: this.memNum,
-						phone: this.phone,
-						begCreateDate: this.begCreateDate,
-						endCreateDate: this.endCreateDate,
+						counselor:this.empId,
+						
+						actualBegDate: this.begCreateDate,
+						actualEndDate: this.endCreateDate,
 
 						page: page.toString(),
 						pageSize: this.pageSize,
-                        empId:this.empId
+                        
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					//console.log(res);
 					if (res.retCode == '0000') {
 
-						this.pages = res.retData.pageRows.pages //总页数
-						this.current = res.retData.pageRows.current //当前页码
-						this.pageSize = res.retData.pageRows.size //一页显示的数量  必须是奇数
-						this.total = res.retData.pageRows.total //数据的数量
+						this.pages = res.retData.pages //总页数
+						this.current = res.retData.current //当前页码
+						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
+						this.total = res.retData.total //数据的数量
 						this.$refs.paging.setParam(this.pages, this.current, this.total)
-						this.consumeList = res.retData.pageRows.records;
-						if(res.retData.poolSum!=null){
-                            this.consumCountTotal=res.retData.poolSum.consumCountTotal
-                            this.sumTotal=res.retData.poolSum.sumTotal
-                        }else {
-                            this.consumCountTotal='0'
-                            this.sumTotal='0'
-                        }
+						this.consumeList = res.retData.records
+// 						if(res.retData.poolSum!=null){
+//                             this.consumCountTotal=res.retData.poolSum.consumCountTotal
+//                             this.sumTotal=res.retData.poolSum.sumTotal
+//                         }else {
+//                             this.consumCountTotal='0'
+//                             this.sumTotal='0'
+//                         }
 
 
+					}else{
+						console.log('sdfas')
 					}
 				}).catch((error) => {
 					//console.log('请求失败处理')

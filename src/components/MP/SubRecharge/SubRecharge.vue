@@ -476,7 +476,7 @@
 					return
 				}
 				if (this.isBlank(this.consume.empId)) {
-					alert("维护人不能为空")
+					alert("顾问不能为空")
 					return
 				}
 				if (this.isBlank(this.consume.cashId)) {
@@ -698,7 +698,6 @@
 			}
 		},
 		mounted() {
-			console.log("------------------------------")
 			var H = window.innerHeight;
 			$(".modal-body").css({'maxHeight':H*.81})
 		},

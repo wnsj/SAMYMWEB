@@ -303,11 +303,12 @@
                 ]
             };
         },
+		
         methods: {
             initData(flag,param) {
 				$('#addSubOrderContent').modal({backdrop: 'static', keyboard: false});
                 this.numArr = []
-				console.log(param)
+				// console.log(param)
                 if (flag == 'againAdd') {
                     this.$refs.counlorEmp.setPosName("咨询师")
                     this.$refs.counlorEmp.setEmp(param.empId)
@@ -447,6 +448,7 @@
 
             //the event of addtional button
             addOrder(param) {
+				
                 if (this.isBlank(this.orderClick.empId)) {
                     alert('咨询师不能为空')
                     return

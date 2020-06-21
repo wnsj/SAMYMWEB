@@ -497,7 +497,7 @@
 					return
 				}
 				if (this.isBlank(this.consume.empId)) {
-					alert("维护人不能为空!")
+					alert("顾问不能为空!")
 					return
 				}
 				if (this.isBlank(this.consume.consumCount)) {
@@ -797,10 +797,7 @@
 			computedRealCross() {
 				if (this.counselorFlag == true) {
 					this.consume.realCross = this.consume.consumCount * this.consume.price
-				} else {
-					this.consume.realCross = ''
-				}
-
+				} 
 			},
 			checkMemCash(param) {
 				if (this.isBlank(param)) {

@@ -397,13 +397,7 @@
                     alert("姓名不能为空")
                     return
                 }
-                if (this.isBlank(this.order.phone)) {
-                    alert("手机号不能为空")
-                    return
-                } else if (reg.test(this.order.phone) == false) {
-                    alert("不是完整的11位手机号或者正确的座机号！");
-                    return
-                }
+                
 
                 if (this.isBlank(this.order.empId)) {
                     alert('咨询师不能为空')

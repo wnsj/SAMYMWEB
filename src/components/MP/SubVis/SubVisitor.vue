@@ -375,7 +375,6 @@
 				var reg =
 					/(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)/;
 
-
 				if (this.isBlank(this.visitor.visitorName)) {
 					alert("客户姓名不能为空")
 					return
@@ -383,14 +382,17 @@
 				if (this.isBlank(this.visitor.phone)) {
 					alert("联系人电话不能为空")
 					return
-				} else if (reg.test(this.visitor.phone) == false) {
-					if (this.title == '新增') {
-						alert("不是完整的11位手机号或者正确的座机号！");
-						return
-					} else {
-						this.visitor.phone = null
+				}else{
+					if(this.visitor.phone.indexOf("****") !=-1){  //==-1不包含
+						this.visitor.phone=null
+					}else{
+						if(reg.test(this.visitor.phone) == false){
+							alert("不是完整的11位手机号或者正确的座机号！");
+							return
+						}
 					}
-				}
+				} 
+				return
 				if(this.isBlank(this.visitor.birthday)){
 					this.visitor.birthday=null
 				}

@@ -74,7 +74,7 @@
                     <store ref='store' @storeChange='storeChange'></store>
                 </div>
             </div>
-            <button type="button" class="btn btn-warning pull-right m_r_10 margin-right-25"
+            <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-30"
                     data-toggle="modal"
                     v-on:click="selectRule('1')" v-has="'SAMY:MP:ScheduleEmp:Add'">添加排班
             </button>

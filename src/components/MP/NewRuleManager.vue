@@ -22,7 +22,7 @@
                     <el-button type="primary" @click="queryRole"><i
                         class="el-icon-zoom-in"></i> 查询
                     </el-button>
-                    <el-button type="warning" @click="dialogAddRole = true,roleData = {}" v-has="'SAMY:MP:NewRuleManager:Add'"><i
+                    <el-button type="warning" class=" jh-fr" @click="dialogAddRole = true,roleData = {}" v-has="'SAMY:MP:NewRuleManager:Add'"><i
                         class="el-icon-circle-plus-outline"></i> 添加
                     </el-button>
                 </el-col>

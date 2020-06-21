@@ -102,7 +102,7 @@
                     </select>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15"
+            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-30"
                     data-toggle="modal"
                     @click="checkOrderList(1)">查询
             </button>
@@ -194,13 +194,13 @@
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="orderContent">
-                <div class="modal-dialog">
+                <div class="modal-dialog wd1000">
                     <!-- <SubOrder ref='order' @addOrder='feedBack'></SubOrder> -->
                     <UpdateSubOrder ref="UpdateSubOrderRef" @addOrder='feedBack'></UpdateSubOrder>
                 </div>
             </div>
             <div class="modal fade" id="addAppointContent">
-                <div class="modal-dialog">
+                <div class="modal-dialog wd1000">
                     <AddSubOrder ref="AddSubOrderRef" @closeCurrentPage='feedBack'></AddSubOrder>
                 </div>
             </div>

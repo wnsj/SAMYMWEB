@@ -226,8 +226,9 @@ body{
     margin-top: 15px;
     padding-bottom:1.5%;
 }
+.jh-wd-33{width:33% !important; margin-bottom: 10px !important;}
 .jh-mb-0{
-    margin-bottom:0;
+    margin-bottom:0 !important;
 }
 .jh-mr0{
     margin-right:0;
@@ -246,6 +247,9 @@ body{
 }
 .jh-mr-35{
     margin-right:35px;
+}
+.jh-mr-30{
+    margin-right:30px !important;
 }
 .jh-mr-45{
     margin-right:45px;
@@ -267,7 +271,7 @@ body{
     float: left;
 }
 .jh-fr{
-    float:right;
+    float:right !important;
 }
 .jh-mt-15{
     margin-top: 15px;
@@ -321,4 +325,3 @@ body{
     margin-bottom: 20px;
     line-height: 25px;
 }
-.jh-wd-33{width:33% !important; margin-bottom: 10px !important;}

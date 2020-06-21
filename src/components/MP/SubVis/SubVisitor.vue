@@ -392,7 +392,6 @@
 						}
 					}
 				} 
-				return
 				if(this.isBlank(this.visitor.birthday)){
 					this.visitor.birthday=null
 				}

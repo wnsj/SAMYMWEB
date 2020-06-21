@@ -399,6 +399,7 @@
                         sex:param.sex,
                     }
                 }
+				this.checkMemNum()
             },
             itemAction(item, index) {
                 console.log("item:" + JSON.stringify(item) + index)

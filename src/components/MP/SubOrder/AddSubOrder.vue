@@ -95,98 +95,79 @@
                         </div>
 
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time4Mod}">
-                            
                             <input type="checkbox" id="checkbox4" v-model="order.time4" class="form-control" :disabled="order.time4Mod" v-on:click="setOrder(4,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox4">{{timeArr[3]}}</label>
                         </div>
 
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time5Mod}">
-                            
                             <input type="checkbox" id="checkbox5" v-model="order.time5" class="form-control" :disabled="order.time5Mod" v-on:click="setOrder(5,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox5">{{timeArr[4]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time6Mod}">
-                            
                             <input type="checkbox" id="checkbox6" v-model="order.time6" class="form-control" :disabled="order.time6Mod" v-on:click="setOrder(6,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox6">{{timeArr[5]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time7Mod}">
-                            
                             <input type="checkbox"  id="checkbox7" v-model="order.time7" class="form-control" :disabled="order.time7Mod" v-on:click="setOrder(7,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox7">{{timeArr[6]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time8Mod}">
-                            
                             <input type="checkbox" id="checkbox8" v-model="order.time8" class="form-control" :disabled="order.time8Mod" v-on:click="setOrder(8,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox8">{{timeArr[7]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time9Mod}">
-                            
                             <input type="checkbox"  id="checkbox9" v-model="order.time9" class="form-control" :disabled="order.time9Mod" v-on:click="setOrder(9,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox9">{{timeArr[8]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time10Mod}">
-                            
                             <input type="checkbox"  id="checkbox10" v-model="order.time10" class="form-control" :disabled="order.time10Mod" v-on:click="setOrder(10,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox10">{{timeArr[9]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time11Mod}"> 
-                            
                             <input type="checkbox"  id="checkbox11" v-model="order.time11" class="form-control" :disabled="order.time11Mod" v-on:click="setOrder(11,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox11">{{timeArr[10]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time12Mod}">
-                            
                             <input type="checkbox"  id="checkbox12" v-model="order.time12" class="form-control" :disabled="order.time12Mod" v-on:click="setOrder(12,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox12">{{timeArr[11]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time13Mod}">
-                            
                             <input type="checkbox"  id="checkbox13" v-model="order.time13" class="form-control" :disabled="order.time13Mod" v-on:click="setOrder(13,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox13">{{timeArr[12]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time14Mod}">
-                            
                             <input type="checkbox"  id="checkbox14" v-model="order.time14" class="form-control" :disabled="order.time14Mod" v-on:click="setOrder(14,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox14">{{timeArr[13]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time15Mod}">
-                            
                             <input type="checkbox"  id="checkbox15" v-model="order.time15" class="form-control" :disabled="order.time15Mod" v-on:click="setOrder(15,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox15">{{timeArr[14]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time16Mod}">
-                            
                             <input type="checkbox"  id="checkbox16" v-model="order.time16" class="form-control" :disabled="order.time16Mod" v-on:click="setOrder(16,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox16">{{timeArr[15]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time17Mod}">
-                            
                             <input type="checkbox"  id="checkbox17" v-model="order.time17" class="form-control" :disabled="order.time17Mod" v-on:click="setOrder(17,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox17">{{timeArr[16]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time18Mod}">
-                            
                             <input type="checkbox"  id="checkbox18" v-model="order.time18" class="form-control" :disabled="order.time18Mod" v-on:click="setOrder(18,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox18">{{timeArr[17]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time19Mod}">
-                            
                             <input type="checkbox"  id="checkbox19" v-model="order.time19" class="form-control" :disabled="order.time19Mod" v-on:click="setOrder(19,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox19">{{timeArr[18]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time20Mod}">
-                           
                             <input type="checkbox"  id="checkbox20" v-model="order.time20" class="form-control" :disabled="order.time20Mod" v-on:click="setOrder(20,order)">
                              <label class="col-md-8 control-label text-right nopad" for="checkbox20">{{timeArr[19]}}</label>
                         </div>
                         <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time21Mod}">
-                            
                             <input type="checkbox"  id="checkbox21" v-model="order.time21" class="form-control" :disabled="order.time21Mod" v-on:click="setOrder(21,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox21">{{timeArr[20]}}</label>
                         </div>
-                        <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time22Mod}">
-                            
+                        <div class="col-md-3 form-group clearfix btnBg jh-ad-0" :class="{'dislab':order.time22Mod}">     
                             <input type="checkbox"  id="checkbox22" v-model="order.time22" class="form-control" :disabled="order.time22Mod" v-on:click="setOrder(22,order)">
                             <label class="col-md-8 control-label text-right nopad" for="checkbox22">{{timeArr[21]}}</label>
                         </div>

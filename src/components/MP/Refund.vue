@@ -33,7 +33,7 @@
 				</dPicker>
            	</div>
            </div>
-            <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15"
+            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-30"
                     data-toggle="modal"
                     v-on:click="queryObjectList(1)">查询
             </button>

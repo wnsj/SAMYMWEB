@@ -65,7 +65,7 @@
                     </select>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
+            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-35"
                     data-toggle="modal"
                     v-on:click="checkMember(1)">查询
             </button>

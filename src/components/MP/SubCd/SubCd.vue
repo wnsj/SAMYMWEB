@@ -255,7 +255,7 @@
 </script>
 
 <style>
-    .subcd-h65{width:65%;}
+    .subcd-h65{width:67%;}
     .pos-tr {
         top: 0;
         right: 20px;

@@ -32,7 +32,7 @@
                     <p class="end-aline col-md-11 col-lg-11 jh-pa-1">开始时间</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
-                    <dPicker class="wdi100" v-model="begCreateDate"></dPicker>
+                    <dPicker class="wd100" v-model="begCreateDate"></dPicker>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                     <p class="end-aline col-md-11 col-lg-11 jh-pa-1">结束时间</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-md-7 col-lg-7">
-                    <dPicker class="wdi100" v-model="endCreateDate"></dPicker>
+                    <dPicker class="wd100" v-model="endCreateDate"></dPicker>
                 </div>
             </div>
             <div class="col-xs-13 col-sm-13 col-md-13 col-lg-13 jh-pa-2">
@@ -82,6 +82,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <p class="tips ">* 双击单行，可查看会员的充值、消费、退费详情</p>
                     <!--分页插件-->
                     <div class="page">
                         <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
@@ -90,7 +91,7 @@
                 </nobr>
             </div>
             <div class="col-md-12 col-lg-12 posAb">
-                <p class="tips ">* 双击单行，可查看会员的充值、消费、退费详情</p>
+                
             </div>
         </div>
 

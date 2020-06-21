@@ -14,16 +14,6 @@
 						<input type="text" class="form-control" v-model="consume.memName" disabled="true">
 					</div>
 				</div>
-				<!--				<div class="col-md-6 form-group clearfix jh-wd-33">-->
-				<!--					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >会员卡号</label><span-->
-				<!--					 class="sign-left">:</span>-->
-				<!--					<div class="col-md-7">-->
-				<!--						<input type="text" class="form-control" v-model="member.memNum" v-on:change="checkMemNum(member.memNum)"-->
-				<!--						 placeholder="卡号/手机号后4位">-->
-				<!--					</div>-->
-				<!--				</div>-->
-
-
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >手机号</label><span
 					 class="sign-left">:</span>
@@ -32,12 +22,14 @@
 					</div>
 				</div>
 				<div v-show="unfinishedProList.length > 0">
-					<div class="col-md-6 form-group clearfix jh-wd-33">
+					<div class="col-md-12  clearfix jh-ad-0">
+						<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >已购产品</label><span
 						 class="sign-left">:</span>
+						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix text-left">
-						<table class="table table-bordered table-hover">
+						<table class="table table-bordered table-hover jh-mb-0">
 							<thead class="datathead">
 								<tr>
 									<td></td>
@@ -240,7 +232,7 @@
 				</div>
 			</div>
 			<div class="col-md-12 clearfix jh-ad-0" v-show="cash.balance>0">
-				<div class="col-md-6 clearfix" v-show="cash.balance>0">
+				<div class="col-md-6 clearfix jh-wd-33" v-show="cash.balance>0">
 					<label class="col-md-4 control-label text-right nopad end-aline" >
 						定金抵扣
 					</label>
@@ -249,7 +241,7 @@
 						<input type="text" class="form-control" v-model="cash.select" id="earn" @keyup.enter="count" @input="count($event)" />
 					</div>
 				</div>
-				<div class="col-md-6 clearfix">
+				<div class="col-md-6 clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >定金余额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">

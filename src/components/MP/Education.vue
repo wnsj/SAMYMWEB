@@ -5,21 +5,21 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">学历管理</h1>
         </div>
-        <div class="row" style="margin-top: 40px;padding-bottom:1.5%;">
+        <div class="row jh-mp-1">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding: 0; line-height: 34px;">
-                    <p class="end-aline col-md-11 col-lg-11" style="padding-right:5px; padding-left:20px;">学历名称</p><span
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">学历名称</p><span
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                     <input class="form-control" type="text" v-model="eduName">
                 </div>
             </div>
-            <button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;"
+            <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-30"
                     data-toggle="modal"
                     v-on:click="selectRule('1')" v-has="'SAMY:MP:Store:Add'">添加
             </button>
-            <button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;"
+            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
                     data-toggle="modal"
                     v-on:click="queryEducationList()">查询
             </button>

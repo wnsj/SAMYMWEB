@@ -104,9 +104,9 @@
                                 </button>
 
                                 <button type="button" class="btn btn-danger" v-on:click="refundModel(item)" v-has="'SAMY:MP:CashDeposit:Refund'">退费</button>
-                                <button v-if="item.memNum==null||item.memNum==''" type="button" class="btn btn-primary"
-                                        v-on:click="transferMember(item)" v-has="'SAMY:MP:CashDeposit:ZhuanMember'">转会员
-                                </button>
+<!--                                <button v-if="item.memNum==null||item.memNum==''" type="button" class="btn btn-primary"-->
+<!--                                        v-on:click="transferMember(item)" v-has="'SAMY:MP:CashDeposit:ZhuanMember'">转会员-->
+<!--                                </button>-->
                             </td>
                         </tr>
                         </tbody>
@@ -133,7 +133,7 @@
         <div class="row row_edit">
             <div class="modal fade" id="xfContent">
                 <div class="modal-dialog">
-                    <SubCdConsumption ref='subCdConsumption' @queryAction='consumptionFeedBack'></SubCdConsumption>
+                    <SubCdConsumption ref='subCdConsumption' @certainAction='feedBack'></SubCdConsumption>
                 </div>
             </div>
         </div>
@@ -141,7 +141,7 @@
         <div class="row row_edit">
             <div class="modal fade" id="tfContent">
                 <div class="modal-dialog">
-                    <SubCdRefund ref='subCdRefund' @refundAction='refundFeedBack'></SubCdRefund>
+                    <SubCdRefund ref='subCdRefund' @certainAction='feedBack'></SubCdRefund>
                 </div>
             </div>
         </div>
@@ -149,7 +149,7 @@
         <div class="row row_edit">
             <div class="modal fade" id="toMember">
                 <div class="modal-dialog">
-                    <SubTransferMember ref='toMember' @closeToMember='closeToMemberFeedBack'></SubTransferMember>
+                    <SubTransferMember ref='toMember' @certainAction='feedBack'></SubTransferMember>
                 </div>
             </div>
         </div>
@@ -222,10 +222,6 @@
                 this.$refs.toMember.initData(item)
                 $("#toMember").modal('show')
             },
-            closeToMemberFeedBack() {
-                this.checkMember(1)
-                $("#toMember").modal('hide')
-            },
             //消费模态框
             consumptionModel(item) {
                 if (item.state == '1') {
@@ -281,17 +277,11 @@
                     this.storeId = param.storeId
                 }
             },
-
             feedBack() {
                 this.checkMember(1)
                 $("#cdContent").modal('hide')
-            },
-            consumptionFeedBack() {
-                this.checkMember(1)
                 $("#xfContent").modal('hide')
-            },
-            refundFeedBack() {
-                this.checkMember(1)
+                $("#toMember").modal('hide')
                 $("#tfContent").modal('hide')
             },
             //check the list of member

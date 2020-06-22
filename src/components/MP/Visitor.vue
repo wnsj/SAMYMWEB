@@ -247,7 +247,7 @@
 		<div class="row row_edit">
 			<div class="modal fade" id="subCdContent">
 				<div class="modal-dialog wd1000">
-					<subCd ref='subCd' @closeCurrentPage='feedBack1'></subCd>
+					<subCd ref='subCd' @certainAction='feedBack1'></subCd>
 				</div>
 			</div>
 		</div>

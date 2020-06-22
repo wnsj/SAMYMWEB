@@ -116,7 +116,7 @@
 				employee: {
 					empId: '',
 					empName: '',
-					posId: '0',
+					posId: '',
 					sex: '1',
 					isuse: '1',
 					leaderId:'',
@@ -204,7 +204,6 @@
 					this.employee.posId = ""
 				} else {
 					this.employee.posId = param.posId
-					// console.log("父级ID"+param.parentId)
 					this.$refs.emp.setPosId(param.parentId)
 				}
 			},
@@ -224,7 +223,7 @@
 					alert("员工的姓名不能为空")
 					return
 				}
-				if (this.isBlank(this.employee.posId) && this.employee.posId == '0') {
+				if (this.isBlank(this.employee.posId) || this.employee.posId == '0') {
 					alert("岗位类型不能为空")
 					return
 				}

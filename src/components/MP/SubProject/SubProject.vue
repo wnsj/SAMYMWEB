@@ -72,7 +72,6 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">
-						<b>*</b>
                         <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">是否停用</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.state">
@@ -108,9 +107,6 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">
-
-						<b>*</b>
-
                         <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">产品类型</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.proType">
@@ -223,6 +219,14 @@
                     return
                     //this.project.empId = null
                 }
+				if (this.isBlank(this.project.totalPrice) || this.project.totalPrice<0) {
+				    alert("折前总价不能为空且大于0!")
+				    return
+				}
+				if (this.isBlank(this.project.discouAmount) || this.project.discouAmount<0) {
+				    alert("折后总价不能为空且大于0!")
+				    return
+				}
                 if (this.isBlank(this.project.price) || this.project.price < 0) {
                     alert("课时单价不能为空!")
                     return
@@ -231,10 +235,10 @@
                     alert("课时不能为空!")
                     return
                 }
-                // if (this.isBlank(this.project.discount)) {
-                //     alert("折扣不能为空")
-                //     return
-                // }
+                if (this.isBlank(this.project.discount)) {
+                    alert("折扣不能为空")
+                    return
+                }
                 // if(this.project.proType == 0 && this.isBlank(this.project.empId)){
                 //     alert("普通产品必须关联咨询师!")
                 //     return;

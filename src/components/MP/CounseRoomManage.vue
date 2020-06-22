@@ -5,7 +5,7 @@
             <h1 class="titleCss">咨询室管理</h1>
         </div>
         <div class="row newRow">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="retActType">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-if="retActType()">
                 <div class="col-md-5 col-lg-5 text-right jh-ad-1">
                     <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span
                     class="sign-left">:</span>

@@ -13,8 +13,11 @@ function boxheight() {
 
 
 	//DIV高度为浏览器窗口高度
+	var topH = document.getElementsByClassName("aside-logo")[0].offsetHeight;
 	document.getElementById("Odiv").style.height = winHeight + "px";
-	document.getElementById("Adiv").style.height = winHeight + "px";
+	document.getElementById("Adiv").style.height = (winHeight-topH) + "px";
+	document.getElementById("aside-menu").style.height = (winHeight-topH-70)+ "px";
+
 
     var oTabel = document.getElementsByClassName("pre-scrollable")[0];
 	var len = document.getElementsByClassName("newRow").length;

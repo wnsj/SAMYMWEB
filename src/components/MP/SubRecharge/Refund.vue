@@ -24,31 +24,37 @@
 						</div>
 					</div>
 
-					<div v-show="unfinishedProList.length > 0">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">已购产品</label><span
-						 class="sign-left">:</span>
-						<table class="table table-bordered table-hover">
-							<thead class="datathead">
-								<tr>
-									<td></td>
-									<td>产品名</td>
-									<td>咨询师名</td>
-									<td>产品类型</td>
-									<td>余额</td>
-									<td>剩余课时</td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr v-for="item in unfinishedProList">
-									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
-									<td>{{item.proName}}</td>
-									<td>{{item.counselorName}}</td>
-									<td>{{transforProType(item.proType)}}</td>
-									<td>{{item.balance}}</td>
-									<td>{{item.totalCount - item.consumCount}}</td>
-								</tr>
-							</tbody>
-						</table>
+					<div v-show="unfinishedProList.length > 0"> 
+						<div class="col-md-12  clearfix jh-ad-0">
+							<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
+							<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >已购产品</label><span
+							 class="sign-left">:</span>
+							</div>
+						</div>
+						<div class="col-md-12 form-group clearfix text-left">
+							<table class="table table-bordered table-hover">
+								<thead class="datathead">
+									<tr>
+										<td></td>
+										<td>产品名</td>
+										<td>咨询师名</td>
+										<td>产品类型</td>
+										<td>余额</td>
+										<td>剩余课时</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="item in unfinishedProList">
+										<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
+										<td>{{item.proName}}</td>
+										<td>{{item.counselorName}}</td>
+										<td>{{transforProType(item.proType)}}</td>
+										<td>{{item.balance}}</td>
+										<td>{{item.totalCount - item.consumCount}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>	
 					</div>
 
 

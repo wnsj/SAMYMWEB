@@ -20,7 +20,7 @@
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.phone" disabled="true">
 					</div>
-				</div>
+				</div> 
 				<div v-show="unfinishedProList.length > 0">
 					<div class="col-md-12  clearfix jh-ad-0">
 						<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">

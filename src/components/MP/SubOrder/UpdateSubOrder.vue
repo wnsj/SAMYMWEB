@@ -414,7 +414,7 @@
                     return
                 }
                 this.numArr = []
-                for (var i = 1; i < 9; i++) {
+                for (var i = 1; i < 23; i++) {
                     var timeParam = 'time'.concat(i)
                     if (this.order[timeParam] == true && this.order[timeParam + 'Mod'] == false) {
                         this.numArr.push(i);

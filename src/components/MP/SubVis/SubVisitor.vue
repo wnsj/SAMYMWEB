@@ -24,6 +24,7 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix jh-wd-33">
+						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">门店</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<Store ref='store' @storeChange='storeChange'></Store>
@@ -265,7 +266,7 @@
 					this.$refs.visStateJudge.setObj('0')
 					this.$refs.visStateFlow.setObj('0')
 					this.$refs.ind.setInd('0')
-					this.$refs.store.setStore('0')
+					this.$refs.store.setStore(this.visitor.storeId)
 					this.$refs.education.setObj('0')
 					this.$refs.region.setObj('0')
 					this.$refs.occupation.setObj('0')
@@ -391,6 +392,10 @@
 						}
 					}
 				} 
+				if(this.isBlank(this.visitor.storeId)){
+					alert("客户所在的店铺不能为空")
+					return
+				}
 				if(this.isBlank(this.visitor.birthday)){
 					this.visitor.birthday=null
 				}

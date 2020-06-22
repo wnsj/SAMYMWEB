@@ -786,7 +786,7 @@
 			//咨询室切换
 			counseRoomChange(param) {
 				if (this.isBlank(param)) this.consume.counseRoom = null
-				else this.consume.counseRoom = param.chaId
+				else this.consume.counseRoom = param.crId
 			},
 			//咨询师重新初始化
 			modCounselor(item) {

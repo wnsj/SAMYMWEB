@@ -58,13 +58,12 @@
 					</div>
 
 
-					<p class="tips col-md-12 col-lg-12">* 退费将按照原价收取课时费用，并收取违约金<br>* 退费总额 = 退费金额 - 违约金</p>
+					<p class="tips col-md-12 col-lg-12">* 退费将按照原价收取课时费用，并收取违约金<br>* 实退总额 = 退费金额 - 违约金</p>
 
 					<div class="col-md-12 form-group clearfix text-left padding-top-20">
 						<h4 id="myModalLabel" class="modal-title">退费合计：</h4>
 					</div>
 					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<b>*</b>
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">退费课时</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
@@ -80,7 +79,6 @@
 					</div>
 
 					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<b>*</b>
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">实退总额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
@@ -89,7 +87,6 @@
 					</div>
 
 					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<b>*</b>
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">违约总额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">

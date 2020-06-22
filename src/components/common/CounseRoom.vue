@@ -28,8 +28,8 @@
                 // //console.log('岗位2：'+this.storeObj.storeId)
                 this.$emit('channelChange', this.channelObj)
             },
-            setChaId: function(chaId) {
-                this.crId = chaId
+            setChaId: function(crId) {
+                this.crId = crId
                 // //console.log('设置岗位'+this.chaId)
             },
             //添加前缀的部门名字兑换原来的名字
@@ -38,7 +38,7 @@
                 if (param == 0) return null;
                 for (var i = 0; i < this.channelList.length; i++) {
                     channel = this.channelList[i];
-                    if (channel.chaId == param) {
+                    if (channel.crId == param) {
                         return channel
                     }
                 }

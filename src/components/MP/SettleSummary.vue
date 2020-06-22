@@ -95,17 +95,15 @@
                             <p class="tips tips-font-20">未消费课时：{{unusedHours}} 小时</p>
                         </div> -->
                     </div>
+					<div class="col-md-12 col-lg-12 posAb">
+					    <p class="tips">* 双击单行，可对当前数据进行修改</p>
+					</div>
 					<!--分页插件-->
 					<div class="page">
 						<!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
 						<paging ref="paging" @change="pageChange"></paging>
 					</div>
 				</nobr>
-			</div>
-			<div class="col-md-12 col-lg-12">
-				<p class="tips">
-					<!--* 双击单行，可查看会员详细的消费情况；非会员流水没有明细-->
-				</p>
 			</div>
 		</div>
 		<div class="row row_edit">

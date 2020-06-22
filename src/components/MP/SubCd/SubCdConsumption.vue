@@ -78,7 +78,7 @@
           </div>
         </div>
         <div class="col-md-6 form-group clearfix">
-          <label class="col-md-4 control-label text-right nopad end-aline" >维护人</label><span
+          <label class="col-md-4 control-label text-right nopad end-aline" >顾问</label><span
           class="sign-left">:</span>
           <div class="col-md-7">
             <emp ref="emp" @employeeChange="empChange"></emp>

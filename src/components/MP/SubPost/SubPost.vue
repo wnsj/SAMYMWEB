@@ -122,6 +122,8 @@
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('certainAction')
+					}else{
+						alert(res.retMsg)
 					}
 				}).catch((error) => {
 					console.log('岗位信息请提交失败')

@@ -83,7 +83,7 @@
 					</div>
 
 					<div class="col-md-6 form-group clearfix">
-						<label class="col-md-4 control-label text-right nopad end-aline" >维护人</label><span
+						<label class="col-md-4 control-label text-right nopad end-aline" >顾问</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<emp ref="emp" @employeeChange="empChange"></emp>
@@ -306,7 +306,7 @@
 					return
 				}
 				if (this.isBlank(this.consume.empId)) {
-					alert("维护人不能为空")
+					alert("顾问不能为空")
 					return
 				}
 				var url = this.url + '/purchasedItemsAction/consum'

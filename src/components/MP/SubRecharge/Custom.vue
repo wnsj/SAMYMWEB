@@ -520,6 +520,14 @@
 					alert("续流状态不能为空!")
 					return;
 				}
+				if (this.isBlank(this.consume.diseaseType)) {
+					alert("咨询方向不能为空!")
+					return;
+				}
+				if (this.isBlank(this.consume.counseRoom)) {
+					alert("咨询室不能为空!")
+					return;
+				}
 				//选择了已购买的项目
 				if (this.selectObj != null) {
 					// if (!this.isBlank(this.selectObj.counselor) && this.selectObj.counselor != this.consume.counselor) {

@@ -251,7 +251,7 @@
                 bool3: false,
                 bool4: false,
                 bool5: false,
-                onString: 'MemberSummary'
+                onString: 'Visitor'
             }
         },
         methods: {

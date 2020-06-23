@@ -9,24 +9,17 @@
             <div class="tab-pane fade in active martop" id="basic">
                 <form action="" class="clearfix">
                     <div class="col-md-6 form-group clearfix jh-wd-33">
-                        <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">会员号</label><span
-                        class="sign-left">:</span>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" v-model="order.memNum" :disabled="true">
-                        </div>
-                    </div>
-                    <div class="col-md-6 form-group clearfix jh-wd-33">
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">姓名</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" v-model="order.appName" placeholder="">
+                            <input type="text" class="form-control" v-model="order.appName" placeholder="":disabled="true">
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">
                         <label class="col-md-3 control-label text-right nopad end-aline">手机号</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" v-model="order.phone" placeholder="">
+                            <input type="text" class="form-control" v-model="order.phone" placeholder="":disabled="true">
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">

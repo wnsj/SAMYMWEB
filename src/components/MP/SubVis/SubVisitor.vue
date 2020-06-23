@@ -379,8 +379,8 @@
 					alert("客户姓名不能为空")
 					return
 				}
-				if (this.isBlank(this.visitor.phone)) {
-					alert("联系人电话不能为空")
+				if (this.isBlank(this.visitor.phone) || this.visitor.phone.length<11) {
+					alert("联系人电话填写不正确")
 					return
 				}else{
 					if(this.visitor.phone.indexOf("****") !=-1){  //==-1不包含

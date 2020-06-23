@@ -310,22 +310,68 @@
                 this.numArr = []
 				// console.log(param)
                 if (flag == 'againAdd') {
+					this.order = { //预约数据
+					    "time1": true,
+					    "time1Mod": true,
+					    "time2": true,
+					    "time2Mod": true,
+					    "time3": true,
+					    "time3Mod": true,
+					    "time4": true,
+					    "time4Mod": true,
+					    "time5": true,
+					    "time5Mod": true,
+					    "time6": true,
+					    "time6Mod": true,
+					    "time7": true,
+					    "time7Mod": true,
+					    "time8": true,
+					    "time8Mod": true,
+					    "time9": true,
+					    "time9Mod": true,
+					    "time10": true,
+					    "time10Mod": true,
+					    "time11": true,
+					    "time11Mod": true,
+					    "time12": true,
+					    "time12Mod": true,
+					    "time13": true,
+					    "time13Mod": true,
+					    "time14": true,
+					    "time14Mod": true,
+					    "time15": true,
+					    "time15Mod": true,
+					    "time16": true,
+					    "time16Mod": true,
+					    "time17": true,
+					    "time17Mod": true,
+					    "time18": true,
+					    "time18Mod": true,
+					    "time19": true,
+					    "time19Mod": true,
+					    "time20": true,
+					    "time20Mod": true,
+					    "time21": true,
+					    "time21Mod": true,
+					    "time22": true,
+					    "time22Mod": true,
+					}
+					this.orderClick = {
+					    memNum: param.memNum,
+					    appName: param.appName,
+					    phone: param.phone,
+					    storeId: this.storeId(),
+					    appDate: param.appDate,
+					    empId: param.empId,
+					    proId: param.proId,
+					    channel: param.channel,
+					    remark: param.remark,
+					    sex:param.sex
+					}
                     this.$refs.counlorEmp.setPosName("咨询师")
                     this.$refs.counlorEmp.setEmp(param.empId)
-					console.log("参数"+param)
                     this.$refs.project.setProject(param.proId)
-                    this.orderClick = {
-                        memNum: param.memNum,
-                        appName: param.appName,
-                        phone: param.phone,
-                        storeId: this.storeId(),
-                        appDate: param.appDate,
-                        empId: param.empId,
-                        proId: param.proId,
-                        channel: param.channel,
-                        remark: param.remark,
-                        sex:param.sex
-                    }
+					
                 } else {
                     this.$refs.counlorEmp.setPosName("咨询师")
                     this.$refs.counlorEmp.setEmp("")

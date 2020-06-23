@@ -493,7 +493,7 @@
 					return
 				}
 				if (this.isBlank(this.consume.proId)) {
-					alert("购买产品不能为空")
+					alert("消费产品不能为空")
 					return
 				}
 				if (this.isBlank(this.consume.empId)) {

@@ -162,12 +162,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index) in visitorList" :key="index" v-on:dblclick="selectRule('3',item)">
+							<tr v-for="(item,index) in visitorList" :key="index" v-on:dblclick="selectRule('7',item)">
 								<td class="text-center editradio-box" v-has="'SAMY:MP:Visitor:Update'">
 									<input :id="'edit'+(index+1)" class="editradio" type="radio" name="复选框" :value="index"
 									 v-model="checkedValue" />
 									<label :for="'edit'+(index+1)" class="editlabel"></label>
-
 								</td>
 								<td class="text-center">{{item.visId}}</td>
 								<td class="text-center">{{item.visitorName}}</td>
@@ -214,6 +213,9 @@
 					<subVis ref='subVis' @certainAction='feedBack6'></subVis>
 				</div>
 			</div>
+		</div>
+		<div class="subVisTree" id="subVisTree">
+			<subTree ref='subTree' @certainAction='feedBack8'></subTree>
 		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="memContent">
@@ -305,6 +307,7 @@
 
 <script>
 	import subVis from '../MP/SubVis/SubVisitor.vue'
+	import subTree from '../MP/SubVis/subVisTree.vue'
 	import tm from '../MP/SubVis/TransferMember.vue'
 	import Store from '../common/Store.vue'
 	import emp from '../common/Employee.vue'
@@ -337,6 +340,7 @@
 			recharge,
 			addSubOrder,
 			subCd,
+			subTree
 		},
 		data() {
 			return {
@@ -388,6 +392,13 @@
 					}
 					this.$refs.subVis.initData('modify', item)
 					$("#visContent").modal('show')
+				}else if (param == 7) {
+					if (!this.has("SAMY:MP:Visitor:Update")) {
+						alert("暂无权限!")
+						return
+					}
+					this.$refs.subTree.initData(item)
+					$("#subVisTree").show();
 				}
 			},
 
@@ -449,6 +460,10 @@
 			feedBack7() {
 				this.checkVisitor(1)
 				$("#memContent").modal('hide')
+			},
+			feedBack8() {
+				this.checkVisitor(1)
+				$("#subVisTree").modal('hide')
 			},
 			//check the list of member
 			checkVisitor(page) {
@@ -734,7 +749,17 @@
 	}
     .visbtn-box{padding-left: 35px;}
     .visbtn-box button{margin-right:1.5%;width: 100px;}
-
+	.subVisTree{
+		position: fixed;
+		top:0;
+		right: 0;
+		width:680px;
+		height:100%;
+		z-index: 100;
+		background-color: #fff;
+		display: none;
+		border-left:1px solid #eeeeee;
+	}
 </style>
 <!-- feedBack() {
 				this.checkVisitor(1)

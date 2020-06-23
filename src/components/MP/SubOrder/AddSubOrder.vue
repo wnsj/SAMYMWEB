@@ -306,6 +306,8 @@
 		
         methods: {
             initData(flag,param) {
+                console.log("==========1===========")
+                console.log(this.order);
 				$('#addSubOrderContent').modal({backdrop: 'static', keyboard: false});
                 this.numArr = []
 				// console.log(param)
@@ -399,6 +401,8 @@
                         sex:param.sex,
                     }
                 }
+                console.log("==========2===========")
+                console.log(this.order);
             },
             itemAction(item, index) {
                 console.log("item:" + JSON.stringify(item) + index)
@@ -556,6 +560,8 @@
                 }).then((response) => {
                     var res = response.data
                     if (res.retCode == '0000') {
+                        console.log('==============3=================');
+                        console.log(res.retData)
                         this.order = res.retData
                         if (this.order.consultantRoomList.length > 0) {
                             this.$refs.CounseRoomRef.setChaId(this.order.consultantRoomList[0].crId)
@@ -566,6 +572,8 @@
                     } else {
                         console.log('没有查到员工排班信息')
                     }
+                    console.log('==============4=================');
+                    console.log(this.order);
                 }).catch((error) => {
                     console.log('员工排班信息查询失败')
                 });

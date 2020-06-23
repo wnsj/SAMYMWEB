@@ -27,7 +27,7 @@
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >已购产品</label><span
 						 class="sign-left">:</span>
 						</div>
-					</div>
+					</div> 
 					<div class="col-md-12 form-group clearfix text-left">
 						<table class="table table-bordered table-hover jh-mb-0">
 							<thead class="datathead">

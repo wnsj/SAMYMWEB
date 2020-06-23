@@ -109,15 +109,14 @@
                         </tbody>
                     </table>
                 </div>
+				<p class="tips">* 双击单行，可对当前数据进行修改</p>
                 <!--分页插件-->
                 <div class="page">
                     <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
                     <paging ref="paging" @change="pageChange"></paging>
                 </div>
             </div>
-            <div class="col-md-12 col-lg-12 posAb">
-                <p class="tips">* 双击单行，可对当前数据进行修改</p>
-            </div>
+            
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="scheduleContent">
@@ -150,7 +149,6 @@
     import {
         init
     } from '@/../static/js/common.js'
-
     export default {
         components: {
             schedule,
@@ -179,7 +177,6 @@
                 searchType: 0,
                 offDuty: '',
                 empIsUse: '1',
-
                 //分页需要的数据
                 pages: '', //总页数
                 current: 1, //当前页码
@@ -235,7 +232,6 @@
                     $("#updateScheduleContent").modal('show')
                 }
             },
-
             //check the list of department
             checkEmp(page) {
                 var startDate = '';
@@ -277,7 +273,6 @@
                     } else {
                         alert(res.retMsg);
                     }
-
                 }).catch((error) => {
                     //console.log('请求失败处理')
                 });
@@ -326,7 +321,6 @@
     #datatable {
         position: relative;
     }
-
     #fHeader {
         position: absolute;
         top: 0;
@@ -334,7 +328,6 @@
         background: #eeeeee;
         overflow: hidden;
     }
-
     #fHeader div.text-center {
         float: left;
         display: inline-block;
@@ -342,16 +335,13 @@
         border: 1px solid #ddd;
         font-weight: bold;
     }
-
     th {
         background: #efefef;
     }
-
     .restBg {
         background: #ccc;
         color: #000;
     }
-
     @media print {
         #fHeader {
             display: none
@@ -359,7 +349,6 @@
     }
 </style>
 <!-- <template>
-
     <div class="wraper">
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">排班管理</h1>
@@ -448,16 +437,12 @@
         <div class="row row_edit">
             <div class="modal fade" id="scheduleContent">
                 <div class="modal-dialog">
-
                     <AddSchedule></AddSchedule>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
-
-
 <script>
     import schedule from '../MP/SubSm/Schedule.vue'
     import Schedule2 from '../MP/SubSm/Schedule2.vue'
@@ -494,8 +479,6 @@
                 morningOrAfternoon: ['上午', '下午', '上午', '下午', '上午', '下午', '上午', '下午', '上午', '下午', '上午', '下午', '上午', '下午'],
                 thisDate: '',
                 empId: '',
-
-
                 //分页需要的数据
                 pages: '', //总页数
                 current: 1, //当前页码
@@ -517,7 +500,6 @@
                     this.$refs.counselorChange.setPosName('咨询师')
                     // this.$refs.counselorChange.setEmp('咨询师')
                     this.empId = param.empId
-
                 }
             },
             storeChange: function(param) {
@@ -543,7 +525,6 @@
 <<<<<<< HEAD
             selectRule(param, item) {
                 var url = this.url + '/ruleAction/queryRule'
-
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -577,16 +558,13 @@
                     } else {
                         alert(res.retMsg)
                     }
-
                 }).catch((error) => {
                     //console.log('员工权限查询请求失败')
                 });
             },
-
 =======
 			selectRule(param,item){
 			    var url = this.url + '/ruleAction/queryRule'
-
 			    this.$ajax({
 			        method: 'POST',
 			        url: url,
@@ -619,12 +597,10 @@
 			        } else {
 			            alert(res.retMsg)
 			        }
-
 			    }).catch((error) => {
 			        //console.log('员工权限查询请求失败')
 			    });
 			},
-
 >>>>>>> d23d876b7647c66bb3f3e052290c675defeb4e7b
             //check the list of department
             checkEmp(page) {
@@ -646,7 +622,6 @@
                         thisDate: this.thisDate,
                         empId: this.empId,
                         storeId: this.storeId,
-
                         page: page.toString(),
                         pageSize: this.pageSize
                     },
@@ -665,7 +640,6 @@
                     } else {
                         alert(res.retMsg);
                     }
-
                 }).catch((error) => {
                     //console.log('请求失败处理')
                 });
@@ -724,7 +698,6 @@
                 //let result = this.chinaDate(alldate);
                 this.schedulingListTitle = alldate;
                 ////console.log('12:'+this.getAll('2019.12.30','2019.01.05'));
-
             },
             //日期转换
             chinaDate(array) {
@@ -761,7 +734,6 @@
                 }
                 return arrTime;
             },
-
             // 时间格式处理
             datetimeparse(timestamp, format, prefix) {
                 if (typeof timestamp == 'string') {
@@ -775,7 +747,6 @@
                 //客户端时间与服务器时间保持一致，固定北京时间东八区。
                 offset = offsetZone + 8;
                 currentTimestamp = currentTimestamp + offset * 3600 * 1000
-
                 let newtimestamp = null;
                 if (currentTimestamp) {
                     if (currentTimestamp.toString().length === 13) {
@@ -809,7 +780,6 @@
                     output += YYYY + separator + MM + separator + DD
                 }
                 output = prefix ? (prefix + output) : output
-
                 return newtimestamp ? output : ''
             },
             addDate(param) {
@@ -832,24 +802,19 @@
                     systemDate = date2.getFullYear() + "-" + (date2.getMonth() + 1) + "-" + date2.getDate();
                 }
                 return systemDate;
-
             },
             getWeekDay(dateString) {
                 let dateStringReg = /^\d{4}[/-]\d{1,2}[/-]\d{1,2}$/;
-
                 if (dateString.match(dateStringReg)) {
                     let presentDate = new Date(dateString),
                         today = presentDate.getDay() !== 0 ? presentDate.getDay() : 7;
-
                     return Array.from(new Array(7), function(val, index) {
                         return formatDate(new Date(presentDate.getTime() - (today - index - 1) * 24 * 60 * 60 *
                             1000));
                     });
-
                 } else {
                     throw new Error('dateString should be like "yyyy-mm-dd" or "yyyy/mm/dd"');
                 }
-
                 function formatDate(date) {
                     return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
                 }
@@ -869,7 +834,6 @@
                 return val;
             }
         },
-
         mounted() {
             this.$refs.counselorChange.setPosName("咨询师")
             this.$refs.counselorChange.setEmp("")
@@ -884,12 +848,10 @@
         }
     }
 </script>
-
 <style>
     #datatable {
         position: relative;
     }
-
     #fHeader {
         position: absolute;
         top: 0;
@@ -897,7 +859,6 @@
         background: #eeeeee;
         overflow: hidden;
     }
-
     #fHeader div.text-center {
         float: left;
         display: inline-block;
@@ -905,16 +866,13 @@
         border: 1px solid #ddd;
         font-weight: bold;
     }
-
     th {
         background: #efefef;
     }
-
     .restBg {
         background: #ccc;
         color: #000;
     }
-
     @media print {
         #fHeader {
             display: none

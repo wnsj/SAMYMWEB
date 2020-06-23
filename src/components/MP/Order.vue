@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="row newRow">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-md-5 col-lg-5 text-right nopad">
                     <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span
                     class="sign-left">:</span>
@@ -182,14 +182,12 @@
                         </tbody>
                     </table>
                 </div>
+                <p class="tips">* 双击单行，可对当前数据进行修改</p>
                 <!--分页插件-->
                 <div class="page">
                     <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
                     <paging ref="paging" @change="pageChange"></paging>
                 </div>
-            </div>
-            <div class="col-md-12 col-lg-12 posAb">
-                <p class="tips">* 双击单行，可对当前数据进行修改</p>
             </div>
         </div>
         <div class="row row_edit">
@@ -259,7 +257,6 @@
     import {
         init
     } from '@/../static/js/common.js'
-
     export default {
         components: {
             SubOrder,
@@ -290,8 +287,6 @@
                 phoneNoX: '',
                 extension: '',
                 endDate: '',
-
-
                 //分页需要的数据
                 pages: '', //总页数
                 current: 1, //当前页码
@@ -306,7 +301,6 @@
                 this.checkOrderList(page);
             },
             selectRule(param, item) {
-
                 if (param == 1) {
                     this.$refs.AddSubOrderRef.initData()
                     $("#addAppointContent").modal('show')
@@ -346,7 +340,6 @@
                     'appDate': item.appDate,
                     'createDate': item.createDate
                 }
-
                 if (param == 'cancel') {
                     if (item.arrival == '1') {
                         alert("已到店，不能修改")
@@ -402,13 +395,11 @@
                 if (!this.isBlank(this.endAppDate)) {
                     this.endAppDate = this.moment(this.endAppDate, 'YYYY-MM-DD 00:00:00.000')
                 }
-
                 // 				if(this.accountType!=1){
                 // 					this.storeId = this.storeId()
                 // 				}else{
                 // 					this.storeId = ""
                 // 				}
-
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -447,7 +438,6 @@
                     } else {
                         alert(res.retMsg)
                     }
-
                 }).catch((error) => {
                     //console.log('请求失败处理')
                 });
@@ -562,7 +552,6 @@
                     } else {
                         alert(res.retMsg)
                     }
-
                 }).catch((error) => {
                     //console.log('请求失败处理')
                 });
@@ -589,7 +578,6 @@
     #datatable {
         position: relative;
     }
-
     #fHeader {
         position: absolute;
         top: 0;
@@ -597,7 +585,6 @@
         background: #eeeeee;
         overflow: hidden;
     }
-
     #fHeader div.text-center {
         float: left;
         display: inline-block;
@@ -605,23 +592,19 @@
         border: 1px solid #ddd;
         font-weight: bold;
     }
-
     @media print {
         #fHeader {
             display: none
         }
     }
-
     .trueDate {
         background: #6CA1BF;
         color: #fff;
     }
-
     .onOffState {
         background: #D9524E;
         color: #fff;
     }
-
     .onOffArrival {
         background: #5CB95C;
         color: #fff;

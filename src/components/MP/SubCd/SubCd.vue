@@ -228,7 +228,6 @@
                     if (res.retCode == '0000') {
                         alert(res.retMsg)
                         this.closeCurrentPage()
-                        //this.$emit('certainAction')
                     } else {
                         alert(res.retMsg)
                     }
@@ -237,14 +236,7 @@
                 });
             },
             closeCurrentPage() {
-				switch (this.title) {
-				    case "新增":
-				        this.$emit('closeCurrentPage')
-				        break;
-				    case "修改":
-				        $("#cdContent").modal("hide")
-				        break;
-				}
+                this.$emit('certainAction')
             },
         },
         mounted() {

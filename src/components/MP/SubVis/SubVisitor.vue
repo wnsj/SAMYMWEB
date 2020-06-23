@@ -24,6 +24,7 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix jh-wd-33">
+						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">门店</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<Store ref='store' @storeChange='storeChange'></Store>
@@ -93,7 +94,6 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<b>*</b>
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">行业</label><span class="sign-left">:</span>
 
 						<div class="col-md-8">
@@ -265,7 +265,7 @@
 					this.$refs.visStateJudge.setObj('0')
 					this.$refs.visStateFlow.setObj('0')
 					this.$refs.ind.setInd('0')
-					this.$refs.store.setStore('0')
+					this.$refs.store.setStore(this.visitor.storeId)
 					this.$refs.education.setObj('0')
 					this.$refs.region.setObj('0')
 					this.$refs.occupation.setObj('0')
@@ -378,8 +378,8 @@
 					alert("客户姓名不能为空")
 					return
 				}
-				if (this.isBlank(this.visitor.phone)) {
-					alert("联系人电话不能为空")
+				if (this.isBlank(this.visitor.phone) || this.visitor.phone.length<11) {
+					alert("联系人电话填写不正确")
 					return
 				}else{
 					if(this.visitor.phone.indexOf("****") !=-1){  //==-1不包含
@@ -391,7 +391,10 @@
 						}
 					}
 				} 
-				return
+				if(this.isBlank(this.visitor.storeId)){
+					alert("客户所在的店铺不能为空")
+					return
+				}
 				if(this.isBlank(this.visitor.birthday)){
 					this.visitor.birthday=null
 				}

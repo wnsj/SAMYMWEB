@@ -88,14 +88,14 @@
                         </tbody>
                     </table>
                 </div>
+				<div class="col-md-12 col-lg-12 posAb">
+				    <p class="tips">* 双击单行，可对当前数据进行修改</p>
+				</div>
                 <!--分页插件-->
                 <div class="page">
                     <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
                     <paging ref="paging" @change="pageChange"></paging>
                 </div>
-            </div>
-            <div class="col-md-12 col-lg-12 posAb">
-                <p class="tips">* 双击单行，可对当前数据进行修改</p>
             </div>
         </div>
         <div class="row row_edit">

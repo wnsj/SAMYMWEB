@@ -23,46 +23,46 @@
 							<input type="text" class="form-control" v-model="refund.phone" :disabled="isShow">
 						</div>
 					</div>
-
-					<div v-show="unfinishedProList.length > 0">
+					<div v-show="unfinishedProList.length > 0"> 
 						<div class="col-md-12  clearfix jh-ad-0">
-						<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">已购产品</label><span
-						 class="sign-left">:</span>
+							<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
+							<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >已购产品</label><span
+							 class="sign-left">:</span>
+							</div>
 						</div>
-						</div>
-						<table class="table table-bordered table-hover">
-							<thead class="datathead">
-								<tr>
-									<td></td>
-									<td>产品名</td>
-									<td>咨询师名</td>
-									<td>产品类型</td>
-									<td>余额</td>
-									<td>剩余课时</td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr v-for="item in unfinishedProList">
-									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
-									<td>{{item.proName}}</td>
-									<td>{{item.counselorName}}</td>
-									<td>{{transforProType(item.proType)}}</td>
-									<td>{{item.balance}}</td>
-									<td>{{item.totalCount - item.consumCount}}</td>
-								</tr>
-							</tbody>
-						</table>
+						<div class="col-md-12 form-group clearfix text-left">
+							<table class="table table-bordered table-hover">
+								<thead class="datathead">
+									<tr>
+										<td></td>
+										<td>产品名</td>
+										<td>咨询师名</td>
+										<td>产品类型</td>
+										<td>余额</td>
+										<td>剩余课时</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="item in unfinishedProList">
+										<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
+										<td>{{item.proName}}</td>
+										<td>{{item.counselorName}}</td>
+										<td>{{transforProType(item.proType)}}</td>
+										<td>{{item.balance}}</td>
+										<td>{{item.totalCount - item.consumCount}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>	
 					</div>
 
 
-					<p class="tips col-md-12 col-lg-12">* 退费将按照原价收取课时费用，并收取违约金<br>* 退费总额 = 退费金额 - 违约金</p>
+					<p class="tips col-md-12 col-lg-12">* 退费将按照原价收取课时费用，并收取违约金<br>* 实退总额 = 退费金额 - 违约金</p>
 
 					<div class="col-md-12 form-group clearfix text-left padding-top-20">
 						<h4 id="myModalLabel" class="modal-title">退费合计：</h4>
 					</div>
 					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<b>*</b>
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">退费课时</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
@@ -78,7 +78,6 @@
 					</div>
 
 					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<b>*</b>
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">实退总额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
@@ -87,7 +86,6 @@
 					</div>
 
 					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<b>*</b>
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">违约总额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">

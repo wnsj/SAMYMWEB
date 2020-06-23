@@ -23,9 +23,9 @@
 					</div>
 				</div>
 				<div v-show="unfinishedProList.length > 0">
-					<div class="col-md-12 col-lg-12 clearfix jh-ad-0">
+					<div class="col-md-12  clearfix jh-ad-0">
 						<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >已购产品</label><span
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >已购产品</label><span
 						 class="sign-left">:</span>
 						</div>
 					</div>

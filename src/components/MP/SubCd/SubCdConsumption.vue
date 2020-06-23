@@ -402,7 +402,7 @@
             //   name: 'SettleSummary',
             // });
             alert(res.retMsg);
-            this.$emit('queryAction')
+            this.closeCurrentPage()
             //$("#addCustom").modal("hide")
           } else {
             alert(res.retMsg)
@@ -412,8 +412,7 @@
         });
       },
       closeCurrentPage() {
-        this.$emit('queryAction')
-        console.log('关闭定金消费界面')
+        this.$emit('certainAction')
       },
       jumpLeft(index){
         $("#aside-menu li").removeClass("li-active");

@@ -68,7 +68,7 @@
             },
             // 关闭模态框
             closeCurrentPage(){
-                this.$emit('closeToMember');
+                this.$emit('certainAction');
             },
             checkMemNum(param) {
                 console.log('checkMemNum')

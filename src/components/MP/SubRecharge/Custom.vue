@@ -20,7 +20,7 @@
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.phone" disabled="true">
 					</div>
-				</div>
+				</div> 
 				<div v-show="unfinishedProList.length > 0">
 					<div class="col-md-12  clearfix jh-ad-0">
 						<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
@@ -493,7 +493,7 @@
 					return
 				}
 				if (this.isBlank(this.consume.proId)) {
-					alert("购买产品不能为空")
+					alert("消费产品不能为空")
 					return
 				}
 				if (this.isBlank(this.consume.empId)) {
@@ -518,6 +518,14 @@
 				}
 				if (this.isBlank(this.consume.continState)) {
 					alert("续流状态不能为空!")
+					return;
+				}
+				if (this.isBlank(this.consume.diseaseType)) {
+					alert("咨询方向不能为空!")
+					return;
+				}
+				if (this.isBlank(this.consume.counseRoom)) {
+					alert("咨询室不能为空!")
 					return;
 				}
 				//选择了已购买的项目
@@ -778,7 +786,7 @@
 			//咨询室切换
 			counseRoomChange(param) {
 				if (this.isBlank(param)) this.consume.counseRoom = null
-				else this.consume.counseRoom = param.chaId
+				else this.consume.counseRoom = param.crId
 			},
 			//咨询师重新初始化
 			modCounselor(item) {

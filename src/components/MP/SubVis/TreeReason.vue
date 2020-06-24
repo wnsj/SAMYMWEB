@@ -72,17 +72,22 @@
 							<input type="text" class="form-control" v-model="reasoner.follow_up" disabled />
 						</div>
 					</div>
-					<div class="col-md-12 form-group clearfix">
-						<label class="col-md-1 control-label text-right nopad end-aline jh-ad-1">原因</label><span class="sign-left">:</span>
-						<div class="col-md-12 wd84">
-							<input type="text" class="form-control" v-model="reasoner.reason" placeholder="">
-						</div>
+					<div class="col-md-12 clearfix jh-mb-0"></div>
+					<div class="col-md-6 clearfix jh-mb-0 jh-wd-33">
+						<label class="col-md-3 control-label text-right nopad end-aline jh-ad-1">原因</label><span class="sign-left">:</span>
+					</div>
+					<div class="col-md-12 jh-mb-0 clearfix">
+						<textarea class="reasonText" v-model="reasoner.reason"></textarea>
+					</div>
+					<div class="col-md-6 clearfix jh-wd-33 jh-mb-0">
+						<label class="col-md-3 control-label text-right nopad end-aline jh-ad-1">备注</label><span class="sign-left">:</span>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<label class="col-md-1 control-label text-right nopad end-aline jh-ad-1">备注</label><span class="sign-left">:</span>
-						<div class="col-md-12 wd84">
-							<input type="text" class="form-control" v-model="reasoner.remarks" placeholder="">
-						</div>
+						<textarea class="reasonText" v-model="reasoner.remarks"></textarea>
+					</div>
+					<div class="col-md-12 form-group clearfix">
+						<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
+						<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="certainAction()">确认</button>
 					</div>
 				</form>
 			</div>
@@ -247,5 +252,14 @@
 	}
 	.reason-content .reason-header{
 		padding: 15px;
+	}
+	.reasonText{
+		width:100%;
+		height: 100px;
+		padding: 5px;
+		box-sizing: border-box;
+		resize: none;
+		font-size: 14px;
+		line-height: 1.5em;
 	}
 </style>

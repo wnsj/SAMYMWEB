@@ -24,7 +24,7 @@
 			        <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span class="sign-left">:</span>
 			    </div>
 			    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-			        <emp ref="counlorEmp" @employeeChange="counlorEmpChange" v-on:change="selectHours()"></emp>
+			        <emp ref="couEmp" @employeeChange="counlorEmpChange"></emp>
 			    </div>
 			</div>
 		</div>
@@ -325,8 +325,8 @@
 			window.addEventListener('scroll', this.handleScroll, true)
 
 			init();
-            this.$refs.counlorEmp.setPosName("咨询师")
-            this.$refs.counlorEmp.setEmp("")
+            this.$refs.couEmp.setPosName("咨询师")
+            this.$refs.couEmp.setEmp("")
 		},
 		created() {
 			this.conditionCheck(1)

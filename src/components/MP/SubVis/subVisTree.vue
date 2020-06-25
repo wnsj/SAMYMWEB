@@ -10,16 +10,14 @@
 			<div class="tree-main">
 				<div class="line"><span></span></div>
 				<div class="tree-item" v-for="(item,index) in infoData" :key="index">
-					<h1 v-if="item.bool">{{item.create_date}}</h1>
+					<h1 v-if="item.bool">{{item.createTime}}</h1>
 					<div class="tree-type clearfix">
 						<div class="tree-type-left">
 							<label :for="'tree'+(index+1)">
 								<input :id="'tree'+(index+1)" class="tree-radio" type="radio" name="tree" :value="index" v-model="checkedValue" />
 								<span></span>
 								<i></i>
-								{{item.operate_model==='1'?'购买':''}}
-								{{item.operate_model==='2'?'消费':''}}
-								{{item.operate_model==='3'?'退费':''}}
+								{{item.title}}
 							</label>
 						</div>
 						<div class="tree-type-right">
@@ -34,17 +32,17 @@
 								<li>跟进人</li>
 							</ul>
 							<ul class="treeCon">
-								<li>{{item.product}}</li>
-								<li>{{item.class_time}}</li>
-								<li>{{item.type}}</li>
-								<li>{{item.vote}}</li>
-								<li>{{item.vs_id_flow}}</li>
-								<li>{{item.counselor}}</li>
-								<li>{{item.assistant}}</li>
-								<li>{{item.follow_up}}</li>
+								<li>{{item.proName}}</li>
+								<li>{{item.totalCount}}</li>
+								<li>{{item.visitType}}</li>
+								<li>{{item.isfirst}}</li>
+								<li>{{item.continState}}</li>
+								<li>{{item.counselorName}}</li>
+								<li>{{item.empName}}</li>
+								<li>{{item.followUpPerson}}</li>
 							</ul>
 							<p class="clearfix"><b>原因：</b><span>{{item.reason}}</span></p>
-							<p class="clearfix"><b>备注：</b><span>{{item.remarks}}</span></p>
+							<p class="clearfix"><b>备注：</b><span>{{item.remark}}</span></p>
 						</div>
 					</div>
 				</div>
@@ -79,17 +77,13 @@
 					visitorName: '',
 				}
 				Object.assign(this.visitor, visitorContent);
+				this.certainAction();
 				
 			},
 			certainAction() {
-
-				switch (this.title) {
-					case '新增':
-						var url = this.url + '/visitorAction/addVisitor';
-						break;
-					case '修改':
-						var url = this.url + '/visitorAction/updateVisitor'
-						break;
+				var url = this.url + '/consumAction/getDetailsByVisitor';
+				var json={
+					'memNum':this.visitor.visId
 				}
 				this.$ajax({
 					method: 'POST',
@@ -98,262 +92,34 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data: this.visitor,
+					data: json,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						alert(res.retMsg)
-						this.$emit('certainAction')
+						this.arrangeData (res.retData)
 					} else {
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('添加或者修改客户信息失败')
+	
 				});
 			},
 			feedBack6() {
-				//this.checkVisitor(1)
-				$("#treeson").modal('hide')
+				this.certainAction()
 			},
 			closeCurrentPage() {
 				$("#subVisTree").hide();
 			},
-			arrangeData (){
-				var oData = [
-					{
-						'create_date':'20200101',
-						'operate_model':'1',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'张丹',
-						'reason':'第一种情况就是宽高都写在样式表里，就比如#div1{width:120px;}。这中情况通过拿不到宽度，而通过#div1.offsetWidth才可以获取到宽度',
-						'remarks':'如果要频繁切换某节点时，使用v-show（无论true或者false初始都会进行渲染，此后通过css来控制显示隐藏，因此切换开销比较小，初始开销较大），如果不需要频繁切换某节点时，使用v-if（因为懒加载，初始为false时，不会渲染，但是因为它是通过添加和删除dom元素来控制显示和隐藏的，因此初始渲染开销较小，切换开销比较大）'
-					},
-					{
-						'create_date':'20200101',
-						'operate_model':'2',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'穆文亮',
-						'reason':'',
-						'remarks':''
-					},
-					{
-						'create_date':'20200101',
-						'operate_model':'3',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'马愔嫕',
-						'reason':'',
-						'remarks':''
-					},
-					{
-						'create_date':'20200102',
-						'operate_model':'1',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'张丹',
-						'reason':'',
-						'remarks':''
-					},
-					{
-						'create_date':'20200102',
-						'operate_model':'2',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'张丹',
-						'reason':'',
-						'remarks':''
-					},
-					{
-						'create_date':'20200102',
-						'operate_model':'3',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'张丹',
-						'reason':'',
-						'remarks':''
-					},
-					{
-						'create_date':'20200103',
-						'operate_model':'1',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'张丹',
-						'reason':'',
-						'remarks':''
-					},
-					{
-						'create_date':'20200103',
-						'operate_model':'2',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'张丹',
-						'reason':'',
-						'remarks':''
-					},
-					{
-						'create_date':'20200104',
-						'operate_model':'1',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'张丹',
-						'reason':'',
-						'remarks':''
-					},
-					{
-						'create_date':'20200104',
-						'operate_model':'2',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'张丹',
-						'reason':'',
-						'remarks':''
-					},
-					{
-						'create_date':'20200105',
-						'operate_model':'1',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'张丹',
-						'reason':'',
-						'remarks':''
-					},
-					{
-						'create_date':'20200105',
-						'operate_model':'3',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'张丹',
-						'reason':'',
-						'remarks':''
-					},
-					{
-						'create_date':'20200106',
-						'operate_model':'2',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'张丹',
-						'reason':'',
-						'remarks':''
-					},
-					{
-						'create_date':'20200106',
-						'operate_model':'3',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'张丹',
-						'reason':'',
-						'remarks':''
-					},
-					{
-						'create_date':'20200107',
-						'operate_model':'3',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'张丹',
-						'reason':'',
-						'remarks':''
-					},
-					{
-						'create_date':'20200107',
-						'operate_model':'2',
-						'product':'资深级月卡',
-						'class_time':'7',
-						'type':'初访',
-						'vote':'首次',
-						'vs_id_flow':'首签',
-						'counselor':'张丹',
-						'assistant':'张丹',
-						'follow_up':'张丹',
-						'reason':'',
-						'remarks':''
-					}
-				];
-				
+			arrangeData (redata){
+				var oData = redata;
 				oData.forEach((data,index,arrs)=>{
 					if(index ===0){
 						data['bool'] = true;
 					}
 					arrs.forEach((arr,num)=>{	
 						if(index>num){
-							if(data['create_date'] === arr['create_date']){
+							if(data['createTime'] === arr['createTime']){
 								data['bool'] = false;
 								return ;
 							}else{
@@ -363,17 +129,16 @@
 						}	
 					})			
 				})
-				//console.log(oData);
-				Object.assign(this.infoData, oData)	
+				this.infoData = oData;	
 			},
 			addreason(){
-				this.$refs.treeson.initData(this.infoData[this.checkedValue])
+				this.$refs.treeson.initData(this.visitor.visitorName,this.infoData[this.checkedValue])
 				$("#treeson").css({'display':'flex'});
 			}
 
 		},
 		mounted(){
-			this.arrangeData(); 
+		
 		}
 	}
 </script>

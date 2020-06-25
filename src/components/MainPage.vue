@@ -154,6 +154,11 @@
                                     汇总报表
                                 </i>
                             </dt>
+							<dd @click="addCheck('EmpDtSummary')"
+							    v-bind:class="{'li-active':onString=='EmpDtSummary'}">
+							    <router-link to="/SummaryMenu/EmpDtSummary"><i class="fa" aria-hidden="true">咨询方向汇总</i>
+							    </router-link>
+							</dd>
 							<dd @click="addCheck('MemberSummary')"
 							    v-bind:class="{'li-active':onString=='MemberSummary'}">
 							    <router-link to="/MP/MemberSummary"><i class="fa" aria-hidden="true">会员汇总</i>
@@ -394,7 +399,7 @@
     }
 
     #aside-menu dl.h10 {
-        height: 100px;
+        height: 150px;
     }
 
     #aside-menu dl.h15 {

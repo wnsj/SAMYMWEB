@@ -1,40 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/components/login.vue'
-// import MainPage from '@/components/MainPage.vue'
-/*------------*/
-// import Employee from '../components/MP/Employee.vue'
-// import ScheduleEmp from '../components/MP/ScheduleEmp.vue'
-// import Member from '../components/MP/Member.vue'
-// import Charge from '../components/MP/Charge.vue'
-// import Position from '../components/MP/Position.vue'
-// import Order from '../components/MP/Order.vue'
-// import Royalty from '../components/MP/Royalty.vue'
-// import SettleSummary from '../components/MP/SettleSummary.vue'
-// import MemberSummary from '../components/MP/MemberSummary.vue'
-// import RoyaltySummary from '../components/MP/RoyaltySummary.vue'
-// import Store from '../components/MP/Store.vue'
-// import RuleManager from '../components/MP/RuleManager.vue'
-// import CashDeposit from '../components/MP/CashDeposit.vue'
-// import CurrentSummary from '../components/MP/CurrentSummary.vue'
-// import Project from '../components/MP/Project.vue'
-// import test from '../components/MP/test.vue'
-// import newtree from '../components/MP/newtree.vue'
-// import CounseRoomManage from '../components/MP/CounseRoomManage.vue'
-// import Schedule2 from '@/components/MP/SubSm/Schedule2.vue'
-// import ZxsSummary from '../components/MP/ZxsSummary.vue'
-// import Visitor from '../components/MP/Visitor.vue'
-// import VisitState from '../components/MP/VisitState.vue'
-// import DiseaseType from '../components/MP/DiseaseType.vue'
-// import MemberTotle from '../components/MP/MemberTotle.vue'
-// import CounseRoomTimeTotal from '../components/MP/CounseRoomTimeTotal.vue'
-// import NewRuleManager from '../components/MP/NewRuleManager.vue'
-// import UmsPermissionManage from '../components/MP/UmsPermissionManage.vue'
-// import Refund from '../components/MP/Refund.vue'
-// import Region from '../components/MP/Region.vue'
-// import Occupation from '../components/MP/Occupation.vue'
-// import Education from '../components/MP/Education.vue'
-
 
 Vue.use(Router)
 
@@ -64,6 +30,11 @@ export default new Router({
                     name: 'MemberSummary',
                     component: () => import('../components/MP/MemberSummary'),
                 },
+				{
+				    path: '/SummaryMenu/EmpDtSummary',
+				    name: 'EmpDtSummary',
+				    component: () => import('../components/SummaryMenu/EmpDtSummary'),
+				},
                 {
                     path: '/MP/Visitor',
                     name: 'Visitor',

@@ -177,6 +177,11 @@ export default new Router({
                     path: '/MP/UmsPermissionManage',
                     name: 'UmsPermissionManage',
                     component: () => import("../components/MP/UmsPermissionManage"),
+                },
+                {
+                    path: '/SummaryMenu/FirstVdSummary',
+                    name: 'FirstVdSummary',
+                    component: () => import("../components/SummaryMenu/FirstVdSummary"),
                 }],
             redirect: '/MP/Visitor'
         }]

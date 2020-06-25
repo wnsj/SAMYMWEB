@@ -10,7 +10,7 @@
                 </h2>
             </div>
             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-right">
-                <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，门店管理系统</p><!-- 
+                <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，门店管理系统</p><!--
                 <button class="btn btn-warning m_r_10" style="margin-top: 40px;" v-on:click="chargeManager()"
                         v-has="'SAMY:MP:CoursePurchase'">产品购买
                 </button>
@@ -147,7 +147,7 @@
                             </dd>
 
                         </dl>
-                        <dl v-bind:class="{h10:bool4}">
+                        <dl v-bind:class="{h15:bool4}">
                             <dt @click="onShow(3)" v-bind:class="{'li-active':bool4}">
                                 <i class="fa" v-bind:class="{'fa-folder-open':bool4,'fa-folder':!bool4}"
                                    aria-hidden="true">
@@ -164,6 +164,11 @@
 							    <router-link to="/MP/MemberSummary"><i class="fa" aria-hidden="true">会员汇总</i>
 							    </router-link>
 							</dd>
+                            <dd @click="addCheck('FirstVdSummary')"
+                                v-bind:class="{'li-active':onString=='FirstVdSummary'}">
+                                <router-link to="/SummaryMenu/FirstVdSummary"><i class="fa" aria-hidden="true">初访咨询方向</i>
+                                </router-link>
+                            </dd>
                             <!-- <dd @click="addCheck('CurrentSummary')"
                                 v-bind:class="{'li-active':onString=='CurrentSummary'}">
                                 <router-link to="/MP/CurrentSummary"><i class="fa" aria-hidden="true">月入汇总</i>

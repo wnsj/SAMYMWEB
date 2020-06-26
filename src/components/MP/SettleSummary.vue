@@ -74,7 +74,7 @@
 									<td>{{item2.price}}</td>
 									<td>{{item2.consumCount}}</td>
 									<td>{{item2.discount}}</td>
-									<td>{{item2.realCross}}</td>
+									<td>{{(item2.realCross*item2.discount/100).toFixed(0)}}</td>
 									<td>{{item2.counselorName}}</td>
 									<td>{{item2.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								</tr>

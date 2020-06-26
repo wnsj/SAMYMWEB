@@ -35,6 +35,11 @@ export default new Router({
 				    name: 'EmpDtSummary',
 				    component: () => import('../components/SummaryMenu/EmpDtSummary'),
 				},
+				{
+				    path: '/SummaryMenu/ProSummary',
+				    name: 'ProSummary',
+				    component: () => import('../components/SummaryMenu/ProSummary'),
+				},
                 {
                     path: '/MP/Visitor',
                     name: 'Visitor',

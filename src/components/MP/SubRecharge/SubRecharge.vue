@@ -514,11 +514,6 @@
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.closeCurrentPage()
-						this.$router.push({
-							name: 'Charge',
-						});
-						this.jumpLeft(3);
-						//this.$emit('func', 'Charge')
 					} else {
 						alert(res.retMsg)
 					}
@@ -528,14 +523,6 @@
 			},
 			closeCurrentPage() {
 				this.$emit('closeCurrentPage')
-				//$("#addFee").modal("hide")
-				console.log('关闭添加患者界面')
-			},
-			jumpLeft(index) {
-				$("#aside-menu li").removeClass("li-active");
-				$("#aside-menu li").find("i.fa-table").removeClass("fa-circle");
-				$("#aside-menu li").eq(index).addClass("li-active");
-				$("#aside-menu li").eq(index).find("i.fa-table").addClass("fa-circle")
 			},
 			setCustom(param) {
 				this.consume.memNum = param.memNum

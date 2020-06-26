@@ -65,15 +65,7 @@ router.beforeEach((to, from, next) => {
         } else if (to.path == '/login') {
             next();
         } else {
-            if (constant.isBlank(token) || constant.isBlank(accountData)) {
-                next('/login');
-            } else if (to.path == '/') {
-                next('/MainPage');
-            } else if (to.path == '/login') {
-                next('/MainPage');
-            } else if (to.path == '/MainPage') {
-                next();
-            } else if (to.path == '/samy/dist/index.html') {
+            if (to.path == '/samy/dist/index.html') {
                 next('/MainPage');
             } else {
                 let jsonString = Cookies.get('upUriList');

@@ -73,7 +73,7 @@
 					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">访问状态</label><span class="sign-left">:</span>
 						<div class="col-md-8">
-							<select class="form-control" v-model="visitor.visType">
+							<select class="form-control" v-model="visitor.visType" v-on:change="visTypeChange()">
 								<option value="1">初访</option>
 								<option value="2">复访</option>
 							</select>
@@ -277,7 +277,7 @@
 					this.$refs.DiseaseType.setObj(this.visitor.dtId)
 					this.$refs.emp.setEmp(this.visitor.empId)
 					this.$refs.visStateJudge.getObj(this.visitor.visType,'1')
-					this.$refs.visStateFlow.setObj(this.visitor.visType,'2')
+					this.$refs.visStateFlow.getObj(this.visitor.visType,'2')
 					this.$refs.visStateJudge.setObj(this.visitor.vsIdJudge)
 					this.$refs.visStateFlow.setObj(this.visitor.vsIdFlow)
 					this.$refs.ind.setInd(this.visitor.indId)
@@ -292,6 +292,12 @@
 						this.$refs.region.setObj(this.visitor.reId)
 					}
 				}
+			},
+			visTypeChange:function(){
+				this.$refs.visStateJudge.getObj(this.visitor.visType,'1')
+				this.$refs.visStateFlow.getObj(this.visitor.visType,'2')
+				this.$refs.visStateJudge.setObj('0')
+				this.$refs.visStateFlow.setObj('0')
 			},
 			judgeChange: function(param) {
 				// //console.log(JSON.stringify(param))

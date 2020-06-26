@@ -39,42 +39,20 @@
             </button>
         </div>
         <div class="">
-            <div class="col-md-12 col-lg-12">
-                <div class="table-responsive pre-scrollable">
-                    <table class="table table-bordered table-hover" id="datatable">
-
-                        <thead class="datathead">
-                        <tr>
-                            <th class="text-center">门店名称</th>
-                            <th class="text-center">退款人</th>
-                            <th class="text-center">咨询师</th>
-                            <th class="text-center">产品</th>
-                            <th class="text-center">退费课时</th>
-							<th class="text-center">退费金额</th>
-							<th class="text-center">时间</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-for="(item,index) in objList" :key="index">
-                            <td class="text-center">{{item.storeName}}</td>
-                            <td class="text-center">{{item.visitorName}}</td>
-                            <td class="text-center">{{item.proEmpName}}</td>
-							<td class="text-center">{{item.proName}}</td>
-							<td class="text-center">{{item.refCount}}</td>
-                            <td class="text-center">{{item.realRefund}}</td>
-                            <td class="text-center">{{item.createDate | dateFormatFilter('YYYY-MM-DD')}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!--分页插件-->
-                <div class="page">
-                    <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
-                    <paging ref="paging" @change="pageChange"></paging>
-                </div>
-            </div>
+			<el-table ref="productTable" :data="objList" style="width: 100%" border>
+				<el-table-column label="名字" width="100" align="center">
+					<template slot-scope="scope">{{scope.row.empName}}</template>
+				</el-table-column>
+				<el-table-column label="岗位" align="center">
+					<template slot-scope="scope">
+						<p>{{scope.row.posName}}</p>
+					</template>
+				</el-table-column>
+				<el-table-column v-for="(item, index) in dtList" :key="index" :label="item.dtName" align="center">
+					<template slot-scope="scope">{{scope.row.dtCountList[index].dtCount}}</template>
+				</el-table-column>
+			</el-table>
         </div>
-
     </div>
 
 </template>
@@ -99,6 +77,7 @@
         data() {
             return {
                 objList: [],
+				dtList:[],
                 fixedHeader: false,
 				visitorName:'',
 				dateArr:'',
@@ -120,7 +99,9 @@
                 this.current = page
                 this.queryObjectList(page);
             },
-
+			conLog(item){
+				console.log(item[0])
+			},
             storeChange(param) {
             	if (this.isBlank(param)) {
             		this.storeId = ""
@@ -147,23 +128,15 @@
                     },
                     data: {
 						storeId: this.storeId,
-						visitorName:this.visitorName,
 						begDate:this.begDate,
 						endDate:this.endDate,
-
-                        page: page.toString(),
-                        pageSize: this.pageSize
                     },
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
                     if (res.retCode == '0000') {
-                        this.pages = res.retData.pages //总页数
-                        this.current = res.retData.current //当前页码
-                        this.pageSize = res.retData.size//一页显示的数量
-                        this.total = res.retData.total //数据的数量
-                        this.$refs.paging.setParam(this.pages, this.current, this.total)
-                        this.objList = res.retData.records
+						this.dtList = res.retData.dtList
+						this.objList=res.retData.empDtList
                     } else {
                         alert(res.retMsg)
                     }

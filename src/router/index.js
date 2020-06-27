@@ -192,6 +192,11 @@ export default new Router({
                     path: '/SummaryMenu/VisitorDeSummary',
                     name: 'VisitorDeSummary',
                     component: () => import("../components/SummaryMenu/VisitorDeSummary"),
+                },
+                {
+                    path: '/SummaryMenu/VisitorConSummary',
+                    name: 'VisitorConSummary',
+                    component: () => import("../components/SummaryMenu/VisitorConSummary"),
                 }],
             redirect: '/MP/Visitor'
         }]

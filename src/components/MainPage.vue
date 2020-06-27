@@ -161,6 +161,11 @@
                                 <router-link to="/SummaryMenu/VisitorDeSummary"><i class="fa" aria-hidden="true">访客跟踪明细</i>
                                 </router-link>
                             </dd>
+                            <dd @click="addCheck('VisitorConSummary')"
+                                v-bind:class="{'li-active':onString=='VisitorConSummary'}">
+                                <router-link to="/SummaryMenu/VisitorConSummary"><i class="fa" aria-hidden="true">产品消耗统计</i>
+                                </router-link>
+                            </dd>
 							<dd @click="addCheck('ProSummary')"
 							    v-bind:class="{'li-active':onString=='ProSummary'}">
 							    <router-link to="/SummaryMenu/ProSummary"><i class="fa" aria-hidden="true">项目汇总</i>

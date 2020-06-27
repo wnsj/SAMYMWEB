@@ -41,7 +41,7 @@
 
                 <el-row>
                     <el-col :span="11" :pull="1">
-                        <el-form-item label="到访时间">
+                        <el-form-item label="购买时间">
                             <el-date-picker
                                 v-model="param.secondVisitStartTime"
                                 :picker-options="pickerOptions0"

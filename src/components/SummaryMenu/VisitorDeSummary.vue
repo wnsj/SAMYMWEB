@@ -1,0 +1,373 @@
+<template>
+    <div>
+        <div class="top">
+            <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
+                <el-row style="margin-top: 2%">
+                    <el-col :span="6">
+                        <el-form-item label="门店">
+                            <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
+                                <el-option v-for="item in storeList"
+                                           :key="item.storeId"
+                                           :label="item.storeName"
+                                           :value="item.storeId">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="6">
+                        <el-form-item label='咨客姓名:'>
+                            <el-input v-model="param.memName" placeholder="咨客姓名" clearable></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="初访时间">
+                            <el-date-picker
+                                v-model="param.firstVisitStartTime"
+                                :picker-options="pickerOptions0"
+                                type="date"
+                                placeholder="开始时间">
+                            </el-date-picker>
+                            <span> - </span>
+                            <el-date-picker
+                                v-model="param.firstVisitEndTime"
+                                :picker-options="pickerOptions1"
+                                type="date"
+                                placeholder="结束时间">
+                            </el-date-picker>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row>
+                    <el-col :span="6">
+                        <el-form-item label="访问类型">
+                            <el-select v-model="param.visitType" clearable placeholder="请选择"
+                                       @change="getObj(param.visitType)">
+                                <el-option v-for="item in list"
+                                           :key="item.id"
+                                           :label="item.name"
+                                           :value="item.id">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="6">
+                        <el-form-item label="咨客判定">
+                            <el-select v-model="param.isfirst" clearable placeholder="请选择">
+                                <el-option v-for="item in vsJugList"
+                                           :key="item.vsId"
+                                           :label="item.vsName"
+                                           :value="item.vsId">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="到访时间">
+                            <el-date-picker
+                                v-model="param.secondVisitStartTime"
+                                :picker-options="pickerOptions0"
+                                type="date"
+                                placeholder="开始时间">
+                            </el-date-picker>
+                            <span> - </span>
+                            <el-date-picker
+                                v-model="param.secondVisitEndTime"
+                                :picker-options="pickerOptions1"
+                                type="date"
+                                placeholder="结束时间">
+                            </el-date-picker>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row>
+                    <el-col :offset="10">
+                        <el-button type="primary" size="small"
+                                   style="width: 85px"
+                                   @click="getAllConByCondition">查询
+                        </el-button>
+                    </el-col>
+                </el-row>
+            </el-form>
+        </div>
+
+                <div>
+                    <el-table
+                        :data="tableData"
+                        :cell-style="cellStyle"
+                        :header-cell-style="headerStyle"
+                        height="530"
+                        style="width: 99%;margin-left:0.5%;margin-top: 20px"
+                        border>
+                        <el-table-column
+                            align="center"
+                            prop="firstTime"
+                            label="出访时间"
+                            min-width="100">
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            prop="receiveTime"
+                            label="到访时间"
+                            min-width="100">
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            prop="visitType"
+                            label="访问类型"
+                            min-width="95">
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            prop="storeName"
+                            label="门店"
+                            min-width="100">
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            prop="memName"
+                            label="咨客姓名"
+                            min-width="100">
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            prop="diseaseType"
+                            label="咨询方向"
+                            min-width="100">
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            prop="diseaseProblem"
+                            label="咨询问题"
+                            min-width="100">
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            prop="counselorName"
+                            label="咨询师"
+                            min-width="95">
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            prop="empName"
+                            label="顾问"
+                            min-width="95">
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            prop="phone"
+                            label="联系方式"
+                            min-width="100">
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            prop="proName"
+                            label="产品"
+                            min-width="100">
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            prop="isfirst"
+                            label="客户判定"
+                            min-width="100">
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            prop="reason"
+                            label="原因"
+                            show-overflow-tooltip
+                            min-width="100">
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            prop="remark"
+                            show-overflow-tooltip
+                            label="跟进情况"
+                            min-width="100">
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            prop="followUpPerson"
+                            label="跟进人"
+                            min-width="100">
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            prop="title"
+                            label="类型"
+                            min-width="95">
+                        </el-table-column>
+                    </el-table>
+                    <el-row class="second_interval">
+                        <el-col :span="24">
+                            <el-pagination
+                                @current-change="handleCurrentChange"
+                                @size-change="handleSizeChange"
+                                :current-page="param.current"
+                                :page-sizes="[10,20,30,50]"
+                                :page-size="param.pageSize"
+                                layout="total, sizes, prev, pager, next, jumper"
+                                :total="totalAmount"
+                            >
+                            </el-pagination>
+                        </el-col>
+                    </el-row>
+                </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        components: {},
+        data() {
+            return {
+                param: {
+                    current: 1,
+                    pageSize: 10,
+                    storeId: '',
+                    firstVisitStartTime: '',
+                    firstVisitEndTime: '',
+                    secondVisitStartTime: '',
+                    secondVisitEndTime: '',
+                    memName: '',
+                    isfirst: '',
+                    visitType: '',
+                },
+                list: [{id: 1, name: "初访"}, {id: 2, name: "复访"}],
+                storeList: [],
+                tableData: [],
+                totalAmount: 0,
+                vsJugList: [],
+                pickerOptions0: {
+                    disabledDate: (time) => {
+                        if (this.param.firstVisitEndTime !== '' && this.param.firstVisitEndTime !== null) {
+                            return time.getTime() > Date.now() || time.getTime() > this.param.firstVisitEndTime
+                        } else {
+                            return time.getTime() > Date.now()
+                        }
+                    }
+                },
+                pickerOptions1: {
+                    disabledDate: (time) => {
+                        return time.getTime() < this.param.firstVisitStartTime || time.getTime() > Date.now()
+                    }
+                },
+            };
+        },
+        methods: {
+
+            // 表格表头样式
+            headerStyle() {
+                return 'text-align: center;color: black;'
+            },
+            // 表格行样式
+            cellStyle() {
+                return 'text-align: center;'
+            },
+            // 获取门店
+            getStore() {
+                var url = this.url + '/storeAction/queryStore'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        isuse: '1'
+                    },
+                    dataType: 'json',
+                }).then((response) => {
+                    var res = response.data
+                    if (res.retCode == '0000') {
+                        this.storeList = res.retData
+                    } else {
+                        alert(res.retMsg)
+                    }
+
+                }).catch((error) => {
+                    //console.log('岗位数据请求失败处理')
+                });
+            },
+
+            //vsType:1初访，2复访；stateType：1客户判定，2续流状态
+            getObj(vsType) {
+                //consolele.log('vsType:'+vsType)
+                var url = this.url + '/visitState/queryVisitState'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        vsType: vsType,
+                        stateType: 1,
+                        isUse: '1'
+                    },
+                    dataType: 'json',
+                }).then((response) => {
+                    var res = response.data
+                    if (res.retCode == '0000') {
+                        if (res.retData.length > 0) {
+                            this.vsJugList = res.retData
+                        }
+                    } else {
+                        alert(res.retMsg)
+                    }
+
+                }).catch((error) => {
+                    //console.log('状态数据请求失败处理')
+                });
+            },
+            // 获取初访咨询方向汇总数据
+            async getAllConByCondition() {
+                var url = this.url + '/consumAction/getAllConByCondition'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: this.param,
+                    dataType: 'json',
+                }).then((response) => {
+                    var res = response.data
+                    if (res.retCode == '0000') {
+                        this.tableData = res.retData.records
+                        this.totalAmount = res.retData.total
+                    } else {
+                        alert(res.retMsg)
+                    }
+
+                }).catch((error) => {
+                    //console.log('岗位数据请求失败处理')
+                });
+            },
+
+            // 翻页
+            handleCurrentChange(pageNum) {
+                this.param.current = pageNum
+                this.getAllConByCondition()
+            },
+            // 每页条数变化时触发
+            handleSizeChange(pageSize) {
+                this.param.pageSize = pageSize
+                this.getAllConByCondition()
+            },
+        },
+        created() {
+            this.getStore()
+            this.getObj()
+            this.getAllConByCondition()
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

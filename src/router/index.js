@@ -187,6 +187,21 @@ export default new Router({
                     path: '/SummaryMenu/FirstVdSummary',
                     name: 'FirstVdSummary',
                     component: () => import("../components/SummaryMenu/FirstVdSummary"),
+                },
+                {
+                    path: '/SummaryMenu/VisitorDeSummary',
+                    name: 'VisitorDeSummary',
+                    component: () => import("../components/SummaryMenu/VisitorDeSummary"),
+                },
+                {
+                    path: '/SummaryMenu/VisitorConSummary',
+                    name: 'VisitorConSummary',
+                    component: () => import("../components/SummaryMenu/VisitorConSummary"),
+                },
+                {
+                    path: '/SummaryMenu/VsMonthSummary',
+                    name: 'VsMonthSummary',
+                    component: () => import("../components/SummaryMenu/VsMonthSummary"),
                 }],
             redirect: '/MP/Visitor'
         }]

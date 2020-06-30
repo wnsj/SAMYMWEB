@@ -11,7 +11,7 @@
             </div>
             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-right">
                 <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，门店管理系统</p>
-				
+
                 <button class="btn btn-danger m_r_10" style="margin-top: 40px;" v-on:click="modPwd()">修改密码</button>
                 <button class="btn btn-default m_r_10" style="margin-top: 40px;" v-on:click="loginOut()">退出</button>
             </div>
@@ -154,6 +154,21 @@
                             <dd @click="addCheck('FirstVdSummary')"
                                 v-bind:class="{'li-active':onString=='FirstVdSummary'}">
                                 <router-link to="/SummaryMenu/FirstVdSummary"><i class="fa" aria-hidden="true">初访咨询方向</i>
+                                </router-link>
+                            </dd>
+                            <dd @click="addCheck('VisitorDeSummary')"
+                                v-bind:class="{'li-active':onString=='VisitorDeSummary'}">
+                                <router-link to="/SummaryMenu/VisitorDeSummary"><i class="fa" aria-hidden="true">访客跟踪明细</i>
+                                </router-link>
+                            </dd>
+                            <dd @click="addCheck('VisitorConSummary')"
+                                v-bind:class="{'li-active':onString=='VisitorConSummary'}">
+                                <router-link to="/SummaryMenu/VisitorConSummary"><i class="fa" aria-hidden="true">产品消耗统计</i>
+                                </router-link>
+                            </dd>
+                            <dd @click="addCheck('VsMonthSummary')"
+                                v-bind:class="{'li-active':onString=='VsMonthSummary'}">
+                                <router-link to="/SummaryMenu/VsMonthSummary"><i class="fa" aria-hidden="true">月度咨客状态</i>
                                 </router-link>
                             </dd>
 							<dd @click="addCheck('ProSummary')"

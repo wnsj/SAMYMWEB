@@ -14,12 +14,21 @@
 					<store ref='store' @storeChange='storeChange'></store>
 				</div>
 			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11">姓名</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" v-model="empName">
+				</div>
+			</div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            	<div class="col-md-5 col-lg-5 text-right nopad">
-            		<p class="end-aline col-md-11 col-lg-11">姓名</p><span class="sign-left">:</span>
-            	</div>
-            	<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="visitorName">
-            	</div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">岗位</p><span
+                    class="sign-left">:</span>
+                </div>
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <pos ref="pos" @positionChange='positionChange'></pos>
+                </div>
             </div>
            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
            	<div class="col-md-3 col-lg-3 text-right nopad">
@@ -63,6 +72,7 @@
 
 	import dPicker from 'vue2-datepicker'
 	import store from '../common/Store.vue'
+	import pos from '../common/Position.vue'
     import Paging from '../common/paging'
     import {
         init
@@ -73,6 +83,7 @@
             Paging,
 			dPicker,
 			store,
+			pos,
         },
         data() {
             return {
@@ -83,6 +94,8 @@
 				dateArr:'',
 				begDate:'',
 				endDate:'',
+				posId:'',
+				empName:'',
 				storeId: this.storeId(),
 				accountType:this.accountType(),
 
@@ -109,6 +122,13 @@
             		this.storeId = param.storeId
             	}
             },
+			positionChange: function (param) {
+			    if (this.isBlank(param)) {
+			        this.posId = ""
+			    } else {
+			        this.posId = param.posId
+			    }
+			},
             //check the list of store
             queryObjectList(page) {
 				if(this.dateArr.length > 0 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1]))	{
@@ -128,6 +148,8 @@
                     },
                     data: {
 						storeId: this.storeId,
+						posId:this.posId,
+						empName:this.empName,
 						begDate:this.begDate,
 						endDate:this.endDate,
                     },

@@ -305,7 +305,12 @@
                     if (res.retCode == '0000') {
                         this.tableData = res.retData.records
                         this.totalAmount = res.retData.total
-                        this.tableHeight = this.tableData.length*52
+                        if (this.tableData) {
+                            if (this.tableData.length>10) {
+                                this.tableData.length = 10
+                            }
+                            this.tableHeight = this.tableData.length*52
+                        }
                     } else {
                         alert(res.retMsg)
                     }

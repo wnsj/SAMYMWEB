@@ -39,7 +39,7 @@
             </button>
         </div>
         <div class="">
-			<el-table ref="productTable" :data="objList" style="width: 100%" border>
+			<el-table ref="productTable" :data="objList" style="width: 100%" height="700" border fixed>
 				<el-table-column label="名字" width="100" align="center">
 					<template slot-scope="scope">{{scope.row.empName}}</template>
 				</el-table-column>
@@ -127,7 +127,7 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-						storeId: this.storeId,
+						storeId:this.storeId,
 						begDate:this.begDate,
 						endDate:this.endDate,
                     },

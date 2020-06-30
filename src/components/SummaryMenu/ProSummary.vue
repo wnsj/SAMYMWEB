@@ -48,8 +48,8 @@
 						<p>{{scope.row.posName}}</p>
 					</template>
 				</el-table-column>
-				<el-table-column v-for="(item, index) in dtList" :key="index" :label="item.dtName" align="center">
-					<template slot-scope="scope">{{scope.row.dtCountList[index].dtCount}}</template>
+				<el-table-column v-for="(item, index) in proList" :key="index" :label="item.proName" align="center">
+					<template slot-scope="scope">{{scope.row.proCountList[index].proCount}}</template>
 				</el-table-column>
 			</el-table>
         </div>
@@ -77,7 +77,7 @@
         data() {
             return {
                 objList: [],
-				dtList:[],
+				proList:[],
                 fixedHeader: false,
 				visitorName:'',
 				dateArr:'',
@@ -118,7 +118,7 @@
 					this.begDate=''
 					this.endDate=''
 				}
-                var url = this.url + '/employeeAction/queryEmpByDt'
+                var url = this.url + '/employeeAction/queryEmpByPro'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -135,8 +135,8 @@
                 }).then((response) => {
                     var res = response.data
                     if (res.retCode == '0000') {
-						this.dtList = res.retData.dtList
-						this.objList=res.retData.empDtList
+						this.proList = res.retData.proList
+						this.objList=res.retData.empProList
                     } else {
                         alert(res.retMsg)
                     }

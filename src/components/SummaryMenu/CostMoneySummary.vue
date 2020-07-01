@@ -91,13 +91,13 @@
                     <el-table-column
                         align="center"
                         prop="radioCon"
-                        label="消耗比"
+                        label="消耗比(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="radioRefund"
-                        label="退费率"
+                        label="退费率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column

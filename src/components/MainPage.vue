@@ -139,7 +139,7 @@
                             </dd>
 
                         </dl>
-                        <dl v-bind:class="{h15:bool4}">
+                        <dl v-bind:class="{h40:bool4}">
                             <dt @click="onShow(3)" v-bind:class="{'li-active':bool4}">
                                 <i class="fa" v-bind:class="{'fa-folder-open':bool4,'fa-folder':!bool4}"
                                    aria-hidden="true">
@@ -169,6 +169,11 @@
                             <dd @click="addCheck('VsMonthSummary')"
                                 v-bind:class="{'li-active':onString=='VsMonthSummary'}">
                                 <router-link to="/SummaryMenu/VsMonthSummary"><i class="fa" aria-hidden="true">月度咨客状态</i>
+                                </router-link>
+                            </dd>
+                            <dd @click="addCheck('CostMoneySummary')"
+                                v-bind:class="{'li-active':onString=='CostMoneySummary'}">
+                                <router-link to="/SummaryMenu/CostMoneySummary"><i class="fa" aria-hidden="true">消耗金额核算</i>
                                 </router-link>
                             </dd>
 							<dd @click="addCheck('ProSummary')"

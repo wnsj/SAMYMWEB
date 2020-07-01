@@ -230,7 +230,7 @@
         data() {
             return {
                 param: {
-                    storeId: '',
+                    storeId: this.storeId(),
                     secondVisitStartTime: '',
                     secondVisitEndTime: '',
                     empName: '',

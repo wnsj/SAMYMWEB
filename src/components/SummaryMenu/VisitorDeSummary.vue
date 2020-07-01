@@ -97,7 +97,7 @@
                         :data="tableData"
                         :cell-style="cellStyle"
                         :header-cell-style="headerStyle"
-                        height="530"
+                        max-height="530"
                         style="width: 99%;margin-left:0.5%;margin-top: 20px"
                         border>
                         <el-table-column

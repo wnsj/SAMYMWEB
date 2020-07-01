@@ -148,44 +148,48 @@
                             </dt>
 							<dd @click="addCheck('EmpDtSummary')"
 							    v-bind:class="{'li-active':onString=='EmpDtSummary'}">
-							    <router-link to="/SummaryMenu/EmpDtSummary"><i class="fa" aria-hidden="true">咨询方向汇总</i>
+							    <router-link to="/SummaryMenu/EmpDtSummary"><i class="fa" aria-hidden="true">初诊咨询方向统计表</i>
+							    </router-link>
+							</dd>
+							<dd @click="addCheck('ProSummary')"
+							    v-bind:class="{'li-active':onString=='ProSummary'}">
+							    <router-link to="/SummaryMenu/ProSummary"><i class="fa" aria-hidden="true">套餐产品消耗统计表</i>
+							    </router-link>
+							</dd>
+							<dd @click="addCheck('EmpConsumeSummary')"
+							    v-bind:class="{'li-active':onString=='EmpConsumeSummary'}">
+							    <router-link to="/SummaryMenu/EmpConsumeSummary"><i class="fa" aria-hidden="true">收入情况核算表</i>
+							    </router-link>
+							</dd>
+							<dd @click="addCheck('CostMoneySummary')"
+							    v-bind:class="{'li-active':onString=='CostMoneySummary'}">
+							    <router-link to="/SummaryMenu/CostMoneySummary"><i class="fa" aria-hidden="true">消耗金额核算表</i>
+							    </router-link>
+							</dd>
+							<dd @click="addCheck('VsMonthSummary')"
+							    v-bind:class="{'li-active':onString=='VsMonthSummary'}">
+							    <router-link to="/SummaryMenu/VsMonthSummary"><i class="fa" aria-hidden="true">月度咨客状态统计表</i>
+							    </router-link>
+							</dd>
+							<dd @click="addCheck('VisitorConSummary')"
+							    v-bind:class="{'li-active':onString=='VisitorConSummary'}">
+							    <router-link to="/SummaryMenu/VisitorConSummary"><i class="fa" aria-hidden="true">客户产品消耗统计表</i>
+							    </router-link>
+							</dd>
+							<dd @click="addCheck('VisitorDeSummary')"
+							    v-bind:class="{'li-active':onString=='VisitorDeSummary'}">
+							    <router-link to="/SummaryMenu/VisitorDeSummary"><i class="fa" aria-hidden="true">访客跟踪明细表</i>
 							    </router-link>
 							</dd>
                             <dd @click="addCheck('FirstVdSummary')"
                                 v-bind:class="{'li-active':onString=='FirstVdSummary'}">
-                                <router-link to="/SummaryMenu/FirstVdSummary"><i class="fa" aria-hidden="true">初访咨询方向</i>
+                                <router-link to="/SummaryMenu/FirstVdSummary"><i class="fa" aria-hidden="true">初访咨询方向统计表</i>
                                 </router-link>
                             </dd>
-                            <dd @click="addCheck('VisitorDeSummary')"
-                                v-bind:class="{'li-active':onString=='VisitorDeSummary'}">
-                                <router-link to="/SummaryMenu/VisitorDeSummary"><i class="fa" aria-hidden="true">访客跟踪明细</i>
-                                </router-link>
-                            </dd>
-                            <dd @click="addCheck('VisitorConSummary')"
-                                v-bind:class="{'li-active':onString=='VisitorConSummary'}">
-                                <router-link to="/SummaryMenu/VisitorConSummary"><i class="fa" aria-hidden="true">产品消耗统计</i>
-                                </router-link>
-                            </dd>
-                            <!-- <dd @click="addCheck('VsMonthSummary')"
-                                v-bind:class="{'li-active':onString=='VsMonthSummary'}">
-                                <router-link to="/SummaryMenu/VsMonthSummary"><i class="fa" aria-hidden="true">月度咨客状态</i>
-                                </router-link>
-                            </dd> -->
-                            <!-- <dd @click="addCheck('CostMoneySummary')"
-                                v-bind:class="{'li-active':onString=='CostMoneySummary'}">
-                                <router-link to="/SummaryMenu/CostMoneySummary"><i class="fa" aria-hidden="true">消耗金额核算</i>
-                                </router-link>
-                            </dd> -->
-							<dd @click="addCheck('ProSummary')"
-							    v-bind:class="{'li-active':onString=='ProSummary'}">
-							    <router-link to="/SummaryMenu/ProSummary"><i class="fa" aria-hidden="true">项目汇总</i>
-							    </router-link>
-							</dd>
-							<!-- <dd @click="addCheck('EmpConsumeSummary')"
-							    v-bind:class="{'li-active':onString=='EmpConsumeSummary'}">
-							    <router-link to="/SummaryMenu/EmpConsumeSummary"><i class="fa" aria-hidden="true">收入汇总</i>
-							    </router-link>
-							</dd> -->
+                            
+                            
+                            
+                            
                             <!-- <dd @click="addCheck('CurrentSummary')"
                                 v-bind:class="{'li-active':onString=='CurrentSummary'}">
                                 <router-link to="/MP/CurrentSummary"><i class="fa" aria-hidden="true">月入汇总</i>

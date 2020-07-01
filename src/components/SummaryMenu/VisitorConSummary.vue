@@ -21,7 +21,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="5" :pull="1">
-                        <el-form-item label="门店">
+                        <el-form-item label="门店" v-if="accountType == true">
                             <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
                                 <el-option v-for="item in storeList"
                                            :key="item.storeId"
@@ -221,7 +221,8 @@
                         return time.getTime() < this.param.firstVisitStartTime || time.getTime() > Date.now()
                     }
                 },
-                tableHeight:0
+                tableHeight:0,
+                accountType:this.accountType(),
             };
         },
         methods: {
@@ -308,6 +309,7 @@
             },
             // 每页条数变化时触发
             handleSizeChange(pageSize) {
+                this.param.current = 1
                 this.param.pageSize = pageSize
                 this.getVsConsume()
             },

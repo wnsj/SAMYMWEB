@@ -39,9 +39,6 @@
                     </el-col>
                 </el-row>
             </el-form>
-
-
-
         </div>
 
         <div>
@@ -103,7 +100,7 @@
                 param: {
                     // current: 1,
                     // pageSize: 10,
-                    storeId: '',
+                    storeId: this.storeId(),
                     firstVisitStartTime: '',
                     firstVisitEndTime: ''
                 },

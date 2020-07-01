@@ -3,7 +3,7 @@
 
     <div class="wraper">
         <div class="col-md-12 col-lg-12 main-title">
-            <h1 class="titleCss">咨询方向汇总</h1>
+            <h1 class="titleCss">收入情况核算表</h1>
         </div>
         <div class="row newRow">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-if="accountType==true">
@@ -48,7 +48,7 @@
             </button>
         </div>
         <div class="">
-			<el-table ref="productTable" :data="objList" style="width: 100%" show-summary>
+			<el-table ref="productTable" :data="objList" style="width: 100%" show-summary border fixed>
 				<el-table-column label="名字" width="100" align="center">
 					<template slot-scope="scope">{{scope.row.empName}}</template>
 				</el-table-column>
@@ -56,12 +56,8 @@
 					<template slot-scope="scope"><p>{{scope.row.posName}}</p></template>
 				</el-table-column>
 				<el-table-column label="初访金额" width="100" align="center" prop="piFirstVisit"></el-table-column>
-				<el-table-column label="复访金额" width="100" align="center">
-					<template slot-scope="scope"><p>{{scope.row.piSecondVisit}}</p></template>
-				</el-table-column>
-				<el-table-column label="返访金额" width="100" align="center">
-					<template slot-scope="scope"><p>{{scope.row.piReverseVisit}}</p></template>
-				</el-table-column>
+				<el-table-column label="复访金额" width="100" align="center" prop="piSecondVisit"></el-table-column>
+				<el-table-column label="返访金额" width="100" align="center" prop="piReverseVisit"></el-table-column>
 				<el-table-column label="退费金额" width="100" align="center">
 					<template slot-scope="scope"><p>{{scope.row.posName}}</p></template>
 				</el-table-column>

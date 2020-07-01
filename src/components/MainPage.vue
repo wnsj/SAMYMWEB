@@ -176,6 +176,11 @@
 							    <router-link to="/SummaryMenu/ProSummary"><i class="fa" aria-hidden="true">项目汇总</i>
 							    </router-link>
 							</dd>
+							<dd @click="addCheck('EmpConsumeSummary')"
+							    v-bind:class="{'li-active':onString=='EmpConsumeSummary'}">
+							    <router-link to="/SummaryMenu/EmpConsumeSummary"><i class="fa" aria-hidden="true">收入汇总</i>
+							    </router-link>
+							</dd>
                             <!-- <dd @click="addCheck('CurrentSummary')"
                                 v-bind:class="{'li-active':onString=='CurrentSummary'}">
                                 <router-link to="/MP/CurrentSummary"><i class="fa" aria-hidden="true">月入汇总</i>
@@ -415,7 +420,7 @@
     }
 
     #aside-menu dl.h15 {
-        height: 350px;
+        height: 500px;
     }
 
     #aside-menu dl.h25 {

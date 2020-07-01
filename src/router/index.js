@@ -40,6 +40,11 @@ export default new Router({
 				    name: 'ProSummary',
 				    component: () => import('../components/SummaryMenu/ProSummary'),
 				},
+				{
+				    path: '/SummaryMenu/EmpConsumeSummary',
+				    name: 'EmpConsumeSummary',
+				    component: () => import('../components/SummaryMenu/EmpConsumeSummary'),
+				},
                 {
                     path: '/MP/Visitor',
                     name: 'Visitor',

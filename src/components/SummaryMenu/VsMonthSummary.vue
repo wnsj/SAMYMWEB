@@ -328,6 +328,7 @@
             },
             // 每页条数变化时触发
             handleSizeChange(pageSize) {
+                this.param.current = 1
                 this.param.pageSize = pageSize
                 this.getMonthVsState()
             },

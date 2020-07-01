@@ -465,9 +465,13 @@
         height: 50px;
         text-align: left;
         line-height: 50px;
+    }
+    #aside-menu dl dt i {
         text-indent: 25px;
     }
-
+    #aside-menu dl dd i {
+        text-indent: 10px;
+    }
     #aside-menu dl i:before {
         position: absolute;
         left: -25px;

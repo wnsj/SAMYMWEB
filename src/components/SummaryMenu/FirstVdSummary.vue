@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <div class="wraper">
+        <div class="col-md-12 col-lg-12 main-title">
+            <h1 class="titleCss">初访咨询方向统计表</h1>
+        </div>
         <div class="top">
             <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
                 <el-row style="margin-top: 2%">

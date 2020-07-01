@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <div class="wraper">
+        <div class="col-md-12 col-lg-12 main-title">
+            <h1 class="titleCss">消耗金额核算表</h1>
+        </div>
         <div class="top">
             <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
                 <el-row style="margin-top: 2%">
@@ -57,7 +60,7 @@
                     show-summary
                     sortable
                     max-height="530"
-                    style="width: 99%;margin-left:0.5%;margin-top: 20px"
+                    style="width: 99%;margin-left:0.5%;"
                     border>
                     <el-table-column
                         align="center"
@@ -141,7 +144,7 @@
                     show-summary
                     sortable
                     max-height="530"
-                    style="width: 99%;margin-left:0.5%;margin-top: 20px"
+                    style="width: 99%;margin-left:0.5%;"
                     border>
                     <el-table-column
                         align="center"

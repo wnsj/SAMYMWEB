@@ -3,7 +3,7 @@
 
     <div class="wraper">
         <div class="col-md-12 col-lg-12 main-title">
-            <h1 class="titleCss">咨询方向汇总</h1>
+            <h1 class="titleCss">初诊咨询方向统计表</h1>
         </div>
         <div class="row newRow">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-if="accountType==true">

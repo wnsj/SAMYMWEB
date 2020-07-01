@@ -1,25 +1,12 @@
 <template>
-    <div>
+    <div class="wraper">
+        <div class="col-md-12 col-lg-12 main-title">
+            <h1 class="titleCss">访客跟踪明细表</h1>
+        </div>
         <div class="top">
             <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
                 <el-row style="margin-top: 2%">
-                    <el-col :span="6">
-                        <el-form-item label="门店" v-if="accountType == true">
-                            <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
-                                <el-option v-for="item in storeList"
-                                           :key="item.storeId"
-                                           :label="item.storeName"
-                                           :value="item.storeId">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-form-item label='咨客姓名:'>
-                            <el-input v-model="param.memName" placeholder="咨客姓名" clearable></el-input>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="12">
+                    <el-col :span="11" :pull="1">
                         <el-form-item label="初访时间">
                             <el-date-picker
                                 v-model="param.firstVisitStartTime"
@@ -36,9 +23,6 @@
                             </el-date-picker>
                         </el-form-item>
                     </el-col>
-                </el-row>
-
-                <el-row>
                     <el-col :span="6">
                         <el-form-item label="访问类型">
                             <el-select v-model="param.visitType" clearable placeholder="请选择"
@@ -62,7 +46,10 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="12">
+                </el-row>
+
+                <el-row>
+                    <el-col :span="11" :pull="1">
                         <el-form-item label="到访时间">
                             <el-date-picker
                                 v-model="param.secondVisitStartTime"
@@ -77,6 +64,22 @@
                                 type="date"
                                 placeholder="结束时间">
                             </el-date-picker>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="6">
+                        <el-form-item label="门店" v-if="accountType == true">
+                            <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
+                                <el-option v-for="item in storeList"
+                                           :key="item.storeId"
+                                           :label="item.storeName"
+                                           :value="item.storeId">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="6">
+                        <el-form-item label='咨客姓名:'>
+                            <el-input v-model="param.memName" placeholder="咨客姓名" clearable></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -98,12 +101,12 @@
                         :cell-style="cellStyle"
                         :header-cell-style="headerStyle"
                         max-height="530"
-                        style="width: 99%;margin-left:0.5%;margin-top: 20px"
+                        style="margin-top: 20px"
                         border>
                         <el-table-column
                             align="center"
                             prop="firstTime"
-                            label="出访时间"
+                            label="初访时间"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
@@ -116,7 +119,7 @@
                             align="center"
                             prop="visitType"
                             label="访问类型"
-                            min-width="95">
+                            min-width="90">
                         </el-table-column>
                         <el-table-column
                             align="center"

@@ -48,7 +48,7 @@
             <el-table
                 :data="tableData"
                 :cell-style="cellStyle"
-                height="500"
+                max-height="530"
                 :header-cell-style="headerStyle"
                 style="width: 95%;margin-left: 3%;margin-top: 20px"
                 border>

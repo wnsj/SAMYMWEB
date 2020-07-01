@@ -91,6 +91,7 @@
                 :data="tableData"
                 :cell-style="cellStyle"
                 :header-cell-style="headerStyle"
+                max-height="530"
                 show-summary
                 sortable
                 style="width: 99%;margin-left:0.5%;margin-top: 20px"
@@ -211,7 +212,6 @@
                         return time.getTime() < this.param.firstVisitStartTime || time.getTime() > Date.now()
                     }
                 },
-                tableHeight:0,
                 accountType:this.accountType(),
             };
         },
@@ -223,7 +223,7 @@
             },
             // 表格样式
             cellStyle() {
-                return 'text-align: center;height: 52px'
+                return 'text-align: center;'
             },
             // 格式化时间
             dateFormat: function (row, column, cellValue, index) {
@@ -306,12 +306,6 @@
                     if (res.retCode == '0000') {
                         this.tableData = res.retData.records
                         this.totalAmount = res.retData.total
-                        if (this.tableData) {
-                            if (this.tableData.length>10) {
-                                this.tableData.length = 10
-                            }
-                            this.tableHeight = this.tableData.length*52
-                        }
                     } else {
                         alert(res.retMsg)
                     }

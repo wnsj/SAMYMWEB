@@ -56,6 +56,7 @@
                     :header-cell-style="headerStyle"
                     show-summary
                     sortable
+                    max-height="530"
                     style="width: 99%;margin-left:0.5%;margin-top: 20px"
                     border>
                     <el-table-column
@@ -67,25 +68,25 @@
                     <el-table-column
                         align="center"
                         prop="firstCon"
-                        label="首签消耗¥"
+                        label="首签消耗(¥)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="secondCon"
-                        label="复访消耗¥"
+                        label="复访消耗(¥)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="other"
-                        label="初访测评/单次/其他消耗¥"
+                        label="初访测评/单次/其他消耗(¥)"
                         min-width="95">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="totalCon"
-                        label="总消耗金额¥"
+                        label="总消耗金额(¥)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -139,6 +140,7 @@
                     :header-cell-style="headerStyle"
                     show-summary
                     sortable
+                    max-height="530"
                     style="width: 99%;margin-left:0.5%;margin-top: 20px"
                     border>
                     <el-table-column
@@ -150,37 +152,37 @@
                     <el-table-column
                         align="center"
                         prop="firstCon"
-                        label="首签消耗¥"
+                        label="首签消耗(¥)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="secondCon"
-                        label="复访消耗¥"
+                        label="复访消耗(¥)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="other"
-                        label="初访测评/单次/其他消耗¥"
+                        label="初访测评/单次/其他消耗(¥)"
                         min-width="95">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="totalCon"
-                        label="总消耗金额¥"
+                        label="总消耗金额(¥)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="radioCon"
-                        label="消耗比"
+                        label="消耗比(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="radioRefund"
-                        label="退费率"
+                        label="退费率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -250,7 +252,6 @@
                         return time.getTime() < this.param.firstVisitStartTime || time.getTime() > Date.now()
                     }
                 },
-                tableHeight: 0,
                 accountType:this.accountType(),
             };
         },
@@ -262,7 +263,7 @@
             },
             // 表格样式
             cellStyle() {
-                return 'text-align: center;height: 52px'
+                return 'text-align: center;'
             },
             // 格式化时间
             dateFormat: function (row, column, cellValue, index) {
@@ -312,12 +313,6 @@
                     var res = response.data
                     if (res.retCode == '0000') {
                         this.tableData = res.retData
-                        if (this.tableData) {
-                            if (this.tableData.length > 10) {
-                                this.tableData.length = 10
-                            }
-                            this.tableHeight = this.tableData.length * 52
-                        }
                     } else {
                         alert(res.retMsg)
                     }

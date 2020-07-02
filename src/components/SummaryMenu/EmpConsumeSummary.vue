@@ -5,87 +5,101 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">收入情况核算表</h1>
 		</div>
-		<div class="row newRow">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-if="accountType==true">
-				<div class="col-md-5 col-lg-5 text-right nopad">
-					<p class="end-aline col-md-11 col-lg-11">门店</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-md-7 col-lg-7">
-					<store ref='store' @storeChange='storeChange'></store>
-				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right nopad">
-					<p class="end-aline col-md-11 col-lg-11">姓名</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" v-model="empName">
-				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-					<p class="end-aline col-md-11 col-lg-11 jh-pa-1">岗位</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-					<pos ref="pos" @positionChange='positionChange'></pos>
-				</div>
-			</div>
-			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-				<div class="col-md-3 col-lg-3 text-right nopad">
-					<p class="end-aline col-md-11 col-lg-11">日期范围</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-md-9 col-lg-9">
-					<dPicker class="wd100" v-model="dateArr" type="format" format="YYYY-MM-DD" range>
-						<template v-slot:header="{ emit }">
-							<div class="text-left"> </div>
-						</template>
-					</dPicker>
-				</div>
-			</div>
-			<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-30" data-toggle="modal" v-on:click="queryObjectList(1)">查询
-			</button>
+		<div class="top">
+		    <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
+		        <el-row style="margin-top: 2%">
+		            <el-col :span="6">
+		                <el-form-item label="门店" v-if="accountType == true">
+		                    <store ref='store' @storeChange='storeChange'></store>
+		                </el-form-item>
+		            </el-col>
+		            <el-col :span="6">
+		                <el-form-item label='姓名:'>
+		                    <el-input v-model="param.empName" placeholder="姓名" clearable></el-input>
+		                </el-form-item>
+		            </el-col>
+		            <el-col :span="11">
+		                <el-form-item label="消费时间">
+		                    <el-date-picker
+		                        v-model="param.begDate"
+		                        :picker-options="pickerOptions0"
+		                        type="date"
+		                        placeholder="开始时间">
+		                    </el-date-picker>
+		                    <span> - </span>
+		                    <el-date-picker
+		                        v-model="param.endDate"
+		                        :picker-options="pickerOptions1"
+		                        type="date"
+		                        placeholder="结束时间">
+		                    </el-date-picker>
+		                </el-form-item>
+		            </el-col>
+		        </el-row>
+		        <el-row>
+		            <el-col :push="8">
+		                <el-button type="primary" size="small"
+		                           style="width: 85px"
+		                           @click="queryObjectList">查询
+		                </el-button>
+		            </el-col>
+		        </el-row>
+		    </el-form>
 		</div>
-		<div class="">
-			<el-table ref="productTable" :data="objList" style="width: 100%" show-summary border fixed :summary-method="getSummaries">
-				<el-table-column label="名字" width="100" align="center" prop="empName">
-				</el-table-column>
-				<el-table-column label="岗位" width="100" align="center" prop="posName">
+		<el-tabs @tab-click="tabChange" type="card" style="width: 100%" v-model="param.jobType">
+			<el-tab-pane label="咨询师" name="1">
+				<el-table ref="productTable" :data="objList" style="width: 100%" show-summary border fixed :summary-method="getSummaries">
 
-				</el-table-column>
-				<el-table-column label="初访金额" width="100" align="center" prop="firstVisit"></el-table-column>
-				<el-table-column label="复访金额" width="100" align="center" prop="secondVisit"></el-table-column>
-				<el-table-column label="返访金额" width="100" align="center" prop="piReverseVisit"></el-table-column>
-				<el-table-column label="退费金额" width="100" align="center">
+					<el-table-column label="名字" width="100" align="center" prop="empName"></el-table-column>
+					<el-table-column label="岗位" width="100" align="center" prop="posName"></el-table-column>
 
-				</el-table-column>
-				<el-table-column label="总金额" width="100" align="center" prop="totleCount"></el-table-column>
-				<el-table-column label="流水收入金额" width="120" align="center" prop="flowTotleCount"></el-table-column>
+					<el-table-column label="初访金额" width="100" align="center" prop="firstVisit"></el-table-column>
+					<el-table-column label="复访金额" width="100" align="center" prop="secondVisit"></el-table-column>
+					<el-table-column label="返访金额" width="100" align="center" prop="piReverseVisit"></el-table-column>
+					<el-table-column label="退费金额" width="100" align="center" prop="realRefund"></el-table-column>
 
-				<el-table-column label="首签金额" width="100" align="center" prop="piInitialSign">
-				</el-table-column>
-				<el-table-column label="首签率￥(%)" width="100" align="center" prop="initialRate">
+					<el-table-column label="总金额" width="100" align="center" prop="totleCount"></el-table-column>
+					<el-table-column label="流水收入金额" width="120" align="center" prop="flowTotleCount"></el-table-column>
 
-				</el-table-column>
-				<el-table-column label="复签金额" width="100" align="center" prop="piRepeatSign">
-				</el-table-column>
-				<el-table-column label="复签率￥(%)" width="100" align="center" prop="repeatRate">
-				</el-table-column>
-				<el-table-column label="续签金额" width="100" align="center" prop="piContinuSign">
+					<el-table-column label="首签金额" width="100" align="center" prop="piInitialSign"></el-table-column>
+					<el-table-column label="首签率￥(%)" width="100" align="center" prop="initialRate"></el-table-column>
+					<el-table-column label="复签金额" width="100" align="center" prop="piRepeatSign"></el-table-column>
+					<el-table-column label="复签率￥(%)" width="100" align="center" prop="repeatRate"></el-table-column>
+					<el-table-column label="续签金额" width="100" align="center" prop="piContinuSign"></el-table-column>
+					<el-table-column label="续签率￥(%)" width="100" align="center" prop="continuRate"></el-table-column>
 
-				</el-table-column>
-				<el-table-column label="续签率￥(%)" width="100" align="center" prop="continuRate">
+					<el-table-column label="签约总金额" width="100" align="center" prop="totleCountSign"></el-table-column>
+					<el-table-column label="总营业额" width="100" align="center" prop="totleIncome"></el-table-column>
+					<el-table-column label="签约率￥(%)" width="100" align="center" prop="signRate"></el-table-column>
+				</el-table>
+			</el-tab-pane>
+			<el-tab-pane label="咨询顾问" name="2">
+				<el-table ref="productTable" :data="objList" style="width: 100%" show-summary border fixed :summary-method="getSummaries">
 
-				</el-table-column>
-				<el-table-column label="签约总金额" width="100" align="center" prop="totleCountSign">
+					<el-table-column label="名字" width="100" align="center" prop="empName"></el-table-column>
+					<el-table-column label="岗位" width="100" align="center" prop="posName"></el-table-column>
 
-				</el-table-column>
-				<el-table-column label="总营业额" width="100" align="center" prop="totleIncome">
+					<el-table-column label="初访金额" width="100" align="center" prop="firstVisit"></el-table-column>
+					<el-table-column label="复访金额" width="100" align="center" prop="secondVisit"></el-table-column>
+					<el-table-column label="返访金额" width="100" align="center" prop="piReverseVisit"></el-table-column>
+					<el-table-column label="退费金额" width="100" align="center" prop="realRefund"></el-table-column>
 
-				</el-table-column>
-				<el-table-column label="签约率￥(%)" width="100" align="center" prop="signRate">
+					<el-table-column label="总金额" width="100" align="center" prop="totleCount"></el-table-column>
+					<el-table-column label="流水收入金额" width="120" align="center" prop="flowTotleCount"></el-table-column>
 
-				</el-table-column>
-			</el-table>
-		</div>
+					<el-table-column label="首签金额" width="100" align="center" prop="piInitialSign"></el-table-column>
+					<el-table-column label="首签率￥(%)" width="100" align="center" prop="initialRate"></el-table-column>
+					<el-table-column label="复签金额" width="100" align="center" prop="piRepeatSign"></el-table-column>
+					<el-table-column label="复签率￥(%)" width="100" align="center" prop="repeatRate"></el-table-column>
+					<el-table-column label="续签金额" width="100" align="center" prop="piContinuSign"></el-table-column>
+					<el-table-column label="续签率￥(%)" width="100" align="center" prop="continuRate"></el-table-column>
+
+					<el-table-column label="签约总金额" width="100" align="center" prop="totleCountSign"></el-table-column>
+					<el-table-column label="总营业额" width="100" align="center" prop="totleIncome"></el-table-column>
+					<el-table-column label="签约率￥(%)" width="100" align="center" prop="signRate"></el-table-column>
+				</el-table>
+			</el-tab-pane>
+		</el-tabs>
 	</div>
 
 </template>
@@ -109,21 +123,31 @@
 		},
 		data() {
 			return {
+				param: {
+				    storeId: this.storeId(),
+				    begDate: '',
+				    endDate: '',
+				    empName: '',
+				    jobType: "1"
+				},
+				storeList: [],
 				objList: [],
-				fixedHeader: false,
-				empName: '',
-				dateArr: '',
-				begDate: '',
-				endDate: '',
-				storeId: this.storeId(),
-				posId: '',
-				accountType: this.accountType(),
-
-				//分页需要的数据
-				pages: '', //总页数
-				current: 1, //当前页码
-				pageSize: 10, //一页显示的数量
-				total: '', //数据的数量
+				objSum:[],
+				pickerOptions0: {
+				    disabledDate: (time) => {
+				        if (this.param.endTime !== '' && this.param.endTime !== null) {
+				            return time.getTime() > Date.now() || time.getTime() > this.param.endTime
+				        } else {
+				            return time.getTime() > Date.now()
+				        }
+				    }
+				},
+				pickerOptions1: {
+				    disabledDate: (time) => {
+				        return time.getTime() < this.param.begDate || time.getTime() > Date.now()
+				    }
+				},
+				accountType:this.accountType(),
 			};
 		},
 		methods: {
@@ -137,27 +161,21 @@
 			},
 			storeChange(param) {
 				if (this.isBlank(param)) {
-					this.storeId = ""
+					this.param.stroeId = ""
 				} else {
-					this.storeId = param.storeId
+					this.param.storeId = param.storeId
 				}
 			},
-			positionChange: function(param) {
-				if (this.isBlank(param)) {
-					this.posId = ""
-				} else {
-					this.posId = param.posId
-				}
+			tabChange() {
+			    this.queryObjectList().then(
+			        this.param.storeId = '',
+			        this.param.empName = '',
+			        this.param.endDate = '',
+			        this.param.begDate = ''
+			    )
 			},
 			//check the list of store
-			queryObjectList(page) {
-				if (this.dateArr.length > 0 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1])) {
-					this.begDate = this.moment(this.dateArr[0], 'YYYY-MM-DD 00:00:00')
-					this.endDate = this.moment(this.dateArr[1], 'YYYY-MM-DD 23:59:59')
-				} else {
-					this.begDate = ''
-					this.endDate = ''
-				}
+			queryObjectList() {
 				var url = this.url + '/employeeAction/queryCouAndConIncome'
 				this.$ajax({
 					method: 'POST',
@@ -166,13 +184,7 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data: {
-						storeId: this.storeId,
-						posId: this.posId,
-						empName: this.empName,
-						begDate: this.begDate,
-						endDate: this.endDate,
-					},
+					data: this.param,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
@@ -198,24 +210,28 @@
 						return;
 					}
 					const values = data.map(item => Number(item[column.property]));
-					if (!values.every(value => isNaN(value))) {
-						sums[index] = values.reduce((prev, curr) => {
-							const value = Number(curr);
-							if (!isNaN(value)) {
-								return prev + curr;
-							} else {
-								return prev;
-							}
-						}, 0);
-						sums[index] += ' 元';
-					} else {
-						sums[index] = '';
+					if(index === 9){
+						sums[9]=(sums[8]*100/sums[2]).toFixed(2)
+					}else if(index === 11){
+						sums[11]=(sums[10]*100/sums[2]).toFixed(2)
+					}else if(index === 13){
+						sums[13]=(sums[12]*100/sums[2]).toFixed(2)
+					}else if(index === 16){
+						sums[16]=((sums[8]+sums[10]+sums[12])*100/(sums[2]+sums[3]+sums[7])).toFixed(2)
+					}else{
+						if (!values.every(value => isNaN(value))) {
+							sums[index] = values.reduce((prev, curr) => {
+								const value = Number(curr);
+								if (!isNaN(value)) {
+									return prev + curr;
+								} else {
+									return prev;
+								}
+							}, 0);
+						} 
 					}
-					if (index === 9) {
-						sums[index] = '9';
-					}
+					
 				});
-
 				return sums;
 			},
 			handleScroll(e) {
@@ -246,7 +262,7 @@
 			init();
 		},
 		created() {
-
+			this.queryObjectList()
 		}
 	}
 </script>

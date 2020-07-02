@@ -5,49 +5,49 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">套餐产品消耗统计表</h1>
         </div>
-        <div class="row newRow">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-if="accountType==true">
-				<div class="col-md-5 col-lg-5 text-right nopad">
-					<p class="end-aline col-md-11 col-lg-11">门店</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-md-7 col-lg-7">
-					<store ref='store' @storeChange='storeChange'></store>
-				</div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right nopad">
-					<p class="end-aline col-md-11 col-lg-11">姓名</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" v-model="empName">
-				</div>
-			</div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">岗位</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <pos ref="pos" @positionChange='positionChange'></pos>
-                </div>
-            </div>
-           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-           	<div class="col-md-3 col-lg-3 text-right nopad">
-           		<p class="end-aline col-md-11 col-lg-11">日期范围</p><span class="sign-left">:</span>
-           	</div>
-           	<div class="col-md-9 col-lg-9">
-           		<dPicker class="wd100" v-model="dateArr" type="format" format="YYYY-MM-DD" range>
-					<template v-slot:header="{ emit }">
-						<div class="text-left">	</div>
-					</template>
-				</dPicker>
-           	</div>
-           </div>
-            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-30"
-                    data-toggle="modal"
-                    v-on:click="queryObjectList(1)">查询
-            </button>
+        <div class="top">
+            <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
+                <el-row style="margin-top: 2%">
+                    <el-col :span="6">
+                        <el-form-item label="门店" v-if="accountType == true">
+                            <store ref='store' @storeChange='storeChange'></store>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="6">
+                        <el-form-item label='姓名:'>
+                            <el-input v-model="param.empName" placeholder="姓名" clearable></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="11">
+                        <el-form-item label="消费时间">
+                            <el-date-picker
+                                v-model="param.begDate"
+                                :picker-options="pickerOptions0"
+                                type="date"
+                                placeholder="开始时间">
+                            </el-date-picker>
+                            <span> - </span>
+                            <el-date-picker
+                                v-model="param.endDate"
+                                :picker-options="pickerOptions1"
+                                type="date"
+                                placeholder="结束时间">
+                            </el-date-picker>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :push="8">
+                        <el-button type="primary" size="small"
+                                   style="width: 85px"
+                                   @click="queryObjectList">查询
+                        </el-button>
+                    </el-col>
+                </el-row>
+            </el-form>
         </div>
-        <div class="">
+        <el-tabs @tab-click="tabChange" type="card" style="width: 100%" v-model="param.posName">
+        	<el-tab-pane label="咨询师" name="咨询师">
 			<el-table ref="productTable" :data="objList" style="width: 100%" border>
 				<el-table-column label="名字" width="100" align="center">
 					<template slot-scope="scope">{{scope.row.empName}}</template>
@@ -61,7 +61,23 @@
 					<template slot-scope="scope">{{scope.row.proCountList[index].proCount}}</template>
 				</el-table-column>
 			</el-table>
-        </div>
+        </el-tab-pane>
+        <el-tab-pane label="咨询顾问" name="咨询顾问">
+			<el-table ref="productTable" :data="objList" style="width: 100%" border>
+				<el-table-column label="名字" width="100" align="center">
+					<template slot-scope="scope">{{scope.row.empName}}</template>
+				</el-table-column>
+				<el-table-column label="岗位" align="center">
+					<template slot-scope="scope">
+						<p>{{scope.row.posName}}</p>
+					</template>
+				</el-table-column>
+				<el-table-column v-for="(item, index) in proList" :key="index" :label="item.proName" align="center">
+					<template slot-scope="scope">{{scope.row.proCountList[index].proCount}}</template>
+				</el-table-column>
+			</el-table>
+			</el-tab-pane>
+			</el-tabs>
     </div>
 
 </template>
@@ -87,23 +103,30 @@
         },
         data() {
             return {
-                objList: [],
-				proList:[],
-                fixedHeader: false,
-				visitorName:'',
-				dateArr:'',
-				begDate:'',
-				endDate:'',
-				posId:'',
-				empName:'',
-				storeId: this.storeId(),
-				accountType:this.accountType(),
-
-                //分页需要的数据
-                pages: '', //总页数
-                current: 1, //当前页码
-                pageSize: 10, //一页显示的数量
-                total: '', //数据的数量
+               param: {
+                   storeId: this.storeId(),
+                   begDate: '',
+                   endDate: '',
+				   posName:'咨询师',
+                   empName: '',
+               },
+               storeList: [],
+               objList: [],
+               pickerOptions0: {
+                   disabledDate: (time) => {
+                       if (this.param.endTime !== '' && this.param.endTime !== null) {
+                           return time.getTime() > Date.now() || time.getTime() > this.param.endTime
+                       } else {
+                           return time.getTime() > Date.now()
+                       }
+                   }
+               },
+               pickerOptions1: {
+                   disabledDate: (time) => {
+                       return time.getTime() < this.param.begDate || time.getTime() > Date.now()
+                   }
+               },
+               accountType:this.accountType(),
             };
         },
         methods: {
@@ -117,27 +140,21 @@
 			},
             storeChange(param) {
             	if (this.isBlank(param)) {
-            		this.storeId = ""
+            		this.param.storeId = ""
             	} else {
-            		this.storeId = param.storeId
+            		this.param.storeId = param.storeId
             	}
             },
-			positionChange: function (param) {
-			    if (this.isBlank(param)) {
-			        this.posId = ""
-			    } else {
-			        this.posId = param.posId
-			    }
+			tabChange() {
+			    this.queryObjectList().then(
+			        this.param.storeId = '',
+			        this.param.empName = '',
+			        this.param.endDate = '',
+			        this.param.begDate = ''
+			    )
 			},
             //check the list of store
-            queryObjectList(page) {
-				if(this.dateArr.length > 0 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1]))	{
-					this.begDate = this.moment(this.dateArr[0],'YYYY-MM-DD 00:00:00')
-					this.endDate = this.moment(this.dateArr[1],'YYYY-MM-DD 23:59:59')
-				}else{
-					this.begDate=''
-					this.endDate=''
-				}
+            queryObjectList() {
                 var url = this.url + '/employeeAction/queryEmpByPro'
                 this.$ajax({
                     method: 'POST',
@@ -146,13 +163,7 @@
                         'Content-Type': this.contentType,
                         'Access-Token': this.accessToken
                     },
-                    data: {
-						storeId: this.storeId,
-						posId:this.posId,
-						empName:this.empName,
-						begDate:this.begDate,
-						endDate:this.endDate,
-                    },
+                    data: this.param,
                     dataType: 'json',
                 }).then((response) => {
                     var res = response.data
@@ -195,7 +206,7 @@
             init();
         },
         created() {
-
+			this.queryObjectList()
         }
     }
 </script>

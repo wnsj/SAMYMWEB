@@ -186,10 +186,14 @@
                                 <router-link to="/SummaryMenu/FirstVdSummary"><i class="fa" aria-hidden="true">初访咨询方向统计表</i>
                                 </router-link>
                             </dd>
-                            
-                            
-                            
-                            
+
+                            <dd @click="addCheck('ConsultStoreSummary')"
+                                v-bind:class="{'li-active':onString=='ConsultStoreSummary'}">
+                                <router-link to="/SummaryMenu/ConsultStoreSummary"><i class="fa" aria-hidden="true">咨询到店消费核算表</i>
+                                </router-link>
+                            </dd>
+
+
                             <!-- <dd @click="addCheck('CurrentSummary')"
                                 v-bind:class="{'li-active':onString=='CurrentSummary'}">
                                 <router-link to="/MP/CurrentSummary"><i class="fa" aria-hidden="true">月入汇总</i>

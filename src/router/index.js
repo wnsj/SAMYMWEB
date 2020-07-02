@@ -212,6 +212,11 @@ export default new Router({
                     path: '/SummaryMenu/CostMoneySummary',
                     name: 'CostMoneySummary',
                     component: () => import("../components/SummaryMenu/CostMoneySummary"),
+                },
+                {
+                    path: '/SummaryMenu/ConsultStoreSummary',
+                    name: 'ConsultStoreSummary',
+                    component: () => import("../components/SummaryMenu/ConsultStoreSummary"),
                 }],
             redirect: '/MP/Visitor'
         }]

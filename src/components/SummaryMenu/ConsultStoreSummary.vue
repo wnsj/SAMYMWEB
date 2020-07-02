@@ -1,7 +1,7 @@
 <template>
     <div class="wraper">
         <div class="col-md-12 col-lg-12 main-title">
-            <h1 class="titleCss">消耗金额核算表</h1>
+            <h1 class="titleCss">咨询到店消费核算表</h1>
         </div>
         <div class="top">
             <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
@@ -44,7 +44,7 @@
                     <el-col :push="8">
                         <el-button type="primary" size="small"
                                    style="width: 85px"
-                                   @click="getConMoney">查询
+                                   @click="getConsultStore">查询
                         </el-button>
                     </el-col>
                 </el-row>
@@ -66,72 +66,145 @@
                         align="center"
                         prop="empName"
                         label="姓名"
-                        min-width="100">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        prop="firstCon"
-                        label="首签消耗(¥)"
-                        min-width="100">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        prop="secondCon"
-                        label="复访消耗(¥)"
-                        min-width="100">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        prop="other"
-                        label="初访测评/单次/其他消耗(¥)"
-                        min-width="95">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        prop="totalCon"
-                        label="总消耗金额(¥)"
-                        min-width="100">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        prop="radioCon"
-                        label="消耗比(%)"
-                        min-width="100">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        prop="radioRefund"
-                        label="退费率(%)"
-                        min-width="100">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        prop="singleTotal"
-                        label="单次"
-                        min-width="100">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        prop="first"
-                        label="首次"
+                        fixed="left"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="firstVisit"
-                        label="初访消耗时长"
+                        label="初访"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="secondVisit"
-                        label="复访消耗时长"
+                        label="复访"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        prop="totalVisit"
-                        label="消耗总时长"
+                        prop="visitTotal"
+                        label="访总量"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="fsRate"
+                        label="初复比"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="loss"
+                        label="流失"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="lossRate"
+                        label="流失率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="returnVisit"
+                        label="返访"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="returnVisitRate"
+                        label="返访率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="single"
+                        label="单次"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="singleRate"
+                        label="单次率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="singleDrop"
+                        label="单脱"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="singleDropRate"
+                        label="单脱率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="deposit"
+                        label="定金"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="depositRate"
+                        label="定金率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="initial"
+                        label="首签"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="initialRate"
+                        label="首签率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="countersignature"
+                        label="复签"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="couRate"
+                        label="复签率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="firstVisitSignRate"
+                        label="初访签约率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="renewal"
+                        label="续签"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="renewalRate"
+                        label="续签率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="signTotal"
+                        label="签约总人数"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="roomSaturatedRate"
+                        label="房间饱和率"
                         min-width="100">
                     </el-table-column>
                 </el-table>
@@ -154,68 +227,140 @@
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        prop="firstCon"
-                        label="首签消耗(¥)"
-                        min-width="100">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        prop="secondCon"
-                        label="复访消耗(¥)"
-                        min-width="100">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        prop="other"
-                        label="初访测评/单次/其他消耗(¥)"
-                        min-width="95">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        prop="totalCon"
-                        label="总消耗金额(¥)"
-                        min-width="100">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        prop="radioCon"
-                        label="消耗比(%)"
-                        min-width="100">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        prop="radioRefund"
-                        label="退费率(%)"
-                        min-width="100">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        prop="singleTotal"
-                        label="单次"
-                        min-width="100">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
-                        prop="first"
-                        label="首次"
-                        min-width="100">
-                    </el-table-column>
-                    <el-table-column
-                        align="center"
                         prop="firstVisit"
-                        label="初访消耗时长"
+                        label="初访"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="secondVisit"
-                        label="复访消耗时长"
+                        label="复访"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        prop="totalVisit"
-                        label="消耗总时长"
+                        prop="visitTotal"
+                        label="访总量"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="fsRate"
+                        label="初复比"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="loss"
+                        label="流失"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="lossRate"
+                        label="流失率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="returnVisit"
+                        label="返访"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="returnVisitRate"
+                        label="返访率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="single"
+                        label="单次"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="singleRate"
+                        label="单次率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="singleDrop"
+                        label="单脱"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="singleDropRate"
+                        label="单脱率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="deposit"
+                        label="定金"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="depositRate"
+                        label="定金率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="initial"
+                        label="首签"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="initialRate"
+                        label="首签率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="countersignature"
+                        label="复签"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="couRate"
+                        label="复签率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="firstVisitSignRate"
+                        label="初访签约率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="renewal"
+                        label="续签"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="renewalRate"
+                        label="续签率"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="signTotal"
+                        label="签约总人数"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="roomSaturatedRate"
+                        label="房间饱和率"
                         min-width="100">
                     </el-table-column>
                 </el-table>
@@ -255,7 +400,7 @@
                         return time.getTime() < this.param.firstVisitStartTime || time.getTime() > Date.now()
                     }
                 },
-                accountType:this.accountType(),
+                accountType: this.accountType(),
             };
         },
         methods: {
@@ -301,8 +446,8 @@
 
 
             // 获取初访咨询方向汇总数据
-            async getConMoney() {
-                var url = this.url + '/consumAction/getConMoney'
+            async getConsultStore() {
+                var url = this.url + '/consumAction/getConsultStore'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -315,12 +460,11 @@
                 }).then((response) => {
                     var res = response.data
                     if (res.retCode == '0000') {
-                        if (null != res.retData) {
-                            this.tableData = res.retData
+                        if (null != res.retData){
+                            this.tableData =  res.retData
                         } else {
-                            this.tableData = []
+                            this.tableData = [];
                         }
-
                     } else {
                         alert(res.retMsg)
                     }
@@ -331,21 +475,39 @@
             },
 
             tabChange() {
-                this.getConMoney().then(
+                this.getConsultStore().then(
                     this.param.storeId = '',
                     this.param.empName = '',
                     this.param.secondVisitEndTime = '',
                     this.param.secondVisitStartTime = ''
                 )
-            }
+            },
+            // getSummaries(params) {
+            //     console.log('数据'  + params);
+            //     debugger
+            // }
         },
         created() {
             this.getStore()
-            this.getConMoney()
+            this.getConsultStore()
         }
     }
 </script>
 
 <style scoped>
-
+    .el-table{
+        overflow: auto;
+    }
+    .el-table__header-wrapper,
+    .el-table__body-wrapper,
+    .el-table__footer-wrapper{
+        overflow:visible;
+    }
+    .el-table__body-wrapper{
+        overflow-x:visible !important;
+    }
+    /* 这个是为了解决前面样式覆盖之后伪类带出来的竖线 */
+    .el-table::after{
+        position: relative;
+    }
 </style>

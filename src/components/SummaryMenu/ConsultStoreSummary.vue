@@ -100,7 +100,7 @@
                     <el-table-column
                         align="center"
                         prop="lossRate"
-                        label="流失率"
+                        label="流失率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -112,7 +112,7 @@
                     <el-table-column
                         align="center"
                         prop="returnVisitRate"
-                        label="返访率"
+                        label="返访率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -124,7 +124,7 @@
                     <el-table-column
                         align="center"
                         prop="singleRate"
-                        label="单次率"
+                        label="单次率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -136,7 +136,7 @@
                     <el-table-column
                         align="center"
                         prop="singleDropRate"
-                        label="单脱率"
+                        label="单脱率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -148,7 +148,7 @@
                     <el-table-column
                         align="center"
                         prop="depositRate"
-                        label="定金率"
+                        label="定金率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -160,7 +160,7 @@
                     <el-table-column
                         align="center"
                         prop="initialRate"
-                        label="首签率"
+                        label="首签率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -172,14 +172,14 @@
                     <el-table-column
                         align="center"
                         prop="couRate"
-                        label="复签率"
+                        label="复签率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="firstVisitSignRate"
-                        label="初访签约率"
-                        min-width="100">
+                        label="初访签约率(%)"
+                        min-width="115">
                     </el-table-column>
                     <el-table-column
                         align="center"
@@ -190,7 +190,7 @@
                     <el-table-column
                         align="center"
                         prop="renewalRate"
-                        label="续签率"
+                        label="续签率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -202,8 +202,8 @@
                     <el-table-column
                         align="center"
                         prop="roomSaturatedRate"
-                        label="房间饱和率"
-                        min-width="100">
+                        label="房间饱和率(%)"
+                        min-width="115">
                     </el-table-column>
                 </el-table>
             </el-tab-pane>
@@ -255,7 +255,7 @@
                     <el-table-column
                         align="center"
                         prop="lossRate"
-                        label="流失率"
+                        label="流失率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -267,7 +267,7 @@
                     <el-table-column
                         align="center"
                         prop="returnVisitRate"
-                        label="返访率"
+                        label="返访率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -279,7 +279,7 @@
                     <el-table-column
                         align="center"
                         prop="singleRate"
-                        label="单次率"
+                        label="单次率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -291,7 +291,7 @@
                     <el-table-column
                         align="center"
                         prop="singleDropRate"
-                        label="单脱率"
+                        label="单脱率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -303,7 +303,7 @@
                     <el-table-column
                         align="center"
                         prop="depositRate"
-                        label="定金率"
+                        label="定金率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -315,7 +315,7 @@
                     <el-table-column
                         align="center"
                         prop="initialRate"
-                        label="首签率"
+                        label="首签率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -327,14 +327,14 @@
                     <el-table-column
                         align="center"
                         prop="couRate"
-                        label="复签率"
+                        label="复签率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="firstVisitSignRate"
-                        label="初访签约率"
-                        min-width="100">
+                        label="初访签约率(%)"
+                        min-width="115">
                     </el-table-column>
                     <el-table-column
                         align="center"
@@ -345,7 +345,7 @@
                     <el-table-column
                         align="center"
                         prop="renewalRate"
-                        label="续签率"
+                        label="续签率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -357,8 +357,8 @@
                     <el-table-column
                         align="center"
                         prop="roomSaturatedRate"
-                        label="房间饱和率"
-                        min-width="100">
+                        label="房间饱和率(%)"
+                        min-width="115">
                     </el-table-column>
                 </el-table>
             </el-tab-pane>

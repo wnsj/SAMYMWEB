@@ -94,6 +94,12 @@
                     </el-table-column>
                     <el-table-column
                         align="center"
+                        prop="fsPerson"
+                        label="初访人均(¥)"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
                         prop="radioCon"
                         label="消耗比(%)"
                         min-width="100">
@@ -174,6 +180,12 @@
                         align="center"
                         prop="totalCon"
                         label="总消耗金额(¥)"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="fsPerson"
+                        label="初访人均(¥)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column

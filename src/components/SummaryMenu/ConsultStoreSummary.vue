@@ -57,8 +57,6 @@
                     :data="tableData"
                     :cell-style="cellStyle"
                     :header-cell-style="headerStyle"
-                    show-summary
-                    sortable
                     max-height="530"
                     style="width: 99%;margin-left:0.5%;"
                     border>
@@ -214,8 +212,6 @@
                     :data="tableData"
                     :cell-style="cellStyle"
                     :header-cell-style="headerStyle"
-                    show-summary
-                    sortable
                     max-height="530"
                     style="width: 99%;margin-left:0.5%;"
                     border>
@@ -223,6 +219,7 @@
                         align="center"
                         prop="empName"
                         label="姓名"
+                        fixed="left"
                         min-width="100">
                     </el-table-column>
                     <el-table-column

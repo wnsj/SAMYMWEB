@@ -48,9 +48,9 @@
 		</div>
 		<el-tabs @tab-click="tabChange" type="card" style="width: 100%" v-model="param.jobType">
 			<el-tab-pane label="咨询师" name="1">
-				<el-table ref="productTable" :data="objList" style="width: 100%" show-summary border fixed :summary-method="getSummaries">
+				<el-table ref="productTable" :data="objList" style="width: 100%" show-summary border :summary-method="getSummaries">
 
-					<el-table-column label="名字" width="100" align="center" prop="empName"></el-table-column>
+					<el-table-column label="名字" width="100" align="center" prop="empName" fixed></el-table-column>
 					<el-table-column label="岗位" width="100" align="center" prop="posName"></el-table-column>
 
 					<el-table-column label="初访金额" width="100" align="center" prop="firstVisit"></el-table-column>
@@ -268,29 +268,19 @@
 </script>
 
 <style>
-	#datatable {
-		store: relative;
-	}
-
-	#fHeader {
-		store: absolute;
-		top: 0;
-		left: 0;
-		background: #eeeeee;
-		overflow: hidden;
-	}
-
-	#fHeader div.text-center {
-		float: left;
-		display: inline-block;
-		padding: 8px;
-		border: 1px solid #ddd;
-		font-weight: bold;
-	}
-
-	@media print {
-		#fHeader {
-			display: none
-		}
-	}
+	
+	/* .el-table{
+        overflow: auto;
+    }
+    .el-table__header-wrapper,
+    .el-table__body-wrapper,
+    .el-table__footer-wrapper{
+        overflow:visible;
+    }
+    .el-table__body-wrapper{
+        overflow-x:visible !important;
+    }
+    .el-table::after{
+        position: relative;
+    } */
 </style>

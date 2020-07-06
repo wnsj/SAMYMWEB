@@ -484,6 +484,8 @@
 
 			//the event of addtional button
 			addFee() {
+				
+				
 				if (this.isBlank(this.consume.memName)) {
 					alert("姓名不能为空!")
 					return
@@ -558,7 +560,11 @@
 					this.consume.cashId = this.cash.cashId;
 					this.consume.cashMoney = this.cash.select;
 				}
-
+				
+				if(this.isShow==true){
+					this.consume.realCross=(parseFloat(this.consume.realCross)*parseFloat(this.consume.discount)/100).toFixed(2)
+				}
+				
 				var url = this.url + '/purchasedItemsAction/consumProject'
 				this.$ajax({
 					method: 'POST',

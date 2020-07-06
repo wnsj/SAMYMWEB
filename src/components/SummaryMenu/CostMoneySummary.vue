@@ -190,6 +190,12 @@
                         label="总消耗金额(¥)"
                         min-width="100">
                     </el-table-column>
+<!--                    <el-table-column-->
+<!--                        align="center"-->
+<!--                        prop="vsTotal"-->
+<!--                        label="咨客人数"-->
+<!--                        min-width="100">-->
+<!--                    </el-table-column>-->
                     <el-table-column
                         align="center"
                         prop="fsPerson"

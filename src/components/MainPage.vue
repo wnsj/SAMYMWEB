@@ -146,6 +146,11 @@
                                     汇总报表
                                 </i>
                             </dt>
+							<dd @click="addCheck('ConsultStoreSummary')"
+							    v-bind:class="{'li-active':onString=='ConsultStoreSummary'}">
+							    <router-link to="/SummaryMenu/ConsultStoreSummary"><i class="fa" aria-hidden="true">咨询到店消费核算表</i>
+							    </router-link>
+							</dd>
 							<dd @click="addCheck('EmpDtSummary')"
 							    v-bind:class="{'li-active':onString=='EmpDtSummary'}">
 							    <router-link to="/SummaryMenu/EmpDtSummary"><i class="fa" aria-hidden="true">初诊咨询方向统计表</i>
@@ -184,12 +189,6 @@
                             <dd @click="addCheck('FirstVdSummary')"
                                 v-bind:class="{'li-active':onString=='FirstVdSummary'}">
                                 <router-link to="/SummaryMenu/FirstVdSummary"><i class="fa" aria-hidden="true">初访咨询方向统计表</i>
-                                </router-link>
-                            </dd>
-
-                            <dd @click="addCheck('ConsultStoreSummary')"
-                                v-bind:class="{'li-active':onString=='ConsultStoreSummary'}">
-                                <router-link to="/SummaryMenu/ConsultStoreSummary"><i class="fa" aria-hidden="true">咨询到店消费核算表</i>
                                 </router-link>
                             </dd>
 

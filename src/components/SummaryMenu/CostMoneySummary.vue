@@ -57,8 +57,6 @@
                     :data="tableData"
                     :cell-style="cellStyle"
                     :header-cell-style="headerStyle"
-                    show-summary
-                    sortable
                     max-height="530"
                     style="width: 99%;margin-left:0.5%;"
                     border>
@@ -94,6 +92,12 @@
                     </el-table-column>
                     <el-table-column
                         align="center"
+                        prop="fsPerson"
+                        label="初访人均(¥)"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
                         prop="radioCon"
                         label="消耗比(%)"
                         min-width="100">
@@ -104,6 +108,18 @@
                         label="退费率(%)"
                         min-width="100">
                     </el-table-column>
+<!--                    <el-table-column-->
+<!--                        align="center"-->
+<!--                        prop="re"-->
+<!--                        label="退费"-->
+<!--                        min-width="100">-->
+<!--                    </el-table-column>-->
+<!--                    <el-table-column-->
+<!--                        align="center"-->
+<!--                        prop="total"-->
+<!--                        label="总营业额"-->
+<!--                        min-width="100">-->
+<!--                    </el-table-column>-->
                     <el-table-column
                         align="center"
                         prop="singleTotal"
@@ -141,8 +157,6 @@
                     :data="tableData"
                     :cell-style="cellStyle"
                     :header-cell-style="headerStyle"
-                    show-summary
-                    sortable
                     max-height="530"
                     style="width: 99%;margin-left:0.5%;"
                     border>
@@ -174,6 +188,12 @@
                         align="center"
                         prop="totalCon"
                         label="总消耗金额(¥)"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="fsPerson"
+                        label="初访人均(¥)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column

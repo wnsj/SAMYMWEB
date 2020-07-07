@@ -448,7 +448,11 @@
 				} else {
 					this.consume.counselor = param.empId
 					if (!this.projectFlag) {
-						this.$refs.project.setEmpId(this.consume.counselor,2)
+						if(this.isShow==true){
+							this.$refs.project.setEmpId(this.consume.counselor,1)
+						}else{
+							this.$refs.project.setEmpId(this.consume.counselor,2)
+						}
 						this.$refs.project.setProject(0)
 						this.consume.price = 0
 						this.consume.actualCount = 0

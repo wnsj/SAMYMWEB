@@ -141,14 +141,14 @@
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        prop="deposit"
-                        label="定金"
+                        prop="isArrears"
+                        label="欠费"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        prop="depositRate"
-                        label="定金率(%)"
+                        prop="isArrearsRate"
+                        label="欠费率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -296,14 +296,14 @@
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        prop="deposit"
-                        label="定金"
+                        prop="isArrears"
+                        label="欠费"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        prop="depositRate"
-                        label="定金率(%)"
+                        prop="isArrearsRate"
+                        label="欠费率(%)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column

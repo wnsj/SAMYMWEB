@@ -112,6 +112,7 @@
                },
                storeList: [],
                objList: [],
+			   proList:[],
                pickerOptions0: {
                    disabledDate: (time) => {
                        if (this.param.endTime !== '' && this.param.endTime !== null) {

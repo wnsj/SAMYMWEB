@@ -78,10 +78,7 @@
 	import store from '../common/Store.vue'
 	import pos from '../common/Position.vue'
 	import Paging from '../common/paging'
-	import {
-		init
-	} from '@/../static/js/common.js'
-
+	
 	export default {
 		components: {
 			Paging,
@@ -167,32 +164,6 @@
 					//console.log('商铺查询请求失败')
 				});
 			},
-			handleScroll(e) {
-				var self = this
-				var etop = e.target.scrollTop
-				var fHeaderwidth = $("#fHeader").width($(".datathead").width())
-				var fHeaderheight = $("#fHeader").height($(".datathead").height())
-				var theadheight = $(".datathead").height()
-				var thlength = $(".datathead tr th").length
-				for (var i = 0; i < thlength; i++) {
-					$("#fHeader div").eq(i).width(
-						$(".datathead tr th").eq(i).width()
-					)
-					$("#fHeader div").eq(i).height(
-						$(".datathead tr th").eq(i).height()
-					)
-				}
-				if (etop > 0) {
-					self.fixedHeader = true
-					$("#fHeader").css("top", etop)
-				} else {
-					self.fixedHeader = false
-				}
-			}
-		},
-		mounted() {
-			window.addEventListener('scroll', this.handleScroll, true);
-			init();
 		},
 		created() {
 			this.queryObjectList()

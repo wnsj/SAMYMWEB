@@ -449,9 +449,9 @@
 					this.consume.counselor = param.empId
 					if (!this.projectFlag) {
 						if(this.isShow==true){
-							this.$refs.project.setEmpId(this.consume.counselor,1)
-						}else{
 							this.$refs.project.setEmpId(this.consume.counselor,2)
+						}else{
+							this.$refs.project.setEmpId(this.consume.counselor,1)
 						}
 						this.$refs.project.setProject(0)
 						this.consume.price = 0
@@ -565,7 +565,7 @@
 					this.consume.cashMoney = this.cash.select;
 				}
 				
-				if(this.isShow==true){
+				if(this.isShow==false){
 					this.consume.realCross=(parseFloat(this.consume.realCross)*parseFloat(this.consume.discount)/100).toFixed(2)
 				}
 				

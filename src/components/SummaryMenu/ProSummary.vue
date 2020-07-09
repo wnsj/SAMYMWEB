@@ -152,10 +152,10 @@
 			},
             //check the list of store
             queryObjectList() {
-				if(this.isBlank(this.param.begDate)){
+				if(!this.isBlank(this.param.begDate)){
 					this.param.begDate=this.moment(this.param.begDate,'YYYY-MM-DD 00:00:00')
 				}
-				if(this.isBlank(this.param.endDate)){
+				if(!this.isBlank(this.param.endDate)){
 					this.param.endDate=this.moment(this.param.endDate,'YYYY-MM-DD 23:59:59')
 				}
                 var url = this.url + '/employeeAction/queryEmpByPro'

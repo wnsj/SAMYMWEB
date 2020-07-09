@@ -472,12 +472,7 @@
             },
 
             tabChange() {
-                this.getConsultStore().then(
-                    this.param.storeId = '',
-                    this.param.empName = '',
-                    this.param.secondVisitEndTime = '',
-                    this.param.secondVisitStartTime = ''
-                )
+                this.getConsultStore()
             },
             // getSummaries(params) {
             //     console.log('数据'  + params);

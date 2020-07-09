@@ -357,12 +357,7 @@
             },
 
             tabChange() {
-                this.getConMoney().then(
-                    this.param.storeId = '',
-                    this.param.empName = '',
-                    this.param.secondVisitEndTime = '',
-                    this.param.secondVisitStartTime = ''
-                )
+                this.getConMoney()
             }
         },
         created() {

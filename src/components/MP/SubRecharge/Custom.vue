@@ -696,7 +696,9 @@
 						this.$refs.counselorEmp.setPosName("咨询师")
 						this.$refs.counselorEmp.setEmp(item.counselor)
 					}
-					this.$refs.project.setEmpId(item.counselor)
+					
+					this.$refs.project.setEmpId(this.consume.counselor,1)
+					
 					this.$refs.project.setProject(item.proId)
 					this.consume.proId = item.proId
 					this.consume.price = item.price //折前单价
@@ -722,7 +724,8 @@
 								this.$refs.counselorEmp.setPosName("咨询师")
 								this.$refs.counselorEmp.setEmp(item.counselor)
 							}
-							this.$refs.project.setEmpId(item.counselor)
+							this.$refs.project.setEmpId(this.consume.counselor,1)
+							
 							this.$refs.project.setProject(item.proId)
 							this.consume.proId = item.proId
 							this.consume.price = item.price //折前单价
@@ -746,7 +749,8 @@
 							this.$refs.counselorEmp.setPosName("咨询师")
 							this.$refs.counselorEmp.setEmp(item.counselor)
 						}
-						this.$refs.project.setEmpId(item.counselor)
+						this.$refs.project.setEmpId(this.consume.counselor,1)
+						
 						this.$refs.project.setProject(item.proId)
 						this.consume.proId = item.proId
 						this.consume.price = item.price //折前单价

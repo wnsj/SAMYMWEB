@@ -9,7 +9,7 @@
 		    <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
 		        <el-row style="margin-top: 2%">
 		            <el-col :span="6">
-		                <el-form-item label="门店" v-if="accountType == true">
+		                <el-form-item label="门店:" v-if="accountType == true">
 		                    <store ref='store' @storeChange='storeChange'></store>
 		                </el-form-item>
 		            </el-col>
@@ -19,7 +19,7 @@
 		                </el-form-item>
 		            </el-col>
 		            <el-col :span="11">
-		                <el-form-item label="消费时间">
+		                <el-form-item label="消费时间:">
 		                    <el-date-picker
 		                        v-model="param.begDate"
 		                        :picker-options="pickerOptions0"
@@ -55,7 +55,7 @@
 
 					<el-table-column label="初访金额" width="100" align="center" prop="firstVisit"></el-table-column>
 					<el-table-column label="复访金额" width="100" align="center" prop="secondVisit"></el-table-column>
-					<el-table-column label="返访金额" width="100" align="center" prop="piReverseVisit"></el-table-column>
+					<el-table-column label="返访金额" width="100" align="center" prop="reverseVisit"></el-table-column>
 					<el-table-column label="退费金额" width="100" align="center" prop="realRefund"></el-table-column>
 
 					<el-table-column label="总金额" width="100" align="center" prop="totleCount"></el-table-column>

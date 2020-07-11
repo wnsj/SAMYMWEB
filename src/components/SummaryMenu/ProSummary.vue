@@ -9,7 +9,7 @@
             <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
                 <el-row style="margin-top: 2%">
                     <el-col :span="6">
-                        <el-form-item label="门店" v-if="accountType == true">
+                        <el-form-item label="门店:" v-if="accountType == true">
                             <store ref='store' @storeChange='storeChange'></store>
                         </el-form-item>
                     </el-col>
@@ -19,7 +19,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="11">
-                        <el-form-item label="消费时间">
+                        <el-form-item label="消费时间:">
                             <el-date-picker
                                 v-model="param.begDate"
                                 :picker-options="pickerOptions0"

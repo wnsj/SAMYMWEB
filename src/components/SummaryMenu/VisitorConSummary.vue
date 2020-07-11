@@ -7,7 +7,7 @@
             <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
                 <el-row style="margin-top: 2%">
                     <el-col :span="11" :pull="1">
-                        <el-form-item label="初访时间">
+                        <el-form-item label="初访时间:">
                             <el-date-picker
                                 v-model="param.firstVisitStartTime"
                                 :picker-options="pickerOptions0"
@@ -24,7 +24,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="5" :pull="1">
-                        <el-form-item label="门店" v-if="accountType == true">
+                        <el-form-item label="门店:" v-if="accountType == true">
                             <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
                                 <el-option v-for="item in storeList"
                                            :key="item.storeId"
@@ -44,7 +44,7 @@
 
                 <el-row>
                     <el-col :span="11" :pull="1">
-                        <el-form-item label="购买时间">
+                        <el-form-item label="购买时间:">
                             <el-date-picker
                                 v-model="param.secondVisitStartTime"
                                 :picker-options="pickerOptions0"

@@ -342,6 +342,18 @@
         font-size: 18px;
      }
 
+    #aside-menu li a {
+         color: #333;
+         display: block;
+     }
+    #aside-menu li a.router-link-active{
+         color: #f2ad4e;
+         text-decoration: none;
+     }
+
+    #aside-menu li a:hover {
+         color: #f2ad4e!important;
+     }
 
 
    #aside-menu li div.el-submenu__title{
@@ -429,18 +441,7 @@
         overflow-x: hidden;
     }
 
-    a {
-        color: #333;
-        display: block;
-    }
-    a.router-link-active{
-        color: #f2ad4e;
-        text-decoration: none;
-    }
 
-   a:hover {
-        color: #f2ad4e!important;
-    }
 </style>
 <host>
 

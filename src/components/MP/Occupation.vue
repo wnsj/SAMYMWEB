@@ -17,7 +17,7 @@
             </div>
             <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-30"
                     data-toggle="modal"
-                    v-on:click="selectRule('1')" v-has="'SAMY:MP:Store:Add'">添加
+                    v-on:click="selectRule('1')" v-has="'SAMY:MP:Occupation:Add'">添加
             </button>
             <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
                     data-toggle="modal"

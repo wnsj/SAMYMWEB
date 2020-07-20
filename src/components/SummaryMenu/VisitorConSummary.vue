@@ -94,7 +94,7 @@
                 </el-row>
             </el-form>
         </div>
-
+        <p class="tips">* 蓝色字体为抵扣数据</p>
         <div>
             <el-table
                 :data="tableData"
@@ -265,7 +265,10 @@
                 return 'text-align: center;color: black;'
             },
             // 表格行样式
-            cellStyle() {
+            cellStyle(row, column, rowIndex, columnIndex) {
+                if (row.row.state == 2) {
+                    return 'text-align: center;color:blue'
+                }
                 return 'text-align: center;'
             },
             // 格式化时间

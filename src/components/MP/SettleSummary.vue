@@ -27,6 +27,23 @@
 			        <emp ref="couEmp" @employeeChange="counlorEmpChange"></emp>
 			    </div>
 			</div>
+
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
+                    <p class="end-aline col-md-11 col-lg-11" >交费方式</p><span class="sign-left">:</span>
+                </div>
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <select class="form-control" v-model="payType">
+                        <option value="1">现金</option>
+                        <option value="2">微信</option>
+                        <option value="3">支付宝</option>
+                        <option value="4">信用卡/银行卡</option>
+                        <option value="5">小程序</option>
+                        <option value="6">免费</option>
+                        <option value="7">其它</option>
+                    </select>
+                </div>
+            </div>
 		</div>
 		<div class="row newRow">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 padding-left-10">
@@ -63,8 +80,10 @@
 									<th class="text-center">课时(小时)</th>
 									<th class="text-center">折扣(%)</th>
 									<th class="text-center">消费金额</th>
+									<th class="text-center">交费方式</th>
 									<th class="text-center">咨询师</th>
 									<th class="text-center">消费时间</th>
+									<th class="text-center">购买时间</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -75,8 +94,10 @@
 									<td>{{item2.consumCount}}</td>
 									<td>{{item2.discount}}</td>
 									<td>{{item2.realCross}}</td>
+									<td>{{item2.payType}}</td>
 									<td>{{item2.counselorName}}</td>
 									<td>{{item2.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+									<td>{{item2.purTime}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -95,7 +116,7 @@
                             <p class="tips tips-font-20">未消费课时：{{unusedHours}} 小时</p>
                         </div> -->
                     </div>
-					
+
 					<!--分页插件-->
 					<div class="page">
 						<!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
@@ -146,6 +167,7 @@
 				singleData: {},
 				begCreateDate: '',
 				endCreateDate: '',
+                payType:'1',
 				accountType:this.accountType(),
 				//分页需要的数据
 				pages: '', //总页数
@@ -252,13 +274,13 @@
 						storeId: this.storeId,
 						memName: this.memName,
 						counselor:this.empId,
-						
+                        payType:this.payType,
 						actualBegDate: this.begCreateDate,
 						actualEndDate: this.endCreateDate,
 
 						page: page.toString(),
 						pageSize: this.pageSize,
-                        
+
 					},
 					dataType: 'json',
 				}).then((response) => {

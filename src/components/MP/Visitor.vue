@@ -177,7 +177,7 @@
                             <td class="text-center">{{item.channelName}}</td>
                             <td class="text-center">{{item.dtName}}</td>
                             <td class="text-center">{{item.empName}}</td>
-                            <td class="text-center">{{item.visType==1?'初访':'复访'}}</td>
+                            <td class="text-center">{{item.visType==1?'初访':item.visType==2?'复访':''}}</td>
                             <td class="text-center">{{item.vsIdJudgeName}}</td>
                             <td class="text-center">{{item.vsIdFlowName}}</td>
                             <td class="text-center">{{item.createTime | dateFormatFilter("YYYY-MM-DD")}}</td>

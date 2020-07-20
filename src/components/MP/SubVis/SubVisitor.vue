@@ -70,7 +70,7 @@
 							<emp ref="emp" @employeeChange="empChange"></emp>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix jh-wd-33">
+					<!-- <div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">访问状态</label><span class="sign-left">:</span>
 						<div class="col-md-8">
 							<select class="form-control" v-model="visitor.visType" v-on:change="visTypeChange()">
@@ -92,7 +92,7 @@
 						<div class="col-md-8">
 							<visStateFlow ref="visStateFlow" @objectChange="flowChange"></visStateFlow>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-3 control-label text-right nopad end-aline jh-ad-1">行业</label><span class="sign-left">:</span>
 
@@ -260,10 +260,10 @@
 					this.$refs.cha.setChaId('0')
 					this.$refs.DiseaseType.setObj('0')
 					this.$refs.emp.setEmp("")
-					this.$refs.visStateJudge.getObj('1', '1')
-					this.$refs.visStateFlow.getObj('1', '2')
-					this.$refs.visStateJudge.setObj('0')
-					this.$refs.visStateFlow.setObj('0')
+// 					this.$refs.visStateJudge.getObj('1', '1')
+// 					this.$refs.visStateFlow.getObj('1', '2')
+// 					this.$refs.visStateJudge.setObj('0')
+// 					this.$refs.visStateFlow.setObj('0')
 					this.$refs.ind.setInd('0')
 					this.$refs.store.setStore(this.visitor.storeId)
 					this.$refs.education.setObj('0')
@@ -276,10 +276,10 @@
 					this.$refs.cha.setChaId(this.visitor.chaId)
 					this.$refs.DiseaseType.setObj(this.visitor.dtId)
 					this.$refs.emp.setEmp(this.visitor.empId)
-					this.$refs.visStateJudge.getObj(this.visitor.visType,'1')
-					this.$refs.visStateFlow.getObj(this.visitor.visType,'2')
-					this.$refs.visStateJudge.setObj(this.visitor.vsIdJudge)
-					this.$refs.visStateFlow.setObj(this.visitor.vsIdFlow)
+// 					this.$refs.visStateJudge.getObj(this.visitor.visType,'1')
+// 					this.$refs.visStateFlow.getObj(this.visitor.visType,'2')
+// 					this.$refs.visStateJudge.setObj(this.visitor.vsIdJudge)
+// 					this.$refs.visStateFlow.setObj(this.visitor.vsIdFlow)
 					this.$refs.ind.setInd(this.visitor.indId)
 					this.$refs.store.setStore(this.visitor.storeId)
 					if (!this.isBlank(this.visitor.eduId)) {
@@ -293,27 +293,27 @@
 					}
 				}
 			},
-			visTypeChange:function(){
-				this.$refs.visStateJudge.getObj(this.visitor.visType,'1')
-				this.$refs.visStateFlow.getObj(this.visitor.visType,'2')
-				this.$refs.visStateJudge.setObj('0')
-				this.$refs.visStateFlow.setObj('0')
-			},
-			judgeChange: function(param) {
-				// //console.log(JSON.stringify(param))
-				if (this.isBlank(param)) {
-					this.visitor.vsIdJudge = ""
-				} else {
-					this.visitor.vsIdJudge = param.vsId
-				}
-			},
-			flowChange: function(param) {
-				if (this.isBlank(param)) {
-					this.visitor.vsIdFlow = ""
-				} else {
-					this.visitor.vsIdFlow = param.vsId
-				}
-			},
+// 			visTypeChange:function(){
+// 				this.$refs.visStateJudge.getObj(this.visitor.visType,'1')
+// 				this.$refs.visStateFlow.getObj(this.visitor.visType,'2')
+// 				this.$refs.visStateJudge.setObj('0')
+// 				this.$refs.visStateFlow.setObj('0')
+// 			},
+// 			judgeChange: function(param) {
+// 				// //console.log(JSON.stringify(param))
+// 				if (this.isBlank(param)) {
+// 					this.visitor.vsIdJudge = ""
+// 				} else {
+// 					this.visitor.vsIdJudge = param.vsId
+// 				}
+// 			},
+// 			flowChange: function(param) {
+// 				if (this.isBlank(param)) {
+// 					this.visitor.vsIdFlow = ""
+// 				} else {
+// 					this.visitor.vsIdFlow = param.vsId
+// 				}
+// 			},
 			dtChange: function(param) {
 				if (this.isBlank(param)) {
 					this.visitor.dtId = ""
@@ -421,18 +421,18 @@
 					alert("客户的来源渠道不能为空")
 					return
 				}
-				if (this.isBlank(this.visitor.visType)) {
-					alert("访问状态不能为空")
-					return
-				}
-				if (this.isBlank(this.visitor.vsIdJudge) || this.visitor.vsIdJudge == '0') {
-					alert("客户判定不能为空")
-					return
-				}
-				if (this.isBlank(this.visitor.vsIdFlow) || this.visitor.vsIdFlow == '0') {
-					alert("续流状态不能为空")
-					return
-				}
+// 				if (this.isBlank(this.visitor.visType)) {
+// 					alert("访问状态不能为空")
+// 					return
+// 				}
+// 				if (this.isBlank(this.visitor.vsIdJudge) || this.visitor.vsIdJudge == '0') {
+// 					alert("客户判定不能为空")
+// 					return
+// 				}
+// 				if (this.isBlank(this.visitor.vsIdFlow) || this.visitor.vsIdFlow == '0') {
+// 					alert("续流状态不能为空")
+// 					return
+// 				}
 				if (this.isBlank(this.visitor.empId) || this.visitor.empId == 0) {
 					alert("接待人不能为空")
 					return

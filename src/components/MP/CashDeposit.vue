@@ -65,6 +65,24 @@
                     </select>
                 </div>
             </div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			    <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+					<p class="end-aline col-md-11 col-lg-11 jh-pa-1">咨询师</p><span
+					class="sign-left">:</span>
+			    </div>
+			    <div class="col-md-7 col-lg-7">
+			        <cou ref="couEmp" @employeeChange="couChange"></cou>
+			    </div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			    <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+					<p class="end-aline col-md-11 col-lg-11 jh-pa-1">咨询顾问</p><span
+					class="sign-left">:</span>
+			    </div>
+			    <div class="col-md-7 col-lg-7">
+			        <con ref="conEmp" @employeeChange="conChange"></con>
+			    </div>
+			</div>
             <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-35"
                     data-toggle="modal"
                     v-on:click="checkMember(1)">查询
@@ -80,6 +98,8 @@
                             <!-- <th class="text-center">会员号</th> -->
                             <th class="text-center">姓名</th>
                             <th class="text-center">手机号</th>
+							<th class="text-center">咨询师</th>
+							<th class="text-center">咨询顾问</th>
                             <th class="text-center">定金金额</th>
                             <th class="text-center">交定金时间</th>
                             <th class="text-center">定金余额</th>
@@ -93,6 +113,8 @@
                             <!-- <td class="text-center jh-lh-33">{{item.memNum}}</td> -->
                             <td class="text-center jh-lh-33">{{item.cashName}}</td>
                             <td class="text-center jh-lh-33">{{item.phone}}</td>
+							<td class="text-center jh-lh-33">{{item.couName}}</td>
+							<td class="text-center jh-lh-33">{{item.conName}}</td>
                             <td class="text-center jh-lh-33">{{item.money}}</td>
                             <td class="text-center jh-lh-33">{{item.createDate |
                                 dateFormatFilter("YYYY-MM-DD")}}
@@ -165,6 +187,8 @@
     import SubCdRefund from '../MP/SubCd/SubCdRefund'
     import Paging from '../common/paging'
     import SubTransferMember from '../MP/SubCd/SubTransferMember'
+	import cou from '../common/Employee.vue' //咨询师
+	import con from '../common/Employee.vue'	//咨询顾问
     import {
         init
     } from '@/../static/js/common.js'
@@ -174,6 +198,8 @@
             dPicker,
             SubCd,
             Store,
+			cou,
+			con,
 
             SubCdConsumption,
             SubCdRefund,
@@ -187,6 +213,8 @@
                 phone: '',
                 beginDate: '',
                 endDate: '',
+				couId: '',
+				conId: '',
                 storeId: this.storeId(),
                 state: '',
                 balanceState: "2",
@@ -221,6 +249,20 @@
                 this.$refs.toMember.initData(item)
                 $("#toMember").modal('show')
             },
+			couChange: function(param) {
+				if (this.isBlank(param)) {
+					this.couId = ""
+				} else {
+					this.couId = param.empId
+				}
+			},
+			conChange: function(param) {
+				if (this.isBlank(param)) {
+					this.conId = ""
+				} else {
+					this.conId = param.empId
+				}
+			},
             //消费模态框
             consumptionModel(item) {
                 if (item.state == '1') {
@@ -306,6 +348,8 @@
                         beginDate: this.beginDate,
                         endDate: this.endDate,
                         storeId: this.storeId,
+						couId:this.couId,
+						conId:this.conId,
 
                         balanceState: this.balanceState,
                         page: page.toString(),
@@ -362,33 +406,10 @@
                     console.log('定金查询失败')
                 });
             },
-
-            handleScroll(e) {
-                var self = this
-                var etop = e.target.scrollTop
-                var fHeaderwidth = $("#fHeader").width($(".datathead").width())
-                var fHeaderheight = $("#fHeader").height($(".datathead").height())
-                var theadheight = $(".datathead").height()
-                var thlength = $(".datathead tr th").length
-                for (var i = 0; i < thlength; i++) {
-                    $("#fHeader div").eq(i).width(
-                        $(".datathead tr th").eq(i).width()
-                    )
-                    $("#fHeader div").eq(i).height(
-                        $(".datathead tr th").eq(i).height()
-                    )
-                }
-                if (etop > 0) {
-                    self.fixedHeader = true
-                    $("#fHeader").css("top", etop)
-                } else {
-                    self.fixedHeader = false
-                }
-            }
         },
         mounted() {
-            window.addEventListener('scroll', this.handleScroll, true);
-            init();
+			this.$refs.couEmp.setPosName("咨询师")
+			this.$refs.conEmp.setPosName("咨询顾问")
         },
         created() {
             this.checkMember(1)

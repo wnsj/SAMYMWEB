@@ -31,9 +31,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">
-
 						<b>*</b>
-
                         <label class="col-md-3 control-label text-right nopad end-aline">定金金额</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
@@ -41,15 +39,26 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">
-
 						<b>*</b>
-
                         <label class="col-md-3 control-label text-right nopad end-aline">交费时间</label><span
                         class="sign-left">:</span>
                         <dPicker class="col-md-8 subcd-h65" v-model="cash.createDate"
                                  v-on:click="dateAction()"></dPicker>
                     </div>
-                    <div class="col-md-6 form-group clearfix jh-wd-33"></div>
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                        <label class="col-md-3 control-label text-right nopad end-aline">咨询师</label><span
+                        class="sign-left">:</span>
+                        <div class="col-md-8">
+                            <cou ref="couEmp" @employeeChange="couChange"></cou>
+                        </div>
+                    </div>
+					<div class="col-md-6 form-group clearfix jh-wd-33">
+					    <label class="col-md-3 control-label text-right nopad end-aline">咨询师</label><span
+					    class="sign-left">:</span>
+					    <div class="col-md-8">
+					        <con ref="conEmp" @employeeChange="conChange"></con>
+					    </div>
+					</div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">
                         <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-35"
                                 data-toggle="modal"
@@ -68,12 +77,14 @@
 
 <script>
     import dPicker from 'vue2-datepicker'
-    import emp from '../../common/Employee.vue'
+    import cou from '../../common/Employee.vue' //咨询师
+	import con from '../../common/Employee.vue'	//咨询顾问
 
     export default {
         components: {
             dPicker,
-            emp,
+            cou,
+			con,
         },
         data() {
             return {
@@ -112,9 +123,13 @@
                         money: '',
                         storeId: this.storeId(),
                         state: '0',
+						couId:'',
+						conId:'',
                         operatorId: this.accountId(),
                         phone: cash.phone
                     }
+					this.$refs.couEmp.setPosName("咨询师")
+					this.$refs.conEmp.setPosName("咨询顾问")
 
                 } else if (param == 'modify') {
                     console.log('Initialization FWRoyalty’s content, which modifies FWRoyalty')
@@ -122,7 +137,10 @@
                     this.title = '修改'
                     Object.assign(this.cash, cash)
                     this.cash.operatorId = this.accountId()
-                    // console.log(JSON.stringify(this.cash))
+                    this.$refs.couEmp.setPosName("咨询师")
+					this.$refs.conEmp.setPosName("咨询顾问")
+					this.$refs.couEmp.setEmp(this.cash.couId)
+					this.$refs.conEmp.setEmp(this.cash.conId)
 
                 }
             },
@@ -131,6 +149,20 @@
                     this.cash.createDate = this.moment(this.cash.createDate, "YYYY-MM-DD 00:00:00.000")
                 }
             },
+			couChange: function(param) {
+				if (this.isBlank(param)) {
+					this.cash.couId = ""
+				} else {
+					this.cash.couId = param.empId
+				}
+			},
+			conChange: function(param) {
+				if (this.isBlank(param)) {
+					this.cash.conId = ""
+				} else {
+					this.cash.conId = param.empId
+				}
+			},
             setCash(param) {
                 this.cash.memNum = param.memNum
                 this.cash.cashName = param.memName
@@ -188,15 +220,19 @@
                     alert("手机号不能为空")
                     return
                 }
-                //else if (reg.test(this.cash.phone) == false) {
-                //     alert("不是完整的11位手机号或者正确的座机号！");
-                //     return
-                // }
 
                 if (this.isBlank(this.cash.money)) {
                     alert("定金不能为空")
                     return
                 }
+				if (this.isBlank(this.cash.couId)) {
+				    alert("咨询师不能为空")
+				    return
+				}
+				if (this.isBlank(this.cash.conId)) {
+				    alert("咨询顾问不能为空")
+				    return
+				}
 
                 if (!this.isBlank(this.cash.createDate)) {
                     this.cash.createDate = this.moment(this.cash.createDate, 'YYYY-MM-DD 00:00:00.000')

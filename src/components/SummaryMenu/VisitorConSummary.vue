@@ -94,7 +94,7 @@
                 </el-row>
             </el-form>
         </div>
-
+        <p class="tips">* 蓝色字体数据为抵扣数据</p>
         <div>
             <el-table
                 :data="tableData"

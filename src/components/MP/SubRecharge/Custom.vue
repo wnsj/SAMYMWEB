@@ -20,14 +20,14 @@
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.phone" disabled="true">
 					</div>
-				</div> 
+				</div>
 				<div v-show="unfinishedProList.length > 0">
 					<div class="col-md-12  clearfix jh-ad-0">
 						<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >已购产品</label><span
 						 class="sign-left">:</span>
 						</div>
-					</div> 
+					</div>
 					<div class="col-md-12 form-group clearfix text-left">
 						<table class="table table-bordered table-hover jh-mb-0">
 							<thead class="datathead">
@@ -289,7 +289,7 @@
 	import ContinState from '../../common/VisitState.vue'
 	import DiseaseType from '../../common/DiseaseType.vue'
 	import CounseRoom from '../../common/CounseRoom.vue'
-
+    import {Decimal} from 'decimal.js'
 	export default {
 		components: {
 			dPicker,
@@ -488,8 +488,8 @@
 
 			//the event of addtional button
 			addFee() {
-				
-				
+
+
 				if (this.isBlank(this.consume.memName)) {
 					alert("姓名不能为空!")
 					return
@@ -564,11 +564,16 @@
 					this.consume.cashId = this.cash.cashId;
 					this.consume.cashMoney = this.cash.select;
 				}
-				
-				if(this.isShow==false){
-					this.consume.realCross=(parseFloat(this.consume.realCross)*parseFloat(this.consume.discount)/100).toFixed(2)
-				}
-				
+
+                if (this.isShow) {
+                    // this.consume.realCross = (parseFloat(this.consume.realCross) * parseFloat(this.consume.discount) / 100).toFixed(2)
+                    var sur = this.selectObj.totalCount - this.selectObj.consumCount;
+                    if (this.consume.consumCount == sur) {
+                        this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.selectObj.realCrossCount))
+                    } else {
+                        this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(this.consume.discount)).div(new Decimal(100)).toFixed(2, Decimal.ROUND_HALF_UP)
+                    }
+                }
 				var url = this.url + '/purchasedItemsAction/consumProject'
 				this.$ajax({
 					method: 'POST',
@@ -696,9 +701,9 @@
 						this.$refs.counselorEmp.setPosName("咨询师")
 						this.$refs.counselorEmp.setEmp(item.counselor)
 					}
-					
+
 					this.$refs.project.setEmpId(this.consume.counselor,1)
-					
+
 					this.$refs.project.setProject(item.proId)
 					this.consume.proId = item.proId
 					this.consume.price = item.price //折前单价
@@ -725,7 +730,7 @@
 								this.$refs.counselorEmp.setEmp(item.counselor)
 							}
 							this.$refs.project.setEmpId(this.consume.counselor,1)
-							
+
 							this.$refs.project.setProject(item.proId)
 							this.consume.proId = item.proId
 							this.consume.price = item.price //折前单价
@@ -750,7 +755,7 @@
 							this.$refs.counselorEmp.setEmp(item.counselor)
 						}
 						this.$refs.project.setEmpId(this.consume.counselor,1)
-						
+
 						this.$refs.project.setProject(item.proId)
 						this.consume.proId = item.proId
 						this.consume.price = item.price //折前单价
@@ -819,7 +824,7 @@
 			computedRealCross() {
 				if (this.counselorFlag == true) {
 					this.consume.realCross = this.consume.consumCount * this.consume.price
-				} 
+				}
 			},
 			checkMemCash(param) {
 				if (this.isBlank(param)) {

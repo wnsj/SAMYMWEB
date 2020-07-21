@@ -57,7 +57,21 @@
 					<dPicker class="wd100" v-model="endCreateDate"></dPicker>
 				</div>
 			</div>
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">咨询顾问</p><span
+                    class="sign-left">:</span>
+                </div>
+                <div class="col-md-7 col-lg-7">
+                    <select class="form-control" v-model="conId">
+                        <option value="">--未选择--</option>
+                        <option v-for="(item,index) in empList" :key="index" v-bind:value="item.empId">
+                            {{item.empName}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal" v-on:click="conditionCheck(1)">查询</button>
 			</div>
 		</div>
@@ -71,6 +85,7 @@
 								<th class="text-center" rowspan='2'>姓名</th>
 								<th class="text-center" rowspan='2'>已购产品名称</th>
 								<th class="text-center" rowspan='2'>咨询师</th>
+								<th class="text-center" rowspan='2'>咨询顾问</th>
 								<th class="text-center" rowspan='2'>购买单价(¥/次)</th>
 								<th class="text-center" rowspan='2'>购买课时(次)</th>
 								<th class="text-center" rowspan='2'>购买折扣(%)</th>
@@ -86,6 +101,7 @@
 								<td>{{item.memName}}</td>
 								<td>{{item.proName}}</td>
 								<td>{{item.counselorName}}</td>
+								<td>{{item.empName}}</td>
 								<td>{{item.price}}</td>
 								<td>{{item.actualCount}}</td>
 								<td>{{item.discount}}</td>
@@ -131,13 +147,14 @@
 				memNum: '',
 				memName: '',
 				empId: '',
+                conId: '',
 				begCreateDate: '',
 				endCreateDate: '',
 				storeId: this.storeId(),
 				isArrears: '1',
 				accountType:this.accountType(),
 
-
+                empList:[],
 				//分页需要的数据
 				pages: '', //总页数
 				current: 1, //当前页码
@@ -166,6 +183,25 @@
 					this.storeId = param.storeId
 				}
 			},
+            getEmp() {
+                var url = this.url + '/employeeAction/getAllEmpByPosName'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        posName: "咨询顾问"
+                    },
+                    dataType: 'json',
+                }).then(res => {
+                    this.empList = res.data.retData
+                }).catch(error => {
+                    console.log(error);
+                })
+            },
 			//feedback from adding and modifying view
 			feedBack() {
 				this.conditionCheck()
@@ -194,7 +230,8 @@
 						storeId: this.storeId,
 						memNum: this.memNum,
 						memName: this.memName,
-						empId: this.empId,
+                        counselor: this.empId,
+                        empId: this.conId,
 						begCreateDate: this.begCreateDate,
 						endCreateDate: this.endCreateDate,
 						storeId: this.storeId,
@@ -253,6 +290,7 @@
 
 		},
 		mounted() {
+		    this.getEmp();
 			this.$refs.emp.setPosName("咨询师")
 			this.$refs.emp.setEmp("")
 			init();

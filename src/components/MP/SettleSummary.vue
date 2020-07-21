@@ -59,9 +59,22 @@
 				<div class="col-md-4 col-lg-4 SSwid27">
 					<dPicker class="wd100" v-model="endCreateDate"></dPicker>
 				</div>
-
 			</div>
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">咨询顾问</p><span
+                    class="sign-left">:</span>
+                </div>
+                <div class="col-md-7 col-lg-7">
+                    <select class="form-control" v-model="conId">
+                        <option value="">--未选择--</option>
+                        <option v-for="(item,index) in empList" :key="index" v-bind:value="item.empId">
+                            {{item.empName}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
 				 v-on:click="conditionCheck(1)">查询</button>
 			</div>
@@ -82,6 +95,7 @@
 									<th class="text-center">消费金额</th>
 									<th class="text-center">交费方式</th>
 									<th class="text-center">咨询师</th>
+									<th class="text-center">咨询助理</th>
 									<th class="text-center">消费时间</th>
 									<th class="text-center">购买时间</th>
 								</tr>
@@ -96,6 +110,7 @@
 									<td>{{item2.realCross}}</td>
 									<td>{{item2.payType}}</td>
 									<td>{{item2.counselorName}}</td>
+									<td>{{item2.empName}}</td>
 									<td>{{item2.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 									<td>{{item2.purTime}}</td>
 								</tr>
@@ -142,6 +157,7 @@
 	import store from '../common/Store.vue'
 	import Paging from '../common/paging'
     import emp from '../common/Employee.vue'
+    import con from '../common/Employee.vue'	//咨询顾问
 	import {
 		init
 	} from '@/../static/js/common.js'
@@ -152,11 +168,13 @@
 			SubConsume,
 			Paging,
 			store,
-            emp
+            emp,
+            con
 		},
 		data() {
 			return {
                 empId:'',
+                conId: '',
 				storeId: this.storeId(),
 				memNum: '',
 				memName: '',
@@ -174,7 +192,7 @@
 				current: 1, //当前页码
                 pageSize: 10, //一页显示的数量
 				total: '', //数据的数量
-
+                empList:[],
                 sumTotal:'0',//消费的总金额
                 consumCountTotal:'0',//消费的总课时
 
@@ -240,6 +258,25 @@
                     });
                 }
             },
+            getEmp() {
+                var url = this.url + '/employeeAction/getAllEmpByPosName'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        posName: "咨询顾问"
+                    },
+                    dataType: 'json',
+                }).then(res => {
+                    this.empList = res.data.retData
+                }).catch(error => {
+                    console.log(error);
+                })
+            },
             selectHours(){
 			  alert("hhhhhhhhhhh"+this.empId)
             },
@@ -274,6 +311,7 @@
 						storeId: this.storeId,
 						memName: this.memName,
 						counselor:this.empId,
+                        empId:this.conId,
                         payType:this.payType,
 						actualBegDate: this.begCreateDate,
 						actualEndDate: this.endCreateDate,
@@ -345,7 +383,7 @@
 		},
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true)
-
+            this.getEmp();
 			init();
             this.$refs.couEmp.setPosName("咨询师")
             this.$refs.couEmp.setEmp("")

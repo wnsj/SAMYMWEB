@@ -94,7 +94,7 @@
                             <td class="text-center">{{item.proName}}</td>
                             <td class="text-center">{{item.refCount}}</td>
                             <td class="text-center">{{item.realRefund}}</td>
-                            <td class="text-center">{{item.createDate | dateFormatFilter('YYYY-MM-DD')}}</td>
+                            <td class="text-center">{{item.createDate | ormatFilter('YYYY-MM-DD')}}</td>
                         </tr>
                         </tbody>
                     </table>

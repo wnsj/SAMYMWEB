@@ -217,6 +217,11 @@ export default new Router({
                     path: '/SummaryMenu/ConsultStoreSummary',
                     name: 'ConsultStoreSummary',
                     component: () => import("../components/SummaryMenu/ConsultStoreSummary"),
+                },
+                {
+                    path: '/MP/Income',
+                    name: 'Income',
+                    component: () => import("../components/MP/Income"),
                 }],
             redirect: '/MP/Visitor'
         }]

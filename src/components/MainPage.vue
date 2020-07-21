@@ -52,6 +52,7 @@
                                       <el-menu-item index="2-3"><router-link to="/MP/Order">预约管理</router-link></el-menu-item>
                                       <el-menu-item index="2-4"><router-link to="/MP/CashDeposit">定金管理</router-link></el-menu-item>
                                       <el-menu-item index="2-5"><router-link to="/MP/Refund">退费管理</router-link></el-menu-item>
+                                      <el-menu-item index="2-6"><router-link to="/MP/Income">收入记录明细</router-link></el-menu-item>
                                   </el-submenu>
 
                                   <el-submenu index="3">

@@ -38,6 +38,8 @@
 									<td>项目类型</td>
 									<td>总课时</td>
 									<td>剩余课时</td>
+									<td>是否全款</td>
+									<td>欠费金额</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -48,6 +50,8 @@
 									<td>{{transforProType(item.proType)}}</td>
 									<td>{{item.totalCount}}</td>
 									<td>{{item.totalCount - item.consumCount}}</td>
+									<td>{{item.isArrears=='1' ? '全款' : '非全款'}}</td>
+									<td>{{item.isArrears=='1' ? '无':(item.receivable - item.realCross)}}</td>
 								</tr>
 							</tbody>
 						</table>

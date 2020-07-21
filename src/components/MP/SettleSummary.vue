@@ -27,6 +27,23 @@
 			        <emp ref="couEmp" @employeeChange="counlorEmpChange"></emp>
 			    </div>
 			</div>
+
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
+                    <p class="end-aline col-md-11 col-lg-11" >交费方式</p><span class="sign-left">:</span>
+                </div>
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <select class="form-control" v-model="payType">
+                        <option value="1">现金</option>
+                        <option value="2">微信</option>
+                        <option value="3">支付宝</option>
+                        <option value="4">信用卡/银行卡</option>
+                        <option value="5">小程序</option>
+                        <option value="6">免费</option>
+                        <option value="7">其它</option>
+                    </select>
+                </div>
+            </div>
 		</div>
 		<div class="row newRow">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 padding-left-10">
@@ -42,9 +59,22 @@
 				<div class="col-md-4 col-lg-4 SSwid27">
 					<dPicker class="wd100" v-model="endCreateDate"></dPicker>
 				</div>
-
 			</div>
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">咨询顾问</p><span
+                    class="sign-left">:</span>
+                </div>
+                <div class="col-md-7 col-lg-7">
+                    <select class="form-control" v-model="conId">
+                        <option value="">--未选择--</option>
+                        <option v-for="(item,index) in empList" :key="index" v-bind:value="item.empId">
+                            {{item.empName}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
 				 v-on:click="conditionCheck(1)">查询</button>
 			</div>
@@ -63,8 +93,11 @@
 									<th class="text-center">课时(小时)</th>
 									<th class="text-center">折扣(%)</th>
 									<th class="text-center">消费金额</th>
+									<th class="text-center">交费方式</th>
 									<th class="text-center">咨询师</th>
+									<th class="text-center">咨询助理</th>
 									<th class="text-center">消费时间</th>
+									<th class="text-center">购买时间</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -75,8 +108,11 @@
 									<td>{{item2.consumCount}}</td>
 									<td>{{item2.discount}}</td>
 									<td>{{item2.realCross}}</td>
+									<td>{{item2.payType}}</td>
 									<td>{{item2.counselorName}}</td>
+									<td>{{item2.empName}}</td>
 									<td>{{item2.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+									<td>{{item2.purTime}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -95,7 +131,7 @@
                             <p class="tips tips-font-20">未消费课时：{{unusedHours}} 小时</p>
                         </div> -->
                     </div>
-					
+
 					<!--分页插件-->
 					<div class="page">
 						<!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
@@ -121,6 +157,7 @@
 	import store from '../common/Store.vue'
 	import Paging from '../common/paging'
     import emp from '../common/Employee.vue'
+    import con from '../common/Employee.vue'	//咨询顾问
 	import {
 		init
 	} from '@/../static/js/common.js'
@@ -131,11 +168,13 @@
 			SubConsume,
 			Paging,
 			store,
-            emp
+            emp,
+            con
 		},
 		data() {
 			return {
                 empId:'',
+                conId: '',
 				storeId: this.storeId(),
 				memNum: '',
 				memName: '',
@@ -146,13 +185,14 @@
 				singleData: {},
 				begCreateDate: '',
 				endCreateDate: '',
+                payType:'1',
 				accountType:this.accountType(),
 				//分页需要的数据
 				pages: '', //总页数
 				current: 1, //当前页码
                 pageSize: 10, //一页显示的数量
 				total: '', //数据的数量
-
+                empList:[],
                 sumTotal:'0',//消费的总金额
                 consumCountTotal:'0',//消费的总课时
 
@@ -218,6 +258,25 @@
                     });
                 }
             },
+            getEmp() {
+                var url = this.url + '/employeeAction/getAllEmpByPosName'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        posName: "咨询顾问"
+                    },
+                    dataType: 'json',
+                }).then(res => {
+                    this.empList = res.data.retData
+                }).catch(error => {
+                    console.log(error);
+                })
+            },
             selectHours(){
 			  alert("hhhhhhhhhhh"+this.empId)
             },
@@ -252,13 +311,14 @@
 						storeId: this.storeId,
 						memName: this.memName,
 						counselor:this.empId,
-						
+                        empId:this.conId,
+                        payType:this.payType,
 						actualBegDate: this.begCreateDate,
 						actualEndDate: this.endCreateDate,
 
 						page: page.toString(),
 						pageSize: this.pageSize,
-                        
+
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -323,7 +383,7 @@
 		},
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true)
-
+            this.getEmp();
 			init();
             this.$refs.couEmp.setPosName("咨询师")
             this.$refs.couEmp.setEmp("")

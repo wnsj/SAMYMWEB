@@ -146,7 +146,8 @@
 					<label class="col-md-4 control-label text-right nopad end-aline" >交费方式</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
-						<select class="form-control" v-model="consume.payType">
+						<select class="form-control" v-model="consume.payType" v-on:change="payChange()">
+							<option value="">--未选择--</option>
 							<option value="1">现金</option>
 							<option value="2">微信</option>
 							<option value="3">支付宝</option>
@@ -155,6 +156,13 @@
 							<option value="6">免费</option>
 							<option value="7">其它</option>
 						</select>
+					</div>
+				</div>
+				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="appShow==true">
+					<label class="col-md-4 control-label text-right nopad end-aline">小程序编号</label><span
+					 class="sign-left">:</span>
+					<div class="col-md-7  ">
+						<input type="text" class="form-control" v-model="consume.appNumber">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -330,6 +338,7 @@
 					consumCount: '0', //消费次数
 					balance: '0',
 					piId: '',
+					appNumber:'',//小程序编号
 					diseaseType: null, //咨询方向
 					diseaseProblem: null, //咨询问题
 					counseRoom: null, //咨询室
@@ -343,6 +352,7 @@
 				consumeReceivable: '',
 				isSelect: true,
 				sameProject: false,
+				appShow:false,
 				unfinishedProList: [],
 				clickItemObj: {
 					itemId: 0,
@@ -398,7 +408,8 @@
 					/** 1:实体卡首充（不计算提成） 0:计算 */
 					consumCount: 0, //消费次数
 					visitType: 1,
-					payType: 1, //支付方式
+					payType: '', //支付方式
+					appNumber:'',//小程序编号
 					serialNo: null, //流水单号
 					receipt: null, //收据
 					visitState: null, //访问状态
@@ -475,6 +486,14 @@
 					this.consume.preFoldTotalPrice = param.totalPrice
 					this.consume.receivable = param.discouAmount
 					this.consume.proType = param.proType
+				}
+			},
+			//付款方式
+			payChange(){
+				if(this.consume.payType==5){
+					this.appShow=true
+				}else{
+					this.appShow=false
 				}
 			},
 			//feedback employee information
@@ -770,6 +789,16 @@
 				this.consume.consumCount = 0
                 //是否选中已购课程都清零
 				//this.consume.realCross = '0'
+				if(this.projectFlag==true){
+					this.consume.payType=item.payType
+					this.appShow=true
+					this.consume.appNumber=item.appNumber
+					this.payChange()
+				}else{
+					this.appShow=false
+					this.consume.appNumber=''
+					this.consume.payType=''
+				}
 			},
 			//项目类型转换
 			transforProType(proType) {

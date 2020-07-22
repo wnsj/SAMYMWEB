@@ -63,6 +63,23 @@
                     </select>
                 </div>
             </div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
+			        <p class="end-aline col-md-11 col-lg-11" >交费方式</p><span class="sign-left">:</span>
+			    </div>
+			    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+			        <select class="form-control" v-model="payType">
+						<option value="">--未付款--</option>
+			            <option value="1">现金</option>
+			            <option value="2">微信</option>
+			            <option value="3">支付宝</option>
+			            <option value="4">信用卡/银行卡</option>
+			            <option value="5">小程序</option>
+			            <option value="6">免费</option>
+			            <option value="7">其它</option>
+			        </select>
+			    </div>
+			</div>
             <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-30"
                     data-toggle="modal"
                     v-on:click="queryObjectList(1)">查询
@@ -82,7 +99,10 @@
                             <th class="text-center">产品</th>
                             <th class="text-center">退费课时</th>
                             <th class="text-center">退费金额</th>
-                            <th class="text-center">时间</th>
+                            <th class="text-center">退费时间</th>
+							<th class="text-center">交费方式</th>
+							<th class="text-center">初访时间</th>
+							<th class="text-center">购买时间</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -94,7 +114,10 @@
                             <td class="text-center">{{item.proName}}</td>
                             <td class="text-center">{{item.refCount}}</td>
                             <td class="text-center">{{item.realRefund}}</td>
-                            <td class="text-center">{{item.createDate | ormatFilter('YYYY-MM-DD')}}</td>
+                            <td class="text-center">{{item.createDate | dateFormatFilter('YYYY-MM-DD')}}</td>
+							<td class="text-center">{{item.psName}}</td>
+							<td class="text-center">{{item.visCreateDate | dateFormatFilter('YYYY-MM-DD')}}</td>
+							<td class="text-center">{{item.piCreateDate | dateFormatFilter('YYYY-MM-DD')}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -153,6 +176,8 @@
                 current: 1, //当前页码
                 pageSize: 10, //一页显示的数量
                 total: '', //数据的数量
+				
+				payType:'',
             };
         },
         methods: {
@@ -231,6 +256,7 @@
                         visitorName: this.visitorName,
                         begDate: this.begDate,
                         endDate: this.endDate,
+						payType:this.payType,
 
                         page: page.toString(),
                         pageSize: this.pageSize

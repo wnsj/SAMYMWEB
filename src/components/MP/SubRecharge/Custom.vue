@@ -323,7 +323,7 @@
 					receivable: '', //应交(折前)
 					preFoldTotalPrice: '', //折前总价
 					realCross: '', //实缴（折后）
-					proId: '', //项目id
+					proId: '0', //项目id
 					discount: '', //折扣
 					price: '', //折前单价
 					disPrice: '', //折后单价
@@ -390,7 +390,7 @@
 					appNum: '', //预约号
 					receivable: 0, //应交
 					realCross: 0, //实缴
-					proId: '', //项目id
+					proId: '0', //项目id
 					discount: 0, //折扣
 					price: 0, //折前单价
 					disPrice: '', //折后单价
@@ -712,11 +712,11 @@
 			},
 			//单选框选中处理
 			radioClick(e, item) {
-				if (this.clickItemObj.itemId == 0) {
+				if (parseInt(this.clickItemObj.itemId) === 0) {
 					this.selectObj = item;
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1
-					if (item.proType != '0') {
+					if (parseInt(item.proType) !== 0) {
 						this.modCounselor(item)
 						this.counselorFlag = false
 					} else {
@@ -736,15 +736,15 @@
 					this.consume.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
 					this.consume.proType = item.proType
 				} else {
-					if (this.clickItemObj.itemId == item.piId) {
-						if (this.clickItemObj.count % 2 == 0) {
+					if (parseInt(this.clickItemObj.itemId) === parseInt(item.piId)) {
+						if (parseInt(this.clickItemObj.count) % 2 === 0) {
 							this.selectObj = null
 							e.target.checked = false
 							this.$refs.counselorEmp.setPosName("咨询师")
 							this.$refs.counselorEmp.setEmp("")
 							this.counselorFlag = false
 						} else {
-							if (item.proType != 0) {
+							if (parseInt(item.proType) !== 0) {
 								this.modCounselor(item)
 								this.counselorFlag = false
 							} else {
@@ -752,9 +752,11 @@
 								this.$refs.counselorEmp.setPosName("咨询师")
 								this.$refs.counselorEmp.setEmp(item.counselor)
 							}
-							this.$refs.project.setEmpId(this.consume.counselor,1)
+							this.$refs.project.setEmpId(this.consume.counselor,1).then(
+                                this.$refs.project.setProject(item.proId)
+                            )
 
-							this.$refs.project.setProject(item.proId)
+
 							this.consume.proId = item.proId
 							this.consume.price = item.price //折前单价
 							this.consume.totalCount = item.totalCount //实际次数
@@ -769,7 +771,7 @@
 						this.selectObj = item
 						this.clickItemObj.itemId = item.piId
 						this.clickItemObj.count = 0
-						if (item.proType != 0) {
+						if (parseInt(item.proType) !== 0) {
 							this.modCounselor(item)
 							this.counselorFlag = false
 						} else {
@@ -778,8 +780,9 @@
 							this.$refs.counselorEmp.setEmp(item.counselor)
 						}
 						this.$refs.project.setEmpId(this.consume.counselor,1)
+                        this.$refs.project.setProject(item.proId)
 
-						this.$refs.project.setProject(item.proId)
+
 						this.consume.proId = item.proId
 						this.consume.price = item.price //折前单价
 						this.consume.totalCount = item.totalCount //实际次数
@@ -793,7 +796,7 @@
 				this.consume.consumCount = 0
                 //是否选中已购课程都清零
 				//this.consume.realCross = '0'
-				if(this.projectFlag==true){
+				if(this.projectFlag){
 					this.consume.payType=item.payType
 					this.appShow=true
 					this.consume.appNumber=item.appNumber

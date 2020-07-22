@@ -66,7 +66,7 @@
 				<div class="col-md-5 col-lg-5 text-right nopad">
 					<p class="end-aline col-md-11 col-lg-11" >课程名称</p><span class="sign-left">:</span>
 				</div>
-				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="posName"></div>
+				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="proName"></div>
 			</div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
@@ -74,6 +74,7 @@
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                     <select class="form-control" v-model="payType">
+						<option value="">--未付款--</option>
                         <option value="1">现金</option>
                         <option value="2">微信</option>
                         <option value="3">支付宝</option>
@@ -119,10 +120,11 @@
 									<th class="text-center">消费金额</th>
 									<th class="text-center">交费方式</th>
 									<th class="text-center">咨询师</th>
-									<th class="text-center">咨询助理</th>
+									<th class="text-center">咨询顾问</th>
 									<th class="text-center">访问类型</th>
 									<th class="text-center">咨客判定</th>
 									<th class="text-center">续流状态</th>
+									<th class="text-center">付款方式</th>
 									<th class="text-center">消费时间</th>
 									<th class="text-center">购买时间</th>
 								</tr>
@@ -141,6 +143,7 @@
 									<td>{{item2.visitType== '1' ? '初访' : '复访'}}</td>
 									<td>{{item2.judgeStateName}}</td>
 									<td>{{item2.continueStateName}}</td>
+									<td>{{item2.psName}}</td>
 									<td>{{item2.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 									<td>{{item2.purTime}}</td>
 								</tr>
@@ -176,9 +179,7 @@
     import con from '../common/Employee.vue'	//咨询顾问
 	import judgeState from '../common/VisitState.vue' //咨客判定
 	import continueState from '../common/VisitState.vue' //续流状态
-	import {
-		init
-	} from '@/../static/js/common.js'
+	
 	export default {
 		name: 'employee',
 		components: {
@@ -206,7 +207,7 @@
 				singleData: {},
 				begCreateDate: '',
 				endCreateDate: '',
-                payType:'1',
+                payType:'',
 				accountType:this.accountType(),
 				//分页需要的数据
 				pages: '', //总页数
@@ -223,7 +224,7 @@
 				
 				couId:'',//咨询师ID
 				conId:'',//咨询师ID
-				posName:'',//课程名称
+				proName:'',//课程名称
 				judgeState:'',//咨客判定
 				continueState:'',//续流状态
 			}
@@ -266,7 +267,7 @@
 					data: {
 						storeId: this.storeId,
 						memName: this.memName,
-						proName:this.posName,
+						proName:this.proName,
 						counselor:this.couId,
                         empId:this.conId,
                         payType:this.payType,
@@ -336,9 +337,9 @@
 			//通过初复访设置咨客判定和续流状态
 			visitTypeChange() {
 				this.$refs.judgeStateRef.setObj(0)
-				this.$refs.judgeStateRef.getObj(this.consume.visitType, 1)
+				this.$refs.judgeStateRef.getObj(this.visitType, 1)
 				this.$refs.continueStateRef.setObj(0)
-				this.$refs.continueStateRef.getObj(this.consume.visitType, 2)
+				this.$refs.continueStateRef.getObj(this.visitType, 2)
 			},
 
 		},

@@ -401,15 +401,16 @@
 				this.$refs.continueStateRef.getObj(this.visitType, 2)
 			},
 		},
-		mounted() {
-		    this.$refs.couEmp.setPosName("咨询师")
-		    this.$refs.couEmp.setEmp("")
-		    this.$refs.conEmp.setPosName("咨询顾问")
-		    this.$refs.conEmp.setEmp("")
+		mounted:function() {
+			console.log('mounted')
+			this.$refs.couEmp.setPosName("咨询师")
+			this.$refs.conEmp.setPosName("咨询顾问")
+			this.$refs.couEmp.setEmp("")
+			this.$refs.conEmp.setEmp("")
 		    this.$refs.judgeStateRef.getObj(1, 1)
 		    this.$refs.continueStateRef.getObj(1, 2)
 		},
-		created() {
+		created:function() {
 			this.conditionCheck(1)
 		}
 	}

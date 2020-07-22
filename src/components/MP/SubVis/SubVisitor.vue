@@ -474,6 +474,9 @@
 			},
 
 		},
+		mounted(){
+			this.$refs.emp.getEmployeeList()
+		}
 	}
 </script>
 

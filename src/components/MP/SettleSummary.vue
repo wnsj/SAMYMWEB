@@ -345,11 +345,13 @@
 		},
 		mounted() {
             this.$refs.couEmp.setPosName("咨询师")
-            this.$refs.couEmp.setEmp("")
 			this.$refs.conEmp.setPosName("咨询顾问")
-			this.$refs.conEmp.setEmp("")
 			this.$refs.judgeStateRef.getObj(1, 1)
 			this.$refs.continueStateRef.getObj(1, 2)
+		},
+		updated(){
+			this.$refs.couEmp.setEmp("")
+			this.$refs.conEmp.setEmp("")
 		},
 		created() {
 			this.conditionCheck(1)

@@ -588,7 +588,7 @@
 					this.consume.cashMoney = this.cash.select;
 				}
 
-                if (this.isShow) {
+                if (this.selectObj) {
                     // this.consume.realCross = (parseFloat(this.consume.realCross) * parseFloat(this.consume.discount) / 100).toFixed(2)
                     var sur = this.selectObj.totalCount - this.selectObj.consumCount;
                     if (this.consume.consumCount == sur) {

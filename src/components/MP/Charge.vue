@@ -199,16 +199,13 @@
 	import continueState from '../common/VisitState.vue' //续流状态
 
     import SubCharge from '../MP/SubCharge/SubCharge.vue'
-	import {
-		init
-	} from '@/../static/js/common.js'
 	export default {
 		components: {
 			dPicker,
 			emp,
 			Paging,
 			store,
-            SubCharge
+            SubCharge,
 			cou,
 			con,
 			judgeState,

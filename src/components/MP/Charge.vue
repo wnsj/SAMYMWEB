@@ -90,13 +90,15 @@
 								<th class="text-center" rowspan='2'>购买课时(次)</th>
 								<th class="text-center" rowspan='2'>购买折扣(%)</th>
 								<th class="text-center" rowspan='2'>购买时间</th>
+								<th class="text-center" rowspan='2'>开始时间</th>
+								<th class="text-center" rowspan='2'>结束时间</th>
 								<th class="text-center" rowspan='2'>实交金额</th>
 								<th class="text-center" rowspan='2'>操作人</th>
 								<th class="text-center" rowspan='2'>是否全款</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index1) in chargeLsit" :key="index1">
+							<tr v-for="(item,index1) in chargeLsit" :key="index1" v-on:dblclick="changeEndDate(item)">
 								<!-- <td>{{item.memNum}}</td> -->
 								<td>{{item.memName}}</td>
 								<td>{{item.proName}}</td>
@@ -106,6 +108,8 @@
 								<td>{{item.actualCount}}</td>
 								<td>{{item.discount}}</td>
 								<td>{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+								<td>{{item.startDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+								<td>{{item.endDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td>{{item.realCross}}</td>
 								<td>{{item.operatorName}}</td>
 								<td v-show="item.isArrears=='0'"><button type="button" class="btn btn-warning" v-on:click="arrearsAaction(item)">否</button></td>
@@ -122,7 +126,13 @@
 				</div>
 			</nobr>
 		</div>
+        <div class="modal fade" id="SubCharge">
+            <div class="modal-dialog">
+                <SubCharge ref='subChargeRef' @certainAction='feedBack1'></SubCharge>
+            </div>
+        </div>
 	</div>
+
 </template>
 
 <script>
@@ -130,6 +140,7 @@
 	import emp from '../common/Employee.vue'
 	import store from '../common/Store.vue'
 	import Paging from '../common/paging'
+    import SubCharge from '../MP/SubCharge/SubCharge.vue'
 	import {
 		init
 	} from '@/../static/js/common.js'
@@ -139,6 +150,7 @@
 			emp,
 			Paging,
 			store,
+            SubCharge
 		},
 		data() {
 			return {
@@ -207,8 +219,14 @@
 				this.conditionCheck()
 				$("#addFee").modal("hide")
 			},
-
-
+            feedBack1() {
+                this.conditionCheck(1)
+                $("#SubCharge").modal("hide")
+            },
+            changeEndDate(item) {
+                this.$refs.subChargeRef.initData(item)
+                $("#SubCharge").modal('show')
+            },
 			//the list , which is detail infomation of patient,was checked.
 			conditionCheck: function(page) {
 				console.log('querying based on multiple conditions')

@@ -266,7 +266,7 @@
             },
             // 表格行样式
             cellStyle(row, column, rowIndex, columnIndex) {
-                if (row.row.state == 2) {
+                if (row.row.isDeduction == 2) {
                     return 'text-align: center;color:blue'
                 }
                 return 'text-align: center;'

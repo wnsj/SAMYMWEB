@@ -138,6 +138,8 @@
 								<th class="text-center">购买课时(次)</th>
 								<th class="text-center">购买折扣(%)</th>
 								<th class="text-center">购买时间</th>
+                                <th class="text-center" rowspan='2'>开始时间</th>
+                                <th class="text-center" rowspan='2'>结束时间</th>
 								<th class="text-center">实交金额</th>
 								<th class="text-center">交费方式</th>
 								<th class="text-center">操作人</th>
@@ -145,7 +147,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(item,index1) in chargeLsit" :key="index1">
+							<tr v-for="(item,index1) in chargeLsit" :key="index1" v-on:dblclick="changeEndDate(item)">
 								<!-- <td>{{item.memNum}}</td> -->
 								<td>{{item.memName}}</td>
 								<td>{{item.proName}}</td>
@@ -158,6 +160,8 @@
 								<td>{{item.actualCount}}</td>
 								<td>{{item.discount}}</td>
 								<td>{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+								<td>{{item.startDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+								<td>{{item.endDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td>{{item.realCross}}</td>
 								<td>{{item.psName}}</td>
 								<td>{{item.operatorName}}</td>
@@ -175,7 +179,13 @@
 				</div>
 			</nobr>
 		</div>
+        <div class="modal fade" id="SubCharge">
+            <div class="modal-dialog">
+                <SubCharge ref='subChargeRef' @certainAction='feedBack1'></SubCharge>
+            </div>
+        </div>
 	</div>
+
 </template>
 
 <script>
@@ -187,13 +197,15 @@
 	import con from '../common/Employee.vue'	//咨询顾问
 	import judgeState from '../common/VisitState.vue' //咨客判定
 	import continueState from '../common/VisitState.vue' //续流状态
-	
+
+    import SubCharge from '../MP/SubCharge/SubCharge.vue'
 	export default {
 		components: {
 			dPicker,
 			emp,
 			Paging,
 			store,
+            SubCharge,
 			cou,
 			con,
 			judgeState,
@@ -219,7 +231,7 @@
 				current: 1, //当前页码
 				size: 10, //一页显示的数量
 				total: '', //数据的数量
-				
+
 				visitType:'',//访问类型
 				payType:'1',//付款方式
 				couId:'',//咨询师ID
@@ -275,8 +287,14 @@
 				this.conditionCheck()
 				$("#addFee").modal("hide")
 			},
-
-
+            feedBack1() {
+                this.conditionCheck(1)
+                $("#SubCharge").modal("hide")
+            },
+            changeEndDate(item) {
+                this.$refs.subChargeRef.initData(item)
+                $("#SubCharge").modal('show')
+            },
 			//the list , which is detail infomation of patient,was checked.
 			conditionCheck: function(page) {
 				console.log('querying based on multiple conditions')

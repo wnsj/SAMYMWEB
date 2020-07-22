@@ -22,12 +22,71 @@
 				</div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<div class="col-md-5 col-lg-5 text-right jh-ad-1">
-					<p class="end-aline col-md-11 col-lg-11 jh-pa-1">咨询师</p><span class="sign-left">:</span>
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >访问类型</p><span class="sign-left">:</span>
 				</div>
 				<div class="col-md-7 col-lg-7">
-					<emp ref="emp" @employeeChange='empChange'></emp>
+					<select class="form-control" v-model="visitType" @change="visitTypeChange">
+						<option value="">--未选择--</option>
+						<option value="1">初访</option>
+						<option value="2">复访</option>
+					</select>
 				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >客户判定</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-7 col-lg-7">
+					<judgeState ref="judgeStateRef" @objectChange="judgeStateChange"></judgeState>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >续流状态</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-7 col-lg-7">
+					<continueState ref="continueStateRef" @objectChange="continueStateChange"></continueState>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
+			        <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span class="sign-left">:</span>
+			    </div>
+			    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+			        <cou ref="couEmp" @employeeChange="couChange"></cou>
+			    </div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
+			        <p class="end-aline col-md-11 col-lg-11" >咨询顾问</p><span class="sign-left">:</span>
+			    </div>
+			    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+			        <con ref="conEmp" @employeeChange="conChange"></con>
+			    </div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >课程名称</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="proName"></div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
+			        <p class="end-aline col-md-11 col-lg-11" >交费方式</p><span class="sign-left">:</span>
+			    </div>
+			    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+			        <select class="form-control" v-model="payType">
+						<option value="">--未付款--</option>
+			            <option value="1">现金</option>
+			            <option value="2">微信</option>
+			            <option value="3">支付宝</option>
+			            <option value="4">信用卡/银行卡</option>
+			            <option value="5">小程序</option>
+			            <option value="6">免费</option>
+			            <option value="7">其它</option>
+			        </select>
+			    </div>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<div class="col-md-5 col-lg-5 text-right jh-ad-1">
@@ -57,20 +116,6 @@
 					<dPicker class="wd100" v-model="endCreateDate"></dPicker>
 				</div>
 			</div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
-                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">咨询顾问</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <select class="form-control" v-model="conId">
-                        <option value="">--未选择--</option>
-                        <option v-for="(item,index) in empList" :key="index" v-bind:value="item.empId">
-                            {{item.empName}}
-                        </option>
-                    </select>
-                </div>
-            </div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal" v-on:click="conditionCheck(1)">查询</button>
 			</div>
@@ -82,19 +127,23 @@
 						<thead class="datathead">
 							<tr class="datatr_1">
 								<!-- <th class="text-center" rowspan='2'>会员卡号</th> -->
-								<th class="text-center" rowspan='2'>姓名</th>
-								<th class="text-center" rowspan='2'>已购产品名称</th>
-								<th class="text-center" rowspan='2'>咨询师</th>
-								<th class="text-center" rowspan='2'>咨询顾问</th>
-								<th class="text-center" rowspan='2'>购买单价(¥/次)</th>
-								<th class="text-center" rowspan='2'>购买课时(次)</th>
-								<th class="text-center" rowspan='2'>购买折扣(%)</th>
-								<th class="text-center" rowspan='2'>购买时间</th>
-								<th class="text-center" rowspan='2'>开始时间</th>
-								<th class="text-center" rowspan='2'>结束时间</th>
-								<th class="text-center" rowspan='2'>实交金额</th>
-								<th class="text-center" rowspan='2'>操作人</th>
-								<th class="text-center" rowspan='2'>是否全款</th>
+								<th class="text-center">姓名</th>
+								<th class="text-center">产品名称</th>
+								<th class="text-center">咨询师</th>
+								<th class="text-center">咨询顾问</th>
+								<th class="text-center">访问类型</th>
+								<th class="text-center">咨客判定</th>
+								<th class="text-center">续流状态</th>
+								<th class="text-center">购买单价(¥/次)</th>
+								<th class="text-center">购买课时(次)</th>
+								<th class="text-center">购买折扣(%)</th>
+								<th class="text-center">购买时间</th>
+                                <th class="text-center" rowspan='2'>开始时间</th>
+                                <th class="text-center" rowspan='2'>结束时间</th>
+								<th class="text-center">实交金额</th>
+								<th class="text-center">交费方式</th>
+								<th class="text-center">操作人</th>
+								<th class="text-center">是否全款</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -104,6 +153,9 @@
 								<td>{{item.proName}}</td>
 								<td>{{item.counselorName}}</td>
 								<td>{{item.empName}}</td>
+								<td>{{item.visitType== '1' ? '初访' : '复访'}}</td>
+								<td>{{item.judgeStateName}}</td>
+								<td>{{item.continueStateName}}</td>
 								<td>{{item.price}}</td>
 								<td>{{item.actualCount}}</td>
 								<td>{{item.discount}}</td>
@@ -111,6 +163,7 @@
 								<td>{{item.startDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td>{{item.endDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td>{{item.realCross}}</td>
+								<td>{{item.psName}}</td>
 								<td>{{item.operatorName}}</td>
 								<td v-show="item.isArrears=='0'"><button type="button" class="btn btn-warning" v-on:click="arrearsAaction(item)">否</button></td>
 								<td v-show="item.isArrears=='1'">是
@@ -140,6 +193,11 @@
 	import emp from '../common/Employee.vue'
 	import store from '../common/Store.vue'
 	import Paging from '../common/paging'
+	import cou from '../common/Employee.vue'	//咨询师
+	import con from '../common/Employee.vue'	//咨询顾问
+	import judgeState from '../common/VisitState.vue' //咨客判定
+	import continueState from '../common/VisitState.vue' //续流状态
+
     import SubCharge from '../MP/SubCharge/SubCharge.vue'
 	import {
 		init
@@ -151,6 +209,10 @@
 			Paging,
 			store,
             SubCharge
+			cou,
+			con,
+			judgeState,
+			continueState,
 		},
 		data() {
 			return {
@@ -172,6 +234,15 @@
 				current: 1, //当前页码
 				size: 10, //一页显示的数量
 				total: '', //数据的数量
+
+				visitType:'',//访问类型
+				payType:'1',//付款方式
+				couId:'',//咨询师ID
+				conId:'',//咨询师ID
+				proName:'',//课程名称
+				judgeState:'',//咨客判定
+				continueState:'',//续流状态
+				payType:'',//支付方式
 			};
 		},
 		methods: {
@@ -248,8 +319,13 @@
 						storeId: this.storeId,
 						memNum: this.memNum,
 						memName: this.memName,
-                        counselor: this.empId,
-                        empId: this.conId,
+                        proName:this.proName,
+                        counselor:this.couId,
+                        empId:this.conId,
+                        payType:this.payType,
+                        visitType:this.visitType,
+                        visitState:this.judgeState,
+                        continState:this.continueState,
 						begCreateDate: this.begCreateDate,
 						endCreateDate: this.endCreateDate,
 						storeId: this.storeId,
@@ -305,13 +381,54 @@
 					console.log('补交费用请求失败')
 				});
 			},
-
+			//咨客判定
+			judgeStateChange: function(param) {
+				// console.log(JSON.stringify(param))
+				if (this.isBlank(param)) {
+					this.judgeState = ""
+				} else {
+					this.judgeState = param.vsId
+				}
+			},
+			//续流状态
+			continueStateChange: function(param) {
+				if (this.isBlank(param)) {
+					this.continueState = ""
+				} else {
+					this.continueState = param.vsId
+				}
+			},
+			//咨询师
+			couChange: function(param) {
+				if (this.isBlank(param)) {
+					this.couId = ""
+				} else {
+					this.couId = param.empId
+				}
+			},
+			//咨询顾问
+			conChange: function(param) {
+				if (this.isBlank(param)) {
+					this.conId = ""
+				} else {
+					this.conId = param.empId
+				}
+			},
+			//通过初复访设置咨客判定和续流状态
+			visitTypeChange() {
+				this.$refs.judgeStateRef.setObj(0)
+				this.$refs.judgeStateRef.getObj(this.visitType, 1)
+				this.$refs.continueStateRef.setObj(0)
+				this.$refs.continueStateRef.getObj(this.visitType, 2)
+			},
 		},
 		mounted() {
-		    this.getEmp();
-			this.$refs.emp.setPosName("咨询师")
-			this.$refs.emp.setEmp("")
-			init();
+		    this.$refs.couEmp.setPosName("咨询师")
+		    this.$refs.couEmp.setEmp("")
+		    this.$refs.conEmp.setPosName("咨询顾问")
+		    this.$refs.conEmp.setEmp("")
+		    this.$refs.judgeStateRef.getObj(1, 1)
+		    this.$refs.continueStateRef.getObj(1, 2)
 		},
 		created() {
 			this.conditionCheck(1)

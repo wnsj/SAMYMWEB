@@ -18,22 +18,63 @@
 				</div>
 				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memName"></div>
 			</div>
-
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >访问类型</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-7 col-lg-7">
+					<select class="form-control" v-model="visitType" @change="visitTypeChange">
+						<option value="">--未选择--</option>
+						<option value="1">初访</option>
+						<option value="2">复访</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >客户判定</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-7 col-lg-7">
+					<judgeState ref="judgeStateRef" @objectChange="judgeStateChange"></judgeState>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >续流状态</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-7 col-lg-7">
+					<continueState ref="continueStateRef" @objectChange="continueStateChange"></continueState>
+				</div>
+			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 			    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
 			        <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span class="sign-left">:</span>
 			    </div>
 			    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-			        <emp ref="couEmp" @employeeChange="counlorEmpChange"></emp>
+			        <cou ref="couEmp" @employeeChange="couChange"></cou>
 			    </div>
 			</div>
-
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
+			        <p class="end-aline col-md-11 col-lg-11" >咨询顾问</p><span class="sign-left">:</span>
+			    </div>
+			    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+			        <con ref="conEmp" @employeeChange="conChange"></con>
+			    </div>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-md-5 col-lg-5 text-right nopad">
+					<p class="end-aline col-md-11 col-lg-11" >课程名称</p><span class="sign-left">:</span>
+				</div>
+				<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="proName"></div>
+			</div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
                     <p class="end-aline col-md-11 col-lg-11" >交费方式</p><span class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                     <select class="form-control" v-model="payType">
+						<option value="">--未付款--</option>
                         <option value="1">现金</option>
                         <option value="2">微信</option>
                         <option value="3">支付宝</option>
@@ -45,39 +86,23 @@
                 </div>
             </div>
 		</div>
-		<div class="row newRow">
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 padding-left-10">
-				<div class="col-md-3 col-lg-3 text-right nopad SSwid20">
-					<p class="end-aline col-md-11 col-lg-11" >消费时间</p><span class="sign-left">:</span>
-				</div>
-				<div class="col-md-4 col-lg-4 SSwid27">
-					<dPicker class="wd100" v-model="begCreateDate"></dPicker>
-				</div>
-				<div class="pull-left end-aline nopad">
-					~
-				</div>
-				<div class="col-md-4 col-lg-4 SSwid27">
-					<dPicker class="wd100" v-model="endCreateDate"></dPicker>
-				</div>
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-md-3 col-lg-3 text-right nopad SSwid20">
+				<p class="end-aline col-md-11 col-lg-11" >消费时间</p><span class="sign-left">:</span>
 			</div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
-                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">咨询顾问</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <select class="form-control" v-model="conId">
-                        <option value="">--未选择--</option>
-                        <option v-for="(item,index) in empList" :key="index" v-bind:value="item.empId">
-                            {{item.empName}}
-                        </option>
-                    </select>
-                </div>
-            </div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
-				 v-on:click="conditionCheck(1)">查询</button>
+			<div class="col-md-4 col-lg-4 SSwid27">
+				<dPicker class="wd100" v-model="begCreateDate"></dPicker>
 			</div>
+			<div class="pull-left end-aline nopad">
+				~
+			</div>
+			<div class="col-md-4 col-lg-4 SSwid27">
+				<dPicker class="wd100" v-model="endCreateDate"></dPicker>
+			</div>
+		</div>
+		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
+			 v-on:click="conditionCheck(1)">查询</button>
 		</div>
 
 		<div>
@@ -95,7 +120,11 @@
 									<th class="text-center">消费金额</th>
 									<th class="text-center">交费方式</th>
 									<th class="text-center">咨询师</th>
-									<th class="text-center">咨询助理</th>
+									<th class="text-center">咨询顾问</th>
+									<th class="text-center">访问类型</th>
+									<th class="text-center">咨客判定</th>
+									<th class="text-center">续流状态</th>
+									<th class="text-center">付款方式</th>
 									<th class="text-center">消费时间</th>
 									<th class="text-center">购买时间</th>
 								</tr>
@@ -111,26 +140,16 @@
 									<td>{{item2.payType}}</td>
 									<td>{{item2.counselorName}}</td>
 									<td>{{item2.empName}}</td>
+									<td>{{item2.visitType== '1' ? '初访' : '复访'}}</td>
+									<td>{{item2.judgeStateName}}</td>
+									<td>{{item2.continueStateName}}</td>
+									<td>{{item2.psName}}</td>
 									<td>{{item2.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 									<td>{{item2.purTime}}</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-                    <div class="row">
-                        <!-- <div class="col-md-3 col-lg-3">
-                            <p class="tips tips-font-20">总课时数：{{consumCountTotal}} 小时</p>
-                        </div>
-                        <div class="col-md-3 col-lg-3">
-                            <p class="tips tips-font-20">总消费额：{{sumTotal}} 元</p>
-                        </div>
-                        <div class="col-md-3 col-lg-3" v-show="showHours">
-                            <p class="tips tips-font-20">已消费课时：{{consumptionHours}} 小时</p>
-                        </div>
-                        <div class="col-md-3 col-lg-3" v-show="showHours">
-                            <p class="tips tips-font-20">未消费课时：{{unusedHours}} 小时</p>
-                        </div> -->
-                    </div>
 
 					<!--分页插件-->
 					<div class="page">
@@ -156,11 +175,11 @@
 	import SubConsume from '../MP/SubConsume/SubConsumeList.vue'
 	import store from '../common/Store.vue'
 	import Paging from '../common/paging'
-    import emp from '../common/Employee.vue'
+    import cou from '../common/Employee.vue'	//咨询师
     import con from '../common/Employee.vue'	//咨询顾问
-	import {
-		init
-	} from '@/../static/js/common.js'
+	import judgeState from '../common/VisitState.vue' //咨客判定
+	import continueState from '../common/VisitState.vue' //续流状态
+	
 	export default {
 		name: 'employee',
 		components: {
@@ -168,8 +187,10 @@
 			SubConsume,
 			Paging,
 			store,
-            emp,
-            con
+            cou,
+            con,
+			judgeState,
+			continueState,
 		},
 		data() {
 			return {
@@ -179,13 +200,14 @@
 				memNum: '',
 				memName: '',
 				phone: '',
+				visitType:'',
 				consumeList: [],
 				hospTime: '',
 				outHosp: '',
 				singleData: {},
 				begCreateDate: '',
 				endCreateDate: '',
-                payType:'1',
+                payType:'',
 				accountType:this.accountType(),
 				//分页需要的数据
 				pages: '', //总页数
@@ -199,6 +221,12 @@
                 showHours:false,//控制显示咨询师已消费课时，未消费课时
                 consumptionHours:'',//已消费课时
                 unusedHours:'',//未消费课时
+				
+				couId:'',//咨询师ID
+				conId:'',//咨询师ID
+				proName:'',//课程名称
+				judgeState:'',//咨客判定
+				continueState:'',//续流状态
 			}
 		},
 
@@ -208,78 +236,7 @@
 				this.current = page
 				this.conditionCheck(page);
 			},
-            //咨询师
-            counlorEmpChange: function(param) {
-                if (this.isBlank(param)) {
-                    this.empId = ""
-                    this.showHours=false
-                } else {
-                    this.empId = param.empId
-
-                    //this.$refs.counlorEmp.setEmpId(this.empId)
-                    var url = this.url + '/accountRecordAction/queryhours'
-                    this.$ajax({
-                        method: 'POST',
-                        url: url,
-                        headers: {
-                            'Content-Type': this.contentType,
-                            'Access-Token': this.accessToken
-                        },
-                        data: {
-                            empId:this.empId,
-                        },
-                        dataType: 'json',
-                    }).then((response) => {
-                        var res = response.data
-                        //console.log(res)
-                        if (res.retCode == '0000') {
-                            //咨询师消费课时，未消费课时
-                            if(res.retData==null){
-                                this.showHours=false
-                            }else {
-                                if(res.retData.consumptionHours==null){
-                                    this.consumptionHours='0'
-                                }else {
-                                    this.consumptionHours=res.retData.consumptionHours
-                                }
-                                if(res.retData.unusedHours==null){
-                                    this.unusedHours='0'
-                                }else {
-                                    this.unusedHours=res.retData.unusedHours
-                                }
-                                this.showHours=true
-                            }
-
-                        } else {
-                            alert(res.retMsg)
-                        }
-                    }).catch((error) => {
-                        //console.log('请求失败处理')
-                    });
-                }
-            },
-            getEmp() {
-                var url = this.url + '/employeeAction/getAllEmpByPosName'
-                this.$ajax({
-                    method: 'POST',
-                    url: url,
-                    headers: {
-                        'Content-Type': this.contentType,
-                        'Access-Token': this.accessToken
-                    },
-                    data: {
-                        posName: "咨询顾问"
-                    },
-                    dataType: 'json',
-                }).then(res => {
-                    this.empList = res.data.retData
-                }).catch(error => {
-                    console.log(error);
-                })
-            },
-            selectHours(){
-			  alert("hhhhhhhhhhh"+this.empId)
-            },
+           
 			storeChange(param) {
 				if (this.isBlank(param)) {
 					this.storeId = ""
@@ -310,11 +267,16 @@
 					data: {
 						storeId: this.storeId,
 						memName: this.memName,
-						counselor:this.empId,
+						proName:this.proName,
+						counselor:this.couId,
                         empId:this.conId,
                         payType:this.payType,
+						visitType:this.visitType,
+						visitState:this.judgeState,
+						continState:this.continueState,
 						actualBegDate: this.begCreateDate,
 						actualEndDate: this.endCreateDate,
+						
 
 						page: page.toString(),
 						pageSize: this.pageSize,
@@ -331,14 +293,6 @@
 						this.total = res.retData.total //数据的数量
 						this.$refs.paging.setParam(this.pages, this.current, this.total)
 						this.consumeList = res.retData.records
-// 						if(res.retData.poolSum!=null){
-//                             this.consumCountTotal=res.retData.poolSum.consumCountTotal
-//                             this.sumTotal=res.retData.poolSum.sumTotal
-//                         }else {
-//                             this.consumCountTotal='0'
-//                             this.sumTotal='0'
-//                         }
-
 
 					}else{
 						console.log('sdfas')
@@ -347,46 +301,55 @@
 					//console.log('请求失败处理')
 				});
 			},
-			viewDetails: function(item) {
-
-				if (this.isBlank(item.MEM_NUM)) {
-					alert('非会员没有消费详情')
-					return
-				}
-				this.$refs.consume.conditionCheck(item)
-				$("#addConsume").modal('show');
-			},
-
-			handleScroll(e) {
-				var self = this
-				var etop = e.target.scrollTop
-				var fHeaderwidth = $("#fHeader").width($(".datathead").width())
-				var fHeaderheight = $("#fHeader").height($(".datathead").height())
-				var theadheight = $(".datathead").height()
-				var thlength = $(".datathead tr th").length
-				for (var i = 0; i < thlength; i++) {
-					$("#fHeader div").eq(i).width(
-						$(".datathead tr th").eq(i).width()
-					)
-					$("#fHeader div").eq(i).height(
-						$(".datathead tr th").eq(i).height()
-					)
-				}
-				if (etop > 0) {
-					self.fixedHeader = true
-					$("#fHeader").css("top", etop)
+			//咨客判定
+			judgeStateChange: function(param) {
+				// console.log(JSON.stringify(param))
+				if (this.isBlank(param)) {
+					this.judgeState = ""
 				} else {
-					self.fixedHeader = false
+					this.judgeState = param.vsId
 				}
-			}
+			},
+			//续流状态
+			continueStateChange: function(param) {
+				if (this.isBlank(param)) {
+					this.continueState = ""
+				} else {
+					this.continueState = param.vsId
+				}
+			},
+			//咨询师
+			couChange: function(param) {
+				if (this.isBlank(param)) {
+					this.couId = ""
+				} else {
+					this.couId = param.empId
+				}
+			},
+			//咨询顾问
+			conChange: function(param) {
+				if (this.isBlank(param)) {
+					this.conId = ""
+				} else {
+					this.conId = param.empId
+				}
+			},
+			//通过初复访设置咨客判定和续流状态
+			visitTypeChange() {
+				this.$refs.judgeStateRef.setObj(0)
+				this.$refs.judgeStateRef.getObj(this.visitType, 1)
+				this.$refs.continueStateRef.setObj(0)
+				this.$refs.continueStateRef.getObj(this.visitType, 2)
+			},
 
 		},
 		mounted() {
-			window.addEventListener('scroll', this.handleScroll, true)
-            this.getEmp();
-			init();
             this.$refs.couEmp.setPosName("咨询师")
             this.$refs.couEmp.setEmp("")
+			this.$refs.conEmp.setPosName("咨询顾问")
+			this.$refs.conEmp.setEmp("")
+			this.$refs.judgeStateRef.getObj(1, 1)
+			this.$refs.continueStateRef.getObj(1, 2)
 		},
 		created() {
 			this.conditionCheck(1)

@@ -205,7 +205,7 @@
                     <paging ref="paging" @change="pageChange"></paging>
                 </div>
             </div>
-            
+
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="visContent">
@@ -322,7 +322,7 @@
 
     import dPicker from 'vue2-datepicker'
     import Paging from '../common/paging'
-    
+
     export default {
         components: {
             subVis,
@@ -543,7 +543,7 @@
                     //console.log('转会员请求失败')
                 });
             },
-           
+
             editorAction(item) {
                 this.objectContent = item
             },
@@ -723,7 +723,7 @@
 		position: fixed;
 		top:0;
 		right: 0;
-		width:680px;
+		width:750px;
 		height:100%;
 		z-index: 100;
 		background-color: #fff;

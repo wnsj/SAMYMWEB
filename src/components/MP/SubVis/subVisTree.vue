@@ -24,6 +24,7 @@
 							<ul>
 								<li>产品</li>
 								<li>课时</li>
+								<li>金额</li>
 								<li>访问类型</li>
 								<li>客户判定</li>
 								<li>续流状态</li>
@@ -34,6 +35,7 @@
 							<ul class="treeCon">
 								<li>{{item.proName}}</li>
 								<li>{{item.totalCount}}</li>
+								<li>{{item.realCross}}</li>
 								<li>{{item.visitType}}</li>
 								<li>{{item.isfirst}}</li>
 								<li>{{item.continState}}</li>
@@ -67,7 +69,7 @@
 				},
 				checkedValue: 0,
 				infoData:[],
-				
+
 			};
 		},
 		methods: {
@@ -78,7 +80,7 @@
 				}
 				Object.assign(this.visitor, visitorContent);
 				this.certainAction();
-				
+
 			},
 			certainAction() {
 				var url = this.url + '/consumAction/getDetailsByVisitor';
@@ -102,7 +104,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-	
+
 				});
 			},
 			feedBack6() {
@@ -117,7 +119,7 @@
 					if(index ===0){
 						data['bool'] = true;
 					}
-					arrs.forEach((arr,num)=>{	
+					arrs.forEach((arr,num)=>{
 						if(index>num){
 							if(data['createTime'] === arr['createTime']){
 								data['bool'] = false;
@@ -126,10 +128,10 @@
 								data['bool'] = true;
 								return ;
 							}
-						}	
-					})			
+						}
+					})
 				})
-				this.infoData = oData;	
+				this.infoData = oData;
 			},
 			addreason(){
 				this.$refs.treeson.initData(this.visitor.visitorName,this.infoData[this.checkedValue])
@@ -138,7 +140,7 @@
 
 		},
 		mounted(){
-		
+
 		}
 	}
 </script>
@@ -191,7 +193,7 @@
 		width: 1px;
 		height: 100%;
 		background: #c9dedb;
-		box-sizing: border-box;	
+		box-sizing: border-box;
 	}
 	.tree-body .line span{
 		display: block;
@@ -267,7 +269,7 @@
 		content: '';
 		background: #fff;
 		border-radius: 50%;
-		
+
 	}
 	.tree-body .tree-item .tree-type .tree-type-left label{
 		display: block;
@@ -300,13 +302,13 @@
 		background: #fff;
 		border-radius: 50%;
 	}
-	.tree-body .tree-item .tree-type .tree-type-right{	
-		float: left;	
+	.tree-body .tree-item .tree-type .tree-type-right{
+		float: left;
 	}
-	.tree-body .tree-item .tree-type .tree-type-right ul{	
+	.tree-body .tree-item .tree-type .tree-type-right ul{
 		height:24px;
 		margin-left: 15px;
-		margin-bottom: 1px;	
+		margin-bottom: 1px;
 	}
 	.tree-body .tree-item .tree-type .tree-type-right ul li{
 		background: #f2f2f2;
@@ -327,7 +329,7 @@
 	}
 	.tree-body .tree-item .tree-type .tree-type-right p{
 		display: block;
-		width:552px;
+		width:622px;
 		background: #f2f2f2;
 		margin-bottom: 1px;
 		margin-left: 15px;

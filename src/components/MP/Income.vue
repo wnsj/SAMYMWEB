@@ -7,7 +7,7 @@
             <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
                 <el-collapse-transition>
                     <div class="searchForm" v-show="showSelect">
-                        <el-row style="margin-top: 1%">
+                        <el-row>
                             <el-col :span="6">
                                 <el-form-item label="访问类型:">
                                     <el-select v-model="param.visitType" clearable placeholder="请选择"
@@ -138,7 +138,7 @@
                 :cell-style="cellStyle"
                 :header-cell-style="headerStyle"
                 max-height="590"
-                style="width: 99%;margin-left:0.5%;margin-top: 20px"
+                style="width: 99%;margin-left:0.5%;margin-top: 10px"
             >
                 <el-table-column
                     align="center"

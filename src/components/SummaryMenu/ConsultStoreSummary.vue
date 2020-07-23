@@ -205,6 +205,24 @@
                         label="房间饱和率(%)"
                         min-width="115">
                     </el-table-column>
+<!--                    <el-table-column-->
+<!--                        align="center"-->
+<!--                        prop="actualCount"-->
+<!--                        label="服务小时数"-->
+<!--                        min-width="115">-->
+<!--                    </el-table-column>-->
+<!--                    <el-table-column-->
+<!--                        align="center"-->
+<!--                        prop="day"-->
+<!--                        label="天数"-->
+<!--                        min-width="115">-->
+<!--                    </el-table-column>-->
+<!--                    <el-table-column-->
+<!--                        align="center"-->
+<!--                        prop="roomSize"-->
+<!--                        label="房间数"-->
+<!--                        min-width="115">-->
+<!--                    </el-table-column>-->
                 </el-table>
             </el-tab-pane>
             <el-tab-pane label="助理" name="2">
@@ -360,6 +378,24 @@
                         label="房间饱和率(%)"
                         min-width="115">
                     </el-table-column>
+<!--                    <el-table-column-->
+<!--                        align="center"-->
+<!--                        prop="actualCount"-->
+<!--                        label="服务小时数"-->
+<!--                        min-width="115">-->
+<!--                    </el-table-column>-->
+<!--                    <el-table-column-->
+<!--                        align="center"-->
+<!--                        prop="day"-->
+<!--                        label="天数"-->
+<!--                        min-width="115">-->
+<!--                    </el-table-column>-->
+<!--                    <el-table-column-->
+<!--                        align="center"-->
+<!--                        prop="roomSize"-->
+<!--                        label="房间数"-->
+<!--                        min-width="115">-->
+<!--                    </el-table-column>-->
                 </el-table>
             </el-tab-pane>
         </el-tabs>

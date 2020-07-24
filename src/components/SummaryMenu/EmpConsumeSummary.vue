@@ -9,7 +9,7 @@
 		    <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
 		        <el-row style="margin-top: 2%">
 		            <el-col :span="6">
-		                <el-form-item label="门店" v-if="accountType == true">
+		                <el-form-item label="门店:" v-if="accountType == true">
 		                    <store ref='store' @storeChange='storeChange'></store>
 		                </el-form-item>
 		            </el-col>
@@ -19,7 +19,7 @@
 		                </el-form-item>
 		            </el-col>
 		            <el-col :span="11">
-		                <el-form-item label="消费时间">
+		                <el-form-item label="消费时间:">
 		                    <el-date-picker
 		                        v-model="param.begDate"
 		                        :picker-options="pickerOptions0"
@@ -48,14 +48,14 @@
 		</div>
 		<el-tabs @tab-click="tabChange" type="card" style="width: 100%" v-model="param.jobType">
 			<el-tab-pane label="咨询师" name="1">
-				<el-table ref="productTable" :data="objList" style="width: 100%" show-summary border fixed :summary-method="getSummaries">
+				<el-table ref="productTable" :data="objList" style="width: 100%" show-summary border :summary-method="getSummaries">
 
-					<el-table-column label="名字" width="100" align="center" prop="empName"></el-table-column>
+					<el-table-column label="名字" width="100" align="center" prop="empName" fixed></el-table-column>
 					<el-table-column label="岗位" width="100" align="center" prop="posName"></el-table-column>
 
 					<el-table-column label="初访金额" width="100" align="center" prop="firstVisit"></el-table-column>
 					<el-table-column label="复访金额" width="100" align="center" prop="secondVisit"></el-table-column>
-					<el-table-column label="返访金额" width="100" align="center" prop="piReverseVisit"></el-table-column>
+					<el-table-column label="返访金额" width="100" align="center" prop="reverseVisit"></el-table-column>
 					<el-table-column label="退费金额" width="100" align="center" prop="realRefund"></el-table-column>
 
 					<el-table-column label="总金额" width="100" align="center" prop="totleCount"></el-table-column>
@@ -110,10 +110,7 @@
 	import store from '../common/Store.vue'
 	import pos from '../common/Position.vue'
 	import Paging from '../common/paging'
-	import {
-		init
-	} from '@/../static/js/common.js'
-
+	
 	export default {
 		components: {
 			Paging,
@@ -176,6 +173,12 @@
 			},
 			//check the list of store
 			queryObjectList() {
+				if(!this.isBlank(this.param.begDate)){
+					this.param.begDate=this.moment(this.param.begDate,'YYYY-MM-DD 00:00:00')
+				}
+				if(!this.isBlank(this.param.endDate)){
+					this.param.endDate=this.moment(this.param.endDate,'YYYY-MM-DD 23:59:59')
+				}
 				var url = this.url + '/employeeAction/queryCouAndConIncome'
 				this.$ajax({
 					method: 'POST',
@@ -240,32 +243,6 @@
 				console.log(sums)
 				return sums;
 			},
-			handleScroll(e) {
-				var self = this
-				var etop = e.target.scrollTop
-				var fHeaderwidth = $("#fHeader").width($(".datathead").width())
-				var fHeaderheight = $("#fHeader").height($(".datathead").height())
-				var theadheight = $(".datathead").height()
-				var thlength = $(".datathead tr th").length
-				for (var i = 0; i < thlength; i++) {
-					$("#fHeader div").eq(i).width(
-						$(".datathead tr th").eq(i).width()
-					)
-					$("#fHeader div").eq(i).height(
-						$(".datathead tr th").eq(i).height()
-					)
-				}
-				if (etop > 0) {
-					self.fixedHeader = true
-					$("#fHeader").css("top", etop)
-				} else {
-					self.fixedHeader = false
-				}
-			}
-		},
-		mounted() {
-			window.addEventListener('scroll', this.handleScroll, true);
-			init();
 		},
 		created() {
 			this.queryObjectList()
@@ -274,29 +251,19 @@
 </script>
 
 <style>
-	#datatable {
-		store: relative;
-	}
-
-	#fHeader {
-		store: absolute;
-		top: 0;
-		left: 0;
-		background: #eeeeee;
-		overflow: hidden;
-	}
-
-	#fHeader div.text-center {
-		float: left;
-		display: inline-block;
-		padding: 8px;
-		border: 1px solid #ddd;
-		font-weight: bold;
-	}
-
-	@media print {
-		#fHeader {
-			display: none
-		}
-	}
+	
+	/* .el-table{
+        overflow: auto;
+    }
+    .el-table__header-wrapper,
+    .el-table__body-wrapper,
+    .el-table__footer-wrapper{
+        overflow:visible;
+    }
+    .el-table__body-wrapper{
+        overflow-x:visible !important;
+    }
+    .el-table::after{
+        position: relative;
+    } */
 </style>

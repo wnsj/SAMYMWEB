@@ -227,7 +227,8 @@
 					<label class="col-md-4 control-label text-right nopad end-aline" >交费方式</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<select class="form-control" v-model="consume.payType">
+						<select class="form-control" v-model="consume.payType" v-on:change="payChange()">
+							<option value="">--未选择--</option>
 							<option value="1">现金</option>
 							<option value="2">微信</option>
 							<option value="3">支付宝</option>
@@ -236,6 +237,13 @@
 							<option value="6">免费</option>
 							<option value="7">其它</option>
 						</select>
+					</div>
+				</div>
+				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="appShow==true">
+					<label class="col-md-4 control-label text-right nopad end-aline">小程序编号</label><span
+					 class="sign-left">:</span>
+					<div class="col-md-7  ">
+						<input type="text" class="form-control" v-model="consume.appNumber">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -316,7 +324,8 @@
 					balance: '0',
 					cashId: null, //使用定金
 					cashMoney: '', //使用定金的金额
-					payType: 1, //支付方式
+					payType: '', //支付方式
+					appNumber:'',//小程序编号
 					serialNo: null, //流水单号
 					receipt: null, //收据
 					isArrears: '1', //是否欠费
@@ -334,6 +343,7 @@
 				consumeReceivable: '',
 				isSelect: false,
 				cashSelect: true,
+				appShow:false,
 				unfinishedProList: [],
 				clickItemObj: {
 					itemId: 0,
@@ -386,7 +396,8 @@
 					/** 1:实体卡首充（不计算提成） 0:计算 */
 					consumCount: '0', //消费次数
 					visitType: 1,
-					payType: 1, //支付方式
+					payType: '', //支付方式
+					appNumber:'',//小程序编号
 					serialNo: null, //流水单号
 					receipt: null, //收据
 					visitState: null, //访问状态
@@ -419,6 +430,14 @@
 					this.consume.discount = 0
 					this.consume.receivable = 0
 					this.consume.realCross = 0
+				}
+			},
+			//付款方式
+			payChange(){
+				if(this.consume.payType==5){
+					this.appShow=true
+				}else{
+					this.appShow=false
 				}
 			},
 			//产品
@@ -492,7 +511,10 @@
 					alert("续流状态不能为空!")
 					return;
 				}
-
+				if (this.isBlank(this.consume.payType)) {
+					alert("支付方式不能为空!")
+					return;
+				}
 				//发生转卡，进余额抵扣
 				if (this.clickItemObj.count % 2 != 0) {
 					this.consume.piId = this.clickItemObj.itemId

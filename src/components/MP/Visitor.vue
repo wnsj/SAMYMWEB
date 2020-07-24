@@ -177,7 +177,7 @@
                             <td class="text-center">{{item.channelName}}</td>
                             <td class="text-center">{{item.dtName}}</td>
                             <td class="text-center">{{item.empName}}</td>
-                            <td class="text-center">{{item.visType==1?'初访':'复访'}}</td>
+                            <td class="text-center">{{item.visType==1?'初访':item.visType==2?'复访':''}}</td>
                             <td class="text-center">{{item.vsIdJudgeName}}</td>
                             <td class="text-center">{{item.vsIdFlowName}}</td>
                             <td class="text-center">{{item.createTime | dateFormatFilter("YYYY-MM-DD")}}</td>
@@ -205,7 +205,7 @@
                     <paging ref="paging" @change="pageChange"></paging>
                 </div>
             </div>
-            
+
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="visContent">
@@ -322,9 +322,6 @@
 
     import dPicker from 'vue2-datepicker'
     import Paging from '../common/paging'
-    import {
-        init
-    } from '@/../static/js/common.js'
 
     export default {
         components: {
@@ -546,28 +543,7 @@
                     //console.log('转会员请求失败')
                 });
             },
-            handleScroll(e) {
-                var self = this
-                var etop = e.target.scrollTop
-                var fHeaderwidth = $("#fHeader").width($(".datathead").width())
-                var fHeaderheight = $("#fHeader").height($(".datathead").height())
-                var theadheight = $(".datathead").height()
-                var thlength = $(".datathead tr th").length
-                for (var i = 0; i < thlength; i++) {
-                    $("#fHeader div").eq(i).width(
-                        $(".datathead tr th").eq(i).width()
-                    )
-                    $("#fHeader div").eq(i).height(
-                        $(".datathead tr th").eq(i).height()
-                    )
-                }
-                if (etop > 0) {
-                    self.fixedHeader = true
-                    $("#fHeader").css("top", etop)
-                } else {
-                    self.fixedHeader = false
-                }
-            },
+
             editorAction(item) {
                 this.objectContent = item
             },
@@ -652,12 +628,8 @@
             },
         },
         mounted() {
-            window.addEventListener('scroll', this.handleScroll, true);
-            init();
+			this.$refs.emp.getEmployeeList()
         },
-        created() {
-            // this.checkVisitor(1);
-        }
     }
 </script>
 
@@ -751,7 +723,7 @@
 		position: fixed;
 		top:0;
 		right: 0;
-		width:680px;
+		width:750px;
 		height:100%;
 		z-index: 100;
 		background-color: #fff;

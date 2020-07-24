@@ -9,7 +9,7 @@
             <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
                 <el-row style="margin-top: 2%">
                     <el-col :span="6">
-                        <el-form-item label="门店" v-if="accountType == true">
+                        <el-form-item label="门店:" v-if="accountType == true">
                             <store ref='store' @storeChange='storeChange'></store>
                         </el-form-item>
                     </el-col>
@@ -19,7 +19,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="11">
-                        <el-form-item label="消费时间">
+                        <el-form-item label="消费时间:">
                             <el-date-picker
                                 v-model="param.begDate"
                                 :picker-options="pickerOptions0"
@@ -90,10 +90,6 @@
 	import store from '../common/Store.vue'
 	import pos from '../common/Position.vue'
     import Paging from '../common/paging'
-    import {
-        init
-    } from '@/../static/js/common.js'
-
     export default {
         components: {
             Paging,
@@ -112,6 +108,7 @@
                },
                storeList: [],
                objList: [],
+			   proList:[],
                pickerOptions0: {
                    disabledDate: (time) => {
                        if (this.param.endTime !== '' && this.param.endTime !== null) {
@@ -155,6 +152,12 @@
 			},
             //check the list of store
             queryObjectList() {
+				if(!this.isBlank(this.param.begDate)){
+					this.param.begDate=this.moment(this.param.begDate,'YYYY-MM-DD 00:00:00')
+				}
+				if(!this.isBlank(this.param.endDate)){
+					this.param.endDate=this.moment(this.param.endDate,'YYYY-MM-DD 23:59:59')
+				}
                 var url = this.url + '/employeeAction/queryEmpByPro'
                 this.$ajax({
                     method: 'POST',
@@ -178,32 +181,8 @@
                     //console.log('商铺查询请求失败')
                 });
             },
-            handleScroll(e) {
-                var self = this
-                var etop = e.target.scrollTop
-                var fHeaderwidth = $("#fHeader").width($(".datathead").width())
-                var fHeaderheight = $("#fHeader").height($(".datathead").height())
-                var theadheight = $(".datathead").height()
-                var thlength = $(".datathead tr th").length
-                for (var i = 0; i < thlength; i++) {
-                    $("#fHeader div").eq(i).width(
-                        $(".datathead tr th").eq(i).width()
-                    )
-                    $("#fHeader div").eq(i).height(
-                        $(".datathead tr th").eq(i).height()
-                    )
-                }
-                if (etop > 0) {
-                    self.fixedHeader = true
-                    $("#fHeader").css("top", etop)
-                } else {
-                    self.fixedHeader = false
-                }
-            }
         },
         mounted() {
-            window.addEventListener('scroll', this.handleScroll, true);
-            init();
         },
         created() {
 			this.queryObjectList()

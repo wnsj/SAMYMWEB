@@ -7,7 +7,7 @@
             <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
                 <el-row style="margin-top: 2%">
                     <el-col :span="11" :pull="1">
-                        <el-form-item label="初访时间">
+                        <el-form-item label="初访时间:">
                             <el-date-picker
                                 v-model="param.firstVisitStartTime"
                                 :picker-options="pickerOptions0"
@@ -24,7 +24,12 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="5" :pull="1">
-                        <el-form-item label="门店" v-if="accountType == true">
+                        <el-form-item label='咨客姓名:'>
+                            <el-input v-model="param.memName" placeholder="咨客姓名" clearable></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="5">
+                        <el-form-item label="门店:" v-if="accountType == true">
                             <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
                                 <el-option v-for="item in storeList"
                                            :key="item.storeId"
@@ -34,17 +39,13 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="5">
-                        <el-form-item label='咨客姓名:'>
-                            <el-input v-model="param.memName" placeholder="咨客姓名" clearable></el-input>
-                        </el-form-item>
-                    </el-col>
+
 
                 </el-row>
 
                 <el-row>
                     <el-col :span="11" :pull="1">
-                        <el-form-item label="购买时间">
+                        <el-form-item label="购买时间:">
                             <el-date-picker
                                 v-model="param.secondVisitStartTime"
                                 :picker-options="pickerOptions0"
@@ -60,8 +61,31 @@
                             </el-date-picker>
                         </el-form-item>
                     </el-col>
-
-                    <el-col :span="8" :push="5">
+                    <el-col :span="5" :pull="1">
+                        <el-form-item label="咨询师:">
+                            <el-select v-model="param.couId" filterable clearable placeholder="请选择">
+                                <el-option v-for="item in couList"
+                                           :key="item.empId"
+                                           :label="item.empName"
+                                           :value="item.empId">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="5">
+                        <el-form-item label="咨询顾问:">
+                            <el-select v-model="param.empId" filterable clearable placeholder="请选择">
+                                <el-option v-for="item in empList"
+                                           :key="item.empId"
+                                           :label="item.empName"
+                                           :value="item.empId">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="24" :push="10">
                         <el-button type="primary" size="small"
                                    style="width: 85px"
                                    @click="getVsConsume">查询
@@ -70,7 +94,7 @@
                 </el-row>
             </el-form>
         </div>
-
+        <p class="tips">* 蓝色字体为抵扣数据</p>
         <div>
             <el-table
                 :data="tableData"
@@ -194,6 +218,7 @@
 
 <script>
     import dateUtil from '../common/utils/dateUtil'
+
     export default {
         components: {},
         data() {
@@ -202,6 +227,8 @@
                     current: 1,
                     pageSize: 10,
                     storeId: this.storeId(),
+                    couId: '',
+                    empId: '',
                     firstVisitStartTime: '',
                     firstVisitEndTime: '',
                     secondVisitStartTime: '',
@@ -209,6 +236,9 @@
                     memName: '',
                 },
                 storeList: [],
+                empList: [],
+                couList: [],
+                posName: '',
                 tableData: [],
                 totalAmount: 0,
                 pickerOptions0: {
@@ -225,7 +255,7 @@
                         return time.getTime() < this.param.firstVisitStartTime || time.getTime() > Date.now()
                     }
                 },
-                accountType:this.accountType(),
+                accountType: this.accountType(),
             };
         },
         methods: {
@@ -235,12 +265,15 @@
                 return 'text-align: center;color: black;'
             },
             // 表格行样式
-            cellStyle() {
+            cellStyle(row, column, rowIndex, columnIndex) {
+                if (row.row.isDeduction == 2) {
+                    return 'text-align: center;color:blue'
+                }
                 return 'text-align: center;'
             },
             // 格式化时间
             dateFormat: function (row, column, cellValue, index) {
-                if (cellValue=='-'){
+                if (cellValue == '-') {
                     return '-'
                 }
                 return dateUtil.getFormateDateYMD(cellValue)
@@ -272,7 +305,44 @@
                 });
             },
 
-            //vsType:1初访，2复访；stateType：1客户判定，2续流状态
+            getCou() {
+                var url = this.url + '/employeeAction/getAllEmpByPosName'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        posName: "咨询师"
+                    },
+                    dataType: 'json',
+                }).then(res => {
+                    this.couList = res.data.retData
+                }).catch(error => {
+                    console.log(error);
+                })
+            },
+            getEmp() {
+                var url = this.url + '/employeeAction/getAllEmpByPosName'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        posName: "咨询顾问"
+                    },
+                    dataType: 'json',
+                }).then(res => {
+                    this.empList = res.data.retData
+                }).catch(error => {
+                    console.log(error);
+                })
+            },
             // 获取初访咨询方向汇总数据
             async getVsConsume() {
                 var url = this.url + '/purchasedItemsAction/getVsConsume'
@@ -313,6 +383,8 @@
         },
         created() {
             this.getStore()
+            this.getCou()
+            this.getEmp()
             this.getVsConsume()
         }
     }

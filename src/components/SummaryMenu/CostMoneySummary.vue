@@ -7,7 +7,7 @@
             <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
                 <el-row style="margin-top: 2%">
                     <el-col :span="6">
-                        <el-form-item label="门店" v-if="accountType == true">
+                        <el-form-item label="门店:" v-if="accountType == true">
                             <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
                                 <el-option v-for="item in storeList"
                                            :key="item.storeId"
@@ -23,7 +23,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="11">
-                        <el-form-item label="消费时间">
+                        <el-form-item label="消费时间:">
                             <el-date-picker
                                 v-model="param.secondVisitStartTime"
                                 :picker-options="pickerOptions0"
@@ -57,8 +57,6 @@
                     :data="tableData"
                     :cell-style="cellStyle"
                     :header-cell-style="headerStyle"
-                    show-summary
-                    sortable
                     max-height="530"
                     style="width: 99%;margin-left:0.5%;"
                     border>
@@ -94,6 +92,12 @@
                     </el-table-column>
                     <el-table-column
                         align="center"
+                        prop="fsPerson"
+                        label="初访人均(¥)"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
                         prop="radioCon"
                         label="消耗比(%)"
                         min-width="100">
@@ -104,6 +108,18 @@
                         label="退费率(%)"
                         min-width="100">
                     </el-table-column>
+<!--                    <el-table-column-->
+<!--                        align="center"-->
+<!--                        prop="re"-->
+<!--                        label="退费"-->
+<!--                        min-width="100">-->
+<!--                    </el-table-column>-->
+<!--                    <el-table-column-->
+<!--                        align="center"-->
+<!--                        prop="total"-->
+<!--                        label="总营业额"-->
+<!--                        min-width="100">-->
+<!--                    </el-table-column>-->
                     <el-table-column
                         align="center"
                         prop="singleTotal"
@@ -141,8 +157,6 @@
                     :data="tableData"
                     :cell-style="cellStyle"
                     :header-cell-style="headerStyle"
-                    show-summary
-                    sortable
                     max-height="530"
                     style="width: 99%;margin-left:0.5%;"
                     border>
@@ -174,6 +188,18 @@
                         align="center"
                         prop="totalCon"
                         label="总消耗金额(¥)"
+                        min-width="100">
+                    </el-table-column>
+<!--                    <el-table-column-->
+<!--                        align="center"-->
+<!--                        prop="vsTotal"-->
+<!--                        label="咨客人数"-->
+<!--                        min-width="100">-->
+<!--                    </el-table-column>-->
+                    <el-table-column
+                        align="center"
+                        prop="fsPerson"
+                        label="初访人均(¥)"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
@@ -331,12 +357,7 @@
             },
 
             tabChange() {
-                this.getConMoney().then(
-                    this.param.storeId = '',
-                    this.param.empName = '',
-                    this.param.secondVisitEndTime = '',
-                    this.param.secondVisitStartTime = ''
-                )
+                this.getConMoney()
             }
         },
         created() {

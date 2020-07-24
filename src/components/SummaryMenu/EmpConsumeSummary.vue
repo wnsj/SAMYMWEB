@@ -189,6 +189,8 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
+						console.log('========================================res.retData===============================')
+						console.log(res.retData)
 						this.objList = res.retData
 					} else {
 						alert(res.retMsg)
@@ -199,6 +201,8 @@
 				});
 			},
 			getSummaries(param) {
+				console.log('======================param===========================')
+				console.log(param)
 				const {
 					columns,
 					data
@@ -232,6 +236,8 @@
 					}
 					
 				});
+				console.log('======================sums===========================')
+				console.log(sums)
 				return sums;
 			},
 			handleScroll(e) {

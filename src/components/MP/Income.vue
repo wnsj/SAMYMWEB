@@ -4,11 +4,11 @@
             <h1 class="titleCss">收入情况表</h1>
         </div>
         <div class="top">
-            <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
+            <el-form label-position="right" label-width="100px" :inline="false" size="small" :model="param">
                 <el-collapse-transition>
                     <div class="searchForm" v-show="showSelect">
                         <el-row>
-                            <el-col :span="6">
+                            <el-col :span="5">
                                 <el-form-item label="访问类型:">
                                     <el-select v-model="param.visitType" clearable placeholder="请选择"
                                                @change="getObj(param.visitType)">
@@ -20,7 +20,7 @@
                                     </el-select>
                                 </el-form-item>
                             </el-col>
-                            <el-col :span="6">
+                            <el-col :span="5">
                                 <el-form-item label="咨客判定:">
                                     <el-select v-model="param.visitState" clearable placeholder="请选择">
                                         <el-option v-for="item in vsJugList"
@@ -31,7 +31,7 @@
                                     </el-select>
                                 </el-form-item>
                             </el-col>
-                            <el-col :span="6" style="margin-left: 3%">
+                            <el-col :span="5">
                                 <el-form-item label="续流状态:">
                                     <el-select v-model="param.continState" clearable placeholder="请选择">
                                         <el-option v-for="item in continueList"
@@ -44,7 +44,7 @@
                             </el-col>
                         </el-row>
                         <el-row>
-                            <el-col :span="6">
+                            <el-col :span="5">
                                 <el-form-item label="门店:" v-if="accountType == true">
                                     <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
                                         <el-option v-for="item in storeList"
@@ -55,12 +55,12 @@
                                     </el-select>
                                 </el-form-item>
                             </el-col>
-                            <el-col :span="6">
+                            <el-col :span="5">
                                 <el-form-item label='咨客姓名:'>
-                                    <el-input v-model="param.vsName" placeholder="咨客姓名" clearable></el-input>
+                                    <el-input v-model="param.vsName" placeholder="咨客姓名" style="width: 94%;" clearable></el-input>
                                 </el-form-item>
                             </el-col>
-                            <el-col :span="6" style="margin-left: 3%">
+                            <el-col :span="5">
                                 <el-form-item label="是否全款:">
                                     <el-select v-model="param.isArrears" filterable clearable placeholder="请选择">
                                         <el-option v-for="item in isArrearsList"
@@ -74,7 +74,7 @@
 
                         </el-row>
                         <el-row>
-                            <el-col :span="6">
+                            <el-col :span="5">
                                 <el-form-item label="咨询师:">
                                     <el-select v-model="param.couId" filterable clearable placeholder="请选择">
                                         <el-option v-for="item in couList"
@@ -85,7 +85,7 @@
                                     </el-select>
                                 </el-form-item>
                             </el-col>
-                            <el-col :span="6">
+                            <el-col :span="5">
                                 <el-form-item label="咨询顾问:">
                                     <el-select v-model="param.empId" filterable clearable placeholder="请选择">
                                         <el-option v-for="item in empList"
@@ -96,19 +96,21 @@
                                     </el-select>
                                 </el-form-item>
                             </el-col>
-                            <el-col :span="11">
+                            <el-col :span="9">
                                 <el-form-item label="购买时间:">
                                     <el-date-picker
                                         v-model="param.startTime"
                                         :picker-options="pickerOptions0"
                                         type="date"
+                                        style="margin-right: 1.5%"
                                         placeholder="开始时间">
                                     </el-date-picker>
-                                    <span> - </span>
+                                    <span style="margin-right: 2%"> - </span>
                                     <el-date-picker
                                         v-model="param.endTime"
                                         :picker-options="pickerOptions1"
                                         type="date"
+                                        style="margin-right: 2.5%"
                                         placeholder="结束时间">
                                     </el-date-picker>
                                 </el-form-item>

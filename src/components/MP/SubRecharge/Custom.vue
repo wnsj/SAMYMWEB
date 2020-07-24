@@ -463,7 +463,8 @@
 				} else {
 					this.consume.counselor = param.empId
 					if (!this.projectFlag) {
-						if(this.isShow==true){
+						if(this.selectObj==null){
+							console.log("nilaile")
 							this.$refs.project.setEmpId(this.consume.counselor,2)
 						}else{
 							this.$refs.project.setEmpId(this.consume.counselor,1)
@@ -735,6 +736,7 @@
 					this.consume.receivable = item.receivable //应交
 					this.consume.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
 					this.consume.proType = item.proType
+					return
 				} else {
 					if (this.clickItemObj.itemId == item.piId) {
 						if (this.clickItemObj.count % 2 == 0) {
@@ -892,7 +894,7 @@
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('会员查询请求失败')
+					console.log('定金查询请求失败')
 				});
 			},
 			count(event) {
@@ -900,23 +902,6 @@
 					this.cash.select = this.cash.balance;
 					$("#earn").val(this.cash.select);
 				}
-				// //console.log("count1")
-				// if (this.member.counselorEmpId != this.consume.counselor) {
-				//     //console.log("count2")
-				//     if (this.consume.proType == 0) {
-				//         //console.log("count4")
-				//         this.isSelect = false
-				//         this.consumeReceivable = this.consume.realCross
-				//     } else {
-				//         //console.log("count5")
-				//         this.isSelect = true
-				//         this.consumeReceivable = this.consume.realCross - this.member.balance - this.cash.select;
-				//     }
-				// } else {
-				//     //console.log("count3")
-				//     this.isSelect = false
-				//     this.consumeReceivable = this.consume.realCross - this.cash.select;
-				// }
 			},
 		},
 		mounted() {

@@ -51,7 +51,7 @@
                 this.empId = empId
                 this.getProject()
             },
-            async getProject() {
+            getProject() {
                 var url = this.url + '/projects/queryAllByParams'
                 this.$ajax({
                     method: 'POST',

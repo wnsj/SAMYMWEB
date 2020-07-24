@@ -4,14 +4,14 @@
             <h1 class="titleCss">收入情况表</h1>
         </div>
         <div class="top">
-            <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
+            <el-form label-position="right" label-width="40.5%"  :inline="false" size="small" :model="param">
                 <el-collapse-transition>
                     <div class="searchForm" v-show="showSelect">
                         <el-row>
                             <el-col :span="6">
                                 <el-form-item label="访问类型:">
                                     <el-select v-model="param.visitType" clearable placeholder="请选择"
-                                               @change="getObj(param.visitType)">
+                                               @change="getObj(param.visitType)" >
                                         <el-option v-for="item in list"
                                                    :key="item.id"
                                                    :label="item.name"
@@ -31,7 +31,7 @@
                                     </el-select>
                                 </el-form-item>
                             </el-col>
-                            <el-col :span="6" style="margin-left: 3%">
+                            <el-col :span="6">
                                 <el-form-item label="续流状态:">
                                     <el-select v-model="param.continState" clearable placeholder="请选择">
                                         <el-option v-for="item in continueList"
@@ -42,8 +42,6 @@
                                     </el-select>
                                 </el-form-item>
                             </el-col>
-                        </el-row>
-                        <el-row>
                             <el-col :span="6">
                                 <el-form-item label="门店:" v-if="accountType == true">
                                     <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
@@ -55,6 +53,9 @@
                                     </el-select>
                                 </el-form-item>
                             </el-col>
+                        </el-row>
+                        <el-row>
+                            
                             <el-col :span="6">
                                 <el-form-item label='咨客姓名:'>
                                     <el-input v-model="param.vsName" placeholder="咨客姓名" clearable></el-input>
@@ -493,7 +494,7 @@
 <style>
     .searchForm {
         background-color: white;
-    / / margin-top: 40 px;
+        margin-top: 40 px;
         padding-top: 30px;
         border-radius: 5px;
         padding-bottom: 22px;

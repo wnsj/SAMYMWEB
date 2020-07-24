@@ -33,7 +33,8 @@
                                   @close="handleClose"
                                   background-color="rgb(230, 230, 230)"
                                   text-color="#333"
-                                  active-text-color="#ffd04b">
+                                  active-text-color="#ffd04b" 
+                                  :default-openeds="openeds">
                                   <el-submenu index="1">
                                     <template slot="title">
                                       <i class="el-icon-folder-add"></i>
@@ -194,7 +195,8 @@
                 // bool3: false,
                 // bool4: false,
                 // bool5: false,
-                onString: 'Visitor'
+                onString: 'Visitor',
+                openeds:['1']
             }
         },
         methods: {
@@ -217,10 +219,10 @@
 
             handleOpen(key, keyPath) {
                 console.log(key, keyPath);
-              },
-              handleClose(key, keyPath) {
+            },
+            handleClose(key, keyPath) {
                 console.log(key, keyPath);
-              },
+            },
             // onShow(index) {
             //     switch (index) {
             //         case 0:

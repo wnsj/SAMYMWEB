@@ -83,6 +83,8 @@
 			        <con ref="conEmp" @employeeChange="conChange"></con>
 			    </div>
 			</div>
+        </div>
+        <div class="row newRow">    
             <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-35"
                     data-toggle="modal"
                     v-on:click="checkMember(1)">查询

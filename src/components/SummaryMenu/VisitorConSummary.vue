@@ -101,8 +101,6 @@
                 :data="tableData"
                 :cell-style="cellStyle"
                 :header-cell-style="headerStyle"
-                show-summary
-                sortable
                 max-height="530"
                 style="width: 99%;margin-left:0.5%;margin-top: 20px"
                 border>
@@ -162,6 +160,12 @@
                 </el-table-column>
                 <el-table-column
                     align="center"
+                    prop="price"
+                    label="单次价格"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
                     prop="reTime"
                     label="退款时长"
                     min-width="100">
@@ -188,6 +192,13 @@
                     align="center"
                     prop="createDate"
                     label="购买时间"
+                    :formatter="dateFormat"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="lastCostDate"
+                    label="最后一次消费时间"
                     :formatter="dateFormat"
                     min-width="100">
                 </el-table-column>

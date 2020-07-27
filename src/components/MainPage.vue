@@ -31,6 +31,7 @@
                                   class="el-menu-vertical-demo"
                                   @open="handleOpen"
                                   @close="handleClose"
+                                  unique-opened
                                   background-color="rgb(230, 230, 230)"
                                   text-color="#333"
                                   active-text-color="#ffd04b" 

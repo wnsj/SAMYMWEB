@@ -83,7 +83,46 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-
+                <el-row>
+                    <el-col :span="6" class="jh-pr-28">
+                        <el-form-item label="咨询师:">
+                            <el-select v-model="param.couId" filterable clearable placeholder="请选择">
+                                <el-option v-for="item in couList"
+                                           :key="item.empId"
+                                           :label="item.empName"
+                                           :value="item.empId">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="6" class="jh-pr-28">
+                        <el-form-item label="咨询顾问:">
+                            <el-select v-model="param.empId" filterable clearable placeholder="请选择">
+                                <el-option v-for="item in empList"
+                                           :key="item.empId"
+                                           :label="item.empName"
+                                           :value="item.empId">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="6" class="jh-pr-28">
+                        <el-form-item label='产品:'>
+                            <el-input v-model="param.proName" placeholder="产品" clearable></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="6" class="jh-pr-28">
+                        <el-form-item label="续流状态:">
+                            <el-select v-model="param.continueState" clearable placeholder="请选择">
+                                <el-option v-for="item in continueList"
+                                           :key="item.vsId"
+                                           :label="item.vsName"
+                                           :value="item.vsId">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
                 <el-row>
                     <el-col :span="24" class="jh-pr-28">
                         <el-button type="primary" size="small"
@@ -96,128 +135,146 @@
             </el-form>
         </div>
 
-                <div>
-                    <el-table
-                        :data="tableData"
-                        :cell-style="cellStyle"
-                        :header-cell-style="headerStyle"
-                        max-height="530"
-                        style="margin-top: 20px"
-                        border>
-                        <el-table-column
-                            align="center"
-                            prop="firstTime"
-                            label="初访时间"
-                            min-width="100">
-                        </el-table-column>
-                        <el-table-column
-                            align="center"
-                            prop="receiveTime"
-                            label="到访时间"
-                            min-width="100">
-                        </el-table-column>
-                        <el-table-column
-                            align="center"
-                            prop="visitType"
-                            label="访问类型"
-                            min-width="90">
-                        </el-table-column>
-                        <el-table-column
-                            align="center"
-                            prop="storeName"
-                            label="门店"
-                            min-width="100">
-                        </el-table-column>
-                        <el-table-column
-                            align="center"
-                            prop="memName"
-                            label="咨客姓名"
-                            min-width="100">
-                        </el-table-column>
-                        <el-table-column
-                            align="center"
-                            prop="diseaseType"
-                            label="咨询方向"
-                            min-width="100">
-                        </el-table-column>
-                        <el-table-column
-                            align="center"
-                            prop="diseaseProblem"
-                            label="咨询问题"
-                            min-width="100">
-                        </el-table-column>
-                        <el-table-column
-                            align="center"
-                            prop="counselorName"
-                            label="咨询师"
-                            min-width="95">
-                        </el-table-column>
-                        <el-table-column
-                            align="center"
-                            prop="empName"
-                            label="顾问"
-                            min-width="95">
-                        </el-table-column>
-                        <el-table-column
-                            align="center"
-                            prop="phone"
-                            label="联系方式"
-                            min-width="100">
-                        </el-table-column>
-                        <el-table-column
-                            align="center"
-                            prop="proName"
-                            label="产品"
-                            min-width="100">
-                        </el-table-column>
-                        <el-table-column
-                            align="center"
-                            prop="isfirst"
-                            label="客户判定"
-                            min-width="100">
-                        </el-table-column>
-                        <el-table-column
-                            align="center"
-                            prop="reason"
-                            label="原因"
-                            show-overflow-tooltip
-                            min-width="100">
-                        </el-table-column>
-                        <el-table-column
-                            align="center"
-                            prop="remark"
-                            show-overflow-tooltip
-                            label="跟进情况"
-                            min-width="100">
-                        </el-table-column>
-                        <el-table-column
-                            align="center"
-                            prop="followUpPerson"
-                            label="跟进人"
-                            min-width="100">
-                        </el-table-column>
-                        <el-table-column
-                            align="center"
-                            prop="title"
-                            label="类型"
-                            min-width="95">
-                        </el-table-column>
-                    </el-table>
-                    <el-row class="second_interval">
-                        <el-col :span="24">
-                            <el-pagination
-                                @current-change="handleCurrentChange"
-                                @size-change="handleSizeChange"
-                                :current-page="param.current"
-                                :page-sizes="[10,20,30,50]"
-                                :page-size="param.pageSize"
-                                layout="total, sizes, prev, pager, next, jumper"
-                                :total="totalAmount"
-                            >
-                            </el-pagination>
-                        </el-col>
-                    </el-row>
-                </div>
+        <div>
+            <el-table
+                :data="tableData"
+                :cell-style="cellStyle"
+                :header-cell-style="headerStyle"
+                max-height="530"
+                style="margin-top: 20px"
+                border>
+                <el-table-column
+                    align="center"
+                    prop="firstTime"
+                    label="初访时间"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="receiveTime"
+                    label="到访时间"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="visitType"
+                    label="访问类型"
+                    min-width="90">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="continState"
+                    label="续流状态"
+                    min-width="90">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="storeName"
+                    label="门店"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="memName"
+                    label="咨客姓名"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="diseaseType"
+                    label="咨询方向"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="diseaseProblem"
+                    label="咨询问题"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="counselorName"
+                    label="咨询师"
+                    min-width="95">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="empName"
+                    label="顾问"
+                    min-width="95">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="phone"
+                    label="联系方式"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="proName"
+                    label="产品"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="isfirst"
+                    label="客户判定"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="totalCount"
+                    label="时长"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="realCross"
+                    label="金额"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="reason"
+                    label="原因"
+                    show-overflow-tooltip
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="remark"
+                    show-overflow-tooltip
+                    label="跟进情况"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="followUpPerson"
+                    label="跟进人"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
+                    prop="title"
+                    label="类型"
+                    min-width="95">
+                </el-table-column>
+            </el-table>
+            <el-row class="second_interval">
+                <el-col :span="24">
+                    <el-pagination
+                        @current-change="handleCurrentChange"
+                        @size-change="handleSizeChange"
+                        :current-page="param.current"
+                        :page-sizes="[10,20,30,50]"
+                        :page-size="param.pageSize"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="totalAmount"
+                    >
+                    </el-pagination>
+                </el-col>
+            </el-row>
+        </div>
     </div>
 </template>
 
@@ -237,12 +294,19 @@
                     memName: '',
                     isfirst: '',
                     visitType: '',
+                    couId: '',
+                    empId: '',
+                    proName: '',
+                    continueState: ''
                 },
                 list: [{id: 1, name: "初访"}, {id: 2, name: "复访"}],
                 storeList: [],
                 tableData: [],
+                empList: [],
+                couList: [],
                 totalAmount: 0,
                 vsJugList: [],
+                continueList: [],
                 pickerOptions0: {
                     disabledDate: (time) => {
                         if (this.param.firstVisitEndTime !== '' && this.param.firstVisitEndTime !== null) {
@@ -257,7 +321,7 @@
                         return time.getTime() < this.param.firstVisitStartTime || time.getTime() > Date.now()
                     }
                 },
-                accountType:this.accountType(),
+                accountType: this.accountType(),
             };
         },
         methods: {
@@ -297,6 +361,44 @@
                 });
             },
 
+            getCou() {
+                var url = this.url + '/employeeAction/getAllEmpByPosName'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        posName: "咨询师"
+                    },
+                    dataType: 'json',
+                }).then(res => {
+                    this.couList = res.data.retData
+                }).catch(error => {
+                    console.log(error);
+                })
+            },
+            getEmp() {
+                var url = this.url + '/employeeAction/getAllEmpByPosName'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        posName: "咨询顾问"
+                    },
+                    dataType: 'json',
+                }).then(res => {
+                    this.empList = res.data.retData
+                }).catch(error => {
+                    console.log(error);
+                })
+            },
             //vsType:1初访，2复访；stateType：1客户判定，2续流状态
             getObj(vsType) {
                 //consolele.log('vsType:'+vsType)
@@ -310,7 +412,6 @@
                     },
                     data: {
                         vsType: vsType,
-                        stateType: 1,
                         isUse: '1'
                     },
                     dataType: 'json',
@@ -318,7 +419,8 @@
                     var res = response.data
                     if (res.retCode == '0000') {
                         if (res.retData.length > 0) {
-                            this.vsJugList = res.retData
+                            this.vsJugList = res.retData.filter(item => item.stateType==1)
+                            this.continueList = res.retData.filter(item => item.stateType==2)
                         }
                     } else {
                         alert(res.retMsg)
@@ -368,6 +470,8 @@
         },
         created() {
             this.getStore()
+            this.getCou()
+            this.getEmp()
             this.getObj()
             this.getAllConByCondition()
         }

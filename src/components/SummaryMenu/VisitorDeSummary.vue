@@ -4,9 +4,9 @@
             <h1 class="titleCss">访客跟踪明细表</h1>
         </div>
         <div class="top">
-            <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
+            <el-form label-position="right" label-width="100px" :inline="false" size="small" :model="param">
                 <el-row style="margin-top: 2%">
-                    <el-col :span="11" :pull="1">
+                    <el-col :span="12" class="jh-pr-28">
                         <el-form-item label="初访时间:">
                             <el-date-picker
                                 v-model="param.firstVisitStartTime"
@@ -23,7 +23,7 @@
                             </el-date-picker>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="6">
+                    <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="访问类型:">
                             <el-select v-model="param.visitType" clearable placeholder="请选择"
                                        @change="getObj(param.visitType)">
@@ -35,7 +35,7 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="6">
+                    <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="咨客判定:">
                             <el-select v-model="param.isfirst" clearable placeholder="请选择">
                                 <el-option v-for="item in vsJugList"
@@ -49,7 +49,7 @@
                 </el-row>
 
                 <el-row>
-                    <el-col :span="11" :pull="1">
+                    <el-col :span="12" class="jh-pr-28">
                         <el-form-item label="到访时间:">
                             <el-date-picker
                                 v-model="param.secondVisitStartTime"
@@ -66,7 +66,7 @@
                             </el-date-picker>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="6">
+                    <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="门店:" v-if="accountType == true">
                             <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
                                 <el-option v-for="item in storeList"
@@ -77,7 +77,7 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="6">
+                    <el-col :span="6" class="jh-pr-28">
                         <el-form-item label='咨客姓名:'>
                             <el-input v-model="param.memName" placeholder="咨客姓名" clearable></el-input>
                         </el-form-item>
@@ -85,10 +85,11 @@
                 </el-row>
 
                 <el-row>
-                    <el-col :offset="10">
+                    <el-col :span="24" class="jh-pr-28">
                         <el-button type="primary" size="small"
                                    style="width: 85px"
-                                   @click="getAllConByCondition">查询
+                                   @click="getAllConByCondition"
+                                   class="jh-fr">查询
                         </el-button>
                     </el-col>
                 </el-row>

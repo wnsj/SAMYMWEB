@@ -4,92 +4,99 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">定金管理</h1>
         </div>
-        <div class="row newRow">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
-                    <p class="end-aline col-md-11 col-lg-11">姓名</p><span
-                    class="sign-left">:</span>
+        <div class="searchForm" v-show="showSelect">
+            <div class="row newRow">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                        <p class="end-aline col-md-11 col-lg-11">姓名</p><span
+                        class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="cashName">
+                    </div>
                 </div>
-                <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="cashName">
+
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">手机号</p><span
+                        class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <input class="form-control" type="text" value="" v-model="phone">
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">开始时间</p><span
+                        class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <dPicker class="wd100" v-model="beginDate"></dPicker>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">结束时间</p><span
+                        class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <dPicker  class="wd100" v-model="endDate"></dPicker>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
-                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">手机号</p><span
-                    class="sign-left">:</span>
+            <div class="row newRow">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-if="accountType==true">
+                    <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span
+                        class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <Store ref='store' @storeChange='storeChange'></Store>
+                    </div>
                 </div>
-                <div class="col-md-7 col-lg-7">
-                    <input class="form-control" type="text" value="" v-model="phone">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">状态</p><span
+                        class="sign-left">:</span>
+                    </div>
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                        <select class="form-control" v-model="balanceState">
+                            <option value="1">全部</option>
+                            <option value="2">未用完</option>
+                            <option value="3">已用完</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">咨询师</p><span
+                        class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <cou ref="couEmp" @employeeChange="couChange"></cou>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">咨询顾问</p><span
+                        class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <con ref="conEmp" @employeeChange="conChange"></con>
+                    </div>
                 </div>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
-                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">开始时间</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <dPicker class="wd100" v-model="beginDate"></dPicker>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
-                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">结束时间</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <dPicker  class="wd100" v-model="endDate"></dPicker>
-                </div>
+
+            <div class="row newRow">    
+                <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-35"
+                        data-toggle="modal"
+                        v-on:click="checkMember(1)">查询
+                </button>
             </div>
         </div>
-        <div class="row newRow">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-if="accountType==true">
-                <div class="col-md-5 col-lg-5 text-right jh-ad-1">
-                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <Store ref='store' @storeChange='storeChange'></Store>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">状态</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <select class="form-control" v-model="balanceState">
-                        <option value="1">全部</option>
-                        <option value="2">未用完</option>
-                        <option value="3">已用完</option>
-                    </select>
-                </div>
-            </div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-			    <div class="col-md-5 col-lg-5 text-right jh-ad-1">
-					<p class="end-aline col-md-11 col-lg-11 jh-pa-1">咨询师</p><span
-					class="sign-left">:</span>
-			    </div>
-			    <div class="col-md-7 col-lg-7">
-			        <cou ref="couEmp" @employeeChange="couChange"></cou>
-			    </div>
-			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-			    <div class="col-md-5 col-lg-5 text-right jh-ad-1">
-					<p class="end-aline col-md-11 col-lg-11 jh-pa-1">咨询顾问</p><span
-					class="sign-left">:</span>
-			    </div>
-			    <div class="col-md-7 col-lg-7">
-			        <con ref="conEmp" @employeeChange="conChange"></con>
-			    </div>
-			</div>
-        </div>
-        <div class="row newRow">    
-            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-35"
-                    data-toggle="modal"
-                    v-on:click="checkMember(1)">查询
-            </button>
-        </div>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
+        </div>    
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive pre-scrollable">
@@ -228,6 +235,7 @@
                 current: 1, //当前页码
                 pageSize: 10, //一页显示的数量
                 total: '', //数据的数量
+                showSelect:true
             };
         },
         methods: {
@@ -245,7 +253,10 @@
                     $("#cdContent").modal('show')
                 }
             },
-
+            dataOpen(){
+                if(this.showSelect) return
+                this.showSelect = true;
+            },
             transferMember(item) {
                 console.log(item)
                 this.$refs.toMember.initData(item)

@@ -5,139 +5,137 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">客户管理</h1>
         </div>
-        <div class="row newRow">
-            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 visbtn-box">
-                <button type="button" class="btn btn-default pull-left" v-on:click="btnAction('5')"
-                        v-has="'SAMY:MP:Visitor:AddRefund'">退费
-                </button>
-                <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('4')"
-                        v-has="'SAMY:MP:Visitor:AddOrder'">预约
-                </button>
-                <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('3')"
-                        v-has="'SAMY:MP:Visitor:AddDush'">定金
-                </button>
-                <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('2')"
-                        v-has="'SAMY:MP:Visitor:AddConsum'">消费
-                </button>
-                <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('1')"
-                        v-has="'SAMY:MP:Visitor:AddRecharge'">购 买 产 品
-                </button>
+        <div class="searchForm" v-show="showSelect">
+            <div class="row newRow">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 visbtn-box">
+                    <button type="button" class="btn btn-default pull-left" v-on:click="btnAction('5')"
+                            v-has="'SAMY:MP:Visitor:AddRefund'">退费
+                    </button>
+                    <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('4')"
+                            v-has="'SAMY:MP:Visitor:AddOrder'">预约
+                    </button>
+                    <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('3')"
+                            v-has="'SAMY:MP:Visitor:AddDush'">定金
+                    </button>
+                    <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('2')"
+                            v-has="'SAMY:MP:Visitor:AddConsum'">消费
+                    </button>
+                    <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('1')"
+                            v-has="'SAMY:MP:Visitor:AddRecharge'">购 买 产 品
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <div class="row newRow">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right nopad">
-                    <p class="end-aline col-md-11 col-lg-11">门店</p><span class="sign-left">:</span>
+            <div class="row newRow">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right nopad">
+                        <p class="end-aline col-md-11 col-lg-11">门店</p><span class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <Store ref='store' @storeChange='storeChange'></Store>
+                    </div>
                 </div>
-                <div class="col-md-7 col-lg-7">
-                    <Store ref='store' @storeChange='storeChange'></Store>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right nopad">
+                        <p class="end-aline col-md-11 col-lg-11">姓名</p><span class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="visitorName">
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right nopad">
+                        <p class="end-aline col-md-11 col-lg-11">手机号</p><span class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <input class="form-control" type="text" value="" v-model="phone">
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right nopad">
+                        <p class="end-aline col-md-11 col-lg-11">生日</p><span class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <dPicker class="wd100" value-type="format" format="DD" v-model="birthday"></dPicker>
+                    </div>
                 </div>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right nopad">
-                    <p class="end-aline col-md-11 col-lg-11">姓名</p><span class="sign-left">:</span>
+
+            <div class="row newRow">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right nopad">
+                        <p class="end-aline col-md-11 col-lg-11">访问类型</p><span class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <select class="form-control" v-model="visType">
+                            <option value="">--未选择--</option>
+                            <option value="1">初访</option>
+                            <option value="2">复访</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="visitorName">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right nopad">
+                        <p class="end-aline col-md-11 col-lg-11">接待人</p><span class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <emp ref="emp" @employeeChange="employeeChange"></emp>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right nopad">
+                        <p class="end-aline col-md-11 col-lg-11">渠道</p><span class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <cha ref="cha" @channelChange="chaChange"></cha>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right nopad">
+                        <p class="end-aline col-md-11 col-lg-11">转会员</p><span class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <select class="form-control" v-model="isMem">
+                            <option value="">--未选择--</option>
+                            <option value="1">已转会员</option>
+                            <option value="2">未转会员</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right nopad">
-                    <p class="end-aline col-md-11 col-lg-11">手机号</p><span class="sign-left">:</span>
+            <div class="row newRow">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right nopad">
+                        <p class="end-aline col-md-11 col-lg-11">开始时间</p><span class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <dPicker class="wd100" value-type="format" format="YYYY-MM-DD" v-model="begDate"></dPicker>
+                    </div>
                 </div>
-                <div class="col-md-7 col-lg-7">
-                    <input class="form-control" type="text" value="" v-model="phone">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right nopad">
+                        <p class="end-aline col-md-11 col-lg-11">结束时间</p><span class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <dPicker class="wd100" value-type="format" format="YYYY-MM-DD" v-model="endDate"></dPicker>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right nopad">
-                    <p class="end-aline col-md-11 col-lg-11">生日</p><span class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <dPicker class="wd100" value-type="format" format="DD" v-model="birthday"></dPicker>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-12 col-lg-12">
+                        <button type="button" class="btn btn-warning pull-right" data-toggle="modal"
+                                v-on:click="selectRule('1')"
+                                v-has="'SAMY:MP:Visitor:Add'">添加咨客
+                        </button>
+                        <button type="button" class="btn btn-primary pull-right margin-right-10" data-toggle="modal"
+                                v-on:click="checkVisitor(1)">查询
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row newRow">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right nopad">
-                    <p class="end-aline col-md-11 col-lg-11">访问类型</p><span class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <select class="form-control" v-model="visType">
-                        <option value="">--未选择--</option>
-                        <option value="1">初访</option>
-                        <option value="2">复访</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right nopad">
-                    <p class="end-aline col-md-11 col-lg-11">接待人</p><span class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <emp ref="emp" @employeeChange="employeeChange"></emp>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right nopad">
-                    <p class="end-aline col-md-11 col-lg-11">渠道</p><span class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <cha ref="cha" @channelChange="chaChange"></cha>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right nopad">
-                    <p class="end-aline col-md-11 col-lg-11">转会员</p><span class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <select class="form-control" v-model="isMem">
-                        <option value="">--未选择--</option>
-                        <option value="1">已转会员</option>
-                        <option value="2">未转会员</option>
-                    </select>
-                </div>
-            </div>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
-        <div class="row newRow">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right nopad">
-                    <p class="end-aline col-md-11 col-lg-11">开始时间</p><span class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <dPicker class="wd100" value-type="format" format="YYYY-MM-DD" v-model="begDate"></dPicker>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right nopad">
-                    <p class="end-aline col-md-11 col-lg-11">结束时间</p><span class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <dPicker class="wd100" value-type="format" format="YYYY-MM-DD" v-model="endDate"></dPicker>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-12 col-lg-12">
-                    <button type="button" class="btn btn-warning pull-right" data-toggle="modal"
-                            v-on:click="selectRule('1')"
-                            v-has="'SAMY:MP:Visitor:Add'">添加咨客
-                    </button>
-                    <button type="button" class="btn btn-primary pull-right margin-right-10" data-toggle="modal"
-                            v-on:click="checkVisitor(1)">查询
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- <el-table :data="visitorList" style="width: 100%">
-            <el-table-column prop="visId" label="序号" width="180">
-            </el-table-column>
-            <el-table-column prop="visitorName" label="姓名" width="180">
-            </el-table-column>
-            <el-table-column prop="address" label="会员卡号">
-            </el-table-column>
-        </el-table> -->
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive pre-scrollable">
@@ -357,6 +355,7 @@
                 birthday: '',
                 fixedHeader: false,
                 checkedValue: -1,
+                showSelect:true,
                 accountType: this.accountType(),
 
                 phoneNoX: '',
@@ -430,6 +429,10 @@
                 } else {
                     this.storeId = param.storeId
                 }
+            },
+            dataOpen(){
+                if(this.showSelect) return
+                this.showSelect = true;
             },
             feedBack(param) {
                 this.checkVisitor(1)

@@ -4,9 +4,9 @@
             <h1 class="titleCss">客户产品消耗统计表</h1>
         </div>
         <div class="top">
-            <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
+            <el-form label-position="right" label-width="100px" :inline="false" size="small" :model="param">
                 <el-row style="margin-top: 2%">
-                    <el-col :span="11" :pull="1">
+                    <el-col :span="12" class="jh-pr-28">
                         <el-form-item label="初访时间:">
                             <el-date-picker
                                 v-model="param.firstVisitStartTime"
@@ -14,7 +14,7 @@
                                 type="date"
                                 placeholder="开始时间">
                             </el-date-picker>
-                            <span> - </span>
+                            <span style="margin-right: 2%"> - </span>
                             <el-date-picker
                                 v-model="param.firstVisitEndTime"
                                 :picker-options="pickerOptions1"
@@ -23,12 +23,12 @@
                             </el-date-picker>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="5" :pull="1">
+                    <el-col :span="6" class="jh-pr-28">
                         <el-form-item label='咨客姓名:'>
                             <el-input v-model="param.memName" placeholder="咨客姓名" clearable></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="5">
+                    <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="门店:" v-if="accountType == true">
                             <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
                                 <el-option v-for="item in storeList"
@@ -44,7 +44,7 @@
                 </el-row>
 
                 <el-row>
-                    <el-col :span="11" :pull="1">
+                    <el-col :span="12" class="jh-pr-28">
                         <el-form-item label="购买时间:">
                             <el-date-picker
                                 v-model="param.secondVisitStartTime"
@@ -52,7 +52,7 @@
                                 type="date"
                                 placeholder="开始时间">
                             </el-date-picker>
-                            <span> - </span>
+                            <span style="margin-right: 2%"> - </span>
                             <el-date-picker
                                 v-model="param.secondVisitEndTime"
                                 :picker-options="pickerOptions1"
@@ -61,7 +61,7 @@
                             </el-date-picker>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="5" :pull="1">
+                    <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="咨询师:">
                             <el-select v-model="param.couId" filterable clearable placeholder="请选择">
                                 <el-option v-for="item in couList"
@@ -72,7 +72,7 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="5">
+                    <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="咨询顾问:">
                             <el-select v-model="param.empId" filterable clearable placeholder="请选择">
                                 <el-option v-for="item in empList"
@@ -85,10 +85,11 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="24" :push="10">
+                    <el-col :span="24" class="jh-pr-28">
                         <el-button type="primary" size="small"
                                    style="width: 85px"
-                                   @click="getVsConsume">查询
+                                   @click="getVsConsume"
+                                   class="jh-fr">查询
                         </el-button>
                     </el-col>
                 </el-row>

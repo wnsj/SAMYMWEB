@@ -12,7 +12,7 @@
                     class="sign-left">:</span>
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <input class="form-control" type="text" v-model="reName">
+                    <input class="form-control" type="text">
                 </div>
             </div>
             <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-30"

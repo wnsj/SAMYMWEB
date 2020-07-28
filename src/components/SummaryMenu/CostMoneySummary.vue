@@ -83,7 +83,7 @@
                         align="center"
                         prop="other"
                         label="初访测评/单次/其他消耗(¥)"
-                        min-width="95">
+                        min-width="110">
                     </el-table-column>
                     <el-table-column
                         align="center"
@@ -107,6 +107,12 @@
                         align="center"
                         prop="radioRefund"
                         label="退费率(%)"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="couRate"
+                        label="咨询师饱和率(%)"
                         min-width="100">
                     </el-table-column>
 <!--                    <el-table-column-->
@@ -183,7 +189,7 @@
                         align="center"
                         prop="other"
                         label="初访测评/单次/其他消耗(¥)"
-                        min-width="95">
+                        min-width="110">
                     </el-table-column>
                     <el-table-column
                         align="center"
@@ -191,12 +197,6 @@
                         label="总消耗金额(¥)"
                         min-width="100">
                     </el-table-column>
-<!--                    <el-table-column-->
-<!--                        align="center"-->
-<!--                        prop="vsTotal"-->
-<!--                        label="咨客人数"-->
-<!--                        min-width="100">-->
-<!--                    </el-table-column>-->
                     <el-table-column
                         align="center"
                         prop="fsPerson"
@@ -215,6 +215,24 @@
                         label="退费率(%)"
                         min-width="100">
                     </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="couRate"
+                        label="顾问饱和率(%)"
+                        min-width="100">
+                    </el-table-column>
+                    <!--                    <el-table-column-->
+                    <!--                        align="center"-->
+                    <!--                        prop="re"-->
+                    <!--                        label="退费"-->
+                    <!--                        min-width="100">-->
+                    <!--                    </el-table-column>-->
+                    <!--                    <el-table-column-->
+                    <!--                        align="center"-->
+                    <!--                        prop="total"-->
+                    <!--                        label="总营业额"-->
+                    <!--                        min-width="100">-->
+                    <!--                    </el-table-column>-->
                     <el-table-column
                         align="center"
                         prop="singleTotal"

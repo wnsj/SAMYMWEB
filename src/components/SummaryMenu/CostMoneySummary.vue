@@ -91,7 +91,7 @@
                         align="center"
                         prop="other"
                         label="初访测评/单次/其他消耗(¥)"
-                        min-width="110">
+                        min-width="120">
                     </el-table-column>
                     <el-table-column
                         align="center"
@@ -149,21 +149,39 @@
                     </el-table-column>
                     <el-table-column
                         align="center"
+                        prop="evaluation"
+                        label="测评消耗"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="waterOther"
+                        label="流水其他"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="signCount"
+                        label="签约汇总消耗"
+                        min-width="110">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
                         prop="firstVisit"
                         label="初访消耗时长"
-                        min-width="100">
+                        min-width="110">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="secondVisit"
                         label="复访消耗时长"
-                        min-width="100">
+                        min-width="110">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="totalVisit"
                         label="消耗总时长"
-                        min-width="100">
+                        min-width="110">
                     </el-table-column>
                 </el-table>
             </el-tab-pane>
@@ -198,7 +216,7 @@
                         align="center"
                         prop="other"
                         label="初访测评/单次/其他消耗(¥)"
-                        min-width="110">
+                        min-width="120">
                     </el-table-column>
                     <el-table-column
                         align="center"
@@ -227,7 +245,7 @@
                     <el-table-column
                         align="center"
                         prop="couRate"
-                        label="顾问饱和率(%)"
+                        label="咨询师饱和率(%)"
                         min-width="100">
                     </el-table-column>
                     <!--                    <el-table-column-->
@@ -256,21 +274,39 @@
                     </el-table-column>
                     <el-table-column
                         align="center"
+                        prop="evaluation"
+                        label="测评消耗"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="waterOther"
+                        label="流水其他"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="signCount"
+                        label="签约汇总消耗"
+                        min-width="110">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
                         prop="firstVisit"
                         label="初访消耗时长"
-                        min-width="100">
+                        min-width="110">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="secondVisit"
                         label="复访消耗时长"
-                        min-width="100">
+                        min-width="110">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="totalVisit"
                         label="消耗总时长"
-                        min-width="100">
+                        min-width="110">
                     </el-table-column>
                 </el-table>
             </el-tab-pane>

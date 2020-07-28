@@ -4,9 +4,9 @@
             <h1 class="titleCss">消耗金额核算表</h1>
         </div>
         <div class="top">
-            <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
+            <el-form label-position="right" label-width="100px" :inline="false" size="small" :model="param">
                 <el-row style="margin-top: 2%">
-                    <el-col :span="6">
+                    <el-col :span="6"  class="jh-pr-28">
                         <el-form-item label="门店:" v-if="accountType == true">
                             <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
                                 <el-option v-for="item in storeList"
@@ -17,12 +17,12 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="6">
+                    <el-col :span="6"  class="jh-pr-28">
                         <el-form-item label='姓名:'>
                             <el-input v-model="param.empName" placeholder="姓名" clearable></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="11">
+                    <el-col :span="12"  class="jh-pr-28">
                         <el-form-item label="消费时间:">
                             <el-date-picker
                                 v-model="param.secondVisitStartTime"
@@ -30,7 +30,7 @@
                                 type="date"
                                 placeholder="开始时间">
                             </el-date-picker>
-                            <span> - </span>
+                            <span  style="margin-right: 2%"> - </span>
                             <el-date-picker
                                 v-model="param.secondVisitEndTime"
                                 :picker-options="pickerOptions1"
@@ -41,10 +41,11 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :push="8">
+                    <el-col :span="24" class="jh-pr-28">
                         <el-button type="primary" size="small"
                                    style="width: 85px"
-                                   @click="getConMoney">查询
+                                   @click="getConMoney"
+                                   class="jh-fr">查询
                         </el-button>
                     </el-col>
                 </el-row>
@@ -82,7 +83,7 @@
                         align="center"
                         prop="other"
                         label="初访测评/单次/其他消耗(¥)"
-                        min-width="95">
+                        min-width="110">
                     </el-table-column>
                     <el-table-column
                         align="center"
@@ -106,6 +107,12 @@
                         align="center"
                         prop="radioRefund"
                         label="退费率(%)"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="couRate"
+                        label="咨询师饱和率(%)"
                         min-width="100">
                     </el-table-column>
 <!--                    <el-table-column-->
@@ -182,7 +189,7 @@
                         align="center"
                         prop="other"
                         label="初访测评/单次/其他消耗(¥)"
-                        min-width="95">
+                        min-width="110">
                     </el-table-column>
                     <el-table-column
                         align="center"
@@ -190,12 +197,6 @@
                         label="总消耗金额(¥)"
                         min-width="100">
                     </el-table-column>
-<!--                    <el-table-column-->
-<!--                        align="center"-->
-<!--                        prop="vsTotal"-->
-<!--                        label="咨客人数"-->
-<!--                        min-width="100">-->
-<!--                    </el-table-column>-->
                     <el-table-column
                         align="center"
                         prop="fsPerson"
@@ -214,6 +215,24 @@
                         label="退费率(%)"
                         min-width="100">
                     </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="couRate"
+                        label="顾问饱和率(%)"
+                        min-width="100">
+                    </el-table-column>
+                    <!--                    <el-table-column-->
+                    <!--                        align="center"-->
+                    <!--                        prop="re"-->
+                    <!--                        label="退费"-->
+                    <!--                        min-width="100">-->
+                    <!--                    </el-table-column>-->
+                    <!--                    <el-table-column-->
+                    <!--                        align="center"-->
+                    <!--                        prop="total"-->
+                    <!--                        label="总营业额"-->
+                    <!--                        min-width="100">-->
+                    <!--                    </el-table-column>-->
                     <el-table-column
                         align="center"
                         prop="singleTotal"

@@ -193,8 +193,9 @@ body{
 .wd100{width:100%!important;}
 .nopad{padding: 0;}
 .newRow{padding-bottom: 15px;}
-
+.jh-wd-w100{width:100px!important;}
 .wd205{width:20.5%!important;}
+.wd285{width:28.5%!important;}
 .wd84{width:84%!important;}
 .wd1000{width: 1000px !important;}
 .jh-ad-0{
@@ -299,6 +300,16 @@ body{
 .jh-po-re{
     position:relative;
 }
+.jh-po-ab{
+    position: absolute;
+}
+.jh-arrow-pos{
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
 .jh-m-15{
     margin: 15px 0;
 }
@@ -323,4 +334,8 @@ body{
 .jh-mb10-lh25{
     margin-bottom: 20px;
     line-height: 25px;
+}
+
+.jh-pr-28{
+    padding-right: 28px;
 }

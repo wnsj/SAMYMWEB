@@ -6,19 +6,19 @@
 			<h1 class="titleCss">初诊咨询方向统计表</h1>
 		</div>
 		<div class="top">
-			<el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
+			<el-form label-position="right" label-width="100px" :inline="false" size="small" :model="param">
 				<el-row style="margin-top: 2%">
-					<el-col :span="6">
+					<el-col :span="6"  class="jh-pr-28">
 						<el-form-item label="门店:" v-if="accountType == true">
 							<store ref='store' @storeChange='storeChange'></store>
 						</el-form-item>
 					</el-col>
-					<el-col :span="6">
+					<el-col :span="6"  class="jh-pr-28">
 						<el-form-item label='姓名:'>
 							<el-input v-model="param.empName" placeholder="姓名" clearable></el-input>
 						</el-form-item>
 					</el-col>
-					<el-col :span="11">
+					<el-col :span="12"  class="jh-pr-28">
 						<el-form-item label="消费时间:">
 							<el-date-picker v-model="param.begDate" :picker-options="pickerOptions0" type="date" placeholder="开始时间">
 							</el-date-picker>
@@ -29,8 +29,8 @@
 					</el-col>
 				</el-row>
 				<el-row>
-					<el-col :push="8">
-						<el-button type="primary" size="small" style="width: 85px" @click="queryObjectList">查询
+					<el-col :span="24"  class="jh-pr-28">
+						<el-button type="primary" size="small" style="width: 85px" @click="queryObjectList" class="jh-fr">查询
 						</el-button>
 					</el-col>
 				</el-row>

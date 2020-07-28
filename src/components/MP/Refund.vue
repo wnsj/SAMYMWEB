@@ -21,11 +21,11 @@
                 <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="visitorName">
                 </div>
             </div>
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <div class="col-md-3 col-lg-3 text-right nopad">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-md-3 col-lg-3 text-right jh-ad-1 wd205">
                     <p class="end-aline col-md-11 col-lg-11">日期范围</p><span class="sign-left">:</span>
                 </div>
-                <div class="col-md-9 col-lg-9">
+                <div class="col-md-8 col-lg-8">
                     <dPicker class="wd100" v-model="dateArr" type="format" format="YYYY-MM-DD" range>
                         <template v-slot:header="{ emit }">
                             <div class="text-left"></div>

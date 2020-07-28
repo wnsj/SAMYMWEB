@@ -4,9 +4,9 @@
             <h1 class="titleCss">初访咨询方向统计表</h1>
         </div>
         <div class="top">
-            <el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
+            <el-form label-position="right" label-width="100px" :inline="false" size="small" :model="param">
                 <el-row style="margin-top: 2%">
-                    <el-col :span="6">
+                    <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="门店:" v-if="accountType == true">
                             <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
                                 <el-option v-for="item in storeList"
@@ -17,7 +17,7 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="10">
+                    <el-col :span="12" class="jh-pr-28">
                         <el-form-item label="时间:">
                             <el-date-picker
                                 v-model="param.firstVisitStartTime"
@@ -34,10 +34,11 @@
                             </el-date-picker>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="6" :offset="2">
+                    <el-col :span="6" class="jh-pr-28">
                         <el-button type="primary" size="small"
                                    style="width: 85px"
-                                   @click="getDiseaseType">查询
+                                   @click="getDiseaseType"
+                                   class="jh-fr">查询
                         </el-button>
                     </el-col>
                 </el-row>

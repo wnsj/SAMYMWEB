@@ -41,11 +41,18 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="24" class="jh-pr-28">
+                    <el-col :span="6" :offset="15">
                         <el-button type="primary" size="small"
                                    style="width: 85px"
                                    @click="getConMoney"
                                    class="jh-fr">查询
+                        </el-button>
+                    </el-col>
+                    <el-col :span="2">
+                        <el-button type="primary" size="small"
+                                   style="width: 85px"
+                                   @click="exportTable()"
+                                   class="jh-fr">导出
                         </el-button>
                     </el-col>
                 </el-row>
@@ -58,6 +65,7 @@
                     :data="tableData"
                     :cell-style="cellStyle"
                     :header-cell-style="headerStyle"
+                    id="costConMoney"
                     max-height="530"
                     style="width: 99%;margin-left:0.5%;"
                     border>
@@ -164,6 +172,7 @@
                     :data="tableData"
                     :cell-style="cellStyle"
                     :header-cell-style="headerStyle"
+                    id="costEmpMoney"
                     max-height="530"
                     style="width: 99%;margin-left:0.5%;"
                     border>
@@ -285,6 +294,7 @@
                     jobType: "1"
                 },
                 storeList: [],
+                tableId: '1',
                 tableData: [],
                 pickerOptions0: {
                     disabledDate: (time) => {
@@ -312,6 +322,15 @@
             // 表格样式
             cellStyle() {
                 return 'text-align: center;'
+            },
+            exportTable() {
+                if (this.tableId == '1') {
+
+                    this.exportTableToExcel('costConMoney','消耗金额核算表_咨询师')
+                } else {
+
+                    this.exportTableToExcel('costEmpMoney','消耗金额核算表_助理')
+                }
             },
             // 格式化时间
             dateFormat: function (row, column, cellValue, index) {
@@ -375,8 +394,13 @@
                 });
             },
 
-            tabChange() {
+            tabChange(item) {
                 this.getConMoney()
+                if (item.name == 1) {
+                    this.tableId = '1'
+                } else {
+                    this.tableId = '2'
+                }
             }
         },
         created() {

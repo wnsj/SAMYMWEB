@@ -124,11 +124,18 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="24" class="jh-pr-28">
+                    <el-col :span="6" :offset="15">
                         <el-button type="primary" size="small"
                                    style="width: 85px"
                                    @click="getAllConByCondition"
                                    class="jh-fr">查询
+                        </el-button>
+                    </el-col>
+                    <el-col :span="2">
+                        <el-button type="primary" size="small"
+                                   style="width: 85px"
+                                   @click="exportTableToExcel('visitorDe','访客跟踪明细表')"
+                                   class="jh-fr">导出
                         </el-button>
                     </el-col>
                 </el-row>
@@ -141,6 +148,7 @@
                 :cell-style="cellStyle"
                 :header-cell-style="headerStyle"
                 max-height="530"
+                id="visitorDe"
                 style="margin-top: 20px"
                 border>
                 <el-table-column

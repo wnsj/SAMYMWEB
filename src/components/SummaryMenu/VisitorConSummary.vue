@@ -85,11 +85,18 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="24" class="jh-pr-28">
+                    <el-col :span="6" :offset="15">
                         <el-button type="primary" size="small"
                                    style="width: 85px"
                                    @click="getVsConsume"
                                    class="jh-fr">查询
+                        </el-button>
+                    </el-col>
+                    <el-col :span="2">
+                        <el-button type="primary" size="small"
+                                   style="width: 85px"
+                                   @click="exportTableToExcel('vsConTable','客户产品消耗统计表')"
+                                   class="jh-fr">导出
                         </el-button>
                     </el-col>
                 </el-row>
@@ -101,6 +108,7 @@
                 :data="tableData"
                 :cell-style="cellStyle"
                 :header-cell-style="headerStyle"
+                id="vsConTable"
                 max-height="530"
                 style="width: 99%;margin-left:0.5%;margin-top: 20px"
                 border>

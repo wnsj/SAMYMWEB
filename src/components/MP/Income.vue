@@ -46,6 +46,7 @@
                             <el-col :span="6" class="jh-pr-28">
                                 <el-form-item label="门店:" v-if="accountType == true">
                                     <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
+                                        <el-option :key="0" label="未选择" value=0></el-option>
                                         <el-option v-for="item in storeList"
                                                    :key="item.storeId"
                                                    :label="item.storeName"
@@ -131,7 +132,7 @@
                 </el-collapse-transition>
                 <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
                     <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
-                </div> 
+                </div>
             </el-form>
         </div>
 
@@ -518,5 +519,5 @@
         z-index: 9999;
         width: 100px;
     }
-    
+
 </style>

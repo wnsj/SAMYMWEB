@@ -53,7 +53,7 @@
                     </el-col>
                 </el-row>
 
-                <el-row >  
+                <el-row >
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label='咨客姓名:'>
                             <el-input v-model="param.memName" placeholder="咨客姓名" clearable></el-input>
@@ -78,11 +78,18 @@
                             </el-date-picker>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="6"  class="jh-pr-28">
+                    <el-col :span="3"  class="jh-pr-28">
                         <el-button type="primary" size="small"
                                    style="width: 85px"
                                    @click="getMonthVsState"
                                    class="jh-fr">查询
+                        </el-button>
+                    </el-col>
+                    <el-col :span="3" class="jh-pr-28">
+                        <el-button type="primary" size="small"
+                                   style="width: 85px"
+                                   @click="exportTableToExcel('vsMonth','月度咨客状态统计表')"
+                                   class="jh-fr">导出
                         </el-button>
                     </el-col>
                 </el-row>
@@ -95,6 +102,7 @@
                 :cell-style="cellStyle"
                 :header-cell-style="headerStyle"
                 max-height="530"
+                id="vsMonth"
                 show-summary
                 sortable
                 style="width: 99%;margin-left:0.5%;margin-top: 20px"

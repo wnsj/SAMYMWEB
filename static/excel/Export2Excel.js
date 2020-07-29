@@ -18,15 +18,18 @@ function s2ab(s) {
 
 //将html表格导出到excel（id:导出表格html的id）
 export function exportTableToExcel(id, fileName) {
-	var theTable = document.getElementById(id);
-	var wb = new Workbook();
-	//将表格转成sheet
-	var ws = XLSX.utils.table_to_sheet(theTable);
-
-	var ws_name = "SheetJS";
-	// add worksheet to workbook 
-	wb.SheetNames.push(ws_name);
-	wb.Sheets[ws_name] = ws;
+    // 解决生成重复数据-因为使用l fixed属性
+    //var fix = document.querySelector('.el-table__fixed')
+    var fix = document.getElementById(id).querySelector('.el-table__fixed')
+    var wb
+    // 判断要导出的节点中是否有fixed的表格，如果有，转换excel时先将该dom移除，然后append回去
+    if (fix) {
+        /* 从表生成工作簿对象 */
+        wb = XLSX.utils.table_to_book(document.getElementById(id).removeChild(fix))
+        document.getElementById(id).appendChild(fix)
+    } else {
+        wb = XLSX.utils.table_to_book(document.getElementById(id))
+    }
 
 	var wbout = XLSX.write(wb, {
 		bookType: 'xlsx',
@@ -62,7 +65,7 @@ export function exportTableToExcel(id, fileName) {
 
 
 
-/* 
+/*
 function generateArray(table) {
 	var out = [];
 	var rows = table.querySelectorAll('tr');
@@ -71,7 +74,7 @@ function generateArray(table) {
 		var outRow = [];
 		var row = rows[R];
 		var columns = row.querySelectorAll('td');
-		
+
 		console.log("R:"+R+"  columns:"+columns)
 		for (var C = 0; C < columns.length; ++C) {
 			var cell = columns[C];
@@ -172,7 +175,7 @@ export function export_table_to_excel(id, fileName) {
 	var ranges = oo[1];
 
 
-	//original data 
+	//original data
 	var data = oo[0];
 	var ws_name = "SheetJS";
 	console.log(data);
@@ -180,7 +183,7 @@ export function export_table_to_excel(id, fileName) {
 		ws = sheet_from_array_of_arrays(data);
 	console.log("ws:" + ws)
 
-	// add ranges to worksheet 
+	// add ranges to worksheet
 	// ws['!cols'] = ['apple', 'banan'];
 	ws['!merges'] = ranges;
 
@@ -204,7 +207,7 @@ function formatJson(jsonData) {
 }
 export function export_json_to_excel(th, jsonData, defaultTitle) {
 
-	//original data 
+	//original data
 
 	var data = jsonData;
 	data.unshift(th);
@@ -227,5 +230,5 @@ export function export_json_to_excel(th, jsonData, defaultTitle) {
 	saveAs(new Blob([s2ab(wbout)], {
 		type: "application/octet-stream"
 	}), title + ".xlsx")
-} 
+}
 */

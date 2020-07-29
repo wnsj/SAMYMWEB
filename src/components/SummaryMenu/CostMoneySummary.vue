@@ -41,11 +41,18 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="24" class="jh-pr-28">
+                    <el-col :span="6" :offset="15">
                         <el-button type="primary" size="small"
                                    style="width: 85px"
                                    @click="getConMoney"
                                    class="jh-fr">查询
+                        </el-button>
+                    </el-col>
+                    <el-col :span="2">
+                        <el-button type="primary" size="small"
+                                   style="width: 85px"
+                                   @click="exportTable()"
+                                   class="jh-fr">导出
                         </el-button>
                     </el-col>
                 </el-row>
@@ -58,6 +65,7 @@
                     :data="tableData"
                     :cell-style="cellStyle"
                     :header-cell-style="headerStyle"
+                    id="costConMoney"
                     max-height="530"
                     style="width: 99%;margin-left:0.5%;"
                     border>
@@ -83,7 +91,7 @@
                         align="center"
                         prop="other"
                         label="初访测评/单次/其他消耗(¥)"
-                        min-width="110">
+                        min-width="120">
                     </el-table-column>
                     <el-table-column
                         align="center"
@@ -141,21 +149,39 @@
                     </el-table-column>
                     <el-table-column
                         align="center"
+                        prop="evaluation"
+                        label="测评消耗"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="waterOther"
+                        label="流水其他"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="signCount"
+                        label="签约汇总消耗"
+                        min-width="110">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
                         prop="firstVisit"
                         label="初访消耗时长"
-                        min-width="100">
+                        min-width="110">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="secondVisit"
                         label="复访消耗时长"
-                        min-width="100">
+                        min-width="110">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="totalVisit"
                         label="消耗总时长"
-                        min-width="100">
+                        min-width="110">
                     </el-table-column>
                 </el-table>
             </el-tab-pane>
@@ -164,6 +190,7 @@
                     :data="tableData"
                     :cell-style="cellStyle"
                     :header-cell-style="headerStyle"
+                    id="costEmpMoney"
                     max-height="530"
                     style="width: 99%;margin-left:0.5%;"
                     border>
@@ -189,7 +216,7 @@
                         align="center"
                         prop="other"
                         label="初访测评/单次/其他消耗(¥)"
-                        min-width="110">
+                        min-width="120">
                     </el-table-column>
                     <el-table-column
                         align="center"
@@ -218,7 +245,7 @@
                     <el-table-column
                         align="center"
                         prop="couRate"
-                        label="顾问饱和率(%)"
+                        label="咨询师饱和率(%)"
                         min-width="100">
                     </el-table-column>
                     <!--                    <el-table-column-->
@@ -247,21 +274,39 @@
                     </el-table-column>
                     <el-table-column
                         align="center"
+                        prop="evaluation"
+                        label="测评消耗"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="waterOther"
+                        label="流水其他"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="signCount"
+                        label="签约汇总消耗"
+                        min-width="110">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
                         prop="firstVisit"
                         label="初访消耗时长"
-                        min-width="100">
+                        min-width="110">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="secondVisit"
                         label="复访消耗时长"
-                        min-width="100">
+                        min-width="110">
                     </el-table-column>
                     <el-table-column
                         align="center"
                         prop="totalVisit"
                         label="消耗总时长"
-                        min-width="100">
+                        min-width="110">
                     </el-table-column>
                 </el-table>
             </el-tab-pane>
@@ -285,6 +330,7 @@
                     jobType: "1"
                 },
                 storeList: [],
+                tableId: '1',
                 tableData: [],
                 pickerOptions0: {
                     disabledDate: (time) => {
@@ -312,6 +358,15 @@
             // 表格样式
             cellStyle() {
                 return 'text-align: center;'
+            },
+            exportTable() {
+                if (this.tableId == '1') {
+
+                    this.exportTableToExcel('costConMoney','消耗金额核算表_咨询师')
+                } else {
+
+                    this.exportTableToExcel('costEmpMoney','消耗金额核算表_助理')
+                }
             },
             // 格式化时间
             dateFormat: function (row, column, cellValue, index) {
@@ -375,8 +430,13 @@
                 });
             },
 
-            tabChange() {
+            tabChange(item) {
                 this.getConMoney()
+                if (item.name == 1) {
+                    this.tableId = '1'
+                } else {
+                    this.tableId = '2'
+                }
             }
         },
         created() {

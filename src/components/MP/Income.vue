@@ -506,17 +506,5 @@
         border-radius: 5px;
         padding-bottom: 22px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
-    }
-    .arrow-bottom{
-        content: "";
-        display: block;
-        border-width: 0px 15px 15px;
-        border-style: none solid solid;
-        border-color: transparent transparent #e3e3e3;
-        -webkit-transform: rotate(-180deg);
-        margin-left: 45%;
-        z-index: 9999;
-        width: 100px;
-    }
-    
+    }   
 </style>

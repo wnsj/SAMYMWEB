@@ -158,7 +158,7 @@
 								<td>{{item.proName}}</td>
 								<td>{{item.counselorName}}</td>
 								<td>{{item.empName}}</td>
-								<td>{{item.visitType== '1' ? '初访' : '复访'}}</td>
+								<td>{{item.visitType== '1' ? '初访' : item.visitType== '2' ? '复访':''}}</td>
 								<td>{{item.judgeStateName}}</td>
 								<td>{{item.continueStateName}}</td>
 								<td>{{item.price}}</td>
@@ -171,8 +171,8 @@
 								<td>{{item.psName}}</td>
 								<td>{{item.operatorName}}</td>
 								<td v-show="item.isArrears=='0'"><button type="button" class="btn btn-warning" v-on:click="arrearsAaction(item)">否</button></td>
-								<td v-show="item.isArrears=='1'">是
-								</td>
+								<td v-show="item.isArrears=='1'">是</td>
+								<td v-show="item.isArrears==null"></td>
 							</tr>
 						</tbody>
 					</table>

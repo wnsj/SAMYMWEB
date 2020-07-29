@@ -502,7 +502,7 @@
 <style>
     .searchForm {
         background-color: white;
-        margin-top: 40 px;
+        margin-top: 40px;
         padding-top: 30px;
         border-radius: 5px;
         padding-bottom: 22px;

@@ -13,7 +13,7 @@
                             <store ref='store' @storeChange='storeChange'></store>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="6" class="jh-pr-28">
+                    <el-col :span="6" class="jh-pr-28" v-show="showName">
                         <el-form-item label='姓名:'>
                             <el-input v-model="param.empName" placeholder="姓名" clearable></el-input>
                         </el-form-item>
@@ -40,7 +40,7 @@
                     <el-col :span="6" :offset="15">
                         <el-button type="primary" size="small"
                                    style="width: 85px"
-                                   @click="queryObjectList"
+                                   @click="getData(tableId)"
                                    class="jh-fr">查询
                         </el-button>
                     </el-col>
@@ -109,6 +109,58 @@
                     <el-table-column label="签约率￥(%)" width="100" align="center" prop="signRate"></el-table-column>
                 </el-table>
             </el-tab-pane>
+            <el-tab-pane label="收银日报表" name="3">
+                <el-table
+                    max-height="530"
+                    ref="productTable"
+                    :data="incomeByPayType"
+                    style="width: 100%"
+                    show-summary border
+                    id="dayMoney">
+                    <el-table-column
+                        align="center"
+                        prop="createDate"
+                        label="日期"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="payType1"
+                        label="现金"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="payType8"
+                        label="POS"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="payType10"
+                        label="二维码"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="payType9"
+                        label="团购"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="payType5"
+                        label="小程序"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="payCount"
+                        label="当日总营业款"
+                        min-width="120">
+                    </el-table-column>
+                </el-table>
+            </el-tab-pane>
         </el-tabs>
     </div>
 
@@ -137,8 +189,11 @@
                     empName: '',
                     jobType: "1"
                 },
+                showName: true,
+                // storeName: this.storeName,
                 storeList: [],
                 objList: [],
+                incomeByPayType: [],
                 tableId: '1',
                 objSum: [],
                 pickerOptions0: {
@@ -170,27 +225,39 @@
             storeChange(param) {
                 if (this.isBlank(param)) {
                     this.param.stroeId = ""
+                    this.storeName = ""
                 } else {
                     this.param.storeId = param.storeId
+                    this.storeName = param.storeName
                 }
             },
             tabChange(item) {
-                this.queryObjectList()
                 this.param.storeId = ''
                 this.param.empName = ''
                 this.param.endDate = ''
                 this.param.begDate = ''
                 if (item.name == 1) {
                     this.tableId = '1'
-                } else {
+                    this.showName = true
+                    this.queryObjectList()
+                } else if (item.name == 2){
                     this.tableId = '2'
+                    this.showName = true
+                    this.queryObjectList()
+                } else if (item.name == 3){
+                    this.tableId = '3'
+                    this.showName = false
+                    this.getIncomeByPayType()
                 }
             },
             exportTable() {
                 if (this.tableId == '1') {
                     this.exportTableToExcel('empCon', '收入情况核算表_咨询师')
-                } else {
+                } else if (this.tableId == '2'){
                     this.exportTableToExcel('emp', '收入情况核算表_助理')
+                } else {
+                    // console.log('门店'+this.storeName);
+                    this.exportTableToExcel('dayMoney','收银日报表')
                 }
             },
             //check the list of store
@@ -265,6 +332,42 @@
                 console.log(sums)
                 return sums;
             },
+            getIncomeByPayType() {
+                if (!this.isBlank(this.param.begDate)) {
+                    this.param.begDate = this.moment(this.param.begDate, 'YYYY-MM-DD 00:00:00')
+                }
+                if (!this.isBlank(this.param.endDate)) {
+                    this.param.endDate = this.moment(this.param.endDate, 'YYYY-MM-DD 23:59:59')
+                }
+                var url = this.url + '/purchasedItemsAction/incomeByPayType'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: this.param,
+                    dataType: 'json',
+                }).then((response) => {
+                    var res = response.data
+                    if (res.retCode == '0000') {
+                        this.incomeByPayType = res.retData
+                    } else {
+                        alert(res.retMsg)
+                    }
+
+                }).catch((error) => {
+                    //console.log('商铺查询请求失败')
+                });
+            },
+            getData(item) {
+                if (item != '3') {
+                    this.queryObjectList()
+                } else {
+                    this.getIncomeByPayType()
+                }
+            }
         },
         created() {
             this.queryObjectList()

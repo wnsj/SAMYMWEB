@@ -339,3 +339,15 @@ body{
 .jh-pr-28{
     padding-right: 28px;
 }
+
+.arrow-bottom{
+	content: "";
+	display: block;
+	border-width: 0px 15px 15px;
+	border-style: none solid solid;
+	border-color: transparent transparent #e3e3e3;
+	-webkit-transform: rotate(-180deg);
+	margin-left: 45%;
+	z-index: 999;
+	width: 100px;
+}

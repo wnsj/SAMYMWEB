@@ -18,7 +18,9 @@ exports.cssLoaders = function (options) {
   const cssLoader = {
     loader: 'css-loader',
     options: {
-      sourceMap: options.sourceMap
+      sourceMap: options.sourceMap,
+			//后加，压缩css文件
+			minimize:true 
     }
   }
 

@@ -52,7 +52,6 @@
 					},
 					data: {
 						isuse: '1',
-						storeId:this.storeId(),
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -72,7 +71,7 @@
 
 		},
 		created() {
-			// this.getUrRole()
+			this.getUrRole()
 		},
 	}
 </script>

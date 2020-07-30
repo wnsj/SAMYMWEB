@@ -222,6 +222,11 @@ export default new Router({
                     path: '/MP/Income',
                     name: 'Income',
                     component: () => import("../components/MP/Income"),
+                },
+                {
+                    path: '/MP/Questionnaire',
+                    name: 'Questionnaire',
+                    component: () => import("../components/MP/Questionnaire"),
                 }],
             redirect: '/MP/Visitor'
         }]

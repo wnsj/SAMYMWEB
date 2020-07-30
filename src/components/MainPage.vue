@@ -5,7 +5,7 @@
                 <h2 class="pull-left" style="padding-top:3px; height:100%;">
                     <img style="width: 50px; height: 50px;display: block;float: left;" src="../assets/img/logo1.png"/>
                     <div style="float: left;margin-left: 10px;">
-                        <strong  style=" display:block;font-size: 24px; line-height:26px;">圣安米悦</strong>
+                        <strong style=" display:block;font-size: 24px; line-height:26px;">圣安米悦</strong>
                         <p style="font-size:16px;line-height:16px;margin-top: 5px;">门 店 管 理 系 统</p>
                     </div>
 
@@ -20,115 +20,182 @@
         </div>
         <div class="container-fluid clear-mp" id="Odiv">
             <div class="row clear-mp">
-                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 my-aside clear-mp" id="Adiv" >
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 my-aside clear-mp" id="Adiv">
                     <!-- <p style=" width:100%; height:50px; line-height:50px; font-size: 30px;font-weight: bold;color: #795548;text-align: left;box-sizing: border-box; padding-left:50px;">
                         功能列表</p> -->
                     <div id="aside-menu">
                         <el-row>
                             <el-col :span="24">
-                            <el-menu
-                                  default-active="2"
-                                  class="el-menu-vertical-demo"
-                                  @open="handleOpen"
-                                  @close="handleClose"
-                                  unique-opened
-                                  background-color="rgb(230, 230, 230)"
-                                  text-color="#333"
-                                  active-text-color="#ffd04b" 
-                                  :default-openeds="openeds">
-                                  <el-submenu index="1">
-                                    <template slot="title">
-                                      <i class="el-icon-folder-add"></i>
-                                      <span>客户管理</span>
-                                    </template>
-                                      <el-menu-item index="1-1"><router-link to="/MP/Visitor">客户管理</router-link></el-menu-item>
-                                  </el-submenu>
-
-                                  <el-submenu index="2">
-                                    <template slot="title">
-                                      <i class="el-icon-folder-add"></i>
-                                      <span>订单管理</span>
-                                    </template>
-                                      <el-menu-item index="2-1"><router-link to="/MP/SettleSummary">消费管理</router-link></el-menu-item>
-                                      <el-menu-item index="2-2"><router-link to="/MP/Charge">已购产品管理</router-link></el-menu-item>
-                                      <el-menu-item index="2-3"><router-link to="/MP/Order">预约管理</router-link></el-menu-item>
-                                      <el-menu-item index="2-4"><router-link to="/MP/CashDeposit">定金管理</router-link></el-menu-item>
-                                      <el-menu-item index="2-5"><router-link to="/MP/Refund">退费管理</router-link></el-menu-item>
-                                      <el-menu-item index="2-6"><router-link to="/MP/Income">收入记录明细</router-link></el-menu-item>
-                                  </el-submenu>
-
-                                  <el-submenu index="3">
-                                    <template slot="title">
-                                      <i class="el-icon-folder-add"></i>
-                                      <span>门店管理</span>
-                                    </template>
-                                      <el-menu-item index="3-1"><router-link to="/MP/Employee">员工管理</router-link></el-menu-item>
-                                      <el-menu-item index="3-2"><router-link to="/MP/Position">岗位管理</router-link></el-menu-item>
-                                      <el-menu-item index="3-3"><router-link to="/MP/ScheduleEmp">排班管理</router-link></el-menu-item>
-                                      <el-menu-item index="3-4"><router-link to="/MP/Project">产品管理</router-link></el-menu-item>
-                                      <el-menu-item index="3-5"><router-link to="/MP/CounseRoomManage">咨询室管理</router-link></el-menu-item>
-                                      <el-menu-item index="3-6"><router-link to="/MP/CounseRoomTimeTotal">咨询室总览</router-link></el-menu-item>
-                                  </el-submenu>
-
-                                  <el-submenu index="4">
-                                    <template slot="title">
-                                      <i class="el-icon-folder-add"></i>
-                                      <span>基础设置</span>
-                                    </template>
-                                      <el-menu-item index="4-1"><router-link to="/MP/Occupation">职业管理</router-link></el-menu-item>
-                                      <el-menu-item index="4-2"><router-link to="/MP/Education">学历管理</router-link></el-menu-item>
-                                      <el-menu-item index="4-3"><router-link to="/MP/Region">区域管理</router-link></el-menu-item>
-                                      <el-menu-item index="4-4"><router-link to="/MP/VisitState">状态管理</router-link></el-menu-item>
-                                      <el-menu-item index="4-5"><router-link to="/MP/DiseaseType">咨询方向</router-link></el-menu-item>
-                                  </el-submenu>
-
-                                  <el-submenu index="5">
-                                    <template slot="title">
-                                      <i class="el-icon-folder-add"></i>
-                                      <span>权限管理</span>
-                                    </template>
-                                      <el-menu-item index="5-1"><router-link to="/MP/NewRuleManager">角色设置</router-link></el-menu-item>
-                                      <el-menu-item index="5-2"><router-link to="/MP/UmsPermissionManage">权限设置</router-link></el-menu-item>
-                                  </el-submenu>
-
-
-                                  <el-submenu index="6" class="menu-item-pd">
-                                    <template slot="title">
-                                      <i class="el-icon-folder-add"></i>
-                                      <span>报表管理</span>
-                                    </template>
-                                    <el-submenu index="6-1">
-                                      <template slot="title">
-                                          <i class="el-icon-folder-remove"></i>
-                                          <span>财务核算表</span>
-                                      </template>
-                                      <el-menu-item index="6-1-1"><router-link to="/SummaryMenu/ConsultStoreSummary">到店消费核算</router-link></el-menu-item>
-                                      <el-menu-item index="6-1-2"><router-link to="/SummaryMenu/EmpConsumeSummary">收入情况核算</router-link></el-menu-item>
-                                      <el-menu-item index="6-1-3"><router-link to="/SummaryMenu/CostMoneySummary">消耗金额核算</router-link></el-menu-item>
-                                    </el-submenu>
-                                    <el-submenu index="6-2">
-                                      <template slot="title">
-                                          <i class="el-icon-folder-remove"></i>
-                                          <span>客户分析表</span>
-                                       </template>
-                                      <el-menu-item index="6-2-1"><router-link to="/SummaryMenu/ProSummary">套餐产品消耗</router-link></el-menu-item>
-                                      <el-menu-item index="6-2-2"><router-link to="/SummaryMenu/VsMonthSummary">月度咨客状态</router-link></el-menu-item>
-                                      <el-menu-item index="6-2-3"><router-link to="/SummaryMenu/VisitorConSummary">客户产品消耗</router-link></el-menu-item>
-                                      <el-menu-item index="6-2-4"><router-link to="/SummaryMenu/VisitorDeSummary">访客跟踪明细</router-link></el-menu-item>
-                                    </el-submenu>
-                                    <el-submenu index="6-3">
-                                      <template slot="title">
-                                          <i class="el-icon-folder-remove"></i>
-                                          <span>咨询方向分析表</span>
-                                       </template>
-                                      <el-menu-item index="6-3-1"><router-link to="/SummaryMenu/FirstVdSummary">初访咨询方向</router-link></el-menu-item>
-                                      <el-menu-item index="6-3-2"><router-link to="/SummaryMenu/EmpDtSummary">初诊咨询方向</router-link></el-menu-item>
+                                <el-menu
+                                    default-active="2"
+                                    class="el-menu-vertical-demo"
+                                    @open="handleOpen"
+                                    @close="handleClose"
+                                    unique-opened
+                                    background-color="rgb(230, 230, 230)"
+                                    text-color="#333"
+                                    active-text-color="#ffd04b"
+                                    :default-openeds="openeds">
+                                    <el-submenu index="1">
+                                        <template slot="title">
+                                            <i class="el-icon-folder-add"></i>
+                                            <span>客户管理</span>
+                                        </template>
+                                        <el-menu-item index="1-1">
+                                            <router-link to="/MP/Visitor">客户管理</router-link>
+                                        </el-menu-item>
                                     </el-submenu>
 
-                                  </el-submenu>
+                                    <el-submenu index="2">
+                                        <template slot="title">
+                                            <i class="el-icon-folder-add"></i>
+                                            <span>订单管理</span>
+                                        </template>
+                                        <el-menu-item index="2-1">
+                                            <router-link to="/MP/SettleSummary">消费管理</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="2-2">
+                                            <router-link to="/MP/Charge">已购产品管理</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="2-3">
+                                            <router-link to="/MP/Order">预约管理</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="2-4">
+                                            <router-link to="/MP/CashDeposit">定金管理</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="2-5">
+                                            <router-link to="/MP/Refund">退费管理</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="2-6">
+                                            <router-link to="/MP/Income">收入记录明细</router-link>
+                                        </el-menu-item>
+                                    </el-submenu>
 
+                                    <el-submenu index="3">
+                                        <template slot="title">
+                                            <i class="el-icon-folder-add"></i>
+                                            <span>门店管理</span>
+                                        </template>
+                                        <el-menu-item index="3-1">
+                                            <router-link to="/MP/Employee">员工管理</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="3-2">
+                                            <router-link to="/MP/Position">岗位管理</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="3-3">
+                                            <router-link to="/MP/ScheduleEmp">排班管理</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="3-4">
+                                            <router-link to="/MP/Project">产品管理</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="3-5">
+                                            <router-link to="/MP/CounseRoomManage">咨询室管理</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="3-6">
+                                            <router-link to="/MP/CounseRoomTimeTotal">咨询室总览</router-link>
+                                        </el-menu-item>
+                                    </el-submenu>
+
+                                    <el-submenu index="4">
+                                        <template slot="title">
+                                            <i class="el-icon-folder-add"></i>
+                                            <span>基础设置</span>
+                                        </template>
+                                        <el-menu-item index="4-1">
+                                            <router-link to="/MP/Occupation">职业管理</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="4-2">
+                                            <router-link to="/MP/Education">学历管理</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="4-3">
+                                            <router-link to="/MP/Region">区域管理</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="4-4">
+                                            <router-link to="/MP/VisitState">状态管理</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="4-5">
+                                            <router-link to="/MP/DiseaseType">咨询方向</router-link>
+                                        </el-menu-item>
+                                    </el-submenu>
+
+                                    <el-submenu index="5">
+                                        <template slot="title">
+                                            <i class="el-icon-folder-add"></i>
+                                            <span>权限管理</span>
+                                        </template>
+                                        <el-menu-item index="5-1">
+                                            <router-link to="/MP/NewRuleManager">角色设置</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="5-2">
+                                            <router-link to="/MP/UmsPermissionManage">权限设置</router-link>
+                                        </el-menu-item>
+                                    </el-submenu>
+
+
+                                    <el-submenu index="6" class="menu-item-pd">
+                                        <template slot="title">
+                                            <i class="el-icon-folder-add"></i>
+                                            <span>报表管理</span>
+                                        </template>
+                                        <el-submenu index="6-1">
+                                            <template slot="title">
+                                                <i class="el-icon-folder-remove"></i>
+                                                <span>财务核算表</span>
+                                            </template>
+                                            <el-menu-item index="6-1-1">
+                                                <router-link to="/SummaryMenu/ConsultStoreSummary">到店消费核算</router-link>
+                                            </el-menu-item>
+                                            <el-menu-item index="6-1-2">
+                                                <router-link to="/SummaryMenu/EmpConsumeSummary">收入情况核算</router-link>
+                                            </el-menu-item>
+                                            <el-menu-item index="6-1-3">
+                                                <router-link to="/SummaryMenu/CostMoneySummary">消耗金额核算</router-link>
+                                            </el-menu-item>
+                                        </el-submenu>
+                                        <el-submenu index="6-2">
+                                            <template slot="title">
+                                                <i class="el-icon-folder-remove"></i>
+                                                <span>客户分析表</span>
+                                            </template>
+                                            <el-menu-item index="6-2-1">
+                                                <router-link to="/SummaryMenu/ProSummary">套餐产品消耗</router-link>
+                                            </el-menu-item>
+                                            <el-menu-item index="6-2-2">
+                                                <router-link to="/SummaryMenu/VsMonthSummary">月度咨客状态</router-link>
+                                            </el-menu-item>
+                                            <el-menu-item index="6-2-3">
+                                                <router-link to="/SummaryMenu/VisitorConSummary">客户产品消耗</router-link>
+                                            </el-menu-item>
+                                            <el-menu-item index="6-2-4">
+                                                <router-link to="/SummaryMenu/VisitorDeSummary">访客跟踪明细</router-link>
+                                            </el-menu-item>
+                                        </el-submenu>
+                                        <el-submenu index="6-3">
+                                            <template slot="title">
+                                                <i class="el-icon-folder-remove"></i>
+                                                <span>咨询方向分析表</span>
+                                            </template>
+                                            <el-menu-item index="6-3-1">
+                                                <router-link to="/SummaryMenu/FirstVdSummary">初访咨询方向</router-link>
+                                            </el-menu-item>
+                                            <el-menu-item index="6-3-2">
+                                                <router-link to="/SummaryMenu/EmpDtSummary">初诊咨询方向</router-link>
+                                            </el-menu-item>
+                                        </el-submenu>
+
+                                    </el-submenu>
+
+                                    <el-submenu index="7">
+                                        <template slot="title">
+                                            <i class="el-icon-folder-add"></i>
+                                            <span>问卷调查管理</span>
+                                        </template>
+                                        <el-menu-item index="7-1">
+                                            <router-link to="/MP/Questionnaire">问卷调查管理</router-link>
+                                        </el-menu-item>
+                                    </el-submenu>
                                 </el-menu>
-                                </el-col>
+                            </el-col>
                         </el-row>
                     </div>
 
@@ -197,7 +264,7 @@
                 // bool4: false,
                 // bool5: false,
                 onString: 'Visitor',
-                openeds:['1']
+                openeds: ['1']
             }
         },
         methods: {
@@ -332,38 +399,44 @@
     #aside-menu::-webkit-scrollbar {
         display: none;
     }
-    #aside-menu .el-submenu .el-menu-item{
-        background: #F1F1F1!important;
-        padding-left: 56px!important;
+
+    #aside-menu .el-submenu .el-menu-item {
+        background: #F1F1F1 !important;
+        padding-left: 56px !important;
     }
-    #aside-menu .menu-item-pd .el-menu-item{
-        padding-left: 75px!important;
+
+    #aside-menu .menu-item-pd .el-menu-item {
+        padding-left: 75px !important;
     }
-    #aside-menu .el-submenu .el-menu-item:hover{
-         background: #fff!important;
+
+    #aside-menu .el-submenu .el-menu-item:hover {
+        background: #fff !important;
     }
-    #aside-menu li{
+
+    #aside-menu li {
         font-size: 18px;
-     }
+    }
 
     #aside-menu li a {
-         color: #333;
-         display: block;
-     }
-    #aside-menu li a.router-link-active{
-         color: #f2ad4e;
-         text-decoration: none;
-     }
+        color: #333;
+        display: block;
+    }
+
+    #aside-menu li a.router-link-active {
+        color: #f2ad4e;
+        text-decoration: none;
+    }
 
     #aside-menu li a:hover {
-         color: #f2ad4e!important;
-     }
+        color: #f2ad4e !important;
+    }
 
 
-   #aside-menu li div.el-submenu__title{
-               font-size: 18px;
+    #aside-menu li div.el-submenu__title {
+        font-size: 18px;
         /* color: #F04134; */
     }
+
     #aside-menu dl {
         margin-bottom: 0;
         height: 50px;
@@ -420,12 +493,15 @@
         text-align: left;
         line-height: 50px;
     }
+
     #aside-menu dl dt i {
         text-indent: 25px;
     }
+
     #aside-menu dl dd i {
         text-indent: 10px;
     }
+
     #aside-menu dl i:before {
         position: absolute;
         left: -25px;

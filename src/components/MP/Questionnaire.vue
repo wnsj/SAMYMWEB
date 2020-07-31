@@ -97,20 +97,34 @@
                     </el-button>
                 </el-table-column>
             </el-table>
-            <!--            <el-row class="second_interval">-->
-            <!--                <el-col :span="24">-->
-            <!--                    <el-pagination-->
-            <!--                        @current-change="handleCurrentChange"-->
-            <!--                        @size-change="handleSizeChange"-->
-            <!--                        :current-page="param.current"-->
-            <!--                        :page-sizes="[10,20,30,50]"-->
-            <!--                        :page-size="param.pageSize"-->
-            <!--                        layout="total, sizes, prev, pager, next, jumper"-->
-            <!--                        :total="totalAmount"-->
-            <!--                    >-->
-            <!--                    </el-pagination>-->
-            <!--                </el-col>-->
-            <!--            </el-row>-->
+			
+			<!-- 添加问题弹窗 -->
+			<el-dialog title="问卷调查" :visible.sync="objParam.dialogVisible" width="40%">
+				<el-card class="form-container" shadow="never">
+				  <el-form :model="objParam" :rules="rules" ref="productAttrFrom" label-width="150px">
+				    <el-form-item label="问卷调查名称：" prop="name">
+				      <el-input v-model="objParam.queName"></el-input>
+					  <el-button type="primary" @click="addProbem()">添加</el-button>
+				    </el-form-item>
+					<el-form-item v-for="item in objParam.problemBeanList" :key="item.proSort">
+					  <el-input v-model="item.name"></el-input>
+					  <el-select v-model="item.proType">
+						 <el-option :value="0">否</el-option>
+					    <el-option :value="1">是</el-option>
+					  </el-select>
+					  <el-select v-model="item.answer">
+					  	<el-option :value="0">否</el-option>
+					    <el-option :value="1">是</el-option>
+					  </el-select>
+					</el-form-item>
+					<el-form-item>
+					  <el-button type="primary" @click="onSubmit('productAttrFrom')">提交</el-button>
+					  <el-button   @click="resetForm('productAttrFrom')">重置</el-button>
+					</el-form-item>
+				  </el-form>
+				</el-card>
+			</el-dialog>
+			
         </div>
     </div>
 </template>
@@ -126,24 +140,28 @@
                     queName: '',
                     problemBeanList: []
                 },
-                // storeList: [],
+				
+				objProblem:{
+					proSort:'',
+					proLabel:'',
+					proType:'',
+					answer:'',
+					
+				},
+				problemBeanList:[],
+				objParam:{
+					queName:'',
+					dialogVisible:false,
+					problemBeanList:[
+						{
+							proSort:1,
+							proLabel:'',
+							proType:'',
+							answer:'',
+						}
+					]
+				},
                 tableData: [],
-                // totalAmount: 0,
-                // pickerOptions0: {
-                //     disabledDate: (time) => {
-                //         if (this.param.firstVisitEndTime !== '' && this.param.firstVisitEndTime !== null) {
-                //             return time.getTime() > Date.now() || time.getTime() > this.param.firstVisitEndTime
-                //         } else {
-                //             return time.getTime() > Date.now()
-                //         }
-                //     }
-                // },
-                // pickerOptions1: {
-                //     disabledDate: (time) => {
-                //         return time.getTime() < this.param.firstVisitStartTime || time.getTime() > Date.now()
-                //     }
-                // },
-                // accountType:this.accountType(),
             };
         },
         methods: {
@@ -156,6 +174,17 @@
             cellStyle() {
                 return 'text-align: center;'
             },
+			
+			//弹窗
+			addQueClick(){
+				this.objParam.dialogVisible=true
+			},
+			//添加问题数据
+			addProbem(){
+				var i = this.objParam.problemBeanList.length
+				this.objProblem.proSort=i+1
+				this.objParam.problemBeanList.push(this.objProblem)
+			},
             // 获取门店
             // getStore() {
             //     var url = this.url + '/storeAction/queryStore'

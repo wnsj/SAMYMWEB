@@ -53,6 +53,7 @@
                 <el-table-column
                     align="center"
                     prop="visitTime"
+                    :formatter="dateFormat"
                     label="来访时间"
                     min-width="100">
                 </el-table-column>
@@ -82,6 +83,8 @@
 </template>
 
 <script>
+    import dateUtil from "../common/utils/dateUtil";
+
     export default {
         components: {},
         data() {
@@ -134,7 +137,10 @@
                     //console.log('岗位数据请求失败处理')
                 });
             },
-
+            // 格式化时间
+            dateFormat: function (row, column, cellValue, index) {
+                return dateUtil.getFormateDateYMD(cellValue)
+            },
             // 获取初访咨询方向汇总数据
             async getAnswerByCondition() {
                 var url = this.url + '/answerBean/getAnswerByCondition'

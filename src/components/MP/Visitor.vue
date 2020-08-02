@@ -632,6 +632,10 @@
             },
         },
         mounted() {
+            if (!this.has("SAMY:MP:Visitor:Query")) {
+                this.$refs.emp.setEmp(this.getEmpId())
+                this.empId = this.getEmpId()
+            }
 			this.$refs.emp.getEmployeeList()
         },
     }

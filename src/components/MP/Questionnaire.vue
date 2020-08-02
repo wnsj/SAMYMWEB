@@ -170,11 +170,13 @@
                         </el-col>
 
 
-            		  <el-select v-model="item.proType" >
-            			 <el-option :value="0">没有选项</el-option>
-            		     <el-option :value="1">二选一</el-option>
-                         <el-option :value="2">多选一</el-option>
-            		  </el-select>
+                        <el-select v-model="item.proType" >
+                            <el-option v-for="item in proList"
+                                       :key="item.id"
+                                       :label="item.label"
+                                       :value="item.id">
+                            </el-option>
+                        </el-select>
 
                       <el-button  @click="delEditProbem(index,$event)">删除此问题</el-button>
 
@@ -222,6 +224,7 @@
 
 				},
 				problemBeanList:[],
+                proList: [{id:0,label:"无选项"},{id:1,label:"二选一"},{id:2,label:"多选一"}],
 				objParam:{
 					queName:'',
                     queState: true,

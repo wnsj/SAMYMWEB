@@ -61,6 +61,39 @@
                     </el-col>
                 </el-row>
             </el-form>
+            <el-dialog title="问卷调查" :visible.sync="dialogVisible" width="40%">
+                <el-card class="form-container" shadow="never">
+                    <el-form :model="select">
+                        <el-form-item label="问卷调查名称：" label-width="110px">
+                            <el-input v-model="select.queName"></el-input>
+                        </el-form-item>
+
+                        <el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort" >
+                            <el-col class="qesitem">
+                                <el-form-item label="问题序号：" label-width="110px">
+                                    <el-input v-model="item.proSort"></el-input>
+                                </el-form-item>
+                                <el-form-item label="问题描述：" label-width="110px">
+                                    <el-input v-model="item.proLabel"></el-input>
+                                </el-form-item>
+                                <el-form-item label="选项答案：" label-width="110px">
+                                    <el-input v-model="item.selectedAnswer"></el-input>
+                                </el-form-item>
+                                <el-form-item label="描述答案：" label-width="110px">
+                                    <el-input v-model="item.describeAnswer"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-select v-model="item.proType" >
+                                <el-option v-for="item in proList"
+                                           :key="item.id"
+                                           :label="item.label"
+                                           :value="item.id">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-form>
+                </el-card>
+            </el-dialog>
         </div>
 
         <div>
@@ -68,7 +101,7 @@
                 :data="tableData"
                 :cell-style="cellStyle"
                 max-height="530"
-                id="firstVd"
+                @row-dblclick="toDetails"
                 :header-cell-style="headerStyle"
                 style="width: 95%;margin-left: 3%;margin-top: 20px"
                 border>
@@ -137,12 +170,18 @@
                     queId: '',
                     storeId: this.storeId()
                 },
+                proList: [{id:0,label:"无选项"},{id:1,label:"二选一"},{id:2,label:"多选一"}],
+                select:{
+                    queName: '',
+                    problemBeanList:[]
+                },
                 queVisitorList: [],
                 storeList: [],
                 couList: [],
                 queList: [],
                 tableData: [],
                 totalAmount: 0,
+                dialogVisible: false,
                 accountType: this.accountType()
             };
         },
@@ -244,6 +283,34 @@
                 }).catch(error => {
                     console.log(error);
                 })
+            },
+            toDetails(row, column, event) {
+                this.dialogVisible = true
+                this.select.queName = row.queName
+                var url = this.url + '/answerBean/getAnswerByQueId'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        vsId:row.vsId,
+                        queId: row.queId
+                    },
+                    dataType: 'json',
+                }).then((response) => {
+                    var res = response.data
+                    if (res.retCode == '0000') {
+                        this.select.problemBeanList = res.retData
+                    } else {
+                        alert(res.retMsg)
+                    }
+
+                }).catch((error) => {
+                    //console.log('岗位数据请求失败处理')
+                });
             },
             // 格式化时间
             dateFormat: function (row, column, cellValue, index) {

@@ -146,7 +146,6 @@
 					proLabel:'',
 					proType:'',
 					answer:'',
-					
 				},
 				problemBeanList:[],
 				objParam:{

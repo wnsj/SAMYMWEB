@@ -61,38 +61,62 @@
                     </el-col>
                 </el-row>
             </el-form>
-            <el-dialog title="问卷调查" :visible.sync="dialogVisible" width="40%">
-                <el-card class="form-container" shadow="never">
-                    <el-form :model="select">
-                        <el-form-item label="问卷调查名称：" label-width="110px">
-                            <el-input v-model="select.queName"></el-input>
-                        </el-form-item>
+<!--            <el-dialog title="问卷调查" :visible.sync="dialogVisible" width="40%">-->
+<!--                <el-card class="form-container" shadow="never">-->
+<!--                    <el-form :model="select">-->
+<!--                        <el-form-item label="问卷调查名称：" label-width="110px">-->
+<!--                            <el-input v-model="select.queName"></el-input>-->
+<!--                        </el-form-item>-->
 
-                        <el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort" >
-                            <el-col class="qesitem">
-                                <el-form-item label="问题序号：" label-width="110px">
-                                    <el-input v-model="item.proSort"></el-input>
-                                </el-form-item>
-                                <el-form-item label="问题描述：" label-width="110px">
-                                    <el-input v-model="item.proLabel"></el-input>
-                                </el-form-item>
-                                <el-form-item label="选项答案：" label-width="110px">
-                                    <el-input v-model="item.selectedAnswer"></el-input>
-                                </el-form-item>
-                                <el-form-item label="描述答案：" label-width="110px">
-                                    <el-input v-model="item.describeAnswer"></el-input>
-                                </el-form-item>
-                            </el-col>
-                            <el-select v-model="item.proType" >
-                                <el-option v-for="item in proList"
-                                           :key="item.id"
-                                           :label="item.label"
-                                           :value="item.id">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-form>
-                </el-card>
+<!--                        <el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort">-->
+<!--                            <el-card>-->
+<!--                                <el-form-item label="问题序号：" label-width="110px">-->
+<!--                                    <el-input v-model="item.proSort"></el-input>-->
+<!--                                </el-form-item>-->
+<!--                                <el-form-item label="问题描述：" label-width="110px">-->
+<!--                                    <el-input v-model="item.proLabel"></el-input>-->
+<!--                                </el-form-item>-->
+<!--                                <el-form-item label="选项答案：" label-width="110px">-->
+<!--                                    <el-input v-model="item.selectedAnswer"></el-input>-->
+<!--                                </el-form-item>-->
+<!--                                <el-form-item label="描述答案：" label-width="110px">-->
+<!--                                    <el-input v-model="item.describeAnswer"></el-input>-->
+<!--                                </el-form-item>-->
+<!--                            </el-card>-->
+<!--                        </el-form-item>-->
+<!--                    </el-form>-->
+<!--                </el-card>-->
+<!--            </el-dialog>-->
+
+            <el-dialog title="问卷调查" :visible.sync="dialogVisible" width="40%">
+                <!--				<el-card class="form-container" shadow="never">-->
+                <el-form :model="select" label-position="right" label-width="110px" :inline="true" size="small">
+                    <el-row>
+                        <el-col :span="12">
+                            <el-form-item label="问卷调查名称：">
+                                <el-input v-model="select.queName"></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort">
+                        <el-card>
+                            <!-- <span class="num-sort">{{index+1}}.</span> -->
+
+                            <el-form-item label="问题序号：">
+                                <el-input v-model="item.proSort"></el-input>
+                            </el-form-item>
+                            <el-form-item label="问题描述：">
+                                <el-input v-model="item.proLabel"></el-input>
+                            </el-form-item>
+                            <el-form-item label="选项答案：">
+                                <el-input v-model="item.selectedAnswer"></el-input>
+                            </el-form-item>
+                            <el-form-item label="描述答案：">
+                                <el-input v-model="item.describeAnswer"></el-input>
+                            </el-form-item>
+                        </el-card>
+                    </el-form-item>
+                </el-form>
             </el-dialog>
         </div>
 
@@ -170,10 +194,10 @@
                     queId: '',
                     storeId: this.storeId()
                 },
-                proList: [{id:0,label:"无选项"},{id:1,label:"二选一"},{id:2,label:"多选一"}],
-                select:{
+                select: {
                     queName: '',
-                    problemBeanList:[]
+                    queState: '',
+                    problemBeanList: []
                 },
                 queVisitorList: [],
                 storeList: [],
@@ -296,7 +320,7 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        vsId:row.vsId,
+                        vsId: row.vsId,
                         queId: row.queId
                     },
                     dataType: 'json',

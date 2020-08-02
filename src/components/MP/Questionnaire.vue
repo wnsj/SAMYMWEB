@@ -65,6 +65,7 @@
 
         <div>
             <el-table
+            @row-click="editQueClick"
                 :data="tableData"
                 :cell-style="cellStyle"
                 max-height="530"
@@ -87,44 +88,116 @@
                     align="center"
                     label="操作"
                     min-width="100">
-                    <el-button type="primary" size="small"
+                    <el-button  type="primary" size="small"
                                style="width: 85px"
-                               class="jh-fr">查看
+                               class="jh-fr">编辑
                     </el-button>
-                    <el-button type="primary" size="small"
-                               style="width: 85px"
-                               class="jh-fr">启用
-                    </el-button>
+
                 </el-table-column>
             </el-table>
-			
+
 			<!-- 添加问题弹窗 -->
 			<el-dialog title="问卷调查" :visible.sync="objParam.dialogVisible" width="40%">
 				<el-card class="form-container" shadow="never">
-				  <el-form :model="objParam" :rules="rules" ref="productAttrFrom" label-width="150px">
-				    <el-form-item label="问卷调查名称：" prop="name">
+				  <el-form :model="objParam"  >
+				    <el-form-item label="问卷调查名称：" prop="name" label-width="110px">
 				      <el-input v-model="objParam.queName"></el-input>
-					  <el-button type="primary" @click="addProbem()">添加</el-button>
+
 				    </el-form-item>
-					<el-form-item v-for="item in objParam.problemBeanList" :key="item.proSort">
-					  <el-input v-model="item.name"></el-input>
-					  <el-select v-model="item.proType">
-						 <el-option :value="0">否</el-option>
-					    <el-option :value="1">是</el-option>
+
+					<el-form-item v-for="(item,index) in objParam.problemBeanList" :key="item.proSort" >
+                        <el-col class="qesitem">
+                            <!-- <span class="num-sort">{{index+1}}.</span> -->
+                            <el-form-item label="问题序号：" label-width="110px">
+                                <el-input v-model="item.proSort"></el-input>
+                            </el-form-item>
+                            <el-form-item label="问题描述：" label-width="110px">
+                                <el-input v-model="item.proLabel"></el-input>
+                            </el-form-item>
+                        </el-col>
+
+
+					  <el-select v-model="item.proType" >
+						 <el-option :value="0">没有选项</el-option>
+					     <el-option :value="1">二选一</el-option>
+                         <el-option :value="2">多选一</el-option>
 					  </el-select>
-					  <el-select v-model="item.answer">
-					  	<el-option :value="0">否</el-option>
-					    <el-option :value="1">是</el-option>
-					  </el-select>
+					 <!-- <el-select v-model="item.answer">
+					  	<el-option :value="1">没有描述</el-option>
+					    <el-option :value="2">有描述</el-option>
+					  </el-select> -->
+
+
+
+                      <el-button  @click="delProbem(index,$event)">删除此问题</el-button>
+
 					</el-form-item>
+
+
+
+
 					<el-form-item>
-					  <el-button type="primary" @click="onSubmit('productAttrFrom')">提交</el-button>
-					  <el-button   @click="resetForm('productAttrFrom')">重置</el-button>
+                        <el-checkbox label="是否使用" v-model="objParam.queState"></el-checkbox>
+                      <el-button type="primary" @click="addProbem()">添加问题</el-button>
+
+					  <el-button type="primary" @click="addQue()">提交</el-button>
+					  <el-button   @click="resetProbem()">重置</el-button>
 					</el-form-item>
+
+
+
 				  </el-form>
 				</el-card>
 			</el-dialog>
-			
+
+
+            <el-dialog title="编辑问卷调查" :visible.sync="editState" width="40%">
+            	<el-card class="form-container" shadow="never">
+            	  <el-form :model="editParam"  >
+            	    <el-form-item label="问卷调查名称：" prop="name" label-width="110px">
+            	      <el-input v-model="editParam.queName"></el-input>
+
+            	    </el-form-item>
+
+            		<el-form-item v-for="(item,index) in editParam.problemBeanList" :key="item.proSort" >
+                        <el-col class="qesitem">
+                            <el-form-item label="问题序号：" label-width="110px">
+                                <el-input v-model="item.proSort"></el-input>
+                            </el-form-item>
+                            <el-form-item label="问题描述：" label-width="110px">
+                                <el-input v-model="item.proLabel"></el-input>
+                            </el-form-item>
+                        </el-col>
+
+
+            		  <el-select v-model="item.proType" >
+            			 <el-option :value="0">没有选项</el-option>
+            		     <el-option :value="1">二选一</el-option>
+                         <el-option :value="2">多选一</el-option>
+            		  </el-select>
+
+                      <el-button  @click="delEditProbem(index,$event)">删除此问题</el-button>
+
+            		</el-form-item>
+
+
+
+
+            		<el-form-item>
+                        <el-checkbox label="是否使用" v-model="editParam.queState"></el-checkbox>
+                      <!-- <el-button type="primary" @click="addEditProbem()">添加问题</el-button> -->
+
+            		  <el-button type="primary" @click="editQue()">提交</el-button>
+            		  <!-- <el-button   @click="resetProbem()">重置</el-button> -->
+            		</el-form-item>
+
+
+
+            	  </el-form>
+            	</el-card>
+            </el-dialog>
+
+
         </div>
     </div>
 </template>
@@ -140,7 +213,7 @@
                     queName: '',
                     problemBeanList: []
                 },
-				
+
 				objProblem:{
 					proSort:'',
 					proLabel:'',
@@ -150,17 +223,20 @@
 				problemBeanList:[],
 				objParam:{
 					queName:'',
+                    queState: true,
 					dialogVisible:false,
 					problemBeanList:[
 						{
 							proSort:1,
 							proLabel:'',
 							proType:'',
-							answer:'',
+							//answer:'',
 						}
 					]
 				},
                 tableData: [],
+                editState: false,
+                editParam: ''
             };
         },
         methods: {
@@ -173,17 +249,74 @@
             cellStyle() {
                 return 'text-align: center;'
             },
-			
+
 			//弹窗
 			addQueClick(){
 				this.objParam.dialogVisible=true
 			},
+
+            //弹窗
+            editQueClick(row, event, column){
+            	this.editState=true
+                console.log(row)
+                this.editParam = row
+            },
+
 			//添加问题数据
 			addProbem(){
-				var i = this.objParam.problemBeanList.length
-				this.objProblem.proSort=i+1
-				this.objParam.problemBeanList.push(this.objProblem)
+				// var i = this.objParam.problemBeanList.length
+    //             this.objProblem.proSort=i+1
+                var obj = Object.assign({}, this.objProblem); //深拷贝
+
+				this.objParam.problemBeanList.push(obj)
 			},
+
+            addEditProbem(){
+                // var i = this.objParam.problemBeanList.length
+    //             this.objProblem.proSort=i+1
+                var obj = Object.assign({}, this.objProblem); //深拷贝
+
+                this.editParam.problemBeanList.push(obj)
+            },
+
+
+            // 清空问题
+            resetProbem(){
+                var obj = {
+					queName:'',
+                    queState: true,
+					dialogVisible:true,
+					problemBeanList:[
+						{
+							proSort:1,
+							proLabel:'',
+							proType:'',
+							//answer:'',
+						}
+					]
+				}
+
+                this.objParam = obj;
+            },
+
+
+            //删除问题数据
+            delProbem(index,event){
+               // this.current = index;
+               //       //获取点击对象
+               //       var el = event.currentTarget;
+               //       console.log(el);
+               //       console.log(index)
+
+                this.objParam.problemBeanList.splice(index,1)
+
+            },
+            delEditProbem(index,event){
+                this.editParam.problemBeanList.splice(index,1)
+
+            },
+
+
             // 获取门店
             // getStore() {
             //     var url = this.url + '/storeAction/queryStore'
@@ -215,7 +348,10 @@
 
             // 获取初访咨询方向汇总数据
             async getQueByCondition() {
-                var url = this.url + '/questionnaireBean/getQueByCondition'
+
+
+                // var url = this.url + '/questionnaireBean/getQueByCondition'
+                var url = 'http://172.16.3.127:8082/questionnaireBean/getQueByCondition'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -238,8 +374,20 @@
                 });
             },
 
+            //添加问题
             addQue() {
-                var url = this.url + '/questionnaireBean/addQue'
+
+                var queState = this.objParam.queState
+                if (queState == true) {
+                    queState = 1
+                } else {
+                    queState = 2
+                }
+                console.log(queState)
+
+                // var url = this.url + '/questionnaireBean/addQue'
+                var url = 'http://172.16.3.127:8082/questionnaireBean/addQue'
+
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -247,12 +395,66 @@
                         'Content-Type': this.contentType,
                         'Access-Token': this.accessToken
                     },
-                    data: this.param,
+                    // data: this.param,
+                    data: {
+                      queName: this.objParam.queName,
+                      queState: queState,
+                      problemNum: this.objParam.problemBeanList.length,
+                      problemBeanList: this.objParam.problemBeanList
+                    },
                     dataType: 'json',
                 }).then((response) => {
+                    console.log(response)
                     var res = response.data
                     if (res.retCode == '0000') {
                         this.tableData = res.retData
+                        alert('提交成功！')
+                        this.objParam.dialogVisible = false
+                    } else {
+                        alert(res.retMsg)
+                    }
+
+                }).catch((error) => {
+                    //console.log('岗位数据请求失败处理')
+                });
+            },
+
+            editQue() {
+                var queState = this.editParam.queState
+                if (queState == true) {
+                    queState = 1
+                } else {
+                    queState = 2
+                }
+                console.log(queState)
+
+                // var url = this.url + '/questionnaireBean/addQue'
+                var url = 'http://172.16.3.127:8082/questionnaireBean/patchQueById'
+
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    // data: this.param,
+                    data: {
+                      id:this.editParam.id,
+                      queName: this.editParam.queName,
+                      queState: queState,
+                      problemNum: this.editParam.problemBeanList.length,
+                      problemBeanList: this.editParam.problemBeanList,
+
+                    },
+                    dataType: 'json',
+                }).then((response) => {
+                    console.log(response)
+                    var res = response.data
+                    if (res.retCode == '0000') {
+                        // this.tableData = res.retData
+                        alert('修改成功！')
+                        this.editState = false
                     } else {
                         alert(res.retMsg)
                     }
@@ -261,6 +463,7 @@
                     //console.log('岗位数据请求失败处理')
                 });
             }
+
             // // 翻页
             // handleCurrentChange(pageNum) {
             //     this.param.current = pageNum
@@ -279,5 +482,6 @@
 </script>
 
 <style scoped>
-
+.qesitem{margin-bottom: 15px;}
+.qesitem .num-sort{position: absolute;left: -60px;}
 </style>

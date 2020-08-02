@@ -227,6 +227,11 @@ export default new Router({
                     path: '/MP/Questionnaire',
                     name: 'Questionnaire',
                     component: () => import("../components/MP/Questionnaire"),
+                },
+                {
+                    path: '/MP/QueVsAnswer',
+                    name: 'QueVsAnswer',
+                    component: () => import("../components/MP/QueVsAnswer"),
                 }],
             redirect: '/MP/Visitor'
         }]

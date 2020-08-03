@@ -88,7 +88,8 @@
 <!--                </el-card>-->
 <!--            </el-dialog>-->
 
-            <el-dialog title="问卷调查" :visible.sync="dialogVisible" width="40%">
+            <el-dialog :visible.sync="dialogVisible" width="40%">
+                <div slot="title" class="wj-title">问卷调查</div>
                 <!--				<el-card class="form-container" shadow="never">-->
                 <el-form :model="select" label-position="right" label-width="110px"  size="small">
                     <el-row>
@@ -415,6 +416,7 @@
 </script>
 
 <style scoped>
+.wj-title{font-weight: bold;font-size: 20px;}
 .ques-info{text-align: left;}
 .ques-tit{margin-bottom: 20px;font-size: 16px;}
 </style>

@@ -90,18 +90,36 @@
 
             <el-dialog title="问卷调查" :visible.sync="dialogVisible" width="40%">
                 <!--				<el-card class="form-container" shadow="never">-->
-                <el-form :model="select" label-position="right" label-width="110px" :inline="true" size="small">
+                <el-form :model="select" label-position="right" label-width="110px"  size="small">
                     <el-row>
-                        <el-col :span="12">
+                        <div class="ques-info ques-tit"><span>问卷调查名称：</span> {{select.queName}}</div>
+                        <!-- <el-col :span="12">
                             <el-form-item label="问卷调查名称：">
                                 <el-input v-model="select.queName"></el-input>
                             </el-form-item>
-                        </el-col>
+                        </el-col> -->
                     </el-row>
-                    <el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort">
+                    <el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort" label-width="0px">
                         <el-card>
-                            <!-- <span class="num-sort">{{index+1}}.</span> -->
+                            <div class="ques-info"><span>{{item.proSort}}. </span> {{item.proLabel}}</div>
 
+                            <template>
+                                <div class="ques-info" v-if="item.proType==1 && item.selectedAnswer">
+                                     <span v-if="item.selectedAnswer==1">选项答案：是</span>
+                                     <span v-else>选项答案：否</span>
+                                </div>
+                                <div class="ques-info" v-else-if="item.proType==2 && item.selectedAnswer">
+                                     <span>选项答案：{{item.selectedAnswer}}分</span>
+                                </div>
+                            </template>
+
+                            <div class="ques-info"  v-if="item.describeAnswer"><span>描述答案： </span> {{item.describeAnswer}}</div>
+                        </el-card>
+                    </el-form-item>
+
+
+                    <!-- <el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort">
+                        <el-card>
                             <el-form-item label="问题序号：">
                                 <el-input v-model="item.proSort"></el-input>
                             </el-form-item>
@@ -121,7 +139,7 @@
                                 </el-col>
                             </el-row>
                         </el-card>
-                    </el-form-item>
+                    </el-form-item> -->
                 </el-form>
             </el-dialog>
         </div>
@@ -181,6 +199,9 @@
                     </el-pagination>
                 </el-col>
             </el-row>
+
+            <p class="tips">* 双击单行，可查看当前数据</p>
+
         </div>
     </div>
 </template>
@@ -394,5 +415,6 @@
 </script>
 
 <style scoped>
-
+.ques-info{text-align: left;}
+.ques-tit{margin-bottom: 20px;font-size: 16px;}
 </style>

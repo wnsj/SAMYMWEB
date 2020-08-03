@@ -98,7 +98,8 @@
             </el-table>
 
             <!-- 添加问题弹窗 -->
-            <el-dialog title="问卷调查" :visible.sync="objParam.dialogVisible" width="40%">
+            <el-dialog  :visible.sync="objParam.dialogVisible" width="40%">
+                <div slot="title" class="wj-title">新增问卷调查</div>
                 <!--				<el-card class="form-container" shadow="never">-->
                 <el-form :model="objParam" label-position="right" label-width="110px" size="small">
                     <el-row>
@@ -168,7 +169,8 @@
             </el-dialog>
 
             <!-- 编辑问卷调查 -->
-            <el-dialog title="编辑问卷调查" :visible.sync="editState" width="40%">
+            <el-dialog :visible.sync="editState" width="40%">
+                <div slot="title" class="wj-title">编辑问卷调查</div>
                 <el-form :model="editParam" label-position="right" label-width="110px" size="small">
                     <el-row>
                         <el-col :span="12">
@@ -467,6 +469,7 @@
 </script>
 
 <style scoped>
+    .wj-title{font-weight: bold;font-size: 20px;}
     .jh-fr{margin-right: 35px;}
     .qesitem {
         margin-bottom: 15px;

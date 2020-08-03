@@ -192,6 +192,8 @@
                                         </template>
                                         <el-menu-item index="7-1">
                                             <router-link to="/MP/Questionnaire">问卷调查管理</router-link>
+                                        </el-menu-item>
+                                        <el-menu-item index="7-2">
                                             <router-link to="/MP/QueVsAnswer">问卷调查结果</router-link>
                                         </el-menu-item>
                                     </el-submenu>

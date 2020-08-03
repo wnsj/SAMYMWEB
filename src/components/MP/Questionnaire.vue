@@ -100,34 +100,35 @@
             <!-- 添加问题弹窗 -->
             <el-dialog title="问卷调查" :visible.sync="objParam.dialogVisible" width="40%">
                 <!--				<el-card class="form-container" shadow="never">-->
-                <el-form :model="objParam" label-position="right" label-width="110px" :inline="true" size="small">
+                <el-form :model="objParam" label-position="right" label-width="110px" size="small">
                     <el-row>
                         <el-col :span="12">
                             <el-form-item label="问卷调查名称：">
                                 <el-input v-model="objParam.queName"></el-input>
                             </el-form-item>
                         </el-col>
-                            <el-col :span="12">
-                                <el-form-item label="是否可用：">
-                                    <el-select v-model="objParam.queState">
-                                        <el-option v-for="item in queStateList"
-                                                   :key="item.id"
-                                                   :label="item.label"
-                                                   :value="item.id">
-                                        </el-option>
-                                    </el-select>
-                                </el-form-item>
-                            </el-col>
+                        <el-col :span="12">
+                            <el-form-item label="是否可用：">
+                                <el-select v-model="objParam.queState">
+                                    <el-option v-for="item in queStateList"
+                                               :key="item.id"
+                                               :label="item.label"
+                                               :value="item.id">
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
                     </el-row>
-                    <el-form-item v-for="(item,index) in objParam.problemBeanList" :key="index">
+                    <el-form-item v-for="(item,index) in objParam.problemBeanList" :key="index" label-width="0px">
                         <el-card>
                             <!-- <span class="num-sort">{{index+1}}.</span> -->
-
+                            <el-row>
+                                <el-col :span="6">
                                     <el-form-item label="问题序号：">
                                         <el-input v-model="item.proSort"></el-input>
                                     </el-form-item>
-
-
+                                </el-col>
+                                <el-col :span="10">
                                     <el-form-item label="问题类型：">
                                         <el-select v-model="item.proType" clearable>
                                             <el-option v-for="item in proList"
@@ -137,14 +138,17 @@
                                             </el-option>
                                         </el-select>
                                     </el-form-item>
+                                </el-col>
+                                <el-col :span="8">
+                                    <el-button type="danger" @click="delProbem(index,$event,1)">删除此问题</el-button>
+                                </el-col>
+                            </el-row>
+
                             <el-row>
-                                <el-col :span="12">
+                                <el-col :span="24">
                                     <el-form-item label="问题描述：" style="margin-right: 5%">
                                         <el-input v-model="item.proLabel" style="width: 99%;"></el-input>
                                     </el-form-item>
-                                </el-col>
-                                <el-col :span="11">
-                                    <el-button type="warning" @click="delProbem(index,$event,1)">删除此问题</el-button>
                                 </el-col>
                             </el-row>
                             <!-- <el-select v-model="item.answer">
@@ -163,9 +167,9 @@
                 </el-footer>
             </el-dialog>
 
-
+            <!-- 编辑问卷调查 -->
             <el-dialog title="编辑问卷调查" :visible.sync="editState" width="40%">
-                <el-form :model="editParam" label-position="right" label-width="110px" :inline="true" size="small">
+                <el-form :model="editParam" label-position="right" label-width="110px" size="small">
                     <el-row>
                         <el-col :span="12">
                             <el-form-item label="问卷调查名称：">
@@ -184,34 +188,39 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-form-item v-for="(item,index) in editParam.problemBeanList" :key="index">
+                    <el-form-item v-for="(item,index) in editParam.problemBeanList" :key="index" label-width="0px">
                         <el-card>
                             <!-- <span class="num-sort">{{index+1}}.</span> -->
-
-                            <el-form-item label="问题序号：">
-                                <el-input v-model="item.proSort"></el-input>
-                            </el-form-item>
-
-
-                            <el-form-item label="问题类型：">
-                                <el-select v-model="item.proType" clearable>
-                                    <el-option v-for="item in proList"
-                                               :key="item.id"
-                                               :label="item.label"
-                                               :value="item.id">
-                                    </el-option>
-                                </el-select>
-                            </el-form-item>
                             <el-row>
-                                <el-col :span="12">
+                                <el-col :span="6">
+                                        <el-form-item label="问题序号：">
+                                        <el-input v-model="item.proSort"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="10">
+                                    <el-form-item label="问题类型：">
+                                        <el-select v-model="item.proType" clearable>
+                                            <el-option v-for="item in proList"
+                                                       :key="item.id"
+                                                       :label="item.label"
+                                                       :value="item.id">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="8">
+                                    <el-button type="danger" @click="delProbem(index,$event,2)">删除此问题</el-button>
+                                </el-col>
+                            </el-row>
+
+                            <el-row>
+                                <el-col :span="24">
                                     <el-form-item label="问题描述：" style="margin-right: 5%">
                                         <el-input v-model="item.proLabel" style="width: 99%;"></el-input>
                                     </el-form-item>
                                 </el-col>
-                                <el-col :span="11">
-                                    <el-button type="warning" @click="delProbem(index,$event,2)">删除此问题</el-button>
-                                </el-col>
                             </el-row>
+
                             <!-- <el-select v-model="item.answer">
                                  <el-option :value="1">没有描述</el-option>
                                <el-option :value="2">有描述</el-option>
@@ -432,6 +441,7 @@
 </script>
 
 <style scoped>
+    .jh-fr{margin-right: 35px;}
     .qesitem {
         margin-bottom: 15px;
     }

@@ -350,8 +350,7 @@
             async getQueByCondition() {
 
 
-                // var url = this.url + '/questionnaireBean/getQueByCondition'
-                var url = 'http://172.16.3.127:8082/questionnaireBean/getQueByCondition'
+                var url = this.url + '/questionnaireBean/getQueByCondition'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -385,8 +384,7 @@
                 }
                 console.log(queState)
 
-                // var url = this.url + '/questionnaireBean/addQue'
-                var url = 'http://172.16.3.127:8082/questionnaireBean/addQue'
+                var url = this.url + '/questionnaireBean/addQue'
 
                 this.$ajax({
                     method: 'POST',
@@ -428,8 +426,7 @@
                 }
                 console.log(queState)
 
-                // var url = this.url + '/questionnaireBean/addQue'
-                var url = 'http://172.16.3.127:8082/questionnaireBean/patchQueById'
+                var url = this.url + '/questionnaireBean/addQue'
 
                 this.$ajax({
                     method: 'POST',

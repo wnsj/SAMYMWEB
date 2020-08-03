@@ -108,12 +108,18 @@
                             <el-form-item label="问题描述：">
                                 <el-input v-model="item.proLabel"></el-input>
                             </el-form-item>
-                            <el-form-item label="选项答案：">
-                                <el-input v-model="item.selectedAnswer"></el-input>
-                            </el-form-item>
-                            <el-form-item label="描述答案：">
-                                <el-input v-model="item.describeAnswer"></el-input>
-                            </el-form-item>
+                            <el-row>
+                                <el-col :span="12" v-if="item.selectedAnswer">
+                                    <el-form-item label="选项答案：">
+                                        <el-input v-model="item.selectedAnswer"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12" v-if="item.describeAnswer">
+                                    <el-form-item label="描述答案：">
+                                        <el-input v-model="item.describeAnswer"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
                         </el-card>
                     </el-form-item>
                 </el-form>

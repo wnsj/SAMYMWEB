@@ -66,6 +66,7 @@
         <div>
             <el-table
                 @row-dblclick="editQueClick"
+                @cell-click="cellClick"
                 :data="tableData"
                 :cell-style="cellStyle"
                 max-height="530"
@@ -118,7 +119,7 @@
                                 </el-form-item>
                             </el-col>
                     </el-row>
-                    <el-form-item v-for="(item,index) in objParam.problemBeanList" :key="item.proSort">
+                    <el-form-item v-for="(item,index) in objParam.problemBeanList" :key="index">
                         <el-card>
                             <!-- <span class="num-sort">{{index+1}}.</span> -->
 
@@ -143,7 +144,7 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="11">
-                                    <el-button type="warning" @click="delProbem(index,$event)">删除此问题</el-button>
+                                    <el-button type="warning" @click="delProbem(index,$event,1)">删除此问题</el-button>
                                 </el-col>
                             </el-row>
                             <!-- <el-select v-model="item.answer">
@@ -155,7 +156,7 @@
                 </el-form>
                 <!--				</el-card>-->
                 <el-footer style="margin-top: 2%">
-                    <el-button type="primary" @click="addProbem()" size="small">添加问题</el-button>
+                    <el-button type="primary" @click="addProbem(1)" size="small">添加问题</el-button>
 
                     <el-button type="primary" @click="addQue()" size="small">提交</el-button>
                     <el-button @click="resetProbem()" type="warning" size="small">重置</el-button>
@@ -183,7 +184,7 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-form-item v-for="(item,index) in editParam.problemBeanList" :key="item.id">
+                    <el-form-item v-for="(item,index) in editParam.problemBeanList" :key="index">
                         <el-card>
                             <!-- <span class="num-sort">{{index+1}}.</span> -->
 
@@ -207,9 +208,9 @@
                                         <el-input v-model="item.proLabel" style="width: 99%;"></el-input>
                                     </el-form-item>
                                 </el-col>
-<!--                                <el-col :span="11">-->
-<!--                                    <el-button type="warning" @click="delProbem(index,$event)">删除此问题</el-button>-->
-<!--                                </el-col>-->
+                                <el-col :span="11">
+                                    <el-button type="warning" @click="delProbem(index,$event,2)">删除此问题</el-button>
+                                </el-col>
                             </el-row>
                             <!-- <el-select v-model="item.answer">
                                  <el-option :value="1">没有描述</el-option>
@@ -220,8 +221,7 @@
                 </el-form>
                 <!--				</el-card>-->
                 <el-footer style="margin-top: 2%">
-<!--                    <el-button type="primary" @click="addProbem()" size="small">添加问题</el-button>-->
-
+                    <el-button type="primary" @click="addProbem(2)" size="small">添加问题</el-button>
                     <el-button type="primary" @click="editQue()" size="small">提交</el-button>
 <!--                    <el-button @click="resetProbem()" type="warning" size="small">重置</el-button>-->
                 </el-footer>
@@ -268,11 +268,12 @@
                 },
                 tableData: [],
                 editState: false,
-                editParam: {
-                    problemNum: '',
-                    queState: 1,
-                    queName: '',
-                    problemBeanList: []
+                editParam: '',
+                pro:{
+                    queId:'',
+                    proSort: '',
+                    proLabel: '',
+                    proType: '',
                 }
             };
         },
@@ -297,25 +298,26 @@
                 this.editState = true
                 this.editParam = row
             },
+            cellClick(row, column, cell, event) {
+                if (column.label == "操作") {
+                    this.editState = true
+                    this.editParam = row
+                }
+            },
             // edits(item) {
             //     console.log('数据'+item);
             //     debugger
             // },
             //添加问题数据
-            addProbem() {
-                // var i = this.objParam.problemBeanList.length
-                //             this.objProblem.proSort=i+1
-                var obj = Object.assign({}, this.objProblem); //深拷贝
-
-                this.objParam.problemBeanList.push(obj)
-            },
-
-            addEditProbem() {
-                // var i = this.objParam.problemBeanList.length
-                //             this.objProblem.proSort=i+1
-                var obj = Object.assign({}, this.objProblem); //深拷贝
-
-                this.editParam.problemBeanList.push(obj)
+            addProbem(item) {
+                if (item == 1) {
+                    var obj = Object.assign({}, this.objProblem); //深拷贝
+                    this.objParam.problemBeanList.push(obj)
+                } else if (item == 2) {
+                    this.pro.queId = this.editParam.id
+                    var OBJ = Object.assign({},this.pro)
+                    this.editParam.problemBeanList.push(OBJ)
+                }
             },
 
 
@@ -340,57 +342,22 @@
 
 
             //删除问题数据
-            delProbem(index, event) {
-                // this.current = index;
-                //       //获取点击对象
-                //       var el = event.currentTarget;
-                //       console.log(el);
-                //       console.log(index)
+            delProbem(index, event,item) {
 
-                this.objParam.problemBeanList.splice(index, 1)
-
-            },
-            delEditProbem(index, event) {
-                this.editParam.problemBeanList.splice(index, 1)
+                if (item == 1) {
+                    this.objParam.problemBeanList.splice(index, 1)
+                } else if(item == 2) {
+                    this.editParam.problemBeanList.splice(index, 1)
+                }
 
             },
 
-
-            // 获取门店
-            // getStore() {
-            //     var url = this.url + '/storeAction/queryStore'
-            //     this.$ajax({
-            //         method: 'POST',
-            //         url: url,
-            //         headers: {
-            //             'Content-Type': this.contentType,
-            //             'Access-Token': this.accessToken
-            //         },
-            //         data: {
-            //             isuse: '1'
-            //         },
-            //         dataType: 'json',
-            //     }).then((response) => {
-            //         var res = response.data
-            //         if (res.retCode == '0000') {
-            //             if (res.retData.length > 0) {
-            //                 this.storeList = res.retData
-            //             }
-            //         } else {
-            //             alert(res.retMsg)
-            //         }
-            //
-            //     }).catch((error) => {
-            //         //console.log('岗位数据请求失败处理')
-            //     });
-            // },
 
             // 获取初访咨询方向汇总数据
             async getQueByCondition() {
 
 
-                // var url = this.url + '/questionnaireBean/getQueByCondition'
-                var url = 'http://172.16.3.127:8082/questionnaireBean/getQueByCondition'
+                var url = this.url + '/questionnaireBean/getQueByCondition'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -415,15 +382,8 @@
 
             //添加问题
             addQue() {
-                // var queState = this.objParam.queState
-                // if (queState == true) {
-                //     queState = 1
-                // } else {
-                //     queState = 2
-                // }
 
-                // var url = this.url + '/questionnaireBean/addQue'
-                var url = 'http://172.16.3.127:8082/questionnaireBean/addQue'
+                var url = this.url + '/questionnaireBean/addQue'
 
                 this.$ajax({
                     method: 'POST',
@@ -455,20 +415,9 @@
             },
 
             editQue() {
-                var queState = this.editParam.queState
-                if (queState == true) {
-                    queState = 1
-                } else {
-                    queState = 2
-                }
 
-                // var url = this.url + '/questionnaireBean/addQue'
-                var url = 'http://172.16.3.127:8082/questionnaireBean/patchQueById'
+                var url = this.url + '/questionnaireBean/patchQueById'
 
-                let proNum = 0;
-                if (this.editParam.problemBeanList) {
-                    proNum = this.editParam.problemBeanList.length
-                }
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -480,14 +429,14 @@
                     data: {
                         id: this.editParam.id,
                         queName: this.editParam.queName,
-                        queState: queState,
-                        problemNum: proNum,
+                        queState: this.editParam.queState,
+                        problemNum: this.editParam.problemBeanList.length,
                         problemBeanList: this.editParam.problemBeanList,
 
                     },
                     dataType: 'json',
                 }).then((response) => {
-                    console.log(response)
+
                     var res = response.data
                     if (res.retCode == '0000') {
                         // this.tableData = res.retData
@@ -498,20 +447,9 @@
                     }
 
                 }).catch((error) => {
-                    //console.log('岗位数据请求失败处理')
+                    alert(response.data.retMsg)
                 });
             }
-
-            // // 翻页
-            // handleCurrentChange(pageNum) {
-            //     this.param.current = pageNum
-            //     this.getDiseaseType()
-            // },
-            // // 每页条数变化时触发
-            // handleSizeChange(pageSize) {
-            //     this.param.pageSize = pageSize
-            //     this.getDiseaseType()
-            // },
         },
         created() {
             this.getQueByCondition()

@@ -65,7 +65,8 @@
 
         <div>
             <el-table
-            @row-click="editQueClick"
+                @row-dblclick="editQueClick"
+                @cell-click="cellClick"
                 :data="tableData"
                 :cell-style="cellStyle"
                 max-height="530"
@@ -88,113 +89,142 @@
                     align="center"
                     label="操作"
                     min-width="100">
-                    <el-button  type="primary" size="small"
+                    <el-button type="primary" size="small"
                                style="width: 85px"
-                               class="jh-fr">编辑
+                               >编辑
                     </el-button>
 
                 </el-table-column>
             </el-table>
 
-			<!-- 添加问题弹窗 -->
-			<el-dialog title="问卷调查" :visible.sync="objParam.dialogVisible" width="40%">
-				<el-card class="form-container" shadow="never">
-				  <el-form :model="objParam"  >
-				    <el-form-item label="问卷调查名称：" prop="name" label-width="110px">
-				      <el-input v-model="objParam.queName"></el-input>
-
-				    </el-form-item>
-
-					<el-form-item v-for="(item,index) in objParam.problemBeanList" :key="item.proSort" >
-                        <el-col class="qesitem">
-                            <!-- <span class="num-sort">{{index+1}}.</span> -->
-                            <el-form-item label="问题序号：" label-width="110px">
-                                <el-input v-model="item.proSort"></el-input>
-                            </el-form-item>
-                            <el-form-item label="问题描述：" label-width="110px">
-                                <el-input v-model="item.proLabel"></el-input>
+            <!-- 添加问题弹窗 -->
+            <el-dialog title="问卷调查" :visible.sync="objParam.dialogVisible" width="40%">
+                <!--				<el-card class="form-container" shadow="never">-->
+                <el-form :model="objParam" label-position="right" label-width="110px" :inline="true" size="small">
+                    <el-row>
+                        <el-col :span="12">
+                            <el-form-item label="问卷调查名称：">
+                                <el-input v-model="objParam.queName"></el-input>
                             </el-form-item>
                         </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="是否可用：">
+                                    <el-select v-model="objParam.queState">
+                                        <el-option v-for="item in queStateList"
+                                                   :key="item.id"
+                                                   :label="item.label"
+                                                   :value="item.id">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-col>
+                    </el-row>
+                    <el-form-item v-for="(item,index) in objParam.problemBeanList" :key="index">
+                        <el-card>
+                            <!-- <span class="num-sort">{{index+1}}.</span> -->
+
+                                    <el-form-item label="问题序号：">
+                                        <el-input v-model="item.proSort"></el-input>
+                                    </el-form-item>
 
 
-					  <el-select v-model="item.proType" >
-						 <el-option :value="0">没有选项</el-option>
-					     <el-option :value="1">二选一</el-option>
-                         <el-option :value="2">多选一</el-option>
-					  </el-select>
-					 <!-- <el-select v-model="item.answer">
-					  	<el-option :value="1">没有描述</el-option>
-					    <el-option :value="2">有描述</el-option>
-					  </el-select> -->
+                                    <el-form-item label="问题类型：">
+                                        <el-select v-model="item.proType" clearable>
+                                            <el-option v-for="item in proList"
+                                                       :key="item.id"
+                                                       :label="item.label"
+                                                       :value="item.id">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                            <el-row>
+                                <el-col :span="12">
+                                    <el-form-item label="问题描述：" style="margin-right: 5%">
+                                        <el-input v-model="item.proLabel" style="width: 99%;"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="11">
+                                    <el-button type="warning" @click="delProbem(index,$event,1)">删除此问题</el-button>
+                                </el-col>
+                            </el-row>
+                            <!-- <el-select v-model="item.answer">
+                                 <el-option :value="1">没有描述</el-option>
+                               <el-option :value="2">有描述</el-option>
+                             </el-select> -->
+                        </el-card>
+                    </el-form-item>
+                </el-form>
+                <!--				</el-card>-->
+                <el-footer style="margin-top: 2%">
+                    <el-button type="primary" @click="addProbem(1)" size="small">添加问题</el-button>
 
-
-
-                      <el-button  @click="delProbem(index,$event)">删除此问题</el-button>
-
-					</el-form-item>
-
-
-
-
-					<el-form-item>
-                        <el-checkbox label="是否使用" v-model="objParam.queState"></el-checkbox>
-                      <el-button type="primary" @click="addProbem()">添加问题</el-button>
-
-					  <el-button type="primary" @click="addQue()">提交</el-button>
-					  <el-button   @click="resetProbem()">重置</el-button>
-					</el-form-item>
-
-
-
-				  </el-form>
-				</el-card>
-			</el-dialog>
+                    <el-button type="primary" @click="addQue()" size="small">提交</el-button>
+                    <el-button @click="resetProbem()" type="warning" size="small">重置</el-button>
+                </el-footer>
+            </el-dialog>
 
 
             <el-dialog title="编辑问卷调查" :visible.sync="editState" width="40%">
-            	<el-card class="form-container" shadow="never">
-            	  <el-form :model="editParam"  >
-            	    <el-form-item label="问卷调查名称：" prop="name" label-width="110px">
-            	      <el-input v-model="editParam.queName"></el-input>
-
-            	    </el-form-item>
-
-            		<el-form-item v-for="(item,index) in editParam.problemBeanList" :key="item.proSort" >
-                        <el-col class="qesitem">
-                            <el-form-item label="问题序号：" label-width="110px">
-                                <el-input v-model="item.proSort"></el-input>
-                            </el-form-item>
-                            <el-form-item label="问题描述：" label-width="110px">
-                                <el-input v-model="item.proLabel"></el-input>
+                <el-form :model="editParam" label-position="right" label-width="110px" :inline="true" size="small">
+                    <el-row>
+                        <el-col :span="12">
+                            <el-form-item label="问卷调查名称：">
+                                <el-input v-model="editParam.queName"></el-input>
                             </el-form-item>
                         </el-col>
+                        <el-col :span="12">
+                            <el-form-item label="是否可用：">
+                                <el-select v-model="editParam.queState" clearable>
+                                    <el-option v-for="item in queStateList"
+                                               :key="item.id"
+                                               :label="item.label"
+                                               :value="item.id">
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-form-item v-for="(item,index) in editParam.problemBeanList" :key="index">
+                        <el-card>
+                            <!-- <span class="num-sort">{{index+1}}.</span> -->
+
+                            <el-form-item label="问题序号：">
+                                <el-input v-model="item.proSort"></el-input>
+                            </el-form-item>
 
 
-            		  <el-select v-model="item.proType" >
-            			 <el-option :value="0">没有选项</el-option>
-            		     <el-option :value="1">二选一</el-option>
-                         <el-option :value="2">多选一</el-option>
-            		  </el-select>
-
-                      <el-button  @click="delEditProbem(index,$event)">删除此问题</el-button>
-
-            		</el-form-item>
-
-
-
-
-            		<el-form-item>
-                        <el-checkbox label="是否使用" v-model="editParam.queState"></el-checkbox>
-                      <!-- <el-button type="primary" @click="addEditProbem()">添加问题</el-button> -->
-
-            		  <el-button type="primary" @click="editQue()">提交</el-button>
-            		  <!-- <el-button   @click="resetProbem()">重置</el-button> -->
-            		</el-form-item>
-
-
-
-            	  </el-form>
-            	</el-card>
+                            <el-form-item label="问题类型：">
+                                <el-select v-model="item.proType" clearable>
+                                    <el-option v-for="item in proList"
+                                               :key="item.id"
+                                               :label="item.label"
+                                               :value="item.id">
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-row>
+                                <el-col :span="12">
+                                    <el-form-item label="问题描述：" style="margin-right: 5%">
+                                        <el-input v-model="item.proLabel" style="width: 99%;"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="11">
+                                    <el-button type="warning" @click="delProbem(index,$event,2)">删除此问题</el-button>
+                                </el-col>
+                            </el-row>
+                            <!-- <el-select v-model="item.answer">
+                                 <el-option :value="1">没有描述</el-option>
+                               <el-option :value="2">有描述</el-option>
+                             </el-select> -->
+                        </el-card>
+                    </el-form-item>
+                </el-form>
+                <!--				</el-card>-->
+                <el-footer style="margin-top: 2%">
+                    <el-button type="primary" @click="addProbem(2)" size="small">添加问题</el-button>
+                    <el-button type="primary" @click="editQue()" size="small">提交</el-button>
+<!--                    <el-button @click="resetProbem()" type="warning" size="small">重置</el-button>-->
+                </el-footer>
             </el-dialog>
 
 
@@ -209,38 +239,44 @@
             return {
                 param: {
                     problemNum: '',
-                    queState: '',
+                    queState: 1,
                     queName: '',
                     problemBeanList: []
                 },
-
-				objProblem:{
-					proSort:'',
-					proLabel:'',
-					proType:'',
-					answer:'',
-				},
-				problemBeanList:[],
-				objParam:{
-					queName:'',
-                    queState: true,
-					dialogVisible:false,
-					problemBeanList:[
-						{
-							proSort:1,
-							proLabel:'',
-							proType:'',
-							//answer:'',
-						}
-					]
-				},
+                queStateList: [{id:1,label:"可用"},{id:2,label:"不可用"}],
+                objProblem: {
+                    proSort: '',
+                    proLabel: '',
+                    proType: '',
+                    //answer:'',
+                },
+                problemBeanList: [],
+                proList: [{id: 0, label: "无选项"}, {id: 1, label: "二选一"}, {id: 2, label: "多选一"}],
+                objParam: {
+                    queName: '',
+                    queState: 1,
+                    dialogVisible: false,
+                    problemBeanList: [
+                        {
+                            proSort: 1,
+                            proLabel: '',
+                            proType: '',
+                            //answer:'',
+                        }
+                    ]
+                },
                 tableData: [],
                 editState: false,
-                editParam: ''
+                editParam: '',
+                pro:{
+                    queId:'',
+                    proSort: '',
+                    proLabel: '',
+                    proType: '',
+                }
             };
         },
         methods: {
-
             // 表格表头样式
             headerStyle() {
                 return 'text-align: center;color: black;'
@@ -249,107 +285,63 @@
             cellStyle() {
                 return 'text-align: center;'
             },
-
-			//弹窗
-			addQueClick(){
-				this.objParam.dialogVisible=true
-			},
-
             //弹窗
-            editQueClick(row, event, column){
-            	this.editState=true
-                console.log(row)
+            addQueClick() {
+                this.objParam.dialogVisible = true
+            },
+            //弹窗
+            editQueClick(row, event, column) {
+                this.editState = true
                 this.editParam = row
             },
-
-			//添加问题数据
-			addProbem(){
-				// var i = this.objParam.problemBeanList.length
-    //             this.objProblem.proSort=i+1
-                var obj = Object.assign({}, this.objProblem); //深拷贝
-
-				this.objParam.problemBeanList.push(obj)
-			},
-
-            addEditProbem(){
-                // var i = this.objParam.problemBeanList.length
-    //             this.objProblem.proSort=i+1
-                var obj = Object.assign({}, this.objProblem); //深拷贝
-
-                this.editParam.problemBeanList.push(obj)
+            cellClick(row, column, cell, event) {
+                if (column.label == "操作") {
+                    this.editState = true
+                    this.editParam = row
+                }
             },
-
-
+            // edits(item) {
+            //     console.log('数据'+item);
+            //     debugger
+            // },
+            //添加问题数据
+            addProbem(item) {
+                if (item == 1) {
+                    var obj = Object.assign({}, this.objProblem); //深拷贝
+                    this.objParam.problemBeanList.push(obj)
+                } else if (item == 2) {
+                    this.pro.queId = this.editParam.id
+                    var OBJ = Object.assign({},this.pro)
+                    this.editParam.problemBeanList.push(OBJ)
+                }
+            },
             // 清空问题
-            resetProbem(){
+            resetProbem() {
                 var obj = {
-					queName:'',
-                    queState: true,
-					dialogVisible:true,
-					problemBeanList:[
-						{
-							proSort:1,
-							proLabel:'',
-							proType:'',
-							//answer:'',
-						}
-					]
-				}
-
+                    queName: '',
+                    queState: 1,
+                    dialogVisible: true,
+                    problemBeanList: [
+                        {
+                            proSort: 1,
+                            proLabel: '',
+                            proType: '',
+                            //answer:'',
+                        }
+                    ]
+                }
                 this.objParam = obj;
             },
-
-
             //删除问题数据
-            delProbem(index,event){
-               // this.current = index;
-               //       //获取点击对象
-               //       var el = event.currentTarget;
-               //       console.log(el);
-               //       console.log(index)
-
-                this.objParam.problemBeanList.splice(index,1)
-
+            delProbem(index, event,item) {
+                if (item == 1) {
+                    this.objParam.problemBeanList.splice(index, 1)
+                } else if(item == 2) {
+                    this.editParam.problemBeanList.splice(index, 1)
+                }
             },
-            delEditProbem(index,event){
-                this.editParam.problemBeanList.splice(index,1)
-
-            },
-
-
-            // 获取门店
-            // getStore() {
-            //     var url = this.url + '/storeAction/queryStore'
-            //     this.$ajax({
-            //         method: 'POST',
-            //         url: url,
-            //         headers: {
-            //             'Content-Type': this.contentType,
-            //             'Access-Token': this.accessToken
-            //         },
-            //         data: {
-            //             isuse: '1'
-            //         },
-            //         dataType: 'json',
-            //     }).then((response) => {
-            //         var res = response.data
-            //         if (res.retCode == '0000') {
-            //             if (res.retData.length > 0) {
-            //                 this.storeList = res.retData
-            //             }
-            //         } else {
-            //             alert(res.retMsg)
-            //         }
-            //
-            //     }).catch((error) => {
-            //         //console.log('岗位数据请求失败处理')
-            //     });
-            // },
-
             // 获取初访咨询方向汇总数据
             async getQueByCondition() {
-
-
                 var url = this.url + '/questionnaireBean/getQueByCondition'
                 this.$ajax({
                     method: 'POST',
@@ -367,25 +359,13 @@
                     } else {
                         alert(res.retMsg)
                     }
-
                 }).catch((error) => {
                     //console.log('岗位数据请求失败处理')
                 });
             },
-
             //添加问题
             addQue() {
-
-                var queState = this.objParam.queState
-                if (queState == true) {
-                    queState = 1
-                } else {
-                    queState = 2
-                }
-                console.log(queState)
-
                 var url = this.url + '/questionnaireBean/addQue'
-
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -395,39 +375,26 @@
                     },
                     // data: this.param,
                     data: {
-                      queName: this.objParam.queName,
-                      queState: queState,
-                      problemNum: this.objParam.problemBeanList.length,
-                      problemBeanList: this.objParam.problemBeanList
+                        queName: this.objParam.queName,
+                        queState: this.objParam.queState,
+                        problemNum: this.objParam.problemBeanList.length,
+                        problemBeanList: this.objParam.problemBeanList
                     },
                     dataType: 'json',
                 }).then((response) => {
-                    console.log(response)
                     var res = response.data
                     if (res.retCode == '0000') {
                         this.tableData = res.retData
                         alert('提交成功！')
                         this.objParam.dialogVisible = false
                     } else {
-                        alert(res.retMsg)
                     }
-
                 }).catch((error) => {
                     //console.log('岗位数据请求失败处理')
                 });
             },
-
             editQue() {
-                var queState = this.editParam.queState
-                if (queState == true) {
-                    queState = 1
-                } else {
-                    queState = 2
-                }
-                console.log(queState)
-
-                var url = this.url + '/questionnaireBean/addQue'
-
+                var url = this.url + '/questionnaireBean/patchQueById'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -437,16 +404,14 @@
                     },
                     // data: this.param,
                     data: {
-                      id:this.editParam.id,
-                      queName: this.editParam.queName,
-                      queState: queState,
-                      problemNum: this.editParam.problemBeanList.length,
-                      problemBeanList: this.editParam.problemBeanList,
-
+                        id: this.editParam.id,
+                        queName: this.editParam.queName,
+                        queState: this.editParam.queState,
+                        problemNum: this.editParam.problemBeanList.length,
+                        problemBeanList: this.editParam.problemBeanList,
                     },
                     dataType: 'json',
                 }).then((response) => {
-                    console.log(response)
                     var res = response.data
                     if (res.retCode == '0000') {
                         // this.tableData = res.retData
@@ -455,22 +420,10 @@
                     } else {
                         alert(res.retMsg)
                     }
-
                 }).catch((error) => {
-                    //console.log('岗位数据请求失败处理')
+                    alert(response.data.retMsg)
                 });
             }
-
-            // // 翻页
-            // handleCurrentChange(pageNum) {
-            //     this.param.current = pageNum
-            //     this.getDiseaseType()
-            // },
-            // // 每页条数变化时触发
-            // handleSizeChange(pageSize) {
-            //     this.param.pageSize = pageSize
-            //     this.getDiseaseType()
-            // },
         },
         created() {
             this.getQueByCondition()
@@ -479,6 +432,11 @@
 </script>
 
 <style scoped>
-.qesitem{margin-bottom: 15px;}
-.qesitem .num-sort{position: absolute;left: -60px;}
+    .qesitem {
+        margin-bottom: 15px;
+    }
+    .qesitem .num-sort {
+        position: absolute;
+        left: -60px;
+    }
 </style>

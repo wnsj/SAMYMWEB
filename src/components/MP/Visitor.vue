@@ -78,7 +78,7 @@
                         <p class="end-aline col-md-11 col-lg-11">接待人</p><span class="sign-left">:</span>
                     </div>
                     <div class="col-md-7 col-lg-7">
-                        <emp ref="emp" @employeeChange="employeeChange"></emp>
+                        <emp :disabled="empDisable" ref="emp" @employeeChange="employeeChange"></emp>
                     </div>
                 </div>
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -370,6 +370,8 @@
                 total: '', //数据的数量
 
                 objectContent: {},
+
+                empDisable:false
             };
         },
         methods: {
@@ -632,6 +634,11 @@
             },
         },
         mounted() {
+            if (!this.has("SAMY:MP:Visitor:Query")) {
+                this.$refs.emp.setEmp(this.getEmpId())
+                this.empId = this.getEmpId()
+                this.empDisable = true
+            }
 			this.$refs.emp.getEmployeeList()
         },
     }

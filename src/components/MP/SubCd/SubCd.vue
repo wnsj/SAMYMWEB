@@ -59,6 +59,24 @@
 					        <con ref="conEmp" @employeeChange="conChange"></con>
 					    </div>
 					</div>
+
+<!--                     缴费方式-->
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                        <label class="col-md-3 control-label text-right nopad end-aline">缴费方式</label><span
+                        class="sign-left">:</span>
+                        <div class="col-md-8">
+                            <select class="form-control" v-model="cash.payType">
+                                <option value="">--未付款--</option>
+                                <option value="1">现金</option>
+                                <option value="2">微信</option>
+                                <option value="3">支付宝</option>
+                                <option value="4">信用卡/银行卡</option>
+                                <option value="5">小程序</option>
+                                <option value="6">免费</option>
+                                <option value="7">其它</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">
                         <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-35"
                                 data-toggle="modal"
@@ -101,6 +119,7 @@
                     createDate: this.moment(),
                     storeId: '',
                     state: '',
+                    payType: '',
                     operatorId: '',
                     memNum: '',
                 },
@@ -125,6 +144,7 @@
                         state: '0',
 						couId:'',
 						conId:'',
+                        payType: '',
                         operatorId: this.accountId(),
                         phone: cash.phone
                     }
@@ -141,7 +161,6 @@
 					this.$refs.conEmp.setPosName("咨询顾问")
 					this.$refs.couEmp.setEmp(this.cash.couId)
 					this.$refs.conEmp.setEmp(this.cash.conId)
-
                 }
             },
             dateAction() {

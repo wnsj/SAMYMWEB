@@ -69,6 +69,20 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">
+                        <label class="col-md-3 control-label text-right nopad end-aline">收据</label><span
+                        class="sign-left">:</span>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" v-model="cash.receipt" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                        <label class="col-md-3 control-label text-right nopad end-aline">流水单号</label><span
+                        class="sign-left">:</span>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" v-model="cash.waterNum" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
                         <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-35"
                                 data-toggle="modal"
                                 v-on:click="closeCurrentPage()">返回
@@ -108,6 +122,8 @@
                     cashName: '',
                     phone: '',
                     money: '',
+                    receipt: '',
+                    waterNum: '',
                     createDate: this.moment(),
                     storeId: '',
                     state: '',

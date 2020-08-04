@@ -348,6 +348,6 @@ body{
 	border-color: transparent transparent #e3e3e3;
 	-webkit-transform: rotate(-180deg);
 	margin-left: 45%;
-	z-index: 999;
+	z-index: 999 !important;
 	width: 100px;
 }

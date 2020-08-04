@@ -202,7 +202,7 @@
                 </el-table-column>
                 <el-table-column
                     align="center"
-                    prop="payType"
+                    prop="payTypeName"
                     label="缴费方式"
                     min-width="100">
                 </el-table-column>

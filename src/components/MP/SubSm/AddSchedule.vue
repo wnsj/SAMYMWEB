@@ -190,6 +190,8 @@
             }
         },
         mounted() {
+			this.$refs.counlorEmp.setPosName("咨询师")
+			this.$refs.counlorEmp.setEmp("")
             //this.printLog()
         }
     }

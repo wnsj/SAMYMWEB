@@ -230,12 +230,11 @@
 						<select class="form-control" v-model="consume.payType" v-on:change="payChange()">
 							<option value="">--未选择--</option>
 							<option value="1">现金</option>
-							<option value="2">微信</option>
-							<option value="3">支付宝</option>
-							<option value="4">信用卡/银行卡</option>
+							<option value="2">POS</option>
+							<option value="3">二维码</option>
+							<option value="4">团购</option>
 							<option value="5">小程序</option>
-							<option value="6">免费</option>
-							<option value="7">其它</option>
+							<option value="6">其它</option>
 						</select>
 					</div>
 				</div>

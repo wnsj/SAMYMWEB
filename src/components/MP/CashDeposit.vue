@@ -14,7 +14,6 @@
                     <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="cashName">
                     </div>
                 </div>
-
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <div class="col-md-5 col-lg-5 text-right jh-ad-1">
                         <p class="end-aline col-md-11 col-lg-11 jh-pa-1">手机号</p><span
@@ -87,7 +86,25 @@
                 </div>
             </div>
 
-            <div class="row newRow">    
+            <div class="row newRow">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right jh-ad-1">
+                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">缴费方式</p><span
+                        class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <select class="form-control" v-model="payType">
+                            <option value="">--未付款--</option>
+                            <option value="1">现金</option>
+                            <option value="2">微信</option>
+                            <option value="3">支付宝</option>
+                            <option value="4">信用卡/银行卡</option>
+                            <option value="5">小程序</option>
+                            <option value="6">免费</option>
+                            <option value="7">其它</option>
+                        </select>
+                    </div>
+                </div>
                 <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-35"
                         data-toggle="modal"
                         v-on:click="checkMember(1)">查询
@@ -96,7 +113,7 @@
         </div>
         <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
-        </div>    
+        </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive pre-scrollable">
@@ -110,6 +127,7 @@
 							<th class="text-center">咨询师</th>
 							<th class="text-center">咨询顾问</th>
                             <th class="text-center">定金金额</th>
+                            <th class="text-center">缴费方式</th>
                             <th class="text-center">交定金时间</th>
                             <th class="text-center">定金余额</th>
                             <th class="text-center">操作人</th>
@@ -125,6 +143,7 @@
 							<td class="text-center jh-lh-33">{{item.couName}}</td>
 							<td class="text-center jh-lh-33">{{item.conName}}</td>
                             <td class="text-center jh-lh-33">{{item.money}}</td>
+                            <td class="text-center jh-lh-33">{{item.payTypeName}}</td>
                             <td class="text-center jh-lh-33">{{item.createDate |
                                 dateFormatFilter("YYYY-MM-DD")}}
                             </td>
@@ -144,7 +163,7 @@
                     </table>
                 </div>
 				<p class="tips">* 双击单行，可对当前数据进行修改</p>
-				
+
                 <!--分页插件-->
                 <div class="page">
                     <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
@@ -226,6 +245,7 @@
 				conId: '',
                 storeId: this.storeId(),
                 state: '',
+                payType: '',
                 balanceState: "2",
                 accountType: this.accountType(),
 
@@ -363,7 +383,7 @@
                         storeId: this.storeId,
 						couId:this.couId,
 						conId:this.conId,
-
+                        payType: this.payType,
                         balanceState: this.balanceState,
                         page: page.toString(),
                         pageSize: this.pageSize

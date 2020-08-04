@@ -5,7 +5,7 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">客户管理</h1>
         </div>
-        <div class="searchForm" v-show="showSelect">
+        <div v-show="showSelect">
             <div class="row newRow">
                 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 visbtn-box">
                     <button type="button" class="btn btn-default pull-left" v-on:click="btnAction('5')"

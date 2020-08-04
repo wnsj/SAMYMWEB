@@ -227,15 +227,7 @@
 					<label class="col-md-4 control-label text-right nopad end-aline" >交费方式</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<select class="form-control" v-model="consume.payType" v-on:change="payChange()">
-							<option value="">--未选择--</option>
-							<option value="1">现金</option>
-							<option value="2">POS</option>
-							<option value="3">二维码</option>
-							<option value="4">团购</option>
-							<option value="5">小程序</option>
-							<option value="6">其它</option>
-						</select>
+						<PayStyle ref="payStyle" @payStyleChange="payChange"></PayStyle>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="appShow==true">
@@ -274,6 +266,7 @@
 <script>
 	import dPicker from 'vue2-datepicker'
 	import emp from '../../common/Employee.vue'
+	import PayStyle from '../../common/PayStyle.vue'
 	import project from '../../common/Project.vue'
 	import VisitState from '../../common/VisitState.vue'
 	import ContinState from '../../common/VisitState.vue'
@@ -284,7 +277,8 @@
 			emp,
 			project,
 			VisitState,
-			ContinState
+			ContinState,
+			PayStyle
 		},
 		data() {
 			return {
@@ -432,11 +426,17 @@
 				}
 			},
 			//付款方式
-			payChange(){
-				if(this.consume.payType==5){
-					this.appShow=true
-				}else{
-					this.appShow=false
+			payChange: function(param) {
+				if (this.isBlank(param)) {
+					this.consume.payType = ""
+				} else {
+					this.consume.payType = param
+					if(this.consume.payType==5){
+						this.appShow=true
+					}else{
+						this.appShow=false
+						this.consume.appNumber=''
+					}
 				}
 			},
 			//产品

@@ -65,16 +65,7 @@
                         <label class="col-md-3 control-label text-right nopad end-aline">缴费方式</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
-                            <select class="form-control" v-model="cash.payType">
-                                <option value="">--未付款--</option>
-                                <option value="1">现金</option>
-                                <option value="2">微信</option>
-                                <option value="3">支付宝</option>
-                                <option value="4">信用卡/银行卡</option>
-                                <option value="5">小程序</option>
-                                <option value="6">免费</option>
-                                <option value="7">其它</option>
-                            </select>
+                            <PayStyle ref="payStyleRef" @payStyleChange="psStyle"></PayStyle>
                         </div>
                     </div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">
@@ -97,12 +88,13 @@
     import dPicker from 'vue2-datepicker'
     import cou from '../../common/Employee.vue' //咨询师
 	import con from '../../common/Employee.vue'	//咨询顾问
-
+    import PayStyle from '../../common/PayStyle.vue'
     export default {
         components: {
             dPicker,
             cou,
 			con,
+            PayStyle
         },
         data() {
             return {
@@ -161,6 +153,13 @@
 					this.$refs.conEmp.setPosName("咨询顾问")
 					this.$refs.couEmp.setEmp(this.cash.couId)
 					this.$refs.conEmp.setEmp(this.cash.conId)
+                    this.$refs.payStyleRef.setPsId(this.cash.payType)
+                }
+            },
+            psStyle(data) {
+                this.cash.payType = ''
+                if (data != null) {
+                    this.cash.payType = data
                 }
             },
             dateAction() {

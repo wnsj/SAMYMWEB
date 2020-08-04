@@ -93,16 +93,7 @@
                         class="sign-left">:</span>
                     </div>
                     <div class="col-md-7 col-lg-7">
-                        <select class="form-control" v-model="payType">
-                            <option value="">--未付款--</option>
-                            <option value="1">现金</option>
-                            <option value="2">微信</option>
-                            <option value="3">支付宝</option>
-                            <option value="4">信用卡/银行卡</option>
-                            <option value="5">小程序</option>
-                            <option value="6">免费</option>
-                            <option value="7">其它</option>
-                        </select>
+                        <PayStyle ref="payStyleRef" @payStyleChange="psStyle"></PayStyle>
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-35"
@@ -217,9 +208,7 @@
     import SubTransferMember from '../MP/SubCd/SubTransferMember'
 	import cou from '../common/Employee.vue' //咨询师
 	import con from '../common/Employee.vue'	//咨询顾问
-    import {
-        init
-    } from '@/../static/js/common.js'
+    import PayStyle from '../common/PayStyle.vue'
 
     export default {
         components: {
@@ -228,7 +217,7 @@
             Store,
 			cou,
 			con,
-
+            PayStyle,
             SubCdConsumption,
             SubCdRefund,
             Paging,
@@ -289,6 +278,12 @@
 					this.couId = param.empId
 				}
 			},
+            psStyle(data) {
+                this.payType = ''
+                if (data != null) {
+                    this.payType = data
+                }
+            },
 			conChange: function(param) {
 				if (this.isBlank(param)) {
 					this.conId = ""

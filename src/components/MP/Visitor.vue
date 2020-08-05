@@ -156,7 +156,7 @@
                             <th class="text-center">续流状态</th>
                             <th class="text-center">添加时间</th>
                             <th class="text-center">是否转会员</th>
-                            <th class="text-center">联系电话</th>
+                            <th class="text-center" v-has="'SAMY:MP:Visitor:QueryPhone'">联系电话</th>
                             <th class="text-center" v-has="'SAMY:MP:Visitor:Update'">修改</th>
                         </tr>
                         </thead>

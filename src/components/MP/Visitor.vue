@@ -162,7 +162,7 @@
                         </thead>
                         <tbody>
                         <tr v-for="(item,index) in visitorList" :key="index" v-on:dblclick="selectRule('7',item)">
-                            <td class="text-center editradio-box" v-has="'SAMY:MP:Visitor:Update'">
+                            <td class="text-center editradio-box">
                                 <input :id="'edit'+(index+1)" class="editradio" type="radio" name="复选框" :value="index"
                                        v-model="checkedValue"/>
                                 <label :for="'edit'+(index+1)" class="editlabel"></label>

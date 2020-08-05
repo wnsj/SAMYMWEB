@@ -534,6 +534,10 @@
 					alert("消费产品课时不可为空!");
 					return;
 				}
+				if (this.isBlank(this.consume.payType)) {
+					alert("消费方式不可为空!");
+					return;
+				}
 				if (this.consume.consumCount > this.consume.totalCount) {
 					alert("此次消费课时大于总课时!")
 					return;

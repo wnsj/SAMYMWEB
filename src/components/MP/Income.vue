@@ -7,7 +7,7 @@
             <el-form label-position="right" label-width="100px"  :inline="false" size="small" :model="param">
 
                 <el-collapse-transition>
-                    <div class="searchForm" v-show="showSelect">
+                    <div  v-show="showSelect">
                         <el-row>
                             <el-col :span="6" class="jh-pr-28">
                                 <el-form-item label="访问类型:">

@@ -4,7 +4,7 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">定金管理</h1>
         </div>
-        <div class="searchForm" v-show="showSelect">
+        <div v-show="showSelect">
             <div class="row newRow">
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <div class="col-md-5 col-lg-5 text-right jh-ad-1">

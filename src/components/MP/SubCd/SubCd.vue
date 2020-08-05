@@ -46,6 +46,7 @@
                                  v-on:click="dateAction()"></dPicker>
                     </div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">
+                        <b>*</b>
                         <label class="col-md-3 control-label text-right nopad end-aline">咨询师</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
@@ -53,6 +54,7 @@
                         </div>
                     </div>
 					<div class="col-md-6 form-group clearfix jh-wd-33">
+                        <b>*</b>
 					    <label class="col-md-3 control-label text-right nopad end-aline">咨询顾问</label><span
 					    class="sign-left">:</span>
 					    <div class="col-md-8">
@@ -62,6 +64,7 @@
 
 <!--                     缴费方式-->
                     <div class="col-md-6 form-group clearfix jh-wd-33">
+                        <b>*</b>
                         <label class="col-md-3 control-label text-right nopad end-aline">缴费方式</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
@@ -127,6 +130,8 @@
                     createDate: this.moment(),
                     storeId: '',
                     state: '',
+                    couId:'',
+                    conId:'',
                     payType: '',
                     operatorId: '',
                     memNum: '',
@@ -267,7 +272,10 @@
 				    alert("咨询顾问不能为空")
 				    return
 				}
-
+                if (this.isBlank(this.cash.payType)) {
+                    alert("缴费方式不能为空")
+                    return
+                }
                 if (!this.isBlank(this.cash.createDate)) {
                     this.cash.createDate = this.moment(this.cash.createDate, 'YYYY-MM-DD 00:00:00.000')
                 } else {

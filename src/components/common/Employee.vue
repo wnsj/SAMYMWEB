@@ -163,6 +163,10 @@
                 });
             }
         },
+
+        created() {
+            this.getEmployeeList()
+        }
     }
 </script>
 

@@ -46,6 +46,7 @@
                                  v-on:click="dateAction()"></dPicker>
                     </div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">
+                        <b>*</b>
                         <label class="col-md-3 control-label text-right nopad end-aline">咨询师</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
@@ -53,6 +54,7 @@
                         </div>
                     </div>
 					<div class="col-md-6 form-group clearfix jh-wd-33">
+                        <b>*</b>
 					    <label class="col-md-3 control-label text-right nopad end-aline">咨询顾问</label><span
 					    class="sign-left">:</span>
 					    <div class="col-md-8">

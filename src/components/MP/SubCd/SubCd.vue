@@ -53,7 +53,7 @@
                         </div>
                     </div>
 					<div class="col-md-6 form-group clearfix jh-wd-33">
-					    <label class="col-md-3 control-label text-right nopad end-aline">咨询师</label><span
+					    <label class="col-md-3 control-label text-right nopad end-aline">咨询顾问</label><span
 					    class="sign-left">:</span>
 					    <div class="col-md-8">
 					        <con ref="conEmp" @employeeChange="conChange"></con>
@@ -306,6 +306,9 @@
                 });
             },
             closeCurrentPage() {
+                this.$refs.couEmp.setEmp('')
+                this.$refs.conEmp.setEmp('')
+                this.$refs.payStyleRef.setPsId('0')
                 this.$emit('certainAction')
             },
         },

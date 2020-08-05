@@ -8,6 +8,7 @@
 		<div class="modal-body pos_r jh-mh-sc">
 			<div class="tab-pane fade in active martop" id="basic">
 				<div class="col-md-6 form-group clearfix jh-wd-33">
+                    <b>*</b>
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >姓名</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
@@ -61,6 +62,7 @@
 					<h4 id="myModalLabel" class="modal-title">产品：</h4>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
+                    <b>*</b>
 					<label class="col-md-4 control-label text-right nopad end-aline" >咨询师</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
@@ -68,7 +70,7 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-
+                    <b>*</b>
 					<label class="col-md-4 control-label text-right nopad end-aline" >产品</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">

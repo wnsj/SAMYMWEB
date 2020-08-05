@@ -58,6 +58,7 @@
                     this.$emit('employeeChange', '')
                 } else {
                     this.empObj = this.exchangeEmpName(this.empId)
+					console.log('---13-------'+JSON.stringify(this.empObj))
                     this.$emit('employeeChange', this.empObj)
                 }
             },

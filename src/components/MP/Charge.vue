@@ -43,7 +43,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row newRow">	
+			<div class="row newRow">
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					<div class="col-md-5 col-lg-5 text-right nopad">
 						<p class="end-aline col-md-11 col-lg-11" >续流状态</p><span class="sign-left">:</span>
@@ -75,22 +75,13 @@
 					<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="proName"></div>
 				</div>
 			</div>
-			<div class="row newRow">	
+			<div class="row newRow">
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
 						<p class="end-aline col-md-11 col-lg-11" >交费方式</p><span class="sign-left">:</span>
 					</div>
 					<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-						<select class="form-control" v-model="payType">
-							<option value="">--未付款--</option>
-							<option value="1">现金</option>
-							<option value="2">微信</option>
-							<option value="3">支付宝</option>
-							<option value="4">信用卡/银行卡</option>
-							<option value="5">小程序</option>
-							<option value="6">免费</option>
-							<option value="7">其它</option>
-						</select>
+                        <PayStyle ref="payStyleRef" @payStyleChange="psStyle"></PayStyle>
 					</div>
 				</div>
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -120,11 +111,11 @@
 					</div>
 					<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal" v-on:click="conditionCheck(1)">查询</button>
 				</div>
-			</div>	
+			</div>
 		</div>
 		<div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
-        </div>	
+        </div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<nobr class="widthmax">
 				<div class="table-responsive pre-scrollable">
@@ -204,6 +195,7 @@
 	import continueState from '../common/VisitState.vue' //续流状态
 
     import SubCharge from '../MP/SubCharge/SubCharge.vue'
+    import PayStyle from '../common/PayStyle.vue'
 	export default {
 		components: {
 			dPicker,
@@ -215,6 +207,7 @@
 			con,
 			judgeState,
 			continueState,
+            PayStyle
 		},
 		data() {
 			return {
@@ -262,6 +255,12 @@
 					this.empId = param.empId
 				}
 			},
+            psStyle(data) {
+                this.payType = ''
+                if (data != null) {
+                    this.payType = data
+                }
+            },
 			storeChange(param) {
 				if (this.isBlank(param)) {
 					this.storeId = ""

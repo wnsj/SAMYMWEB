@@ -130,6 +130,8 @@
                     createDate: this.moment(),
                     storeId: '',
                     state: '',
+                    couId:'',
+                    conId:'',
                     payType: '',
                     operatorId: '',
                     memNum: '',

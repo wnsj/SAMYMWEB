@@ -162,6 +162,10 @@
                 });
             }
         },
+
+        created() {
+            this.getEmployeeList()
+        }
     }
 </script>
 

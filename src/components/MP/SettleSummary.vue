@@ -79,16 +79,7 @@
 						<p class="end-aline col-md-11 col-lg-11" >交费方式</p><span class="sign-left">:</span>
 					</div>
 					<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-						<select class="form-control" v-model="payType">
-							<option value="">--未付款--</option>
-							<option value="1">现金</option>
-							<option value="2">微信</option>
-							<option value="3">支付宝</option>
-							<option value="4">信用卡/银行卡</option>
-							<option value="5">小程序</option>
-							<option value="6">免费</option>
-							<option value="7">其它</option>
-						</select>
+                        <PayStyle ref="payStyleRef" @payStyleChange="psStyle"></PayStyle>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -186,7 +177,7 @@
     import con from '../common/Employee.vue'	//咨询顾问
 	import judgeState from '../common/VisitState.vue' //咨客判定
 	import continueState from '../common/VisitState.vue' //续流状态
-
+    import PayStyle from '../common/PayStyle.vue'
 	export default {
 		name: 'employee',
 		components: {
@@ -198,6 +189,7 @@
             con,
 			judgeState,
 			continueState,
+            PayStyle
 		},
 		data() {
 			return {
@@ -330,6 +322,12 @@
 					this.continueState = param.vsId
 				}
 			},
+            psStyle(data) {
+                this.payType = ''
+                if (data != null) {
+                    this.payType = data
+                }
+            },
 			//咨询师
 			couChange: function(param) {
 				if (this.isBlank(param)) {

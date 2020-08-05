@@ -68,16 +68,7 @@
 			        <p class="end-aline col-md-11 col-lg-11" >交费方式</p><span class="sign-left">:</span>
 			    </div>
 			    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-			        <select class="form-control" v-model="payType">
-						<option value="">--未付款--</option>
-			            <option value="1">现金</option>
-			            <option value="2">微信</option>
-			            <option value="3">支付宝</option>
-			            <option value="4">信用卡/银行卡</option>
-			            <option value="5">小程序</option>
-			            <option value="6">免费</option>
-			            <option value="7">其它</option>
-			        </select>
+                    <PayStyle ref="payStyleRef" @payStyleChange="psStyle"></PayStyle>
 			    </div>
 			</div>
             <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-30"
@@ -146,14 +137,15 @@
     import {
         init
     } from '@/../static/js/common.js'
-
+    import PayStyle from '../common/PayStyle.vue'
     export default {
         components: {
             Paging,
             dPicker,
             store,
             con,
-            cou
+            cou,
+            PayStyle
         },
         data() {
             return {
@@ -176,7 +168,7 @@
                 current: 1, //当前页码
                 pageSize: 10, //一页显示的数量
                 total: '', //数据的数量
-				
+
 				payType:'',
             };
         },
@@ -192,6 +184,12 @@
                     this.storeId = ""
                 } else {
                     this.storeId = param.storeId
+                }
+            },
+            psStyle(data) {
+                this.payType = ''
+                if (data != null) {
+                    this.payType = data
                 }
             },
             getCou() {

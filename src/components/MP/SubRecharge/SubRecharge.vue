@@ -1,5 +1,5 @@
 <!-- add and modify consume -->
-<template> 
+<template>
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
@@ -72,6 +72,7 @@
 					<h4 id="myModalLabel" class="modal-title">产品：</h4>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
+                    <b>*</b>
 					<label class="col-md-4 control-label text-right nopad end-aline" >咨询师</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
@@ -79,6 +80,7 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
+                    <b>*</b>
 					<label class="col-md-4 control-label text-right nopad end-aline" >产品</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
@@ -257,7 +259,7 @@
 				    <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-25" data-toggle="modal" v-on:click="addFee()">确认</button>
 				</div>
 			</div>
-			
+
 			</div>
 		</div>
 	</div>

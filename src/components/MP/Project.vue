@@ -102,6 +102,7 @@
                             <th class="text-center">咨询师等级</th>
                             <th class="text-center">产品名称</th>
                             <th class="text-center">产品类型</th>
+                            <th class="text-center">产品风格</th>
                             <th class="text-center">总价(¥)</th>
                             <th class="text-center">优惠后总价(¥)</th>
                             <th class="text-center">单价(¥)</th>
@@ -120,6 +121,7 @@
                             <td class="text-center" >{{item.empLevelName}}</td>
                             <td class="text-center" >{{item.proName}}</td>
                             <td class="text-center" >{{transforProType(item.proType)}}</td>
+                            <td class="text-center" >{{item.proStyle == 1 ? '新产品' : item.proStyle == 2 ? '老产品' : '-'}}</td>
                             <td class="text-center" >{{item.totalPrice}}</td>
                             <td class="text-center" >{{item.discouAmount}}</td>
                             <td class="text-center" >{{item.price}}</td>
@@ -143,7 +145,7 @@
                     <paging ref="paging" @change="pageChange"></paging>
                 </div>
             </div>
-            
+
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="projectContent">

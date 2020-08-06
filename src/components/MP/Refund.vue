@@ -90,6 +90,7 @@
                             <th class="text-center">产品</th>
                             <th class="text-center">退费课时</th>
                             <th class="text-center">退费金额</th>
+							<th class="text-center">实际剩余金额</th>
                             <th class="text-center">退费时间</th>
 							<th class="text-center">交费方式</th>
 							<th class="text-center">初访时间</th>
@@ -105,6 +106,7 @@
                             <td class="text-center">{{item.proName}}</td>
                             <td class="text-center">{{item.refCount}}</td>
                             <td class="text-center">{{item.realRefund}}</td>
+							<td class="text-center">{{item.balance}}</td>
                             <td class="text-center">{{item.createDate | dateFormatFilter('YYYY-MM-DD')}}</td>
 							<td class="text-center">{{item.psName}}</td>
 							<td class="text-center">{{item.visCreateDate | dateFormatFilter('YYYY-MM-DD')}}</td>

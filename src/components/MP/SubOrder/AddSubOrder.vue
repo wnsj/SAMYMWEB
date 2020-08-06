@@ -390,8 +390,6 @@
 
         methods: {
             initData(flag,param) {
-                console.log("==========1===========")
-                console.log(this.order);
 				$('#addSubOrderContent').modal({backdrop: 'static', keyboard: false});
                 this.numArr = []
 				// console.log(param)
@@ -478,12 +476,10 @@
 					    remark: param.remark,
 					    sex:param.sex
 					}
-                    this.$refs.counlorEmp.setPosName("咨询师")
                     this.$refs.counlorEmp.setEmp(param.empId)
                     this.$refs.project.setProject(param.proId)
 
                 } else {
-                    this.$refs.counlorEmp.setPosName("咨询师")
                     this.$refs.counlorEmp.setEmp("")
                     this.$refs.project.setProject(0)
                     this.$refs.CounseRoomRef.setChaId(0)
@@ -579,8 +575,6 @@
                         sex:param.sex,
                     }
                 }
-                console.log("==========2===========")
-                console.log(this.order);
             },
             itemAction(item, index) {
                 console.log("item:" + JSON.stringify(item) + index)
@@ -599,7 +593,6 @@
             },
             //feedback employee information
             projectChange: function (param) {
-                // console.log('科室：'+JSON.stringify(param))
                 if (this.isBlank(param)) {
                     this.orderClick.proId = ""
                 } else {
@@ -617,7 +610,6 @@
             },
             //feedback employee information
             counlorEmpChange: function (param) {
-                // console.log('科室：'+JSON.stringify(param))
                 this.numArr = []
                 if (this.isBlank(param)) {
                     this.orderClick.empId = ""
@@ -809,10 +801,11 @@
 
         },
         created() {
-
+			
         },
         mounted() {
-
+			this.$refs.counlorEmp.setPosName("咨询师")
+			this.$refs.counlorEmp.setEmp("")
         }
 
     }

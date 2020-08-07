@@ -88,8 +88,8 @@
                             <th class="text-center">咨询师</th>
                             <th class="text-center">咨询助理</th>
                             <th class="text-center">产品</th>
+							<th class="text-center">退费课时</th>
 							<th class="text-center">实交金额</th>
-                            <th class="text-center">退费课时</th>
                             <th class="text-center">退费金额</th>
 							<th class="text-center">实际剩余金额</th>
                             <th class="text-center">退费时间</th>

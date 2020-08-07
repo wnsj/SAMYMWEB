@@ -190,8 +190,8 @@
                     vsName: '',
 					couId: '',
 					queId: '',
-					begScore:0,
-					endScore:0,
+					begScore:'',
+					endScore:'',
 					storeId: this.storeId()
 				},
 				select: {
@@ -348,6 +348,7 @@
 					alert('分数区间填写有误，重新填写')
 					return
 				}
+
 				var url = this.url + '/answerBean/getAnswerByCondition'
 				this.$ajax({
 					method: 'POST',

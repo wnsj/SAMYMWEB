@@ -7,11 +7,11 @@
         <div class="roleBox">
 
             <el-row class="jh-m-15">
-                <el-col :md="6" :lg="5" :xl="5" v-if="accountType">
+                <!-- <el-col :md="6" :lg="5" :xl="5" v-if="accountType">
                     <label>门店: </label>
                     <store class="jh-new-store" ref='store' @storeChange='storeChange' ></store>
-                </el-col>
-                <el-col :md="8" :lg="8" :xl="8">
+                </el-col> -->
+                <el-col :md="6" :lg="5" :xl="5">
                     <label>是否启用: </label>
                     <el-select v-model="urStatus">
                         <el-option value="1" label="启用">启用</el-option>

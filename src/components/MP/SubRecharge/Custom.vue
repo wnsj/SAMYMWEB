@@ -69,6 +69,17 @@
 						<emp ref="counselorEmp" @employeeChange="counselorEmpChange" :disabled="counselorFlag"></emp>
 					</div>
 				</div>
+                <div class="col-md-6 form-group clearfix jh-wd-33">
+                    <label class="col-md-4 control-label text-right nopad end-aline" >产品风格</label><span
+                    class="sign-left">:</span>
+                    <div class="col-md-7">
+                        <select class="form-control" @change="proStyleChange" :disabled="projectFlag" v-model="consume.proStyle">
+                        <option value="">未选择</option>
+                        <option value="1">新产品</option>
+                        <option value="2">老产品</option>
+                    </select>
+                    </div>
+                </div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
                     <b>*</b>
 					<label class="col-md-4 control-label text-right nopad end-aline" >产品</label><span
@@ -148,7 +159,7 @@
 						<ContinState ref="ContinStateRef" @objectChange="continStateChange"></ContinState>
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33">
+				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="projectFlag==false">
 					<b>*</b>
 					<label class="col-md-4 control-label text-right nopad end-aline" >交费方式</label><span
 					 class="sign-left">:</span>
@@ -156,21 +167,21 @@
 						<PayStyle ref="payStyle" @payStyleChange="payChange"></PayStyle>
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="appShow==true">
+				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="projectFlag==false&&appShow==true">
 					<label class="col-md-4 control-label text-right nopad end-aline">小程序编号</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.appNumber">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33">
+				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="projectFlag==false">
 					<label class="col-md-4 control-label text-right nopad end-aline" >流水单号</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.serialNo">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33">
+				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="projectFlag==false">
 					<label class="col-md-4 control-label text-right nopad end-aline" >收据</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
@@ -312,6 +323,7 @@
 			return {
 				counselorList: [],
 				consume: {
+                    proStyle: '',
 					memNum: '', //会员名
 					memName: '', //手机
 					phone: '', //预约号
@@ -475,6 +487,22 @@
 					}
 				}
 			},
+            proStyleChange: function(){
+                if (!this.projectFlag) {
+                    if(this.selectObj==null){
+                        this.$refs.project.setProStyle(this.consume.proStyle,2,this.consume.counselor)
+                    }else{
+                        this.$refs.project.setProStyle(this.consume.proStyle,1,this.consume.counselor)
+                    }
+                    this.$refs.project.setProject(0)
+                    this.consume.price = 0
+                    this.consume.actualCount = 0
+                    this.consume.discount = 0
+                    this.consume.receivable = 0
+                    this.consume.realCross = 0
+                    this.consumeReceivable = 0
+                }
+            },
 			//产品
 			projectChange: function(param) {
 				if (this.isBlank(param)) {
@@ -733,7 +761,7 @@
 					}
 
 					this.$refs.project.setEmpId(this.consume.counselor,1)
-
+                    this.consume.proStyle = item.proStyle
 					this.$refs.project.setProject(item.proId)
 					this.consume.proId = item.proId
 					this.consume.price = item.price //折前单价
@@ -761,7 +789,7 @@
 								this.$refs.counselorEmp.setEmp(item.counselor)
 							}
 							this.$refs.project.setEmpId(this.consume.counselor,1)
-
+                            this.consume.proStyle = item.proStyle
 							this.$refs.project.setProject(item.proId)
 							this.consume.proId = item.proId
 							this.consume.price = item.price //折前单价
@@ -786,7 +814,7 @@
 							this.$refs.counselorEmp.setEmp(item.counselor)
 						}
 						this.$refs.project.setEmpId(this.consume.counselor,1)
-
+                        this.consume.proStyle = item.proStyle
 						this.$refs.project.setProject(item.proId)
 						this.consume.proId = item.proId
 						this.consume.price = item.price //折前单价

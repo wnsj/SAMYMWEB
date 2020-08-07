@@ -4,7 +4,7 @@
 			<h1 class="titleCss">咨客问卷调查结果</h1>
 		</div>
 		<div class="top">
-			<el-form label-position="right" label-width="100px" :inline="false" size="small" :model="param">
+			<el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
 				<el-row style="margin-top: 2%">
 					<el-col :span="6">
 						<el-form-item label="咨客:">
@@ -38,14 +38,27 @@
 							</el-select>
 						</el-form-item>
 					</el-col>
-					<el-col :span="6">
-						<el-form-item label="评分:" v-if="accountType == true">
-							<el-input v-model="param.begScore" placeholder="开始分数" clearable>-</el-input>
-							<el-input v-model="param.endScore" placeholder="结束分数" clearable></el-input>
-						</el-form-item>
-					</el-col>
 				</el-row>
 				<el-row>
+                    <el-col :span="12">
+                        <el-form-item label="评分:" v-if="accountType == true" style="margin-right: 23.5%">
+                            <el-row>
+                                <el-col :span="5">
+                                    <el-input v-model="param.begScore"  clearable></el-input>
+                                </el-col>
+                                <el-col :span="2">
+                                    <span>
+                                        -
+                                    </span>
+                                </el-col>
+                                <el-col :span="5">
+                                    <el-input v-model="param.endScore" clearable></el-input>
+                                </el-col>
+                            </el-row>
+
+
+                        </el-form-item>
+                    </el-col>
 					<el-col :pull="2">
 						<el-button type="primary" size="small" style="width: 85px" @click="getAnswerByCondition" class="jh-fr">查询
 						</el-button>
@@ -390,7 +403,7 @@
 						sums[index] = '';
 					}
 				});
-			
+
 				return sums;
 			},
 			// 翻页

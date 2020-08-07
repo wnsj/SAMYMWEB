@@ -8,10 +8,7 @@
 				<el-row style="margin-top: 2%">
 					<el-col :span="6">
 						<el-form-item label="咨客:">
-							<el-select v-model="param.vsId" filterable clearable placeholder="请选择">
-								<el-option v-for="item in queVisitorList" :key="item.id" :label="item.name" :value="item.id">
-								</el-option>
-							</el-select>
+                            <el-input v-model="param.vsName"  clearable></el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :span="6">
@@ -190,6 +187,7 @@
 					pageNum: 1,
 					pageSize: 10,
 					vsId: '',
+                    vsName: '',
 					couId: '',
 					queId: '',
 					begScore:0,

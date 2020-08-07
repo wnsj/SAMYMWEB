@@ -166,6 +166,12 @@
                     label="咨询师"
                     min-width="100">
                 </el-table-column>
+				<el-table-column
+				    align="center"
+				    prop="score"
+				    label="评分"
+				    min-width="100">
+				</el-table-column>
                 <el-table-column
                     align="center"
                     prop="phone"

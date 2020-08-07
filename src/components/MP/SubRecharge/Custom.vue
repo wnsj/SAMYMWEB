@@ -759,7 +759,7 @@
 						this.$refs.counselorEmp.setPosName("咨询师")
 						this.$refs.counselorEmp.setEmp(item.counselor)
 					}
-
+					this.projectFlag = true
 					this.$refs.project.setEmpId(this.consume.counselor,1)
                     this.consume.proStyle = item.proStyle
 					this.$refs.project.setProject(item.proId)

@@ -293,8 +293,6 @@
                 });
             },
             getSummaries(param) {
-                console.log('======================param===========================')
-                console.log(param)
                 const {
                     columns,
                     data

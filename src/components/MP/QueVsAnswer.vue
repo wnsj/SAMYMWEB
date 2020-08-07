@@ -343,9 +343,10 @@
 			// 获取初访咨询方向汇总数据
 			async getAnswerByCondition() {
 				console.log(this.param.begScore+'--'+this.param.endScore)
-				if(parseInt(this.param.begScore) < 0 || parseInt(this.param.endScore) < 0 || parseInt(this.param.begScore) > parseInt(this.param.endScore)){
-                    alert('分数区间填写有误，重新填写')
-                    return
+				if(parseInt(this.param.begScore) >=0 && parseInt(this.param.endScore)>=0 && parseInt(this.param.begScore)<=parseInt(this.param.endScore)){
+				}else{
+					alert('分数区间填写有误，重新填写')
+					return
 				}
 
 				var url = this.url + '/answerBean/getAnswerByCondition'
@@ -379,7 +380,7 @@
 				const sums = [];
 				columns.forEach((column, index) => {
 					if (index === 0) {
-						sums[index] = '平均分';
+						sums[index] = '总分/平均分';
 						return;
 					}
 					const values = data.map(item => Number(item[column.property]));
@@ -393,7 +394,7 @@
 							}
 						}, 0);
 						if (index === 2) {
-							sums[index] = (sums[index]/this.tableData.length).toFixed(1) + ' 分';
+							sums[index] = sums[index]+ ' 分'+' / '+(sums[index]/this.tableData.length).toFixed(1) + ' 分';
 						}else{
 							sums[index] = '';
 						}

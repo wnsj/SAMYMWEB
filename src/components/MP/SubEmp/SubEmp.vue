@@ -45,6 +45,15 @@
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix jh-wd-33">
+						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" >是否推广</label><span class="sign-left">:</span>
+						<div class="col-md-8">
+							<select class="form-control" v-model="employee.isAdvance">
+								<option value="1">是</option>
+								<option value="0">否</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix jh-wd-33">
 
 						<b>*</b>
 
@@ -146,6 +155,7 @@
 						roleId:'0',
 						storeId:this.storeId(),
 						level:'1',
+						isAdvance:'1',
 					}
 					this.$refs.role.setUr(this.employee.roleId)
 					this.$refs.pos.setPosId(this.employee.posId)

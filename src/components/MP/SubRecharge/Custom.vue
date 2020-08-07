@@ -655,58 +655,15 @@
 				});
 			},
 			closeCurrentPage() {
+                this.$refs.counselorEmp.setPosName("咨询师")
+                this.$refs.counselorEmp.setEmp("")
+                this.$refs.emp.setPosName("咨询顾问")
+                this.$refs.emp.setEmp("")
                 this.$refs.counseRoomRef.setChaId('0')
                 this.$refs.diseaseTypeRef.setObj('0')
-				this.$emit('closeCurrentPage')
-				this.consume = {
-					memNum: param.visId, //会员名
-					memName: param.visitorName,
-					phone: param.phone,
-					appNum: '', //预约号
-					receivable: 0, //应交
-					realCross: 0, //实缴
-					proId: '', //项目id
-					discount: 0, //折扣
-					price: 0, //折前单价
-					disPrice: '', //折后单价
-					totalCount: 0, //总次数
-					actualCount: 0, //实际次数
-					giveCount: 0, //赠送次数
-					giveProId: 0, //赠送项目
-					giveMoney: 0, //赠送金额
-					counselor: '', //咨询师id
-					empId: '', //咨询师助理id
-					state: 0,
-					/**状态 * 0：充值 * 1：完结 * 2：退费 */
-					storeId: this.storeId(), //店铺
-					/** 0：初访 1：在访 */
-					isfirst: null,
-					/** 0:非初办 1:是 */
-					operatorId: this.accountId(), //操作人
-					firstCharge: null,
-					/** 1:实体卡首充（不计算提成） 0:计算 */
-					consumCount: 0, //消费次数
-					visitType: 1,
-					payType: '0', //支付方式
-					appNumber:'',//小程序编号
-					serialNo: null, //流水单号
-					receipt: null, //收据
-					visitState: null, //访问状态
-					continState: null, //续流状态
-					diseaseType: null, //咨询方向
-					diseaseProblem: null, //咨询问题
-					counseRoom: null, //咨询室
-					actualBegDate: null, //实际开始时间
-					actualEndDate: null, //实际结束时间
-					cashId: null, //现金id
-					accompany: null, //陪同人
-					companionship: null, //陪同人关系
-					cashMoney: 0
-				}
-				this.$refs.VisitStateRef.setObj('0')
-				this.$refs.ContinStateRef.setObj('0')
-				this.$refs.diseaseTypeRef.setObj('0')
-				this.$refs.counseRoomRef.setChaId('0')
+                this.$refs.VisitStateRef.setObj('0')
+                this.$refs.ContinStateRef.setObj('0')
+                this.$emit('closeCurrentPage')
 				//$("#addCustom").modal("hide")
 				//console.log('关闭添加患者界面')
 			},

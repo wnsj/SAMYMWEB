@@ -472,7 +472,7 @@
 					this.consume.counselor = param.empId
 					if (!this.projectFlag) {
 						if(this.selectObj==null){
-							console.log("nilaile")
+							// console.log("nilaile")
 							this.$refs.project.setEmpId(this.consume.counselor,2)
 						}else{
 							this.$refs.project.setEmpId(this.consume.counselor,1)

@@ -88,6 +88,7 @@
                             <th class="text-center">咨询师</th>
                             <th class="text-center">咨询助理</th>
                             <th class="text-center">产品</th>
+							<th class="text-center">实交金额</th>
                             <th class="text-center">退费课时</th>
                             <th class="text-center">退费金额</th>
 							<th class="text-center">实际剩余金额</th>
@@ -105,6 +106,7 @@
                             <td class="text-center">{{item.empName}}</td>
                             <td class="text-center">{{item.proName}}</td>
                             <td class="text-center">{{item.refCount}}</td>
+							<td class="text-center">{{item.momey}}</td>
                             <td class="text-center">{{item.realRefund}}</td>
 							<td class="text-center">{{item.balance}}</td>
                             <td class="text-center">{{item.createDate | dateFormatFilter('YYYY-MM-DD')}}</td>
@@ -171,7 +173,7 @@
                 pageSize: 10, //一页显示的数量
                 total: '', //数据的数量
 
-				payType:'',
+				payType:'0',
             };
         },
         methods: {

@@ -15,6 +15,7 @@
                 proId: '0',
                 projectList: [],
                 empId: '',
+                proStyle: '',
 				model:'',//课时数
                 projectObj: {
                     proId: '0',
@@ -51,6 +52,17 @@
                 this.empId = empId
                 this.getProject()
             },
+
+            setProStyle: function(proStyle,model,empId) {
+                if(model==1){
+                    this.model='1'
+                }else if(model==2){
+                    this.model='2'
+                }
+                this.empId = empId
+                this.proStyle = proStyle
+                this.getProject()
+            },
             getProject() {
                 var url = this.url + '/projects/queryAllByParams'
                 this.$ajax({
@@ -61,6 +73,7 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
+                        proStyle: this.proStyle,
                         state: '1',
                         empId: this.empId,
                         storeId: this.storeId(),

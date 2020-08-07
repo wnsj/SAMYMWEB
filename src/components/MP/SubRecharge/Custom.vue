@@ -193,7 +193,7 @@
 					<label class="col-md-4 control-label text-right nopad end-aline" >咨询方向</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
-						<DiseaseType @objectChange="diseaseTypeChange"></DiseaseType>
+						<DiseaseType ref="diseaseTypeRef" @objectChange="diseaseTypeChange"></DiseaseType>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -218,7 +218,7 @@
 					<label class="col-md-4 control-label text-right nopad end-aline" >咨询室</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
-						<CounseRoom @channelChange="counseRoomChange"></CounseRoom>
+						<CounseRoom ref="counseRoomRef" @channelChange="counseRoomChange"></CounseRoom>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -542,8 +542,6 @@
 
 			//the event of addtional button
 			addFee() {
-
-
 				if (this.isBlank(this.consume.memName)) {
 					alert("姓名不能为空!")
 					return
@@ -661,6 +659,8 @@
 				});
 			},
 			closeCurrentPage() {
+                this.$refs.counseRoomRef.setChaId('0')
+                this.$refs.diseaseTypeRef.setObj('0')
 				this.$emit('closeCurrentPage')
 				//$("#addCustom").modal("hide")
 				//console.log('关闭添加患者界面')

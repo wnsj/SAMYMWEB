@@ -1,5 +1,5 @@
 <!-- add and modify consume -->
-<template> 
+<template>
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
@@ -72,6 +72,7 @@
 					<h4 id="myModalLabel" class="modal-title">产品：</h4>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
+                    <b>*</b>
 					<label class="col-md-4 control-label text-right nopad end-aline" >咨询师</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
@@ -79,6 +80,7 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
+                    <b>*</b>
 					<label class="col-md-4 control-label text-right nopad end-aline" >产品</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
@@ -227,16 +229,7 @@
 					<label class="col-md-4 control-label text-right nopad end-aline" >交费方式</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<select class="form-control" v-model="consume.payType" v-on:change="payChange()">
-							<option value="">--未选择--</option>
-							<option value="1">现金</option>
-							<option value="2">微信</option>
-							<option value="3">支付宝</option>
-							<option value="4">信用卡/银行卡</option>
-							<option value="5">小程序</option>
-							<option value="6">免费</option>
-							<option value="7">其它</option>
-						</select>
+						<PayStyle ref="payStyle" @payStyleChange="payChange"></PayStyle>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="appShow==true">
@@ -266,7 +259,7 @@
 				    <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-25" data-toggle="modal" v-on:click="addFee()">确认</button>
 				</div>
 			</div>
-			
+
 			</div>
 		</div>
 	</div>
@@ -275,6 +268,7 @@
 <script>
 	import dPicker from 'vue2-datepicker'
 	import emp from '../../common/Employee.vue'
+	import PayStyle from '../../common/PayStyle.vue'
 	import project from '../../common/Project.vue'
 	import VisitState from '../../common/VisitState.vue'
 	import ContinState from '../../common/VisitState.vue'
@@ -285,7 +279,8 @@
 			emp,
 			project,
 			VisitState,
-			ContinState
+			ContinState,
+			PayStyle
 		},
 		data() {
 			return {
@@ -433,11 +428,17 @@
 				}
 			},
 			//付款方式
-			payChange(){
-				if(this.consume.payType==5){
-					this.appShow=true
-				}else{
-					this.appShow=false
+			payChange: function(param) {
+				if (this.isBlank(param)) {
+					this.consume.payType = ""
+				} else {
+					this.consume.payType = param
+					if(this.consume.payType==5){
+						this.appShow=true
+					}else{
+						this.appShow=false
+						this.consume.appNumber=''
+					}
 				}
 			},
 			//产品

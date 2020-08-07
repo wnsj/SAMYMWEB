@@ -7,7 +7,7 @@
             <el-form label-position="right" label-width="100px"  :inline="false" size="small" :model="param">
 
                 <el-collapse-transition>
-                    <div class="searchForm" v-show="showSelect">
+                    <div  v-show="showSelect">
                         <el-row>
                             <el-col :span="6" class="jh-pr-28">
                                 <el-form-item label="访问类型:">
@@ -202,7 +202,7 @@
                 </el-table-column>
                 <el-table-column
                     align="center"
-                    prop="payType"
+                    prop="payTypeName"
                     label="缴费方式"
                     min-width="100">
                 </el-table-column>

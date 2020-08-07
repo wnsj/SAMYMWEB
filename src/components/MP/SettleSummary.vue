@@ -3,7 +3,7 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">消费管理</h1>
 		</div>
-		<div class="searchForm" v-show="showSelect">
+		<div v-show="showSelect">
 			<div class="row newRow">
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-if="accountType==true">
 					<div class="col-md-5 col-lg-5 text-right nopad">
@@ -41,7 +41,7 @@
 				</div>
 			</div>
 
-			<div class="row newRow">	
+			<div class="row newRow">
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					<div class="col-md-5 col-lg-5 text-right nopad">
 						<p class="end-aline col-md-11 col-lg-11" >续流状态</p><span class="sign-left">:</span>
@@ -73,22 +73,13 @@
 					<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="proName"></div>
 				</div>
 			</div>
-			<div class="row newRow">	
+			<div class="row newRow">
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
 						<p class="end-aline col-md-11 col-lg-11" >交费方式</p><span class="sign-left">:</span>
 					</div>
 					<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-						<select class="form-control" v-model="payType">
-							<option value="">--未付款--</option>
-							<option value="1">现金</option>
-							<option value="2">微信</option>
-							<option value="3">支付宝</option>
-							<option value="4">信用卡/银行卡</option>
-							<option value="5">小程序</option>
-							<option value="6">免费</option>
-							<option value="7">其它</option>
-						</select>
+                        <PayStyle ref="payStyleRef" @payStyleChange="psStyle"></PayStyle>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -113,7 +104,7 @@
 		</div>
 		<div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
-        </div>	
+        </div>
 		<div>
 			<div class="col-md-12 col-lg-12">
 				<nobr class="widthmax">
@@ -127,7 +118,6 @@
 									<th class="text-center">课时(小时)</th>
 									<th class="text-center">折扣(%)</th>
 									<th class="text-center">消费金额</th>
-									<th class="text-center">交费方式</th>
 									<th class="text-center">咨询师</th>
 									<th class="text-center">咨询顾问</th>
 									<th class="text-center">访问类型</th>
@@ -146,7 +136,6 @@
 									<td>{{item2.consumCount}}</td>
 									<td>{{item2.discount}}</td>
 									<td>{{item2.realCross}}</td>
-									<td>{{item2.payType}}</td>
 									<td>{{item2.counselorName}}</td>
 									<td>{{item2.empName}}</td>
 									<td>{{item2.visitType== '1' ? '初访' : '复访'}}</td>
@@ -188,7 +177,7 @@
     import con from '../common/Employee.vue'	//咨询顾问
 	import judgeState from '../common/VisitState.vue' //咨客判定
 	import continueState from '../common/VisitState.vue' //续流状态
-	
+    import PayStyle from '../common/PayStyle.vue'
 	export default {
 		name: 'employee',
 		components: {
@@ -200,6 +189,7 @@
             con,
 			judgeState,
 			continueState,
+            PayStyle
 		},
 		data() {
 			return {
@@ -230,7 +220,7 @@
                 showHours:false,//控制显示咨询师已消费课时，未消费课时
                 consumptionHours:'',//已消费课时
                 unusedHours:'',//未消费课时
-				
+
 				couId:'',//咨询师ID
 				conId:'',//咨询师ID
 				proName:'',//课程名称
@@ -246,7 +236,7 @@
 				this.current = page
 				this.conditionCheck(page);
 			},
-           
+
 			storeChange(param) {
 				if (this.isBlank(param)) {
 					this.storeId = ""
@@ -290,7 +280,7 @@
 						continState:this.continueState,
 						actualBegDate: this.begCreateDate,
 						actualEndDate: this.endCreateDate,
-						
+
 
 						page: page.toString(),
 						pageSize: this.pageSize,
@@ -332,6 +322,12 @@
 					this.continueState = param.vsId
 				}
 			},
+            psStyle(data) {
+                this.payType = ''
+                if (data != null) {
+                    this.payType = data
+                }
+            },
 			//咨询师
 			couChange: function(param) {
 				if (this.isBlank(param)) {

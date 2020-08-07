@@ -155,14 +155,14 @@
                             <th class="text-center">客户判定</th>
                             <th class="text-center">续流状态</th>
                             <th class="text-center">添加时间</th>
-                            <th class="text-center">是否转会员</th>
-                            <th class="text-center">联系电话</th>
+                            <th class="text-center" v-has="'SAMY:MP:Visitor:ZhuanMember'">是否转会员</th>
+                            <th class="text-center" v-has="'SAMY:MP:Visitor:QueryPhone'">联系电话</th>
                             <th class="text-center" v-has="'SAMY:MP:Visitor:Update'">修改</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr v-for="(item,index) in visitorList" :key="index" v-on:dblclick="selectRule('7',item)">
-                            <td class="text-center editradio-box" v-has="'SAMY:MP:Visitor:Update'">
+                            <td class="text-center editradio-box">
                                 <input :id="'edit'+(index+1)" class="editradio" type="radio" name="复选框" :value="index"
                                        v-model="checkedValue"/>
                                 <label :for="'edit'+(index+1)" class="editlabel"></label>
@@ -180,7 +180,7 @@
                             <td class="text-center">{{item.vsIdJudgeName}}</td>
                             <td class="text-center">{{item.vsIdFlowName}}</td>
                             <td class="text-center">{{item.createTime | dateFormatFilter("YYYY-MM-DD")}}</td>
-                            <td class="text-center">
+                            <td class="text-center" v-has="'SAMY:MP:Visitor:ZhuanMember'">
                                 <button type="button" class="btn" :class="item.isMem==1?'btn-success':'btn-warning'"
                                         v-on:click="updateVisitorShiftMember(item)">
                                     {{item.isMem==1?"已转会员":"未转会员"}}

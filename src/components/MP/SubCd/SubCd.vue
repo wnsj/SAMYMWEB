@@ -46,6 +46,7 @@
                                  v-on:click="dateAction()"></dPicker>
                     </div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">
+                        <b>*</b>
                         <label class="col-md-3 control-label text-right nopad end-aline">咨询师</label><span
                         class="sign-left">:</span>
                         <div class="col-md-8">
@@ -53,12 +54,37 @@
                         </div>
                     </div>
 					<div class="col-md-6 form-group clearfix jh-wd-33">
-					    <label class="col-md-3 control-label text-right nopad end-aline">咨询师</label><span
+                        <b>*</b>
+					    <label class="col-md-3 control-label text-right nopad end-aline">咨询顾问</label><span
 					    class="sign-left">:</span>
 					    <div class="col-md-8">
 					        <con ref="conEmp" @employeeChange="conChange"></con>
 					    </div>
 					</div>
+
+<!--                     缴费方式-->
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                        <b>*</b>
+                        <label class="col-md-3 control-label text-right nopad end-aline">缴费方式</label><span
+                        class="sign-left">:</span>
+                        <div class="col-md-8">
+                            <PayStyle ref="payStyleRef" @payStyleChange="psStyle"></PayStyle>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                        <label class="col-md-3 control-label text-right nopad end-aline">收据</label><span
+                        class="sign-left">:</span>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" v-model="cash.receipt" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                        <label class="col-md-3 control-label text-right nopad end-aline">流水单号</label><span
+                        class="sign-left">:</span>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" v-model="cash.waterNum" placeholder="">
+                        </div>
+                    </div>
                     <div class="col-md-6 form-group clearfix jh-wd-33">
                         <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-35"
                                 data-toggle="modal"
@@ -79,12 +105,13 @@
     import dPicker from 'vue2-datepicker'
     import cou from '../../common/Employee.vue' //咨询师
 	import con from '../../common/Employee.vue'	//咨询顾问
-
+    import PayStyle from '../../common/PayStyle.vue'
     export default {
         components: {
             dPicker,
             cou,
 			con,
+            PayStyle
         },
         data() {
             return {
@@ -98,9 +125,14 @@
                     cashName: '',
                     phone: '',
                     money: '',
+                    receipt: '',
+                    waterNum: '',
                     createDate: this.moment(),
                     storeId: '',
                     state: '',
+                    couId:'',
+                    conId:'',
+                    payType: '',
                     operatorId: '',
                     memNum: '',
                 },
@@ -125,6 +157,7 @@
                         state: '0',
 						couId:'',
 						conId:'',
+                        payType: '',
                         operatorId: this.accountId(),
                         phone: cash.phone
                     }
@@ -141,7 +174,13 @@
 					this.$refs.conEmp.setPosName("咨询顾问")
 					this.$refs.couEmp.setEmp(this.cash.couId)
 					this.$refs.conEmp.setEmp(this.cash.conId)
-
+                    this.$refs.payStyleRef.setPsId(this.cash.payType)
+                }
+            },
+            psStyle(data) {
+                this.cash.payType = ''
+                if (data != null) {
+                    this.cash.payType = data
                 }
             },
             dateAction() {
@@ -233,7 +272,10 @@
 				    alert("咨询顾问不能为空")
 				    return
 				}
-
+                if (this.isBlank(this.cash.payType)) {
+                    alert("缴费方式不能为空")
+                    return
+                }
                 if (!this.isBlank(this.cash.createDate)) {
                     this.cash.createDate = this.moment(this.cash.createDate, 'YYYY-MM-DD 00:00:00.000')
                 } else {
@@ -272,6 +314,9 @@
                 });
             },
             closeCurrentPage() {
+                this.$refs.couEmp.setEmp('')
+                this.$refs.conEmp.setEmp('')
+                this.$refs.payStyleRef.setPsId('0')
                 this.$emit('certainAction')
             },
         },

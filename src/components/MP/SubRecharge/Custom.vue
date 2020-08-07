@@ -776,6 +776,8 @@
 						if (this.clickItemObj.count % 2 == 0) {
 							this.selectObj = null
 							e.target.checked = false
+                            this.consume.proStyle = ''
+                            this.$refs.project.setProject('0')
 							this.$refs.counselorEmp.setPosName("咨询师")
 							this.$refs.counselorEmp.setEmp("")
 							this.counselorFlag = false

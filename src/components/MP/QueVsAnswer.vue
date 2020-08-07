@@ -190,8 +190,8 @@
                     vsName: '',
 					couId: '',
 					queId: '',
-					begScore:0,
-					endScore:0,
+					begScore:'',
+					endScore:'',
 					storeId: this.storeId()
 				},
 				select: {
@@ -343,11 +343,11 @@
 			// 获取初访咨询方向汇总数据
 			async getAnswerByCondition() {
 				console.log(this.param.begScore+'--'+this.param.endScore)
-				if(this.param.begScore >=0 && this.param.endScore>=0 && this.param.begScore<=this.param.endScore){
-				}else{
-					alert('分数区间填写有误，重新填写')
-					return
+				if(parseInt(this.param.begScore) < 0 || parseInt(this.param.endScore) < 0 || parseInt(this.param.begScore) > parseInt(this.param.endScore)){
+                    alert('分数区间填写有误，重新填写')
+                    return
 				}
+
 				var url = this.url + '/answerBean/getAnswerByCondition'
 				this.$ajax({
 					method: 'POST',

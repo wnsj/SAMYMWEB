@@ -119,6 +119,15 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                    <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">产品风格</label><span class="sign-left">:</span>
+                    <div class="col-md-8">
+                        <select class="form-control" v-model="project.proStyle">
+                            <option value="1">新产品</option>
+                            <option value="2">老产品</option>
+                        </select>
+                    </div>
+                </div>
                     <div class="col-md-12 form-group clearfix">
                         <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-45"
                                 data-toggle="modal"
@@ -160,7 +169,8 @@
                     totalPrice: 0,
                     discouAmount: 0,
                     endDay: 0,
-                    empLevel: 1
+                    empLevel: 1,
+                    proStyle: '',
                 },
                 title: '',
             };
@@ -185,7 +195,8 @@
                         endDay: 0,
                         storeId: this.storeId(),
                         empLevel: 1,
-                        proType:0
+                        proType:0,
+                        proStyle: '1',
                     }
                     this.$refs.emp.setPosName("咨询师")
                     this.$refs.emp.setEmp("")
@@ -273,6 +284,7 @@
                 });
             },
             closeCurrentPage() {
+                this.project.proStyle = ''
                 $("#projectContent").modal("hide")
                 console.log('关闭添加产品界面')
             },

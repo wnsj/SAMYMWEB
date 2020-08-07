@@ -173,7 +173,7 @@
                 pageSize: 10, //一页显示的数量
                 total: '', //数据的数量
 
-				payType:'0',
+				payType:'',
             };
         },
         methods: {
@@ -236,6 +236,7 @@
             },
             //check the list of store
             queryObjectList(page) {
+				
                 if (this.dateArr.length > 0 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1])) {
                     this.begDate = this.moment(this.dateArr[0], 'YYYY-MM-DD 00:00:00')
                     this.endDate = this.moment(this.dateArr[1], 'YYYY-MM-DD 23:59:59')
@@ -258,7 +259,7 @@
                         visitorName: this.visitorName,
                         begDate: this.begDate,
                         endDate: this.endDate,
-						payType:this.payType,
+						payType:this.payType=='0' ? '' : this.payType,
 
                         page: page.toString(),
                         pageSize: this.pageSize

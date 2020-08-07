@@ -159,7 +159,7 @@
 						<ContinState ref="ContinStateRef" @objectChange="continStateChange"></ContinState>
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33">
+				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="projectFlag==false">
 					<b>*</b>
 					<label class="col-md-4 control-label text-right nopad end-aline" >交费方式</label><span
 					 class="sign-left">:</span>
@@ -167,21 +167,21 @@
 						<PayStyle ref="payStyle" @payStyleChange="payChange"></PayStyle>
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="appShow==true">
+				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="projectFlag==false&&appShow==true">
 					<label class="col-md-4 control-label text-right nopad end-aline">小程序编号</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.appNumber">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33">
+				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="projectFlag==false">
 					<label class="col-md-4 control-label text-right nopad end-aline" >流水单号</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.serialNo">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33">
+				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="projectFlag==false">
 					<label class="col-md-4 control-label text-right nopad end-aline" >收据</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">

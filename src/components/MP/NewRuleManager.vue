@@ -33,7 +33,7 @@
                 <!--@checkbox-all="selectAllEvent"		<vxe-table-column type="checkbox" width="40"></vxe-table-column>-->
                 <vxe-table-column field="urName" width="160" title="角色名"></vxe-table-column>
                 <vxe-table-column field="urDesc" width="160" title="描述"></vxe-table-column>
-                <vxe-table-column field="storeName" title="门店"></vxe-table-column>
+                <!-- <vxe-table-column field="storeName" title="门店"></vxe-table-column> -->
                 <vxe-table-column field="urStatus" title="状态" :formatter="formatterStatus"></vxe-table-column>
                 <vxe-table-column>
                     <template v-slot="{ row }">

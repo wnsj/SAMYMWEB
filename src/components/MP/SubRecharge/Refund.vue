@@ -49,7 +49,7 @@
 										<td>{{item.counselorName}}</td>
 										<td>{{transforProType(item.proType)}}</td>
 										<td>{{item.balance}}</td>
-										<td>{{item.totalCount - item.consumCount}}</td>
+										<td>{{(item.totalCount - item.consumCount).toFixed(2)}}</td>
 									</tr>
 								</tbody>
 							</table>

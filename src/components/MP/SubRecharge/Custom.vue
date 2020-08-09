@@ -50,7 +50,7 @@
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
 									<td>{{item.totalCount}}</td>
-									<td>{{item.totalCount - item.consumCount}}</td>
+									<td>{{(item.totalCount-item.consumCount).toFixed(2)}}</td>
 									<td>{{item.isArrears=='1' ? '全款' : '非全款'}}</td>
 									<td>{{item.isArrears=='1' ? '无':(item.receivable - item.realCross)}}</td>
 								</tr>

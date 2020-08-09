@@ -88,10 +88,10 @@
                             <th class="text-center">咨询师</th>
                             <th class="text-center">咨询助理</th>
                             <th class="text-center">产品</th>
-							<th class="text-center">退费课时</th>
 							<th class="text-center">实交金额</th>
+                            <th class="text-center">实际剩余金额</th>
                             <th class="text-center">退费金额</th>
-							<th class="text-center">实际剩余金额</th>
+                            <th class="text-center">退费课时</th>
                             <th class="text-center">退费时间</th>
 							<th class="text-center">交费方式</th>
 							<th class="text-center">初访时间</th>
@@ -105,10 +105,10 @@
                             <td class="text-center">{{item.proEmpName}}</td>
                             <td class="text-center">{{item.empName}}</td>
                             <td class="text-center">{{item.proName}}</td>
-                            <td class="text-center">{{item.refCount}}</td>
 							<td class="text-center">{{item.momey}}</td>
+                            <td class="text-center">{{item.balance}}</td>
                             <td class="text-center">{{item.realRefund}}</td>
-							<td class="text-center">{{item.balance}}</td>
+                            <td class="text-center">{{item.refCount}}</td>
                             <td class="text-center">{{item.createDate | dateFormatFilter('YYYY-MM-DD')}}</td>
 							<td class="text-center">{{item.psName}}</td>
 							<td class="text-center">{{item.visCreateDate | dateFormatFilter('YYYY-MM-DD')}}</td>
@@ -236,7 +236,7 @@
             },
             //check the list of store
             queryObjectList(page) {
-				
+
                 if (this.dateArr.length > 0 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1])) {
                     this.begDate = this.moment(this.dateArr[0], 'YYYY-MM-DD 00:00:00')
                     this.endDate = this.moment(this.dateArr[1], 'YYYY-MM-DD 23:59:59')

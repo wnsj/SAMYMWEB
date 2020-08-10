@@ -5,7 +5,7 @@
 		</div>
 		<div class="top">
 			<el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
-				<el-row style="margin-top: 2%">
+				<el-row style="margin-top: 2%" >
 					<el-col :span="6">
 						<el-form-item label="咨客:">
                             <el-input v-model="param.vsName"  clearable></el-input>
@@ -56,7 +56,7 @@
 
                         </el-form-item>
                     </el-col>
-					<el-col :pull="2">
+					<el-col :span="12" :pull="1">
 						<el-button type="primary" size="small" style="width: 85px" @click="getAnswerByCondition" class="jh-fr">查询
 						</el-button>
 					</el-col>
@@ -147,8 +147,8 @@
 		</div>
 
 		<div>
-			<el-table :data="tableData" :cell-style="cellStyle" max-height="530" @row-dblclick="toDetails" :header-cell-style="headerStyle"
-			 style="width: 95%;margin-left: 3%;margin-top: 20px" :summary-method="getSummaries" show-summary border>
+			<el-table  :data="tableData" :cell-style="cellStyle" :height="tableHeight" @row-dblclick="toDetails" :header-cell-style="headerStyle"
+			 style="width: 95%;margin: 20px auto 20px" :summary-method="getSummaries" show-summary border>
 				<el-table-column align="center" prop="vsName" label="咨客姓名" min-width="100">
 				</el-table-column>
 				<el-table-column align="center" prop="couName" label="咨询师" min-width="100">
@@ -183,6 +183,7 @@
 		components: {},
 		data() {
 			return {
+                tableHeight: $(window).height() - 380,
 				param: {
 					pageNum: 1,
 					pageSize: 10,
@@ -421,6 +422,7 @@
 			this.getQue()
 			this.getAnswerByCondition()
 		}
+
 	}
 </script>
 

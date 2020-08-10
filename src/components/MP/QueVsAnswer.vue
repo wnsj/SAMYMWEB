@@ -147,7 +147,7 @@
 		</div>
 
 		<div>
-			<el-table  :data="tableData" :cell-style="cellStyle" :height="tableHeight" @row-dblclick="toDetails" :header-cell-style="headerStyle"
+			<el-table  :data="tableData" :cell-style="cellStyle" :height="400" @row-dblclick="toDetails" :header-cell-style="headerStyle"
 			 style="width: 95%;margin: 20px auto 20px" :summary-method="getSummaries" show-summary border>
 				<el-table-column align="center" prop="vsName" label="咨客姓名" min-width="100">
 				</el-table-column>

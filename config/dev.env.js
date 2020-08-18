@@ -4,8 +4,8 @@ const prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-    API_HOST:'"https://cs.miyuejk.com:4093/samy"',
-    // API_HOST:'"http://172.16.56.1:8080"',
-	  // API_HOST:'"http://172.16.3.18:8080"',
-	  // API_HOST:'"http://172.16.3.127:8082"',
+	// API_HOST:'"http://172.16.66.248:8080"',
+	// API_HOST:'"http://172.16.213.210:8080/sam"',
+	// API_HOST:'"http://172.16.3.67:8080"',
+	API_HOST:'"https://cs.miyuejk.com:4093/samy"',
 })

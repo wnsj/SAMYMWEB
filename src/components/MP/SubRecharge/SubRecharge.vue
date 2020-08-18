@@ -152,13 +152,14 @@
 					<label class="col-md-4 control-label text-right nopad end-aline  " >是否全额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<select class="form-control" v-model="consume.isArrears">
+						<select @change="isArrearsChange" class="form-control" v-model="consume.isArrears">
 							<option value="0">否</option>
 							<option value="1">是</option>
 						</select>
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33">
+				<div class="col-md-6 form-group clearfix jh-wd-33" v-show="isArrearsShow">
+                    <b>*</b>
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >欠费金额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
@@ -353,6 +354,7 @@
 				isSelect: false,
 				cashSelect: true,
 				appShow:false,
+                isArrearsShow: false,
 				unfinishedProList: [],
 				clickItemObj: {
 					itemId: 0,
@@ -414,6 +416,7 @@
 					isArrears: '1', //是否欠费
 					arrears: '0', //欠费金额
 				}
+				this.$refs.payStyle.setPsId('0')
 				this.$refs.counselorEmp.setPosName("咨询师")
 				this.$refs.emp.setPosName("咨询顾问")
 				this.$refs.counselorEmp.setEmp("")
@@ -486,6 +489,13 @@
 
 				}
 			},
+            isArrearsChange () {
+			    if (this.consume.isArrears == '1') {
+			        this.isArrearsShow = false
+                } else {
+                    this.isArrearsShow = true
+                }
+            },
 			//feedback employee information
 			empChange: function(param) {
 				if (this.isBlank(param)) {
@@ -540,6 +550,12 @@
 					alert("支付方式不能为空!")
 					return;
 				}
+
+                if (this.consume.isArrears != '1' && (this.isBlank(this.consume.arrears) || parseInt(this.consume.arrears) == 0)) {
+                    alert("欠费金额不能为空!")
+                    return;
+                }
+
 				//发生转卡，进余额抵扣
 				if (this.clickItemObj.count % 2 != 0) {
 					this.consume.piId = this.clickItemObj.itemId

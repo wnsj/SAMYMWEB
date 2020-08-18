@@ -316,8 +316,14 @@
                 }).then((response) => {
                     var res = response.data
                     if (res.retCode == '0000') {
-                        this.tableData = res.retData.records
-                        this.totalAmount = res.retData.total
+                        if (res.retData) {
+                            this.tableData = res.retData.records
+                            this.totalAmount = res.retData.total
+                        } else {
+                            this.tableData = []
+                            this.totalAmount = 0
+                        }
+
                     } else {
                         alert(res.retMsg)
                     }

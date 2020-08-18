@@ -67,9 +67,12 @@
                     <b>*</b>
 					<label class="col-md-4 control-label text-right nopad end-aline" >咨询师</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<!--<div class="col-md-7">
 						<emp ref="counselorEmp" @employeeChange="counselorEmpChange" :disabled="counselorFlag"></emp>
-					</div>
+					</div>-->
+                    <div class="col-md-7">
+                        <emp ref="counselorEmp" @employeeChange="counselorEmpChange"></emp>
+                    </div>
 				</div>
                 <div class="col-md-6 form-group clearfix jh-wd-33">
                     <label class="col-md-4 control-label text-right nopad end-aline" >产品风格</label><span

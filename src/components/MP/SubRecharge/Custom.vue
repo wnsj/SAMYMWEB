@@ -41,6 +41,7 @@
 									<td>剩余课时</td>
 									<td>是否全款</td>
 									<td>欠费金额</td>
+									<td>购买时间</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -53,6 +54,7 @@
 									<td>{{(item.totalCount-item.consumCount).toFixed(2)}}</td>
 									<td>{{item.isArrears=='1' ? '全款' : '非全款'}}</td>
 									<td>{{item.isArrears=='1' ? '无':(item.receivable - item.realCross)}}</td>
+									<td>{{item.createDate}}</td>
 								</tr>
 							</tbody>
 						</table>

@@ -29,7 +29,6 @@
                 this.$emit('channelChange', this.channelObj)
             },
             setChaId: function(crId) {
-				debugger
                 this.crId = crId
                 // //console.log('设置岗位'+this.chaId)
             },

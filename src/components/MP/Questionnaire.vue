@@ -288,7 +288,7 @@
                     //answer:'',
                 },
                 problemBeanList: [],
-                proList: [{id: 0, label: "无选项"}, {id: 1, label: "二选一"}, {id: 2, label: "多选一"}],
+                proList: [{id: 0, label: "无选项"}, {id: 1, label: "二选一"}],
                 objParam: {
                     queName: '',
                     scoreList: [],

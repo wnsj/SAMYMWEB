@@ -153,8 +153,16 @@
 				</el-table-column>
 				<el-table-column align="center" prop="couName" label="咨询师" min-width="100">
 				</el-table-column>
-				<el-table-column align="center" prop="score" label="评分" min-width="100">
+                <el-table-column align="center" prop="conName" label="咨询顾问" min-width="100">
+                </el-table-column>
+                <el-table-column align="center" prop="storeName" label="店铺" min-width="100">
+                </el-table-column>
+				<el-table-column align="center" prop="score" label="咨询师评分" min-width="100">
 				</el-table-column>
+                <el-table-column align="center" prop="empScore" label="咨询顾问评分" min-width="100">
+                </el-table-column>
+                <el-table-column align="center" prop="storeScore" label="店铺评分" min-width="100">
+                </el-table-column>
 				<el-table-column align="center" prop="phone" label="联系方式" min-width="100">
 				</el-table-column>
 				<el-table-column align="center" prop="visitTime" :formatter="dateFormat" label="来访时间" min-width="100">
@@ -392,11 +400,15 @@
 								return prev;
 							}
 						}, 0);
-						if (index === 2) {
+						if (index === 4) {
 							sums[index] = sums[index]+ ' 分'+' / '+(sums[index]/this.tableData.length).toFixed(1) + ' 分';
-						}else{
-							sums[index] = '';
-						}
+						}else if (index === 5){
+                            sums[index] = sums[index]+ ' 分'+' / '+(sums[index]/this.tableData.length).toFixed(1) + ' 分';
+						} else if (index === 6) {
+                            sums[index] = sums[index]+ ' 分'+' / '+(sums[index]/this.tableData.length).toFixed(1) + ' 分';
+                        } else {
+                            sums[index] = '';
+                        }
 					} else {
 						sums[index] = '';
 					}

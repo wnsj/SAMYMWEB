@@ -120,6 +120,19 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
+                    <el-row>
+                        <el-col :span="12">
+                            <el-checkbox-group v-model="objParam.scoreList">
+                                <template v-for="item in scoreObj">
+                                    <el-col :span="8" :key="item.id">
+                                        <el-checkbox :key="item.id" :label="item.id"  >
+                                            {{item.scoreName}}
+                                        </el-checkbox>
+                                    </el-col>
+                                </template>
+                            </el-checkbox-group>
+                        </el-col>
+                    </el-row>
                     <el-form-item v-for="(item,index) in objParam.problemBeanList" :key="index" label-width="0px">
                         <el-card>
                             <!-- <span class="num-sort">{{index+1}}.</span> -->
@@ -188,6 +201,19 @@
                                     </el-option>
                                 </el-select>
                             </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col :span="12">
+                            <el-checkbox-group v-model="editParam.scoreList">
+                                <template v-for="item in scoreObj">
+                                    <el-col :span="8" :key="item.id">
+                                        <el-checkbox :key="item.id" :label="item.id"  >
+                                            {{item.scoreName}}
+                                        </el-checkbox>
+                                    </el-col>
+                                </template>
+                            </el-checkbox-group>
                         </el-col>
                     </el-row>
                     <el-form-item v-for="(item,index) in editParam.problemBeanList" :key="index" label-width="0px">
@@ -265,6 +291,7 @@
                 proList: [{id: 0, label: "无选项"}, {id: 1, label: "二选一"}, {id: 2, label: "多选一"}],
                 objParam: {
                     queName: '',
+                    scoreList: [],
                     queState: 1,
                     dialogVisible: false,
                     problemBeanList: [
@@ -284,7 +311,12 @@
                     proSort: '',
                     proLabel: '',
                     proType: '',
-                }
+                },
+                scoreObj: [
+                    {id:'1',scoreName:'咨询师评分'},
+                    {id:'2',scoreName:'咨询顾问评分'},
+                    {id:'3',scoreName:'店铺评分'}
+                ]
             };
         },
         methods: {
@@ -302,19 +334,17 @@
             },
             //弹窗
             editQueClick(row, event, column) {
+                this.getQueByCondition()
                 this.editState = true
                 this.editParam = row
             },
             cellClick(row, column, cell, event) {
+                this.getQueByCondition()
                 if (column.label == "操作") {
                     this.editState = true
                     this.editParam = row
                 }
             },
-            // edits(item) {
-            //     console.log('数据'+item);
-            //     debugger
-            // },
             //添加问题数据
             addProbem(item) {
                 if (item == 1) {
@@ -388,6 +418,7 @@
                     data: {
                         queName: this.objParam.queName,
                         queState: this.objParam.queState,
+                        scoreList: this.objParam.scoreList,
                         problemNum: this.objParam.problemBeanList.length,
                         problemBeanList: this.objParam.problemBeanList
                     },
@@ -419,6 +450,7 @@
                         queName: this.editParam.queName,
                         queState: this.editParam.queState,
                         problemNum: this.editParam.problemBeanList.length,
+                        scoreList: this.editParam.scoreList,
                         problemBeanList: this.editParam.problemBeanList,
                     },
                     dataType: 'json',

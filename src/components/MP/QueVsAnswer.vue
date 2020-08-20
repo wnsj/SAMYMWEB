@@ -8,12 +8,12 @@
 				<el-row style="margin-top: 2%" >
 					<el-col :span="6">
 						<el-form-item label="咨客:">
-                            <el-input v-model="param.vsName"  clearable></el-input>
+                            <el-input @change="initPage" v-model="param.vsName"  clearable></el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :span="6">
 						<el-form-item label="问卷:">
-							<el-select v-model="param.queId" filterable clearable placeholder="请选择">
+							<el-select @change="initPage" v-model="param.queId" filterable clearable placeholder="请选择">
 								<el-option v-for="item in queList" :key="item.id" :label="item.queName" :value="item.id">
 								</el-option>
 							</el-select>
@@ -21,7 +21,7 @@
 					</el-col>
 					<el-col :span="6">
 						<el-form-item label="咨询师:">
-							<el-select v-model="param.couId" filterable clearable placeholder="请选择">
+							<el-select @change="initPage" v-model="param.couId" filterable clearable placeholder="请选择">
 								<el-option v-for="item in couList" :key="item.empId" :label="item.empName" :value="item.empId">
 								</el-option>
 							</el-select>
@@ -29,7 +29,7 @@
 					</el-col>
 					<el-col :span="6">
 						<el-form-item label="门店:" v-if="accountType == true">
-							<el-select v-model="param.storeId" filterable clearable placeholder="请选择">
+							<el-select @change="initPage" v-model="param.storeId" filterable clearable placeholder="请选择">
 								<el-option v-for="item in storeList" :key="item.storeId" :label="item.storeName" :value="item.storeId">
 								</el-option>
 							</el-select>
@@ -41,7 +41,7 @@
                         <el-form-item label="评分:" v-if="accountType == true" style="margin-right: 23.5%">
                             <el-row>
                                 <el-col :span="5">
-                                    <el-input v-model="param.begScore"  clearable></el-input>
+                                    <el-input @change="initPage" v-model="param.begScore"  clearable></el-input>
                                 </el-col>
                                 <el-col :span="2">
                                     <span>
@@ -49,7 +49,7 @@
                                     </span>
                                 </el-col>
                                 <el-col :span="5">
-                                    <el-input v-model="param.endScore" clearable></el-input>
+                                    <el-input @change="initPage" v-model="param.endScore" clearable></el-input>
                                 </el-col>
                             </el-row>
 
@@ -254,6 +254,10 @@
 					//console.log('岗位数据请求失败处理')
 				});
 			},
+            initPage() {
+                console.log('重置');
+                this.param.pageNum = 1
+            },
 			// 获取门店
 			getStore() {
 				var url = this.url + '/storeAction/queryStore'
@@ -423,6 +427,7 @@
 			},
 			// 每页条数变化时触发
 			handleSizeChange(pageSize) {
+                this.param.pageNum = 1
 				this.param.pageSize = pageSize
 				this.getAnswerByCondition()
 			},

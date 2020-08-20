@@ -12,6 +12,7 @@
                                 v-model="param.firstVisitStartTime"
                                 :picker-options="pickerOptions0"
                                 type="date"
+                                @change="initPage"
                                 placeholder="开始时间">
                             </el-date-picker>
                             <span style="margin-right: 2%"> - </span>
@@ -19,18 +20,19 @@
                                 v-model="param.firstVisitEndTime"
                                 :picker-options="pickerOptions1"
                                 type="date"
+                                @change="initPage"
                                 placeholder="结束时间">
                             </el-date-picker>
                         </el-form-item>
                     </el-col>
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label='咨客姓名:'>
-                            <el-input v-model="param.memName" placeholder="咨客姓名" clearable></el-input>
+                            <el-input @change="initPage" v-model="param.memName" placeholder="咨客姓名" clearable></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="门店:" v-if="accountType == true">
-                            <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
+                            <el-select @change="initPage" v-model="param.storeId" filterable clearable placeholder="请选择">
                                 <el-option :key="0" label="未选择" value=0></el-option>
                                 <el-option v-for="item in storeList"
                                            :key="item.storeId"
@@ -50,6 +52,7 @@
                             <el-date-picker
                                 v-model="param.secondVisitStartTime"
                                 :picker-options="pickerOptions0"
+                                @change="initPage"
                                 type="date"
                                 placeholder="开始时间">
                             </el-date-picker>
@@ -57,6 +60,7 @@
                             <el-date-picker
                                 v-model="param.secondVisitEndTime"
                                 :picker-options="pickerOptions1"
+                                @change="initPage"
                                 type="date"
                                 placeholder="结束时间">
                             </el-date-picker>
@@ -64,7 +68,7 @@
                     </el-col>
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="咨询师:">
-                            <el-select v-model="param.couId" filterable clearable placeholder="请选择">
+                            <el-select @change="initPage" v-model="param.couId" filterable clearable placeholder="请选择">
                                 <el-option v-for="item in couList"
                                            :key="item.empId"
                                            :label="item.empName"
@@ -75,7 +79,7 @@
                     </el-col>
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="咨询顾问:">
-                            <el-select v-model="param.empId" filterable clearable placeholder="请选择">
+                            <el-select @change="initPage" v-model="param.empId" filterable clearable placeholder="请选择">
                                 <el-option v-for="item in empList"
                                            :key="item.empId"
                                            :label="item.empName"
@@ -400,6 +404,9 @@
                 this.param.current = 1
                 this.param.pageSize = pageSize
                 this.getVsConsume()
+            },
+            initPage() {
+                this.param.current = 1
             },
         },
         created() {

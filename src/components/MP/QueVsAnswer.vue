@@ -255,7 +255,6 @@
 				});
 			},
             initPage() {
-                console.log('重置');
                 this.param.pageNum = 1
             },
 			// 获取门店

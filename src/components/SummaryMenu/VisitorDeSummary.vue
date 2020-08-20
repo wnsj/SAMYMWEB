@@ -11,6 +11,7 @@
                             <el-date-picker
                                 v-model="param.firstVisitStartTime"
                                 :picker-options="pickerOptions0"
+                                @change="initPage"
                                 type="date"
                                 placeholder="开始时间">
                             </el-date-picker>
@@ -19,13 +20,14 @@
                                 v-model="param.firstVisitEndTime"
                                 :picker-options="pickerOptions1"
                                 type="date"
+                                @change="initPage"
                                 placeholder="结束时间">
                             </el-date-picker>
                         </el-form-item>
                     </el-col>
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="访问类型:">
-                            <el-select v-model="param.visitType" clearable placeholder="请选择"
+                            <el-select  v-model="param.visitType" clearable placeholder="请选择"
                                        @change="getObj(param.visitType)">
                                 <el-option v-for="item in list"
                                            :key="item.id"
@@ -37,7 +39,7 @@
                     </el-col>
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="咨客判定:">
-                            <el-select v-model="param.isfirst" clearable placeholder="请选择">
+                            <el-select @change="initPage" v-model="param.isfirst" clearable placeholder="请选择">
                                 <el-option v-for="item in vsJugList"
                                            :key="item.vsId"
                                            :label="item.vsName"
@@ -54,6 +56,7 @@
                             <el-date-picker
                                 v-model="param.secondVisitStartTime"
                                 :picker-options="pickerOptions0"
+                                @change="initPage"
                                 type="date"
                                 placeholder="开始时间">
                             </el-date-picker>
@@ -61,6 +64,7 @@
                             <el-date-picker
                                 v-model="param.secondVisitEndTime"
                                 :picker-options="pickerOptions1"
+                                @change="initPage"
                                 type="date"
                                 placeholder="结束时间">
                             </el-date-picker>
@@ -68,7 +72,7 @@
                     </el-col>
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="门店:" v-if="accountType == true">
-                            <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
+                            <el-select @change="initPage" v-model="param.storeId" filterable clearable placeholder="请选择">
                                 <el-option :key="0" label="未选择" value=0></el-option>
                                 <el-option v-for="item in storeList"
                                            :key="item.storeId"
@@ -80,14 +84,14 @@
                     </el-col>
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label='咨客姓名:'>
-                            <el-input v-model="param.memName" placeholder="咨客姓名" clearable></el-input>
+                            <el-input @change="initPage" v-model="param.memName" placeholder="咨客姓名" clearable></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="咨询师:">
-                            <el-select v-model="param.couId" filterable clearable placeholder="请选择">
+                            <el-select @change="initPage" v-model="param.couId" filterable clearable placeholder="请选择">
                                 <el-option v-for="item in couList"
                                            :key="item.empId"
                                            :label="item.empName"
@@ -98,7 +102,7 @@
                     </el-col>
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="咨询顾问:">
-                            <el-select v-model="param.empId" filterable clearable placeholder="请选择">
+                            <el-select @change="initPage" v-model="param.empId" filterable clearable placeholder="请选择">
                                 <el-option v-for="item in empList"
                                            :key="item.empId"
                                            :label="item.empName"
@@ -109,12 +113,12 @@
                     </el-col>
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label='产品:'>
-                            <el-input v-model="param.proName" placeholder="产品" clearable></el-input>
+                            <el-input @change="initPage" v-model="param.proName" placeholder="产品" clearable></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="续流状态:">
-                            <el-select v-model="param.continueState" clearable placeholder="请选择">
+                            <el-select @change="initPage" v-model="param.continueState" clearable placeholder="请选择">
                                 <el-option v-for="item in continueList"
                                            :key="item.vsId"
                                            :label="item.vsName"
@@ -410,6 +414,7 @@
             },
             //vsType:1初访，2复访；stateType：1客户判定，2续流状态
             getObj(vsType) {
+                this.initPage()
                 //consolele.log('vsType:'+vsType)
                 var url = this.url + '/visitState/queryVisitState'
                 this.$ajax({
@@ -475,6 +480,9 @@
                 this.param.current = 1
                 this.param.pageSize = pageSize
                 this.getAllConByCondition()
+            },
+            initPage() {
+                this.param.current = 1
             },
         },
         created() {

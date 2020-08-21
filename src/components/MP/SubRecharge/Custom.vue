@@ -54,7 +54,7 @@
 									<td>{{(item.totalCount-item.consumCount).toFixed(2)}}</td>
 									<td>{{item.isArrears=='1' ? '全款' : '非全款'}}</td>
 									<td>{{item.isArrears=='1' ? '无':(item.receivable - item.realCross)}}</td>
-									<td>{{item.createDate}}</td>
+									<td>{{dateFormat(item.createDate)}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -313,6 +313,7 @@
 	import DiseaseType from '../../common/DiseaseType.vue'
 	import CounseRoom from '../../common/CounseRoom.vue'
     import {Decimal} from 'decimal.js'
+    import dateUtil from "../../common/utils/dateUtil";
 	export default {
 		components: {
 			dPicker,
@@ -469,6 +470,10 @@
 				$("input[name='radioGroup']").prop("checked", "");
 				this.checkMemCash(param.visId)
 			},
+            // 格式化时间
+            dateFormat: function (cellValue) {
+                return dateUtil.getFormateDateYMD(cellValue)
+            },
 			//咨询师
 			counselorEmpChange: function(param) {
 				if (this.isBlank(param)) {

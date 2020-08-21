@@ -36,31 +36,61 @@
 						</el-form-item>
 					</el-col>
 				</el-row>
-				<el-row>
-                    <el-col :span="12">
-                        <el-form-item label="评分:" v-if="accountType == true" style="margin-right: 23.5%">
-                            <el-row>
-                                <el-col :span="5">
-                                    <el-input @change="initPage" v-model="param.begScore"  clearable></el-input>
-                                </el-col>
-                                <el-col :span="2">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+                </div>
+                <el-form-item label="咨询师评分:" v-if="accountType == true">
+                        <el-col :span="5">
+                            <el-input @change="initPage" v-model="param.begScore"  clearable></el-input>
+                        </el-col>
+                        <el-col :span="2">
                                     <span>
                                         -
                                     </span>
-                                </el-col>
-                                <el-col :span="5">
-                                    <el-input @change="initPage" v-model="param.endScore" clearable></el-input>
-                                </el-col>
-                            </el-row>
+                        </el-col>
+                        <el-col :span="5">
+                            <el-input @change="initPage" v-model="param.endScore" clearable></el-input>
+                        </el-col>
+                </el-form-item>
+                <el-form-item label="顾问评分:" v-if="accountType == true">
+                        <el-col :span="5">
+                            <el-input @change="initPage" v-model="param.begConScore"  clearable></el-input>
+                        </el-col>
+                        <el-col :span="2">
+                                    <span>
+                                        -
+                                    </span>
+                        </el-col>
+                        <el-col :span="5">
+                            <el-input @change="initPage" v-model="param.endConScore" clearable></el-input>
+                        </el-col>
+                </el-form-item>
+                <el-form-item label="店铺评分:" v-if="accountType == true">
 
-
-                        </el-form-item>
+                        <el-col :span="5">
+                            <el-input @change="initPage" v-model="param.begStoreScore"  clearable></el-input>
+                        </el-col>
+                        <el-col :span="2">
+                                    <span>
+                                        -
+                                    </span>
+                        </el-col>
+                        <el-col :span="5">
+                            <el-input @change="initPage" v-model="param.endStoreScore" clearable></el-input>
+                        </el-col>
+                </el-form-item>
+                <el-form-item label="顾问:">
+                    <el-select @change="initPage" v-model="param.conId" filterable clearable placeholder="请选择">
+                        <el-option v-for="item in conList" :key="item.empId" :label="item.empName" :value="item.empId">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-row>
+                    <el-col :span="12" :pull="1">
+                        <el-button type="primary" size="small" style="width: 85px" @click="getAnswerByCondition" class="jh-fr">查询
+                        </el-button>
                     </el-col>
-					<el-col :span="12" :pull="1">
-						<el-button type="primary" size="small" style="width: 85px" @click="getAnswerByCondition" class="jh-fr">查询
-						</el-button>
-					</el-col>
-				</el-row>
+                </el-row>
 			</el-form>
 			<!--            <el-dialog title="问卷调查" :visible.sync="dialogVisible" width="40%">-->
 			<!--                <el-card class="form-container" shadow="never">-->
@@ -198,9 +228,14 @@
 					vsId: '',
                     vsName: '',
 					couId: '',
+                    conId: '',
 					queId: '',
 					begScore:'',
 					endScore:'',
+                    begStoreScore: '',
+                    endStoreScore: '',
+                    begConScore: '',
+                    endConScore: '',
 					storeId: this.storeId()
 				},
 				select: {
@@ -211,6 +246,7 @@
 				queVisitorList: [],
 				storeList: [],
 				couList: [],
+                conList: [],
 				queList: [],
 				tableData: [],
 				totalAmount: 0,
@@ -303,6 +339,25 @@
 					console.log(error);
 				})
 			},
+            getCon() {
+                var url = this.url + '/employeeAction/getAllEmpByPosName'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        posName: "咨询顾问"
+                    },
+                    dataType: 'json',
+                }).then(res => {
+                    this.conList = res.data.retData
+                }).catch(error => {
+                    console.log(error);
+                })
+            },
 			getQue() {
 				var url = this.url + '/questionnaireBean/getAllQue'
 				this.$ajax({
@@ -354,11 +409,18 @@
 			},
 			// 获取初访咨询方向汇总数据
 			async getAnswerByCondition() {
-				console.log(this.param.begScore+'--'+this.param.endScore)
 				if(parseInt(this.param.begScore) < 0 || parseInt(this.param.endScore) < 0 || parseInt(this.param.begScore) > parseInt(this.param.endScore)){
-                    alert('分数区间填写有误，重新填写')
+                    alert('咨询师分数区间填写有误，重新填写')
                     return
 				}
+                if(parseInt(this.param.begStoreScore) < 0 || parseInt(this.param.endStoreScore) < 0 || parseInt(this.param.begStoreScore) > parseInt(this.param.endStoreScore)){
+                    alert('店铺分数区间填写有误，重新填写')
+                    return
+                }
+                if(parseInt(this.param.begConScore) < 0 || parseInt(this.param.endConScore) < 0 || parseInt(this.param.begConScore) > parseInt(this.param.endConScore)){
+                    alert('顾问分数区间填写有误，重新填写')
+                    return
+                }
 				var url = this.url + '/answerBean/getAnswerByCondition'
 				this.$ajax({
 					method: 'POST',
@@ -435,6 +497,7 @@
 			this.getQueVisitor()
 			this.getStore()
 			this.getCou()
+            this.getCon()
 			this.getQue()
 			this.getAnswerByCondition()
 		}

@@ -429,6 +429,7 @@
                         this.tableData = res.retData
                         alert('提交成功！')
                         this.objParam.dialogVisible = false
+                        this.getQueByCondition()
                     } else {
                     }
                 }).catch((error) => {
@@ -460,6 +461,7 @@
                         // this.tableData = res.retData
                         alert('修改成功！')
                         this.editState = false
+                        this.getQueByCondition()
                     } else {
                         alert(res.retMsg)
                     }

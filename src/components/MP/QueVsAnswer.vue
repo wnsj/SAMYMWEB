@@ -36,57 +36,67 @@
 						</el-form-item>
 					</el-col>
 				</el-row>
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
-                </div>
-                <el-form-item label="咨询师评分:" v-if="accountType == true">
-                        <el-col :span="5">
-                            <el-input @change="initPage" v-model="param.begScore"  clearable></el-input>
-                        </el-col>
-                        <el-col :span="2">
+                    <div style="position: absolute;margin-left: 2%">
+                        <el-form-item label="咨询师评分:" v-if="accountType == true">
+                            <el-col :span="5">
+                                <el-input @change="initPage" v-model="param.begScore"  clearable></el-input>
+                            </el-col>
+                            <el-col :span="2">
                                     <span>
                                         -
                                     </span>
-                        </el-col>
-                        <el-col :span="5">
-                            <el-input @change="initPage" v-model="param.endScore" clearable></el-input>
-                        </el-col>
-                </el-form-item>
-                <el-form-item label="顾问评分:" v-if="accountType == true">
-                        <el-col :span="5">
-                            <el-input @change="initPage" v-model="param.begConScore"  clearable></el-input>
-                        </el-col>
-                        <el-col :span="2">
+                            </el-col>
+                            <el-col :span="5">
+                                <el-input @change="initPage" v-model="param.endScore" clearable></el-input>
+                            </el-col>
+                        </el-form-item>
+                    </div>
+                    <div style="position: absolute;margin-left: 27%">
+                        <el-form-item label="顾问评分:" v-if="accountType == true">
+                            <el-col :span="5">
+                                <el-input @change="initPage" v-model="param.begConScore"  clearable></el-input>
+                            </el-col>
+                            <el-col :span="2">
                                     <span>
                                         -
                                     </span>
-                        </el-col>
-                        <el-col :span="5">
-                            <el-input @change="initPage" v-model="param.endConScore" clearable></el-input>
-                        </el-col>
-                </el-form-item>
-                <el-form-item label="店铺评分:" v-if="accountType == true">
+                            </el-col>
+                            <el-col :span="5">
+                                <el-input @change="initPage" v-model="param.endConScore" clearable></el-input>
+                            </el-col>
+                        </el-form-item>
+                    </div>
 
-                        <el-col :span="5">
-                            <el-input @change="initPage" v-model="param.begStoreScore"  clearable></el-input>
-                        </el-col>
-                        <el-col :span="2">
+                    <div style="position: absolute;margin-left: 51.5%">
+                        <el-form-item label="店铺评分:" v-if="accountType == true">
+                            <el-col :span="5">
+                                <el-input @change="initPage" v-model="param.begStoreScore"  clearable></el-input>
+                            </el-col>
+                            <el-col :span="2">
                                     <span>
                                         -
                                     </span>
-                        </el-col>
-                        <el-col :span="5">
-                            <el-input @change="initPage" v-model="param.endStoreScore" clearable></el-input>
-                        </el-col>
-                </el-form-item>
-                <el-form-item label="顾问:">
-                    <el-select @change="initPage" v-model="param.conId" filterable clearable placeholder="请选择">
-                        <el-option v-for="item in conList" :key="item.empId" :label="item.empName" :value="item.empId">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-row>
-                    <el-col :span="12" :pull="1">
+                            </el-col>
+                            <el-col :span="5">
+                                <el-input @change="initPage" v-model="param.endStoreScore" clearable></el-input>
+                            </el-col>
+                        </el-form-item>
+                    </div>
+
+                    <div style="position: absolute;margin-left: 76.4%">
+                        <el-form-item label="顾问:">
+                            <el-select @change="initPage" v-model="param.conId" filterable clearable placeholder="请选择">
+                                <el-option v-for="item in conList" :key="item.empId" :label="item.empName" :value="item.empId">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </div>
+
+
+
+                <el-row style="margin-top: 4%">
+                    <el-col :span="12" :push="11">
                         <el-button type="primary" size="small" style="width: 85px" @click="getAnswerByCondition" class="jh-fr">查询
                         </el-button>
                     </el-col>
@@ -176,7 +186,7 @@
 			</el-dialog>
 		</div>
 
-		<div>
+		<div style="margin-top: 1%">
 			<el-table  :data="tableData" :cell-style="cellStyle" :max-height="tableHeight" @row-dblclick="toDetails" :header-cell-style="headerStyle"
 			 style="width: 95%;margin: 20px auto 20px" :summary-method="getSummaries" show-summary border>
 				<el-table-column align="center" prop="vsName" label="咨客姓名" min-width="100">

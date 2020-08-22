@@ -102,7 +102,7 @@
                             <select class="form-control" v-model="project.empLevel">
                                 <option value="1">资深级</option>
                                 <option value="2">专家级</option>
-                                <option value="3">高级</option>
+                                <option value="3">高级专家级</option>
                             </select>
                         </div>
                     </div>

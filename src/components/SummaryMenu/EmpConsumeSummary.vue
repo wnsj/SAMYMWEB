@@ -56,7 +56,7 @@
         </div>
         <el-tabs @tab-click="tabChange" type="card" style="width: 100%" v-model="param.jobType">
             <el-tab-pane label="咨询师" name="1">
-                <el-table ref="productTable" :data="objList" id="empCon" style="width: 100%" show-summary border
+                <el-table ref="productTable" :data="objList" id="empCon" :height="tableHeight"  style="width: 100%" show-summary border
                           :summary-method="getSummaries">
 
                     <el-table-column label="名字" width="100" align="center" prop="empName" fixed></el-table-column>
@@ -83,7 +83,7 @@
                 </el-table>
             </el-tab-pane>
             <el-tab-pane label="咨询顾问" name="2">
-                <el-table ref="productTable" :data="objList" id="emp" style="width: 100%" show-summary border fixed
+                <el-table ref="productTable" :data="objList" id="emp" :height="tableHeight" style="width: 100%" show-summary border fixed
                           :summary-method="getSummaries">
 
                     <el-table-column label="名字" width="100" align="center" prop="empName"></el-table-column>
@@ -114,6 +114,7 @@
                     max-height="530"
                     ref="productTable"
                     :data="incomeByPayType"
+                    :height="tableHeight"
                     style="width: 100%"
                     show-summary border
                     id="dayMoney">
@@ -182,6 +183,7 @@
         },
         data() {
             return {
+                tableHeight: innerHeight - 300,
                 param: {
                     storeId: this.storeId(),
                     begDate: '',

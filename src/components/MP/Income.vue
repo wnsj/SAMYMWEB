@@ -23,7 +23,7 @@
                             </el-col>
                             <el-col :span="6" class="jh-pr-28">
                                 <el-form-item label="咨客判定:">
-                                    <el-select v-model="param.visitState" clearable placeholder="请选择">
+                                    <el-select @change="initPage" v-model="param.visitState" clearable placeholder="请选择">
                                         <el-option v-for="item in vsJugList"
                                                    :key="item.vsId"
                                                    :label="item.vsName"
@@ -34,7 +34,7 @@
                             </el-col>
                             <el-col :span="6" class="jh-pr-28">
                                 <el-form-item label="续流状态:">
-                                    <el-select v-model="param.continState" clearable placeholder="请选择">
+                                    <el-select @change="initPage" v-model="param.continState" clearable placeholder="请选择">
                                         <el-option v-for="item in continueList"
                                                    :key="item.vsId"
                                                    :label="item.vsName"
@@ -45,7 +45,7 @@
                             </el-col>
                             <el-col :span="6" class="jh-pr-28">
                                 <el-form-item label="门店:" v-if="accountType == true">
-                                    <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
+                                    <el-select @change="initPage" v-model="param.storeId" filterable clearable placeholder="请选择">
                                         <el-option :key="0" label="未选择" value=0></el-option>
                                         <el-option v-for="item in storeList"
                                                    :key="item.storeId"
@@ -59,12 +59,12 @@
                         <el-row>
                             <el-col :span="6" class="jh-pr-28">
                                 <el-form-item label='咨客姓名:'>
-                                    <el-input v-model="param.vsName" placeholder="咨客姓名" clearable></el-input>
+                                    <el-input @change="initPage" v-model="param.vsName" placeholder="咨客姓名" clearable></el-input>
                                 </el-form-item>
                             </el-col>
                             <el-col :span="6" class="jh-pr-28">
                                 <el-form-item label="是否全款:">
-                                    <el-select v-model="param.isArrears" filterable clearable placeholder="请选择">
+                                    <el-select @change="initPage" v-model="param.isArrears" filterable clearable placeholder="请选择">
                                         <el-option v-for="item in isArrearsList"
                                                    :key="item.id"
                                                    :label="item.name"
@@ -75,7 +75,7 @@
                             </el-col>
                             <el-col :span="6" class="jh-pr-28">
                                 <el-form-item label="咨询师:">
-                                    <el-select v-model="param.couId" filterable clearable placeholder="请选择">
+                                    <el-select @change="initPage" v-model="param.couId" filterable clearable placeholder="请选择">
                                         <el-option v-for="item in couList"
                                                    :key="item.empId"
                                                    :label="item.empName"
@@ -86,7 +86,7 @@
                             </el-col>
                             <el-col :span="6" class="jh-pr-28">
                                 <el-form-item label="咨询顾问:">
-                                    <el-select v-model="param.empId" filterable clearable placeholder="请选择">
+                                    <el-select @change="initPage" v-model="param.empId" filterable clearable placeholder="请选择">
                                         <el-option v-for="item in empList"
                                                    :key="item.empId"
                                                    :label="item.empName"
@@ -103,6 +103,7 @@
                                         v-model="param.startTime"
                                         :picker-options="pickerOptions0"
                                         type="date"
+                                        @change="initPage"
                                         style="margin-right: 1.5%"
                                         placeholder="开始时间"
                                         class="jh-fl wd285"
@@ -113,6 +114,7 @@
                                         v-model="param.endTime"
                                         :picker-options="pickerOptions1"
                                         type="date"
+                                        @change="initPage"
                                         style="margin-right: 2.5%"
                                         placeholder="结束时间"
                                         class="jh-fl wd285"
@@ -417,6 +419,7 @@
 
             //vsType:1初访，2复访；stateType：1客户判定，2续流状态
             getObj(vsType) {
+                this.initPage()
                 //consolele.log('vsType:'+vsType)
                 var url = this.url + '/visitState/queryVisitState'
                 this.$ajax({
@@ -487,6 +490,9 @@
                 this.param.current = 1
                 this.param.pageSize = pageSize
                 this.getWaterByCondition()
+            },
+            initPage() {
+                this.param.current = 1
             },
         },
         created() {

@@ -20,7 +20,7 @@
                     </el-col>
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="咨客判定:">
-                            <el-select v-model="param.isfirst" clearable placeholder="请选择">
+                            <el-select @change="initPage" v-model="param.isfirst" clearable placeholder="请选择">
                                 <el-option v-for="item in vsJugList"
                                            :key="item.vsId"
                                            :label="item.vsName"
@@ -31,7 +31,7 @@
                     </el-col>
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="续流状态:">
-                            <el-select v-model="param.continueState" clearable placeholder="请选择">
+                            <el-select @change="initPage" v-model="param.continueState" clearable placeholder="请选择">
                                 <el-option v-for="item in continueList"
                                            :key="item.vsId"
                                            :label="item.vsName"
@@ -42,7 +42,7 @@
                     </el-col>
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="门店:" v-if="accountType == true">
-                            <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
+                            <el-select @change="initPage" v-model="param.storeId" filterable clearable placeholder="请选择">
                                 <el-option :key="0" label="未选择" value=0></el-option>
                                 <el-option v-for="item in storeList"
                                            :key="item.storeId"
@@ -57,7 +57,7 @@
                 <el-row >
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label='咨客姓名:'>
-                            <el-input v-model="param.memName" placeholder="咨客姓名" clearable></el-input>
+                            <el-input @change="initPage" v-model="param.memName" placeholder="咨客姓名" clearable></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -66,6 +66,7 @@
                                 v-model="param.firstVisitStartTime"
                                 :picker-options="pickerOptions0"
                                 type="date"
+                                @change="initPage"
                                 placeholder="开始时间"
                                 class="jh-fl wd285">
                             </el-date-picker>
@@ -74,6 +75,7 @@
                                 v-model="param.firstVisitEndTime"
                                 :picker-options="pickerOptions1"
                                 type="date"
+                                @change="initPage"
                                 placeholder="结束时间"
                                 class="jh-fl wd285">
                             </el-date-picker>
@@ -271,6 +273,7 @@
 
             //vsType:1初访，2复访；stateType：1客户判定，2续流状态
             getObj(vsType) {
+                this.initPage()
                 //consolele.log('vsType:'+vsType)
                 var url = this.url + '/visitState/queryVisitState'
                 this.$ajax({
@@ -316,8 +319,14 @@
                 }).then((response) => {
                     var res = response.data
                     if (res.retCode == '0000') {
-                        this.tableData = res.retData.records
-                        this.totalAmount = res.retData.total
+                        if (res.retData) {
+                            this.tableData = res.retData.records
+                            this.totalAmount = res.retData.total
+                        } else {
+                            this.tableData = []
+                            this.totalAmount = 0
+                        }
+
                     } else {
                         alert(res.retMsg)
                     }
@@ -337,6 +346,9 @@
                 this.param.current = 1
                 this.param.pageSize = pageSize
                 this.getMonthVsState()
+            },
+            initPage() {
+                this.param.current = 1
             },
         },
         created() {

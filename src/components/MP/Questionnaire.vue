@@ -98,7 +98,7 @@
             </el-table>
 
             <!-- 添加问题弹窗 -->
-            <el-dialog  :visible.sync="objParam.dialogVisible" width="40%">
+            <el-dialog  :visible.sync="objParam.dialogVisible" width="50%">
                 <div slot="title" class="wj-title">新增问卷调查</div>
                 <!--				<el-card class="form-container" shadow="never">-->
                 <el-form :model="objParam" label-position="right" label-width="110px" size="small">
@@ -120,11 +120,24 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
+                    <el-row>
+                        <el-col :span="12">
+                            <el-checkbox-group v-model="objParam.scoreList">
+                                <template v-for="item in scoreObj">
+                                    <el-col :span="8" :key="item.id">
+                                        <el-checkbox :key="item.id" :label="item.id"  >
+                                            {{item.scoreName}}
+                                        </el-checkbox>
+                                    </el-col>
+                                </template>
+                            </el-checkbox-group>
+                        </el-col>
+                    </el-row>
                     <el-form-item v-for="(item,index) in objParam.problemBeanList" :key="index" label-width="0px">
                         <el-card>
                             <!-- <span class="num-sort">{{index+1}}.</span> -->
                             <el-row>
-                                <el-col :span="6">
+                                <el-col :span="8">
                                     <el-form-item label="问题序号：">
                                         <el-input v-model="item.proSort"></el-input>
                                     </el-form-item>
@@ -140,7 +153,7 @@
                                         </el-select>
                                     </el-form-item>
                                 </el-col>
-                                <el-col :span="8">
+                                <el-col :span="6">
                                     <el-button type="danger" @click="delProbem(index,$event,1)">删除此问题</el-button>
                                 </el-col>
                             </el-row>
@@ -169,7 +182,7 @@
             </el-dialog>
 
             <!-- 编辑问卷调查 -->
-            <el-dialog :visible.sync="editState" width="40%">
+            <el-dialog :visible.sync="editState" width="50%">
                 <div slot="title" class="wj-title">编辑问卷调查</div>
                 <el-form :model="editParam" label-position="right" label-width="110px" size="small">
                     <el-row>
@@ -190,11 +203,24 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
+                    <el-row>
+                        <el-col :span="12">
+                            <el-checkbox-group v-model="editParam.scoreList">
+                                <template v-for="item in scoreObj">
+                                    <el-col :span="8" :key="item.id">
+                                        <el-checkbox :key="item.id" :label="item.id"  >
+                                            {{item.scoreName}}
+                                        </el-checkbox>
+                                    </el-col>
+                                </template>
+                            </el-checkbox-group>
+                        </el-col>
+                    </el-row>
                     <el-form-item v-for="(item,index) in editParam.problemBeanList" :key="index" label-width="0px">
                         <el-card>
                             <!-- <span class="num-sort">{{index+1}}.</span> -->
                             <el-row>
-                                <el-col :span="6">
+                                <el-col :span="8">
                                         <el-form-item label="问题序号：">
                                         <el-input v-model="item.proSort"></el-input>
                                     </el-form-item>
@@ -210,7 +236,7 @@
                                         </el-select>
                                     </el-form-item>
                                 </el-col>
-                                <el-col :span="8">
+                                <el-col :span="6">
                                     <el-button type="danger" @click="delProbem(index,$event,2)">删除此问题</el-button>
                                 </el-col>
                             </el-row>
@@ -262,9 +288,10 @@
                     //answer:'',
                 },
                 problemBeanList: [],
-                proList: [{id: 0, label: "无选项"}, {id: 1, label: "二选一"}, {id: 2, label: "多选一"}],
+                proList: [{id: 0, label: "无选项"}, {id: 1, label: "二选一"}],
                 objParam: {
                     queName: '',
+                    scoreList: [],
                     queState: 1,
                     dialogVisible: false,
                     problemBeanList: [
@@ -284,7 +311,12 @@
                     proSort: '',
                     proLabel: '',
                     proType: '',
-                }
+                },
+                scoreObj: [
+                    {id:'1',scoreName:'咨询师评分'},
+                    {id:'2',scoreName:'咨询顾问评分'},
+                    {id:'3',scoreName:'店铺评分'}
+                ]
             };
         },
         methods: {
@@ -302,19 +334,17 @@
             },
             //弹窗
             editQueClick(row, event, column) {
+                this.getQueByCondition()
                 this.editState = true
                 this.editParam = row
             },
             cellClick(row, column, cell, event) {
+                this.getQueByCondition()
                 if (column.label == "操作") {
                     this.editState = true
                     this.editParam = row
                 }
             },
-            // edits(item) {
-            //     console.log('数据'+item);
-            //     debugger
-            // },
             //添加问题数据
             addProbem(item) {
                 if (item == 1) {
@@ -388,6 +418,7 @@
                     data: {
                         queName: this.objParam.queName,
                         queState: this.objParam.queState,
+                        scoreList: this.objParam.scoreList,
                         problemNum: this.objParam.problemBeanList.length,
                         problemBeanList: this.objParam.problemBeanList
                     },
@@ -398,6 +429,7 @@
                         this.tableData = res.retData
                         alert('提交成功！')
                         this.objParam.dialogVisible = false
+                        this.getQueByCondition()
                     } else {
                     }
                 }).catch((error) => {
@@ -419,6 +451,7 @@
                         queName: this.editParam.queName,
                         queState: this.editParam.queState,
                         problemNum: this.editParam.problemBeanList.length,
+                        scoreList: this.editParam.scoreList,
                         problemBeanList: this.editParam.problemBeanList,
                     },
                     dataType: 'json',
@@ -428,6 +461,7 @@
                         // this.tableData = res.retData
                         alert('修改成功！')
                         this.editState = false
+                        this.getQueByCondition()
                     } else {
                         alert(res.retMsg)
                     }

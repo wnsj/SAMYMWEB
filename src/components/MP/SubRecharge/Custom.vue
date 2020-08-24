@@ -41,6 +41,7 @@
 									<td>剩余课时</td>
 									<td>是否全款</td>
 									<td>欠费金额</td>
+									<td>购买时间</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -53,6 +54,7 @@
 									<td>{{(item.totalCount-item.consumCount).toFixed(2)}}</td>
 									<td>{{item.isArrears=='1' ? '全款' : '非全款'}}</td>
 									<td>{{item.isArrears=='1' ? '无':(item.receivable - item.realCross)}}</td>
+									<td>{{dateFormat(item.createDate)}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -65,9 +67,12 @@
                     <b>*</b>
 					<label class="col-md-4 control-label text-right nopad end-aline" >咨询师</label><span
 					 class="sign-left">:</span>
-					<div class="col-md-7">
+					<!--<div class="col-md-7">
 						<emp ref="counselorEmp" @employeeChange="counselorEmpChange" :disabled="counselorFlag"></emp>
-					</div>
+					</div>-->
+                    <div class="col-md-7">
+                        <emp ref="counselorEmp" @employeeChange="counselorEmpChange"></emp>
+                    </div>
 				</div>
                 <div class="col-md-6 form-group clearfix jh-wd-33">
                     <label class="col-md-4 control-label text-right nopad end-aline" >产品风格</label><span
@@ -308,6 +313,7 @@
 	import DiseaseType from '../../common/DiseaseType.vue'
 	import CounseRoom from '../../common/CounseRoom.vue'
     import {Decimal} from 'decimal.js'
+    import dateUtil from "../../common/utils/dateUtil";
 	export default {
 		components: {
 			dPicker,
@@ -464,6 +470,10 @@
 				$("input[name='radioGroup']").prop("checked", "");
 				this.checkMemCash(param.visId)
 			},
+            // 格式化时间
+            dateFormat: function (cellValue) {
+                return dateUtil.getFormateDateYMD(cellValue)
+            },
 			//咨询师
 			counselorEmpChange: function(param) {
 				if (this.isBlank(param)) {

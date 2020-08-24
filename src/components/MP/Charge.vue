@@ -137,6 +137,8 @@
                                 <th class="text-center" rowspan='2'>开始时间</th>
                                 <th class="text-center" rowspan='2'>结束时间</th>
 								<th class="text-center">实交金额</th>
+								<th class="text-center">消耗金额</th>
+								<th class="text-center">消耗课时</th>
 								<th class="text-center">交费方式</th>
 								<th class="text-center">操作人</th>
 								<th class="text-center">是否全款</th>
@@ -159,6 +161,8 @@
 								<td>{{item.startDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td>{{item.endDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td>{{item.realCross}}</td>
+								<td>{{item.realCrossCount}}</td>
+								<td>{{item.consumCount}}</td>
 								<td>{{item.psName}}</td>
 								<td>{{item.operatorName}}</td>
 								<td v-show="item.isArrears=='0'"><button type="button" class="btn btn-warning" v-on:click="arrearsAaction(item)">否</button></td>

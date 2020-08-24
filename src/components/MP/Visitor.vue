@@ -736,7 +736,7 @@
 		right: 0;
 		width:750px;
 		height:100%;
-		z-index: 100;
+		z-index: 9999;
 		background-color: #fff;
 		display: none;
 		border-left:1px solid #eeeeee;

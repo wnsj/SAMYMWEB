@@ -38,15 +38,13 @@
 				</el-row>
 				<el-row>
                     <el-col :span="12">
-                        <el-form-item label="评分:" v-if="accountType == true" style="margin-right: 23.5%">
+                        <el-form-item label="评分:" v-if="accountType == true" style="float: left;margin-left:4%;">
                             <el-row>
                                 <el-col :span="5">
                                     <el-input v-model="param.begScore"  clearable></el-input>
                                 </el-col>
                                 <el-col :span="2">
-                                    <span>
-                                        -
-                                    </span>
+                                    <span> - </span>
                                 </el-col>
                                 <el-col :span="5">
                                     <el-input v-model="param.endScore" clearable></el-input>

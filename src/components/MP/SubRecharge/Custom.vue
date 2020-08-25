@@ -530,6 +530,7 @@
 			//付款方式
 			payChange: function(param) {
 				if (this.isBlank(param)) {
+					this.appShow=false
 					this.consume.payType = "0"
 				} else {
 					this.consume.payType = param

@@ -75,6 +75,12 @@
                 border>
                 <el-table-column
                     align="center"
+                    prop="id"
+                    label="ID"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    align="center"
                     prop="queName"
                     label="名称"
                     min-width="100">

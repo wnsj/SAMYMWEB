@@ -5,7 +5,8 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">客户管理</h1>
         </div>
-        <div v-show="showSelect">
+        <el-collapse-transition>
+            <div v-show="showSelect">
             <div class="row newRow">
                 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 visbtn-box">
                     <button type="button" class="btn btn-default pull-left" v-on:click="btnAction('5')"
@@ -126,13 +127,12 @@
                                 v-on:click="selectRule('1')"
                                 v-has="'SAMY:MP:Visitor:Add'">添加咨客
                         </button>
-                        <button type="button" class="btn btn-primary pull-right margin-right-10" data-toggle="modal"
-                                v-on:click="checkVisitor(1)">查询
-                        </button>
+                        <button type="button" class="btn btn-primary pull-right margin-right-10" data-toggle="modal" v-on:click="checkVisitor(1)">查询</button>
                     </div>
                 </div>
             </div>
         </div>
+        </el-collapse-transition>
         <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
@@ -457,6 +457,7 @@
             },
             //check the list of member
             checkVisitor(page) {
+                this.showSelect = false
                 //console.log('checkMember')
                 var url = this.url + '/visitorAction/queryVisitor'
                 if (!this.isBlank(this.begDate)) {

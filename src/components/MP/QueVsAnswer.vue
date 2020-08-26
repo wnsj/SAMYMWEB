@@ -4,7 +4,7 @@
 			<h1 class="titleCss">咨客问卷调查结果</h1>
 		</div>
 		<div class="top">
-			<el-form label-position="right" label-width="100px" :inline="true" size="small" :model="param">
+			<el-form label-position="right" :inline="true" size="small" :model="param">
 				<el-row style="margin-top: 2%" >
 					<el-col :span="6">
 						<el-form-item label="咨客:">
@@ -40,20 +40,20 @@
 
                     <div style="position: absolute;margin-left: 2%">
                         <el-form-item label="咨询师评分:" v-if="accountType == true">
-                            <el-col :span="5">
+                            <el-col :span="4">
                                 <el-input @change="initPage" v-model="param.begScore"  clearable></el-input>
                             </el-col>
                             <el-col :span="2">
                                 <span> - </span>
                             </el-col>
-                            <el-col :span="5">
+                            <el-col :span="4">
                                 <el-input @change="initPage" v-model="param.endScore" clearable></el-input>
                             </el-col>
                         </el-form-item>
                     </div>
                     <div style="position: absolute;margin-left: 27%">
                         <el-form-item label="顾问评分:" v-if="accountType == true">
-                            <el-col :span="5">
+                            <el-col :span="4">
                                 <el-input @change="initPage" v-model="param.begConScore"  clearable></el-input>
                             </el-col>
                             <el-col :span="2">
@@ -61,7 +61,7 @@
                                         -
                                     </span>
                             </el-col>
-                            <el-col :span="5">
+                            <el-col :span="4">
                                 <el-input @change="initPage" v-model="param.endConScore" clearable></el-input>
                             </el-col>
                         </el-form-item>
@@ -69,7 +69,7 @@
 
                     <div style="position: absolute;margin-left: 51.5%">
                         <el-form-item label="店铺评分:" v-if="accountType == true">
-                            <el-col :span="5">
+                            <el-col :span="4">
                                 <el-input @change="initPage" v-model="param.begStoreScore"  clearable></el-input>
                             </el-col>
                             <el-col :span="2">
@@ -77,7 +77,7 @@
                                         -
                                     </span>
                             </el-col>
-                            <el-col :span="5">
+                            <el-col :span="4">
                                 <el-input @change="initPage" v-model="param.endStoreScore" clearable></el-input>
                             </el-col>
                         </el-form-item>

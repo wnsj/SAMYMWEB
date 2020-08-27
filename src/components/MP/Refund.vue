@@ -5,6 +5,8 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">退费明细</h1>
         </div>
+        <el-collapse-transition>
+        <div v-show="showSelect">
         <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-if="accountType==true">
                 <div class="col-md-5 col-lg-5 text-right nopad">
@@ -75,6 +77,11 @@
                     data-toggle="modal"
                     v-on:click="queryObjectList(1)">查询
             </button>
+        </div>
+        </div>
+        </el-collapse-transition>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
@@ -163,7 +170,7 @@
                 conId: '',
                 storeId: this.storeId(),
                 accountType: this.accountType(),
-
+                showSelect:true,
                 empList: [],
                 couList: [],
 
@@ -172,7 +179,6 @@
                 current: 1, //当前页码
                 pageSize: 10, //一页显示的数量
                 total: '', //数据的数量
-
 				payType:'',
             };
         },
@@ -234,9 +240,13 @@
                     console.log(error);
                 })
             },
+            dataOpen(){
+                if(this.showSelect) return
+                this.showSelect = true;
+            },
             //check the list of store
             queryObjectList(page) {
-
+                this.showSelect = false
                 if (this.dateArr.length > 0 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1])) {
                     this.begDate = this.moment(this.dateArr[0], 'YYYY-MM-DD 00:00:00')
                     this.endDate = this.moment(this.dateArr[1], 'YYYY-MM-DD 23:59:59')

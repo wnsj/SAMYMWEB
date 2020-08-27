@@ -5,67 +5,74 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">员工管理</h1>
         </div>
-        <div class="row newRow">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span
-                    class="sign-left">:</span>
+        <el-collapse-transition>
+        <div v-show="showSelect">
+            <div class="row newRow">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span
+                        class="sign-left">:</span>
+                    </div>
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-8=7">
+                        <store ref="store" @storeChange='storeChange'></store>
+                    </div>
                 </div>
-                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-8=7">
-                    <store ref="store" @storeChange='storeChange'></store>
+                <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">姓名</p><span
+                        class="sign-left">:</span>
+                    </div>
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                        <input class="form-control" type="text" v-model="empName">
+                    </div>
                 </div>
+                <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">手机号</p><span class="sign-left">:</span>
+                    </div>
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                        <input class="form-control" type="text" v-model="iphone">
+                    </div>
+                </div> -->
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">岗位</p><span
+                        class="sign-left">:</span>
+                    </div>
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                        <pos ref="pos" @positionChange='positionChange'></pos>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">是否在用</p><span
+                        class="sign-left">:</span>
+                    </div>
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                        <select class="form-control" v-model="isuse">
+                            <option value="">全部</option>
+                            <option value="1">在用</option>
+                            <option value="0">停用</option>
+                        </select>
+                    </div>
+                </div>
+
             </div>
-            <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">姓名</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <input class="form-control" type="text" v-model="empName">
-                </div>
+            <div class="row newRow">
+
+                <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
+                        data-toggle="modal"
+                        v-on:click="selectRule('1')" v-has="'SAMY:MP:Employee:Add'">添加员工
+                </button>
+                <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
+                        data-toggle="modal"
+                        v-on:click="checkEmp(1)">查询
+                </button>
             </div>
-            <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">手机号</p><span class="sign-left">:</span>
-                </div>
-                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <input class="form-control" type="text" v-model="iphone">
-                </div>
-            </div> -->
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">岗位</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <pos ref="pos" @positionChange='positionChange'></pos>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-                    <p class="end-aline col-md-11 col-lg-11 jh-pa-1">是否在用</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <select class="form-control" v-model="isuse">
-                        <option value="">全部</option>
-                        <option value="1">在用</option>
-                        <option value="0">停用</option>
-                    </select>
-                </div>
-            </div>
-            
         </div>
-        <div class="row newRow">
-            
-            <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
-                    data-toggle="modal"
-                    v-on:click="selectRule('1')" v-has="'SAMY:MP:Employee:Add'">添加员工
-            </button>
-            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
-                    data-toggle="modal"
-                    v-on:click="checkEmp(1)">查询
-            </button>
+        </el-collapse-transition>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
@@ -154,6 +161,7 @@
                 current: '1', //当前页码
                 pageSize: '10', //一页显示的数量
                 total: '', //数据的数量
+                showSelect:true
             };
         },
         methods: {
@@ -163,7 +171,10 @@
                 this.checkEmp(page);
             },
             //modify the cotent of department
-
+            dataOpen(){
+                if(this.showSelect) return
+                this.showSelect = true;
+            },
             addEmp() {
                 console.log('modify the cotent of department')
                 this.$refs.emp.initData('add')
@@ -213,6 +224,7 @@
             },
             //check the list of department
             checkEmp(page) {
+                this.showSelect = false
                 console.log('checkEmp')
                 var url = this.url + '/employeeAction/queryEmp'
                 this.$ajax({

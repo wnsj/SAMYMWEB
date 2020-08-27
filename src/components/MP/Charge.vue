@@ -4,7 +4,8 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">购买产品管理</h1>
 		</div>
-		<div  v-show="showSelect">
+        <el-collapse-transition>
+		<div v-show="showSelect">
 			<div class="row newRow">
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-if="accountType==true">
 					<div class="col-md-5 col-lg-5 text-right jh-ad-1">
@@ -113,7 +114,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
+		</el-collapse-transition>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -310,6 +312,7 @@
             },
 			//the list , which is detail infomation of patient,was checked.
 			conditionCheck: function(page) {
+                this.showSelect = false
 				console.log('querying based on multiple conditions')
 				if (!this.isBlank(this.begCreateDate)) {
 					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')

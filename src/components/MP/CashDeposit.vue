@@ -4,6 +4,7 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">定金管理</h1>
         </div>
+        <el-collapse-transition>
         <div v-show="showSelect">
             <div class="row newRow">
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -102,6 +103,7 @@
                 </button>
             </div>
         </div>
+        </el-collapse-transition>
         <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
@@ -356,6 +358,7 @@
             //check the list of member
             checkMember(page) {
                 console.log('checkMember')
+                this.showSelect = false
                 var url = this.url + '/cashAction/queryCash'
                 if (!this.isBlank(this.beginDate)) {
                     this.beginDate = this.moment(this.beginDate, 'YYYY-MM-DD 00:00:00.000')

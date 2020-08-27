@@ -28,7 +28,7 @@
 						</el-form-item>
 					</el-col>
 					<el-col :span="6">
-						<el-form-item label="门店:" v-if="accountType == true">
+						<el-form-item label="门店:">
 							<el-select @change="initPage" v-model="param.storeId" filterable clearable placeholder="请选择">
 								<el-option v-for="item in storeList" :key="item.storeId" :label="item.storeName" :value="item.storeId">
 								</el-option>
@@ -39,7 +39,7 @@
 
 
                     <div style="position: absolute;margin-left: 2%">
-                        <el-form-item label="咨询师评分:" v-if="accountType == true">
+                        <el-form-item label="咨询师评分:">
                             <el-col :span="4">
                                 <el-input @change="initPage" v-model="param.begScore"  clearable></el-input>
                             </el-col>
@@ -52,7 +52,7 @@
                         </el-form-item>
                     </div>
                     <div style="position: absolute;margin-left: 27%">
-                        <el-form-item label="顾问评分:" v-if="accountType == true">
+                        <el-form-item label="顾问评分:">
                             <el-col :span="4">
                                 <el-input @change="initPage" v-model="param.begConScore"  clearable></el-input>
                             </el-col>
@@ -68,7 +68,7 @@
                     </div>
 
                     <div style="position: absolute;margin-left: 51.5%">
-                        <el-form-item label="店铺评分:" v-if="accountType == true">
+                        <el-form-item label="店铺评分:">
                             <el-col :span="4">
                                 <el-input @change="initPage" v-model="param.begStoreScore"  clearable></el-input>
                             </el-col>

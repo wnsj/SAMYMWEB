@@ -403,7 +403,10 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						this.select.problemBeanList = res.retData
+					    if (res.retData) {
+                            this.select.problemBeanList = res.retData.filter(item => item.proLabel != null)
+                        }
+
 					} else {
 						alert(res.retMsg)
 					}

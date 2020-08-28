@@ -37,7 +37,6 @@
 					</el-col>
 				</el-row>
 
-
                     <div style="position: absolute;margin-left: 2%">
                         <el-form-item label="咨询师评分:" v-if="accountType == true">
                             <el-col :span="4">
@@ -531,4 +530,8 @@
 		margin-bottom: 20px;
 		font-size: 16px;
 	}
+
+.el-form-item__content{ width: 50%;}
+.el-form--inline .el-form-item__content{ width: 100px;}
+.jh-pr-28 .el-input--small .el-input__inner{ width: 20px;}
 </style>

@@ -12,12 +12,12 @@
 						</el-form-item>
 					</el-col>
 					<el-col :span="6">
-						<el-form-item label="问卷:">
-							<el-select @change="initPage" v-model="param.queId" filterable clearable placeholder="请选择">
-								<el-option v-for="item in queList" :key="item.id" :label="item.queName" :value="item.id">
-								</el-option>
-							</el-select>
-						</el-form-item>
+                        <el-form-item label="门店:">
+                            <el-select @change="storeChange" v-model="param.storeId" filterable clearable placeholder="请选择">
+                                <el-option v-for="item in storeList" :key="item.storeId" :label="item.storeName" :value="item.storeId">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
 					</el-col>
 					<el-col :span="6">
 						<el-form-item label="咨询师:">
@@ -28,12 +28,12 @@
 						</el-form-item>
 					</el-col>
 					<el-col :span="6">
-						<el-form-item label="门店:">
-							<el-select @change="initPage" v-model="param.storeId" filterable clearable placeholder="请选择">
-								<el-option v-for="item in storeList" :key="item.storeId" :label="item.storeName" :value="item.storeId">
-								</el-option>
-							</el-select>
-						</el-form-item>
+                        <el-form-item label="顾问:">
+                            <el-select @change="initPage" v-model="param.conId" filterable clearable placeholder="请选择">
+                                <el-option v-for="item in conList" :key="item.empId" :label="item.empName" :value="item.empId">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
 					</el-col>
 				</el-row>
 
@@ -84,9 +84,9 @@
                     </div>
 
                     <div style="position: absolute;margin-left: 76.4%">
-                        <el-form-item label="顾问:">
-                            <el-select @change="initPage" v-model="param.conId" filterable clearable placeholder="请选择">
-                                <el-option v-for="item in conList" :key="item.empId" :label="item.empName" :value="item.empId">
+                        <el-form-item label="问卷:">
+                            <el-select @change="initPage" v-model="param.queId" filterable clearable placeholder="请选择">
+                                <el-option v-for="item in queList" :key="item.id" :label="item.queName" :value="item.id">
                                 </el-option>
                             </el-select>
                         </el-form-item>
@@ -302,6 +302,11 @@
             initPage() {
                 this.param.pageNum = 1
             },
+            storeChange() {
+                this.param.pageNum = 1
+                this.getCou()
+                this.getCon()
+            },
 			// 获取门店
 			getStore() {
 				var url = this.url + '/storeAction/queryStore'
@@ -339,6 +344,7 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
+                        storeId: this.param.storeId,
 						posName: "咨询师"
 					},
 					dataType: 'json',
@@ -358,6 +364,7 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
+                        storeId: this.param.storeId,
                         posName: "咨询顾问"
                     },
                     dataType: 'json',

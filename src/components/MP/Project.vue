@@ -5,6 +5,8 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">产品管理</h1>
         </div>
+        <el-collapse-transition>
+            <div v-show="showSelect">
         <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
                 <div class="col-md-5 col-lg-5 text-right nopad">
@@ -89,6 +91,8 @@
                     v-on:click="checkProject(1)">查询
             </button>
         </div>
+            </div>
+        </el-collapse-transition>
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive pre-scrollable">
@@ -190,6 +194,7 @@
                 current: 1, //当前页码
                 pageSize: 10, //一页显示的数量
                 total: '', //数据的数量
+                showSelect:true,
             };
         },
         methods: {
@@ -236,8 +241,13 @@
                     $("#projectContent").modal('show')
                 }
             },
+            dataOpen(){
+                if(this.showSelect) return
+                this.showSelect = true;
+            },
             //check the list of position
             checkProject(page) {
+                this.showSelect = false
                 //console.log('checkPosition')
                 var url = this.url + '/projects/queryAllByParams'
                 this.$ajax({

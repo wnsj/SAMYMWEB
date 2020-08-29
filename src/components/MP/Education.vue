@@ -5,6 +5,8 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">学历管理</h1>
         </div>
+        <el-collapse-transition>
+            <div v-show="showSelect">
         <div class="row jh-mp-1">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
@@ -23,6 +25,11 @@
                     data-toggle="modal"
                     v-on:click="queryEducationList()">查询
             </button>
+        </div>
+            </div>
+        </el-collapse-transition>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
@@ -80,20 +87,26 @@
         },
         data() {
             return {
+                showSelect:true,
                 objList: [],
                 eduName: '',
                 fixedHeader: false,
             };
         },
         methods: {
-            
+
             //feedback from adding and modifying view
             feedBack() {
                 this.queryEducationList()
                 $("#subEducationContent").modal('hide')
             },
+            dataOpen(){
+                if(this.showSelect) return
+                this.showSelect = true;
+            },
             // check the adding and modifying rule of account
             selectRule(param, item) {
+                this.showSelect = false
                 if (param == "1") {
                     this.$refs.subEducation.initData('add')
                     $("#subEducationContent").modal('show')

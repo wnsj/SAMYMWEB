@@ -4,6 +4,8 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">咨询室总览</h1>
         </div>
+        <el-collapse-transition>
+            <div v-show="showSelect">
         <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 jh-mt-15">
                 <div class="col-md-3 col-lg-3 text-right jh-ad-1">
@@ -23,11 +25,16 @@
                     <store ref='store' @storeChange='storeChange'></store>
                 </div>
             </div>
-      
+
             <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
                     data-toggle="modal"
                     @click="checkOrderList(1)">查询
             </button>
+        </div>
+            </div>
+        </el-collapse-transition>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
@@ -89,6 +96,7 @@
         },
         data() {
             return {
+                showSelect:true,
                 stId: '',
                 orderList: [],
                 //分页需要的数据
@@ -174,8 +182,13 @@
                     this.stId = param.storeId
                 }
             },
+            dataOpen(){
+                if(this.showSelect) return
+                this.showSelect = true;
+            },
             //check the list of orderContent
             checkOrderList(page) {
+                this.showSelect = false
                 var sId = ''
                 if (this.accountType() == false) {
                     sId = this.storeId()

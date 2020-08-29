@@ -5,6 +5,8 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">岗位管理</h1>
         </div>
+        <el-collapse-transition>
+            <div v-show="showSelect">
         <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
@@ -36,6 +38,11 @@
                     data-toggle="modal"
                     v-on:click="checkPosition(1)">查询
             </button>
+        </div>
+            </div>
+        </el-collapse-transition>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
@@ -108,6 +115,7 @@
                 current: 1, //当前页码
                 pageSize: 10, //一页显示的数量
                 total: '', //数据的数量
+                showSelect:true,
             };
         },
         methods: {
@@ -135,8 +143,13 @@
                     $("#positionContent").modal('show')
                 }
             },
+            dataOpen(){
+                if(this.showSelect) return
+                this.showSelect = true;
+            },
             //check the list of position
             checkPosition(page) {
+                this.showSelect = false
                 //console.log('checkPosition')
                 var url = this.url + '/positionAction/queryPosition'
                 this.$ajax({

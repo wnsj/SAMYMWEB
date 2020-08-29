@@ -5,6 +5,8 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">来访状态</h1>
         </div>
+        <el-collapse-transition>
+            <div v-show="showSelect">
         <div class="row newRow">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
@@ -36,6 +38,11 @@
                     data-toggle="modal"
                     v-on:click="queryVisitStateList()">查询
             </button>
+        </div>
+            </div>
+        </el-collapse-transition>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
@@ -97,6 +104,7 @@
         },
         data() {
             return {
+                showSelect:true,
                 objList: [],
                 isUse: '1',
                 vsName: '',
@@ -110,8 +118,13 @@
                 this.queryVisitStateList()
                 $("#vsContent").modal('hide')
             },
+            dataOpen(){
+                if(this.showSelect) return
+                this.showSelect = true;
+            },
             // check the adding and modifying rule of account
             selectRule(param, item) {
+                this.showSelect = false
                 if (param == "1") {
                     this.$refs.vs.initData('add')
                     $("#vsContent").modal('show')
@@ -124,6 +137,7 @@
                     $("#vsContent").modal('show')
                 }
             },
+
             //check the list of store
             queryVisitStateList() {
                 var url = this.url + '/visitState/queryVisitState'

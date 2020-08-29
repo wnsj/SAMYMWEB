@@ -1,5 +1,5 @@
 @charset "utf-8";
-
+body, div, dl, dt, dd, ul, ol, li, pre, form, fieldset, input, textarea, p, blockquote, th, tr, td, font, form, p, h1, h2, h3, h4, h5, h6, span, a, i ,button{ padding: 0px; margin: 0px; }
 body{
     background-color: #eeeeee;
 }

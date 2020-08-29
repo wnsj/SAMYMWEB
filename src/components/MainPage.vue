@@ -196,6 +196,9 @@
                                         <el-menu-item index="7-2">
                                             <router-link to="/MP/QueVsAnswer">问卷调查结果</router-link>
                                         </el-menu-item>
+                                        <el-menu-item index="7-3">
+                                            <router-link to="/MP/QuestionnaireSummary">问卷调查汇总</router-link>
+                                        </el-menu-item>
                                     </el-submenu>
                                 </el-menu>
                             </el-col>

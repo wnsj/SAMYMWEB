@@ -31,7 +31,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="6" class="jh-pr-28">
-                        <el-form-item label="门店:" v-if="accountType == true">
+                        <el-form-item label="门店:" v-has="'SAMY:MP:STORE'">
                             <el-select @change="initPage" v-model="param.storeId" filterable clearable placeholder="请选择">
                                 <el-option :key="0" label="未选择" value=0></el-option>
                                 <el-option v-for="item in storeList"

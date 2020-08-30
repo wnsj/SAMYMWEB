@@ -7,7 +7,7 @@
         <el-collapse-transition>
             <div v-show="showSelect">
         <div class="row newRow">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-if="retActType()">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-has="'SAMY:MP:STORE'">
                 <div class="col-md-5 col-lg-5 text-right jh-ad-1">
                     <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span
                     class="sign-left">:</span>

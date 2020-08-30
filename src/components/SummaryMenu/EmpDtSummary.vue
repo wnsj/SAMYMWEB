@@ -9,7 +9,7 @@
             <el-form label-position="right" label-width="100px" :inline="false" size="small" :model="param">
                 <el-row style="margin-top: 2%">
                     <el-col :span="6" class="jh-pr-28">
-                        <el-form-item label="门店:" v-if="accountType == true">
+                        <el-form-item label="门店:" v-has="'SAMY:MP:STORE'">
                             <store ref='store' @storeChange='storeChange'></store>
                         </el-form-item>
                     </el-col>

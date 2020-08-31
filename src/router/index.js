@@ -232,6 +232,11 @@ export default new Router({
                     path: '/MP/QueVsAnswer',
                     name: 'QueVsAnswer',
                     component: () => import("../components/MP/QueVsAnswer"),
+                },
+                {
+                    path: '/MP/QuestionnaireSummary',
+                    name: 'QuestionnaireSummary',
+                    component: () => import("../components/MP/QuestionnaireSummary"),
                 }],
             redirect: '/MP/Visitor'
         }]

@@ -8,7 +8,7 @@
             <el-form label-position="right" label-width="100px" :inline="false" size="small" :model="param">
                 <el-row style="margin-top: 2%">
                     <el-col :span="6"  class="jh-pr-28">
-                        <el-form-item label="门店:" v-if="accountType == true">
+                        <el-form-item label="门店:" v-has="'SAMY:MP:STORE'">
                             <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
                                 <el-option :key="0" label="未选择" value=0></el-option>
                                 <el-option v-for="item in storeList"

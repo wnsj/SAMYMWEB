@@ -8,7 +8,7 @@
         <el-collapse-transition>
             <div v-show="showSelect">
         <div class="row newRow">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-show="accountType==true">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-has="'SAMY:MP:STORE'">
                 <div class="col-md-5 col-lg-5 text-right nopad">
                     <p class="end-aline col-md-11 col-lg-11" >门店</p><span
                     class="sign-left">:</span>
@@ -93,6 +93,9 @@
         </div>
             </div>
         </el-collapse-transition>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
+        </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive">

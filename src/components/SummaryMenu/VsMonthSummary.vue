@@ -3,7 +3,8 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">月度咨客状态统计表</h1>
         </div>
-        <div class="top">
+        <el-collapse-transition>
+        <div class="top" v-show="showSelect">
             <el-form label-position="right" label-width="100px" :inline="false" size="small" :model="param">
                 <el-row style="margin-top: 2%">
                     <el-col :span="6" class="jh-pr-28">
@@ -98,7 +99,10 @@
                 </el-row>
             </el-form>
         </div>
-
+        </el-collapse-transition>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
+        </div>
         <div>
             <el-table
                 :data="tableData"
@@ -195,6 +199,7 @@
         components: {},
         data() {
             return {
+                showSelect:true,
                 param: {
                     current: 1,
                     pageSize: 10,
@@ -303,9 +308,13 @@
                     //console.log('状态数据请求失败处理')
                 });
             },
-
+            dataOpen(){
+                if(this.showSelect) return
+                this.showSelect = true;
+            },
             // 获取初访咨询方向汇总数据
             async getMonthVsState() {
+                this.showSelect = false
                 var url = this.url + '/purchasedItemsAction/getMonthVsState'
                 this.$ajax({
                     method: 'POST',
@@ -354,7 +363,7 @@
         created() {
             this.getStore()
             this.getObj()
-            this.getMonthVsState()
+            //this.getMonthVsState()
         }
     }
 </script>

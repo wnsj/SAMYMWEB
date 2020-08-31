@@ -6,6 +6,8 @@
 
         <div class="roleBox">
 
+        <el-collapse-transition>
+            <div v-show="showSelect">
             <el-row class="jh-m-15">
                 <!-- <el-col :md="6" :lg="5" :xl="5" v-if="accountType">
                     <label>门店: </label>
@@ -27,8 +29,11 @@
                     </el-button>
                 </el-col>
             </el-row>
-
-
+            </div>
+        </el-collapse-transition>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
+        </div>
             <vxe-table border ref="xTable1" :data="tableData" @checkbox-change="selectChangeEvent">
                 <!--@checkbox-all="selectAllEvent"		<vxe-table-column type="checkbox" width="40"></vxe-table-column>-->
                 <vxe-table-column field="urName" width="160" title="角色名"></vxe-table-column>
@@ -97,7 +102,7 @@
                             </vxe-table>
                             <div class="btns jh-te-r">
                                 <el-button type="primary" @click="addUpdatePermission"><i class="el-icon-folder-checked"></i> 保存</el-button>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -158,6 +163,7 @@
         components: {store, addRoleStore, updateRoleStore},
         data() {
             return {
+                showSelect:true,
                 roleData: {},
                 tableData: [],
                 multipleSelection: [],
@@ -218,8 +224,13 @@
                 console.log("item:" + item)
                 alert(item)
             },
+            dataOpen(){
+                if(this.showSelect) return
+                this.showSelect = true;
+            },
             //查询角色
             queryRole() {
+                this.showSelect = false
                 var url = this.url + '/umsRoleAction/queryUmsRole'
                 var param = {}
                 if (this.isBlank(this.stId)) {

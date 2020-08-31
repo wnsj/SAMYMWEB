@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-12">
-                    <div class="table-responsive pre-scrollable" ref="tab1">
+                    <div class="table-responsive" ref="tab1">
                         <table class="table table-bordered table-hover mb0" id="datatable">
 
                             <thead class="datathead">
@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-12">
-                    <div class="table-responsive pre-scrollable" ref="tab2">
+                    <div class="table-responsive" ref="tab2">
                         <table class="table table-bordered table-hover mb0" id="datatable">
 
                             <thead class="datathead">
@@ -86,7 +86,7 @@
                     <p class="tips">* 双击单行，可对当前数据进行修改</p>
                 </div>
             </div>
-            
+
         </div>
         <div>
             <div class="col-md-5 col-lg-5 part pb0">
@@ -102,7 +102,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-12">
-                    <div class="table-responsive pre-scrollable" ref="tab3">
+                    <div class="table-responsive" ref="tab3">
                         <table class="table table-bordered table-hover mb0" id="datatable">
                             <thead class="datathead">
                             <tr>
@@ -197,7 +197,7 @@
                     <p class="tips">* 双击单行，可对当前数据进行修改</p>
                 </div>
             </div> -->
-            
+
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="SubFlowWater">

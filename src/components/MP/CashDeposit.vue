@@ -109,7 +109,7 @@
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
-                <div class="table-responsive pre-scrollable">
+                <div class="table-responsive">
                     <table class="table table-bordered table-hover" id="datatable">
                         <thead class="datathead">
                         <tr>
@@ -443,7 +443,7 @@
 			this.$refs.conEmp.setPosName("咨询顾问")
         },
         created() {
-            this.checkMember(1)
+            //this.checkMember(1)
         }
     }
 </script>

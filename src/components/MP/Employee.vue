@@ -76,7 +76,7 @@
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
-                <div class="table-responsive pre-scrollable">
+                <div class="table-responsive">
                     <table class="table table-bordered table-hover jh-po-re" id="datatable">
                         <thead>
                         <tr>
@@ -290,7 +290,7 @@
             init();
         },
         created() {
-            this.checkEmp(1)
+            //this.checkEmp(1)
         }
     }
 </script>

@@ -110,7 +110,7 @@
 		<div>
 			<div class="col-md-12 col-lg-12">
 				<nobr class="widthmax">
-					<div class="table-responsive pre-scrollable">
+					<div class="table-responsive">
 						<table class="table table-bordered table-hover user-table" id="datatable">
 							<thead class="datathead">
 								<tr>
@@ -364,7 +364,7 @@
 			this.$refs.continueStateRef.getObj(1, 2)
 		},
 		created() {
-			this.conditionCheck(1)
+			//this.conditionCheck(1)
 		},
 
 	}

@@ -5,7 +5,8 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">收入情况核算表</h1>
         </div>
-        <div class="top">
+        <el-collapse-transition>
+        <div class="top" v-show="showSelect">
             <el-form label-position="right" label-width="100px" :inline="false" size="small" :model="param">
                 <el-row style="margin-top: 2%">
                     <el-col :span="6" class="jh-pr-28">
@@ -53,6 +54,10 @@
                     </el-col>
                 </el-row>
             </el-form>
+        </div>
+        </el-collapse-transition>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
         <el-tabs @tab-click="tabChange" type="card" style="width: 100%" v-model="param.jobType">
             <el-tab-pane label="咨询师" name="1">
@@ -183,6 +188,7 @@
         },
         data() {
             return {
+                showSelect:true,
                 tableHeight: innerHeight - 300,
                 param: {
                     storeId: this.storeId(),
@@ -361,7 +367,12 @@
                     //console.log('商铺查询请求失败')
                 });
             },
+            dataOpen(){
+                if(this.showSelect) return
+                this.showSelect = true;
+            },
             getData(item) {
+                 this.showSelect = false
                 if (item != '3') {
                     this.queryObjectList()
                 } else {

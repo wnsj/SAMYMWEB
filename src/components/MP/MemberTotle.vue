@@ -60,7 +60,7 @@
         <div>
             <div class="col-md-12 col-lg-12">
                 <nobr class="widthmax">
-                    <div class="table-responsive pre-scrollable">
+                    <div class="table-responsive">
                         <table class="table table-bordered table-hover user-table" id="datatable">
                             <thead class="datathead">
                             <tr>

@@ -33,7 +33,7 @@
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
-                <div class="table-responsive pre-scrollable">
+                <div class="table-responsive">
                     <table class="table table-bordered table-hover" id="datatable">
                         <thead class="datathead">
                         <tr>
@@ -227,7 +227,7 @@
             init();
         },
         created() {
-            this.checkOrderList(1)
+            //this.checkOrderList(1)
         }
     }
 </script>

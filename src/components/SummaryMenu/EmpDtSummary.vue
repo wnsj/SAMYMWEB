@@ -5,7 +5,8 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">初诊咨询方向统计表</h1>
         </div>
-        <div class="top">
+        <el-collapse-transition>
+        <div class="top" v-show="showSelect">
             <el-form label-position="right" label-width="100px" :inline="false" size="small" :model="param">
                 <el-row style="margin-top: 2%">
                     <el-col :span="6" class="jh-pr-28">
@@ -48,6 +49,10 @@
                     </el-col>
                 </el-row>
             </el-form>
+        </div>
+        </el-collapse-transition>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
         <el-tabs @tab-click="tabChange" type="card" style="width: 100%" v-model="param.posName">
             <el-tab-pane label="咨询师" name="咨询师">
@@ -101,6 +106,7 @@
         },
         data() {
             return {
+                showSelect:true,
                 tableHeight: innerHeight - 300,
                 param: {
                     storeId: this.storeId(),
@@ -167,8 +173,13 @@
                     this.exportTableToExcel('empDt', '初诊咨询方向统计表_助理')
                 }
             },
+            dataOpen(){
+                if(this.showSelect) return
+                this.showSelect = true;
+            },
             //check the list of store
             queryObjectList(page) {
+                this.showSelect = false
                 if (!this.isBlank(this.param.begDate)) {
                     this.param.begDate = this.moment(this.param.begDate, 'YYYY-MM-DD 00:00:00')
                 }
@@ -200,7 +211,7 @@
             },
         },
         created() {
-            this.queryObjectList()
+            //this.queryObjectList()
         }
     }
 </script>

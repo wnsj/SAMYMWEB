@@ -23,9 +23,9 @@ function boxheight() {
 	// var len = document.getElementsByClassName("newRow").length;
 	// oTabel.style.maxHeight = (winHeight*600/789 - 100-30*len)+'px';
 
-    if (oTabel.offsetHeight < (winHeight*600/789 - 100-30*len)) {
-        oTabel.style.overflowY = 'auto';
-    }
+    // if (oTabel.offsetHeight < (winHeight*600/789 - 100-30*len)) {
+    //     oTabel.style.overflowY = 'auto';
+    // }
 
 
 

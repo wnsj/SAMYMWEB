@@ -3,7 +3,8 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">咨客问卷调查结果</h1>
 		</div>
-		<div class="top">
+        <el-collapse-transition>
+		<div class="top" v-show="showSelect">
 			<el-form label-position="right" :inline="true" size="small" :model="param">
 				<el-row style="margin-top: 2%" >
 					<el-col :span="6">
@@ -91,8 +92,6 @@
                         </el-form-item>
                     </div>
 
-
-
                 <el-row style="margin-top: 4%">
                     <el-col :span="12" :push="11">
                         <el-button type="primary" size="small" style="width: 85px" @click="getAnswerByCondition" class="jh-fr">查询
@@ -100,89 +99,11 @@
                     </el-col>
                 </el-row>
 			</el-form>
-			<!--            <el-dialog title="问卷调查" :visible.sync="dialogVisible" width="40%">-->
-			<!--                <el-card class="form-container" shadow="never">-->
-			<!--                    <el-form :model="select">-->
-			<!--                        <el-form-item label="问卷调查名称：" label-width="110px">-->
-			<!--                            <el-input v-model="select.queName"></el-input>-->
-			<!--                        </el-form-item>-->
-
-			<!--                        <el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort">-->
-			<!--                            <el-card>-->
-			<!--                                <el-form-item label="问题序号：" label-width="110px">-->
-			<!--                                    <el-input v-model="item.proSort"></el-input>-->
-			<!--                                </el-form-item>-->
-			<!--                                <el-form-item label="问题描述：" label-width="110px">-->
-			<!--                                    <el-input v-model="item.proLabel"></el-input>-->
-			<!--                                </el-form-item>-->
-			<!--                                <el-form-item label="选项答案：" label-width="110px">-->
-			<!--                                    <el-input v-model="item.selectedAnswer"></el-input>-->
-			<!--                                </el-form-item>-->
-			<!--                                <el-form-item label="描述答案：" label-width="110px">-->
-			<!--                                    <el-input v-model="item.describeAnswer"></el-input>-->
-			<!--                                </el-form-item>-->
-			<!--                            </el-card>-->
-			<!--                        </el-form-item>-->
-			<!--                    </el-form>-->
-			<!--                </el-card>-->
-			<!--            </el-dialog>-->
-
-			<el-dialog :visible.sync="dialogVisible" width="40%">
-				<div slot="title" class="wj-title">问卷调查</div>
-				<!--				<el-card class="form-container" shadow="never">-->
-				<el-form :model="select" label-position="right" label-width="110px" size="small">
-					<el-row>
-						<div class="ques-info ques-tit"><span>问卷调查名称：</span> {{select.queName}}</div>
-						<!-- <el-col :span="12">
-                            <el-form-item label="问卷调查名称：">
-                                <el-input v-model="select.queName"></el-input>
-                            </el-form-item>
-                        </el-col> -->
-					</el-row>
-					<el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort" label-width="0px">
-						<el-card>
-							<div class="ques-info"><span>{{item.proSort}}. </span> {{item.proLabel}}</div>
-
-							<template>
-								<div class="ques-info" v-if="item.proType==1 && item.selectedAnswer">
-									<span v-if="item.selectedAnswer==1">选项答案：是</span>
-									<span v-else>选项答案：否</span>
-								</div>
-								<div class="ques-info" v-else-if="item.proType==2 && item.selectedAnswer">
-									<span>选项答案：{{item.selectedAnswer}}分</span>
-								</div>
-							</template>
-
-							<div class="ques-info" v-if="item.describeAnswer"><span>描述答案： </span> {{item.describeAnswer}}</div>
-						</el-card>
-					</el-form-item>
-
-
-					<!-- <el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort">
-                        <el-card>
-                            <el-form-item label="问题序号：">
-                                <el-input v-model="item.proSort"></el-input>
-                            </el-form-item>
-                            <el-form-item label="问题描述：">
-                                <el-input v-model="item.proLabel"></el-input>
-                            </el-form-item>
-                            <el-row>
-                                <el-col :span="12" v-if="item.selectedAnswer">
-                                    <el-form-item label="选项答案：">
-                                        <el-input v-model="item.selectedAnswer"></el-input>
-                                    </el-form-item>
-                                </el-col>
-                                <el-col :span="12" v-if="item.describeAnswer">
-                                    <el-form-item label="描述答案：">
-                                        <el-input v-model="item.describeAnswer"></el-input>
-                                    </el-form-item>
-                                </el-col>
-                            </el-row>
-                        </el-card>
-                    </el-form-item> -->
-				</el-form>
-			</el-dialog>
 		</div>
+        </el-collapse-transition>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
+        </div>
 
 		<div style="margin-top: 1%">
 			<el-table  :data="tableData" :cell-style="cellStyle" :max-height="tableHeight" @row-dblclick="toDetails" :header-cell-style="headerStyle"
@@ -217,8 +138,64 @@
 			</el-row>
 
 			<p class="tips">* 双击单行，可查看当前数据</p>
-
 		</div>
+
+        <el-dialog :visible.sync="dialogVisible" width="40%">
+        	<div slot="title" class="wj-title">问卷调查</div>
+        	<!--				<el-card class="form-container" shadow="never">-->
+        	<el-form :model="select" label-position="right" label-width="110px" size="small">
+        		<el-row>
+        			<div class="ques-info ques-tit"><span>问卷调查名称：</span> {{select.queName}}</div>
+        			<!-- <el-col :span="12">
+                        <el-form-item label="问卷调查名称：">
+                            <el-input v-model="select.queName"></el-input>
+                        </el-form-item>
+                    </el-col> -->
+        		</el-row>
+        		<el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort" label-width="0px">
+        			<el-card>
+        				<div class="ques-info"><span>{{item.proSort}}. </span> {{item.proLabel}}</div>
+
+        				<template>
+        					<div class="ques-info" v-if="item.proType==1 && item.selectedAnswer">
+        						<span v-if="item.selectedAnswer==1">选项答案：是</span>
+        						<span v-else>选项答案：否</span>
+        					</div>
+        					<div class="ques-info" v-else-if="item.proType==2 && item.selectedAnswer">
+        						<span>选项答案：{{item.selectedAnswer}}分</span>
+        					</div>
+        				</template>
+
+        				<div class="ques-info" v-if="item.describeAnswer"><span>描述答案： </span> {{item.describeAnswer}}</div>
+        			</el-card>
+        		</el-form-item>
+
+
+        		<!-- <el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort">
+                    <el-card>
+                        <el-form-item label="问题序号：">
+                            <el-input v-model="item.proSort"></el-input>
+                        </el-form-item>
+                        <el-form-item label="问题描述：">
+                            <el-input v-model="item.proLabel"></el-input>
+                        </el-form-item>
+                        <el-row>
+                            <el-col :span="12" v-if="item.selectedAnswer">
+                                <el-form-item label="选项答案：">
+                                    <el-input v-model="item.selectedAnswer"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12" v-if="item.describeAnswer">
+                                <el-form-item label="描述答案：">
+                                    <el-input v-model="item.describeAnswer"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                    </el-card>
+                </el-form-item> -->
+        	</el-form>
+        </el-dialog>
+
 	</div>
 </template>
 
@@ -259,11 +236,15 @@
 				tableData: [],
 				totalAmount: 0,
 				dialogVisible: false,
-				accountType: this.accountType()
+				accountType: this.accountType(),
+                showSelect:true
 			};
 		},
 		methods: {
-
+            dataOpen(){
+                if(this.showSelect) return
+                this.showSelect = true;
+            },
 			// 表格表头样式
 			headerStyle() {
 				return 'text-align: center;color: black;'
@@ -427,6 +408,8 @@
 			},
 			// 获取初访咨询方向汇总数据
 			async getAnswerByCondition() {
+                this.showSelect = false;
+
 				if(parseInt(this.param.begScore) < 0 || parseInt(this.param.endScore) < 0 || parseInt(this.param.begScore) > parseInt(this.param.endScore)){
                     alert('咨询师分数区间填写有误，重新填写')
                     return
@@ -517,7 +500,7 @@
 			this.getCou()
             this.getCon()
 			this.getQue()
-			this.getAnswerByCondition()
+			// this.getAnswerByCondition()
 		}
 
 	}

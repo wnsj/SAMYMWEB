@@ -7,90 +7,90 @@
         </div>
         <el-collapse-transition>
             <div v-show="showSelect">
-        <div class="row newRow">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-has="'SAMY:MP:STORE'">
-                <div class="col-md-5 col-lg-5 text-right nopad">
-                    <p class="end-aline col-md-11 col-lg-11" >门店</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <store ref='store' @storeChange='storeChange'></store>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
-                    <p class="end-aline col-md-11 col-lg-11" >产品名称</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <input class="form-control" type="text" v-model="proName">
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-md-5 col-lg-5 text-right nopad">
-                    <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-md-7 col-lg-7">
-                    <emp ref='emp' @employeeChange='empChange'></emp>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
-                    <p class="end-aline col-md-11 col-lg-11" >是否在用</p><span
-                    class="sign-left">:</span>
-                </div>
-                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <select class="form-control" v-model="isuse">
-                        <option value="">全部</option>
-                        <option value="1">在用</option>
-                        <option value="0">停用</option>
-                    </select>
-                </div>
-            </div>
+                <div class="row newRow">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-has="'SAMY:MP:STORE'">
+                        <div class="col-md-5 col-lg-5 text-right nopad">
+                            <p class="end-aline col-md-11 col-lg-11" >门店</p><span
+                            class="sign-left">:</span>
+                        </div>
+                        <div class="col-md-7 col-lg-7">
+                            <store ref='store' @storeChange='storeChange'></store>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+                            <p class="end-aline col-md-11 col-lg-11" >产品名称</p><span
+                            class="sign-left">:</span>
+                        </div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                            <input class="form-control" type="text" v-model="proName">
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="col-md-5 col-lg-5 text-right nopad">
+                            <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span
+                            class="sign-left">:</span>
+                        </div>
+                        <div class="col-md-7 col-lg-7">
+                            <emp ref='emp' @employeeChange='empChange'></emp>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+                            <p class="end-aline col-md-11 col-lg-11" >是否在用</p><span
+                            class="sign-left">:</span>
+                        </div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                            <select class="form-control" v-model="isuse">
+                                <option value="">全部</option>
+                                <option value="1">在用</option>
+                                <option value="0">停用</option>
+                            </select>
+                        </div>
+                    </div>
 
 
-        </div>
-        <div class="row newRow">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
-                    <p class="end-aline col-md-11 col-lg-11" >咨询师等级</p>
-                    <span
-                        class="sign-left">:</span>
                 </div>
-                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <select class="form-control" v-model="empLevel">
-                        <option value="">--未选择--</option>
-                        <option value="1">资深级</option>
-                        <option value="2">专家级</option>
-                        <option value="3">高级</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
-                    <p class="end-aline col-md-11 col-lg-11" >是否可退款</p>
-                    <span
-                        class="sign-left">:</span>
-                </div>
-                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                    <select class="form-control" v-model="isRefund">
-                        <option value="">--未选择--</option>
-                        <option value="0">否</option>
-                        <option value="1">是</option>
-                    </select>
-                </div>
-            </div>
+                <div class="row newRow">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+                            <p class="end-aline col-md-11 col-lg-11" >咨询师等级</p>
+                            <span
+                                class="sign-left">:</span>
+                        </div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                            <select class="form-control" v-model="empLevel">
+                                <option value="">--未选择--</option>
+                                <option value="1">资深级</option>
+                                <option value="2">专家级</option>
+                                <option value="3">高级</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+                            <p class="end-aline col-md-11 col-lg-11" >是否可退款</p>
+                            <span
+                                class="sign-left">:</span>
+                        </div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                            <select class="form-control" v-model="isRefund">
+                                <option value="">--未选择--</option>
+                                <option value="0">否</option>
+                                <option value="1">是</option>
+                            </select>
+                        </div>
+                    </div>
 
-            <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-30"
-                    data-toggle="modal"
-                    v-on:click="selectRule('1')" v-has="'SAMY:MP:Project:Add'">添加
-            </button>
-            <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15"
-                    data-toggle="modal"
-                    v-on:click="checkProject(1)">查询
-            </button>
-        </div>
+                    <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-30"
+                            data-toggle="modal"
+                            v-on:click="selectRule('1')" v-has="'SAMY:MP:Project:Add'">添加
+                    </button>
+                    <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15"
+                            data-toggle="modal"
+                            v-on:click="checkProject(1)">查询
+                    </button>
+                </div>
             </div>
         </el-collapse-transition>
         <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
@@ -326,7 +326,7 @@
             init();
         },
         created() {
-            this.checkProject(1)
+            // this.checkProject(1)
         }
     }
 </script>

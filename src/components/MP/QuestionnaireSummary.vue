@@ -3,7 +3,8 @@
     <div class="col-md-12 col-lg-12 main-title">
         <h1 class="titleCss">问卷调查汇总</h1>
     </div>
-    <div class="top">
+    <el-collapse-transition>
+    <div class="top" v-show="showSelect">
         <el-form label-position="right" :inline="true" size="small" label-width="100px">
             <el-row>
                 <el-col :span="8">
@@ -68,6 +69,10 @@
                 </el-col>
             </el-row>
         </el-form>
+    </div>
+    </el-collapse-transition>
+    <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
+        <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
     </div>
 
    <div class="col-md-12 col-lg-12">
@@ -134,6 +139,7 @@
                   <div class="quesum-item-head">
                       <p>{{index + 1}}.{{proDetails.proLabel}}</p>
                       <el-button
+                        :disabled="proDetails.answerBeanList.length==0"
                         size="small"
                         class="pull-right"
                         :type="proDetails.isSelected == true ? 'info' : 'primary'"
@@ -144,10 +150,7 @@
                      </el-button>
                   </div>
                   <ul>
-                      <li v-for="(item,proIndex) in proDetails.answerBeanList" :key="proIndex">
-                          <span>{{proIndex + 1}}.选项答案：{{item.selectedAnswer == 1 ? '是' : '否'}}</span>
-                          <p>答案描述：{{item.describeAnswer}}</p>
-                      </li>
+                      <li v-for="(item,proIndex) in proDetails.answerBeanList" :key="proIndex">{{proIndex + 1}}.答案描述：{{item.describeAnswer}}</li>
                   </ul>
               </div>
           </div>
@@ -208,14 +211,17 @@
                 tableData: [],
                 totalAmount: 0,
                 selectItem: [],
-                proDetailsList: []
+                proDetailsList: [],
+                showSelect:true
 			};
 		},
 
 		methods: {
+            dataOpen(){
+                if(this.showSelect) return
+                this.showSelect = true;
+            },
             showItem(isSelected,index){
-                // console.log(isSelected)
-                // console.log(index)
               if (isSelected) {
                   this.proDetailsList[index].isSelected = false;
               } else {
@@ -247,9 +253,16 @@
               }).then((response) => {
               	var res = response.data
               	if (res.retCode == '0000') {
-              		console.log(res);
+              		// console.log(res);
                     res.retData.forEach(function(item,index){
-                        item.isSelected = false
+                        item.isSelected = false;
+                        if (item.answerBeanList.length !== 0) {
+                            item.answerBeanList = item.answerBeanList.filter((v)=>{
+                                if (v.describeAnswer !== '') {
+                                    return v
+                                }
+                            })
+                        }
                     })
                     this.proDetailsList = res.retData;
                     this.dialogVisible = true;
@@ -284,7 +297,7 @@
             },
             // 问卷调查统计分页查询
             getAvgScore() {
-                // console.log(this.param)
+                this.showSelect = false;
 
             	// var url = 'http://172.16.4.134:8080/queVisitor/getAvgScore'
                 var url = this.url + '/queVisitor/getAvgScore'
@@ -422,9 +435,8 @@
 .quesum .quesum-content .quesum-box .quesum-item .quesum-item-head .el-button{width: 120px;}
 .quesum .quesum-content .quesum-box .quesum-item ul{width: 100%;overflow: hidden;box-sizing: border-box;padding: 20px 2.5%; display: none; }
 .quesum .quesum-content .quesum-box .quesum-item ul li{width: 100%;overflow: hidden;border-bottom: 1px solid #e6e6e6;padding: 17px 0;font-size: 13px;color: #585858;}
-.quesum .quesum-content .quesum-box .quesum-item ul li span{width: 20%;overflow: hidden;display: inline-block;float: left;}
-.quesum .quesum-content .quesum-box .quesum-item ul li p{width: 80%;overflow: hidden;display: inline-block;float: left;}
-
+/* .quesum .quesum-content .quesum-box .quesum-item ul li span{width: 20%;overflow: hidden;display: inline-block;float: left;} */
+/* .quesum .quesum-content .quesum-box .quesum-item ul li p{width: 80%;overflow: hidden;display: inline-block;float: left;} */
 .quesum .quesum-content .quesum-box .quesum-item.active{border-radius: 6px;}
 .quesum .quesum-content .quesum-box .quesum-item.active .quesum-item-head{border-color:#fff;}
 .quesum .quesum-content .quesum-box .quesum-item.active .quesum-item-head p{font-weight: bold;font-size: 16px;color: #191919; }

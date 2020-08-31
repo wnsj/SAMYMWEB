@@ -21,13 +21,12 @@
         <div class="container-fluid clear-mp" id="Odiv">
             <div class="row clear-mp">
                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 my-aside clear-mp" id="Adiv">
-                    <!-- <p style=" width:100%; height:50px; line-height:50px; font-size: 30px;font-weight: bold;color: #795548;text-align: left;box-sizing: border-box; padding-left:50px;">
-                        功能列表</p> -->
+
                     <div id="aside-menu">
                         <el-row>
                             <el-col :span="24">
                                 <el-menu
-                                    default-active="2"
+                                   :default-active="$route.path"
                                     class="el-menu-vertical-demo"
                                     @open="handleOpen"
                                     @close="handleClose"
@@ -35,15 +34,14 @@
                                     background-color="rgb(230, 230, 230)"
                                     text-color="#333"
                                     active-text-color="#ffd04b"
-                                    :default-openeds="openeds">
+                                    :default-openeds="openeds"
+                                    router>
                                     <el-submenu index="1">
                                         <template slot="title">
                                             <i class="el-icon-folder-add"></i>
                                             <span>客户管理</span>
                                         </template>
-                                        <el-menu-item index="1-1">
-                                            <router-link to="/MP/Visitor">客户管理</router-link>
-                                        </el-menu-item>
+                                        <el-menu-item index="/MP/Visitor">客户管理</el-menu-item>
                                     </el-submenu>
 
                                     <el-submenu index="2">
@@ -51,24 +49,12 @@
                                             <i class="el-icon-folder-add"></i>
                                             <span>订单管理</span>
                                         </template>
-                                        <el-menu-item index="2-1">
-                                            <router-link to="/MP/SettleSummary">消费管理</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="2-2">
-                                            <router-link to="/MP/Charge">已购产品管理</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="2-3">
-                                            <router-link to="/MP/Order">预约管理</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="2-4">
-                                            <router-link to="/MP/CashDeposit">定金管理</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="2-5">
-                                            <router-link to="/MP/Refund">退费管理</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="2-6">
-                                            <router-link to="/MP/Income">收入记录明细</router-link>
-                                        </el-menu-item>
+                                        <el-menu-item index="/MP/SettleSummary">消费管理</el-menu-item>
+                                        <el-menu-item index="/MP/Charge">已购产品管理</el-menu-item>
+                                        <el-menu-item index="/MP/Order">预约管理</el-menu-item>
+                                        <el-menu-item index="/MP/CashDeposit">定金管理</el-menu-item>
+                                        <el-menu-item index="/MP/Refund">退费管理</el-menu-item>
+                                        <el-menu-item index="/MP/Income">收入记录明细</el-menu-item>
                                     </el-submenu>
 
                                     <el-submenu index="3">
@@ -76,24 +62,12 @@
                                             <i class="el-icon-folder-add"></i>
                                             <span>门店管理</span>
                                         </template>
-                                        <el-menu-item index="3-1">
-                                            <router-link to="/MP/Employee">员工管理</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="3-2">
-                                            <router-link to="/MP/Position">岗位管理</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="3-3">
-                                            <router-link to="/MP/ScheduleEmp">排班管理</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="3-4">
-                                            <router-link to="/MP/Project">产品管理</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="3-5">
-                                            <router-link to="/MP/CounseRoomManage">咨询室管理</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="3-6">
-                                            <router-link to="/MP/CounseRoomTimeTotal">咨询室总览</router-link>
-                                        </el-menu-item>
+                                        <el-menu-item index="/MP/Employee">员工管理</el-menu-item>
+                                        <el-menu-item index="/MP/Position">岗位管理</el-menu-item>
+                                        <el-menu-item index="/MP/ScheduleEmp">排班管理</el-menu-item>
+                                        <el-menu-item index="/MP/Project">产品管理</el-menu-item>
+                                        <el-menu-item index="/MP/CounseRoomManage">咨询室管理</el-menu-item>
+                                        <el-menu-item index="/MP/CounseRoomTimeTotal">咨询室总览</el-menu-item>
                                     </el-submenu>
 
                                     <el-submenu index="4">
@@ -101,21 +75,11 @@
                                             <i class="el-icon-folder-add"></i>
                                             <span>基础设置</span>
                                         </template>
-                                        <el-menu-item index="4-1">
-                                            <router-link to="/MP/Occupation">职业管理</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="4-2">
-                                            <router-link to="/MP/Education">学历管理</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="4-3">
-                                            <router-link to="/MP/Region">区域管理</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="4-4">
-                                            <router-link to="/MP/VisitState">状态管理</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="4-5">
-                                            <router-link to="/MP/DiseaseType">咨询方向</router-link>
-                                        </el-menu-item>
+                                        <el-menu-item index="/MP/Occupation">职业管理</el-menu-item>
+                                        <el-menu-item index="/MP/Education">学历管理</el-menu-item>
+                                        <el-menu-item index="/MP/Region">区域管理</el-menu-item>
+                                        <el-menu-item index="/MP/VisitState">状态管理</el-menu-item>
+                                        <el-menu-item index="/MP/DiseaseType">咨询方向</el-menu-item>
                                     </el-submenu>
 
                                     <el-submenu index="5">
@@ -123,14 +87,9 @@
                                             <i class="el-icon-folder-add"></i>
                                             <span>权限管理</span>
                                         </template>
-                                        <el-menu-item index="5-1">
-                                            <router-link to="/MP/NewRuleManager">角色设置</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="5-2">
-                                            <router-link to="/MP/UmsPermissionManage">权限设置</router-link>
-                                        </el-menu-item>
+                                        <el-menu-item index="/MP/NewRuleManager">角色设置</el-menu-item>
+                                        <el-menu-item index="/MP/UmsPermissionManage">权限设置</el-menu-item>
                                     </el-submenu>
-
 
                                     <el-submenu index="6" class="menu-item-pd">
                                         <template slot="title">
@@ -142,47 +101,28 @@
                                                 <i class="el-icon-folder-remove"></i>
                                                 <span>财务核算表</span>
                                             </template>
-                                            <el-menu-item index="6-1-1">
-                                                <router-link to="/SummaryMenu/ConsultStoreSummary">到店消费核算</router-link>
-                                            </el-menu-item>
-                                            <el-menu-item index="6-1-2">
-                                                <router-link to="/SummaryMenu/EmpConsumeSummary">收入情况核算</router-link>
-                                            </el-menu-item>
-                                            <el-menu-item index="6-1-3">
-                                                <router-link to="/SummaryMenu/CostMoneySummary">消耗金额核算</router-link>
-                                            </el-menu-item>
+                                            <el-menu-item index="/SummaryMenu/ConsultStoreSummary">到店消费核算</el-menu-item>
+                                            <el-menu-item index="/SummaryMenu/EmpConsumeSummary">收入情况核算</el-menu-item>
+                                            <el-menu-item index="/SummaryMenu/CostMoneySummary">消耗金额核算</el-menu-item>
                                         </el-submenu>
                                         <el-submenu index="6-2">
                                             <template slot="title">
                                                 <i class="el-icon-folder-remove"></i>
                                                 <span>客户分析表</span>
                                             </template>
-                                            <el-menu-item index="6-2-1">
-                                                <router-link to="/SummaryMenu/ProSummary">套餐产品消耗</router-link>
-                                            </el-menu-item>
-                                            <el-menu-item index="6-2-2">
-                                                <router-link to="/SummaryMenu/VsMonthSummary">月度咨客状态</router-link>
-                                            </el-menu-item>
-                                            <el-menu-item index="6-2-3">
-                                                <router-link to="/SummaryMenu/VisitorConSummary">客户产品消耗</router-link>
-                                            </el-menu-item>
-                                            <el-menu-item index="6-2-4">
-                                                <router-link to="/SummaryMenu/VisitorDeSummary">访客跟踪明细</router-link>
-                                            </el-menu-item>
+                                            <el-menu-item index="/SummaryMenu/ProSummary">套餐产品消耗</el-menu-item>
+                                            <el-menu-item index="/SummaryMenu/VsMonthSummary">月度咨客状态</el-menu-item>
+                                            <el-menu-item index="/SummaryMenu/VisitorConSummary">客户产品消耗</el-menu-item>
+                                            <el-menu-item index="/SummaryMenu/VisitorDeSummary">访客跟踪明细</el-menu-item>
                                         </el-submenu>
                                         <el-submenu index="6-3">
                                             <template slot="title">
                                                 <i class="el-icon-folder-remove"></i>
                                                 <span>咨询方向分析表</span>
                                             </template>
-                                            <el-menu-item index="6-3-1">
-                                                <router-link to="/SummaryMenu/FirstVdSummary">初访咨询方向</router-link>
-                                            </el-menu-item>
-                                            <el-menu-item index="6-3-2">
-                                                <router-link to="/SummaryMenu/EmpDtSummary">初诊咨询方向</router-link>
-                                            </el-menu-item>
+                                            <el-menu-item index="/SummaryMenu/FirstVdSummary">初访咨询方向</el-menu-item>
+                                            <el-menu-item index="/SummaryMenu/EmpDtSummary">初诊咨询方向</el-menu-item>
                                         </el-submenu>
-
                                     </el-submenu>
 
                                     <el-submenu index="7">
@@ -190,15 +130,9 @@
                                             <i class="el-icon-folder-add"></i>
                                             <span>问卷调查管理</span>
                                         </template>
-                                        <el-menu-item index="7-1">
-                                            <router-link to="/MP/Questionnaire">问卷调查管理</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="7-2">
-                                            <router-link to="/MP/QueVsAnswer">问卷调查结果</router-link>
-                                        </el-menu-item>
-                                        <el-menu-item index="7-3">
-                                            <router-link to="/MP/QuestionnaireSummary">问卷调查汇总</router-link>
-                                        </el-menu-item>
+                                        <el-menu-item index="/MP/Questionnaire">问卷调查管理</el-menu-item>
+                                        <el-menu-item index="/MP/QueVsAnswer">问卷调查结果</el-menu-item>
+                                        <el-menu-item index="/MP/QuestionnaireSummary">问卷调查汇总</el-menu-item>
                                     </el-submenu>
                                 </el-menu>
                             </el-col>
@@ -264,11 +198,6 @@
             return {
                 accountName: this.accountName(),
                 itemList: [],
-                // bool1: true,
-                // bool2: false,
-                // bool3: false,
-                // bool4: false,
-                // bool5: false,
                 onString: 'Visitor',
                 openeds: ['1']
             }
@@ -297,50 +226,7 @@
             handleClose(key, keyPath) {
                 console.log(key, keyPath);
             },
-            // onShow(index) {
-            //     switch (index) {
-            //         case 0:
-            //             this.bool1 = !this.bool1;
-            //             this.bool2 = false;
-            //             this.bool3 = false;
-            //             this.bool4 = false;
-            //             this.bool5 = false;
-            //             break;
-            //         case 1:
-            //             this.bool1 = false;
-            //             this.bool2 = !this.bool2;
-            //             this.bool3 = false;
-            //             this.bool4 = false;
-            //             this.bool5 = false;
-            //             break;
-            //         case 2:
-            //             this.bool1 = false;
-            //             this.bool2 = false;
-            //             this.bool3 = !this.bool3;
-            //             this.bool4 = false;
-            //             this.bool5 = false;
-            //             break;
-            //         case 3:
-            //             this.bool1 = false;
-            //             this.bool2 = false;
-            //             this.bool3 = false;
-            //             this.bool4 = !this.bool4;
-            //             this.bool5 = false;
-            //             break;
-            //         case 4:
-            //             this.bool1 = false;
-            //             this.bool2 = false;
-            //             this.bool3 = false;
-            //             this.bool4 = false;
-            //             this.bool5 = !this.bool5;
-            //             break;
-            //     }
 
-            // },
-            addCheck(string) {
-                this.onString = string;
-                //console.log(string)
-            },
             gainFun(data) {
                 this.onString = data;
                 this.bool2 = true;

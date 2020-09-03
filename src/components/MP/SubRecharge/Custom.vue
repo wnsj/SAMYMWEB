@@ -164,7 +164,7 @@
 						<ContinState ref="ContinStateRef" @objectChange="continStateChange"></ContinState>
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="projectFlag==false">
+				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<b>*</b>
 					<label class="col-md-4 control-label text-right nopad end-aline" >交费方式</label><span
 					 class="sign-left">:</span>
@@ -179,14 +179,14 @@
 						<input type="text" class="form-control" v-model="consume.appNumber">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="projectFlag==false">
+				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label class="col-md-4 control-label text-right nopad end-aline" >流水单号</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.serialNo">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="projectFlag==false">
+				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label class="col-md-4 control-label text-right nopad end-aline" >收据</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
@@ -771,6 +771,12 @@
 						this.counselorFlag = true
 						this.$refs.counselorEmp.setPosName("咨询师")
 						this.$refs.counselorEmp.setEmp(item.counselor)
+                        this.$refs.emp.setPosName("咨询顾问")
+                        this.$refs.emp.setEmp(item.empId)
+                        this.$refs.payStyle.setPsId(item.payType)
+                        this.consume.serialNo = item.serialNo
+                        this.consume.receipt = item.receipt
+                        this.isExistCon(item)
 					}
 					this.projectFlag = true
 					this.$refs.project.setEmpId(this.consume.counselor,1)
@@ -793,6 +799,11 @@
                             this.$refs.project.setProject('0')
 							this.$refs.counselorEmp.setPosName("咨询师")
 							this.$refs.counselorEmp.setEmp("")
+                            this.$refs.emp.setEmp("")
+                            this.$refs.payStyle.setPsId('0')
+                            this.consume.serialNo = ''
+                            this.consume.receipt = ''
+                            this.$refs.diseaseTypeRef.setObj('0')
 							this.counselorFlag = false
 						} else {
 							if (item.proType != 0) {
@@ -802,6 +813,12 @@
 								this.counselorFlag = true
 								this.$refs.counselorEmp.setPosName("咨询师")
 								this.$refs.counselorEmp.setEmp(item.counselor)
+                                this.$refs.emp.setPosName("咨询顾问")
+                                this.$refs.emp.setEmp(item.empId)
+                                this.$refs.payStyle.setPsId(item.payType)
+                                this.consume.serialNo = item.serialNo
+                                this.consume.receipt = item.receipt
+                                this.isExistCon(item)
 							}
 							this.$refs.project.setEmpId(this.consume.counselor,1)
                             this.consume.proStyle = item.proStyle
@@ -827,6 +844,12 @@
 							this.counselorFlag = true
 							this.$refs.counselorEmp.setPosName("咨询师")
 							this.$refs.counselorEmp.setEmp(item.counselor)
+                            this.$refs.emp.setPosName("咨询顾问")
+                            this.$refs.emp.setEmp(item.empId)
+                            this.$refs.payStyle.setPsId(item.payType)
+                            this.consume.serialNo = item.serialNo
+                            this.consume.receipt = item.receipt
+                            this.isExistCon(item)
 						}
 						this.$refs.project.setEmpId(this.consume.counselor,1)
                         this.consume.proStyle = item.proStyle
@@ -855,6 +878,33 @@
 					this.consume.payType='0'
 				}
 			},
+            isExistCon(item) {
+                var url = this.url + '/consumAction/getLastedCon'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        piId: item.piId
+                    },
+                    dataType: 'json',
+                }).then((response) => {
+                    var res = response.data
+                    if (res.retCode == '0000') {
+                        if (res.retData) {
+                            this.consume.diseaseType = res.retData.diseaseType
+                            this.$refs.diseaseTypeRef.setObj(res.retData.diseaseType)
+                        }
+                    } else {
+                        alert(res.retMsg)
+                    }
+                }).catch((error) => {
+                    console.log('请求失败' + error)
+                });
+            },
 			//项目类型转换
 			transforProType(proType) {
 				if (proType == 0) return '普通'

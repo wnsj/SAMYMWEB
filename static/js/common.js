@@ -19,13 +19,13 @@ function boxheight() {
 	// document.getElementById("aside-menu").style.height = (winHeight-topH-70)+ "px";
     document.getElementById("aside-menu").style.height = (winHeight-topH)+ "px";
 
- //    var oTabel = document.getElementsByClassName("pre-scrollable")[0];
-	// var len = document.getElementsByClassName("newRow").length;
-	// oTabel.style.maxHeight = (winHeight*600/789 - 100-30*len)+'px';
+    var oTabel = document.getElementsByClassName("pre-scrollable")[0];
+	var len = document.getElementsByClassName("newRow").length;
+	oTabel.style.maxHeight = (winHeight*600/789 - 100-30*len)+'px';
 
-    // if (oTabel.offsetHeight < (winHeight*600/789 - 100-30*len)) {
-    //     oTabel.style.overflowY = 'auto';
-    // }
+    if (oTabel.offsetHeight < (winHeight*600/789 - 100-30*len)) {
+        oTabel.style.overflowY = 'auto';
+    }
 
 
 

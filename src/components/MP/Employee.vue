@@ -76,7 +76,7 @@
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
-                <div class="table-responsive">
+                <div class="table-responsive pre-scrollable">
                     <table class="table table-bordered table-hover jh-po-re" id="datatable">
                         <thead>
                         <tr>

@@ -137,7 +137,7 @@
         </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
-                <div class="table-responsive">
+                <div class="table-responsive pre-scrollable">
                     <table class="table table-bordered table-hover" id="datatable">
                         <thead class="datathead">
                         <tr>
@@ -186,12 +186,10 @@
                                 </button>
                             </td>
                             <td class="text-center" v-has="'SAMY:MP:Visitor:QueryPhone'">
-                                <button type="button" class="btn btn-warning" @click="queryPhone(item)">查询手机号码
-                                </button>
+                                <button type="button" class="btn btn-warning" @click="queryPhone(item)">查询手机号码</button>
                             </td>
                             <td class="text-center" v-has="'SAMY:MP:Visitor:Update'">
-                                <button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改
-                                </button>
+                                <button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改</button>
                             </td>
                         </tr>
                         </tbody>

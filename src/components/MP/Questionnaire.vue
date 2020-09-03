@@ -96,7 +96,7 @@
                     <template slot-scope="scope">
                       <!-- <el-link type="primary" @click="editQueClick(scope.row)">编辑</el-link> -->
                       <el-button type="warning" size="small"  @click="editQueClick(scope.row)">编辑</el-button>
-                      <el-button type="warning" size="small"  @click="photoFunia(scope.row)">合成图片</el-button>
+<!--                      <el-button type="warning" size="small"  @click="photoFunia(scope.row)">合成图片</el-button>-->
                     </template>
                 </el-table-column>
             </el-table>

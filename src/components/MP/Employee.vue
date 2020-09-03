@@ -87,6 +87,7 @@
                             <!-- <th class="text-center">手机号</th> -->
                             <th class="text-center">性别</th>
                             <th class="text-center">入职时间</th>
+                            <th class="text-center">操作时间</th>
                             <th class="text-center">是否停用</th>
                             <th class="text-center" v-has="'SAMY:MP:Employee:Update'">修改</th>
                         </tr>
@@ -100,6 +101,7 @@
                             <!-- <td class="text-center">{{item.name}}</td> -->
                             <td class="text-center">{{item.sex=='1' ? '男':'女'}}</td>
                             <td class="text-center">{{item.createDate | dateFormatFilter('YYYY-MM-DD')}}</td>
+                            <td class="text-center">{{item.modifyDate | dateFormatFilter('YYYY-MM-DD')}}</td>
                             <td class="text-center">{{item.isuse==true ? "在用" : "停用"}}</td>
                             <td class="text-center" v-has="'SAMY:MP:Employee:Update'">
                                 <button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改

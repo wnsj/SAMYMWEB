@@ -29,12 +29,12 @@
 							<input type="text" class="form-control" v-model="employee.phone" placeholder="">
 						</div>
 					</div> -->
-					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<label class="col-md-3 control-label text-right nopad end-aline" >年龄</label><span class="sign-left">:</span>
-						<div class="col-md-8">
-							<input type="text" class="form-control" v-model="employee.age" placeholder="">
-						</div>
-					</div>
+<!--					<div class="col-md-6 form-group clearfix jh-wd-33">-->
+<!--						<label class="col-md-3 control-label text-right nopad end-aline" >年龄</label><span class="sign-left">:</span>-->
+<!--						<div class="col-md-8">-->
+<!--							<input type="text" class="form-control" v-model="employee.age" placeholder="">-->
+<!--						</div>-->
+<!--					</div>-->
 					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="sex" class="col-md-3 control-label text-right nopad end-aline" >性别</label><span class="sign-left">:</span>
 						<div class="col-md-8">

@@ -65,8 +65,6 @@
 
         <div>
             <el-table
-                @row-dblclick="editQueClick"
-                @cell-click="cellClick"
                 :data="tableData"
                 :cell-style="cellStyle"
                 max-height="530"
@@ -95,13 +93,33 @@
                     align="center"
                     label="操作"
                     min-width="100">
-                    <el-button type="primary" size="small"
-                               style="width: 85px"
-                               >编辑
-                    </el-button>
-
+                    <template slot-scope="scope">
+                      <!-- <el-link type="primary" @click="editQueClick(scope.row)">编辑</el-link> -->
+                      <el-button type="warning" size="small"  @click="editQueClick(scope.row)">编辑</el-button>
+                      <el-button type="warning" size="small"  @click="photoFunia(scope.row)">合成图片</el-button>
+                    </template>
                 </el-table-column>
             </el-table>
+
+            <!-- 合成图片弹窗 -->
+            <el-dialog
+              :visible.sync="photofuniaState"
+              width="50%">
+              <div slot="title" class="wj-title">合成图片</div>
+              <div class="dialog-body">
+                  <div class="share-img" ref="shareBox">
+                      <img :src="imgUrl" alt="分享图">
+                  </div>
+                  <div class="creat-img" ref="creatBox">
+                      <img src="../../assets/img/qrcode-bg.png" alt="分享背景图">
+                      <div id="qrcode" class="qrcode"></div>
+                  </div>
+              </div>
+              <div slot="footer" class="dialog-footer">
+                <el-button @click="photofuniaState = false">取 消</el-button>
+                <el-button type="primary" @click="picDowns">下载图片</el-button>
+              </div>
+            </el-dialog>
 
             <!-- 添加问题弹窗 -->
             <el-dialog  :visible.sync="objParam.dialogVisible" width="50%">
@@ -276,6 +294,10 @@
 </template>
 
 <script>
+    import { qrcanvas } from 'qrcanvas'
+    import html2canvas from 'html2canvas'
+    import imgShare from "../../assets/img/loading.gif";
+
     export default {
         components: {},
         data() {
@@ -311,6 +333,8 @@
                 },
                 tableData: [],
                 editState: false,
+                photofuniaState: false,
+                imgUrl: imgShare,
                 editParam: '',
                 pro:{
                     queId:'',
@@ -325,6 +349,13 @@
                 ]
             };
         },
+        watch: {
+          imgUrl (val, oldval) {
+            // 监听到imgUrl有变化以后 说明新图片已经生成 隐藏DOM
+            this.$refs.creatBox.style.display = 'none';
+
+          }
+        },
         methods: {
             // 表格表头样式
             headerStyle() {
@@ -334,12 +365,79 @@
             cellStyle() {
                 return 'text-align: center;'
             },
+            photoFunia(row){
+                console.log(row)
+                this.photofuniaState = true;
+                this.imgUrl = imgShare;
+                setTimeout(()=>{
+                    this.createQrcode(row.id);
+                },500)
+                // var _this = this;
+                // setTimeout(function(){
+                //     _this.createQrcode();
+                // },500)
+            },
+            createQrcode (qId) {
+
+              let that = this
+              that.$refs.creatBox.style.display = 'block'
+              that.$nextTick(function () {
+                  var quesUrl = 'http://vip.miyuexli.com/my_evaluation/index.html?titleID='+qId
+
+                // 生成二维码
+                var canvas1 = qrcanvas({
+                  data: decodeURIComponent(quesUrl),
+                  size: 168
+                })
+                document.getElementById('qrcode').innerHTML = ''
+                document.getElementById('qrcode').appendChild(canvas1)
+
+                html2canvas(that.$refs.creatBox).then(function (canvas) {
+                  that.imgUrl = URL.createObjectURL(that.base64ToBlob(canvas.toDataURL()))
+                })
+              })
+            },
+            // base64转blob
+            base64ToBlob (code) {
+              let parts = code.split(';base64,')
+              let contentType = parts[0].split(':')[1]
+              let raw = window.atob(parts[1])
+              let rawLength = raw.length
+
+              let uInt8Array = new Uint8Array(rawLength)
+
+              for (let i = 0; i < rawLength; ++i) {
+                uInt8Array[i] = raw.charCodeAt(i)
+              }
+              return new Blob([uInt8Array], {type: contentType})
+            },
+            // 下载图片
+            picDowns () {
+              var alink = document.createElement('a')
+              alink.href = this.imgUrl
+              alink.download = this.randomString() // 图片名
+              alink.click()
+            },
+            //随机字符串 做为图片名
+            randomString() {
+                 var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+                 var string_length = 8;
+                 var randomstring = '';
+                 for (var i=0; i<string_length; i++) {
+                  var rnum = Math.floor(Math.random() * chars.length);
+                  randomstring += chars.substring(rnum,rnum+1);
+                 }
+                 return randomstring;
+            },
+
+
+
             //弹窗
             addQueClick() {
                 this.objParam.dialogVisible = true
             },
             //弹窗
-            editQueClick(row, event, column) {
+            editQueClick(row) {
                 this.getQueByCondition()
                 this.editState = true
                 this.editParam = row
@@ -475,6 +573,9 @@
                     alert(response.data.retMsg)
                 });
             }
+
+
+
         },
         created() {
             this.getQueByCondition()
@@ -491,5 +592,47 @@
     .qesitem .num-sort {
         position: absolute;
         left: -60px;
+    }
+
+    .dialog-body{
+        width: 100%;
+        height: 590px;
+        text-align: center;
+    }
+    .share-img{
+       /* display: none; */
+       text-align: center;
+       vertical-align: middle;
+        position: relative;
+        z-index: 9;
+    }
+    .creat-img{
+      display: none;
+      width: 414px;
+      height: 585px;
+      z-index: 4;
+      text-align: center;
+      margin: 0 auto;
+      /* position: relative;*/
+      position: absolute;
+      top: 90px;
+      left: 50%;
+      margin-left: -207px;
+
+    }
+    .creat-img  img{
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      display: block;
+      margin: 0 auto;
+    }
+    .creat-img .qrcode{
+      position: absolute;
+      left: 128px;
+      bottom: 113px;
+     /* left: 50%;
+      margin-left: -64px; */
+      z-index: 5;
     }
 </style>

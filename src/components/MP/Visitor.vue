@@ -5,28 +5,27 @@
         <div class="col-md-12 col-lg-12 main-title">
             <h1 class="titleCss">客户管理</h1>
         </div>
+        <div class="row newRow">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 visbtn-box">
+                <button type="button" class="btn btn-default pull-left" v-on:click="btnAction('5')"
+                        v-has="'SAMY:MP:Visitor:AddRefund'">退费
+                </button>
+                <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('4')"
+                        v-has="'SAMY:MP:Visitor:AddOrder'">预约
+                </button>
+                <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('3')"
+                        v-has="'SAMY:MP:Visitor:AddDush'">定金
+                </button>
+                <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('2')"
+                        v-has="'SAMY:MP:Visitor:AddConsum'">消费
+                </button>
+                <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('1')"
+                        v-has="'SAMY:MP:Visitor:AddRecharge'">购 买 产 品
+                </button>
+            </div>
+        </div>
         <el-collapse-transition>
             <div v-show="showSelect">
-            <div class="row newRow">
-                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 visbtn-box">
-                    <button type="button" class="btn btn-default pull-left" v-on:click="btnAction('5')"
-                            v-has="'SAMY:MP:Visitor:AddRefund'">退费
-                    </button>
-                    <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('4')"
-                            v-has="'SAMY:MP:Visitor:AddOrder'">预约
-                    </button>
-                    <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('3')"
-                            v-has="'SAMY:MP:Visitor:AddDush'">定金
-                    </button>
-                    <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('2')"
-                            v-has="'SAMY:MP:Visitor:AddConsum'">消费
-                    </button>
-                    <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('1')"
-                            v-has="'SAMY:MP:Visitor:AddRecharge'">购 买 产 品
-                    </button>
-                </div>
-            </div>
-
             <div class="row newRow">
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <div class="col-md-5 col-lg-5 text-right nopad">

@@ -16,16 +16,17 @@ function boxheight() {
 	var topH = document.getElementsByClassName("aside-logo")[0].offsetHeight;
 	document.getElementById("Odiv").style.height = winHeight + "px";
 	document.getElementById("Adiv").style.height = (winHeight-topH) + "px";
+    document.getElementById("contentDiv").style.height = (winHeight-topH) + "px";
 	// document.getElementById("aside-menu").style.height = (winHeight-topH-70)+ "px";
     document.getElementById("aside-menu").style.height = (winHeight-topH)+ "px";
 
-    var oTabel = document.getElementsByClassName("pre-scrollable")[0];
+    /*var oTabel = document.getElementsByClassName("pre-scrollable")[0];
 	var len = document.getElementsByClassName("newRow").length;
 	oTabel.style.maxHeight = (winHeight*600/789 - 100-30*len)+'px';
 
     if (oTabel.offsetHeight < (winHeight*600/789 - 100-30*len)) {
         oTabel.style.overflowY = 'auto';
-    }
+    }*/
 
 
 

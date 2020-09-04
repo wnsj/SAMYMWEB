@@ -22,6 +22,9 @@ body{
     line-height: 34px;
     font-weight: bold;
 }
+.main-title{
+    display: none;
+}
 .titleCss{
 	color: #ffffff;
 	margin-top:35px;
@@ -149,7 +152,7 @@ body{
     text-align:left;
     color:red;
     font-size:12px;
-    margin-top:15px;
+    margin:15px 0;
 }
 .wraper{
     position:relative;

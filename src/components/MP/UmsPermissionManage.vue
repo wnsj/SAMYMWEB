@@ -5,16 +5,16 @@
                </div>
 
         <div>
-            <el-collapse-transition>
-			<div class="rightBox margin-10"  v-show="showSelect">
+           <!-- <el-collapse-transition>-->
+			<div class="rightBox margin-10"> 
             <el-button type="primary" @click="queryPermission"><i class="el-icon-zoom-in"></i>查询</el-button>
             <el-button type="primary" @click="permissionDialog(1,0)"><i class="el-icon-circle-plus-outline"></i>添加
             </el-button>
 			</div>
-            </el-collapse-transition>
-            <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
+            <!-- </el-collapse-transition> -->
+           <!-- <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
                 <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
-            </div>
+            </div> -->
             <vxe-table border
                        resizable
                        :tree-config="{children: 'umsPermissionBeanList', accordion: true}"
@@ -125,13 +125,13 @@
                     );
                 });
             },
-            dataOpen(){
-                if(this.showSelect) return
-                this.showSelect = true;
-            },
+            // dataOpen(){
+            //     if(this.showSelect) return
+            //     this.showSelect = true;
+            // },
             //查询权限
             queryPermission() {
-                this.showSelect = false
+                // this.showSelect = false
                 //强制刷新组件
                 this.hackRest = false
                 this.$nextTick(() => {

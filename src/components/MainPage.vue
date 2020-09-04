@@ -8,10 +8,12 @@
                         <strong style=" display:block;font-size: 24px; line-height:26px;">圣安米悦</strong>
                         <p style="font-size:16px;line-height:16px;margin-top: 5px;">门 店 管 理 系 统</p>
                     </div>
-
                 </h2>
             </div>
-            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-right">
+
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 text-right showName">{{$route.meta.showName}}</div>
+
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 text-right">
                 <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，门店管理系统</p>
 
                 <button class="btn btn-danger m_r_10" style="margin-top:5px;" v-on:click="modPwd()">修改密码</button>
@@ -140,8 +142,8 @@
                     </div>
 
                 </div>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 embed-responsive embed-responsive-16by9"
-                     style="overflow: inherit;">
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" id="contentDiv"
+                     style="padding: 0; overflow-x: hidden;overflow-y: auto;">
                     <router-view/>
                 </div>
             </div>
@@ -412,7 +414,12 @@
         width: 100%;
         overflow-x: hidden;
     }
-
+    .showName{
+        font-size: 30px;
+        color: #fff;
+        font-weight: bold;
+        line-height: 55px;
+    }
 
 </style>
 <host>

@@ -132,7 +132,7 @@
                                         </template>
                                         <el-menu-item index="/MP/Questionnaire">问卷调查管理</el-menu-item>
                                         <el-menu-item index="/MP/QueVsAnswer">问卷调查结果</el-menu-item>
-                                        <el-menu-item index="/MP/QuestionnaireSummary">问卷调查汇总</el-menu-item>
+<!--                                        <el-menu-item index="/MP/QuestionnaireSummary">问卷调查汇总</el-menu-item>-->
                                     </el-submenu>
                                 </el-menu>
                             </el-col>

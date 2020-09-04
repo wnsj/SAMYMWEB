@@ -377,7 +377,7 @@
 		width: 100%;
 		min-width: 1068px;
 		height: 36px;
-		margin: 40px auto;
+		/* margin: 20px auto; */
 	}
 
 	.widthmax {

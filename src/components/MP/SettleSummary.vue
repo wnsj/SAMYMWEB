@@ -364,7 +364,7 @@
 			this.$refs.continueStateRef.getObj(1, 2)
 		},
 		created() {
-			//this.conditionCheck(1)
+			this.conditionCheck(1)
 		},
 
 	}

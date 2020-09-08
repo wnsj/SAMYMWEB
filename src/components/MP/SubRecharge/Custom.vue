@@ -774,6 +774,7 @@
                         this.$refs.emp.setPosName("咨询顾问")
                         this.$refs.emp.setEmp(item.empId)
                         this.$refs.payStyle.setPsId(item.payType)
+                        this.consume.payType = item.payType
                         this.consume.serialNo = item.serialNo
                         this.consume.receipt = item.receipt
                         this.isExistCon(item)
@@ -801,6 +802,7 @@
 							this.$refs.counselorEmp.setEmp("")
                             this.$refs.emp.setEmp("")
                             this.$refs.payStyle.setPsId('0')
+                            this.consume.payType = '0'
                             this.consume.serialNo = ''
                             this.consume.receipt = ''
                             this.$refs.diseaseTypeRef.setObj('0')
@@ -816,6 +818,7 @@
                                 this.$refs.emp.setPosName("咨询顾问")
                                 this.$refs.emp.setEmp(item.empId)
                                 this.$refs.payStyle.setPsId(item.payType)
+                                this.consume.payType = item.payType
                                 this.consume.serialNo = item.serialNo
                                 this.consume.receipt = item.receipt
                                 this.isExistCon(item)
@@ -847,6 +850,7 @@
                             this.$refs.emp.setPosName("咨询顾问")
                             this.$refs.emp.setEmp(item.empId)
                             this.$refs.payStyle.setPsId(item.payType)
+                            this.consume.payType = item.payType
                             this.consume.serialNo = item.serialNo
                             this.consume.receipt = item.receipt
                             this.isExistCon(item)

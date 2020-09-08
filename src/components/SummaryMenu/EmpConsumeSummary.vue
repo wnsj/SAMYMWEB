@@ -137,19 +137,19 @@
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        prop="payType8"
+                        prop="payType2"
                         label="POS"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        prop="payType10"
+                        prop="payType4"
                         label="二维码"
                         min-width="100">
                     </el-table-column>
                     <el-table-column
                         align="center"
-                        prop="payType9"
+                        prop="payType3"
                         label="团购"
                         min-width="100">
                     </el-table-column>
@@ -157,6 +157,12 @@
                         align="center"
                         prop="payType5"
                         label="小程序"
+                        min-width="100">
+                    </el-table-column>
+                    <el-table-column
+                        align="center"
+                        prop="payType6"
+                        label="转账"
                         min-width="100">
                     </el-table-column>
                     <el-table-column

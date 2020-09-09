@@ -632,7 +632,12 @@
                     // this.consume.realCross = (parseFloat(this.consume.realCross) * parseFloat(this.consume.discount) / 100).toFixed(2)
                     var sur = this.selectObj.totalCount - this.selectObj.consumCount;
                     if (this.consume.consumCount == sur) {
-                        this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.selectObj.realCrossCount))
+                        if (this.selectObj.realCrossCount) {
+                            this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.selectObj.realCrossCount))
+                        } else {
+                            this.consume.realCross = new Decimal(this.consume.receivable)
+                        }
+
                     } else {
                         this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(this.consume.discount)).div(new Decimal(100)).toFixed(2, Decimal.ROUND_HALF_UP)
                     }

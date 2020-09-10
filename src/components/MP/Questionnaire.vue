@@ -167,7 +167,7 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="10">
-                                    <el-form-item label="问题类型：">
+                                    <el-form-item label="选项：">
                                         <el-select v-model="item.proType" clearable>
                                             <el-option v-for="item in proList"
                                                        :key="item.id"
@@ -183,9 +183,20 @@
                             </el-row>
 
                             <el-row>
-                                <el-col :span="24">
-                                    <el-form-item label="问题描述：" style="margin-right: 5%">
-                                        <el-input v-model="item.proLabel" style="width: 99%;"></el-input>
+                                <el-col :span="8">
+                                    <el-form-item label="描述框：">
+                                        <el-select v-model="item.isLabel" clearable>
+                                            <el-option v-for="item in isLabelList"
+                                                       :key="item.id"
+                                                       :label="item.label"
+                                                       :value="item.id">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="16">
+                                    <el-form-item label="题目：" style="margin-right: 5%">
+                                        <el-input v-model="item.proLabel" style="width: 99%;margin-left: 4%"></el-input>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
@@ -250,7 +261,7 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="10">
-                                    <el-form-item label="问题类型：">
+                                    <el-form-item label="选项：">
                                         <el-select v-model="item.proType" clearable>
                                             <el-option v-for="item in proList"
                                                        :key="item.id"
@@ -266,8 +277,19 @@
                             </el-row>
 
                             <el-row>
-                                <el-col :span="24">
-                                    <el-form-item label="问题描述：" style="margin-right: 5%">
+                                <el-col :span="8">
+                                    <el-form-item label="描述框：">
+                                        <el-select v-model="item.isLabel" clearable>
+                                            <el-option v-for="item in isLabelList"
+                                                       :key="item.id"
+                                                       :label="item.label"
+                                                       :value="item.id">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="16">
+                                    <el-form-item label="题目：" style="margin-right: 5%">
                                         <el-input v-model="item.proLabel" style="width: 99%;"></el-input>
                                     </el-form-item>
                                 </el-col>
@@ -316,7 +338,8 @@
                     //answer:'',
                 },
                 problemBeanList: [],
-                proList: [{id: 0, label: "无选项"}, {id: 1, label: "二选一"}],
+                proList: [{id: 0, label: "有选项"}, {id: 1, label: "无选项"}],
+                isLabelList: [{id: 1, label: "展示"}, {id: 2, label: "不展示"}],
                 objParam: {
                     queName: '',
                     scoreList: [],
@@ -327,6 +350,7 @@
                             proSort: 1,
                             proLabel: '',
                             proType: '',
+                            isLabel: '2',
                             //answer:'',
                         }
                     ]

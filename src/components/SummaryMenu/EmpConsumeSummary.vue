@@ -11,7 +11,14 @@
                 <el-row style="margin-top: 2%">
                     <el-col :span="6" class="jh-pr-28">
                         <el-form-item label="门店:"v-has="'SAMY:MP:STORE'">
-                            <store ref='store' @storeChange='storeChange'></store>
+                                <el-select v-model="param.storeId" filterable clearable placeholder="请选择">
+                                    <el-option :key="0" label="未选择" value=''></el-option>
+                                    <el-option v-for="item in storeList"
+                                               :key="item.storeId"
+                                               :label="item.storeName"
+                                               :value="item.storeId">
+                                    </el-option>
+                                </el-select>
                         </el-form-item>
                     </el-col>
                     <el-col :span="6" class="jh-pr-28" v-show="showName">
@@ -203,6 +210,7 @@
                     empName: '',
                     jobType: "1"
                 },
+                storeList: [],
                 showName: true,
                 // storeName: this.storeName,
                 storeList: [],
@@ -236,20 +244,11 @@
             conLog(item) {
                 console.log(item[0])
             },
-            storeChange(param) {
-                if (this.isBlank(param)) {
-                    this.param.stroeId = ""
-                    this.storeName = ""
-                } else {
-                    this.param.storeId = param.storeId
-                    this.storeName = param.storeName
-                }
-            },
+            // storeChange(param) {
+            //     this.param.storeId = ''
+            //     this.param.storeId = param.storeId
+            // },
             tabChange(item) {
-                this.param.storeId = ''
-                this.param.empName = ''
-                this.param.endDate = ''
-                this.param.begDate = ''
                 if (item.name == 1) {
                     this.tableId = '1'
                     this.showName = true
@@ -275,6 +274,32 @@
                 }
             },
             //check the list of store
+            // 获取门店
+            getStore() {
+                var url = this.url + '/storeAction/queryStore'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        isuse: '1'
+                    },
+                    dataType: 'json',
+                }).then((response) => {
+                    var res = response.data
+                    if (res.retCode == '0000') {
+                        this.storeList = res.retData
+                    } else {
+                        alert(res.retMsg)
+                    }
+
+                }).catch((error) => {
+                    //console.log('岗位数据请求失败处理')
+                });
+            },
             queryObjectList() {
                 if (!this.isBlank(this.param.begDate)) {
                     this.param.begDate = this.moment(this.param.begDate, 'YYYY-MM-DD 00:00:00')
@@ -387,6 +412,7 @@
             }
         },
         created() {
+            this.getStore()
             this.queryObjectList()
         }
     }

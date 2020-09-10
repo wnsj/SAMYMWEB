@@ -153,16 +153,12 @@
                 }
             },
             tabChange(item) {
-                this.queryObjectList()
-                this.param.storeId = ''
-                this.param.empName = ''
-                this.param.endDate = ''
-                this.param.begDate = ''
                 if (item.name == '咨询师') {
                     this.tableId = '1'
                 } else {
                     this.tableId = '2'
                 }
+                this.queryObjectList()
             },
             exportTable() {
                 if (this.tableId == '1') {

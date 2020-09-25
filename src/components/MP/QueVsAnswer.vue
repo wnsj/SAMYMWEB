@@ -391,7 +391,7 @@
 					var res = response.data
 					if (res.retCode == '0000') {
 					    if (res.retData) {
-                            this.select.problemBeanList = res.retData.filter(item => item.proLabel != null)
+                            this.select.problemBeanList = res.retData
                         }
 
 					} else {

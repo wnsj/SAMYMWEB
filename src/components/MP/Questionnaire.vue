@@ -350,7 +350,7 @@
                             proSort: 1,
                             proLabel: '',
                             proType: '',
-                            isLabel: '2',
+                            isLabel: 2,
                             //answer:'',
                         }
                     ]

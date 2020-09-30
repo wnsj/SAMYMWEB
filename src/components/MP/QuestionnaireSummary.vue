@@ -137,20 +137,29 @@
           <div class="quesum-box">
               <div class="quesum-item" v-for="(proDetails,index) in proDetailsList" :key="index" :class="{'active':proDetails.isSelected == true}">
                   <div class="quesum-item-head">
-                      <p>{{index + 1}}.{{proDetails.proLabel}}</p>
+                      <p>{{proDetails.proSort}}.{{proDetails.proLabel}}</p>
+                      <!-- :disabled="proDetails.answerBeanList.length==0" -->
                       <el-button
-                        :disabled="proDetails.answerBeanList.length==0"
+
                         size="small"
                         class="pull-right"
                         :type="proDetails.isSelected == true ? 'info' : 'primary'"
                         @click="showItem(proDetails.isSelected,index)">
                         <span v-if="proDetails.isSelected == true">收起</span>
-                        <span v-else>查看{{proDetails.answerBeanList.length}}条内容</span>
+                        <span v-else>查看{{proDetails.num}}条内容</span>
                         <i class="el-icon--right" :class="proDetails.isSelected == true ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"></i>
                      </el-button>
                   </div>
                   <ul>
-                      <li v-for="(item,proIndex) in proDetails.answerBeanList" :key="proIndex">{{proIndex + 1}}.答案描述：{{item.describeAnswer}}</li>
+                      <div class="numRate" v-if="proDetails.proType == 1">
+                        <p><span>是：{{proDetails.yesRate}}</span> <span>个数：{{proDetails.yesNum}}</span></p>
+                        <p><span>否：{{proDetails.noRate}}</span><span>个数：{{proDetails.noNum}}</span></p>
+                      </div>
+                      <div class="num numRate" v-if="proDetails.proType == 2">
+                        <p><span>描述：{{proDetails.labelRate}}</span> <span>个数：{{proDetails.labelNum}}</span></p>
+                      </div>
+
+                      <li v-if="proDetails.proType == 2" v-for="(item,proIndex) in proDetails.answerBeanList" :key="proIndex">{{proIndex + 1}}.答案描述：{{item.describeAnswer}}</li>
                   </ul>
               </div>
           </div>
@@ -253,16 +262,16 @@
               }).then((response) => {
               	var res = response.data
               	if (res.retCode == '0000') {
-              		// console.log(res);
+              		console.log(res);
                     res.retData.forEach(function(item,index){
                         item.isSelected = false;
-                        if (item.answerBeanList.length !== 0) {
-                            item.answerBeanList = item.answerBeanList.filter((v)=>{
-                                if (v.describeAnswer !== '') {
-                                    return v
-                                }
-                            })
-                        }
+                        // if (item.answerBeanList.length !== 0 && item.answerBeanList !== null) {
+                        //     item.answerBeanList = item.answerBeanList.filter((v)=>{
+                        //         if (v.describeAnswer !== '') {
+                        //             return v
+                        //         }
+                        //     })
+                        // }
                     })
                     this.proDetailsList = res.retData;
                     this.dialogVisible = true;
@@ -272,7 +281,7 @@
               	}
 
               }).catch((error) => {
-              	console.log('error')
+              	console.log(error)
               });
 
 
@@ -441,4 +450,10 @@
 .quesum .quesum-content .quesum-box .quesum-item.active .quesum-item-head{border-color:#fff;}
 .quesum .quesum-content .quesum-box .quesum-item.active .quesum-item-head p{font-weight: bold;font-size: 16px;color: #191919; }
 .quesum .quesum-content .quesum-box .quesum-item.active ul{display: block;}
+
+
+.numRate{width: 100%;overflow: hidden;}
+.numRate p{width: 100%;overflow: hidden;line-height: 20px;}
+.numRate p span{width: 15%;overflow: hidden;display: inline-block;float: left;margin-right: 2%;}
+
 </style>

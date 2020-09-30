@@ -338,7 +338,7 @@
                     //answer:'',
                 },
                 problemBeanList: [],
-                proList: [{id: 0, label: "有选项"}, {id: 1, label: "无选项"}],
+                proList: [{id: 1, label: "有选项"}, {id: 2, label: "无选项"}],
                 isLabelList: [{id: 1, label: "展示"}, {id: 2, label: "不展示"}],
                 objParam: {
                     queName: '',
@@ -350,7 +350,7 @@
                             proSort: 1,
                             proLabel: '',
                             proType: '',
-                            isLabel: '2',
+                            isLabel: 2,
                             //answer:'',
                         }
                     ]

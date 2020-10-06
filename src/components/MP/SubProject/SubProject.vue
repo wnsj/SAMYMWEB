@@ -7,71 +7,91 @@
         </div>
         <div class="modal-body  pos_r">
             <div class="tab-pane fade in active martop clearfix" id="basic">
-                    <div class="col-md-6 form-group clearfix jh-wd-33">
-
+                <ValidationObserver tag="form" ref="obs">
+                <div class="row nomg">
+                    <div class="col-md-4 form-group clearfix jh-wd-33">
 						<b>*</b>
-
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">产品名称</label><span class="sign-left">:</span>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" v-model="project.proName" placeholder="">
+                            <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+                                <input type="text" class="form-control" v-model="project.proName" placeholder=""> <span class="err-msg">{{ errors[0] }}</span>
+                            </ValidationProvider>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix jh-wd-33">
-
+                    <div class="col-md-4 form-group clearfix jh-wd-33">
 						<b>*</b>
-
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">咨询师</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <emp ref='emp' @employeeChange='empChange'></emp>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix jh-wd-33">
-
+                    <div class="col-md-4 form-group clearfix jh-wd-33">
 						<b>*</b>
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">总价</label><span class="sign-left">:</span>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" v-model="project.totalPrice" placeholder="">
-                            <span class="pos-ab pos-tr">¥</span>
+                            <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+                                <input type="text" class="form-control" v-model="project.totalPrice" placeholder="">
+                                <span class="pos-ab pos-tr">¥</span>
+                                <span class="err-msg">{{ errors[0] }}</span>
+                            </ValidationProvider>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                </div>
+
+                <div class="row nomg">
+                    <div class="col-md-4 form-group clearfix jh-wd-33">
 
 						<b>*</b>
 
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">优惠后总价</label><span class="sign-left">:</span>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" v-model="project.discouAmount" placeholder="">
-                            <span class="pos-ab pos-tr">¥</span>
+                            <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+                                <input type="text" class="form-control" v-model="project.discouAmount" placeholder="">
+                                <span class="pos-ab pos-tr">¥</span>
+                                <span class="err-msg">{{ errors[0] }}</span>
+                            </ValidationProvider>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                    <div class="col-md-4 form-group clearfix jh-wd-33">
 						<b>*</b>
 
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">单价</label><span class="sign-left">:</span>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" v-model="project.price" placeholder="">
-                            <span class="pos-ab pos-tr">¥</span>
+                            <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+                                <input type="text" class="form-control" v-model="project.price" placeholder="">
+                                <span class="pos-ab pos-tr">¥</span>
+                                <span class="err-msg">{{ errors[0] }}</span>
+                            </ValidationProvider>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                    <div class="col-md-4 form-group clearfix jh-wd-33">
 
 						<b>*</b>
 
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">课时</label><span class="sign-left">:</span>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" v-model="project.frequency">
-                            <span class="pos-ab pos-tr">H</span>
+                            <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+                                <input type="text" class="form-control" v-model="project.frequency">
+                                <span class="pos-ab pos-tr">H</span>
+                                <span class="err-msg">{{ errors[0] }}</span>
+                            </ValidationProvider>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                </div>
+
+                <div class="row nomg">
+                    <div class="col-md-4 form-group clearfix jh-wd-33">
 						<b>*</b>
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">优惠比例</label><span class="sign-left">:</span>
                         <div class="col-md-8 pos-re">
-                            <input type="text" class="form-control" v-model="project.discount" placeholder="">
-                            <span class="pos-ab pos-tr">%</span>
+                            <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+                                <input type="text" class="form-control" v-model="project.discount" placeholder="">
+                                <span class="pos-ab pos-tr">%</span>
+                                <span class="err-msg">{{ errors[0] }}</span>
+                            </ValidationProvider>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                    <div class="col-md-4 form-group clearfix jh-wd-33">
                         <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">是否停用</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.state">
@@ -80,7 +100,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                    <div class="col-md-4 form-group clearfix jh-wd-33">
                         <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">是否可退款</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.isRefund">
@@ -89,14 +109,17 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                </div>
+
+                <div class="row nomg">
+                    <div class="col-md-4 form-group clearfix jh-wd-33">
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">到期时间</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <input type="text" class="form-control" v-model="project.endDay">
                             <span class="pos-ab pos-tr">天</span>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                    <div class="col-md-4 form-group clearfix jh-wd-33">
                         <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">咨询师等级</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.empLevel">
@@ -106,7 +129,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix jh-wd-33">
+                    <div class="col-md-4 form-group clearfix jh-wd-33">
                         <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">产品类型</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <select class="form-control" v-model="project.proType">
@@ -119,26 +142,34 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group clearfix jh-wd-33">
-                    <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">产品风格</label><span class="sign-left">:</span>
-                    <div class="col-md-8">
-                        <select class="form-control" v-model="project.proStyle">
-                            <option value="1">新产品</option>
-                            <option value="2">老产品</option>
-                        </select>
+                </div>
+
+                <div class="row nomg">
+                    <div class="col-md-4 form-group clearfix jh-wd-33">
+                        <label for="erpzh" class="col-md-3 control-label text-right nopad end-aline">产品风格</label><span class="sign-left">:</span>
+                        <div class="col-md-8">
+                            <select class="form-control" v-model="project.proStyle">
+                                <option value="1">新产品</option>
+                                <option value="2">老产品</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                    <div class="col-md-12 form-group clearfix">
-                        <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-45"
-                                data-toggle="modal"
-                                v-on:click="closeCurrentPage()">返回
-                        </button>
-                        <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15"
-                                data-toggle="modal"
-                                v-on:click="certainAction()">确认
-                        </button>
-                    </div>
-                    <p class="tips col-md-12">到期时间为0天，表示的意思为时间一直有效</p>
+
+                <div class="col-md-12 form-group clearfix">
+                    <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-45"
+                            data-toggle="modal"
+                            v-on:click="closeCurrentPage()">返回
+                    </button>
+                    <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15"
+                            data-toggle="modal"
+                            v-on:click="onSubmit()">确认
+                    </button>
+                </div>
+                <p class="tips col-md-12">到期时间为0天，表示的意思为时间一直有效</p>
+
+
+            </ValidationObserver>
             </div>
 
         </div>
@@ -217,11 +248,34 @@
                     this.project.empId = param.empId
                 }
             },
+
+            onSubmit () {
+              this.$refs.obs.validate().then(success => {
+                if (success) {
+                  // alert('yes')
+                  this.certainAction()
+                } else {
+                  // alert('请完善表单')
+                  this.$alert('请完善表单', '提示', {
+                    confirmButtonText: '确定',
+                    type: 'error',
+                    // center: true,
+                    callback: action => {
+
+                    }
+                  })
+
+                }
+
+              })
+            },
+
+
             //the event of addtional button
             certainAction() {
                 // console.log('the event of addtional button')
 
-                if (this.isBlank(this.project.proName)) {
+                /*if (this.isBlank(this.project.proName)) {
                     alert("产品名称不能为空!")
                     return
                 }
@@ -249,7 +303,10 @@
                 if (this.isBlank(this.project.discount)) {
                     alert("折扣不能为空")
                     return
-                }
+                } */
+
+
+
                 // if(this.project.proType == 0 && this.isBlank(this.project.empId)){
                 //     alert("普通产品必须关联咨询师!")
                 //     return;
@@ -294,5 +351,6 @@
 </script>
 
 <style>
-
+.nomg{margin: 0;}
+.err-msg{color: #FF0000;font-size: 12px;display: block;padding-top: 10px; }
 </style>

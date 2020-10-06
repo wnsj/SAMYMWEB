@@ -24,6 +24,7 @@
     "moment": "^2.24.0",
     "qrcanvas": "^3.1.1",
     "script-loader": "^0.7.2",
+    "vee-validate": "^3.4.0",
     "vue": "^2.6.10",
     "vue-beauty": "^2.0.0-beta.19",
     "vue-router": "^3.1.3",

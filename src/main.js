@@ -16,6 +16,8 @@ import elementUiCss from 'element-ui/lib/theme-chalk/index.css'
 import 'xe-utils'
 import VXETable from 'vxe-table'
 import 'vxe-table/lib/index.css'
+import Validate from './assets/js/validate.js'
+Vue.use(Validate)
 
 
 // import utilDate from '../src/assets/js/utilDate'

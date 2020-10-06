@@ -14,7 +14,7 @@
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">产品名称</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
-                                <input type="text" class="form-control" v-model="project.proName" placeholder=""> <span class="err-msg">{{ errors[0] }}</span>
+                                <input type="text" class="form-control" :class="{ inputErr: errors[0] }" v-model="project.proName" placeholder=""> <span class="err-msg">{{ errors[0] }}</span>
                             </ValidationProvider>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">总价</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
-                                <input type="text" class="form-control" v-model="project.totalPrice" placeholder="">
+                                <input type="text" class="form-control" :class="{ inputErr: errors[0] }" v-model="project.totalPrice" placeholder="">
                                 <span class="pos-ab pos-tr">¥</span>
                                 <span class="err-msg">{{ errors[0] }}</span>
                             </ValidationProvider>
@@ -46,7 +46,7 @@
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">优惠后总价</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
-                                <input type="text" class="form-control" v-model="project.discouAmount" placeholder="">
+                                <input type="text" class="form-control" :class="{ inputErr: errors[0] }" v-model="project.discouAmount" placeholder="">
                                 <span class="pos-ab pos-tr">¥</span>
                                 <span class="err-msg">{{ errors[0] }}</span>
                             </ValidationProvider>
@@ -58,7 +58,7 @@
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">单价</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
-                                <input type="text" class="form-control" v-model="project.price" placeholder="">
+                                <input type="text" class="form-control" :class="{ inputErr: errors[0] }" v-model="project.price" placeholder="">
                                 <span class="pos-ab pos-tr">¥</span>
                                 <span class="err-msg">{{ errors[0] }}</span>
                             </ValidationProvider>
@@ -71,7 +71,7 @@
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">课时</label><span class="sign-left">:</span>
                         <div class="col-md-8">
                             <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
-                                <input type="text" class="form-control" v-model="project.frequency">
+                                <input type="text" class="form-control" :class="{ inputErr: errors[0] }" v-model="project.frequency">
                                 <span class="pos-ab pos-tr">H</span>
                                 <span class="err-msg">{{ errors[0] }}</span>
                             </ValidationProvider>
@@ -85,7 +85,7 @@
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">优惠比例</label><span class="sign-left">:</span>
                         <div class="col-md-8 pos-re">
                             <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
-                                <input type="text" class="form-control" v-model="project.discount" placeholder="">
+                                <input type="text" class="form-control" :class="{ inputErr: errors[0] }" v-model="project.discount" placeholder="">
                                 <span class="pos-ab pos-tr">%</span>
                                 <span class="err-msg">{{ errors[0] }}</span>
                             </ValidationProvider>
@@ -353,4 +353,16 @@
 <style>
 .nomg{margin: 0;}
 .err-msg{color: #FF0000;font-size: 12px;display: block;padding-top: 10px; }
+.inputErr{
+    border-color: #f00d0d;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgb(238 9 92 / 60%);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgb(233 102 119 / 60%);
+}
+/* .inputErr:focus {
+    border-color: #f00d0d;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgb(238 9 92 / 60%);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgb(233 102 119 / 60%);
+} */
 </style>

@@ -1,6 +1,6 @@
 <template>
     <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
-        <select class="form-control" v-model="empId" v-on:change="employeeChange()">
+        <select class="form-control" :class="{ inputErr: errors[0] }" v-model="empId" v-on:change="employeeChange()">
             <option value="">--未选择--</option>
             <option v-for="(item,index) in employeeList" :key="index" v-bind:value="item.empId">
                 {{item.empName}}

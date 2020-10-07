@@ -28,6 +28,10 @@
                 <!--共有多少页-->
                 <span>共<i>{{all}}</i>页</span>
             </li>
+
+            <li class="goPage">
+                <span>前往</span><input class="form-control" type="text" v-model="goNum" @keyup.enter="goPage(goNum)"><span>页</span>
+            </li>
         </ul>
     </div>
 </template>
@@ -44,6 +48,7 @@
                 cur: 1, //当前页码
                 num: 5, //一页显示的数量  必须是奇数
                 dataNum: 0, //数据的数量
+                goNum: 1,
             }
         },
         watch: {
@@ -54,9 +59,18 @@
             }
         },
         methods: {
+            goPage: function(data) { // 去输入的页面
+            //console.log(data)
+                if(data != this.cur) {
+                    this.cur = data
+                }
+            },
+
+
             btnClick: function(data) { //页码点击事件
                 if(data != this.cur) {
                     this.cur = data
+                    this.goNum = data
                 }
             },
             pageClick: function() {
@@ -75,6 +89,7 @@
                     this.cur='0'
                 }else{
                     this.cur=parseInt(cur)
+                    this.goNum=parseInt(cur)
                 }
                 this.dataNum=parseInt(dataNum)
             },
@@ -203,4 +218,10 @@
         margin: 0px 4px;
         font-size: 14px;
     }
+    .page-bar li.goPage{width: 150px;height: 36px; font-size: 14px; line-height: 36px;}
+    .page-bar li.goPage input{width: 60px;text-align: center;margin: 0 8px;height: 34px;display:  inline-block; }
+
+
+
+
 </style>

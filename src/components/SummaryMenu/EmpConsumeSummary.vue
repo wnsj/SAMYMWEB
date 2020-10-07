@@ -344,13 +344,13 @@
                     }
                     const values = data.map(item => Number(item[column.property]));
                     if (index === 9) {
-                        sums[9] = (sums[8] * 100 / sums[2]).toFixed(2)
+                        sums[9] = (sums[8] * 100 / sums[2]).toFixed(3)
                     } else if (index === 11) {
-                        sums[11] = (sums[10] * 100 / sums[2]).toFixed(2)
+                        sums[11] = (sums[10] * 100 / sums[2]).toFixed(3)
                     } else if (index === 13) {
-                        sums[13] = (sums[12] * 100 / sums[2]).toFixed(2)
+                        sums[13] = (sums[12] * 100 / sums[2]).toFixed(3)
                     } else if (index === 16) {
-                        sums[16] = ((sums[8] + sums[10] + sums[12]) * 100 / (sums[2] + sums[3] + sums[7])).toFixed(2)
+                        sums[16] = ((parseFloat(sums[8]) + parseFloat(sums[10]) + parseFloat(sums[12])) * 100 / (parseFloat(sums[2]) + parseFloat(sums[3]) + parseFloat(sums[7]))).toFixed(3)
                     } else {
                         if (!values.every(value => isNaN(value))) {
                             sums[index] = values.reduce((prev, curr) => {
@@ -361,9 +361,15 @@
                                     return prev;
                                 }
                             }, 0);
+							
+							if(index !=1 ){
+								sums[index]=sums[index].toFixed(3)
+							}
                         }
                     }
-
+					if(index !=1 ){
+						sums[index]=parseFloat(sums[index])
+					}
                 });
                 this.$nextTick(() => {
                     this.$refs.couRef.doLayout();

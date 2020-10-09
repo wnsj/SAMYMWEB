@@ -78,18 +78,18 @@
                                                 <i class="el-icon-folder-remove"></i>
                                                 <span>审核驳回</span>
                                             </template>
-                                           <el-menu-item index="/Reviewed/Reject/purchase">产品购买审核</el-menu-item>
-                                            <el-menu-item index="/Reviewed/Reject/consumption">消费审核</el-menu-item>
-                                            <el-menu-item index="/Reviewed/Reject/Refund">退费审核</el-menu-item>
+                                           <el-menu-item index="/Reviewed/Reject/purchase">产品购买驳回</el-menu-item>
+                                            <el-menu-item index="/Reviewed/Reject/consumption">消费驳回</el-menu-item>
+                                            <el-menu-item index="/Reviewed/Reject/Refund">退费驳回</el-menu-item>
                                         </el-submenu>
                                         <el-submenu index="3-3">
                                             <template slot="title">
                                                 <i class="el-icon-folder-remove"></i>
                                                 <span>审核列表统计</span>
                                             </template>
-                                             <el-menu-item index="/Reviewed/Statistics/purchase">产品购买审核</el-menu-item>
-                                            <el-menu-item index="/Reviewed/Statistics/consumption">消费审核</el-menu-item>
-                                            <el-menu-item index="/Reviewed/Statistics/Refund">退费审核</el-menu-item>
+                                             <el-menu-item index="/Reviewed/Statistics/purchase">产品购买统计</el-menu-item>
+                                            <el-menu-item index="/Reviewed/Statistics/consumption">消费统计</el-menu-item>
+                                            <el-menu-item index="/Reviewed/Statistics/Refund">退费统计</el-menu-item>
                                         </el-submenu>
                                     </el-submenu>
 

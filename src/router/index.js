@@ -53,7 +53,83 @@ export default new Router({
                     meta: {
                       showName: '收入情况核算'
                     }
-				},
+        },
+//项目审核
+        {
+          path: '/Reviewed/TobeReviewed/purchase',
+          name: 'Tobepurchase',
+          component: () => import('../components/Reviewed/TobeReviewed/purchase'),
+                  meta: {
+                    showName: '产品购买审核'
+                  }
+      },
+      {
+        path: '/Reviewed/TobeReviewed/Refund',
+        name: 'TobeRefund',
+        component: () => import('../components/Reviewed/TobeReviewed/Refund'),
+                meta: {
+                  showName: '退费审核'
+                }
+      },
+      {
+        path: '/Reviewed/TobeReviewed/consumption',
+        name: 'Tobeconsumption',
+        component: () => import('../components/Reviewed/TobeReviewed/consumption'),
+                meta: {
+                  showName: '消费审核'
+                }
+      },
+      {
+        path: '/Reviewed/Reject/purchase',
+        name: 'REpurchase',
+        component: () => import('../components/Reviewed/Reject/purchase'),
+                meta: {
+                  showName: '产品购买驳回'
+                }
+      },
+      {
+        path: '/Reviewed/Reject/consumption',
+        name: 'REconsumption',
+        component: () => import('../components/Reviewed/Reject/consumption'),
+                meta: {
+                  showName: '消费驳回'
+                }
+      },
+      {
+        path: '/Reviewed/Reject/Refund',
+        name: 'RERefund',
+        component: () => import('../components/Reviewed/Reject/Refund'),
+                meta: {
+                  showName: '退费驳回'
+                }
+      },
+      {
+        path: '/Reviewed/Statistics/purchase',
+        name: 'RVpurchase',
+        component: () => import('../components/Reviewed/Statistics/purchase'),
+                meta: {
+                  showName: '产品购买统计'
+                }
+      },
+      {
+        path: '/Reviewed/Statistics/consumption',
+        name: 'RVconsumption',
+        component: () => import('../components/Reviewed/Statistics/consumption'),
+                meta: {
+                  showName: '消费统计'
+                }
+      },
+      {
+        path: '/Reviewed/Statistics/Refund',
+        name: 'RVRefund',
+        component: () => import('../components/Reviewed/Statistics/Refund'),
+                meta: {
+                  showName: '退费统计'
+                }
+      },
+
+
+
                 {
                     path: '/MP/Visitor',
                     name: 'Visitor',

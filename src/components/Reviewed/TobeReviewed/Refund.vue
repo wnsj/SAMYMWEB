@@ -45,7 +45,10 @@
               
             </div>
             <div class="row newRow">
-
+                <button type="button" class="btn btn-success pull-left m_r_10 jh-mr-2" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('1')">通过
+                </button>
+                <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
+                </button>
                 <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
                         data-toggle="modal"
                         v-on:click="exportTable()">导出
@@ -61,12 +64,7 @@
             
         </div>
         </el-collapse-transition>
-        <div class="row newRow">
-            <button type="button" class="btn btn-success pull-left m_r_10 jh-mr-2" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('1')">通过
-            </button>
-            <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
-            </button>
-        </div>
+        
         <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
@@ -88,7 +86,7 @@
                             <th class="text-center">退费课时</th>
                             <th class="text-center">退费时间</th>
                             <th class="text-center">缴费方式</th>
-                            <th class="text-center">出访时间</th>
+                            <th class="text-center">初访时间</th>
                             
                             <th class="text-center">购买时间</th>
 
@@ -101,26 +99,26 @@
                                 <label  class="editlabel" :for="'edit'"></label>
 
                             </td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
+                            <td class="text-center">世纪都会店</td>
+                            <td class="text-center">王二小</td>
+                            <td class="text-center">飞飞老师</td>
+                            <td class="text-center">李助理</td>
+                            <td class="text-center">孕期心理</td>
+                            <td class="text-center">600</td>
+                            <td class="text-center">300</td>
+                            <td class="text-center">700</td>
+                            <td class="text-center">3</td>
+                            <td class="text-center">2020-8-5</td>
+                            <td class="text-center">信用卡</td>
                             
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
+                            <td class="text-center">2020-2-4</td>
+                            <td class="text-center">2020-8-12</td>
                             
                         </tr>
                         </tbody>
                     </table>
                 </div>
-				<p class="tips">* 双击单行，可对当前数据进行修改</p>
+				<!-- <p class="tips">* 双击单行，可对当前数据进行修改</p> -->
                 <!--分页插件-->
                 <div class="page">
                     <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->

@@ -27,7 +27,7 @@
                         <store ref="store" @storeChange='storeChange'></store>
                     </div>
              </div>
-
+            
              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 					<div class="col-md-3 col-lg-3 text-right nopad SSwid20">
 						<p class="end-aline col-md-11 col-lg-11" >审核日期</p><span class="sign-left">:</span>
@@ -66,59 +66,31 @@
         </div>
         
         
-        <div class="">
+        <div class="" id="datatable">
+             <el-table  :data="tableData" style="width: 100%" @cell-dblclick="selectRule">
+                <el-table-column type="index" prop="edit" label="序号" width="60" align="center"></el-table-column>
+                <el-table-column prop="name" label="姓名" width="100" align="center"></el-table-column>
+                <el-table-column prop="Productname" label="产品名称" width="100" align="center"></el-table-column>
+                <el-table-column prop="UnitPrice" label="购买单价（￥/次）" width="100" align="center"></el-table-column>
+                <el-table-column prop="Classhours" label="课时（小时）" width="100" align="center"></el-table-column>
+                <el-table-column prop="Discount" label="购买折扣（%）" width="100" align="center"></el-table-column>
+                <el-table-column prop="Conamount" label="消耗金额" width="100" align="center"></el-table-column>
+                <el-table-column prop="Consultant" label="咨询师" width="100" align="center"></el-table-column>
+                <el-table-column prop="Consultants" label="咨询顾问" width="100" align="center"></el-table-column>
+                <el-table-column prop="Accesstype" label="访问类型" width="100" align="center"></el-table-column>
+                <el-table-column prop="Clientjudgment" label="咨客判定" width="100" align="center"></el-table-column>
+                <el-table-column prop="Freewheeling" label="续流状态" width="100" align="center"></el-table-column>
+                <el-table-column prop="Paymentmethod" label="付款方式" width="100" align="center"></el-table-column>
+                <el-table-column prop="starttime" label="消费时间" width="100" align="center"></el-table-column>
+                 <el-table-column prop="Purchase" label="购买时间" width="100" align="center"></el-table-column>
+                 <el-table-column prop="Auditstatus" label="审核状态" width="100" align="center"></el-table-column>
+                <el-table-column prop="Reviewer" label="审核人" width="100" align="center"></el-table-column>
+                <el-table-column prop="Audittime" label="审核时间" width="100" align="center"></el-table-column>
+                <el-table-column prop="remarks" label="备注" width="100" align="center"></el-table-column>
+
+            </el-table>
+
             <div class="col-md-12 col-lg-12">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover jh-po-re" id="datatable">
-                        <thead>
-                        <tr>
-                            <th class="text-center">序号</th>
-                            <th class="text-center">姓名</th>
-                            <th class="text-center">产品名称</th>
-                            <th class="text-center">单价</th>
-                            <th class="text-center">课时（小时）</th>
-                            <th class="text-center">折扣（%）</th>
-                            <th class="text-center">消费金额</th>
-                            <th class="text-center">咨询师</th>
-                            <th class="text-center">咨询顾问</th>
-                            <th class="text-center">访问类型</th>
-                            <th class="text-center">咨客判定</th>
-                            <th class="text-center">续流状态</th>
-                            <th class="text-center">付款方式</th>
-                            <th class="text-center">消费时间</th>
-                            <th class="text-center">购买时间</th>
-                            <th class="text-center">审核状态</th>
-                            <th class="text-center">审核人</th>
-                            <th class="text-center">审核时间</th>
-                            <th class="text-center">备注</th>
-                            
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-on:dblclick="selectRule()">
-                            <th class="text-center">1</th>
-                            <th class="text-center">aaa</th>
-                            <th class="text-center">产品名称</th>
-                            <th class="text-center">单价</th>
-                            <th class="text-center">课时（小时）</th>
-                            <th class="text-center">折扣（%）</th>
-                            <th class="text-center">消费金额</th>
-                            <th class="text-center">咨询师</th>
-                            <th class="text-center">咨询顾问</th>
-                            <th class="text-center">访问类型</th>
-                            <th class="text-center">咨客判定</th>
-                            <th class="text-center">续流状态</th>
-                            <th class="text-center">付款方式</th>
-                            <th class="text-center">消费时间</th>
-                            <th class="text-center">购买时间</th>
-                            <th class="text-center">审核状态</th>
-                            <th class="text-center">审核人</th>
-                            <th class="text-center">审核时间</th>
-                            <th class="text-center">备注</th>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
 				<p class="tips">* 双击单行，可对当前数据进行修改</p>
                 <!--分页插件-->
                 <div class="page">
@@ -150,7 +122,7 @@
     import dPicker from 'vue2-datepicker'
     import Paging from '../../common/paging'
     import rejection from '../../MP/SubRecharge/rejection.vue'
-    import custom from '../../MP/SubRecharge/Custom.vue'
+    import custom from '../../MP/SubRecharge/reCustom.vue'
     export default {
         components: {
           store,
@@ -171,7 +143,28 @@
                 storeId: this.storeId(),
                 accountType: this.accountType(),
                 name:'',
-                tableData: [],
+                tableData: [
+                    {
+                        name:'王二狗',
+                        Productname:'孕期心理',
+                        UnitPrice:'600',
+                        Classhours:'1',
+                        Discount:'90',
+                        Conamount:'500',
+                        Consultant:'发发老师',
+                        Consultants:'部助理',
+                        Accesstype:'初访',
+                        Clientjudgment:'首次',
+                        Freewheeling:'单脱',
+                        Paymentmethod:'小程序',
+                        starttime:'2020-6-8',
+                        Purchase:'2020-9-4',
+                        Auditstatus:'通过',
+                        Reviewer:'慧慧',
+                        Audittime:'2020-10-12',
+                        remarks:'备注',
+                    },
+                ],
                 checkedValue:-1,
                 objectContent: {},
                 //分页需要的数据

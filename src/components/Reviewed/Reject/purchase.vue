@@ -66,69 +66,34 @@
         </div>
         
         
-        <div class="">
+        <div class="" id="datatable">
+            <el-table  :data="tableData" style="width: 100%" @cell-dblclick="celledit">
+                <el-table-column type="index" prop="edit" label="序号" width="60" align="center"></el-table-column>
+                <el-table-column prop="name" label="姓名" width="100" align="center"></el-table-column>
+                <el-table-column prop="Productname" label="产品名称" width="100" align="center"></el-table-column>
+                <el-table-column prop="Consultant" label="咨询师" width="100" align="center"></el-table-column>
+                <el-table-column prop="Consultants" label="咨询顾问" width="100" align="center"></el-table-column>
+                <el-table-column prop="Accesstype" label="访问类型" width="100" align="center"></el-table-column>
+                <el-table-column prop="Clientjudgment" label="咨客判定" width="100" align="center"></el-table-column>
+                <el-table-column prop="Freewheeling" label="续流状态" width="100" align="center"></el-table-column>
+                <el-table-column prop="UnitPrice" label="购买单价（￥/次）" width="100" align="center"></el-table-column>
+                <el-table-column prop="Classhours" label="购买课时（次）" width="100" align="center"></el-table-column>
+                <el-table-column prop="Discount" label="购买折扣（%）" width="100" align="center"></el-table-column>
+                 <el-table-column prop="Purchase" label="购买时间" width="100" align="center"></el-table-column>
+                 <el-table-column prop="starttime" label="开始时间" width="100" align="center"></el-table-column>
+                 <el-table-column prop="Endtime" label="结束时间" width="100" align="center"></el-table-column>
+                 <el-table-column prop="Paidamount" label="实交金额" width="100" align="center"></el-table-column>
+                 <el-table-column prop="Conamount" label="消耗金额" width="100" align="center"></el-table-column>
+                 <el-table-column prop="Conclasshours" label="消耗课时" width="100" align="center"></el-table-column>
+                 <el-table-column prop="Paymentmethod" label="交费方式" width="100" align="center"></el-table-column>
+                 <el-table-column prop="Operator" label="操作人" width="100" align="center"></el-table-column>
+                 <el-table-column prop="Fullpayment" label="是否全款" width="100" align="center"></el-table-column>
+                 <el-table-column prop="Auditstatus" label="审核状态" width="100" align="center"></el-table-column>
+                 <el-table-column prop="Reviewer" label="审核人" width="100" align="center"></el-table-column>
+                   <el-table-column prop="Audittime" label="审核时间" width="100" align="center"></el-table-column>
+                     <el-table-column prop="remarks" label="备注" width="100" align="center"></el-table-column>
+            </el-table>
             <div class="col-md-12 col-lg-12">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover jh-po-re" id="datatable">
-                        <thead>
-                        <tr>
-                            <th class="text-center">序号</th>
-                            <th class="text-center">姓名</th>
-                            <th class="text-center">产品名称</th>
-                            <th class="text-center">咨询师</th>
-                            <th class="text-center">咨询顾问</th>
-                            <th class="text-center">访问类型</th>
-                            <th class="text-center">咨客判定</th>
-                            <th class="text-center">续流状态</th>
-                            <th class="text-center">购买单价（￥/次）</th>
-                            <th class="text-center">购买课时（次）</th>
-                            <th class="text-center">购买折扣（%）</th>
-                            <th class="text-center">购买时间</th>
-                            <th class="text-center">开始时间</th>
-                            <th class="text-center">结束时间</th>
-                            <th class="text-center">实交金额</th>
-                            <th class="text-center">消耗金额</th>
-                            <th class="text-center">消耗课时</th>
-                            <th class="text-center">交费方式</th>
-                            <th class="text-center">操作人</th>
-                            <th class="text-center">是否全款</th>
-                            <th class="text-center">审核状态</th>
-                            <th class="text-center">审核人</th>
-                            <th class="text-center">审核时间</th>
-                            <th class="text-center">备注</th>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-on:dblclick="selectRule()">
-                            <th class="text-center">1</th>
-                            <th class="text-center">aaa</th>
-                            <th class="text-center">啊啊啊</th>
-                            <th class="text-center">咨询师</th>
-                            <th class="text-center">咨询顾问</th>
-                            <th class="text-center">访问类型</th>
-                            <th class="text-center">咨客判定</th>
-                            <th class="text-center">续流状态</th>
-                            <th class="text-center">购买单价（￥/次）</th>
-                            <th class="text-center">购买课时（次）</th>
-                            <th class="text-center">购买折扣（%）</th>
-                            <th class="text-center">购买时间</th>
-                            <th class="text-center">开始时间</th>
-                            <th class="text-center">结束时间</th>
-                            <th class="text-center">实交金额</th>
-                            <th class="text-center">消耗金额</th>
-                            <th class="text-center">消耗课时</th>
-                            <th class="text-center">交费方式</th>
-                            <th class="text-center">操作人</th>
-                            <th class="text-center">是否全款</th>
-                            <th class="text-center">审核状态</th>
-                            <th class="text-center">审核人</th>
-                            <th class="text-center">审核时间</th>
-                            <th class="text-center">备注</th>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
 				<p class="tips">* 双击单行，可对当前数据进行修改</p>
                 <!--分页插件-->
                 <div class="page">
@@ -159,14 +124,14 @@
     import store from '../../common/Store.vue'
     import dPicker from 'vue2-datepicker'
     import Paging from '../../common/paging'
-    import rejection from '../../MP/SubRecharge/rejection.vue'
-    import recharge from '../../MP/SubRecharge/SubRecharge.vue'
+
+    import recharge from '../../MP/SubRecharge/purchasecharge.vue'
     export default {
         components: {
           store,
           dPicker,
           Paging,
-          rejection,
+          
           recharge,
         },
         data() {
@@ -181,7 +146,104 @@
                 storeId: this.storeId(),
                 accountType: this.accountType(),
                 name:'',
-                tableData: [],
+                tableData: [
+                    {name:'王二小',
+                    Productname:'孕期心理',
+                    Consultant:'欧欧老师',
+                    Consultants:'小顾问',
+                    Accesstype:'初访',
+                    Clientjudgment:'单脱',
+                    Freewheeling:'续签',
+                    UnitPrice:'100',
+                    Classhours:'1',
+                    Discount:'0',
+                    Purchase:'2020-8-9',
+                    starttime:'2020-8-3',
+                    Endtime:'2020-10-8',
+                    Paidamount:'100',
+                    Conamount:'100',
+                    Conclasshours:'1',
+                    Paymentmethod:'蚂蚁花呗',
+                    Operator:'小红',
+                    Fullpayment:'是',
+                    Auditstatus:'未审核',
+                    Reviewer:'李主任',
+                    Audittime:'2020-10-8',
+                    remarks:'备注'
+                    },
+                    {name:'王二小',
+                    Productname:'孕期心理',
+                    Consultant:'欧欧老师',
+                    Consultants:'小顾问',
+                    Accesstype:'初访',
+                    Clientjudgment:'单脱',
+                    Freewheeling:'续签',
+                    UnitPrice:'100',
+                    Classhours:'1',
+                    Discount:'0',
+                    Purchase:'2020-8-9',
+                    starttime:'2020-8-3',
+                    Endtime:'2020-10-8',
+                    Paidamount:'100',
+                    Conamount:'100',
+                    Conclasshours:'1',
+                    Paymentmethod:'蚂蚁花呗',
+                    Operator:'小红',
+                    Fullpayment:'是',
+                    Auditstatus:'未审核',
+                    Reviewer:'李主任',
+                    Audittime:'2020-10-8',
+                    remarks:'备注'
+                    },
+                    {name:'王二小',
+                    Productname:'孕期心理',
+                    Consultant:'欧欧老师',
+                    Consultants:'小顾问',
+                    Accesstype:'初访',
+                    Clientjudgment:'单脱',
+                    Freewheeling:'续签',
+                    UnitPrice:'100',
+                    Classhours:'1',
+                    Discount:'0',
+                    Purchase:'2020-8-9',
+                    starttime:'2020-8-3',
+                    Endtime:'2020-10-8',
+                    Paidamount:'100',
+                    Conamount:'100',
+                    Conclasshours:'1',
+                    Paymentmethod:'蚂蚁花呗',
+                    Operator:'小红',
+                    Fullpayment:'是',
+                    Auditstatus:'未审核',
+                    Reviewer:'李主任',
+                    Audittime:'2020-10-8',
+                    remarks:'备注'
+                    },
+                    {name:'王二小',
+                    Productname:'孕期心理',
+                    Consultant:'欧欧老师',
+                    Consultants:'小顾问',
+                    Accesstype:'初访',
+                    Clientjudgment:'单脱',
+                    Freewheeling:'续签',
+                    UnitPrice:'100',
+                    Classhours:'1',
+                    Discount:'0',
+                    Purchase:'2020-8-9',
+                    starttime:'2020-8-3',
+                    Endtime:'2020-10-8',
+                    Paidamount:'100',
+                    Conamount:'100',
+                    Conclasshours:'1',
+                    Paymentmethod:'蚂蚁花呗',
+                    Operator:'小红',
+                    Fullpayment:'是',
+                    Auditstatus:'未审核',
+                    Reviewer:'李主任',
+                    Audittime:'2020-10-8',
+                    remarks:'备注'
+                    },
+                ],
                 checkedValue:-1,
                 objectContent: {},
                 //分页需要的数据
@@ -236,7 +298,7 @@
                 $("#rechargeContent").modal('hide')
            },
             // check the adding and modifying rule of account
-            selectRule() {
+            celledit() {
 
                     $("#rechargeContent").modal('show')
                 

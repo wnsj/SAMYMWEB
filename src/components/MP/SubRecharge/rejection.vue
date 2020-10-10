@@ -10,7 +10,7 @@
 
 					<div class="col-md-12 form-group clearfix">
 						<label for="cyname" class="col-md-12 control-label text-left nopad">请输入驳回理由，30字以内，必填！</label>
-						<div class="col-md-12">
+						<div class="col-md-12" style="padding:0">
 							<textarea type="text" class="form-control" v-model="reason" maxlength="30"></textarea>
 						</div>
 					</div>

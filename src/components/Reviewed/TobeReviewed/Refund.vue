@@ -8,14 +8,14 @@
         <el-collapse-transition>
         <div v-show="showSelect">
             <div class="row newRow">
-               
+
                 <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
                         <p class="end-aline col-md-11 col-lg-11 jh-pa-1">姓名</p><span
                         class="sign-left">:</span>
                     </div>
                     <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <input class="form-control" type="text" v-model="empName">
+                        <input class="form-control" type="text" v-model="memName">
                     </div>
                 </div>
               <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-has="'SAMY:MP:STORE'">
@@ -42,10 +42,13 @@
 						<dPicker class="wd100" v-model="endCreateDate"></dPicker>
 					</div>
 				</div>
-              
+
             </div>
             <div class="row newRow">
-
+                <button type="button" class="btn btn-success pull-left m_r_10 jh-mr-2" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('1')">通过
+                </button>
+                <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
+                </button>
                 <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
                         data-toggle="modal"
                         v-on:click="exportTable()">导出
@@ -55,18 +58,13 @@
                 </button>
                 <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
                         data-toggle="modal"
-                        v-on:click="checkEmp(1)">查询
+                        v-on:click="getRefundApproveFind(1)">查询
                 </button>
             </div>
-            
+
         </div>
         </el-collapse-transition>
-        <div class="row newRow">
-            <button type="button" class="btn btn-success pull-left m_r_10 jh-mr-2" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('1')">通过
-            </button>
-            <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
-            </button>
-        </div>
+
         <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
@@ -75,52 +73,40 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover jh-po-re" id="datatable">
                         <thead>
-                        <tr>
-                            <th class="text-center">编辑</th>
-                            <th class="text-center">门店名称</th>
-                            <th class="text-center">退款人</th>
-                            <th class="text-center">咨询师</th>
-                            <th class="text-center">咨询助理</th>
-                            <th class="text-center">产品</th>
-                            <th class="text-center">实交金额</th>
-                            <th class="text-center">实际剩余金额</th>
-                            <th class="text-center">退费金额</th>
-                            <th class="text-center">退费课时</th>
-                            <th class="text-center">退费时间</th>
-                            <th class="text-center">缴费方式</th>
-                            <th class="text-center">出访时间</th>
-                            
-                            <th class="text-center">购买时间</th>
-
-                        </tr>
+                            <tr>
+                                <th class="text-center">编辑</th>
+                                <th class="text-center">门店名称</th>
+                                <th class="text-center">退款人</th>
+                                <th class="text-center">咨询师</th>
+                                <th class="text-center">咨询助理</th>
+                                <th class="text-center">产品</th>
+                                <th class="text-center">退费金额</th>
+                                <th class="text-center">退费课时</th>
+                                <th class="text-center">退费时间</th>
+                                <th class="text-center">购买时间</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="text-center editradio-box">
-                                <input :id="'edit'" class="editradio" type="radio" name="单选框" :value="1" v-model="checkedValue" />
-                                <label  class="editlabel" :for="'edit'"></label>
-
-                            </td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            <td class="text-center">aaaaaaaa</td>
-                            
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            
-                        </tr>
+                            <tr v-for="(item,index) in refundApproveFindList" :key="index">
+                                <td class="text-center editradio-box">
+                                    <input :id="'edit'+(index+1)" class="editradio" type="radio" name="复选框" :value="index"
+                                           v-model="checkedValue"/>
+                                    <label :for="'edit'+(index+1)" class="editlabel"></label>
+                                </td>
+                                <td class="text-center">{{item.storeName}}</td>
+                                <td class="text-center">{{item.memName}}</td>
+                                <td class="text-center">{{item.visitorName}}</td>
+                                <td class="text-center">{{item.empName}}</td>
+                                <td class="text-center">{{item.proName}}</td>
+                                <td class="text-center">{{item.momey}}</td>
+                                <td class="text-center">{{item.refCount}}</td>
+                                <td class="text-center">{{item.rejectTime | dateFormatFilter("YYYY-MM-DD")}}</td>
+                                <td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-				<p class="tips">* 双击单行，可对当前数据进行修改</p>
+				<!-- <p class="tips">* 双击单行，可对当前数据进行修改</p> -->
                 <!--分页插件-->
                 <div class="page">
                     <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
@@ -128,7 +114,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- 驳回弹窗 -->
         <div class="row row_edit">
             <div class="modal fade" id="rejectionContent">
@@ -138,12 +124,12 @@
             </div>
         </div>
     </div>
-    
+
 </template>
 
 
 <script>
-  
+
     import {
         init
     } from '@/../static/js/common.js'
@@ -160,22 +146,18 @@
         },
         data() {
             return {
-                employeeList: [],
-                visitorList: [],
-                isuse: '1',
-                empName: '',
-                iphone: '',
+                refundApproveFindList: [],
+                memName: '',
+                operatorId: this.accountId(),
                 fixedHeader: false,
-                posId: '',
                 storeId: this.storeId(),
                 accountType: this.accountType(),
-                name:'',
                 tableData: [],
                 checkedValue:-1,
                 objectContent: {},
                 //分页需要的数据
                 pages: '', //总页数
-                current: '1', //当前页码
+                page: '1', //当前页码
                 pageSize: '10', //一页显示的数量
                 total: '', //数据的数量
                 showSelect:true,
@@ -186,8 +168,8 @@
         methods: {
             //子级传值到父级上来的动态拿去
             pageChange: function (page) {
-                this.current = page
-                this.checkEmp(page);
+                this.page = page
+                this.getRefundApproveFind(page);
             },
             //门店ID
             storeChange: function (param) {
@@ -221,10 +203,10 @@
                     this.storeId = param.storeId
                 }
             },
-            
+
             //导出
             exportTable() {
-                  this.exportTableToExcel('datatable','产品购买审核表')
+                  this.exportTableToExcel('datatable','退费审核表')
             },
             //feedback department information
             positionChange: function (param) {
@@ -236,7 +218,7 @@
             },
             //feedback from adding and modifying view
             feedBack() {
-                this.checkEmp(1)
+                this.getRefundApproveFind(1)
                 $("#rejectionContent").modal('hide')
             },
             // check the adding and modifying rule of account
@@ -256,50 +238,51 @@
             },
              tabChange(item) {
                 this.getConsultStore()
-                
+
             },
             //重置
             reset(){
-                this.empName="";
+                this.memName="";
                 this.begCreateDate="";
                 this.endCreateDate="";
-                
+
             },
              editorAction(item) {
                 this.objectContent = item
             },
             btnAction(index) {
-               
+
                 if (this.checkedValue > -1) {
-                    this.objectContent = this.visitorList[this.checkedValue]
+                    this.objectContent = this.refundApproveFindList[this.checkedValue]
+                    console.log(this.objectContent)
                 } else {
-                    alert("请选择咨客后再操作!");
+                    this.$alert('请选择咨客后再操作', '提示', {
+                      confirmButtonText: '确定',
+                      type: 'warning',
+                      callback: action => {}
+                    });
                     return
                 }
                 switch (index) {
                     //通过
                      case '1':
-                        alert("已经成功通过！")
+                        this.refundApproval();
                         break;
                     //驳回
                     case '2':
-                        //this.$refs.rejection.initData(this.objectContent)
-                        
+                        this.$refs.rejection.initData('refund', this.objectContent)
                         $("#rejectionContent").modal('show')
                         break;
                 }
             },
-            //check the list of department
-            checkEmp(page) {
-                this.showSelect = false
-                console.log('checkEmp')
-                if (!this.isBlank(this.begCreateDate)) {
-					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
-				}
-				if (!this.isBlank(this.endCreateDate)) {
-					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
-				}
-                var url = this.url + '/employeeAction/queryEmp'
+
+            //退费审批
+            refundApproval(){
+                if (!this.isBlank(this.createDate)) {
+                	this.createDate = this.moment(this.createDate, 'YYYY-MM-DD 00:00:00.000')
+                }
+
+                var url = this.url + '/refundAuditBean/refundApprove'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -308,15 +291,63 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        posId: this.posId,
-                        storeId: this.storeId,
-                        empName: this.empName,
-                        isuse: this.isuse,
+                        operatorId: this.objectContent.operatorId,
+                        piId: this.objectContent.piId,
+                        refundId: this.objectContent.refundId,
+                        createDate: this.objectContent.createDate
+                    },
+                    dataType: 'json',
+                }).then((response) => {
+                    var res = response.data
+                    console.log(res)
+                    if (res.retCode == '0000') {
+                        this.$alert(res.retMsg, '提示', {
+                          confirmButtonText: '确定',
+                          type: 'success',
+                          callback: action => {}
+                        })
+                    } else {
+                        // alert(res.retMsg)
+                        this.$alert(res.retMsg, '提示', {
+                          confirmButtonText: '确定',
+                          type: 'error',
+                          callback: action => {}
+                        })
+                    }
 
+                }).catch((error) => {
+                    console.log('请求失败处理')
+                });
+            },
+
+
+
+            //查询退费审核
+            getRefundApproveFind(page) {
+                this.showSelect = false
+                console.log('getRefundApproveFind')
+                if (!this.isBlank(this.begCreateDate)) {
+					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
+				}
+				if (!this.isBlank(this.endCreateDate)) {
+					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
+				}
+                var url = this.url + '/refundAuditBean/refundApproveFind'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        operatorId: this.operatorId,
+                        memName: this.memName,
+                        storeId: this.storeId,
+                        startTime: this.begCreateDate,
+                        endTime: this.endCreateDate,
                         page: page.toString(),
-                        pageSize: this.pageSize,
-                        actualBegDate: this.begCreateDate,
-						actualEndDate: this.endCreateDate,
+                        pageSize: this.pageSize
                     },
                     dataType: 'json',
                 }).then((response) => {
@@ -324,11 +355,11 @@
                     console.log(res)
                     if (res.retCode == '0000') {
                         this.pages = res.retData.pages //总页数
-                        this.current = res.retData.current //当前页码
+                        this.page = res.retData.pageNum //当前页码
                         this.pageSize = res.retData.size//一页显示的数量  必须是奇数
                         this.total = res.retData.total //数据的数量
-                        this.$refs.paging.setParam(this.pages, this.current, this.total)
-                        this.employeeList = res.retData.records
+                        this.$refs.paging.setParam(this.pages, this.page, this.total)
+                        this.refundApproveFindList = res.retData.list
                     } else {
                         alert(res.retMsg)
                     }
@@ -365,7 +396,7 @@
             init();
         },
         created() {
-            //this.checkEmp(1)
+            this.getRefundApproveFind(1)
         }
     }
 </script>

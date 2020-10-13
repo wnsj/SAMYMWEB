@@ -3,10 +3,10 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h2 id="myModalLabel" class="modal-title">产品退费</h2>
+			<h2 id="myModalLabel" class="modal-title">产品退费驳回修改</h2>
 		</div>
 		<div class="modal-body  pos_r clearfix">
-			<div class="clearfix tab-pane fade in active martop " id="basic">
+			<div class="tab-pane fade in active martop " id="basic">
 
 					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">姓名</label><span
@@ -21,6 +21,13 @@
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" v-model="refund.phone" :disabled="isShow">
+						</div>
+					</div>
+					<div class="col-md-6 form-group clearfix jh-wd-33">
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">订单时间</label><span
+						 class="sign-left">:</span>
+						<div class="col-md-7">
+							<input type="text" class="form-control" :disabled="isShow">
 						</div>
 					</div>
 					<div v-show="unfinishedProList.length > 0"> 

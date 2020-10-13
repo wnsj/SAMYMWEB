@@ -8,14 +8,14 @@
         <el-collapse-transition>
         <div v-show="showSelect">
             <div class="row newRow">
-               
+
                 <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
                         <p class="end-aline col-md-11 col-lg-11 jh-pa-1">审核人</p><span
                         class="sign-left">:</span>
                     </div>
                     <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <input class="form-control" type="text" v-model="empName">
+                        <input class="form-control" type="text" v-model="auditName">
                     </div>
                 </div>
               <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-has="'SAMY:MP:STORE'">
@@ -42,7 +42,7 @@
 						<dPicker class="wd100" v-model="endCreateDate"></dPicker>
 					</div>
 				</div>
-              
+
             </div>
             <div class="row newRow">
 
@@ -55,89 +55,65 @@
                 </button>
                 <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
                         data-toggle="modal"
-                        v-on:click="checkEmp(1)">查询
+                        v-on:click="getRejectPage()">查询
                 </button>
             </div>
-            
+
         </div>
         </el-collapse-transition>
         <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
-        
-        
-        <div class="">
-            <div class="col-md-12 col-lg-12">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover jh-po-re" id="datatable">
-                        <thead>
-                        <tr>
-                            <th class="text-center">序号</th>
-                            <th class="text-center">姓名</th>
-                            <th class="text-center">产品名称</th>
-                            <th class="text-center">咨询师</th>
-                            <th class="text-center">咨询顾问</th>
-                            <th class="text-center">访问类型</th>
-                            <th class="text-center">咨客判定</th>
-                            <th class="text-center">续流状态</th>
-                            <th class="text-center">购买单价（￥/次）</th>
-                            <th class="text-center">购买课时（次）</th>
-                            <th class="text-center">购买折扣（%）</th>
-                            <th class="text-center">购买时间</th>
-                            <th class="text-center">开始时间</th>
-                            <th class="text-center">结束时间</th>
-                            <th class="text-center">实交金额</th>
-                            <th class="text-center">消耗金额</th>
-                            <th class="text-center">消耗课时</th>
-                            <th class="text-center">交费方式</th>
-                            <th class="text-center">操作人</th>
-                            <th class="text-center">是否全款</th>
-                            <th class="text-center">审核状态</th>
-                            <th class="text-center">审核人</th>
-                            <th class="text-center">审核时间</th>
-                            <th class="text-center">备注</th>
 
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-on:dblclick="selectRule()">
-                            <th class="text-center">1</th>
-                            <th class="text-center">aaa</th>
-                            <th class="text-center">啊啊啊</th>
-                            <th class="text-center">咨询师</th>
-                            <th class="text-center">咨询顾问</th>
-                            <th class="text-center">访问类型</th>
-                            <th class="text-center">咨客判定</th>
-                            <th class="text-center">续流状态</th>
-                            <th class="text-center">购买单价（￥/次）</th>
-                            <th class="text-center">购买课时（次）</th>
-                            <th class="text-center">购买折扣（%）</th>
-                            <th class="text-center">购买时间</th>
-                            <th class="text-center">开始时间</th>
-                            <th class="text-center">结束时间</th>
-                            <th class="text-center">实交金额</th>
-                            <th class="text-center">消耗金额</th>
-                            <th class="text-center">消耗课时</th>
-                            <th class="text-center">交费方式</th>
-                            <th class="text-center">操作人</th>
-                            <th class="text-center">是否全款</th>
-                            <th class="text-center">审核状态</th>
-                            <th class="text-center">审核人</th>
-                            <th class="text-center">审核时间</th>
-                            <th class="text-center">备注</th>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-				<p class="tips">* 双击单行，可对当前数据进行修改</p>
-                <!--分页插件-->
-                <div class="page">
-                    <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
-                    <paging ref="paging" @change="pageChange"></paging>
-                </div>
-            </div>
+
+        <div class="" id="datatable" >
+            <el-table  :data="tableData" border style="width: 100%" @cell-dblclick="celledit">
+                <el-table-column type="index" prop="edit" label="序号" width="60" align="center"></el-table-column>
+                <el-table-column prop="memName" label="姓名" align="center"></el-table-column>
+                <el-table-column prop="proName" label="产品名称" align="center"></el-table-column>
+                <el-table-column prop="couName" label="咨询师" align="center"></el-table-column>
+                <el-table-column prop="empName" label="咨询顾问" align="center"></el-table-column>
+                <el-table-column prop="Accesstype" label="访问类型" align="center"></el-table-column>
+                <el-table-column prop="vsName" label="咨客判定" align="center"></el-table-column>
+                <el-table-column prop="csName" label="续流状态" align="center"></el-table-column>
+                <el-table-column prop="price" label="购买单价（￥/次）" width="160" align="center"></el-table-column>
+                <el-table-column prop="totalCount" label="购买课时（次）" width="140" align="center"></el-table-column>
+                <el-table-column prop="discount" label="购买折扣（%）" width="140" align="center"></el-table-column>
+                <el-table-column prop="createDate" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+                <el-table-column prop="startDate" label="开始时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+                <el-table-column prop="endDate" label="结束时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+                <el-table-column prop="realCross" label="实交金额" align="center"></el-table-column>
+                <el-table-column prop="psName" label="交费方式" align="center"></el-table-column>
+                <el-table-column prop="operatorName" label="操作人" align="center"></el-table-column>
+                <el-table-column prop="isArrears" label="是否全款" :formatter="resetArrears" align="center"></el-table-column>
+                <el-table-column prop="auditStateName" label="审核状态" align="center"></el-table-column>
+                <el-table-column prop="shopOwnerName" label="审核人" align="center">
+                    <template slot-scope="scope">
+                        <span v-if="scope.row.shopOwnerName !== null">{{scope.row.shopOwnerName}}</span>
+                        <span v-else>{{scope.row.financeName}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+                <el-table-column prop="rejectReason" label="备注" align="center"></el-table-column>
+            </el-table>
+            <div class="col-md-12 col-lg-12 tips">* 双击单行，可对当前数据进行修改</div>
+
+            <el-row class="second_interval">
+                <el-col :span="24">
+                    <el-pagination
+                        @current-change="handleCurrentChange"
+                        @size-change="handleSizeChange"
+                        :current-page="current"
+                        :page-sizes="[10,20,30,50]"
+                        :page-size="pageSize"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="total">
+                    </el-pagination>
+                </el-col>
+            </el-row>
+
         </div>
-        
+
         <!-- 驳回弹窗 -->
         <div class="row row_edit">
             <div class="modal fade" id="rechargeContent">
@@ -147,59 +123,53 @@
             </div>
         </div>
     </div>
-    
+
 </template>
 
 
 <script>
-  
+
     import {
         init
     } from '@/../static/js/common.js'
     import store from '../../common/Store.vue'
     import dPicker from 'vue2-datepicker'
-    import Paging from '../../common/paging'
-    import rejection from '../../MP/SubRecharge/rejection.vue'
-    import recharge from '../../MP/SubRecharge/SubRecharge.vue'
+
+    import recharge from '../../MP/SubRecharge/purchasecharge.vue'
     export default {
         components: {
           store,
           dPicker,
-          Paging,
-          rejection,
-          recharge,
+         recharge
         },
         data() {
             return {
                 employeeList: [],
                 visitorList: [],
-                isuse: '1',
-                empName: '',
-                iphone: '',
-                fixedHeader: false,
-                posId: '',
+                auditName: '',
                 storeId: this.storeId(),
                 accountType: this.accountType(),
-                name:'',
                 tableData: [],
-                checkedValue:-1,
-                objectContent: {},
                 //分页需要的数据
                 pages: '', //总页数
-                current: '1', //当前页码
-                pageSize: '10', //一页显示的数量
-                total: '', //数据的数量
+                current: 1, //当前页码
+                pageSize: 10, //一页显示的数量
+                total: 0, //数据的数量
                 showSelect:true,
                 begCreateDate:'',
                 endCreateDate: '',
             };
         },
         methods: {
-            //子级传值到父级上来的动态拿去
-            pageChange: function (page) {
-                this.current = page
-                this.checkEmp(page);
+            resetDate(row, column, cellValue, index){
+                if (cellValue !== '' && cellValue !== null && cellValue !== undefined) {
+                    return cellValue.substring(0,10)
+                }
             },
+            resetArrears(row, column, cellValue, index){
+               return cellValue == 1 ? "是":"否"
+            },
+
             //门店ID
             storeChange: function (param) {
                 if (this.isBlank(param)) {
@@ -208,21 +178,14 @@
                     this.storeId = param.storeId
                 }
             },
-            
-            storeChange: function (param) {
-                if (this.isBlank(param)) {
-                    this.storeId = ""
-                } else {
-                    this.storeId = param.storeId
-                }
-            },
+
              dataOpen(){
                 if(this.showSelect) return
                 this.showSelect = true;
             },
             //导出
             exportTable() {
-                  this.exportTableToExcel('datatable','产品购买审核表')
+                  this.exportTableToExcel('datatable','产品购买驳回表')
             },
             //feedback department information
             positionChange: function (param) {
@@ -236,37 +199,35 @@
                 $("#rechargeContent").modal('hide')
            },
             // check the adding and modifying rule of account
-            selectRule() {
-
-                    $("#rechargeContent").modal('show')
-                
+            celledit() {
+                $("#rechargeContent").modal('show')
             },
              tabChange(item) {
                 this.getConsultStore()
-                
+
             },
             //重置
             reset(){
-                this.empName="";
+                this.auditName="";
                 this.begCreateDate="";
                 this.endCreateDate="";
-                
+                // this.storeId=this.storeId()
             },
              editorAction(item) {
                 this.objectContent = item
             },
-           
+
             //check the list of department
-            checkEmp(page) {
+            getRejectPage() {
                 this.showSelect = false
-                console.log('checkEmp')
+                console.log('getRejectPage')
                 if (!this.isBlank(this.begCreateDate)) {
 					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
 				}
 				if (!this.isBlank(this.endCreateDate)) {
 					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
 				}
-                var url = this.url + '/employeeAction/queryEmp'
+                var url = this.url + '/purchasedItemsAuditBean/getRejectPage'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -275,15 +236,12 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        posId: this.posId,
-                        storeId: this.storeId,
-                        empName: this.empName,
-                        isuse: this.isuse,
-
-                        page: page.toString(),
+                        current: this.current,
                         pageSize: this.pageSize,
-                        actualBegDate: this.begCreateDate,
-						actualEndDate: this.endCreateDate,
+                        auditName: this.auditName,
+                        storeId: this.storeId,
+                        auditBegTime: this.begCreateDate,
+						auditEndTime: this.endCreateDate,
                     },
                     dataType: 'json',
                 }).then((response) => {
@@ -294,8 +252,8 @@
                         this.current = res.retData.current //当前页码
                         this.pageSize = res.retData.size//一页显示的数量  必须是奇数
                         this.total = res.retData.total //数据的数量
-                        this.$refs.paging.setParam(this.pages, this.current, this.total)
-                        this.employeeList = res.retData.records
+                        // this.$refs.paging.setParam(this.pages, this.current, this.total)
+                        this.tableData = res.retData.records
                     } else {
                         alert(res.retMsg)
                     }
@@ -304,6 +262,19 @@
                     console.log('请求失败处理')
                 });
             },
+            // 翻页
+            handleCurrentChange(pageNum) {
+                this.current = pageNum
+                this.getRejectPage()
+            },
+            // 每页条数变化时触发
+            handleSizeChange(pageSize) {
+                this.current = 1
+                this.pageSize = pageSize
+                this.getRejectPage()
+            },
+
+
             handleScroll(e) {
                 var self = this
                 var etop = e.target.scrollTop
@@ -332,7 +303,7 @@
             init();
         },
         created() {
-            //this.checkEmp(1)
+            this.getRejectPage()
         }
     }
 </script>

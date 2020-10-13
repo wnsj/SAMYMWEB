@@ -77,59 +77,34 @@
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
         
-        <div class="">
+        <div class="" id="datatable">
+             <el-table  :data="tableData" style="width: 100%" @cell-dblclick="selectRule">
+                <el-table-column type="index" prop="edit" label="序号" width="60" align="center"></el-table-column>
+                <el-table-column prop="name" label="姓名" width="100" align="center"></el-table-column>
+                <el-table-column prop="Productname" label="产品名称" width="100" align="center"></el-table-column>
+                <el-table-column prop="UnitPrice" label="购买单价（￥/次）" width="100" align="center"></el-table-column>
+                <el-table-column prop="Classhours" label="课时（小时）" width="100" align="center"></el-table-column>
+                <el-table-column prop="Discount" label="购买折扣（%）" width="100" align="center"></el-table-column>
+                <el-table-column prop="Conamount" label="消耗金额" width="100" align="center"></el-table-column>
+                <el-table-column prop="Consultant" label="咨询师" width="100" align="center"></el-table-column>
+                <el-table-column prop="Consultants" label="咨询顾问" width="100" align="center"></el-table-column>
+                <el-table-column prop="Accesstype" label="访问类型" width="100" align="center"></el-table-column>
+                <el-table-column prop="Clientjudgment" label="咨客判定" width="100" align="center"></el-table-column>
+                <el-table-column prop="Freewheeling" label="续流状态" width="100" align="center"></el-table-column>
+                <el-table-column prop="Paymentmethod" label="付款方式" width="100" align="center"></el-table-column>
+                <el-table-column prop="starttime" label="消费时间" width="100" align="center"></el-table-column>
+                 <el-table-column prop="Purchase" label="购买时间" width="100" align="center"></el-table-column>
+                 <el-table-column prop="Auditstatus" label="审核状态" width="100" align="center"></el-table-column>
+                <el-table-column prop="Reviewer" label="审核人" width="100" align="center"></el-table-column>
+                <el-table-column prop="Audittime" label="审核时间" width="100" align="center"></el-table-column>
+                <el-table-column prop="remarks" label="备注" width="100" align="center"></el-table-column>
+
+            </el-table>
+
+
+
             <div class="col-md-12 col-lg-12">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover jh-po-re" id="datatable">
-                        <thead>
-                        <tr>
-                            <th class="text-center">序号</th>
-                            <th class="text-center">姓名</th>
-                            <th class="text-center">产品名称</th>
-                            <th class="text-center">单价</th>
-                            <th class="text-center">课时（小时）</th>
-                            <th class="text-center">折扣（%）</th>
-                            <th class="text-center">消费金额</th>
-                            <th class="text-center">咨询师</th>
-                            <th class="text-center">咨询顾问</th>
-                            <th class="text-center">访问类型</th>
-                            <th class="text-center">咨客判定</th>
-                            <th class="text-center">续流状态</th>
-                            <th class="text-center">付款方式</th>
-                            <th class="text-center">消费时间</th>
-                            <th class="text-center">购买时间</th>
-                            <th class="text-center">审核状态</th>
-                            <th class="text-center">审核人</th>
-                            <th class="text-center">审核时间</th>
-                            <th class="text-center">备注</th>
-                            
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th class="text-center">1</th>
-                            <th class="text-center">aaa</th>
-                            <th class="text-center">啊啊啊</th>
-                           <th class="text-center">单价</th>
-                            <th class="text-center">课时（小时）</th>
-                            <th class="text-center">折扣（%）</th>
-                            <th class="text-center">消费金额</th>
-                            <th class="text-center">咨询师</th>
-                            <th class="text-center">咨询顾问</th>
-                            <th class="text-center">访问类型</th>
-                            <th class="text-center">咨客判定</th>
-                            <th class="text-center">续流状态</th>
-                            <th class="text-center">付款方式</th>
-                            <th class="text-center">消费时间</th>
-                            <th class="text-center">购买时间</th>
-                            <th class="text-center">审核状态</th>
-                            <th class="text-center">审核人</th>
-                            <th class="text-center">审核时间</th>
-                            <th class="text-center">备注</th>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+               
 				<p class="tips">* 双击单行，可对当前数据进行修改</p>
                 <!--分页插件-->
                 <div class="page">

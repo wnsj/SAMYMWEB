@@ -39,35 +39,36 @@
                 </div>
              </div>
 
-             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<div class="col-md-3 col-lg-3 text-right nopad SSwid20">
-						<p class="end-aline col-md-11 col-lg-11" >审核日期</p><span class="sign-left">:</span>
-					</div>
-					<div class="col-md-4 col-lg-4 SSwid27">
-						<dPicker class="wd100" v-model="begCreateDate"></dPicker>
-					</div>
-					<div class="pull-left end-aline nopad">
-						~
-					</div>
-					<div class="col-md-4 col-lg-4 SSwid27">
-						<dPicker class="wd100" v-model="endCreateDate"></dPicker>
-					</div>
-				</div>
-
             </div>
-            <div class="row newRow">
 
-                <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
-                        data-toggle="modal"
-                        v-on:click="exportTable()">导出
-                </button>
-                <button type="button" class="btn btn-info pull-right m_r_10 jh-mr-2"
-                        data-toggle="modal" v-on:click="reset()">重置
-                </button>
-                <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
-                        data-toggle="modal"
-                        v-on:click="getConsumRejectFind(1)">查询
-                </button>
+            <div class="row newRow">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-md-3 col-lg-3 text-right nopad SSwid20">
+                        <p class="end-aline col-md-11 col-lg-11" >审核日期</p><span class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-4 col-lg-4 SSwid27">
+                        <dPicker class="wd100" v-model="begCreateDate"></dPicker>
+                    </div>
+                    <div class="pull-left end-aline nopad">
+                        ~
+                    </div>
+                    <div class="col-md-4 col-lg-4 SSwid27">
+                        <dPicker class="wd100" v-model="endCreateDate"></dPicker>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
+                            data-toggle="modal"
+                            v-on:click="exportTable()">导出
+                    </button>
+                    <button type="button" class="btn btn-info pull-right m_r_10 jh-mr-2"
+                            data-toggle="modal" v-on:click="reset()">重置
+                    </button>
+                    <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
+                            data-toggle="modal"
+                            v-on:click="getConsumRejectFind(1)">查询
+                    </button>
+                  </div>
             </div>
 
         </div>
@@ -80,7 +81,7 @@
         <div class="" id="datatable">
              <el-table  :data="tableData" style="width: 100%" @cell-dblclick="selectRule" border>
                 <el-table-column type="index" prop="edit" label="序号" width="60" align="center"></el-table-column>
-                <el-table-column prop="name" label="姓名" width="100" align="center"></el-table-column>
+                <el-table-column prop="memName" label="姓名" width="100" align="center"></el-table-column>
                 <el-table-column prop="proName" label="产品名称" width="100" align="center"></el-table-column>
                 <el-table-column prop="price" label="购买单价（￥/次）" width="100" align="center"></el-table-column>
                 <el-table-column prop="consumCount" label="课时（小时）" width="100" align="center"></el-table-column>
@@ -90,12 +91,20 @@
                 <el-table-column prop="empName" label="咨询顾问" width="100" align="center"></el-table-column>
                 <el-table-column prop="visitType" label="访问类型" :formatter="resetVisitType" width="100" align="center"></el-table-column>
                 <el-table-column prop="vsName" label="咨客判定" width="100" align="center"></el-table-column>
-                <el-table-column prop="psName" label="续流状态" width="100" align="center"></el-table-column>
+                <el-table-column prop="continName" label="续流状态" width="100" align="center"></el-table-column>
                 <el-table-column prop="psName" label="付款方式" width="100" align="center"></el-table-column>
                 <el-table-column prop="createDate" label="消费时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="Purchase" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="auditState" label="审核状态"  :formatter="resetAuditState" width="100" align="center"></el-table-column>
-                <el-table-column prop="shopowner" label="审核人" width="100" align="center"></el-table-column>
+                <!-- <el-table-column prop="shopowner" label="审核人" width="100" align="center"></el-table-column> -->
+                <el-table-column prop="shopowner" label="审核人" align="center">
+                    <template slot-scope="scope">
+                        <span v-if="scope.row.shopowner !== null">{{scope.row.shopowner}}</span>
+                        <span v-if="scope.row.finance !== null">{{scope.row.finance}}</span>
+                        <span v-else>{{scope.row.supplement}}</span>
+                    </template>
+                </el-table-column>
+
                 <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                 <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
 
@@ -278,7 +287,7 @@
                     if (res.retCode == '0000') {
                         this.pages = res.retData.pages //总页数
                         this.current = res.retData.pageNum //当前页码
-                        this.pageSize = res.retData.size//一页显示的数量  必须是奇数
+                        this.pageSize = res.retData.pageSize//一页显示的数量  必须是奇数
                         this.total = res.retData.total //数据的数量
                         this.tableData = res.retData.list
                     } else {

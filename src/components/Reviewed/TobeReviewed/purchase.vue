@@ -323,7 +323,7 @@
                     },
                     data: {
                         piId: this.objectContent.piId,					//必填 账目id
-                        operatorId: this.objectContent.operatorId			//必填 操作人（数据录入人，店长，财务，补录人）
+                        operatorId: this.operatorId			//必填 操作人（数据录入人，店长，财务，补录人）
                     },
                     dataType: 'json',
                 }).then((response) => {

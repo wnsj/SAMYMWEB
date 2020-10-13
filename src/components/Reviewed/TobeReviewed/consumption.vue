@@ -8,14 +8,14 @@
         <el-collapse-transition>
         <div v-show="showSelect">
             <div class="row newRow">
-               
+
                 <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
                         <p class="end-aline col-md-11 col-lg-11 jh-pa-1">姓名</p><span
                         class="sign-left">:</span>
                     </div>
                     <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <input class="form-control" type="text" v-model="empName">
+                        <input class="form-control" type="text" v-model="memName">
                     </div>
                 </div>
               <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-has="'SAMY:MP:STORE'">
@@ -42,7 +42,7 @@
 						<dPicker class="wd100" v-model="endCreateDate"></dPicker>
 					</div>
 				</div>
-              
+
             </div>
             <div class="row newRow">
                 <button type="button" class="btn btn-success pull-left m_r_10 jh-mr-2" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('1')">通过
@@ -58,13 +58,13 @@
                 </button>
                 <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
                         data-toggle="modal"
-                        v-on:click="checkEmp(1)">查询
+                        v-on:click="getApproveFind(1)">查询
                 </button>
             </div>
-            
+
         </div>
         </el-collapse-transition>
-        
+
         <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
@@ -73,49 +73,46 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover jh-po-re" id="datatable">
                         <thead>
-                        <tr>
-                            <th class="text-center">编辑</th>
-                            <th class="text-center">姓名</th>
-                            <th class="text-center">产品名称</th>
-                            <th class="text-center">单价</th>
-                            <th class="text-center">课时（小时）</th>
-                            <th class="text-center">折扣（%）</th>
-                            <th class="text-center">消费金额</th>
-                            <th class="text-center">咨询师</th>
-                            <th class="text-center">咨询顾问</th>
-                            <th class="text-center">访问类型</th>
-                            <th class="text-center">咨客判定</th>
-                            <th class="text-center">续流状态</th>
-                            <th class="text-center">付款方式</th>
-                            <th class="text-center">消费时间</th>
-                            <th class="text-center">购买时间</th>
-
-                        </tr>
+                            <tr>
+                                <th class="text-center">编辑</th>
+                                <th class="text-center">姓名</th>
+                                <th class="text-center">产品名称</th>
+                                <th class="text-center">单价</th>
+                                <th class="text-center">课时（小时）</th>
+                                <th class="text-center">折扣（%）</th>
+                                <th class="text-center">消费金额</th>
+                                <th class="text-center">咨询师</th>
+                                <th class="text-center">咨询顾问</th>
+                                <th class="text-center">访问类型</th>
+                                <th class="text-center">咨客判定</th>
+                                <th class="text-center">续流状态</th>
+                                <th class="text-center">付款方式</th>
+                                <th class="text-center">消费时间</th>
+                                <th class="text-center">购买时间</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="text-center editradio-box">
-                                <input :id="'edit'" class="editradio" type="radio" name="单选框" :value="1" v-model="checkedValue" />
-                                <label  class="editlabel" :for="'edit'"></label>
-
-                            </td>
-                            <td class="text-center">李二鹏</td>
-                            <td class="text-center">家庭暴力</td>
-                            <td class="text-center">600</td>
-                            <td class="text-center">3</td>
-                            <td class="text-center">0</td>
-                            <td class="text-center">700</td>
-                            <td class="text-center">李雪艳</td>
-                            <td class="text-center">王顾问</td>
-                            <td class="text-center">复访</td>
-                            <td class="text-center">单脱</td>
-                            <td class="text-center">续签</td>
-                            <td class="text-center">花呗</td>
-                            
-                            <td class="text-center">2020-8-16</td>
-                            <td class="text-center">2020-8-2</td>
-                            
-                        </tr>
+                            <tr v-for="(item,index) in approveFindList" :key="index">
+                                <td class="text-center editradio-box">
+                                    <input :id="'edit'+(index+1)" class="editradio" type="radio" name="复选框" :value="index"
+                                           v-model="checkedValue"/>
+                                    <label :for="'edit'+(index+1)" class="editlabel"></label>
+                                </td>
+                                <td class="text-center">{{item.memName}}</td>
+                                <td class="text-center">{{item.proName}}</td>
+                                <td class="text-center">{{item.price}}</td>
+                                <td class="text-center">{{item.consumCount}}</td>
+                                <td class="text-center">{{item.discount}}</td>
+                                <td class="text-center">{{item.realCross}}</td>
+                                <td class="text-center">{{item.visitorName}}</td>
+                                <td class="text-center">{{item.empName}}</td>
+                                <td class="text-center">{{item.visitType | formatVisit}}</td>
+                                <td class="text-center">{{item.vsName}}</td>
+                                <td class="text-center">{{item.continName}}</td>
+                                <td class="text-center">{{item.psName}}</td>
+                                <td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+                                <td class="text-center">{{item.buyTime | dateFormatFilter("YYYY-MM-DD")}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -127,7 +124,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- 驳回弹窗 -->
         <div class="row row_edit">
             <div class="modal fade" id="rejectionContent">
@@ -137,12 +134,12 @@
             </div>
         </div>
     </div>
-    
+
 </template>
 
 
 <script>
-  
+
     import {
         init
     } from '@/../static/js/common.js'
@@ -159,13 +156,11 @@
         },
         data() {
             return {
-                employeeList: [],
+                approveFindList: [],
                 visitorList: [],
                 isuse: '1',
-                empName: '',
-                iphone: '',
+                memName: '',
                 fixedHeader: false,
-                posId: '',
                 storeId: this.storeId(),
                 accountType: this.accountType(),
                 name:'',
@@ -174,19 +169,25 @@
                 objectContent: {},
                 //分页需要的数据
                 pages: '', //总页数
-                current: '1', //当前页码
+                page: '1', //当前页码
                 pageSize: '10', //一页显示的数量
                 total: '', //数据的数量
                 showSelect:true,
                 begCreateDate:'',
                 endCreateDate: '',
+                operatorId: this.accountId()
             };
+        },
+        filters: {
+        	formatVisit(val) {
+        	    return val == 1 ? "初访":"复访"
+        	}
         },
         methods: {
             //子级传值到父级上来的动态拿去
             pageChange: function (page) {
-                this.current = page
-                this.checkEmp(page);
+                this.page = page
+                this.getApproveFind(page);
             },
             //门店ID
             storeChange: function (param) {
@@ -220,10 +221,10 @@
                     this.storeId = param.storeId
                 }
             },
-            
+
             //导出
             exportTable() {
-                  this.exportTableToExcel('datatable','产品购买审核表')
+                  this.exportTableToExcel('datatable','消费审核表')
             },
             //feedback department information
             positionChange: function (param) {
@@ -235,70 +236,52 @@
             },
             //feedback from adding and modifying view
             feedBack() {
-                this.checkEmp(1)
+                this.getApproveFind(1)
                 $("#rejectionContent").modal('hide')
             },
-            // check the adding and modifying rule of account
-            selectRule(param, item) {
 
-                if (param == 1) {
-                    this.$refs.emp.initData('add', '')
-                    $("#emp").modal('show')
-                } else if (param == 3) {
-                    if (!this.has('SAMY:MP:Employee:Update')) {
-                        alert("暂无权限!")
-                        return
-                    }
-                    this.$refs.emp.initData('modify', item)
-                    $("#emp").modal('show')
-                }
-            },
              tabChange(item) {
                 this.getConsultStore()
-                
+
             },
             //重置
             reset(){
-                this.empName="";
+                this.memName="";
                 this.begCreateDate="";
                 this.endCreateDate="";
-                
+
             },
              editorAction(item) {
                 this.objectContent = item
             },
             btnAction(index) {
-               
+
                 if (this.checkedValue > -1) {
-                    this.objectContent = this.visitorList[this.checkedValue]
+                    this.objectContent = this.approveFindList[this.checkedValue]
                 } else {
-                    alert("请选择咨客后再操作!");
+                    // alert("请选择咨客后再操作!");
+                    this.$alert('请选择咨客后再操作', '提示', {
+                      confirmButtonText: '确定',
+                      type: 'warning',
+                      callback: action => {}
+                    });
                     return
                 }
                 switch (index) {
                     //通过
                      case '1':
-                        alert("已经成功通过！")
+                        this.productConsumption();
                         break;
                     //驳回
                     case '2':
-                        //this.$refs.rejection.initData(this.objectContent)
-                        
+                        this.$refs.rejection.initData('consumption', this.objectContent)
                         $("#rejectionContent").modal('show')
                         break;
                 }
             },
-            //check the list of department
-            checkEmp(page) {
-                this.showSelect = false
-                console.log('checkEmp')
-                if (!this.isBlank(this.begCreateDate)) {
-					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
-				}
-				if (!this.isBlank(this.endCreateDate)) {
-					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
-				}
-                var url = this.url + '/employeeAction/queryEmp'
+
+            productConsumption(){
+                var url = this.url + '/consumAuditBean/consumApprove'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -307,15 +290,67 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        posId: this.posId,
-                        storeId: this.storeId,
-                        empName: this.empName,
-                        isuse: this.isuse,
+                        operatorId: this.objectContent.operatorId,
+                        piId: this.objectContent.piId,
+                        cId: this.objectContent.cid,
+                        createDate: this.objectContent.createDate
+                    },
+                    dataType: 'json',
+                }).then((response) => {
+                    var res = response.data
+                    console.log(res)
+                    if (res.retCode == '0000') {
 
+                        this.$alert(res.retMsg, '提示', {
+                          confirmButtonText: '确定',
+                          type: 'success',
+                          callback: action => {}
+                        })
+
+                    } else {
+
+                        //alert(res.retMsg)
+                        this.$alert(res.retMsg, '提示', {
+                          confirmButtonText: '确定',
+                          type: 'error',
+                          callback: action => {}
+                        })
+
+                    }
+
+                }).catch((error) => {
+                    console.log('请求失败处理')
+                });
+            },
+
+
+
+            //查询待审批的消费
+            getApproveFind(page) {
+                this.showSelect = false
+                console.log('getApproveFind')
+                if (!this.isBlank(this.begCreateDate)) {
+					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
+				}
+				if (!this.isBlank(this.endCreateDate)) {
+					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
+				}
+                var url = this.url + '/consumAuditBean/consumApproveFind'
+                this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
                         page: page.toString(),
                         pageSize: this.pageSize,
-                        actualBegDate: this.begCreateDate,
-						actualEndDate: this.endCreateDate,
+                        operatorId: this.operatorId,
+                        memName: this.memName,
+                        storeId: this.storeId,
+                        startTime: this.begCreateDate,
+                        endTime: this.endCreateDate
                     },
                     dataType: 'json',
                 }).then((response) => {
@@ -323,11 +358,11 @@
                     console.log(res)
                     if (res.retCode == '0000') {
                         this.pages = res.retData.pages //总页数
-                        this.current = res.retData.current //当前页码
+                        this.page = res.retData.pageNum //当前页码
                         this.pageSize = res.retData.size//一页显示的数量  必须是奇数
                         this.total = res.retData.total //数据的数量
-                        this.$refs.paging.setParam(this.pages, this.current, this.total)
-                        this.employeeList = res.retData.records
+                        this.$refs.paging.setParam(this.pages, this.page, this.total)
+                        this.approveFindList = res.retData.list
                     } else {
                         alert(res.retMsg)
                     }
@@ -364,7 +399,7 @@
             init();
         },
         created() {
-            //this.checkEmp(1)
+            this.getApproveFind(1)
         }
     }
 </script>

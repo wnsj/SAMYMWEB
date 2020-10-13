@@ -193,21 +193,11 @@
         },
         filters: {
         	formatVisit(val) {
-                if (val == 1) {
-                    return val = '初访'
-                } else {
-                    return val = '复访'
-                }
+                return val == 1 ? "初访":"复访"
         	},
             formatIsArrears(val) {
-                if (val == 1) {
-                    return val = '是'
-                } else {
-                    return val = '否'
-                }
+                return val == 1 ? "是":"否"
             }
-
-
         },
         methods: {
             //子级传值到父级上来的动态拿去
@@ -315,7 +305,8 @@
                         break;
                     //驳回
                     case '2':
-                        this.$refs.rejection.initData(this.objectContent.piId, this.objectContent.operatorId)
+                        // this.$refs.rejection.initData(this.objectContent.piId, this.objectContent.operatorId)
+                        this.$refs.rejection.initData('product', this.objectContent)
                         $("#rejectionContent").modal('show')
                         break;
                 }

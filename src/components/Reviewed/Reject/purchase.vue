@@ -162,7 +162,7 @@
         },
         methods: {
             resetDate(row, column, cellValue, index){
-                if (cellValue !== '' && cellValue !== null) {
+                if (cellValue !== '' && cellValue !== null && cellValue !== undefined) {
                     return cellValue.substring(0,10)
                 }
             },

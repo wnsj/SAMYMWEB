@@ -58,8 +58,43 @@
                                         <el-menu-item index="/MP/Refund">退费管理</el-menu-item>
                                         <el-menu-item index="/MP/Income">收入记录明细</el-menu-item>
                                     </el-submenu>
+                                    
+                                    <el-submenu index="3" class="menu-item-pd">
+                                        <template slot="title">
+                                            <i class="el-icon-folder-add"></i>
+                                            <span>订单审核管理</span>
+                                        </template>
+                                        <el-submenu index="3-1">
+                                            <template slot="title">
+                                                <i class="el-icon-folder-remove"></i>
+                                                <span>待审核</span>
+                                            </template>
+                                            <el-menu-item index="/Reviewed/TobeReviewed/purchase">产品购买审核</el-menu-item>
+                                            <el-menu-item index="/Reviewed/TobeReviewed/consumption">消费审核</el-menu-item>
+                                            <el-menu-item index="/Reviewed/TobeReviewed/Refund">退费审核</el-menu-item>
+                                        </el-submenu>
+                                        <el-submenu index="3-2">
+                                            <template slot="title">
+                                                <i class="el-icon-folder-remove"></i>
+                                                <span>审核驳回</span>
+                                            </template>
+                                           <el-menu-item index="/Reviewed/Reject/purchase">产品购买驳回</el-menu-item>
+                                            <el-menu-item index="/Reviewed/Reject/consumption">消费驳回</el-menu-item>
+                                            <el-menu-item index="/Reviewed/Reject/Refund">退费驳回</el-menu-item>
+                                        </el-submenu>
+                                        <el-submenu index="3-3">
+                                            <template slot="title">
+                                                <i class="el-icon-folder-remove"></i>
+                                                <span>审核列表统计</span>
+                                            </template>
+                                             <el-menu-item index="/Reviewed/Statistics/purchase">产品购买统计</el-menu-item>
+                                            <el-menu-item index="/Reviewed/Statistics/consumption">消费统计</el-menu-item>
+                                            <el-menu-item index="/Reviewed/Statistics/Refund">退费统计</el-menu-item>
+                                        </el-submenu>
+                                    </el-submenu>
 
-                                    <el-submenu index="3">
+
+                                    <el-submenu index="4">
                                         <template slot="title">
                                             <i class="el-icon-folder-add"></i>
                                             <span>门店管理</span>
@@ -72,7 +107,7 @@
                                         <el-menu-item index="/MP/CounseRoomTimeTotal">咨询室总览</el-menu-item>
                                     </el-submenu>
 
-                                    <el-submenu index="4">
+                                    <el-submenu index="5">
                                         <template slot="title">
                                             <i class="el-icon-folder-add"></i>
                                             <span>基础设置</span>
@@ -84,7 +119,7 @@
                                         <el-menu-item index="/MP/DiseaseType">咨询方向</el-menu-item>
                                     </el-submenu>
 
-                                    <el-submenu index="5">
+                                    <el-submenu index="6">
                                         <template slot="title">
                                             <i class="el-icon-folder-add"></i>
                                             <span>权限管理</span>
@@ -93,12 +128,12 @@
                                         <el-menu-item index="/MP/UmsPermissionManage">权限设置</el-menu-item>
                                     </el-submenu>
 
-                                    <el-submenu index="6" class="menu-item-pd">
+                                    <el-submenu index="7" class="menu-item-pd">
                                         <template slot="title">
                                             <i class="el-icon-folder-add"></i>
                                             <span>报表管理</span>
                                         </template>
-                                        <el-submenu index="6-1">
+                                        <el-submenu index="7-1">
                                             <template slot="title">
                                                 <i class="el-icon-folder-remove"></i>
                                                 <span>财务核算表</span>
@@ -107,7 +142,7 @@
                                             <el-menu-item index="/SummaryMenu/EmpConsumeSummary">收入情况核算</el-menu-item>
                                             <el-menu-item index="/SummaryMenu/CostMoneySummary">消耗金额核算</el-menu-item>
                                         </el-submenu>
-                                        <el-submenu index="6-2">
+                                        <el-submenu index="7-2">
                                             <template slot="title">
                                                 <i class="el-icon-folder-remove"></i>
                                                 <span>客户分析表</span>
@@ -117,7 +152,7 @@
                                             <el-menu-item index="/SummaryMenu/VisitorConSummary">客户产品消耗</el-menu-item>
                                             <el-menu-item index="/SummaryMenu/VisitorDeSummary">访客跟踪明细</el-menu-item>
                                         </el-submenu>
-                                        <el-submenu index="6-3">
+                                        <el-submenu index="7-3">
                                             <template slot="title">
                                                 <i class="el-icon-folder-remove"></i>
                                                 <span>咨询方向分析表</span>
@@ -127,7 +162,7 @@
                                         </el-submenu>
                                     </el-submenu>
 
-                                    <el-submenu index="7">
+                                    <el-submenu index="8">
                                         <template slot="title">
                                             <i class="el-icon-folder-add"></i>
                                             <span>问卷调查管理</span>

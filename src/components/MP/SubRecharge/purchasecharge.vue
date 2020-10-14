@@ -389,7 +389,7 @@
 				this.$refs.emp.setPosName("咨询顾问")
 				this.$refs.counselorEmp.setEmp(param.counselor)
 				this.$refs.emp.setEmp(param.empId)
-                this.$refs.projectRef.setEmpId("0", param.counselor)
+                this.$refs.projectRef.setEmpId(param.counselor,1)
                 this.$refs.projectRef.setProject(param.proId)
 				this.isShow = true
 				this.isSelect = false

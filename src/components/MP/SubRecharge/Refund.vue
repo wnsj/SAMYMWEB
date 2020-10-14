@@ -6,7 +6,7 @@
 			<h2 id="myModalLabel" class="modal-title">产品退费</h2>
 		</div>
 		<div class="modal-body  pos_r clearfix">
-			<div class="tab-pane fade in active martop " id="basic">
+			<div class="clearfix tab-pane fade in active martop " id="basic">
 
 					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">姓名</label><span

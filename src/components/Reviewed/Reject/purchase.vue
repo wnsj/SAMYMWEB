@@ -325,7 +325,7 @@
             window.addEventListener('scroll', this.handleScroll, true);
         },
         created() {
-            //this.checkEmp(1)
+            this.getRejectPage()
         }
     }
 </script>

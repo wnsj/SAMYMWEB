@@ -140,8 +140,6 @@
         components: {
             store,
             dPicker,
-            Paging,
-
             recharge,
         },
         data() {

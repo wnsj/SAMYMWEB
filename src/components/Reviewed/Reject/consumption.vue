@@ -100,7 +100,7 @@
                 <el-table-column prop="shopowner" label="审核人" align="center">
                     <template slot-scope="scope">
                         <span v-if="scope.row.shopowner !== null">{{scope.row.shopowner}}</span>
-                        <span v-if="scope.row.finance !== null">{{scope.row.finance}}</span>
+                        <span v-else-if="scope.row.finance !== null">{{scope.row.finance}}</span>
                         <span v-else>{{scope.row.supplement}}</span>
                     </template>
                 </el-table-column>
@@ -233,7 +233,7 @@
             },
             //导出
             exportTable() {
-                  this.exportTableToExcel('datatable','产品购买审核表')
+                  this.exportTableToExcel('datatable','消费驳回表')
             },
 
            feedBack() {

@@ -240,7 +240,7 @@
 
             //导出
             exportTable() {
-                  this.exportTableToExcel('datatable','产品购买审核表')
+                  this.exportTableToExcel('datatable','消费审核表')
             },
             //feedback department information
             positionChange: function (param) {

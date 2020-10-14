@@ -100,7 +100,14 @@
                  <el-table-column prop="operatorName" label="操作人" width="100" align="center"></el-table-column>
                  <el-table-column prop="isArrears" label="是否全款" :formatter="resetArrears" width="100" align="center"></el-table-column>
                  <el-table-column prop="auditStateName" label="审核状态" width="100" align="center"></el-table-column>
-                 <el-table-column prop="Reviewer" label="审核人" width="100" align="center"></el-table-column>
+                 <!-- <el-table-column prop="Reviewer" label="审核人" width="100" align="center"></el-table-column> -->
+				 <el-table-column prop="shopOwnerName" label="审核人" align="center">
+				     <template slot-scope="scope">
+				         <span v-if="scope.row.shopOwnerName !== null">{{scope.row.shopOwnerName}}</span>
+				         <span v-else-if="scope.row.financeName !== null">{{scope.row.financeName}}</span>
+				         <span v-else>{{scope.row.operatorName}}</span>
+				     </template>
+				 </el-table-column>
                  <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
             </el-table>

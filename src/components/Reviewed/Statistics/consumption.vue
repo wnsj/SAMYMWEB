@@ -98,18 +98,24 @@
                 <!-- <el-table-column prop="Conamount" label="消耗金额" width="100" align="center"></el-table-column> -->
                 <el-table-column prop="visitorName" label="咨询师" width="100" align="center"></el-table-column>
                 <el-table-column prop="empName" label="咨询顾问" width="100" align="center"></el-table-column>
-                <el-table-column prop="visitType" label="访问类型" width="100" align="center"></el-table-column>
+                <el-table-column prop="visitType" label="访问类型" :formatter="resetVisit" width="100" align="center"></el-table-column>
                 <el-table-column prop="vsName" label="咨客判定" width="100" align="center"></el-table-column>
                 <el-table-column prop="Freewheeling" label="续流状态" width="100" align="center"></el-table-column>
                 <el-table-column prop="psName" label="付款方式" width="100" align="center"></el-table-column>
-                <el-table-column prop="createDate" label="消费时间" width="100" align="center"></el-table-column>
-                 <el-table-column prop="buyTime" label="购买时间" width="100" align="center"></el-table-column>
-                 <el-table-column prop="auditState" label="审核状态" width="100" align="center"></el-table-column>
-                <el-table-column prop="shopowner" label="审核人" width="100" align="center"></el-table-column>
-                <el-table-column prop="rejectTime" label="审核时间" width="100" align="center"></el-table-column>
+                <el-table-column prop="createDate" label="消费时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+                 <el-table-column prop="buyTime" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+                 <el-table-column prop="auditState" label="审核状态" :formatter="resetAuditState" width="100" align="center"></el-table-column>
+                <!-- <el-table-column prop="shopowner" label="审核人" width="100" align="center"></el-table-column> -->
+                <el-table-column prop="shopowner" label="审核人" align="center">
+                    <template slot-scope="scope">
+                        <span v-if="scope.row.shopowner !== null">{{scope.row.shopowner}}</span>
+                        <span v-else-if="scope.row.finance !== null">{{scope.row.finance}}</span>
+                        <span v-else>{{scope.row.supplement}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                 <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
             </el-table>
-            <div class="col-md-12 col-lg-12 tips">* 双击单行，可对当前数据进行修改 </div>
 
             <el-row style="margin-top: 20px;">
                 <el-col :span="24">
@@ -171,6 +177,31 @@
             };
         },
         methods: {
+            resetDate(row, column, cellValue, index){
+                if (cellValue !== '' && cellValue !== null) {
+                    return cellValue.substring(0,10)
+                }
+            },
+            resetVisit(row, column, cellValue, index){
+               return cellValue == 1 ? "初访":"复访"
+            },
+            resetAuditState(row, column, cellValue, index){
+                switch (cellValue) {
+                     case 2:
+                        return '未审核'
+                        break;
+                    case 3:
+                       return '审核中'
+                       break;
+                    case 4:
+                       return '审核通过'
+                       break;
+                    case 5:
+                       return '审核未通过'
+                       break;
+                }
+            },
+
             //子级传值到父级上来的动态拿去
             pageChange: function (page) {
                 this.current = page
@@ -192,7 +223,7 @@
 
             //导出
             exportTable() {
-                  this.exportTableToExcel('datatable','产品购买审核表')
+                  this.exportTableToExcel('datatable','消费统计表')
             },
             //feedback department information
             positionChange: function (param) {
@@ -212,7 +243,8 @@
                 this.memName="";
                 this.begCreateDate="";
                 this.endCreateDate="";
-
+                this.auditState="";
+                this.shopowner="";
             },
              editorAction(item) {
                 this.objectContent = item

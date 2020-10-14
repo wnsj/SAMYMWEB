@@ -28,40 +28,35 @@
 </template>
 
 <script>
-	import dPicker from 'vue2-datepicker'
-	import emp from '../../common/Employee.vue'
-	import project from '../../common/Project.vue'
 	import axios from "axios";
-
 	export default {
-		components: {
-
-		},
 		data() {
 			return {
                 param: {
                     rejectReason: '',
-                    operatorId: ''
+                    // operatorId: '',
+                    operatorId: this.accountId()
                 },
                 oFlag: '',
                 oTitle: ''
-
 			};
 		},
 		methods: {
             initData(flag,param) {
-                this.param = { rejectReason: ''};
+                this.param = { 
+                    rejectReason: '',
+                    operatorId: this.accountId()
+                };
                 this.oFlag = flag;
+                console.log(param)
 
 
                 if (flag == 'product') {
                     this.oTitle = '产品购买'
                     this.param.piId = param.piId;
-                    this.param.operatorId = param.operatorId;
 
                 } else if (flag == 'consumption') {
                     this.oTitle = '消费'
-                    this.param.operatorId = param.operatorId;
                     this.param.piId = param.piId;
                     this.param.cId = param.cid;
                     // this.param.createDate = param.createDate;
@@ -71,7 +66,6 @@
 
                 } else if (flag == 'refund') {
                     this.oTitle = '退费'
-                    this.param.operatorId = param.operatorId;
                     this.param.piId = param.piId;
                     this.param.refundId = param.refundId;
                     // this.param.createDate = param.createDate;
@@ -86,13 +80,11 @@
 
 			//取消
 			 closeCurrentPage() {
-               this.param = { rejectReason: ''};
                 $("#rejectionContent").modal("hide");
 			},
 			//确认
 			addFee(){
                 if (this.isBlank(this.param.rejectReason)) {
-					//alert("驳回理由不能为空")
                     this.$alert('驳回理由不能为空', '提示', {
                       confirmButtonText: '确定',
                       type: 'error',
@@ -109,15 +101,12 @@
                 } else if (this.oFlag == 'refund') {
                     postUrl = this.url + '/refundAuditBean/refundReject'
                 }
-                console.log(postUrl)
+                //console.log(postUrl)
                 this.certainAction(postUrl);
 
             },
 
-
-
             certainAction(url) {
-                //var url = this.url + '/purchasedItemsAuditBean/reject'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -140,8 +129,6 @@
                         this.closeCurrentPage()
 
                     } else {
-
-                        //alert(res.retMsg)
                         this.$alert(res.retMsg, '提示', {
                           confirmButtonText: '确定',
                           type: 'error',
@@ -156,13 +143,8 @@
 
 			}
 
-
-
-
 		},
-		mounted() {
 
-		}
 
 	}
 </script>

@@ -290,7 +290,7 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        operatorId: this.objectContent.operatorId,
+                        operatorId: this.operatorId,
                         piId: this.objectContent.piId,
                         cId: this.objectContent.cid,
                         createDate: this.objectContent.createDate

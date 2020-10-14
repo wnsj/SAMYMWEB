@@ -291,7 +291,7 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        operatorId: this.objectContent.operatorId,
+                        operatorId: this.operatorId,
                         piId: this.objectContent.piId,
                         refundId: this.objectContent.refundId,
                         createDate: this.objectContent.createDate

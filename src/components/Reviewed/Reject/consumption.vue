@@ -240,7 +240,8 @@
                 $("#customContent").modal('hide')
            },
             // check the adding and modifying rule of account
-            selectRule() {
+            selectRule(row) {
+                this.$refs.custom.initData(row)
                 $("#customContent").modal('show')
             },
 

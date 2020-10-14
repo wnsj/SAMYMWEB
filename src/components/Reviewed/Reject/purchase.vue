@@ -55,7 +55,7 @@
                     </button>
                     <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
                             data-toggle="modal"
-                            v-on:click="checkEmp(1)">查询
+                            v-on:click="getRejectPage(1)">查询
                     </button>
                 </div>
 
@@ -120,7 +120,7 @@
         <div class="row row_edit">
             <div class="modal fade" id="AuditPurContent">
                 <div class="modal-dialog wd1000">
-                    <recharge ref='auditPur' @closeCurrentPage='feedBack()'></recharge>
+                    <recharge ref='auditPur' @addFee='feedBack()'></recharge>
                 </div>
             </div>
         </div>
@@ -168,7 +168,7 @@
             //子级传值到父级上来的动态拿去
             pageChange: function (page) {
                 this.current = page
-                this.checkEmp(page);
+                this.getRejectPage(page);
             },
             //门店ID
             storeChange: function (param) {
@@ -203,6 +203,7 @@
                 }
             },
             feedBack() {
+                this.getRejectPage(this.current)
                 $("#AuditPurContent").modal('hide')
             },
             // check the adding and modifying rule of account
@@ -216,22 +217,25 @@
             },
             //重置
             reset() {
-
+                this.auditName = ''
+                this.auditBegTime = ''
+                this.auditEndTime = ''
+                this.getRejectPage(1)
             },
             // 翻页
             handleCurrentChange(pageNum) {
                 this.current = pageNum
-                this.checkEmp()
+                this.getRejectPage()
             },
             // 每页条数变化时触发
             handleSizeChange(pageSize) {
                 this.current = 1
                 this.pageSize = pageSize
-                this.checkEmp()
+                this.getRejectPage()
             },
 
             //check the list of department
-            checkEmp(page) {
+            getRejectPage(page) {
                 this.showSelect = false
 
                 if (!this.isBlank(this.auditBegTime)) {

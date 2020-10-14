@@ -557,8 +557,8 @@
 					console.log('请求失败处理')
 				});
 			},
-			closeCurrentPage() {
-				this.$emit('closeCurrentPage')
+            closeCurrentPage() {
+				this.$emit('addFee')
 			},
 			setCustom(param) {
 				this.consume.memNum = param.memNum

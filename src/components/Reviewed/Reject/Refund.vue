@@ -79,7 +79,7 @@
 
 
         <div class="" id="datatable">
-            <el-table  :data="tableData" style="width: 100%" @cell-dblclick="selectRule" border>
+            <el-table  :data="tableData" style="width: 100%" @row-dblclick="selectRule" border>
                 <el-table-column type="index" prop="edit" label="序号" width="60" align="center"></el-table-column>
                 <el-table-column prop="storeName" label="门店名称"  align="center"></el-table-column>
                 <el-table-column prop="memName" label="退款人"  align="center"></el-table-column>
@@ -224,10 +224,9 @@
                 $("#refundContent").modal('hide')
            },
             // check the adding and modifying rule of account
-            selectRule() {
-
-                    $("#refundContent").modal('show')
-
+            selectRule(row) {
+                this.$refs.refund.initData(row)
+                $("#refundContent").modal('show')
             },
              tabChange(item) {
                 this.getConsultStore()

@@ -23,14 +23,14 @@
 							<input type="text" class="form-control" v-model="refund.phone" :disabled="isShow">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix jh-wd-33">
+					<!-- <div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">订单时间</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
 							<input type="text" class="form-control" :disabled="isShow">
 						</div>
-					</div>
-					<div v-show="unfinishedProList.length > 0"> 
+					</div> -->
+					<div v-show="unfinishedProList.length > 0">
 						<div class="col-md-12  clearfix jh-ad-0">
 							<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
 							<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >已购产品</label><span
@@ -60,7 +60,7 @@
 									</tr>
 								</tbody>
 							</table>
-						</div>	
+						</div>
 					</div>
 
 
@@ -128,6 +128,7 @@
 		},
 		data() {
 			return {
+                sourceId: '',
 				refund: {
 					consumCount: 0, //退课时
 					receivable: '', //应退金额
@@ -138,6 +139,24 @@
 					realCross: '', //应退金额
 					balance: '', //违约金
 					money: 0, //退费金额
+                    proId: '',
+                    discount: '',
+                    price: '',
+                    totalCount: '',
+                    counselor: '',
+                    empId: '',
+                    storeId: '',
+                    visitType: '',
+                    operatorId: this.accountId(), //操作人
+                    cashId: '',
+                    cashMoney: '',
+                    visitState: '',
+                    continState: '',
+                    payType: '',
+                    sourceId: '',
+                    followUpPerson: '',
+                    isArrears:''
+
 				},
 				isShow: false,
 				unfinishedProList: [],
@@ -156,24 +175,36 @@
 		methods: {
 			// Initialization consume’s content
 			initData(param) {
+                console.log(param)
+
 				$('#refundContent').modal({
 					backdrop: 'static',
 					keyboard: false
 				});
+                this.sourceId = param.sourceId;
 				this.refund = {
 					consumCount: 0, //退课时
 					receivable: '', //应退金额
-					memNum: param.visId, //会员号
-					memName: param.visitorName, //会员名
+					memNum: param.memNum, //会员号
+					memName: param.memName, //会员名
 					phone: param.phone, //手机
-					piId: '', //产品Id
+					piId: param.piId, //产品Id
 					realCross: '', //应退金额
 					balance: '', //违约金
 					operatorId: this.accountId(), //操作人
 					money: 0, //退费金额
+                    proId: param.proId,
+                    price: param.price,
+                    counselor: param.counselor,
+                    empId: param.empId,
+                    storeId: param.storeId,
+                    cashId: param.cashId,
+                    payType: param.payType,
+                    sourceId: param.sourceId
+
 				}
 				this.isShow = true
-				this.queryUnfinishedPro(param.visId)
+				this.queryUnfinishedPro(param.memNum)
 				this.clickItemObj = null;
 				$("input[name='radioGroup']").prop("checked", "");
 				this.clickItemObj = {
@@ -227,8 +258,14 @@
 					return
 				}
 				this.refund.money = this.selectObj.price * this.refund.consumCount
-				var url = this.url + '/purchasedItemsAction/refundProject'
-				this.requestData(url, this.refund).then((response) => {
+
+                // var url = 'http://172.16.16.255:8080/purchasedItemsAction/refundProject'
+                var url = this.url + '/refundAuditBean/refundRecord'
+                var obj = {
+                    params: this.refund,
+                    sourceId: this.sourceId
+                }
+				this.requestData(url, obj).then((response) => {
 					if (response.retCode == '0000') {
 						alert(response.retMsg)
 						this.closeCurrentPage()
@@ -319,6 +356,16 @@
 			},
 			//单选框选中处理
 			radioClick(e, item) {
+                console.log(item)
+                this.refund.totalCount = this.clickItemObj.totalCount
+                this.refund.visitType = this.clickItemObj.visitType
+                this.refund.cashMoney = this.clickItemObj.cashMoney
+                this.refund.visitState = this.clickItemObj.visitState
+                this.refund.continState =  this.clickItemObj.continState
+                this.refund.followUpPerson = this.clickItemObj.followUpPerson
+                this.refund.isArrears = this.clickItemObj.isArrears
+
+
 				if (this.clickItemObj.itemId == 0) {
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1

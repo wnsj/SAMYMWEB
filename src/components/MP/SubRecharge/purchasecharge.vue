@@ -390,7 +390,7 @@
 				this.$refs.counselorEmp.setEmp(param.counselor)
 				this.$refs.emp.setEmp(param.empId)
                 this.$refs.projectRef.setEmpId("0", param.counselor)
-				this.$refs.projectRef.setProject(param.proId)
+                this.$refs.projectRef.setProject(param.proId)
 				this.isShow = true
 				this.isSelect = false
 				this.$refs.VisitStateRef.getObj(param.visitType, 1)

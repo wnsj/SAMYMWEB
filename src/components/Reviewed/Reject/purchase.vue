@@ -325,7 +325,6 @@
             window.addEventListener('scroll', this.handleScroll, true);
         },
         created() {
-            this.getRejectPage()
         }
     }
 </script>

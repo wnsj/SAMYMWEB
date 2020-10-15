@@ -242,7 +242,7 @@
                        storeId: this.storeId,
                        auditBegTime: this.begCreateDate,
                        auditEndTime: this.endCreateDate,
-                       auditStatet: this.auditState
+                        auditState: this.auditState
                     },
                     dataType: 'json',
                 }).then((response) => {

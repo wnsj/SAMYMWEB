@@ -73,7 +73,7 @@
 
         </div>
         </el-collapse-transition>
-        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
+        <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
 
@@ -167,6 +167,7 @@
                 showSelect:true,
                 begCreateDate:'',
                 endCreateDate: '',
+                addClass: false
             };
         },
         methods: {
@@ -211,17 +212,17 @@
                     this.storeId = param.storeId
                 }
             },
-
-            storeChange: function (param) {
-                if (this.isBlank(param)) {
-                    this.storeId = ""
-                } else {
-                    this.storeId = param.storeId
-                }
-            },
-             dataOpen(){
+            dataOpen(){
                 if(this.showSelect) return
                 this.showSelect = true;
+            },
+            dataClose(){
+                this.showSelect = !this.showSelect
+                this.addClass = true;
+
+                setTimeout(()=>{
+                    this.addClass = false;
+                },400)
             },
             //导出
             exportTable() {

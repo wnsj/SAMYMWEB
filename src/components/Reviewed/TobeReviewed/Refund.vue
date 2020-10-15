@@ -44,30 +44,33 @@
 				</div>
 
             </div>
-            <div class="row newRow">
-                <button type="button" class="btn btn-success pull-left m_r_10 jh-mr-2" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('1')">通过
-                </button>
-                <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
-                </button>
-                <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
-                        data-toggle="modal"
-                        v-on:click="exportTable()">导出
-                </button>
-                <button type="button" class="btn btn-info pull-right m_r_10 jh-mr-2"
-                        data-toggle="modal" v-on:click="reset()">重置
-                </button>
-                <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
-                        data-toggle="modal"
-                        v-on:click="getRefundApproveFind(1)">查询
-                </button>
-            </div>
+
 
         </div>
         </el-collapse-transition>
 
-        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
+        <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
+
+        <div class="row newRow">
+            <button type="button" class="btn btn-success pull-left m_r_10 jh-mr-2" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('1')">通过
+            </button>
+            <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
+            </button>
+            <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
+                    data-toggle="modal"
+                    v-on:click="exportTable()">导出
+            </button>
+            <button type="button" class="btn btn-info pull-right m_r_10 jh-mr-2"
+                    data-toggle="modal" v-on:click="reset()">重置
+            </button>
+            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
+                    data-toggle="modal"
+                    v-on:click="getRefundApproveFind(1)">查询
+            </button>
+        </div>
+
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive">
@@ -163,6 +166,7 @@
                 showSelect:true,
                 begCreateDate:'',
                 endCreateDate: '',
+                addClass: false
             };
         },
         methods: {
@@ -183,6 +187,14 @@
             dataOpen(){
                 if(this.showSelect) return
                 this.showSelect = true;
+            },
+            dataClose(){
+                this.showSelect = !this.showSelect
+                this.addClass = true;
+            
+                setTimeout(()=>{
+                    this.addClass = false;
+                },400)
             },
             addEmp() {
                 console.log('modify the cotent of department')

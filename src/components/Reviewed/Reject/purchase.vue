@@ -61,7 +61,7 @@
 
             </div>
         </el-collapse-transition>
-        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
+        <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
 
@@ -100,9 +100,9 @@
                                  align="center"></el-table-column>
                 <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
             </el-table>
-            
+
             <div class="col-md-12 col-lg-12 tips">* 双击单行，可对当前数据进行修改 </div>
-            
+
             <el-row class="second_interval">
                 <el-col :span="24">
                     <el-pagination
@@ -161,6 +161,7 @@
                 auditBegTime: '',                       // 选填 审核开始时间
                 auditEndTime: '',                      //  选填 审核结束时间
                 auditState: '',                              //  选填 审核状态
+                addClass: false
             };
         },
         methods: {
@@ -178,16 +179,18 @@
                 }
             },
 
-            storeChange: function (param) {
-                if (this.isBlank(param)) {
-                    this.storeId = ""
-                } else {
-                    this.storeId = param.storeId
-                }
-            },
-            dataOpen() {
-                if (this.showSelect) return
+
+            dataOpen(){
+                if(this.showSelect) return
                 this.showSelect = true;
+            },
+            dataClose(){
+                this.showSelect = !this.showSelect
+                this.addClass = true;
+
+                setTimeout(()=>{
+                    this.addClass = false;
+                },400)
             },
             //导出
             exportTable() {

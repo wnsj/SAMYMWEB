@@ -105,14 +105,8 @@
                 <el-table-column prop="createDate" label="消费时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="buyTime" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="auditState" label="审核状态" :formatter="resetAuditState" width="100" align="center"></el-table-column>
-                <!-- <el-table-column prop="shopowner" label="审核人" width="100" align="center"></el-table-column> -->
-                <el-table-column prop="shopowner" label="审核人" align="center">
-                    <template slot-scope="scope">
-                        <span v-if="scope.row.shopowner !== null">{{scope.row.shopowner}}</span>
-                        <span v-else-if="scope.row.finance !== null">{{scope.row.finance}}</span>
-                        <span v-else>{{scope.row.supplement}}</span>
-                    </template>
-                </el-table-column>
+                <el-table-column prop="shopowner" label="店长" width="100" align="center"></el-table-column>
+                <el-table-column prop="finance" label="财务" width="100" align="center"></el-table-column>
                 <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                 <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
             </el-table>

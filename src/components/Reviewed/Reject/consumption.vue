@@ -86,7 +86,6 @@
                 <el-table-column prop="price" label="购买单价（￥/次）" width="100" align="center"></el-table-column>
                 <el-table-column prop="consumCount" label="课时（小时）" width="100" align="center"></el-table-column>
                 <el-table-column prop="discount" label="购买折扣（%）" width="100" align="center"></el-table-column>
-                <!-- <el-table-column prop="Conamount" label="消耗金额" width="100" align="center"></el-table-column> -->
                 <el-table-column prop="visitorName" label="咨询师" width="100" align="center"></el-table-column>
                 <el-table-column prop="empName" label="咨询顾问" width="100" align="center"></el-table-column>
                 <el-table-column prop="visitType" label="访问类型" :formatter="resetVisitType" width="100" align="center"></el-table-column>
@@ -96,15 +95,8 @@
                 <el-table-column prop="createDate" label="消费时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="Purchase" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="auditState" label="审核状态"  :formatter="resetAuditState" width="100" align="center"></el-table-column>
-                <!-- <el-table-column prop="shopowner" label="审核人" width="100" align="center"></el-table-column> -->
-                <el-table-column prop="shopowner" label="审核人" align="center">
-                    <template slot-scope="scope">
-                        <span v-if="scope.row.shopowner !== null">{{scope.row.shopowner}}</span>
-                        <span v-else-if="scope.row.finance !== null">{{scope.row.finance}}</span>
-                        <span v-else>{{scope.row.supplement}}</span>
-                    </template>
-                </el-table-column>
-
+                <el-table-column prop="shopowner" label="店长" width="100" align="center"></el-table-column>
+                <el-table-column prop="finance" label="财务" width="100" align="center"></el-table-column>
                 <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                 <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
 

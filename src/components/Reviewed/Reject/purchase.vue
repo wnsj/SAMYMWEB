@@ -100,6 +100,9 @@
                                  align="center"></el-table-column>
                 <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
             </el-table>
+            
+            <div class="col-md-12 col-lg-12 tips">* 双击单行，可对当前数据进行修改 </div>
+            
             <el-row class="second_interval">
                 <el-col :span="24">
                     <el-pagination

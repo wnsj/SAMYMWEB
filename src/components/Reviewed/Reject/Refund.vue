@@ -92,7 +92,8 @@
                 <el-table-column prop="Paymentmethod" label="交费方式"  align="center"></el-table-column>
                 <el-table-column prop="buyTime" label="购买时间" :formatter="resetDate" align="center"></el-table-column>
                 <el-table-column prop="auditState" label="审核状态" :formatter="resetAuditState" align="center"></el-table-column>
-                <el-table-column prop="shopowner" label="审核人" align="center"></el-table-column>
+                <el-table-column prop="shopowner" label="店长" align="center"></el-table-column>
+                <el-table-column prop="finance" label="财务" align="center"></el-table-column>
                 <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" align="center"></el-table-column>
                 <el-table-column prop="rejectReason" label="备注"  align="center"></el-table-column>
             </el-table>
@@ -154,7 +155,7 @@
                 storeId: this.storeId(),
                 tableData: [],
                 checkedValue:-1,
-                objectContent: {},
+
                 //分页需要的数据
                 pages: '', //总页数
                 current: 1, //当前页码
@@ -162,7 +163,7 @@
                 total: 0, //数据的数量
                 showSelect:true,
                 begCreateDate:'',
-                endCreateDate: '',
+                endCreateDate: ''
             };
         },
         methods: {
@@ -197,13 +198,6 @@
                 }
             },
 
-            storeChange: function (param) {
-                if (this.isBlank(param)) {
-                    this.storeId = ""
-                } else {
-                    this.storeId = param.storeId
-                }
-            },
              dataOpen(){
                 if(this.showSelect) return
                 this.showSelect = true;
@@ -212,14 +206,8 @@
             exportTable() {
                   this.exportTableToExcel('datatable','退费驳回表')
             },
-            //feedback department information
-            positionChange: function (param) {
-                if (this.isBlank(param)) {
-                    this.posId = ""
-                } else {
-                    this.posId = param.posId
-                }
-            },
+
+
            feedBack() {
                 $("#refundContent").modal('hide')
            },
@@ -228,10 +216,7 @@
                 this.$refs.refund.initData(row)
                 $("#refundContent").modal('show')
             },
-             tabChange(item) {
-                this.getConsultStore()
 
-            },
             //重置
             reset(){
                 this.memName="";

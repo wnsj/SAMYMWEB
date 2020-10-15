@@ -259,13 +259,13 @@
 				}
 				this.refund.money = this.selectObj.price * this.refund.consumCount
 
-                // var url = 'http://172.16.16.255:8080/purchasedItemsAction/refundProject'
-                var url = this.url + '/refundAuditBean/refundRecord'
+                 // var url = 'http://172.16.16.255:8080/purchasedItemsAction/refundProject'
+               var url = this.url + '/refundAuditBean/refundRecord'
                 var obj = {
                     params: this.refund,
                     sourceId: this.sourceId
                 }
-				this.requestData(url, obj).then((response) => {
+				this.requestData(url, this.refund).then((response) => {
 					if (response.retCode == '0000') {
 						alert(response.retMsg)
 						this.closeCurrentPage()

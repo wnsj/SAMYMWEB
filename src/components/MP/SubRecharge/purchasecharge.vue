@@ -558,7 +558,7 @@
 				});
 			},
             closeCurrentPage() {
-				this.$emit('addFee')
+				this.$emit('closeCurrentPage')
 			},
 			setCustom(param) {
 				this.consume.memNum = param.memNum

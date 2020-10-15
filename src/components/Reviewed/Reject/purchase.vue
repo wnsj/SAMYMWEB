@@ -123,7 +123,7 @@
         <div class="row row_edit">
             <div class="modal fade" id="AuditPurContent">
                 <div class="modal-dialog wd1000">
-                    <recharge ref='auditPur' @addFee='feedBack()'></recharge>
+                    <recharge ref='auditPur' @closeCurrentPage='feedBack()'></recharge>
                 </div>
             </div>
         </div>

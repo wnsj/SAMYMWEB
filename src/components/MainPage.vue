@@ -13,7 +13,8 @@
 
             <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 text-right showName">{{$route.meta.showName}}</div>
 
-            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 text-right">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right pull-right">
+                
                 <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，门店管理系统</p>
 
                 <button class="btn btn-danger m_r_10" style="margin-top:5px;" v-on:click="modPwd()">修改密码</button>

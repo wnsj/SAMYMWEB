@@ -6,7 +6,7 @@
             <h1 class="titleCss">产品购买审核</h1>
         </div>
         <el-collapse-transition>
-        <div v-show="showSelect">
+        <div>
             <div class="row newRow">
 
                 <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
@@ -42,7 +42,10 @@
 						<dPicker class="wd100" v-model="endCreateDate"></dPicker>
 					</div>
 				</div>
-
+                <div class="pull-right">
+                    <img style="width: 30px; height: 30px;display: block;float: left; margin-top:5px" src="../../../assets/img/Unread.png"/>
+                    <span>123</span>
+                </div>
             </div>
             <div class="row newRow">
                 <button type="button" class="btn btn-success pull-left m_r_10 jh-mr-2" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('1')">通过
@@ -65,9 +68,6 @@
         </div>
         </el-collapse-transition>
 
-        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
-            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
-        </div>
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive">

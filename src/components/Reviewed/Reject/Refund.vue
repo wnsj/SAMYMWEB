@@ -73,13 +73,13 @@
 
         </div>
         </el-collapse-transition>
-        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
+        <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
 
 
         <div class="" id="datatable">
-            <el-table  :data="tableData" style="width: 100%" @cell-dblclick="selectRule" border>
+            <el-table  :data="tableData" style="width: 100%" @row-dblclick="selectRule" border>
                 <el-table-column type="index" prop="edit" label="序号" width="60" align="center"></el-table-column>
                 <el-table-column prop="storeName" label="门店名称"  align="center"></el-table-column>
                 <el-table-column prop="memName" label="退款人"  align="center"></el-table-column>
@@ -92,7 +92,8 @@
                 <el-table-column prop="Paymentmethod" label="交费方式"  align="center"></el-table-column>
                 <el-table-column prop="buyTime" label="购买时间" :formatter="resetDate" align="center"></el-table-column>
                 <el-table-column prop="auditState" label="审核状态" :formatter="resetAuditState" align="center"></el-table-column>
-                <el-table-column prop="shopowner" label="审核人" align="center"></el-table-column>
+                <el-table-column prop="shopowner" label="店长" align="center"></el-table-column>
+                <el-table-column prop="finance" label="财务" align="center"></el-table-column>
                 <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" align="center"></el-table-column>
                 <el-table-column prop="rejectReason" label="备注"  align="center"></el-table-column>
             </el-table>
@@ -154,7 +155,7 @@
                 storeId: this.storeId(),
                 tableData: [],
                 checkedValue:-1,
-                objectContent: {},
+
                 //分页需要的数据
                 pages: '', //总页数
                 current: 1, //当前页码
@@ -163,6 +164,7 @@
                 showSelect:true,
                 begCreateDate:'',
                 endCreateDate: '',
+                addClass: false
             };
         },
         methods: {
@@ -197,42 +199,33 @@
                 }
             },
 
-            storeChange: function (param) {
-                if (this.isBlank(param)) {
-                    this.storeId = ""
-                } else {
-                    this.storeId = param.storeId
-                }
-            },
              dataOpen(){
-                if(this.showSelect) return
-                this.showSelect = true;
-            },
+                 if(this.showSelect) return
+                 this.showSelect = true;
+             },
+             dataClose(){
+                 this.showSelect = !this.showSelect
+                 this.addClass = true;
+
+                 setTimeout(()=>{
+                     this.addClass = false;
+                 },400)
+             },
             //导出
             exportTable() {
-                  this.exportTableToExcel('datatable','产品购买审核表')
+                  this.exportTableToExcel('datatable','退费驳回表')
             },
-            //feedback department information
-            positionChange: function (param) {
-                if (this.isBlank(param)) {
-                    this.posId = ""
-                } else {
-                    this.posId = param.posId
-                }
-            },
+
+
            feedBack() {
                 $("#refundContent").modal('hide')
            },
             // check the adding and modifying rule of account
-            selectRule() {
-
-                    $("#refundContent").modal('show')
-
+            selectRule(row) {
+                this.$refs.refund.initData(row)
+                $("#refundContent").modal('show')
             },
-             tabChange(item) {
-                this.getConsultStore()
 
-            },
             //重置
             reset(){
                 this.memName="";

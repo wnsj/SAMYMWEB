@@ -6,7 +6,11 @@
             <h1 class="titleCss">产品购买审核</h1>
         </div>
         <el-collapse-transition>
+
         <div>
+
+        <div v-show="showSelect" class="selectBox">
+
             <div class="row newRow">
 
                 <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
@@ -47,26 +51,32 @@
                     <span>123</span>
                 </div>
             </div>
-            <div class="row newRow">
-                <button type="button" class="btn btn-success pull-left m_r_10 jh-mr-2" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('1')">通过
-                </button>
-                <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
-                </button>
-                <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
-                        data-toggle="modal"
-                        v-on:click="exportTable()">导出
-                </button>
-                <button type="button" class="btn btn-info pull-right m_r_10 jh-mr-2"
-                        data-toggle="modal" v-on:click="reset()">重置
-                </button>
-                <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
-                        data-toggle="modal"
-                        v-on:click="checkEmp(1)">查询
-                </button>
-            </div>
+            
 
         </div>
         </el-collapse-transition>
+
+        <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
+        </div>
+        
+        <div class="row newRow">
+            <button type="button" class="btn btn-success pull-left m_r_10 jh-mr-2" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('1')">通过
+            </button>
+            <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
+            </button>
+            <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
+                    data-toggle="modal"
+                    v-on:click="exportTable()">导出
+            </button>
+            <button type="button" class="btn btn-info pull-right m_r_10 jh-mr-2"
+                    data-toggle="modal" v-on:click="reset()">重置
+            </button>
+            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
+                    data-toggle="modal"
+                    v-on:click="checkEmp(1)">查询
+            </button>
+        </div>
 
         <div class="">
             <div class="col-md-12 col-lg-12">
@@ -188,7 +198,9 @@
                 showSelect:true,
                 begCreateDate:'',
                 endCreateDate: '',
-                operatorId: this.accountId()
+                operatorId: this.accountId(),
+                addClass: false
+
             };
         },
         filters: {
@@ -213,11 +225,26 @@
                     this.storeId = param.storeId
                 }
             },
+
             //modify the cotent of department
+            dataClose(){
+                this.showSelect = !this.showSelect
+                this.addClass = true;
+
+                setTimeout(()=>{
+                    this.addClass = false;
+                },400)
+                // var _this = this;
+                // setTimeout(function(){
+                //     _this.addClass = false;
+                // },400)
+            },
             dataOpen(){
                 if(this.showSelect) return
                 this.showSelect = true;
             },
+
+
             addEmp() {
                 console.log('modify the cotent of department')
                 this.$refs.emp.initData('add')
@@ -230,17 +257,11 @@
                 $("#emp").modal('show')
             },
 
-            storeChange: function (param) {
-                if (this.isBlank(param)) {
-                    this.storeId = ""
-                } else {
-                    this.storeId = param.storeId
-                }
-            },
+
 
             //导出
             exportTable() {
-                  this.exportTableToExcel('datatable','产品购买审核表')
+                  this.exportTableToExcel('datatable','消费审核表')
             },
             //feedback department information
             positionChange: function (param) {
@@ -357,6 +378,8 @@
             //check the list of department
             checkEmp(page) {
                 this.showSelect = false
+                // this.dataClose()
+
                 console.log('checkEmp')
                 if (!this.isBlank(this.begCreateDate)) {
 					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')

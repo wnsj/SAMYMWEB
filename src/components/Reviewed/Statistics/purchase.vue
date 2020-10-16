@@ -75,9 +75,9 @@
 
         </div>
         </el-collapse-transition>
-         <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
-            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
-        </div>
+         <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
+             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
+         </div>
 
         <div class="" id="datatable">
             <el-table  :data="tableData" style="width: 100%" border>
@@ -100,7 +100,8 @@
                  <el-table-column prop="operatorName" label="操作人" width="100" align="center"></el-table-column>
                  <el-table-column prop="isArrears" label="是否全款" :formatter="resetArrears" width="100" align="center"></el-table-column>
                  <el-table-column prop="auditStateName" label="审核状态" width="100" align="center"></el-table-column>
-                 <el-table-column prop="Reviewer" label="审核人" width="100" align="center"></el-table-column>
+                 <el-table-column prop="shopOwnerName" label="店长" width="100" align="center"></el-table-column>
+				 <el-table-column prop="financeName" label="财务" width="100" align="center"></el-table-column>
                  <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
             </el-table>
@@ -157,6 +158,7 @@
                 showSelect:true,
                 begCreateDate:'',
                 endCreateDate: '',
+                addClass: false
             };
         },
         methods: {
@@ -184,6 +186,14 @@
             dataOpen(){
                 if(this.showSelect) return
                 this.showSelect = true;
+            },
+            dataClose(){
+                this.showSelect = !this.showSelect
+                this.addClass = true;
+
+                setTimeout(()=>{
+                    this.addClass = false;
+                },400)
             },
 
             //导出
@@ -241,7 +251,7 @@
                        storeId: this.storeId,
                        auditBegTime: this.begCreateDate,
                        auditEndTime: this.endCreateDate,
-                       auditStatet: this.auditState
+                        auditState: this.auditState
                     },
                     dataType: 'json',
                 }).then((response) => {

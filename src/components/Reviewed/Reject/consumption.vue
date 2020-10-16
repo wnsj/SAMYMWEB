@@ -73,7 +73,7 @@
 
         </div>
         </el-collapse-transition>
-        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
+        <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
 
@@ -86,7 +86,6 @@
                 <el-table-column prop="price" label="购买单价（￥/次）" width="100" align="center"></el-table-column>
                 <el-table-column prop="consumCount" label="课时（小时）" width="100" align="center"></el-table-column>
                 <el-table-column prop="discount" label="购买折扣（%）" width="100" align="center"></el-table-column>
-                <!-- <el-table-column prop="Conamount" label="消耗金额" width="100" align="center"></el-table-column> -->
                 <el-table-column prop="visitorName" label="咨询师" width="100" align="center"></el-table-column>
                 <el-table-column prop="empName" label="咨询顾问" width="100" align="center"></el-table-column>
                 <el-table-column prop="visitType" label="访问类型" :formatter="resetVisitType" width="100" align="center"></el-table-column>
@@ -96,15 +95,8 @@
                 <el-table-column prop="createDate" label="消费时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="Purchase" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="auditState" label="审核状态"  :formatter="resetAuditState" width="100" align="center"></el-table-column>
-                <!-- <el-table-column prop="shopowner" label="审核人" width="100" align="center"></el-table-column> -->
-                <el-table-column prop="shopowner" label="审核人" align="center">
-                    <template slot-scope="scope">
-                        <span v-if="scope.row.shopowner !== null">{{scope.row.shopowner}}</span>
-                        <span v-if="scope.row.finance !== null">{{scope.row.finance}}</span>
-                        <span v-else>{{scope.row.supplement}}</span>
-                    </template>
-                </el-table-column>
-
+                <el-table-column prop="shopowner" label="店长" width="100" align="center"></el-table-column>
+                <el-table-column prop="finance" label="财务" width="100" align="center"></el-table-column>
                 <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                 <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
 
@@ -175,6 +167,7 @@
                 showSelect:true,
                 begCreateDate:'',
                 endCreateDate: '',
+                addClass: false
             };
         },
         methods: {
@@ -219,28 +212,29 @@
                     this.storeId = param.storeId
                 }
             },
-
-            storeChange: function (param) {
-                if (this.isBlank(param)) {
-                    this.storeId = ""
-                } else {
-                    this.storeId = param.storeId
-                }
-            },
-             dataOpen(){
+            dataOpen(){
                 if(this.showSelect) return
                 this.showSelect = true;
             },
+            dataClose(){
+                this.showSelect = !this.showSelect
+                this.addClass = true;
+
+                setTimeout(()=>{
+                    this.addClass = false;
+                },400)
+            },
             //导出
             exportTable() {
-                  this.exportTableToExcel('datatable','产品购买审核表')
+                  this.exportTableToExcel('datatable','消费驳回表')
             },
 
            feedBack() {
                 $("#customContent").modal('hide')
            },
             // check the adding and modifying rule of account
-            selectRule() {
+            selectRule(row) {
+                this.$refs.custom.initData(row)
                 $("#customContent").modal('show')
             },
 

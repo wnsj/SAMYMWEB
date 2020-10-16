@@ -135,14 +135,11 @@
     } from '@/../static/js/common.js'
     import store from '../../common/Store.vue'
     import dPicker from 'vue2-datepicker'
-    import Paging from '../../common/paging'
 
     export default {
         components: {
           store,
-          dPicker,
-          Paging,
-
+          dPicker
         },
         data() {
             return {
@@ -165,10 +162,22 @@
                 showSelect:true,
                 begCreateDate:'',
                 endCreateDate: '',
-                addClass: false
+                addClass: false,
+                selectDataFlag: false
             };
         },
+        watch: {
+            memName: 'changeData',
+            shopowner: 'changeData',
+            storeId: 'changeData',
+            begCreateDate: 'changeData',
+            endCreateDate: 'changeData'
+        },
         methods: {
+           changeData(newVal,oldVal){
+               this.selectDataFlag = true
+           },
+
             resetDate(row, column, cellValue, index){
                 if (cellValue !== '' && cellValue !== null && cellValue !== undefined) {
                     return cellValue.substring(0,10)
@@ -207,7 +216,7 @@
             dataClose(){
                 this.showSelect = !this.showSelect
                 this.addClass = true;
-            
+
                 setTimeout(()=>{
                     this.addClass = false;
                 },400)
@@ -243,6 +252,10 @@
 
             //check the list of department
             getRefundAllFind() {
+                if (this.selectDataFlag) {
+                    this.current = 1
+                }
+
                 this.showSelect = false
                 console.log('getRefundAllFind')
                 if (!this.isBlank(this.begCreateDate)) {
@@ -286,6 +299,9 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
+
+                this.selectDataFlag = false;
+
             },
 
             // 翻页

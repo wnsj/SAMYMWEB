@@ -145,24 +145,37 @@
         },
         data() {
             return {
-                auditName: '',
-                auditState: '',
+                showSelect:true,
                 fixedHeader: false,
                 storeId: this.storeId(),
                 accountType: this.accountType(),
                 tableData: [],
                 //分页需要的数据
+                total: 0, //数据的数量
                 pages: '', //总页数
                 current: 1, //当前页码
                 pageSize: 10, //一页显示的数量
-                total: 0, //数据的数量
-                showSelect:true,
+                auditName: '',
+                auditState: '',
                 begCreateDate:'',
                 endCreateDate: '',
-                addClass: false
+                addClass: false,
+                selectDataFlag: false
             };
         },
+        watch: {
+            auditName: 'changeData',
+            auditState: 'changeData',
+            storeId: 'changeData',
+            begCreateDate: 'changeData',
+            endCreateDate: 'changeData'
+        },
+
         methods: {
+            changeData(newVal,oldVal){
+                this.selectDataFlag = true
+            },
+
             resetDate(row, column, cellValue, index){
                 if (cellValue !== '' && cellValue !== null) {
                     return cellValue.substring(0,10)
@@ -229,6 +242,10 @@
 
             //check the list of department
             getAllAuditPage() {
+                if (this.selectDataFlag){
+                    this.current = 1
+                }
+
                 this.showSelect = false
                 console.log('getAllAuditPage')
                 if (!this.isBlank(this.begCreateDate)) {
@@ -252,7 +269,7 @@
                        storeId: this.storeId,
                        auditBegTime: this.begCreateDate,
                        auditEndTime: this.endCreateDate,
-                        auditState: this.auditState
+                       auditState: this.auditState
                     },
                     dataType: 'json',
                 }).then((response) => {
@@ -271,6 +288,9 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
+
+                this.selectDataFlag = false;
+
             },
             // 翻页
             handleCurrentChange(pageNum) {

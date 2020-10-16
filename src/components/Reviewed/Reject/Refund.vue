@@ -136,16 +136,14 @@
     } from '@/../static/js/common.js'
     import store from '../../common/Store.vue'
     import dPicker from 'vue2-datepicker'
-    import Paging from '../../common/paging'
     import rejection from '../../MP/SubRecharge/rejection.vue'
     import refund from '../../MP/SubRecharge/Refundmodiy.vue'
     export default {
         components: {
           store,
           dPicker,
-          Paging,
           rejection,
-          refund,
+          refund
         },
         data() {
             return {
@@ -164,10 +162,22 @@
                 showSelect:true,
                 begCreateDate:'',
                 endCreateDate: '',
-                addClass: false
+                addClass: false,
+                selectDataFlag: false
             };
         },
+        watch: {
+            shopowner: 'changeData',
+            memName: 'changeData',
+            storeId: 'changeData',
+            begCreateDate: 'changeData',
+            endCreateDate: 'changeData'
+        },
+
         methods: {
+            changeData(newVal,oldVal){
+                this.selectDataFlag = true
+            },
             resetDate(row, column, cellValue, index){
                 if (cellValue !== '' && cellValue !== null && cellValue !== undefined) {
                     return cellValue.substring(0,10)
@@ -236,6 +246,9 @@
 
             //check the list of department
             getRefundRejectFind(page) {
+                if (this.selectDataFlag){
+                    this.current = 1
+                }
                 this.showSelect = false
                 console.log('getRefundRejectFind 36699')
                 if (!this.isBlank(this.begCreateDate)) {
@@ -279,6 +292,7 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
+                this.selectDataFlag = false;
             },
 
             // 翻页

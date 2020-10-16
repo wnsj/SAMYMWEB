@@ -93,8 +93,8 @@
                 <el-table-column prop="totalCount" label="购买课时（次）" width="100" align="center"></el-table-column>
                 <el-table-column prop="discount" label="购买折扣（%）" width="100" align="center"></el-table-column>
                  <el-table-column prop="createDate" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>
-                 <el-table-column prop="startDate" label="开始时间" :formatter="resetDate" width="100" align="center"></el-table-column>
-                 <el-table-column prop="endDate" label="结束时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+<!--                 <el-table-column prop="startDate" label="开始时间" :formatter="resetDate" width="100" align="center"></el-table-column>-->
+<!--                 <el-table-column prop="endDate" label="结束时间" :formatter="resetDate" width="100" align="center"></el-table-column>-->
                  <el-table-column prop="realCross" label="实交金额" width="100" align="center"></el-table-column>
                  <el-table-column prop="psName" label="交费方式" width="100" align="center"></el-table-column>
                  <el-table-column prop="operatorName" label="操作人" width="100" align="center"></el-table-column>

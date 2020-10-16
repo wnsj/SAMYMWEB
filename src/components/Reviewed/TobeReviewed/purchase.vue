@@ -44,7 +44,7 @@
 				</div>
 
             </div>
-            
+
 
         </div>
         </el-collapse-transition>
@@ -52,7 +52,7 @@
         <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
-        
+
         <div class="row newRow">
             <button type="button" class="btn btn-success pull-left m_r_10 jh-mr-2" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('1')">通过
             </button>
@@ -70,7 +70,7 @@
                     v-on:click="checkEmp(1)">查询
             </button>
         </div>
-        
+
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive">
@@ -89,8 +89,8 @@
                                 <th class="text-center">购买课时(次)</th>
                                 <th class="text-center">购买折扣(%)</th>
                                 <th class="text-center">购买时间</th>
-                                <th class="text-center">开始时间</th>
-                                <th class="text-center">结束时间</th>
+<!--                                <th class="text-center">开始时间</th>-->
+<!--                                <th class="text-center">结束时间</th>-->
                                 <th class="text-center">实交金额</th>
                                 <th class="text-center">交费方式</th>
                                 <th class="text-center">操作人</th>
@@ -120,8 +120,8 @@
                                 <td class="text-center">{{item.totalCount}}</td>
                                 <td class="text-center">{{item.discount}}</td>
                                 <td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
-                                <td class="text-center">{{item.startDate | dateFormatFilter("YYYY-MM-DD")}}</td>
-                                <td class="text-center">{{item.endDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+<!--                                <td class="text-center">{{item.startDate | dateFormatFilter("YYYY-MM-DD")}}</td>-->
+<!--                                <td class="text-center">{{item.endDate | dateFormatFilter("YYYY-MM-DD")}}</td>-->
                                 <td class="text-center">{{item.realCross}}</td>
                                 <td class="text-center">{{item.psName}}</td>
                                 <td class="text-center">{{item.operatorName}}</td>

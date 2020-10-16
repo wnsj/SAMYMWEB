@@ -82,10 +82,10 @@
                 <el-table-column prop="discount" label="购买折扣（%）" width="100" align="center"></el-table-column>
                 <el-table-column prop="createDate" :formatter="dateFormat" label="购买时间" width="100"
                                  align="center"></el-table-column>
-                <el-table-column prop="startDate" :formatter="dateFormat" label="开始时间" width="100"
-                                 align="center"></el-table-column>
-                <el-table-column prop="endDate" :formatter="dateFormat" label="结束时间" width="100"
-                                 align="center"></el-table-column>
+<!--                <el-table-column prop="startDate" :formatter="dateFormat" label="开始时间" width="100"-->
+<!--                                 align="center"></el-table-column>-->
+<!--                <el-table-column prop="endDate" :formatter="dateFormat" label="结束时间" width="100"-->
+<!--                                 align="center"></el-table-column>-->
                 <el-table-column prop="realCross" label="实交金额" width="100" align="center"></el-table-column>
                 <!--                 <el-table-column prop="Conamount" label="消耗金额" width="100" align="center"></el-table-column>-->
                 <!--                 <el-table-column prop="Conclasshours" label="消耗课时" width="100" align="center"></el-table-column>-->

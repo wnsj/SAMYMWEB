@@ -100,6 +100,7 @@
                  <el-table-column prop="operatorName" label="操作人" width="100" align="center"></el-table-column>
                  <el-table-column prop="isArrears" label="是否全款" :formatter="resetArrears" width="100" align="center"></el-table-column>
                  <el-table-column prop="auditStateName" label="审核状态" width="100" align="center"></el-table-column>
+                 <el-table-column prop="storeName" label="门店" width="100" align="center"></el-table-column>
                  <el-table-column prop="shopOwnerName" label="店长" width="100" align="center"></el-table-column>
 				 <el-table-column prop="financeName" label="财务" width="100" align="center"></el-table-column>
                  <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>

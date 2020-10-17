@@ -6,11 +6,7 @@
             <h1 class="titleCss">产品购买审核</h1>
         </div>
         <el-collapse-transition>
-
-        <div>
-
         <div v-show="showSelect" class="selectBox">
-
             <div class="row newRow">
 
                 <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
@@ -46,10 +42,7 @@
 						<dPicker class="wd100" v-model="endCreateDate"></dPicker>
 					</div>
 				</div>
-                <div class="pull-right">
-                    <img style="width: 30px; height: 30px;display: block;float: left; margin-top:5px" src="../../../assets/img/Unread.png"/>
-                    <span>123</span>
-                </div>
+
             </div>
             
 
@@ -65,6 +58,10 @@
             </button>
             <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
             </button>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <img style="width: 30px; height: 30px;display: block;float: left;" src="../../../assets/img/Unread.png"/>
+                <span style="float: left;" id="newsnumber"></span>
+            </div>
             <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
                     data-toggle="modal"
                     v-on:click="exportTable()">导出
@@ -77,7 +74,7 @@
                     v-on:click="checkEmp(1)">查询
             </button>
         </div>
-
+        
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive">
@@ -225,7 +222,7 @@
                     this.storeId = param.storeId
                 }
             },
-
+            
             //modify the cotent of department
             dataClose(){
                 this.showSelect = !this.showSelect
@@ -276,25 +273,7 @@
                 this.checkEmp(1)
                 $("#rejectionContent").modal('hide')
             },
-            // check the adding and modifying rule of account
-            // selectRule(param, item) {
-
-            //     if (param == 1) {
-            //         this.$refs.emp.initData('add', '')
-            //         $("#emp").modal('show')
-            //     } else if (param == 3) {
-            //         if (!this.has('SAMY:MP:Employee:Update')) {
-            //             alert("暂无权限!")
-            //             return
-            //         }
-            //         this.$refs.emp.initData('modify', item)
-            //         $("#emp").modal('show')
-            //     }
-            // },
-            //  tabChange(item) {
-            //     this.getConsultStore()
-
-            // },
+           
             //重置
             reset(){
                 this.memName="";
@@ -314,7 +293,12 @@
                     this.$alert('请选择咨客后再操作', '提示', {
                       confirmButtonText: '确定',
                       type: 'warning',
-                      callback: action => {}
+                      callback: action => {
+                        
+                        this.checkEmp();
+                        this.newsnews();
+                       
+                      }
                     });
                     return
                 }
@@ -323,16 +307,64 @@
                      case '1':
                         //console.log(this.objectContent)
                         this.productApproval();
+                        
                         break;
                     //驳回
                     case '2':
                         // this.$refs.rejection.initData(this.objectContent.piId, this.objectContent.operatorId)
                         this.$refs.rejection.initData('product', this.objectContent)
-                        $("#rejectionContent").modal('show')
+                        $("#rejectionContent").modal('show');
+                        
                         break;
-                }
+                };
+                
             },
+            //查询消息
+            newsnews(){
+                //alert(11)
+                 var url = this.url + '/purchasedItemsAuditBean/getAuditMsg';
+                 this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        storeId: 10,			//门店ID
+                        
+                    },
+                    dataType: 'json',
+                }).then((response) => {
+                    var res = response.data
+                    console.log(res)
+                    if (res.retCode == '0000') {
 
+                        // this.$alert(res.retMsg, '提示', {
+                        //   confirmButtonText: '确定',
+                        //   type: 'success',
+                        //   callback: action => {
+                             
+                        //   }
+                        // })
+                        $("#newsnumber").html(res.retData.purNotReviewNum)
+
+                    } else {
+
+                        //alert(res.retMsg)
+                        this.$alert(res.retMsg, '提示', {
+                          confirmButtonText: '确定',
+                          type: 'error',
+                          callback: action => {}
+                        })
+
+                    }
+
+                }).catch((error) => {
+                    console.log('请求失败处理')
+                });
+                 
+            },
             productApproval(){
                 var url = this.url + '/purchasedItemsAuditBean/adopt'
                 this.$ajax({
@@ -451,7 +483,8 @@
             init();
         },
         created() {
-            this.checkEmp(1)
+            this.checkEmp(1);
+            this.newsnews();
         }
     }
 </script>
@@ -498,4 +531,5 @@
             display: none
         }
     }
+    #newsnumber{padding:0 5px; background-color: red; color: #fff; border-radius: 50%; margin-left: -15px;margin-top: -10px;}
 </style>

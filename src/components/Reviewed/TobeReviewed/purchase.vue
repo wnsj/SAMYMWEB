@@ -58,7 +58,7 @@
             </button>
             <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
             </button>
-            
+
             <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
                     data-toggle="modal"
                     v-on:click="exportTable()">导出
@@ -146,7 +146,7 @@
         <div class="row row_edit">
             <div class="modal fade" id="rejectionContent">
                 <div class="modal-dialog wd600">
-                    <rejection ref='rejection' @closeCurrentPage='feedBack()'></rejection>
+                    <rejection ref='rejection' @func='feedBack()'></rejection>
                 </div>
             </div>
         </div>
@@ -206,6 +206,9 @@
             }
         },
         methods: {
+             fatherMethod() {
+                 console.log('测试');
+             },
             //子级传值到父级上来的动态拿去
             pageChange: function (page) {
                 this.current = page
@@ -219,7 +222,7 @@
                     this.storeId = param.storeId
                 }
             },
-            
+
             //modify the cotent of department
             dataClose(){
                 this.showSelect = !this.showSelect
@@ -266,11 +269,12 @@
                 }
             },
             //feedback from adding and modifying view
-            feedBack() {
+            feedBack(data) {
+                console.log(data);
                 this.checkEmp(1)
                 $("#rejectionContent").modal('hide')
             },
-           
+
             //重置
             reset(){
                 this.memName="";
@@ -291,7 +295,7 @@
                       confirmButtonText: '确定',
                       type: 'warning',
                       callback: action => {
-                        
+
                       }
                     });
                     return
@@ -301,19 +305,19 @@
                      case '1':
                         //console.log(this.objectContent)
                         this.productApproval();
-                        
+
                         break;
                     //驳回
                     case '2':
                         // this.$refs.rejection.initData(this.objectContent.piId, this.objectContent.operatorId)
                         this.$refs.rejection.initData('product', this.objectContent)
                         $("#rejectionContent").modal('show');
-                        
+
                         break;
                 };
-                
+
             },
-           
+
             productApproval(){
                 var url = this.url + '/purchasedItemsAuditBean/adopt'
                 this.$ajax({
@@ -332,7 +336,7 @@
                     var res = response.data
                     console.log(res)
                     if (res.retCode == '0000') {
-
+                        this.checkEmp(1);
                         this.$alert(res.retMsg, '提示', {
                           confirmButtonText: '确定',
                           type: 'success',
@@ -355,8 +359,8 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
-                
-                
+
+
             },
 
 
@@ -437,7 +441,7 @@
         },
         created() {
             this.checkEmp(1);
-            
+
         }
     }
 </script>

@@ -13,7 +13,7 @@
                     <span class="sign-left">:</span>
                 </div>
                 <div class="col-md-6 col-lg-6">
-                    <dPicker type="date" value-type="format" format="YYYY-MM-DD" v-model="appDate"></dPicker>
+                    <dPicker ty45pe="date" value-type="format" format="YYYY-MM-DD" v-model="appDate"></dPicker>
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 jh-mt-15" v-has="'SAMY:MP:STORE'">
@@ -33,7 +33,7 @@
         </div>
             </div>
         </el-collapse-transition>
-        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
+        <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
         <div class="">
@@ -97,6 +97,7 @@
         data() {
             return {
                 showSelect:true,
+                addClass: false,
                 stId: '',
                 orderList: [],
                 //分页需要的数据
@@ -185,6 +186,14 @@
             dataOpen(){
                 if(this.showSelect) return
                 this.showSelect = true;
+            },
+            dataClose(){
+                this.showSelect = !this.showSelect
+                this.addClass = true;
+
+                setTimeout(()=>{
+                    this.addClass = false;
+                },400)
             },
             //check the list of orderContent
             checkOrderList(page) {

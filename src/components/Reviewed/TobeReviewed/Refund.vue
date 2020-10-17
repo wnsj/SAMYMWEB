@@ -103,8 +103,8 @@
                                 <td class="text-center">{{item.proName}}</td>
                                 <td class="text-center">{{item.momey}}</td>
                                 <td class="text-center">{{item.refCount}}</td>
-                                <td class="text-center">{{item.rejectTime | dateFormatFilter("YYYY-MM-DD")}}</td>
                                 <td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+                                <td class="text-center">{{item.buyTime | dateFormatFilter("YYYY-MM-DD")}}</td>
                             </tr>
                         </tbody>
                     </table>

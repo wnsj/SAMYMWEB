@@ -82,10 +82,10 @@
                 <el-table-column prop="discount" label="购买折扣（%）" width="100" align="center"></el-table-column>
                 <el-table-column prop="createDate" :formatter="dateFormat" label="购买时间" width="100"
                                  align="center"></el-table-column>
-                <el-table-column prop="startDate" :formatter="dateFormat" label="开始时间" width="100"
-                                 align="center"></el-table-column>
-                <el-table-column prop="endDate" :formatter="dateFormat" label="结束时间" width="100"
-                                 align="center"></el-table-column>
+<!--                <el-table-column prop="startDate" :formatter="dateFormat" label="开始时间" width="100"-->
+<!--                                 align="center"></el-table-column>-->
+<!--                <el-table-column prop="endDate" :formatter="dateFormat" label="结束时间" width="100"-->
+<!--                                 align="center"></el-table-column>-->
                 <el-table-column prop="realCross" label="实交金额" width="100" align="center"></el-table-column>
                 <!--                 <el-table-column prop="Conamount" label="消耗金额" width="100" align="center"></el-table-column>-->
                 <!--                 <el-table-column prop="Conclasshours" label="消耗课时" width="100" align="center"></el-table-column>-->
@@ -161,15 +161,23 @@
                 auditBegTime: '',                       // 选填 审核开始时间
                 auditEndTime: '',                      //  选填 审核结束时间
                 auditState: '',                              //  选填 审核状态
-                addClass: false
+                addClass: false,
+                selectDataFlag: false
             };
         },
+        watch: {
+            auditName: 'changeData',
+            auditState: 'changeData',
+            storeId: 'changeData',
+            auditEndTime: 'changeData',
+            auditBegTime: 'changeData'
+        },
+  
         methods: {
-            //子级传值到父级上来的动态拿去
-            pageChange: function (page) {
-                this.current = page
-                this.getRejectPage(page);
+            changeData(newVal,oldVal){
+                this.selectDataFlag = true
             },
+
             //门店ID
             storeChange: function (param) {
                 if (this.isBlank(param)) {
@@ -238,6 +246,9 @@
 
             //check the list of department
             getRejectPage(page) {
+                if (this.selectDataFlag){
+                    this.current = 1
+                }
                 this.showSelect = false
 
                 if (!this.isBlank(this.auditBegTime)) {
@@ -277,6 +288,8 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
+
+                this.selectDataFlag = false;
             },
             // 格式化时间
             dateFormat: function (row, column, cellValue, index) {

@@ -100,7 +100,7 @@
                 <el-table-column prop="empName" label="咨询顾问" width="100" align="center"></el-table-column>
                 <el-table-column prop="visitType" label="访问类型" :formatter="resetVisit" width="100" align="center"></el-table-column>
                 <el-table-column prop="vsName" label="咨客判定" width="100" align="center"></el-table-column>
-                <el-table-column prop="Freewheeling" label="续流状态" width="100" align="center"></el-table-column>
+                <el-table-column prop="continName" label="续流状态" width="100" align="center"></el-table-column>
                 <el-table-column prop="psName" label="付款方式" width="100" align="center"></el-table-column>
                 <el-table-column prop="createDate" label="消费时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="buyTime" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>

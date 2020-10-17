@@ -461,7 +461,7 @@
 					accompany: null, //陪同人
 					companionship: null, //陪同人关系
 					cashMoney: param.cashMoney,
-                    cId: param.cid
+                    cId: param.sourceId
 				}
 				this.cash = {
 					cashId: '',

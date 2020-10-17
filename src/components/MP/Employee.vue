@@ -71,7 +71,7 @@
             </div>
         </div>
         </el-collapse-transition>
-        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
+        <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
         <div class="">
@@ -163,7 +163,8 @@
                 current: '1', //当前页码
                 pageSize: '10', //一页显示的数量
                 total: '', //数据的数量
-                showSelect:true
+                showSelect:true,
+                addClass: false
             };
         },
         methods: {
@@ -176,6 +177,14 @@
             dataOpen(){
                 if(this.showSelect) return
                 this.showSelect = true;
+            },
+            dataClose(){
+                this.showSelect = !this.showSelect
+                this.addClass = true;
+
+                setTimeout(()=>{
+                    this.addClass = false;
+                },400)
             },
             addEmp() {
                 console.log('modify the cotent of department')

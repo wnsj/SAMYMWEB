@@ -267,16 +267,7 @@
                  drawer: false,
                 direction: 'rtl',
                 Review:{},
-                // purNotReviewNum:'',  //购买未审核；
-                // conNotReviewNum:'',  //消费未审核；
-                // reNotReviewNum:'',   //退费未审核；
-                // purUnderReviewNum:'',  //购买审核中
-                // conUnderReviewNum:'',  //消费审核中
-                // reUnderReviewNum:'',   //退费审核中
-                // purFailedNum:'',      //购买驳回
-                // conFailedNum:'',      //消费驳回
-                // reFailedNum:'',       //退费驳回
-
+              
             }
         },
         methods: {

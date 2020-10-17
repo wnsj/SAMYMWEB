@@ -103,7 +103,7 @@
                 }
                 //console.log(postUrl)
                 this.certainAction(postUrl);
-
+                 this.checkEmp(1);   
             },
 
             certainAction(url) {

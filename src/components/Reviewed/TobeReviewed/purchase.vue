@@ -58,10 +58,7 @@
             </button>
             <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
             </button>
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                <img style="width: 30px; height: 30px;display: block;float: left;" src="../../../assets/img/Unread.png"/>
-                <span style="float: left;" id="newsnumber"></span>
-            </div>
+            
             <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
                     data-toggle="modal"
                     v-on:click="exportTable()">导出
@@ -295,9 +292,6 @@
                       type: 'warning',
                       callback: action => {
                         
-                        this.checkEmp();
-                        this.newsnews();
-                       
                       }
                     });
                     return
@@ -319,52 +313,7 @@
                 };
                 
             },
-            //查询消息
-            newsnews(){
-                //alert(11)
-                 var url = this.url + '/purchasedItemsAuditBean/getAuditMsg';
-                 this.$ajax({
-                    method: 'POST',
-                    url: url,
-                    headers: {
-                        'Content-Type': this.contentType,
-                        'Access-Token': this.accessToken
-                    },
-                    data: {
-                        storeId: 10,			//门店ID
-                        
-                    },
-                    dataType: 'json',
-                }).then((response) => {
-                    var res = response.data
-                    console.log(res)
-                    if (res.retCode == '0000') {
-
-                        // this.$alert(res.retMsg, '提示', {
-                        //   confirmButtonText: '确定',
-                        //   type: 'success',
-                        //   callback: action => {
-                             
-                        //   }
-                        // })
-                        $("#newsnumber").html(res.retData.purNotReviewNum)
-
-                    } else {
-
-                        //alert(res.retMsg)
-                        this.$alert(res.retMsg, '提示', {
-                          confirmButtonText: '确定',
-                          type: 'error',
-                          callback: action => {}
-                        })
-
-                    }
-
-                }).catch((error) => {
-                    console.log('请求失败处理')
-                });
-                 
-            },
+           
             productApproval(){
                 var url = this.url + '/purchasedItemsAuditBean/adopt'
                 this.$ajax({
@@ -387,7 +336,9 @@
                         this.$alert(res.retMsg, '提示', {
                           confirmButtonText: '确定',
                           type: 'success',
-                          callback: action => {}
+                          callback: action => {
+                              this.checkEmp(1);
+                          }
                         })
 
                     } else {
@@ -404,6 +355,8 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
+                
+                
             },
 
 
@@ -484,7 +437,7 @@
         },
         created() {
             this.checkEmp(1);
-            this.newsnews();
+            
         }
     }
 </script>

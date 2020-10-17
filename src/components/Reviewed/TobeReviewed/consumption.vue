@@ -309,7 +309,9 @@
                         this.$alert(res.retMsg, '提示', {
                           confirmButtonText: '确定',
                           type: 'success',
-                          callback: action => {}
+                          callback: action => {
+                              this.getApproveFind(1)
+                          }
                         })
 
                     } else {
@@ -326,6 +328,7 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
+                
             },
 
 

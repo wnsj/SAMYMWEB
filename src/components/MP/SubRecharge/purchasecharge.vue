@@ -397,7 +397,11 @@
 				this.$refs.ContinStateRef.getObj(param.visitType, 2)
 				this.$refs.ContinStateRef.setObj(param.continState)
 				this.$refs.VisitStateRef.setObj(param.visitState)
-                this.consume.preFoldTotalPrice = new Decimal(param.receivable).div(new Decimal(param.discount)).mul(new Decimal(100)).toFixed(2)
+                if (!this.isBlank(param.discount) && param.discount != 0) {
+                    this.consume.preFoldTotalPrice = new Decimal(param.receivable).div(new Decimal(param.discount)).mul(new Decimal(100)).toFixed(2)
+                } else {
+                    this.consume.preFoldTotalPrice = 0
+                }
                 Object.assign(this.consume, param)
 				this.queryUnfinishedPro(param)
 				this.checkMemCash(param.memNum)

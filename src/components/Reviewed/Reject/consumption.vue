@@ -141,14 +141,12 @@
     } from '@/../static/js/common.js'
     import store from '../../common/Store.vue'
     import dPicker from 'vue2-datepicker'
-    import Paging from '../../common/paging'
     import rejection from '../../MP/SubRecharge/rejection.vue'
     import custom from '../../MP/SubRecharge/reCustom.vue'
     export default {
         components: {
           store,
           dPicker,
-          Paging,
           rejection,
           custom,
         },
@@ -167,11 +165,22 @@
                 showSelect:true,
                 begCreateDate:'',
                 endCreateDate: '',
-                addClass: false
+                addClass: false,
+                selectDataFlag: false
             };
         },
-        methods: {
+        watch: {
+            shopowner: 'changeData',
+            memName: 'changeData',
+            storeId: 'changeData',
+            begCreateDate: 'changeData',
+            endCreateDate: 'changeData'
+        },
 
+        methods: {
+            changeData(newVal,oldVal){
+                this.selectDataFlag = true
+            },
             resetDate(row, column, cellValue, index){
                 if (cellValue !== '' && cellValue !== null && cellValue !== undefined) {
                     return cellValue.substring(0,10)
@@ -199,11 +208,6 @@
             },
 
 
-            //子级传值到父级上来的动态拿去
-            pageChange: function (page) {
-                this.page = page
-                this.getConsumRejectFind(page);
-            },
             //门店ID
             storeChange: function (param) {
                 if (this.isBlank(param)) {
@@ -249,6 +253,9 @@
 
             //check the list of department
             getConsumRejectFind() {
+                if(this.selectDataFlag){
+                    this.current = 1
+                }
                 this.showSelect = false
                 console.log('getConsumRejectFind')
                 if (!this.isBlank(this.begCreateDate)) {
@@ -291,6 +298,8 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
+
+                this.selectDataFlag = false;
             },
 
             // 翻页
@@ -300,7 +309,6 @@
             },
             // 每页条数变化时触发
             handleSizeChange(pageSize) {
-                console.log(pageSize)
                 this.current = 1
                 this.pageSize = pageSize
                 this.getConsumRejectFind()

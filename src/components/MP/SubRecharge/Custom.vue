@@ -589,6 +589,13 @@
 					alert("续流状态不能为空!")
 					return;
 				}
+
+
+                if (this.consume.payType == 0) {
+                    alert("交费方式不能为空!")
+                    return;
+                }
+
 				if (this.isBlank(this.consume.diseaseType)) {
 					alert("咨询方向不能为空!")
 					return;

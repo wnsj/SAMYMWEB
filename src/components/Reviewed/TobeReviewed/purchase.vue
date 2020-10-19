@@ -58,6 +58,7 @@
             </button>
             <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
             </button>
+
             <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
                     data-toggle="modal"
                     v-on:click="exportTable()">导出
@@ -145,7 +146,7 @@
         <div class="row row_edit">
             <div class="modal fade" id="rejectionContent">
                 <div class="modal-dialog wd600">
-                    <rejection ref='rejection' @closeCurrentPage='feedBack()'></rejection>
+                    <rejection ref='rejection' @func='feedBack()'></rejection>
                 </div>
             </div>
         </div>
@@ -205,6 +206,9 @@
             }
         },
         methods: {
+             fatherMethod() {
+                 console.log('测试');
+             },
             //子级传值到父级上来的动态拿去
             pageChange: function (page) {
                 this.current = page
@@ -265,29 +269,12 @@
                 }
             },
             //feedback from adding and modifying view
-            feedBack() {
+            feedBack(data) {
+                console.log(data);
                 this.checkEmp(1)
                 $("#rejectionContent").modal('hide')
             },
-            // check the adding and modifying rule of account
-            // selectRule(param, item) {
 
-            //     if (param == 1) {
-            //         this.$refs.emp.initData('add', '')
-            //         $("#emp").modal('show')
-            //     } else if (param == 3) {
-            //         if (!this.has('SAMY:MP:Employee:Update')) {
-            //             alert("暂无权限!")
-            //             return
-            //         }
-            //         this.$refs.emp.initData('modify', item)
-            //         $("#emp").modal('show')
-            //     }
-            // },
-            //  tabChange(item) {
-            //     this.getConsultStore()
-
-            // },
             //重置
             reset(){
                 this.memName="";
@@ -307,7 +294,9 @@
                     this.$alert('请选择咨客后再操作', '提示', {
                       confirmButtonText: '确定',
                       type: 'warning',
-                      callback: action => {}
+                      callback: action => {
+
+                      }
                     });
                     return
                 }
@@ -316,14 +305,17 @@
                      case '1':
                         //console.log(this.objectContent)
                         this.productApproval();
+
                         break;
                     //驳回
                     case '2':
                         // this.$refs.rejection.initData(this.objectContent.piId, this.objectContent.operatorId)
                         this.$refs.rejection.initData('product', this.objectContent)
-                        $("#rejectionContent").modal('show')
+                        $("#rejectionContent").modal('show');
+
                         break;
-                }
+                };
+
             },
 
             productApproval(){
@@ -344,11 +336,13 @@
                     var res = response.data
                     console.log(res)
                     if (res.retCode == '0000') {
-
+                        this.checkEmp(1);
                         this.$alert(res.retMsg, '提示', {
                           confirmButtonText: '确定',
                           type: 'success',
-                          callback: action => {}
+                          callback: action => {
+                              this.checkEmp(1);
+                          }
                         })
 
                     } else {
@@ -365,6 +359,8 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
+
+
             },
 
 
@@ -444,7 +440,8 @@
             init();
         },
         created() {
-            this.checkEmp(1)
+            this.checkEmp(1);
+
         }
     }
 </script>
@@ -491,4 +488,5 @@
             display: none
         }
     }
+    #newsnumber{padding:0 5px; background-color: red; color: #fff; border-radius: 50%; margin-left: -15px;margin-top: -10px;}
 </style>

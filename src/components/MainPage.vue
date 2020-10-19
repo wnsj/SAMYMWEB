@@ -12,12 +12,38 @@
             </div>
 
             <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 text-right showName">{{$route.meta.showName}}</div>
-
-            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 text-right">
+            
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right pull-right">
+                
                 <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，门店管理系统</p>
-
-                <button class="btn btn-danger m_r_10" style="margin-top:5px;" v-on:click="modPwd()">修改密码</button>
+                <button @click="blocknews()" class="btn btn-warning m_r_10" style="margin-right:20px; margin-top:5px">
+                消息列表
+                </button>
+                <el-drawer :visible.sync="drawer" :direction="direction"  :before-close="handleClose01" >
+                <p class="newlist">购买申请-待审核<span id="purNot">{{Review.purNotReviewNum}}<i>条</i> </span></p>
+                <p class="newlist">消费申请-待审核<span id="conNot"> {{Review.conNotReviewNum}}<i>条</i> </span></p>
+                <p class="newlist">退费申请-审核<span id="reNot">{{Review.reNotReviewNum}}<i>条</i> </span></p>
+                <hr>
+                 <p class="newlist">购买申请-审核中<span id="purUnder">{{Review.purUnderReviewNum}}<i>条</i> </span></p>
+                <p class="newlist">消费申请-审核中<span id="conUnder"> {{Review.conUnderReviewNum}}<i>条</i> </span></p>
+                <p class="newlist">退费申请-审核中<span id="reUnder">{{Review.reUnderReviewNum}} <i>条</i> </span></p>
+                <hr>
+                <p class="newlist">购买驳回-待处理<span id="purFailed">{{Review.purFailedNum}}<i>条</i> </span></p>
+                <p class="newlist">消费驳回-待处理<span id="conFailed">{{Review.conFailedNum}}<i>条</i> </span></p>
+                <p class="newlist">退费驳回-待处理<span id="reFailed">{{Review.reFailedNum}}<i>条</i> </span></p>
+               
+                </el-drawer>
+                <button class="btn btn-danger m_r_10" style="margin-top:5px; margin-right:20px" v-on:click="modPwd()">修改密码</button>
                 <button class="btn btn-default m_r_10" style="margin-top:5px;" v-on:click="loginOut()">退出</button>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 pull-right" style="margin-top:10px">
+                <!-- <img style="width: 30px; height: 30px;display: block;float: left;" src="../assets/img/touming.png"/>
+                <span style="float: left;" id="newsnumber">123</span> -->
+
+                
+                
+
+
             </div>
         </div>
         <div class="container-fluid clear-mp" id="Odiv">
@@ -229,17 +255,35 @@
             SubRecharge,
             refund,
             custom,
-            modPwd
+            modPwd,
+           
         },
         data() {
             return {
                 accountName: this.accountName(),
                 itemList: [],
                 onString: 'Visitor',
-                openeds: ['1']
+                openeds: ['1'],
+                 drawer: false,
+                direction: 'rtl',
+                Review:{},
+              
             }
         },
         methods: {
+            //点击消息列表
+            blocknews(){
+                this.drawer = true;
+                this.newsnews();
+            },
+            handleClose01(done) {
+                this.drawer = false;
+                // this.$confirm('确认关闭？')
+                // .then(_ => {
+                //     done();
+                // })
+                // .catch(_ => {});
+            },
             chargeManager: function () {
                 this.$refs.fee.initData();
                 $("#addFee").modal("show");
@@ -272,6 +316,55 @@
                 this.onString = data;
                 this.bool2 = true;
             },
+             //查询消息
+            newsnews(){
+                //alert(11)
+                 var url = this.url + '/purchasedItemsAuditBean/getAuditMsg';
+                 this.$ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': this.contentType,
+                        'Access-Token': this.accessToken
+                    },
+                    data: {
+                        storeId: 10,			//门店ID
+                        
+                    },
+                    dataType: 'json',
+                }).then((response) => {
+                    var res = response.data
+                    console.log(res)
+                    if (res.retCode == '0000') {
+
+                        // this.$alert(res.retMsg, '提示', {
+                        //   confirmButtonText: '确定',
+                        //   type: 'success',
+                        //   callback: action => {
+                             
+                        //   }
+                        // })
+                        //purNotReviewNum=res.retData.purNotReviewNum
+                        this.Review = res.retData;
+                      
+                    } else {
+
+                        //alert(res.retMsg)
+                        this.$alert(res.retMsg, '提示', {
+                          confirmButtonText: '确定',
+                          type: 'error',
+                          callback: action => {}
+                        })
+
+                    }
+
+                }).catch((error) => {
+                    console.log('请求失败处理')
+                });
+                 
+            },
+
+
             //用户退出
             loginOut() {
                 if (confirm("确定退出?") == false) {
@@ -311,6 +404,7 @@
         },
         created() {
             this.$parent.setRouter("/MainPage");
+            this.newsnews();
         }
     }
 </script>
@@ -455,7 +549,11 @@
         font-weight: bold;
         line-height: 55px;
     }
-
+    .el-drawer{ width: 15% !important;}
+    .newlist{ text-align: left; font-size: 16px; line-height: 40px; width: 85%; margin: 0 auto; }
+    .newlist span{ display: block; float: right;  border-radius: 50%; color:red; text-align: center;  font-size: 16px;font-weight: bold; }
+    .newlist span i{ font-weight: normal; font-style: normal; color: #333;}
+    hr{ border: 1px solid #dddddd;}
 </style>
 <host>
 

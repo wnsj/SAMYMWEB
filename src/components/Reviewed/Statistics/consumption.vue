@@ -100,7 +100,7 @@
                 <el-table-column prop="empName" label="咨询顾问" width="100" align="center"></el-table-column>
                 <el-table-column prop="visitType" label="访问类型" :formatter="resetVisit" width="100" align="center"></el-table-column>
                 <el-table-column prop="vsName" label="咨客判定" width="100" align="center"></el-table-column>
-                <el-table-column prop="Freewheeling" label="续流状态" width="100" align="center"></el-table-column>
+                <el-table-column prop="continName" label="续流状态" width="100" align="center"></el-table-column>
                 <el-table-column prop="psName" label="付款方式" width="100" align="center"></el-table-column>
                 <el-table-column prop="createDate" label="消费时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="buyTime" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>
@@ -140,14 +140,10 @@
     } from '@/../static/js/common.js'
     import store from '../../common/Store.vue'
     import dPicker from 'vue2-datepicker'
-    import Paging from '../../common/paging'
-
     export default {
         components: {
           store,
-          dPicker,
-          Paging,
-
+          dPicker
         },
         data() {
             return {
@@ -169,10 +165,24 @@
                 showSelect:true,
                 begCreateDate:'',
                 endCreateDate: '',
-                addClass: false
+                addClass: false,
+                selectDataFlag: false,
+                
             };
         },
+        watch: {
+            memName: 'changeData',
+            shopowner: 'changeData',
+            auditState: 'changeData',
+            storeId: 'changeData',
+            begCreateDate: 'changeData',
+            endCreateDate: 'changeData'
+        },
+
         methods: {
+            changeData(newVal,oldVal){
+                this.selectDataFlag = true
+            },
             resetDate(row, column, cellValue, index){
                 if (cellValue !== '' && cellValue !== null) {
                     return cellValue.substring(0,10)
@@ -198,11 +208,6 @@
                 }
             },
 
-            //子级传值到父级上来的动态拿去
-            pageChange: function (page) {
-                this.current = page
-                this.getConsumAllFind(page);
-            },
             //门店ID
             storeChange: function (param) {
                 if (this.isBlank(param)) {
@@ -219,7 +224,7 @@
            dataClose(){
                this.showSelect = !this.showSelect
                this.addClass = true;
-           
+
                setTimeout(()=>{
                    this.addClass = false;
                },400)
@@ -256,6 +261,10 @@
 
             //check the list of department
             getConsumAllFind(page) {
+                if (this.selectDataFlag) {
+                    this.current = 1
+                }
+
                 this.showSelect = false
                 console.log('getConsumAllFind')
                 if (!this.isBlank(this.begCreateDate)) {
@@ -299,6 +308,8 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
+
+                this.selectDataFlag = false;
             },
 
             // 翻页

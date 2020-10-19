@@ -104,7 +104,7 @@
 			</div>
 		</div>
 		</el-collapse-transition>
-        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
+        <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
 		<div>
@@ -224,11 +224,11 @@
                 unusedHours:'',//未消费课时
 
 				couId:'',//咨询师ID
-				conId:'',//咨询师ID
 				proName:'',//课程名称
 				judgeState:'',//咨客判定
 				continueState:'',//续流状态
-				showSelect:true
+				showSelect:true,
+                addClass: false,
 			}
 		},
 
@@ -247,9 +247,17 @@
 				}
 			},
 			dataOpen(){
-                if(this.showSelect) return
-                this.showSelect = true;
-            },
+			    if(this.showSelect) return
+			    this.showSelect = true;
+			},
+			dataClose(){
+			    this.showSelect = !this.showSelect
+			    this.addClass = true;
+			
+			    setTimeout(()=>{
+			        this.addClass = false;
+			    },400)
+			},
 			conditionCheck: function(page) {
                 this.showSelect = false
 				if (!this.isBlank(this.begCreateDate)) {

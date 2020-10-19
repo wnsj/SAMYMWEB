@@ -103,8 +103,8 @@
                                 <td class="text-center">{{item.proName}}</td>
                                 <td class="text-center">{{item.momey}}</td>
                                 <td class="text-center">{{item.refCount}}</td>
-                                <td class="text-center">{{item.rejectTime | dateFormatFilter("YYYY-MM-DD")}}</td>
                                 <td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+                                <td class="text-center">{{item.buyTime | dateFormatFilter("YYYY-MM-DD")}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -316,7 +316,9 @@
                         this.$alert(res.retMsg, '提示', {
                           confirmButtonText: '确定',
                           type: 'success',
-                          callback: action => {}
+                          callback: action => {
+                              this.getRefundApproveFind(1)
+                          }
                         })
                     } else {
                         // alert(res.retMsg)
@@ -330,6 +332,7 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
+                
             },
 
 

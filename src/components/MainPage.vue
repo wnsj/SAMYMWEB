@@ -29,7 +29,7 @@
                 <p class="newlist">退费申请-审核中<span id="reUnder">{{Review.reUnderReviewNum}} <i>条</i> </span></p>
                 <hr>
                 <p class="newlist">购买驳回-待处理<span id="purFailed">{{Review.purFailedNum}}<i>条</i> </span></p>
-                <p class="newlist">消费驳回-待处理<span id="conFailed">{{Review.conFailedNum}}<i>条</i> </span></p>
+                <p class="newlist">消费驳回-待处理<span id="conFailed" >{{Review.conFailedNum == null ? '0':Review.conFailedNum }}<i>条</i> </span></p>
                 <p class="newlist">退费驳回-待处理<span id="reFailed">{{Review.reFailedNum}}<i>条</i> </span></p>
                
                 </el-drawer>
@@ -37,13 +37,7 @@
                 <button class="btn btn-default m_r_10" style="margin-top:5px;" v-on:click="loginOut()">退出</button>
             </div>
             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 pull-right" style="margin-top:10px">
-                <!-- <img style="width: 30px; height: 30px;display: block;float: left;" src="../assets/img/touming.png"/>
-                <span style="float: left;" id="newsnumber">123</span> -->
-
-                
-                
-
-
+              
             </div>
         </div>
         <div class="container-fluid clear-mp" id="Odiv">

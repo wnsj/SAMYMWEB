@@ -684,7 +684,7 @@
 						});
 						this.jumpLeft(2);
 						this.closeCurrentPage()
-						//this.$emit('func2', 'SettleSummary')
+						this.$emit('closeCurrentPage', 'succ')
 						alert(res.retMsg)
 					} else {
 						alert(res.retMsg)

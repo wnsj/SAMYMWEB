@@ -553,6 +553,7 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
+                        this.$emit('closeCurrentPage','succ')
 						this.closeCurrentPage()
 					} else {
 						alert(res.retMsg)

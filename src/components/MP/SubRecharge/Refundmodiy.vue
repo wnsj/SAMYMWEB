@@ -258,6 +258,7 @@
 					return
 				}
 				this.refund.money = this.selectObj.price * this.refund.consumCount
+                this.refund.receivable = this.selectObj.price * this.refund.consumCount
 
                  // var url = 'http://172.16.16.255:8080/purchasedItemsAction/refundProject'
                var url = this.url + '/refundAuditBean/refundRecord'
@@ -397,14 +398,17 @@
 						if (parseInt(this.refund.consumCount) > parseInt(this.selectObj.totalCount) - parseInt(this.selectObj.consumCount)) {
 							this.refund.consumCount = parseInt(this.selectObj.totalCount) - parseInt(this.selectObj.consumCount)
 							this.refund.money = this.selectObj.price * parseInt(this.refund.consumCount)
+                            this.refund.receivable = this.selectObj.price * parseInt(this.refund.consumCount)
 						} else {
 							this.refund.money = this.selectObj.price * parseInt(this.refund.consumCount)
+                            this.refund.receivable = this.selectObj.price * parseInt(this.refund.consumCount)
 						}
 					} else {
 						alert('请您先选择退费课程')
 					}
 				} else {
 					this.refund.money = 0
+                    this.refund.receivable = 0
 				}
 			}
 		},

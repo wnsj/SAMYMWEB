@@ -70,6 +70,17 @@ constant.accountId = function() {
     return accountId
 }
 
+constant.roleId = function() {
+    //未传值
+    var jsonString = Cookies.get("accountData");
+    //未登录
+    if (this.isBlank(jsonString)) return false;
+    var accountData = JSON.parse(jsonString);
+    var roleId = accountData.roleid;
+    // //console.log('accountId:'+accountId)
+    return roleId
+}
+
 //账户的岗位
 constant.accountPosId = function() {
     //未传值

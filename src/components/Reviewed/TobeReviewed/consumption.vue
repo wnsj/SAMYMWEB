@@ -43,7 +43,7 @@
 					</div>
 				</div>
             </div>
-            
+
 
         </div>
         </el-collapse-transition>
@@ -51,7 +51,7 @@
         <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
-        
+
         <div class="row newRow">
             <button type="button" class="btn btn-success pull-left m_r_10 jh-mr-2" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('1')">通过
             </button>
@@ -69,7 +69,7 @@
                     v-on:click="getApproveFind(1)">查询
             </button>
         </div>
-        
+
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive">
@@ -131,7 +131,7 @@
         <div class="row row_edit">
             <div class="modal fade" id="rejectionContent">
                 <div class="modal-dialog wd600">
-                    <rejection ref='rejection' @closeCurrentPage='feedBack()'></rejection>
+                    <rejection ref='rejection' @func='feedBack()'></rejection>
                 </div>
             </div>
         </div>
@@ -240,8 +240,12 @@
                 }
             },
             //feedback from adding and modifying view
-            feedBack() {
-                this.getApproveFind(1)
+            feedBack(data) {
+                if (data == 'succ'){
+                    this.getApproveFind(1)
+                    this.objectContent = {}
+                }
+
                 $("#rejectionContent").modal('hide')
             },
 
@@ -328,7 +332,7 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
-                
+
             },
 
 

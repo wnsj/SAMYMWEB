@@ -146,7 +146,7 @@
         <div class="row row_edit">
             <div class="modal fade" id="rejectionContent">
                 <div class="modal-dialog wd600">
-                    <rejection ref='rejection' @func='feedBack()'></rejection>
+                    <rejection ref='rejection' @func='feedBack'></rejection>
                 </div>
             </div>
         </div>
@@ -270,8 +270,12 @@
             },
             //feedback from adding and modifying view
             feedBack(data) {
-                console.log(data);
-                this.checkEmp(1)
+                // console.log(data);
+                if (data == 'succ'){
+                    this.checkEmp(1)
+                    this.objectContent = {}
+                }
+
                 $("#rejectionContent").modal('hide')
             },
 
@@ -328,7 +332,7 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        piId: this.objectContent.piId,					//必填 账目id
+                        piId: this.objectContent.piId,		//必填 账目id
                         operatorId: this.operatorId			//必填 操作人（数据录入人，店长，财务，补录人）
                     },
                     dataType: 'json',
@@ -336,7 +340,7 @@
                     var res = response.data
                     console.log(res)
                     if (res.retCode == '0000') {
-                        this.checkEmp(1);
+                        //this.checkEmp(1);
                         this.$alert(res.retMsg, '提示', {
                           confirmButtonText: '确定',
                           type: 'success',

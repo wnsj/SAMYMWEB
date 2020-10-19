@@ -308,6 +308,7 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
+                        this.$emit('closeCurrentPage','succ')
 						this.member = res.retData.mem
 						this.counselorList = res.retData.counselorList
 						if (this.member != null) {

@@ -122,7 +122,7 @@
         <div class="row row_edit">
             <div class="modal fade" id="rejectionContent">
                 <div class="modal-dialog wd600">
-                    <rejection ref='rejection' @closeCurrentPage='feedBack()'></rejection>
+                    <rejection ref='rejection' @func='feedBack()'></rejection>
                 </div>
             </div>
         </div>
@@ -191,7 +191,7 @@
             dataClose(){
                 this.showSelect = !this.showSelect
                 this.addClass = true;
-            
+
                 setTimeout(()=>{
                     this.addClass = false;
                 },400)
@@ -229,8 +229,12 @@
                 }
             },
             //feedback from adding and modifying view
-            feedBack() {
-                this.getRefundApproveFind(1)
+            feedBack(data) {
+                if (data == 'succ'){
+                    this.getRefundApproveFind(1)
+                    this.objectContent = {}
+                }
+
                 $("#rejectionContent").modal('hide')
             },
             // check the adding and modifying rule of account
@@ -332,7 +336,7 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
-                
+
             },
 
 

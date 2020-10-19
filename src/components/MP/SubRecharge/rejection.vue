@@ -80,7 +80,7 @@
 
 			//取消
 			 closeCurrentPage() {
-                 this.$emit('func',this.oFlag);
+                 // this.$emit('func','1234');
                 $("#rejectionContent").modal("hide");
 			},
 			//确认
@@ -120,7 +120,7 @@
                     var res = response.data
                     console.log(res)
                     if (res.retCode == '0000') {
-                        // this.$emit('func','succ');
+                        this.$emit('func','succ');
 
                         this.$alert(res.retMsg, '提示', {
                           confirmButtonText: '确定',

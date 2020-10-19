@@ -16,21 +16,21 @@
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right pull-right">
 
                 <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，门店管理系统</p>
-                <button @click="blocknews()" class="btn btn-warning m_r_10" style="margin-right:20px; margin-top:5px">
+                <button v-has="'SAMY:MSG'" @click="blocknews()" class="btn btn-warning m_r_10" style="margin-right:20px; margin-top:5px">
                 消息列表
                 </button>
                 <el-drawer :visible.sync="drawer" :direction="direction"  :before-close="handleClose01" >
-                <p class="newlist">购买申请-待审核<span id="purNot">{{Review.purNotReviewNum == null ? 0:Review.purNotReviewNum }}<i>条</i> </span></p>
-                <p class="newlist">消费申请-待审核<span id="conNot"> {{Review.conNotReviewNum == null ? 0:Review.conNotReviewNum}}<i>条</i> </span></p>
-                <p class="newlist">退费申请-待审核<span id="reNot">{{Review.reNotReviewNum == null ? 0:Review.reNotReviewNum}}<i>条</i> </span></p>
-                <hr>
-                 <p class="newlist">购买申请-审核中<span id="purUnder">{{Review.purUnderReviewNum == null ? 0:Review.purUnderReviewNum}}<i>条</i> </span></p>
-                <p class="newlist">消费申请-审核中<span id="conUnder"> {{Review.conUnderReviewNum == null ? 0:Review.conUnderReviewNum}}<i>条</i> </span></p>
-                <p class="newlist">退费申请-审核中<span id="reUnder">{{Review.reUnderReviewNum == null ? 0:Review.reUnderReviewNum}} <i>条</i> </span></p>
-                <hr>
-                <p class="newlist">购买驳回-待处理<span id="purFailed">{{Review.purFailedNum == null ? 0:Review.purFailedNum}}<i>条</i> </span></p>
-                <p class="newlist">消费驳回-待处理<span id="conFailed" >{{Review.conFailedNum == null ? 0:Review.conFailedNum}}<i>条</i> </span></p>
-                <p class="newlist">退费驳回-待处理<span id="reFailed">{{Review.reFailedNum == null ? 0:Review.reFailedNum}}<i>条</i> </span></p>
+                <p v-show="role == 2" class="newlist">购买申请-待审核<span id="purNot">{{Review.purNotReviewNum == null ? 0:Review.purNotReviewNum }}<i>条</i> </span></p>
+                <p v-show="role == 2" class="newlist">消费申请-待审核<span id="conNot"> {{Review.conNotReviewNum == null ? 0:Review.conNotReviewNum}}<i>条</i> </span></p>
+                <p v-show="role == 2" class="newlist">退费申请-待审核<span id="reNot">{{Review.reNotReviewNum == null ? 0:Review.reNotReviewNum}}<i>条</i> </span></p>
+                <hr v-show="role == 11">
+                 <p v-show="role == 11" class="newlist">购买申请-待审核<span id="purUnder">{{Review.purUnderReviewNum == null ? 0:Review.purUnderReviewNum}}<i>条</i> </span></p>
+                <p v-show="role == 11" class="newlist">消费申请-待审核<span id="conUnder"> {{Review.conUnderReviewNum == null ? 0:Review.conUnderReviewNum}}<i>条</i> </span></p>
+                <p v-show="role == 11" class="newlist">退费申请-待审核<span id="reUnder">{{Review.reUnderReviewNum == null ? 0:Review.reUnderReviewNum}} <i>条</i> </span></p>
+                <hr v-show="role == 11">
+                <p v-show="role != 2 && role != 11" class="newlist">购买驳回-待处理<span id="purFailed">{{Review.purFailedNum == null ? 0:Review.purFailedNum}}<i>条</i> </span></p>
+                <p v-show="role != 2 && role != 11" class="newlist">消费驳回-待处理<span id="conFailed" >{{Review.conFailedNum == null ? 0:Review.conFailedNum}}<i>条</i> </span></p>
+                <p v-show="role != 2 && role != 11" class="newlist">退费驳回-待处理<span id="reFailed">{{Review.reFailedNum == null ? 0:Review.reFailedNum}}<i>条</i> </span></p>
 
                 </el-drawer>
                 <button class="btn btn-danger m_r_10" style="margin-top:5px; margin-right:20px" v-on:click="modPwd()">修改密码</button>
@@ -263,6 +263,7 @@
                 onString: 'Visitor',
                 openeds: ['1'],
                  drawer: false,
+                role: '',
                 storeId: this.storeId(),  //门店ID
                 direction: 'rtl',
                 Review:{},
@@ -277,7 +278,7 @@
                 this.newsnews();
                // alert(this.postID);
             },
-           
+
 
 
 
@@ -406,6 +407,7 @@
             init();
         },
         created() {
+            this.role = this.roleId()
             this.$parent.setRouter("/MainPage");
             this.newsnews();
         }

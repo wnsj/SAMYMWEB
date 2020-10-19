@@ -209,7 +209,10 @@ Vue.prototype.getEmpId = function () {
 Vue.prototype.getAccData = function () {
     return constant.getAccData()
 }
-
+// 角色id
+Vue.prototype.roleId = function () {
+    return constant.roleId()
+}
 
 /*
  **权限判断使用方法:

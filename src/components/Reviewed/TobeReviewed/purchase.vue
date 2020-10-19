@@ -345,6 +345,8 @@
                           confirmButtonText: '确定',
                           type: 'success',
                           callback: action => {
+                              this.$store.commit('addCount',1)
+                              this.objectContent = {}
                               this.checkEmp(1);
                           }
                         })
@@ -408,6 +410,7 @@
                         this.total = res.retData.total //数据的数量
                         this.$refs.paging.setParam(this.pages, this.current, this.total)
                         this.productAuditList = res.retData.records
+
                     } else {
                         alert(res.retMsg)
                     }

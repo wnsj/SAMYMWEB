@@ -321,6 +321,8 @@
                           confirmButtonText: '确定',
                           type: 'success',
                           callback: action => {
+                              this.$store.commit('addCount',1)
+                              this.objectContent = {}
                               this.getRefundApproveFind(1)
                           }
                         })

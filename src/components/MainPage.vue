@@ -12,9 +12,9 @@
             </div>
 
             <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 text-right showName">{{$route.meta.showName}}</div>
-            
+
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right pull-right">
-                
+
                 <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，门店管理系统</p>
                 <button @click="blocknews()" class="btn btn-warning m_r_10" style="margin-right:20px; margin-top:5px">
                 消息列表
@@ -31,7 +31,7 @@
                 <p class="newlist">购买驳回-待处理<span id="purFailed">{{Review.purFailedNum}}<i>条</i> </span></p>
                 <p class="newlist">消费驳回-待处理<span id="conFailed">{{Review.conFailedNum}}<i>条</i> </span></p>
                 <p class="newlist">退费驳回-待处理<span id="reFailed">{{Review.reFailedNum}}<i>条</i> </span></p>
-               
+
                 </el-drawer>
                 <button class="btn btn-danger m_r_10" style="margin-top:5px; margin-right:20px" v-on:click="modPwd()">修改密码</button>
                 <button class="btn btn-default m_r_10" style="margin-top:5px;" v-on:click="loginOut()">退出</button>
@@ -40,8 +40,8 @@
                 <!-- <img style="width: 30px; height: 30px;display: block;float: left;" src="../assets/img/touming.png"/>
                 <span style="float: left;" id="newsnumber">123</span> -->
 
-                
-                
+
+
 
 
             </div>
@@ -84,7 +84,7 @@
                                         <el-menu-item index="/MP/Refund">退费管理</el-menu-item>
                                         <el-menu-item index="/MP/Income">收入记录明细</el-menu-item>
                                     </el-submenu>
-                                    
+
                                     <el-submenu index="3" class="menu-item-pd">
                                         <template slot="title">
                                             <i class="el-icon-folder-add"></i>
@@ -256,7 +256,7 @@
             refund,
             custom,
             modPwd,
-           
+
         },
         data() {
             return {
@@ -265,9 +265,10 @@
                 onString: 'Visitor',
                 openeds: ['1'],
                  drawer: false,
+                storeId: this.storeId(),
                 direction: 'rtl',
                 Review:{},
-              
+
             }
         },
         methods: {
@@ -328,8 +329,7 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        storeId: 10,			//门店ID
-                        
+                        storeId: this.storeId,			//门店ID
                     },
                     dataType: 'json',
                 }).then((response) => {
@@ -341,12 +341,11 @@
                         //   confirmButtonText: '确定',
                         //   type: 'success',
                         //   callback: action => {
-                             
+
                         //   }
                         // })
                         //purNotReviewNum=res.retData.purNotReviewNum
                         this.Review = res.retData;
-                      
                     } else {
 
                         //alert(res.retMsg)
@@ -361,7 +360,7 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
-                 
+
             },
 
 

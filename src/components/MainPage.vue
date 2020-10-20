@@ -350,7 +350,7 @@
                 if (this.role == 2) {
                    this.approveNum = this.Review.purNotReviewNum + this.Review.conNotReviewNum + this.Review.reNotReviewNum
                 } else if (this.role == 11) {
-                    this.approveNum = this.Review.purUnderReviewNum + this.Review.conUnderReviewNum + this.Review.reNotReviewNum
+                    this.approveNum = this.Review.purUnderReviewNum + this.Review.conUnderReviewNum + this.Review.reUnderReviewNum
                 } else {
                     this.approveNum = this.Review.purFailedNum + this.Review.conFailedNum + this.Review.reFailedNum
                 }
@@ -452,6 +452,9 @@
             this.newsnews();
 
             this.msgCount = this.$store.state.msgCount;
+            setInterval(()=>{
+                this.newsnews();
+            },600000)
 
         }
     }

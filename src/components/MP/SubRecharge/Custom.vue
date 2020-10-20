@@ -617,7 +617,6 @@
 
                     var ss = new Decimal(this.selectObj.totalCount).sub(new Decimal(this.selectObj.consumCount))
 					if (parseFloat(this.consume.consumCount) > parseFloat(ss)) {
-					    debugger
 						alert("本次消费课时大于剩余课时!");
 						return;
 					}

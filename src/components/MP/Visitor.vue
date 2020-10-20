@@ -389,7 +389,7 @@
                     this.$refs.subVis.initData('modify', item)
                     $("#visContent").modal('show')
                 }else if (param == 7) {
-					if (!this.has("SAMY:MP:Visitor:Update")) {
+					if (!this.has("SAMY:MP:Visitor:Details")) {
 						alert("暂无权限!")
 						return
 					}
@@ -436,7 +436,7 @@
             dataClose(){
                 this.showSelect = !this.showSelect
                 this.addClass = true;
-            
+
                 setTimeout(()=>{
                     this.addClass = false;
                 },400)

@@ -339,8 +339,11 @@
                     proStyle: '',
 					memNum: '', //会员名
 					memName: '', //手机
+                    sourceId: '',
+                    proType: '',
 					phone: '', //预约号
 					appNum: '',
+                    cId:'',
 					receivable: '', //应交(折前)
 					preFoldTotalPrice: '', //折前总价
 					realCross: '', //实缴（折后）
@@ -372,6 +375,9 @@
 					cashId: null, //现金id
 					accompany: null, //陪同人
 					companionship: null, //陪同人关系
+
+
+
 				},
 				isShow: true,
 				consumeReceivable: '',
@@ -400,54 +406,62 @@
 		methods: {
 			// Initialization consume’s content
 			initData(param) {
+                console.log(param)
+
+
 				$('#customContent').modal({
 					backdrop: 'static',
 					keyboard: false
 				});
 				this.consume = {
-					memNum: param.visId, //会员名
-					memName: param.visitorName,
+                    piId: param.piId,
+                    sourceId: param.sourceId,
+					memNum: param.memNum, //会员名
+					memName: param.memName,
 					phone: param.phone,
-					appNum: '', //预约号
-					receivable: 0, //应交
+					appNum: param.appNum, //预约号
+					receivable: param.receivable, //应交
 					realCross: 0, //实缴
-					proId: '', //项目id
-					discount: 0, //折扣
-					price: 0, //折前单价
-					disPrice: '', //折后单价
-					totalCount: 0, //总次数
-					actualCount: 0, //实际次数
-					giveCount: 0, //赠送次数
-					giveProId: 0, //赠送项目
-					giveMoney: 0, //赠送金额
-					counselor: '', //咨询师id
-					empId: '', //咨询师助理id
-					state: 0,
+					proId: param.proId, //项目id
+                    proType: param.proType,  //0:体验课（即单次）1:正式课
+					discount: param.discount, //折扣
+					price: param.price, //折前单价
+					disPrice: param.disPrice, //折后单价
+					totalCount: param.totalCount, //总次数
+					actualCount: param.actualCount, //实际次数
+					giveCount: param.giveCount, //赠送次数
+					giveProId: param.giveProId, //赠送项目
+					giveMoney: param.giveMoney, //赠送金额
+					counselor: param.counselor, //咨询师id
+					empId: param.empId, //咨询师助理id
+                    balance: param.balance, //备注
+					state: param.state,
 					/**状态 * 0：充值 * 1：完结 * 2：退费 */
 					storeId: this.storeId(), //店铺
 					/** 0：初访 1：在访 */
-					isfirst: null,
+					isfirst: param.isfirst,
 					/** 0:非初办 1:是 */
 					operatorId: this.accountId(), //操作人
-					firstCharge: null,
+					firstCharge: param.firstCharge,
 					/** 1:实体卡首充（不计算提成） 0:计算 */
 					consumCount: 0, //消费次数
-					visitType: 1,
-					payType: '0', //支付方式
+					visitType: param.visitType,
+					payType: param.payType, //支付方式
 					appNumber:'',//小程序编号
-					serialNo: null, //流水单号
-					receipt: null, //收据
-					visitState: null, //访问状态
-					continState: null, //续流状态
+					serialNo: param.serialNo, //流水单号
+					receipt: param.receipt, //收据
+					visitState: param.visitState, //访问状态
+					continState: param.continState, //续流状态
 					diseaseType: null, //咨询方向
-					diseaseProblem: null, //咨询问题
+					diseaseProblem: param.diseaseProblem, //咨询问题
 					counseRoom: null, //咨询室
 					actualBegDate: null, //实际开始时间
 					actualEndDate: null, //实际结束时间
-					cashId: null, //现金id
+					cashId: param.cashId, //现金id
 					accompany: null, //陪同人
 					companionship: null, //陪同人关系
-					cashMoney: 0
+					cashMoney: param.cashMoney,
+                    cId: param.sourceId
 				}
 				this.cash = {
 					cashId: '',
@@ -467,7 +481,7 @@
 				this.$refs.emp.setPosName("咨询顾问")
 				this.$refs.emp.setEmp("")
 				this.$refs.project.setEmpId("0")
-				this.queryUnfinishedPro(param.visId)
+				this.queryUnfinishedPro(param.memNum)
 				this.$refs.VisitStateRef.setObj('0')
 				this.$refs.ContinStateRef.setObj('0')
 				this.selectObj = null
@@ -649,7 +663,9 @@
                         this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(this.consume.discount)).div(new Decimal(100)).toFixed(2, Decimal.ROUND_HALF_UP)
                     }
                 }
-				var url = this.url + '/purchasedItemsAction/consumProject'
+
+                var url = this.url + '/consumAuditBean/consumRecord'
+                // var url = 'http://172.16.16.255:8080/consumAuditBean/consumRecord'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -668,7 +684,8 @@
 						});
 						this.jumpLeft(2);
 						this.closeCurrentPage()
-						//this.$emit('func2', 'SettleSummary')
+						this.$emit('closeCurrentPage', 'succ')
+                        this.$store.commit('addCount',1)
 						alert(res.retMsg)
 					} else {
 						alert(res.retMsg)

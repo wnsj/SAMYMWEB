@@ -132,7 +132,7 @@
             </div>
         </div>
         </el-collapse-transition>
-        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
+        <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
         <div class="">
@@ -367,7 +367,7 @@
                 total: '', //数据的数量
 
                 objectContent: {},
-
+                addClass: false,
                 empDisable:false
             };
         },
@@ -432,6 +432,14 @@
             dataOpen(){
                 if(this.showSelect) return
                 this.showSelect = true;
+            },
+            dataClose(){
+                this.showSelect = !this.showSelect
+                this.addClass = true;
+            
+                setTimeout(()=>{
+                    this.addClass = false;
+                },400)
             },
             feedBack(param) {
                 this.checkVisitor(1)

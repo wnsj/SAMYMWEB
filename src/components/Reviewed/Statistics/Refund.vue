@@ -8,26 +8,27 @@
         <el-collapse-transition>
         <div v-show="showSelect">
             <div class="row newRow">
-               
+
+                <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">客户姓名</p><span
+                        class="sign-left">:</span>
+                    </div>
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                        <input class="form-control" type="text" v-model="memName">
+                    </div>
+                </div>
                 <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
                         <p class="end-aline col-md-11 col-lg-11 jh-pa-1">审核人</p><span
                         class="sign-left">:</span>
                     </div>
                     <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <input class="form-control" type="text" v-model="empName">
+                        <input class="form-control" type="text" v-model="shopowner">
                     </div>
                 </div>
-              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-has="'SAMY:MP:STORE'">
-                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span
-                        class="sign-left">:</span>
-                    </div>
-                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-8=7">
-                        <store ref="store" @storeChange='storeChange'></store>
-                    </div>
-             </div>
-           
+
+
              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 					<div class="col-md-3 col-lg-3 text-right nopad SSwid20">
 						<p class="end-aline col-md-11 col-lg-11" >审核日期</p><span class="sign-left">:</span>
@@ -42,10 +43,19 @@
 						<dPicker class="wd100" v-model="endCreateDate"></dPicker>
 					</div>
 				</div>
-              
+
             </div>
             <div class="row newRow">
-                 <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-has="'SAMY:MP:STORE'">
+                       <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                           <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span
+                           class="sign-left">:</span>
+                       </div>
+                       <div class="col-xs-7 col-sm-7 col-md-7 col-lg-8=7">
+                           <store ref="store" @storeChange='storeChange'></store>
+                       </div>
+                </div>
+                 <!-- <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
                         <p class="end-aline col-md-11 col-lg-11 jh-pa-1">审核状态</p><span
                         class="sign-left">:</span>
@@ -57,7 +67,7 @@
                             <option value="2">未通过</option>
                         </select>
                     </div>
-            </div>
+                </div> -->
                 <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
                         data-toggle="modal"
                         v-on:click="exportTable()">导出
@@ -67,76 +77,74 @@
                 </button>
                 <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
                         data-toggle="modal"
-                        v-on:click="checkEmp(1)">查询
+                        v-on:click="getRefundAllFind()">查询
                 </button>
             </div>
-            
+
         </div>
         </el-collapse-transition>
-         <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
-            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
-        </div>
-        
+         <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
+             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
+         </div>
+
         <div class="" id="datatable">
-            <el-table  :data="tableData" style="width: 100%" @cell-dblclick="selectRule">
+            <el-table  :data="tableData" style="width: 100%" border>
                 <el-table-column type="index" prop="edit" label="序号" width="60" align="center"></el-table-column>
-                <el-table-column prop="Productname" label="门店名称" width="100" align="center"></el-table-column>
-                <el-table-column prop="name" label="退款人" width="100" align="center"></el-table-column>
-                <el-table-column prop="Consultant" label="咨询师" width="100" align="center"></el-table-column>
-                <el-table-column prop="Consultants" label="咨询助理" width="100" align="center"></el-table-column>
-                <el-table-column prop="Product" label="产品" width="100" align="center"></el-table-column>
-                <el-table-column prop="UnitPrice" label="实交金额" width="100" align="center"></el-table-column>
-                <el-table-column prop="remaining" label="实际剩余金额" width="100" align="center"></el-table-column>
-                <el-table-column prop="Refundamount" label="退费金额" width="100" align="center"></el-table-column>
-                <el-table-column prop="Classhours" label="退费课时" width="100" align="center"></el-table-column>
-                <el-table-column prop="endtime" label="退费时间" width="100" align="center"></el-table-column>
-                <el-table-column prop="Paymentmethod" label="交费方式" width="100" align="center"></el-table-column>
-                <el-table-column prop="starttime" label="初访时间" width="100" align="center"></el-table-column>
-                <el-table-column prop="Purchase" label="购买时间" width="100" align="center"></el-table-column>
-                <el-table-column prop="Auditstatus" label="审核状态" width="100" align="center"></el-table-column>
-                <el-table-column prop="Reviewer" label="审核人" width="100" align="center"></el-table-column>
-                <el-table-column prop="Audittime" label="审核时间" width="100" align="center"></el-table-column>
-                <el-table-column prop="remarks" label="备注" width="100" align="center"></el-table-column>
+                <el-table-column prop="storeName" label="门店名称" width="100" align="center"></el-table-column>
+                <el-table-column prop="memName" label="退款人" width="100" align="center"></el-table-column>
+                <el-table-column prop="visitorName" label="咨询师" width="100" align="center"></el-table-column>
+                <el-table-column prop="empName" label="咨询助理" width="100" align="center"></el-table-column>
+                <el-table-column prop="proName" label="产品" width="100" align="center"></el-table-column>
+                <el-table-column prop="momey" label="退费金额" width="100" align="center"></el-table-column>
+                <el-table-column prop="refCount" label="退费课时" width="100" align="center"></el-table-column>
+                <el-table-column prop="createDate" label="退费时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+                <el-table-column prop="buyTime" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+                <el-table-column prop="auditState" label="审核状态" :formatter="resetAuditState" width="100" align="center"></el-table-column>
+                <el-table-column prop="shopowner" label="店长" width="100" align="center"></el-table-column>
+                <el-table-column prop="finance" label="财务" width="100" align="center"></el-table-column>
+                <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+                <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
             </el-table>
-            <div class="col-md-12 col-lg-12">
-                
-				<p class="tips">* 双击单行，可对当前数据进行修改</p>
-                <!--分页插件-->
-                <div class="page">
-                    <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
-                    <paging ref="paging" @change="pageChange"></paging>
-                </div>
-            </div>
+
+            <el-row class="second_interval" style="margin-top: 20px;">
+                <el-col :span="24">
+                    <el-pagination
+                        @current-change="handleCurrentChange"
+                        @size-change="handleSizeChange"
+                        :current-page="current"
+                        :page-sizes="[10,20,30,50]"
+                        :page-size="pageSize"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="total">
+                    </el-pagination>
+                </el-col>
+            </el-row>
+
         </div>
-        
-       
+
+
     </div>
-    
+
 </template>
 
 
 <script>
-  
+
     import {
         init
     } from '@/../static/js/common.js'
     import store from '../../common/Store.vue'
     import dPicker from 'vue2-datepicker'
-    import Paging from '../../common/paging'
 
     export default {
         components: {
           store,
-          dPicker,
-          Paging,
-         
+          dPicker
         },
         data() {
             return {
-                employeeList: [],
-                visitorList: [],
-                isuse: '1',
-                empName: '',
+                shopowner: '',
+                memName: '',
                 iphone: '',
                 fixedHeader: false,
                 posId: '',
@@ -148,20 +156,50 @@
                 objectContent: {},
                 //分页需要的数据
                 pages: '', //总页数
-                current: '1', //当前页码
-                pageSize: '10', //一页显示的数量
-                total: '', //数据的数量
+                current: 1, //当前页码
+                pageSize: 10, //一页显示的数量
+                total: 0, //数据的数量
                 showSelect:true,
                 begCreateDate:'',
                 endCreateDate: '',
+                addClass: false,
+                selectDataFlag: false
             };
         },
+        watch: {
+            memName: 'changeData',
+            shopowner: 'changeData',
+            storeId: 'changeData',
+            begCreateDate: 'changeData',
+            endCreateDate: 'changeData'
+        },
         methods: {
-            //子级传值到父级上来的动态拿去
-            pageChange: function (page) {
-                this.current = page
-                this.checkEmp(page);
+           changeData(newVal,oldVal){
+               this.selectDataFlag = true
+           },
+
+            resetDate(row, column, cellValue, index){
+                if (cellValue !== '' && cellValue !== null && cellValue !== undefined) {
+                    return cellValue.substring(0,10)
+                }
             },
+            resetAuditState(row, column, cellValue, index){
+                switch (cellValue) {
+                     case 2:
+                        return '未审核'
+                        break;
+                    case 3:
+                       return '审核中'
+                       break;
+                    case 4:
+                       return '审核通过'
+                       break;
+                    case 5:
+                       return '审核未通过'
+                       break;
+                }
+            },
+
             //门店ID
             storeChange: function (param) {
                 if (this.isBlank(param)) {
@@ -170,22 +208,23 @@
                     this.storeId = param.storeId
                 }
             },
-            
-            storeChange: function (param) {
-                if (this.isBlank(param)) {
-                    this.storeId = ""
-                } else {
-                    this.storeId = param.storeId
-                }
-            },
+
             dataOpen(){
                 if(this.showSelect) return
                 this.showSelect = true;
             },
-            
+            dataClose(){
+                this.showSelect = !this.showSelect
+                this.addClass = true;
+
+                setTimeout(()=>{
+                    this.addClass = false;
+                },400)
+            },
+
             //导出
             exportTable() {
-                  this.exportTableToExcel('datatable','产品购买审核表')
+                  this.exportTableToExcel('datatable','退费统计表')
             },
             //feedback department information
             positionChange: function (param) {
@@ -195,33 +234,37 @@
                     this.posId = param.posId
                 }
             },
-           
+
              tabChange(item) {
                 this.getConsultStore()
-                
+
             },
             //重置
             reset(){
-                this.empName="";
+                this.memName="";
                 this.begCreateDate="";
                 this.endCreateDate="";
-                
+                this.shopowner="";
             },
              editorAction(item) {
                 this.objectContent = item
             },
-            
+
             //check the list of department
-            checkEmp(page) {
+            getRefundAllFind() {
+                if (this.selectDataFlag) {
+                    this.current = 1
+                }
+
                 this.showSelect = false
-                console.log('checkEmp')
+                console.log('getRefundAllFind')
                 if (!this.isBlank(this.begCreateDate)) {
 					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
 				}
 				if (!this.isBlank(this.endCreateDate)) {
 					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
 				}
-                var url = this.url + '/employeeAction/queryEmp'
+                var url = this.url + '/refundAuditBean/refundAllFind'
                 this.$ajax({
                     method: 'POST',
                     url: url,
@@ -230,15 +273,14 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        posId: this.posId,
+                        memName: this.memName,
                         storeId: this.storeId,
-                        empName: this.empName,
-                        isuse: this.isuse,
+                        startTime: this.begCreateDate,
+                        endTime: this.endCreateDate,
+                        shopowner: this.shopowner,
+                        page: this.current,
+                        pageSize: this.pageSize
 
-                        page: page.toString(),
-                        pageSize: this.pageSize,
-                        actualBegDate: this.begCreateDate,
-						actualEndDate: this.endCreateDate,
                     },
                     dataType: 'json',
                 }).then((response) => {
@@ -246,11 +288,10 @@
                     console.log(res)
                     if (res.retCode == '0000') {
                         this.pages = res.retData.pages //总页数
-                        this.current = res.retData.current //当前页码
-                        this.pageSize = res.retData.size//一页显示的数量  必须是奇数
+                        this.current = res.retData.pageNum //当前页码
+                        this.pageSize = res.retData.pageSize//一页显示的数量  必须是奇数
                         this.total = res.retData.total //数据的数量
-                        this.$refs.paging.setParam(this.pages, this.current, this.total)
-                        this.employeeList = res.retData.records
+                        this.tableData = res.retData.list
                     } else {
                         alert(res.retMsg)
                     }
@@ -258,7 +299,25 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
+
+                this.selectDataFlag = false;
+
             },
+
+            // 翻页
+            handleCurrentChange(pageNum) {
+                this.current = pageNum
+                this.getRefundAllFind()
+            },
+            // 每页条数变化时触发
+            handleSizeChange(pageSize) {
+                this.current = 1
+                this.pageSize = pageSize
+                this.getRefundAllFind()
+            },
+
+
+
             handleScroll(e) {
                 var self = this
                 var etop = e.target.scrollTop
@@ -287,7 +346,7 @@
             init();
         },
         created() {
-            //this.checkEmp(1)
+            this.getRefundAllFind()
         }
     }
 </script>

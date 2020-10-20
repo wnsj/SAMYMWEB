@@ -43,7 +43,7 @@
 		},
 		methods: {
             initData(flag,param) {
-                this.param = { 
+                this.param = {
                     rejectReason: '',
                     operatorId: this.accountId()
                 };
@@ -80,6 +80,7 @@
 
 			//取消
 			 closeCurrentPage() {
+                 // this.$emit('func','1234');
                 $("#rejectionContent").modal("hide");
 			},
 			//确认
@@ -103,7 +104,6 @@
                 }
                 //console.log(postUrl)
                 this.certainAction(postUrl);
-
             },
 
             certainAction(url) {
@@ -120,7 +120,8 @@
                     var res = response.data
                     console.log(res)
                     if (res.retCode == '0000') {
-
+                        this.$emit('func','succ');
+                        this.$store.commit('addCount',1)
                         this.$alert(res.retMsg, '提示', {
                           confirmButtonText: '确定',
                           type: 'success',

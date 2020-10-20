@@ -83,9 +83,9 @@
 
         </div>
         </el-collapse-transition>
-         <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
-            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
-        </div>
+         <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
+             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
+         </div>
 
         <div class="" id="datatable">
              <el-table  :data="tableData" style="width: 100%" border>
@@ -98,18 +98,19 @@
                 <!-- <el-table-column prop="Conamount" label="消耗金额" width="100" align="center"></el-table-column> -->
                 <el-table-column prop="visitorName" label="咨询师" width="100" align="center"></el-table-column>
                 <el-table-column prop="empName" label="咨询顾问" width="100" align="center"></el-table-column>
-                <el-table-column prop="visitType" label="访问类型" width="100" align="center"></el-table-column>
+                <el-table-column prop="visitType" label="访问类型" :formatter="resetVisit" width="100" align="center"></el-table-column>
                 <el-table-column prop="vsName" label="咨客判定" width="100" align="center"></el-table-column>
-                <el-table-column prop="Freewheeling" label="续流状态" width="100" align="center"></el-table-column>
+                <el-table-column prop="continName" label="续流状态" width="100" align="center"></el-table-column>
                 <el-table-column prop="psName" label="付款方式" width="100" align="center"></el-table-column>
-                <el-table-column prop="createDate" label="消费时间" width="100" align="center"></el-table-column>
-                 <el-table-column prop="buyTime" label="购买时间" width="100" align="center"></el-table-column>
-                 <el-table-column prop="auditState" label="审核状态" width="100" align="center"></el-table-column>
-                <el-table-column prop="shopowner" label="审核人" width="100" align="center"></el-table-column>
-                <el-table-column prop="rejectTime" label="审核时间" width="100" align="center"></el-table-column>
+                <el-table-column prop="createDate" label="消费时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+                 <el-table-column prop="buyTime" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+                 <el-table-column prop="auditState" label="审核状态" :formatter="resetAuditState" width="100" align="center"></el-table-column>
+                <el-table-column prop="storeName" label="门店" width="100" align="center"></el-table-column>
+                <el-table-column prop="shopowner" label="店长" width="100" align="center"></el-table-column>
+                <el-table-column prop="finance" label="财务" width="100" align="center"></el-table-column>
+                <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                 <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
             </el-table>
-            <div class="col-md-12 col-lg-12 tips">* 双击单行，可对当前数据进行修改 </div>
 
             <el-row style="margin-top: 20px;">
                 <el-col :span="24">
@@ -139,14 +140,10 @@
     } from '@/../static/js/common.js'
     import store from '../../common/Store.vue'
     import dPicker from 'vue2-datepicker'
-    import Paging from '../../common/paging'
-
     export default {
         components: {
           store,
-          dPicker,
-          Paging,
-
+          dPicker
         },
         data() {
             return {
@@ -168,14 +165,49 @@
                 showSelect:true,
                 begCreateDate:'',
                 endCreateDate: '',
+                addClass: false,
+                selectDataFlag: false,
+                
             };
         },
+        watch: {
+            memName: 'changeData',
+            shopowner: 'changeData',
+            auditState: 'changeData',
+            storeId: 'changeData',
+            begCreateDate: 'changeData',
+            endCreateDate: 'changeData'
+        },
+
         methods: {
-            //子级传值到父级上来的动态拿去
-            pageChange: function (page) {
-                this.current = page
-                this.getConsumAllFind(page);
+            changeData(newVal,oldVal){
+                this.selectDataFlag = true
             },
+            resetDate(row, column, cellValue, index){
+                if (cellValue !== '' && cellValue !== null) {
+                    return cellValue.substring(0,10)
+                }
+            },
+            resetVisit(row, column, cellValue, index){
+               return cellValue == 1 ? "初访":"复访"
+            },
+            resetAuditState(row, column, cellValue, index){
+                switch (cellValue) {
+                     case 2:
+                        return '未审核'
+                        break;
+                    case 3:
+                       return '审核中'
+                       break;
+                    case 4:
+                       return '审核通过'
+                       break;
+                    case 5:
+                       return '审核未通过'
+                       break;
+                }
+            },
+
             //门店ID
             storeChange: function (param) {
                 if (this.isBlank(param)) {
@@ -185,14 +217,22 @@
                 }
             },
 
-            dataOpen(){
-                if(this.showSelect) return
-                this.showSelect = true;
-            },
+           dataOpen(){
+               if(this.showSelect) return
+               this.showSelect = true;
+           },
+           dataClose(){
+               this.showSelect = !this.showSelect
+               this.addClass = true;
+
+               setTimeout(()=>{
+                   this.addClass = false;
+               },400)
+           },
 
             //导出
             exportTable() {
-                  this.exportTableToExcel('datatable','产品购买审核表')
+                  this.exportTableToExcel('datatable','消费统计表')
             },
             //feedback department information
             positionChange: function (param) {
@@ -212,7 +252,8 @@
                 this.memName="";
                 this.begCreateDate="";
                 this.endCreateDate="";
-
+                this.auditState="";
+                this.shopowner="";
             },
              editorAction(item) {
                 this.objectContent = item
@@ -220,6 +261,10 @@
 
             //check the list of department
             getConsumAllFind(page) {
+                if (this.selectDataFlag) {
+                    this.current = 1
+                }
+
                 this.showSelect = false
                 console.log('getConsumAllFind')
                 if (!this.isBlank(this.begCreateDate)) {
@@ -263,6 +308,8 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
+
+                this.selectDataFlag = false;
             },
 
             // 翻页

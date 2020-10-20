@@ -75,9 +75,9 @@
 
         </div>
         </el-collapse-transition>
-         <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
-            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
-        </div>
+         <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
+             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
+         </div>
 
         <div class="" id="datatable">
             <el-table  :data="tableData" style="width: 100%" border>
@@ -93,14 +93,16 @@
                 <el-table-column prop="totalCount" label="购买课时（次）" width="100" align="center"></el-table-column>
                 <el-table-column prop="discount" label="购买折扣（%）" width="100" align="center"></el-table-column>
                  <el-table-column prop="createDate" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>
-                 <el-table-column prop="startDate" label="开始时间" :formatter="resetDate" width="100" align="center"></el-table-column>
-                 <el-table-column prop="endDate" label="结束时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+<!--                 <el-table-column prop="startDate" label="开始时间" :formatter="resetDate" width="100" align="center"></el-table-column>-->
+<!--                 <el-table-column prop="endDate" label="结束时间" :formatter="resetDate" width="100" align="center"></el-table-column>-->
                  <el-table-column prop="realCross" label="实交金额" width="100" align="center"></el-table-column>
                  <el-table-column prop="psName" label="交费方式" width="100" align="center"></el-table-column>
                  <el-table-column prop="operatorName" label="操作人" width="100" align="center"></el-table-column>
                  <el-table-column prop="isArrears" label="是否全款" :formatter="resetArrears" width="100" align="center"></el-table-column>
                  <el-table-column prop="auditStateName" label="审核状态" width="100" align="center"></el-table-column>
-                 <el-table-column prop="Reviewer" label="审核人" width="100" align="center"></el-table-column>
+                 <el-table-column prop="storeName" label="门店" width="100" align="center"></el-table-column>
+                 <el-table-column prop="shopOwnerName" label="店长" width="100" align="center"></el-table-column>
+				 <el-table-column prop="financeName" label="财务" width="100" align="center"></el-table-column>
                  <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
             </el-table>
@@ -143,23 +145,37 @@
         },
         data() {
             return {
-                auditName: '',
-                auditState: '',
+                showSelect:true,
                 fixedHeader: false,
                 storeId: this.storeId(),
                 accountType: this.accountType(),
                 tableData: [],
                 //分页需要的数据
+                total: 0, //数据的数量
                 pages: '', //总页数
                 current: 1, //当前页码
                 pageSize: 10, //一页显示的数量
-                total: 0, //数据的数量
-                showSelect:true,
+                auditName: '',
+                auditState: '',
                 begCreateDate:'',
                 endCreateDate: '',
+                addClass: false,
+                selectDataFlag: false
             };
         },
+        watch: {
+            auditName: 'changeData',
+            auditState: 'changeData',
+            storeId: 'changeData',
+            begCreateDate: 'changeData',
+            endCreateDate: 'changeData'
+        },
+
         methods: {
+            changeData(newVal,oldVal){
+                this.selectDataFlag = true
+            },
+
             resetDate(row, column, cellValue, index){
                 if (cellValue !== '' && cellValue !== null) {
                     return cellValue.substring(0,10)
@@ -184,6 +200,14 @@
             dataOpen(){
                 if(this.showSelect) return
                 this.showSelect = true;
+            },
+            dataClose(){
+                this.showSelect = !this.showSelect
+                this.addClass = true;
+
+                setTimeout(()=>{
+                    this.addClass = false;
+                },400)
             },
 
             //导出
@@ -218,6 +242,10 @@
 
             //check the list of department
             getAllAuditPage() {
+                if (this.selectDataFlag){
+                    this.current = 1
+                }
+
                 this.showSelect = false
                 console.log('getAllAuditPage')
                 if (!this.isBlank(this.begCreateDate)) {
@@ -241,7 +269,7 @@
                        storeId: this.storeId,
                        auditBegTime: this.begCreateDate,
                        auditEndTime: this.endCreateDate,
-                       auditStatet: this.auditState
+                       auditState: this.auditState
                     },
                     dataType: 'json',
                 }).then((response) => {
@@ -260,6 +288,9 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
+
+                this.selectDataFlag = false;
+
             },
             // 翻页
             handleCurrentChange(pageNum) {

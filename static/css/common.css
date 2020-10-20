@@ -354,3 +354,6 @@ body{
 	z-index: 999 !important;
 	width: 100px;
 }
+
+
+.noEvents{pointer-events: none;}

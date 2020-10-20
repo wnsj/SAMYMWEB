@@ -23,7 +23,7 @@
 							<input type="text" class="form-control" v-model="refund.phone" :disabled="isShow">
 						</div>
 					</div>
-					<div v-show="unfinishedProList.length > 0"> 
+					<div v-show="unfinishedProList.length > 0">
 						<div class="col-md-12  clearfix jh-ad-0">
 							<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
 							<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >已购产品</label><span
@@ -53,7 +53,7 @@
 									</tr>
 								</tbody>
 							</table>
-						</div>	
+						</div>
 					</div>
 
 
@@ -73,7 +73,7 @@
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">退费金额</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="refund.money" disabled="disabled">
+							<input type="text" class="form-control" v-model="refund.receivable" disabled="disabled">
 						</div>
 					</div>
 
@@ -112,7 +112,7 @@
 	import emp from '../../common/Employee.vue'
 	import project from '../../common/Project.vue'
 	import axios from "axios";
-
+    import {Decimal} from 'decimal.js'
 	export default {
 		components: {
 			dPicker,
@@ -219,7 +219,7 @@
 					alert("实退金额和违约金至少一个大于0")
 					return
 				}
-				this.refund.money = this.selectObj.price * this.refund.consumCount
+				this.refund.receivable = new Decimal(this.selectObj.price).mul(this.refund.consumCount)
 				var url = this.url + '/purchasedItemsAction/refundProject'
 				this.requestData(url, this.refund).then((response) => {
 					if (response.retCode == '0000') {
@@ -338,19 +338,19 @@
 			},
 			//计算退费金额
 			receivableAction() {
-				if (this.refund.consumCount != null && parseInt(this.refund.consumCount) > 0) {
-					if (this.selectObj.price != null && parseInt(this.selectObj.price) > 0) {
-						if (parseInt(this.refund.consumCount) > parseInt(this.selectObj.totalCount) - parseInt(this.selectObj.consumCount)) {
-							this.refund.consumCount = parseInt(this.selectObj.totalCount) - parseInt(this.selectObj.consumCount)
-							this.refund.money = this.selectObj.price * parseInt(this.refund.consumCount)
+				if (this.refund.consumCount != null && parseFloat(this.refund.consumCount) > 0) {
+					if (this.selectObj.price != null && parseFloat(this.selectObj.price) > 0) {
+						if (parseFloat(this.refund.consumCount) > parseFloat(this.selectObj.totalCount) - parseFloat(this.selectObj.consumCount)) {
+							this.refund.consumCount = parseFloat(this.selectObj.totalCount) - parseFloat(this.selectObj.consumCount)
+							this.refund.receivable = new Decimal(this.selectObj.price).mul(new Decimal(this.refund.consumCount))
 						} else {
-							this.refund.money = this.selectObj.price * parseInt(this.refund.consumCount)
+							this.refund.receivable = new Decimal(this.selectObj.price).mul(new Decimal(this.refund.consumCount))
 						}
 					} else {
 						alert('请您先选择退费课程')
 					}
 				} else {
-					this.refund.money = 0
+					this.refund.receivable = 0
 				}
 			}
 		},

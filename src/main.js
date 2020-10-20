@@ -10,6 +10,10 @@ import constant from '../src/assets/js/constant'
 import vueBeauty from 'vue-beauty'
 import elementUi from 'element-ui'
 import elementUiCss from 'element-ui/lib/theme-chalk/index.css'
+import store from './store'
+
+
+
 // import 'default-passive-events'
 
 // import TreeTable from '@weilan/el-tree-table'
@@ -209,7 +213,10 @@ Vue.prototype.getEmpId = function () {
 Vue.prototype.getAccData = function () {
     return constant.getAccData()
 }
-
+// 角色id
+Vue.prototype.roleId = function () {
+    return constant.roleId()
+}
 
 /*
  **权限判断使用方法:
@@ -253,6 +260,7 @@ axios.interceptors.request.use(
 new Vue({
     el: '#app',
     router,
+    store,
     components: {
         App
     },

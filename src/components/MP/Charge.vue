@@ -115,7 +115,7 @@
 			</div>
 		</div>
 		</el-collapse-transition>
-        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
+        <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -239,11 +239,10 @@
 				visitType:'',//访问类型
 				payType:'1',//付款方式
 				couId:'',//咨询师ID
-				conId:'',//咨询师ID
 				proName:'',//课程名称
 				judgeState:'',//咨客判定
 				continueState:'',//续流状态
-				payType:'',//支付方式
+                addClass: false,
 				showSelect:true
 			};
 		},
@@ -275,9 +274,17 @@
 				}
 			},
 			dataOpen(){
-                if(this.showSelect) return
-                this.showSelect = true;
-            },
+			    if(this.showSelect) return
+			    this.showSelect = true;
+			},
+			dataClose(){
+			    this.showSelect = !this.showSelect
+			    this.addClass = true;
+
+			    setTimeout(()=>{
+			        this.addClass = false;
+			    },400)
+			},
             getEmp() {
                 var url = this.url + '/employeeAction/getAllEmpByPosName'
                 this.$ajax({

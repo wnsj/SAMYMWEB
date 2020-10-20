@@ -426,6 +426,8 @@
 				this.isSelect = false
 				this.$refs.VisitStateRef.getObj(1, 1)
 				this.$refs.ContinStateRef.getObj(1, 2)
+				this.$refs.ContinStateRef.setObj('0')
+				this.$refs.VisitStateRef.setObj('0')
 				this.queryUnfinishedPro(param.visId)
 				this.checkMemCash(param.visId)
 			},

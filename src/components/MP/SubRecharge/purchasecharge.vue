@@ -3,12 +3,12 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h2 id="myModalLabel" class="modal-title">产品购买驳回修改</h2>
+			<h2 class="modal-title">产品购买驳回修改</h2>
 		</div>
 		<div class="modal-body  pos_r jh-mh-sc">
 			<div class="tab-pane fade in active martop" id="basic">
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >姓名</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline  " >姓名</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.memName" :disabled="isShow==true">
@@ -16,23 +16,23 @@
 				</div>
 
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >手机号</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline  " >手机号</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.phone" :disabled="isShow==true">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >订单时间</label><span
-					 class="sign-left">:</span>
-					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="consume.datetime" :disabled="isShow==true">
-					</div>
-				</div>
+<!--				<div class="col-md-6 form-group clearfix jh-wd-33">-->
+<!--					<label class="col-md-4 control-label text-right nopad end-aline  " >订单时间</label><span-->
+<!--					 class="sign-left">:</span>-->
+<!--					<div class="col-md-7  ">-->
+<!--						<input type="text" class="form-control" v-model="consume.datetime" :disabled="isShow==true">-->
+<!--					</div>-->
+<!--				</div>-->
 				<div v-show="unfinishedProList.length > 0">
 					<div class="col-md-12  clearfix jh-ad-0">
 						<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >已购产品</label><span
+						<label class="col-md-4 control-label text-right nopad end-aline" >已购产品</label><span
 						 class="sign-left">:</span>
 						</div>
 					</div>
@@ -66,7 +66,7 @@
 
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33" v-show="member.balance>0">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >预购余额</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline  " >预购余额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="member.balance" :disabled="isShow==true">
@@ -76,7 +76,7 @@
 					<p class="tips">* 预购余额：只是用来作为变更咨询师时，购买产品使用；此会员购买产品咨询师未发生变更，此项不做任何参考</p>
 				</div>
 				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
-					<h4 id="myModalLabel" class="modal-title">产品：</h4>
+					<h4 class="modal-title">产品：</h4>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
                     <b>*</b>
@@ -104,25 +104,25 @@
 					<label class="col-md-4 control-label text-right nopad end-aline" >产品</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<project ref="project" @projectChange="projectChange"></project>
+						<project ref="projectRef" @projectChange="projectChange"></project>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >单价</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >单价</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.price" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >课时(次)</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >课时(次)</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.actualCount" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >折扣比例</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >折扣比例</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7   pos-re">
 						<input type="text" class="form-control" v-model="consume.discount" disabled="disabled">
@@ -130,14 +130,14 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >折前总额</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline" >折前总额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.preFoldTotalPrice" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >折后总额</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline  " >折后总额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
@@ -146,10 +146,10 @@
 			</div>
 			<div class="tab-pane fade in active martop" v-show="isShow==true">
 				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
-					<h4 id="myModalLabel" class="modal-title">合计：</h4>
+					<h4 class="modal-title">合计：</h4>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >实交总额</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline  " >实交总额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.realCross">
@@ -167,7 +167,7 @@
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33" v-show="isArrearsShow">
                     <b>*</b>
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  " >欠费金额</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline  " >欠费金额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.arrears">
@@ -190,14 +190,14 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33" v-show="cash.balance>0">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">定金余额</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline">定金余额</label><span
 						 class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="cash.balance" id="cash" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">应交总额</label><span
+					<label class="col-md-4 control-label text-right nopad end-aline">应交总额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
@@ -207,7 +207,7 @@
 			<div class="tab-pane fade in active martop" v-show="isShow==true">
 				<div class="col-md-12 form-group clearfix text-left jh-ad-0 jh-mt-5">
 					<div class="col-md-6 clearfix">
-						<h4 id="myModalLabel" class="modal-title jh-lh-39">相关选择：</h4>
+						<h4 class="modal-title jh-lh-39">相关选择：</h4>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -283,7 +283,6 @@
 
 			</div>
 		</div>
-	</div>
 </template>
 
 <script>
@@ -294,6 +293,7 @@
 	import VisitState from '../../common/VisitState.vue'
 	import ContinState from '../../common/VisitState.vue'
 
+    import { Decimal } from 'decimal.js';
 	export default {
 		components: {
 			dPicker,
@@ -347,6 +347,7 @@
 					receipt: null, //收据
 					isArrears: '1', //是否欠费
 					arrears: '0', //欠费金额
+                    sourceId: ''
 				},
 				cash: {
 					cashId: '',
@@ -372,8 +373,8 @@
 		},
 		methods: {
 			// Initialization consume’s content
-			initData(title, param) {
-				$('#rechargeContent').modal({
+			initAuditPur(param) {
+				$('#AuditPurContent').modal({
 					backdrop: 'static',
 					keyboard: false
 				});
@@ -383,58 +384,27 @@
 				}
 				this.projectObj = {}
 				$("input[name='radioGroup']").prop("checked", "");
-				this.consume = {
-					memNum: param.visId, //会员名
-					memName: param.visitorName,
-					phone: param.phone,
-					appNum: '', //预约号
-					receivable: 0, //应交
-					preFoldTotalPrice: '', //折前总价
-					realCross: 0, //实缴
-					actualCross: 0, //实交金额
-					proId: '', //产品id
-					discount: 0, //折扣
-					price: 0, //折前单价
-					disPrice: 0, //折后单价
-					totalCount: 0, //总次数
-					actualCount: 0, //实际次数
-					giveCount: 0, //赠送次数
-					giveProId: 0, //赠送产品
-					giveMoney: 0, //赠送金额
-					counselor: '', //咨询师id
-					empId: '', //咨询师助理id
-					state: 0,
-					/**状态 * 0：充值 * 1：完结 * 2：退费 */
-					storeId: this.storeId(), //店铺
-					/** 0：初访 1：在访 */
-					isfirst: null,
-					/** 0:非初办 1:是 */
-					operatorId: this.accountId(), //操作人
-					firstCharge: null,
-					/** 1:实体卡首充（不计算提成） 0:计算 */
-					consumCount: '0', //消费次数
-					visitType: 1,
-					payType: '', //支付方式
-					appNumber:'',//小程序编号
-					serialNo: null, //流水单号
-					receipt: null, //收据
-					visitState: null, //访问状态
-					continState: null, //续流状态
-					isArrears: '1', //是否欠费
-					arrears: '0', //欠费金额
-				}
-				this.$refs.payStyle.setPsId('0')
+				this.$refs.payStyle.setPsId(param.payType)
 				this.$refs.counselorEmp.setPosName("咨询师")
 				this.$refs.emp.setPosName("咨询顾问")
-				this.$refs.counselorEmp.setEmp("")
-				this.$refs.emp.setEmp("")
-				this.$refs.project.setEmpId("0", 1)
+				this.$refs.counselorEmp.setEmp(param.counselor)
+				this.$refs.emp.setEmp(param.empId)
+                this.$refs.projectRef.setEmpId(param.counselor,1)
+                this.$refs.projectRef.setProject(param.proId)
 				this.isShow = true
 				this.isSelect = false
-				this.$refs.VisitStateRef.getObj(1, 1)
-				this.$refs.ContinStateRef.getObj(1, 2)
-				this.queryUnfinishedPro(param.visId)
-				this.checkMemCash(param.visId)
+				this.$refs.VisitStateRef.getObj(param.visitType, 1)
+				this.$refs.ContinStateRef.getObj(param.visitType, 2)
+				this.$refs.ContinStateRef.setObj(param.continState)
+				this.$refs.VisitStateRef.setObj(param.visitState)
+                if (!this.isBlank(param.discount) && param.discount != 0) {
+                    this.consume.preFoldTotalPrice = new Decimal(param.receivable).div(new Decimal(param.discount)).mul(new Decimal(100)).toFixed(2)
+                } else {
+                    this.consume.preFoldTotalPrice = 0
+                }
+                Object.assign(this.consume, param)
+				this.queryUnfinishedPro(param)
+				this.checkMemCash(param.memNum)
 			},
 			//咨询师
 			counselorEmpChange: function(param) {
@@ -442,8 +412,8 @@
 					this.consume.counselor = ""
 				} else {
 					this.consume.counselor = param.empId
-					this.$refs.project.setEmpId(this.consume.counselor, 1)
-					this.$refs.project.setProject("0")
+					this.$refs.projectRef.setEmpId(this.consume.counselor, 1)
+					this.$refs.projectRef.setProject("0")
 					this.consume.price = 0
 					this.consume.actualCount = 0
 					this.consume.discount = 0
@@ -453,8 +423,8 @@
 			},
 
             proStyleChange() {
-                this.$refs.project.setProStyle(this.consume.proStyle,1,this.consume.counselor)
-                this.$refs.project.setProject("0")
+                this.$refs.projectRef.setProStyle(this.consume.proStyle,1,this.consume.counselor)
+                this.$refs.projectRef.setProject("0")
                 this.consume.price = 0
                 this.consume.actualCount = 0
                 this.consume.discount = 0
@@ -568,7 +538,7 @@
 					this.consume.piId = this.clickItemObj.itemId
 				}
 
-				var url = this.url + '/purchasedItemsAction/purchasedItemsProject'
+				var url = this.url + '/purchasedItemsAuditBean/supplementData'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -583,6 +553,8 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
+                        this.$emit('closeCurrentPage','succ')
+                        this.$store.commit('addCount',1)
 						this.closeCurrentPage()
 					} else {
 						alert(res.retMsg)
@@ -591,7 +563,7 @@
 					console.log('请求失败处理')
 				});
 			},
-			closeCurrentPage() {
+            closeCurrentPage() {
 				this.$emit('closeCurrentPage')
 			},
 			setCustom(param) {
@@ -602,7 +574,6 @@
 
 			//Query member's information based on the memNum
 			checkMemNum(param) {
-				console.log('checkMemNum')
 				if (this.isBlank(param)) {
 					return
 				}
@@ -714,7 +685,8 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						memNum: param,
+						memNum: param.memNum,
+                        sourceId: param.sourceId,
 						isArrears: '1',
 					},
 					dataType: 'json',

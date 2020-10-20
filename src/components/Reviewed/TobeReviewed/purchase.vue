@@ -6,7 +6,7 @@
             <h1 class="titleCss">产品购买审核</h1>
         </div>
         <el-collapse-transition>
-        <div v-show="showSelect">
+        <div v-show="showSelect" class="selectBox">
             <div class="row newRow">
 
                 <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
@@ -44,30 +44,34 @@
 				</div>
 
             </div>
-            <div class="row newRow">
-                <button type="button" class="btn btn-success pull-left m_r_10 jh-mr-2" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('1')">通过
-                </button>
-                <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
-                </button>
-                <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
-                        data-toggle="modal"
-                        v-on:click="exportTable()">导出
-                </button>
-                <button type="button" class="btn btn-info pull-right m_r_10 jh-mr-2"
-                        data-toggle="modal" v-on:click="reset()">重置
-                </button>
-                <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
-                        data-toggle="modal"
-                        v-on:click="checkEmp(1)">查询
-                </button>
-            </div>
+
 
         </div>
         </el-collapse-transition>
 
-        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
+        <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
         </div>
+
+        <div class="row newRow">
+            <button type="button" class="btn btn-success pull-left m_r_10 jh-mr-2" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('1')">通过
+            </button>
+            <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
+            </button>
+
+            <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
+                    data-toggle="modal"
+                    v-on:click="exportTable()">导出
+            </button>
+            <button type="button" class="btn btn-info pull-right m_r_10 jh-mr-2"
+                    data-toggle="modal" v-on:click="reset()">重置
+            </button>
+            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
+                    data-toggle="modal"
+                    v-on:click="checkEmp(1)">查询
+            </button>
+        </div>
+
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive">
@@ -86,8 +90,8 @@
                                 <th class="text-center">购买课时(次)</th>
                                 <th class="text-center">购买折扣(%)</th>
                                 <th class="text-center">购买时间</th>
-                                <th class="text-center">开始时间</th>
-                                <th class="text-center">结束时间</th>
+<!--                                <th class="text-center">开始时间</th>-->
+<!--                                <th class="text-center">结束时间</th>-->
                                 <th class="text-center">实交金额</th>
                                 <th class="text-center">交费方式</th>
                                 <th class="text-center">操作人</th>
@@ -117,8 +121,8 @@
                                 <td class="text-center">{{item.totalCount}}</td>
                                 <td class="text-center">{{item.discount}}</td>
                                 <td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
-                                <td class="text-center">{{item.startDate | dateFormatFilter("YYYY-MM-DD")}}</td>
-                                <td class="text-center">{{item.endDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+<!--                                <td class="text-center">{{item.startDate | dateFormatFilter("YYYY-MM-DD")}}</td>-->
+<!--                                <td class="text-center">{{item.endDate | dateFormatFilter("YYYY-MM-DD")}}</td>-->
                                 <td class="text-center">{{item.realCross}}</td>
                                 <td class="text-center">{{item.psName}}</td>
                                 <td class="text-center">{{item.operatorName}}</td>
@@ -142,7 +146,7 @@
         <div class="row row_edit">
             <div class="modal fade" id="rejectionContent">
                 <div class="modal-dialog wd600">
-                    <rejection ref='rejection' @closeCurrentPage='feedBack()'></rejection>
+                    <rejection ref='rejection' @func='feedBack'></rejection>
                 </div>
             </div>
         </div>
@@ -188,7 +192,9 @@
                 showSelect:true,
                 begCreateDate:'',
                 endCreateDate: '',
-                operatorId: this.accountId()
+                operatorId: this.accountId(),
+                addClass: false
+
             };
         },
         filters: {
@@ -200,6 +206,9 @@
             }
         },
         methods: {
+             fatherMethod() {
+                 console.log('测试');
+             },
             //子级传值到父级上来的动态拿去
             pageChange: function (page) {
                 this.current = page
@@ -213,11 +222,26 @@
                     this.storeId = param.storeId
                 }
             },
+
             //modify the cotent of department
+            dataClose(){
+                this.showSelect = !this.showSelect
+                this.addClass = true;
+
+                setTimeout(()=>{
+                    this.addClass = false;
+                },400)
+                // var _this = this;
+                // setTimeout(function(){
+                //     _this.addClass = false;
+                // },400)
+            },
             dataOpen(){
                 if(this.showSelect) return
                 this.showSelect = true;
             },
+
+
             addEmp() {
                 console.log('modify the cotent of department')
                 this.$refs.emp.initData('add')
@@ -230,17 +254,11 @@
                 $("#emp").modal('show')
             },
 
-            storeChange: function (param) {
-                if (this.isBlank(param)) {
-                    this.storeId = ""
-                } else {
-                    this.storeId = param.storeId
-                }
-            },
+
 
             //导出
             exportTable() {
-                  this.exportTableToExcel('datatable','产品购买审核表')
+                  this.exportTableToExcel('datatable','消费审核表')
             },
             //feedback department information
             positionChange: function (param) {
@@ -251,29 +269,16 @@
                 }
             },
             //feedback from adding and modifying view
-            feedBack() {
-                this.checkEmp(1)
+            feedBack(data) {
+                // console.log(data);
+                if (data == 'succ'){
+                    this.checkEmp(1)
+                    this.objectContent = {}
+                }
+
                 $("#rejectionContent").modal('hide')
             },
-            // check the adding and modifying rule of account
-            // selectRule(param, item) {
 
-            //     if (param == 1) {
-            //         this.$refs.emp.initData('add', '')
-            //         $("#emp").modal('show')
-            //     } else if (param == 3) {
-            //         if (!this.has('SAMY:MP:Employee:Update')) {
-            //             alert("暂无权限!")
-            //             return
-            //         }
-            //         this.$refs.emp.initData('modify', item)
-            //         $("#emp").modal('show')
-            //     }
-            // },
-            //  tabChange(item) {
-            //     this.getConsultStore()
-
-            // },
             //重置
             reset(){
                 this.memName="";
@@ -293,7 +298,9 @@
                     this.$alert('请选择咨客后再操作', '提示', {
                       confirmButtonText: '确定',
                       type: 'warning',
-                      callback: action => {}
+                      callback: action => {
+
+                      }
                     });
                     return
                 }
@@ -302,14 +309,17 @@
                      case '1':
                         //console.log(this.objectContent)
                         this.productApproval();
+
                         break;
                     //驳回
                     case '2':
                         // this.$refs.rejection.initData(this.objectContent.piId, this.objectContent.operatorId)
                         this.$refs.rejection.initData('product', this.objectContent)
-                        $("#rejectionContent").modal('show')
+                        $("#rejectionContent").modal('show');
+
                         break;
-                }
+                };
+
             },
 
             productApproval(){
@@ -322,7 +332,7 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        piId: this.objectContent.piId,					//必填 账目id
+                        piId: this.objectContent.piId,		//必填 账目id
                         operatorId: this.operatorId			//必填 操作人（数据录入人，店长，财务，补录人）
                     },
                     dataType: 'json',
@@ -330,11 +340,15 @@
                     var res = response.data
                     console.log(res)
                     if (res.retCode == '0000') {
-
+                        //this.checkEmp(1);
                         this.$alert(res.retMsg, '提示', {
                           confirmButtonText: '确定',
                           type: 'success',
-                          callback: action => {}
+                          callback: action => {
+                              this.$store.commit('addCount',1)
+                              this.objectContent = {}
+                              this.checkEmp(1);
+                          }
                         })
 
                     } else {
@@ -351,12 +365,16 @@
                 }).catch((error) => {
                     console.log('请求失败处理')
                 });
+
+
             },
 
 
             //check the list of department
             checkEmp(page) {
                 this.showSelect = false
+                // this.dataClose()
+
                 console.log('checkEmp')
                 if (!this.isBlank(this.begCreateDate)) {
 					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
@@ -392,6 +410,7 @@
                         this.total = res.retData.total //数据的数量
                         this.$refs.paging.setParam(this.pages, this.current, this.total)
                         this.productAuditList = res.retData.records
+
                     } else {
                         alert(res.retMsg)
                     }
@@ -428,7 +447,8 @@
             init();
         },
         created() {
-            this.checkEmp(1)
+            this.checkEmp(1);
+
         }
     }
 </script>
@@ -475,4 +495,5 @@
             display: none
         }
     }
+    #newsnumber{padding:0 5px; background-color: red; color: #fff; border-radius: 50%; margin-left: -15px;margin-top: -10px;}
 </style>

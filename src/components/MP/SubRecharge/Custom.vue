@@ -589,6 +589,13 @@
 					alert("续流状态不能为空!")
 					return;
 				}
+
+
+                if (this.consume.payType == 0) {
+                    alert("交费方式不能为空!")
+                    return;
+                }
+
 				if (this.isBlank(this.consume.diseaseType)) {
 					alert("咨询方向不能为空!")
 					return;
@@ -608,7 +615,8 @@
 						return;
 					}
 
-					if (this.consume.consumCount > (this.selectObj.totalCount - this.selectObj.consumCount)) {
+                    var ss = new Decimal(this.selectObj.totalCount).sub(new Decimal(this.selectObj.consumCount))
+					if (parseFloat(this.consume.consumCount) > parseFloat(ss)) {
 						alert("本次消费课时大于剩余课时!");
 						return;
 					}

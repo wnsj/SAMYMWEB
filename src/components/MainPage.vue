@@ -452,6 +452,9 @@
             this.newsnews();
 
             this.msgCount = this.$store.state.msgCount;
+            setInterval(()=>{
+                this.newsnews();
+            },600000)
 
         }
     }

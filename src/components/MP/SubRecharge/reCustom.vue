@@ -22,13 +22,13 @@
 						<input type="text" class="form-control" v-model="consume.phone" disabled="true">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33">
+				<!-- <div class="col-md-6 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >订单时间</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" disabled="true">
 					</div>
-				</div>
+				</div> -->
 				<div v-show="unfinishedProList.length > 0">
 					<div class="col-md-12  clearfix jh-ad-0">
 						<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
@@ -375,7 +375,7 @@
 					cashId: null, //现金id
 					accompany: null, //陪同人
 					companionship: null, //陪同人关系
-
+                    startTime: ''
 
 
 				},
@@ -414,6 +414,7 @@
 					keyboard: false
 				});
 				this.consume = {
+                    startTime: param.createDate,
                     piId: param.piId,
                     sourceId: param.sourceId,
 					memNum: param.memNum, //会员名

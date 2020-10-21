@@ -130,6 +130,7 @@
 			return {
                 sourceId: '',
 				refund: {
+                    startTime: '',
 					consumCount: 0, //退课时
 					receivable: '', //应退金额
 					memNum: '', //会员号
@@ -183,6 +184,7 @@
 				});
                 this.sourceId = param.sourceId;
 				this.refund = {
+                    startTime: param.createDate,
 					consumCount: 0, //退课时
 					receivable: '', //应退金额
 					memNum: param.memNum, //会员号
@@ -262,7 +264,7 @@
 
 
                var url = this.url + '/refundAuditBean/refundRecord'
-   
+
 				this.requestData(url, this.refund).then((response) => {
 					if (response.retCode == '0000') {
                         this.$emit('closeCurrentPage','succ')

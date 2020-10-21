@@ -253,7 +253,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-12 clearfix jh-ad-0" v-show="cash.balance>0">
+			<div class="col-md-12 clearfix jh-ad-0" v-show="selectObj == null">
 				<div class="col-md-6 clearfix jh-wd-33" v-show="cash.balance>0">
 					<label class="col-md-4 control-label text-right nopad end-aline" >
 						定金抵扣

@@ -29,16 +29,16 @@
                     </div>
 
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div class="col-md-3 col-lg-3 text-right nopad SSwid20">
+                        <div class="col-md-3 col-lg-3 text-right nopad SSwid20" style="width: 20%;">
                             <p class="end-aline col-md-11 col-lg-11">审核日期</p><span class="sign-left">:</span>
                         </div>
-                        <div class="col-md-4 col-lg-4 SSwid27">
+                        <div class="col-md-4 col-lg-4 SSwid27" style="width: 28%;">
                             <dPicker class="wd100" v-model="auditBegTime"></dPicker>
                         </div>
                         <div class="pull-left end-aline nopad">
                             ~
                         </div>
-                        <div class="col-md-4 col-lg-4 SSwid27">
+                        <div class="col-md-4 col-lg-4 SSwid27" style="width: 28%;">
                             <dPicker class="wd100" v-model="auditEndTime"></dPicker>
                         </div>
                     </div>
@@ -202,7 +202,7 @@
             },
             //导出
             exportTable() {
-                this.exportTableToExcel('datatable', '产品购买审核表')
+                this.exportTableToExcel('datatable', '产品购买驳回表')
             },
             //feedback department information
             positionChange: function (param) {
@@ -234,7 +234,7 @@
                 this.auditName = ''
                 this.auditBegTime = ''
                 this.auditEndTime = ''
-                this.getRejectPage(1)
+
             },
             // 翻页
             handleCurrentChange(pageNum) {

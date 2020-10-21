@@ -352,7 +352,7 @@
 
 <style>
 .nomg{margin: 0;}
-.err-msg{color: #FF0000;font-size: 12px;display: block;padding-top: 10px; }
+.err-msg{color: #FF0000;font-size: 12px;display: block; }
 .inputErr{
     border-color: #f00d0d;
     outline: 0;

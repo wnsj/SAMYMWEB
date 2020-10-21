@@ -233,7 +233,11 @@
                   this.exportTableToExcel('datatable','消费驳回表')
             },
 
-           feedBack() {
+           feedBack(data) {
+               if (data == 'succ') {
+                   this.current = 1
+                   this.getConsumRejectFind()
+               }
                 $("#customContent").modal('hide')
            },
             // check the adding and modifying rule of account

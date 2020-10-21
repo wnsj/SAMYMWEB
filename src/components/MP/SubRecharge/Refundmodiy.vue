@@ -260,14 +260,13 @@
 				this.refund.money = this.selectObj.price * this.refund.consumCount
                 this.refund.receivable = this.selectObj.price * this.refund.consumCount
 
-                 // var url = 'http://172.16.16.255:8080/purchasedItemsAction/refundProject'
+
                var url = this.url + '/refundAuditBean/refundRecord'
-                var obj = {
-                    params: this.refund,
-                    sourceId: this.sourceId
-                }
+   
 				this.requestData(url, this.refund).then((response) => {
 					if (response.retCode == '0000') {
+                        this.$emit('closeCurrentPage','succ')
+                        this.$store.commit('addCount',1)
 						alert(response.retMsg)
 						this.closeCurrentPage()
 					} else {
@@ -308,6 +307,7 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
+
 						this.member = res.retData.mem
 						this.counselorList = res.retData.counselorList
 						if (this.member != null) {

@@ -553,6 +553,8 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
+                        this.$emit('closeCurrentPage','succ')
+                        this.$store.commit('addCount',1)
 						this.closeCurrentPage()
 					} else {
 						alert(res.retMsg)

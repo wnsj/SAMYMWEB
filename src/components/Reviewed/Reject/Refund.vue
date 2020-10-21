@@ -227,7 +227,11 @@
             },
 
 
-           feedBack() {
+           feedBack(data) {
+                if (data == 'succ') {
+                    this.current = 1
+                    this.getRefundRejectFind()
+                }
                 $("#refundContent").modal('hide')
            },
             // check the adding and modifying rule of account

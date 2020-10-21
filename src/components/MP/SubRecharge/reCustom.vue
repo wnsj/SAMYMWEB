@@ -684,7 +684,8 @@
 						});
 						this.jumpLeft(2);
 						this.closeCurrentPage()
-						//this.$emit('func2', 'SettleSummary')
+						this.$emit('closeCurrentPage', 'succ')
+                        this.$store.commit('addCount',1)
 						alert(res.retMsg)
 					} else {
 						alert(res.retMsg)

@@ -55,7 +55,7 @@
                     </button>
                     <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
                             data-toggle="modal"
-                            v-on:click="getRejectPage(1)">查询
+                            v-on:click="getRejectPage()">查询
                     </button>
                 </div>
 
@@ -172,7 +172,7 @@
             auditEndTime: 'changeData',
             auditBegTime: 'changeData'
         },
-  
+
         methods: {
             changeData(newVal,oldVal){
                 this.selectDataFlag = true
@@ -212,7 +212,11 @@
                     this.posId = param.posId
                 }
             },
-            feedBack() {
+            feedBack(data) {
+                if (data == 'succ') {
+                    this.current = 1
+                    this.getRejectPage()
+                }
                 this.getRejectPage(this.current)
                 $("#AuditPurContent").modal('hide')
             },
@@ -344,6 +348,7 @@
             window.addEventListener('scroll', this.handleScroll, true);
         },
         created() {
+            this.getRejectPage()
         }
     }
 </script>

@@ -112,7 +112,7 @@
 	import emp from '../../common/Employee.vue'
 	import project from '../../common/Project.vue'
 	import axios from "axios";
-
+    import {Decimal} from 'decimal.js'
 	export default {
 		components: {
 			dPicker,
@@ -219,7 +219,7 @@
 					alert("实退金额和违约金至少一个大于0")
 					return
 				}
-				this.refund.receivable = this.selectObj.price * this.refund.consumCount
+				this.refund.receivable = new Decimal(this.selectObj.price).mul(this.refund.consumCount)
 				var url = this.url + '/purchasedItemsAction/refundProject'
 				this.requestData(url, this.refund).then((response) => {
 					if (response.retCode == '0000') {
@@ -338,13 +338,13 @@
 			},
 			//计算退费金额
 			receivableAction() {
-				if (this.refund.consumCount != null && parseInt(this.refund.consumCount) > 0) {
-					if (this.selectObj.price != null && parseInt(this.selectObj.price) > 0) {
-						if (parseInt(this.refund.consumCount) > parseInt(this.selectObj.totalCount) - parseInt(this.selectObj.consumCount)) {
-							this.refund.consumCount = parseInt(this.selectObj.totalCount) - parseInt(this.selectObj.consumCount)
-							this.refund.receivable = this.selectObj.price * parseInt(this.refund.consumCount)
+				if (this.refund.consumCount != null && parseFloat(this.refund.consumCount) > 0) {
+					if (this.selectObj.price != null && parseFloat(this.selectObj.price) > 0) {
+						if (parseFloat(this.refund.consumCount) > parseFloat(this.selectObj.totalCount) - parseFloat(this.selectObj.consumCount)) {
+							this.refund.consumCount = parseFloat(this.selectObj.totalCount) - parseFloat(this.selectObj.consumCount)
+							this.refund.receivable = new Decimal(this.selectObj.price).mul(new Decimal(this.refund.consumCount))
 						} else {
-							this.refund.receivable = this.selectObj.price * parseInt(this.refund.consumCount)
+							this.refund.receivable = new Decimal(this.selectObj.price).mul(new Decimal(this.refund.consumCount))
 						}
 					} else {
 						alert('请您先选择退费课程')

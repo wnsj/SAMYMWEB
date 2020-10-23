@@ -78,24 +78,24 @@
                     <table class="table table-bordered table-hover jh-po-re" id="datatable">
                         <thead>
                             <tr>
-                                <th class="text-center">编辑</th>
-                                <th class="text-center">姓名</th>
-                                <th class="text-center">产品名称</th>
-                                <th class="text-center">咨询师</th>
-                                <th class="text-center">咨询顾问</th>
-                                <th class="text-center">访问类型</th>
-                                <th class="text-center">咨客判定</th>
-                                <th class="text-center">续流状态</th>
-                                <th class="text-center">购买单价(¥/次)</th>
-                                <th class="text-center">购买课时(次)</th>
-                                <th class="text-center">购买折扣(%)</th>
-                                <th class="text-center">购买时间</th>
+                                <th class="text-center;">编辑</th>
+                                <th class="text-center;">姓名</th>
+                                <th class="text-center;">产品名称</th>
+                                <th class="text-center;">咨询师</th>
+                                <th class="text-center;">咨询顾问</th>
+                                <th class="text-center;">访问类型</th>
+                                <th class="text-center;">咨客判定</th>
+                                <th class="text-center;">续流状态</th>
+                                <th class="text-center;">购买单价(¥/次)</th>
+                                <th class="text-center;">购买课时(次)</th>
+                                <th class="text-center;">购买折扣(%)</th>
+                                <th class="text-center;">购买时间</th>
 <!--                                <th class="text-center">开始时间</th>-->
 <!--                                <th class="text-center">结束时间</th>-->
-                                <th class="text-center">实交金额</th>
-                                <th class="text-center">交费方式</th>
-                                <th class="text-center">操作人</th>
-                                <th class="text-center">是否全款</th>
+                                <th class="text-center;">实交金额</th>
+                                <th class="text-center;">交费方式</th>
+                                <th class="text-center;">操作人</th>
+                                <th class="text-center;">是否全款</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -110,23 +110,23 @@
                                     <label :for="'edit'+(index+1)" class="editlabel"></label>
 
                                 </td>
-                                <td class="text-center">{{item.memName}}</td>
-                                <td class="text-center">{{item.proName}}</td>
-                                <td class="text-center">{{item.couName}}</td>
-                                <td class="text-center">{{item.empName}}</td>
-                                <td class="text-center">{{item.visitType | formatVisit}}</td>
-                                <td class="text-center">{{item.vsName}}</td>
-                                <td class="text-center">{{item.csName}}</td>
-                                <td class="text-center">{{item.price}}</td>
-                                <td class="text-center">{{item.totalCount}}</td>
-                                <td class="text-center">{{item.discount}}</td>
-                                <td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+                                <td class="text-center;">{{item.memName}}</td>
+                                <td class="text-center;">{{item.proName}}</td>
+                                <td class="text-center;">{{item.couName}}</td>
+                                <td class="text-center;">{{item.empName}}</td>
+                                <td class="text-center;">{{item.visitType | formatVisit}}</td>
+                                <td class="text-center;">{{item.vsName}}</td>
+                                <td class="text-center;">{{item.csName}}</td>
+                                <td class="text-center;">{{item.price}}</td>
+                                <td class="text-center;">{{item.totalCount}}</td>
+                                <td class="text-center;">{{item.discount}}</td>
+                                <td class="text-center;">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 <!--                                <td class="text-center">{{item.startDate | dateFormatFilter("YYYY-MM-DD")}}</td>-->
 <!--                                <td class="text-center">{{item.endDate | dateFormatFilter("YYYY-MM-DD")}}</td>-->
-                                <td class="text-center">{{item.realCross}}</td>
-                                <td class="text-center">{{item.psName}}</td>
-                                <td class="text-center">{{item.operatorName}}</td>
-                                <td class="text-center">{{item.isArrears | formatIsArrears}}</td>
+                                <td class="text-center;">{{item.realCross}}</td>
+                                <td class="text-center;">{{item.psName}}</td>
+                                <td class="text-center;">{{item.operatorName}}</td>
+                                <td class="text-center;">{{item.isArrears | formatIsArrears}}</td>
                             </tr>
 
 
@@ -513,4 +513,5 @@
         }
     }
     #newsnumber{padding:0 5px; background-color: red; color: #fff; border-radius: 50%; margin-left: -15px;margin-top: -10px;}
+   #datatable td{}
 </style>

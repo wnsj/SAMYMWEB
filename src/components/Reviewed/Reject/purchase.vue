@@ -94,8 +94,8 @@
                 <el-table-column prop="isArrears" :formatter="arrearsFormat" label="是否全款" width="100"
                                  align="center"></el-table-column>
                 <el-table-column prop="auditStateName" label="审核状态" width="100" align="center"></el-table-column>
-                <el-table-column prop="shopOwnerName" label="店长" width="100" align="center"></el-table-column>
-                <el-table-column prop="financeName" label="财务" width="100" align="center"></el-table-column>
+                <el-table-column prop="shopowner" label="店长" width="100" align="center"></el-table-column>
+                <el-table-column prop="finance" label="财务" width="100" align="center"></el-table-column>
                 <el-table-column prop="rejectTime" :formatter="dateFormat" label="审核时间" width="100"
                                  align="center"></el-table-column>
                 <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>

@@ -94,7 +94,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(item,index) in approveFindList" :key="index">
+                            <tr v-for="(item,index) in approveFindList" :key="index" @dblclick="showDetails(item)">
                                 <td class="text-center editradio-box">
                                     <input :id="'edit'+(index+1)" class="editradio" type="radio" name="复选框" :value="index"
                                            v-model="checkedValue"/>
@@ -135,6 +135,15 @@
                 </div>
             </div>
         </div>
+        <div class="row row_edit">
+            <div class="modal fade" id="consumptionModal">
+                <div class="modal-dialog wd1000">
+                    <infoDetail ref='infoDetail'></infoDetail>
+                </div>
+            </div>
+        </div>
+        
+        
     </div>
 
 </template>
@@ -149,12 +158,14 @@
     import dPicker from 'vue2-datepicker'
     import Paging from '../../common/paging'
     import rejection from '../../MP/SubRecharge/rejection.vue'
+    import infoDetail from '../../MP/SubRecharge/auditInfoDetail.vue'
     export default {
         components: {
           store,
           dPicker,
           Paging,
           rejection,
+          infoDetail
         },
         data() {
             return {
@@ -186,7 +197,14 @@
         	    return val == 1 ? "初访":"复访"
         	}
         },
+        
         methods: {
+            showDetails(row) {
+                // console.log(row);
+                this.selectItem = row;
+                this.$refs.infoDetail.initData('consumption', this.selectItem)
+                $('#consumptionModal').modal('show')
+            },
             //子级传值到父级上来的动态拿去
             pageChange: function (page) {
                 this.page = page

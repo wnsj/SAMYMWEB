@@ -465,9 +465,9 @@
 					receipt: param.receipt, //收据
 					visitState: param.visitState, //访问状态
 					continState: param.continState, //续流状态
-					diseaseType: null, //咨询方向
+					diseaseType: param.diseaseType, //咨询方向
 					diseaseProblem: param.diseaseProblem, //咨询问题
-					counseRoom: null, //咨询室
+					counseRoom: param.counseRoom, //咨询室
 					actualBegDate: param.actualBegDate, //实际开始时间
 					actualEndDate: param.actualEndDate, //实际结束时间
 					cashId: param.cashId, //现金id

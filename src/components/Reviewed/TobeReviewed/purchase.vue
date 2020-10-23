@@ -221,7 +221,7 @@
         },
         methods: {
             showDetails(row) {
-                console.log(row);
+                //console.log(row);
                 this.selectItem = row;
                 this.$refs.infoDetail.initData('purchase', this.selectItem)
                 $('#purchaseModal').modal('show')

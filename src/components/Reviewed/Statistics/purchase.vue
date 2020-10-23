@@ -60,7 +60,7 @@
                            <store ref="store" @storeChange='storeChange'></store>
                        </div>
                 </div>
-                 
+
                 <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
                         data-toggle="modal"
                         v-on:click="exportTable()">导出
@@ -102,8 +102,8 @@
                  <el-table-column prop="isArrears" label="是否全款" :formatter="resetArrears" width="100" align="center"></el-table-column>
                  <el-table-column prop="auditStateName" label="审核状态" width="100" align="center"></el-table-column>
                  <el-table-column prop="storeName" label="门店" width="100" align="center"></el-table-column>
-                 <el-table-column prop="shopOwnerName" label="店长" width="100" align="center"></el-table-column>
-				 <el-table-column prop="financeName" label="财务" width="100" align="center"></el-table-column>
+                 <el-table-column prop="shopowner" label="店长" width="100" align="center"></el-table-column>
+				 <el-table-column prop="finance" label="财务" width="100" align="center"></el-table-column>
                  <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
             </el-table>

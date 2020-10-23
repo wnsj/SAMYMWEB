@@ -1,11 +1,11 @@
 <!-- add and modify consume -->
 <template>
-	<div class="modal-content">
+	<div class="modal-content" >
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
 			<h2 id="myModalLabel" class="modal-title">产品消费驳回修改</h2>
 		</div>
-		<div class="modal-body pos_r jh-mh-sc">
+		<div class="modal-body pos_r jh-mh-sc" v-if="destroy">
 			<div class="tab-pane fade in active martop" id="basic">
 				<div class="col-md-6 form-group clearfix jh-wd-33">
                     <b>*</b>
@@ -334,6 +334,8 @@
 		},
 		data() {
 			return {
+                destroy: true,
+                firstFlag: false,
 				counselorList: [],
 				consume: {
                     proStyle: '',
@@ -404,9 +406,18 @@
 			};
 		},
 		methods: {
+            // destroyDom() {
+            //     this.destroy = false
+            //     this.$nextTick(()=>{
+            //         this.destroy = true
+            //     })
+
+            // },
 			// Initialization consume’s content
 			initData(param) {
+                this.firstFlag = false
                 console.log(param)
+                console.log(param.visitState)
 
 
 				$('#customContent').modal({
@@ -414,6 +425,7 @@
 					keyboard: false
 				});
 				this.consume = {
+                    proStyle: param.proType,
                     startTime: param.createDate,
                     piId: param.piId,
                     sourceId: param.sourceId,
@@ -422,7 +434,7 @@
 					phone: param.phone,
 					appNum: param.appNum, //预约号
 					receivable: param.receivable, //应交
-					realCross: 0, //实缴
+					realCross: param.realCross, //实缴
 					proId: param.proId, //项目id
                     proType: param.proType,  //0:体验课（即单次）1:正式课
 					discount: param.discount, //折扣
@@ -445,7 +457,7 @@
 					operatorId: this.accountId(), //操作人
 					firstCharge: param.firstCharge,
 					/** 1:实体卡首充（不计算提成） 0:计算 */
-					consumCount: 0, //消费次数
+					consumCount: param.consumCount, //消费次数
 					visitType: param.visitType,
 					payType: param.payType, //支付方式
 					appNumber:'',//小程序编号
@@ -456,14 +468,17 @@
 					diseaseType: null, //咨询方向
 					diseaseProblem: param.diseaseProblem, //咨询问题
 					counseRoom: null, //咨询室
-					actualBegDate: null, //实际开始时间
-					actualEndDate: null, //实际结束时间
+					actualBegDate: param.actualBegDate, //实际开始时间
+					actualEndDate: param.actualEndDate, //实际结束时间
 					cashId: param.cashId, //现金id
-					accompany: null, //陪同人
-					companionship: null, //陪同人关系
+					accompany: param.accompany, //陪同人
+					companionship: param.companionship, //陪同人关系
 					cashMoney: param.cashMoney,
-                    cId: param.sourceId
+                    cId: param.sourceId,
+                    preFoldTotalPrice: parseInt(param.totalCount) * parseInt(param.price)
 				}
+
+
 				this.cash = {
 					cashId: '',
 					memNum: '',
@@ -478,13 +493,20 @@
 				this.isSelect = true
 				this.consumeReceivable = 0
 				this.$refs.counselorEmp.setPosName("咨询师")
-				this.$refs.counselorEmp.setEmp("")
+				this.$refs.counselorEmp.setEmp(param.counselor)
 				this.$refs.emp.setPosName("咨询顾问")
-				this.$refs.emp.setEmp("")
-				this.$refs.project.setEmpId("0")
+				this.$refs.emp.setEmp(param.empId)
+
+                this.$refs.project.setEmpId(param.counselor,1)
+                this.$refs.project.setProject(param.proId)
+				// this.$refs.project.setEmpId("0")
 				this.queryUnfinishedPro(param.memNum)
-				this.$refs.VisitStateRef.setObj('0')
-				this.$refs.ContinStateRef.setObj('0')
+				this.$refs.VisitStateRef.setObj(param.visitState)
+				this.$refs.ContinStateRef.setObj(param.continState)
+                this.$refs.payStyle.setPsId(param.payType)
+                this.$refs.diseaseTypeRef.setObj(param.diseaseType)
+                this.$refs.counseRoomRef.setChaId(param.counseRoom)
+
 				this.selectObj = null
 				this.projectFlag = false
 				this.counselorFlag = false
@@ -503,19 +525,25 @@
 				} else {
 					this.consume.counselor = param.empId
 					if (!this.projectFlag) {
+
 						if(this.selectObj==null){
 							// console.log("nilaile")
 							this.$refs.project.setEmpId(this.consume.counselor,2)
 						}else{
 							this.$refs.project.setEmpId(this.consume.counselor,1)
 						}
-						this.$refs.project.setProject(0)
-						this.consume.price = 0
-						this.consume.actualCount = 0
-						this.consume.discount = 0
-						this.consume.receivable = 0
-						this.consume.realCross = 0
-						this.consumeReceivable = 0
+
+                        if (this.firstFlag) {
+                            this.$refs.project.setProject(0)
+                            this.consume.price = 0
+                            this.consume.actualCount = 0
+                            this.consume.discount = 0
+                            this.consume.receivable = 0
+                            this.consume.realCross = 0
+                            this.consumeReceivable = 0
+                        }
+                        this.firstFlag = true
+
 					}
 				}
 			},
@@ -611,6 +639,12 @@
 					alert("续流状态不能为空!")
 					return;
 				}
+
+                if (this.isBlank(this.consume.payType)) {
+                	alert("交费方式不能为空!")
+                	return;
+                }
+
 				if (this.isBlank(this.consume.diseaseType)) {
 					alert("咨询方向不能为空!")
 					return;

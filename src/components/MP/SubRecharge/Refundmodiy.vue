@@ -185,16 +185,16 @@
                 this.sourceId = param.sourceId;
 				this.refund = {
                     startTime: param.createDate,
-					consumCount: 0, //退课时
+					consumCount: param.refCount, //退课时
 					receivable: '', //应退金额
 					memNum: param.memNum, //会员号
 					memName: param.memName, //会员名
 					phone: param.phone, //手机
 					piId: param.piId, //产品Id
-					realCross: '', //应退金额
-					balance: '', //违约金
+					realCross: param.realRefund, //应退金额
+					balance: param.breakContract, //违约金
 					operatorId: this.accountId(), //操作人
-					money: 0, //退费金额
+					money: param.momey, //退费金额
                     proId: param.proId,
                     price: param.price,
                     counselor: param.counselor,

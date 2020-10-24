@@ -70,7 +70,7 @@
             </button>
         </div>
 
-        <div class="">
+        <div class="tableBox">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover jh-po-re" id="datatable">
@@ -118,7 +118,6 @@
                         </tbody>
                     </table>
                 </div>
-				<!-- <p class="tips">* 双击单行，可对当前数据进行修改</p> -->
                 <!--分页插件-->
                 <div class="page">
                     <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
@@ -142,8 +141,8 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
     </div>
 
 </template>
@@ -197,7 +196,7 @@
         	    return val == 1 ? "初访":"复访"
         	}
         },
-        
+
         methods: {
             showDetails(row) {
                 // console.log(row);

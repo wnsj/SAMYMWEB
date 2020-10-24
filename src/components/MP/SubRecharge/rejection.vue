@@ -43,6 +43,7 @@
 		},
 		methods: {
             initData(flag,param) {
+
                 this.param = {
                     rejectReason: '',
                     operatorId: this.accountId()
@@ -59,10 +60,10 @@
                     this.oTitle = '消费'
                     this.param.piId = param.piId;
                     this.param.cId = param.cid;
-                    // this.param.createDate = param.createDate;
-                    if (!this.isBlank(param.createDate)) {
-                    	this.param.createDate = this.moment(param.createDate, 'YYYY-MM-DD 00:00:00.000')
-                    }
+                    this.param.createDate = param.createDate;
+                    // if (!this.isBlank(param.createDate)) {
+                    // 	this.param.createDate = this.moment(param.createDate, 'YYYY-MM-DD 00:00:00.000')
+                    // }
 
                 } else if (flag == 'refund') {
                     this.oTitle = '退费'
@@ -120,7 +121,7 @@
                     var res = response.data
                     console.log(res)
                     if (res.retCode == '0000') {
-                       
+
                         this.$alert(res.retMsg, '提示', {
                           confirmButtonText: '确定',
                           type: 'success',

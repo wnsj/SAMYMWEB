@@ -228,6 +228,8 @@
                     min-width="100">
                 </el-table-column>
             </el-table>
+            <p class="tips" v-if="tipsFlag">* 有数据未完成审核流程，请尽快完成审核。避免影响汇总数据</p>
+            
             <el-row class="second_interval">
                 <el-col :span="24">
                     <el-pagination
@@ -243,6 +245,7 @@
                 </el-col>
             </el-row>
         </div>
+        
     </div>
 </template>
 
@@ -287,8 +290,18 @@
                     }
                 },
                 accountType: this.accountType(),
+                tipsFlag: false
             };
         },
+        watch:{
+             '$store.getters.getAuditStatus'(val, oldVal){  //监听store
+                 if (val == '1') {
+                     this.tipsFlag = false
+                 } else {
+                     this.tipsFlag = true
+                 }
+             }
+         },
         methods: {
 
             // 表格表头样式
@@ -421,6 +434,11 @@
             },
         },
         created() {
+            if (this.$store.state.allAuditStatus == '1') {
+                this.tipsFlag = false
+            } else {
+                this.tipsFlag = true
+            }
             this.getStore()
             this.getCou()
             this.getEmp()

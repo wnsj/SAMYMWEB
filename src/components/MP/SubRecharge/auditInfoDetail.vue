@@ -178,7 +178,32 @@
                       <span class="sign-left">:</span>
                   	<p class="col-md-7 dtrowP">{{param.buyTime | dateFormatFilter("YYYY-MM-DD")}}</p>
                   </div>
+                  <div class="col-md-4 nopad">
+                  	<label class="col-md-4 " >手机号</label>
+                      <span class="sign-left">:</span>
+                  	<p class="col-md-7 dtrowP">{{param.phone}}</p>
+                  </div>
               </div>
+              <!-- <div class="row dtrow">
+                  <div class="col-md-4 nopad">
+                  	<label class="col-md-4 " >应收金额</label>
+                      <span class="sign-left">:</span>
+                  	<p class="col-md-7 dtrowP">{{param.receivable }}</p>
+                  </div>
+                  <div class="col-md-4 nopad">
+                  	<label class="col-md-4 " >购买时间</label>
+                      <span class="sign-left">:</span>
+                  	<p class="col-md-7 dtrowP">{{param.realCross}}</p>
+                  </div>
+                  <div class="col-md-4 nopad">
+                  	<label class="col-md-4 " >手机号</label>
+                      <span class="sign-left">:</span>
+                  	<p class="col-md-7 dtrowP">{{param.phone}}</p>
+                  </div>
+              </div>
+ -->
+
+
         </div>
 
         <!-- 退费审核 -->
@@ -234,7 +259,23 @@
                   	<p class="col-md-7 dtrowP">{{param.buyTime | dateFormatFilter("YYYY-MM-DD")}}</p>
                   </div>
               </div>
-
+              <div class="row dtrow">
+                  <div class="col-md-4 nopad">
+                  	<label class="col-md-4 " >手机号</label>
+                      <span class="sign-left">:</span>
+                  	<p class="col-md-7 dtrowP">{{param.phone}}</p>
+                  </div>
+                  <div class="col-md-4 nopad">
+                  	<label class="col-md-4 " >违约总额</label>
+                      <span class="sign-left">:</span>
+                  	<p class="col-md-7 dtrowP">{{param.breakContract}}</p>
+                  </div>
+                  <div class="col-md-4 nopad">
+                  	<label class="col-md-4 " >实退总额</label>
+                      <span class="sign-left">:</span>
+                  	<p class="col-md-7 dtrowP">{{param.realRefund}}</p>
+                  </div>
+              </div>
         </div>
 
 

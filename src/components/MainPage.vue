@@ -12,7 +12,6 @@
             </div>
 
             <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 text-right showName">{{$route.meta.showName}}</div>
-
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right pull-right">
 
                 <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，门店管理系统</p>
@@ -278,9 +277,9 @@
                 Review:{},
 
                 approveNum: 0,
-                msgCount: this.$store.getters.getMsgCount
+                msgCount: this.$store.getters.getMsgCount,
              //   postID:this.accountPosId(), //角色ID
-
+                testnum: 0
 
             }
         },
@@ -349,6 +348,22 @@
                 } else {
                     this.approveNum = this.Review.purFailedNum + this.Review.conFailedNum + this.Review.reFailedNum
                 }
+
+                if (this.Review.purNotReviewNum > 0 ||
+                    this.Review.conNotReviewNum > 0 ||
+                    this.Review.reNotReviewNum > 0 ||
+                    this.Review.purUnderReviewNum > 0 ||
+                    this.Review.conUnderReviewNum > 0 ||
+                    this.Review.reUnderReviewNum > 0 ||
+                    this.Review.purFailedNum > 0 ||
+                    this.Review.conFailedNum > 0 ||
+                    this.Review.reFailedNum > 0) {
+
+                    this.$store.commit('changeAuditStatus','2') //有未完成的审核
+                } else {
+                    this.$store.commit('changeAuditStatus','1') //完成所有审核
+                }
+
             },
 
              //查询消息
@@ -432,10 +447,7 @@
                 Cookies.remove("upValueList");
                 this.$parent.setRouter("/login");
             },
-            // add(){
-            //     this.$store.commit('addCount',1)
-
-            // }
+            
 
         },
         mounted() {

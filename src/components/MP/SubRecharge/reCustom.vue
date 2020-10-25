@@ -412,14 +412,13 @@
             //     this.$nextTick(()=>{
             //         this.destroy = true
             //     })
-
             // },
 			// Initialization consume’s content
 			initData(param) {
                 this.firstFlag = false
                 console.log(param)
                 console.log(param.visitState)
-
+                // this.clickItemObj.itemId = 0
 				$('#customContent').modal({
 					backdrop: 'static',
 					keyboard: false
@@ -510,10 +509,14 @@
 				this.selectObj = null
 				this.projectFlag = false
 				this.counselorFlag = false
-				this.dateArr = []
+				// this.dateArr[0] = param.actualBegDate
+    //             this.dateArr[1] = param.actualEndDate
+    //             console.log(this.dateArr)
+
 				$("input[name='radioGroup']").prop("checked", "");
 				this.checkMemCash(param.visId)
-			},
+                this.oRadioGroup = ''
+ 			},
             // 格式化时间
             dateFormat: function (cellValue) {
                 return dateUtil.getFormateDateYMD(cellValue)
@@ -818,23 +821,16 @@
 						this.unfinishedProList = res.retData
                         this.unfinishedProList.forEach((item, index)=>{
                             if (item.piId == piId) {
-                                console.log(item)
-                                console.log(index)
-                                // this.oRadioGroup = index
+                                // console.log(item)
+                                // console.log(index)
+                                this.oRadioGroup = index
                                 this.clickItemObj.itemId = item.piId
+                                this.clickItemObj.count = 0
                                 this.selectObj = item
                                 this.projectFlag = true
                                 this.counselorFlag = true
-
                             }
                         })
-
-
-                        // this.radioClick($event, this.unfinishedProList[2])
-                        // this.oRadioGroup = 2;
-                        // this.selectObj = this.unfinishedProList[2];
-                        // this.projectFlag = true;
-
 
 					} else {
 						alert(res.retMsg)
@@ -1096,6 +1092,9 @@
 			this.$refs.VisitStateRef.getObj(1, 1)
 			this.$refs.ContinStateRef.getObj(1, 2)
 		},
+        // created() {
+        //     this.destroyDom()
+        // }
 
 	}
 </script>

@@ -52,8 +52,8 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="item in unfinishedProList">
-									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
+								<tr v-for="(item,index) in unfinishedProList" :key="index">
+									<td><input v-model="oRadioGroup" :value="index"  type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -334,6 +334,7 @@
 		},
 		data() {
 			return {
+                oRadioGroup:'',
                 destroy: true,
                 firstFlag: false,
 				counselorList: [],
@@ -419,7 +420,6 @@
                 console.log(param)
                 console.log(param.visitState)
 
-
 				$('#customContent').modal({
 					backdrop: 'static',
 					keyboard: false
@@ -500,7 +500,7 @@
                 this.$refs.project.setEmpId(param.counselor,1)
                 this.$refs.project.setProject(param.proId)
 				// this.$refs.project.setEmpId("0")
-				this.queryUnfinishedPro(param.memNum)
+				this.queryUnfinishedPro(param.memNum, param.piId,)
 				this.$refs.VisitStateRef.setObj(param.visitState)
 				this.$refs.ContinStateRef.setObj(param.continState)
                 this.$refs.payStyle.setPsId(param.payType)
@@ -797,7 +797,8 @@
 				});
 			},
 			//查询已购买产品
-			queryUnfinishedPro(param) {
+			queryUnfinishedPro(param, piId) {
+                console.log(piId)
 				if (this.isBlank(param)) return
 				var url = this.url + '/purchasedItemsAction/queryUnfinishedPro'
 				this.$ajax({
@@ -815,6 +816,26 @@
 					var res = response.data
 					if (res.retCode == '0000') {
 						this.unfinishedProList = res.retData
+                        this.unfinishedProList.forEach((item, index)=>{
+                            if (item.piId == piId) {
+                                console.log(item)
+                                console.log(index)
+                                // this.oRadioGroup = index
+                                this.clickItemObj.itemId = item.piId
+                                this.selectObj = item
+                                this.projectFlag = true
+                                this.counselorFlag = true
+
+                            }
+                        })
+
+
+                        // this.radioClick($event, this.unfinishedProList[2])
+                        // this.oRadioGroup = 2;
+                        // this.selectObj = this.unfinishedProList[2];
+                        // this.projectFlag = true;
+
+
 					} else {
 						alert(res.retMsg)
 					}
@@ -824,7 +845,7 @@
 			},
 			//单选框选中处理
 			radioClick(e, item) {
-				if (this.clickItemObj.itemId == 0) {
+ 				if (this.clickItemObj.itemId == 0) {
 					this.selectObj = item;
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1

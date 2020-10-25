@@ -258,6 +258,7 @@
             },
             //feedback from adding and modifying view
             feedBack(data) {
+                console.log(data)
                 if (data == 'succ'){
                     this.getApproveFind(1)
                     this.objectContent = {}

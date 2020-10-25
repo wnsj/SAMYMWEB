@@ -91,8 +91,26 @@
                       <span class="sign-left">:</span>
                   	<p class="col-md-7 dtrowP">{{param.isArrears | formatIsArrears}}</p>
                   </div>
+              </div>
+              <div class="row dtrow">
+                  <div class="col-md-4 nopad">
+                  	<label class="col-md-4 " >联系方式</label>
+                      <span class="sign-left">:</span>
+                  	<p class="col-md-7 dtrowP">{{param.phone}}</p>
+                  </div>
+                  <div class="col-md-4 nopad">
+                  	<label class="col-md-4 " >折前总额</label>
+                      <span class="sign-left">:</span>
+                  	<p class="col-md-7 dtrowP">{{param.totalCount * param.price}}</p>
+                  </div>
+                  <div class="col-md-4 nopad">
+                  	<label class="col-md-4 " >折后总额</label>
+                      <span class="sign-left">:</span>
+                  	<p class="col-md-7 dtrowP">{{param.totalCount * param.price * (param.discount /100)}}</p>
+                  </div>
 
               </div>
+
   		</div>
 
         <!-- 消费审核 -->
@@ -184,24 +202,47 @@
                   	<p class="col-md-7 dtrowP">{{param.phone}}</p>
                   </div>
               </div>
-              <!-- <div class="row dtrow">
+              <div class="row dtrow">
                   <div class="col-md-4 nopad">
                   	<label class="col-md-4 " >应收金额</label>
                       <span class="sign-left">:</span>
-                  	<p class="col-md-7 dtrowP">{{param.receivable }}</p>
+                  	<p class="col-md-7 dtrowP">{{param.receivable}}</p>
                   </div>
                   <div class="col-md-4 nopad">
-                  	<label class="col-md-4 " >购买时间</label>
+                  	<label class="col-md-4 " >陪同人</label>
                       <span class="sign-left">:</span>
-                  	<p class="col-md-7 dtrowP">{{param.realCross}}</p>
+                  	<p class="col-md-7 dtrowP">{{param.accompany }}</p>
                   </div>
                   <div class="col-md-4 nopad">
-                  	<label class="col-md-4 " >手机号</label>
+                  	<label class="col-md-4 " >陪同人关系</label>
                       <span class="sign-left">:</span>
-                  	<p class="col-md-7 dtrowP">{{param.phone}}</p>
+                  	<p class="col-md-7 dtrowP">{{param.companionship}}</p>
                   </div>
               </div>
- -->
+              <div class="row dtrow">
+                  <div class="col-md-4 nopad">
+                  	<label class="col-md-4 " >开始时间</label>
+                      <span class="sign-left">:</span>
+                  	<p class="col-md-7 dtrowP">{{param.actualBegDate}}</p>
+                  </div>
+                  <div class="col-md-4 nopad">
+                  	<label class="col-md-4 " >结束时间</label>
+                      <span class="sign-left">:</span>
+                  	<p class="col-md-7 dtrowP">{{param.actualEndDate }}</p>
+                  </div>
+                  <div class="col-md-4 nopad">
+                  	<label class="col-md-4 " >折前总额</label>
+                      <span class="sign-left">:</span>
+                  	<p class="col-md-7 dtrowP">{{param.totalCount * param.price}}</p>
+                  </div>
+              </div>
+              <div class="row dtrow">
+                  <div class="col-md-4 nopad">
+                  	<label class="col-md-4 " >折后总额</label>
+                      <span class="sign-left">:</span>
+                  	<p class="col-md-7 dtrowP">{{param.totalCount * param.price * (param.discount / 100)}}</p>
+                  </div>
+              </div>
 
 
         </div>
@@ -327,6 +368,6 @@
 </script>
 
 <style>
-.dtrow{line-height: 34px;font-size: 14px;}
+.dtrow{line-height: 34px;font-size: 14px;margin-bottom: 10px;}
 .dtrowP{border-bottom:1px solid #555;margin-left: 5px;height: 34px;line-height: 34px;}
 </style>

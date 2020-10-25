@@ -108,7 +108,13 @@
                       <span class="sign-left">:</span>
                   	<p class="col-md-7 dtrowP">{{param.totalCount * param.price * (param.discount /100)}}</p>
                   </div>
-
+              </div>
+              <div class="row dtrow">
+                  <div class="col-md-4 nopad">
+                  	<label class="col-md-4 " >定金金额</label>
+                      <span class="sign-left">:</span>
+                  	<p class="col-md-7 dtrowP">{{param.cashMoney}}</p>
+                  </div>
               </div>
 
   		</div>

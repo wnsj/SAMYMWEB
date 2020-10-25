@@ -50,8 +50,8 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr v-for="item in unfinishedProList">
-										<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
+									<tr v-for="(item,index) in unfinishedProList" :key="index">
+										<td><input type="radio" name="radioGroup" :value="index" v-model="oRadioGroup" @click="radioClick($event,item)" /></td>
 										<td>{{item.proName}}</td>
 										<td>{{item.counselorName}}</td>
 										<td>{{transforProType(item.proType)}}</td>
@@ -171,6 +171,7 @@
 					consumCount: '',
 					actualCount: '',
 				},
+                oRadioGroup: ''
 			};
 		},
 		methods: {
@@ -206,13 +207,14 @@
 
 				}
 				this.isShow = true
-				this.queryUnfinishedPro(param.memNum)
+				this.queryUnfinishedPro(param.memNum, param.piId)
 				this.clickItemObj = null;
 				$("input[name='radioGroup']").prop("checked", "");
 				this.clickItemObj = {
 					itemId: 0,
 					count: 0
 				}
+                this.oRadioGroup = ''
 			},
 			//公共请求方法,返回响应数据
 			requestData(url, rquestParam) {
@@ -331,7 +333,8 @@
 				});
 			},
 			//查询已购买产品
-			queryUnfinishedPro(param) {
+			queryUnfinishedPro(param, piId) {
+                // console.log(piId)
 				if (this.isBlank(param)) return
 				var url = this.url + '/purchasedItemsAction/queryUnfinishedPro'
 				var data = {
@@ -341,6 +344,18 @@
 				this.requestData(url, data).then((response) => {
 					if (response.retCode == '0000') {
 						this.unfinishedProList = response.retData
+                        this.unfinishedProList.forEach((item, index)=>{
+                            if (item.piId == piId) {
+                                this.oRadioGroup = index
+                                this.clickItemObj.itemId = item.piId
+                                this.clickItemObj.count = 0
+                                this.selectObj = item
+                                this.projectFlag = true
+                                this.counselorFlag = true
+                            }
+                        })
+
+
 					} else {
 						alert(response.retMsg)
 					}

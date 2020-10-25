@@ -124,6 +124,7 @@
                         </tbody>
                     </table>
                 </div>
+                <p class="tips" v-if="tipsFlag">* 有数据未完成审核流程，请尽快完成审核。避免影响汇总数据</p>
                 <!--分页插件-->
                 <div class="page">
                     <!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
@@ -180,9 +181,19 @@
                 pageSize: 10, //一页显示的数量
                 total: '', //数据的数量
 				payType:'',
-                addClass: false
+                addClass: false,
+                tipsFlag: false
             };
         },
+        watch:{
+             '$store.getters.getAuditStatus'(val, oldVal){  //监听store
+                 if (val == '1') {
+                     this.tipsFlag = false
+                 } else {
+                     this.tipsFlag = true
+                 }
+             }
+         },
         methods: {
             dataOpen(){
                 if(this.showSelect) return
@@ -191,7 +202,7 @@
             dataClose(){
                 this.showSelect = !this.showSelect
                 this.addClass = true;
-            
+
                 setTimeout(()=>{
                     this.addClass = false;
                 },400)
@@ -253,7 +264,7 @@
                     console.log(error);
                 })
             },
-            
+
             //check the list of store
             queryObjectList(page) {
                 this.showSelect = false
@@ -332,7 +343,11 @@
             init();
         },
         created() {
-
+            if (this.$store.state.allAuditStatus == '1') {
+                this.tipsFlag = false
+            } else {
+                this.tipsFlag = true
+            }
         }
     }
 </script>

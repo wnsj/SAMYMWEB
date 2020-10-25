@@ -16,10 +16,10 @@
         vsName: '',
         vsId:'0',
         objList: [],
-				obj:{
-					vsId:'',
-					vsName: '',
-				},
+        obj:{
+            vsId:'',
+            vsName: '',
+        },
       };
     },
     methods: {

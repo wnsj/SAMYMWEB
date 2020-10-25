@@ -174,6 +174,9 @@
 						</tbody>
 					</table>
 				</div>
+                
+                <p class="tips" v-if="tipsFlag">* 有数据未完成审核流程，请尽快完成审核。避免影响汇总数据</p>
+                
 				<!--分页插件-->
 				<div class="page">
 					<!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
@@ -243,9 +246,19 @@
 				judgeState:'',//咨客判定
 				continueState:'',//续流状态
                 addClass: false,
-				showSelect:true
+				showSelect:true,
+                tipsFlag: false
 			};
 		},
+        watch:{
+             '$store.getters.getAuditStatus'(val, oldVal){  //监听store
+                 if (val == '1') {
+                     this.tipsFlag = false
+                 } else {
+                     this.tipsFlag = true
+                 }
+             }
+         },
 		methods: {
 			//子级传值到父级上来的动态拿去
 			pageChange: function(page) {
@@ -452,6 +465,11 @@
 		    this.$refs.continueStateRef.getObj(1, 2)
 		},
 		created:function() {
+            if (this.$store.state.allAuditStatus == '1') {
+                this.tipsFlag = false
+            } else {
+                this.tipsFlag = true
+            }
 			//this.conditionCheck(1)
 		}
 	}

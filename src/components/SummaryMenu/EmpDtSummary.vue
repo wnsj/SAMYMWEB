@@ -86,6 +86,9 @@
                 </el-table>
             </el-tab-pane>
         </el-tabs>
+        
+        <p class="tips" v-if="tipsFlag">* 有数据未完成审核流程，请尽快完成审核。避免影响汇总数据</p>
+        
     </div>
 
 </template>
@@ -134,8 +137,18 @@
                     }
                 },
                 accountType: this.accountType(),
+                tipsFlag: false
             };
         },
+        watch:{
+             '$store.getters.getAuditStatus'(val, oldVal){  //监听store
+                 if (val == '1') {
+                     this.tipsFlag = false
+                 } else {
+                     this.tipsFlag = true
+                 }
+             }
+         },
         methods: {
             //子级传值到父级上来的动态拿去
             pageChange: function (page) {
@@ -207,6 +220,11 @@
             },
         },
         created() {
+            if (this.$store.state.allAuditStatus == '1') {
+                this.tipsFlag = false
+            } else {
+                this.tipsFlag = true
+            }
             //this.queryObjectList()
         }
     }

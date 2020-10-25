@@ -22,7 +22,9 @@
 						<b>*</b>
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">咨询师</label><span class="sign-left">:</span>
                         <div class="col-md-8">
-                            <emp ref='emp' @employeeChange='empChange'></emp>
+                            <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+                                <emp ref='emp' :class="{ inputErr: errors[0] }" @employeeChange='empChange'></emp> <span class="err-msg">{{ errors[0] }}</span>
+                            </ValidationProvider>
                         </div>
                     </div>
                     <div class="col-md-4 form-group clearfix jh-wd-33">

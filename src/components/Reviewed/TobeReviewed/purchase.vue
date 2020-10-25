@@ -29,16 +29,16 @@
              </div>
 
              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<div class="col-md-3 col-lg-3 text-right nopad SSwid20">
-						<p class="end-aline col-md-11 col-lg-11" >产品购买日期</p><span class="sign-left">:</span>
+					<div class="col-md-3 col-lg-3 text-right nopad SSwid20" style="width: 20%;">
+						<p class="end-aline col-md-11 col-lg-11" >购买日期</p><span class="sign-left">:</span>
 					</div>
-					<div class="col-md-4 col-lg-4 SSwid27">
+					<div class="col-md-4 col-lg-4 SSwid27" style="width: 28%;">
 						<dPicker class="wd100" v-model="begCreateDate"></dPicker>
 					</div>
 					<div class="pull-left end-aline nopad">
 						~
 					</div>
-					<div class="col-md-4 col-lg-4 SSwid27">
+					<div class="col-md-4 col-lg-4 SSwid27" style="width: 28%;">
 						<dPicker class="wd100" v-model="endCreateDate"></dPicker>
 					</div>
 				</div>
@@ -78,28 +78,28 @@
                     <table class="table table-bordered table-hover jh-po-re" id="datatable">
                         <thead>
                             <tr>
-                                <th class="text-center">编辑</th>
-                                <th class="text-center">姓名</th>
-                                <th class="text-center">产品名称</th>
-                                <th class="text-center">咨询师</th>
-                                <th class="text-center">咨询顾问</th>
-                                <th class="text-center">访问类型</th>
-                                <th class="text-center">咨客判定</th>
-                                <th class="text-center">续流状态</th>
-                                <th class="text-center">购买单价(¥/次)</th>
-                                <th class="text-center">购买课时(次)</th>
-                                <th class="text-center">购买折扣(%)</th>
-                                <th class="text-center">购买时间</th>
+                                <th class="text-center;">编辑</th>
+                                <th class="text-center;">姓名</th>
+                                <th class="text-center;">产品名称</th>
+                                <th class="text-center;">咨询师</th>
+                                <th class="text-center;">咨询顾问</th>
+                                <th class="text-center;">访问类型</th>
+                                <th class="text-center;">咨客判定</th>
+                                <th class="text-center;">续流状态</th>
+                                <th class="text-center;">购买单价(¥/次)</th>
+                                <th class="text-center;">购买课时(次)</th>
+                                <th class="text-center;">购买折扣(%)</th>
+                                <th class="text-center;">购买时间</th>
 <!--                                <th class="text-center">开始时间</th>-->
 <!--                                <th class="text-center">结束时间</th>-->
-                                <th class="text-center">实交金额</th>
-                                <th class="text-center">交费方式</th>
-                                <th class="text-center">操作人</th>
-                                <th class="text-center">是否全款</th>
+                                <th class="text-center;">实交金额</th>
+                                <th class="text-center;">交费方式</th>
+                                <th class="text-center;">操作人</th>
+                                <th class="text-center;">是否全款</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(item,index) in productAuditList" :key="index">
+                            <tr v-for="(item,index) in productAuditList" :key="index" @dblclick="showDetails(item)">
                                 <!-- <td class="text-center editradio-box">
                                     <input :id="'edit'" class="editradio" type="radio" name="单选框" :value="1" v-model="checkedValue" />
                                     <label  class="editlabel" :for="'edit'"></label>
@@ -110,23 +110,23 @@
                                     <label :for="'edit'+(index+1)" class="editlabel"></label>
 
                                 </td>
-                                <td class="text-center">{{item.memName}}</td>
-                                <td class="text-center">{{item.proName}}</td>
-                                <td class="text-center">{{item.couName}}</td>
-                                <td class="text-center">{{item.empName}}</td>
-                                <td class="text-center">{{item.visitType | formatVisit}}</td>
-                                <td class="text-center">{{item.vsName}}</td>
-                                <td class="text-center">{{item.csName}}</td>
-                                <td class="text-center">{{item.price}}</td>
-                                <td class="text-center">{{item.totalCount}}</td>
-                                <td class="text-center">{{item.discount}}</td>
-                                <td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+                                <td class="text-center;">{{item.memName}}</td>
+                                <td class="text-center;">{{item.proName}}</td>
+                                <td class="text-center;">{{item.couName}}</td>
+                                <td class="text-center;">{{item.empName}}</td>
+                                <td class="text-center;">{{item.visitType | formatVisit}}</td>
+                                <td class="text-center;">{{item.vsName}}</td>
+                                <td class="text-center;">{{item.csName}}</td>
+                                <td class="text-center;">{{item.price}}</td>
+                                <td class="text-center;">{{item.totalCount}}</td>
+                                <td class="text-center;">{{item.discount}}</td>
+                                <td class="text-center;">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 <!--                                <td class="text-center">{{item.startDate | dateFormatFilter("YYYY-MM-DD")}}</td>-->
 <!--                                <td class="text-center">{{item.endDate | dateFormatFilter("YYYY-MM-DD")}}</td>-->
-                                <td class="text-center">{{item.realCross}}</td>
-                                <td class="text-center">{{item.psName}}</td>
-                                <td class="text-center">{{item.operatorName}}</td>
-                                <td class="text-center">{{item.isArrears | formatIsArrears}}</td>
+                                <td class="text-center;">{{item.realCross}}</td>
+                                <td class="text-center;">{{item.psName}}</td>
+                                <td class="text-center;">{{item.operatorName}}</td>
+                                <td class="text-center;">{{item.isArrears | formatIsArrears}}</td>
                             </tr>
 
 
@@ -150,6 +150,17 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="row row_edit">
+            <div class="modal fade" id="purchaseModal">
+                <div class="modal-dialog wd1000">
+                    <infoDetail ref='infoDetail'></infoDetail>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
 </template>
@@ -164,12 +175,14 @@
     import dPicker from 'vue2-datepicker'
     import Paging from '../../common/paging'
     import rejection from '../../MP/SubRecharge/rejection.vue'
+    import infoDetail from '../../MP/SubRecharge/auditInfoDetail.vue'
     export default {
         components: {
           store,
           dPicker,
           Paging,
           rejection,
+          infoDetail
         },
         data() {
             return {
@@ -193,7 +206,8 @@
                 begCreateDate:'',
                 endCreateDate: '',
                 operatorId: this.accountId(),
-                addClass: false
+                addClass: false,
+                selectItem: ''
 
             };
         },
@@ -206,9 +220,12 @@
             }
         },
         methods: {
-             fatherMethod() {
-                 console.log('测试');
-             },
+            showDetails(row) {
+                //console.log(row);
+                this.selectItem = row;
+                this.$refs.infoDetail.initData('purchase', this.selectItem)
+                $('#purchaseModal').modal('show')
+            },
             //子级传值到父级上来的动态拿去
             pageChange: function (page) {
                 this.current = page
@@ -258,7 +275,7 @@
 
             //导出
             exportTable() {
-                  this.exportTableToExcel('datatable','消费审核表')
+                  this.exportTableToExcel('datatable','产品购买审核表')
             },
             //feedback department information
             positionChange: function (param) {
@@ -496,4 +513,5 @@
         }
     }
     #newsnumber{padding:0 5px; background-color: red; color: #fff; border-radius: 50%; margin-left: -15px;margin-top: -10px;}
+   #datatable td{}
 </style>

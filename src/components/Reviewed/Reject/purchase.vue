@@ -29,16 +29,16 @@
                     </div>
 
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div class="col-md-3 col-lg-3 text-right nopad SSwid20">
+                        <div class="col-md-3 col-lg-3 text-right nopad SSwid20" style="width: 20%;">
                             <p class="end-aline col-md-11 col-lg-11">审核日期</p><span class="sign-left">:</span>
                         </div>
-                        <div class="col-md-4 col-lg-4 SSwid27">
+                        <div class="col-md-4 col-lg-4 SSwid27" style="width: 28%;">
                             <dPicker class="wd100" v-model="auditBegTime"></dPicker>
                         </div>
                         <div class="pull-left end-aline nopad">
                             ~
                         </div>
-                        <div class="col-md-4 col-lg-4 SSwid27">
+                        <div class="col-md-4 col-lg-4 SSwid27" style="width: 28%;">
                             <dPicker class="wd100" v-model="auditEndTime"></dPicker>
                         </div>
                     </div>
@@ -94,8 +94,8 @@
                 <el-table-column prop="isArrears" :formatter="arrearsFormat" label="是否全款" width="100"
                                  align="center"></el-table-column>
                 <el-table-column prop="auditStateName" label="审核状态" width="100" align="center"></el-table-column>
-                <el-table-column prop="shopOwnerName" label="店长" width="100" align="center"></el-table-column>
-                <el-table-column prop="financeName" label="财务" width="100" align="center"></el-table-column>
+                <el-table-column prop="shopowner" label="店长" width="100" align="center"></el-table-column>
+                <el-table-column prop="finance" label="财务" width="100" align="center"></el-table-column>
                 <el-table-column prop="rejectTime" :formatter="dateFormat" label="审核时间" width="100"
                                  align="center"></el-table-column>
                 <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
@@ -202,7 +202,7 @@
             },
             //导出
             exportTable() {
-                this.exportTableToExcel('datatable', '产品购买审核表')
+                this.exportTableToExcel('datatable', '产品购买驳回表')
             },
             //feedback department information
             positionChange: function (param) {
@@ -234,7 +234,7 @@
                 this.auditName = ''
                 this.auditBegTime = ''
                 this.auditEndTime = ''
-                this.getRejectPage(1)
+
             },
             // 翻页
             handleCurrentChange(pageNum) {

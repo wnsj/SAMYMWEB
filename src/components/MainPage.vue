@@ -32,6 +32,7 @@
 
 
                 <!-- <button v-has="'SAMY:MSG'" @click="blocknews()" class="btn btn-warning m_r_10" style="margin-right:20px; margin-top:5px">消息列表</button> -->
+
                 <el-drawer :visible.sync="drawer" :direction="direction"  :before-close="handleClose01" >
                 <p v-show="role == 2" class="newlist">购买申请-待审核<span id="purNot">{{Review.purNotReviewNum == null ? 0:Review.purNotReviewNum }}<i>条</i> </span></p>
                 <p v-show="role == 2" class="newlist">消费申请-待审核<span id="conNot"> {{Review.conNotReviewNum == null ? 0:Review.conNotReviewNum}}<i>条</i> </span></p>
@@ -280,9 +281,11 @@
                 storeId: this.storeId(),  //门店ID
                 direction: 'rtl',
                 Review:{},
+
                 approveNum: 0,
                 msgCount: this.$store.getters.getMsgCount
              //   postID:this.accountPosId(), //角色ID
+
 
             }
         },
@@ -297,10 +300,7 @@
             blocknews(){
                 this.drawer = true;
                 this.newsnews();
-               // alert(this.postID);
             },
-
-
 
 
             handleClose01(done) {

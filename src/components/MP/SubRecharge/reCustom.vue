@@ -509,9 +509,11 @@
 				this.selectObj = null
 				this.projectFlag = false
 				this.counselorFlag = false
-				// this.dateArr[0] = param.actualBegDate
-    //             this.dateArr[1] = param.actualEndDate
-    //             console.log(this.dateArr)
+                this.dateArr = []
+				this.dateArr.push(param.actualBegDate)
+                this.dateArr.push(param.actualEndDate)
+
+                console.log(this.dateArr)
 
 				$("input[name='radioGroup']").prop("checked", "");
 				this.checkMemCash(param.visId)

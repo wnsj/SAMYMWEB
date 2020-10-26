@@ -513,8 +513,6 @@
 				this.dateArr.push(param.actualBegDate)
                 this.dateArr.push(param.actualEndDate)
 
-                console.log(this.dateArr)
-
 				$("input[name='radioGroup']").prop("checked", "");
 				this.checkMemCash(param.visId)
                 this.oRadioGroup = ''

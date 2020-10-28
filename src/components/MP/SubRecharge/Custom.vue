@@ -664,13 +664,13 @@
 					var res = response.data
 					//console.log(res)
 					if (res.retCode == '0000') {
+                        alert(res.retMsg)
 						this.$router.push({
 							name: 'SettleSummary',
 						});
 						this.jumpLeft(2);
 						this.closeCurrentPage()
 						//this.$emit('func2', 'SettleSummary')
-						alert(res.retMsg)
 					} else {
 						alert(res.retMsg)
 					}

@@ -717,6 +717,7 @@
 					var res = response.data
 					//console.log(res)
 					if (res.retCode == '0000') {
+                        alert(res.retMsg)
 						this.$router.push({
 							name: 'SettleSummary',
 						});
@@ -724,7 +725,6 @@
 						this.closeCurrentPage()
 						this.$emit('closeCurrentPage', 'succ')
                         this.$store.commit('addCount',1)
-						alert(res.retMsg)
 					} else {
 						alert(res.retMsg)
 					}

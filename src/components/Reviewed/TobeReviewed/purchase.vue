@@ -93,6 +93,7 @@
 <!--                                <th class="text-center">开始时间</th>-->
 <!--                                <th class="text-center">结束时间</th>-->
                                 <th class="text-center;">实交金额</th>
+                                <th class="text-center;">定金</th>
                                 <th class="text-center;">交费方式</th>
                                 <th class="text-center;">操作人</th>
                                 <th class="text-center;">是否全款</th>
@@ -124,6 +125,7 @@
 <!--                                <td class="text-center">{{item.startDate | dateFormatFilter("YYYY-MM-DD")}}</td>-->
 <!--                                <td class="text-center">{{item.endDate | dateFormatFilter("YYYY-MM-DD")}}</td>-->
                                 <td class="text-center;">{{item.realCross}}</td>
+                                <td class="text-center;">{{item.cashMoney}}</td>
                                 <td class="text-center;">{{item.psName}}</td>
                                 <td class="text-center;">{{item.operatorName}}</td>
                                 <td class="text-center;">{{item.isArrears | formatIsArrears}}</td>

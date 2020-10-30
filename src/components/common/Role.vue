@@ -51,7 +51,7 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						isuse: '1',
+                        urStatus: '1',
 					},
 					dataType: 'json',
 				}).then((response) => {

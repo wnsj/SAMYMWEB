@@ -174,9 +174,9 @@
 						</tbody>
 					</table>
 				</div>
-                
+
                 <p class="tips" v-if="tipsFlag">* 有数据未完成审核流程，请尽快完成审核。避免影响汇总数据</p>
-                
+
 				<!--分页插件-->
 				<div class="page">
 					<!--这里时通过props传值到子级，并有一个回调change的函数，来获取自己传值到父级的值-->
@@ -240,7 +240,7 @@
 				total: '', //数据的数量
 
 				visitType:'',//访问类型
-				payType:'1',//付款方式
+				payType:'',//付款方式
 				couId:'',//咨询师ID
 				proName:'',//课程名称
 				judgeState:'',//咨客判定

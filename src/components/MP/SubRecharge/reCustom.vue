@@ -509,9 +509,9 @@
 				this.selectObj = null
 				this.projectFlag = false
 				this.counselorFlag = false
-				// this.dateArr[0] = param.actualBegDate
-    //             this.dateArr[1] = param.actualEndDate
-    //             console.log(this.dateArr)
+                this.dateArr = []
+				this.dateArr.push(param.actualBegDate)
+                this.dateArr.push(param.actualEndDate)
 
 				$("input[name='radioGroup']").prop("checked", "");
 				this.checkMemCash(param.visId)
@@ -717,6 +717,7 @@
 					var res = response.data
 					//console.log(res)
 					if (res.retCode == '0000') {
+                        alert(res.retMsg)
 						this.$router.push({
 							name: 'SettleSummary',
 						});
@@ -724,7 +725,6 @@
 						this.closeCurrentPage()
 						this.$emit('closeCurrentPage', 'succ')
                         this.$store.commit('addCount',1)
-						alert(res.retMsg)
 					} else {
 						alert(res.retMsg)
 					}

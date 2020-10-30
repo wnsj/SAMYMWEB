@@ -83,6 +83,7 @@
                                 <th class="text-center">课时（小时）</th>
                                 <th class="text-center">折扣（%）</th>
                                 <th class="text-center">消费金额</th>
+                                <th class="text-center">定金</th>
                                 <th class="text-center">咨询师</th>
                                 <th class="text-center">咨询顾问</th>
                                 <th class="text-center">访问类型</th>
@@ -106,6 +107,7 @@
                                 <td class="text-center">{{item.consumCount}}</td>
                                 <td class="text-center">{{item.discount}}</td>
                                 <td class="text-center">{{item.realCross}}</td>
+                                <td class="text-center">{{item.cashMoney}}</td>
                                 <td class="text-center">{{item.visitorName}}</td>
                                 <td class="text-center">{{item.empName}}</td>
                                 <td class="text-center">{{item.visitType | formatVisit}}</td>

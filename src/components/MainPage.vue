@@ -16,7 +16,7 @@
 
                 <p style="color: #1b4fa3;">欢迎<span style="color: #d58512;"> {{accountName}} </span>来到，门店管理系统</p>
 
-                <el-badge :value="approveNum" class="item" style="margin-top: 10px;">
+                <!-- <el-badge :value="approveNum" class="item" style="margin-top: 10px;">
                     <el-button type="info"
                         icon="el-icon-message"
                         circle
@@ -24,7 +24,7 @@
                         @click="blocknews()"
                         size="small">
                    </el-button>
-                </el-badge>
+                </el-badge> -->
 
 
                 <el-drawer :visible.sync="drawer" :direction="direction"  :before-close="handleClose01" >

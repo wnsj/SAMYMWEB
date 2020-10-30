@@ -22,9 +22,9 @@
 						<b>*</b>
                         <label for="cyname" class="col-md-3 control-label text-right nopad end-aline">咨询师</label><span class="sign-left">:</span>
                         <div class="col-md-8">
-                            <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
-                                <emp ref='emp' :class="{ inputErr: errors[0] }" @employeeChange='empChange'></emp> <span class="err-msg">{{ errors[0] }}</span>
-                            </ValidationProvider>
+                            <!-- <ValidationProvider mode="lazy" rules="required" v-slot="{ errors }"> -->
+                                <emp ref='emp'  @employeeChange='empChange'></emp>
+                            <!-- </ValidationProvider> -->
                         </div>
                     </div>
                     <div class="col-md-4 form-group clearfix jh-wd-33">
@@ -277,15 +277,15 @@
             certainAction() {
                 // console.log('the event of addtional button')
 
+				if (this.isBlank(this.project.empId)) {
+                    alert("咨询师不能为空!")
+                    return
+                }
                 /*if (this.isBlank(this.project.proName)) {
                     alert("产品名称不能为空!")
                     return
                 }
-                if (this.isBlank(this.project.empId)) {
-                    alert("咨询师不能为空!")
-                    return
-                    //this.project.empId = null
-                }
+                
 				if (this.isBlank(this.project.totalPrice) || this.project.totalPrice<0) {
 				    alert("折前总价不能为空且大于0!")
 				    return

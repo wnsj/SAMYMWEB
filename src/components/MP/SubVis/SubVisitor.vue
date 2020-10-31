@@ -153,14 +153,14 @@
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<label class="col-md-2 control-label text-right nopad end-aline jh-ad-1">联系地址</label><span class="sign-left">:</span>
-						<div class="col-md-10 wd84">
+						<label class="col-md-1 control-label text-right nopad end-aline jh-ad-1">联系地址</label><span class="sign-left" style="margin-left: 3px;">:</span>
+						<div class="col-md-12" style="padding: 0;">
 							<input type="text" class="form-control" v-model="visitor.address" placeholder="">
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<label class="col-md-2 control-label text-right nopad end-aline jh-ad-1">备注</label><span class="sign-left">:</span>
-						<div class="col-md-10 wd84">
+						<label for="cyname" class="col-md-1 control-label text-right nopad end-aline jh-ad-1" style="width: 7.333333%!important;">备注</label><span class="sign-left" style="margin-left: 3px;">:</span>
+						<div class="col-md-12" style="padding: 0;">
 							<input type="text" class="form-control" v-model="visitor.marker" placeholder="">
 						</div>
 					</div>

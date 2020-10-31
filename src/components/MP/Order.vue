@@ -74,10 +74,10 @@
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
-                    <div class="col-md-2 col-lg-2 text-right nopad orderwd20">
+                    <div class="col-md-2 col-lg-2 text-right nopad orderwd20" style="padding-right: 5px;">
                         <p class="end-aline col-md-11 col-lg-11" >预约时间</p><span class="sign-left">:</span>
                     </div>
-                    <div class="col-md-4 col-lg-4 orderwd27">
+                    <div class="col-md-4 col-lg-4 orderwd27" style="margin-left: -3.5px;">
                         <dPicker class="wd100" v-model="begAppDate"></dPicker>
                     </div>
                     <div class="pull-left end-aline nopad">
@@ -169,18 +169,19 @@
                                 <button type="button" class="btn btn-warning" @click="updateOrder(item)"
                                         v-has="'SAMY:MP:Order:Update'" :disabled="item.state == 0">修改
                                 </button>
-                                <button type="button" class="btn btn-primary" @click="caAction(item,'cancel')"
+                                <button type="button" style="margin-left: 10px;" class="btn btn-primary" @click="caAction(item,'cancel')"
                                         :disabled="item.state == 0">
                                     {{item.state=='0' ? '已取消' : '点击取消'}}
                                 </button>
-                                <button type="button" class="btn btn-primary" @click="caAction(item,'arrival')"
+                                <button type="button" style="margin-left: 10px;" class="btn btn-primary" @click="caAction(item,'arrival')"
                                         :disabled="item.state == 0 || item.arrival == 1">
                                     {{item.arrival=='0' ? '点击到店' : '已到店'}}
                                 </button>
-                                <button type="button" class="btn btn-primary" @click="queryPhone(item)"
+								<br>
+                                <button type="button" style="margin-top: 10px;margin-right:49px;" class="btn btn-primary" @click="queryPhone(item)"
                                         v-has="'SAMY:MP:Order:QueryPhone'" :disabled="item.state == 0">查看手机号码
                                 </button>
-                                <button type="button" class="btn btn-primary" @click="againAdd(item)"
+                                <button type="button" style="margin-top: 10px;" class="btn btn-primary" @click="againAdd(item)"
                                         v-has="'SAMY:MP:Order:Add'">再来一条
                                 </button>
                             </td>

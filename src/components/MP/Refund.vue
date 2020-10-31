@@ -27,7 +27,7 @@
                 <div class="col-md-3 col-lg-3 text-right jh-ad-1 wd205">
                     <p class="end-aline col-md-11 col-lg-11">日期范围</p><span class="sign-left">:</span>
                 </div>
-                <div class="col-md-8 col-lg-8">
+                <div class="col-md-4 col-lg-4" style="margin-left: -5px;">
                     <dPicker class="wd100" v-model="dateArr" type="format" format="YYYY-MM-DD" range>
                         <template v-slot:header="{ emit }">
                             <div class="text-left"></div>
@@ -67,7 +67,7 @@
             </div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 			    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
-			        <p class="end-aline col-md-11 col-lg-11" >交费方式</p><span class="sign-left">:</span>
+			        <p class="end-aline col-md-11 col-lg-11" >交费方式</p><span class="sign-left" style="margin-left: 3px;">:</span>
 			    </div>
 			    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                     <PayStyle ref="payStyleRef" @payStyleChange="psStyle"></PayStyle>

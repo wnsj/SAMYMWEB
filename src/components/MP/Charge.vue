@@ -98,10 +98,10 @@
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<div class="col-md-3 col-lg-3 text-right jh-ad-1 wd205">
+					<div class="col-md-3 col-lg-3 text-right jh-ad-1 wd205" style="padding-right: 4px;">
 						<p class="end-aline col-md-11 col-lg-11 jh-pa-1">购买时间</p><span class="sign-left">:</span>
 					</div>
-					<div class="col-md-4 col-lg-4 jh-tw-1">
+					<div class="col-md-4 col-lg-4 jh-tw-1" style="margin-left: -3.5px;">
 						<dPicker class="wd100" v-model="begCreateDate"></dPicker>
 					</div>
 					<div class="jh-ad-1 jh-fl">

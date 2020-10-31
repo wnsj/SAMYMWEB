@@ -30,7 +30,7 @@
                                 v-model="param.secondVisitStartTime"
                                 :picker-options="pickerOptions0"
                                 type="date"
-                                placeholder="开始时间">
+                                placeholder="开始时间" style="margin-left: -8px;">
                             </el-date-picker>
                             <span style="margin-right: 2%"> - </span>
                             <el-date-picker

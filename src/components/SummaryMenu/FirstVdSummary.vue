@@ -36,7 +36,20 @@
                             </el-date-picker>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="3" class="jh-pr-28">
+					
+					
+					<el-button type="warning" size="small"
+					           style="width: 85px"
+					           @click="exportTableToExcel('firstVd','初访咨询方向统计表')"
+					           class="jh-fr">导出
+					</el-button>
+					<el-button type="primary" size="small"
+					           style="width: 85px;margin-right: 50px;"
+					           @click="getDiseaseType "
+					           class="jh-fr">查询
+					</el-button>
+					
+                    <!-- <el-col :span="3" class="jh-pr-28">
                         <el-button type="primary" size="small"
                                    style="width: 85px"
                                    @click="getDiseaseType"
@@ -49,7 +62,7 @@
                                    @click="exportTableToExcel('firstVd','初访咨询方向统计表')"
                                    class="jh-fr">导出
                         </el-button>
-                    </el-col>
+                    </el-col> -->
                 </el-row>
             </el-form>
         </div>

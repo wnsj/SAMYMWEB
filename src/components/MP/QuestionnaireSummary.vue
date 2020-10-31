@@ -15,7 +15,7 @@
                 		</el-select>
                 	</el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="8" style="margin-left: -30px;">
                 	<el-form-item label="咨询师:">
                 		<el-select @change="initPage" v-model="param.couId" filterable clearable placeholder="请选择">
                 			<el-option v-for="item in couList" :key="item.empId" :label="item.empName" :value="item.empId">
@@ -455,5 +455,18 @@
 .numRate{width: 100%;overflow: hidden;}
 .numRate p{width: 100%;overflow: hidden;line-height: 20px;}
 .numRate p span{width: 15%;overflow: hidden;display: inline-block;float: left;margin-right: 2%;}
+.el-form-item label:after {
+		content: "";
+		display: inline-block;
+		width: 100%;
+	}
 
+	.el-form-item__label {
+		text-align: justify;
+		height: 50px;
+	}
+
+	.el-form-item.is-required .el-form-item__label:before {
+		content: none !important;
+	}
 </style>

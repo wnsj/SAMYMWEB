@@ -17,14 +17,25 @@
                     <input class="form-control" type="text" v-model="occName">
                 </div>
             </div>
-            <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-30"
+			<el-col :md="6" :lg="5" :xl="4" class="jh-fr">
+				<el-button type="warning" class=" jh-fr" @click="selectRule('1')" v-has="'SAMY:MP:Occupation:Add'"><i
+				    class="el-icon-circle-plus-outline"  data-toggle="modal"></i> 添加
+				</el-button>
+				
+			    <el-button type="primary" @click="queryOccupationList()"><i
+			        class="el-icon-zoom-in"  data-toggle="modal"></i> 查询
+			    </el-button>
+			   
+			</el-col>
+			
+            <!-- <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-30"
                     data-toggle="modal"
                     v-on:click="selectRule('1')" v-has="'SAMY:MP:Occupation:Add'">添加
             </button>
             <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
                     data-toggle="modal"
                     v-on:click="queryOccupationList()">查询
-            </button>
+            </button> -->
         </div>
             </div>
         </el-collapse-transition>

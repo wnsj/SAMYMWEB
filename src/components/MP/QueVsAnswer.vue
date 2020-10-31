@@ -3,125 +3,126 @@
 		<div class="col-md-12 col-lg-12 main-title">
 			<h1 class="titleCss">咨客问卷调查结果</h1>
 		</div>
-        <el-collapse-transition>
-		<div class="top" v-show="showSelect">
-			<el-form label-position="right" :inline="true" size="small" :model="param">
-				<el-row style="margin-top: 2%" >
-					<el-col :span="6">
-						<el-form-item label="咨客:">
-                            <el-input @change="initPage" v-model="param.vsName"  clearable></el-input>
+		<el-collapse-transition>
+			<div class="top" v-show="showSelect">
+				<el-form label-position="right" :inline="true" size="small" :model="param">
+					<el-row style="margin-top: 2%">
+						<el-col :span="6">
+							<el-form-item label="咨客:">
+								<el-input @change="initPage" v-model="param.vsName" clearable></el-input>
+							</el-form-item>
+						</el-col>
+						<el-col :span="6">
+							<el-form-item label="门店:">
+								<el-select @change="storeChange" v-model="param.storeId" filterable clearable placeholder="请选择">
+									<el-option v-for="item in storeList" :key="item.storeId" :label="item.storeName" :value="item.storeId">
+									</el-option>
+								</el-select>
+							</el-form-item>
+						</el-col>
+						<el-col :span="6">
+							<el-form-item label="咨询师:">
+								<el-select @change="initPage" v-model="param.couId" filterable clearable placeholder="请选择">
+									<el-option v-for="item in couList" :key="item.empId" :label="item.empName" :value="item.empId">
+									</el-option>
+								</el-select>
+							</el-form-item>
+						</el-col>
+						<el-col :span="6">
+							<el-form-item label="顾问:">
+								<el-select @change="initPage" v-model="param.conId" filterable clearable placeholder="请选择">
+									<el-option v-for="item in conList" :key="item.empId" :label="item.empName" :value="item.empId">
+									</el-option>
+								</el-select>
+							</el-form-item>
+						</el-col>
+					</el-row>
+
+					<div style="position: absolute;">
+						<el-form-item label="咨询师评分:">
+							<el-col :span="4">
+								<el-input @change="initPage" v-model="param.begScore" clearable></el-input>
+							</el-col>
+							<el-col :span="2">
+								<span> - </span>
+							</el-col>
+							<el-col :span="4">
+								<el-input @change="initPage" v-model="param.endScore" clearable></el-input>
+							</el-col>
 						</el-form-item>
-					</el-col>
-					<el-col :span="6">
-                        <el-form-item label="门店:">
-                            <el-select @change="storeChange" v-model="param.storeId" filterable clearable placeholder="请选择">
-                                <el-option v-for="item in storeList" :key="item.storeId" :label="item.storeName" :value="item.storeId">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-					</el-col>
-					<el-col :span="6">
-						<el-form-item label="咨询师:">
-							<el-select @change="initPage" v-model="param.couId" filterable clearable placeholder="请选择">
-								<el-option v-for="item in couList" :key="item.empId" :label="item.empName" :value="item.empId">
+					</div>
+					<div style="position: absolute;margin-left: 25%">
+						<el-form-item label="顾问评分:">
+							<el-col :span="4">
+								<el-input @change="initPage" v-model="param.begConScore" clearable></el-input>
+							</el-col>
+							<el-col :span="2">
+								<span>
+									-
+								</span>
+							</el-col>
+							<el-col :span="4">
+								<el-input @change="initPage" v-model="param.endConScore" clearable></el-input>
+							</el-col>
+						</el-form-item>
+					</div>
+
+					<div style="position: absolute;margin-left: 48.5%">
+						<el-form-item label="店铺评分:">
+							<el-col :span="4">
+								<el-input @change="initPage" v-model="param.begStoreScore" clearable></el-input>
+							</el-col>
+							<el-col :span="2">
+								<span>
+									-
+								</span>
+							</el-col>
+							<el-col :span="4">
+								<el-input @change="initPage" v-model="param.endStoreScore" clearable></el-input>
+							</el-col>
+						</el-form-item>
+					</div>
+
+					<div style="position: absolute;margin-left: 74.6%">
+						<el-form-item label="问卷:">
+							<el-select @change="initPage" v-model="param.queId" filterable clearable placeholder="请选择" style="margin-left: -1px;">
+								<el-option v-for="item in queList" :key="item.id" :label="item.queName" :value="item.id">
 								</el-option>
 							</el-select>
 						</el-form-item>
-					</el-col>
-					<el-col :span="6">
-                        <el-form-item label="顾问:">
-                            <el-select @change="initPage" v-model="param.conId" filterable clearable placeholder="请选择">
-                                <el-option v-for="item in conList" :key="item.empId" :label="item.empName" :value="item.empId">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-					</el-col>
-				</el-row>
+					</div>
 
-                    <div style="position: absolute;margin-left: 2%">
-                        <el-form-item label="咨询师评分:">
-                            <el-col :span="4">
-                                <el-input @change="initPage" v-model="param.begScore"  clearable></el-input>
-                            </el-col>
-                            <el-col :span="2">
-                                <span> - </span>
-                            </el-col>
-                            <el-col :span="4">
-                                <el-input @change="initPage" v-model="param.endScore" clearable></el-input>
-                            </el-col>
-                        </el-form-item>
-                    </div>
-                    <div style="position: absolute;margin-left: 27%">
-                        <el-form-item label="顾问评分:">
-                            <el-col :span="4">
-                                <el-input @change="initPage" v-model="param.begConScore"  clearable></el-input>
-                            </el-col>
-                            <el-col :span="2">
-                                    <span>
-                                        -
-                                    </span>
-                            </el-col>
-                            <el-col :span="4">
-                                <el-input @change="initPage" v-model="param.endConScore" clearable></el-input>
-                            </el-col>
-                        </el-form-item>
-                    </div>
-
-                    <div style="position: absolute;margin-left: 51.5%">
-                        <el-form-item label="店铺评分:">
-                            <el-col :span="4">
-                                <el-input @change="initPage" v-model="param.begStoreScore"  clearable></el-input>
-                            </el-col>
-                            <el-col :span="2">
-                                    <span>
-                                        -
-                                    </span>
-                            </el-col>
-                            <el-col :span="4">
-                                <el-input @change="initPage" v-model="param.endStoreScore" clearable></el-input>
-                            </el-col>
-                        </el-form-item>
-                    </div>
-
-                    <div style="position: absolute;margin-left: 76.4%">
-                        <el-form-item label="问卷:">
-                            <el-select @change="initPage" v-model="param.queId" filterable clearable placeholder="请选择">
-                                <el-option v-for="item in queList" :key="item.id" :label="item.queName" :value="item.id">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </div>
-
-                <el-row style="margin-top: 4%">
-                    <el-col :span="12" :push="11">
-                        <el-button type="primary" size="small" style="width: 85px" @click="getAnswerByCondition" class="jh-fr">查询
-                        </el-button>
-                    </el-col>
-                </el-row>
-			</el-form>
+					<el-row style="margin-top: 4%">
+						<el-col :span="12" :push="11">
+							<el-button type="primary" size="small" style="width: 85px" @click="getAnswerByCondition" class="jh-fr">查询
+							</el-button>
+						</el-col>
+					</el-row>
+				</el-form>
+			</div>
+		</el-collapse-transition>
+		<div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect" @mouseenter="dataOpen">
+			<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 		</div>
-        </el-collapse-transition>
-        <div class="arrow-bottom jh-wd-100 jh-po-re" @click="showSelect = !showSelect"  @mouseenter="dataOpen">
-            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
-        </div>
 
 		<div style="margin-top: 1%">
-			<el-table  :data="tableData" :cell-style="cellStyle" :max-height="tableHeight" @row-dblclick="toDetails" :header-cell-style="headerStyle"
-			 style="width: 95%;margin: 20px auto 20px" :summary-method="getSummaries" show-summary border>
+			<el-table :data="tableData" :cell-style="cellStyle" :max-height="tableHeight" @row-dblclick="toDetails"
+			 :header-cell-style="headerStyle" style="width: 95%;margin: 20px auto 20px" :summary-method="getSummaries"
+			 show-summary border>
 				<el-table-column align="center" prop="vsName" label="咨客姓名" min-width="100">
 				</el-table-column>
 				<el-table-column align="center" prop="couName" label="咨询师" min-width="100">
 				</el-table-column>
-                <el-table-column align="center" prop="conName" label="咨询顾问" min-width="100">
-                </el-table-column>
-                <el-table-column align="center" prop="storeName" label="店铺" min-width="100">
-                </el-table-column>
+				<el-table-column align="center" prop="conName" label="咨询顾问" min-width="100">
+				</el-table-column>
+				<el-table-column align="center" prop="storeName" label="店铺" min-width="100">
+				</el-table-column>
 				<el-table-column align="center" prop="score" label="咨询师评分" min-width="100">
 				</el-table-column>
-                <el-table-column align="center" prop="empScore" label="咨询顾问评分" min-width="100">
-                </el-table-column>
-                <el-table-column align="center" prop="storeScore" label="店铺评分" min-width="100">
-                </el-table-column>
+				<el-table-column align="center" prop="empScore" label="咨询顾问评分" min-width="100">
+				</el-table-column>
+				<el-table-column align="center" prop="storeScore" label="店铺评分" min-width="100">
+				</el-table-column>
 				<el-table-column align="center" prop="phone" label="联系方式" min-width="100">
 				</el-table-column>
 				<el-table-column align="center" prop="visitTime" :formatter="dateFormat" label="来访时间" min-width="100">
@@ -140,38 +141,38 @@
 			<p class="tips">* 双击单行，可查看当前数据</p>
 		</div>
 
-        <el-dialog :visible.sync="dialogVisible" width="40%">
-        	<div slot="title" class="wj-title">问卷调查</div>
-        	<!--				<el-card class="form-container" shadow="never">-->
-        	<el-form :model="select" label-position="right" label-width="110px" size="small">
-        		<el-row>
-        			<div class="ques-info ques-tit"><span>问卷调查名称：</span> {{select.queName}}</div>
-        			<!-- <el-col :span="12">
+		<el-dialog :visible.sync="dialogVisible" width="40%">
+			<div slot="title" class="wj-title">问卷调查</div>
+			<!--				<el-card class="form-container" shadow="never">-->
+			<el-form :model="select" label-position="right" label-width="110px" size="small">
+				<el-row>
+					<div class="ques-info ques-tit"><span>问卷调查名称：</span> {{select.queName}}</div>
+					<!-- <el-col :span="12">
                         <el-form-item label="问卷调查名称：">
                             <el-input v-model="select.queName"></el-input>
                         </el-form-item>
                     </el-col> -->
-        		</el-row>
-        		<el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort" label-width="0px">
-        			<el-card>
-        				<div class="ques-info"><span>{{item.proSort}}. </span> {{item.proLabel}}</div>
+				</el-row>
+				<el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort" label-width="0px">
+					<el-card>
+						<div class="ques-info"><span>{{item.proSort}}. </span> {{item.proLabel}}</div>
 
-        				<template>
-        					<div class="ques-info" v-if="item.proType==1 && item.selectedAnswer">
-        						<span v-if="item.selectedAnswer==1">选项答案：是</span>
-        						<span v-else>选项答案：否</span>
-        					</div>
-        					<div class="ques-info" v-else-if="item.proType==2 && item.selectedAnswer">
-        						<span>选项答案：{{item.selectedAnswer}}分</span>
-        					</div>
-        				</template>
+						<template>
+							<div class="ques-info" v-if="item.proType==1 && item.selectedAnswer">
+								<span v-if="item.selectedAnswer==1">选项答案：是</span>
+								<span v-else>选项答案：否</span>
+							</div>
+							<div class="ques-info" v-else-if="item.proType==2 && item.selectedAnswer">
+								<span>选项答案：{{item.selectedAnswer}}分</span>
+							</div>
+						</template>
 
-        				<div class="ques-info" v-if="item.describeAnswer"><span>描述答案： </span> {{item.describeAnswer}}</div>
-        			</el-card>
-        		</el-form-item>
+						<div class="ques-info" v-if="item.describeAnswer"><span>描述答案： </span> {{item.describeAnswer}}</div>
+					</el-card>
+				</el-form-item>
 
 
-        		<!-- <el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort">
+				<!-- <el-form-item v-for="(item,index) in select.problemBeanList" :key="item.proSort">
                     <el-card>
                         <el-form-item label="问题序号：">
                             <el-input v-model="item.proSort"></el-input>
@@ -193,8 +194,8 @@
                         </el-row>
                     </el-card>
                 </el-form-item> -->
-        	</el-form>
-        </el-dialog>
+			</el-form>
+		</el-dialog>
 
 	</div>
 </template>
@@ -206,21 +207,21 @@
 		components: {},
 		data() {
 			return {
-                tableHeight: $(window).height() - 380,
+				tableHeight: $(window).height() - 380,
 				param: {
 					pageNum: 1,
 					pageSize: 10,
 					vsId: '',
-                    vsName: '',
+					vsName: '',
 					couId: '',
-                    conId: '',
+					conId: '',
 					queId: '',
-					begScore:'',
-					endScore:'',
-                    begStoreScore: '',
-                    endStoreScore: '',
-                    begConScore: '',
-                    endConScore: '',
+					begScore: '',
+					endScore: '',
+					begStoreScore: '',
+					endStoreScore: '',
+					begConScore: '',
+					endConScore: '',
 					storeId: this.storeId()
 				},
 				select: {
@@ -231,20 +232,20 @@
 				queVisitorList: [],
 				storeList: [],
 				couList: [],
-                conList: [],
+				conList: [],
 				queList: [],
 				tableData: [],
 				totalAmount: 0,
 				dialogVisible: false,
 				accountType: this.accountType(),
-                showSelect:true
+				showSelect: true
 			};
 		},
 		methods: {
-            dataOpen(){
-                if(this.showSelect) return
-                this.showSelect = true;
-            },
+			dataOpen() {
+				if (this.showSelect) return
+				this.showSelect = true;
+			},
 			// 表格表头样式
 			headerStyle() {
 				return 'text-align: center;color: black;'
@@ -279,14 +280,14 @@
 					//console.log('岗位数据请求失败处理')
 				});
 			},
-            initPage() {
-                this.param.pageNum = 1
-            },
-            storeChange() {
-                this.param.pageNum = 1
-                this.getCou()
-                this.getCon()
-            },
+			initPage() {
+				this.param.pageNum = 1
+			},
+			storeChange() {
+				this.param.pageNum = 1
+				this.getCou()
+				this.getCon()
+			},
 			// 获取门店
 			getStore() {
 				var url = this.url + '/storeAction/queryStore'
@@ -324,7 +325,7 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-                        storeId: this.param.storeId,
+						storeId: this.param.storeId,
 						posName: "咨询师"
 					},
 					dataType: 'json',
@@ -334,26 +335,26 @@
 					console.log(error);
 				})
 			},
-            getCon() {
-                var url = this.url + '/employeeAction/getAllEmpByPosName'
-                this.$ajax({
-                    method: 'POST',
-                    url: url,
-                    headers: {
-                        'Content-Type': this.contentType,
-                        'Access-Token': this.accessToken
-                    },
-                    data: {
-                        storeId: this.param.storeId,
-                        posName: "咨询顾问"
-                    },
-                    dataType: 'json',
-                }).then(res => {
-                    this.conList = res.data.retData
-                }).catch(error => {
-                    console.log(error);
-                })
-            },
+			getCon() {
+				var url = this.url + '/employeeAction/getAllEmpByPosName'
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: {
+						storeId: this.param.storeId,
+						posName: "咨询顾问"
+					},
+					dataType: 'json',
+				}).then(res => {
+					this.conList = res.data.retData
+				}).catch(error => {
+					console.log(error);
+				})
+			},
 			getQue() {
 				var url = this.url + '/questionnaireBean/getAllQue'
 				this.$ajax({
@@ -390,9 +391,9 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-					    if (res.retData) {
-                            this.select.problemBeanList = res.retData
-                        }
+						if (res.retData) {
+							this.select.problemBeanList = res.retData
+						}
 
 					} else {
 						alert(res.retMsg)
@@ -408,20 +409,23 @@
 			},
 			// 获取初访咨询方向汇总数据
 			async getAnswerByCondition() {
-                this.showSelect = false;
+				this.showSelect = false;
 
-				if(parseInt(this.param.begScore) < 0 || parseInt(this.param.endScore) < 0 || parseInt(this.param.begScore) > parseInt(this.param.endScore)){
-                    alert('咨询师分数区间填写有误，重新填写')
-                    return
+				if (parseInt(this.param.begScore) < 0 || parseInt(this.param.endScore) < 0 || parseInt(this.param.begScore) >
+					parseInt(this.param.endScore)) {
+					alert('咨询师分数区间填写有误，重新填写')
+					return
 				}
-                if(parseInt(this.param.begStoreScore) < 0 || parseInt(this.param.endStoreScore) < 0 || parseInt(this.param.begStoreScore) > parseInt(this.param.endStoreScore)){
-                    alert('店铺分数区间填写有误，重新填写')
-                    return
-                }
-                if(parseInt(this.param.begConScore) < 0 || parseInt(this.param.endConScore) < 0 || parseInt(this.param.begConScore) > parseInt(this.param.endConScore)){
-                    alert('顾问分数区间填写有误，重新填写')
-                    return
-                }
+				if (parseInt(this.param.begStoreScore) < 0 || parseInt(this.param.endStoreScore) < 0 || parseInt(this.param.begStoreScore) >
+					parseInt(this.param.endStoreScore)) {
+					alert('店铺分数区间填写有误，重新填写')
+					return
+				}
+				if (parseInt(this.param.begConScore) < 0 || parseInt(this.param.endConScore) < 0 || parseInt(this.param.begConScore) >
+					parseInt(this.param.endConScore)) {
+					alert('顾问分数区间填写有误，重新填写')
+					return
+				}
 				var url = this.url + '/answerBean/getAnswerByCondition'
 				this.$ajax({
 					method: 'POST',
@@ -467,14 +471,14 @@
 							}
 						}, 0);
 						if (index === 4) {
-							sums[index] = sums[index]+ ' 分'+' / '+(sums[index]/this.tableData.length).toFixed(1) + ' 分';
-						}else if (index === 5){
-                            sums[index] = sums[index]+ ' 分'+' / '+(sums[index]/this.tableData.length).toFixed(1) + ' 分';
+							sums[index] = sums[index] + ' 分' + ' / ' + (sums[index] / this.tableData.length).toFixed(1) + ' 分';
+						} else if (index === 5) {
+							sums[index] = sums[index] + ' 分' + ' / ' + (sums[index] / this.tableData.length).toFixed(1) + ' 分';
 						} else if (index === 6) {
-                            sums[index] = sums[index]+ ' 分'+' / '+(sums[index]/this.tableData.length).toFixed(1) + ' 分';
-                        } else {
-                            sums[index] = '';
-                        }
+							sums[index] = sums[index] + ' 分' + ' / ' + (sums[index] / this.tableData.length).toFixed(1) + ' 分';
+						} else {
+							sums[index] = '';
+						}
 					} else {
 						sums[index] = '';
 					}
@@ -489,7 +493,7 @@
 			},
 			// 每页条数变化时触发
 			handleSizeChange(pageSize) {
-                this.param.pageNum = 1
+				this.param.pageNum = 1
 				this.param.pageSize = pageSize
 				this.getAnswerByCondition()
 			},
@@ -498,7 +502,7 @@
 			this.getQueVisitor()
 			this.getStore()
 			this.getCou()
-            this.getCon()
+			this.getCon()
 			this.getQue()
 			// this.getAnswerByCondition()
 		}
@@ -521,7 +525,30 @@
 		font-size: 16px;
 	}
 
-.el-form-item__content{ width: 50%;}
-.el-form--inline .el-form-item__content{ width: 100px;}
-.jh-pr-28 .el-input--small .el-input__inner{ width: 20px;}
+	.el-form-item label:after {
+		content: "";
+		display: inline-block;
+		width: 100%;
+	}
+
+	.el-form-item__label {
+		text-align: justify;
+		height: 50px;
+	}
+
+	.el-form-item.is-required .el-form-item__label:before {
+		content: none !important;
+	}
+
+	.el-form-item__content {
+		width: 50%;
+	}
+
+	.el-form--inline .el-form-item__content {
+		width: 100px;
+	}
+
+	.jh-pr-28 .el-input--small .el-input__inner {
+		width: 20px;
+	}
 </style>

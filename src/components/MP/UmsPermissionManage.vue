@@ -7,8 +7,17 @@
         <div>
            <!-- <el-collapse-transition>-->
 			<div class="rightBox margin-10"> 
-            <el-button type="primary" @click="queryPermission"><i class="el-icon-zoom-in"></i>查询</el-button>
-            <el-button type="primary" @click="permissionDialog(1,0)"><i class="el-icon-circle-plus-outline"></i>添加
+			<el-col :md="6" :lg="5" :xl="4" class="jh-fr">
+			    <el-button type="primary" @click="queryPermission"><i
+			        class="el-icon-zoom-in"></i> 查询
+			    </el-button>
+			    <el-button type="warning" class=" jh-fr" @click="permissionDialog(1,0)" v-has="'SAMY:MP:NewRuleManager:Add'"><i
+			        class="el-icon-circle-plus-outline"></i> 添加
+			    </el-button>
+			</el-col>
+			
+            <!-- <el-button type="primary" @click="queryPermission"><i class="el-icon-zoom-in"></i>查询</el-button>
+            <el-button type="primary" @click="permissionDialog(1,0)"><i class="el-icon-circle-plus-outline"></i>添加 -->
             </el-button>
 			</div>
             <!-- </el-collapse-transition> -->
@@ -53,11 +62,11 @@
                     <el-switch
                         v-model="permissionObj.status"
                         active-color="#13ce66"
-                        inactive-color="#ff4949">
+                        inactive-color="#ff4949" style="margin-left: -386px;">
                     </el-switch>
                 </el-form-item>
                 <el-form-item label="超管仅有">
-                    <el-select v-model="permissionObj.specialRole">
+                    <el-select v-model="permissionObj.specialRole" style="margin-left: -210px;">
                         <el-option value="0" label="否">否</el-option>
                         <el-option value="1" label="是">是</el-option>
                     </el-select>

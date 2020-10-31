@@ -82,7 +82,7 @@
                             </el-date-picker>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="3"  class="jh-pr-28">
+                   <!-- <el-col :span="3"  class="jh-pr-28">
                         <el-button type="primary" size="small"
                                    style="width: 85px"
                                    @click="getMonthVsState"
@@ -95,7 +95,23 @@
                                    @click="exportTableToExcel('vsMonth','月度咨客状态统计表')"
                                    class="jh-fr">导出
                         </el-button>
-                    </el-col>
+                    </el-col -->
+					
+					<el-col :span="3">
+					    <el-button type="primary" size="small"
+					               style="width: 85px"
+					               @click="getMonthVsState"
+					               class="jh-fr">查询
+					    </el-button>
+					</el-col>
+					<el-col :span="2">
+					    <el-button type="primary" size="small"
+					               style="width: 85px"
+					               @click="exportTableToExcel('vsMonth','月度咨客状态统计表')"
+					               class="jh-fr">导出
+					    </el-button>
+					</el-col>
+					
                 </el-row>
             </el-form>
         </div>

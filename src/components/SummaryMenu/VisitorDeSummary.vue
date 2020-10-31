@@ -405,7 +405,8 @@
 
 	.el-form-item__label {
 		text-align: justify;
-		height: 50px;
+		height: 30px;
+		color:#2c3e50;
 	}
 
 	.el-form-item.is-required .el-form-item__label:before {

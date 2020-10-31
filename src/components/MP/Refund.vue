@@ -1,4 +1,3 @@
-<!-- the page of department management -->
 <template>
 
     <div class="wraper">

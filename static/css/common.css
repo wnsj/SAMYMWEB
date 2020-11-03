@@ -10,6 +10,8 @@ body{
     position:absolute;
 }
 .end-aline{
+	font-size: 14px;
+	font-weight: bold;
     display: inline-block;
     text-align:justify;
     text-align-last:justify;

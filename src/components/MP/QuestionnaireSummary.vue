@@ -462,8 +462,9 @@
 	}
 
 	.el-form-item__label {
+		color:#2c3e50;
 		text-align: justify;
-		height: 50px;
+		height: 30px;
 	}
 
 	.el-form-item.is-required .el-form-item__label:before {

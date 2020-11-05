@@ -31,7 +31,7 @@
 
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <div class="col-md-3 col-lg-3 text-right nopad SSwid20" style="width: 20%;">
-                        <p class="end-aline col-md-11 col-lg-11" >审核日期</p><span class="sign-left">:</span>
+                        <p class="end-aline col-md-11 col-lg-11" >消费日期</p><span class="sign-left">:</span>
                     </div>
                     <div class="col-md-4 col-lg-4 SSwid27" style="width: 28%;">
                         <dPicker class="wd100" v-model="begCreateDate"></dPicker>

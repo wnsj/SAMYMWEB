@@ -514,7 +514,7 @@
                 this.dateArr.push(param.actualEndDate)
 
 				$("input[name='radioGroup']").prop("checked", "");
-				this.checkMemCash(param.visId)
+				this.checkMemCash(param.memNum)
                 this.oRadioGroup = ''
  			},
             // 格式化时间

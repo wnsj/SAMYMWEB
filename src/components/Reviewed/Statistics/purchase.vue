@@ -6,106 +6,121 @@
             <h1 class="titleCss">产品购买统计</h1>
         </div>
         <el-collapse-transition>
-        <div v-show="showSelect">
-            <div class="row newRow">
+            <div v-show="showSelect">
+                <div class="row newRow">
+                    <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                            <p class="end-aline col-md-11 col-lg-11 jh-pa-1">客户姓名</p><span
+                            class="sign-left">:</span>
+                        </div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                            <input class="form-control" type="text" v-model="memName">
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                            <p class="end-aline col-md-11 col-lg-11 jh-pa-1">审核人</p><span
+                            class="sign-left">:</span>
+                        </div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                            <input class="form-control" type="text" v-model="auditName">
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-has="'SAMY:MP:STORE'">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                            <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span
+                            class="sign-left">:</span>
+                        </div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-8=7">
+                            <store ref="store" @storeChange='storeChange'></store>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+                            <p class="end-aline col-md-11 col-lg-11 jh-pa-1">审核状态</p><span
+                            class="sign-left">:</span>
+                        </div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                            <select class="form-control" v-model="auditState">
+                                <option value="">未选择</option>
+                                <option value="2">未审核</option>
+                                <option value="3">审核中</option>
+                                <option value="4">审核通过</option>
+                                <option value="5">审核未通过</option>
+                            </select>
+                        </div>
+                    </div>
 
-                <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
-                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">审核人</p><span
-                        class="sign-left">:</span>
-                    </div>
-                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <input class="form-control" type="text" v-model="auditName">
-                    </div>
-                </div>
-                <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
-                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">审核状态</p><span
-                        class="sign-left">:</span>
-                    </div>
-                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <select class="form-control" v-model="auditState">
-                            <option value="">未选择</option>
-                            <option value="2">未审核</option>
-                            <option value="3">审核中</option>
-                            <option value="4">审核通过</option>
-                            <option value="5">审核未通过</option>
-                        </select>
-                    </div>
-                </div>
 
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<div class="col-md-3 col-lg-3 text-right nopad SSwid20" style="width: 20%;">
-						<p class="end-aline col-md-11 col-lg-11" >审核日期</p><span class="sign-left">:</span>
-					</div>
-					<div class="col-md-4 col-lg-4 SSwid27" style="width: 28%;">
-						<dPicker class="wd100" v-model="begCreateDate"></dPicker>
-					</div>
-					<div class="pull-left end-aline nopad">
-						~
-					</div>
-					<div class="col-md-4 col-lg-4 SSwid27" style="width: 28%;">
-						<dPicker class="wd100" v-model="endCreateDate"></dPicker>
-					</div>
-				</div>
+
+
+                </div>
+                <div class="row newRow">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="col-md-3 col-lg-3 text-right nopad SSwid20" style="width: 20%;">
+                            <p class="end-aline col-md-11 col-lg-11">审核日期</p><span class="sign-left">:</span>
+                        </div>
+                        <div class="col-md-4 col-lg-4 SSwid27" style="width: 28%;">
+                            <dPicker class="wd100" v-model="begCreateDate"></dPicker>
+                        </div>
+                        <div class="pull-left end-aline nopad">
+                            ~
+                        </div>
+                        <div class="col-md-4 col-lg-4 SSwid27" style="width: 28%;">
+                            <dPicker class="wd100" v-model="endCreateDate"></dPicker>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
+                            data-toggle="modal"
+                            v-on:click="exportTable()">导出
+                    </button>
+                    <button type="button" class="btn btn-info pull-right m_r_10 jh-mr-2"
+                            data-toggle="modal" v-on:click="reset()">重置
+                    </button>
+                    <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
+                            data-toggle="modal"
+                            v-on:click="getAllAuditPage()">查询
+                    </button>
+                </div>
 
             </div>
-            <div class="row newRow">
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-has="'SAMY:MP:STORE'">
-                       <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-                           <p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span
-                           class="sign-left">:</span>
-                       </div>
-                       <div class="col-xs-7 col-sm-7 col-md-7 col-lg-8=7">
-                           <store ref="store" @storeChange='storeChange'></store>
-                       </div>
-                </div>
-
-                <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
-                        data-toggle="modal"
-                        v-on:click="exportTable()">导出
-                </button>
-                <button type="button" class="btn btn-info pull-right m_r_10 jh-mr-2"
-                        data-toggle="modal" v-on:click="reset()">重置
-                </button>
-                <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2"
-                        data-toggle="modal"
-                        v-on:click="getAllAuditPage()">查询
-                </button>
-            </div>
-
-        </div>
         </el-collapse-transition>
-         <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
-             <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
-         </div>
+        <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose"
+             @mouseenter="dataOpen">
+            <div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
+        </div>
 
         <div class="" id="datatable">
-            <el-table  :data="tableData" style="width: 100%" border>
+            <el-table :data="tableData" style="width: 100%" border>
                 <el-table-column type="index" prop="edit" label="序号" width="60" align="center"></el-table-column>
                 <el-table-column prop="memName" label="姓名" width="100" align="center"></el-table-column>
                 <el-table-column prop="proName" label="产品名称" width="100" align="center"></el-table-column>
                 <el-table-column prop="couName" label="咨询师" width="100" align="center"></el-table-column>
                 <el-table-column prop="empName" label="咨询顾问" width="100" align="center"></el-table-column>
-                <el-table-column prop="visitType" label="访问类型" :formatter="resetVisit" width="100" align="center"></el-table-column>
+                <el-table-column prop="visitType" label="访问类型" :formatter="resetVisit" width="100"
+                                 align="center"></el-table-column>
                 <el-table-column prop="vsName" label="咨客判定" width="100" align="center"></el-table-column>
                 <el-table-column prop="csName" label="续流状态" width="100" align="center"></el-table-column>
                 <el-table-column prop="price" label="购买单价（￥/次）" width="100" align="center"></el-table-column>
                 <el-table-column prop="totalCount" label="购买课时（次）" width="100" align="center"></el-table-column>
                 <el-table-column prop="discount" label="购买折扣（%）" width="100" align="center"></el-table-column>
-                 <el-table-column prop="createDate" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>
-<!--                 <el-table-column prop="startDate" label="开始时间" :formatter="resetDate" width="100" align="center"></el-table-column>-->
-<!--                 <el-table-column prop="endDate" label="结束时间" :formatter="resetDate" width="100" align="center"></el-table-column>-->
-                 <el-table-column prop="realCross" label="实交金额" width="100" align="center"></el-table-column>
-                 <el-table-column prop="psName" label="交费方式" width="100" align="center"></el-table-column>
-                 <el-table-column prop="operatorName" label="操作人" width="100" align="center"></el-table-column>
-                 <el-table-column prop="isArrears" label="是否全款" :formatter="resetArrears" width="100" align="center"></el-table-column>
-                 <el-table-column prop="auditStateName" label="审核状态" width="100" align="center"></el-table-column>
-                 <el-table-column prop="storeName" label="门店" width="100" align="center"></el-table-column>
-                 <el-table-column prop="shopowner" label="店长" width="100" align="center"></el-table-column>
-				 <el-table-column prop="finance" label="财务" width="100" align="center"></el-table-column>
-                 <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
-                 <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
+                <el-table-column prop="createDate" label="购买时间" :formatter="resetDate" width="100"
+                                 align="center"></el-table-column>
+                <!--                 <el-table-column prop="startDate" label="开始时间" :formatter="resetDate" width="100" align="center"></el-table-column>-->
+                <!--                 <el-table-column prop="endDate" label="结束时间" :formatter="resetDate" width="100" align="center"></el-table-column>-->
+                <el-table-column prop="realCross" label="实交金额" width="100" align="center"></el-table-column>
+                <el-table-column prop="psName" label="交费方式" width="100" align="center"></el-table-column>
+                <el-table-column prop="operatorName" label="操作人" width="100" align="center"></el-table-column>
+                <el-table-column prop="isArrears" label="是否全款" :formatter="resetArrears" width="100"
+                                 align="center"></el-table-column>
+                <el-table-column prop="auditStateName" label="审核状态" width="100" align="center"></el-table-column>
+                <el-table-column prop="storeName" label="门店" width="100" align="center"></el-table-column>
+                <el-table-column prop="shopowner" label="店长" width="100" align="center"></el-table-column>
+                <el-table-column prop="finance" label="财务" width="100" align="center"></el-table-column>
+                <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100"
+                                 align="center"></el-table-column>
+                <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
             </el-table>
 
             <el-row style="margin-top: 20px;">
@@ -141,12 +156,12 @@
 
     export default {
         components: {
-          store,
-          dPicker
+            store,
+            dPicker
         },
         data() {
             return {
-                showSelect:true,
+                showSelect: true,
                 fixedHeader: false,
                 storeId: this.storeId(),
                 accountType: this.accountType(),
@@ -157,8 +172,9 @@
                 current: 1, //当前页码
                 pageSize: 10, //一页显示的数量
                 auditName: '',
+                memName: '',
                 auditState: '',
-                begCreateDate:'',
+                begCreateDate: '',
                 endCreateDate: '',
                 addClass: false,
                 selectDataFlag: false
@@ -173,20 +189,20 @@
         },
 
         methods: {
-            changeData(newVal,oldVal){
+            changeData(newVal, oldVal) {
                 this.selectDataFlag = true
             },
 
-            resetDate(row, column, cellValue, index){
+            resetDate(row, column, cellValue, index) {
                 if (cellValue !== '' && cellValue !== null) {
-                    return cellValue.substring(0,10)
+                    return cellValue.substring(0, 10)
                 }
             },
-            resetVisit(row, column, cellValue, index){
-               return cellValue == 1 ? "初访":"复访"
+            resetVisit(row, column, cellValue, index) {
+                return cellValue == 1 ? "初访" : "复访"
             },
-            resetArrears(row, column, cellValue, index){
-               return cellValue == 1 ? "是":"否"
+            resetArrears(row, column, cellValue, index) {
+                return cellValue == 1 ? "是" : "否"
             },
 
 
@@ -198,22 +214,22 @@
                 }
             },
 
-            dataOpen(){
-                if(this.showSelect) return
+            dataOpen() {
+                if (this.showSelect) return
                 this.showSelect = true;
             },
-            dataClose(){
+            dataClose() {
                 this.showSelect = !this.showSelect
                 this.addClass = true;
 
-                setTimeout(()=>{
+                setTimeout(() => {
                     this.addClass = false;
-                },400)
+                }, 400)
             },
 
             //导出
             exportTable() {
-                  this.exportTableToExcel('datatable','产品购买统计表')
+                this.exportTableToExcel('datatable', '产品购买统计表')
             },
             //feedback department information
             positionChange: function (param) {
@@ -224,37 +240,37 @@
                 }
             },
 
-             tabChange(item) {
+            tabChange(item) {
                 this.getConsultStore()
 
             },
             //重置
-            reset(){
-                this.auditName="";
-                this.begCreateDate="";
-                this.endCreateDate="";
-                this.auditState="";
+            reset() {
+                this.auditName = "";
+                this.begCreateDate = "";
+                this.endCreateDate = "";
+                this.auditState = "";
                 // this.storeId=this.storeId()
 
             },
-             editorAction(item) {
+            editorAction(item) {
                 this.objectContent = item
             },
 
             //check the list of department
             getAllAuditPage() {
-                if (this.selectDataFlag){
+                if (this.selectDataFlag) {
                     this.current = 1
                 }
 
                 this.showSelect = false
                 console.log('getAllAuditPage')
                 if (!this.isBlank(this.begCreateDate)) {
-					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
-				}
-				if (!this.isBlank(this.endCreateDate)) {
-					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
-				}
+                    this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
+                }
+                if (!this.isBlank(this.endCreateDate)) {
+                    this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
+                }
                 var url = this.url + '/purchasedItemsAuditBean/getAllAuditPage'
                 this.$ajax({
                     method: 'POST',
@@ -264,13 +280,14 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                       current: this.current,
-                       pageSize: this.pageSize,
-                       auditName: this.auditName,
-                       storeId: this.storeId,
-                       auditBegTime: this.begCreateDate,
-                       auditEndTime: this.endCreateDate,
-                       auditState: this.auditState
+                        current: this.current,
+                        pageSize: this.pageSize,
+                        auditName: this.auditName,
+                        memName: this.memName,
+                        storeId: this.storeId,
+                        auditBegTime: this.begCreateDate,
+                        auditEndTime: this.endCreateDate,
+                        auditState: this.auditState
                     },
                     dataType: 'json',
                 }).then((response) => {
@@ -304,7 +321,6 @@
                 this.pageSize = pageSize
                 this.getAllAuditPage()
             },
-
 
 
             handleScroll(e) {
@@ -360,6 +376,7 @@
         border: 1px solid #ddd;
         font-weight: bold;
     }
+
     input.editradio[type='radio'] {
         width: 20px;
         height: 20px;

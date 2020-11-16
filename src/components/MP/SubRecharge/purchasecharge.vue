@@ -104,7 +104,7 @@
 					<label class="col-md-4 control-label text-right nopad end-aline" >产品</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<project ref="projectRef" @projectChange="projectChange"></project>
+						<project disabled="true" ref="projectRef" @projectChange="projectChange"></project>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">

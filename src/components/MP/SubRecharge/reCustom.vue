@@ -335,6 +335,7 @@
 		data() {
 			return {
                 oRadioGroup:'',
+                realCrossCount: '',
                 destroy: true,
                 firstFlag: false,
 				counselorList: [],
@@ -499,7 +500,8 @@
                 this.$refs.project.setEmpId(param.counselor,1)
                 this.$refs.project.setProject(param.proId)
 				// this.$refs.project.setEmpId("0")
-				this.queryUnfinishedPro(param.memNum, param.piId,)
+				this.queryUnfinishedPro(param.memNum, param.piId)
+
 				this.$refs.VisitStateRef.setObj(param.visitState)
 				this.$refs.ContinStateRef.setObj(param.continState)
                 this.$refs.payStyle.setPsId(param.payType)
@@ -839,10 +841,36 @@
 					//console.log('会员查询请求失败')
 				});
 			},
+            // getCoByPiAndPro(item) {
+            //     var url = this.url + '/consumAction/getCoByPiAndPro'
+            //     this.$ajax({
+            //         method: 'POST',
+            //         url: url,
+            //         headers: {
+            //             'Content-Type': this.contentType,
+            //             'Access-Token': this.accessToken
+            //         },
+            //         data: {
+            //             proId: item.proId,
+            //             piId: item.piId
+            //         },
+            //         dataType: 'json',
+            //     }).then((response) => {
+            //         var res = response.data
+            //         if (res.retCode == '0000') {
+            //             this.selectObj.realCrossCount = res.retData.realCrossCount;
+            //         } else {
+            //             alert(res.retMsg)
+            //         }
+            //     }).catch((error) => {
+            //         //console.log('会员查询请求失败')
+            //     });
+            // },
 			//单选框选中处理
 			radioClick(e, item) {
  				if (this.clickItemObj.itemId == 0) {
 					this.selectObj = item;
+					// this.getCoByPiAndPro(item)
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1
 					if (item.proType != '0') {
@@ -915,10 +943,12 @@
 							this.consume.realCross = item.realCross //实缴
 							this.consume.proType = item.proType
 							this.selectObj = item
+                            // this.getCoByPiAndPro(item)
 						}
 						this.clickItemObj.count = this.clickItemObj.count + 1
 					} else {
 						this.selectObj = item
+                        // this.getCoByPiAndPro(item)
 						this.clickItemObj.itemId = item.piId
 						this.clickItemObj.count = 0
 						if (item.proType != 0) {

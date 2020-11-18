@@ -9,11 +9,12 @@
 
 <script>
     export default {
-        name: 'department',
+
         data() {
             return {
                 crName: '',
                 crId: '0',
+                storeId: this.storeId(),
                 channelList: [],
                 channelObj: {
                     crId: '',
@@ -54,7 +55,8 @@
                         'Access-Token': this.accessToken
                     },
                     data: {
-                        isUse: '1'
+                        isUse: '1',
+                        storeId: this.storeId
                     },
                     dataType: 'json',
                 }).then((response) => {

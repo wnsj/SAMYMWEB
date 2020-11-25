@@ -39,7 +39,6 @@ Vue.prototype.url = process.env.API_HOST
 // 给 vue 实例挂载全局窗口对象
 Vue.prototype.$XModal = VXETable.modal
 
-
 Vue.config.productionTip = false
 
 

@@ -97,7 +97,7 @@
                 <el-table-column prop="proName" label="产品" width="100" align="center"></el-table-column>
                 <el-table-column prop="momey" label="退费金额" width="100" align="center"></el-table-column>
                 <el-table-column prop="refCount" label="退费课时" width="100" align="center"></el-table-column>
-                <el-table-column prop="createDate" label="退费时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+                <el-table-column prop="sourceDate" label="退费时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                 <el-table-column prop="buyTime" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                 <el-table-column prop="auditState" label="审核状态" :formatter="resetAuditState" width="100" align="center"></el-table-column>
                 <el-table-column prop="shopowner" label="店长" width="100" align="center"></el-table-column>

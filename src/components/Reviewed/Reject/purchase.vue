@@ -80,7 +80,7 @@
                 <el-table-column prop="price" label="购买单价（￥/次）" width="100" align="center"></el-table-column>
                 <el-table-column prop="totalCount" label="购买课时（次）" width="100" align="center"></el-table-column>
                 <el-table-column prop="discount" label="购买折扣（%）" width="100" align="center"></el-table-column>
-                <el-table-column prop="createDate" :formatter="dateFormat" label="购买时间" width="100"
+                <el-table-column prop="sourceDate" :formatter="dateFormat" label="购买时间" width="100"
                                  align="center"></el-table-column>
 <!--                <el-table-column prop="startDate" :formatter="dateFormat" label="开始时间" width="100"-->
 <!--                                 align="center"></el-table-column>-->

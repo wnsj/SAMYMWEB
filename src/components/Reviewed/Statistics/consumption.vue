@@ -102,7 +102,7 @@
                 <el-table-column prop="vsName" label="咨客判定" width="100" align="center"></el-table-column>
                 <el-table-column prop="continName" label="续流状态" width="100" align="center"></el-table-column>
                 <el-table-column prop="psName" label="付款方式" width="100" align="center"></el-table-column>
-                <el-table-column prop="createDate" label="消费时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+                <el-table-column prop="sourceDate" label="消费时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="buyTime" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>
                  <el-table-column prop="auditState" label="审核状态" :formatter="resetAuditState" width="100" align="center"></el-table-column>
                 <el-table-column prop="storeName" label="门店" width="100" align="center"></el-table-column>

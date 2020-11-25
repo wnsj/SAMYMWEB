@@ -121,7 +121,7 @@
                                 <td class="text-center;">{{item.price}}</td>
                                 <td class="text-center;">{{item.totalCount}}</td>
                                 <td class="text-center;">{{item.discount}}</td>
-                                <td class="text-center;">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+                                <td class="text-center;">{{item.sourceDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 <!--                                <td class="text-center">{{item.startDate | dateFormatFilter("YYYY-MM-DD")}}</td>-->
 <!--                                <td class="text-center">{{item.endDate | dateFormatFilter("YYYY-MM-DD")}}</td>-->
                                 <td class="text-center;">{{item.realCross}}</td>

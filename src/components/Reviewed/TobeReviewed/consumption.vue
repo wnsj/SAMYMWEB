@@ -114,7 +114,7 @@
                                 <td class="text-center">{{item.vsName}}</td>
                                 <td class="text-center">{{item.continName}}</td>
                                 <td class="text-center">{{item.psName}}</td>
-                                <td class="text-center">{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
+                                <td class="text-center">{{item.sourceDate | dateFormatFilter("YYYY-MM-DD")}}</td>
                                 <td class="text-center">{{item.buyTime | dateFormatFilter("YYYY-MM-DD")}}</td>
                             </tr>
                         </tbody>

@@ -259,12 +259,12 @@
                 }
             },
             //feedback from adding and modifying view
-            feedBack(data) {
-                console.log(data)
-                if (data == 'succ'){
+            feedBack(val) {
+                // console.log(val)
+                // if (val == 'succ'){
                     this.getApproveFind(1)
                     this.objectContent = {}
-                }
+                // }
 
                 $("#rejectionContent").modal('hide')
             },

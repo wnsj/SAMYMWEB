@@ -80,6 +80,7 @@
                             <tr>
                                 <th class="text-center;">编辑</th>
                                 <th class="text-center;">姓名</th>
+								<th class="text-center">序号</th>
                                 <th class="text-center;">产品名称</th>
                                 <th class="text-center;">咨询师</th>
                                 <th class="text-center;">咨询顾问</th>
@@ -97,6 +98,7 @@
                                 <th class="text-center;">交费方式</th>
                                 <th class="text-center;">操作人</th>
                                 <th class="text-center;">是否全款</th>
+								<th class="text-center;">备注</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -112,6 +114,7 @@
 
                                 </td>
                                 <td class="text-center;">{{item.memName}}</td>
+								<td class="text-center">{{item.memNum}}</td>
                                 <td class="text-center;">{{item.proName}}</td>
                                 <td class="text-center;">{{item.couName}}</td>
                                 <td class="text-center;">{{item.empName}}</td>
@@ -129,6 +132,7 @@
                                 <td class="text-center;">{{item.psName}}</td>
                                 <td class="text-center;">{{item.operatorName}}</td>
                                 <td class="text-center;">{{item.isArrears | formatIsArrears}}</td>
+								<td class="text-center">{{item.remark}}</td>
                             </tr>
 
 

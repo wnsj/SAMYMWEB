@@ -33,7 +33,7 @@
 						<table class="table table-bordered table-hover jh-mb-0">
 							<thead class="datathead">
 								<tr>
-									<td></td>
+									<td>选择</td>
 									<td>产品</td>
 									<td>咨询师名</td>
 									<td>项目类型</td>
@@ -271,6 +271,13 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="tab-pane fade in active martop" id="basic" v-show="isShow==true">
+				<div class="col-md-12 form-group clearfix text-left">
+					<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
+				</div>
+			</div>
+			
 			<div class="tab-pane fade in active martop" id="basic" v-show="isShow==true">
 				<div class="col-md-12 form-group clearfix text-left">
 					<h4 id="myModalLabel" class="modal-title">合计：</h4>
@@ -280,6 +287,13 @@
 					 class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.realCross">
+					</div>
+				</div>
+				<div class="col-md-4 form-group clearfix jh-wd-33" v-show="selectObj == null">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >备注</label><span
+					 class="sign-left">:</span>
+					<div class="col-md-7">
+						<textarea type="text" class="form-control" style="height: 34px;" v-model="consume.remark"></textarea>
 					</div>
 				</div>
 			</div>

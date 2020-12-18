@@ -92,6 +92,14 @@
 							<input type="text" class="form-control" v-model="refund.balance">
 						</div>
 					</div>
+					
+					<div class="col-md-6 form-group clearfix jh-wd-33">
+						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">备注</label><span
+						 class="sign-left">:</span>
+						<div class="col-md-7">
+							<textarea type="text" class="form-control" style="height: 34px;" v-model="refund.remark"></textarea>
+						</div>
+					</div>
 
 					<div class="col-md-12 form-group clearfix">
 						<button type="button" class="btn btn-warning pull-right margin-right-15" data-toggle="modal"

@@ -80,6 +80,7 @@
         <div class="" id="datatable">
             <el-table  :data="tableData" style="width: 100%" @row-dblclick="selectRule" border>
                 <el-table-column type="index" prop="edit" label="序号" width="60" align="center"></el-table-column>
+				<el-table-column prop="memNum" label="客户序号" width="100" align="center"></el-table-column>
                 <el-table-column prop="storeName" label="门店名称"  align="center"></el-table-column>
                 <el-table-column prop="memName" label="退款人"  align="center"></el-table-column>
                 <el-table-column prop="visitorName" label="咨询师"  align="center"></el-table-column>
@@ -94,7 +95,7 @@
                 <el-table-column prop="shopowner" label="店长" align="center"></el-table-column>
                 <el-table-column prop="finance" label="财务" align="center"></el-table-column>
                 <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" align="center"></el-table-column>
-                <el-table-column prop="rejectReason" label="备注"  align="center"></el-table-column>
+                <el-table-column prop="rejectReason" label="驳回理由"  align="center"></el-table-column>
             </el-table>
 
             <div class="col-md-12 col-lg-12 tips">* 双击单行，可对当前数据进行修改 </div>

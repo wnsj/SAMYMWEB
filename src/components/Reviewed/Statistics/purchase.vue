@@ -94,6 +94,7 @@
         <div class="" id="datatable">
             <el-table :data="tableData" style="width: 100%" border>
                 <el-table-column type="index" prop="edit" label="序号" width="60" align="center"></el-table-column>
+				<el-table-column prop="memNum" label="客户序号" width="100" align="center"></el-table-column>
                 <el-table-column prop="memName" label="姓名" width="100" align="center"></el-table-column>
                 <el-table-column prop="proName" label="产品名称" width="100" align="center"></el-table-column>
                 <el-table-column prop="couName" label="咨询师" width="100" align="center"></el-table-column>

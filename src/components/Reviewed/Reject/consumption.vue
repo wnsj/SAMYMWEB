@@ -82,6 +82,7 @@
         <div class="" id="datatable">
              <el-table  :data="tableData" style="width: 100%" @cell-dblclick="selectRule" border>
                 <el-table-column type="index" prop="edit" label="序号" width="60" align="center"></el-table-column>
+				<el-table-column prop="memNum" label="客户序号" width="100" align="center"></el-table-column>
                 <el-table-column prop="memName" label="姓名" width="100" align="center"></el-table-column>
                 <el-table-column prop="proName" label="产品名称" width="100" align="center"></el-table-column>
                 <el-table-column prop="price" label="购买单价（￥/次）" width="100" align="center"></el-table-column>
@@ -101,7 +102,7 @@
                 <el-table-column prop="shopowner" label="店长" width="100" align="center"></el-table-column>
                 <el-table-column prop="finance" label="财务" width="100" align="center"></el-table-column>
                 <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
-                <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
+                <el-table-column prop="rejectReason" label="驳回理由" width="100" align="center"></el-table-column>
 
             </el-table>
 

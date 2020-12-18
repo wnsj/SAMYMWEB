@@ -90,6 +90,7 @@
         <div class="" id="datatable">
             <el-table  :data="tableData" style="width: 100%" border>
                 <el-table-column type="index" prop="edit" label="序号" width="60" align="center"></el-table-column>
+				<el-table-column prop="memNum" label="客户序号" width="100" align="center"></el-table-column>
                 <el-table-column prop="storeName" label="门店名称" width="100" align="center"></el-table-column>
                 <el-table-column prop="memName" label="退款人" width="100" align="center"></el-table-column>
                 <el-table-column prop="visitorName" label="咨询师" width="100" align="center"></el-table-column>

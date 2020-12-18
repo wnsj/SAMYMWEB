@@ -78,6 +78,7 @@
                             <tr>
                                 <th class="text-center">编辑</th>
                                 <th class="text-center">姓名</th>
+								<th class="text-center">序号</th>
                                 <th class="text-center">产品名称</th>
                                 <th class="text-center">单价</th>
                                 <th class="text-center">课时（小时）</th>
@@ -92,6 +93,7 @@
                                 <th class="text-center">付款方式</th>
                                 <th class="text-center">消费时间</th>
                                 <th class="text-center">购买时间</th>
+								<th class="text-center;">备注</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -102,6 +104,7 @@
                                     <label :for="'edit'+(index+1)" class="editlabel"></label>
                                 </td>
                                 <td class="text-center">{{item.memName}}</td>
+								<td class="text-center">{{item.memNum}}</td>
                                 <td class="text-center">{{item.proName}}</td>
                                 <td class="text-center">{{item.price}}</td>
                                 <td class="text-center">{{item.consumCount}}</td>
@@ -116,6 +119,7 @@
                                 <td class="text-center">{{item.psName}}</td>
                                 <td class="text-center">{{item.sourceDate | dateFormatFilter("YYYY-MM-DD")}}</td>
                                 <td class="text-center">{{item.buyTime | dateFormatFilter("YYYY-MM-DD")}}</td>
+								<td class="text-center">{{item.remark}}</td>
                             </tr>
                         </tbody>
                     </table>

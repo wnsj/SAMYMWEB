@@ -229,7 +229,7 @@
 	.tree-body .tree-item .tree-type .tree-type-left{
 		position: relative;
 		float: left;
-		width:90px;
+		width:100px;
 		height:24px;
 	}
 	.tree-body .tree-item .tree-type .tree-type-left .tree-radio{
@@ -307,13 +307,13 @@
 	}
 	.tree-body .tree-item .tree-type .tree-type-right ul{
 		height:24px;
-		margin-left: 15px;
+		margin-left: 90px;
 		margin-bottom: 1px;
 	}
 	.tree-body .tree-item .tree-type .tree-type-right ul li{
 		background: #f2f2f2;
 		float: left;
-		width: 68px;
+		width: 100px;
 		height:24px;
 		font-size: 12px;
 		color: #000;
@@ -332,7 +332,7 @@
 		width:622px;
 		background: #f2f2f2;
 		margin-bottom: 1px;
-		margin-left: 15px;
+		margin-left: 90px;
 		text-align: left;
 		line-height: 24px;
 		padding: 0 4px;

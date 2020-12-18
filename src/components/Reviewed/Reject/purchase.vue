@@ -69,6 +69,7 @@
         <div class="" id="datatable">
             <el-table :data="tableData" style="width: 100%" @cell-dblclick="celledit" border>
                 <el-table-column type="index" prop="edit" label="序号" width="60" align="center"></el-table-column>
+				<el-table-column prop="memNum" label="客户序号" width="100" align="center"></el-table-column>
                 <el-table-column prop="memName" label="姓名" width="100" align="center"></el-table-column>
                 <el-table-column prop="proName" label="产品名称" width="100" align="center"></el-table-column>
                 <el-table-column prop="couName" label="咨询师" width="100" align="center"></el-table-column>
@@ -98,7 +99,7 @@
                 <el-table-column prop="finance" label="财务" width="100" align="center"></el-table-column>
                 <el-table-column prop="rejectTime" :formatter="dateFormat" label="审核时间" width="100"
                                  align="center"></el-table-column>
-                <el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
+                <el-table-column prop="rejectReason" label="驳回理由" width="100" align="center"></el-table-column>
             </el-table>
 
             <div class="col-md-12 col-lg-12 tips">* 双击单行，可对当前数据进行修改 </div>

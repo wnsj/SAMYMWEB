@@ -125,7 +125,7 @@
 				<div class="col-md-6 form-group clearfix"></div>
 			</div>
 			<div class="col-md-12 form-group clearfix">
-				<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-25"  v-on:click="go1" v-has="'SAMY:MP:Coupon:selectcall'">确认</button>
+				<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-25"  v-on:click="go1" v-has="'SAMY:CouponManage'">确认</button>
 				<button type="button" class="btn btn-warning pull-center m_r_10 jh-mr-35"  @click="goOff()">取消</button>
 			</div>
 		</div>
@@ -248,7 +248,7 @@
 			//点击确定按钮跳转
 			go1() {
 				this.$router.push({
-					path: '../../MP/Coupon/selectcall'
+					path: '../../MP/Coupon'
 				})
 			},
 			//点击选择用户按钮跳转

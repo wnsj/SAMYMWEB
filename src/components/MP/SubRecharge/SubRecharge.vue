@@ -130,7 +130,9 @@
 				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 					<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
 				</div>
-
+				<div class="col-md-7 you">
+					
+				</div>
 			</div>
 
 
@@ -750,7 +752,12 @@
 	}
 </script>
 
-<style>
+<style scoped="scoped">
+	.tab-pane .you{
+		border: 1px solid #DDDDDD;
+		width: 100%;
+		overflow: auto;
+	}
 	label.bui-radios-label {
 		position: relative;
 		line-height: 34px;

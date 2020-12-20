@@ -58,6 +58,8 @@
             </button>
             <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
             </button>
+			<button type="button" class="btn btn-danger1 pull-left m_r_10" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('2')"> 舍弃
+			</button>
 
             <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
                     data-toggle="modal"
@@ -476,7 +478,12 @@
     }
 </script>
 
-<style>
+<style scoped="scoped">
+	.btn-danger1{
+		background-color:purple;
+		border-color: purple;
+		color:#fff;
+	}
     #datatable {
         position: relative;
     }

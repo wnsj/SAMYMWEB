@@ -276,6 +276,7 @@
 				<div class="col-md-12 form-group clearfix text-left">
 					<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
 				</div>
+				<div class="col-md-7 you"></div>
 			</div>
 			
 			<div class="tab-pane fade in active martop" id="basic" v-show="isShow==true">
@@ -1042,6 +1043,10 @@
 	}
 </script>
 
-<style>
-
+<style scoped="scoped">
+.tab-pane .you{
+		border: 1px solid #DDDDDD;
+		width: 100%;
+		overflow: auto;
+	}
 </style>

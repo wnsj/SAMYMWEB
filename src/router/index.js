@@ -425,6 +425,70 @@ export default new Router({
 					meta: {
 						showName: '新增优惠券'
 					}
+				},
+				{
+					path: '/MP/Coupon/Couponcall',
+					name: 'Couponcall',
+					component: () => import("../components/MP/Coupon/Couponcall"),
+					meta: {
+						showName: '查看优惠券'
+					}
+				},
+				{
+					path: '/MP/Coupon/Couponupdate',
+					name: 'Couponupdate',
+					component: () => import("../components/MP/Coupon/Couponupdate"),
+					meta: {
+						showName: '修改优惠券'
+					}
+				},
+				{
+					path: '/MP/Coupon/selectAdd',
+					name: 'selectAdd',
+					component: () => import("../components/MP/Coupon/selectAdd"),
+					meta: {
+						showName: '选择指定用户'
+					}
+				},
+				{
+					path: '/MP/Coupon/selectcall',
+					name: 'selectcall',
+					component: () => import("../components/MP/Coupon/selectcall"),
+					meta: {
+						showName: '查看指定用户'
+					}
+				},
+				{
+					path: '/MP/Coupon/select-type',
+					name: 'select-type',
+					component: () => import("../components/MP/Coupon/select-type"),
+					meta: {
+						showName: '选择指定分类'
+					}
+				},
+				{
+					path: '/MP/Coupon/select-type-call',
+					name: 'select-type-call',
+					component: () => import("../components/MP/Coupon/select-type-call"),
+					meta: {
+						showName: '查看指定分类'
+					}
+				},
+				{
+					path: '/MP/Coupon/select-chan',
+					name: 'select-chan',
+					component: () => import("../components/MP/Coupon/select-chan"),
+					meta: {
+						showName: '选择指定产品'
+					}
+				},
+				{
+					path: '/MP/Coupon/select-chan-call',
+					name: 'select-chan-call',
+					component: () => import("../components/MP/Coupon/select-chan-call"),
+					meta: {
+						showName: '查看指定产品'
+					}
 				}
 			],
 			redirect: '/MP/Visitor'

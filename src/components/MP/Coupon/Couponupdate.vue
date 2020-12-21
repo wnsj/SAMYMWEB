@@ -85,7 +85,7 @@
 						<div class="xianzhi"><input class="xian" type="radio" name="radioGroup" @click="radioClick($event,item)" /><label class="xian1">全体用户</label></div>
 						<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup" @click="radioClick($event,item)" /><label class="xian1">新用户</label></div>
 						<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup" @click="radioClick($event,item)" /><label class="xian1">指定用户</label></div>
-						<div class="xianzhi3_1"><p>选择用户</p></div>
+						<div class="xianzhi3_1"><p style="cursor: pointer;" v-on:click="seles" v-has="'SAMY:MP:Coupon:selectAdd'">选择用户</p></div>
 					</div>
 				</div>
 				<div class="col-md-12 form-group clearfix">
@@ -94,9 +94,9 @@
 					<div class="col-md-8 shiyong shiyong1">
 						<div class="xianzhi"><input class="xian" type="radio" name="radioGroup" @click="radioClick($event,item)" /><label class="xian1">全品类</label></div>
 						<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup" @click="radioClick($event,item)" /><label class="xian1">指定分类</label></div>
-						<div class="xianzhi3_1"><p>选择分类</p></div>
+						<div class="xianzhi3_1"><p style="cursor: pointer;" v-on:click="xus" v-has="'SAMY:MP:Coupon:select-type'">选择分类</p></div>
 						<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" name="radioGroup" @click="radioClick($event,item)" /><label class="xian1">指定产品</label></div>
-						<div class="xianzhi3_1"><p>选择产品</p></div>
+						<div class="xianzhi3_1"><p style="cursor: pointer;" v-on:click="ots" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p></div>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">
@@ -250,6 +250,24 @@
 						this.clickItemObj.count = 0
 					}
 				}
+			},
+			//点击选择用户按钮跳转
+			seles() {
+				this.$router.push({
+					path: '../../MP/Coupon/selectAdd'
+				})
+			},
+			//点击选择分类按钮跳转
+			xus() {
+				this.$router.push({
+					path: '../../MP/Coupon/select-type'
+				})
+			},
+			//点击选择产品按钮跳转
+			ots() {
+				this.$router.push({
+					path: '../../MP/Coupon/select-chan'
+				})
 			},
 			// Initialization consume’s content
 			initData(title, param) {

@@ -73,7 +73,7 @@
 					<div class="col-md-8 shiyong shiyong1">
 						<div class="xianzhi"><input class="xian" type="radio" :disabled="true" name="radioGroup" @click="radioClick($event,item)" /><label class="xian1">永久有效</label></div>
 						<div class="xianzhi1"><input class="xian" type="radio" :disabled="true" name="radioGroup" @click="radioClick($event,item)" /><label class="xian1">日期范围：</label></div>
-						<div class="xianzhi3"><dPicker class="wd100" disabledDate v-model="dateArr" type="format" format="YYYY-MM-DD" range><template v-slot:header="{ emit }" ><div class="text-left"></div></template></dPicker></div>
+						<div class="xianzhi3"><dPicker class="wd100"  v-model="dateArr" type="format" format="YYYY-MM-DD" range disabledDate><template v-slot:header="{ emit }" ><div class="text-left"></div></template></dPicker></div>
 					</div>
 				</div>
 				<div class="col-md-12 form-group clearfix">
@@ -94,7 +94,7 @@
 						<div class="xianzhi1"><input class="xian" type="radio" :disabled="true" name="radioGroup" @click="radioClick($event,item)" /><label class="xian1">指定分类</label></div>
 						<div class="xianzhi3_1"><p style="cursor: pointer;" v-on:click="xus1" v-has="'SAMY:MP:Coupon:select-type-call'">查看分类</p></div>
 						<div class="xianzhi1" style="margin-left:25px;"><input class="xian" :disabled="true" type="radio" name="radioGroup" @click="radioClick($event,item)" /><label class="xian1">指定产品</label></div>
-						<div class="xianzhi3_1"><p style="cursor: pointer;" v-on:click="ots1" v-has="'SAMY:MP:Coupon:select-chan-call'">选择产品</p></div>
+						<div class="xianzhi3_1"><p style="cursor: pointer;" v-on:click="ots1" v-has="'SAMY:MP:Coupon:select-chan-call'">查看产品</p></div>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix">

@@ -82,7 +82,7 @@
                             <tr>
                                 <th class="text-center;">编辑</th>
                                 <th class="text-center;">姓名</th>
-								<th class="text-center">序号</th>
+								<th class="text-center">客户序号</th>
                                 <th class="text-center;">产品名称</th>
                                 <th class="text-center;">咨询师</th>
                                 <th class="text-center;">咨询顾问</th>

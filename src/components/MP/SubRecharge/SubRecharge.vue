@@ -24,7 +24,7 @@
 					<div class="col-md-12  clearfix jh-ad-0">
 						<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
 							<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">已购产品</label><span class="sign-left">:</span>
-						</div>
+						</div>>
 					</div>
 					<div class="col-md-12 col-lg-12">
 						<table class="table table-bordered table-hover jh-mb-0">
@@ -38,8 +38,8 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="item in unfinishedProList">
-									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
+								<tr v-for="item in unfinishedProList" class="zes">
+									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" class="resd"  :style="{disabled:!dis?true:false}"/></td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -47,6 +47,12 @@
 								</tr>
 							</tbody>
 						</table>
+						<el-tooltip class="item gantan" effect="dark" content="由于审核原因，当前产品无法操作" placement="bottom"  :style="{'display':shs ? 'block':'none'}">
+						      <div class="gan">
+						      	<p>!</p>
+						      </div>
+						</el-tooltip>
+						
 					</div>
 
 					<div class="col-md-12 col-lg-12">
@@ -79,7 +85,7 @@
 					<label class="col-md-4 control-label text-right nopad end-aline">产品风格</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<select class="form-control" @change="proStyleChange" v-model="consume.proStyle">
-							<option value="">未选择</option>
+							<option value="">--未选择--</option>
 							<option value="1">新产品</option>
 							<option value="2">老产品</option>
 						</select>
@@ -298,7 +304,7 @@
 					counselorEmpId: '',
 				},
 				consume: {
-					proStyle: '',
+					proStyle: '1',
 					memNum: '', //会员名
 					memName: '', //手机
 					phone: '', //预约号
@@ -340,6 +346,8 @@
 					select: '',
 					btn: false,
 				},
+				dis:true,
+				shs:false,
 				title: '',
 				isShow: true,
 				consumeReceivable: '',
@@ -348,6 +356,7 @@
 				appShow: false,
 				isArrearsShow: false,
 				unfinishedProList: [],
+				auditState:'',
 				clickItemObj: {
 					itemId: 0,
 					count: 0
@@ -707,6 +716,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
+					var aud = res.retData.auditState
 					if (res.retCode == '0000') {
 						this.unfinishedProList = res.retData
 					} else {
@@ -718,10 +728,12 @@
 			},
 			//单选框选中处理
 			radioClick(e, item) {
+				
 				if (this.clickItemObj.itemId == 0) {
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1
-				} else {
+				} 
+				else {
 					if (this.clickItemObj.itemId == item.piId) {
 						if (this.clickItemObj.count % 2 == 0) {
 							e.target.checked = false
@@ -804,5 +816,24 @@
 
 	label.bui-radios-label input:disabled:checked+.bui-radios:after {
 		background-color: #c1c1c1;
+	}
+	.table .zes{
+		position: relative;
+	}
+	.gan{
+		position: absolute;
+		left: -5px;
+		top: 50px;
+		width: 15px;
+		height: 15px;
+		border-radius: 50%;
+		background: red;
+		color:#fff;
+	}
+	.gantan{
+		color:red;
+	}
+	.gan p{
+		color:#fff;
 	}
 </style>

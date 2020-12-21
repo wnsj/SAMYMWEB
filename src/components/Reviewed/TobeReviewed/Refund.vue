@@ -80,7 +80,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center">编辑</th>
-								<th class="text-center">序号</th>
+								<th class="text-center">客户序号</th>
                                 <th class="text-center">门店名称</th>
                                 <th class="text-center">退款人</th>
                                 <th class="text-center">咨询师</th>

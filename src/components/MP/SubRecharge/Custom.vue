@@ -8,16 +8,14 @@
 		<div class="modal-body pos_r jh-mh-sc">
 			<div class="tab-pane fade in active martop" id="basic">
 				<div class="col-md-4 form-group clearfix jh-wd-33">
-                    <b>*</b>
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >姓名</label><span
-					 class="sign-left">:</span>
+					<b>*</b>
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">姓名</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.memName" disabled="true">
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >手机号</label><span
-					 class="sign-left">:</span>
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">手机号</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.phone" disabled="true">
 					</div>
@@ -25,8 +23,7 @@
 				<div v-show="unfinishedProList.length > 0">
 					<div class="col-md-12  clearfix jh-ad-0">
 						<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >已购产品</label><span
-						 class="sign-left">:</span>
+							<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">已购产品</label><span class="sign-left">:</span>
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix text-left">
@@ -64,83 +61,73 @@
 					<h4 id="myModalLabel" class="modal-title">产品：</h4>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
-                    <b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >咨询师</label><span
-					 class="sign-left">:</span>
+					<b>*</b>
+					<label class="col-md-4 control-label text-right nopad end-aline">咨询师</label><span class="sign-left">:</span>
 					<!--<div class="col-md-7">
 						<emp ref="counselorEmp" @employeeChange="counselorEmpChange" :disabled="counselorFlag"></emp>
 					</div>-->
-                    <div class="col-md-7">
-                        <emp ref="counselorEmp" @employeeChange="counselorEmpChange"></emp>
-                    </div>
+					<div class="col-md-7">
+						<emp ref="counselorEmp" @employeeChange="counselorEmpChange"></emp>
+					</div>
 				</div>
-                <div class="col-md-4 form-group clearfix jh-wd-33">
-                    <label class="col-md-4 control-label text-right nopad end-aline" >产品风格</label><span
-                    class="sign-left">:</span>
-                    <div class="col-md-7">
-                        <select class="form-control" @change="proStyleChange" :disabled="projectFlag" v-model="consume.proStyle">
-                        <option value="">未选择</option>
-                        <option value="1">新产品</option>
-                        <option value="2">老产品</option>
-                    </select>
-                    </div>
-                </div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
-                    <b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >产品</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">产品风格</label><span class="sign-left">:</span>
+					<div class="col-md-7">
+						<select class="form-control" @change="proStyleChange" :disabled="projectFlag" v-model="consume.proStyle">
+							<option value="">未选择</option>
+							<option value="1">新产品</option>
+							<option value="2">老产品</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4 form-group clearfix jh-wd-33">
+					<b>*</b>
+					<label class="col-md-4 control-label text-right nopad end-aline">产品</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<project ref="project" @projectChange="projectChange" :disabled="projectFlag"></project>
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >单价</label><span
-					 class="sign-left">:</span>
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">单价</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.price" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >课时(次)</label><span
-					 class="sign-left">:</span>
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">课时(次)</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.totalCount" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >折扣比例</label><span
-					 class="sign-left">:</span>
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">折扣比例</label><span class="sign-left">:</span>
 					<div class="col-md-7 pos-re">
 						<input type="text" class="form-control" v-model="consume.discount" disabled="disabled">
 						<span class="pos-ab pos-tr">%</span>
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >折前总额</label><span
-					 class="sign-left">:</span>
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">折前总额</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.preFoldTotalPrice" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >折后总额</label><span
-					 class="sign-left">:</span>
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">折后总额</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >顾问</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">顾问</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<emp ref="emp" @employeeChange="empChange"></emp>
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >访问类型</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">访问类型</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<select class="form-control" v-model="consume.visitType" @change="visitTypeChange">
 							<option value="1">初访</option>
@@ -150,60 +137,52 @@
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >客户判定</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">客户判定</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<VisitState ref="VisitStateRef" @objectChange="visitStateChange"></VisitState>
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >续流状态</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">续流状态</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<ContinState ref="ContinStateRef" @objectChange="continStateChange"></ContinState>
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >交费方式</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">交费方式</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<PayStyle ref="payStyle" @payStyleChange="payChange"></PayStyle>
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33" v-if="projectFlag==false&&appShow==true">
-					<label class="col-md-4 control-label text-right nopad end-aline">小程序编号</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">小程序编号</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.appNumber">
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline" >流水单号</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">流水单号</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.serialNo">
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline" >收据</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">收据</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.receipt">
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >咨询方向</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">咨询方向</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<DiseaseType ref="diseaseTypeRef" @objectChange="diseaseTypeChange"></DiseaseType>
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline" >咨询问题</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">咨询问题</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<!-- <textarea class="form-control" v-model="consume.diseaseProblem" placeholder="限制输入100个字">
 				        </textarea> -->
@@ -220,16 +199,14 @@
                 </div> -->
 				<div class="col-md-4 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >咨询室</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">咨询室</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<CounseRoom ref="counseRoomRef" @channelChange="counseRoomChange"></CounseRoom>
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >开始-结束时间</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">开始-结束时间</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<dPicker class="wd100" v-model="dateArr" format="HH:mm:ss" type="time" valueType="format" range>
 							<template v-slot:header="{ emit }">
@@ -239,15 +216,13 @@
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline" >陪同人</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">陪同人</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.accompany">
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline" >陪同人关系</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">陪同人关系</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.companionship">
 					</div>
@@ -255,7 +230,7 @@
 			</div>
 			<div class="col-md-12 clearfix jh-ad-0" v-show="selectObj == null">
 				<div class="col-md-6 clearfix jh-wd-33" v-show="cash.balance>0">
-					<label class="col-md-4 control-label text-right nopad end-aline" >
+					<label class="col-md-4 control-label text-right nopad end-aline">
 						定金抵扣
 					</label>
 					<span class="sign-left">:</span>
@@ -264,35 +239,32 @@
 					</div>
 				</div>
 				<div class="col-md-6 clearfix jh-wd-33">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >定金余额</label><span
-					 class="sign-left">:</span>
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">定金余额</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="cash.balance" id="cash" disabled="disabled">
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="tab-pane fade in active martop" id="basic" v-show="isShow==true">
 				<div class="col-md-12 form-group clearfix text-left">
 					<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
 				</div>
 				<div class="col-md-7 you"></div>
 			</div>
-			
+
 			<div class="tab-pane fade in active martop" id="basic" v-show="isShow==true">
 				<div class="col-md-12 form-group clearfix text-left">
 					<h4 id="myModalLabel" class="modal-title">合计：</h4>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33" v-show="selectObj == null">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >实交总额</label><span
-					 class="sign-left">:</span>
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">实交总额</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="consume.realCross">
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33" v-show="selectObj == null">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >备注</label><span
-					 class="sign-left">:</span>
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">备注</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<textarea type="text" class="form-control" style="height: 34px;" v-model="consume.remark"></textarea>
 					</div>
@@ -300,18 +272,15 @@
 			</div>
 			<div class="col-md-4 form-group clearfix jh-wd-33">
 				<b>*</b>
-				<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >此次消费课时</label><span
-				 class="sign-left">:</span>
+				<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">此次消费课时</label><span class="sign-left">:</span>
 				<div class="col-md-7">
 					<input type="text" class="form-control" v-model="consume.consumCount" @blur="computedRealCross">
 				</div>
 			</div>
 			<div class="col-md-12 form-group clearfix">
-				<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1" data-toggle="modal"
-				 v-on:click="closeCurrentPage()">返回
+				<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="closeCurrentPage()">返回
 				</button>
-				<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal"
-				 v-on:click="addFee()">确认
+				<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" :style="{disabled:succ?'':'disabled'}" data-toggle="modal" v-on:click="addFee()">确认
 				</button>
 			</div>
 		</div>
@@ -327,8 +296,10 @@
 	import ContinState from '../../common/VisitState.vue'
 	import DiseaseType from '../../common/DiseaseType.vue'
 	import CounseRoom from '../../common/CounseRoom.vue'
-    import {Decimal} from 'decimal.js'
-    import dateUtil from "../../common/utils/dateUtil";
+	import {
+		Decimal
+	} from 'decimal.js'
+	import dateUtil from "../../common/utils/dateUtil";
 	export default {
 		components: {
 			dPicker,
@@ -344,7 +315,7 @@
 			return {
 				counselorList: [],
 				consume: {
-                    proStyle: '',
+					proStyle: '',
 					memNum: '', //会员名
 					memName: '', //手机
 					phone: '', //预约号
@@ -371,7 +342,7 @@
 					consumCount: '0', //消费次数
 					balance: '0',
 					piId: '',
-					appNumber:'',//小程序编号
+					appNumber: '', //小程序编号
 					diseaseType: null, //咨询方向
 					diseaseProblem: null, //咨询问题
 					counseRoom: null, //咨询室
@@ -385,12 +356,13 @@
 				consumeReceivable: '',
 				isSelect: true,
 				sameProject: false,
-				appShow:false,
+				appShow: false,
 				unfinishedProList: [],
 				clickItemObj: {
 					itemId: 0,
 					count: 0
 				},
+				succ:false,
 				//proList:[],//有剩余的产品信息
 				selectObj: {},
 				dateArr: [],
@@ -442,7 +414,7 @@
 					consumCount: 0, //消费次数
 					visitType: 1,
 					payType: '0', //支付方式
-					appNumber:'',//小程序编号
+					appNumber: '', //小程序编号
 					serialNo: null, //流水单号
 					receipt: null, //收据
 					visitState: null, //访问状态
@@ -485,10 +457,10 @@
 				$("input[name='radioGroup']").prop("checked", "");
 				this.checkMemCash(param.visId)
 			},
-            // 格式化时间
-            dateFormat: function (cellValue) {
-                return dateUtil.getFormateDateYMD(cellValue)
-            },
+			// 格式化时间
+			dateFormat: function(cellValue) {
+				return dateUtil.getFormateDateYMD(cellValue)
+			},
 			//咨询师
 			counselorEmpChange: function(param) {
 				if (this.isBlank(param)) {
@@ -496,11 +468,11 @@
 				} else {
 					this.consume.counselor = param.empId
 					if (!this.projectFlag) {
-						if(this.selectObj==null){
+						if (this.selectObj == null) {
 							// console.log("nilaile")
-							this.$refs.project.setEmpId(this.consume.counselor,2)
-						}else{
-							this.$refs.project.setEmpId(this.consume.counselor,1)
+							this.$refs.project.setEmpId(this.consume.counselor, 2)
+						} else {
+							this.$refs.project.setEmpId(this.consume.counselor, 1)
 						}
 						this.$refs.project.setProject(0)
 						this.consume.price = 0
@@ -512,22 +484,22 @@
 					}
 				}
 			},
-            proStyleChange: function(){
-                if (!this.projectFlag) {
-                    if(this.selectObj==null){
-                        this.$refs.project.setProStyle(this.consume.proStyle,2,this.consume.counselor)
-                    }else{
-                        this.$refs.project.setProStyle(this.consume.proStyle,1,this.consume.counselor)
-                    }
-                    this.$refs.project.setProject(0)
-                    this.consume.price = 0
-                    this.consume.actualCount = 0
-                    this.consume.discount = 0
-                    this.consume.receivable = 0
-                    this.consume.realCross = 0
-                    this.consumeReceivable = 0
-                }
-            },
+			proStyleChange: function() {
+				if (!this.projectFlag) {
+					if (this.selectObj == null) {
+						this.$refs.project.setProStyle(this.consume.proStyle, 2, this.consume.counselor)
+					} else {
+						this.$refs.project.setProStyle(this.consume.proStyle, 1, this.consume.counselor)
+					}
+					this.$refs.project.setProject(0)
+					this.consume.price = 0
+					this.consume.actualCount = 0
+					this.consume.discount = 0
+					this.consume.receivable = 0
+					this.consume.realCross = 0
+					this.consumeReceivable = 0
+				}
+			},
 			//产品
 			projectChange: function(param) {
 				if (this.isBlank(param)) {
@@ -545,15 +517,15 @@
 			//付款方式
 			payChange: function(param) {
 				if (this.isBlank(param)) {
-					this.appShow=false
+					this.appShow = false
 					this.consume.payType = "0"
 				} else {
 					this.consume.payType = param
-					if(this.consume.payType==5){
-						this.appShow=true
-					}else{
-						this.appShow=false
-						this.consume.appNumber=''
+					if (this.consume.payType == 5) {
+						this.appShow = true
+					} else {
+						this.appShow = false
+						this.consume.appNumber = ''
 					}
 				}
 			},
@@ -606,10 +578,10 @@
 				}
 
 
-                if (this.consume.payType == 0) {
-                    alert("交费方式不能为空!")
-                    return;
-                }
+				if (this.consume.payType == 0) {
+					alert("交费方式不能为空!")
+					return;
+				}
 
 				if (this.isBlank(this.consume.diseaseType)) {
 					alert("咨询方向不能为空!")
@@ -630,14 +602,14 @@
 						return;
 					}
 
-                    var ss = new Decimal(this.selectObj.totalCount).sub(new Decimal(this.selectObj.consumCount))
+					var ss = new Decimal(this.selectObj.totalCount).sub(new Decimal(this.selectObj.consumCount))
 					if (parseFloat(this.consume.consumCount) > parseFloat(ss)) {
 						alert("本次消费课时大于剩余课时!");
 						return;
 					}
 
 					this.consume.piId = this.selectObj.piId
-                    this.consume.realCross = this.consume.consumCount * this.consume.price
+					this.consume.realCross = this.consume.consumCount * this.consume.price
 				}
 				if (this.dateArr.length > 1 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1])) {
 					this.consume.actualBegDate = this.dateArr[0];
@@ -651,20 +623,21 @@
 					this.consume.cashMoney = this.cash.select;
 				}
 
-                if (this.selectObj) {
-                    // this.consume.realCross = (parseFloat(this.consume.realCross) * parseFloat(this.consume.discount) / 100).toFixed(2)
-                    var sur = this.selectObj.totalCount - this.selectObj.consumCount;
-                    if (this.consume.consumCount == sur) {
-                        if (this.selectObj.realCrossCount) {
-                            this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.selectObj.realCrossCount))
-                        } else {
-                            this.consume.realCross = new Decimal(this.consume.receivable)
-                        }
+				if (this.selectObj) {
+					// this.consume.realCross = (parseFloat(this.consume.realCross) * parseFloat(this.consume.discount) / 100).toFixed(2)
+					var sur = this.selectObj.totalCount - this.selectObj.consumCount;
+					if (this.consume.consumCount == sur) {
+						if (this.selectObj.realCrossCount) {
+							this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.selectObj.realCrossCount))
+						} else {
+							this.consume.realCross = new Decimal(this.consume.receivable)
+						}
 
-                    } else {
-                        this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(this.consume.discount)).div(new Decimal(100)).toFixed(2, Decimal.ROUND_HALF_UP)
-                    }
-                }
+					} else {
+						this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(this.consume.discount)).div(new Decimal(
+							100)).toFixed(2, Decimal.ROUND_HALF_UP)
+					}
+				}
 				var url = this.url + '/purchasedItemsAction/consumProject'
 				this.$ajax({
 					method: 'POST',
@@ -679,7 +652,8 @@
 					var res = response.data
 					//console.log(res)
 					if (res.retCode == '0000') {
-                        alert(res.retMsg)
+						this.succ =true;
+						alert(res.retMsg)
 						this.$router.push({
 							name: 'SettleSummary',
 						});
@@ -694,15 +668,15 @@
 				});
 			},
 			closeCurrentPage() {
-                this.$refs.counselorEmp.setPosName("咨询师")
-                this.$refs.counselorEmp.setEmp("")
-                this.$refs.emp.setPosName("咨询顾问")
-                this.$refs.emp.setEmp("")
-                this.$refs.counseRoomRef.setChaId('0')
-                this.$refs.diseaseTypeRef.setObj('0')
-                this.$refs.VisitStateRef.setObj('0')
-                this.$refs.ContinStateRef.setObj('0')
-                this.$emit('closeCurrentPage')
+				this.$refs.counselorEmp.setPosName("咨询师")
+				this.$refs.counselorEmp.setEmp("")
+				this.$refs.emp.setPosName("咨询顾问")
+				this.$refs.emp.setEmp("")
+				this.$refs.counseRoomRef.setChaId('0')
+				this.$refs.diseaseTypeRef.setObj('0')
+				this.$refs.VisitStateRef.setObj('0')
+				this.$refs.ContinStateRef.setObj('0')
+				this.$emit('closeCurrentPage')
 				//$("#addCustom").modal("hide")
 				//console.log('关闭添加患者界面')
 			},
@@ -799,17 +773,17 @@
 						this.counselorFlag = true
 						this.$refs.counselorEmp.setPosName("咨询师")
 						this.$refs.counselorEmp.setEmp(item.counselor)
-                        this.$refs.emp.setPosName("咨询顾问")
-                        this.$refs.emp.setEmp(item.empId)
-                        this.$refs.payStyle.setPsId(item.payType)
-                        this.consume.payType = item.payType
-                        this.consume.serialNo = item.serialNo
-                        this.consume.receipt = item.receipt
-                        this.isExistCon(item)
+						this.$refs.emp.setPosName("咨询顾问")
+						this.$refs.emp.setEmp(item.empId)
+						this.$refs.payStyle.setPsId(item.payType)
+						this.consume.payType = item.payType
+						this.consume.serialNo = item.serialNo
+						this.consume.receipt = item.receipt
+						this.isExistCon(item)
 					}
 					this.projectFlag = true
-					this.$refs.project.setEmpId(this.consume.counselor,1)
-                    this.consume.proStyle = item.proStyle
+					this.$refs.project.setEmpId(this.consume.counselor, 1)
+					this.consume.proStyle = item.proStyle
 					this.$refs.project.setProject(item.proId)
 					this.consume.proId = item.proId
 					this.consume.price = item.price //折前单价
@@ -824,16 +798,16 @@
 						if (this.clickItemObj.count % 2 == 0) {
 							this.selectObj = null
 							e.target.checked = false
-                            this.consume.proStyle = ''
-                            this.$refs.project.setProject('0')
+							this.consume.proStyle = ''
+							this.$refs.project.setProject('0')
 							this.$refs.counselorEmp.setPosName("咨询师")
 							this.$refs.counselorEmp.setEmp("")
-                            this.$refs.emp.setEmp("")
-                            this.$refs.payStyle.setPsId('0')
-                            this.consume.payType = '0'
-                            this.consume.serialNo = ''
-                            this.consume.receipt = ''
-                            this.$refs.diseaseTypeRef.setObj('0')
+							this.$refs.emp.setEmp("")
+							this.$refs.payStyle.setPsId('0')
+							this.consume.payType = '0'
+							this.consume.serialNo = ''
+							this.consume.receipt = ''
+							this.$refs.diseaseTypeRef.setObj('0')
 							this.counselorFlag = false
 						} else {
 							if (item.proType != 0) {
@@ -843,16 +817,16 @@
 								this.counselorFlag = true
 								this.$refs.counselorEmp.setPosName("咨询师")
 								this.$refs.counselorEmp.setEmp(item.counselor)
-                                this.$refs.emp.setPosName("咨询顾问")
-                                this.$refs.emp.setEmp(item.empId)
-                                this.$refs.payStyle.setPsId(item.payType)
-                                this.consume.payType = item.payType
-                                this.consume.serialNo = item.serialNo
-                                this.consume.receipt = item.receipt
-                                this.isExistCon(item)
+								this.$refs.emp.setPosName("咨询顾问")
+								this.$refs.emp.setEmp(item.empId)
+								this.$refs.payStyle.setPsId(item.payType)
+								this.consume.payType = item.payType
+								this.consume.serialNo = item.serialNo
+								this.consume.receipt = item.receipt
+								this.isExistCon(item)
 							}
-							this.$refs.project.setEmpId(this.consume.counselor,1)
-                            this.consume.proStyle = item.proStyle
+							this.$refs.project.setEmpId(this.consume.counselor, 1)
+							this.consume.proStyle = item.proStyle
 							this.$refs.project.setProject(item.proId)
 							this.consume.proId = item.proId
 							this.consume.price = item.price //折前单价
@@ -875,16 +849,16 @@
 							this.counselorFlag = true
 							this.$refs.counselorEmp.setPosName("咨询师")
 							this.$refs.counselorEmp.setEmp(item.counselor)
-                            this.$refs.emp.setPosName("咨询顾问")
-                            this.$refs.emp.setEmp(item.empId)
-                            this.$refs.payStyle.setPsId(item.payType)
-                            this.consume.payType = item.payType
-                            this.consume.serialNo = item.serialNo
-                            this.consume.receipt = item.receipt
-                            this.isExistCon(item)
+							this.$refs.emp.setPosName("咨询顾问")
+							this.$refs.emp.setEmp(item.empId)
+							this.$refs.payStyle.setPsId(item.payType)
+							this.consume.payType = item.payType
+							this.consume.serialNo = item.serialNo
+							this.consume.receipt = item.receipt
+							this.isExistCon(item)
 						}
-						this.$refs.project.setEmpId(this.consume.counselor,1)
-                        this.consume.proStyle = item.proStyle
+						this.$refs.project.setEmpId(this.consume.counselor, 1)
+						this.consume.proStyle = item.proStyle
 						this.$refs.project.setProject(item.proId)
 						this.consume.proId = item.proId
 						this.consume.price = item.price //折前单价
@@ -897,46 +871,46 @@
 				}
 				this.projectFlag = e.target.checked
 				this.consume.consumCount = 0
-                //是否选中已购课程都清零
+				//是否选中已购课程都清零
 				//this.consume.realCross = '0'
-				if(this.projectFlag==true){
-					this.consume.payType=item.payType
-					this.appShow=true
-					this.consume.appNumber=item.appNumber
+				if (this.projectFlag == true) {
+					this.consume.payType = item.payType
+					this.appShow = true
+					this.consume.appNumber = item.appNumber
 					this.payChange()
-				}else{
-					this.appShow=false
-					this.consume.appNumber=''
-					this.consume.payType='0'
+				} else {
+					this.appShow = false
+					this.consume.appNumber = ''
+					this.consume.payType = '0'
 				}
 			},
-            isExistCon(item) {
-                var url = this.url + '/consumAction/getLastedCon'
-                this.$ajax({
-                    method: 'POST',
-                    url: url,
-                    headers: {
-                        'Content-Type': this.contentType,
-                        'Access-Token': this.accessToken
-                    },
-                    data: {
-                        piId: item.piId
-                    },
-                    dataType: 'json',
-                }).then((response) => {
-                    var res = response.data
-                    if (res.retCode == '0000') {
-                        if (res.retData) {
-                            this.consume.diseaseType = res.retData.diseaseType
-                            this.$refs.diseaseTypeRef.setObj(res.retData.diseaseType)
-                        }
-                    } else {
-                        alert(res.retMsg)
-                    }
-                }).catch((error) => {
-                    console.log('请求失败' + error)
-                });
-            },
+			isExistCon(item) {
+				var url = this.url + '/consumAction/getLastedCon'
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: {
+						piId: item.piId
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						if (res.retData) {
+							this.consume.diseaseType = res.retData.diseaseType
+							this.$refs.diseaseTypeRef.setObj(res.retData.diseaseType)
+						}
+					} else {
+						alert(res.retMsg)
+					}
+				}).catch((error) => {
+					console.log('请求失败' + error)
+				});
+			},
 			//项目类型转换
 			transforProType(proType) {
 				if (proType == 0) return '普通'
@@ -1044,7 +1018,7 @@
 </script>
 
 <style scoped="scoped">
-.tab-pane .you{
+	.tab-pane .you {
 		border: 1px solid #DDDDDD;
 		width: 100%;
 		overflow: auto;

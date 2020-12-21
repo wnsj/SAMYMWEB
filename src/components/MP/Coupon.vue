@@ -18,7 +18,7 @@
 					        class="sign-left">:</span>
 					    </div>
 					    <div class="col-md-7 col-lg-7">
-					        <dPicker class="wd100" v-model="beginDate"></dPicker>
+					        <dPicker class="wd100" v-model="startTime"></dPicker>
 					    </div>
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -27,7 +27,7 @@
 					        class="sign-left">:</span>
 					    </div>
 					    <div class="col-md-7 col-lg-7">
-					        <dPicker  class="wd100" v-model="endDate"></dPicker>
+					        <dPicker  class="wd100" v-model="endTime"></dPicker>
 					    </div>
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="margin-bottom: 20px;">
@@ -36,7 +36,7 @@
 					        class="sign-left">:</span>
 					    </div>
 					    <div class="col-md-7 col-lg-7">
-					        <dPicker  class="wd100" v-model="creaDate"></dPicker>
+					        <dPicker  class="wd100" v-model="createTime"></dPicker>
 					    </div>
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -44,7 +44,11 @@
 							<p class="end-aline col-md-11 col-lg-11">优惠券类型</p><span class="sign-left">:</span>
 						</div>
 						<div class="col-md-7 col-lg-7">
-							<cha ref="cha" @channelChange="chaChange"></cha>
+							<select class="form-control" v-model="couponType">
+							    <option value="0">--请选择--</option>
+							    <option value="2">满减券</option>
+							    <option value="1">满折券</option>
+							</select>
 						</div>
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -52,7 +56,15 @@
 							<p class="end-aline col-md-11 col-lg-11">产品类型</p><span class="sign-left">:</span>
 						</div>
 						<div class="col-md-7 col-lg-7">
-							<cha ref="cha" @channelChange="chaChange"></cha>
+							<select class="form-control" v-model="proType">
+								<option value="01">--请选择--</option>
+							    <option value="0">普通</option>
+							    <option value="1">月卡</option>
+							    <option value="2">季卡</option>
+							    <option value="3">半年卡</option>
+							    <option value="4">年卡</option>
+							    <option value="5">测评</option>
+							</select>
 						</div>
 					</div>
 					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getAllAuditPage()">查询</button>
@@ -60,12 +72,7 @@
 					        data-toggle="modal"
 					        v-on:click="adSort" v-has="'SAMY:MP:Coupon:Add'">添加
 					</button>
-
-
-
 				</div>
-
-
 	</div>
 	</el-collapse-transition>
 	<div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
@@ -74,19 +81,19 @@
 
 	<div class="" id="datatable">
 		<el-table :data="tableData" style="width: 100%" border>
-			<el-table-column prop="memName" label="优惠券ID" width="80" align="center"></el-table-column>
-			<el-table-column prop="proName" label="优惠券名称" width="100" align="center"></el-table-column>
-			<el-table-column prop="shopowner" label="优惠券类型"  width="100"  align="center"></el-table-column>
-			<el-table-column prop="storeName" label="金额(￥)" width="80" align="center"></el-table-column>
-			<el-table-column prop="shopowner" label="折扣(%)" width="80" align="center"></el-table-column>
-			<el-table-column prop="sourceDate" label="开始时间" :formatter="resetDate" width="100"  align="center"></el-table-column>
-			<el-table-column prop="sourceDate" label="结束时间" :formatter="resetDate" width="100"  align="center"></el-table-column>
-			<el-table-column prop="sourceDate" label="创建时间" :formatter="resetDate" width="100"  align="center"></el-table-column>
-			<el-table-column prop="finance" label="创建人" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="适用产品" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="产品类型" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="总发行量" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="使用状态" width="80" align="center"></el-table-column>
+			<el-table-column prop="couId" label="优惠券ID" width="80" align="center"></el-table-column>
+			<el-table-column prop="couponName" label="优惠券名称" width="100" align="center"></el-table-column>
+			<el-table-column prop="couponTypeName" label="优惠券类型"  width="100"  align="center"></el-table-column>
+			<el-table-column prop="fullCondition" label="金额(￥)" width="80" align="center"></el-table-column>
+			<el-table-column prop="recude" label="折扣(%)" width="80" align="center"></el-table-column>
+			<el-table-column prop="startTime" label="开始时间" :formatter="resetDate" width="100"  align="center"></el-table-column>
+			<el-table-column prop="endTime" label="结束时间" :formatter="resetDate" width="100"  align="center"></el-table-column>
+			<el-table-column prop="createTime" label="创建时间" :formatter="resetDate" width="100"  align="center"></el-table-column>
+			<el-table-column prop="operatorName" label="创建人" width="100" align="center"></el-table-column>
+			<el-table-column prop="productTypeName" label="适用产品" width="100" align="center"></el-table-column>
+			<el-table-column prop="productType" label="产品类型" width="100" align="center"></el-table-column>
+			<el-table-column prop="allCount" label="总发行量" width="100" align="center"></el-table-column>
+			<el-table-column prop="stateName" label="使用状态" width="80" align="center"></el-table-column>
 			<el-table-column align="center"  label="操作" min-width="165">
 				<template slot-scope="scope">
 					<el-button type="button" class="chakan"  v-on:click="refundModels" v-has="'SAMY:MP:Coupon:call'">查看</el-button>
@@ -97,7 +104,7 @@
 
 		<el-row style="margin-top: 20px;">
 			<el-col :span="24">
-				<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="current"
+				<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="pageNum"
 				 :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
 				</el-pagination>
 			</el-col>
@@ -131,12 +138,17 @@
 				//分页需要的数据
 				total: 0, //数据的数量
 				pages: '', //总页数
-				current: 1, //当前页码
+				pageNum: 1, //当前页码
 				pageSize: 10, //一页显示的数量
-				auditName: '',
+				couponName:'',
 				memName: '',
-				beginDate: '',
+				startTime: '',
+				endTime:'',
+				createTime:'',
+				couponType:'0',
+				operatorId:'',
 				isMem: '',
+				proType: '01',
 				visType: '',
 				auditState: '',
 				begCreateDate: '',
@@ -223,21 +235,21 @@
 			//check the list of department
 			getAllAuditPage() {
 				if (this.selectDataFlag) {
-					this.current = 1
+					this.pageNum = 1
 				}
 
 				this.showSelect = false
 				console.log('getAllAuditPage')
-				if (!this.isBlank(this.beginDate)) {
-				    this.beginDate = this.moment(this.beginDate, 'YYYY-MM-DD 00:00:00.000')
+				if (!this.isBlank(this.startTime)) {
+				    this.startTime = this.moment(this.startTime, 'YYYY-MM-DD 00:00:00.000')
 				}
-				if (!this.isBlank(this.endDate)) {
-				    this.endDate = this.moment(this.endDate, 'YYYY-MM-DD 23:59:00.000')
+				if (!this.isBlank(this.endTime)) {
+				    this.endTime = this.moment(this.endTime, 'YYYY-MM-DD 23:59:00.000')
 				}
-				if (!this.isBlank(this.creaDate)) {
-				    this.creaDate = this.moment(this.creaDate, 'YYYY-MM-DD 23:59:00.000')
+				if (!this.isBlank(this.createTime)) {
+				    this.createTime = this.moment(this.createTime, 'YYYY-MM-DD 23:59:00.000')
 				}
-				var url = this.url + '/purchasedItemsAuditBean/getAllAuditPage'
+				var url = this.url + '/couponController/selectAllCoupon'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -246,14 +258,15 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						current: this.current,
+						operatorId:this.operatorId,
+						pageNum: this.pageNum,
 						pageSize: this.pageSize,
-						auditName: this.auditName,
-						memName: this.memName,
-						storeId: this.storeId,
-						auditBegTime: this.begCreateDate,
-						auditEndTime: this.endCreateDate,
-						auditState: this.auditState
+						couponName: this.couponName,
+						startTime: this.startTime,
+						endTime: this.endTime,
+						createTime: this.createTime,
+						couponType:this.couponType,
+						proType: this.proType
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -261,10 +274,11 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
-						this.current = res.retData.current //当前页码
+						this.pageNum = res.retData.pageNum //当前页码
 						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
-						this.tableData = res.retData.records
+						this.tableData = res.retData.list
+						
 					} else {
 						alert(res.retMsg)
 					}

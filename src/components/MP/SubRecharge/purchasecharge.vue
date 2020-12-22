@@ -22,6 +22,10 @@
 						<input type="text" class="form-control" v-model="consume.phone" :disabled="isShow==true">
 					</div>
 				</div>
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal"
+					 v-on:click="xiaofei()">舍弃</button>
+				</div>
 <!--				<div class="col-md-6 form-group clearfix jh-wd-33">-->
 <!--					<label class="col-md-4 control-label text-right nopad end-aline  " >订单时间</label><span-->
 <!--					 class="sign-left">:</span>-->
@@ -312,12 +316,14 @@
 					balance: '',
 					counselorEmpId: '',
 				},
+				
 				consume: {
                     proStyle: '',
 					memNum: '', //会员名
 					memName: '', //手机
 					phone: '', //预约号
 					appNum: '',
+					
 					receivable: 0, //应交(折前)
 					preFoldTotalPrice: '', //折前总价
 					realCross: '', //实缴（折后）
@@ -349,6 +355,7 @@
 					arrears: '0', //欠费金额
                     sourceId: ''
 				},
+				purAuditId:'',
 				cash: {
 					cashId: '',
 					memNum: '',
@@ -374,6 +381,7 @@
 		methods: {
 			// Initialization consume’s content
 			initAuditPur(param) {
+				this.purAuditId = param.piId;
 				$('#AuditPurContent').modal({
 					backdrop: 'static',
 					keyboard: false
@@ -617,6 +625,35 @@
 					}
 				}).catch((error) => {
 					console.log('会员查询请求失败')
+				});
+			},
+			xiaofei() {
+			    var url = this.url + '/purchasedItemsAuditBean/rejectPurAbandon'
+			    // var url = 'http://172.16.16.255:8080/consumAuditBean/consumRecord'
+				var formData = new FormData();
+				formData.append('purAuditId', this.purAuditId)
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data:formData,
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					//console.log(res)
+					if (res.retCode == '0000') {
+			            alert(res.retMsg)
+						this.$emit('closeCurrentPage','succ')
+						this.$store.commit('addCount',1)
+						this.closeCurrentPage()
+					} else {
+						alert(res.retMsg)
+					}
+				}).catch((error) => {
+					//console.log('请求失败处理')
 				});
 			},
 			//Query member's based information of cash on the memNum

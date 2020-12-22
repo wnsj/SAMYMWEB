@@ -22,6 +22,12 @@
 						<input type="text" class="form-control" v-model="consume.phone" disabled="true">
 					</div>
 				</div>
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal"
+					 v-on:click="xiaofei()">舍弃</button>
+				</div>
+				
+				
 				<!-- <div class="col-md-6 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >订单时间</label><span
 					 class="sign-left">:</span>
@@ -380,9 +386,8 @@
 					accompany: null, //陪同人
 					companionship: null, //陪同人关系
                     startTime: ''
-
-
 				},
+				consumAuditId:'',
 				isShow: true,
 				consumeReceivable: '',
 				isSelect: true,
@@ -417,8 +422,8 @@
 			// Initialization consume’s content
 			initData(param) {
                 this.firstFlag = false
-                console.log(param)
-                console.log(param.visitState)
+				this.consumAuditId = param.cid;
+                
                 // this.clickItemObj.itemId = 0
 				$('#customContent').modal({
 					backdrop: 'static',
@@ -727,6 +732,40 @@
 						this.closeCurrentPage()
 						this.$emit('closeCurrentPage', 'succ')
                         this.$store.commit('addCount',1)
+					} else {
+						alert(res.retMsg)
+					}
+				}).catch((error) => {
+					//console.log('请求失败处理')
+				});
+			},
+			
+			xiaofei() {
+			    var url = this.url + '/consumAuditBean/rejectConsumAbandon'
+			    // var url = 'http://172.16.16.255:8080/consumAuditBean/consumRecord'
+				var formData = new FormData();
+				formData.append('consumAuditId', this.consumAuditId)
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data:formData,
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					//console.log(res)
+					if (res.retCode == '0000') {
+			            alert(res.retMsg)
+						this.$router.push({
+							name: 'consumption',
+						});
+						this.jumpLeft(2);
+						this.closeCurrentPage()
+						this.$emit('closeCurrentPage', 'succ')
+						this.$store.commit('addCount',1)
 					} else {
 						alert(res.retMsg)
 					}

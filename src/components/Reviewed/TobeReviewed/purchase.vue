@@ -58,7 +58,7 @@
             </button>
             <button type="button" class="btn btn-danger pull-left m_r_10" data-toggle="modal" v-on:click="btnAction('2')"> 驳回
             </button>
-			<button type="button" class="btn btn-danger1 pull-left m_r_10" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('2')"> 舍弃
+			<button type="button" class="btn btn-danger1 pull-left m_r_10" data-toggle="modal" style="margin-left:2.5%" v-on:click="btnAction('3')"> 舍弃
 			</button>
 
             <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
@@ -111,7 +111,7 @@
                                 </td> -->
                                 <td class="text-center editradio-box">
                                     <input :id="'edit'+(index+1)" class="editradio" type="radio" name="复选框" :value="index"
-                                           v-model="checkedValue"/>
+                                           v-model="checkedValue"/ @change="xiao(item)">
                                     <label :for="'edit'+(index+1)" class="editlabel"></label>
 
                                 </td>
@@ -205,6 +205,7 @@
                 memName:'',
                 checkedValue:-1,
                 objectContent: {},
+				params: '',
                 //分页需要的数据
                 pages: '', //总页数
                 current: '1', //当前页码
@@ -215,7 +216,8 @@
                 endCreateDate: '',
                 operatorId: this.accountId(),
                 addClass: false,
-                selectItem: ''
+                selectItem: '',
+				piId:''
 
             };
         },
@@ -247,6 +249,9 @@
                     this.storeId = param.storeId
                 }
             },
+			xiao:function(item){
+				this.piId = item.piId
+			},
 
             //modify the cotent of department
             dataClose(){
@@ -314,6 +319,10 @@
              editorAction(item) {
                 this.objectContent = item
             },
+			initData(param) {
+				this.params = param;
+				this.xiaofei();
+			},
             btnAction(index) {
 
                 if (this.checkedValue > -1) {
@@ -341,8 +350,11 @@
                         // this.$refs.rejection.initData(this.objectContent.piId, this.objectContent.operatorId)
                         this.$refs.rejection.initData('product', this.objectContent)
                         $("#rejectionContent").modal('show');
-
                         break;
+						//驳回
+						case '3':
+						   this.initData(this.piId);
+						    break;
                 };
 
             },
@@ -393,7 +405,34 @@
 
 
             },
-
+			xiaofei() {
+				var url = this.url + '/purchasedItemsAuditBean/discard'
+				// var url = 'http://172.16.16.255:8080/consumAuditBean/consumRecord'
+				// var formData = new FormData();
+				// formData.append('params', this.params)
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: {
+						operatorId: this.operatorId,
+						params:this.params
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						alert(res.retMsg)
+					} else {
+						alert(res.retMsg)
+					}
+				}).catch((error) => {
+					//console.log('请求失败处理')
+				});
+			},
 
             //check the list of department
             checkEmp(page) {

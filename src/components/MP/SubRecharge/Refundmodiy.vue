@@ -23,6 +23,10 @@
 							<input type="text" class="form-control" v-model="refund.phone" :disabled="isShow">
 						</div>
 					</div>
+					<div class="col-md-6 form-group clearfix jh-wd-33">
+						<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal"
+						 v-on:click="xiaofei()">舍弃</button>
+					</div>
 					<!-- <div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">订单时间</label><span
 						 class="sign-left">:</span>
@@ -159,6 +163,7 @@
                     isArrears:''
 
 				},
+				refundAuditId:'',
 				isShow: false,
 				unfinishedProList: [],
 				clickItemObj: {
@@ -178,7 +183,7 @@
 			// Initialization consume’s content
 			initData(param) {
                 console.log(param)
-
+				this.refundAuditId = param.refundId;
 				$('#refundContent').modal({
 					backdrop: 'static',
 					keyboard: false
@@ -279,6 +284,35 @@
 				}, (error) => {
 					//console.log("请求失败处理");
 				})
+			},
+			xiaofei() {
+			    var url = this.url + '/refundAuditBean/rejectRefundAbandon'
+			    // var url = 'http://172.16.16.255:8080/consumAuditBean/consumRecord'
+				var formData = new FormData();
+				formData.append('refundAuditId', this.refundAuditId)
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data:formData,
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					//console.log(res)
+					if (res.retCode == '0000') {
+			           this.$emit('closeCurrentPage','succ')
+			           this.$store.commit('addCount',1)
+			           alert(response.retMsg)
+			           this.closeCurrentPage()
+					} else {
+						alert(res.retMsg)
+					}
+				}).catch((error) => {
+					//console.log('请求失败处理')
+				});
 			},
 			closeCurrentPage() {
 				this.$emit('closeCurrentPage')

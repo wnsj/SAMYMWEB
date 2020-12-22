@@ -24,7 +24,7 @@
 							<p class="end-aline col-md-11 col-lg-11">咨询师</p><span class="sign-left">:</span>
 						</div>
 						<div class="col-md-7 col-lg-7">
-							<cou ref="couEmp" @employeeChange="couChange"></cou>
+							<cou ref="couEmp" @employeeChange="empChange"></cou>
 						</div>
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="margin-bottom: 20px;">
@@ -74,7 +74,15 @@
 							<p class="end-aline col-md-11 col-lg-11">产品类型</p><span class="sign-left">:</span>
 						</div>
 						<div class="col-md-7 col-lg-7">
-							<cou ref="couEmp" @employeeChange="couChange"></cou>
+							<select class="form-control" v-model="proType">
+								<option value="01">--请选择--</option>
+							    <option value="0">普通</option>
+							    <option value="1">月卡</option>
+							    <option value="2">季卡</option>
+							    <option value="3">半年卡</option>
+							    <option value="4">年卡</option>
+							    <option value="5">测评</option>
+							</select>
 						</div>
 					</div>
 					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getAllAuditPage()">查询
@@ -86,24 +94,24 @@
 		<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 	</div>
 	<div class="" id="datatable">
-		<el-table :data="tableData" style="width: 100%" border>
+		<el-table :data="tableData" style="width: 100%" border ref="multipleTable" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="55" align="center" label="全选"></el-table-column>
-			<el-table-column prop="memName" label="店铺" width="100" align="center"></el-table-column>
-			<el-table-column prop="proName" label="咨询师" width="100" align="center"></el-table-column>
-			<el-table-column prop="shopowner" label="咨询师等级"  width="100"   align="center"></el-table-column>
-			<el-table-column prop="storeName" label="产品名称" width="100" align="center"></el-table-column>
-			<el-table-column prop="shopowner" label="产品类型" width="100" align="center"></el-table-column>
-			<el-table-column prop="shopowner" label="产品风格" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="总价(￥)" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="优惠后总价(￥)" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="单价(￥)" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="课时(小时)" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="优惠比例(%)" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="是否可退款" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="到期日期(天)" width="100" align="center"></el-table-column>
+			<el-table-column prop="storeName" label="店铺" width="100" align="center"></el-table-column>
+			<el-table-column prop="empName" label="咨询师" width="100" align="center"></el-table-column>
+			<el-table-column prop="empLevelName" label="咨询师等级"  width="100"   align="center"></el-table-column>
+			<el-table-column prop="proName" label="产品名称" width="100" align="center"></el-table-column>
+			<el-table-column prop="proType" label="产品类型" width="100" align="center"></el-table-column>
+			<el-table-column prop="proStyle" label="产品风格" width="100" align="center"></el-table-column>
+			<el-table-column prop="totalPrice" label="总价(￥)" width="100" align="center"></el-table-column>
+			<el-table-column prop="discouAmount" label="优惠后总价(￥)" width="100" align="center"></el-table-column>
+			<el-table-column prop="price" label="单价(￥)" width="100" align="center"></el-table-column>
+			<el-table-column prop="frequency" label="课时(小时)" width="100" align="center"></el-table-column>
+			<el-table-column prop="discount" label="优惠比例(%)" width="100" align="center"></el-table-column>
+			<el-table-column prop="isRefund" label="是否可退款" width="100" align="center"></el-table-column>
+			<el-table-column prop="endDay" label="到期日期(天)" width="100" align="center"></el-table-column>
 		</el-table>
-		<button type="button" class="btn btn-primary pull-left m_r_10 jh-mr-2 jh-mr-3 jh-mr-1" data-toggle="modal">全选</button>
-		<button type="button" class="btn btn-primary pull-left m_r_10 jh-mr-2 jh-mr-4 jh-mr-1" data-toggle="modal">反选</button>
+		<el-button class="jh-mr-1 jh-mr-3" style="cursor: pointer;" @click="checkAll" size="mini">全选</el-button>
+		<el-button class="jh-mr-1 jh-mr-4" style="cursor: pointer;" @click="toggerCheck" size="mini">反选</el-button>
 		<el-row style="margin-top: 20px;">
 			<el-col :span="24">
 				<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="current"
@@ -147,14 +155,15 @@
 				//分页需要的数据
 				total: 0, //数据的数量
 				pages: '', //总页数
-				current: 1, //当前页码
+				page: 1, //当前页码
 				pageSize: 10, //一页显示的数量
-				auditName: '',
-				memName: '',
+				proName: '',
+				empId:'',
 				empLevel: '',
 				isRefund:'',
 				isMem: '',
 				isuse: '1',
+				proType:'',
 				visType: '',
 				auditState: '',
 				begCreateDate: '',
@@ -173,6 +182,17 @@
 		},
 
 		methods: {
+			checkAll() {
+				this.$refs.multipleTable.toggleAllSelection();
+			},
+			toggerCheck() {
+				this.tableData.forEach((item) => {
+					this.$refs.multipleTable.toggleRowSelection(item);
+				});
+			},
+			handleSelectionChange(val) {
+				this.multipleSelection = val;
+			},
 			resetDate(row, column, cellValue, index) {
 			    if (cellValue !== '' && cellValue !== null) {
 			        return cellValue.substring(0, 10)
@@ -187,6 +207,13 @@
 				} else {
 					this.chaId = param.chaId
 				}
+			},
+			empChange(param) {
+			    if (this.isBlank(param)) {
+			        this.empId = ""
+			    } else {
+			        this.empId = param.empId
+			    }
 			},
 			//点击确定按钮跳转
 			go1(){
@@ -254,7 +281,7 @@
 			//check the list of department
 			getAllAuditPage() {
 				if (this.selectDataFlag) {
-					this.current = 1
+					this.page = 1
 				}
 
 				this.showSelect = false
@@ -265,7 +292,7 @@
 				if (!this.isBlank(this.endCreateDate)) {
 					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
 				}
-				var url = this.url + '/purchasedItemsAuditBean/getAllAuditPage'
+				var url = this.url + '/projects/queryAllByParams'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -274,14 +301,15 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						current: this.current,
+						page: this.page,
 						pageSize: this.pageSize,
-						auditName: this.auditName,
-						memName: this.memName,
 						storeId: this.storeId,
-						auditBegTime: this.begCreateDate,
-						auditEndTime: this.endCreateDate,
-						auditState: this.auditState
+						proName: this.proName,
+						empId: this.empId,
+						isuse: this.isuse,
+						empLevel: this.empLevel,
+						isRefund:this.isRefund,
+						proType:this.proType
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -289,7 +317,7 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
-						this.current = res.retData.current //当前页码
+						this.page = res.retData.page //当前页码
 						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.records
@@ -394,10 +422,15 @@
 		border: none;
 		margin-top: 20px;
 	}
-	#datatable .jh-mr-3{
+	#datatable .jh-mr-3 {
+		color: #fff;
+		float: left;
 		background-color: rgb(72, 196, 65);
 	}
-	#datatable .jh-mr-4{
+	
+	#datatable .jh-mr-4 {
+		color: #fff;
+		margin-right: 88%;
 		background-color: rgb(186, 107, 234);
 	}
 	.jh-mr-5{

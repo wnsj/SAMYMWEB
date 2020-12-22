@@ -33,13 +33,13 @@
 		<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 	</div>
 	<div class="" id="datatable">
-		<el-table :data="tableData" style="width: 100%" border class="table">
+		<el-table :data="tableData" style="width: 100%" border class="table" ref="multipleTable" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="100" align="center" label="全选"></el-table-column>
-			<el-table-column prop="memName" label="类型名称" width="230" align="center"></el-table-column>
+			<el-table-column prop="typeName" label="类型名称" width="230" align="center"></el-table-column>
 			<el-table-column prop="finance" label="使用状态" width="230" align="center"></el-table-column>
 		</el-table>
-		<button type="button" class="btn btn-primary pull-left m_r_10 jh-mr-2 jh-mr-3 jh-mr-1" data-toggle="modal">全选</button>
-		<button type="button" class="btn btn-primary pull-left m_r_10 jh-mr-2 jh-mr-4 jh-mr-1" data-toggle="modal">反选</button>
+		<el-button class="jh-mr-1 jh-mr-3" style="cursor: pointer;" @click="checkAll" size="mini">全选</el-button>
+		<el-button class="jh-mr-1 jh-mr-4" style="cursor: pointer;" @click="toggerCheck" size="mini">反选</el-button>
 		<el-row style="margin-top: 20px;">
 			<el-col :span="24">
 				<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="current"
@@ -82,6 +82,7 @@
 				current: 1, //当前页码
 				pageSize: 10, //一页显示的数量
 				auditName: '',
+				visitorName:'',
 				memName: '',
 				isMem: '',
 				isuse: '1',
@@ -103,6 +104,17 @@
 		},
 
 		methods: {
+			checkAll() {
+				this.$refs.multipleTable.toggleAllSelection();
+			},
+			toggerCheck() {
+				this.tableData.forEach((item) => {
+					this.$refs.multipleTable.toggleRowSelection(item);
+				});
+			},
+			handleSelectionChange(val) {
+				this.multipleSelection = val;
+			},
 			resetDate(row, column, cellValue, index) {
 			    if (cellValue !== '' && cellValue !== null) {
 			        return cellValue.substring(0, 10)
@@ -195,7 +207,7 @@
 				if (!this.isBlank(this.endCreateDate)) {
 					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
 				}
-				var url = this.url + '/purchasedItemsAuditBean/getAllAuditPage'
+				var url = this.url + '/couponController/selectProductType'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -204,14 +216,7 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						current: this.current,
-						pageSize: this.pageSize,
-						auditName: this.auditName,
-						memName: this.memName,
-						storeId: this.storeId,
-						auditBegTime: this.begCreateDate,
-						auditEndTime: this.endCreateDate,
-						auditState: this.auditState
+						visitorName: this.visitorName
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -222,7 +227,7 @@
 						this.current = res.retData.current //当前页码
 						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
-						this.tableData = res.retData.records
+						this.tableData = res.retData
 					} else {
 						alert(res.retMsg)
 					}
@@ -325,10 +330,15 @@
 		margin-top: 20px;
 		margin-bottom: 20px;
 	}
-	#datatable .jh-mr-3{
+	#datatable .jh-mr-3 {
+		color: #fff;
+		float: left;
 		background-color: rgb(72, 196, 65);
 	}
-	#datatable .jh-mr-4{
+	
+	#datatable .jh-mr-4 {
+		color: #fff;
+		margin-right: 75%;
 		background-color: rgb(186, 107, 234);
 	}
 	.jh-mr-5{

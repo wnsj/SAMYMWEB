@@ -39,7 +39,8 @@
 							</thead>
 							<tbody>
 								<tr v-for="item in unfinishedProList" class="zes">
-									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" class="resd"  :style="{disabled:!dis?true:false}"/></td>
+									<td><input type="radio" name="radioGroup" id="radioMan" disabled="disabled" @click="radioClick($event,item)"
+										 :style="{'input[name=radioMan]':dis? 'false':'true'}"></td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -47,12 +48,12 @@
 								</tr>
 							</tbody>
 						</table>
-						<el-tooltip class="item gantan" effect="dark" content="由于审核原因，当前产品无法操作" placement="bottom"  :style="{'display':shs ? 'block':'none'}">
-						      <div class="gan">
-						      	<p>!</p>
-						      </div>
+						<el-tooltip class="item gantan" effect="dark" content="由于审核原因，当前产品无法操作" placement="bottom" :style="{'display':!shs ? 'block':'none'}">
+							<div class="gan">
+								<p>!</p>
+							</div>
 						</el-tooltip>
-						
+
 					</div>
 
 					<div class="col-md-12 col-lg-12">
@@ -137,7 +138,34 @@
 					<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
 				</div>
 				<div class="col-md-7 you">
-					
+					<div class="man1">
+						<div class="man">
+							<div class="manjian"></div>
+							<div class="manjian1">满减</div>
+						</div>
+						<ul>
+							<li>
+								<div class="jia">1000</div>
+								<div class="manzu">满<span>10000</span>元可用</div>
+								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
+								<div class="niucha"><p class="xian"></p><span>2020-12-12 00:01:01</span></div>
+							</li>
+						</ul>
+					</div>
+					<div class="man2">
+						<div class="man">
+							<div class="manjian"></div>
+							<div class="manjian1">满折</div>
+						</div>
+						<ol>
+							<li>
+								<div class="jia">7.7<span>折</span></div>
+								<div class="manzu">满<span>10000</span>元可用</div>
+								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
+								<div class="niucha"><p class="xian"></p><span>2020-12-12 00:01:01</span></div>
+							</li>
+						</ol>
+					</div>
 				</div>
 			</div>
 
@@ -177,7 +205,7 @@
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  ">实交总额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="consume.realCross">
+						<input type="text" class="form-control" v-model="consume.realCross" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -272,7 +300,7 @@
 				<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-25" data-toggle="modal" v-on:click="addFee()">确认</button>
 			</div>
 		</div>
-		
+
 	</div>
 	</div>
 </template>
@@ -346,9 +374,10 @@
 					select: '',
 					btn: false,
 				},
-				dis:true,
-				shs:false,
+				dis: true,
+				shs: true,
 				title: '',
+				xuanze1: '',
 				isShow: true,
 				consumeReceivable: '',
 				isSelect: false,
@@ -356,7 +385,7 @@
 				appShow: false,
 				isArrearsShow: false,
 				unfinishedProList: [],
-				auditState:'',
+				auditState: '',
 				clickItemObj: {
 					itemId: 0,
 					count: 0
@@ -366,6 +395,7 @@
 		},
 		methods: {
 			// Initialization consume’s content
+
 			initData(title, param) {
 				$('#rechargeContent').modal({
 					backdrop: 'static',
@@ -580,6 +610,7 @@
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.closeCurrentPage()
+
 					} else {
 						alert(res.retMsg)
 					}
@@ -716,24 +747,33 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					var aud = res.retData.auditState
 					if (res.retCode == '0000') {
 						this.unfinishedProList = res.retData
+						for (var i = 0; i < this.unfinishedProList.length; i++) {
+							if (this.unfinishedProList[i].auditState == '5') {
+								this.dis = false
+								this.shs = false
+							} else {
+								this.dis = true
+								this.shs = true
+							}
+						}
+
+
 					} else {
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('会员查询请求失败')
+					console.log('查询请求失败')
 				});
 			},
 			//单选框选中处理
 			radioClick(e, item) {
-				
+
 				if (this.clickItemObj.itemId == 0) {
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1
-				} 
-				else {
+				} else {
 					if (this.clickItemObj.itemId == item.piId) {
 						if (this.clickItemObj.count % 2 == 0) {
 							e.target.checked = false
@@ -764,76 +804,6 @@
 	}
 </script>
 
-<style scoped="scoped">
-	.tab-pane .you{
-		border: 1px solid #DDDDDD;
-		width: 100%;
-		overflow: auto;
-	}
-	label.bui-radios-label {
-		position: relative;
-		line-height: 34px;
-	}
-
-	label.bui-radios-label input {
-		position: absolute;
-		opacity: 0;
-		visibility: hidden;
-	}
-
-	label.bui-radios-label .bui-radios {
-		display: inline-block;
-		position: relative;
-		width: 13px;
-		height: 13px;
-		background: #FFFFFF;
-		border: 1px solid #979797;
-		border-radius: 50%;
-		vertical-align: -2px;
-		box-sizing: content-box;
-	}
-
-	label.bui-radios-label input:checked+.bui-radios:after {
-		position: absolute;
-		content: "";
-		width: 7px;
-		height: 7px;
-		background-color: #fff;
-		border-radius: 50%;
-		top: 3px;
-		left: 3px;
-	}
-
-	label.bui-radios-label input:checked+.bui-radios {
-		background: #00B066;
-		border: 1px solid #00B066;
-	}
-
-	label.bui-radios-label input:disabled+.bui-radios {
-		background-color: #e8e8e8;
-		border: solid 1px #979797;
-	}
-
-	label.bui-radios-label input:disabled:checked+.bui-radios:after {
-		background-color: #c1c1c1;
-	}
-	.table .zes{
-		position: relative;
-	}
-	.gan{
-		position: absolute;
-		left: -5px;
-		top: 50px;
-		width: 15px;
-		height: 15px;
-		border-radius: 50%;
-		background: red;
-		color:#fff;
-	}
-	.gantan{
-		color:red;
-	}
-	.gan p{
-		color:#fff;
-	}
+<style>
+	@import url("../../../assets/css/SubRecharge.css");
 </style>

@@ -1,6 +1,9 @@
 <!-- the page of department management -->
 <template>
 	<div class="wraper">
+		<div class="col-md-12 col-lg-12 main-title">
+		    <h1 class="titleCss">选择产品</h1>
+		</div>
 		<el-collapse-transition>
 			<div v-show="showSelect">
 				<div class="row newRow">
@@ -100,21 +103,21 @@
 			<el-table-column prop="empName" label="咨询师" width="100" align="center"></el-table-column>
 			<el-table-column prop="empLevelName" label="咨询师等级"  width="100"   align="center"></el-table-column>
 			<el-table-column prop="proName" label="产品名称" width="100" align="center"></el-table-column>
-			<el-table-column prop="proType" label="产品类型" width="100" align="center"></el-table-column>
-			<el-table-column prop="proStyle" label="产品风格" width="100" align="center"></el-table-column>
+			<el-table-column prop="proType" label="产品类型" :formatter="resetAuditState" width="100" align="center"></el-table-column>
+			<el-table-column prop="proStyle" label="产品风格" :formatter="chanstyle" width="100" align="center"></el-table-column>
 			<el-table-column prop="totalPrice" label="总价(￥)" width="100" align="center"></el-table-column>
 			<el-table-column prop="discouAmount" label="优惠后总价(￥)" width="100" align="center"></el-table-column>
 			<el-table-column prop="price" label="单价(￥)" width="100" align="center"></el-table-column>
 			<el-table-column prop="frequency" label="课时(小时)" width="100" align="center"></el-table-column>
 			<el-table-column prop="discount" label="优惠比例(%)" width="100" align="center"></el-table-column>
-			<el-table-column prop="isRefund" label="是否可退款" width="100" align="center"></el-table-column>
+			<el-table-column prop="isRefund" label="是否可退款" :formatter="tui" width="100" align="center"></el-table-column>
 			<el-table-column prop="endDay" label="到期日期(天)" width="100" align="center"></el-table-column>
 		</el-table>
 		<el-button class="jh-mr-1 jh-mr-3" style="cursor: pointer;" @click="checkAll" size="mini">全选</el-button>
 		<el-button class="jh-mr-1 jh-mr-4" style="cursor: pointer;" @click="toggerCheck" size="mini">反选</el-button>
 		<el-row style="margin-top: 20px;">
 			<el-col :span="24">
-				<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="current"
+				<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="page"
 				 :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
 				</el-pagination>
 			</el-col>
@@ -123,7 +126,7 @@
 	<div class="xuanzhong_kuang">
 		<h2>已选中：</h2>
 		<ul>
-			<li>1-225</li>
+			<li v-for="item in unfinishedProLists" key="index">{{item.storeName}}</li>
 		</ul>
 	</div>
 	<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
@@ -147,6 +150,7 @@
 		},
 		data() {
 			return {
+				unfinishedProLists:[],
 				showSelect: true,
 				fixedHeader: false,
 				storeId: this.storeId(),
@@ -191,7 +195,8 @@
 				});
 			},
 			handleSelectionChange(val) {
-				this.multipleSelection = val;
+				this.unfinishedProLists = val;
+				console.log(arguments)
 			},
 			resetDate(row, column, cellValue, index) {
 			    if (cellValue !== '' && cellValue !== null) {
@@ -228,18 +233,35 @@
 					this.empId = param.empId
 				}
 			},
-			resetDate(row, column, cellValue, index) {
-				if (cellValue !== '' && cellValue !== null) {
-					return cellValue.substring(0, 10)
-				}
+			resetAuditState(row, column, cellValue, index){
+				console.log( typeof(cellValue))
+			    switch (cellValue) {
+					case '0':
+					   return '普通'
+					   break;
+			         case '1':
+			            return '月卡'
+			            break;
+			        case '2':
+			           return '季卡'
+			           break;
+			        case '3':
+			           return '半年卡'
+			           break;
+			        case '4':
+			           return '年卡'
+			           break;
+					case '5':
+					    return '测评'
+					    break;
+			    }
 			},
-			resetVisit(row, column, cellValue, index) {
-				return cellValue == 1 ? "初访" : "复访"
+			chanstyle(row, column, cellValue, index) {
+				return cellValue == 1 ? "新产品" : "老产品"
 			},
-			resetArrears(row, column, cellValue, index) {
+			tui(row, column, cellValue, index) {
 				return cellValue == 1 ? "是" : "否"
 			},
-
 
 			storeChange: function(param) {
 				if (this.isBlank(param)) {
@@ -338,12 +360,12 @@
 			},
 			// 翻页
 			handleCurrentChange(pageNum) {
-				this.current = pageNum
+				this.page = pageNum
 				this.getAllAuditPage()
 			},
 			// 每页条数变化时触发
 			handleSizeChange(pageSize) {
-				this.current = 1
+				this.page = 1
 				this.pageSize = pageSize
 				this.getAllAuditPage()
 			},
@@ -405,6 +427,7 @@
 	.xuanzhong_kuang ul li{
 		width: 85px;
 		height: 30px;
+		float: left;
 		margin-bottom: 10px;
 		line-height: 30px;
 		text-align: center;

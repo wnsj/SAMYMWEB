@@ -35,7 +35,7 @@
 							<ul class="treeCon">
 								<li>{{item.proName}}</li>
 								<li>{{item.totalCount}}</li>
-								<li>{{item.realCross}}</li>
+								<li>{{item.receivable}}</li>
 								<li>{{item.visitType}}</li>
 								<li>{{item.isfirst}}</li>
 								<li>{{item.continState}}</li>

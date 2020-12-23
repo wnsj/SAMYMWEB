@@ -1,6 +1,9 @@
 <!-- the page of department management -->
 <template>
 	<div class="wraper">
+		<div class="col-md-12 col-lg-12 main-title">
+		    <h1 class="titleCss">选择分类</h1>
+		</div>
 		<el-collapse-transition>
 			<div v-show="showSelect">
 				<div class="row newRow">
@@ -40,18 +43,11 @@
 		</el-table>
 		<el-button class="jh-mr-1 jh-mr-3" style="cursor: pointer;" @click="checkAll" size="mini">全选</el-button>
 		<el-button class="jh-mr-1 jh-mr-4" style="cursor: pointer;" @click="toggerCheck" size="mini">反选</el-button>
-		<el-row style="margin-top: 20px;">
-			<el-col :span="24">
-				<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="current"
-				 :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
-				</el-pagination>
-			</el-col>
-		</el-row>
 	</div>
 	<div class="xuanzhong_kuang">
 		<h2>已选中：</h2>
 		<ul>
-			<li>1-225</li>
+			<li v-for="item in unfinishedProLists" key="index">{{item.typeName}}</li>
 		</ul>
 	</div>
 	<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" data-toggle="modal" @click="gooff1" v-has="'SAMY:MP:Coupon:Add'">确定</button>
@@ -64,6 +60,7 @@
 	export default {
 		data() {
 			return {
+				unfinishedProLists:[],
 				showSelect: true,
 				fixedHeader: false,
 				storeId: this.storeId(),
@@ -72,7 +69,6 @@
 				name:'',
 				isMem: '',
 				state: '0',
-				name: '',
 				prtId:'',
 				addClass: false,
 				empDisable: false,
@@ -81,12 +77,12 @@
 		},
 
 		methods: {
-			resetAuditState(row, column, state, index){
-			    switch (state) {
-			         case 1:
+			resetAuditState(row, column, cellValue, index){
+			    switch (cellValue) {
+			         case '1':
 			            return '在用'
 			            break;
-			        case 2:
+			        case '2':
 			           return '停用'
 			           break;
 			    }
@@ -100,7 +96,8 @@
 				});
 			},
 			handleSelectionChange(val) {
-				this.multipleSelection = val;
+				this.unfinishedProLists = val;
+				console.log(arguments)
 			},
 			chaChange(param) {
 				if (this.isBlank(param)) {
@@ -195,6 +192,7 @@
 	.xuanzhong_kuang ul li{
 		width: 85px;
 		height: 30px;
+		float: left;
 		margin-bottom: 10px;
 		line-height: 30px;
 		text-align: center;

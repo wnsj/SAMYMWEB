@@ -283,7 +283,7 @@
 
 			},
 			initData(param) {
-				this.params = param;
+				this.refundId = param;
 				this.xiaofei();
 			},
 			editorAction(item) {
@@ -333,13 +333,25 @@
 					},
 					data: {
 						operatorId: this.operatorId,
-						params:this.params
+						piId: this.objectContent.piId,
+						createDate: this.objectContent.createDate,
+						rejectReason:"没有理由",
+						refundId:this.refundId
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						alert(res.retMsg)
+						// alert(res.retMsg)
+						this.$alert(res.retMsg, '提示', {
+							confirmButtonText: '确定',
+							type: 'success',
+							callback: action => {
+								this.$store.commit('addCount', 1)
+								this.objectContent = {}
+								this.getRefundApproveFind(1)
+							}
+						})
 					} else {
 						alert(res.retMsg)
 					}

@@ -1,6 +1,9 @@
 <!-- the page of department management -->
 <template>
 	<div class="wraper">
+		<div class="col-md-12 col-lg-12 main-title">
+		    <h1 class="titleCss">查看用户</h1>
+		</div>
 		<h2>被选中客户：</h2>
 	<div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
 		<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
@@ -8,19 +11,19 @@
 	<div class="" id="datatable">
 		<el-table :data="tableData" style="width: 100%" border>
 			<el-table-column type="selection" width="55" align="center" label="全选"></el-table-column>
-			<el-table-column type="index" prop="edit" label="序号" width="60" align="center"></el-table-column>
-			<el-table-column prop="memName" label="姓名" width="100" align="center"></el-table-column>
-			<el-table-column prop="proName" label="性别" width="100" align="center"></el-table-column>
-			<el-table-column prop="sourceDate" label="生日" :formatter="resetDate" width="100"   align="center"></el-table-column>
+			<el-table-column type="index" prop="visId" label="序号" width="60" align="center"></el-table-column>
+			<el-table-column prop="visitorName" label="姓名" width="100" align="center"></el-table-column>
+			<el-table-column prop="sex" label="性别" :formatter="sex" width="100" align="center"></el-table-column>
+			<el-table-column prop="birthday" label="生日" :formatter="resetDate" width="100" align="center"></el-table-column>
 			<el-table-column prop="storeName" label="店铺" width="100" align="center"></el-table-column>
-			<el-table-column prop="shopowner" label="渠道" width="100" align="center"></el-table-column>
-			<el-table-column prop="shopowner" label="咨询方向" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="接待人" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="访问类型" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="客户判定" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="续流状态" width="100" align="center"></el-table-column>
-			<el-table-column prop="sourceDate" label="添加时间" :formatter="resetDate" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="是否转会员" width="100" align="center"></el-table-column>
+			<el-table-column prop="channelName" label="渠道" width="100" align="center"></el-table-column>
+			<el-table-column prop="dtName" label="咨询方向" width="100" align="center"></el-table-column>
+			<el-table-column prop="empName" label="接待人" width="100" align="center"></el-table-column>
+			<el-table-column prop="visType" label="访问类型" :formatter="resetVisit" width="100" align="center"></el-table-column>
+			<el-table-column prop="vsIdJudgeName" label="客户判定" width="100" align="center"></el-table-column>
+			<el-table-column prop="vsIdFlowName" label="续流状态" width="100" align="center"></el-table-column>
+			<el-table-column prop="createTime" label="添加时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+			<el-table-column prop="isMem" label="是否转会员" :formatter="resetArrears" width="100" align="center"></el-table-column>
 		</el-table>
 		<el-row style="margin-top: 20px;">
 			<el-col :span="24">
@@ -114,7 +117,10 @@
 				return cellValue == 1 ? "初访" : "复访"
 			},
 			resetArrears(row, column, cellValue, index) {
-				return cellValue == 1 ? "是" : "否"
+				return cellValue == 1 ? "已转会员" : "未转会员"
+			},
+			sex(row, column, cellValue, index) {
+				return cellValue == 1 ? "男" : "女"
 			},
 
 
@@ -163,13 +169,7 @@
 
 				this.showSelect = false
 				console.log('getAllAuditPage')
-				if (!this.isBlank(this.begCreateDate)) {
-					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
-				}
-				if (!this.isBlank(this.endCreateDate)) {
-					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
-				}
-				var url = this.url + '/purchasedItemsAuditBean/getAllAuditPage'
+				var url = this.url + '/visitorAction/queryVisitor'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -178,14 +178,14 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						current: this.current,
-						pageSize: this.pageSize,
-						auditName: this.auditName,
-						memName: this.memName,
 						storeId: this.storeId,
-						auditBegTime: this.begCreateDate,
-						auditEndTime: this.endCreateDate,
-						auditState: this.auditState
+						visitorName: this.visitorName,
+						chaId: this.chaId,
+						isMem: this.isMem,
+						visType: this.visType,
+						empId: this.empId,
+						page: this.current,
+						pageSize: this.pageSize
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -193,8 +193,8 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
-						this.current = res.retData.current //当前页码
-						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
+						this.current = res.retData.pageNum //当前页码
+						this.pageSize = res.retData.pageSize//一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.records
 					} else {

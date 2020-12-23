@@ -44,7 +44,7 @@
 								</thead>
 								<tbody>
 									<tr v-for="item in unfinishedProList">
-										<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
+										<td><input type="radio" disabled="disabled" :style="{'input[name=radioMan]':dis? 'false':'true'}" name="radioGroup" @click="radioClick($event,item)" /></td>
 										<td>{{item.proName}}</td>
 										<td>{{item.counselorName}}</td>
 										<td>{{transforProType(item.proType)}}</td>
@@ -53,6 +53,11 @@
 									</tr>
 								</tbody>
 							</table>
+							<el-tooltip class="item gantan" effect="dark" content="由于审核原因，当前产品无法操作" placement="bottom" :style="{'display':!shs ? 'block':'none'}">
+								<div class="gan">
+									<p>!</p>
+								</div>
+							</el-tooltip>
 						</div>
 					</div>
 
@@ -141,6 +146,8 @@
 					money: 0, //退费金额
 				},
 				isShow: false,
+				dis:true,
+				shs:true,
 				unfinishedProList: [],
 				clickItemObj: {
 					itemId: 0,
@@ -302,6 +309,15 @@
 				this.requestData(url, data).then((response) => {
 					if (response.retCode == '0000') {
 						this.unfinishedProList = response.retData
+						for (var i = 0; i < this.unfinishedProList.length; i++) {
+							if (this.unfinishedProList[i].auditState == 5) {
+								this.dis = false
+								this.shs = false
+							} else {
+								this.dis = true
+								this.shs = true
+							}
+						}
 					} else {
 						alert(response.retMsg)
 					}

@@ -1,6 +1,9 @@
 <!-- the page of department management -->
 <template>
 	<div class="wraper">
+		<div class="col-md-12 col-lg-12 main-title">
+		    <h1 class="titleCss">选择用户</h1>
+		</div>
 		<el-collapse-transition>
 			<div v-show="showSelect">
 				<div class="row newRow">
@@ -72,32 +75,38 @@
 				<el-table-column type="selection" width="55" align="center" label="全选"></el-table-column>
 				<el-table-column type="index" prop="visId" label="序号" width="60" align="center"></el-table-column>
 				<el-table-column prop="visitorName" label="姓名" width="100" align="center"></el-table-column>
-				<el-table-column prop="sex" label="性别" width="100" align="center"></el-table-column>
+				<el-table-column prop="sex" label="性别" :formatter="sex" width="100" align="center"></el-table-column>
 				<el-table-column prop="birthday" label="生日" :formatter="resetDate" width="100" align="center"></el-table-column>
 				<el-table-column prop="storeName" label="店铺" width="100" align="center"></el-table-column>
 				<el-table-column prop="channelName" label="渠道" width="100" align="center"></el-table-column>
 				<el-table-column prop="dtName" label="咨询方向" width="100" align="center"></el-table-column>
 				<el-table-column prop="empName" label="接待人" width="100" align="center"></el-table-column>
-				<el-table-column prop="visType" label="访问类型" width="100" align="center"></el-table-column>
+				<el-table-column prop="visType" label="访问类型" :formatter="resetVisit" width="100" align="center"></el-table-column>
 				<el-table-column prop="vsIdJudgeName" label="客户判定" width="100" align="center"></el-table-column>
 				<el-table-column prop="vsIdFlowName" label="续流状态" width="100" align="center"></el-table-column>
 				<el-table-column prop="createTime" label="添加时间" :formatter="resetDate" width="100" align="center"></el-table-column>
-				<el-table-column prop="isMem" label="是否转会员" width="100" align="center"></el-table-column>
+				<el-table-column prop="isMem" label="是否转会员" :formatter="resetArrears" width="100" align="center"></el-table-column>
 			</el-table>
 			<el-button class="jh-mr-1 jh-mr-3" style="cursor: pointer;" @click="checkAll" size="mini">全选</el-button>
 			<el-button class="jh-mr-1 jh-mr-4" style="cursor: pointer;" @click="toggerCheck" size="mini">反选</el-button>
-			<el-row style="margin-top: 20px;">
-				<el-col :span="24">
-					<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="page"
-					 :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
-					</el-pagination>
-				</el-col>
+			<el-row class="second_interval" style="margin-top: 20px;">
+			    <el-col :span="24">
+			        <el-pagination
+			            @current-change="handleCurrentChange"
+			            @size-change="handleSizeChange"
+			            :current-page="current"
+			            :page-sizes="[10,20,30,50]"
+			            :page-size="pageSize"
+			            layout="total, sizes, prev, pager, next, jumper"
+			            :total="total">
+			        </el-pagination>
+			    </el-col>
 			</el-row>
 		</div>
 		<div class="xuanzhong_kuang">
 			<h2>已选中：</h2>
-			<ul>
-				<li>1-225</li>
+			<ul  >
+				<li v-for="item in unfinishedProLists" key="index">{{item.visitorName}}</li>
 			</ul>
 		</div>
 		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @click="go1" v-has="'SAMY:MP:Coupon:Add'">确定</button>
@@ -123,7 +132,9 @@
 		},
 		data() {
 			return {
+				unfinishedProLists:[],
 				showSelect: true,
+				multipleSelection: [],
 				fixedHeader: false,
 				storeId: this.storeId(),
 				accountType: this.accountType(),
@@ -131,7 +142,7 @@
 				//分页需要的数据
 				total: 0, //数据的数量
 				pages: '', //总页数
-				page: 1, //当前页码
+				current: 1, //当前页码
 				pageSize: 10, //一页显示的数量
 				chaId: '',
 				auditName: '',
@@ -170,7 +181,9 @@
 				});
 			},
 			handleSelectionChange(val) {
-				this.multipleSelection = val;
+				this.unfinishedProLists = val;
+				console.log(arguments)
+				
 			},
 			resetDate(row, column, cellValue, index) {
 				if (cellValue !== '' && cellValue !== null) {
@@ -209,7 +222,10 @@
 				return cellValue == 1 ? "初访" : "复访"
 			},
 			resetArrears(row, column, cellValue, index) {
-				return cellValue == 1 ? "是" : "否"
+				return cellValue == 1 ? "已转会员" : "未转会员"
+			},
+			sex(row, column, cellValue, index) {
+				return cellValue == 1 ? "男" : "女"
 			},
 
 
@@ -253,17 +269,11 @@
 			//check the list of department
 			getAllAuditPage() {
 				if (this.selectDataFlag) {
-					this.page = 1
+					this.current = 1
 				}
 
 				this.showSelect = false
 				console.log('getAllAuditPage')
-				if (!this.isBlank(this.begCreateDate)) {
-					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
-				}
-				if (!this.isBlank(this.endCreateDate)) {
-					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
-				}
 				var url = this.url + '/visitorAction/queryVisitor'
 				this.$ajax({
 					method: 'POST',
@@ -279,44 +289,17 @@
 						isMem: this.isMem,
 						visType: this.visType,
 						empId: this.empId,
-						page: this.page,
-						pageSize: this.pageSize,
+						page: this.current,
+						pageSize: this.pageSize
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					// response.data.records.forEach((item) => {
-					// 	switch (item.sex) {
-					// 		case 1:
-					// 			item.state = '男'
-					// 			break;
-					// 		case 2:
-					// 			item.state = '女'
-					// 			break;
-					// 	}
-					// 	switch (item.visType) {
-					// 		case 1:
-					// 			item.visType = '初访'
-					// 			break;
-					// 		case 2:
-					// 			item.visType = '复访'
-					// 			break;
-					// 	}
-					// 	switch (item.isMem) {
-					// 		case 1:
-					// 			item.isMem = '已转会员'
-					// 			break;
-					// 		case 2:
-					// 			item.isMem = '未转会员'
-					// 			break;
-					// 	}
-
-					// })
 					console.log(res)
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
-						this.page = res.retData.page //当前页码
-						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
+						this.current = res.retData.pageNum //当前页码
+						this.pageSize = res.retData.pageSize//一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.records
 					} else {
@@ -334,16 +317,17 @@
 			goOff() {
 				this.$router.go(-1);
 			},
+			
 			// 翻页
 			handleCurrentChange(pageNum) {
-				this.page = pageNum
-				this.getAllAuditPage()
+			    this.current = pageNum
+			    this.getAllAuditPage()
 			},
 			// 每页条数变化时触发
 			handleSizeChange(pageSize) {
-				this.page = 1
-				this.pageSize = pageSize
-				this.getAllAuditPage()
+			    this.current = 1
+			    this.pageSize = pageSize
+			    this.getAllAuditPage()
 			},
 			handleScroll(e) {
 				var self = this
@@ -405,6 +389,7 @@
 	.xuanzhong_kuang ul li {
 		width: 85px;
 		height: 30px;
+		float: left;
 		margin-bottom: 10px;
 		line-height: 30px;
 		text-align: center;

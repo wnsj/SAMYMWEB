@@ -3,7 +3,7 @@
 	<div class="modal-content1">
 		<div class="modal-body  pos_r jh-mh-sc1">
 			<div class="tab-pane fade in active martop" id="basic">
-				<div class="tab-pane fade in active martop">
+			<div class="tab-pane fade in active martop">
 					<div class="col-md-12 form-group clearfix text-left jh-ad-0 jh-mt-5">
 						<div class="col-md-6 clearfix">
 							<h4 id="myModalLabel" class="modal-title jh-lh-39">基础信息：</h4>
@@ -227,21 +227,7 @@
 					this.begDate = ''
 					this.endDate = ''
 				}
-				var url = this.url + '/couponController/addCoupon'
-				var formData = new FormData();
-				formData.append('couponName', this.couponName)
-				formData.append('operatorId', this.operatorId)
-				formData.append('couponType', this.couponType)
-				formData.append('state', this.state)
-				formData.append('couponType', this.couponType)
-				formData.append('fullCondition', this.fullCondition)
-				formData.append('recude', this.recude)
-				formData.append('isLimit', this.isLimit)
-				formData.append('isVaild', this.isVaild)
-				formData.append('userType', this.userType)
-				formData.append('categoryType', this.categoryType)
-				formData.append('limitGet', this.limitGet)
-				formData.append('allCount', this.allCount)
+				var url = this.url + '/couponController/selectCouponById'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -249,7 +235,21 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data: formData,
+					data: {
+						couponName:this.couponName,
+						operatorId:this.operatorId,
+						couponType:this.couponType,
+						state:this.state,
+						couponType:this.couponType,
+						fullCondition:this.fullCondition,
+						recude:this.recude,
+						isLimit:this.isLimit,
+						isVaild:this.isVaild,
+						userType:this.userType,
+						categoryType:this.categoryType,
+						limitGet:this.limitGet,
+						allCount:this.allCount
+					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data

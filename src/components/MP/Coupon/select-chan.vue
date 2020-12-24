@@ -19,7 +19,7 @@
 						<div class="col-md-5 col-lg-5 text-right nopad">
 							<p class="end-aline col-md-11 col-lg-11">产品名称</p><span class="sign-left">:</span>
 						</div>
-						<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="visitorName">
+						<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="proName">
 						</div>
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="margin-bottom: 20px;">
@@ -339,7 +339,7 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
-						this.page = res.retData.page //当前页码
+						this.page = res.retData.current //当前页码
 						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.records

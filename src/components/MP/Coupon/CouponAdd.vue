@@ -20,8 +20,8 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">优惠券类型</label><span class="sign-left">:</span>
 						<div class="col-md-7  ">
-							<select class="form-control" v-model="couponType">
-								<option value="">全部</option>
+							<select class="form-control" v-model="couponType" @click="man">
+								<option value="">--请选择--</option>
 								<option value="2">满减券</option>
 								<option value="1">满折券</option>
 							</select>
@@ -32,20 +32,20 @@
 						<label class="col-md-2 control-label text-right nopad end-aline">状态</label><span class="sign-left">:</span>
 						<div class="col-md-7  ">
 							<select class="form-control" v-model="state">
-								<option value="">全部</option>
+								<option value="">--请选择--</option>
 								<option value="1">在用</option>
 								<option value="2">停用</option>
 							</select>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jin" >
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
 						<div class="col-md-7  ">
 							<input type="text" class="form-control" v-model="fullCondition">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix" style="float: right;">
+					<div class="col-md-6 form-group clearfix zhe" style="float: right;">
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
 						<div class="col-md-7  ">
@@ -56,8 +56,8 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">使用门槛</label><span class="sign-left">:</span>
 						<div class="col-md-7" v-model="isLimit">
-							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="2"/><label class="xian1">无限制</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="1"/><label class="xian1">满</label></div>
+							<div class="xianzhi wuxian"><input class="xian" type="radio" name="radioGroup1"  v-model="isLimit" value="2"  /><label class="xian1">无限制</label></div>
+							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="1"  /><label class="xian1">满</label></div>
 							<div class="xianzhi2"><input type="text" placeholder="0"><span>元可用</span></div>
 						</div>
 					</div>
@@ -107,7 +107,7 @@
 							<div class="xianzhi3_1">
 								<p style="cursor: pointer;" v-on:click="xus" v-has="'SAMY:MP:Coupon:select-type'">选择分类</p>
 							</div>
-							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" name="radioGroup10" value="3"  @click="radioClick($event,item)"/><label
+							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" name="radioGroup5" value="3"  @click="radioClick($event,item)"/><label
 								 class="xian1">指定产品</label></div>
 							<div class="xianzhi3_1">
 								<p style="cursor: pointer;" v-on:click="ots" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p>
@@ -170,6 +170,7 @@
 				categoryType: '', //选择产品
 				limitGet: '', //每人限领取
 				allCount: '', //发放机制
+				categoryList:[],
 				cash: {
 					cashId: '',
 					memNum: '',
@@ -196,6 +197,23 @@
 			};
 		},
 		methods: {
+			man(){
+				if(this.couponType == ''){
+					$(".jin").show();
+					$(".zhe").show();
+					$(".wuxian").show();
+				}
+				else if(this.couponType == '1'){
+					$(".jin").hide();
+					$(".zhe").show();
+					$(".wuxian").hide();
+				}
+				else if(this.couponType == '2'){
+					$(".jin").show();
+					$(".zhe").hide();
+					$(".wuxian").show();
+				}
+			},
 			//点击返回按钮跳转
 			goOff() {
 				this.$router.go(-1);
@@ -230,11 +248,11 @@
 				}
 				var url = this.url + '/couponController/addCoupon'
 				var formData = new FormData();
+				formData.append('categoryList', this.categoryList)
 				formData.append('couponName', this.couponName)
 				formData.append('operatorId', this.operatorId)
 				formData.append('couponType', this.couponType)
 				formData.append('state', this.state)
-				formData.append('couponType', this.couponType)
 				formData.append('fullCondition', this.fullCondition)
 				formData.append('recude', this.recude)
 				formData.append('isLimit', this.isLimit)

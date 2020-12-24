@@ -71,8 +71,8 @@
 			<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 		</div>
 		<div class="" id="datatable">
-			<el-table :data="tableData" style="width: 100%" border ref="multipleTable" @selection-change="handleSelectionChange">
-				<el-table-column type="selection" width="55" align="center" label="全选"></el-table-column>
+			<el-table :data="tableData"  style="width: 100%" border ref="multipleTable" @selection-change="handleSelectionChange">
+				<el-table-column type="selection" width="55"  align="center" label="全选"></el-table-column>
 				<el-table-column type="index" prop="visId" label="序号" width="60" align="center"></el-table-column>
 				<el-table-column prop="visitorName" label="姓名" width="100" align="center"></el-table-column>
 				<el-table-column prop="sex" label="性别" :formatter="sex" width="100" align="center"></el-table-column>
@@ -89,27 +89,21 @@
 			</el-table>
 			<el-button class="jh-mr-1 jh-mr-3" style="cursor: pointer;" @click="checkAll" size="mini">全选</el-button>
 			<el-button class="jh-mr-1 jh-mr-4" style="cursor: pointer;" @click="toggerCheck" size="mini">反选</el-button>
-			<el-row class="second_interval" style="margin-top: 20px;">
-			    <el-col :span="24">
-			        <el-pagination
-			            @current-change="handleCurrentChange"
-			            @size-change="handleSizeChange"
-			            :current-page="current"
-			            :page-sizes="[10,20,30,50]"
-			            :page-size="pageSize"
-			            layout="total, sizes, prev, pager, next, jumper"
-			            :total="total">
-			        </el-pagination>
-			    </el-col>
+			<el-row style="margin-top: 20px;">
+				<el-col :span="24">
+					<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="page"
+					 :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
+					</el-pagination>
+				</el-col>
 			</el-row>
 		</div>
 		<div class="xuanzhong_kuang">
 			<h2>已选中：</h2>
-			<ul  >
+			<ul>
 				<li v-for="item in unfinishedProLists" key="index">{{item.visitorName}}</li>
 			</ul>
 		</div>
-		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @click="go1" v-has="'SAMY:MP:Coupon:Add'">确定</button>
+		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @selection-change="handleSelectionChange1" @click="go1" v-has="'SAMY:MP:Coupon:Add'">确定</button>
 		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
 	</div>
 </template>
@@ -142,7 +136,7 @@
 				//分页需要的数据
 				total: 0, //数据的数量
 				pages: '', //总页数
-				current: 1, //当前页码
+				page: 1, //当前页码
 				pageSize: 10, //一页显示的数量
 				chaId: '',
 				auditName: '',
@@ -180,10 +174,21 @@
 					this.$refs.multipleTable.toggleRowSelection(item);
 				});
 			},
+			 getNum() {
+			      let sum  = 0;
+			      if (this.vTable) {
+			        for (let key in this.vTable) {
+			          sum += this.vTable[key].length;
+			        }
+			      }
+			      this.num = sum;
+				  },
 			handleSelectionChange(val) {
 				this.unfinishedProLists = val;
-				console.log(arguments)
-				
+				if (event === undefined || event.target.nodeName === 'INPUT') {
+				        this.vTable['v_' + this.currentPage] = [...val];
+				        this.getNum();
+				      }
 			},
 			resetDate(row, column, cellValue, index) {
 				if (cellValue !== '' && cellValue !== null) {
@@ -205,6 +210,8 @@
 				this.$router.push({
 					path: '../../MP/Coupon/CouponAdd'
 				})
+			},
+			handleSelectionChange1(val) {
 			},
 			employeeChange(param) {
 				if (this.isBlank(param)) {
@@ -269,7 +276,7 @@
 			//check the list of department
 			getAllAuditPage() {
 				if (this.selectDataFlag) {
-					this.current = 1
+					this.page = 1
 				}
 
 				this.showSelect = false
@@ -289,7 +296,7 @@
 						isMem: this.isMem,
 						visType: this.visType,
 						empId: this.empId,
-						page: this.current,
+						page: this.page,
 						pageSize: this.pageSize
 					},
 					dataType: 'json',
@@ -298,8 +305,8 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
-						this.current = res.retData.pageNum //当前页码
-						this.pageSize = res.retData.pageSize//一页显示的数量  必须是奇数
+						this.page = res.retData.current //当前页码
+						this.pageSize = res.retData.size//一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.records
 					} else {
@@ -320,12 +327,15 @@
 			
 			// 翻页
 			handleCurrentChange(pageNum) {
-			    this.current = pageNum
+			    this.page = pageNum
+				this.unfinishedProLists = pageNum
+				console.log(this.unfinishedProLists)
 			    this.getAllAuditPage()
 			},
 			// 每页条数变化时触发
 			handleSizeChange(pageSize) {
-			    this.current = 1
+			    this.page = 1
+				this.unfinishedProLists = this.unfinishedProLists
 			    this.pageSize = pageSize
 			    this.getAllAuditPage()
 			},

@@ -24,7 +24,7 @@
 					<div class="col-md-12  clearfix jh-ad-0">
 						<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
 							<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">已购产品</label><span class="sign-left">:</span>
-						</div>>
+						</div>
 					</div>
 					<div class="col-md-12 col-lg-12">
 						<table class="table table-bordered table-hover jh-mb-0">
@@ -39,8 +39,7 @@
 							</thead>
 							<tbody>
 								<tr v-for="item in unfinishedProList" class="zes">
-									<td><input type="radio" name="radioGroup" id="radioMan" disabled="disabled" @click="radioClick($event,item)"
-										 :style="{'input[name=radioMan]':dis? 'false':'true'}"></td>
+									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)"></td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -750,12 +749,10 @@
 					if (res.retCode == '0000') {
 						this.unfinishedProList = res.retData
 						for (var i = 0; i < this.unfinishedProList.length; i++) {
-							if (this.unfinishedProList[i].auditState == '5') {
-								this.dis = false
-								this.shs = false
+							if (this.unfinishedProList[i].auditState == 4) {
+								$(".zes").hide();
 							} else {
-								this.dis = true
-								this.shs = true
+								$(".zes").show();
 							}
 						}
 

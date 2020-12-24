@@ -107,7 +107,7 @@
 							<div class="xianzhi3_1">
 								<p style="cursor: pointer;" v-on:click="xus" v-has="'SAMY:MP:Coupon:select-type'">选择分类</p>
 							</div>
-							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" name="radioGroup10" value="3"  @click="radioClick($event,item)"/><label
+							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" name="radioGroup5" value="3"  @click="radioClick($event,item)"/><label
 								 class="xian1">指定产品</label></div>
 							<div class="xianzhi3_1">
 								<p style="cursor: pointer;" v-on:click="ots" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p>

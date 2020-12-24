@@ -50,7 +50,7 @@
 			<li v-for="item in unfinishedProLists" key="index">{{item.typeName}}</li>
 		</ul>
 	</div>
-	<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" data-toggle="modal" @click="gooff1" v-has="'SAMY:MP:Coupon:Add'">确定</button>
+	<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" data-toggle="modal" @click="gooff1(prtId)" v-has="'SAMY:MP:Coupon:Add'">确定</button>
 	<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
 	</div>
 </template>
@@ -68,8 +68,9 @@
 				tableData: [],
 				name:'',
 				isMem: '',
-				state: '0',
 				prtId:'',
+				typeName:'',
+				state: '0',
 				addClass: false,
 				empDisable: false,
 				selectDataFlag: false
@@ -97,7 +98,9 @@
 			},
 			handleSelectionChange(val) {
 				this.unfinishedProLists = val;
-				console.log(arguments)
+				for(var i =0;i<val.length;i++){
+					console.log(val[i].prtId)
+				}
 			},
 			chaChange(param) {
 				if (this.isBlank(param)) {
@@ -107,9 +110,12 @@
 				}
 			},
 			//点击确定按钮跳转
-			gooff1(){
+			gooff1(prtId){
 				this.$router.push({
-					path: '../MP/Coupon/CouponAdd'
+					path: '../../MP/Coupon/CouponAdd',
+					query:{
+						prtId:prtId
+					}
 				})
 			},
 

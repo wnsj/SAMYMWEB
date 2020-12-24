@@ -215,8 +215,7 @@
                 endCreateDate: '',
                 operatorId: this.accountId(),
                 addClass: false,
-                selectItem: '',
-				piIds:''
+                selectItem: ''
 
             };
         },
@@ -352,7 +351,7 @@
                         break;
 						//驳回
 						case '3':
-						   this.initData(this.piIds);
+						   this.initData(this.piId);
 						    break;
                 };
 

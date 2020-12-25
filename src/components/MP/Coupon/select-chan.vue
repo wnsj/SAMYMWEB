@@ -2,7 +2,7 @@
 <template>
 	<div class="wraper">
 		<div class="col-md-12 col-lg-12 main-title">
-		    <h1 class="titleCss">选择产品</h1>
+			<h1 class="titleCss">选择产品</h1>
 		</div>
 		<el-collapse-transition>
 			<div v-show="showSelect">
@@ -31,46 +31,43 @@
 						</div>
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="margin-bottom: 20px;">
-					    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-					        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">是否在用</p><span
-					        class="sign-left">:</span>
-					    </div>
-					    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-					        <select class="form-control" v-model="isuse">
-					            <option value="">全部</option>
-					            <option value="1">在用</option>
-					            <option value="0">停用</option>
-					        </select>
-					    </div>
+						<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+							<p class="end-aline col-md-11 col-lg-11 jh-pa-1">是否在用</p><span class="sign-left">:</span>
+						</div>
+						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+							<select class="form-control" v-model="isuse">
+								<option value="">全部</option>
+								<option value="1">在用</option>
+								<option value="0">停用</option>
+							</select>
+						</div>
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-					    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
-					        <p class="end-aline col-md-11 col-lg-11" >咨询师等级</p>
-					        <span
-					            class="sign-left">:</span>
-					    </div>
-					    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-					        <select class="form-control" v-model="empLevel">
-					            <option value="">--未选择--</option>
-					            <option value="1">资深级</option>
-					            <option value="2">专家级</option>
-					            <option value="3">高级</option>
-					        </select>
-					    </div>
+						<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+							<p class="end-aline col-md-11 col-lg-11">咨询师等级</p>
+							<span class="sign-left">:</span>
+						</div>
+						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+							<select class="form-control" v-model="empLevel">
+								<option value="">--未选择--</option>
+								<option value="1">资深级</option>
+								<option value="2">专家级</option>
+								<option value="3">高级</option>
+							</select>
+						</div>
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-					    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
-					        <p class="end-aline col-md-11 col-lg-11" >是否可退款</p>
-					        <span
-					            class="sign-left">:</span>
-					    </div>
-					    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-					        <select class="form-control" v-model="isRefund">
-					            <option value="">--未选择--</option>
-					            <option value="0">否</option>
-					            <option value="1">是</option>
-					        </select>
-					    </div>
+						<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad">
+							<p class="end-aline col-md-11 col-lg-11">是否可退款</p>
+							<span class="sign-left">:</span>
+						</div>
+						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+							<select class="form-control" v-model="isRefund">
+								<option value="">--未选择--</option>
+								<option value="0">否</option>
+								<option value="1">是</option>
+							</select>
+						</div>
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 						<div class="col-md-5 col-lg-5 text-right nopad">
@@ -79,58 +76,60 @@
 						<div class="col-md-7 col-lg-7">
 							<select class="form-control" v-model="proType">
 								<option value="01">--请选择--</option>
-							    <option value="0">普通</option>
-							    <option value="1">月卡</option>
-							    <option value="2">季卡</option>
-							    <option value="3">半年卡</option>
-							    <option value="4">年卡</option>
-							    <option value="5">测评</option>
+								<option value="0">普通</option>
+								<option value="1">月卡</option>
+								<option value="2">季卡</option>
+								<option value="3">半年卡</option>
+								<option value="4">年卡</option>
+								<option value="5">测评</option>
 							</select>
 						</div>
 					</div>
 					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getAllAuditPage()">查询
 					</button>
 				</div>
-	</div>
-	</el-collapse-transition>
-	<div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
-		<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
-	</div>
-	<div class="" id="datatable">
-		<el-table :data="tableData" style="width: 100%" border ref="multipleTable" @selection-change="handleSelectionChange">
-			<el-table-column type="selection" width="55" align="center" label="全选"></el-table-column>
-			<el-table-column prop="storeName" label="店铺" width="100" align="center"></el-table-column>
-			<el-table-column prop="empName" label="咨询师" width="100" align="center"></el-table-column>
-			<el-table-column prop="empLevelName" label="咨询师等级"  width="100"   align="center"></el-table-column>
-			<el-table-column prop="proName" label="产品名称" width="100" align="center"></el-table-column>
-			<el-table-column prop="proType" label="产品类型" :formatter="resetAuditState" width="100" align="center"></el-table-column>
-			<el-table-column prop="proStyle" label="产品风格" :formatter="chanstyle" width="100" align="center"></el-table-column>
-			<el-table-column prop="totalPrice" label="总价(￥)" width="100" align="center"></el-table-column>
-			<el-table-column prop="discouAmount" label="优惠后总价(￥)" width="100" align="center"></el-table-column>
-			<el-table-column prop="price" label="单价(￥)" width="100" align="center"></el-table-column>
-			<el-table-column prop="frequency" label="课时(小时)" width="100" align="center"></el-table-column>
-			<el-table-column prop="discount" label="优惠比例(%)" width="100" align="center"></el-table-column>
-			<el-table-column prop="isRefund" label="是否可退款" :formatter="tui" width="100" align="center"></el-table-column>
-			<el-table-column prop="endDay" label="到期日期(天)" width="100" align="center"></el-table-column>
-		</el-table>
-		<el-button class="jh-mr-1 jh-mr-3" style="cursor: pointer;" @click="checkAll" size="mini">全选</el-button>
-		<el-button class="jh-mr-1 jh-mr-4" style="cursor: pointer;" @click="toggerCheck" size="mini">反选</el-button>
-		<el-row style="margin-top: 20px;">
-			<el-col :span="24">
-				<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="page"
-				 :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
-				</el-pagination>
-			</el-col>
-		</el-row>
-	</div>
-	<div class="xuanzhong_kuang">
-		<h2>已选中：</h2>
-		<ul>
-			<li v-for="item in unfinishedProLists" key="index">{{item.storeName}}</li>
-		</ul>
-	</div>
-	<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
-	<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2 jh-mr-5"  @click="go1" v-has="'SAMY:MP:Coupon:Add'">确定</button>
+			</div>
+		</el-collapse-transition>
+		<div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
+			<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
+		</div>
+		<div class="" id="datatable">
+			<el-table :data="tableData" style="width: 100%" :row-key="getRowKeys"  border ref="multipleTable" @selection-change="handleSelectionChange">
+				<el-table-column type="selection" :reserve-selection="true" width="55" align="center"></el-table-column>
+				<el-table-column prop="storeName" label="店铺" width="100" align="center"></el-table-column>
+				<el-table-column prop="empName" label="咨询师" width="100" align="center"></el-table-column>
+				<el-table-column prop="empLevelName" label="咨询师等级" width="100" align="center"></el-table-column>
+				<el-table-column prop="proName" label="产品名称" width="100" align="center"></el-table-column>
+				<el-table-column prop="proType" label="产品类型" :formatter="resetAuditState" width="100" align="center"></el-table-column>
+				<el-table-column prop="proStyle" label="产品风格" :formatter="chanstyle" width="100" align="center"></el-table-column>
+				<el-table-column prop="totalPrice" label="总价(￥)" width="100" align="center"></el-table-column>
+				<el-table-column prop="discouAmount" label="优惠后总价(￥)" width="100" align="center"></el-table-column>
+				<el-table-column prop="price" label="单价(￥)" width="100" align="center"></el-table-column>
+				<el-table-column prop="frequency" label="课时(小时)" width="100" align="center"></el-table-column>
+				<el-table-column prop="discount" label="优惠比例(%)" width="100" align="center"></el-table-column>
+				<el-table-column prop="isRefund" label="是否可退款" :formatter="tui" width="100" align="center"></el-table-column>
+				<el-table-column prop="endDay" label="到期日期(天)" width="100" align="center"></el-table-column>
+			</el-table>
+			<el-button class="jh-mr-1 jh-mr-3" style="cursor: pointer;" @click="checkAll" size="mini">全选</el-button>
+			<el-button class="jh-mr-1 jh-mr-4" style="cursor: pointer;" @click="toggerCheck" size="mini">反选</el-button>
+			<el-row style="margin-top: 20px;">
+				<el-col :span="24">
+					<el-pagination @current-change="handleCurrentChange"  @size-change="handleSizeChange"
+						 :current-page="page" :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
+						 :total="total">
+						</el-pagination>
+				</el-col>
+			</el-row>
+		</div>
+		<div class="xuanzhong_kuang">
+			<h2>已选中：</h2>
+			<ul>
+				<li v-for="item in projectList" key="index">{{item.storeName}}</li>
+			</ul>
+		</div>
+		<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
+		<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2 jh-mr-5" @click="go1" v-has="'SAMY:MP:Coupon:Add'">确定</button>
+
 	</div>
 </template>
 
@@ -150,24 +149,24 @@
 		},
 		data() {
 			return {
-				unfinishedProLists:[],
+				projectList:[],
 				showSelect: true,
 				fixedHeader: false,
 				storeId: this.storeId(),
 				accountType: this.accountType(),
-				tableData: [],
+				tableData: [], // 表格数据 
 				//分页需要的数据
 				total: 0, //数据的数量
 				pages: '', //总页数
 				page: 1, //当前页码
 				pageSize: 10, //一页显示的数量
 				proName: '',
-				empId:'',
+				empId: '',
 				empLevel: '',
-				isRefund:'',
+				isRefund: '',
 				isMem: '',
 				isuse: '1',
-				proType:'',
+				proType: '',
 				visType: '',
 				auditState: '',
 				begCreateDate: '',
@@ -186,6 +185,13 @@
 		},
 
 		methods: {
+			getRowKeys(row) {
+			    return row.proId;
+				this.$refs.projectList.clearSelection();
+			},
+			handleSelectionChange(val) {
+				this.projectList = val;
+			},
 			checkAll() {
 				this.$refs.multipleTable.toggleAllSelection();
 			},
@@ -194,14 +200,10 @@
 					this.$refs.multipleTable.toggleRowSelection(item);
 				});
 			},
-			handleSelectionChange(val) {
-				this.unfinishedProLists = val;
-				console.log(arguments)
-			},
 			resetDate(row, column, cellValue, index) {
-			    if (cellValue !== '' && cellValue !== null) {
-			        return cellValue.substring(0, 10)
-			    }
+				if (cellValue !== '' && cellValue !== null) {
+					return cellValue.substring(0, 10)
+				}
 			},
 			changeData(newVal, oldVal) {
 				this.selectDataFlag = true
@@ -214,14 +216,14 @@
 				}
 			},
 			empChange(param) {
-			    if (this.isBlank(param)) {
-			        this.empId = ""
-			    } else {
-			        this.empId = param.empId
-			    }
+				if (this.isBlank(param)) {
+					this.empId = ""
+				} else {
+					this.empId = param.empId
+				}
 			},
 			//点击确定按钮跳转
-			go1(){
+			go1() {
 				this.$router.push({
 					path: '../../MP/Coupon/CouponAdd'
 				})
@@ -233,28 +235,28 @@
 					this.empId = param.empId
 				}
 			},
-			resetAuditState(row, column, cellValue, index){
-				console.log( typeof(cellValue))
-			    switch (cellValue) {
+			resetAuditState(row, column, cellValue, index) {
+				console.log(typeof(cellValue))
+				switch (cellValue) {
 					case '0':
-					   return '普通'
-					   break;
-			         case '1':
-			            return '月卡'
-			            break;
-			        case '2':
-			           return '季卡'
-			           break;
-			        case '3':
-			           return '半年卡'
-			           break;
-			        case '4':
-			           return '年卡'
-			           break;
+						return '普通'
+						break;
+					case '1':
+						return '月卡'
+						break;
+					case '2':
+						return '季卡'
+						break;
+					case '3':
+						return '半年卡'
+						break;
+					case '4':
+						return '年卡'
+						break;
 					case '5':
-					    return '测评'
-					    break;
-			    }
+						return '测评'
+						break;
+				}
 			},
 			chanstyle(row, column, cellValue, index) {
 				return cellValue == 1 ? "新产品" : "老产品"
@@ -330,8 +332,8 @@
 						empId: this.empId,
 						isuse: this.isuse,
 						empLevel: this.empLevel,
-						isRefund:this.isRefund,
-						proType:this.proType
+						isRefund: this.isRefund,
+						proType: this.proType
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -405,14 +407,16 @@
 </script>
 
 <style scoped="scoped">
-	.xuanzhong_kuang{
+	.xuanzhong_kuang {
 		margin-top: 20px;
 		border: 1px solid #DDDDDD;
 		width: 100%;
 		overflow: auto;
-		margin-bottom: 20px;;
+		margin-bottom: 20px;
+		;
 	}
-	.xuanzhong_kuang h2{
+
+	.xuanzhong_kuang h2 {
 		text-align: left;
 		margin-top: 10px;
 		font-weight: bold;
@@ -420,53 +424,62 @@
 		font-size: 16px;
 		margin-bottom: 10px;
 	}
-	.xuanzhong_kuang ul{
+
+	.xuanzhong_kuang ul {
 		margin-left: 20px;
 		overflow: auto;
 	}
-	.xuanzhong_kuang ul li{
+
+	.xuanzhong_kuang ul li {
 		width: 85px;
 		height: 30px;
 		float: left;
 		margin-bottom: 10px;
 		line-height: 30px;
 		text-align: center;
-		border:1px solid #DDDDDD;
+		border: 1px solid #DDDDDD;
 		margin-right: 10px;
 	}
-	.xuanzhong_kuang ul li:nth-child(10n){
+
+	.xuanzhong_kuang ul li:nth-child(10n) {
 		margin-right: 0;
 		margin-bottom: 0;
 	}
-	.xuanzhong_kuang ul li:last-child{
+
+	.xuanzhong_kuang ul li:last-child {
 		margin-right: 0;
 	}
-	.jh-mr-1{
+
+	.jh-mr-1 {
 		border: none;
 		margin-top: 20px;
 	}
+
 	#datatable .jh-mr-3 {
 		color: #fff;
 		float: left;
 		background-color: rgb(72, 196, 65);
 	}
-	
+
 	#datatable .jh-mr-4 {
 		color: #fff;
 		margin-right: 88%;
 		background-color: rgb(186, 107, 234);
 	}
-	.jh-mr-5{
-		border:none;
+
+	.jh-mr-5 {
+		border: none;
 		margin-bottom: 20px;
 		background-color: rgb(22, 155, 213);
 	}
-	.jh-mr-6{
+
+	.jh-mr-6 {
 		outline: none;
-		border:none;
+		border: none;
 		margin-bottom: 20px;
 		background-color: rgb(213, 170, 22);
 	}
+
 	#datatable {
 		position: relative;
 	}

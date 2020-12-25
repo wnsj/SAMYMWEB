@@ -750,9 +750,9 @@
 						this.unfinishedProList = res.retData
 						for (var i = 0; i < this.unfinishedProList.length; i++) {
 							if (this.unfinishedProList[i].auditState == 4) {
-								$(".zes").hide();
+								$(".table .zes").css('background','red');
 							} else {
-								$(".zes").show();
+								$(".zes").css('background','white');
 							}
 						}
 

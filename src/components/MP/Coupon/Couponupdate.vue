@@ -38,14 +38,14 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jin">
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
 						<div class="col-md-7  ">
-							<input type="text" class="form-control" v-model="fullCondition" disabled="disabled">
+							<input type="text" class="form-control" v-model="recude" disabled="disabled">
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix" style="float: right;">
+					<div class="col-md-6 form-group clearfix zhe" style="float: right;">
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
 						<div class="col-md-7  ">
@@ -56,9 +56,9 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">使用门槛</label><span class="sign-left">:</span>
 						<div class="col-md-7" v-model="isLimit">
-							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="2"/><label class="xian1">无限制</label></div>
+							<div class="xianzhi wuxian"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="2"/><label class="xian1">无限制</label></div>
 							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="1"/><label class="xian1">满</label></div>
-							<div class="xianzhi2"><input type="text" placeholder="0" disabled="disabled"><span>元可用</span></div>
+							<div class="xianzhi2"><input type="text" placeholder="0" disabled="disabled" v-model="fullCondition"><span>元可用</span></div>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix"></div>
@@ -140,7 +140,7 @@
 					<div class="col-md-6 form-group clearfix"></div>
 				</div>
 				<div class="col-md-12 form-group clearfix">
-					<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-25" v-on:click="addFee()" v-has="'SAMY:CouponManage'">确认</button>
+					<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-25" v-on:click="updataFee()" v-has="'SAMY:CouponManage'">确认</button>
 					<button type="button" class="btn btn-warning pull-center m_r_10 jh-mr-35" @click="goOff()">取消</button>
 				</div>
 			</div>
@@ -163,6 +163,8 @@
 				couponType: '', //优惠券类型
 				fullCondition: '', //金额
 				recude: '', //折扣
+				couponId:'',
+				couId:'',
 				operatorId:'',
 				isLimit: '', //使用门槛
 				isVaild: '', //有效期
@@ -218,9 +220,70 @@
 					path: '../../MP/Coupon/select-chan'
 				})
 			},
-			//the event of addtional button
-			addFee() {
-				console.log('the event of addtional button')
+			//查询优惠券
+			addFee(couponId) {
+				if (this.dateArr.length > 0 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1])) {
+					this.begDate = this.moment(this.dateArr[0], 'YYYY-MM-DD 00:00:00')
+					this.endDate = this.moment(this.dateArr[1], 'YYYY-MM-DD 23:59:59')
+				} else {
+					this.begDate = ''
+					this.endDate = ''
+				}
+				var url = this.url + '/couponController/selectCouponById'
+				var formData = new FormData();
+				formData.append('couponId', couponId);
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type':'x-www-form-urlencoded',
+						'Access-Token': this.accessToken
+					},
+					data: formData,
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						this.couponName = res.retData.couponName; //优惠券名称
+						this.state = res.retData.state; //状态
+						this.couponType = res.retData.couponType; //优惠券类型
+						this.fullCondition = res.retData.fullCondition; //金额
+						this.recude = res.retData.recude; //折扣
+						this.operatorId = res.retData.operatorId;
+						this.isLimit = res.retData.isLimit; //使用门槛
+						this.isVaild = res.retData.isVaild; //有效期
+						this.userType = res.retData.userType; //使用用户
+						this.categoryType = res.retData.categoryType; //选择产品
+						this.limitGet = res.retData.limitGet; //每人限领取
+						this.couponId = res.retData.couponId;
+						this.allCount = res.retData.allCount; //发放机制
+						if(this.couponType == ''){
+							$(".jin").show();
+							$(".zhe").show();
+							$(".wuxian").show();
+						}
+						if(this.couponType == '1'){
+							$(".jin").hide();
+							$(".zhe").show();
+							$(".xianzhi2 span").css('right','35px');
+							$(".wuxian").hide();
+						}
+						if(this.couponType == '2'){
+							$(".jin").show();
+							$(".zhe").hide();
+							$(".wuxian").show();
+						}
+					} else {
+						
+					}
+				}).catch((error) => {
+					console.log('请求失败处理')
+				});
+			},
+			//修改优惠券
+			updataFee() {
+				this.couId = ''
+				this.couId = this.$route.query.couId
 				if (this.dateArr.length > 0 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1])) {
 					this.begDate = this.moment(this.dateArr[0], 'YYYY-MM-DD 00:00:00')
 					this.endDate = this.moment(this.dateArr[1], 'YYYY-MM-DD 23:59:59')
@@ -230,36 +293,45 @@
 				}
 				var url = this.url + '/couponController/updateCoupon'
 				var formData = new FormData();
-				formData.append('couponName', this.couponName)
-				formData.append('operatorId', this.operatorId)
-				formData.append('couponType', this.couponType)
-				formData.append('state', this.state)
-				formData.append('couponType', this.couponType)
-				formData.append('fullCondition', this.fullCondition)
-				formData.append('recude', this.recude)
-				formData.append('isLimit', this.isLimit)
-				formData.append('isVaild', this.isVaild)
-				formData.append('userType', this.userType)
-				formData.append('categoryType', this.categoryType)
-				formData.append('limitGet', this.limitGet)
-				formData.append('allCount', this.allCount)
+				formData.append('couId', this.couId);
+				formData.append('couponName', this.couponName);
+				formData.append('state', this.state);
+				formData.append('begDate', this.startTime);
+				formData.append('endDate', this.endTime);
+				formData.append('isVaild', this.isVaild);
+				formData.append('userType', this.userType);
+				formData.append('categoryType', this.categoryType);
+				formData.append('limitGet', this.limitGet);
+				formData.append('allCount', this.allCount);
 				this.$ajax({
 					method: 'POST',
 					url: url,
 					headers: {
-						'Content-Type': this.contentType,
+						'Content-Type':'x-www-form-urlencoded',
 						'Access-Token': this.accessToken
 					},
 					data: formData,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
 					if (res.retCode == '0000') {
+						this.couponName = res.retData.couponName; //优惠券名称
+						this.couId = res.retData.couId; //优惠券名称
+						this.state = res.retData.state; //状态
+						this.begDate = res.retData.startTime; //状态
+						this.endDate = res.retData.endTime; //状态
+						this.couponType = res.retData.couponType; //优惠券类型
+						this.fullCondition = res.retData.fullCondition; //金额
+						this.recude = res.retData.recude; //折扣
+						this.operatorId = res.retData.operatorId;
+						this.isLimit = res.retData.isLimit; //使用门槛
+						this.isVaild = res.retData.isVaild; //有效期
+						this.userType = res.retData.userType; //使用用户
+						this.categoryType = res.retData.categoryType; //选择产品
+						this.limitGet = res.retData.limitGet; //每人限领取
+						this.allCount = res.retData.allCount; //发放机制
 						alert(res.retMsg)
-						this.$router.push({
-							path: '../../MP/Coupon'
-						})
+						this.$router.push({path: '../../MP/Coupon'})
 					} else {
 						alert(res.retMsg)
 					}
@@ -267,7 +339,17 @@
 					console.log('请求失败处理')
 				});
 			},
+			getAditId(){
+				this.couponId = ''
+				this.couponId = this.$route.query.couId
+				if (this.couponId != undefined && this.couponId != '') {
+					this.addFee(this.couponId)
+				}
+			},
 		},
+		mounted(){
+			this.getAditId();
+		}
 	}
 </script>
 
@@ -356,6 +438,7 @@
 
 	.shiyong .xianzhi2 input {
 		width: 100%;
+		text-align: center;
 		outline: none;
 		border: 1px solid #DDDDDD;
 		height: 25px;
@@ -383,6 +466,7 @@
 	}
 
 	.shiyong .xianzhi6 input {
+		text-align: center;
 		width: 100%;
 		outline: none;
 		border: 1px solid #DDDDDD;

@@ -40,7 +40,6 @@
 							<dPicker class="wd100" v-model="createTime"></dPicker>
 						</div>
 					</div>
-
 				</div>
 				<div class="row newRow">
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -101,9 +100,13 @@
 			<el-table :data="tableData" style="width: 100%" border>
 				<el-table-column prop="couId" label="优惠券ID" width="80" align="center"></el-table-column>
 				<el-table-column prop="couponName" label="优惠券名称" width="100" align="center"></el-table-column>
-				<el-table-column prop="couponTypeName" label="优惠券类型" width="100" align="center"></el-table-column>
-				<el-table-column prop="fullCondition" label="金额(￥)" width="80" align="center"></el-table-column>
-				<el-table-column prop="recude" label="折扣(%)" width="80" align="center"></el-table-column>
+				<el-table-column prop="couponTypeName" label="优惠券类型" :formatter="couponType" width="100" align="center"></el-table-column>
+				<el-table-column label="金额(￥)" width="80" align="center">
+					<template slot-scope="scope">{{scope.row.couponType==1?"/":scope.row.recude}}</template>
+				</el-table-column>
+				<el-table-column label="折扣(%)" width="80" align="center">
+					<template slot-scope="scope">{{scope.row.couponType==1?scope.row.recude:"/"}}</template>
+				</el-table-column>
 				<el-table-column prop="startTime" label="开始时间" :formatter="resetDate" width="100" align="center"></el-table-column>
 				<el-table-column prop="endTime" label="结束时间" :formatter="resetDate" width="100" align="center"></el-table-column>
 				<el-table-column prop="createTime" label="创建时间" :formatter="resetDate" width="100" align="center"></el-table-column>
@@ -114,8 +117,8 @@
 				<el-table-column prop="stateName" label="使用状态" width="80" align="center"></el-table-column>
 				<el-table-column align="center" label="操作" min-width="165">
 					<template slot-scope="scope">
-						<el-button type="button" class="chakan" v-on:click="refundModels(scope.row.couponId)" v-has="'SAMY:MP:Coupon:call'">查看</el-button>
-						<el-button type="button" class="chakan1" v-on:click="mems(scope.row.couponId)" v-has="'SAMY:MP:Coupon:Update'">修改</el-button>
+						<el-button type="button" class="chakan" @click="toAdds(scope.row.couId)" v-has="'SAMY:MP:Coupon:call'">查看</el-button>
+						<el-button type="button" class="chakan1" v-on:click="mems(scope.row.couId)" v-has="'SAMY:MP:Coupon:Update'">修改</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -159,7 +162,7 @@
 				total: 0, //数据的数量
 				startTime: '',
 				endTime: '',
-				couponId: '',
+				id: '',
 				createTime: '',
 				couponType: '',
 				operatorId: '',
@@ -179,22 +182,22 @@
 
 		},
 		methods: {
-			refundModels(couponId) {
-				console.log(couponId)
-					this.$router.push({
-						path: '../MP/Coupon/Couponcall',
-						query: {
-							couponId: couponId,
-						}
-					})
-				
+			//查看优惠券
+			toAdds(couId) {
+				this.$router.push({
+					path: '../MP/Coupon/Couponcall',
+					query: {
+						couId: couId,
+					}
+				})
+
 			},
-			mems(couponId) {
-				console.log(couponId)
+			//修改优惠券
+			mems(couId) {
 				this.$router.push({
 					path: '../MP/Coupon/Couponupdate',
 					query: {
-						couponId: couponId,
+						couId: couId,
 					}
 				})
 			},
@@ -207,6 +210,11 @@
 				this.selectDataFlag = true
 			},
 
+			// couponType(){
+			// 	if(this.couponType == 1){
+
+			// 	}
+			// },
 			resetDate(row, column, cellValue, index) {
 				if (cellValue !== '' && cellValue !== null && cellValue !== undefined) {
 					return cellValue.substring(0, 10)
@@ -271,6 +279,7 @@
 						this.pageSize = res.retData.pageSize //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.list
+
 					} else {
 						alert(res.retMsg)
 					}

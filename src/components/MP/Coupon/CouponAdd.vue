@@ -41,16 +41,20 @@
 					<div class="col-md-6 form-group clearfix jin" >
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
-						<div class="col-md-7  ">
-							<input type="text" class="form-control" v-model="fullCondition">
+						<div class="col-md-7  jin1">
+							<input type="text" class="form-control" v-model="recude">
+							<span>元</span>
 						</div>
+						
 					</div>
 					<div class="col-md-6 form-group clearfix zhe" style="float: right;">
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
-						<div class="col-md-7  ">
+						<div class="col-md-7  zhe1">
 							<input type="text" class="form-control" v-model="recude">
+							<span>%</span>
 						</div>
+						
 					</div>
 					<div class="col-md-6 form-group clearfix shiyong">
 						<b>*</b>
@@ -58,7 +62,7 @@
 						<div class="col-md-7" v-model="isLimit">
 							<div class="xianzhi wuxian"><input class="xian" type="radio" name="radioGroup1"  v-model="isLimit" value="2"  /><label class="xian1">无限制</label></div>
 							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="1"  /><label class="xian1">满</label></div>
-							<div class="xianzhi2"><input type="text" placeholder="0"><span>元可用</span></div>
+							<div class="xianzhi2"><input type="text" placeholder="0" v-model="fullCondition"><span>元可用</span></div>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix"></div>
@@ -158,6 +162,9 @@
 		},
 		data() {
 			return {
+				userList:[],
+				projectList:[],
+				categoryList:[],
 				couponName: '', //优惠券名称
 				state: '', //状态
 				couponType: '', //优惠券类型
@@ -207,6 +214,7 @@
 					$(".jin").hide();
 					$(".zhe").show();
 					$(".wuxian").hide();
+					$(".xianzhi2 span").css('right','35px');
 				}
 				else if(this.couponType == '2'){
 					$(".jin").show();
@@ -371,6 +379,22 @@
 		color: #fff;
 		background: rgba(72, 196, 65, 1);
 	}
+	.jin1{
+		position: relative;
+	}
+	.jin1 span{
+		position: absolute;
+		right: -2%;
+		top: 30%;
+	}
+	.zhe1{
+		position: relative;
+	}
+	.zhe1 span{
+		position: absolute;
+		right: -2%;
+		top: 30%;
+	}
 
 	.shiyong .xianzhi2 input {
 		width: 100%;
@@ -379,6 +403,7 @@
 		height: 25px;
 		position: relative;
 	}
+	
 
 	.shiyong .xianzhi2 span {
 		position: absolute;

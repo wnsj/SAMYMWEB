@@ -71,8 +71,8 @@
 			<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 		</div>
 		<div class="" id="datatable">
-			<el-table :data="tableData"  style="width: 100%" border ref="multipleTable" @selection-change="handleSelectionChange">
-				<el-table-column type="selection" width="55"  align="center" label="全选"></el-table-column>
+			<el-table :data="tableData"  style="width: 100%" :row-key="getRowKeys" border ref="multipleTable" @selection-change="handleSelectionChange">
+				<el-table-column type="selection" width="55" :reserve-selection="true"  align="center" label="全选"></el-table-column>
 				<el-table-column type="index" prop="visId" label="序号" width="60" align="center"></el-table-column>
 				<el-table-column prop="visitorName" label="姓名" width="100" align="center"></el-table-column>
 				<el-table-column prop="sex" label="性别" :formatter="sex" width="100" align="center"></el-table-column>
@@ -100,7 +100,7 @@
 		<div class="xuanzhong_kuang">
 			<h2>已选中：</h2>
 			<ul>
-				<li v-for="item in unfinishedProLists" key="index">{{item.visitorName}}</li>
+				<li v-for="item in userList" key="index">{{item.visitorName}}</li>
 			</ul>
 		</div>
 		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @selection-change="handleSelectionChange1" @click="go1" v-has="'SAMY:MP:Coupon:Add'">确定</button>
@@ -126,7 +126,7 @@
 		},
 		data() {
 			return {
-				unfinishedProLists:[],
+				userList:[],
 				showSelect: true,
 				multipleSelection: [],
 				fixedHeader: false,
@@ -166,6 +166,10 @@
 		},
 
 		methods: {
+			getRowKeys(row) {
+			    return row.visId;
+				this.$refs.userList.clearSelection();
+			},
 			checkAll() {
 				this.$refs.multipleTable.toggleAllSelection();
 			},
@@ -174,17 +178,8 @@
 					this.$refs.multipleTable.toggleRowSelection(item);
 				});
 			},
-			 getNum() {
-			      let sum  = 0;
-			      if (this.vTable) {
-			        for (let key in this.vTable) {
-			          sum += this.vTable[key].length;
-			        }
-			      }
-			      this.num = sum;
-				  },
 			handleSelectionChange(val) {
-				this.unfinishedProLists = val;
+				this.userList = val;
 				if (event === undefined || event.target.nodeName === 'INPUT') {
 				        this.vTable['v_' + this.currentPage] = [...val];
 				        this.getNum();

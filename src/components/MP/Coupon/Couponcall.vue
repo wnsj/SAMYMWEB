@@ -78,9 +78,13 @@
 							<div class="xianzhi"><input class="xian" :disabled="true" type="radio" name="radioGroup3" value="1" v-model="isVaild" /><label class="xian1">永久有效</label></div>
 							<div class="xianzhi1"><input class="xian" :disabled="true" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label class="xian1">日期范围：</label></div>
 							<div class="xianzhi3">
-								<dPicker class="wd100" v-model="dateArr" type="format" format="YYYY-MM-DD" range><template v-slot:header="{ emit }">
-										<div class="text-left"></div>
-									</template></dPicker>
+								<el-date-picker v-model="begDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="选择日期时间">
+								</el-date-picker>
+							</div>
+							<div class="xianhzi15">~</div>
+							<div class="xianzhi3">
+								<el-date-picker v-model="endDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="选择日期时间">
+								</el-date-picker>
 							</div>
 							<!-- <div class="xianzhi4"><input type="checkbox"><label class="xian1">自领取之日</label></div>
 						<div class="xianzhi5"><input type="text" placeholder="0"><span>天内</span></div> -->
@@ -190,7 +194,6 @@
 				isArrearsShow: false,
 				unfinishedProList: [],
 				projectObj: {},
-				dateArr: '',
 				begDate: '',
 				endDate: '',
 			};
@@ -223,14 +226,6 @@
 			},
 			//the event of addtional button
 			addFee(couponId) {
-				
-				if (this.dateArr.length > 0 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1])) {
-					this.begDate = this.moment(this.dateArr[0], 'YYYY-MM-DD 00:00:00')
-					this.endDate = this.moment(this.dateArr[1], 'YYYY-MM-DD 23:59:59')
-				} else {
-					this.begDate = ''
-					this.endDate = ''
-				}
 				var url = this.url + '/couponController/selectCouponById'
 				var formData = new FormData();
 				formData.append('couponId', couponId);
@@ -248,7 +243,8 @@
 					if (res.retCode == '0000') {
 						this.couponName = res.retData.couponName; //优惠券名称
 						this.state = res.retData.state; //状态
-						// this.dateArr = [res.retData[0].startTime, res.retData[0].endTime];
+						this.begDate = res.retData.startTime;
+						this.endDate = res.retData.endTime;
 						this.couponType = res.retData.couponType; //优惠券类型
 						this.fullCondition = res.retData.fullCondition; //金额
 						this.recude = res.retData.recude; //折扣
@@ -307,12 +303,19 @@
 	.shiyong{margin-top: 40px;}
 	.shiyong1{margin-top: 0;}
 	.shiyong .xianzhi{float: left;}
+	.xianhzi15{margin-left: 8px;margin-right: 8px;float: left;margin-top: 10px;}
 	.shiyong .xianzhi1{float: left;margin-left: 15px;}
 	.shiyong .xianzhi4{float: left;margin-left: 15px;margin-top: 5px;}
 	.shiyong .xianzhi2{float: left;width:105px;margin-left: 10px;margin-top: 5px;}
 	.shiyong .xianzhi5{float: left;width:105px;margin-left: 10px;margin-top: 5px;}
 	.shiyong .xianzhi6{float: left;width:120px;margin-left: 10px;margin-top: 5px;}
-	.shiyong .xianzhi3{float: left;width:202px;}
+	.shiyong .xianzhi3 {
+		float: left;
+		width: 195px;
+	}
+	.shiyong .xianzhi3  .el-date-editor.el-input, .el-date-editor.el-input__inner{
+		width: 195px;
+	}
 	.shiyong .xianzhi3_1{float: left;width:80px;}
 	.shiyong .xianzhi3_1 p{margin-left: 10px;margin-top: 5px;border-radius: 5px; width: 80px;height: 25px;line-height: 25px;text-align: center;color:#fff;background: rgba(72, 196, 65, 1);}
 	.shiyong .xianzhi2 input{text-align: center;width: 100%; outline: none;border:1px solid #DDDDDD;height: 25px;position: relative;}

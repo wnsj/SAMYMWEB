@@ -41,15 +41,17 @@
 					<div class="col-md-6 form-group clearfix jin">
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
-						<div class="col-md-7  ">
+						<div class="col-md-7 jin1 ">
 							<input type="text" class="form-control" v-model="recude" :disabled="true">
+							<span>元</span>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix zhe" style="float: right;">
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
-						<div class="col-md-7  ">
+						<div class="col-md-7  zhe1">
 							<input type="text" class="form-control" v-model="recude" :disabled="true">
+							<span>%</span>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix shiyong">
@@ -78,12 +80,12 @@
 							<div class="xianzhi"><input class="xian" :disabled="true" type="radio" name="radioGroup3" value="1" v-model="isVaild" /><label class="xian1">永久有效</label></div>
 							<div class="xianzhi1"><input class="xian" :disabled="true" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label class="xian1">日期范围：</label></div>
 							<div class="xianzhi3">
-								<el-date-picker v-model="begDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="选择日期时间">
+								<el-date-picker  disabled v-model="begDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="选择日期时间">
 								</el-date-picker>
 							</div>
 							<div class="xianhzi15">~</div>
 							<div class="xianzhi3">
-								<el-date-picker v-model="endDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="选择日期时间">
+								<el-date-picker disabled v-model="endDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="选择日期时间">
 								</el-date-picker>
 							</div>
 							<!-- <div class="xianzhi4"><input type="checkbox"><label class="xian1">自领取之日</label></div>
@@ -153,12 +155,7 @@
 </template>
 
 <script>
-	import dPicker from 'vue2-datepicker'
-
 	export default {
-		components: {
-			dPicker
-		},
 		data() {
 			return {
 				couponName: '', //优惠券名称
@@ -256,6 +253,9 @@
 						this.limitGet = res.retData.limitGet; //每人限领取
 						this.couponId = res.retData.couponId;
 						this.allCount = res.retData.allCount; //发放机制
+						// if(this.isLimit =='2' && this.couponType =='2'){
+						// 	this.recude.value != '6';
+						// }
 						if(this.couponType == ''){
 							$(".jin").show();
 							$(".zhe").show();
@@ -315,6 +315,25 @@
 	}
 	.shiyong .xianzhi3  .el-date-editor.el-input, .el-date-editor.el-input__inner{
 		width: 195px;
+	}
+	.jin1 {
+		position: relative;
+	}
+	
+	.jin1 span {
+		position: absolute;
+		right: -2%;
+		top: 30%;
+	}
+	
+	.zhe1 {
+		position: relative;
+	}
+	
+	.zhe1 span {
+		position: absolute;
+		right: -2%;
+		top: 30%;
 	}
 	.shiyong .xianzhi3_1{float: left;width:80px;}
 	.shiyong .xianzhi3_1 p{margin-left: 10px;margin-top: 5px;border-radius: 5px; width: 80px;height: 25px;line-height: 25px;text-align: center;color:#fff;background: rgba(72, 196, 65, 1);}

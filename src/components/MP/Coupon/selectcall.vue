@@ -9,8 +9,8 @@
 		<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 	</div>
 	<div class="" id="datatable">
-		<el-table :data="tableData" style="width: 100%" border>
-			<el-table-column type="selection" width="55" align="center" label="全选"></el-table-column>
+		<el-table :data="tableData" style="width: 100%" border :row-key="getRowKeys" ref="multipleTable" @selection-change="handleSelectionChange">
+			<el-table-column type="selection" width="55" align="center" label="全选" :reserve-selection="true"></el-table-column>
 			<el-table-column type="index" prop="visId" label="序号" width="60" align="center"></el-table-column>
 			<el-table-column prop="visitorName" label="姓名" width="100" align="center"></el-table-column>
 			<el-table-column prop="sex" label="性别" :formatter="sex" width="100" align="center"></el-table-column>
@@ -86,6 +86,13 @@
 		},
 
 		methods: {
+			getRowKeys(row) {
+				return row.visId;
+			},
+			handleSelectionChange(val) {
+				this.userList = val;
+				console.log(val)
+			},
 			resetDate(row, column, cellValue, index) {
 			    if (cellValue !== '' && cellValue !== null) {
 			        return cellValue.substring(0, 10)
@@ -166,7 +173,9 @@
 				if (this.selectDataFlag) {
 					this.current = 1
 				}
-
+				var projectList = localStorage.getItem('projectList');
+				var stringResult1 = projectList.split(',');
+				console.log(stringResult1)
 				this.showSelect = false
 				console.log('getAllAuditPage')
 				var url = this.url + '/visitorAction/queryVisitor'
@@ -192,11 +201,18 @@
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
-						this.pages = res.retData.pages //总页数
-						this.current = res.retData.current //当前页码
-						this.pageSize = res.retData.size//一页显示的数量  必须是奇数
-						this.total = res.retData.total //数据的数量
-						this.tableData = res.retData.records
+						this.pages = res.retData.pages; //总页数
+						this.current = res.retData.current; //当前页码
+						this.pageSize = res.retData.size;//一页显示的数量  必须是奇数
+						this.total = res.retData.total; //数据的数量
+						this.tableData = res.retData.records;
+						for (let i = 0; i < res.retData.records.length; i++) {
+							if (stringResult1.includes(res.retData.records[i].visId)) {
+								console.log(typeof(res.retData.records[i].visId) )
+								 this.$refs.multipleTable.toggleRowSelection(res.retData.records[i])
+								}
+						 
+						}
 					} else {
 						alert(res.retMsg)
 					}

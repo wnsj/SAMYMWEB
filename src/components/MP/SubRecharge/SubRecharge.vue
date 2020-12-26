@@ -132,7 +132,7 @@
 				</div>
 			</div>
 
-			<div class="tab-pane fade in active martop" v-show="isShow==true">
+			<div class="tab-pane fade in active martop">
 				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 					<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
 				</div>
@@ -143,11 +143,14 @@
 							<div class="manjian1">满减</div>
 						</div>
 						<ul>
-							<li>
+							<li @click="dianji()">
 								<div class="jia">1000</div>
 								<div class="manzu">满<span>10000</span>元可用</div>
 								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
-								<div class="niucha"><p class="xian"></p><span>2020-12-12 00:01:01</span></div>
+								<div class="niucha">
+									<p class="xian"></p><span>2020-12-12 00:01:01</span>
+								</div>
+								<div class="gou"><img src="../../../../static/img/youhui_gou.png" alt=""></div>
 							</li>
 						</ul>
 					</div>
@@ -157,18 +160,33 @@
 							<div class="manjian1">满折</div>
 						</div>
 						<ol>
-							<li>
+							<li @click="dianji1()">
 								<div class="jia">7.7<span>折</span></div>
 								<div class="manzu">满<span>10000</span>元可用</div>
 								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
-								<div class="niucha"><p class="xian"></p><span>2020-12-12 00:01:01</span></div>
+								<div class="niucha">
+									<p class="xian"></p><span>2020-12-12 00:01:01</span>
+								</div>
+								<div class="gou"><img src="../../../../static/img/youhui_gou.png" alt=""></div>
 							</li>
 						</ol>
 					</div>
 				</div>
 			</div>
-
-
+			<div class="tab-pane fade in active martop">
+				<div class="col-md-7">
+					<ul class="btn-numbox">
+						<li class="shiyong2"><span class="number">使用数量/张：</span></li>
+						<li>
+							<ul class="count">
+								<li><span class="num-jian" @click="num_jian()">-</span></li>
+								<li><input type="text" class="input-num" id="input-num" value="1" /></li>
+								<li><span class="num-jia" @click="num_jia()">+</span></li>
+							</ul>
+						</li>　
+					</ul>
+				</div>
+			</div>
 			<div class="tab-pane fade in active martop" v-show="isShow==true">
 				<div class="col-md-12 form-group clearfix text-left jh-ad-0 jh-mt-5">
 					<div class="col-md-6 clearfix jh-wd-33">
@@ -373,6 +391,7 @@
 					select: '',
 					btn: false,
 				},
+				dui: true,
 				dis: true,
 				shs: true,
 				title: '',
@@ -384,8 +403,13 @@
 				appShow: false,
 				isArrearsShow: false,
 				unfinishedProList: [],
+				unfinishedProSList: [],
 				auditState: '',
 				clickItemObj: {
+					itemId: 0,
+					count: 0
+				},
+				clickItemObj1: {
 					itemId: 0,
 					count: 0
 				},
@@ -393,14 +417,31 @@
 			};
 		},
 		methods: {
+			
+			//优惠券使用张数
+			num_jia() {
+				var input_num = document.getElementById("input-num");
+				input_num.value = parseInt(input_num.value) + 1;
+			},
+			num_jian() {
+				var input_num = document.getElementById("input-num");
+				if (input_num.value <= 0) {
+					input_num.value = 0;
+				} else {
+					input_num.value = parseInt(input_num.value) - 1;
+				}
+			},
 			// Initialization consume’s content
-
 			initData(title, param) {
 				$('#rechargeContent').modal({
 					backdrop: 'static',
 					keyboard: false
 				});
 				this.clickItemObj = {
+					itemId: 0,
+					count: 0
+				}
+				this.clickItemObj1 = {
 					itemId: 0,
 					count: 0
 				}
@@ -459,6 +500,7 @@
 				this.$refs.ContinStateRef.setObj('0')
 				this.$refs.VisitStateRef.setObj('0')
 				this.queryUnfinishedPro(param.visId)
+				// this.youhui(param.couId)
 				this.checkMemCash(param.visId)
 			},
 			//咨询师
@@ -750,9 +792,9 @@
 						this.unfinishedProList = res.retData
 						for (var i = 0; i < this.unfinishedProList.length; i++) {
 							if (this.unfinishedProList[i].auditState == 4) {
-								$(".table .zes").css('background','red');
+								$(".table .zes").css('background', 'green');
 							} else {
-								$(".zes").css('background','white');
+								$(".zes").css('background', 'white');
 							}
 						}
 
@@ -764,6 +806,33 @@
 					console.log('查询请求失败')
 				});
 			},
+			//查询优惠券
+			// youhui(param) {
+			// 	if (this.isBlank(param)) return
+			// 	var url = this.url + '/couponController/selectCoupon'
+			// 	this.$ajax({
+			// 		method: 'POST',
+			// 		url: url,
+			// 		headers: {
+			// 			'Content-Type': this.contentType,
+			// 			'Access-Token': this.accessToken
+			// 		},
+			// 		data: {
+
+			// 		},
+			// 		dataType: 'json',
+			// 	}).then((response) => {
+			// 		var res = response.data
+			// 		if (res.retCode == '0000') {
+			// 			this.unfinishedProsList = res.retData
+			// 		} else {
+			// 			alert(res.retMsg)
+			// 		}
+			// 	}).catch((error) => {
+			// 		console.log('查询请求失败')
+			// 	});
+			// },
+
 			//单选框选中处理
 			radioClick(e, item) {
 
@@ -781,6 +850,24 @@
 						this.clickItemObj.count = 0
 					}
 				}
+			},
+			//选择满减优惠券
+			dianji() {
+				if (this.dui) {
+					$(".you .man1 .gou").show();
+				} else {
+					$(".you .man1 .gou").hide();
+				}
+				this.dui = !this.dui
+			},
+			//选择满折优惠券
+			dianji1() {
+				if (this.dui) {
+					$(".you .man2 .gou").show();
+				} else {
+					$(".you .man2 .gou").hide();
+				}
+				this.dui = !this.dui
 			},
 			//产品类型转换
 			transforProType(proType) {

@@ -100,10 +100,10 @@
 		<div class="xuanzhong_kuang">
 			<h2>已选中：</h2>
 			<ul>
-				<li v-for="item in userList" key="index">{{item.visitorName}}</li>
+				<li v-for="item in userList" :key="item.visId">{{item.visId}}-{{item.visitorName}}</li>
 			</ul>
 		</div>
-		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @selection-change="handleSelectionChange1" @click="go1" v-has="'SAMY:MP:Coupon:Add'">确定</button>
+		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5"  @click="go1()" v-has="'SAMY:MP:Coupon:Add'">确定</button>
 		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
 	</div>
 </template>
@@ -127,6 +127,7 @@
 		data() {
 			return {
 				userList:[],
+				newuserList:[],
 				showSelect: true,
 				multipleSelection: [],
 				fixedHeader: false,
@@ -202,8 +203,28 @@
 			},
 			//点击确定按钮跳转
 			go1() {
+				var win = window.localStorage;
+				var bb = '';
+				for (var i = 0; i < this.userList.length; i++) {
+					this.newuserList.push(this.userList[i].visId);
+					if (!win) {
+						alert("浏览器不支持localstorage");
+						return false;
+					} else {
+						//主逻辑业务
+						var storage = window.localStorage;
+						for (var i = 0; i < this.userList.length; i++) {
+							bb += this.userList[i].visId + ",";
+						}
+						if (bb.length > 0) {
+							bb = bb.substr(0, bb.length - 1);
+						}
+						storage.setItem('userList',bb)
+					}
+				}
+				// console.log(this.newprojectList)
 				this.$router.push({
-					path: '../../MP/Coupon/CouponAdd'
+					path: '../../MP/Coupon/CouponAdd',
 				})
 			},
 			handleSelectionChange1(val) {
@@ -273,7 +294,7 @@
 				if (this.selectDataFlag) {
 					this.page = 1
 				}
-
+				
 				this.showSelect = false
 				console.log('getAllAuditPage')
 				var url = this.url + '/visitorAction/queryVisitor'
@@ -323,14 +344,12 @@
 			// 翻页
 			handleCurrentChange(pageNum) {
 			    this.page = pageNum
-				this.unfinishedProLists = pageNum
-				console.log(this.unfinishedProLists)
 			    this.getAllAuditPage()
+				this.newuserList = []
 			},
 			// 每页条数变化时触发
 			handleSizeChange(pageSize) {
 			    this.page = 1
-				this.unfinishedProLists = this.unfinishedProLists
 			    this.pageSize = pageSize
 			    this.getAllAuditPage()
 			},
@@ -392,20 +411,16 @@
 	}
 
 	.xuanzhong_kuang ul li {
-		width: 85px;
-		height: 30px;
+		width:150px;
+		height: 40px;
 		float: left;
 		margin-bottom: 10px;
-		line-height: 30px;
+		line-height: 40px;
 		text-align: center;
 		border: 1px solid #DDDDDD;
 		margin-right: 10px;
 	}
 
-	.xuanzhong_kuang ul li:nth-child(10n) {
-		margin-right: 0;
-		margin-bottom: 0;
-	}
 
 	.xuanzhong_kuang ul li:last-child {
 		margin-right: 0;

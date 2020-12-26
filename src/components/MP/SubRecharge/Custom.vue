@@ -262,11 +262,12 @@
 							<div class="manjian1">满减</div>
 						</div>
 						<ul>
-							<li>
+							<li @click="dianji()">
 								<div class="jia">1000</div>
 								<div class="manzu">满<span>10000</span>元可用</div>
 								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
 								<div class="niucha"><p class="xian"></p><span>2020-12-12 00:01:01</span></div>
+								<div class="gou"><img src="../../../../static/img/youhui_gou.png" alt=""></div>
 							</li>
 						</ul>
 					</div>
@@ -276,17 +277,33 @@
 							<div class="manjian1">满折</div>
 						</div>
 						<ol>
-							<li>
+							<li @click="dianji1()">
 								<div class="jia">7.7<span>折</span></div>
 								<div class="manzu">满<span>10000</span>元可用</div>
 								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
 								<div class="niucha"><p class="xian"></p><span>2020-12-12 00:01:01</span></div>
+								<div class="gou"><img src="../../../../static/img/youhui_gou.png" alt=""></div>
 							</li>
 						</ol>
 					</div>
 				</div>
 			</div>
-
+			
+			<div class="tab-pane fade in active martop">
+				<div class="col-md-7">
+					<ul class="btn-numbox">
+						<li class="shiyong2"><span class="number">使用数量/张：</span></li>
+						<li>
+							<ul class="count">
+								<li><span class="num-jian" @click="num_jian()">-</span></li>
+								<li><input type="text" class="input-num" id="input-num" value="1" /></li>
+								<li><span class="num-jia" @click="num_jia()">+</span></li>
+							</ul>
+						</li>　
+					</ul>
+				</div>
+			</div>
+			
 			<div class="tab-pane fade in active martop" id="basic" v-show="isShow==true">
 				<div class="col-md-12 form-group clearfix text-left">
 					<h4 id="myModalLabel" class="modal-title">合计：</h4>
@@ -350,6 +367,7 @@
 				counselorList: [],
 				dis:true,
 				shs:true,
+				dui:true,
 				consume: {
 					proStyle: '',
 					memNum: '', //会员名
@@ -414,6 +432,19 @@
 			};
 		},
 		methods: {
+			//优惠券使用张数
+			num_jia() {
+				var input_num = document.getElementById("input-num");
+				input_num.value = parseInt(input_num.value) + 1;
+			},
+			num_jian() {
+				var input_num = document.getElementById("input-num");
+				if (input_num.value <= 0) {
+					input_num.value = 0;
+				} else {
+					input_num.value = parseInt(input_num.value) - 1;
+				}
+			},
 			// Initialization consume’s content
 			initData(param) {
 				$('#customContent').modal({
@@ -1010,6 +1041,24 @@
 				if (this.counselorFlag == true) {
 					this.consume.realCross = this.consume.consumCount * this.consume.price
 				}
+			},
+			//选择满减优惠券
+			dianji() {
+				if (this.dui) {
+					$(".you .man1 .gou").show();
+				} else {
+					$(".you .man1 .gou").hide();
+				}
+				this.dui = !this.dui
+			},
+			//选择满折优惠券
+			dianji1() {
+				if (this.dui) {
+					$(".you .man2 .gou").show();
+				} else {
+					$(".you .man2 .gou").hide();
+				}
+				this.dui = !this.dui
 			},
 			checkMemCash(param) {
 				if (this.isBlank(param)) {

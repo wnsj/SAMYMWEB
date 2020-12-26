@@ -13,7 +13,7 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">优惠券名称</label><span class="sign-left">:</span>
 						<div class="col-md-7  ">
-							<input type="text" class="form-control" v-model="couponName">
+							<input type="text" class="form-control" v-model="couponName" maxlength="12" placeholder="最多输入12个字">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
@@ -86,13 +86,15 @@
 							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label
 								 class="xian1">日期范围：</label></div>
 							<div class="xianzhi3">
-								<el-date-picker v-model="begDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="选择日期时间">
+								<el-date-picker v-model="begDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime"
+								 placeholder="选择日期时间">
 								</el-date-picker>
 								<!-- <dPicker class="wd100" value-type="format" format="YYYY-MM-DD HH:mm:ss" v-model="begDate"></dPicker> -->
 							</div>
 							<div class="xianhzi15">~</div>
 							<div class="xianzhi3">
-								<el-date-picker v-model="endDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="选择日期时间">
+								<el-date-picker v-model="endDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime"
+								 placeholder="选择日期时间">
 								</el-date-picker>
 								<!-- <dPicker class="wd100" value-type="format" format="YYYY-MM-DD HH:mm:ss" v-model="endDate"></dPicker -->
 							</div>
@@ -111,7 +113,7 @@
 							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="3" /><label
 								 class="xian1">指定用户</label></div>
 							<div class="xianzhi3_1">
-								<p style="cursor: pointer;" v-on:click="seles" v-has="'SAMY:MP:Coupon:selectAdd'">选择用户</p>
+								<p style="cursor: pointer;" class="" v-on:click="seles" v-has="'SAMY:MP:Coupon:selectAdd'">选择用户</p>
 							</div>
 						</div>
 					</div>
@@ -129,7 +131,7 @@
 							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" name="radioGroup5" value="3"
 								 @click="radioClick($event,item)" /><label class="xian1">指定产品</label></div>
 							<div class="xianzhi3_1">
-								<p style="cursor: pointer;" v-on:click="ots" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p>
+								<p style="cursor: pointer;" v-on:click="ots()" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p>
 							</div>
 						</div>
 					</div>
@@ -179,9 +181,11 @@
 			return {
 				userList: [],
 				projectList: [],
+				newprojectList: [],
 				categoryList: [],
 				couponName: '', //优惠券名称
 				state: '', //状态
+				proId: '',
 				couponType: '', //优惠券类型
 				fullCondition: '', //金额
 				recude: '', //折扣
@@ -192,7 +196,6 @@
 				categoryType: '', //选择产品
 				limitGet: '', //每人限领取
 				allCount: '', //发放机制
-				categoryList: [],
 				cash: {
 					cashId: '',
 					memNum: '',
@@ -253,17 +256,34 @@
 			//点击选择产品按钮跳转
 			ots() {
 				this.$router.push({
-					path: '../../MP/Coupon/select-chan'
+					path: '../../MP/Coupon/select-chan',
 				})
+
 			},
 			//the event of addtional button
 			addFee() {
-				var url = this.url + '/couponController/addCoupon'
 				var formData = new FormData();
+				var projectList = localStorage.getItem('projectList');
+				var userList = localStorage.getItem('userList');
+				var categoryList = localStorage.getItem('categoryList');
+				console.log(projectList)
+				var stringResult = projectList.split(',');
+				var stringResult1 = userList.split(',');
+				var stringResult2 = categoryList.split(',');
+				for (var i = 0; i < stringResult.length; i++) {
+					formData.append('projectList', stringResult[i])
+				}
+				for (var i = 0; i < stringResult1.length; i++) {
+					formData.append('userList', stringResult1[i])
+				}
+				for (var i = 0; i < stringResult2.length; i++) {
+					formData.append('categoryList', stringResult2[i])
+				}
+				var url = this.url + '/couponController/addCoupon'
 				formData.append('couponName', this.couponName)
 				formData.append('operatorId', this.operatorId)
-				formData.append('startTime', this.couponType)
-				formData.append('begDate', this.begDate)
+				formData.append('couponType', this.couponType)
+				formData.append('startTime', this.begDate)
 				formData.append('endTime', this.endDate)
 				formData.append('state', this.state)
 				formData.append('fullCondition', this.fullCondition)
@@ -298,7 +318,9 @@
 					console.log('请求失败处理')
 				});
 			},
+
 		},
+
 	}
 </script>
 
@@ -367,7 +389,9 @@
 		float: left;
 		width: 195px;
 	}
-	.shiyong .xianzhi3  .el-date-editor.el-input, .el-date-editor.el-input__inner{
+
+	.shiyong .xianzhi3 .el-date-editor.el-input,
+	.el-date-editor.el-input__inner {
 		width: 195px;
 	}
 

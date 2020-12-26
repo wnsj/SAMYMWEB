@@ -94,7 +94,7 @@
 			<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 		</div>
 		<div class="" id="datatable">
-			<el-table :data="tableData" style="width: 100%" :row-key="getRowKeys"  border ref="multipleTable" @selection-change="handleSelectionChange">
+			<el-table :data="tableData" style="width: 100%" :row-key="getRowKeys" border ref="multipleTable" @selection-change="handleSelectionChange">
 				<el-table-column type="selection" :reserve-selection="true" width="55" align="center"></el-table-column>
 				<el-table-column prop="storeName" label="店铺" width="100" align="center"></el-table-column>
 				<el-table-column prop="empName" label="咨询师" width="100" align="center"></el-table-column>
@@ -114,21 +114,20 @@
 			<el-button class="jh-mr-1 jh-mr-4" style="cursor: pointer;" @click="toggerCheck" size="mini">反选</el-button>
 			<el-row style="margin-top: 20px;">
 				<el-col :span="24">
-					<el-pagination @current-change="handleCurrentChange"  @size-change="handleSizeChange"
-						 :current-page="page" :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
-						 :total="total">
-						</el-pagination>
+					<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="page"
+					 :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
+					</el-pagination>
 				</el-col>
 			</el-row>
 		</div>
 		<div class="xuanzhong_kuang">
 			<h2>已选中：</h2>
 			<ul>
-				<li v-for="item in projectList" key="index">{{item.storeName}}</li>
+				<li v-for="item in projectList" :key="item.proId">{{item.storeName}}-{{item.proName}}</li>
 			</ul>
 		</div>
 		<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
-		<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2 jh-mr-5" @click="go1" v-has="'SAMY:MP:Coupon:Add'">确定</button>
+		<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2 jh-mr-5" @click="go1()" v-has="'SAMY:MP:Coupon:Add'">确定</button>
 
 	</div>
 </template>
@@ -149,7 +148,8 @@
 		},
 		data() {
 			return {
-				projectList:[],
+				projectList: [],
+				newprojectList: [],
 				showSelect: true,
 				fixedHeader: false,
 				storeId: this.storeId(),
@@ -186,7 +186,7 @@
 
 		methods: {
 			getRowKeys(row) {
-			    return row.proId;
+				return row.proId;
 				this.$refs.projectList.clearSelection();
 			},
 			handleSelectionChange(val) {
@@ -224,8 +224,28 @@
 			},
 			//点击确定按钮跳转
 			go1() {
+				var win = window.localStorage;
+				var bb = '';
+				for (var i = 0; i < this.projectList.length; i++) {
+					this.newprojectList.push(this.projectList[i].proId);
+					if (!win) {
+						alert("浏览器不支持localstorage");
+						return false;
+					} else {
+						//主逻辑业务
+						var storage = window.localStorage;
+						for (var i = 0; i < this.projectList.length; i++) {
+							bb += this.projectList[i].proId + ",";
+						}
+						if (bb.length > 0) {
+							bb = bb.substr(0, bb.length - 1);
+						}
+						storage.setItem('projectList',bb)
+					}
+				}
+				// console.log(this.newprojectList)
 				this.$router.push({
-					path: '../../MP/Coupon/CouponAdd'
+					path: '../../MP/Coupon/CouponAdd',
 				})
 			},
 			employeeChange(param) {
@@ -236,7 +256,7 @@
 				}
 			},
 			resetAuditState(row, column, cellValue, index) {
-				console.log(typeof(cellValue))
+
 				switch (cellValue) {
 					case '0':
 						return '普通'
@@ -364,6 +384,7 @@
 			handleCurrentChange(pageNum) {
 				this.page = pageNum
 				this.getAllAuditPage()
+				this.newprojectList = []
 			},
 			// 每页条数变化时触发
 			handleSizeChange(pageSize) {
@@ -431,7 +452,7 @@
 	}
 
 	.xuanzhong_kuang ul li {
-		width: 85px;
+		width: 150px;
 		height: 30px;
 		float: left;
 		margin-bottom: 10px;
@@ -442,7 +463,6 @@
 	}
 
 	.xuanzhong_kuang ul li:nth-child(10n) {
-		margin-right: 0;
 		margin-bottom: 0;
 	}
 

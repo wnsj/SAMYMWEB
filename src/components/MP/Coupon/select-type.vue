@@ -49,7 +49,7 @@
 				<li v-for="item in categoryList" key="index">{{item.typeName}}</li>
 			</ul>
 		</div>
-		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @click="go1" v-has="'SAMY:MP:Coupon:Add'">确定</button>
+		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @click="go1()" v-has="'SAMY:MP:Coupon:Add'">确定</button>
 		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
 	</div>
 </template>
@@ -60,6 +60,7 @@
 		data() {
 			return {
 				categoryList: [],
+				newcategoryList: [],
 				showSelect: true,
 				fixedHeader: false,
 				storeId: this.storeId(),
@@ -111,14 +112,29 @@
 			},
 			//点击确定按钮跳转
 			go1() {
-				console.log(this.$route.query.id)
+				var win = window.localStorage;
+				var bb = '';
+				for (var i = 0; i < this.categoryList.length; i++) {
+					this.newcategoryList.push(this.categoryList[i].prtId);
+					if (!win) {
+						alert("浏览器不支持localstorage");
+						return false;
+					} else {
+						//主逻辑业务
+						var storage = window.localStorage;
+						for (var i = 0; i < this.categoryList.length; i++) {
+							bb += this.categoryList[i].prtId + ",";
+						}
+						if (bb.length > 0) {
+							bb = bb.substr(0, bb.length - 1);
+						}
+						storage.setItem('categoryList',bb)
+					}
+				}
+				// console.log(this.newprojectList)
 				this.$router.push({
 					path: '../../MP/Coupon/CouponAdd',
-					query: {
-						prtId: this.$refs.multipleTable.prtId,
-					}
 				})
-				
 			},
 
 			dataOpen() {

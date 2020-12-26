@@ -41,24 +41,26 @@
 					<div class="col-md-6 form-group clearfix jin">
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
-						<div class="col-md-7  ">
+						<div class="col-md-7  jin1">
 							<input type="text" class="form-control" v-model="recude" disabled="disabled">
+							<span>元</span>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix zhe" style="float: right;">
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
-						<div class="col-md-7  ">
+						<div class="col-md-7  zhe1">
 							<input type="text" class="form-control" v-model="recude" disabled="disabled">
+							<span>%</span>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix shiyong">
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">使用门槛</label><span class="sign-left">:</span>
 						<div class="col-md-7" v-model="isLimit">
-							<div class="xianzhi wuxian"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="2"/><label class="xian1">无限制</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="1"/><label class="xian1">满</label></div>
-							<div class="xianzhi2"><input type="text" placeholder="0" disabled="disabled" v-model="fullCondition"><span>元可用</span></div>
+							<div class="xianzhi wuxian"><input class="xian" type="radio" :disabled="true" name="radioGroup1" v-model="isLimit" value="2"/><label class="xian1">无限制</label></div>
+							<div class="xianzhi1"><input class="xian" type="radio" :disabled="true" name="radioGroup1" v-model="isLimit" value="1"/><label class="xian1">满</label></div>
+							<div class="xianzhi2"><input type="text" placeholder="0" :disabled="true" v-model="fullCondition"><span>元可用</span></div>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix"></div>
@@ -405,6 +407,25 @@
 		width: 105px;
 		margin-left: 10px;
 		margin-top: 5px;
+	}
+	.jin1 {
+		position: relative;
+	}
+	
+	.jin1 span {
+		position: absolute;
+		right: -2%;
+		top: 30%;
+	}
+	
+	.zhe1 {
+		position: relative;
+	}
+	
+	.zhe1 span {
+		position: absolute;
+		right: -2%;
+		top: 30%;
 	}
 
 	.shiyong .xianzhi6 {

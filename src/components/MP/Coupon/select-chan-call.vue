@@ -9,8 +9,8 @@
 		<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 	</div>
 	<div class="" id="datatable">
-		<el-table :data="tableData" style="width: 100%" border>
-			<el-table-column type="selection" width="55" align="center" label="全选"></el-table-column>
+		<el-table :data="tableData" style="width: 100%" :row-key="getRowKeys" border ref="multipleTable" @selection-change="handleSelectionChange">
+			<el-table-column type="selection" width="55" align="center" label="全选" :reserve-selection="true"></el-table-column>
 			<el-table-column prop="storeName" label="店铺" width="100" align="center"></el-table-column>
 			<el-table-column prop="empName" label="咨询师" width="100" align="center"></el-table-column>
 			<el-table-column prop="empLevelName" label="咨询师等级"  width="100"   align="center"></el-table-column>
@@ -86,6 +86,9 @@
 		},
 
 		methods: {
+			getRowKeys(row) {
+				return row.proId;
+			},
 			resetDate(row, column, cellValue, index) {
 			    if (cellValue !== '' && cellValue !== null) {
 			        return cellValue.substring(0, 10)
@@ -181,7 +184,8 @@
 				if (this.selectDataFlag) {
 					this.current = 1
 				}
-
+				var userList = localStorage.getItem('userList');
+				var stringResult2 = userList.split(',');
 				this.showSelect = false
 				console.log('getAllAuditPage')
 				if (!this.isBlank(this.begCreateDate)) {
@@ -219,6 +223,12 @@
 						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.records
+						for (let i = 0; i < this.tableData.length; i++) {
+							if (stringResult2.includes(this.tableData[i].proId + '')) {
+								 this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
+								}
+						 
+						}
 					} else {
 						alert(res.retMsg)
 					}

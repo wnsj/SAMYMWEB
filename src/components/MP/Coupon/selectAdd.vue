@@ -1,6 +1,9 @@
 <!-- the page of department management -->
 <template>
 	<div class="wraper">
+		<div class="col-md-12 col-lg-12 main-title">
+		    <h1 class="titleCss">选择用户</h1>
+		</div>
 		<el-collapse-transition>
 			<div v-show="showSelect">
 				<div class="row newRow">
@@ -68,21 +71,21 @@
 			<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 		</div>
 		<div class="" id="datatable">
-			<el-table :data="tableData" style="width: 100%" border ref="multipleTable" @selection-change="handleSelectionChange">
-				<el-table-column type="selection" width="55" align="center" label="全选"></el-table-column>
+			<el-table :data="tableData"  style="width: 100%" :row-key="getRowKeys" border ref="multipleTable" @selection-change="handleSelectionChange">
+				<el-table-column type="selection" width="55" :reserve-selection="true"  align="center" label="全选"></el-table-column>
 				<el-table-column type="index" prop="visId" label="序号" width="60" align="center"></el-table-column>
 				<el-table-column prop="visitorName" label="姓名" width="100" align="center"></el-table-column>
-				<el-table-column prop="sex" label="性别" width="100" align="center"></el-table-column>
+				<el-table-column prop="sex" label="性别" :formatter="sex" width="100" align="center"></el-table-column>
 				<el-table-column prop="birthday" label="生日" :formatter="resetDate" width="100" align="center"></el-table-column>
 				<el-table-column prop="storeName" label="店铺" width="100" align="center"></el-table-column>
 				<el-table-column prop="channelName" label="渠道" width="100" align="center"></el-table-column>
 				<el-table-column prop="dtName" label="咨询方向" width="100" align="center"></el-table-column>
 				<el-table-column prop="empName" label="接待人" width="100" align="center"></el-table-column>
-				<el-table-column prop="visType" label="访问类型" width="100" align="center"></el-table-column>
+				<el-table-column prop="visType" label="访问类型" :formatter="resetVisit" width="100" align="center"></el-table-column>
 				<el-table-column prop="vsIdJudgeName" label="客户判定" width="100" align="center"></el-table-column>
 				<el-table-column prop="vsIdFlowName" label="续流状态" width="100" align="center"></el-table-column>
 				<el-table-column prop="createTime" label="添加时间" :formatter="resetDate" width="100" align="center"></el-table-column>
-				<el-table-column prop="isMem" label="是否转会员" width="100" align="center"></el-table-column>
+				<el-table-column prop="isMem" label="是否转会员" :formatter="resetArrears" width="100" align="center"></el-table-column>
 			</el-table>
 			<el-button class="jh-mr-1 jh-mr-3" style="cursor: pointer;" @click="checkAll" size="mini">全选</el-button>
 			<el-button class="jh-mr-1 jh-mr-4" style="cursor: pointer;" @click="toggerCheck" size="mini">反选</el-button>
@@ -97,10 +100,10 @@
 		<div class="xuanzhong_kuang">
 			<h2>已选中：</h2>
 			<ul>
-				<li>1-225</li>
+				<li v-for="item in userList" :key="item.visId">{{item.visId}}-{{item.visitorName}}</li>
 			</ul>
 		</div>
-		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @click="go1" v-has="'SAMY:MP:Coupon:Add'">确定</button>
+		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5"  @click="go1()" v-has="'SAMY:MP:Coupon:Add'">确定</button>
 		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
 	</div>
 </template>
@@ -123,7 +126,10 @@
 		},
 		data() {
 			return {
+				userList:[],
+				newuserList:[],
 				showSelect: true,
+				multipleSelection: [],
 				fixedHeader: false,
 				storeId: this.storeId(),
 				accountType: this.accountType(),
@@ -161,6 +167,10 @@
 		},
 
 		methods: {
+			getRowKeys(row) {
+			    return row.visId;
+				this.$refs.userList.clearSelection();
+			},
 			checkAll() {
 				this.$refs.multipleTable.toggleAllSelection();
 			},
@@ -170,7 +180,11 @@
 				});
 			},
 			handleSelectionChange(val) {
-				this.multipleSelection = val;
+				this.userList = val;
+				if (event === undefined || event.target.nodeName === 'INPUT') {
+				        this.vTable['v_' + this.currentPage] = [...val];
+				        this.getNum();
+				      }
 			},
 			resetDate(row, column, cellValue, index) {
 				if (cellValue !== '' && cellValue !== null) {
@@ -189,9 +203,31 @@
 			},
 			//点击确定按钮跳转
 			go1() {
+				var win = window.localStorage;
+				var bb = '';
+				for (var i = 0; i < this.userList.length; i++) {
+					this.newuserList.push(this.userList[i].visId);
+					if (!win) {
+						alert("浏览器不支持localstorage");
+						return false;
+					} else {
+						//主逻辑业务
+						var storage = window.localStorage;
+						for (var i = 0; i < this.userList.length; i++) {
+							bb += this.userList[i].visId + ",";
+						}
+						if (bb.length > 0) {
+							bb = bb.substr(0, bb.length - 1);
+						}
+						storage.setItem('userList',bb)
+					}
+				}
+				// console.log(this.newprojectList)
 				this.$router.push({
-					path: '../../MP/Coupon/CouponAdd'
+					path: '../../MP/Coupon/CouponAdd',
 				})
+			},
+			handleSelectionChange1(val) {
 			},
 			employeeChange(param) {
 				if (this.isBlank(param)) {
@@ -209,7 +245,10 @@
 				return cellValue == 1 ? "初访" : "复访"
 			},
 			resetArrears(row, column, cellValue, index) {
-				return cellValue == 1 ? "是" : "否"
+				return cellValue == 1 ? "已转会员" : "未转会员"
+			},
+			sex(row, column, cellValue, index) {
+				return cellValue == 1 ? "男" : "女"
 			},
 
 
@@ -255,15 +294,9 @@
 				if (this.selectDataFlag) {
 					this.page = 1
 				}
-
+				
 				this.showSelect = false
 				console.log('getAllAuditPage')
-				if (!this.isBlank(this.begCreateDate)) {
-					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
-				}
-				if (!this.isBlank(this.endCreateDate)) {
-					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
-				}
 				var url = this.url + '/visitorAction/queryVisitor'
 				this.$ajax({
 					method: 'POST',
@@ -280,43 +313,16 @@
 						visType: this.visType,
 						empId: this.empId,
 						page: this.page,
-						pageSize: this.pageSize,
+						pageSize: this.pageSize
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					// response.data.records.forEach((item) => {
-					// 	switch (item.sex) {
-					// 		case 1:
-					// 			item.state = '男'
-					// 			break;
-					// 		case 2:
-					// 			item.state = '女'
-					// 			break;
-					// 	}
-					// 	switch (item.visType) {
-					// 		case 1:
-					// 			item.visType = '初访'
-					// 			break;
-					// 		case 2:
-					// 			item.visType = '复访'
-					// 			break;
-					// 	}
-					// 	switch (item.isMem) {
-					// 		case 1:
-					// 			item.isMem = '已转会员'
-					// 			break;
-					// 		case 2:
-					// 			item.isMem = '未转会员'
-					// 			break;
-					// 	}
-
-					// })
 					console.log(res)
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
-						this.page = res.retData.page //当前页码
-						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
+						this.page = res.retData.current //当前页码
+						this.pageSize = res.retData.size//一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.records
 					} else {
@@ -334,16 +340,18 @@
 			goOff() {
 				this.$router.go(-1);
 			},
+			
 			// 翻页
 			handleCurrentChange(pageNum) {
-				this.page = pageNum
-				this.getAllAuditPage()
+			    this.page = pageNum
+			    this.getAllAuditPage()
+				this.newuserList = []
 			},
 			// 每页条数变化时触发
 			handleSizeChange(pageSize) {
-				this.page = 1
-				this.pageSize = pageSize
-				this.getAllAuditPage()
+			    this.page = 1
+			    this.pageSize = pageSize
+			    this.getAllAuditPage()
 			},
 			handleScroll(e) {
 				var self = this
@@ -403,19 +411,16 @@
 	}
 
 	.xuanzhong_kuang ul li {
-		width: 85px;
-		height: 30px;
+		width:150px;
+		height: 40px;
+		float: left;
 		margin-bottom: 10px;
-		line-height: 30px;
+		line-height: 40px;
 		text-align: center;
 		border: 1px solid #DDDDDD;
 		margin-right: 10px;
 	}
 
-	.xuanzhong_kuang ul li:nth-child(10n) {
-		margin-right: 0;
-		margin-bottom: 0;
-	}
 
 	.xuanzhong_kuang ul li:last-child {
 		margin-right: 0;

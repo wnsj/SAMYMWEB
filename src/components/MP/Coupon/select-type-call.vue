@@ -1,25 +1,21 @@
 <!-- the page of department management -->
 <template>
 	<div class="wraper">
+		<div class="col-md-12 col-lg-12 main-title">
+			<h1 class="titleCss">查看分类</h1>
+		</div>
 		<h2>被选中的分类：</h2>
-	<div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
-		<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
-	</div>
-	<div class="" id="datatable">
-		<el-table :data="tableData" style="width: 100%" border>
-			<el-table-column type="selection" width="100" align="center" label="全选"></el-table-column>
-			<el-table-column prop="memName" label="类型名称" width="230" align="center"></el-table-column>
-			<el-table-column prop="finance" label="使用状态" width="230" align="center"></el-table-column>
-		</el-table>
-		<el-row style="margin-top: 20px;">
-			<el-col :span="24">
-				<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="current"
-				 :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
-				</el-pagination>
-			</el-col>
-		</el-row>
-	</div>
-	<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
+		<div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
+			<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
+		</div>
+		<div class="" id="datatable">
+			<el-table :data="tableData" style="width: 100%" border :row-key="getRowKeys" ref="multipleTable" @selection-change="handleSelectionChange">
+				<el-table-column type="selection" width="100" align="center" :reserve-selection="true" :class="showSelect?'false':'true'"></el-table-column>
+				<el-table-column prop="typeName" label="类型名称" width="230" align="center"></el-table-column>
+				<el-table-column prop="state" :formatter="resetAuditState" label="使用状态" width="230" align="center"></el-table-column>
+			</el-table>
+		</div>
+		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
 	</div>
 </template>
 
@@ -66,10 +62,27 @@
 		},
 
 		methods: {
+			handleSelectionChange(val) {
+				this.categoryList = val;
+				console.log(val)
+			},
+			getRowKeys(row) {
+				return row.prtId;
+			},
+			resetAuditState(row, column, cellValue, index) {
+				switch (cellValue) {
+					case '1':
+						return '在用'
+						break;
+					case '2':
+						return '停用'
+						break;
+				}
+			},
 			resetDate(row, column, cellValue, index) {
-			    if (cellValue !== '' && cellValue !== null) {
-			        return cellValue.substring(0, 10)
-			    }
+				if (cellValue !== '' && cellValue !== null) {
+					return cellValue.substring(0, 10)
+				}
 			},
 			changeData(newVal, oldVal) {
 				this.selectDataFlag = true
@@ -139,47 +152,51 @@
 			},
 
 			//check the list of department
+
 			getAllAuditPage() {
 				if (this.selectDataFlag) {
 					this.current = 1
 				}
 
 				this.showSelect = false
-				console.log('getAllAuditPage')
+				var categoryList = localStorage.getItem('categoryList');
+				var stringResult = categoryList.split(',');
+				console.log(stringResult)
 				if (!this.isBlank(this.begCreateDate)) {
 					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
 				}
 				if (!this.isBlank(this.endCreateDate)) {
 					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
 				}
-				var url = this.url + '/purchasedItemsAuditBean/getAllAuditPage'
+				var url = this.url + '/couponController/selectProductType'
+				var formData = new FormData();
+				formData.append('name', this.name);
+				formData.append('state', this.state);
 				this.$ajax({
-					method: 'POST',
+					method: 'GET',
 					url: url,
 					headers: {
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data: {
-						current: this.current,
-						pageSize: this.pageSize,
-						auditName: this.auditName,
-						memName: this.memName,
-						storeId: this.storeId,
-						auditBegTime: this.begCreateDate,
-						auditEndTime: this.endCreateDate,
-						auditState: this.auditState
-					},
+					param: formData,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
-						this.pages = res.retData.pages //总页数
-						this.current = res.retData.current //当前页码
-						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
-						this.total = res.retData.total //数据的数量
-						this.tableData = res.retData.records
+						this.tableData = res.retData
+						for (let i = 0; i < this.tableData.length; i++) {
+							if (stringResult.includes(this.tableData[i].prtId + '')) {
+								 this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
+								}
+						 
+						}
+						// for (var i = 0; i < this.tableData.length; i++) {
+						// 	if (stringResult.includes(this.tableData[i].prtId + '')) {
+						// 		this.showSelect == true;
+						// 	}
+						// }
 					} else {
 						alert(res.retMsg)
 					}
@@ -236,26 +253,30 @@
 		},
 		created() {
 			this.getAllAuditPage()
+			
 		}
 	}
 </script>
 
 <style scoped="scoped">
-	.wraper h2{
+	.wraper h2 {
 		font-size: 18px;
 		text-align: left;
 		margin-left: 20px;
 		font-weight: bold;
 		margin-bottom: 20px;
 	}
-	.xuanzhong_kuang{
+
+	.xuanzhong_kuang {
 		margin-top: 20px;
 		border: 1px solid #DDDDDD;
 		width: 100%;
 		overflow: auto;
-		margin-bottom: 20px;;
+		margin-bottom: 20px;
+		;
 	}
-	.xuanzhong_kuang h2{
+
+	.xuanzhong_kuang h2 {
 		text-align: left;
 		margin-top: 10px;
 		font-weight: bold;
@@ -263,47 +284,57 @@
 		font-size: 16px;
 		margin-bottom: 10px;
 	}
-	.xuanzhong_kuang ul{
+
+	.xuanzhong_kuang ul {
 		margin-left: 20px;
 		overflow: auto;
 	}
-	.xuanzhong_kuang ul li{
+
+	.xuanzhong_kuang ul li {
 		width: 85px;
 		height: 30px;
 		margin-bottom: 10px;
 		line-height: 30px;
 		text-align: center;
-		border:1px solid #DDDDDD;
+		border: 1px solid #DDDDDD;
 		margin-right: 10px;
 	}
-	.xuanzhong_kuang ul li:nth-child(10n){
+
+	.xuanzhong_kuang ul li:nth-child(10n) {
 		margin-right: 0;
 		margin-bottom: 0;
 	}
-	.xuanzhong_kuang ul li:last-child{
+
+	.xuanzhong_kuang ul li:last-child {
 		margin-right: 0;
 	}
-	.jh-mr-1{
+
+	.jh-mr-1 {
 		border: none;
 		margin-top: 20px;
 	}
-	#datatable .jh-mr-3{
+
+	#datatable .jh-mr-3 {
 		background-color: rgb(72, 196, 65);
 	}
-	#datatable .jh-mr-4{
+
+	#datatable .jh-mr-4 {
 		background-color: rgb(186, 107, 234);
 	}
-	.jh-mr-5{
-		border:none;
+
+	.jh-mr-5 {
+		border: none;
 		margin-bottom: 20px;
 		background-color: rgb(22, 155, 213);
 	}
-	.jh-mr-6{
+
+	.jh-mr-6 {
 		margin-top: 20px;
-		border:none;
+		border: none;
 		margin-bottom: 20px;
 		background-color: rgb(213, 170, 22);
 	}
+
 	#datatable {
 		position: relative;
 		margin-left: auto;

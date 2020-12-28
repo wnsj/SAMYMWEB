@@ -24,7 +24,7 @@
 					<div class="col-md-12  clearfix jh-ad-0">
 						<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
 							<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">已购产品</label><span class="sign-left">:</span>
-						</div>>
+						</div>
 					</div>
 					<div class="col-md-12 col-lg-12">
 						<table class="table table-bordered table-hover jh-mb-0">
@@ -39,7 +39,7 @@
 							</thead>
 							<tbody>
 								<tr v-for="item in unfinishedProList" class="zes">
-									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" class="resd"  :style="{disabled:!dis?true:false}"/></td>
+									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)"></td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -47,12 +47,12 @@
 								</tr>
 							</tbody>
 						</table>
-						<el-tooltip class="item gantan" effect="dark" content="由于审核原因，当前产品无法操作" placement="bottom"  :style="{'display':shs ? 'block':'none'}">
-						      <div class="gan">
-						      	<p>!</p>
-						      </div>
+						<el-tooltip class="item gantan" effect="dark" content="由于审核原因，当前产品无法操作" placement="bottom" :style="{'display':!shs ? 'block':'none'}">
+							<div class="gan">
+								<p>!</p>
+							</div>
 						</el-tooltip>
-						
+
 					</div>
 
 					<div class="col-md-12 col-lg-12">
@@ -132,16 +132,61 @@
 				</div>
 			</div>
 
-			<div class="tab-pane fade in active martop" v-show="isShow==true">
+			<div class="tab-pane fade in active martop">
 				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 					<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
 				</div>
 				<div class="col-md-7 you">
-					
+					<div class="man1">
+						<div class="man">
+							<div class="manjian"></div>
+							<div class="manjian1">满减</div>
+						</div>
+						<ul>
+							<li @click="dianji()">
+								<div class="jia">1000</div>
+								<div class="manzu">满<span>10000</span>元可用</div>
+								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
+								<div class="niucha">
+									<p class="xian"></p><span>2020-12-12 00:01:01</span>
+								</div>
+								<div class="gou"><img src="../../../../static/img/youhui_gou.png" alt=""></div>
+							</li>
+						</ul>
+					</div>
+					<div class="man2">
+						<div class="man">
+							<div class="manjian"></div>
+							<div class="manjian1">满折</div>
+						</div>
+						<ol>
+							<li @click="dianji1()">
+								<div class="jia">7.7<span>折</span></div>
+								<div class="manzu">满<span>10000</span>元可用</div>
+								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
+								<div class="niucha">
+									<p class="xian"></p><span>2020-12-12 00:01:01</span>
+								</div>
+								<div class="gou"><img src="../../../../static/img/youhui_gou.png" alt=""></div>
+							</li>
+						</ol>
+					</div>
 				</div>
 			</div>
-
-
+			<div class="tab-pane fade in active martop">
+				<div class="col-md-7">
+					<ul class="btn-numbox">
+						<li class="shiyong2"><span class="number">使用数量/张：</span></li>
+						<li>
+							<ul class="count">
+								<li><span class="num-jian" @click="num_jian()">-</span></li>
+								<li><input type="text" class="input-num" id="input-num" value="1" /></li>
+								<li><span class="num-jia" @click="num_jia()">+</span></li>
+							</ul>
+						</li>　
+					</ul>
+				</div>
+			</div>
 			<div class="tab-pane fade in active martop" v-show="isShow==true">
 				<div class="col-md-12 form-group clearfix text-left jh-ad-0 jh-mt-5">
 					<div class="col-md-6 clearfix jh-wd-33">
@@ -177,7 +222,7 @@
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  ">实交总额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="consume.realCross">
+						<input type="text" class="form-control" v-model="consume.realCross" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -272,7 +317,7 @@
 				<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-25" data-toggle="modal" v-on:click="addFee()">确认</button>
 			</div>
 		</div>
-		
+
 	</div>
 	</div>
 </template>
@@ -346,9 +391,11 @@
 					select: '',
 					btn: false,
 				},
-				dis:true,
-				shs:false,
+				dui: true,
+				dis: true,
+				shs: true,
 				title: '',
+				xuanze1: '',
 				isShow: true,
 				consumeReceivable: '',
 				isSelect: false,
@@ -356,8 +403,13 @@
 				appShow: false,
 				isArrearsShow: false,
 				unfinishedProList: [],
-				auditState:'',
+				unfinishedProSList: [],
+				auditState: '',
 				clickItemObj: {
+					itemId: 0,
+					count: 0
+				},
+				clickItemObj1: {
 					itemId: 0,
 					count: 0
 				},
@@ -365,6 +417,20 @@
 			};
 		},
 		methods: {
+			
+			//优惠券使用张数
+			num_jia() {
+				var input_num = document.getElementById("input-num");
+				input_num.value = parseInt(input_num.value) + 1;
+			},
+			num_jian() {
+				var input_num = document.getElementById("input-num");
+				if (input_num.value <= 0) {
+					input_num.value = 0;
+				} else {
+					input_num.value = parseInt(input_num.value) - 1;
+				}
+			},
 			// Initialization consume’s content
 			initData(title, param) {
 				$('#rechargeContent').modal({
@@ -372,6 +438,10 @@
 					keyboard: false
 				});
 				this.clickItemObj = {
+					itemId: 0,
+					count: 0
+				}
+				this.clickItemObj1 = {
 					itemId: 0,
 					count: 0
 				}
@@ -430,6 +500,7 @@
 				this.$refs.ContinStateRef.setObj('0')
 				this.$refs.VisitStateRef.setObj('0')
 				this.queryUnfinishedPro(param.visId)
+				// this.youhui(param.couId)
 				this.checkMemCash(param.visId)
 			},
 			//咨询师
@@ -580,6 +651,7 @@
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.closeCurrentPage()
+
 					} else {
 						alert(res.retMsg)
 					}
@@ -716,24 +788,58 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					var aud = res.retData.auditState
 					if (res.retCode == '0000') {
 						this.unfinishedProList = res.retData
+						for (var i = 0; i < this.unfinishedProList.length; i++) {
+							if (this.unfinishedProList[i].auditState == 4) {
+								$(".table .zes").css('background', 'green');
+							} else {
+								$(".zes").css('background', 'white');
+							}
+						}
+
+
 					} else {
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					console.log('会员查询请求失败')
+					console.log('查询请求失败')
 				});
 			},
+			//查询优惠券
+			// youhui(param) {
+			// 	if (this.isBlank(param)) return
+			// 	var url = this.url + '/couponController/selectCoupon'
+			// 	this.$ajax({
+			// 		method: 'POST',
+			// 		url: url,
+			// 		headers: {
+			// 			'Content-Type': this.contentType,
+			// 			'Access-Token': this.accessToken
+			// 		},
+			// 		data: {
+
+			// 		},
+			// 		dataType: 'json',
+			// 	}).then((response) => {
+			// 		var res = response.data
+			// 		if (res.retCode == '0000') {
+			// 			this.unfinishedProsList = res.retData
+			// 		} else {
+			// 			alert(res.retMsg)
+			// 		}
+			// 	}).catch((error) => {
+			// 		console.log('查询请求失败')
+			// 	});
+			// },
+
 			//单选框选中处理
 			radioClick(e, item) {
-				
+
 				if (this.clickItemObj.itemId == 0) {
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1
-				} 
-				else {
+				} else {
 					if (this.clickItemObj.itemId == item.piId) {
 						if (this.clickItemObj.count % 2 == 0) {
 							e.target.checked = false
@@ -744,6 +850,24 @@
 						this.clickItemObj.count = 0
 					}
 				}
+			},
+			//选择满减优惠券
+			dianji() {
+				if (this.dui) {
+					$(".you .man1 .gou").show();
+				} else {
+					$(".you .man1 .gou").hide();
+				}
+				this.dui = !this.dui
+			},
+			//选择满折优惠券
+			dianji1() {
+				if (this.dui) {
+					$(".you .man2 .gou").show();
+				} else {
+					$(".you .man2 .gou").hide();
+				}
+				this.dui = !this.dui
 			},
 			//产品类型转换
 			transforProType(proType) {
@@ -764,76 +888,6 @@
 	}
 </script>
 
-<style scoped="scoped">
-	.tab-pane .you{
-		border: 1px solid #DDDDDD;
-		width: 100%;
-		overflow: auto;
-	}
-	label.bui-radios-label {
-		position: relative;
-		line-height: 34px;
-	}
-
-	label.bui-radios-label input {
-		position: absolute;
-		opacity: 0;
-		visibility: hidden;
-	}
-
-	label.bui-radios-label .bui-radios {
-		display: inline-block;
-		position: relative;
-		width: 13px;
-		height: 13px;
-		background: #FFFFFF;
-		border: 1px solid #979797;
-		border-radius: 50%;
-		vertical-align: -2px;
-		box-sizing: content-box;
-	}
-
-	label.bui-radios-label input:checked+.bui-radios:after {
-		position: absolute;
-		content: "";
-		width: 7px;
-		height: 7px;
-		background-color: #fff;
-		border-radius: 50%;
-		top: 3px;
-		left: 3px;
-	}
-
-	label.bui-radios-label input:checked+.bui-radios {
-		background: #00B066;
-		border: 1px solid #00B066;
-	}
-
-	label.bui-radios-label input:disabled+.bui-radios {
-		background-color: #e8e8e8;
-		border: solid 1px #979797;
-	}
-
-	label.bui-radios-label input:disabled:checked+.bui-radios:after {
-		background-color: #c1c1c1;
-	}
-	.table .zes{
-		position: relative;
-	}
-	.gan{
-		position: absolute;
-		left: -5px;
-		top: 50px;
-		width: 15px;
-		height: 15px;
-		border-radius: 50%;
-		background: red;
-		color:#fff;
-	}
-	.gantan{
-		color:red;
-	}
-	.gan p{
-		color:#fff;
-	}
+<style>
+	@import url("../../../assets/css/SubRecharge.css");
 </style>

@@ -3,7 +3,7 @@
 	<div class="modal-content1">
 		<div class="modal-body  pos_r jh-mh-sc1">
 			<div class="tab-pane fade in active martop" id="basic">
-				<div class="tab-pane fade in active martop">
+			<div class="tab-pane fade in active martop">
 					<div class="col-md-12 form-group clearfix text-left jh-ad-0 jh-mt-5">
 						<div class="col-md-6 clearfix">
 							<h4 id="myModalLabel" class="modal-title jh-lh-39">基础信息：</h4>
@@ -31,34 +31,36 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">状态</label><span class="sign-left">:</span>
 						<div class="col-md-7  ">
-							<select class="form-control" v-model="state" :disabled="true">
+							<select class="form-control" v-model="state" :disabled="true" @click="man">
 								<option value="">全部</option>
 								<option value="1">在用</option>
 								<option value="2">停用</option>
 							</select>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix">
+					<div class="col-md-6 form-group clearfix jin">
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
-						<div class="col-md-7  ">
-							<input type="text" class="form-control" v-model="fullCondition" :disabled="true">
+						<div class="col-md-7 jin1 ">
+							<input type="text" class="form-control" v-model="recude" :disabled="true">
+							<span>元</span>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix" style="float: right;">
+					<div class="col-md-6 form-group clearfix zhe" style="float: right;">
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
-						<div class="col-md-7  ">
+						<div class="col-md-7  zhe1">
 							<input type="text" class="form-control" v-model="recude" :disabled="true">
+							<span>%</span>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix shiyong">
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">使用门槛</label><span class="sign-left">:</span>
 						<div class="col-md-7" v-model="isLimit">
-							<div class="xianzhi"><input class="xian" :disabled="true" type="radio" name="radioGroup1" v-model="isLimit" value="2"/><label class="xian1">无限制</label></div>
+							<div class="xianzhi wuxian"><input class="xian" :disabled="true" type="radio" name="radioGroup1" v-model="isLimit" value="2"/><label class="xian1">无限制</label></div>
 							<div class="xianzhi1"><input class="xian" :disabled="true" type="radio" name="radioGroup1" v-model="isLimit" value="1"/><label class="xian1">满</label></div>
-							<div class="xianzhi2"><input type="text" placeholder="0" :disabled="true"><span>元可用</span></div>
+							<div class="xianzhi2"><input type="text" placeholder="0" :disabled="true" v-model="fullCondition"><span>元可用</span></div>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix"></div>
@@ -78,9 +80,13 @@
 							<div class="xianzhi"><input class="xian" :disabled="true" type="radio" name="radioGroup3" value="1" v-model="isVaild" /><label class="xian1">永久有效</label></div>
 							<div class="xianzhi1"><input class="xian" :disabled="true" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label class="xian1">日期范围：</label></div>
 							<div class="xianzhi3">
-								<dPicker class="wd100" v-model="dateArr" type="format" format="YYYY-MM-DD" range><template v-slot:header="{ emit }">
-										<div class="text-left"></div>
-									</template></dPicker>
+								<el-date-picker  disabled v-model="begDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="选择日期时间">
+								</el-date-picker>
+							</div>
+							<div class="xianhzi15">~</div>
+							<div class="xianzhi3">
+								<el-date-picker disabled v-model="endDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="选择日期时间">
+								</el-date-picker>
 							</div>
 							<!-- <div class="xianzhi4"><input type="checkbox"><label class="xian1">自领取之日</label></div>
 						<div class="xianzhi5"><input type="text" placeholder="0"><span>天内</span></div> -->
@@ -149,12 +155,7 @@
 </template>
 
 <script>
-	import dPicker from 'vue2-datepicker'
-
 	export default {
-		components: {
-			dPicker
-		},
 		data() {
 			return {
 				couponName: '', //优惠券名称
@@ -168,6 +169,7 @@
 				userType: '', //使用用户
 				categoryType: '', //选择产品
 				limitGet: '', //每人限领取
+				couponId:'',
 				allCount: '', //发放机制
 				cash: {
 					cashId: '',
@@ -189,12 +191,14 @@
 				isArrearsShow: false,
 				unfinishedProList: [],
 				projectObj: {},
-				dateArr: '',
 				begDate: '',
 				endDate: '',
 			};
 		},
 		methods: {
+			man(){
+				
+			},
 			//点击返回按钮跳转
 			goOff() {
 				this.$router.go(-1);
@@ -218,55 +222,76 @@
 				})
 			},
 			//the event of addtional button
-			addFee() {
-				console.log('the event of addtional button')
-				if (this.dateArr.length > 0 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1])) {
-					this.begDate = this.moment(this.dateArr[0], 'YYYY-MM-DD 00:00:00')
-					this.endDate = this.moment(this.dateArr[1], 'YYYY-MM-DD 23:59:59')
-				} else {
-					this.begDate = ''
-					this.endDate = ''
-				}
-				var url = this.url + '/couponController/addCoupon'
+			addFee(couponId) {
+				var url = this.url + '/couponController/selectCouponById'
 				var formData = new FormData();
-				formData.append('couponName', this.couponName)
-				formData.append('operatorId', this.operatorId)
-				formData.append('couponType', this.couponType)
-				formData.append('state', this.state)
-				formData.append('couponType', this.couponType)
-				formData.append('fullCondition', this.fullCondition)
-				formData.append('recude', this.recude)
-				formData.append('isLimit', this.isLimit)
-				formData.append('isVaild', this.isVaild)
-				formData.append('userType', this.userType)
-				formData.append('categoryType', this.categoryType)
-				formData.append('limitGet', this.limitGet)
-				formData.append('allCount', this.allCount)
+				formData.append('couponId', couponId);
 				this.$ajax({
 					method: 'POST',
 					url: url,
 					headers: {
-						'Content-Type': this.contentType,
+						'Content-Type':'x-www-form-urlencoded',
 						'Access-Token': this.accessToken
 					},
 					data: formData,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
 					if (res.retCode == '0000') {
-						alert(res.retMsg)
-						this.$router.push({
-							path: '../../MP/Coupon'
-						})
+						this.couponName = res.retData.couponName; //优惠券名称
+						this.state = res.retData.state; //状态
+						this.begDate = res.retData.startTime;
+						this.endDate = res.retData.endTime;
+						this.couponType = res.retData.couponType; //优惠券类型
+						this.fullCondition = res.retData.fullCondition; //金额
+						this.recude = res.retData.recude; //折扣
+						this.operatorId = res.retData.operatorId;
+						this.isLimit = res.retData.isLimit; //使用门槛
+						this.isVaild = res.retData.isVaild; //有效期
+						this.userType = res.retData.userType; //使用用户
+						this.categoryType = res.retData.categoryType; //选择产品
+						this.limitGet = res.retData.limitGet; //每人限领取
+						this.couponId = res.retData.couponId;
+						this.allCount = res.retData.allCount; //发放机制
+						// if(this.isLimit =='2' && this.couponType =='2'){
+						// 	this.recude.value != '6';
+						// }
+						if(this.couponType == ''){
+							$(".jin").show();
+							$(".zhe").show();
+							$(".wuxian").show();
+						}
+						else if(this.couponType == '1'){
+							$(".jin").hide();
+							$(".zhe").show();
+							$(".xianzhi2 span").css('right','35px');
+							$(".wuxian").hide();
+						}
+						else if(this.couponType == '2'){
+							$(".jin").show();
+							$(".zhe").hide();
+							$(".wuxian").show();
+						}
 					} else {
-						alert(res.retMsg)
+						
 					}
 				}).catch((error) => {
 					console.log('请求失败处理')
 				});
 			},
+			getAditId(){
+				this.couponId = ''
+				
+				this.couponId = this.$route.query.couId
+				
+				if (this.couponId != undefined && this.couponId != '') {
+					this.addFee(this.couponId)
+				}
+			}
 		},
+		mounted(){
+			this.getAditId();
+		}
 	}
 </script>
 
@@ -278,19 +303,45 @@
 	.shiyong{margin-top: 40px;}
 	.shiyong1{margin-top: 0;}
 	.shiyong .xianzhi{float: left;}
+	.xianhzi15{margin-left: 8px;margin-right: 8px;float: left;margin-top: 10px;}
 	.shiyong .xianzhi1{float: left;margin-left: 15px;}
 	.shiyong .xianzhi4{float: left;margin-left: 15px;margin-top: 5px;}
 	.shiyong .xianzhi2{float: left;width:105px;margin-left: 10px;margin-top: 5px;}
 	.shiyong .xianzhi5{float: left;width:105px;margin-left: 10px;margin-top: 5px;}
 	.shiyong .xianzhi6{float: left;width:120px;margin-left: 10px;margin-top: 5px;}
-	.shiyong .xianzhi3{float: left;width:202px;}
+	.shiyong .xianzhi3 {
+		float: left;
+		width: 195px;
+	}
+	.shiyong .xianzhi3  .el-date-editor.el-input, .el-date-editor.el-input__inner{
+		width: 195px;
+	}
+	.jin1 {
+		position: relative;
+	}
+	
+	.jin1 span {
+		position: absolute;
+		right: -2%;
+		top: 30%;
+	}
+	
+	.zhe1 {
+		position: relative;
+	}
+	
+	.zhe1 span {
+		position: absolute;
+		right: -2%;
+		top: 30%;
+	}
 	.shiyong .xianzhi3_1{float: left;width:80px;}
 	.shiyong .xianzhi3_1 p{margin-left: 10px;margin-top: 5px;border-radius: 5px; width: 80px;height: 25px;line-height: 25px;text-align: center;color:#fff;background: rgba(72, 196, 65, 1);}
-	.shiyong .xianzhi2 input{width: 100%; outline: none;border:1px solid #DDDDDD;height: 25px;position: relative;}
+	.shiyong .xianzhi2 input{text-align: center;width: 100%; outline: none;border:1px solid #DDDDDD;height: 25px;position: relative;}
 	.shiyong .xianzhi2 span{position: absolute;right: -20px;top: 10px;}
 	.shiyong .xianzhi5 input{width: 100%; outline: none;border:1px solid #DDDDDD;height: 25px;position: relative;}
 	.shiyong .xianzhi5 span{position: absolute;right: -15px;top: 10px;}
-	.shiyong .xianzhi6 input{width: 100%; outline: none;border:1px solid #DDDDDD;height: 25px;position: relative;}
+	.shiyong .xianzhi6 input{text-align: center;width: 100%; outline: none;border:1px solid #DDDDDD;height: 25px;position: relative;}
 	.shiyong .xianzhi6 span{position: absolute;right: 90px;top: 10px;}
 	.shiyong .xian{margin-top: 10px;}
 	.shiyong .xian1{margin-left: 10px;}

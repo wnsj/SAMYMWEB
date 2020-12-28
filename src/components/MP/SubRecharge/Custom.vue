@@ -43,7 +43,7 @@
 							</thead>
 							<tbody>
 								<tr v-for="item in unfinishedProList">
-									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
+									<td><input type="radio" :style="{'input[name=radioMan]':dis? 'false':'true'}" disabled="disabled" name="radioGroup" @click="radioClick($event,item)" /></td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -55,6 +55,11 @@
 								</tr>
 							</tbody>
 						</table>
+						<el-tooltip class="item gantan" effect="dark" content="由于审核原因，当前产品无法操作" placement="bottom" :style="{'display':!shs ? 'block':'none'}">
+							<div class="gan">
+								<p>!</p>
+							</div>
+						</el-tooltip>
 					</div>
 				</div>
 				<div class="col-md-12 form-group clearfix text-left">
@@ -250,9 +255,55 @@
 				<div class="col-md-12 form-group clearfix text-left">
 					<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
 				</div>
-				<div class="col-md-7 you"></div>
+				<div class="col-md-7 you">
+					<div class="man1">
+						<div class="man">
+							<div class="manjian"></div>
+							<div class="manjian1">满减</div>
+						</div>
+						<ul>
+							<li @click="dianji()">
+								<div class="jia">1000</div>
+								<div class="manzu">满<span>10000</span>元可用</div>
+								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
+								<div class="niucha"><p class="xian"></p><span>2020-12-12 00:01:01</span></div>
+								<div class="gou"><img src="../../../../static/img/youhui_gou.png" alt=""></div>
+							</li>
+						</ul>
+					</div>
+					<div class="man2">
+						<div class="man">
+							<div class="manjian"></div>
+							<div class="manjian1">满折</div>
+						</div>
+						<ol>
+							<li @click="dianji1()">
+								<div class="jia">7.7<span>折</span></div>
+								<div class="manzu">满<span>10000</span>元可用</div>
+								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
+								<div class="niucha"><p class="xian"></p><span>2020-12-12 00:01:01</span></div>
+								<div class="gou"><img src="../../../../static/img/youhui_gou.png" alt=""></div>
+							</li>
+						</ol>
+					</div>
+				</div>
 			</div>
-
+			
+			<div class="tab-pane fade in active martop">
+				<div class="col-md-7">
+					<ul class="btn-numbox">
+						<li class="shiyong2"><span class="number">使用数量/张：</span></li>
+						<li>
+							<ul class="count">
+								<li><span class="num-jian" @click="num_jian()">-</span></li>
+								<li><input type="text" class="input-num" id="input-num" value="1" /></li>
+								<li><span class="num-jia" @click="num_jia()">+</span></li>
+							</ul>
+						</li>　
+					</ul>
+				</div>
+			</div>
+			
 			<div class="tab-pane fade in active martop" id="basic" v-show="isShow==true">
 				<div class="col-md-12 form-group clearfix text-left">
 					<h4 id="myModalLabel" class="modal-title">合计：</h4>
@@ -314,6 +365,9 @@
 		data() {
 			return {
 				counselorList: [],
+				dis:true,
+				shs:true,
+				dui:true,
 				consume: {
 					proStyle: '',
 					memNum: '', //会员名
@@ -378,6 +432,19 @@
 			};
 		},
 		methods: {
+			//优惠券使用张数
+			num_jia() {
+				var input_num = document.getElementById("input-num");
+				input_num.value = parseInt(input_num.value) + 1;
+			},
+			num_jian() {
+				var input_num = document.getElementById("input-num");
+				if (input_num.value <= 0) {
+					input_num.value = 0;
+				} else {
+					input_num.value = parseInt(input_num.value) - 1;
+				}
+			},
 			// Initialization consume’s content
 			initData(param) {
 				$('#customContent').modal({
@@ -753,6 +820,15 @@
 					var res = response.data
 					if (res.retCode == '0000') {
 						this.unfinishedProList = res.retData
+						for (var i = 0; i < this.unfinishedProList.length; i++) {
+							if (this.unfinishedProList[i].auditState == 5) {
+								this.dis = false
+								this.shs = false
+							} else {
+								this.dis = true
+								this.shs = true
+							}
+						}
 					} else {
 						alert(res.retMsg)
 					}
@@ -966,6 +1042,24 @@
 					this.consume.realCross = this.consume.consumCount * this.consume.price
 				}
 			},
+			//选择满减优惠券
+			dianji() {
+				if (this.dui) {
+					$(".you .man1 .gou").show();
+				} else {
+					$(".you .man1 .gou").hide();
+				}
+				this.dui = !this.dui
+			},
+			//选择满折优惠券
+			dianji1() {
+				if (this.dui) {
+					$(".you .man2 .gou").show();
+				} else {
+					$(".you .man2 .gou").hide();
+				}
+				this.dui = !this.dui
+			},
 			checkMemCash(param) {
 				if (this.isBlank(param)) {
 					return
@@ -1017,10 +1111,6 @@
 	}
 </script>
 
-<style scoped="scoped">
-	.tab-pane .you {
-		border: 1px solid #DDDDDD;
-		width: 100%;
-		overflow: auto;
-	}
+<style>
+	@import url("../../../assets/css/Custom.css");
 </style>

@@ -648,10 +648,19 @@
 					var res = response.data
 					//console.log(res)
 					if (res.retCode == '0000') {
-			            alert(res.retMsg)
-						this.$emit('closeCurrentPage','succ')
-						this.$store.commit('addCount',1)
-						this.closeCurrentPage()
+						this.$alert(res.retMsg, '提示', {
+							confirmButtonText: '确定',
+							type: 'success',
+							callback: action => {
+								this.$emit('closeCurrentPage','succ')
+								this.$store.commit('addCount',1)
+								this.closeCurrentPage()
+							}
+						})
+			   //          alert(res.retMsg)
+						// this.$emit('closeCurrentPage','succ')
+						// this.$store.commit('addCount',1)
+						// this.closeCurrentPage()
 					} else {
 						alert(res.retMsg)
 					}

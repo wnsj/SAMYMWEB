@@ -136,6 +136,14 @@
 				</div>
 			</div>
 		</div>
+		<!-- 舍弃弹窗 -->
+		<div class="row row_edit">
+			<div class="modal fade" id="rejectionContent1">
+				<div class="modal-dialog wd600">
+					<rejections ref='rejections' @func='feedBack()'></rejections>
+				</div>
+			</div>
+		</div>
 		<div class="row row_edit">
 			<div class="modal fade" id="consumptionModal">
 				<div class="modal-dialog wd1000">
@@ -158,6 +166,7 @@
 	import dPicker from 'vue2-datepicker'
 	import Paging from '../../common/paging'
 	import rejection from '../../MP/SubRecharge/rejection.vue'
+	import rejections from '../../MP/SubRecharge/rejection.vue'
 	import infoDetail from '../../MP/SubRecharge/auditInfoDetail.vue'
 	export default {
 		components: {
@@ -165,6 +174,7 @@
 			dPicker,
 			Paging,
 			rejection,
+			rejections,
 			infoDetail
 		},
 		data() {
@@ -177,7 +187,7 @@
 				storeId: this.storeId(),
 				accountType: this.accountType(),
 				name: '',
-				params: '',
+				cId: '',
 				tableData: [],
 				checkedValue: -1,
 				objectContent: {},
@@ -271,6 +281,7 @@
 				// }
 
 				$("#rejectionContent").modal('hide')
+				$("#rejectionContent1").modal('hide')
 			},
 
 			tabChange(item) {
@@ -287,8 +298,8 @@
 			editorAction(item) {
 				this.objectContent = item
 			},
-			initData(param) {
-				this.params = param;
+			initDatas(param) {
+				this.cId = param;
 				this.xiaofei();
 			},
 			btnAction(index) {
@@ -315,8 +326,9 @@
 						break;
 						//驳回
 					case '3':
-					    this.initData(this.cid);
-						
+					    this.initDatas(this.cid);
+						// this.$refs.rejections.initData('consumption', this.objectContent)
+						// $("#rejectionContent1").modal('show')
 						break;
 				}
 			},
@@ -384,13 +396,24 @@
 					},
 					data: {
 						operatorId: this.operatorId,
-						params:this.params
+						piId: this.objectContent.piId,
+						createDate: this.objectContent.createDate,
+						cId:this.cId,
+						rejectReason:"没有理由"
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						alert(res.retMsg)
+						this.$alert(res.retMsg, '提示', {
+							confirmButtonText: '确定',
+							type: 'success',
+							callback: action => {
+								this.$store.commit('addCount', 1)
+								this.objectContent = {}
+								this.getApproveFind(1)
+							}
+						})
 					} else {
 						alert(res.retMsg)
 					}

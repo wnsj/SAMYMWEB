@@ -110,9 +110,8 @@
                                     <label  class="editlabel" :for="'edit'"></label>
                                 </td> -->
                                 <td class="text-center editradio-box">
-                                    <input :id="'edit'+(index+1)" class="editradio" type="radio" name="复选框" :value="index"
-                                           v-model="checkedValue"/ @change="xiao(item)">
-                                    <label :for="'edit'+(index+1)" class="editlabel"></label>
+									<input :id="'edit'+(index+1)" class="editradio" type="radio" name="复选框" :value="index" v-model="checkedValue" @change="xiao(item)" />
+									<label :for="'edit'+(index+1)" class="editlabel"></label>
 
                                 </td>
                                 <td class="text-center;">{{item.memName}}</td>
@@ -205,7 +204,7 @@
                 memName:'',
                 checkedValue:-1,
                 objectContent: {},
-				params: '',
+				piId: '',
                 //分页需要的数据
                 pages: '', //总页数
                 current: '1', //当前页码
@@ -216,8 +215,7 @@
                 endCreateDate: '',
                 operatorId: this.accountId(),
                 addClass: false,
-                selectItem: '',
-				piId:''
+                selectItem: ''
 
             };
         },
@@ -320,7 +318,7 @@
                 this.objectContent = item
             },
 			initData(param) {
-				this.params = param;
+				this.piId = param;
 				this.xiaofei();
 			},
             btnAction(index) {
@@ -409,7 +407,7 @@
 				var url = this.url + '/purchasedItemsAuditBean/discard'
 				// var url = 'http://172.16.16.255:8080/consumAuditBean/consumRecord'
 				// var formData = new FormData();
-				// formData.append('params', this.params)
+				// formData.append('piId', this.piId)
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -419,13 +417,22 @@
 					},
 					data: {
 						operatorId: this.operatorId,
-						params:this.params
+						piId:this.piId,
+						rejectReason:"没有理由"
 					},
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						alert(res.retMsg)
+						this.$alert(res.retMsg, '提示', {
+						  confirmButtonText: '确定',
+						  type: 'success',
+						  callback: action => {
+						      this.$store.commit('addCount',1)
+						      this.objectContent = {}
+						      this.checkEmp(1);
+						  }
+						})
 					} else {
 						alert(res.retMsg)
 					}

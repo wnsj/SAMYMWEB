@@ -1,26 +1,29 @@
 <!-- the page of department management -->
 <template>
 	<div class="wraper">
+		<div class="col-md-12 col-lg-12 main-title">
+		    <h1 class="titleCss">查看产品</h1>
+		</div>
 		<h2>被选中的产品：</h2>
 	<div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
 		<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 	</div>
 	<div class="" id="datatable">
-		<el-table :data="tableData" style="width: 100%" border>
-			<el-table-column type="selection" width="55" align="center" label="全选"></el-table-column>
-			<el-table-column prop="memName" label="店铺" width="100" align="center"></el-table-column>
-			<el-table-column prop="proName" label="咨询师" width="100" align="center"></el-table-column>
-			<el-table-column prop="shopowner" label="咨询师等级"  width="100"   align="center"></el-table-column>
-			<el-table-column prop="storeName" label="产品名称" width="100" align="center"></el-table-column>
-			<el-table-column prop="shopowner" label="产品类型" width="100" align="center"></el-table-column>
-			<el-table-column prop="shopowner" label="产品风格" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="总价(￥)" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="优惠后总价(￥)" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="单价(￥)" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="课时(小时)" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="优惠比例(%)" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="是否可退款" width="100" align="center"></el-table-column>
-			<el-table-column prop="finance" label="到期日期(天)" width="100" align="center"></el-table-column>
+		<el-table :data="tableData" style="width: 100%" :row-key="getRowKeys" border ref="multipleTable" @selection-change="handleSelectionChange">
+			<el-table-column type="selection" width="55" align="center" label="全选" :reserve-selection="true"></el-table-column>
+			<el-table-column prop="storeName" label="店铺" width="100" align="center"></el-table-column>
+			<el-table-column prop="empName" label="咨询师" width="100" align="center"></el-table-column>
+			<el-table-column prop="empLevelName" label="咨询师等级"  width="100"   align="center"></el-table-column>
+			<el-table-column prop="proName" label="产品名称" width="100" align="center"></el-table-column>
+			<el-table-column prop="proType" label="产品类型" :formatter="resetAuditState" width="100" align="center"></el-table-column>
+			<el-table-column prop="proStyle" label="产品风格" :formatter="chanstyle" width="100" align="center"></el-table-column>
+			<el-table-column prop="totalPrice" label="总价(￥)" width="100" align="center"></el-table-column>
+			<el-table-column prop="discouAmount" label="优惠后总价(￥)" width="100" align="center"></el-table-column>
+			<el-table-column prop="price" label="单价(￥)" width="100" align="center"></el-table-column>
+			<el-table-column prop="frequency" label="课时(小时)" width="100" align="center"></el-table-column>
+			<el-table-column prop="discount" label="优惠比例(%)" width="100" align="center"></el-table-column>
+			<el-table-column prop="isRefund" label="是否可退款" :formatter="tui" width="100" align="center"></el-table-column>
+			<el-table-column prop="endDay" label="到期日期(天)" width="100" align="center"></el-table-column>
 		</el-table>
 		<el-row style="margin-top: 20px;">
 			<el-col :span="24">
@@ -83,6 +86,9 @@
 		},
 
 		methods: {
+			getRowKeys(row) {
+				return row.proId;
+			},
 			resetDate(row, column, cellValue, index) {
 			    if (cellValue !== '' && cellValue !== null) {
 			        return cellValue.substring(0, 10)
@@ -105,15 +111,33 @@
 					this.empId = param.empId
 				}
 			},
-			resetDate(row, column, cellValue, index) {
-				if (cellValue !== '' && cellValue !== null) {
-					return cellValue.substring(0, 10)
-				}
+			resetAuditState(row, column, cellValue, index){
+				console.log( typeof(cellValue))
+			    switch (cellValue) {
+					case '0':
+					   return '普通'
+					   break;
+			         case '1':
+			            return '月卡'
+			            break;
+			        case '2':
+			           return '季卡'
+			           break;
+			        case '3':
+			           return '半年卡'
+			           break;
+			        case '4':
+			           return '年卡'
+			           break;
+					case '5':
+					    return '测评'
+					    break;
+			    }
 			},
-			resetVisit(row, column, cellValue, index) {
-				return cellValue == 1 ? "初访" : "复访"
+			chanstyle(row, column, cellValue, index) {
+				return cellValue == 1 ? "新产品" : "老产品"
 			},
-			resetArrears(row, column, cellValue, index) {
+			tui(row, column, cellValue, index) {
 				return cellValue == 1 ? "是" : "否"
 			},
 
@@ -160,7 +184,8 @@
 				if (this.selectDataFlag) {
 					this.current = 1
 				}
-
+				var userList = localStorage.getItem('userList');
+				var stringResult2 = userList.split(',');
 				this.showSelect = false
 				console.log('getAllAuditPage')
 				if (!this.isBlank(this.begCreateDate)) {
@@ -169,7 +194,7 @@
 				if (!this.isBlank(this.endCreateDate)) {
 					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
 				}
-				var url = this.url + '/purchasedItemsAuditBean/getAllAuditPage'
+				var url = this.url + '/projects/queryAllByParams'
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -178,14 +203,15 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						current: this.current,
+						page: this.page,
 						pageSize: this.pageSize,
-						auditName: this.auditName,
-						memName: this.memName,
 						storeId: this.storeId,
-						auditBegTime: this.begCreateDate,
-						auditEndTime: this.endCreateDate,
-						auditState: this.auditState
+						proName: this.proName,
+						empId: this.empId,
+						isuse: this.isuse,
+						empLevel: this.empLevel,
+						isRefund:this.isRefund,
+						proType:this.proType
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -193,10 +219,16 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
-						this.current = res.retData.current //当前页码
+						this.page = res.retData.current //当前页码
 						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.records
+						for (let i = 0; i < this.tableData.length; i++) {
+							if (stringResult2.includes(this.tableData[i].proId + '')) {
+								 this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
+								}
+						 
+						}
 					} else {
 						alert(res.retMsg)
 					}
@@ -213,12 +245,12 @@
 			},
 			// 翻页
 			handleCurrentChange(pageNum) {
-				this.current = pageNum
+				this.page = pageNum
 				this.getAllAuditPage()
 			},
 			// 每页条数变化时触发
 			handleSizeChange(pageSize) {
-				this.current = 1
+				this.page = 1
 				this.pageSize = pageSize
 				this.getAllAuditPage()
 			},

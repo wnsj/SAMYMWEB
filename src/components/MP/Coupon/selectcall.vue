@@ -10,8 +10,8 @@
 	</div>
 	<div class="" id="datatable">
 		<el-table :data="tableData" style="width: 100%" border :row-key="getRowKeys" ref="multipleTable" @selection-change="handleSelectionChange">
-			<el-table-column type="selection" width="55" align="center" label="全选" :reserve-selection="true"></el-table-column>
-			<el-table-column type="index" prop="visId" label="序号" width="60" align="center"></el-table-column>
+			<el-table-column type="selection" width="55" align="center" label="全选" :reserve-selection="true" :selectable='checkboxSelect'></el-table-column>
+			<el-table-column prop="visId" label="序号" width="60" align="center"></el-table-column>
 			<el-table-column prop="visitorName" label="姓名" width="100" align="center"></el-table-column>
 			<el-table-column prop="sex" label="性别" :formatter="sex" width="100" align="center"></el-table-column>
 			<el-table-column prop="birthday" label="生日" :formatter="resetDate" width="100" align="center"></el-table-column>
@@ -86,6 +86,13 @@
 		},
 
 		methods: {
+			checkboxSelect(row, rowIndex) {
+				if (rowIndex == 0) {
+					return false // 禁用
+				} else {
+					return false // 不禁用
+				}
+			},
 			getRowKeys(row) {
 				return row.visId;
 			},
@@ -173,7 +180,7 @@
 				if (this.selectDataFlag) {
 					this.current = 1
 				}
-				var projectList = localStorage.getItem('projectList');
+				var projectList = localStorage.getItem('userList');
 				var stringResult1 = projectList.split(',');
 				console.log(stringResult1)
 				this.showSelect = false
@@ -187,12 +194,6 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						storeId: this.storeId,
-						visitorName: this.visitorName,
-						chaId: this.chaId,
-						isMem: this.isMem,
-						visType: this.visType,
-						empId: this.empId,
 						page: this.current,
 						pageSize: this.pageSize
 					},
@@ -206,10 +207,10 @@
 						this.pageSize = res.retData.size;//一页显示的数量  必须是奇数
 						this.total = res.retData.total; //数据的数量
 						this.tableData = res.retData.records;
-						for (let i = 0; i < res.retData.records.length; i++) {
-							if (stringResult1.includes(res.retData.records[i].visId)) {
-								console.log(typeof(res.retData.records[i].visId) )
-								 this.$refs.multipleTable.toggleRowSelection(res.retData.records[i])
+						for (let i = 0; i < this.tableData.length; i++) {
+							console.log(stringResult1.includes(this.tableData[i].visId + ''))
+							if (stringResult1.includes(this.tableData[i].visId + '')) {
+								 this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
 								}
 						 
 						}

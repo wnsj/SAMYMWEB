@@ -127,6 +127,12 @@
 				</el-table-column>
 				<el-table-column align="center" prop="realCross" label="实收金额" min-width="100">
 				</el-table-column>
+				<el-table-column align="center" prop="cashMoney" label="定金抵扣/元" min-width="100">
+				</el-table-column>
+				<el-table-column align="center" prop="receivable" label="应交金额/元" min-width="100">
+				</el-table-column>
+				<el-table-column align="center" prop="couponAmount" label="优惠金额/元" min-width="100">
+				</el-table-column>
 				<el-table-column align="center" prop="payTypeName" label="缴费方式" min-width="100">
 				</el-table-column>
 				<el-table-column align="center" prop="visitType" label="访问类型" min-width="100">

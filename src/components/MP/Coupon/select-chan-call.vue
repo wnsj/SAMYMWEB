@@ -2,38 +2,38 @@
 <template>
 	<div class="wraper">
 		<div class="col-md-12 col-lg-12 main-title">
-		    <h1 class="titleCss">查看产品</h1>
+			<h1 class="titleCss">查看产品</h1>
 		</div>
 		<h2>被选中的产品：</h2>
-	<div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
-		<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
-	</div>
-	<div class="" id="datatable">
-		<el-table :data="tableData" style="width: 100%" :row-key="getRowKeys" border ref="multipleTable" @selection-change="handleSelectionChange">
-			<el-table-column type="selection" width="55" align="center" label="全选" :reserve-selection="true"></el-table-column>
-			<el-table-column prop="storeName" label="店铺" width="100" align="center"></el-table-column>
-			<el-table-column prop="empName" label="咨询师" width="100" align="center"></el-table-column>
-			<el-table-column prop="empLevelName" label="咨询师等级"  width="100"   align="center"></el-table-column>
-			<el-table-column prop="proName" label="产品名称" width="100" align="center"></el-table-column>
-			<el-table-column prop="proType" label="产品类型" :formatter="resetAuditState" width="100" align="center"></el-table-column>
-			<el-table-column prop="proStyle" label="产品风格" :formatter="chanstyle" width="100" align="center"></el-table-column>
-			<el-table-column prop="totalPrice" label="总价(￥)" width="100" align="center"></el-table-column>
-			<el-table-column prop="discouAmount" label="优惠后总价(￥)" width="100" align="center"></el-table-column>
-			<el-table-column prop="price" label="单价(￥)" width="100" align="center"></el-table-column>
-			<el-table-column prop="frequency" label="课时(小时)" width="100" align="center"></el-table-column>
-			<el-table-column prop="discount" label="优惠比例(%)" width="100" align="center"></el-table-column>
-			<el-table-column prop="isRefund" label="是否可退款" :formatter="tui" width="100" align="center"></el-table-column>
-			<el-table-column prop="endDay" label="到期日期(天)" width="100" align="center"></el-table-column>
-		</el-table>
-		<el-row style="margin-top: 20px;">
-			<el-col :span="24">
-				<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="current"
-				 :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
-				</el-pagination>
-			</el-col>
-		</el-row>
-	</div>
-	<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
+		<div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
+			<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
+		</div>
+		<div class="" id="datatable">
+			<el-table :data="tableData" style="width: 100%" :row-key="getRowKeys" border ref="multipleTable" @selection-change="handleSelectionChange">
+				<el-table-column type="selection" width="55" align="center" label="全选" :reserve-selection="true" :selectable='checkboxSelect'></el-table-column>
+				<el-table-column prop="storeName" label="店铺" width="100" align="center"></el-table-column>
+				<el-table-column prop="empName" label="咨询师" width="100" align="center"></el-table-column>
+				<el-table-column prop="empLevelName" label="咨询师等级" width="100" align="center"></el-table-column>
+				<el-table-column prop="proName" label="产品名称" width="100" align="center"></el-table-column>
+				<el-table-column prop="proType" label="产品类型" :formatter="resetAuditState" width="100" align="center"></el-table-column>
+				<el-table-column prop="proStyle" label="产品风格" :formatter="chanstyle" width="100" align="center"></el-table-column>
+				<el-table-column prop="totalPrice" label="总价(￥)" width="100" align="center"></el-table-column>
+				<el-table-column prop="discouAmount" label="优惠后总价(￥)" width="100" align="center"></el-table-column>
+				<el-table-column prop="price" label="单价(￥)" width="100" align="center"></el-table-column>
+				<el-table-column prop="frequency" label="课时(小时)" width="100" align="center"></el-table-column>
+				<el-table-column prop="discount" label="优惠比例(%)" width="100" align="center"></el-table-column>
+				<el-table-column prop="isRefund" label="是否可退款" :formatter="tui" width="100" align="center"></el-table-column>
+				<el-table-column prop="endDay" label="到期日期(天)" width="100" align="center"></el-table-column>
+			</el-table>
+			<el-row style="margin-top: 20px;">
+				<el-col :span="24">
+					<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="current"
+					 :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
+					</el-pagination>
+				</el-col>
+			</el-row>
+		</div>
+		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
 	</div>
 </template>
 
@@ -86,13 +86,20 @@
 		},
 
 		methods: {
+			checkboxSelect(row, rowIndex) {
+				if (rowIndex == 0) {
+					return false // 禁用
+				} else {
+					return false // 不禁用
+				}
+			},
 			getRowKeys(row) {
 				return row.proId;
 			},
 			resetDate(row, column, cellValue, index) {
-			    if (cellValue !== '' && cellValue !== null) {
-			        return cellValue.substring(0, 10)
-			    }
+				if (cellValue !== '' && cellValue !== null) {
+					return cellValue.substring(0, 10)
+				}
 			},
 			changeData(newVal, oldVal) {
 				this.selectDataFlag = true
@@ -111,28 +118,28 @@
 					this.empId = param.empId
 				}
 			},
-			resetAuditState(row, column, cellValue, index){
-				console.log( typeof(cellValue))
-			    switch (cellValue) {
+			resetAuditState(row, column, cellValue, index) {
+				console.log(typeof(cellValue))
+				switch (cellValue) {
 					case '0':
-					   return '普通'
-					   break;
-			         case '1':
-			            return '月卡'
-			            break;
-			        case '2':
-			           return '季卡'
-			           break;
-			        case '3':
-			           return '半年卡'
-			           break;
-			        case '4':
-			           return '年卡'
-			           break;
+						return '普通'
+						break;
+					case '1':
+						return '月卡'
+						break;
+					case '2':
+						return '季卡'
+						break;
+					case '3':
+						return '半年卡'
+						break;
+					case '4':
+						return '年卡'
+						break;
 					case '5':
-					    return '测评'
-					    break;
-			    }
+						return '测评'
+						break;
+				}
 			},
 			chanstyle(row, column, cellValue, index) {
 				return cellValue == 1 ? "新产品" : "老产品"
@@ -184,7 +191,7 @@
 				if (this.selectDataFlag) {
 					this.current = 1
 				}
-				var userList = localStorage.getItem('userList');
+				var userList = localStorage.getItem('projectList');
 				var stringResult2 = userList.split(',');
 				this.showSelect = false
 				console.log('getAllAuditPage')
@@ -210,8 +217,8 @@
 						empId: this.empId,
 						isuse: this.isuse,
 						empLevel: this.empLevel,
-						isRefund:this.isRefund,
-						proType:this.proType
+						isRefund: this.isRefund,
+						proType: this.proType
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -225,9 +232,9 @@
 						this.tableData = res.retData.records
 						for (let i = 0; i < this.tableData.length; i++) {
 							if (stringResult2.includes(this.tableData[i].proId + '')) {
-								 this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
-								}
-						 
+								this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
+							}
+
 						}
 					} else {
 						alert(res.retMsg)
@@ -290,21 +297,24 @@
 </script>
 
 <style scoped="scoped">
-	.wraper h2{
+	.wraper h2 {
 		font-size: 18px;
 		text-align: left;
 		margin-left: 20px;
 		font-weight: bold;
 		margin-bottom: 20px;
 	}
-	.xuanzhong_kuang{
+
+	.xuanzhong_kuang {
 		margin-top: 20px;
 		border: 1px solid #DDDDDD;
 		width: 100%;
 		overflow: auto;
-		margin-bottom: 20px;;
+		margin-bottom: 20px;
+		;
 	}
-	.xuanzhong_kuang h2{
+
+	.xuanzhong_kuang h2 {
 		text-align: left;
 		margin-top: 10px;
 		font-weight: bold;
@@ -312,47 +322,57 @@
 		font-size: 16px;
 		margin-bottom: 10px;
 	}
-	.xuanzhong_kuang ul{
+
+	.xuanzhong_kuang ul {
 		margin-left: 20px;
 		overflow: auto;
 	}
-	.xuanzhong_kuang ul li{
+
+	.xuanzhong_kuang ul li {
 		width: 85px;
 		height: 30px;
 		margin-bottom: 10px;
 		line-height: 30px;
 		text-align: center;
-		border:1px solid #DDDDDD;
+		border: 1px solid #DDDDDD;
 		margin-right: 10px;
 	}
-	.xuanzhong_kuang ul li:nth-child(10n){
+
+	.xuanzhong_kuang ul li:nth-child(10n) {
 		margin-right: 0;
 		margin-bottom: 0;
 	}
-	.xuanzhong_kuang ul li:last-child{
+
+	.xuanzhong_kuang ul li:last-child {
 		margin-right: 0;
 	}
-	.jh-mr-1{
+
+	.jh-mr-1 {
 		border: none;
 		margin-top: 20px;
 	}
-	#datatable .jh-mr-3{
+
+	#datatable .jh-mr-3 {
 		background-color: rgb(72, 196, 65);
 	}
-	#datatable .jh-mr-4{
+
+	#datatable .jh-mr-4 {
 		background-color: rgb(186, 107, 234);
 	}
-	.jh-mr-5{
-		border:none;
+
+	.jh-mr-5 {
+		border: none;
 		margin-bottom: 20px;
 		background-color: rgb(22, 155, 213);
 	}
-	.jh-mr-6{
+
+	.jh-mr-6 {
 		margin-top: 20px;
-		border:none;
+		border: none;
 		margin-bottom: 20px;
 		background-color: rgb(213, 170, 22);
 	}
+
 	#datatable {
 		position: relative;
 	}

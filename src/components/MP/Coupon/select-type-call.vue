@@ -10,7 +10,7 @@
 		</div>
 		<div class="" id="datatable">
 			<el-table :data="tableData" style="width: 100%" border :row-key="getRowKeys" ref="multipleTable" @selection-change="handleSelectionChange">
-				<el-table-column type="selection" width="100" align="center" :reserve-selection="true" :class="showSelect?'false':'true'"></el-table-column>
+				<el-table-column type="selection" width="100" align="center" :reserve-selection="true" :selectable='checkboxSelect' :class="showSelect?'false':'true'"></el-table-column>
 				<el-table-column prop="typeName" label="类型名称" width="230" align="center"></el-table-column>
 				<el-table-column prop="state" :formatter="resetAuditState" label="使用状态" width="230" align="center"></el-table-column>
 			</el-table>
@@ -62,6 +62,13 @@
 		},
 
 		methods: {
+			checkboxSelect(row, rowIndex) {
+				if (rowIndex == 0) {
+					return false // 禁用
+				} else {
+					return false // 不禁用
+				}
+			},
 			handleSelectionChange(val) {
 				this.categoryList = val;
 				console.log(val)

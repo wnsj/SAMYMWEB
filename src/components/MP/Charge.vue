@@ -47,6 +47,18 @@
 			<div class="row newRow">
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					<div class="col-md-5 col-lg-5 text-right nopad">
+						<p class="end-aline col-md-11 col-lg-11" >优惠券类型</p><span class="sign-left">:</span>
+					</div>
+					<div class="col-md-7 col-lg-7">
+						<select class="form-control" v-model="couponType">
+							<option value="">--未选择--</option>
+							<option value="2">满减</option>
+							<option value="1">满折</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					<div class="col-md-5 col-lg-5 text-right nopad">
 						<p class="end-aline col-md-11 col-lg-11" >续流状态</p><span class="sign-left">:</span>
 					</div>
 					<div class="col-md-7 col-lg-7">
@@ -69,23 +81,33 @@
 						<con ref="conEmp" @employeeChange="conChange"></con>
 					</div>
 				</div>
-				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"  style="margin-top: 20px;">
 					<div class="col-md-5 col-lg-5 text-right nopad">
 						<p class="end-aline col-md-11 col-lg-11" >课程名称</p><span class="sign-left">:</span>
 					</div>
 					<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="proName"></div>
 				</div>
-			</div>
-			<div class="row newRow">
-				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+					<div class="col-md-7 col-lg-7 text-right nopad" style="margin-right: -50px;">
+						<p class="end-aline col-md-11 col-lg-11" style="margin-left: -40px;" >是否使用优惠券</p><span class="sign-left">:</span>
+					</div>
+					<div class="col-md-7 col-lg-7">
+						<select class="form-control" v-model="isUseCoupon">
+							<option value="">--未选择--</option>
+							<option value="1">是</option>
+							<option value="2">否</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"  style="margin-top: 20px;">
 					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
 						<p class="end-aline col-md-11 col-lg-11" >交费方式</p><span class="sign-left">:</span>
 					</div>
 					<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <PayStyle ref="payStyleRef" @payStyleChange="psStyle"></PayStyle>
+				        <PayStyle ref="payStyleRef" @payStyleChange="psStyle"></PayStyle>
 					</div>
 				</div>
-				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"  style="margin-top: 20px;">
 					<div class="col-md-5 col-lg-5 text-right jh-ad-1">
 						<p class="end-aline col-md-11 col-lg-11 jh-pa-1">是否欠费</p><span class="sign-left">:</span>
 					</div>
@@ -97,6 +119,10 @@
 						</select>
 					</div>
 				</div>
+			</div>
+			<div class="row newRow">
+				
+				
 				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 					<div class="col-md-3 col-lg-3 text-right jh-ad-1 wd205" style="padding-right: 4px;">
 						<p class="end-aline col-md-11 col-lg-11 jh-pa-1">购买时间</p><span class="sign-left">:</span>
@@ -135,6 +161,9 @@
 								<th class="text-center">购买单价(¥/次)</th>
 								<th class="text-center">购买课时(次)</th>
 								<th class="text-center">购买折扣(%)</th>
+								<th class="text-center">优惠券类型</th>
+								<th class="text-center">优惠券名字</th>
+								<th class="text-center">优惠金额(元)</th>
 								<th class="text-center">购买时间</th>
                                 <th class="text-center" rowspan='2'>开始时间</th>
                                 <th class="text-center" rowspan='2'>结束时间</th>
@@ -159,6 +188,9 @@
 								<td>{{item.price}}</td>
 								<td>{{item.actualCount}}</td>
 								<td>{{item.discount}}</td>
+								<td>{{item.couponType}}</td>
+								<td>{{item.couponName}}</td>
+								<td>{{item.couponAmount}}</td>
 								<td>{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td>{{item.startDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td>{{item.endDate | dateFormatFilter("YYYY-MM-DD")}}</td>
@@ -220,6 +252,8 @@
 		},
 		data() {
 			return {
+				isUseCoupon:'',
+				couponType:'',
 				chargeLsit: [],
 				costType: '1', //费用类型（1.充值，  2.消费，3.退款）
 				memNum: '',
@@ -353,6 +387,8 @@
 						memNum: this.memNum,
 						memName: this.memName,
                         proName:this.proName,
+						couponType:this.couponType,
+						isUseCoupon:this.isUseCoupon,
                         counselor:this.couId,
                         empId:this.conId,
                         payType:this.payType,

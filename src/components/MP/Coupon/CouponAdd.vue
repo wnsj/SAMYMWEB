@@ -87,14 +87,14 @@
 								 class="xian1">日期范围：</label></div>
 							<div class="xianzhi3">
 								<el-date-picker v-model="begDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime"
-								 placeholder="选择日期时间">
+								 placeholder="开始时间">
 								</el-date-picker>
 								<!-- <dPicker class="wd100" value-type="format" format="YYYY-MM-DD HH:mm:ss" v-model="begDate"></dPicker> -->
 							</div>
 							<div class="xianhzi15">~</div>
 							<div class="xianzhi3">
 								<el-date-picker v-model="endDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime"
-								 placeholder="选择日期时间">
+								 placeholder="结束时间">
 								</el-date-picker>
 								<!-- <dPicker class="wd100" value-type="format" format="YYYY-MM-DD HH:mm:ss" v-model="endDate"></dPicker -->
 							</div>
@@ -105,33 +105,33 @@
 					<div class="col-md-12 form-group clearfix">
 						<b>*</b>
 						<label class="col-md-1 control-label text-right nopad end-aline">使用用户</label><span class="sign-left">:</span>
-						<div class="col-md-8 shiyong shiyong1" v-model="userType">
-							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="1" /><label
+						<div class="col-md-8 shiyong shiyong1">
+							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="1" @click="usertypes()" /><label
 								 class="xian1">全体用户</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="2" /><label
+							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="2" @click="usertypes()" /><label
 								 class="xian1">新用户</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="3" /><label
+							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="3" @click="usertypes()" /><label
 								 class="xian1">指定用户</label></div>
-							<div class="xianzhi3_1">
-								<p style="cursor: pointer;" class="" v-on:click="seles" v-has="'SAMY:MP:Coupon:selectAdd'">选择用户</p>
+							<div class="xianzhi3_1 user" style="display: none;">
+								<p style="cursor: pointer;"  v-on:click="seles()" v-has="'SAMY:MP:Coupon:selectAdd'">选择用户</p>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
 						<b>*</b>
 						<label class="col-md-1 control-label text-right nopad end-aline">选择产品</label><span class="sign-left">:</span>
-						<div class="col-md-8 shiyong shiyong1" v-model="categoryType">
-							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="1" /><label
+						<div class="col-md-8 shiyong shiyong1">
+							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup5"  @click="fentype()" v-model="categoryType" value="1" /><label
 								 class="xian1">全品类</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="2" /><label
-								 class="xian1">指定分类</label></div>
-							<div class="xianzhi3_1">
-								<p style="cursor: pointer;" v-on:click="xus" v-has="'SAMY:MP:Coupon:select-type'">选择分类</p>
+							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="2"
+								 @click="fentype()" /><label class="xian1">指定分类</label></div>
+							<div class="xianzhi3_1 typead"  style="display: none;">
+								<p style="cursor: pointer;"  v-on:click="xus()" v-has="'SAMY:MP:Coupon:select-type'">选择分类</p>
 							</div>
 							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" name="radioGroup5" value="3"
-								 @click="radioClick($event,item)" /><label class="xian1">指定产品</label></div>
-							<div class="xianzhi3_1">
-								<p style="cursor: pointer;" v-on:click="ots()" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p>
+								  @click="fentype()" /><label class="xian1">指定产品</label></div>
+							<div class="xianzhi3_1 chan"  style="display: none;">
+								<p style="cursor: pointer;"  v-on:click="ots()" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p>
 							</div>
 						</div>
 					</div>
@@ -139,7 +139,7 @@
 						<b>*</b>
 						<label class="col-md-3 control-label text-right nopad end-aline">每人限领/限用</label><span class="sign-left">:</span>
 						<div class="col-md-7 shiyong shiyong1">
-							<div class="xianzhi6"><input type="text" placeholder="0" v-model="limitGet"><span>张</span></div>
+							<div class="xianzhi6"><input type="text" placeholder="无限制填写0" v-model="limitGet"><span>张</span></div>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix"></div>
@@ -237,6 +237,37 @@
 					$(".wuxian").show();
 				}
 			},
+			usertypes() {
+				console.log(this.userType)
+				if (this.userType == '3') {
+					$(".user").hide();
+				}
+				if (this.userType == '') {
+					$(".user").hide();
+				}
+				if (this.userType == '2') {
+					$(".user").show();
+				}
+				if (this.userType == '1') {
+					$(".user").hide();
+				}
+				
+			},
+			fentype() {
+				console.log(this.categoryType)
+				if (this.categoryType == '') {
+					$(".typead").hide();
+					$(".chan").hide();
+				}
+				if (this.categoryType == '2') {
+					$(".chan").show();
+					$(".typead").show();
+				}
+				if (this.categoryType == '1') {
+					$(".typead").hide();
+					$(".chan").hide();
+				}
+			},
 			//点击返回按钮跳转
 			goOff() {
 				this.$router.go(-1);
@@ -266,7 +297,7 @@
 				var projectList = localStorage.getItem('projectList');
 				var userList = localStorage.getItem('userList');
 				var categoryList = localStorage.getItem('categoryList');
-				console.log(projectList)
+				// console.log(projectList)
 				var stringResult = projectList.split(',');
 				var stringResult1 = userList.split(',');
 				var stringResult2 = categoryList.split(',');

@@ -263,11 +263,15 @@
 						</div>
 						<ul>
 							<li @click="dianji()">
-								<div class="jia">1000</div>
+								<div class="jia"><span>￥</span>1000</div>
+								<div class="bianhaoasd">编号：<span>10086</span></div>
+								<div class="title">风格风格发广告</div>
 								<div class="manzu">满<span>10000</span>元可用</div>
 								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
-								<div class="niucha"><p class="xian"></p><span>2020-12-12 00:01:01</span></div>
-								<div class="gou"><img src="../../../../static/img/youhui_gou.png" alt=""></div>
+								<div class="niucha">
+									<p class="xian"></p><span>2020-12-12 00:01:01</span>
+								</div>
+								<div class="gou2"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
 							</li>
 						</ul>
 					</div>
@@ -279,10 +283,14 @@
 						<ol>
 							<li @click="dianji1()">
 								<div class="jia">7.7<span>折</span></div>
+								<div class="bianhaoasd">编号：<span>10086</span></div>
+								<div class="title">风格风格发广告</div>
 								<div class="manzu">满<span>10000</span>元可用</div>
 								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
-								<div class="niucha"><p class="xian"></p><span>2020-12-12 00:01:01</span></div>
-								<div class="gou"><img src="../../../../static/img/youhui_gou.png" alt=""></div>
+								<div class="niucha">
+									<p class="xian"></p><span>2020-12-12 00:01:01</span>
+								</div>
+								<div class="gou2"><img src="../../../../static/img/youhui_xuanze2.png" alt=""></div>
 							</li>
 						</ol>
 					</div>
@@ -1045,18 +1053,18 @@
 			//选择满减优惠券
 			dianji() {
 				if (this.dui) {
-					$(".you .man1 .gou").show();
+					$(".you .man1 .gou2").show();
 				} else {
-					$(".you .man1 .gou").hide();
+					$(".you .man1 .gou2").hide();
 				}
 				this.dui = !this.dui
 			},
 			//选择满折优惠券
 			dianji1() {
 				if (this.dui) {
-					$(".you .man2 .gou").show();
+					$(".you .man2 .gou2").show();
 				} else {
-					$(".you .man2 .gou").hide();
+					$(".you .man2 .gou2").hide();
 				}
 				this.dui = !this.dui
 			},

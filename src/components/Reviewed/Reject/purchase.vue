@@ -27,8 +27,32 @@
                             <store ref="store" @storeChange='storeChange'></store>
                         </div>
                     </div>
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+						<div class="col-md-5 col-lg-5 text-right nopad">
+							<p class="end-aline col-md-11 col-lg-11" >优惠券类型</p><span class="sign-left">:</span>
+						</div>
+						<div class="col-md-7 col-lg-7">
+							<select class="form-control" v-model="couponType" >
+								<option value="">--未选择--</option>
+								<option value="2">满减</option>
+								<option value="1">满折</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+						<div class="col-md-7 col-lg-7 text-right nopad" style="margin-right: -50px;">
+							<p class="end-aline col-md-11 col-lg-11" style="margin-left: -40px;" >是否使用优惠券</p><span class="sign-left">:</span>
+						</div>
+						<div class="col-md-7 col-lg-7">
+							<select class="form-control" v-model="isUseCoupon">
+								<option value="">--未选择--</option>
+								<option value="1">是</option>
+								<option value="2">否</option>
+							</select>
+						</div>
+					</div>
 
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="margin-top: 20px;">
                         <div class="col-md-3 col-lg-3 text-right nopad SSwid20" style="width: 20%;">
                             <p class="end-aline col-md-11 col-lg-11">审核日期</p><span class="sign-left">:</span>
                         </div>
@@ -81,6 +105,9 @@
                 <el-table-column prop="price" label="购买单价（￥/次）" width="100" align="center"></el-table-column>
                 <el-table-column prop="totalCount" label="购买课时（次）" width="100" align="center"></el-table-column>
                 <el-table-column prop="discount" label="购买折扣（%）" width="100" align="center"></el-table-column>
+				<el-table-column prop="couponType" label="优惠券类型" :formatter="retype" width="100" align="center"></el-table-column>
+				<el-table-column prop="couponName" label="优惠券名字" width="100" align="center"></el-table-column>
+				<el-table-column prop="couponAmount" label="优惠金额(元)" width="100" align="center"></el-table-column>
                 <el-table-column prop="sourceDate" :formatter="dateFormat" label="购买时间" width="100"
                                  align="center"></el-table-column>
 <!--                <el-table-column prop="startDate" :formatter="dateFormat" label="开始时间" width="100"-->
@@ -148,6 +175,8 @@
         },
         data() {
             return {
+				isUseCoupon:'',
+				couponType:'',
                 fixedHeader: false,
                 storeId: this.storeId(),
                 accountType: this.accountType(),
@@ -275,6 +304,8 @@
                         auditName: this.auditName,
                         page: this.current,
                         pageSize: this.pageSize,
+						couponType:this.couponType,
+						isUseCoupon:this.isUseCoupon,
                         auditEndTime: this.auditEndTime,
                         auditBegTime: this.auditBegTime,
                     },

@@ -13,17 +13,15 @@
 	overflow: auto;
 }
 
-.you .man1 .gou {
+.you .man1 .gou1 {
 	position: absolute;
-	right: 15px;
-	top: 10px;
+	width: 300px;
 	display: none;
 }
 
-.you .man2 .gou {
+.you .man2 .gou1 {
 	position: absolute;
-	right: 15px;
-	top: 10px;
+	width: 300px;
 	display: none;
 }
 
@@ -121,32 +119,59 @@
 	float: left;
 	margin-bottom: 20px;
 	overflow: auto;
-	height: 84px;
+	height: 100px;
 	background: url(../../../static/img/youhui_jin.png) no-repeat left center;
 	background-size: auto;
 	margin-right: 6px;
 }
+
 
 @font-face {
 	font-family: 'fontnameRegulars';
 	src: url(../../../static/img/rui.ttf);
 }
 
+.wuxian{
+	display: none;
+}
 .you ul li .jia {
 	font-family: "fontnameRegulars";
-	font-size: 28px;
+	font-size: 25px;
 	position: absolute;
-	left: 25px;
+	left: 10px;
 	color: #97753d;
 	top: 28px;
+}
+.you ul li .jia span{
+	color: #97753d;
+	font-family: "思源黑体";
+	font-size: 14px;
 }
 
 .you ul li .manzu {
 	overflow: auto;
 	position: absolute;
 	right: 50px;
-	top: 14px;
+	top: 32px;
+	font-weight: bold;
 	color: #97753d;
+	font-size: 16px;
+}
+
+.you ul li .titleSY {
+	overflow: auto;
+	position: absolute;
+	left: 150px;
+	top: 10px;
+	color: #97753d;
+	font-size: 16px;
+}
+.you ol li .titleSY {
+	overflow: auto;
+	position: absolute;
+	right: 50px;
+	top: 10px;
+	color: #f1c49b;
 	font-size: 16px;
 }
 
@@ -155,8 +180,15 @@
 	position: absolute;
 	right: 15px;
 	color: #97753d;
-	top: 35px;
+	top: 53px;
 	font-size: 14px;
+}
+.you ul li .bianhaoasd {
+	font-size: 14px;
+	position: absolute;
+	left: 14px;
+	color: #97753d;
+	top: 63px;
 }
 
 .you ul li .niucha {
@@ -164,7 +196,7 @@
 	position: absolute;
 	left: 120px;
 	color: #97753d;
-	top: 55px;
+	top: 70px;
 	font-size: 14px;
 }
 
@@ -182,9 +214,17 @@
 	font-family: "fontnameRegulars";
 	font-size: 28px;
 	position: absolute;
-	left: 18px;
+	left: 28px;
 	color: #f1c49b;
 	top: 20px;
+}
+
+.you ol li .bianhaoasd {
+	font-size: 14px;
+	position: absolute;
+	left: 14px;
+	color: #f1c49b;
+	top: 63px;
 }
 
 .you ol li .jia span {
@@ -197,7 +237,8 @@
 	overflow: auto;
 	position: absolute;
 	right: 50px;
-	top: 14px;
+	font-weight: bold;
+	top: 32px;
 	color: #f1c49b;
 	font-size: 16px;
 }
@@ -207,7 +248,7 @@
 	position: absolute;
 	right: 15px;
 	color: #f1c49b;
-	top: 35px;
+	top: 53px;
 	font-size: 14px;
 }
 
@@ -216,7 +257,7 @@
 	position: absolute;
 	left: 120px;
 	color: #f1c49b;
-	top: 55px;
+	top: 72px;
 	font-size: 14px;
 }
 
@@ -249,7 +290,7 @@
 	float: left;
 	position: relative;
 	overflow: auto;
-	height: 84px;
+	height: 100px;
 	background: url(../../../static/img/youhui_hong.png) no-repeat left center;
 	background-size: auto;
 	margin-right: 6px;

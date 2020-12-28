@@ -80,12 +80,12 @@
 							<div class="xianzhi"><input class="xian" :disabled="true" type="radio" name="radioGroup3" value="1" v-model="isVaild" /><label class="xian1">永久有效</label></div>
 							<div class="xianzhi1"><input class="xian" :disabled="true" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label class="xian1">日期范围：</label></div>
 							<div class="xianzhi3">
-								<el-date-picker  disabled v-model="begDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="选择日期时间">
+								<el-date-picker  disabled v-model="begDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="开始时间">
 								</el-date-picker>
 							</div>
 							<div class="xianhzi15">~</div>
 							<div class="xianzhi3">
-								<el-date-picker disabled v-model="endDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="选择日期时间">
+								<el-date-picker disabled v-model="endDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="结束时间">
 								</el-date-picker>
 							</div>
 							<!-- <div class="xianzhi4"><input type="checkbox"><label class="xian1">自领取之日</label></div>
@@ -113,7 +113,7 @@
 							<div class="xianzhi3_1">
 								<p style="cursor: pointer;" v-on:click="xus1" v-has="'SAMY:MP:Coupon:select-type-call'">查看分类</p>
 							</div>
-							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" :disabled="true" name="radioGroup10" value="3"  @click="radioClick($event,item)"/><label
+							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" v-model="categoryType" :disabled="true" name="radioGroup5" value="3"  @click="radioClick($event,item)"/><label
 								 class="xian1">指定产品</label></div>
 							<div class="xianzhi3_1">
 								<p style="cursor: pointer;" v-on:click="ots1" v-has="'SAMY:MP:Coupon:select-chan-call'">查看产品</p>

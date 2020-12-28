@@ -131,7 +131,6 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="tab-pane fade in active martop">
 				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 					<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
@@ -143,14 +142,17 @@
 							<div class="manjian1">满减</div>
 						</div>
 						<ul>
-							<li @click="dianji()">
-								<div class="jia">1000</div>
-								<div class="manzu">满<span>10000</span>元可用</div>
-								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
+							<li @click="dianji()" v-for="item in unfinishedProLists">
+								<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
+								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+								<div class="titleSY">{{item.couponName}}</div>
+								<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
+								<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
 								<div class="niucha">
-									<p class="xian"></p><span>2020-12-12 00:01:01</span>
+									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
 								</div>
-								<div class="gou"><img src="../../../../static/img/youhui_gou.png" alt=""></div>
+								<div class="wuxian">永久有效</div>
+								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
 							</li>
 						</ul>
 					</div>
@@ -160,31 +162,33 @@
 							<div class="manjian1">满折</div>
 						</div>
 						<ol>
-							<li @click="dianji1()">
-								<div class="jia">7.7<span>折</span></div>
-								<div class="manzu">满<span>10000</span>元可用</div>
-								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
+							<li @click="dianji1()" v-for="item in unfinishedProLists">
+								<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
+								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+								<div class="titleSY">{{item.couponName}}</div>
+								<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
+								<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
 								<div class="niucha">
-									<p class="xian"></p><span>2020-12-12 00:01:01</span>
+									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
 								</div>
-								<div class="gou"><img src="../../../../static/img/youhui_gou.png" alt=""></div>
+								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
 							</li>
 						</ol>
 					</div>
 				</div>
-			</div>
-			<div class="tab-pane fade in active martop">
-				<div class="col-md-7">
-					<ul class="btn-numbox">
-						<li class="shiyong2"><span class="number">使用数量/张：</span></li>
-						<li>
-							<ul class="count">
-								<li><span class="num-jian" @click="num_jian()">-</span></li>
-								<li><input type="text" class="input-num" id="input-num" value="1" /></li>
-								<li><span class="num-jia" @click="num_jia()">+</span></li>
-							</ul>
-						</li>　
-					</ul>
+				<div class="tab-pane fade in active martop">
+					<div class="col-md-7">
+						<ul class="btn-numbox">
+							<li class="shiyong2"><span class="number">使用数量/张：</span></li>
+							<li>
+								<ul class="count">
+									<li><span class="num-jian" @click="num_jian()">-</span></li>
+									<li><input type="text" class="input-num" id="input-num" value="1" /></li>
+									<li><span class="num-jia" @click="num_jia()">+</span></li>
+								</ul>
+							</li>　
+						</ul>
+					</div>
 				</div>
 			</div>
 			<div class="tab-pane fade in active martop" v-show="isShow==true">
@@ -391,11 +395,13 @@
 					select: '',
 					btn: false,
 				},
+				productId: '',
 				dui: true,
 				dis: true,
 				shs: true,
 				title: '',
 				xuanze1: '',
+				userId: '',
 				isShow: true,
 				consumeReceivable: '',
 				isSelect: false,
@@ -403,7 +409,7 @@
 				appShow: false,
 				isArrearsShow: false,
 				unfinishedProList: [],
-				unfinishedProSList: [],
+				unfinishedProLists: [],
 				auditState: '',
 				clickItemObj: {
 					itemId: 0,
@@ -417,7 +423,11 @@
 			};
 		},
 		methods: {
-			
+			resetDate(row, column, cellValue, index) {
+				if (cellValue !== '' && cellValue !== null && cellValue !== undefined) {
+					return cellValue.substring(0, 10)
+				}
+			},
 			//优惠券使用张数
 			num_jia() {
 				var input_num = document.getElementById("input-num");
@@ -433,10 +443,13 @@
 			},
 			// Initialization consume’s content
 			initData(title, param) {
+				this.productId = param.proId;
+				this.userId = param.visId;
 				$('#rechargeContent').modal({
 					backdrop: 'static',
 					keyboard: false
 				});
+
 				this.clickItemObj = {
 					itemId: 0,
 					count: 0
@@ -549,6 +562,43 @@
 					this.consume.proId = ""
 					this.projectObj = {}
 				} else {
+					var url = this.url + '/couponController/selectCoupon'
+					this.$ajax({
+						method: 'POST',
+						url: url,
+						headers: {
+							'Content-Type': 'x-www-form-urlencoded ',
+							'Access-Token': this.accessToken
+						},
+						// data:{
+						// 	productId:'1',
+						// 	userId:'1'
+						// },
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						console.log(res)
+						if (res.retCode == '0000') {
+							this.unfinishedProLists = res.retData
+							for (var i = 0; i < this.unfinishedProLists.length; i++) {
+								console.log(this.unfinishedProLists[i].isLimit == 2)
+								if (this.unfinishedProLists[i].isLimit == 2) {
+									$(".wuxian").css('display','block');
+									$(".you ul li .youxiao").css('display','none');
+									$(".you ul li .niucha").css('display','none');
+								} else {
+									$(".wuxian").hide();
+									$(".you ul li .youxiao").show();
+									$(".you ul li .niucha").show();
+								}
+							}
+
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('请求失败处理')
+					});
 					this.consume.proId = param.proId
 					this.consume.price = param.price //折前单价
 					//this.consume.disPrice = param.price * param.discount / 100 //折后单价
@@ -854,18 +904,18 @@
 			//选择满减优惠券
 			dianji() {
 				if (this.dui) {
-					$(".you .man1 .gou").show();
+					$(".you .man1 .gou1").show();
 				} else {
-					$(".you .man1 .gou").hide();
+					$(".you .man1 .gou1").hide();
 				}
 				this.dui = !this.dui
 			},
 			//选择满折优惠券
 			dianji1() {
 				if (this.dui) {
-					$(".you .man2 .gou").show();
+					$(".you .man2 .gou1").show();
 				} else {
-					$(".you .man2 .gou").hide();
+					$(".you .man2 .gou1").hide();
 				}
 				this.dui = !this.dui
 			},

@@ -316,14 +316,14 @@
 					balance: '',
 					counselorEmpId: '',
 				},
-				
+
 				consume: {
                     proStyle: '',
 					memNum: '', //会员名
 					memName: '', //手机
 					phone: '', //预约号
 					appNum: '',
-					
+
 					receivable: 0, //应交(折前)
 					preFoldTotalPrice: '', //折前总价
 					realCross: '', //实缴（折后）
@@ -544,7 +544,9 @@
 				//发生转卡，进余额抵扣
 				if (this.clickItemObj.count % 2 != 0) {
 					this.consume.piId = this.clickItemObj.itemId
-				}
+				} else {
+                    this.consume.piId = ''
+                }
 
 				var url = this.url + '/purchasedItemsAuditBean/supplementData'
 				this.$ajax({
@@ -559,6 +561,7 @@
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
+                    debugger
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
                         this.$emit('closeCurrentPage','succ')

@@ -340,6 +340,7 @@
 		},
 		data() {
 			return {
+				unfinishedProLists:[],
                 oRadioGroup:'',
                 realCrossCount: '',
                 destroy: true,

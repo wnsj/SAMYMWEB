@@ -197,13 +197,7 @@
 							if (stringResult.includes(this.tableData[i].prtId + '')) {
 								 this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
 								}
-						 
 						}
-						// for (var i = 0; i < this.tableData.length; i++) {
-						// 	if (stringResult.includes(this.tableData[i].prtId + '')) {
-						// 		this.showSelect == true;
-						// 	}
-						// }
 					} else {
 						alert(res.retMsg)
 					}

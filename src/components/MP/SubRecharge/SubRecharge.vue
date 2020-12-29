@@ -131,38 +131,39 @@
 					</div>
 				</div>
 			</div>
-			<div class="tab-pane fade in active martop">
-				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
-					<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
-				</div>
-				<div class="col-md-7 you">
-					<div class="man1">
-						<div class="man">
-							<div class="manjian"></div>
-							<div class="manjian1">满减</div>
-						</div>
-						<ul>
-							<li @click="dianji()" v-for="item in unfinishedProLists">
-								<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
-								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
-								<div class="titleSY">{{item.couponName}}</div>
-								<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
-								<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
-								<div class="niucha">
-									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
-								</div>
-								<div class="wuxian">永久有效</div>
-								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
-							</li>
-						</ul>
+			<div v-show="youhui">
+				<div class="tab-pane fade in active martop">
+					<div class="col-md-12 form-group clearfix text-left jh-mt-5">
+						<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
 					</div>
-					<div class="man2">
-						<div class="man">
-							<div class="manjian"></div>
-							<div class="manjian1">满折</div>
+					<div class="col-md-7 you">
+						<div class="man1">
+							<div class="man">
+								<div class="manjian"></div>
+								<div class="manjian1">满减</div>
+							</div>
+							<ul>
+								<li @click="dianji()" v-for="item in unfinishedProLists">
+									<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
+									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+									<div class="titleSY">{{item.couponName}}</div>
+									<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
+									<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+									<div class="niucha">
+										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+									</div>
+									<div class="wuxian">永久有效</div>
+									<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+								</li>
+							</ul>
 						</div>
-						<ol>
-							<li @click="dianji1()" v-for="item in unfinishedProLists">
+						<div class="man2">
+							<div class="man">
+								<div class="manjian"></div>
+								<div class="manjian1">满折</div>
+							</div>
+							<ol>
+								<!-- <li @click="dianji1()" v-for="item in unfinishedProLists">
 								<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
 								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 								<div class="titleSY">{{item.couponName}}</div>
@@ -172,19 +173,20 @@
 									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
 								</div>
 								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
-							</li>
-						</ol>
+							</li> -->
+							</ol>
+						</div>
 					</div>
 				</div>
 				<div class="tab-pane fade in active martop">
 					<div class="col-md-7">
-						<ul class="btn-numbox">
-							<li class="shiyong2"><span class="number">使用数量/张：</span></li>
+						<ul class="btn-numbox1">
+							<li class="shiyong2"><span class="number1">使用数量/张：</span></li>
 							<li>
-								<ul class="count">
-									<li><span class="num-jian" @click="num_jian()">-</span></li>
-									<li><input type="text" class="input-num" id="input-num" value="1" /></li>
-									<li><span class="num-jia" @click="num_jia()">+</span></li>
+								<ul class="count1">
+									<li><span class="num-jian1" @click="num_jian1()">-</span></li>
+									<li><input type="text" class="input-num1" id="input-num1" value="2" v-model="titttl" /></li>
+									<li><span class="num-jia1" @click="num_jia1()">+</span></li>
 								</ul>
 							</li>　
 						</ul>
@@ -373,6 +375,7 @@
 					giveMoney: 0, //赠送金额
 					counselor: '', //咨询师id
 					empId: '', //咨询师助理id
+					remark: '',
 					state: 0,
 					/**状态 * 0：充值 * 1：完结 * 2：退费 */
 					storeId: '', //店铺
@@ -395,13 +398,17 @@
 					select: '',
 					btn: false,
 				},
+				// titll: '',
 				productId: '',
+				// couponId: '',
 				dui: true,
 				dis: true,
+				youhui: false,
 				shs: true,
 				title: '',
 				xuanze1: '',
 				userId: '',
+				titttl: '',
 				isShow: true,
 				consumeReceivable: '',
 				isSelect: false,
@@ -423,27 +430,12 @@
 			};
 		},
 		methods: {
-			resetDate(row, column, cellValue, index) {
-				if (cellValue !== '' && cellValue !== null && cellValue !== undefined) {
-					return cellValue.substring(0, 10)
-				}
-			},
-			//优惠券使用张数
-			num_jia() {
-				var input_num = document.getElementById("input-num");
-				input_num.value = parseInt(input_num.value) + 1;
-			},
-			num_jian() {
-				var input_num = document.getElementById("input-num");
-				if (input_num.value <= 0) {
-					input_num.value = 0;
-				} else {
-					input_num.value = parseInt(input_num.value) - 1;
-				}
-			},
+
 			// Initialization consume’s content
 			initData(title, param) {
-				this.productId = param.proId;
+				console.log(param)
+				this.productId = param.empId;
+				this.couponId = param.couId;
 				this.userId = param.visId;
 				$('#rechargeContent').modal({
 					backdrop: 'static',
@@ -516,6 +508,24 @@
 				// this.youhui(param.couId)
 				this.checkMemCash(param.visId)
 			},
+			//优惠券使用张数
+			num_jia1() {
+				var input_num1 = document.getElementById("input-num1");
+				input_num1.value = parseInt(input_num1.value) + 1;
+			},
+			num_jian1() {
+				var input_num1 = document.getElementById("input-num1");
+				if (input_num1.value <= 0) {
+					input_num1.value = 0;
+				} else {
+					input_num1.value = parseInt(input_num1.value) - 1;
+				}
+			},
+			resetDate(row, column, cellValue, index) {
+				if (cellValue !== '' && cellValue !== null && cellValue !== undefined) {
+					return cellValue.substring(0, 10)
+				}
+			},
 			//咨询师
 			counselorEmpChange: function(param) {
 				if (this.isBlank(param)) {
@@ -563,34 +573,27 @@
 					this.projectObj = {}
 				} else {
 					var url = this.url + '/couponController/selectCoupon'
+					var formData = new FormData();
+					formData.append('productId', '1');
+					formData.append('userId', this.userId);
 					this.$ajax({
 						method: 'POST',
 						url: url,
 						headers: {
-							'Content-Type': 'x-www-form-urlencoded ',
+							'Content-Type': 'x-www-form-urlencoded',
 							'Access-Token': this.accessToken
 						},
-						// data:{
-						// 	productId:'1',
-						// 	userId:'1'
-						// },
+						data: formData,
 						dataType: 'json',
 					}).then((response) => {
 						var res = response.data
 						console.log(res)
 						if (res.retCode == '0000') {
 							this.unfinishedProLists = res.retData
-							for (var i = 0; i < this.unfinishedProLists.length; i++) {
-								console.log(this.unfinishedProLists[i].isLimit == 2)
-								if (this.unfinishedProLists[i].isLimit == 2) {
-									$(".wuxian").css('display','block');
-									$(".you ul li .youxiao").css('display','none');
-									$(".you ul li .niucha").css('display','none');
-								} else {
-									$(".wuxian").hide();
-									$(".you ul li .youxiao").show();
-									$(".you ul li .niucha").show();
-								}
+							if (this.unfinishedProLists) {
+								this.youhui = true
+							} else {
+								this.youhui = false
 							}
 
 						} else {
@@ -701,7 +704,7 @@
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.closeCurrentPage()
-
+						this.unfinishedProLists = []
 					} else {
 						alert(res.retMsg)
 					}
@@ -711,6 +714,7 @@
 			},
 			closeCurrentPage() {
 				this.$emit('closeCurrentPage')
+				this.unfinishedProLists = []
 			},
 			setCustom(param) {
 				this.consume.memNum = param.memNum
@@ -905,8 +909,48 @@
 			dianji() {
 				if (this.dui) {
 					$(".you .man1 .gou1").show();
+					var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+					this.$ajax({
+						method: 'GET',
+						url: url,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+							'Access-Token': this.accessToken
+						},
+						// param: formData,
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						if (res.retCode == '0000') {
+							this.titttl = res.retData
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('查询请求失败')
+					});
 				} else {
 					$(".you .man1 .gou1").hide();
+					var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+					this.$ajax({
+						method: 'GET',
+						url: url,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+							'Access-Token': this.accessToken
+						},
+						// param: formData,
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						if (res.retCode == '0000') {
+							this.titttl = '1'
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('查询请求失败')
+					});
 				}
 				this.dui = !this.dui
 			},

@@ -234,7 +234,6 @@
 							if (stringResult2.includes(this.tableData[i].proId + '')) {
 								this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
 							}
-
 						}
 					} else {
 						alert(res.retMsg)

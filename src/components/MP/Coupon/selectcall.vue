@@ -208,11 +208,9 @@
 						this.total = res.retData.total; //数据的数量
 						this.tableData = res.retData.records;
 						for (let i = 0; i < this.tableData.length; i++) {
-							console.log(stringResult1.includes(this.tableData[i].visId + ''))
 							if (stringResult1.includes(this.tableData[i].visId + '')) {
 								 this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
 								}
-						 
 						}
 					} else {
 						alert(res.retMsg)

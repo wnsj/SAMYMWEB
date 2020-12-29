@@ -10,7 +10,7 @@
 					<div class="col-md-5 col-lg-5 text-right nopad">
 						<p class="end-aline col-md-11 col-lg-11" >门店</p><span class="sign-left">:</span>
 					</div>
-					<div class="col-md-7 col-lg-7">
+					<div class="col-md-7 col-lg-7" style="padding-right: 0;">
 						<store ref='store' @storeChange='storeChange'></store>
 					</div>
 				</div>
@@ -18,13 +18,13 @@
 					<div class="col-md-5 col-lg-5 text-right nopad">
 						<p class="end-aline col-md-11 col-lg-11" >姓名</p><span class="sign-left">:</span>
 					</div>
-					<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="memName"></div>
+					<div class="col-md-7 col-lg-7" style="padding-right: 0;"><input class="form-control" type="text" value="" v-model="memName"></div>
 				</div>
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					<div class="col-md-5 col-lg-5 text-right nopad">
-						<p class="end-aline col-md-11 col-lg-11" >访问类型</p><span class="sign-left">:</span>
+						<p class="end-aline col-md-11 col-lg-11" style="padding-left: 0;padding-right: 0;">访问类型</p><span class="sign-left">:</span>
 					</div>
-					<div class="col-md-7 col-lg-7">
+					<div class="col-md-7 col-lg-7" style="padding-right: 0;">
 						<select class="form-control" v-model="visitType" @change="visitTypeChange">
 							<option value="">--未选择--</option>
 							<option value="1">初访</option>
@@ -34,10 +34,22 @@
 				</div>
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					<div class="col-md-5 col-lg-5 text-right nopad">
-						<p class="end-aline col-md-11 col-lg-11" >客户判定</p><span class="sign-left">:</span>
+						<p class="end-aline col-md-11 col-lg-11"  style="padding-left: 0;padding-right: 0;">客户判定</p><span class="sign-left">:</span>
 					</div>
-					<div class="col-md-7 col-lg-7">
+					<div class="col-md-7 col-lg-7" style="padding-right: 0;">
 						<judgeState ref="judgeStateRef" @objectChange="judgeStateChange"></judgeState>
+					</div>
+				</div>
+				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					<div class="col-md-5 col-lg-5 text-right nopad">
+						<p class="end-aline col-md-11 col-lg-11" style="padding-left: 0;padding-right: 0;">优惠券类型</p><span class="sign-left">:</span>
+					</div>
+					<div class="col-md-7 col-lg-7" style="padding-right: 0;">
+						<select class="form-control" v-model="couponType">
+							<option value="">--未选择--</option>
+							<option value="2">满减</option>
+							<option value="1">满折</option>
+						</select>
 					</div>
 				</div>
 			</div>
@@ -45,9 +57,9 @@
 			<div class="row newRow">
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					<div class="col-md-5 col-lg-5 text-right nopad">
-						<p class="end-aline col-md-11 col-lg-11" >续流状态</p><span class="sign-left">:</span>
+						<p class="end-aline col-md-11 col-lg-11"  style="padding-left: 0;padding-right: 0;">续流状态</p><span class="sign-left">:</span>
 					</div>
-					<div class="col-md-7 col-lg-7">
+					<div class="col-md-7 col-lg-7" style="padding-right: 0;">
 						<continueState ref="continueStateRef" @objectChange="continueStateChange"></continueState>
 					</div>
 				</div>
@@ -55,39 +67,51 @@
 					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
 						<p class="end-aline col-md-11 col-lg-11" >咨询师</p><span class="sign-left">:</span>
 					</div>
-					<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+					<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" style="padding-right: 0;">
 						<cou ref="couEmp" @employeeChange="couChange"></cou>
 					</div>
 				</div>
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
-						<p class="end-aline col-md-11 col-lg-11" >咨询顾问</p><span class="sign-left">:</span>
+						<p class="end-aline col-md-11 col-lg-11"  style="padding-left: 0;padding-right: 0;">咨询顾问</p><span class="sign-left">:</span>
 					</div>
-					<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+					<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" style="padding-right: 0;">
 						<con ref="conEmp" @employeeChange="conChange"></con>
 					</div>
 				</div>
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					<div class="col-md-5 col-lg-5 text-right nopad">
-						<p class="end-aline col-md-11 col-lg-11" >课程名称</p><span class="sign-left">:</span>
+						<p class="end-aline col-md-11 col-lg-11"  style="padding-left: 0;padding-right: 0;">课程名称</p><span class="sign-left">:</span>
 					</div>
-					<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="proName"></div>
+					<div class="col-md-7 col-lg-7" style="padding-right: 0;"><input class="form-control" type="text" value="" v-model="proName"></div>
+				</div>
+				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					<div class="col-md-5 col-lg-5 text-right nopad">
+						<p class="end-aline col-md-11 col-lg-11" style="padding-left: 0;padding-right: 0;">使用优惠券</p><span class="sign-left">:</span>
+					</div>
+					<div class="col-md-7 col-lg-7" style="padding-right: 0;">
+						<select class="form-control" v-model="isUseCoupon">
+							<option value="">--未选择--</option>
+							<option value="1">是</option>
+							<option value="2">否</option>
+						</select>
+					</div>
 				</div>
 			</div>
 			<div class="row newRow">
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 nopad" >
-						<p class="end-aline col-md-11 col-lg-11" >交费方式</p><span class="sign-left">:</span>
+						<p class="end-aline col-md-11 col-lg-11"  style="padding-left: 0;padding-right: 0;">交费方式</p><span class="sign-left">:</span>
 					</div>
-					<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+					<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" style="padding-right: 0;">
                         <PayStyle ref="payStyleRef" @payStyleChange="psStyle"></PayStyle>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 					<div class="col-md-3 col-lg-3 text-right nopad SSwid20">
-						<p class="end-aline col-md-11 col-lg-11" >消费时间</p><span class="sign-left">:</span>
+						<p class="end-aline col-md-11 col-lg-11" style="margin-left: -25px;">消费时间</p><span class="sign-left">:</span>
 					</div>
-					<div class="col-md-4 col-lg-4 SSwid27">
+					<div class="col-md-4 col-lg-4 SSwid27" style="margin-left: -30px;">
 						<dPicker class="wd100" v-model="begCreateDate"></dPicker>
 					</div>
 					<div class="pull-left end-aline nopad">
@@ -120,6 +144,9 @@
 									<th class="text-center">课时(小时)</th>
 									<th class="text-center">折扣(%)</th>
 									<th class="text-center">消费金额</th>
+									<th class="text-center">优惠券类型</th>
+									<th class="text-center">优惠券名字</th>
+									<th class="text-center">优惠金额(元)</th>
 									<th class="text-center">咨询师</th>
 									<th class="text-center">咨询顾问</th>
 									<th class="text-center">访问类型</th>
@@ -138,6 +165,9 @@
 									<td>{{item2.consumCount}}</td>
 									<td>{{item2.discount}}</td>
 									<td>{{item2.realCross}}</td>
+									<td>{{item2.couponType}}</td>
+									<td>{{item2.couponName}}</td>
+									<td>{{item2.couponAmount}}</td>
 									<td>{{item2.counselorName}}</td>
 									<td>{{item2.empName}}</td>
 									<td>{{item2.visitType== '1' ? '初访' : '复访'}}</td>
@@ -195,6 +225,9 @@
 		},
 		data() {
 			return {
+				
+				couponType:'',
+				isUseCoupon:'',
                 empId:'',
                 conId: '',
 				storeId: this.storeId(),
@@ -299,8 +332,8 @@
 						continState:this.continueState,
 						actualBegDate: this.begCreateDate,
 						actualEndDate: this.endCreateDate,
-
-
+						isUseCoupon:this.isUseCoupon,
+						couponType:this.couponType,
 						page: page.toString(),
 						pageSize: this.pageSize,
 
@@ -395,6 +428,9 @@
 
 
 <style scoped="scoped">
+	.newRow .col-xs-3,.newRow .col-sm-3,.newRow .col-md-3,.newRow .col-lg-3{
+		width: 20%!important;
+	}
 	/*分页需要的样式*/
 	.page {
 		width: 100%;

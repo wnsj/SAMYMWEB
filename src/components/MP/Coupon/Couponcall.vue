@@ -111,7 +111,7 @@
 							<div class="xianzhi"><input class="xian" type="radio" :disabled="true" name="radioGroup5" v-model="categoryType" value="1" /><label class="xian1">全品类</label></div>
 							<div class="xianzhi1"><input class="xian" type="radio" :disabled="true" name="radioGroup5" v-model="categoryType" value="2"/><label class="xian1">指定分类</label></div>
 							<div class="xianzhi3_1">
-								<p style="cursor: pointer;" v-on:click="xus1" v-has="'SAMY:MP:Coupon:select-type-call'">查看分类</p>
+								<p style="cursor: pointer;" v-on:click="xus1()" v-has="'SAMY:MP:Coupon:select-type-call'">查看分类</p>
 							</div>
 							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" v-model="categoryType" :disabled="true" name="radioGroup5" value="3"  @click="radioClick($event,item)"/><label
 								 class="xian1">指定产品</label></div>
@@ -182,6 +182,9 @@
 					itemId: 0,
 					count: 0
 				},
+				userList: [],
+				projectList: [],
+				categoryList: [],
 				title: '',
 				isShow: true,
 				consumeReceivable: '',
@@ -196,9 +199,6 @@
 			};
 		},
 		methods: {
-			man(){
-				
-			},
 			//点击返回按钮跳转
 			goOff() {
 				this.$router.go(-1);
@@ -215,7 +215,7 @@
 					path: '../../MP/Coupon/select-type-call'
 				})
 			},
-			//点击选择分类按钮跳转
+			//点击选择产品按钮跳转
 			ots1() {
 				this.$router.push({
 					path: '../../MP/Coupon/select-chan-call'

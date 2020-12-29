@@ -43,7 +43,7 @@
 							</thead>
 							<tbody>
 								<tr v-for="item in unfinishedProList">
-									<td><input type="radio" :style="{'input[name=radioMan]':dis? 'false':'true'}" disabled="disabled" name="radioGroup" @click="radioClick($event,item)" /></td>
+									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -55,11 +55,6 @@
 								</tr>
 							</tbody>
 						</table>
-						<el-tooltip class="item gantan" effect="dark" content="由于审核原因，当前产品无法操作" placement="bottom" :style="{'display':!shs ? 'block':'none'}">
-							<div class="gan">
-								<p>!</p>
-							</div>
-						</el-tooltip>
 					</div>
 				</div>
 				<div class="col-md-12 form-group clearfix text-left">
@@ -251,67 +246,69 @@
 				</div>
 			</div>
 
-			<div class="tab-pane fade in active martop" id="basic" v-show="isShow==true">
-				<div class="col-md-12 form-group clearfix text-left">
-					<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
-				</div>
-				<div class="col-md-7 you">
-					<div class="man1">
-						<div class="man">
-							<div class="manjian"></div>
-							<div class="manjian1">满减</div>
+			<div v-show="youhui">
+				<div class="tab-pane fade in active martop">
+					<div class="col-md-12 form-group clearfix text-left jh-mt-5">
+						<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
+					</div>
+					<div class="col-md-7 you">
+						<div class="man1">
+							<div class="man">
+								<div class="manjian"></div>
+								<div class="manjian1">满减</div>
+							</div>
+							<ul>
+								<li @click="dianji()" v-for="item in unfinishedProLists">
+									<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
+									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+									<div class="titleSY">{{item.couponName}}</div>
+									<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
+									<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+									<div class="niucha">
+										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+									</div>
+									<div class="wuxian">永久有效</div>
+									<div class="gou2"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+								</li>
+							</ul>
 						</div>
-						<ul>
-							<li @click="dianji()">
-								<div class="jia"><span>￥</span>1000</div>
-								<div class="bianhaoasd">编号：<span>10086</span></div>
-								<div class="title">风格风格发广告</div>
-								<div class="manzu">满<span>10000</span>元可用</div>
-								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
+						<div class="man2">
+							<div class="man">
+								<div class="manjian"></div>
+								<div class="manjian1">满折</div>
+							</div>
+							<ol>
+								<!-- <li @click="dianji1()" v-for="item in unfinishedProLists">
+								<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
+								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+								<div class="titleSY">{{item.couponName}}</div>
+								<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
+								<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
 								<div class="niucha">
-									<p class="xian"></p><span>2020-12-12 00:01:01</span>
+									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
 								</div>
-								<div class="gou2"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
-							</li>
+								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+							</li> -->
+							</ol>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade in active martop">
+					<div class="col-md-7">
+						<ul class="btn-numbox1">
+							<li class="shiyong2"><span class="number1">使用数量/张：</span></li>
+							<li>
+								<ul class="count1">
+									<li><span class="num-jian1" @click="num_jian()">-</span></li>
+									<li><input type="text" class="input-num1" id="input-num" value="2" v-model="titttl" /></li>
+									<li><span class="num-jia1" @click="num_jia()">+</span></li>
+								</ul>
+							</li>　
 						</ul>
 					</div>
-					<div class="man2">
-						<div class="man">
-							<div class="manjian"></div>
-							<div class="manjian1">满折</div>
-						</div>
-						<ol>
-							<li @click="dianji1()">
-								<div class="jia">7.7<span>折</span></div>
-								<div class="bianhaoasd">编号：<span>10086</span></div>
-								<div class="title">风格风格发广告</div>
-								<div class="manzu">满<span>10000</span>元可用</div>
-								<div class="youxiao">有效期<span>2020-12-12 00:00:00</span></div>
-								<div class="niucha">
-									<p class="xian"></p><span>2020-12-12 00:01:01</span>
-								</div>
-								<div class="gou2"><img src="../../../../static/img/youhui_xuanze2.png" alt=""></div>
-							</li>
-						</ol>
-					</div>
 				</div>
 			</div>
-			
-			<div class="tab-pane fade in active martop">
-				<div class="col-md-7">
-					<ul class="btn-numbox">
-						<li class="shiyong2"><span class="number">使用数量/张：</span></li>
-						<li>
-							<ul class="count">
-								<li><span class="num-jian" @click="num_jian()">-</span></li>
-								<li><input type="text" class="input-num" id="input-num" value="1" /></li>
-								<li><span class="num-jia" @click="num_jia()">+</span></li>
-							</ul>
-						</li>　
-					</ul>
-				</div>
-			</div>
-			
+
 			<div class="tab-pane fade in active martop" id="basic" v-show="isShow==true">
 				<div class="col-md-12 form-group clearfix text-left">
 					<h4 id="myModalLabel" class="modal-title">合计：</h4>
@@ -339,7 +336,8 @@
 			<div class="col-md-12 form-group clearfix">
 				<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="closeCurrentPage()">返回
 				</button>
-				<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" :style="{disabled:succ?'':'disabled'}" data-toggle="modal" v-on:click="addFee()">确认
+				<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" :style="{disabled:succ?'':'disabled'}"
+				 data-toggle="modal" v-on:click="addFee()">确认
 				</button>
 			</div>
 		</div>
@@ -373,9 +371,11 @@
 		data() {
 			return {
 				counselorList: [],
-				dis:true,
-				shs:true,
-				dui:true,
+				unfinishedProLists:[],
+				dis: true,
+				shs: true,
+				youhui:false,
+				dui: true,
 				consume: {
 					proStyle: '',
 					memNum: '', //会员名
@@ -416,15 +416,18 @@
 				},
 				isShow: true,
 				consumeReceivable: '',
+				titttl:'',
 				isSelect: true,
 				sameProject: false,
 				appShow: false,
+				productId:'',
+				userId:'',
 				unfinishedProList: [],
 				clickItemObj: {
 					itemId: 0,
 					count: 0
 				},
-				succ:false,
+				succ: false,
 				//proList:[],//有剩余的产品信息
 				selectObj: {},
 				dateArr: [],
@@ -455,6 +458,8 @@
 			},
 			// Initialization consume’s content
 			initData(param) {
+				this.productId = param.empId;
+				this.userId = param.visId;
 				$('#customContent').modal({
 					backdrop: 'static',
 					keyboard: false
@@ -580,6 +585,36 @@
 				if (this.isBlank(param)) {
 					this.consume.proId = ""
 				} else {
+					var url = this.url + '/couponController/selectCoupon'
+					var formData = new FormData();
+					formData.append('productId', '1');
+					formData.append('userId', this.userId);
+					this.$ajax({
+						method: 'POST',
+						url: url,
+						headers: {
+							'Content-Type': 'x-www-form-urlencoded',
+							'Access-Token': this.accessToken
+						},
+						data: formData,
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						console.log(res)
+						if (res.retCode == '0000') {
+							this.unfinishedProLists = res.retData
+							if(this.unfinishedProLists){
+								this.youhui = true
+							}else{
+								this.youhui = false
+							}
+					
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('请求失败处理')
+					});
 					this.consume.proId = param.proId
 					this.consume.price = param.price
 					this.consume.totalCount = param.frequency
@@ -727,13 +762,14 @@
 					var res = response.data
 					//console.log(res)
 					if (res.retCode == '0000') {
-						this.succ =true;
+						this.succ = true;
 						alert(res.retMsg)
 						this.$router.push({
 							name: 'SettleSummary',
 						});
 						this.jumpLeft(2);
 						this.closeCurrentPage()
+						this.unfinishedProLists = []
 						//this.$emit('func2', 'SettleSummary')
 					} else {
 						alert(res.retMsg)
@@ -752,6 +788,7 @@
 				this.$refs.VisitStateRef.setObj('0')
 				this.$refs.ContinStateRef.setObj('0')
 				this.$emit('closeCurrentPage')
+				this.unfinishedProLists = []
 				//$("#addCustom").modal("hide")
 				//console.log('关闭添加患者界面')
 			},
@@ -1054,8 +1091,48 @@
 			dianji() {
 				if (this.dui) {
 					$(".you .man1 .gou2").show();
+					var url = this.url + '/couponController/couponCalculate?productId='+'1'+'&couponId='+1+'&userId='+this.userId
+					this.$ajax({
+						method: 'GET',
+						url: url,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+							'Access-Token': this.accessToken
+						},
+						// param: formData,
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						if (res.retCode == '0000') {
+							this.titttl = res.retData
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('查询请求失败')
+					});
 				} else {
 					$(".you .man1 .gou2").hide();
+					var url = this.url + '/couponController/couponCalculate?productId='+'1'+'&couponId='+1+'&userId='+this.userId
+					this.$ajax({
+						method: 'GET',
+						url: url,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+							'Access-Token': this.accessToken
+						},
+						// param: formData,
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						if (res.retCode == '0000') {
+							this.titttl ='1'
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('查询请求失败')
+					});
 				}
 				this.dui = !this.dui
 			},

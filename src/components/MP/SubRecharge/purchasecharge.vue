@@ -148,6 +148,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<div class="tab-pane fade in active martop" v-show="isShow==true">
 				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 					<h4 class="modal-title">合计：</h4>

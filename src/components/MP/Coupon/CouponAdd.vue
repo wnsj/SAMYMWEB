@@ -332,7 +332,7 @@
 					for (var i = 0; i < stringResult2.length; i++) {
 						formData.append('categoryList', stringResult2[i])
 					}
-				}else if(this.userType == '3'){
+				}else if(this.categoryType == '3'){
 					var projectList = localStorage.getItem('projectList');
 					var stringResult = projectList.split(',');
 					for (var i = 0; i < stringResult.length; i++) {

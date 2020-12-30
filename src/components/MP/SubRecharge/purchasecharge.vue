@@ -148,7 +148,66 @@
 					</div>
 				</div>
 			</div>
-			
+			<div class="tab-pane fade in active martop">
+				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
+					<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
+				</div>
+				<div class="col-md-7 you">
+					<div class="man1">
+						<div class="man">
+							<div class="manjian"></div>
+							<div class="manjian1">满减</div>
+						</div>
+						<ul>
+							<li @click="dianji()" v-for="item in unfinishedProLists">
+								<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
+								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+								<div class="titleSY">{{item.couponName}}</div>
+								<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
+								<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+								<div class="niucha">
+									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+								</div>
+								<div class="wuxian">永久有效</div>
+								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+							</li>
+						</ul>
+					</div>
+					<div class="man2">
+						<div class="man">
+							<div class="manjian"></div>
+							<div class="manjian1">满折</div>
+						</div>
+						<ol>
+							<li @click="dianji1()" v-for="item in unfinishedProLists">
+								<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
+								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+								<div class="titleSY">{{item.couponName}}</div>
+								<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
+								<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+								<div class="niucha">
+									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+								</div>
+								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade in active martop">
+				<div class="col-md-7">
+					<ul class="btn-numbox1">
+						<li class="shiyong2"><span class="number1">使用数量/张：</span></li>
+						<li>
+							<ul class="count1">
+								<li><span class="num-jian1" @click="num_jian()">-</span></li>
+								<li><input type="text" class="input-num1" id="input-num1" value="1" v-model="titttl" /></li>
+								<li><span class="num-jia1" @click="num_jia()">+</span></li>
+							</ul>
+						</li>　
+					</ul>
+				</div>
+			</div>
 			<div class="tab-pane fade in active martop" v-show="isShow==true">
 				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 					<h4 class="modal-title">合计：</h4>
@@ -317,6 +376,7 @@
 					balance: '',
 					counselorEmpId: '',
 				},
+				unfinishedProLists:[],
 
 				consume: {
                     proStyle: '',
@@ -366,6 +426,8 @@
 				},
 				title: '',
 				isShow: true,
+				productId: '',
+				userId: '',
 				consumeReceivable: '',
 				isSelect: false,
 				cashSelect: true,
@@ -380,9 +442,49 @@
 			};
 		},
 		methods: {
+			// //优惠券使用张数
+			num_jia() {
+				var input_num1 = document.getElementById("input-num1");
+				var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+				this.$ajax({
+					method: 'GET',
+					url: url,
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+						'Access-Token': this.accessToken
+					},
+					// param: formData,
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						this.titttl = res.retData;
+						if(input_num1.value == res.retData){
+							input_num1.value = parseInt(input_num1.value) + 0;
+						}else{
+							input_num1.value = parseInt(input_num1.value) + 1;
+						}
+					} else {
+						alert(res.retMsg)
+					}
+				}).catch((error) => {
+					console.log('查询请求失败')
+				});
+				
+			},
+			num_jian() {
+				var input_num1 = document.getElementById("input-num1");
+				if (input_num1.value <= 1) {
+					input_num1.value = 1;
+				} else {
+					input_num1.value = parseInt(input_num1.value) - 1;
+				}
+			},
 			// Initialization consume’s content
 			initAuditPur(param) {
 				this.purAuditId = param.piId;
+				this.productId = param.empId;
+				this.userId = param.visId;
 				$('#AuditPurContent').modal({
 					backdrop: 'static',
 					keyboard: false
@@ -568,6 +670,7 @@
                         this.$emit('closeCurrentPage','succ')
                         this.$store.commit('addCount',1)
 						this.closeCurrentPage()
+						
 					} else {
 						alert(res.retMsg)
 					}
@@ -669,6 +772,104 @@
 					//console.log('请求失败处理')
 				});
 			},
+			//选择满减优惠券
+			dianji() {
+				if (this.dui) {
+					$(".you .man1 .gou1").show();
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
+					this.$ajax({
+						method: 'GET',
+						url: url,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+							'Access-Token': this.accessToken
+						},
+						// param: formData,
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						if (res.retCode == '0000') {
+							this.titttl = res.retData;
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('查询请求失败')
+					});
+				} else {
+					$(".you .man1 .gou1").hide();
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
+					this.$ajax({
+						method: 'GET',
+						url: url,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+							'Access-Token': this.accessToken
+						},
+						// param: formData,
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						if (res.retCode == '0000') {
+							this.titttl = 1
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('查询请求失败')
+					});
+				}
+				this.dui = !this.dui
+			},
+			//选择满折优惠券
+			dianji1() {
+				if (this.dui) {
+					$(".you .man2 .gou1").show();
+					var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+					this.$ajax({
+						method: 'GET',
+						url: url,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+							'Access-Token': this.accessToken
+						},
+						// param: formData,
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						if (res.retCode == '0000') {
+							this.titttl = res.retData
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('查询请求失败')
+					});
+				} else {
+					$(".you .man2 .gou1").hide();
+					var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+					this.$ajax({
+						method: 'GET',
+						url: url,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+							'Access-Token': this.accessToken
+						},
+						// param: formData,
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						if (res.retCode == '0000') {
+							this.titttl = 1
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('查询请求失败')
+					});
+				}
+				this.dui = !this.dui
+			},
 			//Query member's based information of cash on the memNum
 			checkMemCash(param) {
 				if (this.isBlank(param)) {
@@ -751,6 +952,31 @@
 					console.log('会员查询请求失败')
 				});
 			},
+			add() {
+				var url = this.url + '/couponController/selectCoupon'
+				var formData = new FormData();
+				formData.append('productId', this.productId);
+				formData.append('userId', this.userId);
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: formData,
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						this.unfinishedProLists = res.retData
+					} else {
+						alert(res.retMsg)
+					}
+				}).catch((error) => {
+					console.log('会员查询请求失败')
+				});
+			},
 			//单选框选中处理
 			radioClick(e, item) {
 				if (this.clickItemObj.itemId == 0) {
@@ -782,6 +1008,9 @@
 			var H = window.innerHeight;
 			$(".modal-body").css({'maxHeight':H*.81})
 		},
+		created(){
+			this.add();
+		}
 	}
 </script>
 

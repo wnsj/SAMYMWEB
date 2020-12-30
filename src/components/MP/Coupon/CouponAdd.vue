@@ -121,7 +121,7 @@
 						<b>*</b>
 						<label class="col-md-1 control-label text-right nopad end-aline">选择产品</label><span class="sign-left">:</span>
 						<div class="col-md-8 shiyong shiyong1">
-							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup5"  @click="fentype()" v-model="categoryType" value="1" /><label
+							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="1" /><label
 								 class="xian1">全品类</label></div>
 							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="2" /><label class="xian1">指定分类</label></div>
 							<div class="xianzhi3_1">
@@ -170,7 +170,6 @@
 
 <script>
 	import dPicker from 'vue2-datepicker'
-
 	export default {
 		components: {
 			dPicker
@@ -235,37 +234,6 @@
 					$(".wuxian").show();
 				}
 			},
-			// usertypes() {
-			// 	console.log(this.userType)
-			// 	if (this.userType == '3') {
-			// 		$(".user").hide();
-			// 	}
-			// 	if (this.userType == '') {
-			// 		$(".user").hide();
-			// 	}
-			// 	if (this.userType == '2') {
-			// 		$(".user").show();
-			// 	}
-			// 	if (this.userType == '1') {
-			// 		$(".user").hide();
-			// 	}
-				
-			// },
-			// fentype() {
-			// 	console.log(this.categoryType)
-			// 	if (this.categoryType == '') {
-			// 		$(".typead").hide();
-			// 		$(".chan").hide();
-			// 	}
-			// 	if (this.categoryType == '2') {
-			// 		$(".chan").show();
-			// 		$(".typead").show();
-			// 	}
-			// 	if (this.categoryType == '1') {
-			// 		$(".typead").hide();
-			// 		$(".chan").hide();
-			// 	}
-			// },
 			//点击返回按钮跳转
 			goOff() {
 				this.$router.go(-1);
@@ -275,19 +243,69 @@
 				this.$router.push({
 					path: '../../MP/Coupon/selectAdd'
 				})
+				localStorage.setItem('projectList',this.projectList);
+				localStorage.setItem('userList',this.userList);
+				localStorage.setItem('categoryList',this.categoryList);
+				localStorage.setItem('couponName', this.couponName)
+				localStorage.setItem('operatorId', this.operatorId)
+				localStorage.setItem('couponType', this.couponType)
+				localStorage.setItem('startTime', this.begDate)
+				localStorage.setItem('endTime', this.endDate)
+				localStorage.setItem('state', this.state)
+				localStorage.setItem('fullCondition', this.fullCondition)
+				localStorage.setItem('recude', this.recude)
+				localStorage.setItem('isLimit', this.isLimit)
+				localStorage.setItem('isVaild', this.isVaild)
+				localStorage.setItem('userType', this.userType)
+				localStorage.setItem('categoryType', this.categoryType)
+				localStorage.setItem('limitGet', this.limitGet)
+				localStorage.setItem('allCount', this.allCount)
 			},
 			//点击选择分类按钮跳转
 			xus() {
 				this.$router.push({
 					path: '../../MP/Coupon/select-type'
 				})
+				localStorage.setItem('projectList',this.projectList);
+				localStorage.setItem('userList',this.userList);
+				localStorage.setItem('categoryList',this.categoryList);
+				localStorage.setItem('couponName', this.couponName)
+				localStorage.setItem('operatorId', this.operatorId)
+				localStorage.setItem('couponType', this.couponType)
+				localStorage.setItem('startTime', this.begDate)
+				localStorage.setItem('endTime', this.endDate)
+				localStorage.setItem('state', this.state)
+				localStorage.setItem('fullCondition', this.fullCondition)
+				localStorage.setItem('recude', this.recude)
+				localStorage.setItem('isLimit', this.isLimit)
+				localStorage.setItem('isVaild', this.isVaild)
+				localStorage.setItem('userType', this.userType)
+				localStorage.setItem('categoryType', this.categoryType)
+				localStorage.setItem('limitGet', this.limitGet)
+				localStorage.setItem('allCount', this.allCount)
 			},
 			//点击选择产品按钮跳转
 			ots() {
 				this.$router.push({
 					path: '../../MP/Coupon/select-chan',
 				})
-
+				localStorage.setItem('projectList',this.projectList);
+				localStorage.setItem('userList',this.userList);
+				localStorage.setItem('categoryList',this.categoryList);
+				localStorage.setItem('couponName', this.couponName)
+				localStorage.setItem('operatorId', this.operatorId)
+				localStorage.setItem('couponType', this.couponType)
+				localStorage.setItem('startTime', this.begDate)
+				localStorage.setItem('endTime', this.endDate)
+				localStorage.setItem('state', this.state)
+				localStorage.setItem('fullCondition', this.fullCondition)
+				localStorage.setItem('recude', this.recude)
+				localStorage.setItem('isLimit', this.isLimit)
+				localStorage.setItem('isVaild', this.isVaild)
+				localStorage.setItem('userType', this.userType)
+				localStorage.setItem('categoryType', this.categoryType)
+				localStorage.setItem('limitGet', this.limitGet)
+				localStorage.setItem('allCount', this.allCount)
 			},
 			//the event of addtional button
 			addFee() {
@@ -349,7 +367,76 @@
 			},
 
 		},
-
+		mounted(){
+			if(localStorage.getItem('couponName')){
+				this.couponName = localStorage.getItem('couponName');
+				localStorage.removeItem('couponName');
+			}
+			if(localStorage.getItem('operatorId')){
+				this.operatorId = localStorage.getItem('operatorId');
+				localStorage.removeItem('operatorId');
+			}
+			if(localStorage.getItem('couponType')){
+				this.couponType = localStorage.getItem('couponType');
+				localStorage.removeItem('couponType');
+			}
+			if(localStorage.getItem('startTime')){
+				this.startTime = localStorage.getItem('startTime');
+				localStorage.removeItem('startTime');
+			}
+			if(localStorage.getItem('endTime')){
+				this.endTime = localStorage.getItem('endTime');
+				localStorage.removeItem('endTime');
+			}
+			if(localStorage.getItem('state')){
+				this.state = localStorage.getItem('state');
+				localStorage.removeItem('state');
+			}
+			if(localStorage.getItem('fullCondition')){
+				this.fullCondition = localStorage.getItem('fullCondition');
+				localStorage.removeItem('fullCondition');
+			}
+			if(localStorage.getItem('recude')){
+				this.recude = localStorage.getItem('recude');
+				localStorage.removeItem('recude');
+			}
+			if(localStorage.getItem('isLimit')){
+				this.isLimit = localStorage.getItem('isLimit');
+				localStorage.removeItem('isLimit');
+			}
+			if(localStorage.getItem('isVaild')){
+				this.isVaild = localStorage.getItem('isVaild');
+				localStorage.removeItem('isVaild');
+			}
+			if(localStorage.getItem('userType')){
+				this.userType = localStorage.getItem('userType');
+				localStorage.removeItem('userType');
+			}
+			if(localStorage.getItem('categoryType')){
+				this.categoryType = localStorage.getItem('categoryType');
+				localStorage.removeItem('categoryType');
+			}
+			if(localStorage.getItem('limitGet')){
+				this.limitGet = localStorage.getItem('limitGet');
+				localStorage.removeItem('limitGet');
+			}
+			if(localStorage.getItem('allCount')){
+				this.allCount = localStorage.getItem('allCount');
+				localStorage.removeItem('allCount');
+			}
+			if(localStorage.getItem('projectList')){
+				this.projectList = localStorage.getItem('projectList');
+				localStorage.removeItem('projectList');
+			}
+			if(localStorage.getItem('categoryList')){
+				this.categoryList = localStorage.getItem('categoryList');
+				localStorage.removeItem('categoryList');
+			}
+			if(localStorage.getItem('userList')){
+				this.userList = localStorage.getItem('userList');
+				localStorage.removeItem('userList');
+			}
+		}
 	}
 </script>
 

@@ -8,6 +8,7 @@
 		<div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
 			<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 		</div>
+		<div>{{info}}</div>
 		<div class="" id="datatable">
 			<el-table :data="tableData" style="width: 100%" border :row-key="getRowKeys" ref="multipleTable" @selection-change="handleSelectionChange">
 				<el-table-column type="selection" width="100" align="center" :reserve-selection="true" :selectable='checkboxSelect' :class="showSelect?'false':'true'"></el-table-column>
@@ -18,8 +19,6 @@
 		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
 	</div>
 </template>
-
-
 <script>
 	import {
 		init
@@ -32,35 +31,10 @@
 		data() {
 			return {
 				showSelect: true,
-				fixedHeader: false,
-				storeId: this.storeId(),
-				accountType: this.accountType(),
 				tableData: [],
-				//分页需要的数据
-				total: 0, //数据的数量
-				pages: '', //总页数
-				current: 1, //当前页码
-				pageSize: 10, //一页显示的数量
-				auditName: '',
-				memName: '',
-				isMem: '',
-				visType: '',
-				auditState: '',
-				begCreateDate: '',
-				endCreateDate: '',
-				addClass: false,
-				empDisable: false,
-				selectDataFlag: false
+				addClass: false
 			};
 		},
-		watch: {
-			auditName: 'changeData',
-			auditState: 'changeData',
-			storeId: 'changeData',
-			begCreateDate: 'changeData',
-			endCreateDate: 'changeData'
-		},
-
 		methods: {
 			checkboxSelect(row, rowIndex) {
 				if (rowIndex == 0) {
@@ -86,47 +60,8 @@
 						break;
 				}
 			},
-			resetDate(row, column, cellValue, index) {
-				if (cellValue !== '' && cellValue !== null) {
-					return cellValue.substring(0, 10)
-				}
-			},
 			changeData(newVal, oldVal) {
 				this.selectDataFlag = true
-			},
-			chaChange(param) {
-				if (this.isBlank(param)) {
-					this.chaId = ""
-				} else {
-					this.chaId = param.chaId
-				}
-			},
-			employeeChange(param) {
-				if (this.isBlank(param)) {
-					this.empId = ""
-				} else {
-					this.empId = param.empId
-				}
-			},
-			resetDate(row, column, cellValue, index) {
-				if (cellValue !== '' && cellValue !== null) {
-					return cellValue.substring(0, 10)
-				}
-			},
-			resetVisit(row, column, cellValue, index) {
-				return cellValue == 1 ? "初访" : "复访"
-			},
-			resetArrears(row, column, cellValue, index) {
-				return cellValue == 1 ? "是" : "否"
-			},
-
-
-			storeChange: function(param) {
-				if (this.isBlank(param)) {
-					this.storeId = ""
-				} else {
-					this.storeId = param.storeId
-				}
 			},
 
 			dataOpen() {
@@ -141,30 +76,7 @@
 					this.addClass = false;
 				}, 400)
 			},
-			//feedback department information
-			positionChange: function(param) {
-				if (this.isBlank(param)) {
-					this.posId = ""
-				} else {
-					this.posId = param.posId
-				}
-			},
-
-			tabChange(item) {
-				this.getConsultStore()
-
-			},
-			editorAction(item) {
-				this.objectContent = item
-			},
-
-			//check the list of department
-
 			getAllAuditPage() {
-				if (this.selectDataFlag) {
-					this.current = 1
-				}
-
 				this.showSelect = false
 				var categoryList = localStorage.getItem('categoryList');
 				var stringResult = categoryList.split(',');
@@ -201,30 +113,14 @@
 					} else {
 						alert(res.retMsg)
 					}
-
 				}).catch((error) => {
 					console.log('请求失败处理')
 				});
-
 				this.selectDataFlag = false;
-
 			},
 			goOff() {
 				this.$router.go(-1);
 			},
-			// 翻页
-			handleCurrentChange(pageNum) {
-				this.current = pageNum
-				this.getAllAuditPage()
-			},
-			// 每页条数变化时触发
-			handleSizeChange(pageSize) {
-				this.current = 1
-				this.pageSize = pageSize
-				this.getAllAuditPage()
-			},
-
-
 			handleScroll(e) {
 				var self = this
 				var etop = e.target.scrollTop
@@ -258,7 +154,6 @@
 		}
 	}
 </script>
-
 <style scoped="scoped">
 	.wraper h2 {
 		font-size: 18px;

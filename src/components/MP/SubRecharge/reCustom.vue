@@ -266,6 +266,66 @@
 					</div>
 				</div>
 			</div>
+			<div class="tab-pane fade in active martop">
+				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
+					<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
+				</div>
+				<div class="col-md-7 you">
+					<div class="man1">
+						<div class="man">
+							<div class="manjian"></div>
+							<div class="manjian1">满减</div>
+						</div>
+						<ul>
+							<li @click="dianji()" v-for="item in unfinishedProLists">
+								<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
+								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+								<div class="titleSY">{{item.couponName}}</div>
+								<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
+								<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+								<div class="niucha">
+									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+								</div>
+								<div class="wuxian">永久有效</div>
+								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+							</li>
+						</ul>
+					</div>
+					<div class="man2">
+						<div class="man">
+							<div class="manjian"></div>
+							<div class="manjian1">满折</div>
+						</div>
+						<ol>
+							<!-- <li @click="dianji1()" v-for="item in unfinishedProLists">
+							<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
+							<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+							<div class="titleSY">{{item.couponName}}</div>
+							<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
+							<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+							<div class="niucha">
+								<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+							</div>
+							<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+						</li> -->
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade in active martop">
+				<div class="col-md-7">
+					<ul class="btn-numbox1">
+						<li class="shiyong2"><span class="number1">使用数量/张：</span></li>
+						<li>
+							<ul class="count1">
+								<li><span class="num-jian1" @click="num_jian1()">-</span></li>
+								<li><input type="text" class="input-num1" id="input-num1" value="2" v-model="titttl" /></li>
+								<li><span class="num-jia1" @click="num_jia1()">+</span></li>
+							</ul>
+						</li>　
+					</ul>
+				</div>
+			</div>
 			<div class="col-md-12 clearfix jh-ad-0" v-show="cash.balance>0">
 				<div class="col-md-6 clearfix jh-wd-33" v-show="cash.balance>0">
 					<label class="col-md-4 control-label text-right nopad end-aline" >

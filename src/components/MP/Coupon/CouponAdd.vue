@@ -106,11 +106,11 @@
 						<b>*</b>
 						<label class="col-md-1 control-label text-right nopad end-aline">使用用户</label><span class="sign-left">:</span>
 						<div class="col-md-8 shiyong shiyong1">
-							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="1" @click="usertypes()" /><label
+							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="1"  /><label
 								 class="xian1">全体用户</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="2" @click="usertypes()" /><label
+							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="2"  /><label
 								 class="xian1">新用户</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="3" @click="usertypes()" /><label
+							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="3" /><label
 								 class="xian1">指定用户</label></div>
 							<div class="xianzhi3_1">
 								<p style="cursor: pointer;"  v-on:click="seles()" v-has="'SAMY:MP:Coupon:selectAdd'">选择用户</p>
@@ -310,21 +310,34 @@
 			//the event of addtional button
 			addFee() {
 				var formData = new FormData();
-				var projectList = localStorage.getItem('projectList');
-				var userList = localStorage.getItem('userList');
-				var categoryList = localStorage.getItem('categoryList');
-				// console.log(projectList)
-				var stringResult = projectList.split(',');
-				var stringResult1 = userList.split(',');
-				var stringResult2 = categoryList.split(',');
-				for (var i = 0; i < stringResult.length; i++) {
-					formData.append('projectList', stringResult[i])
+				if(this.userType == '1'){
+					
 				}
-				for (var i = 0; i < stringResult1.length; i++) {
-					formData.append('userList', stringResult1[i])
+				else if(this.userType == '2'){
+					
+				}else if(this.userType == '3'){
+					var userList = localStorage.getItem('userList');
+					var stringResult1 = userList.split(',');
+					for (var i = 0; i < stringResult1.length; i++) {
+						formData.append('userList', stringResult1[i])
+					}
 				}
-				for (var i = 0; i < stringResult2.length; i++) {
-					formData.append('categoryList', stringResult2[i])
+				
+				if(this.categoryType == '1'){
+					
+				}
+				else if(this.categoryType == '2'){
+					var categoryList = localStorage.getItem('categoryList');
+					var stringResult2 = categoryList.split(',');
+					for (var i = 0; i < stringResult2.length; i++) {
+						formData.append('categoryList', stringResult2[i])
+					}
+				}else if(this.userType == '3'){
+					var projectList = localStorage.getItem('projectList');
+					var stringResult = projectList.split(',');
+					for (var i = 0; i < stringResult.length; i++) {
+						formData.append('projectList', stringResult[i])
+					}
 				}
 				var url = this.url + '/couponController/addCoupon'
 				formData.append('couponName', this.couponName)

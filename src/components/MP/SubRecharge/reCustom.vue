@@ -278,7 +278,7 @@
 						</div>
 						<ul>
 							<li @click="dianji()" v-for="item in unfinishedProLists">
-								<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
+								<div class="jia"><span>￥</span>{{item.reduce}}</div>
 								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 								<div class="titleSY">{{item.couponName}}</div>
 								<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
@@ -297,8 +297,8 @@
 							<div class="manjian1">满折</div>
 						</div>
 						<ol>
-							<!-- <li @click="dianji1()" v-for="item in unfinishedProLists">
-							<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
+							<li @click="dianji1()" v-for="item in unfinishedProLists">
+							<div class="jia"><span>￥</span>{{item.reduce}}</div>
 							<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 							<div class="titleSY">{{item.couponName}}</div>
 							<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
@@ -307,7 +307,7 @@
 								<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
 							</div>
 							<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
-						</li> -->
+						</li>
 						</ol>
 					</div>
 				</div>
@@ -406,6 +406,8 @@
                 destroy: true,
                 firstFlag: false,
 				counselorList: [],
+				productId:'',
+				userId:'',
 				consume: {
                     proStyle: '',
 					memNum: '', //会员名
@@ -474,6 +476,44 @@
 			};
 		},
 		methods: {
+			// //优惠券使用张数
+			num_jia() {
+				var input_num1 = document.getElementById("input-num1");
+				var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+				this.$ajax({
+					method: 'GET',
+					url: url,
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+						'Access-Token': this.accessToken
+					},
+					// param: formData,
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						this.titttl = res.retData;
+						if(input_num1.value == res.retData){
+							input_num1.value = parseInt(input_num1.value) + 0;
+						}else{
+							input_num1.value = parseInt(input_num1.value) + 1;
+						}
+					} else {
+						alert(res.retMsg)
+					}
+				}).catch((error) => {
+					console.log('查询请求失败')
+				});
+				
+			},
+			num_jian() {
+				var input_num1 = document.getElementById("input-num1");
+				if (input_num1.value <= 1) {
+					input_num1.value = 1;
+				} else {
+					input_num1.value = parseInt(input_num1.value) - 1;
+				}
+			},
             // destroyDom() {
             //     this.destroy = false
             //     this.$nextTick(()=>{
@@ -484,7 +524,8 @@
 			initData(param) {
                 this.firstFlag = false
 				this.consumAuditId = param.cid;
-                
+                this.productId = param.empId;
+                this.userId = param.visId;
                 // this.clickItemObj.itemId = 0
 				$('#customContent').modal({
 					backdrop: 'static',
@@ -1211,6 +1252,31 @@
 					console.log('定金查询请求失败')
 				});
 			},
+			add() {
+				var url = this.url + '/couponController/selectCoupon'
+				var formData = new FormData();
+				formData.append('productId', this.productId);
+				formData.append('userId', this.userId);
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: formData,
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						this.unfinishedProLists = res.retData
+					} else {
+						alert(res.retMsg)
+					}
+				}).catch((error) => {
+					console.log('会员查询请求失败')
+				});
+			},
 			count(event) {
 				if (Number(this.cash.select) > Number(this.cash.balance)) {
 					this.cash.select = this.cash.balance;
@@ -1222,9 +1288,9 @@
 			this.$refs.VisitStateRef.getObj(1, 1)
 			this.$refs.ContinStateRef.getObj(1, 2)
 		},
-        // created() {
-        //     this.destroyDom()
-        // }
+        created() {
+            this.add();
+        }
 
 	}
 </script>

@@ -131,7 +131,7 @@
 					</div>
 				</div>
 			</div>
-			<div v-show="youhui">
+			<div class="youa">
 				<div class="tab-pane fade in active martop">
 					<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 						<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
@@ -143,8 +143,8 @@
 								<div class="manjian1">满减</div>
 							</div>
 							<ul>
-								<li @click="dianji()" v-for="item in unfinishedProLists">
-									<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
+								<li @click="dianji(item)" v-for="item in unfinishedProLists">
+									<div class="jia"><span>￥</span>{{item.recude}}</div>
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
 									<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
@@ -163,8 +163,8 @@
 								<div class="manjian1">满折</div>
 							</div>
 							<ol>
-								<li @click="dianji1()" v-for="item in unfinishedProLists">
-									<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
+								<li @click="dianji1()" v-for="item in unfinishedProLists1">
+									<div class="jia"><span>￥</span>{{item.recude}}</div>
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
 									<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
@@ -186,7 +186,7 @@
 								<ul class="count1">
 									<li><span class="num-jian1" @click="num_jian()">-</span></li>
 									<li><input type="text" class="input-num1" id="input-num1" value="1" v-model="titttl" /></li>
-									<li><span class="num-jia1" @click="num_jia()">+</span></li>
+									<li><span class="num-jia1" @click="num_jia(item)">+</span></li>
 								</ul>
 							</li>　
 						</ul>
@@ -244,7 +244,7 @@
 					<b>*</b>
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  ">欠费金额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="consume.arrears">
+						<input type="text" class="form-control" v-model="consume.arrears"  @blur="onChange()">
 					</div>
 				</div>
 			</div>
@@ -329,6 +329,9 @@
 </template>
 
 <script>
+	import {
+		Decimal
+	} from 'decimal.js'
 	import dPicker from 'vue2-datepicker'
 	import emp from '../../common/Employee.vue'
 	import PayStyle from '../../common/PayStyle.vue'
@@ -347,6 +350,7 @@
 		},
 		data() {
 			return {
+				recude:0,
 				member: {
 					memNum: '', //会员号
 					memName: '', //会员名
@@ -360,6 +364,10 @@
 					memName: '', //手机
 					phone: '', //预约号
 					appNum: '',
+					couponId:'',
+					couponType:'',
+					couponNum:'',
+					couponName:'',
 					receivable: 0, //应交(折前)
 					preFoldTotalPrice: '', //折前总价
 					realCross: '', //实缴（折后）
@@ -381,7 +389,7 @@
 					storeId: '', //店铺
 					operatorId: '', //操作人
 					consumCount: '0', //消费次数
-					balance: '0',
+					balance: 0,
 					cashId: null, //使用定金
 					cashMoney: '', //使用定金的金额
 					payType: '', //支付方式
@@ -389,21 +397,20 @@
 					serialNo: null, //流水单号
 					receipt: null, //收据
 					isArrears: '1', //是否欠费
-					arrears: '0', //欠费金额
+					arrears: 0, //欠费金额
 				},
 				cash: {
 					cashId: '',
 					memNum: '',
-					balance: '',
-					select: '',
+					balance: 0,
+					select:0,
 					btn: false,
 				},
 				// titll: '',
 				productId: '',
-				// couponId: '',
+				couponId: '',
 				dui: true,
 				dis: true,
-				youhui: false,
 				shs: true,
 				title: '',
 				xuanze1: '',
@@ -417,6 +424,7 @@
 				isArrearsShow: false,
 				unfinishedProList: [],
 				unfinishedProLists: [],
+				unfinishedProLists1: [],
 				auditState: '',
 				clickItemObj: {
 					itemId: 0,
@@ -434,8 +442,6 @@
 			// Initialization consume’s content
 			initData(title, param) {
 				console.log(param)
-				this.productId = param.empId;
-				this.couponId = param.couId;
 				this.userId = param.visId;
 				$('#rechargeContent').modal({
 					backdrop: 'static',
@@ -456,8 +462,12 @@
 					memNum: param.visId, //会员名
 					memName: param.visitorName,
 					phone: param.phone,
+					couponId:param.couponId,
+					couponType:param.couponType,
+					couponNum:param.couponNum,
+					couponName:param.couponName,
 					appNum: '', //预约号
-					receivable: 0, //应交
+					receivable: '0', //应交
 					preFoldTotalPrice: '', //折前总价
 					realCross: 0, //实缴
 					actualCross: 0, //实交金额
@@ -483,6 +493,7 @@
 					/** 1:实体卡首充（不计算提成） 0:计算 */
 					consumCount: '0', //消费次数
 					visitType: 1,
+					remark:'',
 					payType: '', //支付方式
 					appNumber: '', //小程序编号
 					serialNo: null, //流水单号
@@ -509,9 +520,11 @@
 				this.checkMemCash(param.visId)
 			},
 			// //优惠券使用张数
-			num_jia() {
+			num_jia:function(item) {
 				var input_num1 = document.getElementById("input-num1");
-				var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+				this.productId = this.consume.proId;
+				this.couponId = item.couId;
+				var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
 				this.$ajax({
 					method: 'GET',
 					url: url,
@@ -593,13 +606,15 @@
 			//产品
 			projectChange: function(param) {
 				// console.log(JSON.stringify(param))
+				this.productId = param.proId;
+				console.log(this.productId)
 				if (this.isBlank(param)) {
 					this.consume.proId = ""
 					this.projectObj = {}
 				} else {
 					var url = this.url + '/couponController/selectCoupon'
 					var formData = new FormData();
-					formData.append('productId', '1');
+					formData.append('productId', this.productId);
 					formData.append('userId', this.userId);
 					this.$ajax({
 						method: 'POST',
@@ -614,11 +629,12 @@
 						var res = response.data
 						console.log(res)
 						if (res.retCode == '0000') {
-							this.unfinishedProLists = res.retData
-							if (this.unfinishedProLists) {
-								this.youhui = true
+							this.unfinishedProLists = res.retData['1']
+							this.unfinishedProLists1 = res.retData['2']
+							if (this.unfinishedProLists !='') {
+								$(".youa").show();
 							} else {
-								this.youhui = false
+								$(".youa").hide();
 							}
 
 						} else {
@@ -647,6 +663,17 @@
 				} else {
 					this.isArrearsShow = true
 				}
+			},
+			onChange(){
+				// console.log(this.consume.receivable)
+				// console.log(this.consume.arrears)
+				// console.log(this.cash.select)
+				console.log(this.unfinishedProList[0].balance)
+				if(this.clickItemObj.count + 1 && this.unfinishedProList !=''){
+					this.unfinishedProList[0].balance
+				}
+				var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.unfinishedProList[0].balance))
+				this.consume.realCross = ss;
 			},
 			//feedback employee information
 			empChange: function(param) {
@@ -730,6 +757,7 @@
 						alert(res.retMsg)
 						this.closeCurrentPage()
 						this.unfinishedProLists = []
+						$(".youa").hide()
 					} else {
 						alert(res.retMsg)
 					}
@@ -740,6 +768,7 @@
 			closeCurrentPage() {
 				this.$emit('closeCurrentPage')
 				this.unfinishedProLists = []
+				$(".youa").hide()
 			},
 			setCustom(param) {
 				this.consume.memNum = param.memNum
@@ -931,10 +960,21 @@
 				}
 			},
 			//选择满减优惠券
-			dianji() {
+			dianji:function(item) {
+				this.productId = this.consume.proId;
+				this.couponId = item.couId;
+				// this.recude = item.recude;
+				console.log(this.consume.proId)
+				// for(var i =0;i< this.unfinishedProLists.length;i++){
+					if(this.unfinishedProLists !=''){
+						this.unfinishedProLists[0].recude
+					}
+				// }
+				var zz = new Decimal(this.consume.receivable).sub(new Decimal(this.unfinishedProLists[0].recude))
+				this.consume.receivable = zz;
 				if (this.dui) {
 					$(".you .man1 .gou1").show();
-					var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
 						url: url,
@@ -956,7 +996,7 @@
 					});
 				} else {
 					$(".you .man1 .gou1").hide();
-					var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
 						url: url,
@@ -969,7 +1009,7 @@
 					}).then((response) => {
 						var res = response.data
 						if (res.retCode == '0000') {
-							this.titttl = '1'
+							this.titttl = 1
 						} else {
 							alert(res.retMsg)
 						}
@@ -983,7 +1023,7 @@
 			dianji1() {
 				if (this.dui) {
 					$(".you .man2 .gou1").show();
-					var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
 						url: url,
@@ -1005,7 +1045,7 @@
 					});
 				} else {
 					$(".you .man2 .gou1").hide();
-					var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
 						url: url,
@@ -1018,7 +1058,7 @@
 					}).then((response) => {
 						var res = response.data
 						if (res.retCode == '0000') {
-							this.titttl = '1'
+							this.titttl = 1
 						} else {
 							alert(res.retMsg)
 						}

@@ -259,6 +259,22 @@
 						this.limitGet = res.retData.limitGet; //每人限领取
 						this.couponId = res.retData.couponId;
 						this.allCount = res.retData.allCount; //发放机制
+						if(this.couponType == ''){
+							$(".jin").show();
+							$(".zhe").show();
+							$(".wuxian").show();
+						}
+						if(this.couponType == '1'){
+							$(".jin").hide();
+							$(".zhe").show();
+							$(".xianzhi2 span").css('right','35px');
+							$(".wuxian").hide();
+						}
+						if(this.couponType == '2'){
+							$(".jin").show();
+							$(".zhe").hide();
+							$(".wuxian").show();
+						}
 					} else {
 						alert(res.retMsg)
 					}

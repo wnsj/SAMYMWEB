@@ -83,11 +83,11 @@
                         </select>
                     </div>
                 </div> -->
-
-					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getRefundAllFind()">查询
-					</button>
 					<button type="button" class="btn btn-info pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="adSort" v-has="'SAMY:MP:Coupon:Add'">添加
 					</button>
+					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getRefundAllFind()">查询
+					</button>
+
 				</div>
 
 			</div>

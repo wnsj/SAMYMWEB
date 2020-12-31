@@ -21,7 +21,6 @@
 						<label class="col-md-2 control-label text-right nopad end-aline">优惠券类型</label><span class="sign-left">:</span>
 						<div class="col-md-7">
 							<select class="form-control" v-model="couponType" @click="man">
-								<option value="">--请选择--</option>
 								<option value="2">满减券</option>
 								<option value="1">满折券</option>
 							</select>
@@ -32,7 +31,6 @@
 						<label class="col-md-2 control-label text-right nopad end-aline">状态</label><span class="sign-left">:</span>
 						<div class="col-md-7">
 							<select class="form-control" v-model="state">
-								<option value="">--请选择--</option>
 								<option value="1">在用</option>
 								<option value="2">停用</option>
 							</select>
@@ -45,7 +43,6 @@
 							<input type="text" class="form-control" v-model="recude">
 							<span>元</span>
 						</div>
-
 					</div>
 					<div class="col-md-6 form-group clearfix zhe" style="float: right;">
 						<b>*</b>
@@ -54,7 +51,6 @@
 							<input type="text" class="form-control" v-model="recude">
 							<span>%</span>
 						</div>
-
 					</div>
 					<div class="col-md-6 form-group clearfix shiyong">
 						<b>*</b>
@@ -69,8 +65,6 @@
 					</div>
 					<div class="col-md-6 form-group clearfix"></div>
 				</div>
-
-
 				<div class="tab-pane fade in active martop">
 					<div class="col-md-12 form-group clearfix text-left jh-ad-0 jh-mt-5">
 						<div class="col-md-6 clearfix">
@@ -89,14 +83,12 @@
 								<el-date-picker v-model="begDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime"
 								 placeholder="开始时间">
 								</el-date-picker>
-								<!-- <dPicker class="wd100" value-type="format" format="YYYY-MM-DD HH:mm:ss" v-model="begDate"></dPicker> -->
 							</div>
 							<div class="xianhzi15 xie">~</div>
 							<div class="xianzhi3 end-time">
 								<el-date-picker v-model="endDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime"
 								 placeholder="结束时间">
 								</el-date-picker>
-								<!-- <dPicker class="wd100" value-type="format" format="YYYY-MM-DD HH:mm:ss" v-model="endDate"></dPicker -->
 							</div>
 							<!-- <div class="xianzhi4"><input type="checkbox"><label class="xian1">自领取之日</label></div>
 						<div class="xianzhi5"><input type="text" placeholder="0"><span>天内</span></div> -->
@@ -163,7 +155,6 @@
 					<button type="button" class="btn btn-warning pull-center m_r_10 jh-mr-35" @click="goOff()" v-has="'SAMY:CouponManage'">取消</button>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </template>
@@ -183,7 +174,7 @@
 				couponName: '', //优惠券名称
 				state: '1', //状态
 				proId: '',
-				couponType: '', //优惠券类型
+				couponType: '2', //优惠券类型
 				fullCondition: '', //金额
 				recude: '', //折扣
 				operatorId: '',
@@ -219,11 +210,7 @@
 		},
 		methods: {
 			man() {
-				if (this.couponType == '') {
-					$(".jin").show();
-					$(".zhe").show();
-					$(".wuxian").show();
-				} else if (this.couponType == '1') {
+				if (this.couponType == '1') {
 					$(".jin").hide();
 					$(".zhe").show();
 					$(".wuxian").hide();

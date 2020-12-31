@@ -135,6 +135,7 @@
                                         <el-menu-item index="/MP/Position">岗位管理</el-menu-item>
                                         <el-menu-item index="/MP/ScheduleEmp">排班管理</el-menu-item>
                                         <el-menu-item index="/MP/Project">产品管理</el-menu-item>
+										 <el-menu-item index="/MP/Coupon">优惠券管理</el-menu-item>
                                         <el-menu-item index="/MP/CounseRoomManage">咨询室管理</el-menu-item>
                                         <el-menu-item index="/MP/CounseRoomTimeTotal">咨询室总览</el-menu-item>
                                     </el-submenu>
@@ -203,14 +204,6 @@
                                         <el-menu-item index="/MP/QueVsAnswer">问卷调查结果</el-menu-item>
                                         <el-menu-item index="/MP/QuestionnaireSummary">问卷调查汇总</el-menu-item>
                                     </el-submenu>
-									
-									<el-submenu index="9">
-									    <template slot="title">
-									        <i class="el-icon-folder-add"></i>
-									        <span>优惠券管理</span>
-									    </template>
-									    <el-menu-item index="/MP/Coupon">优惠券管理</el-menu-item>
-									</el-submenu>
                                 </el-menu>
                             </el-col>
                         </el-row>

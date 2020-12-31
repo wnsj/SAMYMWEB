@@ -727,7 +727,6 @@
 					return;
 				}
 				//选择了已购买的项目
-                var ss = 0;
 				if (this.selectObj != null) {
 					// if (!this.isBlank(this.selectObj.counselor) && this.selectObj.counselor != this.consume.counselor) {
 					//     alert("你选择的咨询师与已购买项目中选择的咨询师不一致!");
@@ -738,7 +737,7 @@
 						return;
 					}
 
-					ss = new Decimal(this.selectObj.totalCount).sub(new Decimal(this.selectObj.consumCount))
+					var ss = new Decimal(this.selectObj.totalCount).sub(new Decimal(this.selectObj.consumCount))
 					if (parseFloat(this.consume.consumCount) > parseFloat(ss)) {
 						alert("本次消费课时大于剩余课时!");
 						return;
@@ -765,7 +764,7 @@
 						if (this.selectObj.realCrossCount) {
 							this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.selectObj.realCrossCount))
 						} else {
-							this.consume.realCross = new Decimal(this.consume.receivable)
+							this.consume.realCross = new Decimal(this.consume.realCross)
 						}
 					} else {
 						this.consume.realCross = new Decimal(this.consume.receivable).div(new Decimal(this.consume.totalCount)).mul(new Decimal(this.consume.consumCount)).toFixed(2, Decimal.ROUND_HALF_UP);

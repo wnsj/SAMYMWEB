@@ -258,8 +258,8 @@
 								<div class="manjian1">满减</div>
 							</div>
 							<ul>
-								<li @click="dianji()" v-for="item in unfinishedProLists">
-									<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
+								<li @click="dianji(item)" v-for="item in unfinishedProLists">
+									<div class="jia"><span>￥</span>{{item.recude}}</div>
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
 									<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
@@ -278,17 +278,17 @@
 								<div class="manjian1">满折</div>
 							</div>
 							<ol>
-								<li @click="dianji1()" v-for="item in unfinishedProLists">
-								<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
-								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
-								<div class="titleSY">{{item.couponName}}</div>
-								<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
-								<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
-								<div class="niucha">
-									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
-								</div>
-								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
-							</li>
+								<li @click="dianji1(item)" v-for="item in unfinishedProLists1">
+									<div class="jia"><span>￥</span>{{item.recude}}</div>
+									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+									<div class="titleSY">{{item.couponName}}</div>
+									<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
+									<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+									<div class="niucha">
+										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+									</div>
+									<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+								</li>
 							</ol>
 						</div>
 					</div>
@@ -301,7 +301,7 @@
 								<ul class="count1">
 									<li><span class="num-jian1" @click="num_jian()">-</span></li>
 									<li><input type="text" class="input-num1" id="input-num" value="2" v-model="titttl" /></li>
-									<li><span class="num-jia1" @click="num_jia()">+</span></li>
+									<li><span class="num-jia1" @click="num_jia(item)">+</span></li>
 								</ul>
 							</li>　
 						</ul>
@@ -372,6 +372,7 @@
 			return {
 				counselorList: [],
 				unfinishedProLists:[],
+				unfinishedProLists1:[],
 				dis: true,
 				shs: true,
 				youhui:false,
@@ -416,7 +417,7 @@
 				},
 				isShow: true,
 				consumeReceivable: '',
-				titttl:'',
+				titttl:'1',
 				isSelect: true,
 				sameProject: false,
 				appShow: false,
@@ -437,16 +438,18 @@
 					cashId: '',
 					memNum: '',
 					balance: '',
-					select: '',
+					select: 0,
 					btn: false,
 				}
 			};
 		},
 		methods: {
 			// //优惠券使用张数
-			num_jia() {
+			num_jia:function(item) {
 				var input_num1 = document.getElementById("input-num1");
-				var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+				this.productId = this.consume.proId;
+				this.couponId = item.couId;
+				var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
 				this.$ajax({
 					method: 'GET',
 					url: url,
@@ -627,10 +630,16 @@
 						var res = response.data
 						console.log(res)
 						if (res.retCode == '0000') {
-							this.unfinishedProLists = res.retData
-							if(this.unfinishedProLists){
+							this.unfinishedProLists = res.retData['1']
+							this.unfinishedProLists1 = res.retData['2']
+							if (this.unfinishedProLists !='') {
 								this.youhui = true
-							}else{
+							} else {
+								this.youhui = false
+							}
+							if (this.unfinishedProLists1 !='') {
+								this.youhui = true
+							} else {
 								this.youhui = false
 							}
 					
@@ -1115,10 +1124,18 @@
 				}
 			},
 			//选择满减优惠券
-			dianji() {
-				if (this.dui) {
+			dianji:function(item) {
+				this.productId = this.consume.proId;
+				this.couponId = item.couId;
+				console.log(this.consume.proId)
+				if (this.dui == true) {
 					$(".you .man1 .gou1").show();
-					var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+					if(this.unfinishedProLists !=''){
+							this.unfinishedProLists[0].recude
+						}
+					var zz = new Decimal(this.consume.receivable).sub(new Decimal(this.unfinishedProLists[0].recude)).sub(new Decimal(this.cash.select))
+					this.consume.receivable = zz;
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
 						url: url,
@@ -1140,34 +1157,21 @@
 					});
 				} else {
 					$(".you .man1 .gou1").hide();
-					var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
-					this.$ajax({
-						method: 'GET',
-						url: url,
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-							'Access-Token': this.accessToken
-						},
-						// param: formData,
-						dataType: 'json',
-					}).then((response) => {
-						var res = response.data
-						if (res.retCode == '0000') {
-							this.titttl = 1
-						} else {
-							alert(res.retMsg)
-						}
-					}).catch((error) => {
-						console.log('查询请求失败')
-					});
 				}
 				this.dui = !this.dui
 			},
 			//选择满折优惠券
-			dianji1() {
-				if (this.dui) {
+			dianji1:function(item) {
+				this.productId = this.consume.proId;
+				this.couponId = item.couId;
+				if (this.dui == true) {
 					$(".you .man2 .gou1").show();
-					var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+					if(this.unfinishedProLists1 !=''){
+							this.unfinishedProLists1[0].recude
+						}
+					var zz = new Decimal(this.consume.receivable).sub(new Decimal(this.unfinishedProLists1[0].recude))
+					this.consume.receivable = zz;
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
 						url: url,
@@ -1187,9 +1191,9 @@
 					}).catch((error) => {
 						console.log('查询请求失败')
 					});
-				} else {
+				} else if(this.dui == false) {
 					$(".you .man2 .gou1").hide();
-					var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
 						url: url,

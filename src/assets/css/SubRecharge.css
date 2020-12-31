@@ -9,14 +9,21 @@
 
 .you .man1 {
 	margin-top: 10px;
-	position: relative;
 	overflow: auto;
+	position: relative;
 }
 
 .you .man1 .gou1 {
 	position: absolute;
 	width: 300px;
 	display: none;
+}
+.admins {
+	position: absolute;
+	width: 300px;
+	background: url(../../../static/img/youhui_xuanze1.png);
+	background-size: auto;
+	height: 100px;
 }
 
 .you .man2 .gou1 {
@@ -304,7 +311,7 @@
 	margin-right: 0;
 	margin-bottom: 0;
 }
-.you ol li:nth-child(2n) {
+.you ol li:nth-child(3n) {
 	margin-right: 0;
 }
 /* .you ol li:nth-last-child(2),.you ol li:nth-last-child(3){

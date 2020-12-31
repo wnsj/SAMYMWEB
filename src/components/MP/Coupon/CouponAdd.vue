@@ -394,6 +394,40 @@
 							path: '../../MP/Coupon'
 						})
 					} else {
+						alert('请填写完整！')
+						return false
+						if(this.couponName == ''){
+							alert('请填写优惠券名称！')
+							return false
+						}
+						if(this.couponType == ''){
+							alert('请填写优惠券类型！')
+							return false
+						}
+						if(this.isLimit == ''){
+							alert('请选择使用门槛！')
+							return false
+						}
+						if(this.isVaild == ''){
+							alert('请选择有效期！')
+							return false
+						}
+						if(this.userType == ''){
+							alert('请选择使用用户！')
+							return false
+						}
+						if(this.categoryType == ''){
+							alert('请选择产品！')
+							return false
+						}
+						if(this.limitGet == ''){
+							alert('请填写每人限领！')
+							return false
+						}
+						if(this.allCount == ''){
+							alert('请填写总发行量！')
+							return false
+						}
 						alert(res.retMsg)
 					}
 				}).catch((error) => {

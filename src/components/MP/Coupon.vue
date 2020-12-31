@@ -111,8 +111,8 @@
 				<el-table-column prop="endTime" label="结束时间" :formatter="resetDate" width="100" align="center"></el-table-column>
 				<el-table-column prop="createTime" label="创建时间" :formatter="resetDate" width="100" align="center"></el-table-column>
 				<el-table-column prop="operatorName" label="创建人" width="100" align="center"></el-table-column>
-				<el-table-column prop="productTypeName" label="适用产品" width="100" align="center"></el-table-column>
-				<el-table-column prop="productType" label="产品类型" width="100" align="center"></el-table-column>
+				<el-table-column prop="productName" label="适用产品" width="100" align="center"></el-table-column>
+				<el-table-column prop="productTypeName" label="产品类型" width="100" align="center"></el-table-column>
 				<el-table-column prop="allCount" label="总发行量" width="100" align="center"></el-table-column>
 				<el-table-column prop="stateName" label="使用状态" width="80" align="center"></el-table-column>
 				<el-table-column align="center" label="操作" min-width="165">

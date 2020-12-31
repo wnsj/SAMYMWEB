@@ -471,7 +471,7 @@
 				}).catch((error) => {
 					console.log('查询请求失败')
 				});
-				
+
 			},
 			num_jian() {
 				var input_num1 = document.getElementById("input-num1");
@@ -633,7 +633,7 @@
 							}else{
 								this.youhui = false
 							}
-					
+
 						} else {
 							alert(res.retMsg)
 						}
@@ -727,6 +727,7 @@
 					return;
 				}
 				//选择了已购买的项目
+                var ss = 0;
 				if (this.selectObj != null) {
 					// if (!this.isBlank(this.selectObj.counselor) && this.selectObj.counselor != this.consume.counselor) {
 					//     alert("你选择的咨询师与已购买项目中选择的咨询师不一致!");
@@ -737,7 +738,7 @@
 						return;
 					}
 
-					var ss = new Decimal(this.selectObj.totalCount).sub(new Decimal(this.selectObj.consumCount))
+					ss = new Decimal(this.selectObj.totalCount).sub(new Decimal(this.selectObj.consumCount))
 					if (parseFloat(this.consume.consumCount) > parseFloat(ss)) {
 						alert("本次消费课时大于剩余课时!");
 						return;
@@ -757,7 +758,6 @@
 					this.consume.cashId = this.cash.cashId;
 					this.consume.cashMoney = this.cash.select;
 				}
-
 				if (this.selectObj) {
 					// this.consume.realCross = (parseFloat(this.consume.realCross) * parseFloat(this.consume.discount) / 100).toFixed(2)
 					var sur = this.selectObj.totalCount - this.selectObj.consumCount;
@@ -767,10 +767,8 @@
 						} else {
 							this.consume.realCross = new Decimal(this.consume.receivable)
 						}
-
 					} else {
-						this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(this.consume.discount)).div(new Decimal(
-							100)).toFixed(2, Decimal.ROUND_HALF_UP)
+						this.consume.realCross = new Decimal(this.consume.receivable).div(new Decimal(this.consume.totalCount)).mul(new Decimal(this.consume.consumCount)).toFixed(2, Decimal.ROUND_HALF_UP);
 					}
 				}
 				var url = this.url + '/purchasedItemsAction/consumProject'

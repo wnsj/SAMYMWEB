@@ -474,7 +474,7 @@
 				}).catch((error) => {
 					console.log('查询请求失败')
 				});
-				
+
 			},
 			num_jian() {
 				var input_num1 = document.getElementById("input-num1");
@@ -642,7 +642,7 @@
 							} else {
 								this.youhui = false
 							}
-					
+
 						} else {
 							alert(res.retMsg)
 						}
@@ -766,7 +766,6 @@
 					this.consume.cashId = this.cash.cashId;
 					this.consume.cashMoney = this.cash.select;
 				}
-
 				if (this.selectObj) {
 					// this.consume.realCross = (parseFloat(this.consume.realCross) * parseFloat(this.consume.discount) / 100).toFixed(2)
 					var sur = this.selectObj.totalCount - this.selectObj.consumCount;
@@ -774,12 +773,10 @@
 						if (this.selectObj.realCrossCount) {
 							this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.selectObj.realCrossCount))
 						} else {
-							this.consume.realCross = new Decimal(this.consume.receivable)
+							this.consume.realCross = new Decimal(this.consume.realCross)
 						}
-
 					} else {
-						this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(this.consume.discount)).div(new Decimal(
-							100)).toFixed(2, Decimal.ROUND_HALF_UP)
+						this.consume.realCross = new Decimal(this.consume.receivable).div(new Decimal(this.consume.totalCount)).mul(new Decimal(this.consume.consumCount)).toFixed(2, Decimal.ROUND_HALF_UP);
 					}
 				}
 				var url = this.url + '/purchasedItemsAction/consumProject'

@@ -36,7 +36,7 @@
 						</div>
 						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 							<select class="form-control" v-model="isuse">
-								<option value="">全部</option>
+								<option value="">--未选择-</option>
 								<option value="1">在用</option>
 								<option value="0">停用</option>
 							</select>
@@ -75,7 +75,7 @@
 						</div>
 						<div class="col-md-7 col-lg-7">
 							<select class="form-control" v-model="proType">
-								<option value="01">--请选择--</option>
+								<option value="">--请选择--</option>
 								<option value="0">普通</option>
 								<option value="1">月卡</option>
 								<option value="2">季卡</option>
@@ -165,7 +165,7 @@
 				empLevel: '',
 				isRefund: '',
 				isMem: '',
-				isuse: '1',
+				isuse: '',
 				proType: '',
 				visType: '',
 				auditState: '',
@@ -350,7 +350,7 @@
 						storeId: this.storeId,
 						proName: this.proName,
 						empId: this.empId,
-						isuse: this.isuse,
+						state: this.isuse,
 						empLevel: this.empLevel,
 						isRefund: this.isRefund,
 						proType: this.proType

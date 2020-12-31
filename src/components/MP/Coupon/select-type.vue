@@ -153,10 +153,10 @@
 			//check the list of department
 			getAllAuditPage() {
 				this.showSelect = false
-				var url = this.url + '/couponController/selectProductType'
-				var formData = new FormData();
-				formData.append('name', this.name);
-				formData.append('state', this.state);
+				var url = this.url + '/couponController/selectProductType?name=' + this.name + '&state=' + this.state
+				// var formData = new FormData();
+				// formData.append('name', this.name);
+				// formData.append('state', this.state);
 				this.$ajax({
 					method: 'GET',
 					url: url,
@@ -164,7 +164,7 @@
 						'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
 						'Access-Token': this.accessToken
 					},
-					param: formData,
+					// param: formData,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data

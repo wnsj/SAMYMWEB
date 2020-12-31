@@ -963,17 +963,14 @@
 			dianji:function(item) {
 				this.productId = this.consume.proId;
 				this.couponId = item.couId;
-				// this.recude = item.recude;
 				console.log(this.consume.proId)
-				// for(var i =0;i< this.unfinishedProLists.length;i++){
-					if(this.unfinishedProLists !=''){
-						this.unfinishedProLists[0].recude
-					}
-				// }
-				var zz = new Decimal(this.consume.receivable).sub(new Decimal(this.unfinishedProLists[0].recude))
-				this.consume.receivable = zz;
 				if (this.dui) {
 					$(".you .man1 .gou1").show();
+					if(this.unfinishedProLists !=''){
+							this.unfinishedProLists[0].recude
+						}
+					var zz = new Decimal(this.consume.receivable).sub(new Decimal(this.unfinishedProLists[0].recude))
+					this.consume.receivable = zz;
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
@@ -996,33 +993,20 @@
 					});
 				} else {
 					$(".you .man1 .gou1").hide();
-					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
-					this.$ajax({
-						method: 'GET',
-						url: url,
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-							'Access-Token': this.accessToken
-						},
-						// param: formData,
-						dataType: 'json',
-					}).then((response) => {
-						var res = response.data
-						if (res.retCode == '0000') {
-							this.titttl = 1
-						} else {
-							alert(res.retMsg)
-						}
-					}).catch((error) => {
-						console.log('查询请求失败')
-					});
 				}
 				this.dui = !this.dui
 			},
 			//选择满折优惠券
 			dianji1() {
-				if (this.dui) {
+				this.productId = this.consume.proId;
+				this.couponId = item.couId;
+				if (this.dui == true) {
 					$(".you .man2 .gou1").show();
+					if(this.unfinishedProLists !=''){
+							this.unfinishedProLists[0].recude
+						}
+					var zz = new Decimal(this.consume.receivable).sub(new Decimal(this.unfinishedProLists[0].recude))
+					this.consume.receivable = zz;
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
@@ -1043,7 +1027,7 @@
 					}).catch((error) => {
 						console.log('查询请求失败')
 					});
-				} else {
+				} else if(this.dui == false) {
 					$(".you .man2 .gou1").hide();
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
 					this.$ajax({

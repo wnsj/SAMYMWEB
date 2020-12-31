@@ -163,7 +163,7 @@
 								<div class="manjian1">满折</div>
 							</div>
 							<ol>
-								<li @click="dianji1()" v-for="item in unfinishedProLists">
+								<li @click="dianji1()" v-for="item in unfinishedProLists1">
 									<div class="jia"><span>￥</span>{{item.recude}}</div>
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
@@ -186,7 +186,7 @@
 								<ul class="count1">
 									<li><span class="num-jian1" @click="num_jian()">-</span></li>
 									<li><input type="text" class="input-num1" id="input-num1" value="1" v-model="titttl" /></li>
-									<li><span class="num-jia1" @click="num_jia()">+</span></li>
+									<li><span class="num-jia1" @click="num_jia(item)">+</span></li>
 								</ul>
 							</li>　
 						</ul>
@@ -364,7 +364,10 @@
 					memName: '', //手机
 					phone: '', //预约号
 					appNum: '',
-					
+					couponId:'',
+					couponType:'',
+					couponNum:'',
+					couponName:'',
 					receivable: 0, //应交(折前)
 					preFoldTotalPrice: '', //折前总价
 					realCross: '', //实缴（折后）
@@ -421,6 +424,7 @@
 				isArrearsShow: false,
 				unfinishedProList: [],
 				unfinishedProLists: [],
+				unfinishedProLists1: [],
 				auditState: '',
 				clickItemObj: {
 					itemId: 0,
@@ -458,6 +462,10 @@
 					memNum: param.visId, //会员名
 					memName: param.visitorName,
 					phone: param.phone,
+					couponId:param.couponId,
+					couponType:param.couponType,
+					couponNum:param.couponNum,
+					couponName:param.couponName,
 					appNum: '', //预约号
 					receivable: '0', //应交
 					preFoldTotalPrice: '', //折前总价
@@ -512,9 +520,11 @@
 				this.checkMemCash(param.visId)
 			},
 			// //优惠券使用张数
-			num_jia() {
+			num_jia:function(item) {
 				var input_num1 = document.getElementById("input-num1");
-				var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+				this.productId = this.consume.proId;
+				this.couponId = item.couId;
+				var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
 				this.$ajax({
 					method: 'GET',
 					url: url,
@@ -619,7 +629,8 @@
 						var res = response.data
 						console.log(res)
 						if (res.retCode == '0000') {
-							this.unfinishedProLists = res.retData
+							this.unfinishedProLists = res.retData['1']
+							this.unfinishedProLists1 = res.retData['2']
 							if (this.unfinishedProLists !='') {
 								$(".youa").show();
 							} else {
@@ -657,8 +668,11 @@
 				// console.log(this.consume.receivable)
 				// console.log(this.consume.arrears)
 				// console.log(this.cash.select)
-				console.log(this.cash.balance)
-				var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears)).sub(new Decimal(this.cash.select))
+				console.log(this.unfinishedProList[0].balance)
+				if(this.clickItemObj.count + 1 && this.unfinishedProList !=''){
+					this.unfinishedProList[0].balance
+				}
+				var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.unfinishedProList[0].balance))
 				this.consume.realCross = ss;
 			},
 			//feedback employee information
@@ -947,15 +961,20 @@
 			},
 			//选择满减优惠券
 			dianji:function(item) {
-				this.productId = item.proId;
+				this.productId = this.consume.proId;
 				this.couponId = item.couId;
 				// this.recude = item.recude;
-				console.log(this.couId)
-				var zz = new Decimal(this.consume.receivable).sub(new Decimal(this.recude))
+				console.log(this.consume.proId)
+				// for(var i =0;i< this.unfinishedProLists.length;i++){
+					if(this.unfinishedProLists !=''){
+						this.unfinishedProLists[0].recude
+					}
+				// }
+				var zz = new Decimal(this.consume.receivable).sub(new Decimal(this.unfinishedProLists[0].recude))
 				this.consume.receivable = zz;
 				if (this.dui) {
 					$(".you .man1 .gou1").show();
-					var url = this.url + '/couponController/couponCalculate?productId=' + 1 + '&couponId=' + this.couponId + '&userId=' + this.userId
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
 						url: url,

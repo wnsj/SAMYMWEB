@@ -159,7 +159,7 @@
 							<div class="manjian1">满减</div>
 						</div>
 						<ul>
-							<li @click="dianji()" v-for="item in unfinishedProLists">
+							<li @click="dianji(item)" v-for="item in unfinishedProLists">
 								<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
 								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 								<div class="titleSY">{{item.couponName}}</div>
@@ -483,8 +483,9 @@
 			// Initialization consume’s content
 			initAuditPur(param) {
 				this.purAuditId = param.piId;
-				this.productId = param.empId;
-				this.userId = param.visId;
+				this.productId = param.proId;
+				
+				this.userId = param.memNum;
 				$('#AuditPurContent').modal({
 					backdrop: 'static',
 					keyboard: false
@@ -563,6 +564,36 @@
 					this.consume.proId = ""
 					this.projectObj = {}
 				} else {
+					var url = this.url + '/couponController/selectCoupon'
+					var formData = new FormData();
+					formData.append('productId', this.productId);
+					formData.append('userId', this.userId);
+					this.$ajax({
+						method: 'POST',
+						url: url,
+						headers: {
+							'Content-Type': 'x-www-form-urlencoded',
+							'Access-Token': this.accessToken
+						},
+						data: formData,
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						console.log(res)
+						if (res.retCode == '0000') {
+							this.unfinishedProLists = res.retData
+							if (this.unfinishedProLists !='') {
+								$(".youa").show();
+							} else {
+								$(".youa").hide();
+							}
+					
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('请求失败处理')
+					});
 					this.consume.proId = param.proId
 					this.consume.price = param.price //折前单价
 					//this.consume.disPrice = param.price * param.discount / 100 //折后单价
@@ -773,7 +804,8 @@
 				});
 			},
 			//选择满减优惠券
-			dianji() {
+			dianji:function(item) {
+				this.couponId = item.couId;
 				if (this.dui) {
 					$(".you .man1 .gou1").show();
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId

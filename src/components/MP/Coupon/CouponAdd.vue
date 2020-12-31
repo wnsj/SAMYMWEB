@@ -81,18 +81,18 @@
 						<b>*</b>
 						<label class="col-md-1 control-label text-right nopad end-aline">有效期</label><span class="sign-left">:</span>
 						<div class="col-md-8 shiyong shiyong1" v-model="isVaild">
-							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup3" value="1" v-model="isVaild" /><label
+							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup3" value="1" v-model="isVaild"  @click="youxiao()" /><label
 								 class="xian1">永久有效</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label
+							<div class="xianzhi1 data"><input class="xian" type="radio" name="radioGroup3" value="2" v-model="isVaild" @click="youxiao()" /><label
 								 class="xian1">日期范围：</label></div>
-							<div class="xianzhi3">
+							<div class="xianzhi3 start-time">
 								<el-date-picker v-model="begDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime"
 								 placeholder="开始时间">
 								</el-date-picker>
 								<!-- <dPicker class="wd100" value-type="format" format="YYYY-MM-DD HH:mm:ss" v-model="begDate"></dPicker> -->
 							</div>
-							<div class="xianhzi15">~</div>
-							<div class="xianzhi3">
+							<div class="xianhzi15 xie">~</div>
+							<div class="xianzhi3 end-time">
 								<el-date-picker v-model="endDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime"
 								 placeholder="结束时间">
 								</el-date-picker>
@@ -232,6 +232,26 @@
 					$(".jin").show();
 					$(".zhe").hide();
 					$(".wuxian").show();
+					$(".xianzhi2 span").css('right', '-20px');
+				}
+			},
+			youxiao() {
+				console.log(this.isVaild)
+				if (this.isVaild == '') {
+					$(".data").hide();
+					$(".start-time").hide();
+					$(".end-time").hide();
+					$(".xie").hide()
+				}else if (this.isVaild == '2') {
+					$(".data").hide();
+					$(".start-time").hide();
+					$(".end-time").hide();
+					$(".xie").hide()
+				} else if (this.isVaild == '1') {
+					$(".data").show();
+					$(".start-time").show();
+					$(".end-time").show();
+					$(".xie").show()
 				}
 			},
 			//点击返回按钮跳转
@@ -439,15 +459,15 @@
 			}
 			if(localStorage.getItem('projectList')){
 				this.projectList = localStorage.getItem('projectList');
-				localStorage.removeItem('projectList');
+				// localStorage.removeItem('projectList');
 			}
 			if(localStorage.getItem('categoryList')){
 				this.categoryList = localStorage.getItem('categoryList');
-				localStorage.removeItem('categoryList');
+				// localStorage.removeItem('categoryList');
 			}
 			if(localStorage.getItem('userList')){
 				this.userList = localStorage.getItem('userList');
-				localStorage.removeItem('userList');
+				// localStorage.removeItem('userList');
 			}
 		}
 	}

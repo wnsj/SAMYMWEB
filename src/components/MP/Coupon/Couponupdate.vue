@@ -147,7 +147,7 @@
 				</div>
 				<div class="col-md-12 form-group clearfix">
 					<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-25" v-on:click="updataFee()" v-has="'SAMY:CouponManage'">确认</button>
-					<button type="button" class="btn btn-warning pull-center m_r_10 jh-mr-35" @click="goOff()">取消</button>
+					<button type="button" class="btn btn-warning pull-center m_r_10 jh-mr-35" @click="goOff()"  v-has="'SAMY:CouponManage'">取消</button>
 				</div>
 			</div>
 
@@ -206,7 +206,9 @@
 		methods: {
 			//点击返回按钮跳转
 			goOff() {
-				this.$router.go(-1);
+				this.$router.push({
+					path: '../../MP/Coupon'
+				})
 			},
 			//点击选择用户按钮跳转
 			seles() {

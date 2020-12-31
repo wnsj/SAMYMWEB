@@ -343,6 +343,7 @@
 	.el-button.chakan {
 		width: 63px;
 		height: 30px;
+		margin-left: 5px;
 		line-height: 5px;
 		color: #fff;
 		background-color: rgba(22, 155, 213, 1);

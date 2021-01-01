@@ -62,7 +62,23 @@
 							<emp :disabled="empDisable" ref="emp" @employeeChange="employeeChange"></emp>
 						</div>
 					</div>
-					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getAllAuditPage()">查询
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+						<div class="col-md-5 col-lg-5 text-right nopad">
+							<p class="end-aline col-md-11 col-lg-11">客户判定</p><span class="sign-left">:</span>
+						</div>
+						<div class="col-md-7 col-lg-7">
+							<judgeState ref="judgeStateRef" @objectChange="judgeStateChange"></judgeState>
+						</div>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+						<div class="col-md-5 col-lg-5 text-right nopad">
+							<p class="end-aline col-md-11 col-lg-11">续流状态</p><span class="sign-left">:</span>
+						</div>
+						<div class="col-md-7 col-lg-7">
+							<continueState ref="continueStateRef" @objectChange="continueStateChange"></continueState>
+						</div>
+					</div>
+					<button type="button" style="margin-top: 20px;" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getAllAuditPage()">查询
 					</button>
 				</div>
 			</div>
@@ -72,7 +88,7 @@
 		</div>
 		<div class="" id="datatable">
 			<el-table :data="tableData"  style="width: 100%" :row-key="getRowKeys" border ref="multipleTable" @selection-change="handleSelectionChange">
-				<el-table-column type="selection" width="55" :reserve-selection="true"  align="center" label="全选"></el-table-column>
+				<el-table-column type="selection" width="55" :reserve-selection="true"  align="center" label="全选" :selectable='checkboxSelect'></el-table-column>
 				<el-table-column type="index" prop="visId" label="序号" width="60" align="center"></el-table-column>
 				<el-table-column prop="visitorName" label="姓名" width="100" align="center"></el-table-column>
 				<el-table-column prop="sex" label="性别" :formatter="sex" width="100" align="center"></el-table-column>
@@ -117,12 +133,16 @@
 	import dPicker from 'vue2-datepicker'
 	import cha from '../../common/Channel.vue'
 	import emp from '../../common/Employee.vue'
+	import judgeState from '../../common/VisitState.vue' //咨客判定
+	import continueState from '../../common/VisitState.vue' //续流状态
 	export default {
 		components: {
 			store,
 			dPicker,
 			cha,
-			emp
+			emp,
+			judgeState,
+			continueState
 		},
 		data() {
 			return {
@@ -142,6 +162,8 @@
 				chaId: '',
 				auditName: '',
 				empId: '',
+				judgeState:'', //咨客判定
+				continueState:'', //续流状态
 				memName: '',
 				isMem: '',
 				visType: '',
@@ -167,6 +189,30 @@
 		},
 
 		methods: {
+			checkboxSelect(row, rowIndex) {
+				if (rowIndex == 0) {
+					return true // 禁用
+				} else {
+					return true // 不禁用
+				}
+			},
+			//咨客判定
+			judgeStateChange: function(param) {
+				// console.log(JSON.stringify(param))
+				if (this.isBlank(param)) {
+					this.judgeState = ""
+				} else {
+					this.judgeState = param.vsId
+				}
+			},
+			//续流状态
+			continueStateChange: function(param) {
+				if (this.isBlank(param)) {
+					this.continueState = ""
+				} else {
+					this.continueState = param.vsId
+				}
+			},
 			getRowKeys(row) {
 			    return row.visId;
 				this.$refs.userList.clearSelection();
@@ -296,7 +342,8 @@
 				}
 				
 				this.showSelect = false
-				console.log('getAllAuditPage')
+				var projectList = localStorage.getItem('userList');
+				var stringResult1 = projectList.split(',');
 				var url = this.url + '/visitorAction/queryVisitor'
 				this.$ajax({
 					method: 'POST',
@@ -312,6 +359,8 @@
 						isMem: this.isMem,
 						visType: this.visType,
 						empId: this.empId,
+						vsIdJudge:this.judgeState,
+						vsIdFlow:this.continueState,						
 						page: this.page,
 						pageSize: this.pageSize
 					},
@@ -325,6 +374,11 @@
 						this.pageSize = res.retData.size//一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.records
+						for (let i = 0; i < this.tableData.length; i++) {
+							if (stringResult1.includes(this.tableData[i].visId + '')) {
+								 this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
+								}
+						}
 					} else {
 						alert(res.retMsg)
 					}
@@ -345,7 +399,6 @@
 			handleCurrentChange(pageNum) {
 			    this.page = pageNum
 			    this.getAllAuditPage()
-				this.newuserList = []
 			},
 			// 每页条数变化时触发
 			handleSizeChange(pageSize) {

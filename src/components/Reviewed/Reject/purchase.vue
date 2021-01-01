@@ -68,7 +68,7 @@
                     </div>
 
                 </div>
-                <div class="row newRow">
+                <div class="row newRow" style="margin-top: -50px;">
 
                     <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
                             data-toggle="modal"

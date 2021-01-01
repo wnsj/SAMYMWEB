@@ -9,7 +9,7 @@
 		<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 	</div>
 	<div class="" id="datatable">
-		<el-table :data="tableData" style="width: 100%" border :row-key="getRowKeys" ref="multipleTable" @selection-change="handleSelectionChange">
+		<el-table :data="selectList" style="width: 100%" border :row-key="getRowKeys" ref="multipleTable" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="55" align="center" label="全选" :reserve-selection="true" :selectable='checkboxSelect'></el-table-column>
 			<el-table-column prop="visId" label="序号" width="60" align="center"></el-table-column>
 			<el-table-column prop="visitorName" label="姓名" width="100" align="center"></el-table-column>
@@ -74,7 +74,8 @@
 				endCreateDate: '',
 				addClass: false,
 				empDisable: false,
-				selectDataFlag: false
+				selectDataFlag: false,
+				selectList:[]
 			};
 		},
 		watch: {
@@ -182,6 +183,7 @@
 				}
 				var projectList = localStorage.getItem('userList');
 				var stringResult1 = projectList.split(',');
+				
 				console.log(stringResult1)
 				this.showSelect = false
 				console.log('getAllAuditPage')
@@ -210,6 +212,7 @@
 						for (let i = 0; i < this.tableData.length; i++) {
 							if (stringResult1.includes(this.tableData[i].visId + '')) {
 								 this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
+								 this.selectList.push(this.tableData[i])
 								}
 						}
 					} else {

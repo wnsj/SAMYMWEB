@@ -40,11 +40,11 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
 						<div class="col-md-7  jin1">
-							<input type="text" class="form-control" v-model="recude">
+							<input type="text" class="form-control" v-model="recude" @change="manjian()">
 							<span>元</span>
 						</div>
 					</div>
-					<div class="col-md-6 form-group clearfix zhe" style="float: right;">
+					<div class="col-md-6 form-group clearfix zhe" style="float: right;display: none;">
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
 						<div class="col-md-7  zhe1">
@@ -56,8 +56,8 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">使用门槛</label><span class="sign-left">:</span>
 						<div class="col-md-7" v-model="isLimit">
-							<div class="xianzhi wuxian"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="2" /><label
-								 class="xian1">无限制</label></div>
+							<div class="xianzhi wuxian" style="display: block;"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit"
+								 value="2" /><label class="xian1">无限制</label></div>
 							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="1" /><label
 								 class="xian1">满</label></div>
 							<div class="xianzhi2"><input type="text" placeholder="0" v-model="fullCondition"><span>元可用</span></div>
@@ -75,19 +75,16 @@
 						<b>*</b>
 						<label class="col-md-1 control-label text-right nopad end-aline">有效期</label><span class="sign-left">:</span>
 						<div class="col-md-8 shiyong shiyong1" v-model="isVaild">
-							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup3" value="1" v-model="isVaild"  @click="youxiao()" /><label
+							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup3" value="1" v-model="isVaild" @click="youxiao()" /><label
 								 class="xian1">永久有效</label></div>
-							<div class="xianzhi1 data"><input class="xian" type="radio" name="radioGroup3" value="2" v-model="isVaild" @click="youxiao()" /><label
-								 class="xian1">日期范围：</label></div>
+							<div class="xianzhi1 data"><input class="xian" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label class="xian1">日期范围：</label></div>
 							<div class="xianzhi3 start-time">
-								<el-date-picker v-model="begDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime"
-								 placeholder="开始时间">
+								<el-date-picker v-model="startTime" value-format="yyyy-MM-dd" format="yyyy-MM-dd" type="datetime" placeholder="开始时间">
 								</el-date-picker>
 							</div>
 							<div class="xianhzi15 xie">~</div>
 							<div class="xianzhi3 end-time">
-								<el-date-picker v-model="endDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime"
-								 placeholder="结束时间">
+								<el-date-picker v-model="endTime" value-format="yyyy-MM-dd" format="yyyy-MM-dd" type="datetime" placeholder="结束时间">
 								</el-date-picker>
 							</div>
 							<!-- <div class="xianzhi4"><input type="checkbox"><label class="xian1">自领取之日</label></div>
@@ -98,14 +95,14 @@
 						<b>*</b>
 						<label class="col-md-1 control-label text-right nopad end-aline">使用用户</label><span class="sign-left">:</span>
 						<div class="col-md-8 shiyong shiyong1">
-							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="1"  /><label
-								 class="xian1">全体用户</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="2"  /><label
-								 class="xian1">新用户</label></div>
+							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="1" /><label
+								 class="xian1" v-model="userType">全体用户</label></div>
+							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="2" /><label
+								 class="xian1" v-model="userType">新用户</label></div>
 							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="3" /><label
-								 class="xian1">指定用户</label></div>
+								 class="xian1" v-model="userType">指定用户</label></div>
 							<div class="xianzhi3_1">
-								<p style="cursor: pointer;"  v-on:click="seles()" v-has="'SAMY:MP:Coupon:selectAdd'">选择用户</p>
+								<p style="cursor: pointer;" v-on:click="seles()" v-has="'SAMY:MP:Coupon:selectAdd'">选择用户</p>
 							</div>
 						</div>
 					</div>
@@ -114,14 +111,16 @@
 						<label class="col-md-1 control-label text-right nopad end-aline">选择产品</label><span class="sign-left">:</span>
 						<div class="col-md-8 shiyong shiyong1">
 							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="1" /><label
-								 class="xian1">全品类</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="2" /><label class="xian1">指定分类</label></div>
+								 class="xian1" v-model="categoryType">全品类</label></div>
+							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="2" /><label
+								 class="xian1" v-model="categoryType">指定分类</label></div>
 							<div class="xianzhi3_1">
-								<p style="cursor: pointer;"  v-on:click="xus()" v-has="'SAMY:MP:Coupon:select-type'">选择分类</p>
+								<p style="cursor: pointer;" v-on:click="xus()" v-has="'SAMY:MP:Coupon:select-type'">选择分类</p>
 							</div>
-							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" name="radioGroup5" value="3" /><label class="xian1">指定产品</label></div>
+							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" v-model="categoryType" name="radioGroup5" value="3" /><label
+								 class="xian1" v-model="categoryType">指定产品</label></div>
 							<div class="xianzhi3_1">
-								<p style="cursor: pointer;"  v-on:click="ots()" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p>
+								<p style="cursor: pointer;" v-on:click="ots()" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p>
 							</div>
 						</div>
 					</div>
@@ -129,7 +128,7 @@
 						<b>*</b>
 						<label class="col-md-3 control-label text-right nopad end-aline">每人限领/限用</label><span class="sign-left">:</span>
 						<div class="col-md-7 shiyong shiyong1">
-							<div class="xianzhi6"><input type="text" placeholder="无限制填写0" v-model="limitGet"><span>张</span></div>
+							<div class="xianzhi6"><input type="number" id="num" placeholder="无限制填写0" v-model="limitGet" @change="xianhzi()"><span>张</span></div>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix"></div>
@@ -145,7 +144,7 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">总发行量</label><span class="sign-left">:</span>
 						<div class="col-md-7 shiyong shiyong1">
-							<div class="xianzhi6"><input type="text" placeholder="0" v-model="allCount"><span>张</span></div>
+							<div class="xianzhi6"><input type="number" placeholder="0" v-model="allCount" @change="faxing()"><span>张</span></div>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix"></div>
@@ -178,7 +177,7 @@
 				fullCondition: '', //金额
 				recude: '', //折扣
 				operatorId: '',
-				isLimit: '', //使用门槛
+				isLimit: '2', //使用门槛
 				isVaild: '', //有效期
 				userType: '', //使用用户
 				categoryType: '', //选择产品
@@ -204,8 +203,8 @@
 				isArrearsShow: false,
 				unfinishedProList: [],
 				projectObj: {},
-				begDate: '',
-				endDate: '',
+				startTime: '',
+				endTime: '',
 			};
 		},
 		methods: {
@@ -222,6 +221,40 @@
 					$(".xianzhi2 span").css('right', '-20px');
 				}
 			},
+			//限制领取
+			xianhzi() {
+				if (!(/(^[0-9]*[1-9][0-9]*$)/.test(this.limitGet))) {
+					alert("输入的不是正整数！")
+					this.limitGet = ''
+					return false
+				} else {
+
+				}
+			},
+			//发行量
+			faxing() {
+				if (!(/(^[0-9]*[1-9][0-9]*$)/.test(this.allCount))) {
+					alert("输入的不是正整数！")
+					this.allCount = ''
+					return false
+				} else {
+
+				}
+
+			},
+
+			manjian() {
+				// alert(2)
+				if (this.couponType == '2' && this.isLimit == '2') {
+					// alert(2)
+					if (this.recude - 5 > 0) {
+						alert("输入的金额数值不能大于5！")
+						this.recude = ''
+						return false
+
+					}
+				}
+			},
 			youxiao() {
 				console.log(this.isVaild)
 				if (this.isVaild == '') {
@@ -229,7 +262,7 @@
 					$(".start-time").hide();
 					$(".end-time").hide();
 					$(".xie").hide()
-				}else if (this.isVaild == '2') {
+				} else if (this.isVaild == '2') {
 					$(".data").hide();
 					$(".start-time").hide();
 					$(".end-time").hide();
@@ -252,14 +285,14 @@
 				this.$router.push({
 					path: '../../MP/Coupon/selectAdd'
 				})
-				localStorage.setItem('projectList',this.projectList);
-				localStorage.setItem('userList',this.userList);
-				localStorage.setItem('categoryList',this.categoryList);
+				localStorage.setItem('projectList', this.projectList);
+				localStorage.setItem('userList', this.userList);
+				localStorage.setItem('categoryList', this.categoryList);
 				localStorage.setItem('couponName', this.couponName)
 				localStorage.setItem('operatorId', this.operatorId)
 				localStorage.setItem('couponType', this.couponType)
-				localStorage.setItem('startTime', this.begDate)
-				localStorage.setItem('endTime', this.endDate)
+				localStorage.setItem('startTime', this.startTime)
+				localStorage.setItem('endTime', this.endTime)
 				localStorage.setItem('state', this.state)
 				localStorage.setItem('fullCondition', this.fullCondition)
 				localStorage.setItem('recude', this.recude)
@@ -275,14 +308,14 @@
 				this.$router.push({
 					path: '../../MP/Coupon/select-type'
 				})
-				localStorage.setItem('projectList',this.projectList);
-				localStorage.setItem('userList',this.userList);
-				localStorage.setItem('categoryList',this.categoryList);
+				localStorage.setItem('projectList', this.projectList);
+				localStorage.setItem('userList', this.userList);
+				localStorage.setItem('categoryList', this.categoryList);
 				localStorage.setItem('couponName', this.couponName)
 				localStorage.setItem('operatorId', this.operatorId)
 				localStorage.setItem('couponType', this.couponType)
-				localStorage.setItem('startTime', this.begDate)
-				localStorage.setItem('endTime', this.endDate)
+				localStorage.setItem('startTime', this.startTime)
+				localStorage.setItem('endTime', this.endTime)
 				localStorage.setItem('state', this.state)
 				localStorage.setItem('fullCondition', this.fullCondition)
 				localStorage.setItem('recude', this.recude)
@@ -298,14 +331,14 @@
 				this.$router.push({
 					path: '../../MP/Coupon/select-chan',
 				})
-				localStorage.setItem('projectList',this.projectList);
-				localStorage.setItem('userList',this.userList);
-				localStorage.setItem('categoryList',this.categoryList);
+				localStorage.setItem('projectList', this.projectList);
+				localStorage.setItem('userList', this.userList);
+				localStorage.setItem('categoryList', this.categoryList);
 				localStorage.setItem('couponName', this.couponName)
 				localStorage.setItem('operatorId', this.operatorId)
 				localStorage.setItem('couponType', this.couponType)
-				localStorage.setItem('startTime', this.begDate)
-				localStorage.setItem('endTime', this.endDate)
+				localStorage.setItem('startTime', this.startTime)
+				localStorage.setItem('endTime', this.endTime)
 				localStorage.setItem('state', this.state)
 				localStorage.setItem('fullCondition', this.fullCondition)
 				localStorage.setItem('recude', this.recude)
@@ -318,44 +351,55 @@
 			},
 			//the event of addtional button
 			addFee() {
+				// console.log(this.limitGet)
+				// console.log(this.allcount)
+				// return false
 				var formData = new FormData();
-				if(this.userType == '1'){
-					
-				}
-				else if(this.userType == '2'){
-					
-				}else if(this.userType == '3'){
+				if (this.userType == '1') {
+
+				} else if (this.userType == '2') {
+
+				} else if (this.userType == '3') {
 					var userList = localStorage.getItem('userList');
 					var stringResult1 = userList.split(',');
 					for (var i = 0; i < stringResult1.length; i++) {
 						formData.append('userList', stringResult1[i])
 					}
 				}
-				
-				if(this.categoryType == '1'){
-					
-				}
-				else if(this.categoryType == '2'){
+
+				if (this.categoryType == '1') {
+
+				} else if (this.categoryType == '2') {
 					var categoryList = localStorage.getItem('categoryList');
 					var stringResult2 = categoryList.split(',');
 					for (var i = 0; i < stringResult2.length; i++) {
 						formData.append('categoryList', stringResult2[i])
 					}
-				}else if(this.categoryType == '3'){
+				} else if (this.categoryType == '3') {
 					var projectList = localStorage.getItem('projectList');
 					var stringResult = projectList.split(',');
 					for (var i = 0; i < stringResult.length; i++) {
 						formData.append('projectList', stringResult[i])
 					}
 				}
+				if (this.isLimit == '1') {
+					formData.append('fullCondition', this.fullCondition)
+				} else {
+
+				}
+				if (this.allCount - this.limitGet < 0) {
+					alert("每人限领不能大于发行量！")
+					this.limitGet = ''
+					this.allCount = ''
+					return false
+				}
 				var url = this.url + '/couponController/addCoupon'
 				formData.append('couponName', this.couponName)
 				formData.append('operatorId', this.operatorId)
 				formData.append('couponType', this.couponType)
-				formData.append('startTime', this.begDate)
-				formData.append('endTime', this.endDate)
+				formData.append('startTime', this.startTime)
+				formData.append('endTime', this.endTime)
 				formData.append('state', this.state)
-				formData.append('fullCondition', this.fullCondition)
 				formData.append('recude', this.recude)
 				formData.append('isLimit', this.isLimit)
 				formData.append('isVaild', this.isVaild)
@@ -383,35 +427,35 @@
 					} else {
 						alert('请填写完整！')
 						return false
-						if(this.couponName == ''){
+						if (this.couponName == '') {
 							alert('请填写优惠券名称！')
 							return false
 						}
-						if(this.couponType == ''){
+						if (this.couponType == '') {
 							alert('请填写优惠券类型！')
 							return false
 						}
-						if(this.isLimit == ''){
+						if (this.isLimit == '') {
 							alert('请选择使用门槛！')
 							return false
 						}
-						if(this.isVaild == ''){
+						if (this.isVaild == '') {
 							alert('请选择有效期！')
 							return false
 						}
-						if(this.userType == ''){
+						if (this.userType == '') {
 							alert('请选择使用用户！')
 							return false
 						}
-						if(this.categoryType == ''){
+						if (this.categoryType == '') {
 							alert('请选择产品！')
 							return false
 						}
-						if(this.limitGet == ''){
+						if (this.limitGet == '') {
 							alert('请填写每人限领！')
 							return false
 						}
-						if(this.allCount == ''){
+						if (this.allCount == '') {
 							alert('请填写总发行量！')
 							return false
 						}
@@ -423,72 +467,72 @@
 			},
 
 		},
-		mounted(){
-			if(localStorage.getItem('couponName')){
+		mounted() {
+			if (localStorage.getItem('couponName')) {
 				this.couponName = localStorage.getItem('couponName');
 				localStorage.removeItem('couponName');
 			}
-			if(localStorage.getItem('operatorId')){
+			if (localStorage.getItem('operatorId')) {
 				this.operatorId = localStorage.getItem('operatorId');
 				localStorage.removeItem('operatorId');
 			}
-			if(localStorage.getItem('couponType')){
+			if (localStorage.getItem('couponType')) {
 				this.couponType = localStorage.getItem('couponType');
 				localStorage.removeItem('couponType');
 			}
-			if(localStorage.getItem('startTime')){
+			if (localStorage.getItem('startTime')) {
 				this.startTime = localStorage.getItem('startTime');
 				localStorage.removeItem('startTime');
 			}
-			if(localStorage.getItem('endTime')){
+			if (localStorage.getItem('endTime')) {
 				this.endTime = localStorage.getItem('endTime');
 				localStorage.removeItem('endTime');
 			}
-			if(localStorage.getItem('state')){
+			if (localStorage.getItem('state')) {
 				this.state = localStorage.getItem('state');
 				localStorage.removeItem('state');
 			}
-			if(localStorage.getItem('fullCondition')){
+			if (localStorage.getItem('fullCondition')) {
 				this.fullCondition = localStorage.getItem('fullCondition');
 				localStorage.removeItem('fullCondition');
 			}
-			if(localStorage.getItem('recude')){
+			if (localStorage.getItem('recude')) {
 				this.recude = localStorage.getItem('recude');
 				localStorage.removeItem('recude');
 			}
-			if(localStorage.getItem('isLimit')){
+			if (localStorage.getItem('isLimit')) {
 				this.isLimit = localStorage.getItem('isLimit');
 				localStorage.removeItem('isLimit');
 			}
-			if(localStorage.getItem('isVaild')){
+			if (localStorage.getItem('isVaild')) {
 				this.isVaild = localStorage.getItem('isVaild');
 				localStorage.removeItem('isVaild');
 			}
-			if(localStorage.getItem('userType')){
+			if (localStorage.getItem('userType')) {
 				this.userType = localStorage.getItem('userType');
 				localStorage.removeItem('userType');
 			}
-			if(localStorage.getItem('categoryType')){
+			if (localStorage.getItem('categoryType')) {
 				this.categoryType = localStorage.getItem('categoryType');
 				localStorage.removeItem('categoryType');
 			}
-			if(localStorage.getItem('limitGet')){
+			if (localStorage.getItem('limitGet')) {
 				this.limitGet = localStorage.getItem('limitGet');
 				localStorage.removeItem('limitGet');
 			}
-			if(localStorage.getItem('allCount')){
+			if (localStorage.getItem('allCount')) {
 				this.allCount = localStorage.getItem('allCount');
 				localStorage.removeItem('allCount');
 			}
-			if(localStorage.getItem('projectList')){
+			if (localStorage.getItem('projectList')) {
 				this.projectList = localStorage.getItem('projectList');
 				// localStorage.removeItem('projectList');
 			}
-			if(localStorage.getItem('categoryList')){
+			if (localStorage.getItem('categoryList')) {
 				this.categoryList = localStorage.getItem('categoryList');
 				// localStorage.removeItem('categoryList');
 			}
-			if(localStorage.getItem('userList')){
+			if (localStorage.getItem('userList')) {
 				this.userList = localStorage.getItem('userList');
 				// localStorage.removeItem('userList');
 			}
@@ -559,12 +603,12 @@
 
 	.shiyong .xianzhi3 {
 		float: left;
-		width: 195px;
+		width: 135px;
 	}
 
 	.shiyong .xianzhi3 .el-date-editor.el-input,
 	.el-date-editor.el-input__inner {
-		width: 195px;
+		width: 135px;
 	}
 
 	.xianhzi15 {

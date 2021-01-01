@@ -95,7 +95,7 @@
 		</div>
 		<div class="" id="datatable">
 			<el-table :data="tableData" style="width: 100%" :row-key="getRowKeys" border ref="multipleTable" @selection-change="handleSelectionChange">
-				<el-table-column type="selection" :reserve-selection="true" width="55" align="center"></el-table-column>
+				<el-table-column type="selection" :reserve-selection="true" width="55" align="center" :selectable='checkboxSelect'></el-table-column>
 				<el-table-column prop="storeName" label="店铺" width="100" align="center"></el-table-column>
 				<el-table-column prop="empName" label="咨询师" width="100" align="center"></el-table-column>
 				<el-table-column prop="empLevelName" label="咨询师等级" width="100" align="center"></el-table-column>
@@ -185,6 +185,13 @@
 		},
 
 		methods: {
+			checkboxSelect(row, rowIndex) {
+				if (rowIndex == 0) {
+					return true // 禁用
+				} else {
+					return true // 不禁用
+				}
+			},
 			getRowKeys(row) {
 				return row.proId;
 				this.$refs.projectList.clearSelection();
@@ -329,7 +336,8 @@
 				}
 
 				this.showSelect = false
-				console.log('getAllAuditPage')
+				var userList = localStorage.getItem('projectList');
+				var stringResult2 = userList.split(',');
 				if (!this.isBlank(this.begCreateDate)) {
 					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
 				}
@@ -365,6 +373,11 @@
 						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.records
+						for (let i = 0; i < this.tableData.length; i++) {
+							if (stringResult2.includes(this.tableData[i].proId + '')) {
+								this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
+							}
+						}
 					} else {
 						alert(res.retMsg)
 					}
@@ -384,7 +397,6 @@
 			handleCurrentChange(pageNum) {
 				this.page = pageNum
 				this.getAllAuditPage()
-				this.newprojectList = []
 			},
 			// 每页条数变化时触发
 			handleSizeChange(pageSize) {
@@ -498,6 +510,10 @@
 		border: none;
 		margin-bottom: 20px;
 		background-color: rgb(213, 170, 22);
+	}
+	.el-checkbox__input.is-disabled.is-checked .el-checkbox__inner{
+		background-color: #409eff!important;
+		border-color: #409eff!important;
 	}
 
 	#datatable {

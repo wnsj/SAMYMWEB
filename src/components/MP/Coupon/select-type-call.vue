@@ -10,7 +10,7 @@
 		</div>
 		<div>{{info}}</div>
 		<div class="" id="datatable">
-			<el-table :data="tableData" style="width: 100%" border :row-key="getRowKeys" ref="multipleTable" @selection-change="handleSelectionChange">
+			<el-table :data="selectlist" style="width: 100%" border :row-key="getRowKeys" ref="multipleTable" @selection-change="handleSelectionChange">
 				<el-table-column type="selection" width="100" align="center" :reserve-selection="true" :selectable='checkboxSelect' :class="showSelect?'false':'true'"></el-table-column>
 				<el-table-column prop="typeName" label="类型名称" width="230" align="center"></el-table-column>
 				<el-table-column prop="state" :formatter="resetAuditState" label="使用状态" width="230" align="center"></el-table-column>
@@ -32,7 +32,8 @@
 			return {
 				showSelect: true,
 				tableData: [],
-				addClass: false
+				addClass: false,
+				selectlist:[]
 			};
 		},
 		methods: {
@@ -88,9 +89,6 @@
 					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
 				}
 				var url = this.url + '/couponController/selectProductType'
-				var formData = new FormData();
-				formData.append('name', this.name);
-				formData.append('state', this.state);
 				this.$ajax({
 					method: 'GET',
 					url: url,
@@ -98,7 +96,6 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					param: formData,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
@@ -108,6 +105,7 @@
 						for (let i = 0; i < this.tableData.length; i++) {
 							if (stringResult.includes(this.tableData[i].prtId + '')) {
 								 this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
+								 this.selectlist.push(this.tableData[i])
 								}
 						}
 					} else {

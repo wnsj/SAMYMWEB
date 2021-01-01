@@ -147,7 +147,7 @@
 									<div class="jia"><span>￥</span>{{item.recude}}</div>
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
-									<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
+									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
 									<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
 									<div class="niucha">
 										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
@@ -167,7 +167,7 @@
 										<div class="jia"><span>￥</span>{{item.recude}}</div>
 										<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 										<div class="titleSY">{{item.couponName}}</div>
-										<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
+										<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
 										<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
 										<div class="niucha">
 											<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
@@ -630,8 +630,8 @@
 						var res = response.data
 						console.log(res)
 						if (res.retCode == '0000') {
-							this.unfinishedProLists = res.retData['1']
-							this.unfinishedProLists1 = res.retData['2']
+                            this.unfinishedProLists1 = res.retData['1']
+                            this.unfinishedProLists = res.retData['2']
 							if (this.unfinishedProLists != '') {
 								$(".youa").show();
 							} else {

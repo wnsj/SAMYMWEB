@@ -74,18 +74,12 @@
 							<store ref="store" @storeChange='storeChange'></store>
 						</div>
 					</div>
-				</div>
-
-				<div class="row newRow">
-
-					<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float: right;">
-						<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="exportTable()">导出
-						</button>
-						<button type="button" class="btn btn-info pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="reset()">重置
-						</button>
-						<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getConsumRejectFind(1)">查询
-						</button>
-					</div>
+					<button type="button" style="margin-top: 20px;" class="btn btn-warning pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="exportTable()">导出
+					</button>
+					<button type="button" style="margin-top: 20px;" class="btn btn-info pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="reset()">重置
+					</button>
+					<button type="button" style="margin-top: 20px;" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getConsumRejectFind(1)">查询
+					</button>
 				</div>
 
 			</div>
@@ -168,8 +162,8 @@
 		},
 		data() {
 			return {
-				couponType:'',
-				isUseCoupon:'',
+				couponType: '',
+				isUseCoupon: '',
 				memName: '',
 				shopowner: '',
 				fixedHeader: false,
@@ -199,7 +193,7 @@
 			changeData(newVal, oldVal) {
 				this.selectDataFlag = true
 			},
-			retype(row, column, cellValue, index){
+			retype(row, column, cellValue, index) {
 				switch (cellValue) {
 					case 1:
 						return '满折券'
@@ -311,8 +305,8 @@
 						endTime: this.endCreateDate,
 						shopowner: this.shopowner,
 						page: this.current,
-						isUseCoupon:this.isUseCoupon,
-						couponType:this.couponType,
+						isUseCoupon: this.isUseCoupon,
+						couponType: this.couponType,
 						pageSize: this.pageSize
 					},
 					dataType: 'json',

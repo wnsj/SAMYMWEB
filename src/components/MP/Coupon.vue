@@ -3,7 +3,7 @@
 
 	<div class="wraper">
 		<div class="col-md-12 col-lg-12 main-title">
-			<h1 class="titleCss">退费统计</h1>
+			<h1 class="titleCss">优惠券管理</h1>
 		</div>
 		<el-collapse-transition>
 			<div v-show="showSelect">
@@ -21,7 +21,10 @@
 							<p class="end-aline col-md-11 col-lg-11 jh-pa-1">开始时间</p><span class="sign-left">:</span>
 						</div>
 						<div class="col-md-7 col-lg-7">
-							<dPicker class="wd100" v-model="startTime"></dPicker>
+							<el-date-picker v-model="startTime" value-format="yyyy-MM-dd" format="yyyy-MM-dd" type="datetime"
+							 placeholder="开始时间">
+							</el-date-picker>
+							<!-- <dPicker class="wd100" v-model="startTime"></dPicker> -->
 						</div>
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -29,7 +32,10 @@
 							<p class="end-aline col-md-11 col-lg-11 jh-pa-1">结束时间</p><span class="sign-left">:</span>
 						</div>
 						<div class="col-md-7 col-lg-7">
-							<dPicker class="wd100" v-model="endTime"></dPicker>
+							<el-date-picker v-model="endTime" value-format="yyyy-MM-dd" format="yyyy-MM-dd" type="datetime"
+							 placeholder="结束时间">
+							</el-date-picker>
+							<!-- <dPicker class="wd100" v-model="endTime"></dPicker> -->
 						</div>
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -37,7 +43,10 @@
 							<p class="end-aline col-md-11 col-lg-11 jh-pa-1">创建时间</p><span class="sign-left">:</span>
 						</div>
 						<div class="col-md-7 col-lg-7">
-							<dPicker class="wd100" v-model="createTime"></dPicker>
+							<el-date-picker v-model="createTime" value-format="yyyy-MM-dd" format="yyyy-MM-dd" type="datetime"
+							 placeholder="创建时间">
+							</el-date-picker>
+							<!-- <dPicker class="wd100" v-model="createTime"></dPicker> -->
 						</div>
 					</div>
 				</div>
@@ -59,15 +68,16 @@
 							<p class="end-aline col-md-11 col-lg-11">产品类型</p><span class="sign-left">:</span>
 						</div>
 						<div class="col-md-7 col-lg-7">
-							<select class="form-control" v-model="productType">
+							<channelType @sendChannelId="getChannelId"></channelType>
+							<!-- <select class="form-control" v-model="productType">
 								<option value="">--请选择--</option>
-								<option value="0">普通</option>
-								<option value="1">月卡</option>
-								<option value="2">季卡</option>
-								<option value="3">半年卡</option>
-								<option value="4">年卡</option>
-								<option value="5">测评</option>
-							</select>
+								<option value="1">普通</option>
+								<option value="2">月卡</option>
+								<option value="3">季卡</option>
+								<option value="4">半年卡</option>
+								<option value="5">年卡</option>
+								<option value="6">测评</option>
+							</select> -->
 						</div>
 					</div>
 					<!-- <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
@@ -83,11 +93,11 @@
                         </select>
                     </div>
                 </div> -->
-
-					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getRefundAllFind()">查询
-					</button>
 					<button type="button" class="btn btn-info pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="adSort" v-has="'SAMY:MP:Coupon:Add'">添加
 					</button>
+					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getRefundAllFind()">查询
+					</button>
+
 				</div>
 
 			</div>
@@ -100,7 +110,7 @@
 			<el-table :data="tableData" style="width: 100%" border>
 				<el-table-column prop="couId" label="优惠券ID" width="80" align="center"></el-table-column>
 				<el-table-column prop="couponName" label="优惠券名称" width="100" align="center"></el-table-column>
-				<el-table-column prop="couponTypeName" label="优惠券类型" :formatter="couponType" width="100" align="center"></el-table-column>
+				<el-table-column prop="couponTypeName" label="优惠券类型"  width="100" align="center"></el-table-column>
 				<el-table-column label="金额(￥)" width="80" align="center">
 					<template slot-scope="scope">{{scope.row.couponType==1?"/":scope.row.recude}}</template>
 				</el-table-column>
@@ -125,7 +135,7 @@
 
 			<el-row style="margin-top: 20px;">
 				<el-col :span="24">
-					<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="current"
+					<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="pageNum"
 					 :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
 					</el-pagination>
 				</el-col>
@@ -142,22 +152,18 @@
 	import {
 		init
 	} from '@/../static/js/common.js'
-	import dPicker from 'vue2-datepicker'
+	import channelType from '../common/project-type.vue'
 	export default {
 		components: {
-			dPicker
+			channelType
 		},
 		data() {
 			return {
 				couponName: '',
-				accountType: this.accountType(),
-				name: '',
 				tableData: [],
-				checkedValue: -1,
-				objectContent: {},
 				//分页需要的数据
 				pages: '', //总页数
-				current: 1, //当前页码
+				pageNum: 1, //当前页码
 				pageSize: 10, //一页显示的数量
 				total: 0, //数据的数量
 				startTime: '',
@@ -166,22 +172,17 @@
 				createTime: '',
 				couponType: '',
 				operatorId: '',
-				isMem: '',
 				productType: '',
 				showSelect: true,
-				begCreateDate: '',
-				endCreateDate: '',
 				addClass: false,
 				selectDataFlag: false
 			};
 		},
-		watch: {
-			startTime: 'changeData',
-			endTime: 'changeData',
-			createTime: 'changeData'
-
-		},
 		methods: {
+			//产品分类
+			getChannelId(val){
+				this.productType = val
+			},
 			//查看优惠券
 			toAdds(couId) {
 				this.$router.push({
@@ -201,6 +202,7 @@
 					}
 				})
 			},
+			//添加优惠券
 			adSort() {
 				this.$router.push({
 					path: '../MP/Coupon/CouponAdd'
@@ -209,12 +211,6 @@
 			changeData(newVal, oldVal) {
 				this.selectDataFlag = true
 			},
-
-			// couponType(){
-			// 	if(this.couponType == 1){
-
-			// 	}
-			// },
 			resetDate(row, column, cellValue, index) {
 				if (cellValue !== '' && cellValue !== null && cellValue !== undefined) {
 					return cellValue.substring(0, 10)
@@ -237,23 +233,12 @@
 			//check the list of department
 			getRefundAllFind() {
 				if (this.selectDataFlag) {
-					this.current = 1
+					this.pageNum = 1
 				}
-
 				this.showSelect = false
-				console.log('getRefundAllFind')
-				if (!this.isBlank(this.startTime)) {
-					this.startTime = this.moment(this.startTime, 'YYYY-MM-DD 00:00:00.000')
-				}
-				if (!this.isBlank(this.endTime)) {
-					this.endTime = this.moment(this.endTime, 'YYYY-MM-DD 23:59:00.000')
-				}
-				if (!this.isBlank(this.createTime)) {
-					this.createTime = this.moment(this.createTime, 'YYYY-MM-DD 23:59:00.000')
-				}
 				var url = this.url + '/couponController/selectAllCoupon'
 				var formData = new FormData();
-				formData.append('pageNum', this.current);
+				formData.append('pageNum', this.pageNum);
 				formData.append('pageSize', this.pageSize);
 				formData.append('couponName', this.couponName);
 				formData.append('startTime', this.startTime);
@@ -275,7 +260,7 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
-						this.current = res.retData.pageNum //当前页码
+						this.pageNum = res.retData.pageNum //当前页码
 						this.pageSize = res.retData.pageSize //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.list
@@ -291,21 +276,17 @@
 				this.selectDataFlag = false;
 
 			},
-
 			// 翻页
 			handleCurrentChange(pageNum) {
-				this.current = pageNum
+				this.pageNum = pageNum
 				this.getRefundAllFind()
 			},
 			// 每页条数变化时触发
 			handleSizeChange(pageSize) {
-				this.current = 1
+				this.pageNum = 1
 				this.pageSize = pageSize
 				this.getRefundAllFind()
 			},
-
-
-
 			handleScroll(e) {
 				var self = this
 				var etop = e.target.scrollTop
@@ -340,6 +321,9 @@
 </script>
 
 <style scoped="scoped">
+	.el-date-editor.el-input,.el-date-editor.el-input__inner {
+		width: 135px;
+	}
 	.el-button.chakan {
 		width: 63px;
 		height: 30px;

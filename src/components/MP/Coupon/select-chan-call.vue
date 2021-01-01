@@ -9,7 +9,7 @@
 			<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 		</div>
 		<div class="" id="datatable">
-			<el-table :data="tableData" style="width: 100%" :row-key="getRowKeys" border ref="multipleTable" @selection-change="handleSelectionChange">
+			<el-table :data="selectchan" style="width: 100%" :row-key="getRowKeys" border ref="multipleTable" @selection-change="handleSelectionChange">
 				<el-table-column type="selection" width="55" align="center" label="全选" :reserve-selection="true" :selectable='checkboxSelect'></el-table-column>
 				<el-table-column prop="storeName" label="店铺" width="100" align="center"></el-table-column>
 				<el-table-column prop="empName" label="咨询师" width="100" align="center"></el-table-column>
@@ -74,7 +74,8 @@
 				endCreateDate: '',
 				addClass: false,
 				empDisable: false,
-				selectDataFlag: false
+				selectDataFlag: false,
+				selectchan:[]
 			};
 		},
 		watch: {
@@ -211,14 +212,7 @@
 					},
 					data: {
 						page: this.page,
-						pageSize: this.pageSize,
-						storeId: this.storeId,
-						proName: this.proName,
-						empId: this.empId,
-						isuse: this.isuse,
-						empLevel: this.empLevel,
-						isRefund: this.isRefund,
-						proType: this.proType
+						pageSize: this.pageSize
 					},
 					dataType: 'json',
 				}).then((response) => {
@@ -233,6 +227,7 @@
 						for (let i = 0; i < this.tableData.length; i++) {
 							if (stringResult2.includes(this.tableData[i].proId + '')) {
 								this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
+								this.selectchan.push(this.tableData[i])
 							}
 						}
 					} else {

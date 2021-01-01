@@ -13,7 +13,7 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">优惠券名称</label><span class="sign-left">:</span>
 						<div class="col-md-7  ">
-							<input type="text" class="form-control" v-model="couponName">
+							<input type="text" class="form-control" v-model="couponName" maxlength="12">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix">
@@ -58,8 +58,8 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">使用门槛</label><span class="sign-left">:</span>
 						<div class="col-md-7" v-model="isLimit">
-							<div class="xianzhi wuxian"><input class="xian" type="radio" :disabled="true" name="radioGroup1" v-model="isLimit" value="2"/><label class="xian1">无限制</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" :disabled="true" name="radioGroup1" v-model="isLimit" value="1"/><label class="xian1">满</label></div>
+							<div class="xianzhi wuxian"><input class="xian" type="radio" :disabled="true" name="radioGroup1" v-model="isLimit" value="2"/><label class="xian1" v-model="isLimit">无限制</label></div>
+							<div class="xianzhi1"><input class="xian" type="radio" :disabled="true" name="radioGroup1" v-model="isLimit" value="1"/><label class="xian1" v-model="isLimit">满</label></div>
 							<div class="xianzhi2"><input type="text" placeholder="0" :disabled="true" v-model="fullCondition"><span>元可用</span></div>
 						</div>
 					</div>
@@ -77,15 +77,15 @@
 						<b>*</b>
 						<label class="col-md-1 control-label text-right nopad end-aline">有效期</label><span class="sign-left">:</span>
 						<div class="col-md-8 shiyong shiyong1" v-model="isVaild">
-							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup3" value="1" v-model="isVaild" /><label class="xian1">永久有效</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label class="xian1">日期范围：</label></div>
+							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup3" value="1" v-model="isVaild" /><label class="xian1" v-model="isVaild">永久有效</label></div>
+							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label class="xian1" v-model="isVaild">日期范围：</label></div>
 							<div class="xianzhi3">
-								<el-date-picker v-model="begDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="开始时间">
+								<el-date-picker v-model="begDate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" type="datetime" placeholder="开始时间">
 								</el-date-picker>
 							</div>
 							<div class="xianhzi15">~</div>
 							<div class="xianzhi3">
-								<el-date-picker v-model="endDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="结束时间">
+								<el-date-picker v-model="endDate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" type="datetime" placeholder="结束时间">
 								</el-date-picker>
 							</div>
 							<!-- <div class="xianzhi4"><input type="checkbox"><label class="xian1">自领取之日</label></div>
@@ -96,9 +96,9 @@
 						<b>*</b>
 						<label class="col-md-1 control-label text-right nopad end-aline">使用用户</label><span class="sign-left">:</span>
 						<div class="col-md-8 shiyong shiyong1" v-model="userType">
-							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="1"  /><label class="xian1">全体用户</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="2"  /><label class="xian1">新用户</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="3"  /><label class="xian1">指定用户</label></div>
+							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="1"  /><label class="xian1" v-model="userType">全体用户</label></div>
+							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="2"  /><label class="xian1" v-model="userType">新用户</label></div>
+							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="3"  /><label class="xian1" v-model="userType">指定用户</label></div>
 							<div class="xianzhi3_1">
 								<p style="cursor: pointer;" v-on:click="seles" v-has="'SAMY:MP:Coupon:selectAdd'">选择用户</p>
 							</div>
@@ -108,13 +108,13 @@
 						<b>*</b>
 						<label class="col-md-1 control-label text-right nopad end-aline">选择产品</label><span class="sign-left">:</span>
 						<div class="col-md-8 shiyong shiyong1" v-model="categoryType">
-							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="1" /><label class="xian1">全品类</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="2"/><label class="xian1">指定分类</label></div>
+							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="1" /><label class="xian1" v-model="categoryType">全品类</label></div>
+							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="2"/><label class="xian1" v-model="categoryType">指定分类</label></div>
 							<div class="xianzhi3_1">
 								<p style="cursor: pointer;" v-on:click="xus" v-has="'SAMY:MP:Coupon:select-type'">选择分类</p>
 							</div>
 							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="3"  @click="radioClick($event,item)"/><label
-								 class="xian1">指定产品</label></div>
+								 class="xian1" v-model="categoryType">指定产品</label></div>
 							<div class="xianzhi3_1">
 								<p style="cursor: pointer;" v-on:click="ots" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p>
 							</div>
@@ -124,7 +124,7 @@
 						<b>*</b>
 						<label class="col-md-3 control-label text-right nopad end-aline">每人限领/限用</label><span class="sign-left">:</span>
 						<div class="col-md-7 shiyong shiyong1">
-							<div class="xianzhi6"><input type="text" placeholder="0" v-model="limitGet"><span>张</span></div>
+							<div class="xianzhi6"><input type="text" placeholder="0" v-model="limitGet" @change="xianzhi()"><span>张</span></div>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix"></div>
@@ -140,7 +140,7 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">总发行量</label><span class="sign-left">:</span>
 						<div class="col-md-7 shiyong shiyong1">
-							<div class="xianzhi6"><input type="text" placeholder="0" v-model="allCount"><span>张</span></div>
+							<div class="xianzhi6"><input type="text" placeholder="0" v-model="allCount" @change="faxing()"><span>张</span></div>
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix"></div>
@@ -156,12 +156,7 @@
 </template>
 
 <script>
-	import dPicker from 'vue2-datepicker'
-
 	export default {
-		components: {
-			dPicker
-		},
 		data() {
 			return {
 				couponName: '', //优惠券名称
@@ -228,15 +223,29 @@
 					path: '../../MP/Coupon/select-chan'
 				})
 			},
+			//限制领取
+			xianhzi() {
+				if (!(/(^[0-9]*[1-9][0-9]*$)/.test(this.limitGet))) {
+					alert("输入的不是正整数！")
+					this.limitGet = ''
+					return false
+				} else {
+			
+				}
+			},
+			//发行量
+			faxing() {
+				if (!(/(^[0-9]*[1-9][0-9]*$)/.test(this.allCount))) {
+					alert("输入的不是正整数！")
+					this.allCount = ''
+					return false
+				} else {
+			
+				}
+			
+			},
 			//查询优惠券
 			addFee(couponId) {
-				if (this.dateArr.length > 0 && !this.isBlank(this.dateArr[0]) && !this.isBlank(this.dateArr[1])) {
-					this.begDate = this.moment(this.dateArr[0], 'YYYY-MM-DD 00:00:00')
-					this.endDate = this.moment(this.dateArr[1], 'YYYY-MM-DD 23:59:59')
-				} else {
-					this.begDate = ''
-					this.endDate = ''
-				}
 				var url = this.url + '/couponController/selectCouponById'
 				var formData = new FormData();
 				formData.append('couponId', couponId);
@@ -294,6 +303,12 @@
 			updataFee() {
 				this.couId = ''
 				this.couId = this.$route.query.couId
+				if (this.allCount - this.limitGet < 0) {
+					alert("每人限领不能大于发行量！")
+					this.limitGet = ''
+					this.allCount = ''
+					return false
+				}
 				var url = this.url + '/couponController/updateCoupon'
 				var formData = new FormData();
 				formData.append('couId', this.couId);

@@ -148,9 +148,9 @@
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
 									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
-									<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+									<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
 									<div class="niucha">
-										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span>
 									</div>
 									<div class="wuxian">永久有效</div>
 									<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
@@ -164,7 +164,7 @@
 							</div>
 							<ol>
 								<li @click="dianji1(item)" v-for="item in unfinishedProLists1">
-										<div class="jia"><span>￥</span>{{item.recude}}</div>
+										<div class="jia">{{item.recude}}<span>折</span></div>
 										<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 										<div class="titleSY">{{item.couponName}}</div>
 										<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
@@ -630,8 +630,8 @@
 						var res = response.data
 						console.log(res)
 						if (res.retCode == '0000') {
-                            this.unfinishedProLists1 = res.retData['1']
-                            this.unfinishedProLists = res.retData['2']
+							this.unfinishedProLists = res.retData['1']
+							this.unfinishedProLists1 = res.retData['2']
 							if (this.unfinishedProLists != '') {
 								$(".youa").show();
 							} else {

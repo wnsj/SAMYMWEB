@@ -36,7 +36,7 @@
 		<div class="" id="datatable">
 			<el-table :data="tableData" style="width: 100%" :row-key="getRowKeys" border class="table" ref="multipleTable"
 			 @selection-change="handleSelectionChange">
-				<el-table-column type="selection" width="100" align="center" label="全选" :reserve-selection="true"></el-table-column>
+				<el-table-column type="selection" width="100" align="center" label="全选" :reserve-selection="true" :selectable='checkboxSelect'></el-table-column>
 				<el-table-column prop="typeName" label="类型名称" width="230" align="center"></el-table-column>
 				<el-table-column prop="state" :formatter="resetAuditState" label="使用状态" width="230" align="center"></el-table-column>
 			</el-table>
@@ -78,6 +78,13 @@
 		},
 
 		methods: {
+			checkboxSelect(row, rowIndex) {
+				if (rowIndex == 0) {
+					return true // 禁用
+				} else {
+					return true // 不禁用
+				}
+			},
 			getRowKeys(row) {
 				return row.prtId;
 				this.$refs.categoryList.clearSelection();
@@ -153,6 +160,8 @@
 			//check the list of department
 			getAllAuditPage() {
 				this.showSelect = false
+				var categoryList = localStorage.getItem('categoryList');
+				var stringResult = categoryList.split(',');
 				var url = this.url + '/couponController/selectProductType?name=' + this.name + '&state=' + this.state
 				// var formData = new FormData();
 				// formData.append('name', this.name);
@@ -171,6 +180,11 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						this.tableData = res.retData
+						for (let i = 0; i < this.tableData.length; i++) {
+							if (stringResult.includes(this.tableData[i].prtId + '')) {
+								 this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
+								}
+						}
 					} else {
 						alert(res.retMsg)
 					}

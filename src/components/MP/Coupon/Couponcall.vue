@@ -80,13 +80,11 @@
 							<div class="xianzhi"><input class="xian" :disabled="true" type="radio" name="radioGroup3" value="1" v-model="isVaild" /><label class="xian1">永久有效</label></div>
 							<div class="xianzhi1"><input class="xian" :disabled="true" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label class="xian1">日期范围：</label></div>
 							<div class="xianzhi3">
-								<el-date-picker  disabled v-model="begDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="开始时间">
-								</el-date-picker>
+								<dPicker class="wd100" v-model="startTime" disabled></dPicker>
 							</div>
 							<div class="xianhzi15">~</div>
 							<div class="xianzhi3">
-								<el-date-picker disabled v-model="endDate" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="结束时间">
-								</el-date-picker>
+								<dPicker class="wd100" v-model="endTime" disabled></dPicker>
 							</div>
 							<!-- <div class="xianzhi4"><input type="checkbox"><label class="xian1">自领取之日</label></div>
 						<div class="xianzhi5"><input type="text" placeholder="0"><span>天内</span></div> -->
@@ -155,7 +153,11 @@
 </template>
 
 <script>
+	import dPicker from 'vue2-datepicker'
 	export default {
+		components: {
+			dPicker
+		},
 		data() {
 			return {
 				userList: [],
@@ -194,8 +196,8 @@
 				isArrearsShow: false,
 				unfinishedProList: [],
 				projectObj: {},
-				begDate: '',
-				endDate: '',
+				startTime: '',
+				endTime: '',
 			};
 		},
 		methods: {
@@ -226,6 +228,12 @@
 			},
 			//the event of addtional button
 			addFee(couponId) {
+				if (!this.isBlank(this.startTime)) {
+				    this.startTime = this.moment(this.startTime, "YYYY-MM-DD 00:00:00")
+				}
+				if (!this.isBlank(this.endTime)) {
+				    this.endTime = this.moment(this.endTime, "YYYY-MM-DD 23:59:59")
+				}
 				var url = this.url + '/couponController/selectCouponById'
 				var formData = new FormData();
 				formData.append('couponId', couponId);
@@ -243,8 +251,8 @@
 					if (res.retCode == '0000') {
 						this.couponName = res.retData.couponName; //优惠券名称
 						this.state = res.retData.state; //状态
-						this.begDate = res.retData.startTime;
-						this.endDate = res.retData.endTime;
+						this.startTime = res.retData.startTime;
+						this.endTime = res.retData.endTime;
 						this.couponType = res.retData.couponType; //优惠券类型
 						this.fullCondition = res.retData.fullCondition; //金额
 						this.recude = res.retData.recude; //折扣
@@ -314,7 +322,7 @@
 	.shiyong .xianzhi6{float: left;width:120px;margin-left: 10px;margin-top: 5px;}
 	.shiyong .xianzhi3 {
 		float: left;
-		width: 195px;
+		width: 115px;
 	}
 	.shiyong .xianzhi3  .el-date-editor.el-input, .el-date-editor.el-input__inner{
 		width: 195px;

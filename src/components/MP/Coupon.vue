@@ -21,10 +21,7 @@
 							<p class="end-aline col-md-11 col-lg-11 jh-pa-1">开始时间</p><span class="sign-left">:</span>
 						</div>
 						<div class="col-md-7 col-lg-7">
-							<el-date-picker v-model="startTime" value-format="yyyy-MM-dd" format="yyyy-MM-dd" type="datetime"
-							 placeholder="开始时间">
-							</el-date-picker>
-							<!-- <dPicker class="wd100" v-model="startTime"></dPicker> -->
+							<dPicker class="wd100" v-model="startTime"></dPicker>
 						</div>
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -32,10 +29,7 @@
 							<p class="end-aline col-md-11 col-lg-11 jh-pa-1">结束时间</p><span class="sign-left">:</span>
 						</div>
 						<div class="col-md-7 col-lg-7">
-							<el-date-picker v-model="endTime" value-format="yyyy-MM-dd" format="yyyy-MM-dd" type="datetime"
-							 placeholder="结束时间">
-							</el-date-picker>
-							<!-- <dPicker class="wd100" v-model="endTime"></dPicker> -->
+							<dPicker class="wd100" v-model="endTime"></dPicker>
 						</div>
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -43,10 +37,7 @@
 							<p class="end-aline col-md-11 col-lg-11 jh-pa-1">创建时间</p><span class="sign-left">:</span>
 						</div>
 						<div class="col-md-7 col-lg-7">
-							<el-date-picker v-model="createTime" value-format="yyyy-MM-dd" format="yyyy-MM-dd" type="datetime"
-							 placeholder="创建时间">
-							</el-date-picker>
-							<!-- <dPicker class="wd100" v-model="createTime"></dPicker> -->
+							<dPicker class="wd100" v-model="createTime"></dPicker>
 						</div>
 					</div>
 				</div>
@@ -69,33 +60,11 @@
 						</div>
 						<div class="col-md-7 col-lg-7">
 							<channelType @sendChannelId="getChannelId"></channelType>
-							<!-- <select class="form-control" v-model="productType">
-								<option value="">--请选择--</option>
-								<option value="1">普通</option>
-								<option value="2">月卡</option>
-								<option value="3">季卡</option>
-								<option value="4">半年卡</option>
-								<option value="5">年卡</option>
-								<option value="6">测评</option>
-							</select> -->
 						</div>
 					</div>
-					<!-- <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
-                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-                        <p class="end-aline col-md-11 col-lg-11 jh-pa-1">审核状态</p><span
-                        class="sign-left">:</span>
-                    </div>
-                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <select name="" id="" class="form-control">
-                            <option value="0">未选择</option>
-                            <option value="1">通过</option>
-                            <option value="2">未通过</option>
-                        </select>
-                    </div>
-                </div> -->
 					<button type="button" class="btn btn-info pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="adSort" v-has="'SAMY:MP:Coupon:Add'">添加
 					</button>
-					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getRefundAllFind()">查询
+					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getRefundAllFind(1)">查询
 					</button>
 
 				</div>
@@ -135,7 +104,7 @@
 
 			<el-row style="margin-top: 20px;">
 				<el-col :span="24">
-					<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="pageNum"
+					<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="curret"
 					 :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
 					</el-pagination>
 				</el-col>
@@ -152,10 +121,12 @@
 	import {
 		init
 	} from '@/../static/js/common.js'
+	import dPicker from 'vue2-datepicker'
 	import channelType from '../common/project-type.vue'
 	export default {
 		components: {
-			channelType
+			channelType,
+			dPicker
 		},
 		data() {
 			return {
@@ -163,7 +134,7 @@
 				tableData: [],
 				//分页需要的数据
 				pages: '', //总页数
-				pageNum: 1, //当前页码
+				curret: 1, //当前页码
 				pageSize: 10, //一页显示的数量
 				total: 0, //数据的数量
 				startTime: '',
@@ -208,15 +179,11 @@
 					path: '../MP/Coupon/CouponAdd'
 				})
 			},
-			changeData(newVal, oldVal) {
-				this.selectDataFlag = true
-			},
 			resetDate(row, column, cellValue, index) {
 				if (cellValue !== '' && cellValue !== null && cellValue !== undefined) {
 					return cellValue.substring(0, 10)
 				}
 			},
-
 			dataOpen() {
 				if (this.showSelect) return
 				this.showSelect = true;
@@ -224,21 +191,27 @@
 			dataClose() {
 				this.showSelect = !this.showSelect
 				this.addClass = true;
-
 				setTimeout(() => {
 					this.addClass = false;
 				}, 400)
 			},
-
-			//check the list of department
-			getRefundAllFind() {
-				if (this.selectDataFlag) {
+			getRefundAllFind(startNum) {
+				if (startNum == 1) {
 					this.pageNum = 1
 				}
 				this.showSelect = false
+				if (!this.isBlank(this.startTime)) {
+				    this.startTime = this.moment(this.startTime, "YYYY-MM-DD 00:00:00")
+				}
+				if (!this.isBlank(this.endTime)) {
+				    this.endTime = this.moment(this.endTime, "YYYY-MM-DD 23:59:59")
+				}
+				if (!this.isBlank(this.createTime)) {
+				    this.createTime = this.moment(this.createTime, "YYYY-MM-DD 23:59:59")
+				}
 				var url = this.url + '/couponController/selectAllCoupon'
 				var formData = new FormData();
-				formData.append('pageNum', this.pageNum);
+				formData.append('pageNum', this.curret);
 				formData.append('pageSize', this.pageSize);
 				formData.append('couponName', this.couponName);
 				formData.append('startTime', this.startTime);
@@ -260,11 +233,10 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
-						this.pageNum = res.retData.pageNum //当前页码
+						this.curret = res.retData.pageNum //当前页码
 						this.pageSize = res.retData.pageSize //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.list
-
 					} else {
 						alert(res.retMsg)
 					}
@@ -272,20 +244,18 @@
 				}).catch((error) => {
 					console.log('请求失败处理')
 				});
-
 				this.selectDataFlag = false;
-
 			},
 			// 翻页
 			handleCurrentChange(pageNum) {
-				this.pageNum = pageNum
+				this.curret = pageNum
 				this.getRefundAllFind()
 			},
 			// 每页条数变化时触发
 			handleSizeChange(pageSize) {
-				this.pageNum = 1
+				this.curret = 1
 				this.pageSize = pageSize
-				this.getRefundAllFind()
+				this.getRefundAllFind(1)
 			},
 			handleScroll(e) {
 				var self = this
@@ -313,10 +283,11 @@
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll, true);
 			init();
-		},
-		created() {
-			this.getRefundAllFind()
+			this.getRefundAllFind();
 		}
+		// created() {
+		// 	this.getRefundAllFind()
+		// }
 	}
 </script>
 

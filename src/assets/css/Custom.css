@@ -1,47 +1,47 @@
 @charset "utf-8";
-.tab-pane .you {
+.tab-pane .you1 {
 	border: 1px solid #DDDDDD;
 	width: 100%;
 	overflow: auto;
 	padding-bottom: 20px;
 }
 
-.you .man1 {
+.you1 .man1 {
 	margin-top: 10px;
 	position: relative;
 	overflow: auto;
 }
 
-.you .man1 .gou2 {
+.you1 .man1 .gou2 {
 	position: absolute;
 	width: 300px;
 	display: none;
 }
 
-.you .man2 .gou2 {
+.you1 .man2 .gou2 {
 	position: absolute;
 	width: 300px;
 	display: none;
 }
 
-.you .man2 {
+.you1 .man2 {
 	margin-top: 30px;
 	position: relative;
 	overflow: auto;
 }
 
-.you .man {
+.you1 .man {
 	margin-top: 20px;
 	overflow: auto;
 }
 
-.you .man .manjian {
+.you1 .man .manjian {
 	width: 100%;
 	background: #DDDDDD;
 	height: 1px;
 }
 
-.you .man .manjian1 {
+.you1 .man .manjian1 {
 	width: 50px;
 	font-size: 16px;
 	background: #fff;
@@ -98,7 +98,7 @@
 	border-right: 0;
 }
 
-.you .man2 .manjian1 {
+.you1 .man2 .manjian1 {
 	width: 50px;
 	font-size: 16px;
 	background: #fff;
@@ -107,12 +107,12 @@
 	top: 8px;
 }
 
-.you ul {
+.you1 ul {
 	margin-top: 20px;
 	overflow: auto;
 }
 
-.you ul li {
+.you1 ul li {
 	width: 300px;
 	position: relative;
 	float: left;
@@ -129,7 +129,7 @@
 	src: url(../../../static/img/rui.ttf);
 }
 
-.you ul li .jia {
+.you1 ul li .jia {
 	font-family: "fontnameRegulars";
 	font-size: 28px;
 	position: absolute;
@@ -137,13 +137,13 @@
 	color: #97753d;
 	top: 28px;
 }
-.you ul li .jia span{
+.you1 ul li .jia span{
 	color: #97753d;
 	font-family: "思源黑体";
 	font-size: 14px;
 }
 
-.you ul li .manzu {
+.you1 ul li .manzu {
 	overflow: auto;
 	position: absolute;
 	right: 50px;
@@ -152,7 +152,7 @@
 	color: #97753d;
 	font-size: 16px;
 }
-.you ul li .title {
+.you1 ul li .titleSY {
 	overflow: auto;
 	position: absolute;
 	right: 50px;
@@ -160,7 +160,7 @@
 	color: #97753d;
 	font-size: 16px;
 }
-.you ol li .title {
+.you1 ol li .titleSY {
 	overflow: auto;
 	position: absolute;
 	right: 50px;
@@ -169,7 +169,7 @@
 	font-size: 16px;
 }
 
-.you ul li .youxiao {
+.you1 ul li .youxiao {
 	overflow: auto;
 	position: absolute;
 	right: 15px;
@@ -177,7 +177,7 @@
 	top: 53px;
 	font-size: 14px;
 }
-.you ul li .bianhaoasd {
+.you1 ul li .bianhaoasd {
 	font-size: 14px;
 	position: absolute;
 	left: 14px;
@@ -185,7 +185,7 @@
 	top: 63px;
 }
 
-.you ul li .niucha {
+.you1 ul li .niucha {
 	overflow: auto;
 	position: absolute;
 	left: 120px;
@@ -194,7 +194,7 @@
 	font-size: 14px;
 }
 
-.you ul li .niucha p {
+.you1 ul li .niucha p {
 	width: 30px;
 	height: 1px;
 	margin-top: 10px;
@@ -204,7 +204,7 @@
 }
 
 
-.you ol li .jia {
+.you1 ol li .jia {
 	font-family: "fontnameRegulars";
 	font-size: 28px;
 	position: absolute;
@@ -213,7 +213,7 @@
 	top: 20px;
 }
 
-.you ol li .bianhaoasd {
+.you1 ol li .bianhaoasd {
 	font-size: 14px;
 	position: absolute;
 	left: 14px;
@@ -221,13 +221,13 @@
 	top: 63px;
 }
 
-.you ol li .jia span {
+.you1 ol li .jia span {
 	font-size: 14px;
 	margin-left: 2px;
 	font-family: "思源黑体";
 }
 
-.you ol li .manzu {
+.you1 ol li .manzu {
 	overflow: auto;
 	position: absolute;
 	right: 50px;
@@ -237,7 +237,7 @@
 	font-size: 16px;
 }
 
-.you ol li .youxiao {
+.you1 ol li .youxiao {
 	overflow: auto;
 	position: absolute;
 	right: 15px;
@@ -246,7 +246,7 @@
 	font-size: 14px;
 }
 
-.you ol li .niucha {
+.you1 ol li .niucha {
 	overflow: auto;
 	position: absolute;
 	left: 120px;
@@ -255,7 +255,7 @@
 	font-size: 14px;
 }
 
-.you ol li .niucha p {
+.you1 ol li .niucha p {
 	width: 30px;
 	height: 1px;
 	margin-top: 10px;
@@ -264,22 +264,19 @@
 	float: left;
 }
 
-.you ul li:last-child {
+.you1 ul li:last-child {
 	margin-bottom: 0;
 	margin-right: 0;
 }
 
-.you ul li:nth-last-child(2),
-.you ul li:nth-last-child(3) {
-	margin-bottom: 0;
-}
 
-.you ol {
+
+.you1 ol {
 	margin-top: 20px;
 	overflow: auto;
 }
 
-.you ol li {
+.you1 ol li {
 	width: 300px;
 	float: left;
 	position: relative;
@@ -290,6 +287,6 @@
 	margin-right: 6px;
 }
 
-.you ol li:last-child {
+.you1 ol li:last-child {
 	margin-right: 0;
 }

@@ -79,13 +79,11 @@
 								 class="xian1">永久有效</label></div>
 							<div class="xianzhi1 data"><input class="xian" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label class="xian1">日期范围：</label></div>
 							<div class="xianzhi3 start-time">
-								<el-date-picker v-model="startTime" value-format="yyyy-MM-dd" format="yyyy-MM-dd" type="datetime" placeholder="开始时间">
-								</el-date-picker>
+								<dPicker class="wd100" v-model="startTime"></dPicker>
 							</div>
 							<div class="xianhzi15 xie">~</div>
 							<div class="xianzhi3 end-time">
-								<el-date-picker v-model="endTime" value-format="yyyy-MM-dd" format="yyyy-MM-dd" type="datetime" placeholder="结束时间">
-								</el-date-picker>
+								<dPicker class="wd100" v-model="endTime"></dPicker>
 							</div>
 							<!-- <div class="xianzhi4"><input type="checkbox"><label class="xian1">自领取之日</label></div>
 						<div class="xianzhi5"><input type="text" placeholder="0"><span>天内</span></div> -->
@@ -96,11 +94,11 @@
 						<label class="col-md-1 control-label text-right nopad end-aline">使用用户</label><span class="sign-left">:</span>
 						<div class="col-md-8 shiyong shiyong1">
 							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="1" /><label
-								 class="xian1" v-model="userType">全体用户</label></div>
+								 class="xian1">全体用户</label></div>
 							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="2" /><label
-								 class="xian1" v-model="userType">新用户</label></div>
+								 class="xian1">新用户</label></div>
 							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="3" /><label
-								 class="xian1" v-model="userType">指定用户</label></div>
+								 class="xian1">指定用户</label></div>
 							<div class="xianzhi3_1">
 								<p style="cursor: pointer;" v-on:click="seles()" v-has="'SAMY:MP:Coupon:selectAdd'">选择用户</p>
 							</div>
@@ -111,14 +109,14 @@
 						<label class="col-md-1 control-label text-right nopad end-aline">选择产品</label><span class="sign-left">:</span>
 						<div class="col-md-8 shiyong shiyong1">
 							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="1" /><label
-								 class="xian1" v-model="categoryType">全品类</label></div>
+								 class="xian1">全品类</label></div>
 							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="2" /><label
-								 class="xian1" v-model="categoryType">指定分类</label></div>
+								 class="xian1">指定分类</label></div>
 							<div class="xianzhi3_1">
 								<p style="cursor: pointer;" v-on:click="xus()" v-has="'SAMY:MP:Coupon:select-type'">选择分类</p>
 							</div>
 							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" v-model="categoryType" name="radioGroup5" value="3" /><label
-								 class="xian1" v-model="categoryType">指定产品</label></div>
+								 class="xian1">指定产品</label></div>
 							<div class="xianzhi3_1">
 								<p style="cursor: pointer;" v-on:click="ots()" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p>
 							</div>
@@ -393,6 +391,12 @@
 					this.allCount = ''
 					return false
 				}
+				if (!this.isBlank(this.startTime)) {
+				    this.startTime = this.moment(this.startTime, "YYYY-MM-DD 00:00:00")
+				}
+				if (!this.isBlank(this.endTime)) {
+				    this.endTime = this.moment(this.endTime, "YYYY-MM-DD 23:59:59")
+				}
 				var url = this.url + '/couponController/addCoupon'
 				formData.append('couponName', this.couponName)
 				formData.append('operatorId', this.operatorId)
@@ -603,14 +607,8 @@
 
 	.shiyong .xianzhi3 {
 		float: left;
-		width: 135px;
+		width: 115px;
 	}
-
-	.shiyong .xianzhi3 .el-date-editor.el-input,
-	.el-date-editor.el-input__inner {
-		width: 135px;
-	}
-
 	.xianhzi15 {
 		margin-left: 8px;
 		margin-right: 8px;

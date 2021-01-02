@@ -25,6 +25,14 @@
 	background-size: auto;
 	height: 100px;
 }
+.you ul li .niucha1{
+	text-align: center;
+	color:#97753d;
+	position: absolute;
+	right: 50px;
+	bottom: 12px;
+	font-size: 18px;
+}
 
 .you .man2 .gou1 {
 	position: absolute;
@@ -183,6 +191,15 @@
 	top: 10px;
 	color: #f1c49b;
 	font-size: 16px;
+}
+
+.you ol li .niucha1{
+	text-align: center;
+	color:#f1c49b;
+	position: absolute;
+	right: 50px;
+	bottom: 12px;
+	font-size: 18px;
 }
 
 .you ul li .youxiao {

@@ -251,7 +251,7 @@
 					<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 						<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
 					</div>
-					<div class="col-md-7 you">
+					<div class="col-md-7 you1">
 						<div class="man1">
 							<div class="man">
 								<div class="manjian"></div>
@@ -279,15 +279,15 @@
 							</div>
 							<ol>
 								<li @click="dianji1(item)" v-for="item in unfinishedProLists1">
-									<div class="jia"><span>￥</span>{{item.recude}}</div>
-									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
-									<div class="titleSY">{{item.couponName}}</div>
-									<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
-									<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
-									<div class="niucha">
-										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
-									</div>
-									<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+										<div class="jia">{{item.recude}}<span>折</span></div>
+										<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+										<div class="titleSY">{{item.couponName}}</div>
+										<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
+										<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+										<div class="niucha">
+											<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+										</div>
+										<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
 								</li>
 							</ol>
 						</div>
@@ -610,12 +610,13 @@
 			},
 			//产品
 			projectChange: function(param) {
+				this.productId = param.proId;
 				if (this.isBlank(param)) {
 					this.consume.proId = ""
 				} else {
 					var url = this.url + '/couponController/selectCoupon'
 					var formData = new FormData();
-					formData.append('productId', '1');
+					formData.append('productId', this.productId);
 					formData.append('userId', this.userId);
 					this.$ajax({
 						method: 'POST',
@@ -936,6 +937,42 @@
 						this.isExistCon(item)
 					}
 					this.projectFlag = true
+					var url = this.url + '/couponController/selectCoupon'
+					var formData = new FormData();
+					formData.append('productId', this.consume.proId);
+					formData.append('userId', this.userId);
+					this.$ajax({
+						method: 'POST',
+						url: url,
+						headers: {
+							'Content-Type': 'x-www-form-urlencoded',
+							'Access-Token': this.accessToken
+						},
+						data: formData,
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						console.log(res)
+						if (res.retCode == '0000') {
+							this.unfinishedProLists = res.retData['2']
+							this.unfinishedProLists1 = res.retData['1']
+							if (this.unfinishedProLists !='') {
+								this.youhui = true
+							} else {
+								this.youhui = false
+							}
+							if (this.unfinishedProLists1 !='') {
+								this.youhui = true
+							} else {
+								this.youhui = false
+							}
+					
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('请求失败处理')
+					});
 					this.$refs.project.setEmpId(this.consume.counselor, 1)
 					this.consume.proStyle = item.proStyle
 					this.$refs.project.setProject(item.proId)
@@ -950,6 +987,7 @@
 				} else {
 					if (this.clickItemObj.itemId == item.piId) {
 						if (this.clickItemObj.count % 2 == 0) {
+							$(".you1").hide()
 							this.selectObj = null
 							e.target.checked = false
 							this.consume.proStyle = ''
@@ -1126,7 +1164,7 @@
 				this.couponId = item.couId;
 				console.log(this.consume.proId)
 				if (this.dui == true) {
-					$(".you .man1 .gou1").show();
+					$(".you1 .man1 .gou1").show();
 					if(this.unfinishedProLists !=''){
 							this.unfinishedProLists[0].recude
 						}
@@ -1153,7 +1191,8 @@
 						console.log('查询请求失败')
 					});
 				} else {
-					$(".you .man1 .gou1").hide();
+					$(".you1 .man1 .gou1").hide();
+					
 				}
 				this.dui = !this.dui
 			},
@@ -1162,7 +1201,7 @@
 				this.productId = this.consume.proId;
 				this.couponId = item.couId;
 				if (this.dui == true) {
-					$(".you .man2 .gou1").show();
+					$(".you1 .man2 .gou1").show();
 					if(this.unfinishedProLists1 !=''){
 							this.unfinishedProLists1[0].recude
 						}
@@ -1189,27 +1228,9 @@
 						console.log('查询请求失败')
 					});
 				} else if(this.dui == false) {
-					$(".you .man2 .gou1").hide();
-					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
-					this.$ajax({
-						method: 'GET',
-						url: url,
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-							'Access-Token': this.accessToken
-						},
-						// param: formData,
-						dataType: 'json',
-					}).then((response) => {
-						var res = response.data
-						if (res.retCode == '0000') {
-							this.titttl = 1
-						} else {
-							alert(res.retMsg)
-						}
-					}).catch((error) => {
-						console.log('查询请求失败')
-					});
+					$(".you1 .man2 .gou1").hide();
+					var yy = new Decimal(this.consume.receivable).add(new Decimal(this.unfinishedProLists[0].recude)).add(new Decimal(this.cash.select))
+					this.consume.receivable = yy;
 				}
 				this.dui = !this.dui
 			},

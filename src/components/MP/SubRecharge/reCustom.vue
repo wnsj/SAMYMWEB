@@ -277,14 +277,14 @@
 							<div class="manjian1">满减</div>
 						</div>
 						<ul>
-							<li @click="dianji()" v-for="item in unfinishedProLists">
-								<div class="jia"><span>￥</span>{{item.reduce}}</div>
+							<li @click="dianji(item)" v-for="item in unfinishedProLists">
+								<div class="jia"><span>￥</span>{{item.recude}}</div>
 								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 								<div class="titleSY">{{item.couponName}}</div>
-								<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
-								<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+								<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
+								<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
 								<div class="niucha">
-									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span>
 								</div>
 								<div class="wuxian">永久有效</div>
 								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
@@ -297,17 +297,17 @@
 							<div class="manjian1">满折</div>
 						</div>
 						<ol>
-							<li @click="dianji1()" v-for="item in unfinishedProLists">
-							<div class="jia"><span>￥</span>{{item.reduce}}</div>
-							<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
-							<div class="titleSY">{{item.couponName}}</div>
-							<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
-							<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
-							<div class="niucha">
-								<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
-							</div>
-							<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
-						</li>
+							<li @click="dianji1(item)" v-for="item in unfinishedProLists1">
+									<div class="jia">{{item.recude}}<span>折</span></div>
+									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+									<div class="titleSY">{{item.couponName}}</div>
+									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
+									<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+									<div class="niucha">
+										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+									</div>
+									<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+							</li>
 						</ol>
 					</div>
 				</div>
@@ -401,9 +401,11 @@
 		data() {
 			return {
 				unfinishedProLists:[],
+				unfinishedProLists1:[],
                 oRadioGroup:'',
                 realCrossCount: '',
                 destroy: true,
+				titttl:1,
                 firstFlag: false,
 				counselorList: [],
 				productId:'',
@@ -675,6 +677,7 @@
                     this.consumeReceivable = 0
                 }
             },
+			
 			//产品
 			projectChange: function(param) {
 				if (this.isBlank(param)) {
@@ -1269,7 +1272,8 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						this.unfinishedProLists = res.retData
+						this.unfinishedProLists = res.retData['2']
+						this.unfinishedProLists1 = res.retData['1']
 					} else {
 						alert(res.retMsg)
 					}

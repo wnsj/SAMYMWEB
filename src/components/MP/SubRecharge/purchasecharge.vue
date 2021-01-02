@@ -160,13 +160,13 @@
 						</div>
 						<ul>
 							<li @click="dianji(item)" v-for="item in unfinishedProLists">
-								<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
+								<div class="jia"><span>￥</span>{{item.recude}}</div>
 								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 								<div class="titleSY">{{item.couponName}}</div>
-								<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
-								<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+								<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
+								<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
 								<div class="niucha">
-									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span>
 								</div>
 								<div class="wuxian">永久有效</div>
 								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
@@ -179,16 +179,16 @@
 							<div class="manjian1">满折</div>
 						</div>
 						<ol>
-							<li @click="dianji1()" v-for="item in unfinishedProLists">
-								<div class="jia"><span>￥</span>{{item.fullCondition}}</div>
-								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
-								<div class="titleSY">{{item.couponName}}</div>
-								<div class="manzu">满<span>{{item.allCount}}</span>元可用</div>
-								<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
-								<div class="niucha">
-									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
-								</div>
-								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+							<li @click="dianji1(item)" v-for="item in unfinishedProLists1">
+									<div class="jia">{{item.recude}}<span>折</span></div>
+									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+									<div class="titleSY">{{item.couponName}}</div>
+									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
+									<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+									<div class="niucha">
+										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+									</div>
+									<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
 							</li>
 						</ol>
 					</div>
@@ -234,7 +234,7 @@
 					<label class="col-md-4 control-label text-right nopad end-aline  " >欠费金额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="consume.arrears">
+						<input type="text" class="form-control" v-model="consume.arrears" @blur="Changes()">
 					</div>
 				</div>
 			</div>
@@ -377,14 +377,18 @@
 					counselorEmpId: '',
 				},
 				unfinishedProLists:[],
-
+				titttl: 1,
+				unfinishedProLists1:[],
 				consume: {
                     proStyle: '',
 					memNum: '', //会员名
 					memName: '', //手机
 					phone: '', //预约号
 					appNum: '',
-
+					couponId: 0,
+					couponType: 0,
+					couponNum: 0,
+					couponName: '',
 					receivable: 0, //应交(折前)
 					preFoldTotalPrice: '', //折前总价
 					realCross: '', //实缴（折后）
@@ -413,7 +417,7 @@
 					serialNo: null, //流水单号
 					receipt: null, //收据
 					isArrears: '1', //是否欠费
-					arrears: '0', //欠费金额
+					arrears: 0, //欠费金额
                     sourceId: ''
 				},
 				purAuditId:'',
@@ -421,7 +425,7 @@
 					cashId: '',
 					memNum: '',
 					balance: '',
-					select: '',
+					select: 0,
 					btn: false,
 				},
 				title: '',
@@ -443,9 +447,12 @@
 		},
 		methods: {
 			// //优惠券使用张数
-			num_jia() {
+			num_jia:function(item) {
 				var input_num1 = document.getElementById("input-num1");
-				var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
+				this.productId = this.consume.proId;
+				this.couponId = item.couId;
+				var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId +
+					'&userId=' + this.userId
 				this.$ajax({
 					method: 'GET',
 					url: url,
@@ -472,6 +479,7 @@
 				});
 				
 			},
+			
 			num_jian() {
 				var input_num1 = document.getElementById("input-num1");
 				if (input_num1.value <= 1) {
@@ -615,6 +623,15 @@
                     this.isArrearsShow = true
                 }
             },
+			//实交总额
+			Changes() {
+				if (this.clickItemObj.count + 1 && this.unfinishedProList != '') {
+					this.unfinishedProList[0].balance
+				}
+				var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears)).sub(new Decimal(this.cash.select))
+					.sub(new Decimal(this.unfinishedProList[0].balance))
+				this.consume.realCross = ss;
+			},
 			//feedback employee information
 			empChange: function(param) {
 				if (this.isBlank(param)) {
@@ -805,10 +822,20 @@
 			},
 			//选择满减优惠券
 			dianji:function(item) {
-				this.couponId = item.couId;
+				this.consume.couponNum = this.titttl;
+				this.productId = this.consume.proId;
+				this.consume.couponId = item.couId;
+				this.consume.couponName = item.couponName;
+				this.consume.couponType = item.couponType;
+				console.log(this.consume.proId)
+				if (this.unfinishedProLists != '') {
+					this.unfinishedProLists[0].recude
+				}
 				if (this.dui) {
+					var zz = new Decimal(this.consume.receivable).sub(new Decimal(this.unfinishedProLists[0].recude))
+					this.consume.receivable = zz;
 					$(".you .man1 .gou1").show();
-					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
 						url: url,
@@ -830,75 +857,26 @@
 					});
 				} else {
 					$(".you .man1 .gou1").hide();
-					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId + '&userId=' + this.userId
-					this.$ajax({
-						method: 'GET',
-						url: url,
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-							'Access-Token': this.accessToken
-						},
-						// param: formData,
-						dataType: 'json',
-					}).then((response) => {
-						var res = response.data
-						if (res.retCode == '0000') {
-							this.titttl = 1
-						} else {
-							alert(res.retMsg)
-						}
-					}).catch((error) => {
-						console.log('查询请求失败')
-					});
 				}
 				this.dui = !this.dui
 			},
 			//选择满折优惠券
-			dianji1() {
+			dianji1:function(item) {
+				this.consume.couponNum = this.titttl;
+				this.productId = this.consume.proId;
+				this.consume.couponId = item.couId;
+				this.consume.couponName = item.couponName;
+				this.consume.couponType = item.couponType;
+				console.log(this.consume.proId)
+				if (this.unfinishedProLists != '') {
+					this.unfinishedProLists[0].recude
+				}
 				if (this.dui) {
 					$(".you .man2 .gou1").show();
-					var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
-					this.$ajax({
-						method: 'GET',
-						url: url,
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-							'Access-Token': this.accessToken
-						},
-						// param: formData,
-						dataType: 'json',
-					}).then((response) => {
-						var res = response.data
-						if (res.retCode == '0000') {
-							this.titttl = res.retData
-						} else {
-							alert(res.retMsg)
-						}
-					}).catch((error) => {
-						console.log('查询请求失败')
-					});
+					var uu = new Decimal(this.consume.receivable).sub(new Decimal(this.unfinishedProLists1[0].recude))
+					this.consume.receivable = uu;
 				} else {
 					$(".you .man2 .gou1").hide();
-					var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
-					this.$ajax({
-						method: 'GET',
-						url: url,
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-							'Access-Token': this.accessToken
-						},
-						// param: formData,
-						dataType: 'json',
-					}).then((response) => {
-						var res = response.data
-						if (res.retCode == '0000') {
-							this.titttl = 1
-						} else {
-							alert(res.retMsg)
-						}
-					}).catch((error) => {
-						console.log('查询请求失败')
-					});
 				}
 				this.dui = !this.dui
 			},
@@ -1001,7 +979,8 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						this.unfinishedProLists = res.retData
+						this.unfinishedProLists = res.retData['2']
+						this.unfinishedProLists1 = res.retData['1']
 					} else {
 						alert(res.retMsg)
 					}

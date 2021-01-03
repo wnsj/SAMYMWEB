@@ -85,7 +85,7 @@
 							</select>
 						</div>
 					</div>
-					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getAllAuditPage()">查询
+					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getAllAuditPage(1)">查询
 					</button>
 				</div>
 			</div>
@@ -330,8 +330,8 @@
 			},
 
 			//check the list of department
-			getAllAuditPage() {
-				if (this.selectDataFlag) {
+			getAllAuditPage(num) {
+				if (num == 1) {
 					this.page = 1
 				}
 
@@ -402,7 +402,7 @@
 			handleSizeChange(pageSize) {
 				this.page = 1
 				this.pageSize = pageSize
-				this.getAllAuditPage()
+				this.getAllAuditPage(1)
 			},
 
 

@@ -8,17 +8,28 @@
 
 .you1 .man1 {
 	margin-top: 10px;
-	position: relative;
 	overflow: auto;
+	position: relative;
 }
+/* .active{
+	background: red;
+} */
 
-.you1 .man1 .gou2 {
+.you1 .man1 .gou1 {
 	position: absolute;
 	width: 300px;
 	display: none;
 }
+.you1 ul li .niucha1{
+	text-align: center;
+	color:#97753d;
+	position: absolute;
+	right: 50px;
+	bottom: 12px;
+	font-size: 18px;
+}
 
-.you1 .man2 .gou2 {
+.you1 .man2 .gou1 {
 	position: absolute;
 	width: 300px;
 	display: none;
@@ -51,32 +62,35 @@
 }
 
 
-.btn-numbox {
+.btn-numbox1 {
 	overflow: hidden;
 	margin-top: 30px;
 	margin-bottom: 20px;
 }
 
-.btn-numbox li {
+.btn-numbox1 li {
 	float: left;
 }
 
-.btn-numbox li .number {
+.btn-numbox1 li .number1 {
 	display: inline-block;
 	font-size: 16px;
 	color: #333;
 	margin-right: 30px;
 	vertical-align: sub;
 }
+.youa{
+	display: none;
+}
 
-.btn-numbox .count {
+.btn-numbox1.count1 {
 	overflow: hidden;
 	margin: 0 16px 0 -20px;
 }
 
-.btn-numbox .count .num-jian,
-.input-num,
-.num-jia {
+.btn-numbox1 .count1 .num-jian1,
+.input-num1,
+.num-jia1 {
 	display: inline-block;
 	width: 28px;
 	height: 28px;
@@ -87,10 +101,10 @@
 	cursor: pointer;
 	border: 1px solid #e6e6e6;
 }
-.num-jia,.num-jian{
+.num-jia1,.num-jian1{
 	background-color: rgba(136, 165, 178, 1);
 }
-.btn-numbox .count .input-num {
+.btn-numbox1 .count1 .input-num1 {
 	width: 58px;
 	height: 28px;
 	color: #333;
@@ -124,14 +138,18 @@
 	margin-right: 6px;
 }
 
+
 @font-face {
 	font-family: 'fontnameRegulars';
 	src: url(../../../static/img/rui.ttf);
 }
 
+.wuxian{
+	display: none;
+}
 .you1 ul li .jia {
 	font-family: "fontnameRegulars";
-	font-size: 28px;
+	font-size: 25px;
 	position: absolute;
 	left: 10px;
 	color: #97753d;
@@ -152,10 +170,11 @@
 	color: #97753d;
 	font-size: 16px;
 }
+
 .you1 ul li .titleSY {
 	overflow: auto;
 	position: absolute;
-	right: 50px;
+	left: 150px;
 	top: 10px;
 	color: #97753d;
 	font-size: 16px;
@@ -167,6 +186,15 @@
 	top: 10px;
 	color: #f1c49b;
 	font-size: 16px;
+}
+
+.you1 ol li .niucha1{
+	text-align: center;
+	color:#f1c49b;
+	position: absolute;
+	right: 50px;
+	bottom: 12px;
+	font-size: 18px;
 }
 
 .you1 ul li .youxiao {
@@ -269,7 +297,10 @@
 	margin-right: 0;
 }
 
-
+/* .you1 ul li:nth-last-child(2),
+.you1 ul li:nth-last-child(3) {
+	margin-bottom: 0;
+} */
 
 .you1 ol {
 	margin-top: 20px;
@@ -278,6 +309,7 @@
 
 .you1 ol li {
 	width: 300px;
+	margin-bottom: 20px;
 	float: left;
 	position: relative;
 	overflow: auto;
@@ -288,5 +320,9 @@
 }
 
 .you1 ol li:last-child {
+	margin-right: 0;
+	margin-bottom: 0;
+}
+.you1 ol li:nth-child(3n) {
 	margin-right: 0;
 }

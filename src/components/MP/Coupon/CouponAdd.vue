@@ -429,18 +429,24 @@
 							path: '../../MP/Coupon'
 						})
 					} else {
-						alert('请填写完整！')
-						return false
+						if(this.couponName == '' && this.couponType == '' && this.isLimit == '' && this.isVaild == '' && this.userType == '' &&this.categoryType == ''  &&this.limitGet == '' &&this.allCount == ''){
+							alert('请填写完整！');
+							return false
+						}
 						if (this.couponName == '') {
 							alert('请填写优惠券名称！')
 							return false
 						}
-						if (this.couponType == '') {
-							alert('请填写优惠券类型！')
+						if (this.recude == '') {
+							alert('请填写金额/折扣！')
 							return false
 						}
-						if (this.isLimit == '') {
-							alert('请选择使用门槛！')
+						if (this.startTime == '') {
+							alert('请填写开始时间！')
+							return false
+						}
+						if (this.endTime == '') {
+							alert('请填写结束时间！')
 							return false
 						}
 						if (this.isVaild == '') {

@@ -52,7 +52,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="item in unfinishedProList">
+								<tr v-for="(item,index) in unfinishedProList" :key="index">
 									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
@@ -87,7 +87,7 @@
 					<label class="col-md-4 control-label text-right nopad end-aline" >咨询师</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<emp ref="counselorEmp" @employeeChange="counselorEmpChange"></emp>
+						<emp ref="counselorEmp" disabled="true" @employeeChange="counselorEmpChange"></emp>
 					</div>
 				</div>
 
@@ -95,7 +95,7 @@
                     <label class="col-md-4 control-label text-right nopad end-aline" >产品风格</label><span
                     class="sign-left">:</span>
                     <div class="col-md-7">
-                        <select class="form-control" @change="proStyleChange" v-model="consume.proStyle">
+                        <select class="form-control" @change="proStyleChange" v-model="consume.proStyle" disabled="true">
                             <option value="">未选择</option>
                             <option value="1">新产品</option>
                             <option value="2">老产品</option>
@@ -159,16 +159,16 @@
 							<div class="manjian1">满减</div>
 						</div>
 						<ul>
-							<li @click="dianji(item)" v-for="item in unfinishedProLists">
+							<li @click="dianji(item,index)" v-for="(item,index) in unfinishedProLists" :key="index">
 								<div class="jia"><span>￥</span>{{item.recude}}</div>
 								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 								<div class="titleSY">{{item.couponName}}</div>
 								<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
-								<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
-								<div class="niucha">
+								<div class="youxiao" v-if="item.isLimit == 1">有效期<span>{{item.startTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
+								<div class="niucha1" v-if="item.isLimit == 2">永久有效</div>
+								<div class="niucha" v-if="item.isLimit == 1">
 									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span>
 								</div>
-								<div class="wuxian">永久有效</div>
 								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
 							</li>
 						</ul>
@@ -179,16 +179,17 @@
 							<div class="manjian1">满折</div>
 						</div>
 						<ol>
-							<li @click="dianji1(item)" v-for="item in unfinishedProLists1">
-									<div class="jia">{{item.recude}}<span>折</span></div>
-									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
-									<div class="titleSY">{{item.couponName}}</div>
-									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
-									<div class="youxiao">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
-									<div class="niucha">
-										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
-									</div>
-									<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+							<li @click="dianji1(index,item)" v-for="(item,index) in unfinishedProLists1" :key="index">
+								<div class="jia">{{item.recude}}<span>折</span></div>
+								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+								<div class="titleSY">{{item.couponName}}</div>
+								<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
+								<div class="youxiao" v-if="item.isLimit == 1">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+								<div class="niucha1" v-if="item.isLimit == 2">永久有效</div>
+								<div class="niucha" v-if="item.isLimit == 1">
+									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+								</div>
+								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
 							</li>
 						</ol>
 					</div>
@@ -264,7 +265,7 @@
 					<label class="col-md-4 control-label text-right nopad end-aline">应交总额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
+						<input type="text" class="form-control" v-model="consume.receivables" disabled="disabled">
 					</div>
 				</div>
 			</div>
@@ -369,6 +370,7 @@
 		},
 		data() {
 			return {
+				jinqian:0,
 				member: {
 					memNum: '', //会员号
 					memName: '', //会员名
@@ -389,7 +391,8 @@
 					couponType: 0,
 					couponNum: 0,
 					couponName: '',
-					receivable: 0, //应交(折前)
+					receivable: 0, //折后
+					receivables: 0, //应交
 					preFoldTotalPrice: '', //折前总价
 					realCross: '', //实缴（折后）
 					actualCross: '0', //实交金额
@@ -428,6 +431,9 @@
 					select: 0,
 					btn: false,
 				},
+				lifh: true,
+				yongjiu: false,
+				isLine: true,
 				title: '',
 				isShow: true,
 				productId: '',
@@ -538,6 +544,7 @@
 					this.consume.actualCount = 0
 					this.consume.discount = 0
 					this.consume.receivable = 0
+					this.consume.receivables = 0
 					this.consume.realCross = 0
 				}
 			},
@@ -549,6 +556,7 @@
                 this.consume.actualCount = 0
                 this.consume.discount = 0
                 this.consume.receivable = 0
+				this.consume.receivables = 0
                 this.consume.realCross = 0
             },
 			//付款方式
@@ -589,11 +597,20 @@
 						var res = response.data
 						console.log(res)
 						if (res.retCode == '0000') {
-							this.unfinishedProLists = res.retData
-							if (this.unfinishedProLists !='') {
-								$(".youa").show();
-							} else {
+							this.unfinishedProLists = res.retData['2']
+							this.unfinishedProLists1 = res.retData['1']
+							for (var i = 0; i < this.unfinishedProLists1.length; i++) {
+								this.unfinishedProLists1[i].recude = this.unfinishedProLists1[i].recude / 10
+							}
+							if (this.unfinishedProLists == '') {
 								$(".youa").hide();
+							} else {
+								$(".youa").show();
+							}
+							if (this.unfinishedProLists1 == '') {
+								$(".youa").hide();
+							} else {
+								$(".youa").show();
 							}
 					
 						} else {
@@ -609,6 +626,7 @@
 					this.consume.discount = param.discount //折扣
 					this.consume.preFoldTotalPrice = param.totalPrice //课程总额
 					this.consume.receivable = param.discouAmount //应交
+					this.consume.receivables = param.discouAmount //应交
 					// this.consume.realCross = param.discouAmount //实缴
 					this.consume.proType = param.proType
 					this.cash.select = '0'
@@ -625,11 +643,12 @@
             },
 			//实交总额
 			Changes() {
-				if (this.clickItemObj.count + 1 && this.unfinishedProList != '') {
-					this.unfinishedProList[0].balance
-				}
-				var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears)).sub(new Decimal(this.cash.select))
-					.sub(new Decimal(this.unfinishedProList[0].balance))
+				console.log(this.consume.receivables)
+				console.log(this.consume.arrears)
+				console.log(this.cash.select)
+				console.log(this.jinqian)
+				var ss = new Decimal(this.consume.receivables).sub(new Decimal(this.consume.arrears))
+					.sub(new Decimal(this.jinqian))
 				this.consume.realCross = ss;
 			},
 			//feedback employee information
@@ -712,7 +731,6 @@
 				}).then((response) => {
 					var res = response.data
 					console.log(res)
-                    debugger
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
                         this.$emit('closeCurrentPage','succ')
@@ -821,20 +839,18 @@
 				});
 			},
 			//选择满减优惠券
-			dianji:function(item) {
+			dianji:function(item,index) {
 				this.consume.couponNum = this.titttl;
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
 				console.log(this.consume.proId)
-				if (this.unfinishedProLists != '') {
-					this.unfinishedProLists[0].recude
-				}
+				var rt = item.recude;
 				if (this.dui) {
-					var zz = new Decimal(this.consume.receivable).sub(new Decimal(this.unfinishedProLists[0].recude))
-					this.consume.receivable = zz;
-					$(".you .man1 .gou1").show();
+					var zz = new Decimal(this.consume.receivable).sub(new Decimal(rt))
+					this.consume.receivables = zz;
+					$(".you .man1 .gou1").eq(index).show();
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
@@ -856,27 +872,29 @@
 						console.log('查询请求失败')
 					});
 				} else {
-					$(".you .man1 .gou1").hide();
+					$(".you .man1 .gou1").eq(index).hide();
+					var zy = new Decimal(this.consume.receivable)
+					this.consume.receivables = zy;
 				}
 				this.dui = !this.dui
 			},
 			//选择满折优惠券
-			dianji1:function(item) {
+			dianji1:function(item,index) {
 				this.consume.couponNum = this.titttl;
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
+				var rw = item.recude;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
 				console.log(this.consume.proId)
-				if (this.unfinishedProLists != '') {
-					this.unfinishedProLists[0].recude
-				}
 				if (this.dui) {
-					$(".you .man2 .gou1").show();
-					var uu = new Decimal(this.consume.receivable).sub(new Decimal(this.unfinishedProLists1[0].recude))
-					this.consume.receivable = uu;
+					$(".you .man2 .gou1").eq(index).show();
+					var uu = new Decimal(this.consume.receivable).mul(new Decimal(rw)) /10
+					this.consume.receivables = uu;
 				} else {
 					$(".you .man2 .gou1").hide();
+					var us = new Decimal(this.consume.receivable).div(new Decimal(rw)).mul(new Decimal(rw))
+					this.consume.receivables = us;
 				}
 				this.dui = !this.dui
 			},
@@ -981,6 +999,9 @@
 					if (res.retCode == '0000') {
 						this.unfinishedProLists = res.retData['2']
 						this.unfinishedProLists1 = res.retData['1']
+						for (var i = 0; i < this.unfinishedProLists1.length; i++) {
+							this.unfinishedProLists1[i].recude = this.unfinishedProLists1[i].recude / 10
+						}
 					} else {
 						alert(res.retMsg)
 					}
@@ -990,6 +1011,7 @@
 			},
 			//单选框选中处理
 			radioClick(e, item) {
+				this.jinqian = item.balance;
 				if (this.clickItemObj.itemId == 0) {
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1

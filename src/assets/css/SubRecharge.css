@@ -12,18 +12,14 @@
 	overflow: auto;
 	position: relative;
 }
+/* .active{
+	background: red;
+} */
 
 .you .man1 .gou1 {
 	position: absolute;
 	width: 300px;
 	display: none;
-}
-.admins {
-	position: absolute;
-	width: 300px;
-	background: url(../../../static/img/youhui_xuanze1.png);
-	background-size: auto;
-	height: 100px;
 }
 .you ul li .niucha1{
 	text-align: center;

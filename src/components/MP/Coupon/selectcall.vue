@@ -32,9 +32,6 @@
 				</el-pagination>
 			</el-col>
 		</el-row> -->
-		
-		<!--分页插件-->
-		
 	</div>
 	<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
 	</div>
@@ -49,14 +46,12 @@
 	import dPicker from 'vue2-datepicker'
 	import cha from '../../common/Channel.vue'
 	import emp from '../../common/Employee.vue'
-	import Paging from '../../common/paging'
 	export default {
 		components: {
 			store,
 			dPicker,
 			cha,
-			emp,
-			Paging
+			emp
 		},
 		data() {
 			return {
@@ -92,11 +87,6 @@
 		},
 
 		methods: {
-			// //子级传值到父级上来的动态拿去
-			// pageChange: function (page) {
-			//     this.current = page
-			//     this.getAllAuditPage(page);
-			// },
 			checkboxSelect(row, rowIndex) {
 				if (rowIndex == 0) {
 					return false // 禁用

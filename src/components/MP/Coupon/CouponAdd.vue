@@ -40,7 +40,7 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
 						<div class="col-md-7  jin1">
-							<input type="text" class="form-control" v-model="recude" @change="manjian()">
+							<input type="number" class="form-control" v-model="recude" @change="manjian()">
 							<span>元</span>
 						</div>
 					</div>
@@ -48,7 +48,7 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
 						<div class="col-md-7  zhe1">
-							<input type="text" class="form-control" v-model="recude">
+							<input type="number" class="form-control" v-model="recude">
 							<span>%</span>
 						</div>
 					</div>
@@ -349,6 +349,7 @@
 			},
 			//the event of addtional button
 			addFee() {
+				
 				// console.log(this.limitGet)
 				// console.log(this.allcount)
 				// return false
@@ -385,12 +386,12 @@
 				} else {
 
 				}
-				if (this.allCount - this.limitGet < 0) {
-					alert("每人限领不能大于发行量！")
-					this.limitGet = ''
-					this.allCount = ''
-					return false
-				}
+				// if (this.allCount - this.limitGet < 0) {
+				// 	alert("每人限领不能大于发行量！")
+				// 	this.limitGet = ''
+				// 	this.allCount = ''
+				// 	return false
+				// }
 				if (!this.isBlank(this.startTime)) {
 				    this.startTime = this.moment(this.startTime, "YYYY-MM-DD 00:00:00")
 				}

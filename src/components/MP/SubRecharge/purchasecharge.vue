@@ -184,7 +184,7 @@
 								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 								<div class="titleSY">{{item.couponName}}</div>
 								<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
-								<div class="youxiao" v-if="item.isLimit == 1">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+								<div class="youxiao" v-if="item.isLimit == 1">有效期<span>{{item.createTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
 								<div class="niucha1" v-if="item.isLimit == 2">永久有效</div>
 								<div class="niucha" v-if="item.isLimit == 1">
 									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
@@ -235,7 +235,7 @@
 					<label class="col-md-4 control-label text-right nopad end-aline  " >欠费金额</label><span
 					 class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="consume.arrears" @blur="Changes()">
+						<input type="number" class="form-control" v-model="consume.arrears" @blur="Changes()">
 					</div>
 				</div>
 			</div>
@@ -879,7 +879,7 @@
 				this.dui = !this.dui
 			},
 			//选择满折优惠券
-			dianji1:function(item,index) {
+			dianji1:function(index,item) {
 				this.consume.couponNum = this.titttl;
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
@@ -887,6 +887,7 @@
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
 				console.log(this.consume.proId)
+				console.log(rw)
 				if (this.dui) {
 					$(".you .man2 .gou1").eq(index).show();
 					var uu = new Decimal(this.consume.receivable).mul(new Decimal(rw)) /10

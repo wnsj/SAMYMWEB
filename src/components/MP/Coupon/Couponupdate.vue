@@ -42,7 +42,7 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
 						<div class="col-md-7  jin1">
-							<input type="text" class="form-control" v-model="recude" disabled="disabled">
+							<input type="number" class="form-control" v-model="recude" disabled="disabled">
 							<span>元</span>
 						</div>
 					</div>
@@ -50,7 +50,7 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
 						<div class="col-md-7  zhe1">
-							<input type="text" class="form-control" v-model="recude" disabled="disabled">
+							<input type="number" class="form-control" v-model="recude" disabled="disabled">
 							<span>%</span>
 						</div>
 					</div>
@@ -170,6 +170,9 @@
 		},
 		data() {
 			return {
+				userList: [],
+				projectList: [],
+				categoryList: [],
 				couponName: '', //优惠券名称
 				state: '', //状态
 				couponType: '', //优惠券类型
@@ -221,18 +224,21 @@
 				this.$router.push({
 					path: '../../MP/Coupon/selectAdd'
 				})
+				localStorage.setItem('userList',this.userList);
 			},
 			//点击选择分类按钮跳转
 			xus() {
 				this.$router.push({
 					path: '../../MP/Coupon/select-type'
 				})
+				localStorage.setItem('categoryList',this.categoryList);
 			},
 			//点击选择产品按钮跳转
 			ots() {
 				this.$router.push({
 					path: '../../MP/Coupon/select-chan'
 				})
+				localStorage.setItem('projectList',this.projectList);
 			},
 			//限制领取
 			xianhzi() {
@@ -287,6 +293,9 @@
 						this.recude = res.retData.recude; //折扣
 						this.operatorId = res.retData.operatorId;
 						this.isLimit = res.retData.isLimit; //使用门槛
+						this.userList = res.retData.userList; //用户集合
+						this.projectList = res.retData.productList; //产品集合
+						this.categoryList = res.retData.categoryList; //分类集合
 						this.isVaild = res.retData.isVaild; //有效期
 						this.userType = res.retData.userType; //使用用户
 						this.categoryType = res.retData.categoryType; //选择产品
@@ -359,12 +368,12 @@
 				}
 				this.couId = ''
 				this.couId = this.$route.query.couId
-				if (this.allCount - this.limitGet < 0) {
-					alert("每人限领不能大于发行量！")
-					this.limitGet = ''
-					this.allCount = ''
-					return false
-				}
+				// if (this.allCount - this.limitGet < 0) {
+				// 	alert("每人限领不能大于发行量！")
+				// 	this.limitGet = ''
+				// 	this.allCount = ''
+				// 	return false
+				// }
 				var url = this.url + '/couponController/updateCoupon'
 				formData.append('couId', this.couId);
 				formData.append('couponName', this.couponName);

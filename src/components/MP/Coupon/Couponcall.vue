@@ -42,7 +42,7 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
 						<div class="col-md-7 jin1 ">
-							<input type="text" class="form-control" v-model="recude" :disabled="true">
+							<input type="number" class="form-control" v-model="recude" :disabled="true">
 							<span>元</span>
 						</div>
 					</div>
@@ -50,7 +50,7 @@
 						<b>*</b>
 						<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
 						<div class="col-md-7  zhe1">
-							<input type="text" class="form-control" v-model="recude" :disabled="true">
+							<input type="number" class="form-control" v-model="recude" :disabled="true">
 							<span>%</span>
 						</div>
 					</div>

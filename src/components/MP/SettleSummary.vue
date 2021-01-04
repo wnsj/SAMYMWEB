@@ -165,7 +165,7 @@
 									<td>{{item2.consumCount}}</td>
 									<td>{{item2.discount}}</td>
 									<td>{{item2.realCross}}</td>
-									<td>{{item2.couponType}}</td>
+									<td>{{transforProType(item2.couponType)}}</td>
 									<td>{{item2.couponName}}</td>
 									<td>{{item2.couponAmount}}</td>
 									<td>{{item2.counselorName}}</td>
@@ -275,6 +275,11 @@
              }
          },
 		methods: {
+			//产品类型转换
+			transforProType(couponType) {
+				if (couponType == 1) return '满折券'
+				else if (couponType == 2) return '满减券'
+			},
 			//子级传值到父级上来的动态拿去
 			pageChange: function(page) {
 				this.current = page

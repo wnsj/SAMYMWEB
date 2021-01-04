@@ -189,7 +189,7 @@
 								<td>{{item.price}}</td>
 								<td>{{item.actualCount}}</td>
 								<td>{{item.discount}}</td>
-								<td>{{item.couponType}}</td>
+								<td>{{transforProType(item.couponType)}}</td>
 								<td>{{item.couponName}}</td>
 								<td>{{item.couponAmount}}</td>
 								<td>{{item.createDate | dateFormatFilter("YYYY-MM-DD")}}</td>
@@ -483,6 +483,11 @@
 				} else {
 					this.conId = param.empId
 				}
+			},
+			//产品类型转换
+			transforProType(couponType) {
+				if (couponType == 1) return '满折券'
+				else if (couponType == 2) return '满减券'
 			},
 			//通过初复访设置咨客判定和续流状态
 			visitTypeChange() {

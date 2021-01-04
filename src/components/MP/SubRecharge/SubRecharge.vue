@@ -681,7 +681,7 @@
 					this.consume.preFoldTotalPrice = param.totalPrice //课程总额
 					this.consume.receivable = param.discouAmount //应交
 					this.consume.receivables = param.discouAmount //折后
-					// this.consume.realCross = param.discouAmount //实缴
+					this.consume.realCross = param.discouAmount //实缴
 					this.consume.proType = param.proType
 					this.cash.select = '0'
 					this.projectObj = param

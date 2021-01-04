@@ -142,7 +142,7 @@
 								<td class="text-center">{{item.psName}}</td>
 								<td class="text-center">{{item.sourceDate | dateFormatFilter("YYYY-MM-DD")}}</td>
 								<td class="text-center">{{item.buyTime | dateFormatFilter("YYYY-MM-DD")}}</td>
-								<td class="text-center">{{item.couponType}}</td>
+								<td class="text-center">{{transforProType(item.couponType)}}</td>
 								<td class="text-center">{{item.couponName}}</td>
 								<td class="text-center">{{item.couponAmount}}</td>
 								<td class="text-center">{{item.remark}}</td>
@@ -243,6 +243,10 @@
 		},
 
 		methods: {
+			transforProType(couponType) {
+				if (couponType == 1) return '满折券'
+				else if (couponType == 2) return '满减券'
+			},
 			showDetails(row) {
 				// console.log(row);
 				this.selectItem = row;

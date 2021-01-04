@@ -892,6 +892,26 @@
 					$(".you .man2 .gou1").eq(index).show();
 					var uu = new Decimal(this.consume.receivable).mul(new Decimal(rw)) /10
 					this.consume.receivables = uu;
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume.couponId + '&userId=' + this.userId
+					this.$ajax({
+						method: 'GET',
+						url: url,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+							'Access-Token': this.accessToken
+						},
+						// param: formData,
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						if (res.retCode == '0000') {
+							this.titttl = res.retData;
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('查询请求失败')
+					});
 				} else {
 					$(".you .man2 .gou1").hide();
 					var us = new Decimal(this.consume.receivable).div(new Decimal(rw)).mul(new Decimal(rw))

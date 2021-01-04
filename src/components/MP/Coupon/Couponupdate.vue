@@ -105,7 +105,7 @@
 							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="3" /><label
 								 class="xian1">指定用户</label></div>
 							<div class="xianzhi3_1">
-								<p style="cursor: pointer;" v-on:click="seles" v-has="'SAMY:MP:Coupon:selectAdd'">选择用户</p>
+								<p style="cursor: pointer;" v-on:click="seles" v-has="'SAMY:MP:Coupon:updataselectAdd'">选择用户</p>
 							</div>
 						</div>
 					</div>
@@ -118,12 +118,12 @@
 							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="2" /><label
 								 class="xian1">指定分类</label></div>
 							<div class="xianzhi3_1">
-								<p style="cursor: pointer;" v-on:click="xus" v-has="'SAMY:MP:Coupon:select-type'">选择分类</p>
+								<p style="cursor: pointer;" v-on:click="xus" v-has="'SAMY:MP:Coupon:updataselect-type'">选择分类</p>
 							</div>
 							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType"
 								 value="3" @click="radioClick($event,item)" /><label class="xian1">指定产品</label></div>
 							<div class="xianzhi3_1">
-								<p style="cursor: pointer;" v-on:click="ots" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p>
+								<p style="cursor: pointer;" v-on:click="ots" v-has="'SAMY:MP:Coupon:updataselect-chan'">选择产品</p>
 							</div>
 						</div>
 					</div>
@@ -222,27 +222,27 @@
 			//点击选择用户按钮跳转
 			seles() {
 				this.$router.push({
-					path: '../../MP/Coupon/selectAdd'
+					path: '../../MP/Coupon/updataselectAdd'
 				})
 				localStorage.setItem('userList',this.userList);
 			},
 			//点击选择分类按钮跳转
 			xus() {
 				this.$router.push({
-					path: '../../MP/Coupon/select-type'
+					path: '../../MP/Coupon/updataselect-type'
 				})
 				localStorage.setItem('categoryList',this.categoryList);
 			},
 			//点击选择产品按钮跳转
 			ots() {
 				this.$router.push({
-					path: '../../MP/Coupon/select-chan'
+					path: '../../MP/Coupon/updataselect-chan'
 				})
 				localStorage.setItem('projectList',this.projectList);
 			},
 			//限制领取
 			xianhzi() {
-				if (!(/(^[0-9]*[1-9][0-9]*$)/.test(this.limitGet))) {
+				if (!(/[^\d]/g,'').test(this.limitGet)) {
 					alert("输入的不是正整数！")
 					this.limitGet = ''
 					return false
@@ -252,7 +252,7 @@
 			},
 			//发行量
 			faxing() {
-				if (!(/(^[0-9]*[1-9][0-9]*$)/.test(this.allCount))) {
+				if (!(/[^\d]/g,'').test(this.allCount)) {
 					alert("输入的不是正整数！")
 					this.allCount = ''
 					return false

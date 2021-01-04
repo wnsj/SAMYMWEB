@@ -77,7 +77,8 @@
 						<div class="col-md-8 shiyong shiyong1" v-model="isVaild">
 							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup3" value="1" v-model="isVaild" @click="youxiao()" /><label
 								 class="xian1">永久有效</label></div>
-							<div class="xianzhi1 data"><input class="xian" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label class="xian1">日期范围：</label></div>
+							<div class="xianzhi1 data"><input class="xian" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label
+								 class="xian1">日期范围：</label></div>
 							<div class="xianzhi3 start-time">
 								<dPicker class="wd100" v-model="startTime"></dPicker>
 							</div>
@@ -115,8 +116,8 @@
 							<div class="xianzhi3_1">
 								<p style="cursor: pointer;" v-on:click="xus()" v-has="'SAMY:MP:Coupon:select-type'">选择分类</p>
 							</div>
-							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" v-model="categoryType" name="radioGroup5" value="3" /><label
-								 class="xian1">指定产品</label></div>
+							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" v-model="categoryType" name="radioGroup5"
+								 value="3" /><label class="xian1">指定产品</label></div>
 							<div class="xianzhi3_1">
 								<p style="cursor: pointer;" v-on:click="ots()" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p>
 							</div>
@@ -221,7 +222,7 @@
 			},
 			//限制领取
 			xianhzi() {
-				if (!(/(^[0-9]*[1-9][0-9]*$)/.test(this.limitGet))) {
+				if (!(/[^\d]/g,'').test(this.limitGet)) {
 					alert("输入的不是正整数！")
 					this.limitGet = ''
 					return false
@@ -231,7 +232,7 @@
 			},
 			//发行量
 			faxing() {
-				if (!(/(^[0-9]*[1-9][0-9]*$)/.test(this.allCount))) {
+				if (!(/[^\d]/g,'').test(this.allCount)) {
 					alert("输入的不是正整数！")
 					this.allCount = ''
 					return false
@@ -349,7 +350,7 @@
 			},
 			//the event of addtional button
 			addFee() {
-				
+
 				// console.log(this.limitGet)
 				// console.log(this.allcount)
 				// return false
@@ -393,10 +394,10 @@
 				// 	return false
 				// }
 				if (!this.isBlank(this.startTime)) {
-				    this.startTime = this.moment(this.startTime, "YYYY-MM-DD 00:00:00")
+					this.startTime = this.moment(this.startTime, "YYYY-MM-DD 00:00:00")
 				}
 				if (!this.isBlank(this.endTime)) {
-				    this.endTime = this.moment(this.endTime, "YYYY-MM-DD 23:59:59")
+					this.endTime = this.moment(this.endTime, "YYYY-MM-DD 23:59:59")
 				}
 				var url = this.url + '/couponController/addCoupon'
 				formData.append('couponName', this.couponName)
@@ -430,24 +431,12 @@
 							path: '../../MP/Coupon'
 						})
 					} else {
-						if(this.couponName == '' && this.couponType == '' && this.isLimit == '' && this.isVaild == '' && this.userType == '' &&this.categoryType == ''  &&this.limitGet == '' &&this.allCount == ''){
-							alert('请填写完整！');
-							return false
-						}
 						if (this.couponName == '') {
 							alert('请填写优惠券名称！')
 							return false
 						}
 						if (this.recude == '') {
 							alert('请填写金额/折扣！')
-							return false
-						}
-						if (this.startTime == '') {
-							alert('请填写开始时间！')
-							return false
-						}
-						if (this.endTime == '') {
-							alert('请填写结束时间！')
 							return false
 						}
 						if (this.isVaild == '') {
@@ -470,6 +459,16 @@
 							alert('请填写总发行量！')
 							return false
 						}
+						// if (this.isVaild == '1') {
+						// 	if (this.startTime == '') {
+						// 		alert('请填写开始时间！')
+						// 		return false
+						// 	}
+						// 	if (this.endTime == '') {
+						// 		alert('请填写结束时间！')
+						// 		return false
+						// 	}
+						// }
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
@@ -616,6 +615,7 @@
 		float: left;
 		width: 115px;
 	}
+
 	.xianhzi15 {
 		margin-left: 8px;
 		margin-right: 8px;

@@ -42,7 +42,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="item in unfinishedProList">
+								<tr v-for="(item,index) in unfinishedProList" :key="index" class="zes">
 									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
@@ -52,8 +52,14 @@
 									<td>{{item.isArrears=='1' ? '全款' : '非全款'}}</td>
 									<td>{{item.isArrears=='1' ? '无':item.arrears}}</td>
 									<td>{{dateFormat(item.createDate)}}</td>
+									<!-- <el-tooltip class="item gantan" effect="dark" content="由于审核原因，当前产品无法操作" placement="bottom" style="display: none;">
+										<div class="gan">
+											<p>!</p>
+										</div>
+									</el-tooltip> -->
 								</tr>
 							</tbody>
+							
 						</table>
 					</div>
 				</div>
@@ -371,6 +377,7 @@
 		},
 		data() {
 			return {
+				shs:false,
 				counselorList: [],
 				unfinishedProLists: [],
 				unfinishedProLists1: [],
@@ -641,8 +648,8 @@
 						var res = response.data
 						console.log(res)
 						if (res.retCode == '0000') {
-							this.unfinishedProLists = res.retData['1']
-							this.unfinishedProLists1 = res.retData['2']
+							this.unfinishedProLists = res.retData['2']
+							this.unfinishedProLists1 = res.retData['1']
 							for (var i = 0; i < this.unfinishedProLists1.length; i++) {
 								this.unfinishedProLists1[i].recude = this.unfinishedProLists1[i].recude / 10
 							}
@@ -895,7 +902,7 @@
 				});
 			},
 			//查询已购买产品
-			queryUnfinishedPro(param) {
+			queryUnfinishedPro(param,index) {
 				if (this.isBlank(param)) return
 				var url = this.url + '/purchasedItemsAction/queryUnfinishedPro'
 				this.$ajax({
@@ -914,12 +921,11 @@
 					if (res.retCode == '0000') {
 						this.unfinishedProList = res.retData
 						for (var i = 0; i < this.unfinishedProList.length; i++) {
-							if (this.unfinishedProList[i].auditState == 5) {
-								this.dis = false
-								this.shs = false
+							console.log(typeof(this.unfinishedProList[i].auditState))
+							if (this.unfinishedProList[i].auditState == '3') {
+								$(".zes").hide();
 							} else {
-								this.dis = true
-								this.shs = true
+								$(".zes").show();
 							}
 						}
 					} else {
@@ -1195,6 +1201,28 @@
 					$(".you1 .man2 .gou1").eq(index).show();
 					var uu = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.balance)).mul(new Decimal(re)) / 10
 					this.consume.realCross = uu;
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
+						.couponId +
+						'&userId=' + this.userId
+					this.$ajax({
+						method: 'GET',
+						url: url,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+							'Access-Token': this.accessToken
+						},
+						// param: formData,
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						if (res.retCode == '0000') {
+							this.titttl = res.retData;
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('查询请求失败')
+					});
 				} else{
 					$(".you1 .man2 .gou1").eq(index).hide();
 					var us = new Decimal(this.consume.receivable)

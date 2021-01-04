@@ -1,0 +1,77 @@
+@charset "utf-8";
+.el-table .cell {
+	display: inline-block;
+}
+
+.el-button.chakan {
+	width: 63px;
+	height: 30px;
+	padding: 0;
+	margin-left: 5px;
+	line-height: 5px;
+	color: #fff;
+	background-color: rgba(22, 155, 213, 1);
+}
+.el-tag{
+	border: none!important;
+	background-color: #fff!important;
+	font-size: 16px;
+	color:#333
+}
+
+.el-button.chakan1 {
+	color: #fff;
+	padding: 0;
+	width: 63px;
+	line-height: 5px;
+	height: 30px;
+	background-color: rgba(72, 196, 65, 1);
+}
+
+.el-button {
+	display: block;
+	float: left;
+}
+
+#datatable {
+	position: relative;
+}
+
+#fHeader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #eeeeee;
+	overflow: hidden;
+}
+
+#fHeader div.text-center {
+	float: left;
+	display: inline-block;
+	padding: 8px;
+	border: 1px solid #ddd;
+	font-weight: bold;
+}
+
+input.editradio[type='radio'] {
+	width: 20px;
+	height: 20px;
+	opacity: 0;
+}
+
+label.editlabel {
+	position: absolute;
+	left: 13px;
+	bottom: 11px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	border: 1px solid #999;
+	z-index: 99;
+}
+
+@media print {
+	#fHeader {
+		display: none
+	}
+}

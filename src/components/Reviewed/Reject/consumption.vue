@@ -11,26 +11,26 @@
 
 					<div class="col-xs-3 col-sm- col-md-3 col-lg-3">
 						<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-							<p class="end-aline col-md-11 col-lg-11 jh-pa-1">客户姓名</p><span class="sign-left">:</span>
+							<p class="end-aline col-md-11 col-lg-11 jh-pa-1" style="padding-left: 0;padding-right: 0;">客户姓名</p><span class="sign-left">:</span>
 						</div>
-						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" style="padding-right: 0;">
 							<input class="form-control" type="text" v-model="memName">
 						</div>
 					</div>
 
 					<div class="col-xs-3 col-sm- col-md-3 col-lg-3">
 						<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-							<p class="end-aline col-md-11 col-lg-11 jh-pa-1">审核人</p><span class="sign-left">:</span>
+							<p class="end-aline col-md-11 col-lg-11 jh-pa-1" style="padding-left: 0;padding-right: 0;">审核人</p><span class="sign-left">:</span>
 						</div>
-						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" style="padding-right: 0;">
 							<input class="form-control" type="text" v-model="shopowner">
 						</div>
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 						<div class="col-md-5 col-lg-5 text-right nopad">
-							<p class="end-aline col-md-11 col-lg-11">优惠券类型</p><span class="sign-left">:</span>
+							<p class="end-aline col-md-11 col-lg-11" style="padding-left: 0;padding-right: 0;">优惠券类型</p><span class="sign-left">:</span>
 						</div>
-						<div class="col-md-7 col-lg-7">
+						<div class="col-md-7 col-lg-7" style="padding-right: 0;">
 							<select class="form-control" v-model="couponType">
 								<option value="">--未选择--</option>
 								<option value="2">满减</option>
@@ -42,7 +42,7 @@
 						<div class="col-md-7 col-lg-7 text-right nopad" style="margin-right: -50px;">
 							<p class="end-aline col-md-11 col-lg-11" style="margin-left: -40px;">是否使用优惠券</p><span class="sign-left">:</span>
 						</div>
-						<div class="col-md-7 col-lg-7">
+						<div class="col-md-7 col-lg-7" style="padding-right: 0;">
 							<select class="form-control" v-model="isUseCoupon">
 								<option value="">--未选择--</option>
 								<option value="1">是</option>
@@ -50,10 +50,18 @@
 							</select>
 						</div>
 					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-has="'SAMY:MP:STORE'" style="margin-top: 20px;">
+						<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+							<p class="end-aline col-md-11 col-lg-11 jh-pa-1" style="padding-left: 0;padding-right: 0;">门店</p><span class="sign-left">:</span>
+						</div>
+						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-8=7" style="padding-right: 0;">
+							<store ref="store" @storeChange='storeChange'></store>
+						</div>
+					</div>
 
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="margin-top: 20px;">
 						<div class="col-md-3 col-lg-3 text-right nopad SSwid20" style="width: 20%;">
-							<p class="end-aline col-md-11 col-lg-11">消费日期</p><span class="sign-left">:</span>
+							<p class="end-aline col-md-11 col-lg-11" style="padding-left: 0;">消费日期</p><span class="sign-left">:</span>
 						</div>
 						<div class="col-md-4 col-lg-4 SSwid27" style="width: 28%;">
 							<dPicker class="wd100" v-model="begCreateDate"></dPicker>
@@ -66,14 +74,7 @@
 						</div>
 					</div>
 
-					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" v-has="'SAMY:MP:STORE'" style="margin-top: 20px;">
-						<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-							<p class="end-aline col-md-11 col-lg-11 jh-pa-1">门店</p><span class="sign-left">:</span>
-						</div>
-						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-8=7">
-							<store ref="store" @storeChange='storeChange'></store>
-						</div>
-					</div>
+					
 					<button type="button" style="margin-top: 20px;" class="btn btn-warning pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="exportTable()">导出
 					</button>
 					<button type="button" style="margin-top: 20px;" class="btn btn-info pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="reset()">重置
@@ -376,7 +377,7 @@
 	}
 </script>
 
-<style>
+<style scoped="scoped">
 	#datatable {
 		position: relative;
 	}

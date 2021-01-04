@@ -8,7 +8,6 @@
 		<div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
 			<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 		</div>
-		<div>{{info}}</div>
 		<div class="" id="datatable">
 			<el-table :data="selectlist" style="width: 100%" border :row-key="getRowKeys" ref="multipleTable" @selection-change="handleSelectionChange">
 				<el-table-column type="selection" width="100" align="center" :reserve-selection="true" :selectable='checkboxSelect' :class="showSelect?'false':'true'"></el-table-column>

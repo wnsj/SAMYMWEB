@@ -78,7 +78,7 @@
 							<continueState ref="continueStateRef" @objectChange="continueStateChange"></continueState>
 						</div>
 					</div>
-					<button type="button" style="margin-top: 20px;" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getAllAuditPage()">查询
+					<button type="button" style="margin-top: 20px;" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getAllAuditPage(1)">查询
 					</button>
 				</div>
 			</div>
@@ -162,6 +162,7 @@
 				chaId: '',
 				auditName: '',
 				empId: '',
+				visitorName:'',
 				judgeState:'', //咨客判定
 				continueState:'', //续流状态
 				memName: '',
@@ -227,10 +228,10 @@
 			},
 			handleSelectionChange(val) {
 				this.userList = val;
-				if (event === undefined || event.target.nodeName === 'INPUT') {
-				        this.vTable['v_' + this.currentPage] = [...val];
-				        this.getNum();
-				      }
+				// if (event === undefined || event.target.nodeName === 'INPUT') {
+				//         this.vTable['v_' + this.currentPage] = [...val];
+				//         this.getNum();
+				//       }
 			},
 			resetDate(row, column, cellValue, index) {
 				if (cellValue !== '' && cellValue !== null) {
@@ -272,8 +273,6 @@
 				this.$router.push({
 					path: '../../MP/Coupon/CouponAdd',
 				})
-			},
-			handleSelectionChange1(val) {
 			},
 			employeeChange(param) {
 				if (this.isBlank(param)) {
@@ -336,8 +335,8 @@
 			},
 
 			//check the list of department
-			getAllAuditPage() {
-				if (this.selectDataFlag) {
+			getAllAuditPage(num) {
+				if (num == 1) {
 					this.page = 1
 				}
 				
@@ -404,7 +403,7 @@
 			handleSizeChange(pageSize) {
 			    this.page = 1
 			    this.pageSize = pageSize
-			    this.getAllAuditPage()
+			    this.getAllAuditPage(1)
 			},
 			handleScroll(e) {
 				var self = this

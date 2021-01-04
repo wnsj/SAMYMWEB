@@ -339,7 +339,7 @@
 	}
 </script>
 
-<style>
+<style scoped="scoped">
 	#datatable {
 		position: relative;
 	}

@@ -9,7 +9,7 @@
 			<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 		</div>
 		<div class="" id="datatable">
-			<el-table :data="selectchan" style="width: 100%" :row-key="getRowKeys" border ref="multipleTable" @selection-change="handleSelectionChange">
+			<el-table :data="selectchan" style="width: 100%" :row-key="getRowKeys" border ref="multipleTable">
 				<el-table-column type="selection" width="55" align="center" label="全选" :reserve-selection="true" :selectable='checkboxSelect'></el-table-column>
 				<el-table-column prop="storeName" label="店铺" width="100" align="center"></el-table-column>
 				<el-table-column prop="empName" label="咨询师" width="100" align="center"></el-table-column>
@@ -25,13 +25,13 @@
 				<el-table-column prop="isRefund" label="是否可退款" :formatter="tui" width="100" align="center"></el-table-column>
 				<el-table-column prop="endDay" label="到期日期(天)" width="100" align="center"></el-table-column>
 			</el-table>
-			<el-row style="margin-top: 20px;">
+			<!-- <el-row style="margin-top: 20px;">
 				<el-col :span="24">
-					<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="current"
+					<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="page"
 					 :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
 					</el-pagination>
 				</el-col>
-			</el-row>
+			</el-row> -->
 		</div>
 		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
 	</div>
@@ -64,29 +64,25 @@
 				total: 0, //数据的数量
 				pages: '', //总页数
 				current: 1, //当前页码
-				pageSize: 10, //一页显示的数量
+				pageSize: 99999, //一页显示的数量
 				auditName: '',
 				memName: '',
 				isMem: '',
 				visType: '',
 				auditState: '',
-				begCreateDate: '',
-				endCreateDate: '',
 				addClass: false,
 				empDisable: false,
 				selectDataFlag: false,
 				selectchan:[]
 			};
 		},
-		watch: {
-			auditName: 'changeData',
-			auditState: 'changeData',
-			storeId: 'changeData',
-			begCreateDate: 'changeData',
-			endCreateDate: 'changeData'
-		},
 
 		methods: {
+			//子级传值到父级上来的动态拿去
+			pageChange: function (page) {
+			    this.current = page
+			    this.getAllAuditPage(page);
+			},
 			checkboxSelect(row, rowIndex) {
 				if (rowIndex == 0) {
 					return false // 禁用
@@ -96,28 +92,6 @@
 			},
 			getRowKeys(row) {
 				return row.proId;
-			},
-			resetDate(row, column, cellValue, index) {
-				if (cellValue !== '' && cellValue !== null) {
-					return cellValue.substring(0, 10)
-				}
-			},
-			changeData(newVal, oldVal) {
-				this.selectDataFlag = true
-			},
-			chaChange(param) {
-				if (this.isBlank(param)) {
-					this.chaId = ""
-				} else {
-					this.chaId = param.chaId
-				}
-			},
-			employeeChange(param) {
-				if (this.isBlank(param)) {
-					this.empId = ""
-				} else {
-					this.empId = param.empId
-				}
 			},
 			resetAuditState(row, column, cellValue, index) {
 				console.log(typeof(cellValue))
@@ -149,15 +123,6 @@
 				return cellValue == 1 ? "是" : "否"
 			},
 
-
-			storeChange: function(param) {
-				if (this.isBlank(param)) {
-					this.storeId = ""
-				} else {
-					this.storeId = param.storeId
-				}
-			},
-
 			dataOpen() {
 				if (this.showSelect) return
 				this.showSelect = true;
@@ -186,22 +151,15 @@
 			editorAction(item) {
 				this.objectContent = item
 			},
-
-			//check the list of department
+			//查询
 			getAllAuditPage() {
 				if (this.selectDataFlag) {
 					this.current = 1
 				}
 				var userList = localStorage.getItem('projectList');
 				var stringResult2 = userList.split(',');
+				console.log(stringResult2)
 				this.showSelect = false
-				console.log('getAllAuditPage')
-				if (!this.isBlank(this.begCreateDate)) {
-					this.begCreateDate = this.moment(this.begCreateDate, 'YYYY-MM-DD 00:00:00.000')
-				}
-				if (!this.isBlank(this.endCreateDate)) {
-					this.endCreateDate = this.moment(this.endCreateDate, 'YYYY-MM-DD 23:59:00.000')
-				}
 				var url = this.url + '/projects/queryAllByParams'
 				this.$ajax({
 					method: 'POST',
@@ -211,7 +169,7 @@
 						'Access-Token': this.accessToken
 					},
 					data: {
-						page: this.page,
+						current: this.current,
 						pageSize: this.pageSize
 					},
 					dataType: 'json',
@@ -220,12 +178,14 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
-						this.page = res.retData.current //当前页码
+						this.current = res.retData.current //当前页码
 						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.records
 						for (let i = 0; i < this.tableData.length; i++) {
+							console.log(this.tableData[i].proId + '')
 							if (stringResult2.includes(this.tableData[i].proId + '')) {
+								console.log(this.tableData[i].proId + '')
 								this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
 								this.selectchan.push(this.tableData[i])
 							}
@@ -244,19 +204,17 @@
 			goOff() {
 				this.$router.go(-1);
 			},
-			// 翻页
-			handleCurrentChange(pageNum) {
-				this.page = pageNum
-				this.getAllAuditPage()
-			},
-			// 每页条数变化时触发
-			handleSizeChange(pageSize) {
-				this.page = 1
-				this.pageSize = pageSize
-				this.getAllAuditPage()
-			},
-
-
+			// // 翻页
+			// handleCurrentChange(pageNum) {
+			// 	this.current = pageNum
+			// 	this.getAllAuditPage()
+			// },
+			// // 每页条数变化时触发
+			// handleSizeChange(pageSize) {
+			// 	this.current = 1
+			// 	this.pageSize = pageSize
+			// 	this.getAllAuditPage()
+			// },
 			handleScroll(e) {
 				var self = this
 				var etop = e.target.scrollTop

@@ -25,13 +25,13 @@
 			<el-table-column prop="createTime" label="添加时间" :formatter="resetDate" width="100" align="center"></el-table-column>
 			<el-table-column prop="isMem" label="是否转会员" :formatter="resetArrears" width="100" align="center"></el-table-column>
 		</el-table>
-		<el-row style="margin-top: 20px;">
+		<!-- <el-row style="margin-top: 20px;">
 			<el-col :span="24">
 				<el-pagination @current-change="handleCurrentChange" @size-change="handleSizeChange" :current-page="current"
 				 :page-sizes="[10,20,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
 				</el-pagination>
 			</el-col>
-		</el-row>
+		</el-row> -->
 	</div>
 	<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
 	</div>
@@ -64,7 +64,7 @@
 				total: 0, //数据的数量
 				pages: '', //总页数
 				current: 1, //当前页码
-				pageSize: 10, //一页显示的数量
+				pageSize: 999999, //一页显示的数量
 				auditName: '',
 				memName: '',
 				isMem: '',
@@ -211,6 +211,7 @@
 						this.tableData = res.retData.records;
 						for (let i = 0; i < this.tableData.length; i++) {
 							if (stringResult1.includes(this.tableData[i].visId + '')) {
+								console.log(this.tableData[i].visId + '')
 								 this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
 								 this.selectList.push(this.tableData[i])
 								}
@@ -229,17 +230,17 @@
 			goOff() {
 				this.$router.go(-1);
 			},
-			// 翻页
-			handleCurrentChange(pageNum) {
-				this.current = pageNum
-				this.getAllAuditPage()
-			},
-			// 每页条数变化时触发
-			handleSizeChange(pageSize) {
-				this.current = 1
-				this.pageSize = pageSize
-				this.getAllAuditPage()
-			},
+			// // 翻页
+			// handleCurrentChange(pageNum) {
+			// 	this.current = pageNum
+			// 	this.getAllAuditPage()
+			// },
+			// // 每页条数变化时触发
+			// handleSizeChange(pageSize) {
+			// 	this.current = 1
+			// 	this.pageSize = pageSize
+			// 	this.getAllAuditPage()
+			// },
 
 
 			handleScroll(e) {

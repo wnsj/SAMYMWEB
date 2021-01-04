@@ -136,8 +136,9 @@
 					<div class="col-md-4 col-lg-4 jh-tw-1">
 						<dPicker class="wd100" v-model="endCreateDate"></dPicker>
 					</div>
-					<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal" v-on:click="conditionCheck(1)">查询</button>
+					
 				</div>
+				<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" style="margin-right: -30px;" data-toggle="modal" v-on:click="conditionCheck(1)">查询</button>
 			</div>
 		</div>
 		</el-collapse-transition>

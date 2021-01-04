@@ -27,7 +27,7 @@
                         <input class="form-control" type="text" v-model="shopowner">
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="margin-top: 20px;">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 					<div class="col-md-3 col-lg-3 text-right nopad SSwid20" style="width: 20%;">
 						<p class="end-aline col-md-11 col-lg-11" >审核日期</p><span class="sign-left">:</span>
 					</div>
@@ -52,7 +52,7 @@
 				</div>
             </div>
 
-            <div class="row newRow">
+            <div class="row newRow" style="margin-top: -50px;">
                 
 
                  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float: right;">
@@ -344,7 +344,7 @@
     }
 </script>
 
-<style>
+<style scoped="scoped">
     #datatable {
         position: relative;
     }

@@ -325,24 +325,21 @@
 			},
 			//限制领取
 			xianhzi() {
-				if (!(/[^\d]/g, '').test(this.limitGet)) {
-					alert("输入的不是正整数！")
+				if (!(/^\+?(0|[1-9][0-9]*)$/).test(this.limitGet)) {
+					alert("输入的不是正整数/0！")
 					this.limitGet = ''
 					return false
 				} else {
-
+			
 				}
 			},
 			//发行量
 			faxing() {
-				if (!(/[^\d]/g, '').test(this.allCount)) {
-					alert("输入的不是正整数！")
+				if (!(/^\+?(0|[1-9][0-9]*)$/).test(this.allCount)) {
+					alert("输入的不是正整数/0！")
 					this.allCount = ''
 					return false
-				} else {
-
-				}
-
+				} else {}
 			},
 			//查询优惠券
 			addFee(couponId) {
@@ -836,6 +833,7 @@
 	.shiyong .xianzhi6 input {
 		text-align: center;
 		width: 100%;
+		text-indent: 1em;
 		outline: none;
 		border: 1px solid #DDDDDD;
 		height: 25px;

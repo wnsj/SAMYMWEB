@@ -95,16 +95,16 @@
 								<b>*</b>
 								<label class="col-md-1 control-label text-right nopad end-aline">有效期</label><span class="sign-left">:</span>
 								<div class="col-md-8 shiyong shiyong1" v-model="isVaild">
-									<div class="xianzhi"><input class="xian" type="radio" name="radioGroup3" value="1" v-model="isVaild" /><label
+									<div class="xianzhi"><input class="xian" type="radio" name="radioGroup3" value="1" @click="youxiao()" v-model="isVaild" /><label
 										 class="xian1">永久有效</label></div>
-									<div class="xianzhi1 data"><input class="xian" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label
+									<div class="xianzhi1 data"><input class="xian" id="cats" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label
 										 class="xian1">日期范围：</label></div>
 									<div class="xianzhi3 start-time">
-										<dPicker class="wd100" v-model="startTime"></dPicker>
+										<dPicker class="wd100"  v-model="startTime" ></dPicker>
 									</div>
 									<div class="xianhzi15 xie">~</div>
 									<div class="xianzhi3 end-time">
-										<dPicker class="wd100" v-model="endTime"></dPicker>
+										<dPicker class="wd100"  v-model="endTime"></dPicker>
 									</div>
 									<!-- <div class="xianzhi4"><input type="checkbox"><label class="xian1">自领取之日</label></div>
 						<div class="xianzhi5"><input type="text" placeholder="0"><span>天内</span></div> -->
@@ -243,6 +243,31 @@
 			};
 		},
 		methods: {
+			youxiao(){
+				if(this.isVaild == ''){
+					$(".data").hide();
+					// document.getElementById("cats").disabled = true
+					$(".xie").hide();
+					$(".wd100").hide();
+				}else{
+					$(".data").show();
+					// document.getElementById("cats").disabled = false
+					$(".xie").show();
+					$(".wd100").show();
+				}
+				if(this.isVaild == 1){
+					$(".data").hide();
+					// document.getElementById("cats").disabled = true
+					$(".xie").hide();
+					$(".wd100").hide();
+				}else{
+					$(".data").show();
+					// document.getElementById("cats").disabled = false
+					$(".xie").show();
+					$(".wd100").show();
+				}
+			
+			},
 			man() {
 				if (this.couponType == '1') {
 					$(".jin").hide();
@@ -258,8 +283,8 @@
 			},
 			//限制领取
 			xianhzi() {
-				if (!(/[^\d]/g, '').test(this.limitGet)) {
-					alert("输入的不是正整数！")
+				if (!(/^\+?(0|[1-9][0-9]*)$/).test(this.limitGet)) {
+					alert("输入的不是正整数/0！")
 					this.limitGet = ''
 					return false
 				} else {
@@ -268,8 +293,8 @@
 			},
 			//发行量
 			faxing() {
-				if (!(/[^\d]/g, '').test(this.allCount)) {
-					alert("输入的不是正整数！")
+				if (!(/^\+?(0|[1-9][0-9]*)$/).test(this.allCount)) {
+					alert("输入的不是正整数/0！")
 					this.allCount = ''
 					return false
 				} else {}
@@ -438,38 +463,6 @@
 							path: '../../MP/Coupon'
 						})
 					} else {
-						if (this.isVaild == 3 || this.isVaild == 1) {
-							alert('请选择有效期！')
-							return false
-						} else if (this.couponName == '') {
-							alert('请填写优惠券名称！')
-							return false
-						} else if (this.recude == '') {
-							alert('请填写金额/折扣！')
-							return false
-						} else if (this.userType == '') {
-							alert('请选择使用用户！')
-							return false
-						} else if (this.categoryType == '') {
-							alert('请选择产品！')
-							return false
-						} else if (this.limitGet == '') {
-							alert('请填写每人限领！')
-							return false
-						} else if (this.allCount == '') {
-							alert('请填写总发行量！')
-							return false
-						}
-						if (this.isVaild == 1) {
-							if (this.startTime == '') {
-								alert('请填写开始时间！')
-								return false
-							}
-							if (this.endTime == '') {
-								alert('请填写结束时间！')
-								return false
-							}
-						}
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
@@ -758,6 +751,7 @@
 
 	.shiyong .xianzhi6 input {
 		width: 100%;
+		text-indent: 1em;
 		outline: none;
 		border: 1px solid #DDDDDD;
 		height: 25px;

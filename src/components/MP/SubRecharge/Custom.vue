@@ -1153,12 +1153,10 @@
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
-				var res = item.recude;
+				var res1 = item.recude;
 				console.log(this.consume.proId)
 				if (this.dui) {
-					$(".you .man1 .gou1").eq(index).show();
-						var zz = new Decimal(this.consume.receivable).sub(new Decimal(res)).sub(new Decimal(this.cash.select))
-						this.consume.receivable = zz;
+					$(".you1 .man1 .gou1").eq(index).show();
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
 						.couponId +
 						'&userId=' + this.userId
@@ -1175,6 +1173,9 @@
 						var res = response.data
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
+							var mach= new Decimal(this.titttl).mul(new Decimal(res1)).sub(new Decimal(this.cash.select));
+							var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach));
+							this.consume.realCross = zz;
 						} else {
 							alert(res.retMsg)
 						}
@@ -1182,9 +1183,10 @@
 						console.log('查询请求失败')
 					});
 				} else {
-					$(".you .man1 .gou1").eq(index).hide();
-						var zz = new Decimal(this.consume.receivable);
-						this.consume.receivable = zy;
+					this.titttl = 1;
+					$(".you1 .man1 .gou1").eq(index).hide();
+						var zy = new Decimal(this.consume.receivable);
+						this.consume.realCross = zy;
 				}
 				this.dui = !this.dui
 			},
@@ -1217,6 +1219,8 @@
 						var res = response.data
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
+							var jh =new Decimal(this.cash.balance).mul(new Decimal(re)) /10;
+							this.consume.realCross = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titttl))).toFixed(2, Decimal.ROUND_HALF_UP);
 						} else {
 							alert(res.retMsg)
 						}

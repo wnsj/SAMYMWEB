@@ -848,8 +848,7 @@
 				console.log(this.consume.proId)
 				var rt = item.recude;
 				if (this.dui) {
-					var zz = new Decimal(this.consume.receivable).sub(new Decimal(rt))
-					this.consume.receivables = zz;
+					
 					$(".you .man1 .gou1").eq(index).show();
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume.couponId + '&userId=' + this.userId
 					this.$ajax({
@@ -865,6 +864,9 @@
 						var res = response.data
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
+							var mach= new Decimal(this.titttl).mul(new Decimal(rt));
+							var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach));
+							this.consume.receivables = zz;
 						} else {
 							alert(res.retMsg)
 						}
@@ -890,8 +892,7 @@
 				console.log(rw)
 				if (this.dui) {
 					$(".you .man2 .gou1").eq(index).show();
-					var uu = new Decimal(this.consume.receivable).mul(new Decimal(rw)) /10
-					this.consume.receivables = uu;
+					
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
@@ -906,6 +907,8 @@
 						var res = response.data
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
+							var jh = new Decimal(rw) / 10;
+							this.consume.receivables = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titttl))).toFixed(2, Decimal.ROUND_HALF_UP);
 						} else {
 							alert(res.retMsg)
 						}

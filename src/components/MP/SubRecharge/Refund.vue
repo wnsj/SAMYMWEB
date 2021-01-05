@@ -44,7 +44,8 @@
 								</thead>
 								<tbody>
 									<tr v-for="item in unfinishedProList">
-										<td><input type="radio"  name="radioGroup" @click="radioClick($event,item)" /></td>
+                                        <td v-if="item.auditState != 5" ><input type="radio" name="radioGroup"  @click="radioClick($event,item)"></td>
+                                        <td v-else style="color: red;font-weight: bold">该产品为驳回状态!</td>
 										<td>{{item.proName}}</td>
 										<td>{{item.counselorName}}</td>
 										<td>{{transforProType(item.proType)}}</td>
@@ -92,7 +93,7 @@
 							<input type="text" class="form-control" v-model="refund.balance">
 						</div>
 					</div>
-					
+
 					<div class="col-md-6 form-group clearfix jh-wd-33">
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">备注</label><span
 						 class="sign-left">:</span>

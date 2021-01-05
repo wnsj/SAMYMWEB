@@ -43,7 +43,8 @@
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in unfinishedProList" :key="index" class="zes">
-									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
+                                    <td v-if="item.auditState != 5" ><input type="radio" name="radioGroup"  @click="radioClick($event,item)"></td>
+                                    <td v-else style="color: red;font-weight: bold">该产品为驳回状态!</td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -59,7 +60,7 @@
 									</el-tooltip> -->
 								</tr>
 							</tbody>
-							
+
 						</table>
 					</div>
 				</div>
@@ -1143,8 +1144,8 @@
 					this.consume.realCross = this.consume.consumCount * this.consume.price
 				}
 			},
-			
-			
+
+
 			//选择满减优惠券
 			dianji: function(item,index) {
 				console.log(item)
@@ -1190,7 +1191,7 @@
 				}
 				this.dui = !this.dui
 			},
-			
+
 			//选择满折优惠券
 			dianji1: function(index, item) {
 				this.productId = this.consume.proId;

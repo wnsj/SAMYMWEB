@@ -27,7 +27,7 @@
 						</div>
 					</div>
 					<div class="col-md-12 col-lg-12">
-						<table class="table table-bordered table-hover jh-mb-0">
+						<table class="table table-bordered table-hover jh-mb-0" >
 							<thead class="datathead">
 								<tr>
 									<td>选择</td>
@@ -39,7 +39,8 @@
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in unfinishedProList" class="zes" :key="index">
-									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)"></td>
+									<td v-if="item.auditState != 5"><input type="radio" name="radioGroup" @click="radioClick($event,item)"></td>
+                                    <td v-else style="color: red;font-weight: bold">该产品为驳回状态!</td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -56,7 +57,7 @@
 					</div>
 
 					<div class="col-md-12 col-lg-12">
-						<p class="tips">注：1、上面是已购产品列表，如发生余额抵扣购买新产品，则请选中已购产品；否则，请不要点选。若已经勾选，则再次点击取消勾选
+						<p class="tips" style="font-weight: bolder">注：1、上面是已购产品列表，如发生余额抵扣购买新产品，则请选中已购产品；否则，请不要点选。若已经勾选，则再次点击取消勾选
 							<br>2、只能抵扣非欠费普通类型产品，月卡季卡等不可抵扣</p>
 					</div>
 

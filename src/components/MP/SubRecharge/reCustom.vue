@@ -240,65 +240,68 @@
 					</div>
 				</div>
 			</div>
-			<div class="tab-pane fade in active martop">
-				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
-					<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
-				</div>
-				<div class="col-md-7 you1">
-					<div class="man1">
-						<div class="man">
-							<div class="manjian"></div>
-							<div class="manjian1">满减</div>
+			<div class="youa" v-if="listCouponZhe.length||listCouponJian.length" style="display: block;">
+				<div class="tab-pane fade in active martop">
+					<div class="col-md-12 form-group clearfix text-left jh-mt-5">
+						<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
+					</div>
+					<div class="col-md-7 you1">
+						<div class="man1">
+							<div class="man">
+								<div class="manjian"></div>
+								<div class="manjian1">满减</div>
+							</div>
+							<ul>
+								<li @click="dianji(item,index)" v-for="(item,index) in listCouponJian" :key="index">
+									<div class="jia"><span>￥</span>{{item.recude}}</div>
+									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+									<div class="titleSY">{{item.couponName}}</div>
+									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
+									<div class="youxiao" v-if="item.isLimit == 1">有效期<span>{{item.startTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
+									<div class="niucha1" v-if="item.isLimit == 2">永久有效</div>
+									<div class="niucha" v-if="item.isLimit == 1">
+										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span>
+									</div>
+									<div class="gou1" v-if="item.checked"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+								</li>
+							</ul>
 						</div>
-						<ul>
-							<li @click="dianji(item,index)" v-for="(item,index) in unfinishedProLists" :key="index">
-								<div class="jia"><span>￥</span>{{item.recude}}</div>
-								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
-								<div class="titleSY">{{item.couponName}}</div>
-								<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
-								<div class="youxiao" v-if="item.isLimit == 1">有效期<span>{{item.startTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
-								<div class="niucha1" v-if="item.isLimit == 2">永久有效</div>
-								<div class="niucha" v-if="item.isLimit == 1">
-									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span>
-								</div>
-								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
-							</li>
+						<div class="man2">
+							<div class="man">
+								<div class="manjian"></div>
+								<div class="manjian1">满折</div>
+							</div>
+							<ol>
+								<li @click="dianji1(index,item)" v-for="(item,index) in listCouponZhe" :key="index">
+									
+									<div class="jia">{{item.recude}}<span>折</span></div>
+									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+									<div class="titleSY">{{item.couponName}}</div>
+									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
+									<div class="youxiao" v-if="item.isLimit == 1">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+									<div class="niucha1" v-if="item.isLimit == 2">永久有效</div>
+									<div class="niucha" v-if="item.isLimit == 1">
+										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+									</div>
+									<div class="gou1" style="display: block;" v-if="Number(item.checked)==1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade in active martop">
+					<div class="col-md-7">
+						<ul class="btn-numbox1">
+							<li class="shiyong2"><span class="number1">使用数量/张：</span></li>
+							<li>
+								<ul class="count1">
+									<li><span class="num-jian1" @click="btnMinute()">-</span></li>
+									<li><input type="text" class="input-num1" value="1" v-model="titles" /></li>
+									<li><span class="num-jia1" @click="btnAdd()">+</span></li>
+								</ul>
+							</li>　
 						</ul>
 					</div>
-					<div class="man2">
-						<div class="man">
-							<div class="manjian"></div>
-							<div class="manjian1">满折</div>
-						</div>
-						<ol>
-							<li @click="dianji1(index,item)" v-for="(item,index) in unfinishedProLists1" :key="index">
-								<div class="jia">{{item.recude}}<span>折</span></div>
-								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
-								<div class="titleSY">{{item.couponName}}</div>
-								<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
-								<div class="youxiao" v-if="item.isLimit == 1">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
-								<div class="niucha1" v-if="item.isLimit == 2">永久有效</div>
-								<div class="niucha" v-if="item.isLimit == 1">
-									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
-								</div>
-								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
-							</li>
-						</ol>
-					</div>
-				</div>
-			</div>
-			<div class="tab-pane fade in active martop">
-				<div class="col-md-7">
-					<ul class="btn-numbox1">
-						<li class="shiyong2"><span class="number1">使用数量/张：</span></li>
-						<li>
-							<ul class="count1">
-								<li><span class="num-jian1" @click="num_jian1()">-</span></li>
-								<li><input type="text" class="input-num1" id="input-num1" value="2" v-model="titttl" /></li>
-								<li><span class="num-jia1" @click="num_jia1()">+</span></li>
-							</ul>
-						</li>　
-					</ul>
 				</div>
 			</div>
 			<div class="col-md-12 clearfix jh-ad-0" v-show="cash.balance>0">
@@ -372,8 +375,8 @@
 		},
 		data() {
 			return {
-				unfinishedProLists: [],
-				unfinishedProLists1: [],
+				listCouponJian: [],
+				listCouponZhe:[],
 				oRadioGroup: '',
 				realCrossCount: '',
 				destroy: true,
@@ -428,6 +431,7 @@
 				isShow: true,
 				consumeReceivable: '',
 				isSelect: true,
+				titles: 1,
 				sameProject: false,
 				appShow: false,
 				unfinishedProList: [],
@@ -451,41 +455,22 @@
 		},
 		methods: {
 			// //优惠券使用张数
-			num_jia() {
-				var input_num1 = document.getElementById("input-num1");
-				var url = this.url + '/couponController/couponCalculate?productId=' + '1' + '&couponId=' + 1 + '&userId=' + this.userId
-				this.$ajax({
-					method: 'GET',
-					url: url,
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-						'Access-Token': this.accessToken
-					},
-					// param: formData,
-					dataType: 'json',
-				}).then((response) => {
-					var res = response.data
-					if (res.retCode == '0000') {
-						this.titttl = res.retData;
-						if (input_num1.value == res.retData) {
-							input_num1.value = parseInt(input_num1.value) + 0;
-						} else {
-							input_num1.value = parseInt(input_num1.value) + 1;
-						}
-					} else {
-						alert(res.retMsg)
-					}
-				}).catch((error) => {
-					console.log('查询请求失败')
-				});
-
-			},
-			num_jian() {
-				var input_num1 = document.getElementById("input-num1");
-				if (input_num1.value <= 1) {
-					input_num1.value = 1;
+			btnAdd() {
+				// 如果数量大于商品库存
+				if (this.titles >= this.titttl) {
+					alert('该优惠券不能使用更多了~')
+					return false
 				} else {
-					input_num1.value = parseInt(input_num1.value) - 1;
+					this.titles++
+				}
+			},
+			
+			btnMinute() {
+				if (this.titles <= 1) {
+					alert('该优惠券不能减少了哟~')
+					return false
+				} else {
+					this.titles--
 				}
 			},
 			// destroyDom() {
@@ -820,6 +805,9 @@
 
 			//选择满减优惠券
 			dianji: function(item,index) {
+				this.listCouponJian.forEach((item)=>{
+					item.checked=false
+				})
 				console.log(item)
 				this.consume.couponNum = this.titttl;
 				this.productId = this.consume.proId;
@@ -830,7 +818,7 @@
 				console.log(this.consume.proId)
 				console.log(this.cash.select)
 				if (this.dui) {
-					$(".you1 .man1 .gou1").eq(index).show();
+					this.listCouponJian[index].checked=!this.listCouponJian[index].checked
 						var zz = new Decimal(this.consume.receivable).sub(new Decimal(res))
 						this.consume.realCross = zz;
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
@@ -849,6 +837,10 @@
 						var res = response.data
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
+							this.titles = res.retData;
+							var mach= new Decimal(this.titttl).mul(new Decimal(res1)).sub(new Decimal(this.cash.select));
+							var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach));
+							this.consume.realCross = zz;
 						} else {
 							alert(res.retMsg)
 						}
@@ -856,6 +848,8 @@
 						console.log('查询请求失败')
 					});
 				} else {
+					this.titttl = 1;
+					this.titles = 1;
 					$(".you1 .man1 .gou1").eq(index).hide();
 						var zx = new Decimal(this.consume.receivable);
 						this.consume.realCross = zx;
@@ -865,6 +859,9 @@
 			
 			//选择满折优惠券
 			dianji1: function(index, item) {
+				this.listCouponZhe.forEach((item)=>{
+					item.checked=false
+				})
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
@@ -872,7 +869,7 @@
 				var re = item.recude;
 				console.log(re)
 				if (this.dui) {
-					$(".you1 .man2 .gou1").eq(index).show();
+					this.listCouponZhe[index].checked=!this.listCouponZhe[index].checked
 					var uu = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.balance)).mul(new Decimal(re)) / 10
 					this.consume.realCross = uu;
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume.couponId + '&userId=' + this.userId
@@ -889,6 +886,9 @@
 						var res = response.data
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
+							this.titles = res.retData;
+							var jh =new Decimal(this.cash.balance).mul(new Decimal(re)) /10;
+							this.consume.realCross = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titttl))).toFixed(2, Decimal.ROUND_HALF_UP);
 						} else {
 							alert(res.retMsg)
 						}
@@ -896,6 +896,8 @@
 						console.log('查询请求失败')
 					});
 				} else{
+					this.titttl = res.retData;
+					this.titles = res.retData;
 					$(".you1 .man2 .gou1").eq(index).hide();
 					var us = new Decimal(this.consume.receivable)
 					this.consume.realCross = us;

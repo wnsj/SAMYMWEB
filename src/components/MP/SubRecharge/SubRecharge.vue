@@ -132,7 +132,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="youa">
+			<div class="youa" v-if="listCouponZhe.length||listCouponJian.length" style="display: block;">
 				<div class="tab-pane fade in active martop">
 					<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 						<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
@@ -144,7 +144,7 @@
 								<div class="manjian1">满减</div>
 							</div>
 							<ul>
-								<li @click="dianji(item,index)" v-for="(item,index) in unfinishedProLists" :key="index">
+								<li @click="dianji(item,index)" v-for="(item,index) in listCouponJian" :key="index">
 									<div class="jia"><span>￥</span>{{item.recude}}</div>
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
@@ -154,7 +154,7 @@
 									<div class="niucha" v-if="item.isLimit == 1">
 										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span>
 									</div>
-									<div class="gou1" v-show="yongjiu"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+									<div class="gou1" v-if="item.checked"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
 								</li>
 							</ul>
 						</div>
@@ -164,7 +164,8 @@
 								<div class="manjian1">满折</div>
 							</div>
 							<ol>
-								<li @click="dianji1(index,item)" v-for="(item,index) in unfinishedProLists1" :key="index">
+								<li @click="dianji1(index,item)" v-for="(item,index) in listCouponZhe" :key="index">
+									
 									<div class="jia">{{item.recude}}<span>折</span></div>
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
@@ -174,7 +175,7 @@
 									<div class="niucha" v-if="item.isLimit == 1">
 										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
 									</div>
-									<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+									<div class="gou1" style="display: block;" v-if="Number(item.checked)==1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
 								</li>
 							</ol>
 						</div>
@@ -429,8 +430,8 @@
 				appShow: false,
 				isArrearsShow: false,
 				unfinishedProList: [],
-				unfinishedProLists: [],
-				unfinishedProLists1: [],
+				listCouponJian: [],
+				listCouponZhe:[],
 				auditState: '',
 				clickItemObj: {
 					itemId: 0,
@@ -616,29 +617,23 @@
 						},
 						data: formData,
 						dataType: 'json',
-					}).then((response) => {
-						var res = response.data
-						console.log(res)
-						if (res.retCode == '0000') {
-							this.unfinishedProLists = res.retData['2']
-							this.unfinishedProLists1 = res.retData['1']
-							for (var i = 0; i < this.unfinishedProLists1.length; i++) {
-								this.unfinishedProLists1[i].recude = this.unfinishedProLists1[i].recude / 10
-							}
-							if (this.unfinishedProLists == '') {
-								$(".youa").hide();
-							} else {
-								$(".youa").show();
-							}
-							if (this.unfinishedProLists1 == '') {
-								$(".youa").hide();
-							} else {
-								$(".youa").show();
-							}
-						} else {
-							alert(res.retMsg)
+					}).then((res) => {
+						if(0==res.data.retCode){
+							let data=res.data.retData
+							let listZhe=data['1']
+							let listjian=data['2']
+							listZhe.forEach((item)=>{
+								item.checked=false
+								item.recude=item.recude/10
+							})
+							listjian.forEach((item)=>{
+								item.checked=false
+							})
+							this.listCouponZhe=listZhe
+							this.listCouponJian=listjian
 						}
 					}).catch((error) => {
+						console.log(error)
 						console.log('请求失败处理')
 					});
 					this.consume.proId = param.proId
@@ -921,15 +916,17 @@
 			},
 			//选择满减优惠券
 			dianji: function(item, index) {
+				this.listCouponJian.forEach((item)=>{
+					item.checked=false
+				})
 				this.consume.couponNum = this.titttl;
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
 				var res1 = item.recude;
-					if(!this.yongjiu){
-						this.yongjiu = true
-						$(".you .man1 .gou1").eq(index).show();
+					if(this.dui){
+						this.listCouponJian[index].checked=!this.listCouponJian[index].checked
 						var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
 							.couponId +
 							'&userId=' + this.userId
@@ -957,17 +954,20 @@
 							console.log('查询请求失败')
 						});
 					}else{
-						this.yongjiu = false
 						this.titttl = 1;
 						this.titles = 1;
 						var zy = new Decimal(this.consume.receivables)
 						this.consume.receivable = zy;
 					}
 					
-				this.yongjiu = this.yongjiu
+				this.dui = !this.dui
 			},
 			//选择满折优惠券
 			dianji1: function(index, item) {
+				this.listCouponZhe.forEach((item)=>{
+					item.checked=false
+				})
+				this.$forceUpdate()
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
@@ -975,8 +975,7 @@
 				var re = item.recude;
 				console.log(re)
 				if (this.dui) {
-					$(".you .man2 .gou1").eq(index).show();
-					
+					this.listCouponZhe[index].checked=!this.listCouponZhe[index].checked
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
 						.couponId +
 						'&userId=' + this.userId

@@ -875,6 +875,26 @@
 					$(".you1 .man2 .gou1").eq(index).show();
 					var uu = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.balance)).mul(new Decimal(re)) / 10
 					this.consume.realCross = uu;
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume.couponId + '&userId=' + this.userId
+					this.$ajax({
+						method: 'GET',
+						url: url,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+							'Access-Token': this.accessToken
+						},
+						// param: formData,
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						if (res.retCode == '0000') {
+							this.titttl = res.retData;
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('查询请求失败')
+					});
 				} else{
 					$(".you1 .man2 .gou1").eq(index).hide();
 					var us = new Decimal(this.consume.receivable)

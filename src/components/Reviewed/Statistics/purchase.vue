@@ -116,6 +116,9 @@
 				<el-table-column prop="price" label="购买单价（￥/次）" width="100" align="center"></el-table-column>
 				<el-table-column prop="totalCount" label="购买课时（次）" width="100" align="center"></el-table-column>
 				<el-table-column prop="discount" label="购买折扣（%）" width="100" align="center"></el-table-column>
+				<el-table-column prop="couponType"  label="优惠券类型" :formatter="retype" width="100" align="center"></el-table-column>
+				<el-table-column prop="couponName" label="优惠券名字" width="100" align="center"></el-table-column>
+				<el-table-column prop="couponAmount" label="优惠金额(元)" width="100" align="center"></el-table-column>
 				<el-table-column prop="sourceDate" label="购买时间" :formatter="resetDate" width="100" align="center"></el-table-column>
 				<!--                 <el-table-column prop="startDate" label="开始时间" :formatter="resetDate" width="100" align="center"></el-table-column>-->
 				<!--                 <el-table-column prop="endDate" label="结束时间" :formatter="resetDate" width="100" align="center"></el-table-column>-->
@@ -192,6 +195,16 @@
 		},
 
 		methods: {
+			retype(row, column, cellValue, index){
+			    switch (cellValue) {
+			         case 1:
+			            return '满折券'
+			            break;
+			        case 2:
+			           return '满减券'
+			           break;
+			    }
+			},
 			changeData(newVal, oldVal) {
 				this.selectDataFlag = true
 			},

@@ -326,3 +326,26 @@
 .you1 ol li:nth-child(3n) {
 	margin-right: 0;
 }
+.table .zes {
+	position: relative;
+}
+
+.gan {
+	position: absolute;
+	left: -5px;
+	top: 50px;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background: red;
+	color: #fff;
+}
+
+.gantan {
+	color: red;
+}
+
+.gan p {
+	padding-left: 6px;
+	color: #fff;
+}

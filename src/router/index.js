@@ -451,6 +451,14 @@ export default new Router({
 					}
 				},
 				{
+					path: '/MP/Coupon/updataselectAdd',
+					name: 'updataselectAdd',
+					component: () => import("../components/MP/Coupon/updataselectAdd"),
+					meta: {
+						showName: '选择指定用户'
+					}
+				},
+				{
 					path: '/MP/Coupon/selectcall',
 					name: 'selectcall',
 					component: () => import("../components/MP/Coupon/selectcall"),
@@ -467,6 +475,14 @@ export default new Router({
 					}
 				},
 				{
+					path: '/MP/Coupon/updataselect-type',
+					name: 'updataselect-type',
+					component: () => import("../components/MP/Coupon/updataselect-type"),
+					meta: {
+						showName: '选择指定分类'
+					}
+				},
+				{
 					path: '/MP/Coupon/select-type-call',
 					name: 'select-type-call',
 					component: () => import("../components/MP/Coupon/select-type-call"),
@@ -478,6 +494,14 @@ export default new Router({
 					path: '/MP/Coupon/select-chan',
 					name: 'select-chan',
 					component: () => import("../components/MP/Coupon/select-chan"),
+					meta: {
+						showName: '选择指定产品'
+					}
+				},
+				{
+					path: '/MP/Coupon/updataselect-chan',
+					name: 'updataselect-chan',
+					component: () => import("../components/MP/Coupon/updataselect-chan"),
 					meta: {
 						showName: '选择指定产品'
 					}

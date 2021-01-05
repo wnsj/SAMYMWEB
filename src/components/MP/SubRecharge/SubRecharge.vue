@@ -47,11 +47,11 @@
 								</tr>
 							</tbody>
 						</table>
-						<el-tooltip class="item gantan" effect="dark" content="由于审核原因，当前产品无法操作" placement="bottom" :style="{'display':!shs ? 'block':'none'}">
+						<!-- <el-tooltip class="item gantan" effect="dark" content="由于审核原因，当前产品无法操作" placement="bottom" :style="{'display':!shs ? 'block':'none'}">
 							<div class="gan">
 								<p>!</p>
 							</div>
-						</el-tooltip>
+						</el-tooltip> -->
 
 					</div>
 
@@ -548,9 +548,10 @@
 					var res = response.data
 					if (res.retCode == '0000') {
 						this.titttl = res.retData;
-						if (input_num1.value == res.retData) {
-							input_num1.value = parseInt(input_num1.value) + 0;
+						if (input_num1.value == this.titttl) {
+							$(".input-num1").hide();
 						} else {
+							$(".input-num1").show();
 							input_num1.value = parseInt(input_num1.value) + 1;
 						}
 					} else {
@@ -641,8 +642,8 @@
 						var res = response.data
 						console.log(res)
 						if (res.retCode == '0000') {
-							this.unfinishedProLists = res.retData['1']
-							this.unfinishedProLists1 = res.retData['2']
+							this.unfinishedProLists = res.retData['2']
+							this.unfinishedProLists1 = res.retData['1']
 							for (var i = 0; i < this.unfinishedProLists1.length; i++) {
 								this.unfinishedProLists1[i].recude = this.unfinishedProLists1[i].recude / 10
 							}
@@ -680,7 +681,7 @@
 					this.consume.preFoldTotalPrice = param.totalPrice //课程总额
 					this.consume.receivable = param.discouAmount //应交
 					this.consume.receivables = param.discouAmount //折后
-					// this.consume.realCross = param.discouAmount //实缴
+					this.consume.realCross = param.discouAmount //实缴
 					this.consume.proType = param.proType
 					this.cash.select = '0'
 					this.projectObj = param
@@ -924,15 +925,6 @@
 					var res = response.data
 					if (res.retCode == '0000') {
 						this.unfinishedProList = res.retData
-						for (var i = 0; i < this.unfinishedProList.length; i++) {
-							if (this.unfinishedProList[i].auditState == 4) {
-								$(".table .zes").css('background', 'green');
-							} else {
-								$(".zes").css('background', 'white');
-							}
-						}
-
-
 					} else {
 						alert(res.retMsg)
 					}
@@ -1014,6 +1006,28 @@
 					$(".you .man2 .gou1").eq(index).show();
 					var uu = new Decimal(this.consume.receivables).mul(new Decimal(re)) / 10
 					this.consume.receivable = uu;
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
+						.couponId +
+						'&userId=' + this.userId
+					this.$ajax({
+						method: 'GET',
+						url: url,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+							'Access-Token': this.accessToken
+						},
+						// param: formData,
+						dataType: 'json',
+					}).then((response) => {
+						var res = response.data
+						if (res.retCode == '0000') {
+							this.titttl = res.retData;
+						} else {
+							alert(res.retMsg)
+						}
+					}).catch((error) => {
+						console.log('查询请求失败')
+					});
 				} else{
 					$(".you .man2 .gou1").eq(index).hide();
 					var us = new Decimal(this.consume.receivables).div(new Decimal(re)).mul(new Decimal(re))

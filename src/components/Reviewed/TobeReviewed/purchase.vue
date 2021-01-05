@@ -158,7 +158,7 @@
                                 <td class="text-center;">{{item.realCross}}</td>
                                 <td class="text-center;">{{item.cashMoney}}</td>
                                 <td class="text-center;">{{item.psName}}</td>
-								<td class="text-center">{{item.couponType}}</td>
+								<td class="text-center">{{transforProType(item.couponType)}}</td>
 								<td class="text-center">{{item.couponName}}</td>
 								<td class="text-center">{{item.couponAmount}}</td>
                                 <td class="text-center;">{{item.operatorName}}</td>
@@ -271,6 +271,11 @@
                 this.current = page
                 this.checkEmp(page);
             },
+			//产品类型转换
+			transforProType(couponType) {
+				if (couponType == 1) return '满折券'
+				else if (couponType == 2) return '满减券'
+			},
             //门店ID
             storeChange: function (param) {
                 if (this.isBlank(param)) {

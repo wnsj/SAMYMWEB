@@ -2,157 +2,194 @@
 <template>
 	<div class="modal-content1">
 		<div class="modal-body  pos_r jh-mh-sc1">
-			<div class="tab-pane fade in active martop" id="basic">
-				<div class="tab-pane fade in active martop">
-					<div class="col-md-12 form-group clearfix text-left jh-ad-0 jh-mt-5">
-						<div class="col-md-6 clearfix">
-							<h4 id="myModalLabel" class="modal-title jh-lh-39">基础信息：</h4>
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<b>*</b>
-						<label class="col-md-2 control-label text-right nopad end-aline">优惠券名称</label><span class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="couponName" maxlength="12" placeholder="最多输入12个字">
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<b>*</b>
-						<label class="col-md-2 control-label text-right nopad end-aline">优惠券类型</label><span class="sign-left">:</span>
-						<div class="col-md-7">
-							<select class="form-control" v-model="couponType" @click="man">
-								<option value="2">满减券</option>
-								<option value="1">满折券</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<b>*</b>
-						<label class="col-md-2 control-label text-right nopad end-aline">状态</label><span class="sign-left">:</span>
-						<div class="col-md-7">
-							<select class="form-control" v-model="state">
-								<option value="1">在用</option>
-								<option value="2">停用</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix jin">
-						<b>*</b>
-						<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
-						<div class="col-md-7  jin1">
-							<input type="number" class="form-control" v-model="recude" @change="manjian()">
-							<span>元</span>
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix zhe" style="float: right;display: none;">
-						<b>*</b>
-						<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
-						<div class="col-md-7  zhe1">
-							<input type="number" class="form-control" v-model="recude">
-							<span>%</span>
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix shiyong">
-						<b>*</b>
-						<label class="col-md-2 control-label text-right nopad end-aline">使用门槛</label><span class="sign-left">:</span>
-						<div class="col-md-7" v-model="isLimit">
-							<div class="xianzhi wuxian" style="display: block;"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit"
-								 value="2" /><label class="xian1">无限制</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="1" /><label
-								 class="xian1">满</label></div>
-							<div class="xianzhi2"><input type="text" placeholder="0" v-model="fullCondition"><span>元可用</span></div>
-						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix"></div>
-				</div>
-				<div class="tab-pane fade in active martop">
-					<div class="col-md-12 form-group clearfix text-left jh-ad-0 jh-mt-5">
-						<div class="col-md-6 clearfix">
-							<h4 id="myModalLabel" class="modal-title jh-lh-39">适用机制：</h4>
-						</div>
-					</div>
-					<div class="col-md-12 form-group clearfix">
-						<b>*</b>
-						<label class="col-md-1 control-label text-right nopad end-aline">有效期</label><span class="sign-left">:</span>
-						<div class="col-md-8 shiyong shiyong1" v-model="isVaild">
-							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup3" value="1" v-model="isVaild" @click="youxiao()" /><label
-								 class="xian1">永久有效</label></div>
-							<div class="xianzhi1 data"><input class="xian" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label class="xian1">日期范围：</label></div>
-							<div class="xianzhi3 start-time">
-								<dPicker class="wd100" v-model="startTime"></dPicker>
+			<ValidationObserver tag="div" ref="addArcForm">
+				<div class="tab-pane fade in active martop" id="basic">
+					<div class="tab-pane fade in active martop">
+						<div class="col-md-12 form-group clearfix text-left jh-ad-0 jh-mt-5">
+							<div class="col-md-6 clearfix">
+								<h4 id="myModalLabel" class="modal-title jh-lh-39">基础信息：</h4>
 							</div>
-							<div class="xianhzi15 xie">~</div>
-							<div class="xianzhi3 end-time">
-								<dPicker class="wd100" v-model="endTime"></dPicker>
+						</div>
+						<div class="col-md-6 form-group clearfix">
+							<ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+								<b>*</b>
+								<label class="col-md-2 control-label text-right nopad end-aline">优惠券名称</label><span class="sign-left">:</span>
+								<div class="col-md-7">
+									<input type="text" class="form-control" v-model="couponName" maxlength="12" placeholder="最多输入12个字">
+								</div>
+								<span class="err-msg1">{{ errors[0] }}</span>
+							</ValidationProvider>
+						</div>
+						<div class="col-md-6 form-group clearfix">
+							<ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+								<b>*</b>
+								<label class="col-md-2 control-label text-right nopad end-aline">优惠券类型</label><span class="sign-left">:</span>
+								<div class="col-md-7">
+									<select class="form-control" v-model="couponType" @click="man">
+										<option value="2">满减券</option>
+										<option value="1">满折券</option>
+									</select>
+								</div>
+								<span class="err-msg">{{ errors[0] }}</span>
+							</ValidationProvider>
+						</div>
+						<div class="col-md-6 form-group clearfix">
+							<ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+								<b>*</b>
+								<label class="col-md-2 control-label text-right nopad end-aline">状态</label><span class="sign-left">:</span>
+								<div class="col-md-7">
+									<select class="form-control" v-model="state">
+										<option value="1">在用</option>
+										<option value="2">停用</option>
+									</select>
+								</div>
+								<span class="err-msg">{{ errors[0] }}</span>
+							</ValidationProvider>
+						</div>
+						<div class="col-md-6 form-group clearfix jin">
+							<ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+								<b>*</b>
+								<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
+								<div class="col-md-7  jin1">
+									<input type="number" class="form-control" v-model="recude" @change="manjian()">
+									<span>元</span>
+								</div>
+								<span class="err-msg2">{{ errors[0] }}</span>
+							</ValidationProvider>
+						</div>
+						<div class="col-md-6 form-group clearfix zhe" style="float: right;display: none;">
+							<ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+								<b>*</b>
+								<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
+								<div class="col-md-7  zhe1">
+									<input type="number" class="form-control" v-model="recude">
+									<span>%</span>
+								</div>
+								<span class="err-msg2">{{ errors[0] }}</span>
+							</ValidationProvider>
+						</div>
+						<div class="col-md-6 form-group clearfix shiyong">
+							<ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+								<b>*</b>
+								<label class="col-md-2 control-label text-right nopad end-aline">使用门槛</label><span class="sign-left">:</span>
+								<div class="col-md-7" v-model="isLimit">
+									<div class="xianzhi wuxian" style="display: block;"><input class="xian" type="radio" name="radioGroup1"
+										 v-model="isLimit" value="2" /><label class="xian1">无限制</label></div>
+									<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="1" /><label
+										 class="xian1">满</label></div>
+									<div class="xianzhi2"><input type="text" placeholder="0" v-model="fullCondition"><span>元可用</span></div>
+								</div>
+								<span class="err-msg8">{{ errors[0] }}</span>
+							</ValidationProvider>
+						</div>
+						<div class="col-md-6 form-group clearfix"></div>
+					</div>
+					<div class="tab-pane fade in active martop">
+						<div class="col-md-12 form-group clearfix text-left jh-ad-0 jh-mt-5">
+							<div class="col-md-6 clearfix">
+								<h4 id="myModalLabel" class="modal-title jh-lh-39">适用机制：</h4>
 							</div>
-							<!-- <div class="xianzhi4"><input type="checkbox"><label class="xian1">自领取之日</label></div>
+						</div>
+						<div class="col-md-12 form-group clearfix">
+							<ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+								<b>*</b>
+								<label class="col-md-1 control-label text-right nopad end-aline">有效期</label><span class="sign-left">:</span>
+								<div class="col-md-8 shiyong shiyong1" v-model="isVaild">
+									<div class="xianzhi"><input class="xian" type="radio" name="radioGroup3" value="1" @click="youxiao()" v-model="isVaild" /><label
+										 class="xian1">永久有效</label></div>
+									<div class="xianzhi1 data"><input class="xian" id="cats" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label
+										 class="xian1">日期范围：</label></div>
+									<div class="xianzhi3 start-time">
+										<dPicker class="wd100"  v-model="startTime" ></dPicker>
+									</div>
+									<div class="xianhzi15 xie">~</div>
+									<div class="xianzhi3 end-time">
+										<dPicker class="wd100"  v-model="endTime"></dPicker>
+									</div>
+									<!-- <div class="xianzhi4"><input type="checkbox"><label class="xian1">自领取之日</label></div>
 						<div class="xianzhi5"><input type="text" placeholder="0"><span>天内</span></div> -->
+								</div>
+								<span class="err-msg3">{{ errors[0] }}</span>
+							</ValidationProvider>
 						</div>
-					</div>
-					<div class="col-md-12 form-group clearfix">
-						<b>*</b>
-						<label class="col-md-1 control-label text-right nopad end-aline">使用用户</label><span class="sign-left">:</span>
-						<div class="col-md-8 shiyong shiyong1">
-							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="1" /><label
-								 class="xian1">全体用户</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="2" /><label
-								 class="xian1">新用户</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="3" /><label
-								 class="xian1">指定用户</label></div>
-							<div class="xianzhi3_1">
-								<p style="cursor: pointer;" v-on:click="seles()" v-has="'SAMY:MP:Coupon:selectAdd'">选择用户</p>
-							</div>
+						<div class="col-md-12 form-group clearfix">
+							<ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+								<b>*</b>
+								<label class="col-md-1 control-label text-right nopad end-aline">使用用户</label><span class="sign-left">:</span>
+								<div class="col-md-8 shiyong shiyong1">
+									<div class="xianzhi"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="1" /><label
+										 class="xian1">全体用户</label></div>
+									<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="2" /><label
+										 class="xian1">新用户</label></div>
+									<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup4" v-model="userType" value="3" /><label
+										 class="xian1">指定用户</label></div>
+									<div class="xianzhi3_1">
+										<p style="cursor: pointer;" v-on:click="seles()" v-has="'SAMY:MP:Coupon:selectAdd'">选择用户</p>
+									</div>
+								</div>
+								<span class="err-msg4">{{ errors[0] }}</span>
+							</ValidationProvider>
 						</div>
-					</div>
-					<div class="col-md-12 form-group clearfix">
-						<b>*</b>
-						<label class="col-md-1 control-label text-right nopad end-aline">选择产品</label><span class="sign-left">:</span>
-						<div class="col-md-8 shiyong shiyong1">
-							<div class="xianzhi"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="1" /><label
-								 class="xian1">全品类</label></div>
-							<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="2" /><label
-								 class="xian1">指定分类</label></div>
-							<div class="xianzhi3_1">
-								<p style="cursor: pointer;" v-on:click="xus()" v-has="'SAMY:MP:Coupon:select-type'">选择分类</p>
-							</div>
-							<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" v-model="categoryType" name="radioGroup5" value="3" /><label
-								 class="xian1">指定产品</label></div>
-							<div class="xianzhi3_1">
-								<p style="cursor: pointer;" v-on:click="ots()" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p>
-							</div>
+						<div class="col-md-12 form-group clearfix">
+							<ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+								<b>*</b>
+								<label class="col-md-1 control-label text-right nopad end-aline">选择产品</label><span class="sign-left">:</span>
+								<div class="col-md-8 shiyong shiyong1">
+									<div class="xianzhi"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="1" /><label
+										 class="xian1">全品类</label></div>
+									<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="2" /><label
+										 class="xian1">指定分类</label></div>
+									<div class="xianzhi3_1">
+										<p style="cursor: pointer;" v-on:click="xus()" v-has="'SAMY:MP:Coupon:select-type'">选择分类</p>
+									</div>
+									<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" v-model="categoryType" name="radioGroup5"
+										 value="3" /><label class="xian1">指定产品</label></div>
+									<div class="xianzhi3_1">
+										<p style="cursor: pointer;" v-on:click="ots()" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p>
+									</div>
+								</div>
+								<span class="err-msg5">{{ errors[0] }}</span>
+							</ValidationProvider>
 						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<b>*</b>
-						<label class="col-md-3 control-label text-right nopad end-aline">每人限领/限用</label><span class="sign-left">:</span>
-						<div class="col-md-7 shiyong shiyong1">
-							<div class="xianzhi6"><input type="number" id="num" placeholder="无限制填写0" v-model="limitGet" @change="xianhzi()"><span>张</span></div>
+						<div class="col-md-6 form-group clearfix">
+							<ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+								<b>*</b>
+								<label class="col-md-3 control-label text-right nopad end-aline">每人限领/限用</label><span class="sign-left">:</span>
+								<div class="col-md-7 shiyong shiyong1">
+									<div class="xianzhi6"><input type="number" id="num" placeholder="无限制填写0" v-model="limitGet" @change="xianhzi()"><span>张</span></div>
+								</div>
+								<span class="err-msg6">{{ errors[0] }}</span>
+							</ValidationProvider>
 						</div>
+						<div class="col-md-6 form-group clearfix"></div>
 					</div>
-					<div class="col-md-6 form-group clearfix"></div>
-				</div>
 
-				<div class="tab-pane fade in active martop">
-					<div class="col-md-12 form-group clearfix text-left jh-ad-0 jh-mt-5">
-						<div class="col-md-6 clearfix">
-							<h4 id="myModalLabel" class="modal-title jh-lh-39">发放机制：</h4>
+					<div class="tab-pane fade in active martop">
+						<div class="col-md-12 form-group clearfix text-left jh-ad-0 jh-mt-5">
+							<div class="col-md-6 clearfix">
+								<h4 id="myModalLabel" class="modal-title jh-lh-39">发放机制：</h4>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-6 form-group clearfix">
-						<b>*</b>
-						<label class="col-md-2 control-label text-right nopad end-aline">总发行量</label><span class="sign-left">:</span>
-						<div class="col-md-7 shiyong shiyong1">
-							<div class="xianzhi6"><input type="number" placeholder="0" v-model="allCount" @change="faxing()"><span>张</span></div>
+						<div class="col-md-6 form-group clearfix">
+							<ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
+								<b>*</b>
+								<label class="col-md-2 control-label text-right nopad end-aline">总发行量</label><span class="sign-left">:</span>
+								<div class="col-md-7 shiyong shiyong1">
+									<div class="xianzhi6"><input type="number" placeholder="无限制填写0" v-model="allCount" @change="faxing()"><span>张</span></div>
+								</div>
+								<span class="err-msg7">{{ errors[0] }}</span>
+							</ValidationProvider>
 						</div>
+						<div class="col-md-6 form-group clearfix"></div>
 					</div>
-					<div class="col-md-6 form-group clearfix"></div>
+					<div class="col-md-12 form-group clearfix">
+						<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-25" v-on:click="addFee()" v-has="'SAMY:CouponManage'">确认</button>
+						<button type="button" class="btn btn-warning pull-center m_r_10 jh-mr-35" @click="goOff()" v-has="'SAMY:CouponManage'">取消</button>
+					</div>
 				</div>
-				<div class="col-md-12 form-group clearfix">
-					<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-25" v-on:click="addFee()" v-has="'SAMY:CouponManage'">确认</button>
-					<button type="button" class="btn btn-warning pull-center m_r_10 jh-mr-35" @click="goOff()" v-has="'SAMY:CouponManage'">取消</button>
-				</div>
-			</div>
+			</ValidationObserver>
 		</div>
+
 	</div>
 </template>
 
@@ -166,6 +203,7 @@
 			return {
 				userList: [],
 				projectList: [],
+				operatorId: this.accountId(),
 				newprojectList: [],
 				categoryList: [],
 				couponName: '', //优惠券名称
@@ -174,7 +212,6 @@
 				couponType: '2', //优惠券类型
 				fullCondition: '', //金额
 				recude: '', //折扣
-				operatorId: '',
 				isLimit: '2', //使用门槛
 				isVaild: '', //有效期
 				userType: '', //使用用户
@@ -202,10 +239,35 @@
 				unfinishedProList: [],
 				projectObj: {},
 				startTime: '',
-				endTime: '',
+				endTime: ''
 			};
 		},
 		methods: {
+			youxiao(){
+				if(this.isVaild == ''){
+					$(".data").hide();
+					// document.getElementById("cats").disabled = true
+					$(".xie").hide();
+					$(".wd100").hide();
+				}else{
+					$(".data").show();
+					// document.getElementById("cats").disabled = false
+					$(".xie").show();
+					$(".wd100").show();
+				}
+				if(this.isVaild == 1){
+					$(".data").hide();
+					// document.getElementById("cats").disabled = true
+					$(".xie").hide();
+					$(".wd100").hide();
+				}else{
+					$(".data").show();
+					// document.getElementById("cats").disabled = false
+					$(".xie").show();
+					$(".wd100").show();
+				}
+			
+			},
 			man() {
 				if (this.couponType == '1') {
 					$(".jin").hide();
@@ -221,8 +283,8 @@
 			},
 			//限制领取
 			xianhzi() {
-				if (!(/(^[0-9]*[1-9][0-9]*$)/.test(this.limitGet))) {
-					alert("输入的不是正整数！")
+				if (!(/^\+?(0|[1-9][0-9]*)$/).test(this.limitGet)) {
+					alert("输入的不是正整数/0！")
 					this.limitGet = ''
 					return false
 				} else {
@@ -231,47 +293,22 @@
 			},
 			//发行量
 			faxing() {
-				if (!(/(^[0-9]*[1-9][0-9]*$)/.test(this.allCount))) {
-					alert("输入的不是正整数！")
+				if (!(/^\+?(0|[1-9][0-9]*)$/).test(this.allCount)) {
+					alert("输入的不是正整数/0！")
 					this.allCount = ''
 					return false
-				} else {
-
-				}
-
+				} else {}
 			},
-
 			manjian() {
-				// alert(2)
 				if (this.couponType == '2' && this.isLimit == '2') {
-					// alert(2)
 					if (this.recude - 5 > 0) {
 						alert("输入的金额数值不能大于5！")
 						this.recude = ''
 						return false
-
 					}
 				}
 			},
-			youxiao() {
-				console.log(this.isVaild)
-				if (this.isVaild == '') {
-					$(".data").hide();
-					$(".start-time").hide();
-					$(".end-time").hide();
-					$(".xie").hide()
-				} else if (this.isVaild == '2') {
-					$(".data").hide();
-					$(".start-time").hide();
-					$(".end-time").hide();
-					$(".xie").hide()
-				} else if (this.isVaild == '1') {
-					$(".data").show();
-					$(".start-time").show();
-					$(".end-time").show();
-					$(".xie").show()
-				}
-			},
+
 			//点击返回按钮跳转
 			goOff() {
 				this.$router.push({
@@ -348,16 +385,13 @@
 				localStorage.setItem('allCount', this.allCount)
 			},
 			//the event of addtional button
-			addFee() {
-				
-				// console.log(this.limitGet)
-				// console.log(this.allcount)
-				// return false
+			
+			addAddScale(url){
 				var formData = new FormData();
 				if (this.userType == '1') {
-
+				
 				} else if (this.userType == '2') {
-
+				
 				} else if (this.userType == '3') {
 					var userList = localStorage.getItem('userList');
 					var stringResult1 = userList.split(',');
@@ -365,9 +399,9 @@
 						formData.append('userList', stringResult1[i])
 					}
 				}
-
+				
 				if (this.categoryType == '1') {
-
+				
 				} else if (this.categoryType == '2') {
 					var categoryList = localStorage.getItem('categoryList');
 					var stringResult2 = categoryList.split(',');
@@ -384,7 +418,7 @@
 				if (this.isLimit == '1') {
 					formData.append('fullCondition', this.fullCondition)
 				} else {
-
+				
 				}
 				// if (this.allCount - this.limitGet < 0) {
 				// 	alert("每人限领不能大于发行量！")
@@ -393,12 +427,11 @@
 				// 	return false
 				// }
 				if (!this.isBlank(this.startTime)) {
-				    this.startTime = this.moment(this.startTime, "YYYY-MM-DD 00:00:00")
+					this.startTime = this.moment(this.startTime, "YYYY-MM-DD 00:00:00")
 				}
 				if (!this.isBlank(this.endTime)) {
-				    this.endTime = this.moment(this.endTime, "YYYY-MM-DD 23:59:59")
+					this.endTime = this.moment(this.endTime, "YYYY-MM-DD 23:59:59")
 				}
-				var url = this.url + '/couponController/addCoupon'
 				formData.append('couponName', this.couponName)
 				formData.append('operatorId', this.operatorId)
 				formData.append('couponType', this.couponType)
@@ -430,51 +463,26 @@
 							path: '../../MP/Coupon'
 						})
 					} else {
-						if(this.couponName == '' && this.couponType == '' && this.isLimit == '' && this.isVaild == '' && this.userType == '' &&this.categoryType == ''  &&this.limitGet == '' &&this.allCount == ''){
-							alert('请填写完整！');
-							return false
-						}
-						if (this.couponName == '') {
-							alert('请填写优惠券名称！')
-							return false
-						}
-						if (this.recude == '') {
-							alert('请填写金额/折扣！')
-							return false
-						}
-						if (this.startTime == '') {
-							alert('请填写开始时间！')
-							return false
-						}
-						if (this.endTime == '') {
-							alert('请填写结束时间！')
-							return false
-						}
-						if (this.isVaild == '') {
-							alert('请选择有效期！')
-							return false
-						}
-						if (this.userType == '') {
-							alert('请选择使用用户！')
-							return false
-						}
-						if (this.categoryType == '') {
-							alert('请选择产品！')
-							return false
-						}
-						if (this.limitGet == '') {
-							alert('请填写每人限领！')
-							return false
-						}
-						if (this.allCount == '') {
-							alert('请填写总发行量！')
-							return false
-						}
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
 					console.log('请求失败处理')
 				});
+			},
+			addFee() {
+				this.$refs.addArcForm.validate().then(success => {
+					if (success) {
+						var url = this.url + '/couponController/addCoupon'
+						this.addAddScale(url)
+
+					} else {
+						this.$message.error('请填写完整！');
+					}
+				})
+				// console.log(this.limitGet)
+				// console.log(this.allcount)
+				// return false
+				
 			},
 
 		},
@@ -552,6 +560,57 @@
 </script>
 
 <style scoped>
+	.err-msg {
+		color: #FF0000;
+	}
+	.err-msg8 {
+		position: absolute;
+		left: 360px;
+		top: 10px;
+		color: #FF0000;
+	}
+	.err-msg1 {
+		position: absolute;
+		left: 355px;
+		top: 10px;
+		color: #FF0000;
+	}
+	.err-msg2 {
+		position: absolute;
+		left: 370px;
+		top: 10px;
+		color: #FF0000;
+	}
+	.err-msg3 {
+		position: absolute;
+		left: 544px;
+		top: 10px;
+		color: #FF0000;
+	}
+	.err-msg4 {
+		position: absolute;
+		left: 445px;
+		top: 10px;
+		color: #FF0000;
+	}
+	.err-msg5 {
+		position: absolute;
+		left: 540px;
+		top: 10px;
+		color: #FF0000;
+	}
+	.err-msg6 {
+		position: absolute;
+		left: 308px;
+		top: 10px;
+		color: #FF0000;
+	}
+	.err-msg7 {
+		position: absolute;
+		left: 275px;
+		top: 10px;
+		color: #FF0000;
+	}
 	::-webkit-input-placeholder {
 		text-indent: 1em;
 	}
@@ -616,6 +675,7 @@
 		float: left;
 		width: 115px;
 	}
+
 	.xianhzi15 {
 		margin-left: 8px;
 		margin-right: 8px;
@@ -691,6 +751,7 @@
 
 	.shiyong .xianzhi6 input {
 		width: 100%;
+		text-indent: 1em;
 		outline: none;
 		border: 1px solid #DDDDDD;
 		height: 25px;

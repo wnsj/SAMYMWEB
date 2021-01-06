@@ -470,12 +470,14 @@
 		methods: {
 			//优惠券使用张数增加
 			btnAdd() {
+				
 				// 如果数量大于商品库存
 				if (this.titles >= this.titttl) {
 					alert('该优惠券不能使用更多了~')
 					return false
 				} else {
 					this.titles++
+					this.consume.couponNum = this.titles;
 					var mach= new Decimal(this.titles).mul(new Decimal(this.manjian));
 					var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
 					var jh = new Decimal(this.zhekou).div(new Decimal(10));
@@ -487,12 +489,14 @@
 			},
 			//优惠券使用张数减少
 			btnMinute() {
+				
 				if (this.titles <= 1) {
 					alert('该优惠券不能减少了哟~')
 					return false
 				} else {
 					// return false
 					this.titles--
+					this.consume.couponNum = this.titles;
 					var mach= new Decimal(this.titles).mul(new Decimal(this.manjian));
 					var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
 					var jh = new Decimal(this.zhekou).div(new Decimal(10));
@@ -1185,7 +1189,6 @@
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
 							this.titles = res.retData;
-							this.consume.couponNum = this.titles;
 							console.log(this.titles)
 							var mach= new Decimal(this.titttl).mul(new Decimal(res1));
 							var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
@@ -1243,7 +1246,7 @@
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
 							this.titles = res.retData;
-							this.consume.couponNum = this.titles;
+							// this.consume.couponNum = this.titles;
 							var jh = new Decimal(re).div(new Decimal(10));
 							this.consume.realCross1 = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titttl))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
 						} else {

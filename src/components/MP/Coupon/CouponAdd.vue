@@ -464,6 +464,14 @@
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
+						if(this.startTime==''){
+							alert("请填写开始时间!");
+							return false
+						}
+						if(this.endTime==''){
+							alert("请填写结束时间！");
+							return false
+						}
 						alert(res.retMsg)
 						this.$router.push({
 							path: '../../MP/Coupon'

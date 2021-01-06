@@ -2,7 +2,7 @@
 <template>
 	<div class="wraper">
 		<div class="col-md-12 col-lg-12 main-title">
-		    <h1 class="titleCss">选择用户</h1>
+			<h1 class="titleCss">选择用户</h1>
 		</div>
 		<el-collapse-transition>
 			<div v-show="showSelect">
@@ -78,7 +78,8 @@
 							<continueState ref="continueStateRef" @objectChange="continueStateChange"></continueState>
 						</div>
 					</div>
-					<button type="button" style="margin-top: 20px;" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal" v-on:click="getAllAuditPage(1)">查询
+					<button type="button" style="margin-top: 20px;" class="btn btn-primary pull-right m_r_10 jh-mr-2" data-toggle="modal"
+					 v-on:click="getAllAuditPage(1)">查询
 					</button>
 				</div>
 			</div>
@@ -87,8 +88,8 @@
 			<div class="jh-po-ab jh-arrow-pos" :class="showSelect?'el-icon-arrow-down':'el-icon-arrow-up'"></div>
 		</div>
 		<div class="" id="datatable">
-			<el-table :data="tableData"  style="width: 100%" :row-key="getRowKeys" border ref="multipleTable" @selection-change="handleSelectionChange">
-				<el-table-column type="selection" width="55" :reserve-selection="true"  align="center" label="全选" :selectable='checkboxSelect'></el-table-column>
+			<el-table :data="tableData" style="width: 100%" :row-key="getRowKeys" border ref="multipleTable" @selection-change="handleSelectionChange">
+				<el-table-column type="selection" width="55" :reserve-selection="true" align="center" label="全选" :selectable='checkboxSelect'></el-table-column>
 				<el-table-column type="index" prop="visId" label="序号" width="60" align="center"></el-table-column>
 				<el-table-column prop="visitorName" label="姓名" width="100" align="center"></el-table-column>
 				<el-table-column prop="sex" label="性别" :formatter="sex" width="100" align="center"></el-table-column>
@@ -119,7 +120,7 @@
 				<li v-for="item in userList" :key="item.visId">{{item.visId}}-{{item.visitorName}}</li>
 			</ul>
 		</div>
-		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5"  @click="go1()" v-has="'SAMY:MP:Coupon:Add'">确定</button>
+		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @click="go1()" v-has="'SAMY:MP:Coupon:Add'">确定</button>
 		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
 	</div>
 </template>
@@ -146,8 +147,8 @@
 		},
 		data() {
 			return {
-				userList:[],
-				newuserList:[],
+				userList: [],
+				newuserList: [],
 				showSelect: true,
 				multipleSelection: [],
 				fixedHeader: false,
@@ -162,9 +163,9 @@
 				chaId: '',
 				auditName: '',
 				empId: '',
-				visitorName:'',
-				judgeState:'', //咨客判定
-				continueState:'', //续流状态
+				visitorName: '',
+				judgeState: '', //咨客判定
+				continueState: '', //续流状态
 				memName: '',
 				isMem: '',
 				visType: '',
@@ -191,11 +192,13 @@
 
 		methods: {
 			checkboxSelect(row, rowIndex) {
+				console.log(4)
 				if (rowIndex == 0) {
 					return true // 禁用
 				} else {
 					return true // 不禁用
 				}
+				this.userList = this.arrayDistint(this.userList);
 			},
 			//咨客判定
 			judgeStateChange: function(param) {
@@ -215,9 +218,27 @@
 				}
 			},
 			getRowKeys(row) {
-			    return row.visId;
+				return row.visId;
+
 				this.$refs.userList.clearSelection();
 			},
+			arrayDistint(arr){
+					var i,j,
+					len = arr.length;
+				for (i = 0; i < len; i++) {
+					for (j = i + 1; j < len; j++) {
+						if (arr[i] == arr[j]) {
+							arr.splice(j, 1);
+							len--;
+							j--;
+						}
+					}
+				}
+				return arr;
+			},
+			// Array.prototype.distinct = function() {
+				
+			// };
 			checkAll() {
 				this.$refs.multipleTable.toggleAllSelection();
 			},
@@ -227,7 +248,19 @@
 				});
 			},
 			handleSelectionChange(val) {
-				this.userList = val;
+				console.log(1)
+				// if (this.userList.length > 0) {
+				// 	for (var i = 0; i < this.userList.length; i++) {
+				// 		if (this.userList[i].visitorName != val.visitorName) {
+				// 			this.userList = val;
+				// 		}
+				// 	}
+				// } else {
+				// 	this.userList = val;
+					
+				// }
+				this.userList = this.arrayDistint(val);
+
 				// if (event === undefined || event.target.nodeName === 'INPUT') {
 				//         this.vTable['v_' + this.currentPage] = [...val];
 				//         this.getNum();
@@ -266,7 +299,7 @@
 						if (bb.length > 0) {
 							bb = bb.substr(0, bb.length - 1);
 						}
-						storage.setItem('userList',bb)
+						storage.setItem('userList', bb)
 					}
 				}
 				// console.log(this.newprojectList)
@@ -339,7 +372,7 @@
 				if (num == 1) {
 					this.page = 1
 				}
-				
+
 				this.showSelect = false
 				var projectList = localStorage.getItem('userList');
 				var stringResult1 = projectList.split(',');
@@ -358,8 +391,8 @@
 						isMem: this.isMem,
 						visType: this.visType,
 						empId: this.empId,
-						vsIdJudge:this.judgeState,
-						vsIdFlow:this.continueState,						
+						vsIdJudge: this.judgeState,
+						vsIdFlow: this.continueState,
 						page: this.page,
 						pageSize: this.pageSize
 					},
@@ -370,13 +403,13 @@
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
 						this.page = res.retData.current //当前页码
-						this.pageSize = res.retData.size//一页显示的数量  必须是奇数
+						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.records
 						for (let i = 0; i < this.tableData.length; i++) {
 							if (stringResult1.includes(this.tableData[i].visId + '')) {
-								 this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
-								}
+								this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
+							}
 						}
 					} else {
 						alert(res.retMsg)
@@ -393,17 +426,19 @@
 			goOff() {
 				this.$router.go(-1);
 			},
-			
+
 			// 翻页
 			handleCurrentChange(pageNum) {
-			    this.page = pageNum
-			    this.getAllAuditPage()
+				console.log(2)
+				this.page = pageNum
+				this.getAllAuditPage()
 			},
 			// 每页条数变化时触发
 			handleSizeChange(pageSize) {
-			    this.page = 1
-			    this.pageSize = pageSize
-			    this.getAllAuditPage(1)
+				console.log(3)
+				this.page = 1
+				this.pageSize = pageSize
+				this.getAllAuditPage(1)
 			},
 			handleScroll(e) {
 				var self = this
@@ -463,7 +498,7 @@
 	}
 
 	.xuanzhong_kuang ul li {
-		width:150px;
+		width: 150px;
 		height: 40px;
 		float: left;
 		margin-bottom: 10px;

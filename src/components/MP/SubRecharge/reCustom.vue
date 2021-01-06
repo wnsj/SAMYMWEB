@@ -331,12 +331,6 @@
 						<input type="text" class="form-control" v-model="consume.realCross">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33 shiji1" style="display: none;">
-					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">实交总额</label><span class="sign-left">:</span>
-					<div class="col-md-7">
-						<input type="text" class="form-control" v-model="consume.realCross1">
-					</div>
-				</div>
 			</div>
 			<div class="col-md-6 form-group clearfix jh-wd-33">
 				<b>*</b>
@@ -403,7 +397,6 @@
 					receivable: '', //应交(折前)
 					preFoldTotalPrice: '', //折前总价
 					realCross: 0, //实缴（折后）
-					realCross1: 0, //实缴（折后）
 					proId: '', //项目id
 					discount: '', //折扣
 					price: '', //折前单价
@@ -471,13 +464,20 @@
 					return false
 				} else {
 					this.titles++
-					var mach= new Decimal(this.titles).mul(new Decimal(this.manjianx));
-					var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
-					var jh =  new Decimal(this.zhekou).div(new Decimal(10));
+					this.consume.couponNum = this.titles;
 					//满减
-					this.consume.realCross = zz;
+					if (this.consume.couponType == 2) {
+						var mach= new Decimal(this.titles).mul(new Decimal(this.manjian));
+						var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
+						this.consume.receivable = zz;
+						this.consume.realCross = zz;
+					}
 					//满折
-					this.consume.realCross1 = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titles))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
+					if (this.consume.couponType == 1) {
+						var jh = new Decimal(this.zhekou).div(new Decimal(10));
+						this.consume.receivables = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titles))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
+						this.consume.realCross = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titles))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
+					}
 				}
 			},
 			//优惠券使用张数减少
@@ -488,14 +488,20 @@
 				} else {
 					// return false
 					this.titles--
-					var mach= new Decimal(this.titles).mul(new Decimal(this.manjianx));
-					var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
-					var jh =  new Decimal(this.zhekou).div(new Decimal(10));
+					this.consume.couponNum = this.titles;
 					//满减
-					this.consume.realCross = zz;
+					if (this.consume.couponType == 2) {
+						var mach= new Decimal(this.titles).mul(new Decimal(this.manjian));
+						var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
+						this.consume.receivable = zz;
+						this.consume.realCross = zz;
+					}
 					//满折
-					this.consume.realCross1 = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titles))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
-					
+					if (this.consume.couponType == 1) {
+						var jh = new Decimal(this.zhekou).div(new Decimal(10));
+						this.consume.receivables = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titles))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
+						this.consume.realCross = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titles))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
+					}
 				}
 			},
 			// destroyDom() {
@@ -526,7 +532,6 @@
 					appNum: param.appNum, //预约号
 					receivable: param.receivable, //应交
 					realCross: param.realCross, //实缴
-					realCross1: param.realCross, //实缴
 					proId: param.proId, //项目id
 					proType: param.proType, //0:体验课（即单次）1:正式课
 					discount: param.discount, //折扣
@@ -637,7 +642,6 @@
 							this.consume.discount = 0
 							this.consume.receivable = 0
 							this.consume.realCross = 0
-							this.consume.realCross1 = 0
 							this.consumeReceivable = 0
 						}
 						this.firstFlag = true
@@ -658,7 +662,6 @@
 					this.consume.discount = 0
 					this.consume.receivable = 0
 					this.consume.realCross = 0
-					this.consume.realCross1 = 0
 					this.consumeReceivable = 0
 				}
 			},
@@ -870,14 +873,16 @@
 				this.listCouponJian.forEach((item)=>{
 					item.checked=false
 				})
+				console.log(item)
+				
+				console.log(this.titttl)
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
 				var res1 = item.recude;
-				this.manjianx = item.recude;
+				this.manjian = item.recude;
 				console.log(this.consume.proId)
-				console.log(this.cash.select)
 				if (this.dui) {
 					this.listCouponJian[index].checked=!this.listCouponJian[index].checked
 					this.listCouponZhe.forEach((item)=>{
@@ -900,10 +905,13 @@
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
 							this.titles = res.retData;
-							this.consume.couponNum = this.titles;
-							var mach= new Decimal(this.titttl).mul(new Decimal(res1));
-							var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
-							this.consume.realCross = zz;
+							console.log(this.titles)
+							if (item.couponType == 2) {
+								var mach= new Decimal(this.titttl).mul(new Decimal(res1));
+								var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
+								this.consume.receivables = zz;
+								this.consume.realCross = zz;
+							}
 						} else {
 							alert(res.retMsg)
 						}
@@ -913,9 +921,11 @@
 				} else {
 					this.titttl = 0;
 					this.titles = 0;
-					$(".you1 .man1 .gou1").eq(index).hide();
-						var zx = new Decimal(this.consume.receivable);
-						this.consume.realCross = zx;
+					if (item.couponType == 2 ){
+							var zy = new Decimal(this.consume.receivable)
+							this.consume.receivables = zy;
+							this.consume.realCross = zy;
+						}
 				}
 				this.dui = !this.dui
 			},
@@ -926,6 +936,7 @@
 					item.checked=false
 				})
 				this.productId = this.consume.proId;
+				this.consume.couponNum = this.titles;
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
@@ -933,13 +944,13 @@
 				this.zhekou = item.recude;
 				console.log(re)
 				if (this.dui) {
-					$(".shiji1").show();
-					$(".shiji").hide();
 					this.listCouponZhe[index].checked=!this.listCouponZhe[index].checked
 					this.listCouponJian.forEach((item)=>{
 						item.checked=false
 					})
-					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume.couponId + '&userId=' + this.userId
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
+						.couponId +
+						'&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
 						url: url,
@@ -954,9 +965,11 @@
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
 							this.titles = res.retData;
-							this.consume.couponNum = this.titles;
-							var jh = new Decimal(re).div(new Decimal(10));
-							this.consume.realCross1 = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titttl))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
+							if (item.couponType == 1) {
+								var jh = new Decimal(re).div(new Decimal(10));
+								this.consume.receivables = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titttl))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
+								this.consume.realCross = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titttl))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
+							}
 						} else {
 							alert(res.retMsg)
 						}
@@ -964,13 +977,13 @@
 						console.log('查询请求失败')
 					});
 				} else{
-					$(".shiji1").hide();
-					$(".shiji").show();
 					this.titttl = 0;
-					this.titles = 0;
-					$(".you1 .man2 .gou1").eq(index).hide();
-					var us = new Decimal(this.consume.receivable)
-					this.consume.realCross1 = us;
+					this.titles =0;
+					if (item.couponType == 1) {
+						var us = new Decimal(this.consume.receivable).div(new Decimal(re)).mul(new Decimal(re))
+						this.consume.receivables = us;
+						this.consume.realCross = us;
+					}
 				}
 				this.dui = !this.dui
 			},

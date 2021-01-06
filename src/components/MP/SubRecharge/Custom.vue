@@ -322,10 +322,16 @@
 				<div class="col-md-12 form-group clearfix text-left">
 					<h4 id="myModalLabel" class="modal-title">合计：</h4>
 				</div>
-				<div class="col-md-4 form-group clearfix jh-wd-33" v-show="selectObj == null">
+				<div class="col-md-4 form-group clearfix jh-wd-33 shiji" v-show="selectObj == null">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">实交总额</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" disabled="true" v-model="consume.realCross">
+					</div>
+				</div>
+				<div class="col-md-4 form-group clearfix jh-wd-33 shiji1"  style="display: none;">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">实交总额</label><span class="sign-left">:</span>
+					<div class="col-md-7">
+						<input type="text" class="form-control" disabled="true" v-model="consume.realCross1">
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33" v-show="selectObj == null">
@@ -396,6 +402,7 @@
 					receivable: '', //应交(折前)
 					preFoldTotalPrice: '', //折前总价
 					realCross: '', //实缴（折后）
+					realCross1: '', //实缴（折后）
 					proId: '', //项目id
 					discount: '', //折扣
 					price: '', //折前单价
@@ -417,7 +424,7 @@
 					piId: '',
 					couponId: 0,
 					couponType: 0,
-					couponNum: 1,
+					couponNum: 0,
 					couponName: '',
 					appNumber: '', //小程序编号
 					diseaseType: null, //咨询方向
@@ -431,7 +438,7 @@
 				},
 				isShow: true,
 				consumeReceivable: '',
-				titttl: '1',
+				titttl: 0,
 				isSelect: true,
 				sameProject: false,
 				appShow: false,
@@ -446,7 +453,9 @@
 				//proList:[],//有剩余的产品信息
 				selectObj: {},
 				dateArr: [],
-				titles: 1,
+				titles: 0,
+				manjian:0,
+				zhekou:0,
 				projectFlag: false,
 				counselorFlag: false,
 				cash: {
@@ -459,7 +468,7 @@
 			};
 		},
 		methods: {
-			// //优惠券使用张数
+			//优惠券使用张数增加
 			btnAdd() {
 				// 如果数量大于商品库存
 				if (this.titles >= this.titttl) {
@@ -467,15 +476,31 @@
 					return false
 				} else {
 					this.titles++
+					var mach= new Decimal(this.titles).mul(new Decimal(this.manjian));
+					var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
+					var jh = new Decimal(this.zhekou).div(new Decimal(10));
+					//满减
+					this.consume.realCross = zz;
+					//满折
+					this.consume.realCross1 = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titles))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
 				}
 			},
-			
+			//优惠券使用张数减少
 			btnMinute() {
 				if (this.titles <= 1) {
 					alert('该优惠券不能减少了哟~')
 					return false
 				} else {
+					// return false
 					this.titles--
+					var mach= new Decimal(this.titles).mul(new Decimal(this.manjian));
+					var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
+					var jh = new Decimal(this.zhekou).div(new Decimal(10));
+					//满减
+					this.consume.realCross = zz;
+					//满折
+					this.consume.realCross1 = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titles))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
+					
 				}
 			},
 			// Initialization consume’s content
@@ -493,9 +518,10 @@
 					appNum: '', //预约号
 					receivable: 0, //应交
 					realCross: 0, //实缴
+					realCross1: 0, //实缴
 					couponId: null,
 					couponType: null,
-					couponNum: null,
+					couponNum: 0,
 					couponName: '',
 					proId: '', //项目id
 					discount: 0, //折扣
@@ -539,7 +565,7 @@
 					cashId: '',
 					memNum: '',
 					balance: 0,
-					select: '',
+					select: 0,
 					btn: false,
 				}
 
@@ -586,6 +612,7 @@
 						this.consume.discount = 0
 						this.consume.receivable = 0
 						this.consume.realCross = 0
+						this.consume.realCross1 = 0
 						this.consumeReceivable = 0
 					}
 				}
@@ -603,6 +630,7 @@
 					this.consume.discount = 0
 					this.consume.receivable = 0
 					this.consume.realCross = 0
+					this.consume.realCross1 = 0
 					this.consumeReceivable = 0
 				}
 			},
@@ -984,6 +1012,7 @@
 							this.consume.discount = item.discount //折扣
 							this.consume.receivable = item.receivable //应交
 							this.consume.realCross = item.realCross //实缴
+							this.consume.realCross1 = item.realCross //实缴
 							this.consume.proType = item.proType
 							this.selectObj = item
 						}
@@ -1016,6 +1045,7 @@
 						this.consume.discount = item.discount //折扣
 						this.consume.receivable = item.receivable //应交
 						this.consume.realCross = item.realCross //实缴
+						this.consume.realCross1 = item.realCross //实缴
 						this.consume.proType = item.proType
 					}
 				}
@@ -1124,12 +1154,14 @@
 					item.checked=false
 				})
 				console.log(item)
-				this.consume.couponNum = this.titttl;
+				
+				console.log(this.titttl)
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
 				var res1 = item.recude;
+				this.manjian = item.recude;
 				console.log(this.consume.proId)
 				if (this.dui) {
 					this.listCouponJian[index].checked=!this.listCouponJian[index].checked
@@ -1153,8 +1185,10 @@
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
 							this.titles = res.retData;
-							var mach= new Decimal(this.titttl).mul(new Decimal(res1)).sub(new Decimal(this.cash.select));
-							var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach));
+							this.consume.couponNum = this.titles;
+							console.log(this.titles)
+							var mach= new Decimal(this.titttl).mul(new Decimal(res1));
+							var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
 							this.consume.realCross = zz;
 						} else {
 							alert(res.retMsg)
@@ -1163,8 +1197,8 @@
 						console.log('查询请求失败')
 					});
 				} else {
-					this.titttl = 1;
-					this.titles = 1;
+					this.titttl = 0;
+					this.titles = 0;
 					$(".you1 .man1 .gou1").eq(index).hide();
 						var zy = new Decimal(this.consume.receivable);
 						this.consume.realCross = zy;
@@ -1178,18 +1212,20 @@
 					item.checked=false
 				})
 				this.productId = this.consume.proId;
+				this.consume.couponNum = this.titles;
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
 				var re = item.recude;
+				this.zhekou = item.recude;
 				console.log(re)
 				if (this.dui) {
+					$(".shiji1").show();
+					$(".shiji").hide();
 					this.listCouponZhe[index].checked=!this.listCouponZhe[index].checked
 					this.listCouponJian.forEach((item)=>{
 						item.checked=false
 					})
-					var uu = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.balance)).mul(new Decimal(re)) / 10
-					this.consume.realCross = uu;
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
 						.couponId +
 						'&userId=' + this.userId
@@ -1207,8 +1243,9 @@
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
 							this.titles = res.retData;
-							var jh =new Decimal(this.cash.balance).mul(new Decimal(re)) /10;
-							this.consume.realCross = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titttl))).toFixed(2, Decimal.ROUND_HALF_UP);
+							this.consume.couponNum = this.titles;
+							var jh = new Decimal(re).div(new Decimal(10));
+							this.consume.realCross1 = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titttl))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
 						} else {
 							alert(res.retMsg)
 						}
@@ -1216,10 +1253,12 @@
 						console.log('查询请求失败')
 					});
 				} else{
-					this.titttl = 1;
-					this.titles =1;
+					$(".shiji1").hide();
+					$(".shiji").show();
+					this.titttl = 0;
+					this.titles =0;
 					var us = new Decimal(this.consume.receivable)
-					this.consume.realCross = us;
+					this.consume.realCross1 = us;
 				}
 				this.dui = !this.dui
 			},
@@ -1245,7 +1284,7 @@
 					if (res.retCode == '0000') {
 						if (res.retData.length > 0) {
 							this.cash = res.retData[0]
-							this.cash.select = '0.0'
+							this.cash.select = 0.0
 						} else {
 							this.cash = {
 								memNum: '', //会员号

@@ -381,10 +381,8 @@
 					balance: '',
 					counselorEmpId: '',
 				},
-				unfinishedProLists:[],
 				titttl: 1,
 				titles: 1,
-				unfinishedProLists1:[],
 				consume: {
                     proStyle: '',
 					memNum: '', //会员名
@@ -428,7 +426,6 @@
                     sourceId: ''
 				},
 				purAuditId:'',
-				
 				cash: {
 					cashId: '',
 					memNum: '',
@@ -449,6 +446,8 @@
 				appShow:false,
                 isArrearsShow: false,
 				unfinishedProList: [],
+				listCouponJian: [],
+				listCouponZhe:[],
 				clickItemObj: {
 					itemId: 0,
 					count: 0
@@ -478,10 +477,12 @@
 			},
 			// Initialization consume’s content
 			initAuditPur(param) {
+				
 				this.purAuditId = param.piId;
 				this.productId = param.proId;
-				
 				this.userId = param.memNum;
+				this.getCoupon(this.userId,param.proId)
+			
 				$('#AuditPurContent').modal({
 					backdrop: 'static',
 					keyboard: false
@@ -562,37 +563,7 @@
 					this.consume.proId = ""
 					this.projectObj = {}
 				} else {
-					var url = this.url + '/couponController/selectCoupon'
-					var formData = new FormData();
-					formData.append('productId', this.productId);
-					formData.append('userId', this.userId);
-					this.$ajax({
-						method: 'POST',
-						url: url,
-						headers: {
-							'Content-Type': 'x-www-form-urlencoded',
-							'Access-Token': this.accessToken
-						},
-						data: formData,
-						dataType: 'json',
-					}).then((res) => {
-						if(0==res.data.retCode){
-							let data=res.data.retData
-							let listZhe=data['1']
-							let listjian=data['2']
-							listZhe.forEach((item)=>{
-								item.checked=false
-								item.recude=item.recude/10
-							})
-							listjian.forEach((item)=>{
-								item.checked=false
-							})
-							this.listCouponZhe=listZhe
-							this.listCouponJian=listjian
-						}
-					}).catch((error) => {
-						console.log('请求失败处理')
-					});
+					getCoupon(this.userId,param.proId)
 					this.consume.proId = param.proId
 					this.consume.price = param.price //折前单价
 					//this.consume.disPrice = param.price * param.discount / 100 //折后单价
@@ -617,13 +588,42 @@
             },
 			//实交总额
 			Changes() {
-				console.log(this.consume.receivables)
-				console.log(this.consume.arrears)
-				console.log(this.cash.select)
-				console.log(this.jinqian)
 				var ss = new Decimal(this.consume.receivables).sub(new Decimal(this.consume.arrears))
 					.sub(new Decimal(this.jinqian))
 				this.consume.realCross = ss;
+			},
+			getCoupon(userId,proId){
+				var url = this.url + '/couponController/selectCoupon'
+				var formData = new FormData();
+				formData.append('productId', proId);
+				formData.append('userId', userId);
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': 'x-www-form-urlencoded',
+						'Access-Token': this.accessToken
+					},
+					data: formData,
+					dataType: 'json',
+				}).then((res) => {
+					if(0==res.data.retCode){
+						let data=res.data.retData
+						let listZhe=data['1']
+						let listjian=data['2']
+						listZhe.forEach((item)=>{
+							item.checked=false
+							item.recude=item.recude/10
+						})
+						listjian.forEach((item)=>{
+							item.checked=false
+						})
+						this.listCouponZhe=listZhe
+						this.listCouponJian=listjian
+					}
+				}).catch((error) => {
+					console.log('请求失败处理')
+				});
 			},
 			//feedback employee information
 			empChange: function(param) {
@@ -826,6 +826,9 @@
 				var rt = item.recude;
 				if (this.dui) {
 					this.listCouponJian[index].checked=!this.listCouponJian[index].checked
+					this.listCouponZhe.forEach((item)=>{
+						item.checked=false
+					})
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
@@ -852,8 +855,7 @@
 					});
 				} else {
 					this.titles = 1;
-					this.titttl = res.retData;
-					$(".you .man1 .gou1").eq(index).hide();
+					this.titttl = 1;
 					var zy = new Decimal(this.consume.receivable)
 					this.consume.receivables = zy;
 				}
@@ -874,6 +876,9 @@
 				console.log(rw)
 				if (this.dui) {
 					this.listCouponZhe[index].checked=!this.listCouponZhe[index].checked
+					this.listCouponJian.forEach((item)=>{
+						item.checked=false
+					})
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
@@ -897,7 +902,8 @@
 						console.log('查询请求失败')
 					});
 				} else {
-					$(".you .man2 .gou1").hide();
+					this.titles = 1;
+					this.titttl = 1;
 					var us = new Decimal(this.consume.receivable).div(new Decimal(rw)).mul(new Decimal(rw))
 					this.consume.receivables = us;
 				}
@@ -999,20 +1005,16 @@
 					},
 					data: formData,
 					dataType: 'json',
-				}).then((res) => {
-					if(0==res.data.retCode){
-						let data=res.data.retData
-						let listZhe=data['1']
-						let listjian=data['2']
-						listZhe.forEach((item)=>{
-							item.checked=false
-							item.recude=item.recude/10
-						})
-						listjian.forEach((item)=>{
-							item.checked=false
-						})
-						this.listCouponZhe=listZhe
-						this.listCouponJian=listjian
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						this.unfinishedProLists = res.retData['2']
+						this.unfinishedProLists1 = res.retData['1']
+						for (var i = 0; i < this.unfinishedProLists1.length; i++) {
+							this.unfinishedProLists1[i].recude = this.unfinishedProLists1[i].recude / 10
+						}
+					} else {
+						alert(res.retMsg)
 					}
 				}).catch((error) => {
 					console.log('会员查询请求失败')

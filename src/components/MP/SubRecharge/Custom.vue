@@ -1133,6 +1133,9 @@
 				console.log(this.consume.proId)
 				if (this.dui) {
 					this.listCouponJian[index].checked=!this.listCouponJian[index].checked
+					this.listCouponZhe.forEach((item)=>{
+						item.checked=false
+					})
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
 						.couponId +
 						'&userId=' + this.userId
@@ -1182,6 +1185,9 @@
 				console.log(re)
 				if (this.dui) {
 					this.listCouponZhe[index].checked=!this.listCouponZhe[index].checked
+					this.listCouponJian.forEach((item)=>{
+						item.checked=false
+					})
 					var uu = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.balance)).mul(new Decimal(re)) / 10
 					this.consume.realCross = uu;
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
@@ -1210,9 +1216,8 @@
 						console.log('查询请求失败')
 					});
 				} else{
-					this.titttl = res.retData;
-					this.titles = res.retData;
-					$(".you1 .man2 .gou1").eq(index).hide();
+					this.titttl = 1;
+					this.titles =1;
 					var us = new Decimal(this.consume.receivable)
 					this.consume.realCross = us;
 				}

@@ -62,7 +62,7 @@
 								<b>*</b>
 								<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
 								<div class="col-md-7  zhe1">
-									<input type="number" class="form-control" v-model="recude">
+									<input type="number" class="form-control" v-model="recude" @blur="manjian()">
 									<span>%</span>
 								</div>
 								<span class="err-msg2">{{ errors[0] }}</span>

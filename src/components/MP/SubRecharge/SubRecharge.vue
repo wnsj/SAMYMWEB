@@ -419,6 +419,8 @@
 				dui: true,
 				dis: true,
 				shs: true,
+				zhekou:1,
+				manjian:1,
 				titles: 1,
 				xuanze1: '',
 				userId: '',
@@ -530,23 +532,45 @@
 				// this.youhui(param.couId)
 				this.checkMemCash(param.visId)
 			},
-			// //优惠券使用张数
+			//优惠券使用张数增加
 			btnAdd() {
 				// 如果数量大于商品库存
+				var mach= new Decimal(this.titles).mul(new Decimal(this.manjian));
+				var zz =  new Decimal(this.consume.receivables).sub(new Decimal(mach));
+				// var jh = new Decimal(this.zhekou) / 10;
 				if (this.titles >= this.titttl) {
 					alert('该优惠券不能使用更多了~')
 					return false
 				} else {
+					
+					//满减
+					this.consume.receivable = zz;
 					this.titles++
+					//满折
+					// this.consume.receivable = new Decimal(this.consume.receivables).mul(new Decimal(Math.pow(jh,this.titles))).toFixed(2, Decimal.ROUND_HALF_UP);
 				}
 			},
-			
+			//优惠券使用张数减少
 			btnMinute() {
+				
+				console.log(this.titles*this.manjian)
+				console.log(this.manjian)
+				console.log(this.consume.receivable)
+				var mach= new Decimal(this.titles).mul(new Decimal(this.manjian));
+				var zz =  new Decimal(this.consume.receivables).sub(new Decimal(mach));
+				console.log(mach)
+				var jh = new Decimal(this.zhekou).div(new Decimal(10));
+				console.log('数据'+jh)
 				if (this.titles <= 1) {
 					alert('该优惠券不能减少了哟~')
 					return false
 				} else {
+					
+					//满减
+					this.consume.receivable = zz;
 					this.titles--
+					//满折
+					// this.consume.receivable = new Decimal(this.consume.receivables).mul(new Decimal(Math.pow(jh,this.titles))).toFixed(2, Decimal.ROUND_HALF_UP);
 				}
 			},
 			resetDate(row, column, cellValue, index) {
@@ -925,8 +949,12 @@
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
 				var res1 = item.recude;
+				this.manjian = item.recude;
 					if(this.dui){
 						this.listCouponJian[index].checked=!this.listCouponJian[index].checked
+						this.listCouponZhe.forEach((item)=>{
+							item.checked=false
+						})
 						var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
 							.couponId +
 							'&userId=' + this.userId
@@ -973,9 +1001,14 @@
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
 				var re = item.recude;
+				this.zhekou = item.recude;
+				console.log(this.zhekou)
 				console.log(re)
 				if (this.dui) {
 					this.listCouponZhe[index].checked=!this.listCouponZhe[index].checked
+					this.listCouponJian.forEach((item)=>{
+						item.checked=false
+					})
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
 						.couponId +
 						'&userId=' + this.userId
@@ -992,6 +1025,7 @@
 						var res = response.data
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
+							this.titles = res.retData;
 							var jh = new Decimal(re) / 10;
 							this.consume.receivable = new Decimal(this.consume.receivables).mul(new Decimal(Math.pow(jh,this.titttl))).toFixed(2, Decimal.ROUND_HALF_UP);
 						} else {
@@ -1002,7 +1036,7 @@
 					});
 				} else {
 					this.titttl = 1;
-					$(".you .man2 .gou1").eq(index).hide();
+					this.titles = 1;
 					var us = new Decimal(this.consume.receivables).div(new Decimal(re)).mul(new Decimal(re))
 					this.consume.receivable = us;
 				}

@@ -484,7 +484,7 @@
 				this.firstFlag = false
 				this.consumAuditId = param.cid;
 				this.productId = param.empId;
-				this.userId = param.visId;
+				this.userId = param.memNum;
 				// this.clickItemObj.itemId = 0
 				$('#customContent').modal({
 					backdrop: 'static',
@@ -640,6 +640,7 @@
 				if (this.isBlank(param)) {
 					this.consume.proId = ""
 				} else {
+					this.getCoupon(this.userId,param.proId)
 					this.consume.proId = param.proId
 					this.consume.price = param.price
 					this.consume.totalCount = param.frequency
@@ -648,6 +649,39 @@
 					this.consume.receivable = param.discouAmount
 					this.consume.proType = param.proType
 				}
+			},
+			getCoupon(userId,proId){
+				var url = this.url + '/couponController/selectCoupon'
+				var formData = new FormData();
+				formData.append('productId', proId);
+				formData.append('userId', userId);
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': 'x-www-form-urlencoded',
+						'Access-Token': this.accessToken
+					},
+					data: formData,
+					dataType: 'json',
+				}).then((res) => {
+					if(0==res.data.retCode){
+						let data=res.data.retData
+						let listZhe=data['1']
+						let listjian=data['2']
+						listZhe.forEach((item)=>{
+							item.checked=false
+							item.recude=item.recude/10
+						})
+						listjian.forEach((item)=>{
+							item.checked=false
+						})
+						this.listCouponZhe=listZhe
+						this.listCouponJian=listjian
+					}
+				}).catch((error) => {
+					console.log('请求失败处理')
+				});
 			},
 			//付款方式
 			payChange: function(param) {
@@ -814,13 +848,14 @@
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
-				var res = item.recude;
+				var res1 = item.recude;
 				console.log(this.consume.proId)
 				console.log(this.cash.select)
 				if (this.dui) {
 					this.listCouponJian[index].checked=!this.listCouponJian[index].checked
-						var zz = new Decimal(this.consume.receivable).sub(new Decimal(res))
-						this.consume.realCross = zz;
+					this.listCouponZhe.forEach((item)=>{
+						item.checked=false
+					})
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
 						.couponId +
 						'&userId=' + this.userId
@@ -838,7 +873,7 @@
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
 							this.titles = res.retData;
-							var mach= new Decimal(this.titttl).mul(new Decimal(res1)).sub(new Decimal(this.cash.select));
+							var mach= new Decimal(this.titttl).mul(new Decimal(res1));
 							var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach));
 							this.consume.realCross = zz;
 						} else {
@@ -870,8 +905,9 @@
 				console.log(re)
 				if (this.dui) {
 					this.listCouponZhe[index].checked=!this.listCouponZhe[index].checked
-					var uu = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.balance)).mul(new Decimal(re)) / 10
-					this.consume.realCross = uu;
+					this.listCouponJian.forEach((item)=>{
+						item.checked=false
+					})
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
@@ -896,8 +932,8 @@
 						console.log('查询请求失败')
 					});
 				} else{
-					this.titttl = res.retData;
-					this.titles = res.retData;
+					this.titttl = 1;
+					this.titles = 1;
 					$(".you1 .man2 .gou1").eq(index).hide();
 					var us = new Decimal(this.consume.receivable)
 					this.consume.realCross = us;
@@ -1315,35 +1351,6 @@
 					console.log('定金查询请求失败')
 				});
 			},
-			add() {
-				var url = this.url + '/couponController/selectCoupon'
-				var formData = new FormData();
-				formData.append('productId', this.productId);
-				formData.append('userId', this.userId);
-				this.$ajax({
-					method: 'POST',
-					url: url,
-					headers: {
-						'Content-Type': this.contentType,
-						'Access-Token': this.accessToken
-					},
-					data: formData,
-					dataType: 'json',
-				}).then((response) => {
-					var res = response.data
-					if (res.retCode == '0000') {
-						this.unfinishedProLists = res.retData['2']
-						this.unfinishedProLists1 = res.retData['1']
-						for (var i = 0; i < this.unfinishedProLists1.length; i++) {
-							this.unfinishedProLists1[i].recude = this.unfinishedProLists1[i].recude / 10
-						}
-					} else {
-						alert(res.retMsg)
-					}
-				}).catch((error) => {
-					console.log('会员查询请求失败')
-				});
-			},
 			count(event) {
 				if (Number(this.cash.select) > Number(this.cash.balance)) {
 					this.cash.select = this.cash.balance;
@@ -1355,9 +1362,6 @@
 			this.$refs.VisitStateRef.getObj(1, 1)
 			this.$refs.ContinStateRef.getObj(1, 2)
 		},
-		created() {
-			this.add();
-		}
 
 	}
 </script>

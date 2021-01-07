@@ -209,7 +209,8 @@
 					</label>
 					<span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="cash.select" id="earn" @keyup.enter="count" @input="count($event)" />
+						<input type="number" class="form-control" v-model="cash.select" id="earn" @keyup.enter="count" @input="count($event)"
+						 @blur="dikou()" />
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33" v-show="cash.balance>0">
@@ -248,7 +249,7 @@
 					<b>*</b>
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  ">欠费金额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="number" class="form-control" v-model="consume.arrears" @blur="onChange()">
+						<input type="number" class="form-control" v-model="consume.arrears" @blur="qianfei()">
 					</div>
 				</div>
 			</div>
@@ -677,12 +678,13 @@
 					this.consume.discount = param.discount //折扣
 					this.consume.preFoldTotalPrice = param.totalPrice //课程总额
 					this.consume.receivable = param.discouAmount //应交
-					if(this.consume.price =='' || this.consume.actualCount == '' || this.consume.discount == ''){
+					if (this.consume.price == '' || this.consume.actualCount == '' || this.consume.discount == '') {
 						this.consume.price = 0;
 						this.consume.actualCount = 0;
 						this.consume.discount = 0;
-					}else{
-						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(this.consume.discount)).div(new Decimal(100));
+					} else {
+						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(
+							this.consume.discount)).div(new Decimal(100));
 					}
 
 					this.consume.realCross = param.discouAmount //实缴
@@ -699,11 +701,18 @@
 					this.isArrearsShow = true
 				}
 			},
-			onChange() {
-				console.log(this.jinqian)
-				var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears)).sub(new Decimal(this.cash.select))
-					.sub(new Decimal(this.jinqian))
-				this.consume.realCross = ss;
+			dikou() {
+				if (this.cash.select != '') {
+					var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
+					this.consume.realCross = ss;
+				}
+			},
+			qianfei() {
+				if (this.consume.arrears != '') {
+					var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+					this.consume.realCross = ss;
+				}
+
 			},
 			//feedback employee information
 			empChange: function(param) {
@@ -941,12 +950,18 @@
 				console.log(item.balance)
 				this.jinqian = item.balance;
 				if (this.clickItemObj.itemId == 0) {
+					if (this.jinqian != '') {
+						var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian))
+						this.consume.realCross = ss;
+					}
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1
 				} else {
 					if (this.clickItemObj.itemId == item.piId) {
 						if (this.clickItemObj.count % 2 == 0) {
 							e.target.checked = false
+							var ss = new Decimal(this.consume.receivable)
+							this.consume.realCross = ss;
 						}
 						this.clickItemObj.count = this.clickItemObj.count + 1
 					} else {
@@ -1006,11 +1021,11 @@
 				} else {
 					this.titttl = 0;
 					this.titles = 0;
-					if (item.couponType == 2 ){
-							var zy = new Decimal(this.receivables)
-							this.consume.receivable = zy;
-							this.consume.realCross = zy;
-						}
+					if (item.couponType == 2) {
+						var zy = new Decimal(this.receivables)
+						this.consume.receivable = zy;
+						this.consume.realCross = zy;
+					}
 
 				}
 

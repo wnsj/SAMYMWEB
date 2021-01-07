@@ -224,7 +224,7 @@
 					<b>*</b>
 					<label class="col-md-4 control-label text-right nopad end-aline  ">欠费金额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="number" class="form-control" v-model="consume.arrears" @blur="Changes()">
+						<input type="number" class="form-control" v-model="consume.arrears" @blur="qianfei()">
 					</div>
 				</div>
 			</div>
@@ -240,7 +240,7 @@
 					</label>
 					<span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="cash.select" id="earn" @keyup.enter="count" @input="count($event)" />
+						<input type="number" class="form-control" v-model="cash.select" id="earn" @keyup.enter="count" @input="count($event)" @blur="dikou()" />
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33" v-show="cash.balance>0">
@@ -378,8 +378,8 @@
 					realCross: '', //实缴（折后）
 					actualCross: '0', //实交金额
 					proId: '', //产品id
-					discount: '', //折扣
-					price: '', //折前单价
+					discount: 0, //折扣
+					price: 0, //折前单价
 					disPrice: '', //折后单价
 					totalCount: 0, //总次数
 					actualCount: 0, //实际次数
@@ -496,7 +496,16 @@
 				this.productId = param.proId;
 				this.userId = param.memNum;
 				this.getCoupon(this.userId, param.proId)
-
+				console.log(this.consume.price)
+				console.log(this.consume.actualCount)
+				console.log(this.consume.discount)
+				if(this.consume.price =='' || this.consume.actualCount == '' || this.consume.discount == ''){
+					this.consume.price = 0;
+					this.consume.actualCount = 0;
+					this.consume.discount = 0;
+				}else{
+					this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(this.consume.discount)).div(new Decimal(100));
+				}
 				$('#AuditPurContent').modal({
 					backdrop: 'static',
 					keyboard: false
@@ -607,10 +616,18 @@
 				}
 			},
 			//实交总额
-			Changes() {
-				var ss = new Decimal(this.receivables).sub(new Decimal(this.consume.arrears))
-					.sub(new Decimal(this.jinqian))
-				this.consume.realCross = ss;
+			dikou() {
+				if (this.cash.select != '') {
+					var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
+					this.consume.realCross = ss;
+				}
+			},
+			qianfei() {
+				if (this.consume.arrears != '') {
+					var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+					this.consume.realCross = ss;
+				}
+			
 			},
 			getCoupon(userId, proId) {
 				var url = this.url + '/couponController/selectCoupon'
@@ -1035,12 +1052,18 @@
 			radioClick(e, item) {
 				this.jinqian = item.balance;
 				if (this.clickItemObj.itemId == 0) {
+					if (this.jinqian != '') {
+						var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian))
+						this.consume.realCross = ss;
+					}
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1
 				} else {
 					if (this.clickItemObj.itemId == item.piId) {
 						if (this.clickItemObj.count % 2 == 0) {
 							e.target.checked = false
+							var ss = new Decimal(this.consume.receivable)
+							this.consume.realCross = ss;
 						}
 						this.clickItemObj.count = this.clickItemObj.count + 1
 					} else {

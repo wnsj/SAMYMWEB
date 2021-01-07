@@ -27,7 +27,7 @@
 						</div>
 					</div>
 					<div class="col-md-12 col-lg-12">
-						<table class="table table-bordered table-hover jh-mb-0" >
+						<table class="table table-bordered table-hover jh-mb-0">
 							<thead class="datathead">
 								<tr>
 									<td>选择</td>
@@ -40,7 +40,7 @@
 							<tbody>
 								<tr v-for="(item,index) in unfinishedProList" class="zes" :key="index">
 									<td v-if="item.auditState != 5"><input type="radio" name="radioGroup" @click="radioClick($event,item)"></td>
-                                    <td v-else style="color: red;font-weight: bold">该产品为驳回状态!</td>
+									<td v-else style="color: red;font-weight: bold">该产品为驳回状态!</td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -128,11 +128,11 @@
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  ">折后总额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="consume.receivables" disabled="disabled">
+						<input type="text" class="form-control" v-model="receivables" disabled="disabled">
 					</div>
 				</div>
 			</div>
-			<div class="youa">
+			<div class="youa" v-if="listCouponZhe.length||listCouponJian.length" style="display: block;">
 				<div class="tab-pane fade in active martop">
 					<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 						<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
@@ -144,17 +144,17 @@
 								<div class="manjian1">满减</div>
 							</div>
 							<ul>
-								<li @click="dianji(item,index)" v-for="(item,index) in unfinishedProLists" :key="index">
+								<li @click="dianji(item,index)" v-for="(item,index) in listCouponJian" :key="index">
 									<div class="jia"><span>￥</span>{{item.recude}}</div>
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
 									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
 									<div class="youxiao" v-if="item.isLimit == 1">有效期<span>{{item.startTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
-									<div class="niucha1" v-if="item.isLimit == 2">永久有效</div>
+									<div class="niucha1" v-else-if="item.isLimit == 2">永久有效</div>
 									<div class="niucha" v-if="item.isLimit == 1">
 										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span>
 									</div>
-									<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+									<div class="gou1" v-if="item.checked"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
 								</li>
 							</ul>
 						</div>
@@ -164,17 +164,19 @@
 								<div class="manjian1">满折</div>
 							</div>
 							<ol>
-								<li @click="dianji1(index,item)" v-for="(item,index) in unfinishedProLists1" :key="index">
+								<li @click="dianji1(index,item)" v-for="(item,index) in listCouponZhe" :key="index">
+
 									<div class="jia">{{item.recude}}<span>折</span></div>
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
 									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
 									<div class="youxiao" v-if="item.isLimit == 1">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
-									<div class="niucha1" v-if="item.isLimit == 2">永久有效</div>
+									<div class="niucha1" v-else-if="item.isLimit == 2">永久有效</div>
 									<div class="niucha" v-if="item.isLimit == 1">
 										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
 									</div>
-									<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+									<div class="gou1" style="display: block;" v-if="Number(item.checked)==1"><img src="../../../../static/img/youhui_xuanze1.png"
+										 alt=""></div>
 								</li>
 							</ol>
 						</div>
@@ -186,9 +188,9 @@
 							<li class="shiyong2"><span class="number1">使用数量/张：</span></li>
 							<li>
 								<ul class="count1">
-									<li><span class="num-jian1" @click="num_jian()">-</span></li>
-									<li><input type="text" class="input-num1" id="input-num1" value="1" v-model="titttl" /></li>
-									<li><span class="num-jia1" @click="num_jia(item)">+</span></li>
+									<li><span class="num-jian1" @click="btnMinute()">-</span></li>
+									<li><input type="text" class="input-num1" value="1" v-model="titles" /></li>
+									<li><span class="num-jia1" @click="btnAdd()">+</span></li>
 								</ul>
 							</li>　
 						</ul>
@@ -216,7 +218,7 @@
 						<input type="text" class="form-control" v-model="cash.balance" id="cash" disabled="disabled">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33">
+				<div class="col-md-6 form-group clearfix jh-wd-33 zongeb">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">应交总额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
@@ -227,7 +229,7 @@
 				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 					<h4 id="myModalLabel" class="modal-title">合计：</h4>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33">
+				<div class="col-md-6 form-group clearfix jh-wd-33 shiji">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline  ">实交总额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.realCross" disabled="disabled">
@@ -355,7 +357,7 @@
 				lifh: true,
 				recude: 0,
 				yongjiu: false,
-				jinqian:'',
+				jinqian: '',
 				member: {
 					memNum: '', //会员号
 					memName: '', //会员名
@@ -363,6 +365,7 @@
 					balance: '',
 					counselorEmpId: '',
 				},
+				receivables: 0, //折前
 				consume: {
 					proStyle: '1',
 					memNum: '', //会员名
@@ -373,7 +376,7 @@
 					couponType: 0,
 					couponNum: 0,
 					couponName: '',
-					receivables: 0, //折前
+					
 					receivable: 0, //应交
 					preFoldTotalPrice: '', //折前总价
 					realCross: '', //实缴（折后）
@@ -418,10 +421,12 @@
 				dui: true,
 				dis: true,
 				shs: true,
-				title: '',
+				zhekou: 1,
+				manjian: 1,
+				titles: 0,
 				xuanze1: '',
 				userId: '',
-				titttl: 1,
+				titttl: 0,
 				isShow: true,
 				consumeReceivable: '',
 				isSelect: false,
@@ -429,8 +434,8 @@
 				appShow: false,
 				isArrearsShow: false,
 				unfinishedProList: [],
-				unfinishedProLists: [],
-				unfinishedProLists1: [],
+				listCouponJian: [],
+				listCouponZhe: [],
 				auditState: '',
 				clickItemObj: {
 					itemId: 0,
@@ -471,13 +476,12 @@
 					memNum: param.visId, //会员名
 					memName: param.visitorName,
 					phone: param.phone,
-					couponId: 0,
-					couponType: 0,
-					couponNum: 1,
+					couponId: null,
+					couponType: null,
+					couponNum: 0,
 					couponName: '',
 					appNum: '', //预约号
-					receivable: '0', //折前
-					receivables: '0', //应交
+					receivable: 0, //折前
 					preFoldTotalPrice: '', //折前总价
 					realCross: 0, //实缴
 					actualCross: 0, //实交金额
@@ -529,46 +533,56 @@
 				// this.youhui(param.couId)
 				this.checkMemCash(param.visId)
 			},
-			// //优惠券使用张数
-			num_jia: function(item) {
-				var input_num1 = document.getElementById("input-num1");
-				this.productId = this.consume.proId;
-				this.couponId = item.couId;
-				var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId +
-					'&userId=' + this.userId
-				this.$ajax({
-					method: 'GET',
-					url: url,
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-						'Access-Token': this.accessToken
-					},
-					// param: formData,
-					dataType: 'json',
-				}).then((response) => {
-					var res = response.data
-					if (res.retCode == '0000') {
-						this.titttl = res.retData;
-						if (input_num1.value == this.titttl) {
-							$(".input-num1").hide();
-						} else {
-							$(".input-num1").show();
-							input_num1.value = parseInt(input_num1.value) + 1;
-						}
-					} else {
-						alert(res.retMsg)
-					}
-				}).catch((error) => {
-					console.log('查询请求失败')
-				});
-
-			},
-			num_jian() {
-				var input_num1 = document.getElementById("input-num1");
-				if (input_num1.value <= 1) {
-					input_num1.value = 1;
+			//优惠券使用张数增加
+			btnAdd() {
+				// 如果数量大于商品库存
+				if (this.titles >= this.titttl) {
+					alert('该优惠券不能使用更多了~')
+					return false
 				} else {
-					input_num1.value = parseInt(input_num1.value) - 1;
+					this.titles++
+					this.consume.couponNum = this.titles;
+					//满减
+					if (this.consume.couponType == 2) {
+						var mach = new Decimal(this.titles).mul(new Decimal(this.manjian));
+						var zz = new Decimal(this.receivables).sub(new Decimal(mach));
+						this.consume.receivable = zz;
+						this.consume.realCross = zz;
+					}
+					//满折
+					if (this.consume.couponType == 1) {
+						var jh = new Decimal(this.zhekou).div(new Decimal(10));
+						this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
+							2, Decimal.ROUND_HALF_UP);
+						this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
+							2, Decimal.ROUND_HALF_UP);
+					}
+				}
+			},
+			//优惠券使用张数减少
+			btnMinute() {
+				if (this.titles <= 1) {
+					alert('该优惠券不能减少了哟~')
+					return false
+				} else {
+					// return false
+					this.titles--
+					this.consume.couponNum = this.titles;
+					//满减
+					if (this.consume.couponType == 2) {
+						var mach = new Decimal(this.titles).mul(new Decimal(this.manjian));
+						var zz = new Decimal(this.receivables).sub(new Decimal(mach));
+						this.consume.receivable = zz;
+						this.consume.realCross = zz;
+					}
+					//满折
+					if (this.consume.couponType == 1) {
+						var jh = new Decimal(this.zhekou).div(new Decimal(10));
+						this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
+							2, Decimal.ROUND_HALF_UP);
+						this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
+							2, Decimal.ROUND_HALF_UP);
+					}
 				}
 			},
 			resetDate(row, column, cellValue, index) {
@@ -588,7 +602,6 @@
 					this.consume.actualCount = 0
 					this.consume.discount = 0
 					this.consume.receivable = 0
-					this.consume.receivables = 0
 					this.consume.realCross = 0
 				}
 			},
@@ -600,7 +613,6 @@
 				this.consume.actualCount = 0
 				this.consume.discount = 0
 				this.consume.receivable = 0
-				this.consume.receivables = 0
 				this.consume.realCross = 0
 			},
 			//付款方式
@@ -639,39 +651,23 @@
 						},
 						data: formData,
 						dataType: 'json',
-					}).then((response) => {
-						var res = response.data
-						console.log(res)
-						if (res.retCode == '0000') {
-							this.unfinishedProLists = res.retData['2']
-							this.unfinishedProLists1 = res.retData['1']
-							for (var i = 0; i < this.unfinishedProLists1.length; i++) {
-								this.unfinishedProLists1[i].recude = this.unfinishedProLists1[i].recude / 10
-							}
-
-							// if (this.unfinishedProLists[0].isLimit == '2') {
-							// 	this.lifh = false
-							// 	this.isLine = false
-							// 	this.yongjiu = true
-							// } else {
-							// 	this.lifh = true
-							// 	this.isLine = true
-							// 	this.yongjiu = false
-							// }
-							if (this.unfinishedProLists == '') {
-								$(".youa").hide();
-							} else {
-								$(".youa").show();
-							}
-							if (this.unfinishedProLists1 == '') {
-								$(".youa").hide();
-							} else {
-								$(".youa").show();
-							}
-						} else {
-							alert(res.retMsg)
+					}).then((res) => {
+						if (0 == res.data.retCode) {
+							let data = res.data.retData
+							let listZhe = data['1']
+							let listjian = data['2']
+							listZhe.forEach((item) => {
+								item.checked = false
+								item.recude = item.recude / 10
+							})
+							listjian.forEach((item) => {
+								item.checked = false
+							})
+							this.listCouponZhe = listZhe
+							this.listCouponJian = listjian
 						}
 					}).catch((error) => {
+						console.log(error)
 						console.log('请求失败处理')
 					});
 					this.consume.proId = param.proId
@@ -681,7 +677,14 @@
 					this.consume.discount = param.discount //折扣
 					this.consume.preFoldTotalPrice = param.totalPrice //课程总额
 					this.consume.receivable = param.discouAmount //应交
-					this.consume.receivables = param.discouAmount //折后
+					if(this.consume.price =='' || this.consume.actualCount == '' || this.consume.discount == ''){
+						this.consume.price = 0;
+						this.consume.actualCount = 0;
+						this.consume.discount = 0;
+					}else{
+						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(this.consume.discount)).div(new Decimal(100));
+					}
+					
 					this.consume.realCross = param.discouAmount //实缴
 					this.consume.proType = param.proType
 					this.cash.select = '0'
@@ -953,19 +956,22 @@
 				}
 			},
 			//选择满减优惠券
-			dianji: function(item,index) {
-				console.log(item)
+			dianji: function(item, index) {
+				this.listCouponJian.forEach((item) => {
+					item.checked = false
+				})
 				this.consume.couponNum = this.titttl;
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
-				var res = item.recude;
-				console.log(this.consume.proId)
+				var res1 = item.recude;
+				this.manjian = item.recude;
 				if (this.dui) {
-					$(".you .man1 .gou1").eq(index).show();
-						var zz = new Decimal(this.consume.receivables).sub(new Decimal(res))
-						this.consume.receivable = zz;
+					this.listCouponJian[index].checked = !this.listCouponJian[index].checked
+					this.listCouponZhe.forEach((item) => {
+						item.checked = false
+					})
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
 						.couponId +
 						'&userId=' + this.userId
@@ -982,6 +988,14 @@
 						var res = response.data
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
+							this.titles = res.retData;
+							if (item.couponType == 2) {
+								var mach = new Decimal(this.titttl).mul(new Decimal(res1));
+								var zz = new Decimal(this.receivables).sub(new Decimal(mach));
+								this.consume.receivable = zz;
+								this.consume.realCross = zz;
+							}
+
 						} else {
 							alert(res.retMsg)
 						}
@@ -989,24 +1003,37 @@
 						console.log('查询请求失败')
 					});
 				} else {
-					$(".you .man1 .gou1").eq(index).hide();
-						var zy = new Decimal(this.consume.receivables)
-						this.consume.receivable = zy;
+					this.titttl = 0;
+					this.titles = 0;
+					if (item.couponType == 2 ){
+							var zy = new Decimal(this.receivables)
+							this.consume.receivable = zy;
+							this.consume.realCross = zy;
+						}
+
 				}
+
 				this.dui = !this.dui
 			},
 			//选择满折优惠券
 			dianji1: function(index, item) {
+				this.listCouponZhe.forEach((item) => {
+					item.checked = false
+				})
+				this.$forceUpdate()
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
 				var re = item.recude;
+				this.zhekou = item.recude;
+				console.log(this.zhekou)
 				console.log(re)
 				if (this.dui) {
-					$(".you .man2 .gou1").eq(index).show();
-					var uu = new Decimal(this.consume.receivables).mul(new Decimal(re)) / 10
-					this.consume.receivable = uu;
+					this.listCouponZhe[index].checked = !this.listCouponZhe[index].checked
+					this.listCouponJian.forEach((item) => {
+						item.checked = false
+					})
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
 						.couponId +
 						'&userId=' + this.userId
@@ -1023,16 +1050,30 @@
 						var res = response.data
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
+							this.titles = res.retData;
+							if (item.couponType == 1) {
+								var jh = new Decimal(re).div(new Decimal(10));
+								this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(
+									2, Decimal.ROUND_HALF_UP);
+								this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(
+									2, Decimal.ROUND_HALF_UP);
+							}
+
 						} else {
 							alert(res.retMsg)
 						}
 					}).catch((error) => {
 						console.log('查询请求失败')
 					});
-				} else{
-					$(".you .man2 .gou1").eq(index).hide();
-					var us = new Decimal(this.consume.receivables).div(new Decimal(re)).mul(new Decimal(re))
-					this.consume.receivable = us;
+				} else {
+					this.titttl = 0;
+					this.titles = 0;
+					if (item.couponType == 1) {
+						var us = new Decimal(this.receivables).div(new Decimal(re)).mul(new Decimal(re))
+						this.consume.receivable = us;
+						this.consume.realCross = us;
+					}
+
 				}
 				this.dui = !this.dui
 			},

@@ -49,7 +49,7 @@
 				<li v-for="item in categoryList" key="index">{{item.typeName}}</li>
 			</ul>
 		</div>
-		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @click="go1()" v-has="'SAMY:MP:Coupon:Add'">确定</button>
+		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @click="go1()" v-has="'SAMY:MP:Coupon:Update'">确定</button>
 		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
 	</div>
 </template>
@@ -140,7 +140,7 @@
 				}
 				// console.log(this.newprojectList)
 				this.$router.push({
-					path: '../../MP/Coupon/CouponAdd',
+					path: '../../MP/Coupon/Couponupdate',
 				})
 			},
 

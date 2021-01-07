@@ -51,7 +51,7 @@
 								<b>*</b>
 								<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
 								<div class="col-md-7  jin1">
-									<input type="number" class="form-control" v-model="recude" @change="manjian()">
+									<input type="number" class="form-control" v-model="recude" @blur="manjian()">
 									<span>元</span>
 								</div>
 								<span class="err-msg2">{{ errors[0] }}</span>
@@ -62,7 +62,7 @@
 								<b>*</b>
 								<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
 								<div class="col-md-7  zhe1">
-									<input type="number" class="form-control" v-model="recude">
+									<input type="number" class="form-control" v-model="recude" @blur="manjian()">
 									<span>%</span>
 								</div>
 								<span class="err-msg2">{{ errors[0] }}</span>
@@ -100,11 +100,11 @@
 									<div class="xianzhi1 data"><input class="xian" id="cats" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label
 										 class="xian1">日期范围：</label></div>
 									<div class="xianzhi3 start-time">
-										<dPicker class="wd100"  v-model="startTime" ></dPicker>
+										<dPicker class="wd100" v-model="startTime"></dPicker>
 									</div>
 									<div class="xianhzi15 xie">~</div>
 									<div class="xianzhi3 end-time">
-										<dPicker class="wd100"  v-model="endTime"></dPicker>
+										<dPicker class="wd100" v-model="endTime"></dPicker>
 									</div>
 									<!-- <div class="xianzhi4"><input type="checkbox"><label class="xian1">自领取之日</label></div>
 						<div class="xianzhi5"><input type="text" placeholder="0"><span>天内</span></div> -->
@@ -243,30 +243,30 @@
 			};
 		},
 		methods: {
-			youxiao(){
-				if(this.isVaild == ''){
+			youxiao() {
+				if (this.isVaild == '') {
 					$(".data").hide();
 					// document.getElementById("cats").disabled = true
 					$(".xie").hide();
 					$(".wd100").hide();
-				}else{
+				} else {
 					$(".data").show();
 					// document.getElementById("cats").disabled = false
 					$(".xie").show();
 					$(".wd100").show();
 				}
-				if(this.isVaild == 1){
+				if (this.isVaild == 1) {
 					$(".data").hide();
 					// document.getElementById("cats").disabled = true
 					$(".xie").hide();
 					$(".wd100").hide();
-				}else{
+				} else {
 					$(".data").show();
 					// document.getElementById("cats").disabled = false
 					$(".xie").show();
 					$(".wd100").show();
 				}
-			
+
 			},
 			man() {
 				if (this.couponType == '1') {
@@ -301,12 +301,18 @@
 			},
 			manjian() {
 				if (this.couponType == '2' && this.isLimit == '2') {
+					if (!(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/).test(this.recude)) {
+						alert("只能输入正数或者小数");
+						this.recude = ''
+						return false
+					}
 					if (this.recude - 5 > 0) {
 						alert("输入的金额数值不能大于5！")
 						this.recude = ''
 						return false
 					}
 				}
+
 			},
 
 			//点击返回按钮跳转
@@ -385,13 +391,13 @@
 				localStorage.setItem('allCount', this.allCount)
 			},
 			//the event of addtional button
-			
-			addAddScale(url){
+
+			addAddScale(url) {
 				var formData = new FormData();
 				if (this.userType == '1') {
-				
+
 				} else if (this.userType == '2') {
-				
+
 				} else if (this.userType == '3') {
 					var userList = localStorage.getItem('userList');
 					var stringResult1 = userList.split(',');
@@ -399,9 +405,9 @@
 						formData.append('userList', stringResult1[i])
 					}
 				}
-				
+
 				if (this.categoryType == '1') {
-				
+
 				} else if (this.categoryType == '2') {
 					var categoryList = localStorage.getItem('categoryList');
 					var stringResult2 = categoryList.split(',');
@@ -418,7 +424,7 @@
 				if (this.isLimit == '1') {
 					formData.append('fullCondition', this.fullCondition)
 				} else {
-				
+
 				}
 				// if (this.allCount - this.limitGet < 0) {
 				// 	alert("每人限领不能大于发行量！")
@@ -458,6 +464,14 @@
 					var res = response.data
 					console.log(res)
 					if (res.retCode == '0000') {
+						// if(this.startTime==''){
+						// 	alert("请填写开始时间!");
+						// 	return false
+						// }
+						// if(this.endTime==''){
+						// 	alert("请填写结束时间！");
+						// 	return false
+						// }
 						alert(res.retMsg)
 						this.$router.push({
 							path: '../../MP/Coupon'
@@ -482,7 +496,7 @@
 				// console.log(this.limitGet)
 				// console.log(this.allcount)
 				// return false
-				
+
 			},
 
 		},
@@ -563,54 +577,63 @@
 	.err-msg {
 		color: #FF0000;
 	}
+
 	.err-msg8 {
 		position: absolute;
 		left: 360px;
 		top: 10px;
 		color: #FF0000;
 	}
+
 	.err-msg1 {
 		position: absolute;
 		left: 355px;
 		top: 10px;
 		color: #FF0000;
 	}
+
 	.err-msg2 {
 		position: absolute;
 		left: 370px;
 		top: 10px;
 		color: #FF0000;
 	}
+
 	.err-msg3 {
 		position: absolute;
 		left: 544px;
 		top: 10px;
 		color: #FF0000;
 	}
+
 	.err-msg4 {
 		position: absolute;
 		left: 445px;
 		top: 10px;
 		color: #FF0000;
 	}
+
 	.err-msg5 {
 		position: absolute;
 		left: 540px;
 		top: 10px;
 		color: #FF0000;
 	}
+
 	.err-msg6 {
 		position: absolute;
 		left: 308px;
 		top: 10px;
 		color: #FF0000;
 	}
+
 	.err-msg7 {
 		position: absolute;
 		left: 275px;
 		top: 10px;
 		color: #FF0000;
 	}
+
 	::-webkit-input-placeholder {
 		text-indent: 1em;
 	}

@@ -262,6 +262,7 @@
             },
             // check the adding and modifying rule of account
             celledit(row, column, cell, event) {
+			
                 $("#AuditPurContent").modal('show')
                 this.$refs.auditPur.initAuditPur(row)
             },

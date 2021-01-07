@@ -273,7 +273,7 @@
 							</div>
 							<ol>
 								<li @click="dianji1(index,item)" v-for="(item,index) in listCouponZhe" :key="index">
-									
+
 									<div class="jia">{{item.recude}}<span>折</span></div>
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
@@ -874,7 +874,7 @@
 					item.checked=false
 				})
 				console.log(item)
-				
+
 				console.log(this.titttl)
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
@@ -929,7 +929,7 @@
 				}
 				this.dui = !this.dui
 			},
-			
+
 			//选择满折优惠券
 			dianji1: function(index, item) {
 				this.listCouponZhe.forEach((item)=>{

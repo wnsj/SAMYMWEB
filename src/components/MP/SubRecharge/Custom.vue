@@ -43,8 +43,8 @@
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in unfinishedProList" :key="index" class="zes">
-                                    <td v-if="item.auditState != 5" ><input type="radio" name="radioGroup"  @click="radioClick($event,item)"></td>
-                                    <td v-else style="color: red;font-weight: bold">该产品为驳回状态!</td>
+                                    <td v-if="item.auditState != 5 && item.auditState != 10" ><input type="radio" name="radioGroup"  @click="radioClick($event,item)"></td>
+                                    <td v-else style="color: red;font-weight: bold">{{item.auditState == 10 ? "该产品下有消费或退费为驳回状态！" : "该产品为驳回状态！"}}</td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -286,7 +286,7 @@
 							</div>
 							<ol>
 								<li @click="dianji1(index,item)" v-for="(item,index) in listCouponZhe" :key="index">
-									
+
 									<div class="jia">{{item.recude}}<span>折</span></div>
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
@@ -1155,7 +1155,7 @@
 					item.checked=false
 				})
 				console.log(item)
-				
+
 				console.log(this.titttl)
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;

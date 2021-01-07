@@ -39,8 +39,8 @@
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in unfinishedProList" class="zes" :key="index">
-									<td v-if="item.auditState != 5"><input type="radio" name="radioGroup" @click="radioClick($event,item)"></td>
-									<td v-else style="color: red;font-weight: bold">该产品为驳回状态!</td>
+									<td v-if="item.auditState != 5 && item.auditState != 10"><input type="radio" name="radioGroup" @click="radioClick($event,item)"></td>
+									<td v-else style="color: red;font-weight: bold">{{item.auditState == 10 ? "该产品下有消费或退费为驳回状态！" : "该产品为驳回状态！"}}</td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -376,7 +376,7 @@
 					couponType: 0,
 					couponNum: 0,
 					couponName: '',
-					
+
 					receivable: 0, //应交
 					preFoldTotalPrice: '', //折前总价
 					realCross: '', //实缴（折后）
@@ -684,7 +684,7 @@
 					}else{
 						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(this.consume.discount)).div(new Decimal(100));
 					}
-					
+
 					this.consume.realCross = param.discouAmount //实缴
 					this.consume.proType = param.proType
 					this.cash.select = '0'

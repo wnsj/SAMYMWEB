@@ -962,11 +962,25 @@
 							e.target.checked = false
 							var ss = new Decimal(this.consume.receivable)
 							this.consume.realCross = ss;
+						
+						} else {
+									
+							if (this.jinqian != '') {
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian))
+								this.consume.realCross = ss;
+							}
 						}
 						this.clickItemObj.count = this.clickItemObj.count + 1
 					} else {
 						this.clickItemObj.itemId = item.piId
 						this.clickItemObj.count = 0
+						var ss = new Decimal(this.consume.receivable)
+						this.consume.realCross = ss;
+						
+						if (this.jinqian != '') {
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian))
+							this.consume.realCross = ss;
+						}
 					}
 				}
 			},

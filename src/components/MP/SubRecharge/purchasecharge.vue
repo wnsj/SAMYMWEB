@@ -1052,6 +1052,7 @@
 			radioClick(e, item) {
 				this.jinqian = item.balance;
 				if (this.clickItemObj.itemId == 0) {
+					
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1
 					if (this.jinqian != '') {
@@ -1059,18 +1060,33 @@
 						this.consume.realCross = ss;
 					}
 				} else {
+					
 					if (this.clickItemObj.itemId == item.piId) {
+						
 						if (this.clickItemObj.count % 2 == 0) {
 							e.target.checked = false
 							var ss = new Decimal(this.consume.receivable)
 							this.consume.realCross = ss;
+						} else {
+			
+							if (this.jinqian != '') {
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian))
+								this.consume.realCross = ss;
+							}
 						}
 						this.clickItemObj.count = this.clickItemObj.count + 1
+						
 					} else {
+					
 						this.clickItemObj.itemId = item.piId
 						this.clickItemObj.count = 0
 						var ss = new Decimal(this.consume.receivable)
 						this.consume.realCross = ss;
+						
+						if (this.jinqian != '') {
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian))
+							this.consume.realCross = ss;
+						}
 					}
 				}
 			},

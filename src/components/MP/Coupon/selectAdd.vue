@@ -247,22 +247,6 @@
 						obj[val[i].visId] = true;
 					}
 				}
-				// if (this.userList.length > 0) {
-				// 	for (var i = 0; i < this.userList.length; i++) {
-				// 		if (this.userList[i].visitorName != val.visitorName) {
-				// 			this.userList = val;
-				// 		}
-				// 	}
-				// } else {
-				// 	this.userList = val;
-
-				// }
-				// this.userList = this.arrayDistint(val);
-
-				// if (event === undefined || event.target.nodeName === 'INPUT') {
-				//         this.vTable['v_' + this.currentPage] = [...val];
-				//         this.getNum();
-				//       }
 			},
 			resetDate(row, column, cellValue, index) {
 				if (cellValue !== '' && cellValue !== null) {

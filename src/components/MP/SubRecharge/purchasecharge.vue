@@ -53,7 +53,8 @@
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in unfinishedProList" :key="index">
-									<td><input type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
+                                    <td v-if="item.auditState != 5" ><input type="radio" name="radioGroup"  @click="radioClick($event,item)"></td>
+                                    <td v-else style="color: red;font-weight: bold">该产品为驳回状态!</td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -483,9 +484,9 @@
 				}).catch((error) => {
 					console.log('查询请求失败')
 				});
-				
+
 			},
-			
+
 			num_jian() {
 				var input_num1 = document.getElementById("input-num1");
 				if (input_num1.value <= 1) {
@@ -498,7 +499,7 @@
 			initAuditPur(param) {
 				this.purAuditId = param.piId;
 				this.productId = param.proId;
-				
+
 				this.userId = param.memNum;
 				$('#AuditPurContent').modal({
 					backdrop: 'static',
@@ -612,7 +613,7 @@
 							} else {
 								$(".youa").show();
 							}
-					
+
 						} else {
 							alert(res.retMsg)
 						}
@@ -736,7 +737,7 @@
                         this.$emit('closeCurrentPage','succ')
                         this.$store.commit('addCount',1)
 						this.closeCurrentPage()
-						
+
 					} else {
 						alert(res.retMsg)
 					}

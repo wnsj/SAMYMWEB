@@ -198,12 +198,12 @@
 			},
 			handleSelectionChange(val) {
 				// this.projectList = val;
-				this.userList = [];
+				this.projectList = [];
 				var obj = {};
 				for (var i = 0; i < val.length; i++) {
-					if (!obj[val[i].visId]) {
-						this.userList.push(val[i]);
-						obj[val[i].visId] = true;
+					if (!obj[val[i].proId]) {
+						this.projectList.push(val[i]);
+						obj[val[i].proId] = true;
 					}
 				}
 			},

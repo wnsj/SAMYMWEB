@@ -149,9 +149,9 @@
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
 									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
-									<div class="youxiao" v-if="item.isLimit == 1">有效期<span>{{item.startTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
-									<div class="niucha1" v-else-if="item.isLimit == 2">永久有效</div>
-									<div class="niucha" v-if="item.isLimit == 1">
+									<div class="youxiao" v-if="item.startTime != null">有效期<span>{{item.startTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
+									<div class="niucha1" v-else-if="item.startTime == null">永久有效</div>
+									<div class="niucha" v-if="item.endTime != null">
 										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span>
 									</div>
 									<div class="gou1" v-if="item.checked"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
@@ -170,9 +170,9 @@
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
 									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
-									<div class="youxiao" v-if="item.isLimit == 1">有效期<span>{{item.createTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
-									<div class="niucha1" v-else-if="item.isLimit == 2">永久有效</div>
-									<div class="niucha" v-if="item.isLimit == 1">
+									<div class="youxiao" v-if="item.startTime != null">有效期<span>{{item.startTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+									<div class="niucha1" v-else-if="item.startTime == null">永久有效</div>
+									<div class="niucha" v-if="item.endTime != null">
 										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
 									</div>
 									<div class="gou1" style="display: block;" v-if="Number(item.checked)==1"><img src="../../../../static/img/youhui_xuanze1.png"
@@ -989,6 +989,7 @@
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
 							this.titles = res.retData;
+							this.consume.couponNum = this.titttl;
 							if (item.couponType == 2) {
 								var mach = new Decimal(this.titttl).mul(new Decimal(res1));
 								var zz = new Decimal(this.receivables).sub(new Decimal(mach));
@@ -1051,6 +1052,7 @@
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
 							this.titles = res.retData;
+							this.consume.couponNum = this.titttl;
 							if (item.couponType == 1) {
 								var jh = new Decimal(re).div(new Decimal(10));
 								this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(

@@ -227,11 +227,15 @@
 				});
 			},
 			handleSelectionChange(val) {
-				this.userList = val;
-				// if (event === undefined || event.target.nodeName === 'INPUT') {
-				//         this.vTable['v_' + this.currentPage] = [...val];
-				//         this.getNum();
-				//       }
+				// this.userList = val;
+				this.userList = [];
+				var obj = {};
+				for (var i = 0; i < val.length; i++) {
+					if (!obj[val[i].visId]) {
+						this.userList.push(val[i]);
+						obj[val[i].visId] = true;
+					}
+				}
 			},
 			resetDate(row, column, cellValue, index) {
 				if (cellValue !== '' && cellValue !== null) {

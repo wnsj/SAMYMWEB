@@ -8,36 +8,32 @@
 		<div class="modal-body  pos_r jh-mh-sc">
 			<div class="tab-pane fade in active martop" id="basic">
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline  " >姓名</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline  ">姓名</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.memName" :disabled="isShow==true">
 					</div>
 				</div>
 
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline  " >手机号</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline  ">手机号</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.phone" :disabled="isShow==true">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal"
-					 v-on:click="xiaofei()">舍弃</button>
+					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="xiaofei()">舍弃</button>
 				</div>
-<!--				<div class="col-md-6 form-group clearfix jh-wd-33">-->
-<!--					<label class="col-md-4 control-label text-right nopad end-aline  " >订单时间</label><span-->
-<!--					 class="sign-left">:</span>-->
-<!--					<div class="col-md-7  ">-->
-<!--						<input type="text" class="form-control" v-model="consume.datetime" :disabled="isShow==true">-->
-<!--					</div>-->
-<!--				</div>-->
+				<!--				<div class="col-md-6 form-group clearfix jh-wd-33">-->
+				<!--					<label class="col-md-4 control-label text-right nopad end-aline  " >订单时间</label><span-->
+				<!--					 class="sign-left">:</span>-->
+				<!--					<div class="col-md-7  ">-->
+				<!--						<input type="text" class="form-control" v-model="consume.datetime" :disabled="isShow==true">-->
+				<!--					</div>-->
+				<!--				</div>-->
 				<div v-show="unfinishedProList.length > 0">
 					<div class="col-md-12  clearfix jh-ad-0">
 						<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
-						<label class="col-md-4 control-label text-right nopad end-aline" >已购产品</label><span
-						 class="sign-left">:</span>
+							<label class="col-md-4 control-label text-right nopad end-aline">已购产品</label><span class="sign-left">:</span>
 						</div>
 					</div>
 					<div class="col-md-12 col-lg-12">
@@ -71,8 +67,7 @@
 
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33" v-show="member.balance>0">
-					<label class="col-md-4 control-label text-right nopad end-aline  " >预购余额</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline  ">预购余额</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<input type="text" class="form-control" v-model="member.balance" :disabled="isShow==true">
 					</div>
@@ -84,146 +79,140 @@
 					<h4 class="modal-title">产品：</h4>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-                    <b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >咨询师</label><span
-					 class="sign-left">:</span>
+					<b>*</b>
+					<label class="col-md-4 control-label text-right nopad end-aline">咨询师</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<emp ref="counselorEmp" disabled="true" @employeeChange="counselorEmpChange"></emp>
 					</div>
 				</div>
 
-                <div class="col-md-6 form-group clearfix jh-wd-33">
-                    <label class="col-md-4 control-label text-right nopad end-aline" >产品风格</label><span
-                    class="sign-left">:</span>
-                    <div class="col-md-7">
-                        <select class="form-control" @change="proStyleChange" v-model="consume.proStyle" disabled="true">
-                            <option value="">未选择</option>
-                            <option value="1">新产品</option>
-                            <option value="2">老产品</option>
-                        </select>
-                    </div>
-                </div>
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label class="col-md-4 control-label text-right nopad end-aline">产品风格</label><span class="sign-left">:</span>
+					<div class="col-md-7">
+						<select class="form-control" @change="proStyleChange" v-model="consume.proStyle" disabled="true">
+							<option value="">未选择</option>
+							<option value="1">新产品</option>
+							<option value="2">老产品</option>
+						</select>
+					</div>
+				</div>
 
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-                    <b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >产品</label><span
-					 class="sign-left">:</span>
+					<b>*</b>
+					<label class="col-md-4 control-label text-right nopad end-aline">产品</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<project disabled="true" ref="projectRef" @projectChange="projectChange"></project>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline" >单价</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">单价</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.price" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline" >课时(次)</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">课时(次)</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.actualCount" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline" >折扣比例</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">折扣比例</label><span class="sign-left">:</span>
 					<div class="col-md-7   pos-re">
 						<input type="text" class="form-control" v-model="consume.discount" disabled="disabled">
 						<span class="pos-ab pos-tr">%</span>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline" >折前总额</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">折前总额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.preFoldTotalPrice" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline  " >折后总额</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline  ">折后总额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
+						<input type="text" class="form-control" v-model="receivables" disabled="disabled">
 					</div>
 				</div>
 			</div>
-			<div class="tab-pane fade in active martop">
-				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
-					<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
-				</div>
-				<div class="col-md-7 you">
-					<div class="man1">
-						<div class="man">
-							<div class="manjian"></div>
-							<div class="manjian1">满减</div>
+			<div class="youa" v-if="listCouponZhe.length||listCouponJian.length" style="display: block;">
+				<div class="tab-pane fade in active martop">
+					<div class="col-md-12 form-group clearfix text-left jh-mt-5">
+						<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
+					</div>
+					<div class="col-md-7 you">
+						<div class="man1">
+							<div class="man">
+								<div class="manjian"></div>
+								<div class="manjian1">满减</div>
+							</div>
+							<ul>
+								<li @click="dianji(item,index)" v-for="(item,index) in listCouponJian" :key="index">
+									<div class="jia"><span>￥</span>{{item.recude}}</div>
+									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+									<div class="titleSY">{{item.couponName}}</div>
+									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
+									<div class="youxiao" v-if="item.startTime != null">有效期<span>{{item.startTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
+									<div class="niucha1" v-else-if="item.startTime == null">永久有效</div>
+									<div class="niucha" v-if="item.endTime != null">
+										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span>
+									</div>
+									<div class="gou1" v-if="item.checked"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
+								</li>
+							</ul>
 						</div>
-						<ul>
-							<li @click="dianji(item,index)" v-for="(item,index) in unfinishedProLists" :key="index">
-								<div class="jia"><span>￥</span>{{item.recude}}</div>
-								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
-								<div class="titleSY">{{item.couponName}}</div>
-								<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
-								<div class="youxiao" v-if="item.isLimit == 1">有效期<span>{{item.startTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
-								<div class="niucha1" v-if="item.isLimit == 2">永久有效</div>
-								<div class="niucha" v-if="item.isLimit == 1">
-									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span>
-								</div>
-								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
-							</li>
+						<div class="man2">
+							<div class="man">
+								<div class="manjian"></div>
+								<div class="manjian1">满折</div>
+							</div>
+							<ol>
+								<li @click="dianji1(index,item)" v-for="(item,index) in listCouponZhe" :key="index">
+
+									<div class="jia">{{item.recude}}<span>折</span></div>
+									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
+									<div class="titleSY">{{item.couponName}}</div>
+									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
+									<div class="youxiao" v-if="item.startTime != null">有效期<span>{{item.startTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+									<div class="niucha1" v-else-if="item.startTime == null">永久有效</div>
+									<div class="niucha" v-if="item.endTime != null">
+										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+									</div>
+									<div class="gou1" style="display: block;" v-if="Number(item.checked)==1"><img src="../../../../static/img/youhui_xuanze1.png"
+										 alt=""></div>
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade in active martop">
+					<div class="col-md-7">
+						<ul class="btn-numbox1">
+							<li class="shiyong2"><span class="number1">使用数量/张：</span></li>
+							<li>
+								<ul class="count1">
+									<li><span class="num-jian1" @click="btnMinute()">-</span></li>
+									<li><input type="text" class="input-num1" value="1" v-model="titles" /></li>
+									<li><span class="num-jia1" @click="btnAdd()">+</span></li>
+								</ul>
+							</li>　
 						</ul>
 					</div>
-					<div class="man2">
-						<div class="man">
-							<div class="manjian"></div>
-							<div class="manjian1">满折</div>
-						</div>
-						<ol>
-							<li @click="dianji1(index,item)" v-for="(item,index) in unfinishedProLists1" :key="index">
-								<div class="jia">{{item.recude}}<span>折</span></div>
-								<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
-								<div class="titleSY">{{item.couponName}}</div>
-								<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
-								<div class="youxiao" v-if="item.isLimit == 1">有效期<span>{{item.createTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
-								<div class="niucha1" v-if="item.isLimit == 2">永久有效</div>
-								<div class="niucha" v-if="item.isLimit == 1">
-									<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
-								</div>
-								<div class="gou1"><img src="../../../../static/img/youhui_xuanze1.png" alt=""></div>
-							</li>
-						</ol>
-					</div>
-				</div>
-			</div>
-			<div class="tab-pane fade in active martop">
-				<div class="col-md-7">
-					<ul class="btn-numbox1">
-						<li class="shiyong2"><span class="number1">使用数量/张：</span></li>
-						<li>
-							<ul class="count1">
-								<li><span class="num-jian1" @click="num_jian()">-</span></li>
-								<li><input type="text" class="input-num1" id="input-num1" value="1" v-model="titttl" /></li>
-								<li><span class="num-jia1" @click="num_jia()">+</span></li>
-							</ul>
-						</li>　
-					</ul>
 				</div>
 			</div>
 			<div class="tab-pane fade in active martop" v-show="isShow==true">
 				<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 					<h4 class="modal-title">合计：</h4>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline  " >实交总额</label><span
-					 class="sign-left">:</span>
+				<div class="col-md-6 form-group clearfix jh-wd-33 zongeb">
+					<label class="col-md-4 control-label text-right nopad end-aline  ">实交总额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="consume.realCross">
+						<input type="text" class="form-control" v-model="consume.realCross" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline  " >是否全额</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline  ">是否全额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<select @change="isArrearsChange" class="form-control" v-model="consume.isArrears">
 							<option value="0">否</option>
@@ -232,9 +221,8 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33" v-show="isArrearsShow">
-                    <b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline  " >欠费金额</label><span
-					 class="sign-left">:</span>
+					<b>*</b>
+					<label class="col-md-4 control-label text-right nopad end-aline  ">欠费金额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="number" class="form-control" v-model="consume.arrears" @blur="Changes()">
 					</div>
@@ -247,7 +235,7 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33" v-show="cash.balance>0">
-					<label class="col-md-4 control-label text-right nopad end-aline" >
+					<label class="col-md-4 control-label text-right nopad end-aline">
 						定金抵扣
 					</label>
 					<span class="sign-left">:</span>
@@ -256,17 +244,15 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33" v-show="cash.balance>0">
-					<label class="col-md-4 control-label text-right nopad end-aline">定金余额</label><span
-						 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">定金余额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="cash.balance" id="cash" disabled="disabled">
 					</div>
 				</div>
-				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline">应交总额</label><span
-					 class="sign-left">:</span>
+				<div class="col-md-6 form-group clearfix jh-wd-33 zongeb">
+					<label class="col-md-4 control-label text-right nopad end-aline">应交总额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="consume.receivables" disabled="disabled">
+						<input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
 					</div>
 				</div>
 			</div>
@@ -278,16 +264,14 @@
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline">顾问</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">顾问</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<emp ref="emp" @employeeChange="empChange"></emp>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline">访问类型</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">访问类型</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<select class="form-control" v-model="consume.visitType" @change="visitTypeChange">
 							<option value="1">初访</option>
@@ -297,45 +281,39 @@
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline">客户判定</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">客户判定</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<VisitState ref="VisitStateRef" @objectChange="visitStateChange"></VisitState>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >续流状态</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">续流状态</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<ContinState ref="ContinStateRef" @objectChange="continStateChange"></ContinState>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<b>*</b>
-					<label class="col-md-4 control-label text-right nopad end-aline" >交费方式</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">交费方式</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<PayStyle ref="payStyle" @payStyleChange="payChange"></PayStyle>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33" v-if="appShow==true">
-					<label class="col-md-4 control-label text-right nopad end-aline">小程序编号</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">小程序编号</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.appNumber">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline">流水单号</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">流水单号</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.serialNo">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
-					<label class="col-md-4 control-label text-right nopad end-aline">收据</label><span
-					 class="sign-left">:</span>
+					<label class="col-md-4 control-label text-right nopad end-aline">收据</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
 						<input type="text" class="form-control" v-model="consume.receipt">
 					</div>
@@ -343,12 +321,12 @@
 				<div class="col-md-6 form-group clearfix jh-wd-33"></div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-35" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-				    <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-25" data-toggle="modal" v-on:click="addFee()">确认</button>
+					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-25" data-toggle="modal" v-on:click="addFee()">确认</button>
 				</div>
 			</div>
 
-			</div>
 		</div>
+	</div>
 </template>
 
 <script>
@@ -359,7 +337,9 @@
 	import VisitState from '../../common/VisitState.vue'
 	import ContinState from '../../common/VisitState.vue'
 
-    import { Decimal } from 'decimal.js';
+	import {
+		Decimal
+	} from 'decimal.js';
 	export default {
 		components: {
 			dPicker,
@@ -371,7 +351,7 @@
 		},
 		data() {
 			return {
-				jinqian:0,
+				jinqian: 0,
 				member: {
 					memNum: '', //会员号
 					memName: '', //会员名
@@ -379,11 +359,11 @@
 					balance: '',
 					counselorEmpId: '',
 				},
-				unfinishedProLists:[],
-				titttl: 1,
-				unfinishedProLists1:[],
+				titttl: 0,
+				titles: 0,
+				receivables: 0, //应交
 				consume: {
-                    proStyle: '',
+					proStyle: '',
 					memNum: '', //会员名
 					memName: '', //手机
 					phone: '', //预约号
@@ -393,7 +373,7 @@
 					couponNum: 0,
 					couponName: '',
 					receivable: 0, //折后
-					receivables: 0, //应交
+
 					preFoldTotalPrice: '', //折前总价
 					realCross: '', //实缴（折后）
 					actualCross: '0', //实交金额
@@ -417,14 +397,14 @@
 					cashId: null, //使用定金
 					cashMoney: '', //使用定金的金额
 					payType: '', //支付方式
-					appNumber:'',//小程序编号
+					appNumber: '', //小程序编号
 					serialNo: null, //流水单号
 					receipt: null, //收据
 					isArrears: '1', //是否欠费
 					arrears: 0, //欠费金额
-                    sourceId: ''
+					sourceId: ''
 				},
-				purAuditId:'',
+				purAuditId: '',
 				cash: {
 					cashId: '',
 					memNum: '',
@@ -438,13 +418,17 @@
 				title: '',
 				isShow: true,
 				productId: '',
+				manjian: 0,
+				zhekou: 0,
 				userId: '',
 				consumeReceivable: '',
 				isSelect: false,
 				cashSelect: true,
-				appShow:false,
-                isArrearsShow: false,
+				appShow: false,
+				isArrearsShow: false,
 				unfinishedProList: [],
+				listCouponJian: [],
+				listCouponZhe: [],
 				clickItemObj: {
 					itemId: 0,
 					count: 0
@@ -453,54 +437,66 @@
 			};
 		},
 		methods: {
-			// //优惠券使用张数
-			num_jia:function(item) {
-				var input_num1 = document.getElementById("input-num1");
-				this.productId = this.consume.proId;
-				this.couponId = item.couId;
-				var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.couponId +
-					'&userId=' + this.userId
-				this.$ajax({
-					method: 'GET',
-					url: url,
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-						'Access-Token': this.accessToken
-					},
-					// param: formData,
-					dataType: 'json',
-				}).then((response) => {
-					var res = response.data
-					if (res.retCode == '0000') {
-						this.titttl = res.retData;
-						if(input_num1.value == res.retData){
-							input_num1.value = parseInt(input_num1.value) + 0;
-						}else{
-							input_num1.value = parseInt(input_num1.value) + 1;
-						}
-					} else {
-						alert(res.retMsg)
-					}
-				}).catch((error) => {
-					console.log('查询请求失败')
-				});
-
-			},
-
-			num_jian() {
-				var input_num1 = document.getElementById("input-num1");
-				if (input_num1.value <= 1) {
-					input_num1.value = 1;
+			//优惠券使用张数增加
+			btnAdd() {
+				// 如果数量大于商品库存
+				if (this.titles >= this.titttl) {
+					alert('该优惠券不能使用更多了~')
+					return false
 				} else {
-					input_num1.value = parseInt(input_num1.value) - 1;
+					this.titles++
+					this.consume.couponNum = this.titles;
+					//满减
+					if (this.consume.couponType == 2) {
+						var mach = new Decimal(this.titles).mul(new Decimal(this.manjian));
+						var zz = new Decimal(this.receivables).sub(new Decimal(mach));
+						this.consume.receivable = zz;
+						this.consume.realCross = zz;
+					}
+					//满折
+					if (this.consume.couponType == 1) {
+						var jh = new Decimal(this.zhekou).div(new Decimal(10));
+						this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
+							2, Decimal.ROUND_HALF_UP);
+						this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
+							2, Decimal.ROUND_HALF_UP);
+					}
+				}
+			},
+			//优惠券使用张数减少
+			btnMinute() {
+				if (this.titles <= 1) {
+					alert('该优惠券不能减少了哟~')
+					return false
+				} else {
+					// return false
+					this.titles--
+					this.consume.couponNum = this.titles;
+					//满减
+					if (this.consume.couponType == 2) {
+						var mach = new Decimal(this.titles).mul(new Decimal(this.manjian));
+						var zz = new Decimal(this.receivables).sub(new Decimal(mach));
+						this.consume.receivable = zz;
+						this.consume.realCross = zz;
+					}
+					//满折
+					if (this.consume.couponType == 1) {
+						var jh = new Decimal(this.zhekou).div(new Decimal(10));
+						this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
+							2, Decimal.ROUND_HALF_UP);
+						this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
+							2, Decimal.ROUND_HALF_UP);
+					}
 				}
 			},
 			// Initialization consume’s content
 			initAuditPur(param) {
+
 				this.purAuditId = param.piId;
 				this.productId = param.proId;
-
 				this.userId = param.memNum;
+				this.getCoupon(this.userId, param.proId)
+
 				$('#AuditPurContent').modal({
 					backdrop: 'static',
 					keyboard: false
@@ -516,20 +512,21 @@
 				this.$refs.emp.setPosName("咨询顾问")
 				this.$refs.counselorEmp.setEmp(param.counselor)
 				this.$refs.emp.setEmp(param.empId)
-                this.$refs.projectRef.setEmpId(param.counselor,1)
-                this.$refs.projectRef.setProject(param.proId)
+				this.$refs.projectRef.setEmpId(param.counselor, 1)
+				this.$refs.projectRef.setProject(param.proId)
 				this.isShow = true
 				this.isSelect = false
 				this.$refs.VisitStateRef.getObj(param.visitType, 1)
 				this.$refs.ContinStateRef.getObj(param.visitType, 2)
 				this.$refs.ContinStateRef.setObj(param.continState)
 				this.$refs.VisitStateRef.setObj(param.visitState)
-                if (!this.isBlank(param.discount) && param.discount != 0) {
-                    this.consume.preFoldTotalPrice = new Decimal(param.receivable).div(new Decimal(param.discount)).mul(new Decimal(100)).toFixed(2)
-                } else {
-                    this.consume.preFoldTotalPrice = 0
-                }
-                Object.assign(this.consume, param)
+				if (!this.isBlank(param.discount) && param.discount != 0) {
+					this.consume.preFoldTotalPrice = new Decimal(param.receivable).div(new Decimal(param.discount)).mul(new Decimal(
+						100)).toFixed(2)
+				} else {
+					this.consume.preFoldTotalPrice = 0
+				}
+				Object.assign(this.consume, param)
 				this.queryUnfinishedPro(param)
 				this.checkMemCash(param.memNum)
 			},
@@ -545,32 +542,30 @@
 					this.consume.actualCount = 0
 					this.consume.discount = 0
 					this.consume.receivable = 0
-					this.consume.receivables = 0
 					this.consume.realCross = 0
 				}
 			},
 
-            proStyleChange() {
-                this.$refs.projectRef.setProStyle(this.consume.proStyle,1,this.consume.counselor)
-                this.$refs.projectRef.setProject("0")
-                this.consume.price = 0
-                this.consume.actualCount = 0
-                this.consume.discount = 0
-                this.consume.receivable = 0
-				this.consume.receivables = 0
-                this.consume.realCross = 0
-            },
+			proStyleChange() {
+				this.$refs.projectRef.setProStyle(this.consume.proStyle, 1, this.consume.counselor)
+				this.$refs.projectRef.setProject("0")
+				this.consume.price = 0
+				this.consume.actualCount = 0
+				this.consume.discount = 0
+				this.consume.receivable = 0
+				this.consume.realCross = 0
+			},
 			//付款方式
 			payChange: function(param) {
 				if (this.isBlank(param)) {
 					this.consume.payType = ""
 				} else {
 					this.consume.payType = param
-					if(this.consume.payType==5){
-						this.appShow=true
-					}else{
-						this.appShow=false
-						this.consume.appNumber=''
+					if (this.consume.payType == 5) {
+						this.appShow = true
+					} else {
+						this.appShow = false
+						this.consume.appNumber = ''
 					}
 				}
 			},
@@ -581,45 +576,7 @@
 					this.consume.proId = ""
 					this.projectObj = {}
 				} else {
-					var url = this.url + '/couponController/selectCoupon'
-					var formData = new FormData();
-					formData.append('productId', this.productId);
-					formData.append('userId', this.userId);
-					this.$ajax({
-						method: 'POST',
-						url: url,
-						headers: {
-							'Content-Type': 'x-www-form-urlencoded',
-							'Access-Token': this.accessToken
-						},
-						data: formData,
-						dataType: 'json',
-					}).then((response) => {
-						var res = response.data
-						console.log(res)
-						if (res.retCode == '0000') {
-							this.unfinishedProLists = res.retData['2']
-							this.unfinishedProLists1 = res.retData['1']
-							for (var i = 0; i < this.unfinishedProLists1.length; i++) {
-								this.unfinishedProLists1[i].recude = this.unfinishedProLists1[i].recude / 10
-							}
-							if (this.unfinishedProLists == '') {
-								$(".youa").hide();
-							} else {
-								$(".youa").show();
-							}
-							if (this.unfinishedProLists1 == '') {
-								$(".youa").hide();
-							} else {
-								$(".youa").show();
-							}
-
-						} else {
-							alert(res.retMsg)
-						}
-					}).catch((error) => {
-						console.log('请求失败处理')
-					});
+					getCoupon(this.userId, param.proId)
 					this.consume.proId = param.proId
 					this.consume.price = param.price //折前单价
 					//this.consume.disPrice = param.price * param.discount / 100 //折后单价
@@ -627,30 +584,66 @@
 					this.consume.discount = param.discount //折扣
 					this.consume.preFoldTotalPrice = param.totalPrice //课程总额
 					this.consume.receivable = param.discouAmount //应交
-					this.consume.receivables = param.discouAmount //应交
-					// this.consume.realCross = param.discouAmount //实缴
+					if(this.consume.price =='' || this.consume.actualCount == '' || this.consume.discount == ''){
+						this.consume.price = 0;
+						this.consume.actualCount = 0;
+						this.consume.discount = 0;
+					}else{
+						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(this.consume.discount)).div(new Decimal(100));
+					}
+					// this.receivables = param.discouAmount //应交
+					this.consume.realCross = param.discouAmount //实缴
 					this.consume.proType = param.proType
 					this.cash.select = '0'
 					this.projectObj = param
 
 				}
 			},
-            isArrearsChange () {
-			    if (this.consume.isArrears == '1') {
-			        this.isArrearsShow = false
-                } else {
-                    this.isArrearsShow = true
-                }
-            },
+			isArrearsChange() {
+				if (this.consume.isArrears == '1') {
+					this.isArrearsShow = false
+				} else {
+					this.isArrearsShow = true
+				}
+			},
 			//实交总额
 			Changes() {
-				console.log(this.consume.receivables)
-				console.log(this.consume.arrears)
-				console.log(this.cash.select)
-				console.log(this.jinqian)
-				var ss = new Decimal(this.consume.receivables).sub(new Decimal(this.consume.arrears))
+				var ss = new Decimal(this.receivables).sub(new Decimal(this.consume.arrears))
 					.sub(new Decimal(this.jinqian))
 				this.consume.realCross = ss;
+			},
+			getCoupon(userId, proId) {
+				var url = this.url + '/couponController/selectCoupon'
+				var formData = new FormData();
+				formData.append('productId', proId);
+				formData.append('userId', userId);
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': 'x-www-form-urlencoded',
+						'Access-Token': this.accessToken
+					},
+					data: formData,
+					dataType: 'json',
+				}).then((res) => {
+					if (0 == res.data.retCode) {
+						let data = res.data.retData
+						let listZhe = data['1']
+						let listjian = data['2']
+						listZhe.forEach((item) => {
+							item.checked = false
+							item.recude = item.recude / 10
+						})
+						listjian.forEach((item) => {
+							item.checked = false
+						})
+						this.listCouponZhe = listZhe
+						this.listCouponJian = listjian
+					}
+				}).catch((error) => {
+					console.log('请求失败处理')
+				});
 			},
 			//feedback employee information
 			empChange: function(param) {
@@ -707,17 +700,17 @@
 					return;
 				}
 
-                if (this.consume.isArrears != '1' && (this.isBlank(this.consume.arrears) || parseInt(this.consume.arrears) == 0)) {
-                    alert("欠费金额不能为空!")
-                    return;
-                }
+				if (this.consume.isArrears != '1' && (this.isBlank(this.consume.arrears) || parseInt(this.consume.arrears) == 0)) {
+					alert("欠费金额不能为空!")
+					return;
+				}
 
 				//发生转卡，进余额抵扣
 				if (this.clickItemObj.count % 2 != 0) {
 					this.consume.piId = this.clickItemObj.itemId
 				} else {
-                    this.consume.piId = ''
-                }
+					this.consume.piId = ''
+				}
 
 				var url = this.url + '/purchasedItemsAuditBean/supplementData'
 				this.$ajax({
@@ -734,8 +727,8 @@
 					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
-                        this.$emit('closeCurrentPage','succ')
-                        this.$store.commit('addCount',1)
+						this.$emit('closeCurrentPage', 'succ')
+						this.$store.commit('addCount', 1)
 						this.closeCurrentPage()
 
 					} else {
@@ -745,7 +738,7 @@
 					console.log('请求失败处理')
 				});
 			},
-            closeCurrentPage() {
+			closeCurrentPage() {
 				this.$emit('closeCurrentPage')
 			},
 			setCustom(param) {
@@ -802,8 +795,8 @@
 				});
 			},
 			xiaofei() {
-			    var url = this.url + '/purchasedItemsAuditBean/rejectPurAbandon'
-			    // var url = 'http://172.16.16.255:8080/consumAuditBean/consumRecord'
+				var url = this.url + '/purchasedItemsAuditBean/rejectPurAbandon'
+				// var url = 'http://172.16.16.255:8080/consumAuditBean/consumRecord'
 				var formData = new FormData();
 				formData.append('purAuditId', this.purAuditId)
 				this.$ajax({
@@ -813,7 +806,7 @@
 						'Content-Type': this.contentType,
 						'Access-Token': this.accessToken
 					},
-					data:formData,
+					data: formData,
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
@@ -823,12 +816,12 @@
 							confirmButtonText: '确定',
 							type: 'success',
 							callback: action => {
-								this.$emit('closeCurrentPage','succ')
-								this.$store.commit('addCount',1)
+								this.$emit('closeCurrentPage', 'succ')
+								this.$store.commit('addCount', 1)
 								this.closeCurrentPage()
 							}
 						})
-			   //          alert(res.retMsg)
+						//          alert(res.retMsg)
 						// this.$emit('closeCurrentPage','succ')
 						// this.$store.commit('addCount',1)
 						// this.closeCurrentPage()
@@ -840,19 +833,24 @@
 				});
 			},
 			//选择满减优惠券
-			dianji:function(item,index) {
-				this.consume.couponNum = this.titttl;
+			dianji: function(item, index) {
+				this.listCouponJian.forEach((item) => {
+					item.checked = false
+				})
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
 				console.log(this.consume.proId)
 				var rt = item.recude;
+				this.manjian = item.recude;
 				if (this.dui) {
-					var zz = new Decimal(this.consume.receivable).sub(new Decimal(rt))
-					this.consume.receivables = zz;
-					$(".you .man1 .gou1").eq(index).show();
-					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume.couponId + '&userId=' + this.userId
+					this.listCouponJian[index].checked = !this.listCouponJian[index].checked
+					this.listCouponZhe.forEach((item) => {
+						item.checked = false
+					})
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
+						.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
 						url: url,
@@ -866,6 +864,15 @@
 						var res = response.data
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
+							this.titles = res.retData;
+							this.consume.couponNum = this.titttl;
+							if (item.couponType == 2) {
+								var mach = new Decimal(this.titttl).mul(new Decimal(rt));
+								var zz = new Decimal(this.receivables).sub(new Decimal(mach));
+								this.consume.receivable = zz;
+								this.consume.realCross = zz;
+							}
+
 						} else {
 							alert(res.retMsg)
 						}
@@ -873,27 +880,35 @@
 						console.log('查询请求失败')
 					});
 				} else {
-					$(".you .man1 .gou1").eq(index).hide();
-					var zy = new Decimal(this.consume.receivable)
-					this.consume.receivables = zy;
+					this.titles = 0;
+					this.titttl = 0;
+					if (item.couponType == 2) {
+						var zy = new Decimal(this.receivables)
+						this.consume.receivable = zy;
+						this.consume.realCross = zy;
+					}
 				}
 				this.dui = !this.dui
 			},
 			//选择满折优惠券
-			dianji1:function(index,item) {
-				this.consume.couponNum = this.titttl;
+			dianji1: function(index, item) {
+				console.log(item.couponType)
+				this.listCouponZhe.forEach((item) => {
+					item.checked = false
+				})
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
 				var rw = item.recude;
+				this.zhekou = item.recude;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
-				console.log(this.consume.proId)
-				console.log(rw)
 				if (this.dui) {
-					$(".you .man2 .gou1").eq(index).show();
-					var uu = new Decimal(this.consume.receivable).mul(new Decimal(rw)) /10
-					this.consume.receivables = uu;
-					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume.couponId + '&userId=' + this.userId
+					this.listCouponZhe[index].checked = !this.listCouponZhe[index].checked
+					this.listCouponJian.forEach((item) => {
+						item.checked = false
+					})
+					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
+						.couponId + '&userId=' + this.userId
 					this.$ajax({
 						method: 'GET',
 						url: url,
@@ -907,6 +922,15 @@
 						var res = response.data
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
+							this.titles = res.retData;
+							this.consume.couponNum = this.titttl;
+							if (item.couponType == 1) {
+								var jh = new Decimal(rw).div(new Decimal(10));
+								this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh,this.titttl))).toFixed(
+									2, Decimal.ROUND_HALF_UP);
+								this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh,this.titttl))).toFixed(
+									2, Decimal.ROUND_HALF_UP);
+							}
 						} else {
 							alert(res.retMsg)
 						}
@@ -914,9 +938,13 @@
 						console.log('查询请求失败')
 					});
 				} else {
-					$(".you .man2 .gou1").hide();
-					var us = new Decimal(this.consume.receivable).div(new Decimal(rw)).mul(new Decimal(rw))
-					this.consume.receivables = us;
+					this.titles = 0;
+					this.titttl = 0;
+					if (item.couponType == 1) {
+						var us = new Decimal(this.receivables).div(new Decimal(rw)).mul(new Decimal(rw))
+						this.consume.receivable = us;
+						this.consume.realCross = us;
+					}
 				}
 				this.dui = !this.dui
 			},
@@ -987,7 +1015,7 @@
 					},
 					data: {
 						memNum: param.memNum,
-                        sourceId: param.sourceId,
+						sourceId: param.sourceId,
 						isArrears: '1',
 					},
 					dataType: 'json',
@@ -1002,35 +1030,7 @@
 					console.log('会员查询请求失败')
 				});
 			},
-			add() {
-				var url = this.url + '/couponController/selectCoupon'
-				var formData = new FormData();
-				formData.append('productId', this.productId);
-				formData.append('userId', this.userId);
-				this.$ajax({
-					method: 'POST',
-					url: url,
-					headers: {
-						'Content-Type': this.contentType,
-						'Access-Token': this.accessToken
-					},
-					data: formData,
-					dataType: 'json',
-				}).then((response) => {
-					var res = response.data
-					if (res.retCode == '0000') {
-						this.unfinishedProLists = res.retData['2']
-						this.unfinishedProLists1 = res.retData['1']
-						for (var i = 0; i < this.unfinishedProLists1.length; i++) {
-							this.unfinishedProLists1[i].recude = this.unfinishedProLists1[i].recude / 10
-						}
-					} else {
-						alert(res.retMsg)
-					}
-				}).catch((error) => {
-					console.log('会员查询请求失败')
-				});
-			},
+
 			//单选框选中处理
 			radioClick(e, item) {
 				this.jinqian = item.balance;
@@ -1061,11 +1061,10 @@
 		},
 		mounted() {
 			var H = window.innerHeight;
-			$(".modal-body").css({'maxHeight':H*.81})
+			$(".modal-body").css({
+				'maxHeight': H * .81
+			})
 		},
-		created(){
-			this.add();
-		}
 	}
 </script>
 

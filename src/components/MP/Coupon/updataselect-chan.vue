@@ -197,7 +197,15 @@
 				this.$refs.projectList.clearSelection();
 			},
 			handleSelectionChange(val) {
-				this.projectList = val;
+				// this.projectList = val;
+				this.projectList = [];
+				var obj = {};
+				for (var i = 0; i < val.length; i++) {
+					if (!obj[val[i].proId]) {
+						this.projectList.push(val[i]);
+						obj[val[i].proId] = true;
+					}
+				}
 			},
 			checkAll() {
 				this.$refs.multipleTable.toggleAllSelection();

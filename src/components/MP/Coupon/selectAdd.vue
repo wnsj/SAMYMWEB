@@ -89,7 +89,7 @@
 		</div>
 		<div class="" id="datatable">
 			<el-table :data="tableData" style="width: 100%" :row-key="getRowKeys" border ref="multipleTable" @selection-change="handleSelectionChange">
-				<el-table-column type="selection" width="55" :reserve-selection="true" align="center" label="全选" :selectable='checkboxSelect'></el-table-column>
+				<el-table-column type="selection" width="55" :reserve-selection="true" align="center" label="全选"></el-table-column>
 				<el-table-column type="index" prop="visId" label="序号" width="60" align="center"></el-table-column>
 				<el-table-column prop="visitorName" label="姓名" width="100" align="center"></el-table-column>
 				<el-table-column prop="sex" label="性别" :formatter="sex" width="100" align="center"></el-table-column>
@@ -191,15 +191,7 @@
 		},
 
 		methods: {
-			checkboxSelect(row, rowIndex) {
-				console.log(4)
-				if (rowIndex == 0) {
-					return true // 禁用
-				} else {
-					return true // 不禁用
-				}
-				this.userList = this.arrayDistint(this.userList);
-			},
+
 			//咨客判定
 			judgeStateChange: function(param) {
 				// console.log(JSON.stringify(param))
@@ -219,11 +211,11 @@
 			},
 			getRowKeys(row) {
 				return row.visId;
-
-				this.$refs.userList.clearSelection();
+				this.userList.clearSelection();
+				this.userList = this.arrayDistint(this.userList);
 			},
-			arrayDistint(arr){
-					var i,j,
+			arrayDistint(arr) {
+				var i, j,
 					len = arr.length;
 				for (i = 0; i < len; i++) {
 					for (j = i + 1; j < len; j++) {
@@ -236,9 +228,6 @@
 				}
 				return arr;
 			},
-			// Array.prototype.distinct = function() {
-				
-			// };
 			checkAll() {
 				this.$refs.multipleTable.toggleAllSelection();
 			},
@@ -249,6 +238,15 @@
 			},
 			handleSelectionChange(val) {
 				console.log(1)
+				// this.userList = val;
+				this.userList = [];
+				var obj = {};
+				for (var i = 0; i < val.length; i++) {
+					if (!obj[val[i].visId]) {
+						this.userList.push(val[i]);
+						obj[val[i].visId] = true;
+					}
+				}
 				// if (this.userList.length > 0) {
 				// 	for (var i = 0; i < this.userList.length; i++) {
 				// 		if (this.userList[i].visitorName != val.visitorName) {
@@ -257,9 +255,9 @@
 				// 	}
 				// } else {
 				// 	this.userList = val;
-					
+
 				// }
-				this.userList = this.arrayDistint(val);
+				// this.userList = this.arrayDistint(val);
 
 				// if (event === undefined || event.target.nodeName === 'INPUT') {
 				//         this.vTable['v_' + this.currentPage] = [...val];
@@ -429,13 +427,11 @@
 
 			// 翻页
 			handleCurrentChange(pageNum) {
-				console.log(2)
 				this.page = pageNum
 				this.getAllAuditPage()
 			},
 			// 每页条数变化时触发
 			handleSizeChange(pageSize) {
-				console.log(3)
 				this.page = 1
 				this.pageSize = pageSize
 				this.getAllAuditPage(1)

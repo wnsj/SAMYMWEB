@@ -426,12 +426,6 @@
 				} else {
 
 				}
-				// if (this.allCount - this.limitGet < 0) {
-				// 	alert("每人限领不能大于发行量！")
-				// 	this.limitGet = ''
-				// 	this.allCount = ''
-				// 	return false
-				// }
 				if (!this.isBlank(this.startTime)) {
 					this.startTime = this.moment(this.startTime, "YYYY-MM-DD 00:00:00")
 				}
@@ -462,16 +456,7 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
 					if (res.retCode == '0000') {
-						// if(this.startTime==''){
-						// 	alert("请填写开始时间!");
-						// 	return false
-						// }
-						// if(this.endTime==''){
-						// 	alert("请填写结束时间！");
-						// 	return false
-						// }
 						alert(res.retMsg)
 						this.$router.push({
 							path: '../../MP/Coupon'
@@ -486,19 +471,22 @@
 			addFee() {
 				this.$refs.addArcForm.validate().then(success => {
 					if (success) {
+						if(this.userType ==2){
+							if(this.startTime==''){
+								alert("请填写开始时间!");
+								return false
+							}else if(this.endTime==''){
+								alert("请填写结束时间！");
+								return false
+							}
+						}
 						var url = this.url + '/couponController/addCoupon'
 						this.addAddScale(url)
-
 					} else {
 						this.$message.error('请填写完整！');
 					}
 				})
-				// console.log(this.limitGet)
-				// console.log(this.allcount)
-				// return false
-
-			},
-
+			}
 		},
 		mounted() {
 			if (localStorage.getItem('couponName')) {

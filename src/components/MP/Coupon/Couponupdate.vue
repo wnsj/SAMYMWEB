@@ -409,9 +409,17 @@
 			updataFee() {
 				this.$refs.addArcForm.validate().then(success => {
 					if (success) {
+						if(this.userType ==2){
+							if(this.startTime==''){
+								alert("请填写开始时间!");
+								return false
+							}else if(this.endTime==''){
+								alert("请填写结束时间！");
+								return false
+							}
+						}
 						var url = this.url + '/couponController/updateCoupon'
 						this.updataFees(url)
-
 					} else {
 						this.$message.error('请填写完整！');
 					}
@@ -501,43 +509,6 @@
 							path: '../../MP/Coupon'
 						})
 					} else {
-						if (this.couponName == '' && this.couponType == '' && this.isLimit == '' && this.isVaild == '' && this.userType ==
-							'' && this.categoryType == '' && this.limitGet == '' && this.allCount == '') {
-							alert('请填写完整！');
-							return false
-						}
-						if (this.couponName == '') {
-							alert('请填写优惠券名称！')
-							return false
-						}
-						if (this.isVaild == '') {
-							alert('请选择有效期！')
-							return false
-						}
-						if (this.startTime == '') {
-							alert('请填写开始时间！')
-							return false
-						}
-						if (this.endTime == '') {
-							alert('请填写结束时间！')
-							return false
-						}
-						if (this.userType == '') {
-							alert('请选择使用用户！')
-							return false
-						}
-						if (this.categoryType == '') {
-							alert('请选择产品！')
-							return false
-						}
-						if (this.limitGet == '') {
-							alert('请填写每人限领！')
-							return false
-						}
-						if (this.allCount == '') {
-							alert('请填写总发行量！')
-							return false
-						}
 						alert(res.retMsg)
 					}
 				}).catch((error) => {

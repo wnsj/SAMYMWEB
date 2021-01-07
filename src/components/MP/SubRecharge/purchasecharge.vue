@@ -836,7 +836,6 @@
 				this.listCouponJian.forEach((item) => {
 					item.checked = false
 				})
-				this.consume.couponNum = this.titttl;
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
@@ -894,7 +893,6 @@
 				this.listCouponZhe.forEach((item) => {
 					item.checked = false
 				})
-				this.consume.couponNum = this.titttl;
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
 				var rw = item.recude;

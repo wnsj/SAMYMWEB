@@ -989,6 +989,7 @@
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
 							this.titles = res.retData;
+							this.consume.couponNum = this.titttl;
 							if (item.couponType == 2) {
 								var mach = new Decimal(this.titttl).mul(new Decimal(res1));
 								var zz = new Decimal(this.receivables).sub(new Decimal(mach));
@@ -1051,6 +1052,7 @@
 						if (res.retCode == '0000') {
 							this.titttl = res.retData;
 							this.titles = res.retData;
+							this.consume.couponNum = this.titttl;
 							if (item.couponType == 1) {
 								var jh = new Decimal(re).div(new Decimal(10));
 								this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(

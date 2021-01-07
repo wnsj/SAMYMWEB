@@ -25,7 +25,7 @@
 								<b>*</b>
 								<label class="col-md-2 control-label text-right nopad end-aline">优惠券类型</label><span class="sign-left">:</span>
 								<div class="col-md-7  ">
-									<select class="form-control" v-model="couponType" disabled="disabled">
+									<select class="form-control" v-model="couponType" disabled="disabled" @click="man">
 										<option value="">全部</option>
 										<option value="2">满减券</option>
 										<option value="1">满折券</option>
@@ -333,6 +333,19 @@
 			
 				}
 			},
+			man() {
+				if (this.couponType == '1') {
+					$(".jin").hide();
+					$(".zhe").show();
+					$(".wuxian").hide();
+					$(".xianzhi2 span").css('right', '35px');
+				} else if (this.couponType == '2') {
+					$(".jin").show();
+					$(".zhe").hide();
+					$(".wuxian").show();
+					$(".xianzhi2 span").css('right', '-20px');
+				}
+			},
 			//发行量
 			faxing() {
 				if (!(/^\+?(0|[1-9][0-9]*)$/).test(this.allCount)) {
@@ -519,6 +532,17 @@
 				this.couponId = ''
 				this.couponId = this.$route.query.couId
 				if (this.couponId != undefined && this.couponId != '') {
+					if (this.couponType == '1') {
+						$(".jin").hide();
+						$(".zhe").show();
+						$(".wuxian").hide();
+						$(".xianzhi2 span").css('right', '35px');
+					} else if (this.couponType == '2') {
+						$(".jin").show();
+						$(".zhe").hide();
+						$(".wuxian").show();
+						$(".xianzhi2 span").css('right', '-20px');
+					}
 					this.addFee(this.couponId)
 				}
 			},
@@ -535,7 +559,7 @@
 			}
 			if (localStorage.getItem('couponType')) {
 				this.couponType = localStorage.getItem('couponType');
-				localStorage.removeItem('couponType');
+				// localStorage.removeItem('couponType');
 			}
 			if (localStorage.getItem('startTime')) {
 				this.startTime = localStorage.getItem('startTime');
@@ -593,7 +617,21 @@
 				this.userList = localStorage.getItem('userList');
 				// localStorage.removeItem('userList');
 			}
-		}
+		},
+		created(){
+			if (this.couponType == '1') {
+					$(".jin").hide();
+					$(".zhe").show();
+					$(".wuxian").hide();
+					$(".xianzhi2 span").css('right', '35px');
+				} else if (this.couponType == '2') {
+					$(".jin").show();
+					$(".zhe").hide();
+					$(".wuxian").show();
+					$(".xianzhi2 span").css('right', '-20px');
+				}
+			}
+		
 	}
 </script>
 

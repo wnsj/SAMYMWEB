@@ -697,6 +697,8 @@
 			isArrearsChange() {
 				if (this.consume.isArrears == '1') {
 					this.isArrearsShow = false
+					var ss = new Decimal(this.consume.receivable)
+					this.consume.realCross = ss;
 				} else {
 					this.isArrearsShow = true
 				}

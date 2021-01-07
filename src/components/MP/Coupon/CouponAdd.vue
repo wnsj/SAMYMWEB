@@ -51,7 +51,7 @@
 								<b>*</b>
 								<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
 								<div class="col-md-7  jin1">
-									<input type="number" class="form-control" v-model="recude" @blur="manjian()">
+									<input type="number" class="form-control" v-model="recude" @blur="manjian2()">
 									<span>元</span>
 								</div>
 								<span class="err-msg2">{{ errors[0] }}</span>
@@ -62,7 +62,7 @@
 								<b>*</b>
 								<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
 								<div class="col-md-7  zhe1">
-									<input type="number" class="form-control" v-model="recude" @blur="manjian()">
+									<input type="number" class="form-control" v-model="recude" @blur="manjian1()">
 									<span>%</span>
 								</div>
 								<span class="err-msg2">{{ errors[0] }}</span>
@@ -77,7 +77,7 @@
 										 v-model="isLimit" value="2" /><label class="xian1">无限制</label></div>
 									<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="1" /><label
 										 class="xian1">满</label></div>
-									<div class="xianzhi2"><input type="text" placeholder="0" v-model="fullCondition"><span>元可用</span></div>
+									<div class="xianzhi2"><input type="text" placeholder="0" v-model="fullCondition" @blur="manjian1()"><span>元可用</span></div>
 								</div>
 								<span class="err-msg8">{{ errors[0] }}</span>
 							</ValidationProvider>
@@ -304,11 +304,31 @@
 					if (!(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/).test(this.recude)) {
 						alert("只能输入正数或者小数");
 						this.recude = ''
-						return false
+						return false0
 					}
 					if (this.recude - 5 > 0) {
 						alert("输入的金额数值不能大于5！")
-						this.recude = ''
+						return false
+					}
+				}
+
+			},
+			manjian2() {
+				if (!(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/).test(this.recude)) {
+					alert("只能输入正数或者小数");
+					return false
+				}
+				if (this.recude - 5 > 0) {
+					alert("输入的金额数值不能大于5！")
+					return false
+				}
+
+
+			},
+			manjian1() {
+				if (this.isLimit == '1') {
+					if (!(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/).test(this.recude)) {
+						alert("只能输入正数或者小数");
 						return false
 					}
 				}
@@ -401,9 +421,11 @@
 				} else if (this.userType == '3') {
 					var userList = localStorage.getItem('userList');
 					var stringResult1 = userList.split(',');
+					
 					for (var i = 0; i < stringResult1.length; i++) {
 						formData.append('userList', stringResult1[i])
 					}
+					
 				}
 
 				if (this.categoryType == '1') {
@@ -411,15 +433,25 @@
 				} else if (this.categoryType == '2') {
 					var categoryList = localStorage.getItem('categoryList');
 					var stringResult2 = categoryList.split(',');
+					if (stringResult2 == '') {
+						alert("请选择分类!");
+						return false
+					}
 					for (var i = 0; i < stringResult2.length; i++) {
 						formData.append('categoryList', stringResult2[i])
 					}
+					
 				} else if (this.categoryType == '3') {
 					var projectList = localStorage.getItem('projectList');
 					var stringResult = projectList.split(',');
+					if (stringResult == '') {
+						alert("请选择产品!");
+						return false
+					}
 					for (var i = 0; i < stringResult.length; i++) {
 						formData.append('projectList', stringResult[i])
 					}
+					
 				}
 				if (this.isLimit == '1') {
 					formData.append('fullCondition', this.fullCondition)
@@ -471,12 +503,30 @@
 			addFee() {
 				this.$refs.addArcForm.validate().then(success => {
 					if (success) {
-						if(this.userType ==2){
-							if(this.startTime==''){
+						if (this.isVaild == 2) {
+							if (this.startTime == '') {
 								alert("请填写开始时间!");
 								return false
-							}else if(this.endTime==''){
+							} else if (this.endTime == '') {
 								alert("请填写结束时间！");
+								return false
+							}
+						}
+						if(this.userType ==3){
+							if (this.userList  == '') {
+								alert("请勾选用户!");
+								return false
+							}
+						}
+						if(this.categoryType ==2){
+							if (this.categoryList  == '') {
+								alert("请勾选分类!");
+								return false
+							}
+						}
+						if(this.categoryType ==3){
+							if (this.projectList  == '') {
+								alert("请勾选产品!");
 								return false
 							}
 						}

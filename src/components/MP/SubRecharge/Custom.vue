@@ -122,7 +122,7 @@
 				<div class="col-md-4 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">折后总额</label><span class="sign-left">:</span>
 					<div class="col-md-7">
-						<input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
+						<input type="text" class="form-control" v-model="receivables" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
@@ -388,6 +388,7 @@
 				listCouponJian: [],
 				listCouponZhe:[],
 				dui: true,
+				receivables:0,
 				consume: {
 					proStyle: '',
 					memNum: '', //会员名
@@ -474,15 +475,13 @@
 					//满减
 					if (this.consume.couponType == 2) {
 						var mach= new Decimal(this.titles).mul(new Decimal(this.manjian));
-						var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
-						this.consume.receivable = zz;
+						var zz =  new Decimal(this.receivables).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
 						this.consume.realCross = zz;
 					}
 					//满折
 					if (this.consume.couponType == 1) {
 						var jh = new Decimal(this.zhekou).div(new Decimal(10));
-						this.consume.receivables = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titles))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
-						this.consume.realCross = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titles))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
+						this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh,this.titles))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
 					}
 				}
 			},
@@ -498,15 +497,13 @@
 					//满减
 					if (this.consume.couponType == 2) {
 						var mach= new Decimal(this.titles).mul(new Decimal(this.manjian));
-						var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
-						this.consume.receivable = zz;
+						var zz =  new Decimal(this.receivables).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
 						this.consume.realCross = zz;
 					}
 					//满折
 					if (this.consume.couponType == 1) {
 						var jh = new Decimal(this.zhekou).div(new Decimal(10));
-						this.consume.receivables = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titles))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
-						this.consume.realCross = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titles))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
+						this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh,this.titles))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
 					}
 				}
 			},
@@ -681,6 +678,14 @@
 					this.consume.discount = param.discount
 					this.consume.preFoldTotalPrice = param.totalPrice
 					this.consume.receivable = param.discouAmount
+					if (this.consume.price == '' || this.consume.actualCount == '' || this.consume.discount == '') {
+						this.consume.price = 0;
+						this.consume.actualCount = 0;
+						this.consume.discount = 0;
+					} else {
+						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(
+							this.consume.discount)).div(new Decimal(100));
+					}
 					this.consume.proType = param.proType
 				}
 			},
@@ -1191,8 +1196,7 @@
 							console.log(this.titles)
 							if (item.couponType == 2) {
 								var mach= new Decimal(this.titttl).mul(new Decimal(res1));
-								var zz =  new Decimal(this.consume.receivable).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
-								this.consume.receivables = zz;
+								var zz =  new Decimal(this.receivables).sub(new Decimal(mach)).sub(new Decimal(this.cash.balance));
 								this.consume.realCross = zz;
 							}
 						} else {
@@ -1205,8 +1209,7 @@
 					this.titttl = 0;
 					this.titles = 0;
 					if (item.couponType == 2 ){
-							var zy = new Decimal(this.consume.receivable)
-							this.consume.receivables = zy;
+							var zy = new Decimal(this.receivables)
 							this.consume.realCross = zy;
 						}
 				}
@@ -1251,8 +1254,7 @@
 							this.consume.couponNum = this.titttl;
 							if (item.couponType == 1) {
 								var jh = new Decimal(re).div(new Decimal(10));
-								this.consume.receivables = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titttl))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
-								this.consume.realCross = new Decimal(this.consume.receivable).mul(new Decimal(Math.pow(jh,this.titttl))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
+								this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh,this.titttl))).sub(new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
 							}
 						} else {
 							alert(res.retMsg)
@@ -1264,8 +1266,7 @@
 					this.titttl = 0;
 					this.titles =0;
 					if (item.couponType == 1) {
-						var us = new Decimal(this.consume.receivable).div(new Decimal(re)).mul(new Decimal(re))
-						this.consume.receivables = us;
+						var us = new Decimal(this.receivables).div(new Decimal(re)).mul(new Decimal(re))
 						this.consume.realCross = us;
 					}
 				}

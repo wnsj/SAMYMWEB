@@ -139,9 +139,10 @@
 					}
 				}
 				// console.log(this.newprojectList)
-				this.$router.push({
-					path: '../../MP/Coupon/Couponupdate',
-				})
+				// this.$router.push({
+				// 	path: '../../MP/Coupon/Couponupdate',
+				// })
+				this.$router.go(-1);
 			},
 
 			dataOpen() {

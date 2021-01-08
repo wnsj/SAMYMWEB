@@ -225,7 +225,7 @@
                             <button type="button" class="btn btn-warning pull-right margin-right-15"
                                     data-toggle="modal" v-on:click="closeCurrentPage()">返回
                             </button>
-                            <button type="button" class="btn btn-primary pull-right margin-right-15"
+                            <button type="button" :disabled="isDisable" class="btn btn-primary pull-right margin-right-15"
                                     data-toggle="modal" v-on:click="addOrder(title)">确认
                             </button>
                     </div>
@@ -384,7 +384,8 @@
                     '22:30-23:00',
                     '23:00-23:30',
                     '23:30-00:00'
-                ]
+                ],
+                isDisable: false
             };
         },
 
@@ -676,7 +677,10 @@
                     // item.clerkEmpId
                     // item.counlorEmpId
                 }
-
+                this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+                }, 2000)
 
                 var url = this.url + '/appointmentAction/addAppointment';
                 this.$ajax({

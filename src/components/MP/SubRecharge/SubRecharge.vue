@@ -326,7 +326,7 @@
 			</div>
 			<div class="col-md-12 form-group clearfix">
 				<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-35" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-				<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-25" data-toggle="modal" v-on:click="addFee(item)">确认</button>
+				<button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10 jh-mr-25" data-toggle="modal" v-on:click="addFee(item)">确认</button>
 			</div>
 		</div>
 
@@ -448,7 +448,8 @@
 					count: 0
 				},
 				projectObj: {},
-				isLine: true
+				isLine: true,
+				isDisable: false
 			};
 		},
 		methods: {
@@ -783,7 +784,12 @@
 				if (this.clickItemObj.count % 2 != 0) {
 					this.consume.piId = this.clickItemObj.itemId
 				}
-
+				
+				this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+				}, 2000)
+				
 				var url = this.url + '/purchasedItemsAction/purchasedItemsProject'
 				this.$ajax({
 					method: 'POST',

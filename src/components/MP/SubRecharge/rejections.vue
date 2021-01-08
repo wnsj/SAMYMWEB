@@ -18,7 +18,7 @@
                     <button type="button" class="btn btn-warning pull-right margin-right-15" data-toggle="modal"
                      v-on:click="closeCurrentPage()">取消
                     </button>
-                    <button type="button" class="btn btn-primary pull-right margin-right-15" data-toggle="modal"
+                    <button type="button" :disabled="isDisable" class="btn btn-primary pull-right margin-right-15" data-toggle="modal"
                      v-on:click="addFee()">确认
                     </button>
                 </div>
@@ -38,7 +38,8 @@
                     operatorId: this.accountId()
                 },
                 oFlag: '',
-                oTitle: ''
+                oTitle: '',
+                isDisable: false
 			};
 		},
 		methods: {
@@ -93,7 +94,12 @@
                       callback: action => {}
                     });
 					return
-				}
+                }
+                
+                this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+                }, 2000)
 
                 var postUrl = '';
                 if (this.oFlag == 'product') {

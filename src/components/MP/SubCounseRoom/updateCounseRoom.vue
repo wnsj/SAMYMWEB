@@ -14,7 +14,7 @@
                         <div class="col-md-6">
                             <input type="text" class="form-control" v-model="counseRoom.crName">
                         </div>
-                        <button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal" v-on:click="addOrder(title)">确认</button>
+                        <button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal" v-on:click="addOrder(title)">确认</button>
                     </div>
                 </form>
                 <hr>
@@ -38,7 +38,7 @@
                                     <emp ref="counlorEmp" @employeeChange="counlorEmpChange" :pn="pn"></emp>
                                 </td>
                                 <td class="text-center">
-                                    <button type="button" class="btn btn-warning" v-show="isBlank(item.empName)"
+                                    <button type="button" :disabled="isDisable" class="btn btn-warning" v-show="isBlank(item.empName)"
                                             @click="addConsultantRoom">确定
                                     </button>
                                     <button type="button" class="btn btn-warning" @click="deleteConsultantRoom(item)">删除
@@ -70,7 +70,8 @@
                 crName: '',
                 counseRoom: {},
                 itemObj: {},
-                pn: '咨询师'
+                pn: '咨询师',
+                isDisable: false
             };
         },
         methods: {
@@ -86,6 +87,11 @@
                     alert("咨询室名不能为空!")
                     return
                 }
+                
+                this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+                }, 2000)
 
                 var url = this.url + '/counseRoomAction/updateCounseRoom';
                 this.$ajax({
@@ -166,6 +172,12 @@
                     alert("请选择咨询师!")
                     return
                 }
+
+                this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+                }, 2000)
+
                 this.itemObj.crId = this.crId
                 var url = this.url + '/consultantRoomAction/addConsultantRoom';
                 this.$ajax({

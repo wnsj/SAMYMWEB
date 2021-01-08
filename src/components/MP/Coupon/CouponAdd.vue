@@ -212,7 +212,7 @@
 				couponType: '2', //优惠券类型
 				fullCondition: '', //金额
 				recude: '', //折扣
-				isLimit: '2', //使用门槛
+				isLimit: '1', //使用门槛
 				isVaild: '', //有效期
 				userType: '', //使用用户
 				categoryType: '', //选择产品
@@ -284,7 +284,7 @@
 			//限制领取
 			xianhzi() {
 				if (!(/^\+?(0|[1-9][0-9]*)$/).test(this.limitGet)) {
-					alert("输入的不是正整数/0！")
+					alert("输入的不是正整数或者0！")
 					this.limitGet = ''
 					return false
 				} else {
@@ -294,7 +294,7 @@
 			//发行量
 			faxing() {
 				if (!(/^\+?(0|[1-9][0-9]*)$/).test(this.allCount)) {
-					alert("输入的不是正整数/0！")
+					alert("输入的不是正整数或者0！")
 					this.allCount = ''
 					return false
 				} else {}
@@ -302,7 +302,7 @@
 			manjian() {
 				if (this.couponType == '2' && this.isLimit == '2') {
 					if (!(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/).test(this.recude)) {
-						alert("只能输入正数或者小数");
+						alert("只能输入正数或者保留两位小数");
 						this.recude = ''
 						return false0
 					}
@@ -311,14 +311,14 @@
 						return false
 					}
 				}else if(!(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/).test(this.recude)){
-					alert("只能输入正数或者小数");
+					alert("只能输入正数或者保留两位小数");
 					return false
 				}
 
 			},
 			manjian3() {
 				if (!(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/).test(this.recude)) {
-					alert("只能输入正数或者小数");
+					alert("只能输入正数或者保留两位小数");
 					return false
 				}
 			
@@ -335,7 +335,7 @@
 			manjian1() {
 				if (this.isLimit == '1') {
 					if (!(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/).test(this.recude)) {
-						alert("只能输入正数或者小数");
+						alert("只能输入正数或者保留两位小数");
 						return false
 					}
 				}

@@ -40,7 +40,15 @@
 							<tbody>
 								<tr v-for="(item,index) in unfinishedProList" class="zes" :key="index">
 									<td v-if="item.auditState != 5 && item.auditState != 10"><input type="radio" name="radioGroup" @click="radioClick($event,item)"></td>
-									<td v-else style="color: red;font-weight: bold">{{item.auditState == 10 ? "该产品下有消费或退费为驳回状态！" : "该产品为驳回状态！"}}</td>
+									<td v-if="item.auditState == 10 || item.auditState == 5"><input type="radio" name="radioGroup" @click="radioClick($event,item)"
+										 disabled="disabled">
+										<el-tooltip v-if="item.auditState == 10 || item.auditState == 5" popper-class="atooltip" class="item gantan0"
+										 effect="light" content="由于审核原因，当前产品无法操作" placement="bottom">
+											<div class="gan0">
+												<p>!</p>
+											</div>
+										</el-tooltip>
+									</td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -48,11 +56,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<!-- <el-tooltip class="item gantan" effect="dark" content="由于审核原因，当前产品无法操作" placement="bottom" :style="{'display':!shs ? 'block':'none'}">
-							<div class="gan">
-								<p>!</p>
-							</div>
-						</el-tooltip> -->
+
 
 					</div>
 
@@ -122,7 +126,7 @@
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">折前总额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="preFoldTotalPrice" disabled="disabled">
+						<input type="text" class="form-control" v-model="consume.preFoldTotalPrice" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -132,7 +136,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="youa" v-if="listCouponZhe.length||listCouponJian.length" style="display: block;">
+			<div class="youthis"  v-if="listCouponZhe.length||listCouponJian.length" style="display: block;">
 				<div class="tab-pane fade in active martop">
 					<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 						<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
@@ -326,7 +330,8 @@
 			</div>
 			<div class="col-md-12 form-group clearfix">
 				<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-35" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-				<button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10 jh-mr-25" data-toggle="modal" v-on:click="addFee(item)">确认</button>
+				<button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10 jh-mr-25" data-toggle="modal"
+				 v-on:click="addFee(item)">确认</button>
 			</div>
 		</div>
 
@@ -368,7 +373,7 @@
 					counselorEmpId: '',
 				},
 				receivables: 0, //折前
-				preFoldTotalPrice: 0, //折前总价
+				// preFoldTotalPrice: 0, //折前总价
 				consume: {
 					proStyle: '1',
 					memNum: '', //会员名
@@ -685,7 +690,7 @@
 						this.consume.actualCount = 0;
 						this.consume.discount = 0;
 					} else {
-						this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount));
+						// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount));
 						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(
 							this.consume.discount)).div(new Decimal(100));
 					}
@@ -784,12 +789,12 @@
 				if (this.clickItemObj.count % 2 != 0) {
 					this.consume.piId = this.clickItemObj.itemId
 				}
-				
+
 				this.isDisable = true
-                setTimeout(() => {
-                    this.isDisable = false
+				setTimeout(() => {
+					this.isDisable = false
 				}, 2000)
-				
+
 				var url = this.url + '/purchasedItemsAction/purchasedItemsProject'
 				this.$ajax({
 					method: 'POST',
@@ -806,8 +811,7 @@
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.closeCurrentPage()
-						this.unfinishedProLists = []
-						$(".youa").hide()
+						$(".youthis").hide()
 					} else {
 						alert(res.retMsg)
 					}
@@ -817,8 +821,7 @@
 			},
 			closeCurrentPage() {
 				this.$emit('closeCurrentPage')
-				this.unfinishedProLists = []
-				$(".youa").hide()
+				$(".youthis").hide()
 			},
 			setCustom(param) {
 				this.consume.memNum = param.memNum
@@ -972,9 +975,9 @@
 							e.target.checked = false
 							var ss = new Decimal(this.consume.receivable)
 							this.consume.realCross = ss;
-						
+
 						} else {
-									
+
 							if (this.jinqian != '') {
 								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian))
 								this.consume.realCross = ss;
@@ -986,7 +989,7 @@
 						this.clickItemObj.count = 0
 						var ss = new Decimal(this.consume.receivable)
 						this.consume.realCross = ss;
-						
+
 						if (this.jinqian != '') {
 							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian))
 							this.consume.realCross = ss;

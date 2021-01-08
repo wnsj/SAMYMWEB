@@ -49,8 +49,16 @@
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in unfinishedProList" :key="index">
-                                    <td v-if="item.auditState != 5 && item.auditState != 10" ><input type="radio" name="radioGroup"  @click="radioClick($event,item)"></td>
-                                    <td v-else style="color: red;font-weight: bold">{{item.auditState == 10 ? "该产品下有消费或退费为驳回状态！" : "该产品为驳回状态！"}}</td>
+                                    <td v-if="item.auditState != 5 && item.auditState != 10"><input type="radio" name="radioGroup" @click="radioClick($event,item)"></td>
+                                    <td v-if="item.auditState == 10 || item.auditState == 5"><input type="radio" name="radioGroup" @click="radioClick($event,item)"
+                                    	 disabled="disabled">
+                                    	<el-tooltip v-if="item.auditState == 10 || item.auditState == 5" popper-class="atooltip" class="item gantan0"
+                                    	 effect="light" content="由于审核原因，当前产品无法操作" placement="bottom">
+                                    		<div class="gan0">
+                                    			<p>!</p>
+                                    		</div>
+                                    	</el-tooltip>
+                                    </td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -126,7 +134,7 @@
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label class="col-md-4 control-label text-right nopad end-aline">折前总额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="preFoldTotalPrice" disabled="disabled">
+						<input type="text" class="form-control" v-model="consume.preFoldTotalPrice" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -362,7 +370,7 @@
 				titttl: 0,
 				titles: 0,
 				receivables: 0, //应交
-				preFoldTotalPrice: 0, //折前总价
+				// preFoldTotalPrice: 0, //折前总价
 				consume: {
 					proStyle: '',
 					memNum: '', //会员名
@@ -505,7 +513,7 @@
 					this.consume.actualCount = 0;
 					this.consume.discount = 0;
 				}else{
-					this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount));
+					// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount));
 					this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(this.consume.discount)).div(new Decimal(100));
 				}
 				$('#AuditPurContent').modal({
@@ -532,10 +540,10 @@
 				this.$refs.ContinStateRef.setObj(param.continState)
 				this.$refs.VisitStateRef.setObj(param.visitState)
 				if (!this.isBlank(param.discount) && param.discount != 0) {
-					this.preFoldTotalPrice = new Decimal(this.receivables).div(new Decimal(param.discount)).mul(new Decimal(
+					this.consume.preFoldTotalPrice = new Decimal(this.receivables).div(new Decimal(param.discount)).mul(new Decimal(
 						100)).toFixed(2)
 				} else {
-					this.preFoldTotalPrice = 0
+					this.consume.preFoldTotalPrice = 0
 				}
 				Object.assign(this.consume, param)
 				this.queryUnfinishedPro(param)
@@ -603,7 +611,7 @@
 						this.consume.actualCount = 0;
 						this.consume.discount = 0;
 					}else{
-						this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount));
+						// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount));
 						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(this.consume.discount)).div(new Decimal(100));
 					}
 					// this.receivables = param.discouAmount //应交

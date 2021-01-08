@@ -8,108 +8,107 @@
 		<div class="modal-body  pos_r clearfix" style="overflow-y: auto;">
 			<div class="clearfix tab-pane fade in active martop " id="basic">
 
-					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">姓名</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="refund.memName" :disabled="isShow">
-						</div>
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">姓名</label><span class="sign-left">:</span>
+					<div class="col-md-7">
+						<input type="text" class="form-control" v-model="refund.memName" :disabled="isShow">
 					</div>
+				</div>
 
-					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">手机号</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="refund.phone" :disabled="isShow">
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">手机号</label><span class="sign-left">:</span>
+					<div class="col-md-7">
+						<input type="text" class="form-control" v-model="refund.phone" :disabled="isShow">
+					</div>
+				</div>
+				<div v-show="unfinishedProList.length > 0">
+					<div class="col-md-12  clearfix jh-ad-0">
+						<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
+							<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">已购产品</label><span class="sign-left">:</span>
 						</div>
 					</div>
-					<div v-show="unfinishedProList.length > 0">
-						<div class="col-md-12  clearfix jh-ad-0">
-							<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
-							<label for="cyname" class="col-md-4 control-label text-right nopad end-aline" >已购产品</label><span
-							 class="sign-left">:</span>
-							</div>
-						</div>
-						<div class="col-md-12 form-group clearfix text-left">
-							<table class="table table-bordered table-hover">
-								<thead class="datathead">
-									<tr>
-										<td></td>
-										<td>产品名</td>
-										<td>咨询师名</td>
-										<td>产品类型</td>
-										<td>余额</td>
-										<td>剩余课时</td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr v-for="item in unfinishedProList">
-                                        <td v-if="item.auditState != 5 && item.auditState != 10" ><input type="radio" name="radioGroup"  @click="radioClick($event,item)"></td>
-                                        <td v-else style="color: red;font-weight: bold">{{item.auditState == 10 ? "该产品下有消费或退费为驳回状态！" : "该产品为驳回状态！"}}</td>
-										<td>{{item.proName}}</td>
-										<td>{{item.counselorName}}</td>
-										<td>{{transforProType(item.proType)}}</td>
-										<td>{{item.balance}}</td>
-										<td>{{(item.totalCount - item.consumCount).toFixed(2)}}</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+					<div class="col-md-12 form-group clearfix text-left">
+						<table class="table table-bordered table-hover">
+							<thead class="datathead">
+								<tr>
+									<td></td>
+									<td>产品名</td>
+									<td>咨询师名</td>
+									<td>产品类型</td>
+									<td>余额</td>
+									<td>剩余课时</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="item in unfinishedProList">
+									<td v-if="item.auditState != 5 && item.auditState != 10"><input type="radio" name="radioGroup" @click="radioClick($event,item)"></td>
+									<td v-if="item.auditState == 10 || item.auditState == 5"><input type="radio" name="radioGroup" @click="radioClick($event,item)"
+										 disabled="disabled">
+										<el-tooltip v-if="item.auditState == 10 || item.auditState == 5" popper-class="atooltip" class="item gantan2"
+										 effect="light" content="由于审核原因，当前产品无法操作" placement="bottom">
+											<div class="gan2">
+												<p>!</p>
+											</div>
+										</el-tooltip>
+									</td>
+									<td>{{item.proName}}</td>
+									<td>{{item.counselorName}}</td>
+									<td>{{transforProType(item.proType)}}</td>
+									<td>{{item.balance}}</td>
+									<td>{{(item.totalCount - item.consumCount).toFixed(2)}}</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
+				</div>
 
 
-					<p class="tips col-md-12 col-lg-12">* 退费将按照原价收取课时费用，并收取违约金<br>* 实退总额 = 退费金额 - 违约金</p>
+				<p class="tips col-md-12 col-lg-12">* 退费将按照原价收取课时费用，并收取违约金<br>* 实退总额 = 退费金额 - 违约金</p>
 
-					<div class="col-md-12 form-group clearfix text-left padding-top-20">
-						<h4 id="myModalLabel" class="modal-title">退费合计：</h4>
+				<div class="col-md-12 form-group clearfix text-left padding-top-20">
+					<h4 id="myModalLabel" class="modal-title">退费合计：</h4>
+				</div>
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">退费课时</label><span class="sign-left">:</span>
+					<div class="col-md-7">
+						<input type="text" class="form-control" v-model="refund.consumCount" @change="receivableAction()">
 					</div>
-					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">退费课时</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="refund.consumCount" @change="receivableAction()">
-						</div>
+				</div>
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">退费金额</label><span class="sign-left">:</span>
+					<div class="col-md-7">
+						<input type="text" class="form-control" v-model="refund.receivable" disabled="disabled">
 					</div>
-					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">退费金额</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="refund.receivable" disabled="disabled">
-						</div>
-					</div>
+				</div>
 
-					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">实退总额</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="refund.realCross">
-						</div>
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">实退总额</label><span class="sign-left">:</span>
+					<div class="col-md-7">
+						<input type="text" class="form-control" v-model="refund.realCross">
 					</div>
+				</div>
 
-					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">违约总额</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="refund.balance">
-						</div>
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">违约总额</label><span class="sign-left">:</span>
+					<div class="col-md-7">
+						<input type="text" class="form-control" v-model="refund.balance">
 					</div>
+				</div>
 
-					<div class="col-md-6 form-group clearfix jh-wd-33">
-						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">备注</label><span
-						 class="sign-left">:</span>
-						<div class="col-md-7">
-							<textarea type="text" class="form-control" style="height: 34px;" v-model="refund.remark"></textarea>
-						</div>
+				<div class="col-md-6 form-group clearfix jh-wd-33">
+					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">备注</label><span class="sign-left">:</span>
+					<div class="col-md-7">
+						<textarea type="text" class="form-control" style="height: 34px;" v-model="refund.remark"></textarea>
 					</div>
+				</div>
 
-					<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-warning pull-right margin-right-15" data-toggle="modal"
-						 v-on:click="closeCurrentPage()">返回
-						</button>
-						<button type="button" :disabled="isDisable" class="btn btn-primary pull-right margin-right-15" data-toggle="modal"
-						 v-on:click="addFee()">确认
-						</button>
-					</div>
+				<div class="col-md-12 form-group clearfix">
+					<button type="button" class="btn btn-warning pull-right margin-right-15" data-toggle="modal" v-on:click="closeCurrentPage()">返回
+					</button>
+					<button type="button" :disabled="isDisable" class="btn btn-primary pull-right margin-right-15" data-toggle="modal"
+					 v-on:click="addFee()">确认
+					</button>
+				</div>
 
 			</div>
 		</div>
@@ -121,7 +120,9 @@
 	import emp from '../../common/Employee.vue'
 	import project from '../../common/Project.vue'
 	import axios from "axios";
-    import {Decimal} from 'decimal.js'
+	import {
+		Decimal
+	} from 'decimal.js'
 	export default {
 		components: {
 			dPicker,
@@ -142,8 +143,8 @@
 					money: 0, //退费金额
 				},
 				isShow: false,
-				dis:true,
-				shs:true,
+				dis: true,
+				shs: true,
 				unfinishedProList: [],
 				clickItemObj: {
 					itemId: 0,
@@ -232,10 +233,10 @@
 					return
 				}
 
-                this.isDisable = true
-                setTimeout(() => {
-                    this.isDisable = false
-                }, 2000)
+				this.isDisable = true
+				setTimeout(() => {
+					this.isDisable = false
+				}, 2000)
 
 				this.refund.receivable = new Decimal(this.selectObj.price).mul(this.refund.consumCount)
 				var url = this.url + '/purchasedItemsAction/refundProject'
@@ -388,6 +389,30 @@
 	}
 </script>
 
-<style>
+<style scoped="scoped">
+	.gan2 {
+		width: 15px;
+		height: 15px;
+		border-radius: 50%;
+		background: red;
+		color: #fff;
+		margin-top: -15px;
+		position: absolute;
+		margin-left: -30px;
+	}
 
+	.gantan2 {
+		color: red;
+	}
+
+	.gan2 p {
+		padding-left: 6px;
+		color: #fff;
+	}
+	.el-tooltip__popper.is-light[x-placement^=bottom] .popper__arrow{
+		border-bottom-color:#108ee9!important;
+	}
+	.el-tooltip__popper.is-light{
+		border-bottom-color:#108ee9!important;
+	}
 </style>

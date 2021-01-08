@@ -75,7 +75,7 @@
 	margin-right: 30px;
 	vertical-align: sub;
 }
-.youa{
+.youthis{
 	display: none;
 }
 
@@ -374,25 +374,29 @@ label.bui-radios-label input:disabled:checked+.bui-radios:after {
 	background-color: #c1c1c1;
 }
 
-.table .zes {
-	position: relative;
-}
 
-.gan {
-	position: absolute;
-	left: -5px;
-	top: 50px;
+.gan0 {
 	width: 15px;
 	height: 15px;
 	border-radius: 50%;
 	background: red;
 	color: #fff;
+	margin-top: -15px;
+	position: absolute;
+	margin-left: -30px;
 }
 
-.gantan {
+.gantan0 {
 	color: red;
 }
+.el-tooltip__popper.is-light[x-placement^=bottom] .popper__arrow{
+	border-bottom-color:#108ee9!important;
+}
+.el-tooltip__popper.is-light{
+	border-bottom-color:#108ee9!important;
+}
 
-.gan p {
+.gan0 p {
+	padding-left: 0px;
 	color: #fff;
 }

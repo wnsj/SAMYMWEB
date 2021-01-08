@@ -444,6 +444,8 @@
 			}
 		},
 		mounted() {
+			this.$refs.judgeStateRef.getObj(1, 1)
+			this.$refs.continueStateRef.getObj(1, 2)
 			window.addEventListener('scroll', this.handleScroll, true);
 			init();
 		},

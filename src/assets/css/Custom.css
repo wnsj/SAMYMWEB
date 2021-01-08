@@ -324,26 +324,29 @@
 .you1 ol li:nth-child(3n) {
 	margin-right: 0;
 }
-.table .zes {
-	position: relative;
-}
-
-.gan {
-	position: absolute;
-	left: -5px;
-	top: 50px;
+.gan1 {
+	margin-left: -5px;
 	width: 15px;
 	height: 15px;
 	border-radius: 50%;
 	background: red;
 	color: #fff;
+	margin-top: -15px;
+	position: absolute;
+	margin-left: -30px;
 }
 
-.gantan {
+.gantan1 {
 	color: red;
 }
+.el-tooltip__popper.is-light[x-placement^=bottom] .popper__arrow{
+	border-bottom-color:#108ee9!important;
+}
+.el-tooltip__popper.is-light{
+	border-bottom-color:#108ee9!important;
+}
 
-.gan p {
+.gan1 p {
 	padding-left: 6px;
 	color: #fff;
 }

@@ -124,7 +124,7 @@
                 <el-table-column prop="auditStateName" label="审核状态" width="100" align="center"></el-table-column>
                 <el-table-column prop="shopowner" label="店长" width="100" align="center"></el-table-column>
                 <el-table-column prop="finance" label="财务" width="100" align="center"></el-table-column>
-                <el-table-column prop="rejectTime" :formatter="dateFormat" label="审核时间" width="100"
+                <el-table-column prop="approveTime" :formatter="dateFormat" label="审核时间" width="100"
                                  align="center"></el-table-column>
                 <el-table-column prop="rejectReason" label="驳回理由" width="100" align="center"></el-table-column>
             </el-table>

@@ -55,7 +55,16 @@
 								</thead>
 								<tbody>
 									<tr v-for="(item,index) in unfinishedProList" :key="index">
-										<td><input type="radio" name="radioGroup" :value="index" v-model="oRadioGroup" @click="radioClick($event,item)" /></td>
+										<td v-if="item.auditState != 5 && item.auditState != 10"><input type="radio" name="radioGroup" :value="index" v-model="oRadioGroup" @click="radioClick($event,item)"></td>
+										<td v-if="item.auditState == 10 || item.auditState == 5"><input type="radio" name="radioGroup" @click="radioClick($event,item)"
+											 disabled="disabled">
+											<el-tooltip v-if="item.auditState == 10 || item.auditState == 5" popper-class="atooltip" class="item gantan2"
+											 effect="light" content="由于审核原因，当前产品无法操作" placement="bottom">
+												<div class="gan2">
+													<p>!</p>
+												</div>
+											</el-tooltip>
+										</td>
 										<td>{{item.proName}}</td>
 										<td>{{item.counselorName}}</td>
 										<td>{{transforProType(item.proType)}}</td>
@@ -475,6 +484,30 @@
 	}
 </script>
 
-<style>
+<style scoped="scoped">
+	.gan2 {
+		width: 15px;
+		height: 15px;
+		border-radius: 50%;
+		background: red;
+		color: #fff;
+		margin-top: -15px;
+		position: absolute;
+		margin-left: -30px;
+	}
 
+	.gantan2 {
+		color: red;
+	}
+
+	.gan2 p {
+		padding-left: 6px;
+		color: #fff;
+	}
+	.el-tooltip__popper.is-light[x-placement^=bottom] .popper__arrow{
+		border-bottom-color:#108ee9!important;
+	}
+	.el-tooltip__popper.is-light{
+		border-bottom-color:#108ee9!important;
+	}
 </style>

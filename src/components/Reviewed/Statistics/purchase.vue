@@ -130,7 +130,7 @@
 				<el-table-column prop="storeName" label="门店" width="100" align="center"></el-table-column>
 				<el-table-column prop="shopowner" label="店长" width="100" align="center"></el-table-column>
 				<el-table-column prop="finance" label="财务" width="100" align="center"></el-table-column>
-				<el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
+				<el-table-column prop="approveTime" label="审核时间" :formatter="resetDate" width="100" align="center"></el-table-column>
 				<el-table-column prop="rejectReason" label="备注" width="100" align="center"></el-table-column>
 			</el-table>
 

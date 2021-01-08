@@ -89,12 +89,12 @@
                 <el-table-column prop="momey" label="退费金额"  align="center"></el-table-column>
                 <el-table-column prop="refCount" label="退费课时"  align="center"></el-table-column>
                 <el-table-column prop="sourceDate" label="退费时间" :formatter="resetDate"  align="center"></el-table-column>
-                <el-table-column prop="Paymentmethod" label="交费方式"  align="center"></el-table-column>
+                <el-table-column prop="payType" label="交费方式"  align="center"></el-table-column>
                 <el-table-column prop="buyTime" label="购买时间" :formatter="resetDate" align="center"></el-table-column>
                 <el-table-column prop="auditState" label="审核状态" :formatter="resetAuditState" align="center"></el-table-column>
                 <el-table-column prop="shopowner" label="店长" align="center"></el-table-column>
                 <el-table-column prop="finance" label="财务" align="center"></el-table-column>
-                <el-table-column prop="rejectTime" label="审核时间" :formatter="resetDate" align="center"></el-table-column>
+                <el-table-column prop="approveTime" label="审核时间" :formatter="resetDate" align="center"></el-table-column>
                 <el-table-column prop="rejectReason" label="驳回理由"  align="center"></el-table-column>
             </el-table>
 

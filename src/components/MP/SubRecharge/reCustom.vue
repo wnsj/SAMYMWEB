@@ -55,7 +55,16 @@
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in unfinishedProList" :key="index">
-									<td><input v-model="oRadioGroup" :value="index" type="radio" name="radioGroup" @click="radioClick($event,item)" /></td>
+									<td v-if="item.auditState != 5 && item.auditState != 10"><input type="radio" v-model="oRadioGroup" :value="index" name="radioGroup" @click="radioClick($event,item)"></td>
+									<td v-if="item.auditState == 10 || item.auditState == 5"><input type="radio" name="radioGroup" @click="radioClick($event,item)"
+										 disabled="disabled">
+										<el-tooltip v-if="item.auditState == 10 || item.auditState == 5" popper-class="atooltip" class="item gantan1"
+										 effect="light" content="由于审核原因，当前产品无法操作" placement="bottom">
+											<div class="gan1">
+												<p>!</p>
+											</div>
+										</el-tooltip>
+									</td>
 									<td>{{item.proName}}</td>
 									<td>{{item.counselorName}}</td>
 									<td>{{transforProType(item.proType)}}</td>
@@ -121,7 +130,7 @@
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">折前总额</label><span class="sign-left">:</span>
 					<div class="col-md-7">
-						<input type="text" class="form-control" v-model="preFoldTotalPrice" disabled="disabled">
+						<input type="text" class="form-control" v-model="consume.preFoldTotalPrice" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -387,7 +396,7 @@
 				productId: '',
 				userId: '',
 				receivables: 0, //应交(折前)
-				preFoldTotalPrice: 0, //折前总价
+				// preFoldTotalPrice: 0, //折前总价
 				consume: {
 					proStyle: '',
 					memNum: '', //会员名
@@ -523,7 +532,7 @@
 				this.consume.price = param.price; //折前单价
 				this.consume.totalCount = param.totalCount; //实际次数
 				this.consume.discount = param.discount; //折扣
-				this.preFoldTotalPrice = 0;
+				this.consume.preFoldTotalPrice = 0;
 				this.receivables = 0;
 				// if(this.consume.price =='' || this.consume.price ==null || this.consume.totalCount == '' || this.consume.totalCount == null || this.consume.discount == '' || this.consume.discount == null){
 				// 	this.consume.price = 0;
@@ -701,7 +710,7 @@
 						this.consume.totalCount = 0;
 						this.consume.discount = 0;
 					} else {
-						this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
+						// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
 						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
 							this.consume.discount)).div(new Decimal(100));
 					}
@@ -1152,11 +1161,11 @@
 								this.selectObj = item
 								this.projectFlag = true
 								this.counselorFlag = true
-								this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
+								// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
 								this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
 									this.consume.discount)).div(new Decimal(100));
 							}else{
-								this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
+								// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
 								this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
 									this.consume.discount)).div(new Decimal(100));
 							}
@@ -1224,7 +1233,7 @@
 					this.consume.totalCount = item.totalCount //实际次数
 					this.consume.discount = item.discount //折扣
 					this.receivables = parseInt(item.totalCount) * parseInt(item.price) * parseInt(item.discount) / 100 //应交
-					this.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
+					this.consume.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
 					// this.consume.receivable = item.receivable //应交
 					// this.consume.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
 					this.consume.proType = item.proType
@@ -1270,7 +1279,7 @@
 							this.consume.discount = item.discount //折扣
 							this.consume.receivable = item.receivable //应交
 							this.receivables = parseInt(item.totalCount) * parseInt(item.price) * parseInt(item.discount) / 100 //应交
-							this.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
+							this.consume.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
 							this.consume.realCross = item.realCross //实缴
 							this.consume.proType = item.proType
 							this.selectObj = item
@@ -1306,7 +1315,7 @@
 						this.consume.discount = item.discount //折扣
 						this.consume.receivable = item.receivable //应交
 						this.receivables = parseInt(item.totalCount) * parseInt(item.price) * parseInt(item.discount) / 100 //应交
-						this.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
+						this.consume.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
 						this.consume.realCross = item.realCross //实缴
 						this.consume.proType = item.proType
 					}

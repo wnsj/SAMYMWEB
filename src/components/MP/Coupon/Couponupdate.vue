@@ -26,7 +26,6 @@
 								<label class="col-md-2 control-label text-right nopad end-aline">优惠券类型</label><span class="sign-left">:</span>
 								<div class="col-md-7  ">
 									<select class="form-control" v-model="couponType" disabled="disabled" @click="man">
-										<option value="">全部</option>
 										<option value="2">满减券</option>
 										<option value="1">满折券</option>
 									</select>
@@ -40,7 +39,6 @@
 								<label class="col-md-2 control-label text-right nopad end-aline">状态</label><span class="sign-left">:</span>
 								<div class="col-md-7  ">
 									<select class="form-control" v-model="state">
-										<option value="">全部</option>
 										<option value="1">在用</option>
 										<option value="2">停用</option>
 									</select>

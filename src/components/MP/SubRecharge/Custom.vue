@@ -116,7 +116,7 @@
 				<div class="col-md-4 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">折前总额</label><span class="sign-left">:</span>
 					<div class="col-md-7">
-						<input type="text" class="form-control" v-model="consume.preFoldTotalPrice" disabled="disabled">
+						<input type="text" class="form-control" v-model="preFoldTotalPrice" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-4 form-group clearfix jh-wd-33">
@@ -389,6 +389,7 @@
 				listCouponZhe:[],
 				dui: true,
 				receivables:0,
+				preFoldTotalPrice: 0, //折前总价
 				consume: {
 					proStyle: '',
 					memNum: '', //会员名
@@ -677,13 +678,17 @@
 					this.consume.totalCount = param.frequency
 					this.consume.discount = param.discount
 					this.consume.preFoldTotalPrice = param.totalPrice
-					this.consume.receivable = param.discouAmount
-					if (this.consume.price == '' || this.consume.actualCount == '' || this.consume.discount == '') {
+					// this.consume.receivable = param.discouAmount
+					console.log(this.consume.price)
+					console.log(this.consume.actualCount)
+					console.log(this.consume.discount)
+					if (this.consume.price == null || this.consume.totalCount == null || this.consume.discount == null) {
 						this.consume.price = 0;
-						this.consume.actualCount = 0;
+						this.consume.totalCount = 0;
 						this.consume.discount = 0;
 					} else {
-						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(
+						this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
+						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
 							this.consume.discount)).div(new Decimal(100));
 					}
 					this.consume.proType = param.proType
@@ -975,8 +980,8 @@
 					this.consume.price = item.price //折前单价
 					this.consume.totalCount = item.totalCount //实际次数
 					this.consume.discount = item.discount //折扣
-					this.consume.receivable = item.receivable //应交
-					this.consume.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
+					this.receivables = parseInt(item.totalCount) * parseInt(item.price) * parseInt(item.discount) / 100 //应交
+					this.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
 					this.consume.proType = item.proType
 					return
 				} else {

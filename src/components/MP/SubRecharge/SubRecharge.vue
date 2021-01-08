@@ -122,7 +122,7 @@
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">折前总额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="consume.preFoldTotalPrice" disabled="disabled">
+						<input type="text" class="form-control" v-model="preFoldTotalPrice" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -148,7 +148,8 @@
 									<div class="jia"><span>￥</span>{{item.recude}}</div>
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
-									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
+									<div class="manzu" v-if="item.fullCondition !=null">满<span>{{item.fullCondition}}</span>元可用</div>
+									<div class="manzu" v-else-if="item.fullCondition == null">满<span>0</span>元可用</div>
 									<div class="youxiao" v-if="item.startTime != null">有效期<span>{{item.startTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
 									<div class="niucha1" v-else-if="item.startTime == null">永久有效</div>
 									<div class="niucha" v-if="item.endTime != null">
@@ -367,6 +368,7 @@
 					counselorEmpId: '',
 				},
 				receivables: 0, //折前
+				preFoldTotalPrice: 0, //折前总价
 				consume: {
 					proStyle: '1',
 					memNum: '', //会员名
@@ -377,7 +379,6 @@
 					couponType: 0,
 					couponNum: 0,
 					couponName: '',
-
 					receivable: 0, //应交
 					preFoldTotalPrice: '', //折前总价
 					realCross: '', //实缴（折后）
@@ -678,11 +679,12 @@
 					this.consume.discount = param.discount //折扣
 					this.consume.preFoldTotalPrice = param.totalPrice //课程总额
 					this.consume.receivable = param.discouAmount //应交
-					if (this.consume.price == '' || this.consume.actualCount == '' || this.consume.discount == '') {
+					if (this.consume.price == null || this.consume.actualCount == null || this.consume.discount == null) {
 						this.consume.price = 0;
 						this.consume.actualCount = 0;
 						this.consume.discount = 0;
 					} else {
+						this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount));
 						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(
 							this.consume.discount)).div(new Decimal(100));
 					}

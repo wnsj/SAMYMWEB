@@ -51,7 +51,7 @@
 								<b>*</b>
 								<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
 								<div class="col-md-7  jin1">
-									<input type="number" class="form-control" v-model="recude" @blur="manjian2()">
+									<input type="number" class="form-control" v-model="recude" @blur="manjian()">
 									<span>元</span>
 								</div>
 								<span class="err-msg2">{{ errors[0] }}</span>
@@ -62,7 +62,7 @@
 								<b>*</b>
 								<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
 								<div class="col-md-7  zhe1">
-									<input type="number" class="form-control" v-model="recude" @blur="manjian1()">
+									<input type="number" class="form-control" v-model="recude" @blur="manjian3()">
 									<span>%</span>
 								</div>
 								<span class="err-msg2">{{ errors[0] }}</span>
@@ -75,7 +75,7 @@
 								<div class="col-md-7" v-model="isLimit">
 									<div class="xianzhi wuxian" style="display: block;"><input class="xian" type="radio" name="radioGroup1"
 										 v-model="isLimit" value="2" /><label class="xian1">无限制</label></div>
-									<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="1" /><label
+									<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="1" @blur="manjian4()" /><label
 										 class="xian1">满</label></div>
 									<div class="xianzhi2"><input type="text" placeholder="0" v-model="fullCondition" @blur="manjian1()"><span>元可用</span></div>
 								</div>
@@ -310,20 +310,27 @@
 						alert("输入的金额数值不能大于5！")
 						return false
 					}
+				}else if(!(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/).test(this.recude)){
+					alert("只能输入正数或者小数");
+					return false
 				}
 
 			},
-			manjian2() {
+			manjian3() {
 				if (!(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/).test(this.recude)) {
 					alert("只能输入正数或者小数");
 					return false
 				}
-				if (this.recude - 5 > 0) {
-					alert("输入的金额数值不能大于5！")
-					return false
+			
+			
+			},
+			manjian4(){
+				if(this.isLimit =='1'){
+					if(this.fullCondition == ''){
+						alert("请填写使用门槛满减/满折金额！");
+						return false
+					}
 				}
-
-
 			},
 			manjian1() {
 				if (this.isLimit == '1') {
@@ -511,6 +518,12 @@
 								alert("请填写结束时间！");
 								return false
 							}
+						}
+						if (this.isLimit == '1') {
+							if (this.fullCondition == '') {
+								alert("请填写使用门槛满减/满折金额!");
+								return false
+							} 
 						}
 						if(this.userType ==3){
 							if (this.userList  == '') {

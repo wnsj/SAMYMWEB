@@ -108,7 +108,7 @@
 						<button type="button" class="btn btn-warning pull-right margin-right-15" data-toggle="modal"
 						 v-on:click="closeCurrentPage()">返回
 						</button>
-						<button type="button" class="btn btn-primary pull-right margin-right-15" data-toggle="modal"
+						<button type="button" :disabled="isDisable" class="btn btn-primary pull-right margin-right-15" data-toggle="modal"
 						 v-on:click="addFee()">确认
 						</button>
 					</div>
@@ -176,7 +176,8 @@
 					consumCount: '',
 					actualCount: '',
 				},
-                oRadioGroup: ''
+				oRadioGroup: '',
+				isDisable: false
 			};
 		},
 		methods: {
@@ -269,7 +270,11 @@
 				this.refund.money = this.selectObj.price * this.refund.consumCount
                 this.refund.receivable = this.selectObj.price * this.refund.consumCount
 
-
+                this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+				}, 2000)
+				
                var url = this.url + '/refundAuditBean/refundRecord'
 
 				this.requestData(url, this.refund).then((response) => {

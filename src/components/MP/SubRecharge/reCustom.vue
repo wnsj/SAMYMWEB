@@ -343,7 +343,7 @@
 			<div class="col-md-12 form-group clearfix">
 				<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="closeCurrentPage()">返回
 				</button>
-				<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="addFee()">确认
+				<button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="addFee()">确认
 				</button>
 			</div>
 		</div>
@@ -453,7 +453,8 @@
 					balance: '',
 					select: 0,
 					btn: false,
-				}
+				},
+				isDisable: false
 			};
 		},
 		methods: {
@@ -837,7 +838,12 @@
 							100)).toFixed(2, Decimal.ROUND_HALF_UP)
 					}
 				}
-
+				
+				this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+				}, 2000)
+				
 				var url = this.url + '/consumAuditBean/consumRecord'
 				// var url = 'http://172.16.16.255:8080/consumAuditBean/consumRecord'
 				this.$ajax({

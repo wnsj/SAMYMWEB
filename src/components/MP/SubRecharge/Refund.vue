@@ -106,7 +106,7 @@
 						<button type="button" class="btn btn-warning pull-right margin-right-15" data-toggle="modal"
 						 v-on:click="closeCurrentPage()">返回
 						</button>
-						<button type="button" class="btn btn-primary pull-right margin-right-15" data-toggle="modal"
+						<button type="button" :disabled="isDisable" class="btn btn-primary pull-right margin-right-15" data-toggle="modal"
 						 v-on:click="addFee()">确认
 						</button>
 					</div>
@@ -155,6 +155,7 @@
 					consumCount: '',
 					actualCount: '',
 				},
+				isDisable: false
 			};
 		},
 		methods: {
@@ -230,6 +231,12 @@
 					alert("实退金额和违约金至少一个大于0")
 					return
 				}
+
+                this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+                }, 2000)
+
 				this.refund.receivable = new Decimal(this.selectObj.price).mul(this.refund.consumCount)
 				var url = this.url + '/purchasedItemsAction/refundProject'
 				this.requestData(url, this.refund).then((response) => {

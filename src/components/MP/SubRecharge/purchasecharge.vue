@@ -321,7 +321,7 @@
 				<div class="col-md-6 form-group clearfix jh-wd-33"></div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-35" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-					<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-25" data-toggle="modal" v-on:click="addFee()">确认</button>
+					<button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10 jh-mr-25" data-toggle="modal" v-on:click="addFee()">确认</button>
 				</div>
 			</div>
 
@@ -433,7 +433,8 @@
 					itemId: 0,
 					count: 0
 				},
-				projectObj: {}
+				projectObj: {},
+				isDisable: false
 			};
 		},
 		methods: {
@@ -730,6 +731,11 @@
 				} else {
 					this.consume.piId = ''
 				}
+				
+				this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+				}, 2000)
 
 				var url = this.url + '/purchasedItemsAuditBean/supplementData'
 				this.$ajax({

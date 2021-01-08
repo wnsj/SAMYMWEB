@@ -132,7 +132,7 @@
 		data() {
 			return {
 				refund: {
-					consumCount: 0, //退课时
+					consumCount: '', //退课时
 					receivable: '', //应退金额
 					memNum: '', //会员号
 					memName: '', //会员名
@@ -142,6 +142,10 @@
 					balance: '', //违约金
 					money: 0, //退费金额
 				},
+				yingyong: 0,
+				zongji: 0,
+				cos: 0,
+				abv: 0,
 				isShow: false,
 				dis: true,
 				shs: true,
@@ -153,6 +157,7 @@
 				selectObj: {
 					price: '',
 					piId: '',
+					receivable:'',
 					consumCount: '',
 					actualCount: '',
 				},
@@ -340,14 +345,26 @@
 			},
 			//单选框选中处理
 			radioClick(e, item) {
+				this.yingyong = item.receivable;
+				this.zongji = item.totalCount;
+				this.abv = item.balance;
+				this.cos = item.consumCount;
 				if (this.clickItemObj.itemId == 0) {
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1
+					if (this.refund.consumCount == item.totalCount) {
+						this.refund.receivable == item.balance
+					} else if (this.refund.consumCount > item.totalCount) {
+						this.refund.receivable == new Decimal(item.receivable).div(new Decimal(item.totalCount)).mul(new Decimal(this.refund
+							.consumCount))
+					}
+					// <td>{{(item.totalCount - item.consumCount).toFixed(2)}}</td>
 					this.selectObj = item
 				} else {
 					if (this.clickItemObj.itemId == item.piId) {
 						if (this.clickItemObj.count % 2 == 1) {
 							e.target.checked = false
+							this.refund.consumCount = this.refund.consumCount;
 							this.selectObj = {
 								price: '',
 								piId: '',
@@ -366,15 +383,31 @@
 			},
 			//计算退费金额
 			receivableAction() {
+				console.log(this.refund.consumCount);
+				console.log(this.zongji);
+				console.log(this.yingyong);
+				console.log(this.cos);
+				console.log(this.selectObj.receivable);
+				var jisuan = this.zongji-this.cos;
+				// if (this.refund.consumCount == this.zongji - this.cos) {
+				// 	this.refund.receivable = this.abv
+				// } else {
+				// 	console.log(this.refund.consumCount)
+				// 	this.refund.receivable = new Decimal(this.yingyong).div(new Decimal(this.zongji)).mul(new Decimal(this.refund.consumCount))
+				// 		.toFixed(2)
+				// }
+				
 				if (this.refund.consumCount != null && parseFloat(this.refund.consumCount) > 0) {
 					if (this.selectObj.price != null && parseFloat(this.selectObj.price) > 0) {
-						if (parseFloat(this.refund.consumCount) > parseFloat(this.selectObj.totalCount) - parseFloat(this.selectObj.consumCount)) {
-							this.refund.consumCount = parseFloat(this.selectObj.totalCount) - parseFloat(this.selectObj.consumCount)
-							this.refund.receivable = new Decimal(this.selectObj.price).mul(new Decimal(this.refund.consumCount))
+						if (parseFloat(this.refund.consumCount) == parseFloat(this.selectObj.totalCount) - parseFloat(this.selectObj.consumCount)) {
+							// this.refund.consumCount = parseFloat(this.selectObj.totalCount) - parseFloat(this.selectObj.consumCount)
+							this.refund.receivable = new Decimal(this.selectObj.receivable)
+							
 						} else {
-							this.refund.receivable = new Decimal(this.selectObj.price).mul(new Decimal(this.refund.consumCount))
+							this.refund.receivable = new Decimal(this.selectObj.receivable).div(new Decimal(this.selectObj.totalCount)).mul(new Decimal(this.refund.consumCount)).toFixed(2)
 						}
-					} else {
+					} 
+					else {
 						alert('请您先选择退费课程')
 					}
 				} else {
@@ -409,10 +442,12 @@
 		padding-left: 6px;
 		color: #fff;
 	}
-	.el-tooltip__popper.is-light[x-placement^=bottom] .popper__arrow{
-		border-bottom-color:#108ee9!important;
+
+	.el-tooltip__popper.is-light[x-placement^=bottom] .popper__arrow {
+		border-bottom-color: #108ee9 !important;
 	}
-	.el-tooltip__popper.is-light{
-		border-bottom-color:#108ee9!important;
+
+	.el-tooltip__popper.is-light {
+		border-bottom-color: #108ee9 !important;
 	}
 </style>

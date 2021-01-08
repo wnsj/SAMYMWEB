@@ -144,7 +144,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="youa" v-if="listCouponZhe.length||listCouponJian.length" style="display: block;">
+			<div  v-show="listCouponZhe.length > 0|| listCouponJian.length >0" >
 				<div class="tab-pane fade in active martop">
 					<div class="col-md-12 form-group clearfix text-left jh-mt-5">
 						<h4 id="myModalLabel" class="modal-title">选择优惠券：</h4>
@@ -778,6 +778,8 @@
 			},
 			closeCurrentPage() {
 				this.$emit('closeCurrentPage')
+				this.listCouponZhe =[]
+				this.listCouponJian =[]
 			},
 			setCustom(param) {
 				this.consume.memNum = param.memNum

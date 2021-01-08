@@ -17,7 +17,7 @@
 					</div>
 					<div class="col-md-12 form-group clearfix">
 						<button type="button" class="btn btn-warning pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-						<button type="button" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>	
+						<button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10" style="margin-right:1.5%;" data-toggle="modal" v-on:click="certainAction()">确认</button>	
 					</div>
 				</form>
 			</div>
@@ -40,6 +40,7 @@
 					occName:'1',
 				},
 				title:'',
+				isDisable: false
 			};
 		},
 		methods:{
@@ -82,6 +83,12 @@
 						var url = this.url + '/occupation/updateOccupation'
 						break;	
 				}
+
+				this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+				}, 2000)
+				
 				this.$ajax({
 					method: 'POST',
 					url: url,

@@ -64,7 +64,7 @@
                 </el-form>
                 <div slot="footer" class="dialog-footer">
                     <el-button type="warning" @click="dialogAddRole = false">取 消</el-button>
-                    <el-button type="primary" @click="addRole">确 定</el-button>
+                    <el-button type="primary" :disabled="isDisable" @click="addRole">确 定</el-button>
                 </div>
             </el-dialog>
             <!-- 对话框：修改角色 -->
@@ -138,7 +138,7 @@
                                 </el-form>
                                 <div slot="footer" class="dialog-footer jh-te-r">
                                     <el-button type="warning" @click="closeCurrentPage">取 消</el-button>
-                                    <el-button type="primary" @click="updateRole">确 定</el-button>
+                                    <el-button type="primary" :disabled="isDisable" @click="updateRole">确 定</el-button>
                                 </div>
                             </div>
                         </div>
@@ -184,7 +184,8 @@
                     urStatus: null,
                     storeId: null,
                 },
-                updateRoleStoreFlag: true
+                updateRoleStoreFlag: true,
+                isDisable: false
             }
         },
 
@@ -328,7 +329,7 @@
                 console.log(selectRecords)
             },
             //添加角色
-            addRole() {
+            addRole() {  
                 if (this.isBlank(this.roleData.urName)) {
                     alert("角色名为空!")
                     return
@@ -344,6 +345,12 @@
                 }
                 this.roleData.urStatus = 1;
                 this.roleData.accType = 2;
+
+                this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+                }, 2000)
+
                 var url = this.url + '/umsRoleAction/addUmsRole'
                 this.requestData(url, this.roleData).then((responseData) => {
                     if (responseData.retCode == '0000') {
@@ -380,6 +387,12 @@
                     alert("角色名为空!")
                     return
                 }
+
+                this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+                }, 2000)
+
                 var url = this.url + '/umsRoleAction/updateUmsRole'
                 this.requestData(url, this.updateRoleData).then((responseData) => {
                     if (responseData.retCode == '0000') {

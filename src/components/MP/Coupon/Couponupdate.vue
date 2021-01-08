@@ -185,7 +185,7 @@
 						<div class="col-md-6 form-group clearfix"></div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-25" v-on:click="updataFee()" v-has="'SAMY:CouponManage'">确认</button>
+						<button type="button" :disabled="isDisable" class="btn btn-primary pull-center m_r_10 jh-mr-25" v-on:click="updataFee()" v-has="'SAMY:CouponManage'">确认</button>
 						<button type="button" class="btn btn-warning pull-center m_r_10 jh-mr-35" @click="goOff()" v-has="'SAMY:CouponManage'">取消</button>
 					</div>
 				</div>
@@ -242,6 +242,7 @@
 				dateArr: '',
 				startTime: '',
 				endTime: '',
+				isDisable: false
 			};
 		},
 		methods: {
@@ -488,6 +489,12 @@
 				formData.append('categoryType', this.categoryType);
 				formData.append('limitGet', this.limitGet);
 				formData.append('allCount', this.allCount);
+
+				this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+				}, 2000)
+				
 				this.$ajax({
 					method: 'POST',
 					url: url,

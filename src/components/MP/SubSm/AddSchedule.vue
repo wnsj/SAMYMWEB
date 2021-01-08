@@ -48,7 +48,7 @@
                     <div class="col-md-12 form-group clearfix">
                             <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-0"
                                 data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-                            <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
+                            <button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10 jh-mr-1"
                                 data-toggle="modal" v-on:click="addOrder()">确认</button>
 							<button type="button" class="btn btn-success pull-right m_r_10 jh-mr-1"
 							    data-toggle="modal" v-on:click="setCheckBox(1)">全选</button>
@@ -86,6 +86,7 @@
                 isSelete: false,
                 dateList: [],
                 curDate: new Date(),
+                isDisable: false
             };
         },
         methods: {
@@ -131,6 +132,12 @@
                     };
                     this.dateList.push(obj)
                 }
+                
+                this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+                }, 2000)
+
                 var url = this.url + '/schedulingAction/addSched';
                 this.$ajax({
                     method: 'POST',

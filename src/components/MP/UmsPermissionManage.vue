@@ -77,7 +77,7 @@
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button type="warning" @click="closeCurrPage">取 消</el-button>
-                <el-button type="primary" @click="operatPermission">确 定</el-button>
+                <el-button type="primary" :disabled="isDisable" @click="operatPermission">确 定</el-button>
             </div>
         </el-dialog>
     </div>
@@ -109,7 +109,8 @@
                     specialRole: '0'
                 },
                 umsPermissionflag: false,
-                title: '添加权限'
+                title: '添加权限',
+                isDisable: false
             }
         },
         methods: {
@@ -213,6 +214,12 @@
                 var param = {}
                 Object.assign(param, this.permissionObj)
                 param.status = param.status ? 1 : 0;
+
+                this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+                }, 2000)
+                
                 var url = this.title == '添加权限' ? this.url + '/umsPermissionAction/addUmsPermission' : this.url + '/umsPermissionAction/updateUmsPermission'
                 this.requestData(url, param).then((responseData) => {
                     if (responseData.retCode == '0000') {

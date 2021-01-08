@@ -211,7 +211,7 @@
                 <el-footer style="margin-top: 2%">
                     <el-button type="primary" @click="addProbem(1)" size="small">添加问题</el-button>
 
-                    <el-button type="primary" @click="addQue()" size="small">提交</el-button>
+                    <el-button type="primary" :disabled="isDisable" @click="addQue()" size="small">提交</el-button>
                     <el-button @click="resetProbem()" type="warning" size="small">重置</el-button>
                 </el-footer>
             </el-dialog>
@@ -305,7 +305,7 @@
                 <!--				</el-card>-->
                 <el-footer style="margin-top: 2%">
                     <el-button type="primary" @click="addProbem(2)" size="small">添加问题</el-button>
-                    <el-button type="primary" @click="editQue()" size="small">提交</el-button>
+                    <el-button type="primary" :disabled="isDisable" @click="editQue()" size="small">提交</el-button>
 <!--                    <el-button @click="resetProbem()" type="warning" size="small">重置</el-button>-->
                 </el-footer>
             </el-dialog>
@@ -370,7 +370,8 @@
                     {id:'1',scoreName:'咨询师评分'},
                     {id:'2',scoreName:'咨询顾问评分'},
                     {id:'3',scoreName:'店铺评分'}
-                ]
+                ],
+                isDisable: false
             };
         },
         watch: {
@@ -534,6 +535,11 @@
             },
             //添加问题
             addQue() {
+                this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+                }, 2000)
+
                 var url = this.url + '/questionnaireBean/addQue'
                 this.$ajax({
                     method: 'POST',
@@ -565,6 +571,11 @@
                 });
             },
             editQue() {
+                this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+                }, 2000)
+
                 var url = this.url + '/questionnaireBean/patchQueById'
                 this.$ajax({
                     method: 'POST',

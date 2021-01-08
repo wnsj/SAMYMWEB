@@ -22,7 +22,7 @@
 						</div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
+						<button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
 							v-on:click="certainAction()">确认</button>
 					</div>
 				</form>
@@ -40,7 +40,8 @@
 			return {
 				accountPwd: '',
 				accountPwdCopy:'',
-				accountData:{}
+				accountData:{},
+				isDisable: false
 			};
 		},
 		methods: {
@@ -70,6 +71,12 @@
                 }
 				console.log(JSON.stringify(this.accountData))
 				this.accountData.accountPwd=this.accountPwd
+
+				this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+				}, 2000)
+				
 				var url = this.url+'/accountAction/updateAccount'
 
 				this.$ajax({

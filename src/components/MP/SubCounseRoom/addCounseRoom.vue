@@ -27,7 +27,7 @@
 					<div class="col-md-12form-group clearfix">
 						<button type="button" class="btn btn-warning pull-right m_r_10 margin-right-15" data-toggle="modal" v-on:click="closeCurrentPage()">返回
 						</button>
-						<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal" v-on:click="addOrder(title)">确认
+						<button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal" v-on:click="addOrder(title)">确认
 						</button>
 					</div>
 				</form>
@@ -51,6 +51,7 @@
 				storeId: this.storeId(),
 				crName: '',
 				crType:'1',
+				isDisable: false
 			};
 		},
 		methods: {
@@ -63,7 +64,12 @@
 					alert("姓名不能为空")
 					return
 				}
-
+				
+				this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+				}, 2000)
+				
 				var url = this.url + '/counseRoomAction/addCounseRoom';
 				this.$ajax({
 					method: 'POST',

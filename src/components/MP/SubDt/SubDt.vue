@@ -27,7 +27,7 @@
 				<div class="col-md-12 form-group clearfix">
 						<button type="button" class="btn btn-warning pull-right m_r_10 margin-right-45" data-toggle="modal"
 						 v-on:click="closeCurrentPage()">返回</button>
-						<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
+						<button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
 						 v-on:click="certainAction()">确认</button>
 				</div>
 			</div>
@@ -50,6 +50,7 @@
 					isUse: '1',
 				},
 				title: '',
+				isDisable: false
 			};
 		},
 		methods: {
@@ -91,6 +92,12 @@
 						var url = this.url + '/diseaseType/updateDiseaseType'
 						break;
 				}
+
+				this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+				}, 2000)
+				
 				this.$ajax({
 					method: 'POST',
 					url: url,

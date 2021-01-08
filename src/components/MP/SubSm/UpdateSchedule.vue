@@ -51,7 +51,7 @@
                         <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-0"
                                     data-toggle="modal" v-on:click="closeCurrentPage()">返回
                         </button>
-                        <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
+                        <button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10 jh-mr-1"
                                     data-toggle="modal" v-on:click="addOrder()">确认
                         </button>
                         <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-0"
@@ -93,7 +93,8 @@
                 dateList: [],
                 curDate: new Date(),
                 updateList: [],
-                tempDate: ''
+                tempDate: '',
+                isDisable: false
             };
         },
         methods: {
@@ -141,6 +142,12 @@
                     };
                     this.updateList.push(obj)
                 }
+
+                this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+                }, 2000)
+                
                 var url = this.url + '/schedulingAction/updateSched';
                 this.$ajax({
                     method: 'POST',

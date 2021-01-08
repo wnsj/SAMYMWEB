@@ -166,7 +166,7 @@
 					</div>
 					<div class="col-md-12 form-group clearfix">
 						<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="closeCurrentPage()">返回</button>
-						<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="certainAction()">确认</button>
+						<button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="certainAction()">确认</button>
 					</div>
 				</form>
 			</div>
@@ -224,6 +224,7 @@
 					birthday: '',
 				},
 				title: '',
+				isDisable: false
 			};
 		},
 		methods: {
@@ -376,6 +377,7 @@
 			},
 			//the event of addtional button
 			certainAction() {
+				
 				//console.log('the event of addtional button')
 				var reg =
 					/(^[0-9]{3,4}\-[0-9]{7,8}$)|(^[0-9]{7,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)|(^0{0,1}14[0-9]{9}$)|(^0{0,1}15[0-9]{9}$)|(^0{0,1}16[0-9]{9}$)|(^0{0,1}17[0-9]{9}$)|(^0{0,1}18[0-9]{9}$)|(^0{0,1}19[0-9]{9}$)/;
@@ -443,6 +445,11 @@
 					return
 				}
 
+                this.isDisable = true
+                setTimeout(() => {
+                    this.isDisable = false
+				}, 2000)
+				
 				switch (this.title) {
 					case '新增':
 						var url = this.url + '/visitorAction/addVisitor';

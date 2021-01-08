@@ -126,7 +126,7 @@
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label class="col-md-4 control-label text-right nopad end-aline">折前总额</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<input type="text" class="form-control" v-model="consume.preFoldTotalPrice" disabled="disabled">
+						<input type="text" class="form-control" v-model="preFoldTotalPrice" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -362,6 +362,7 @@
 				titttl: 0,
 				titles: 0,
 				receivables: 0, //应交
+				preFoldTotalPrice: 0, //折前总价
 				consume: {
 					proStyle: '',
 					memNum: '', //会员名
@@ -373,7 +374,6 @@
 					couponNum: 0,
 					couponName: '',
 					receivable: 0, //折后
-
 					preFoldTotalPrice: '', //折前总价
 					realCross: '', //实缴（折后）
 					actualCross: '0', //实交金额
@@ -492,19 +492,20 @@
 			},
 			// Initialization consume’s content
 			initAuditPur(param) {
-
+				
 				this.purAuditId = param.piId;
 				this.productId = param.proId;
 				this.userId = param.memNum;
 				this.getCoupon(this.userId, param.proId)
-				console.log(this.consume.price)
-				console.log(this.consume.actualCount)
-				console.log(this.consume.discount)
-				if(this.consume.price =='' || this.consume.actualCount == '' || this.consume.discount == ''){
+				this.consume.price = param.price; //折前单价
+				this.consume.actualCount = param.actualCount; //实际次数
+				this.consume.discount = param.discount; //折扣
+				if(this.consume.price =='' && this.consume.price ==null || this.consume.actualCount == '' &&this.consume.actualCount == null || this.consume.discount == '' && this.consume.discount == null){
 					this.consume.price = 0;
 					this.consume.actualCount = 0;
 					this.consume.discount = 0;
 				}else{
+					this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount));
 					this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(this.consume.discount)).div(new Decimal(100));
 				}
 				$('#AuditPurContent').modal({
@@ -531,10 +532,10 @@
 				this.$refs.ContinStateRef.setObj(param.continState)
 				this.$refs.VisitStateRef.setObj(param.visitState)
 				if (!this.isBlank(param.discount) && param.discount != 0) {
-					this.consume.preFoldTotalPrice = new Decimal(param.receivable).div(new Decimal(param.discount)).mul(new Decimal(
+					this.preFoldTotalPrice = new Decimal(this.receivables).div(new Decimal(param.discount)).mul(new Decimal(
 						100)).toFixed(2)
 				} else {
-					this.consume.preFoldTotalPrice = 0
+					this.preFoldTotalPrice = 0
 				}
 				Object.assign(this.consume, param)
 				this.queryUnfinishedPro(param)
@@ -594,11 +595,15 @@
 					this.consume.discount = param.discount //折扣
 					this.consume.preFoldTotalPrice = param.totalPrice //课程总额
 					this.consume.receivable = param.discouAmount //应交
-					if(this.consume.price =='' || this.consume.actualCount == '' || this.consume.discount == ''){
+					console.log(this.consume.price)
+					console.log(this.consume.actualCount)
+					console.log(this.consume.discount)
+					if(this.consume.price == null &&this.consume.price == '' || this.consume.actualCount == null&&this.consume.actualCount == '' || this.consume.discount == null&&this.consume.discount == ''){
 						this.consume.price = 0;
 						this.consume.actualCount = 0;
 						this.consume.discount = 0;
 					}else{
+						this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount));
 						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(this.consume.discount)).div(new Decimal(100));
 					}
 					// this.receivables = param.discouAmount //应交

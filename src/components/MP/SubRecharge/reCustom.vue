@@ -121,13 +121,13 @@
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">折前总额</label><span class="sign-left">:</span>
 					<div class="col-md-7">
-						<input type="text" class="form-control" v-model="consume.preFoldTotalPrice" disabled="disabled">
+						<input type="text" class="form-control" v-model="preFoldTotalPrice" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">折后总额</label><span class="sign-left">:</span>
 					<div class="col-md-7">
-						<input type="text" class="form-control" v-model="consume.receivable" disabled="disabled">
+						<input type="text" class="form-control" v-model="receivables" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -386,6 +386,8 @@
 				counselorList: [],
 				productId: '',
 				userId: '',
+				receivables: 0, //应交(折前)
+				preFoldTotalPrice: 0, //折前总价
 				consume: {
 					proStyle: '',
 					memNum: '', //会员名
@@ -399,11 +401,11 @@
 					preFoldTotalPrice: '', //折前总价
 					realCross: 0, //实缴（折后）
 					proId: '', //项目id
-					discount: '', //折扣
-					price: '', //折前单价
+					discount: 0, //折扣
+					price: 0, //折前单价
 					disPrice: '', //折后单价
-					totalCount: '', //总次数
-					actualCount: '', //实际次数
+					totalCount: 0, //总次数
+					actualCount: 0, //实际次数
 					consumedCount: '', //已经消费次数
 					giveCount: '', //赠送次数
 					giveProId: '', //赠送项目
@@ -518,6 +520,20 @@
 				this.consumAuditId = param.cid;
 				this.productId = param.empId;
 				this.userId = param.memNum;
+				this.consume.price = param.price; //折前单价
+				this.consume.totalCount = param.totalCount; //实际次数
+				this.consume.discount = param.discount; //折扣
+				this.preFoldTotalPrice = 0;
+				this.receivables = 0;
+				// if(this.consume.price =='' || this.consume.price ==null || this.consume.totalCount == '' || this.consume.totalCount == null || this.consume.discount == '' || this.consume.discount == null){
+				// 	this.consume.price = 0;
+				// 	this.consume.totalCount = 0;
+				// 	this.consume.discount = 0;
+				// } else {
+				// 	this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
+				// 	this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
+				// 		this.consume.discount)).div(new Decimal(100));
+				// }
 				// this.clickItemObj.itemId = 0
 				$('#customContent').modal({
 					backdrop: 'static',
@@ -680,6 +696,15 @@
 					this.consume.discount = param.discount
 					this.consume.preFoldTotalPrice = param.totalPrice
 					this.consume.receivable = param.discouAmount
+					if (this.consume.price == null || this.consume.totalCount == null || this.consume.discount == null) {
+						this.consume.price = 0;
+						this.consume.totalCount = 0;
+						this.consume.discount = 0;
+					} else {
+						this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
+						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
+							this.consume.discount)).div(new Decimal(100));
+					}
 					this.consume.proType = param.proType
 				}
 			},
@@ -1127,9 +1152,15 @@
 								this.selectObj = item
 								this.projectFlag = true
 								this.counselorFlag = true
+								this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
+								this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
+									this.consume.discount)).div(new Decimal(100));
+							}else{
+								this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
+								this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
+									this.consume.discount)).div(new Decimal(100));
 							}
 						})
-
 					} else {
 						alert(res.retMsg)
 					}
@@ -1192,8 +1223,10 @@
 					this.consume.price = item.price //折前单价
 					this.consume.totalCount = item.totalCount //实际次数
 					this.consume.discount = item.discount //折扣
-					this.consume.receivable = item.receivable //应交
-					this.consume.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
+					this.receivables = parseInt(item.totalCount) * parseInt(item.price) * parseInt(item.discount) / 100 //应交
+					this.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
+					// this.consume.receivable = item.receivable //应交
+					// this.consume.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
 					this.consume.proType = item.proType
 					return
 				} else {
@@ -1236,6 +1269,8 @@
 							this.consume.totalCount = item.totalCount //实际次数
 							this.consume.discount = item.discount //折扣
 							this.consume.receivable = item.receivable //应交
+							this.receivables = parseInt(item.totalCount) * parseInt(item.price) * parseInt(item.discount) / 100 //应交
+							this.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
 							this.consume.realCross = item.realCross //实缴
 							this.consume.proType = item.proType
 							this.selectObj = item
@@ -1270,6 +1305,8 @@
 						this.consume.totalCount = item.totalCount //实际次数
 						this.consume.discount = item.discount //折扣
 						this.consume.receivable = item.receivable //应交
+						this.receivables = parseInt(item.totalCount) * parseInt(item.price) * parseInt(item.discount) / 100 //应交
+						this.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
 						this.consume.realCross = item.realCross //实缴
 						this.consume.proType = item.proType
 					}

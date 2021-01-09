@@ -37,7 +37,7 @@
                                 data-toggle="modal"
                                 v-on:click="closeCurrentPage()">返回
                         </button>
-                        <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-25"
+                        <button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10 jh-mr-25"
                                 data-toggle="modal"
                                 v-on:click="certainAction()">确认
                         </button>
@@ -65,7 +65,7 @@
                     proName: '',
                     endDate: ''
                 },
-
+                isDisable: false
             };
         },
         methods: {
@@ -90,6 +90,12 @@
                     alert("结束时间不能为空")
                     return
                 }
+
+                this.isDisable = true
+				setTimeout(() => {
+					this.isDisable = false
+                }, 2000)
+                
                 var url = this.url + '/purchasedItemsAction/updatePurchasedItems'
 
                 this.$ajax({

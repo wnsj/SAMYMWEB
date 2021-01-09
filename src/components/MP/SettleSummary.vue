@@ -121,10 +121,12 @@
 						<dPicker class="wd100" v-model="endCreateDate"></dPicker>
 					</div>
 				</div>
-				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
+					v-on:click="conditionCheck(1)">查询</button>
+				<!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" data-toggle="modal"
 					v-on:click="conditionCheck(1)">查询</button>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		</el-collapse-transition>

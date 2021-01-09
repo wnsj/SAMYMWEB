@@ -549,6 +549,7 @@
 						$(".xianzhi2 span").css('right', '-20px');
 					}
 					this.addFee(this.couponId)
+                    
 				}
 			},
 		},
@@ -596,7 +597,7 @@
 			}
 			if (localStorage.getItem('userType')) {
 				this.userType = localStorage.getItem('userType');
-				localStorage.removeItem('userType');
+				//localStorage.removeItem('userType');
 			}
 			if (localStorage.getItem('categoryType')) {
 				this.categoryType = localStorage.getItem('categoryType');

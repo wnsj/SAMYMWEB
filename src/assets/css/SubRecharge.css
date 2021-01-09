@@ -20,9 +20,10 @@
 	text-align: center;
 	color:#97753d;
 	position: absolute;
-	right: 50px;
+	left: 112px;
 	bottom: 12px;
 	font-size: 18px;
+	width: 170px;
 }
 
 .you .man2 .gou1 {
@@ -160,28 +161,34 @@
 .you ul li .manzu {
 	overflow: auto;
 	position: absolute;
-	right: 50px;
+	left: 112px;
 	top: 32px;
 	font-weight: bold;
 	color: #97753d;
 	font-size: 16px;
+	width: 170px;
+	text-align: center;
 }
 
 .you ul li .titleSY {
 	overflow: auto;
 	position: absolute;
-	left: 120px;
+	left: 112px;
 	top: 10px;
 	color: #97753d;
 	font-size: 16px;
+	width: 170px;
+	text-align: center;
 }
 .you ol li .titleSY {
 	overflow: auto;
 	position: absolute;
-	right: 120px;
+	left: 114px;
 	top: 10px;
 	color: #f1c49b;
 	font-size: 16px;
+	width: 170px;
+	text-align: center;
 }
 
 .you ol li .niucha1{

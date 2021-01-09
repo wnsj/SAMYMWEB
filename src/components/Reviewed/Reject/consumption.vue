@@ -279,8 +279,11 @@
 
 
 			//check the list of department
-			getConsumRejectFind() {
-				if (this.selectDataFlag) {
+			getConsumRejectFind(page) {
+				// if (this.selectDataFlag) {
+				// 	this.current = 1
+				// }
+				if (page == 1) {
 					this.current = 1
 				}
 				this.showSelect = false

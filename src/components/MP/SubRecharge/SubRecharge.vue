@@ -480,6 +480,8 @@
 				}
 				this.projectObj = {}
 				$("input[name='radioGroup']").prop("checked", "");
+				this.receivables = 0;  //折后总额清零
+				this.titles = 0;  //优惠券数清零
 				this.consume = {
 					memNum: param.visId, //会员名
 					memName: param.visitorName,
@@ -704,6 +706,7 @@
 			},
 			isArrearsChange() {
 				if (this.consume.isArrears == '1') {
+					this.consume.arrears = 0;
 					this.isArrearsShow = false
 					var ss = new Decimal(this.consume.receivable)
 					this.consume.realCross = ss;
@@ -715,12 +718,34 @@
 				if (this.cash.select != '') {
 					var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
 					this.consume.realCross = ss;
+					if (this.consume.arrears != '') {
+						var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+						this.consume.realCross = ss;
+					}
+				}else{
+					this.cash.select = 0;
+					console.log(new Decimal(this.cash.select))
+					if (this.consume.arrears !== '') {
+						var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+						this.consume.realCross = ss;
+					}
 				}
 			},
 			qianfei() {
 				if (this.consume.arrears != '') {
 					var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
 					this.consume.realCross = ss;
+					if (this.cash.select != '') {
+						var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+						this.consume.realCross = ss;
+					}
+				}else{
+					this.consume.arrears = 0;
+					console.log(this.cash.select)
+					if (this.cash.select !== '') {
+						var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
+						this.consume.realCross = ss;
+					}
 				}
 
 			},

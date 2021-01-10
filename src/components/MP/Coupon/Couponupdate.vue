@@ -75,8 +75,8 @@
 								<div class="col-md-7">
 									<div class="xianzhi wuxian" style="display: block;"><input disabled="disabled" class="xian" type="radio" name="radioGroup1"
 										 v-model="isLimit" value="2" /><label class="xian1">无限制</label></div>
-									<div class="xianzhi1"><input class="xian" type="radio" disabled="disabled" name="radioGroup1" v-model="isLimit" value="1" @blur="manjian4()" /><label
-										 class="xian1">满</label></div>
+									<div class="xianzhi1"><input class="xian" type="radio" disabled="disabled" name="radioGroup1" v-model="isLimit"
+										 value="1" @blur="manjian4()" /><label class="xian1">满</label></div>
 									<div class="xianzhi2"><input type="text" placeholder="0" v-model="fullCondition" @blur="manjian1()"><span>元可用</span></div>
 								</div>
 								<span class="err-msg8">{{ errors[0] }}</span>
@@ -135,14 +135,14 @@
 								<b>*</b>
 								<label class="col-md-1 control-label text-right nopad end-aline">选择产品</label><span class="sign-left">:</span>
 								<div class="col-md-8 shiyong shiyong1">
-									<div class="xianzhi"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="1" /><label
+									<div class="xianzhi"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="1" @click="shangpin(1)" /><label
 										 class="xian1">全品类</label></div>
-									<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="2" /><label
+									<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup5" v-model="categoryType" value="2" @click="shangpin(2)" /><label
 										 class="xian1">指定分类</label></div>
 									<div class="xianzhi3_1">
 										<p style="cursor: pointer;" v-on:click="xus()" v-has="'SAMY:MP:Coupon:select-type'">选择分类</p>
 									</div>
-									<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" v-model="categoryType" name="radioGroup5"
+									<div class="xianzhi1" style="margin-left:25px;"><input class="xian" type="radio" v-model="categoryType" name="radioGroup5" @click="shangpin(3)"
 										 value="3" /><label class="xian1">指定产品</label></div>
 									<div class="xianzhi3_1">
 										<p style="cursor: pointer;" v-on:click="ots()" v-has="'SAMY:MP:Coupon:select-type'">选择产品</p>
@@ -183,7 +183,8 @@
 						<div class="col-md-6 form-group clearfix"></div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" :disabled="isDisable" class="btn btn-primary pull-center m_r_10 jh-mr-25" v-on:click="updataFee()" v-has="'SAMY:CouponManage'">确认</button>
+						<button type="button" :disabled="isDisable" class="btn btn-primary pull-center m_r_10 jh-mr-25" v-on:click="updataFee()"
+						 v-has="'SAMY:CouponManage'">确认</button>
 						<button type="button" class="btn btn-warning pull-center m_r_10 jh-mr-35" @click="goOff()" v-has="'SAMY:CouponManage'">取消</button>
 					</div>
 				</div>
@@ -252,72 +253,87 @@
 			},
 			//点击选择用户按钮跳转
 			seles() {
+				this.couId = ''
+				this.couId = this.$route.query.couId
 				this.$router.push({
-					path: '../../MP/Coupon/updataselectAdd'
+					path: '../../MP/Coupon/updataselectAdd',
+					query:{
+						couId:this.couId
+					}
 				})
 				localStorage.setItem('projectList', this.projectList);
 				localStorage.setItem('userList', this.userList);
 				localStorage.setItem('categoryList', this.categoryList);
-				localStorage.setItem('couponName', this.couponName)
-				localStorage.setItem('operatorId', this.operatorId)
-				localStorage.setItem('couponType', this.couponType)
-				localStorage.setItem('startTime', this.startTime)
-				localStorage.setItem('endTime', this.endTime)
-				localStorage.setItem('state', this.state)
-				localStorage.setItem('fullCondition', this.fullCondition)
-				localStorage.setItem('recude', this.recude)
-				localStorage.setItem('isLimit', this.isLimit)
-				localStorage.setItem('isVaild', this.isVaild)
-				localStorage.setItem('userType', this.userType)
-				localStorage.setItem('categoryType', this.categoryType)
-				localStorage.setItem('limitGet', this.limitGet)
-				localStorage.setItem('allCount', this.allCount)
+				localStorage.setItem('couponName', this.couponName);
+				localStorage.setItem('couId', this.couId);
+				localStorage.setItem('couponType', this.couponType);
+				localStorage.setItem('startTime', this.startTime);
+				localStorage.setItem('endTime', this.endTime);
+				localStorage.setItem('state', this.state);
+				localStorage.setItem('fullCondition', this.fullCondition);
+				localStorage.setItem('recude', this.recude);
+				localStorage.setItem('isLimit', this.isLimit);
+				localStorage.setItem('isVaild', this.isVaild);
+				localStorage.setItem('userType', this.userType);
+				localStorage.setItem('categoryType', this.categoryType);
+				localStorage.setItem('limitGet', this.limitGet);
+				localStorage.setItem('allCount', this.allCount);
+			},
+			shangpin(num){
+				this.categoryType = num;
+				console.log(this.categoryType)
 			},
 			//点击选择分类按钮跳转
 			xus() {
+				this.couId = ''
+				this.couId = this.$route.query.couId
 				this.$router.push({
 					path: '../../MP/Coupon/updataselect-type'
+					
 				})
 				localStorage.setItem('projectList', this.projectList);
 				localStorage.setItem('userList', this.userList);
 				localStorage.setItem('categoryList', this.categoryList);
-				localStorage.setItem('couponName', this.couponName)
-				localStorage.setItem('operatorId', this.operatorId)
-				localStorage.setItem('couponType', this.couponType)
-				localStorage.setItem('startTime', this.startTime)
-				localStorage.setItem('endTime', this.endTime)
-				localStorage.setItem('state', this.state)
-				localStorage.setItem('fullCondition', this.fullCondition)
-				localStorage.setItem('recude', this.recude)
-				localStorage.setItem('isLimit', this.isLimit)
-				localStorage.setItem('isVaild', this.isVaild)
-				localStorage.setItem('userType', this.userType)
-				localStorage.setItem('categoryType', this.categoryType)
-				localStorage.setItem('limitGet', this.limitGet)
-				localStorage.setItem('allCount', this.allCount)
+				localStorage.setItem('couponName', this.couponName);
+				localStorage.setItem('couId', this.couId);
+				localStorage.setItem('couponType', this.couponType);
+				localStorage.setItem('startTime', this.startTime);
+				localStorage.setItem('endTime', this.endTime);
+				localStorage.setItem('state', this.state);
+				localStorage.setItem('fullCondition', this.fullCondition);
+				localStorage.setItem('recude', this.recude);
+				localStorage.setItem('isLimit', this.isLimit);
+				localStorage.setItem('isVaild', this.isVaild);
+				localStorage.setItem('userType', this.userType);
+				localStorage.setItem('categoryType', this.categoryType);
+				localStorage.setItem('limitGet', this.limitGet);
+				localStorage.setItem('allCount', this.allCount);
 			},
 			//点击选择产品按钮跳转
 			ots() {
+				this.couId = ''
+				this.couId = this.$route.query.couId
 				this.$router.push({
 					path: '../../MP/Coupon/updataselect-chan',
+					
 				})
 				localStorage.setItem('projectList', this.projectList);
 				localStorage.setItem('userList', this.userList);
 				localStorage.setItem('categoryList', this.categoryList);
-				localStorage.setItem('couponName', this.couponName)
-				localStorage.setItem('operatorId', this.operatorId)
-				localStorage.setItem('couponType', this.couponType)
-				localStorage.setItem('startTime', this.startTime)
-				localStorage.setItem('endTime', this.endTime)
-				localStorage.setItem('state', this.state)
-				localStorage.setItem('fullCondition', this.fullCondition)
-				localStorage.setItem('recude', this.recude)
-				localStorage.setItem('isLimit', this.isLimit)
-				localStorage.setItem('isVaild', this.isVaild)
-				localStorage.setItem('userType', this.userType)
-				localStorage.setItem('categoryType', this.categoryType)
-				localStorage.setItem('limitGet', this.limitGet)
-				localStorage.setItem('allCount', this.allCount)
+				localStorage.setItem('couponName', this.couponName);
+				localStorage.setItem('couId', this.couId);
+				localStorage.setItem('couponType', this.couponType);
+				localStorage.setItem('startTime', this.startTime);
+				localStorage.setItem('endTime', this.endTime);
+				localStorage.setItem('state', this.state);
+				localStorage.setItem('fullCondition', this.fullCondition);
+				localStorage.setItem('recude', this.recude);
+				localStorage.setItem('isLimit', this.isLimit);
+				localStorage.setItem('isVaild', this.isVaild);
+				localStorage.setItem('userType', this.userType);
+				localStorage.setItem('categoryType', this.categoryType);
+				localStorage.setItem('limitGet', this.limitGet);
+				localStorage.setItem('allCount', this.allCount);
 			},
 			//限制领取
 			xianhzi() {
@@ -325,7 +341,7 @@
 					alert("输入的不是正整数或者0！")
 					this.limitGet = ''
 					return false
-				} 
+				}
 			},
 			man() {
 				if (this.couponType == '1') {
@@ -346,16 +362,10 @@
 					alert("输入的不是正整数/0！")
 					this.allCount = ''
 					return false
-				} 
+				}
 			},
 			//查询优惠券
 			addFee(couponId) {
-				if (!this.isBlank(this.startTime)) {
-					this.startTime = this.moment(this.startTime, "YYYY-MM-DD 00:00:00")
-				}
-				if (!this.isBlank(this.endTime)) {
-					this.endTime = this.moment(this.endTime, "YYYY-MM-DD 23:59:59")
-				}
 				var url = this.url + '/couponController/selectCouponById'
 				var formData = new FormData();
 				formData.append('couponId', couponId);
@@ -416,39 +426,39 @@
 			updataFee() {
 				this.$refs.addArcForm.validate().then(success => {
 					if (success) {
-						if(this.isVaild ==2){
-							if(this.startTime==''){
+						if (this.isVaild == 2) {
+							if (this.startTime == '' || this.startTime == null) {
 								alert("请填写开始时间!");
 								return false
-							}else if(this.endTime==''){
+							} else if (this.endTime == '' || this.endTime == null) {
 								alert("请填写结束时间！");
 								return false
 							}
 						}
-						// if(this.userType =='3'){
-						// 	if(this.userList==''|| this.userList == null){
-						// 		alert("请勾选使用用户!");
-						// 		return false
-						// 	}else{
-								
-						// 	}
-						// }
-						// if(this.categoryType =='2'){
-						// 	if(this.categoryList=='' || this.categoryList == null){
-						// 		alert("请勾选分类!");
-						// 		return false
-						// 	}else{
-								
-						// 	}
-						// }
-						// if(this.categoryType =='3'){
-						// 	if(this.projectList=='' || this.projectList == null){
-						// 		alert("请勾选产品!");
-						// 		return false
-						// 	}else{
-								
-						// 	}
-						// }
+						if (this.userType == 3) {
+							if (this.userList == '' || this.userList == null) {
+								alert("请勾选使用用户!");
+								return false
+							} else {
+
+							}
+						}
+						if (this.categoryType == 2) {
+							if (this.categoryList == '' || this.categoryList == null) {
+								alert("请勾选分类!");
+								return false
+							} else {
+
+							}
+						}
+						if (this.categoryType == 3) {
+							if (this.projectList == '' || this.projectList == null) {
+								alert("请勾选产品!");
+								return false
+							} else {
+
+							}
+						}
 						var url = this.url + '/couponController/updateCoupon'
 						this.UpdataScale(url)
 					} else {
@@ -458,11 +468,11 @@
 			},
 			UpdataScale(url) {
 				var formData = new FormData();
-				if (this.userType == '1') {
+				if (this.userType == 1) {
 
-				} else if (this.userType == '2') {
+				} else if (this.userType == 2) {
 
-				} else if (this.userType == '3') {
+				} else if (this.userType == 3) {
 					var userList = localStorage.getItem('userList');
 					var stringResult1 = userList.split(',');
 					for (var i = 0; i < stringResult1.length; i++) {
@@ -470,39 +480,40 @@
 					}
 				}
 
-				if (this.categoryType == '1') {
+				if (this.categoryType == 1) {
 
-				} else if (this.categoryType == '2') {
+				} else if (this.categoryType == 2) {
 					var categoryList = localStorage.getItem('categoryList');
 					var stringResult2 = categoryList.split(',');
 					for (var i = 0; i < stringResult2.length; i++) {
 						formData.append('categoryList', stringResult2[i])
 					}
-				} else if (this.categoryType == '3') {
+				} else if (this.categoryType == 3) {
 					var projectList = localStorage.getItem('projectList');
 					var stringResult = projectList.split(',');
 					for (var i = 0; i < stringResult.length; i++) {
 						formData.append('projectList', stringResult[i])
 					}
 				}
-				if (this.isLimit == '1') {
+				if (this.isLimit == 1) {
 					formData.append('fullCondition', this.fullCondition)
 				} else {
 
 				}
-				if (!this.isBlank(this.startTime)) {
-					this.startTime = this.moment(this.startTime, "YYYY-MM-DD 00:00:00")
+				if (this.isVaild == 2) {
+					if (!this.isBlank(this.startTime)) {
+						this.startTime = this.moment(this.startTime, "YYYY-MM-DD 00:00:00")
+					}
+					if (!this.isBlank(this.endTime)) {
+						this.endTime = this.moment(this.endTime, "YYYY-MM-DD 23:59:59")
+					}
+					formData.append('startTime', this.startTime);
+					formData.append('endTime', this.endTime);
 				}
-				if (!this.isBlank(this.endTime)) {
-					this.endTime = this.moment(this.endTime, "YYYY-MM-DD 23:59:59")
-				}
-				this.couId = ''
-				this.couId = this.$route.query.couId
-				formData.append('couId', this.couId);
+				var couid = localStorage.getItem('couId');
+				formData.append('couId', couid);
 				formData.append('couponName', this.couponName);
 				formData.append('state', this.state);
-				formData.append('startTime', this.startTime);
-				formData.append('endTime', this.endTime);
 				formData.append('isVaild', this.isVaild);
 				formData.append('userType', this.userType);
 				formData.append('categoryType', this.categoryType);
@@ -510,10 +521,10 @@
 				formData.append('allCount', this.allCount);
 
 				this.isDisable = true
-                setTimeout(() => {
-                    this.isDisable = false
+				setTimeout(() => {
+					this.isDisable = false
 				}, 2000)
-				
+
 				this.$ajax({
 					method: 'POST',
 					url: url,
@@ -558,33 +569,25 @@
 				this.couponId = ''
 				this.couponId = this.$route.query.couId
 				if (this.couponId != undefined && this.couponId != '') {
-					if (this.couponType == '1') {
-						$(".jin").hide();
-						$(".zhe").show();
-						$(".wuxian").hide();
-						$(".xianzhi2 span").css('right', '35px');
-					} else if (this.couponType == '2') {
-						$(".jin").show();
-						$(".zhe").hide();
-						$(".wuxian").show();
-						$(".xianzhi2 span").css('right', '-20px');
-					}
 					this.addFee(this.couponId)
-                    
+
 				}
 			},
 		},
-		created(){
+		created() {
 			this.getAditId();
 		},
 		mounted() {
+			// this.getAditId();
+			this.couId = '';
+			this.couId = this.$route.query.couId;
 			if (localStorage.getItem('couponName')) {
 				this.couponName = localStorage.getItem('couponName');
 				localStorage.removeItem('couponName');
 			}
-			if (localStorage.getItem('operatorId')) {
-				this.operatorId = localStorage.getItem('operatorId');
-				localStorage.removeItem('operatorId');
+			if (localStorage.getItem('couId')) {
+				this.couId = localStorage.getItem('couId');
+				// localStorage.removeItem('operatorId');
 			}
 			if (localStorage.getItem('couponType')) {
 				this.couponType = localStorage.getItem('couponType');
@@ -647,7 +650,7 @@
 				// localStorage.removeItem('userList');
 			}
 		}
-		
+
 	}
 </script>
 

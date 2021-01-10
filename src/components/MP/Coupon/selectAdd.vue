@@ -296,11 +296,6 @@
 					this.empId = param.empId
 				}
 			},
-			resetDate(row, column, cellValue, index) {
-				if (cellValue !== '' && cellValue !== null) {
-					return cellValue.substring(0, 10)
-				}
-			},
 			resetVisit(row, column, cellValue, index) {
 				return cellValue == 1 ? "初访" : "复访"
 			},

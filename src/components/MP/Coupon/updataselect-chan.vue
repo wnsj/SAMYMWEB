@@ -239,6 +239,8 @@
 			},
 			//点击确定按钮跳转
 			go1() {
+				this.couId = '';
+				this.couId = this.$route.query.couId;
 				var win = window.localStorage;
 				var bb = '';
 				for (var i = 0; i < this.projectList.length; i++) {
@@ -259,10 +261,9 @@
 					}
 				}
 				// console.log(this.newprojectList)
-				// this.$router.push({
-				// 	path: '../../MP/Coupon/Couponupdate',
-				// })
-				this.$router.go(-1);
+				this.$router.push({
+					path: '../../MP/Coupon/Couponupdate'
+				})
 			},
 			employeeChange(param) {
 				if (this.isBlank(param)) {
@@ -320,22 +321,6 @@
 				setTimeout(() => {
 					this.addClass = false;
 				}, 400)
-			},
-			//feedback department information
-			positionChange: function(param) {
-				if (this.isBlank(param)) {
-					this.posId = ""
-				} else {
-					this.posId = param.posId
-				}
-			},
-
-			tabChange(item) {
-				this.getConsultStore()
-
-			},
-			editorAction(item) {
-				this.objectContent = item
 			},
 
 			//check the list of department

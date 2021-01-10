@@ -69,6 +69,7 @@
 				name: '',
 				isMem: '',
 				prtId: '',
+				couId:'',
 				typeName: '',
 				state: '',
 				addClass: false,
@@ -119,6 +120,8 @@
 			},
 			//点击确定按钮跳转
 			go1() {
+				this.couId = ''
+				this.couId = this.$route.query.couId
 				var win = window.localStorage;
 				var bb = '';
 				for (var i = 0; i < this.categoryList.length; i++) {
@@ -138,11 +141,9 @@
 						storage.setItem('categoryList',bb)
 					}
 				}
-				// console.log(this.newprojectList)
-				// this.$router.push({
-				// 	path: '../../MP/Coupon/Couponupdate',
-				// })
-				this.$router.go(-1);
+				this.$router.push({
+					path: '../../MP/Coupon/Couponupdate'
+				})
 			},
 
 			dataOpen() {

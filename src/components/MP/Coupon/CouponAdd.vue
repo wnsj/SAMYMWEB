@@ -183,7 +183,8 @@
 						<div class="col-md-6 form-group clearfix"></div>
 					</div>
 					<div class="col-md-12 form-group clearfix">
-						<button type="button" :disabled="isDisable" class="btn btn-primary pull-center m_r_10 jh-mr-25" v-on:click="addFee()" v-has="'SAMY:CouponManage'">确认</button>
+						<button type="button" :disabled="isDisable" class="btn btn-primary pull-center m_r_10 jh-mr-25" v-on:click="addFee()"
+						 v-has="'SAMY:CouponManage'">确认</button>
 						<button type="button" class="btn btn-warning pull-center m_r_10 jh-mr-35" @click="goOff()" v-has="'SAMY:CouponManage'">取消</button>
 					</div>
 				</div>
@@ -311,7 +312,7 @@
 						alert("输入的金额数值不能大于5！")
 						return false
 					}
-				}else if(!(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/).test(this.recude)){
+				} else if (!(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/).test(this.recude)) {
 					alert("只能输入正数或者保留两位小数");
 					return false
 				}
@@ -322,12 +323,12 @@
 					alert("只能输入正数或者保留两位小数");
 					return false
 				}
-			
-			
+
+
 			},
-			manjian4(){
-				if(this.isLimit =='1'){
-					if(this.fullCondition == ''){
+			manjian4() {
+				if (this.isLimit == '1') {
+					if (this.fullCondition == '') {
 						alert("请填写使用门槛满减/满折金额！");
 						return false
 					}
@@ -422,37 +423,37 @@
 
 			addAddScale(url) {
 				var formData = new FormData();
-				if (this.userType == '1') {
+				if (this.userType == 1) {
 
-				} else if (this.userType == '2') {
+				} else if (this.userType == 2) {
 
-				} else if (this.userType == '3') {
+				} else if (this.userType == 3) {
 					var userList = localStorage.getItem('userList');
 					var stringResult1 = userList.split(',');
 					for (var i = 0; i < stringResult1.length; i++) {
 						formData.append('userList', stringResult1[i])
 					}
-					
+
 				}
 
-				if (this.categoryType == '1') {
+				if (this.categoryType == 1) {
 
-				} else if (this.categoryType == '2') {
+				} else if (this.categoryType == 2) {
 					var categoryList = localStorage.getItem('categoryList');
 					var stringResult2 = categoryList.split(',');
 					for (var i = 0; i < stringResult2.length; i++) {
 						formData.append('categoryList', stringResult2[i])
 					}
-					
-				} else if (this.categoryType == '3') {
+
+				} else if (this.categoryType == 3) {
 					var projectList = localStorage.getItem('projectList');
 					var stringResult = projectList.split(',');
 					for (var i = 0; i < stringResult.length; i++) {
 						formData.append('projectList', stringResult[i])
 					}
-					
+
 				}
-				if (this.isLimit == '1') {
+				if (this.isLimit == 1) {
 					formData.append('fullCondition', this.fullCondition)
 				} else {
 
@@ -517,31 +518,31 @@
 								return false
 							}
 						}
-						if (this.isLimit == '1') {
+						if (this.isLimit == 1) {
 							if (this.fullCondition == '') {
 								alert("请填写使用门槛满减/满折金额!");
 								return false
-							} 
+							}
 						}
-						if(this.userType ==3){
-							if (this.userList  == '' || this.userList == null) {
+						if (this.userType == 3) {
+							if (this.userList == '' || this.userList == null) {
 								alert("请勾选用户!");
 								return false
 							}
 						}
-						if(this.categoryType ==2){
-							if (this.categoryList  == '' || this.categoryList == null) {
+						if (this.categoryType == 2) {
+							if (this.categoryList == '' || this.categoryList == null) {
 								alert("请勾选分类!");
 								return false
 							}
 						}
-						if(this.categoryType ==3){
-							if (this.projectList  == '' || this.projectList ==null) {
+						if (this.categoryType == 3) {
+							if (this.projectList == '' || this.projectList == null) {
 								alert("请勾选产品!");
 								return false
 							}
 						}
-				
+
 						var url = this.url + '/couponController/addCoupon'
 						this.addAddScale(url)
 					} else {
@@ -633,6 +634,36 @@
 		left: 360px;
 		top: 10px;
 		color: #FF0000;
+	}
+
+	@media screen and (max-width:1920px) {
+		.err-msg1 {
+			left: 505px!important;
+		}
+		.err-msg2 {
+			left: 535px!important;
+		}
+		.err-msg3 {
+			left: 580px!important;
+		}
+		.err-msg4 {
+			left: 492px!important;
+		}
+		.err-msg5 {
+			left: 575px!important;
+		}
+		.err-msg6 {
+			left: 370px!important;
+		}
+		.err-msg7 {
+			left: 320px!important;
+		}
+		.shiyong .xianzhi6 span{
+			right: 215px!important;
+		}
+		.shiyong .xianzhi2 span{
+			right: 100px!important;
+		}
 	}
 
 	.err-msg1 {

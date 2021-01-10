@@ -624,7 +624,7 @@
 	}
 </script>
 
-<style scoped>
+<style scoped="scoped">
 	.err-msg {
 		color: #FF0000;
 	}
@@ -635,37 +635,6 @@
 		top: 10px;
 		color: #FF0000;
 	}
-
-	@media screen and (max-width:1920px) {
-		.err-msg1 {
-			left: 505px!important;
-		}
-		.err-msg2 {
-			left: 535px!important;
-		}
-		.err-msg3 {
-			left: 580px!important;
-		}
-		.err-msg4 {
-			left: 492px!important;
-		}
-		.err-msg5 {
-			left: 575px!important;
-		}
-		.err-msg6 {
-			left: 370px!important;
-		}
-		.err-msg7 {
-			left: 320px!important;
-		}
-		.shiyong .xianzhi6 span{
-			right: 215px!important;
-		}
-		.shiyong .xianzhi2 span{
-			right: 100px!important;
-		}
-	}
-
 	.err-msg1 {
 		position: absolute;
 		left: 355px;
@@ -928,5 +897,34 @@
 		padding-top: 20px !important;
 		padding: 100px;
 		overflow: auto;
+	}
+	@media screen and (min-width:1600px) and (max-width:1920px) {
+		.err-msg1 {
+			left: 505px!important;
+		}
+		.err-msg2 {
+			left: 535px!important;
+		}
+		.err-msg3 {
+			left: 580px!important;
+		}
+		.err-msg4 {
+			left: 492px!important;
+		}
+		.err-msg5 {
+			left: 575px!important;
+		}
+		.err-msg6 {
+			left: 370px!important;
+		}
+		.err-msg7 {
+			left: 320px!important;
+		}
+		.shiyong .xianzhi6 span{
+			right: 215px!important;
+		}
+		.shiyong .xianzhi2 span{
+			right: 100px!important;
+		}
 	}
 </style>

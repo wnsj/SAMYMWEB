@@ -1053,9 +1053,9 @@
 							confirmButtonText: '确定',
 							type: 'success',
 							callback: action => {
+								this.closeCurrentPage()
 								this.$emit('closeCurrentPage', 'succ')
 								this.$store.commit('addCount', 1)
-								this.closeCurrentPage()
 							}
 						})
 					} else {

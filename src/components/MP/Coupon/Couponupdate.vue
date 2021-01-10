@@ -25,7 +25,7 @@
 								<b>*</b>
 								<label class="col-md-2 control-label text-right nopad end-aline">优惠券类型</label><span class="sign-left">:</span>
 								<div class="col-md-7">
-									<select class="form-control" v-model="couponType" @click="man">
+									<select class="form-control" v-model="couponType" @click="man()" disabled="disabled">
 										<option value="2">满减券</option>
 										<option value="1">满折券</option>
 									</select>
@@ -51,7 +51,7 @@
 								<b>*</b>
 								<label class="col-md-2 control-label text-right nopad end-aline">金额</label><span class="sign-left">:</span>
 								<div class="col-md-7  jin1">
-									<input type="number" class="form-control" v-model="recude" @blur="manjian()">
+									<input type="number" class="form-control" v-model="recude" @blur="manjian()" disabled="disabled">
 									<span>元</span>
 								</div>
 								<span class="err-msg2">{{ errors[0] }}</span>
@@ -62,7 +62,7 @@
 								<b>*</b>
 								<label class="col-md-2 control-label text-right nopad end-aline">折扣</label><span class="sign-left">:</span>
 								<div class="col-md-7  zhe1">
-									<input type="number" class="form-control" v-model="recude" @blur="manjian3()">
+									<input type="number" class="form-control" v-model="recude" @blur="manjian3()" disabled="disabled">
 									<span>%</span>
 								</div>
 								<span class="err-msg2">{{ errors[0] }}</span>
@@ -72,10 +72,10 @@
 							<ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
 								<b>*</b>
 								<label class="col-md-2 control-label text-right nopad end-aline">使用门槛</label><span class="sign-left">:</span>
-								<div class="col-md-7" v-model="isLimit">
-									<div class="xianzhi wuxian" style="display: block;"><input class="xian" type="radio" name="radioGroup1"
+								<div class="col-md-7">
+									<div class="xianzhi wuxian" style="display: block;"><input disabled="disabled" class="xian" type="radio" name="radioGroup1"
 										 v-model="isLimit" value="2" /><label class="xian1">无限制</label></div>
-									<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="1" @blur="manjian4()" /><label
+									<div class="xianzhi1"><input class="xian" type="radio" disabled="disabled" name="radioGroup1" v-model="isLimit" value="1" @blur="manjian4()" /><label
 										 class="xian1">满</label></div>
 									<div class="xianzhi2"><input type="text" placeholder="0" v-model="fullCondition" @blur="manjian1()"><span>元可用</span></div>
 								</div>
@@ -94,7 +94,7 @@
 							<ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
 								<b>*</b>
 								<label class="col-md-1 control-label text-right nopad end-aline">有效期</label><span class="sign-left">:</span>
-								<div class="col-md-8 shiyong shiyong1" v-model="isVaild">
+								<div class="col-md-8 shiyong shiyong1">
 									<div class="xianzhi"><input class="xian" type="radio" name="radioGroup3" value="1" @click="youxiao()" v-model="isVaild" /><label
 										 class="xian1">永久有效</label></div>
 									<div class="xianzhi1 data"><input class="xian" id="cats" type="radio" name="radioGroup3" value="2" v-model="isVaild" /><label
@@ -217,6 +217,17 @@
 				categoryType: '', //选择产品
 				limitGet: '', //每人限领取
 				allCount: '', //发放机制
+				cash: {
+					cashId: '',
+					memNum: '',
+					balance: '',
+					select: '',
+					btn: false,
+				},
+				clickItemObj: {
+					itemId: 0,
+					count: 0
+				},
 				title: '',
 				isShow: true,
 				consumeReceivable: '',
@@ -261,7 +272,6 @@
 				localStorage.setItem('categoryType', this.categoryType)
 				localStorage.setItem('limitGet', this.limitGet)
 				localStorage.setItem('allCount', this.allCount)
-
 			},
 			//点击选择分类按钮跳转
 			xus() {
@@ -289,7 +299,7 @@
 			//点击选择产品按钮跳转
 			ots() {
 				this.$router.push({
-					path: '../../MP/Coupon/updataselect-chan'
+					path: '../../MP/Coupon/updataselect-chan',
 				})
 				localStorage.setItem('projectList', this.projectList);
 				localStorage.setItem('userList', this.userList);
@@ -309,6 +319,14 @@
 				localStorage.setItem('limitGet', this.limitGet)
 				localStorage.setItem('allCount', this.allCount)
 			},
+			//限制领取
+			xianhzi() {
+				if (!(/^\+?(0|[1-9][0-9]*)$/).test(this.limitGet)) {
+					alert("输入的不是正整数或者0！")
+					this.limitGet = ''
+					return false
+				} 
+			},
 			man() {
 				if (this.couponType == '1') {
 					$(".jin").hide();
@@ -322,23 +340,13 @@
 					$(".xianzhi2 span").css('right', '-20px');
 				}
 			},
-			//限制领取
-			xianhzi() {
-				if (!(/^\+?(0|[1-9][0-9]*)$/).test(this.limitGet)) {
-					alert("输入的不是正整数或者0！")
-					this.limitGet = ''
-					return false
-				} else {
-			
-				}
-			},
 			//发行量
 			faxing() {
 				if (!(/^\+?(0|[1-9][0-9]*)$/).test(this.allCount)) {
-					alert("输入的不是正整数或者0！")
+					alert("输入的不是正整数/0！")
 					this.allCount = ''
 					return false
-				} else {}
+				} 
 			},
 			//查询优惠券
 			addFee(couponId) {
@@ -408,7 +416,7 @@
 			updataFee() {
 				this.$refs.addArcForm.validate().then(success => {
 					if (success) {
-						if(this.userType ==2){
+						if(this.isVaild ==2){
 							if(this.startTime==''){
 								alert("请填写开始时间!");
 								return false
@@ -417,32 +425,38 @@
 								return false
 							}
 						}
-						if(this.userType ==3){
-							if(this.userList==''|| this.userList == null){
-								alert("请勾选使用用户!");
-								return false
-							}
-						}
-						if(this.categoryType ==2){
-							if(this.categoryList=='' || this.categoryList == null){
-								alert("请勾选分类!");
-								return false
-							}
-						}
-						if(this.categoryType ==3){
-							if(this.projectList=='' || this.projectList == null){
-								alert("请勾选产品!");
-								return false
-							}
-						}
+						// if(this.userType =='3'){
+						// 	if(this.userList==''|| this.userList == null){
+						// 		alert("请勾选使用用户!");
+						// 		return false
+						// 	}else{
+								
+						// 	}
+						// }
+						// if(this.categoryType =='2'){
+						// 	if(this.categoryList=='' || this.categoryList == null){
+						// 		alert("请勾选分类!");
+						// 		return false
+						// 	}else{
+								
+						// 	}
+						// }
+						// if(this.categoryType =='3'){
+						// 	if(this.projectList=='' || this.projectList == null){
+						// 		alert("请勾选产品!");
+						// 		return false
+						// 	}else{
+								
+						// 	}
+						// }
 						var url = this.url + '/couponController/updateCoupon'
-						this.updataFees(url)
+						this.UpdataScale(url)
 					} else {
 						this.$message.error('请填写完整！');
 					}
 				})
 			},
-			updataFees(url) {
+			UpdataScale(url) {
 				var formData = new FormData();
 				if (this.userType == '1') {
 
@@ -515,14 +529,16 @@
 						this.couponName = res.retData.couponName; //优惠券名称
 						this.couId = res.retData.couId; //优惠券名称
 						this.state = res.retData.state; //状态
-						this.begDate = res.retData.startTime; //状态
-						this.endDate = res.retData.endTime; //状态
+						this.startTime = res.retData.startTime; //状态
+						this.endTime = res.retData.endTime; //状态
 						this.couponType = res.retData.couponType; //优惠券类型
 						this.fullCondition = res.retData.fullCondition; //金额
 						this.recude = res.retData.recude; //折扣
-						this.operatorId = res.retData.operatorId;
 						this.isLimit = res.retData.isLimit; //使用门槛
 						this.isVaild = res.retData.isVaild; //有效期
+						this.userList = res.retData.userList; //用户集合
+						this.projectList = res.retData.productList; //产品集合
+						this.categoryList = res.retData.categoryList; //分类集合
 						this.userType = res.retData.userType; //使用用户
 						this.categoryType = res.retData.categoryType; //选择产品
 						this.limitGet = res.retData.limitGet; //每人限领取
@@ -564,69 +580,73 @@
 		mounted() {
 			if (localStorage.getItem('couponName')) {
 				this.couponName = localStorage.getItem('couponName');
+				localStorage.removeItem('couponName');
 			}
 			if (localStorage.getItem('operatorId')) {
 				this.operatorId = localStorage.getItem('operatorId');
+				localStorage.removeItem('operatorId');
 			}
 			if (localStorage.getItem('couponType')) {
 				this.couponType = localStorage.getItem('couponType');
+				localStorage.removeItem('couponType');
 			}
 			if (localStorage.getItem('startTime')) {
 				this.startTime = localStorage.getItem('startTime');
+				localStorage.removeItem('startTime');
 			}
 			if (localStorage.getItem('endTime')) {
 				this.endTime = localStorage.getItem('endTime');
+				localStorage.removeItem('endTime');
 			}
 			if (localStorage.getItem('state')) {
 				this.state = localStorage.getItem('state');
+				localStorage.removeItem('state');
 			}
 			if (localStorage.getItem('fullCondition')) {
 				this.fullCondition = localStorage.getItem('fullCondition');
+				localStorage.removeItem('fullCondition');
 			}
 			if (localStorage.getItem('recude')) {
 				this.recude = localStorage.getItem('recude');
+				localStorage.removeItem('recude');
 			}
 			if (localStorage.getItem('isLimit')) {
 				this.isLimit = localStorage.getItem('isLimit');
+				localStorage.removeItem('isLimit');
 			}
 			if (localStorage.getItem('isVaild')) {
 				this.isVaild = localStorage.getItem('isVaild');
+				localStorage.removeItem('isVaild');
 			}
 			if (localStorage.getItem('userType')) {
 				this.userType = localStorage.getItem('userType');
+				localStorage.removeItem('userType');
 			}
 			if (localStorage.getItem('categoryType')) {
 				this.categoryType = localStorage.getItem('categoryType');
+				localStorage.removeItem('categoryType');
 			}
 			if (localStorage.getItem('limitGet')) {
 				this.limitGet = localStorage.getItem('limitGet');
+				localStorage.removeItem('limitGet');
 			}
 			if (localStorage.getItem('allCount')) {
 				this.allCount = localStorage.getItem('allCount');
+				localStorage.removeItem('allCount');
 			}
 			if (localStorage.getItem('projectList')) {
 				this.projectList = localStorage.getItem('projectList');
+				// localStorage.removeItem('projectList');
 			}
 			if (localStorage.getItem('categoryList')) {
 				this.categoryList = localStorage.getItem('categoryList');
+				// localStorage.removeItem('categoryList');
 			}
 			if (localStorage.getItem('userList')) {
 				this.userList = localStorage.getItem('userList');
+				// localStorage.removeItem('userList');
 			}
-		},
-		created(){
-			if (this.couponType == '1') {
-					$(".jin").hide();
-					$(".zhe").show();
-					$(".wuxian").hide();
-					$(".xianzhi2 span").css('right', '35px');
-				} else if (this.couponType == '2') {
-					$(".jin").show();
-					$(".zhe").hide();
-					$(".wuxian").show();
-					$(".xianzhi2 span").css('right', '-20px');
-				}
-			}
+		}
 		
 	}
 </script>

@@ -1049,14 +1049,15 @@
 					var res = response.data
 					//console.log(res)
 					if (res.retCode == '0000') {
-						alert(res.retMsg)
-						this.$router.push({
-							name: 'consumption',
-						});
-						this.jumpLeft(2);
-						this.closeCurrentPage()
-						this.$emit('closeCurrentPage', 'succ')
-						this.$store.commit('addCount', 1)
+						this.$alert(res.retMsg, '提示', {
+							confirmButtonText: '确定',
+							type: 'success',
+							callback: action => {
+								this.$emit('closeCurrentPage', 'succ')
+								this.$store.commit('addCount', 1)
+								this.closeCurrentPage()
+							}
+						})
 					} else {
 						alert(res.retMsg)
 					}

@@ -46,7 +46,7 @@
 		<div class="xuanzhong_kuang">
 			<h2>已选中：</h2>
 			<ul>
-				<li v-for="item in categoryList" key="index">{{item.typeName}}</li>
+				<li v-for="(item,index) in categoryList" :key="index">{{item.typeName}}</li>
 			</ul>
 		</div>
 		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @click="go1()" v-has="'SAMY:MP:Coupon:Update'">确定</button>

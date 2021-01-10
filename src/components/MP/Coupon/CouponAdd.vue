@@ -429,7 +429,6 @@
 				} else if (this.userType == '3') {
 					var userList = localStorage.getItem('userList');
 					var stringResult1 = userList.split(',');
-					
 					for (var i = 0; i < stringResult1.length; i++) {
 						formData.append('userList', stringResult1[i])
 					}
@@ -441,10 +440,6 @@
 				} else if (this.categoryType == '2') {
 					var categoryList = localStorage.getItem('categoryList');
 					var stringResult2 = categoryList.split(',');
-					if (stringResult2 == '') {
-						alert("请选择分类!");
-						return false
-					}
 					for (var i = 0; i < stringResult2.length; i++) {
 						formData.append('categoryList', stringResult2[i])
 					}
@@ -452,10 +447,6 @@
 				} else if (this.categoryType == '3') {
 					var projectList = localStorage.getItem('projectList');
 					var stringResult = projectList.split(',');
-					if (stringResult == '') {
-						alert("请选择产品!");
-						return false
-					}
 					for (var i = 0; i < stringResult.length; i++) {
 						formData.append('projectList', stringResult[i])
 					}
@@ -533,19 +524,19 @@
 							} 
 						}
 						if(this.userType ==3){
-							if (this.userList  == '') {
+							if (this.userList  == '' || this.userList == null) {
 								alert("请勾选用户!");
 								return false
 							}
 						}
 						if(this.categoryType ==2){
-							if (this.categoryList  == '') {
+							if (this.categoryList  == '' || this.categoryList == null) {
 								alert("请勾选分类!");
 								return false
 							}
 						}
 						if(this.categoryType ==3){
-							if (this.projectList  == '') {
+							if (this.projectList  == '' || this.projectList ==null) {
 								alert("请勾选产品!");
 								return false
 							}

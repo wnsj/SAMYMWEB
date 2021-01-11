@@ -116,7 +116,6 @@
 						</el-popover>
 					</template>
 				</el-table-column>
-				<!-- <el-table-column prop="productTypeName" label="产品类型" width="100" align="center"></el-table-column> -->
 				<el-table-column prop="allCount" label="总发行量" width="100" align="center"></el-table-column>
 				<el-table-column prop="stateName" label="使用状态" width="80" align="center"></el-table-column>
 				<el-table-column align="center" label="操作" min-width="165">

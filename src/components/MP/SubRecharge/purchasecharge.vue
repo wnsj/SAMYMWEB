@@ -500,7 +500,9 @@
 			},
 			// Initialization consume’s content
 			initAuditPur(param) {
-				
+				this.listCouponJian.forEach((item) => {
+					item.checked = true
+				})
 				this.purAuditId = param.piId;
 				this.productId = param.proId;
 				this.userId = param.memNum;

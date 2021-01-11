@@ -701,6 +701,7 @@
 							this.consume.discount)).div(new Decimal(100));
 					}
 					this.consume.proType = param.proType
+					this.consume.realCross = this.receivables
 				}
 			},
 			//付款方式

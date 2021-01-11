@@ -100,7 +100,17 @@
 						</el-popover>
 					</template>
 				</el-table-column>
-				<el-table-column prop="productTypeName" label="产品类型" width="100" align="center"></el-table-column>
+				<el-table-column prop="productTypeName" label="产品类型" :formatter="chanpin" width="100" align="center">
+					<template slot-scope="scope">
+						<el-popover trigger="hover" placement="top" v-if="scope.row.categoryType==2">
+							<p>{{scope.row.product1}}</p>
+							<div slot="reference">
+								<el-tag size="medium" :formatter="chanpin">{{scope.row.productTypeName[0]}}</el-tag>
+							</div>
+						</el-popover>
+					</template>
+				</el-table-column>
+				<!-- <el-table-column prop="productTypeName" label="产品类型" width="100" align="center"></el-table-column> -->
 				<el-table-column prop="allCount" label="总发行量" width="100" align="center"></el-table-column>
 				<el-table-column prop="stateName" label="使用状态" width="80" align="center"></el-table-column>
 				<el-table-column align="center" label="操作" min-width="165">
@@ -208,6 +218,11 @@
 					return cellValue.slice(1)
 				}
 			},
+			chanpin(row, column, cellValue, index) {
+				if (cellValue !== '' && cellValue !== null && cellValue !== undefined) {
+					return cellValue.slice(1)
+				}
+			},
 			// stre(row, column, cellValue, index){
 			// 	if (cellValue !== '' && cellValue !== null && cellValue !== undefined) {
 			// 		return cellValue.substring(0, 10)
@@ -268,11 +283,19 @@
 						this.tableData = res.retData.list
 						for (var i = 0; i < this.tableData.length; i++) {
 							this.tableData[i].product ='';
+							this.tableData[i].product1 ='';
 							for (var j = 0; j < this.tableData[i].productName.length; j++) {
 								if(j == this.tableData[i].productName.length-1){
 									this.tableData[i].product += this.tableData[i].productName[j] 
 								}else{
 									this.tableData[i].product += this.tableData[i].productName[j] + ',';
+								}
+							}
+							for (var k = 0; k < this.tableData[i].productTypeName.length; k++) {
+								if(k == this.tableData[i].productTypeName.length-1){
+									this.tableData[i].product1 += this.tableData[i].productTypeName[k] 
+								}else{
+									this.tableData[i].product1 += this.tableData[i].productTypeName[k] + ',';
 								}
 								
 							}

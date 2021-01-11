@@ -172,7 +172,8 @@
 									<td>{{item2.couponAmount}}</td>
 									<td>{{item2.counselorName}}</td>
 									<td>{{item2.empName}}</td>
-									<td>{{item2.visitType== '1' ? '初访' : '复访'}}</td>
+									<td>{{item2.visitType== '1' ? '初访' : item2.visitType== '2' ? '复访':''}}</td>
+									<!-- <td>{{item2.visitType== '1' ? '初访' : '复访'}}</td> -->
 									<td>{{item2.judgeStateName}}</td>
 									<td>{{item2.continueStateName}}</td>
 									<td>{{item2.psName}}</td>

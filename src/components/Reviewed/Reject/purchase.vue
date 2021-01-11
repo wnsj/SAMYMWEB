@@ -192,7 +192,11 @@
                 auditEndTime: '',                      //  选填 审核结束时间
                 auditState: '',                              //  选填 审核状态
                 addClass: false,
-                selectDataFlag: false
+                selectDataFlag: false,
+                // couponId:'',  //优惠券ID
+                // memNum:'',   //用户ID
+                // proId:'',    //产品ID
+                // couponNum:''  //优惠券数量
             };
         },
         watch: {
@@ -262,9 +266,41 @@
             },
             // check the adding and modifying rule of account
             celledit(row, column, cell, event) {
-			
-                $("#AuditPurContent").modal('show')
-                this.$refs.auditPur.initAuditPur(row)
+                
+                console.log(row)
+                if(row.couponId!=""){
+                    var url = this.url + '/couponController/couponCalculate?productId=' + row.proId + '&couponId=' + row.couponId + '&userId=' + row.memNum
+                    this.$ajax({
+                        method: 'GET',
+                        url: url,
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                            'Access-Token': this.accessToken
+                        },
+                        // param: formData,
+                        dataType: 'json',
+                    }).then((response) => {
+                        var res = response.data
+                        console.log(res)
+                        if (res.retCode == '0000') {
+                            if(res.retData>=row.couponNum){
+                                $("#AuditPurContent").modal('show')
+                                this.$refs.auditPur.initAuditPur(row)
+                            }else{
+                                alert("当前优惠券可用额度不足！请此优惠券相关设置，或重新录入！")
+                            }
+                        } else {
+                            alert(res.retMsg)
+                        }
+
+                    }).catch((error) => {
+                        console.log('查询失败处理')
+                    });
+                }else{
+                    $("#AuditPurContent").modal('show')
+                    this.$refs.auditPur.initAuditPur(row)
+                }
+                
             },
             tabChange(item) {
                 this.getConsultStore()
@@ -328,6 +364,10 @@
                     if (res.retCode == '0000') {
                         this.tableData = res.retData.records
                         this.total = res.retData.total
+                        //this.couponId = res.retData.records.couponId  // 优惠券ID
+                        //this.memNum = res.retData.records.memNum  // 用户ID
+                        //this.proId = res.retData.records.proId  // 产品ID
+                        //this.couponNum = res.retData.records.couponNum  //优惠券数量
                     } else {
                         alert(res.retMsg)
                     }

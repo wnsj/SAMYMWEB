@@ -607,10 +607,6 @@
 					this.consume.discount = param.discount //折扣
 					this.consume.preFoldTotalPrice = param.totalPrice //课程总额
 					// this.consume.receivable = param.discouAmount //应交
-					
-					console.log(this.consume.price)
-					console.log(this.consume.actualCount)
-					console.log(this.consume.discount)
 					if(this.consume.price == null &&this.consume.price == '' || this.consume.actualCount == null&&this.consume.actualCount == '' || this.consume.discount == null&&this.consume.discount == ''){
 						this.consume.price = 0;
 						this.consume.actualCount = 0;
@@ -618,10 +614,10 @@
 					}else{
 						// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount));
 						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(this.consume.discount)).div(new Decimal(100));
+						this.consume.receivable = this.receivables; //应交
+						this.consume.realCross = this.consume.receivable; //实缴
 					}
-					this.consume.receivable = this.receivables //应交
-					// this.receivables = param.discouAmount //应交
-					this.consume.realCross = this.consume.receivable //实缴
+					
 					this.consume.realCross = param.discouAmount //实缴
 					this.consume.proType = param.proType
 					this.cash.select = '0'

@@ -71,7 +71,7 @@
 				<div class="col-md-6 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">退费课时</label><span class="sign-left">:</span>
 					<div class="col-md-7">
-						<input type="text" class="form-control" v-model="refund.consumCount" @change="receivableAction()">
+						<input type="number" class="form-control" v-model="refund.consumCount" @change="receivableAction()" @blur="reces()">
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -382,28 +382,24 @@
 				}
 			},
 			//计算退费金额
+			reces(){
+				if (!(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/).test(this.refund.consumCount)) {
+					alert("只能输入正数或者保留两位小数");
+					this.refund.receivable =''
+					return false
+				}
+			},
 			receivableAction() {
-				console.log(this.refund.consumCount);
-				console.log(this.zongji);
-				console.log(this.yingyong);
-				console.log(this.cos);
-				console.log(this.selectObj.receivable);
-				var jisuan = this.zongji-this.cos;
-				// if (this.refund.consumCount == this.zongji - this.cos) {
-				// 	this.refund.receivable = this.abv
-				// } else {
-				// 	console.log(this.refund.consumCount)
-				// 	this.refund.receivable = new Decimal(this.yingyong).div(new Decimal(this.zongji)).mul(new Decimal(this.refund.consumCount))
-				// 		.toFixed(2)
-				// }
-				
 				if (this.refund.consumCount != null && parseFloat(this.refund.consumCount) > 0) {
 					if (this.selectObj.price != null && parseFloat(this.selectObj.price) > 0) {
 						if (parseFloat(this.refund.consumCount) == parseFloat(this.selectObj.totalCount) - parseFloat(this.selectObj.consumCount)) {
 							// this.refund.consumCount = parseFloat(this.selectObj.totalCount) - parseFloat(this.selectObj.consumCount)
 							this.refund.receivable = new Decimal(this.selectObj.balance)
 							
-						} else {
+						}else if(parseFloat(this.refund.consumCount) > parseFloat(this.selectObj.totalCount) - parseFloat(this.selectObj.consumCount)) {
+							alert("退费课时不能大于剩余课时！");
+							return false
+						}else{
 							this.refund.receivable = new Decimal(this.selectObj.receivable).div(new Decimal(this.selectObj.totalCount)).mul(new Decimal(this.refund.consumCount)).toFixed(2)
 						}
 					} 

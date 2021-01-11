@@ -306,7 +306,7 @@
 					if (!(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/).test(this.recude)) {
 						alert("只能输入正数或者保留两位小数");
 						this.recude = ''
-						return false0
+						return false
 					}
 					if (this.recude - 5 > 0) {
 						alert("输入的金额数值不能大于5！")

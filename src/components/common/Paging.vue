@@ -136,7 +136,7 @@
     }
 
     .page-bar ul {
-        min-width: 700px;
+        min-width: 800px;
         display: block;
         overflow: hidden;
         position: absolute;

@@ -870,7 +870,6 @@
 				this.$refs.VisitStateRef.setObj('0')
 				this.$refs.ContinStateRef.setObj('0')
 				this.$emit('closeCurrentPage')
-				this.unfinishedProLists = []
 				this.listCouponZhe =[]
 				this.listCouponJian =[]
 				//$("#addCustom").modal("hide")
@@ -949,14 +948,6 @@
 					var res = response.data
 					if (res.retCode == '0000') {
 						this.unfinishedProList = res.retData
-						for (var i = 0; i < this.unfinishedProList.length; i++) {
-							console.log(typeof(this.unfinishedProList[i].auditState))
-							if (this.unfinishedProList[i].auditState == '3') {
-								$(".zes").hide();
-							} else {
-								$(".zes").show();
-							}
-						}
 					} else {
 						alert(res.retMsg)
 					}

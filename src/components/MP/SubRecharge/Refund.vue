@@ -401,7 +401,7 @@
 					if (this.selectObj.price != null && parseFloat(this.selectObj.price) > 0) {
 						if (parseFloat(this.refund.consumCount) == parseFloat(this.selectObj.totalCount) - parseFloat(this.selectObj.consumCount)) {
 							// this.refund.consumCount = parseFloat(this.selectObj.totalCount) - parseFloat(this.selectObj.consumCount)
-							this.refund.receivable = new Decimal(this.selectObj.receivable)
+							this.refund.receivable = new Decimal(this.selectObj.balance)
 							
 						} else {
 							this.refund.receivable = new Decimal(this.selectObj.receivable).div(new Decimal(this.selectObj.totalCount)).mul(new Decimal(this.refund.consumCount)).toFixed(2)

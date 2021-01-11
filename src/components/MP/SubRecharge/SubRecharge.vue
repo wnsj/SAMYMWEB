@@ -1139,7 +1139,7 @@
 					this.titttl = 0;
 					this.titles = 0;
 					if (item.couponType == 1) {
-						var us = new Decimal(this.receivables).div(new Decimal(re)).mul(new Decimal(re))
+						var us = new Decimal(this.receivables);
 						this.consume.receivable = us;
 						this.consume.realCross = us;
 					}

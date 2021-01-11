@@ -172,21 +172,21 @@
 .you1 ul li .titleSY {
 	overflow: auto;
 	position: absolute;
-	left: 112px;
+	right: 7px;
 	top: 10px;
 	color: #97753d;
 	font-size: 14px;
-	width: 170px;
+	width: 189px;
 	text-align: center;
 }
 .you1 ol li .titleSY {
 	overflow: auto;
 	position: absolute;
-	right: 35px;
+	right: 7px;
 	top: 10px;
 	color: #f1c49b;
 	font-size: 14px;
-	width: 170px;
+	width: 189px;
 	text-align: center;
 }
 

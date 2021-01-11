@@ -442,7 +442,7 @@
                 },400)
             },
             feedBack(param) {
-                this.checkVisitor(1)
+                // this.checkVisitor(1)
                 if (param == 1)
                     $("#subCdContent").modal('hide')
                 else if (param == 2)

@@ -398,6 +398,7 @@
 							
 						}else if(parseFloat(this.refund.consumCount) > parseFloat(this.selectObj.totalCount) - parseFloat(this.selectObj.consumCount)) {
 							alert("退费课时不能大于剩余课时！");
+							this.refund.receivable =''
 							return false
 						}else{
 							this.refund.receivable = new Decimal(this.selectObj.receivable).div(new Decimal(this.selectObj.totalCount)).mul(new Decimal(this.refund.consumCount)).toFixed(2)

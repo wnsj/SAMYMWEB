@@ -1170,8 +1170,6 @@
 				this.listCouponJian.forEach((item)=>{
 					item.checked=false
 				})
-				console.log(item)
-
 				console.log(this.titttl)
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;

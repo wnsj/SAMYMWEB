@@ -500,9 +500,6 @@
 			},
 			// Initialization consume’s content
 			initAuditPur(param) {
-				this.listCouponJian.forEach((item) => {
-					item.checked = true
-				})
 				this.purAuditId = param.piId;
 				this.productId = param.proId;
 				this.userId = param.memNum;
@@ -510,7 +507,6 @@
 				this.consume.price = param.price; //折前单价
 				this.consume.actualCount = param.actualCount; //实际次数
 				this.consume.discount = param.discount; //折扣
-				
 				if(this.consume.price =='' && this.consume.price ==null || this.consume.actualCount == '' &&this.consume.actualCount == null || this.consume.discount == '' && this.consume.discount == null){
 					this.consume.price = 0;
 					this.consume.actualCount = 0;
@@ -521,7 +517,6 @@
 					this.consume.receivable = this.receivables; //应交
 					this.consume.realCross = this.consume.receivable; //实缴
 				}
-				
 				$('#AuditPurContent').modal({
 					backdrop: 'static',
 					keyboard: false

@@ -138,7 +138,7 @@
 					</div>
 					
 				</div>
-				<button type="button" class="btn btn-primary pull-right m_r_10 margin-right-15" style="margin-right: -30px;" data-toggle="modal" v-on:click="conditionCheck(1)">查询</button>
+				<button type="button" class="btn btn-primary pull-right m_r_10 " style="margin-right: 30px;" data-toggle="modal" v-on:click="conditionCheck(1)">查询</button>
 			</div>
 		</div>
 		</el-collapse-transition>

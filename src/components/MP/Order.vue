@@ -12,7 +12,7 @@
                         <p class="end-aline col-md-11 col-lg-11" >姓名</p><span
                         class="sign-left">:</span>
                     </div>
-                    <div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="appName"></div>
+                    <div class="col-md-7 col-lg-7" style="padding-right: 0;"><input class="form-control" type="text" value="" v-model="appName"></div>
                 </div>
 
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -20,17 +20,17 @@
                         <p class="end-aline col-md-11 col-lg-11" >手机号</p><span
                         class="sign-left">:</span>
                     </div>
-                    <div class="col-md-7 col-lg-7">
+                    <div class="col-md-7 col-lg-7" style="padding-right: 0;">
                         <input class="form-control" type="text" value="" v-model="phone">
                     </div>
                 </div>
 
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5  text-right nopad">
-                        <p class="end-aline col-md-11 col-lg-11" >是否到店</p><span
+                        <p class="end-aline col-md-11 col-lg-11" style="padding-left: 0;padding-right: 0;">是否到店</p><span
                         class="sign-left">:</span>
                     </div>
-                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" style="padding-right: 0;">
                         <select class="form-control" v-model="arrival">
                             <option value="">--未选择--</option>
                             <option value="0">未到店</option>
@@ -44,27 +44,27 @@
                         <p class="end-aline col-md-11 col-lg-11" >门店</p><span
                         class="sign-left">:</span>
                     </div>
-                    <div class="col-md-7 col-lg-7">
+                    <div class="col-md-7 col-lg-7" style="padding-right: 0;">
                         <store ref='store' @storeChange='storeChange'></store>
+                    </div>
+                </div>
+				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-md-5 col-lg-5 text-right nopad">
+                        <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span
+                        class="sign-left">:</span>
+                    </div>
+                    <div class="col-md-7 col-lg-7" style="padding-right: 0;">
+                        <emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
                     </div>
                 </div>
             </div>
             <div class="row newRow">
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <div class="col-md-5 col-lg-5 text-right nopad">
-                        <p class="end-aline col-md-11 col-lg-11" >咨询师</p><span
-                        class="sign-left">:</span>
-                    </div>
-                    <div class="col-md-7 col-lg-7">
-                        <emp ref="counlorEmp" @employeeChange="counlorEmpChange"></emp>
-                    </div>
-                </div>
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    <div class="col-md-5 col-lg-5 text-right nopad">
                         <p class="end-aline col-md-11 col-lg-11" >渠道</p><span
                         class="sign-left">:</span>
                     </div>
-                    <div class="col-md-7 col-lg-7">
+                    <div class="col-md-7 col-lg-7" style="padding-right: 0;">
                         <select class="form-control" v-model="channel">
                             <option value="">--未选择--</option>
                             <option value="1">线上电话</option>
@@ -73,41 +73,45 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
+				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
+				    <div class="col-md-5 col-lg-5 text-right nopad">
+				        <p class="end-aline col-md-11 col-lg-11" style="padding-left: 0; padding-right: 0;">是否取消</p><span
+				        class="sign-left">:</span>
+				    </div>
+				    <div class="col-md-7 col-lg-7" style="padding-right: 0;">
+				        <select class="form-control" v-model="state">
+				            <option value="">--未选择--</option>
+				            <option value="1">未取消</option>
+				            <option value="0">已取消</option>
+				        </select>
+				    </div>
+				</div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" >
                     <div class="col-md-2 col-lg-2 text-right nopad orderwd20" style="padding-right: 5px;">
-                        <p class="end-aline col-md-11 col-lg-11" >预约时间</p><span class="sign-left">:</span>
+                        <p class="end-aline col-md-11 col-lg-11" style="padding-left: 0;padding-right: 0;">预约时间</p><span class="sign-left">:</span>
                     </div>
-                    <div class="col-md-4 col-lg-4 orderwd27" style="margin-left: -3.5px;">
+                    <div class="col-md-4 col-lg-4" style="margin-left: -3.5px;">
                         <dPicker class="wd100" v-model="begAppDate"></dPicker>
                     </div>
                     <div class="pull-left end-aline nopad">
                         ~
                     </div>
-                    <div class="col-md-4 col-lg-4 orderwd27">
+                    <div class="col-md-4 col-lg-4">
                         <dPicker class="wd100" v-model="endAppDate"></dPicker>
                     </div>
                 </div>
-
+				<button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-30"
+				        data-toggle="modal"
+				        @click="checkOrderList(1)">查询
+				</button>
             </div>
-            <div class="row newRow">
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
-                    <div class="col-md-5 col-lg-5 text-right nopad">
-                        <p class="end-aline col-md-11 col-lg-11" >是否取消</p><span
-                        class="sign-left">:</span>
-                    </div>
-                    <div class="col-md-7 col-lg-7">
-                        <select class="form-control" v-model="state">
-                            <option value="">--未选择--</option>
-                            <option value="1">未取消</option>
-                            <option value="0">已取消</option>
-                        </select>
-                    </div>
-                </div>
+           <!-- <div class="row newRow">
+                
                 <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-30"
                         data-toggle="modal"
                         @click="checkOrderList(1)">查询
                 </button>
-            </div>
+            </div> -->
         </div>
         </el-collapse-transition>
         <div class="arrow-bottom jh-wd-100 jh-po-re" :class="addClass?'noEvents':''" @click="dataClose" @mouseenter="dataOpen">
@@ -618,7 +622,10 @@
     }
 </script>
 
-<style>
+<style scoped="scoped">
+	.newRow .col-xs-3,.newRow .col-sm-3,.newRow .col-md-3,.newRow .col-lg-3{
+		width: 20%!important;
+	}
     .orderwd20{width: 20.5%;}
     .orderwd27{width: 27.3%;}
     #datatable {

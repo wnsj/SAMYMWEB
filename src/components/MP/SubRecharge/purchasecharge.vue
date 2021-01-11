@@ -508,6 +508,7 @@
 				this.consume.price = param.price; //折前单价
 				this.consume.actualCount = param.actualCount; //实际次数
 				this.consume.discount = param.discount; //折扣
+				
 				if(this.consume.price =='' && this.consume.price ==null || this.consume.actualCount == '' &&this.consume.actualCount == null || this.consume.discount == '' && this.consume.discount == null){
 					this.consume.price = 0;
 					this.consume.actualCount = 0;
@@ -515,7 +516,10 @@
 				}else{
 					// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount));
 					this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(this.consume.discount)).div(new Decimal(100));
+					this.consume.receivable = this.receivables; //应交
+					this.consume.realCross = this.consume.receivable; //实缴
 				}
+				
 				$('#AuditPurContent').modal({
 					backdrop: 'static',
 					keyboard: false
@@ -602,7 +606,8 @@
 					this.consume.actualCount = param.frequency //实际次数
 					this.consume.discount = param.discount //折扣
 					this.consume.preFoldTotalPrice = param.totalPrice //课程总额
-					this.consume.receivable = param.discouAmount //应交
+					// this.consume.receivable = param.discouAmount //应交
+					
 					console.log(this.consume.price)
 					console.log(this.consume.actualCount)
 					console.log(this.consume.discount)
@@ -614,7 +619,9 @@
 						// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount));
 						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(this.consume.discount)).div(new Decimal(100));
 					}
+					this.consume.receivable = this.receivables //应交
 					// this.receivables = param.discouAmount //应交
+					this.consume.realCross = this.consume.receivable //实缴
 					this.consume.realCross = param.discouAmount //实缴
 					this.consume.proType = param.proType
 					this.cash.select = '0'

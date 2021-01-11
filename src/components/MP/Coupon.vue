@@ -108,6 +108,12 @@
 								<el-tag size="medium" :formatter="chanpin">{{scope.row.productTypeName[0]}}</el-tag>
 							</div>
 						</el-popover>
+						<el-popover  placement="top" v-if="scope.row.categoryType==1">
+							<p>{{scope.row.product1}}</p>
+							<div slot="reference">
+								<el-tag size="medium" :formatter="chanpin">{{scope.row.productTypeName[0]}}</el-tag>
+							</div>
+						</el-popover>
 					</template>
 				</el-table-column>
 				<!-- <el-table-column prop="productTypeName" label="产品类型" width="100" align="center"></el-table-column> -->

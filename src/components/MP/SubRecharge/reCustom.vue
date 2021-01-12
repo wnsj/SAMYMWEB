@@ -1253,6 +1253,11 @@
 							this.selectObj = null
 							e.target.checked = false
 							this.consume.proStyle = ''
+							this.consume.price = 0
+							this.consume.totalCount = 0
+							this.consume.discount = 0
+							this.consume.preFoldTotalPrice = 0
+							this.receivables = 0
 							this.$refs.project.setProject('0')
 							this.$refs.counselorEmp.setPosName("咨询师")
 							this.$refs.counselorEmp.setEmp("")

@@ -242,8 +242,9 @@
 				setTimeout(() => {
 					this.isDisable = false
 				}, 2000)
-
-				this.refund.receivable = new Decimal(this.selectObj.price).mul(this.refund.consumCount)
+				this.refund.receivable == new Decimal(this.selectObj.receivable).div(new Decimal(this.selectObj.totalCount)).mul(new Decimal(this.refund
+					.consumCount))
+				// this.refund.receivable = new Decimal(this.selectObj.price).mul(this.refund.consumCount)
 				var url = this.url + '/purchasedItemsAction/refundProject'
 				this.requestData(url, this.refund).then((response) => {
 					if (response.retCode == '0000') {

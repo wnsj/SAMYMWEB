@@ -96,6 +96,11 @@
                 <el-table-column prop="finance" label="财务" align="center"></el-table-column>
                 <el-table-column prop="approveTime" label="审核时间" :formatter="resetDate" align="center"></el-table-column>
                 <el-table-column prop="rejectReason" label="驳回理由"  align="center"></el-table-column>
+				<el-table-column align="center" label="编辑" min-width="100">
+					<template slot-scope="scope">
+						<el-button type="button" class="btn" @click="xiaofei(scope.row.refundId)">舍弃</el-button>
+					</template>
+				</el-table-column>
             </el-table>
 
             <div class="col-md-12 col-lg-12 tips">* 双击单行，可对当前数据进行修改 </div>
@@ -175,6 +180,40 @@
         },
 
         methods: {
+			//舍弃功能
+			xiaofei(refundId) {
+				var url = this.url + '/refundAuditBean/rejectRefundAbandon'
+				// var url = 'http://172.16.16.255:8080/consumAuditBean/consumRecord'
+				var formData = new FormData();
+				formData.append('refundAuditId', refundId)
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.contentType,
+						'Access-Token': this.accessToken
+					},
+					data: formData,
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					//console.log(res)
+					if (res.retCode == '0000') {
+						this.$alert(res.retMsg, '提示', {
+							confirmButtonText: '确定',
+							type: 'success',
+							callback: action => {
+								this.current = 1
+								this.getRefundRejectFind()
+							}
+						})
+					} else {
+						alert(res.retMsg)
+					}
+				}).catch((error) => {
+					//console.log('请求失败处理')
+				});
+			},
             changeData(newVal,oldVal){
                 this.selectDataFlag = true
             },
@@ -345,6 +384,14 @@
 </script>
 
 <style scoped="scoped">
+	.btn{
+		width: 60px;
+		height:30px;
+		line-height: 5px;
+		background-color: rgba(22, 155, 213, 1);
+		color:#fff;
+		text-align: center;
+	}
     #datatable {
         position: relative;
     }

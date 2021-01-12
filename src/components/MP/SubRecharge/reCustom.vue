@@ -677,6 +677,10 @@
 				}
 			},
 			proStyleChange: function() {
+				if (this.isBlank(param)) {
+					this.consume.proStyle = ""
+				} else {
+					this.consume.proStyle = param.empId
 				if (!this.projectFlag) {
 					if (this.selectObj == null) {
 						this.$refs.project.setProStyle(this.consume.proStyle, 2, this.consume.counselor)
@@ -690,6 +694,7 @@
 					this.consume.receivable = 0
 					this.consume.realCross = 0
 					this.consumeReceivable = 0
+				}
 				}
 			},
 

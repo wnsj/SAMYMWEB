@@ -566,7 +566,11 @@
 				}
 			},
 
-			proStyleChange() {
+			proStyleChange:function(param) {
+				if (this.isBlank(param)) {
+					this.consume.proStyle = ""
+				} else {
+					this.consume.proStyle = param.proStyle
 				this.$refs.projectRef.setProStyle(this.consume.proStyle, 1, this.consume.counselor)
 				this.$refs.projectRef.setProject("0")
 				this.consume.price = 0
@@ -574,6 +578,7 @@
 				this.consume.discount = 0
 				this.consume.receivable = 0
 				this.consume.realCross = 0
+				}
 			},
 			//付款方式
 			payChange: function(param) {

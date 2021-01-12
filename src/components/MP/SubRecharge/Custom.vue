@@ -391,7 +391,6 @@
 				shs:false,
 				counselorList: [],
 				dis: true,
-				shs: true,
 				youhui: false,
 				listCouponJian: [],
 				listCouponZhe:[],
@@ -539,6 +538,7 @@
 					proId: '', //项目id
 					discount: 0, //折扣
 					price: 0, //折前单价
+					preFoldTotalPrice: 0, //折前总价
 					disPrice: '', //折后单价
 					totalCount: 0, //总次数
 					actualCount: 0, //实际次数
@@ -768,10 +768,10 @@
 				}
 
 
-				if (this.consume.payType == 0) {
-					alert("交费方式不能为空!")
-					return;
-				}
+				// if (this.consume.payType == 0) {
+				// 	alert("交费方式不能为空!")
+				// 	return;
+				// }
 
 				if (this.isBlank(this.consume.diseaseType)) {
 					alert("咨询方向不能为空!")
@@ -963,6 +963,8 @@
 					this.selectObj = item;
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1
+					this.listCouponZhe =[]
+					this.listCouponJian =[]
 					if (item.proType != '0') {
 						this.modCounselor(item)
 						this.counselorFlag = false
@@ -993,10 +995,16 @@
 				} else {
 					if (this.clickItemObj.itemId == item.piId) {
 						if (this.clickItemObj.count % 2 == 0) {
-							$(".you1").hide()
+							this.listCouponZhe =[]
+							this.listCouponJian =[]
 							this.selectObj = null
 							e.target.checked = false
 							this.consume.proStyle = ''
+							this.consume.price = 0
+							this.consume.totalCount = 0
+							this.consume.discount = 0
+							this.consume.preFoldTotalPrice = 0
+							this.receivables = 0
 							this.$refs.project.setProject('0')
 							this.$refs.counselorEmp.setPosName("咨询师")
 							this.$refs.counselorEmp.setEmp("")
@@ -1028,6 +1036,8 @@
 							this.$refs.project.setProject(item.proId)
 							this.consume.proId = item.proId
 							this.consume.price = item.price //折前单价
+							this.consume.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
+							this.receivables = parseInt(item.totalCount) * parseInt(item.price) * parseInt(item.discount) / 100 //应交
 							this.consume.totalCount = item.totalCount //实际次数
 							this.consume.discount = item.discount //折扣
 							this.consume.receivable = item.receivable //应交
@@ -1060,6 +1070,8 @@
 						this.$refs.project.setProject(item.proId)
 						this.consume.proId = item.proId
 						this.consume.price = item.price //折前单价
+						this.consume.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
+						this.receivables = parseInt(item.totalCount) * parseInt(item.price) * parseInt(item.discount) / 100 //应交
 						this.consume.totalCount = item.totalCount //实际次数
 						this.consume.discount = item.discount //折扣
 						this.consume.receivable = item.receivable //应交

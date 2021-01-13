@@ -478,7 +478,6 @@
 
 <style scoped="scoped">
 	.btn{
-		width: 60px;
 		height:30px;
 		line-height: 5px;
 		background-color: rgba(22, 155, 213, 1);

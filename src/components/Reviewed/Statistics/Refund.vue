@@ -51,9 +51,9 @@
 					</div>
 					<div class="col-xs-3 col-sm- col-md-3 col-lg-3" style="margin-top: 20px;">
 						<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
-							<p class="end-aline col-md-11 col-lg-11 jh-pa-1" style="padding-left: 0;padding-right: 0;">审核状态</p><span class="sign-left">:</span>
+							<p class="end-aline col-md-11 col-lg-11 jh-pa-1">审核状态</p><span class="sign-left">:</span>
 						</div>
-						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" style="padding-right: 0;">
+						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 							<select name="" id="" class="form-control" v-model="auditState">
 								<option value="">未选择</option>
 								<option value="2">未审核</option>

@@ -1080,7 +1080,6 @@
 			radioClick(e, item) {
 				this.jinqian = item.balance;
 				if (this.clickItemObj.itemId == 0) {
-					
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1
 					if (this.jinqian != '') {

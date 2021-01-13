@@ -49,7 +49,22 @@
 							<store ref="store" @storeChange='storeChange'></store>
 						</div>
 					</div>
-					
+					<div class="col-xs-3 col-sm- col-md-3 col-lg-3" style="margin-top: 20px;">
+						<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 jh-ad-1">
+							<p class="end-aline col-md-11 col-lg-11 jh-pa-1">审核状态</p><span class="sign-left">:</span>
+						</div>
+						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+							<select name="" id="" class="form-control" v-model="auditState">
+								<option value="">未选择</option>
+								<option value="2">未审核</option>
+								<option value="3">审核中</option>
+								<option value="4">审核通过</option>
+								<option value="5">审核未通过</option>
+								<option value="6">舍弃</option>
+								<option value="7">未舍弃</option>
+							</select>
+						</div>
+					</div>
 					
 				</div>
 				<div class="row newRow" style="margin-top: -50px;">
@@ -131,6 +146,7 @@
 		},
 		data() {
 			return {
+				auditState: '',
 				shopowner: '',
 				memName: '',
 				iphone: '',
@@ -156,6 +172,7 @@
 		},
 		watch: {
 			memName: 'changeData',
+			auditState: 'changeData',
 			shopowner: 'changeData',
 			storeId: 'changeData',
 			begCreateDate: 'changeData',
@@ -185,6 +202,9 @@
 					case 5:
 						return '审核未通过'
 						break;
+						case 6:
+							return '数据被舍弃'
+							break;
 				}
 			},
 
@@ -233,6 +253,7 @@
 				this.begCreateDate = "";
 				this.endCreateDate = "";
 				this.shopowner = "";
+				this.auditState = "";
 			},
 			editorAction(item) {
 				this.objectContent = item
@@ -267,6 +288,7 @@
 						endTime: this.endCreateDate,
 						shopowner: this.shopowner,
 						page: this.current,
+						auditState: this.auditState,
 						pageSize: this.pageSize
 
 					},

@@ -67,6 +67,8 @@
 								<option value="3">审核中</option>
 								<option value="4">审核通过</option>
 								<option value="5">审核未通过</option>
+								<option value="6">舍弃</option>
+								<option value="7">未舍弃</option>
 							</select>
 						</div>
 					</div>

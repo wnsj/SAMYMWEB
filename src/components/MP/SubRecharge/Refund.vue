@@ -142,10 +142,6 @@
 					balance: '', //违约金
 					money: 0, //退费金额
 				},
-				yingyong: 0,
-				zongji: 0,
-				cos: 0,
-				abv: 0,
 				isShow: false,
 				dis: true,
 				shs: true,
@@ -242,8 +238,10 @@
 				setTimeout(() => {
 					this.isDisable = false
 				}, 2000)
-
-				this.refund.receivable = new Decimal(this.selectObj.price).mul(this.refund.consumCount)
+				//退费金额计算
+				this.refund.receivable == new Decimal(this.selectObj.receivable).div(new Decimal(this.selectObj.totalCount)).mul(new Decimal(this.refund
+					.consumCount))
+				// this.refund.receivable = new Decimal(this.selectObj.price).mul(this.refund.consumCount)
 				var url = this.url + '/purchasedItemsAction/refundProject'
 				this.requestData(url, this.refund).then((response) => {
 					if (response.retCode == '0000') {
@@ -345,19 +343,9 @@
 			},
 			//单选框选中处理
 			radioClick(e, item) {
-				this.yingyong = item.receivable;
-				this.zongji = item.totalCount;
-				this.abv = item.balance;
-				this.cos = item.consumCount;
 				if (this.clickItemObj.itemId == 0) {
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1
-					if (this.refund.consumCount == item.totalCount) {
-						this.refund.receivable == item.balance
-					} else if (this.refund.consumCount > item.totalCount) {
-						this.refund.receivable == new Decimal(item.receivable).div(new Decimal(item.totalCount)).mul(new Decimal(this.refund
-							.consumCount))
-					}
 					// <td>{{(item.totalCount - item.consumCount).toFixed(2)}}</td>
 					this.selectObj = item
 				} else {

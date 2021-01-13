@@ -494,7 +494,7 @@
 					couponName: '',
 					appNum: '', //预约号
 					receivable: 0, //折前
-					preFoldTotalPrice: '', //折前总价
+					preFoldTotalPrice: 0, //折前总价
 					realCross: 0, //实缴
 					actualCross: 0, //实交金额
 					proId: '', //产品id

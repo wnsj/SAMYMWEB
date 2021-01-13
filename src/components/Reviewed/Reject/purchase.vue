@@ -268,7 +268,7 @@
             celledit(row, column, cell, event) {
                 
                 console.log(row)
-                if(row.couponId!=""){
+                if(row.couponId!="" && row.couponId!=null){
                     var url = this.url + '/couponController/couponCalculate?productId=' + row.proId + '&couponId=' + row.couponId + '&userId=' + row.memNum
                     this.$ajax({
                         method: 'GET',

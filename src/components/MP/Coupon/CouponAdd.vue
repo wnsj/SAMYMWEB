@@ -72,7 +72,7 @@
 							<ValidationProvider mode="lazy" rules="required" v-slot="{ errors }">
 								<b>*</b>
 								<label class="col-md-2 control-label text-right nopad end-aline">使用门槛</label><span class="sign-left">:</span>
-								<div class="col-md-7" v-model="isLimit">
+								<div class="col-md-7">
 									<div class="xianzhi wuxian" style="display: block;"><input class="xian" type="radio" name="radioGroup1"
 										 v-model="isLimit" value="2" /><label class="xian1">无限制</label></div>
 									<div class="xianzhi1"><input class="xian" type="radio" name="radioGroup1" v-model="isLimit" value="1" @blur="manjian4()" /><label

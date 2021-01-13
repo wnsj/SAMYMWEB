@@ -519,6 +519,7 @@
 			},
 			// Initialization consume’s content
 			initData(param) {
+				this.titles = 0;
 				this.productId = param.empId;
 				this.userId = param.visId;
 				$('#customContent').modal({
@@ -647,6 +648,7 @@
 			},
 			//产品
 			projectChange: function(param) {
+				this.titles = 0;  //优惠券数量清零
 				this.productId = param.proId;
 				if (this.isBlank(param)) {
 					this.consume.proId = ""

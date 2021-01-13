@@ -336,7 +336,6 @@
 		</div>
 
 	</div>
-	</div>
 </template>
 
 <script>
@@ -1077,7 +1076,6 @@
 					// 	var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian))
 					// 	this.consume.realCross = ss;
 					// }
-					console.log('可能1');
 					if(this.cash.select!='' && this.cash.select!=undefined){
                         if(this.jinqian != ''){
 							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
@@ -1098,11 +1096,8 @@
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1
 				} else {
-					console.log('可能2');
 					if (this.clickItemObj.itemId == item.piId) {
-						console.log('可能2-1');
 						if (this.clickItemObj.count % 2 == 0) {
-							console.log('可能2-1-1');
 							console.log(this.cash.select);
 							e.target.checked = false
 							this.jinqian = 0;
@@ -1114,19 +1109,17 @@
 							this.consume.realCross = ss;
 
 						} else {
-                            console.log('可能2-1-2');
 							if (this.jinqian != '') {
 								if(this.cash.select!='' && this.cash.select!=undefined){
 								    var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
 								}else{
-									 var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+									var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
 								}
 								this.consume.realCross = ss;
 							}
 						}
 						this.clickItemObj.count = this.clickItemObj.count + 1
 					} else {
-						console.log('可能2-2');
 						this.clickItemObj.itemId = item.piId
 						this.clickItemObj.count = 0
 						// var ss = new Decimal(this.consume.receivable)

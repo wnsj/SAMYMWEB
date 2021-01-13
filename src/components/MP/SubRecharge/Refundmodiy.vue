@@ -86,7 +86,7 @@
 						<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">退费课时</label><span
 						 class="sign-left">:</span>
 						<div class="col-md-7">
-							<input type="text" class="form-control" v-model="refund.consumCount" @change="receivableAction()">
+							<input type="text" class="form-control" v-model="refund.consumCount" @change="receivableAction()" @blur="reces()">
 						</div>
 					</div>
 					<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -132,7 +132,9 @@
 	import emp from '../../common/Employee.vue'
 	import project from '../../common/Project.vue'
 	import axios from "axios";
-
+	import {
+		Decimal
+	} from 'decimal.js'
 	export default {
 		components: {
 			dPicker,
@@ -144,7 +146,7 @@
                 sourceId: '',
 				refund: {
                     startTime: '',
-					consumCount: 0, //退课时
+					consumCount: '', //退课时
 					receivable: '', //应退金额
 					memNum: '', //会员号
 					memName: '', //会员名
@@ -182,6 +184,7 @@
 				selectObj: {
 					price: '',
 					piId: '',
+					receivable:'',
 					consumCount: '',
 					actualCount: '',
 				},
@@ -457,16 +460,29 @@
 				}
 			},
 			//计算退费金额
+			reces(){
+				if (!(/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/).test(this.refund.consumCount)) {
+					alert("只能输入正数或者保留两位小数");
+					this.refund.money =''
+					return false
+				}
+			},
 			receivableAction() {
 				if (this.refund.consumCount != null && parseInt(this.refund.consumCount) > 0) {
 					if (this.selectObj.price != null && parseInt(this.selectObj.price) > 0) {
-						if (parseInt(this.refund.consumCount) > parseInt(this.selectObj.totalCount) - parseInt(this.selectObj.consumCount)) {
+						if (parseInt(this.refund.consumCount) == parseInt(this.selectObj.totalCount) - parseInt(this.selectObj.consumCount)) {
 							this.refund.consumCount = parseInt(this.selectObj.totalCount) - parseInt(this.selectObj.consumCount)
-							this.refund.money = this.selectObj.price * parseInt(this.refund.consumCount)
+							// this.refund.money = this.selectObj.price * parseInt(this.refund.consumCount)
+							this.refund.receivable = this.selectObj.price * parseInt(this.refund.consumCount)
+                            this.refund.money = new Decimal(this.selectObj.balance)
+						} else if (parseInt(this.refund.consumCount) > parseInt(this.selectObj.totalCount) - parseInt(this.selectObj.consumCount)){
+							alert("退费课时不能大于剩余课时！");
+							this.refund.money =''
+							return false
+						}else {
+							// this.refund.money = this.selectObj.price * parseInt(this.refund.consumCount)
                             this.refund.receivable = this.selectObj.price * parseInt(this.refund.consumCount)
-						} else {
-							this.refund.money = this.selectObj.price * parseInt(this.refund.consumCount)
-                            this.refund.receivable = this.selectObj.price * parseInt(this.refund.consumCount)
+							this.refund.money = new Decimal(this.selectObj.receivable).div(new Decimal(this.selectObj.totalCount)).mul(new Decimal(this.refund.consumCount)).toFixed(2)
 						}
 					} else {
 						alert('请您先选择退费课程')

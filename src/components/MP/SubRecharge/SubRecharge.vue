@@ -755,11 +755,30 @@
 			},
 			isArrearsChange() {
 				if (this.consume.isArrears == '1') {
+					console.log('点击1')
 					this.consume.arrears = 0;
 					this.isArrearsShow = false
-					var ss = new Decimal(this.consume.receivable)
-					this.consume.realCross = ss;
+					// var ss = new Decimal(this.consume.receivable)
+					// this.consume.realCross = ss;
+					if(this.cash.select!='' && this.cash.select!=undefined){
+                        if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}else{
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}
+					}else{
+						if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}else{
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}
+					}   // 减去抵扣
 				} else {
+					console.log('点击2')
 					this.isArrearsShow = true
 				}
 			},
@@ -844,6 +863,9 @@
 				if (Number(this.cash.select) > Number(this.cash.balance)) {
 					this.cash.select = this.cash.balance;
 					$("#earn").val(this.cash.select);
+				}else if (Number(this.cash.select)<0) {
+					this.cash.select = 0;
+					//$("#earn").val(this.cash.select);
 				}
 			},
 			//the event of addtional button
@@ -1174,7 +1196,7 @@
 							if (item.couponType == 2) {
 								var mach = new Decimal(this.titttl).mul(new Decimal(res1));
 								var zz = new Decimal(this.receivables).sub(new Decimal(mach));
-								this.consume.receivable = zz;								
+								this.consume.receivable = zz;						
 								if(this.jinqian != ''){
 									var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
 									this.consume.realCross = ss;

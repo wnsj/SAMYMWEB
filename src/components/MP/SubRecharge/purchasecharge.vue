@@ -49,7 +49,7 @@
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in unfinishedProList" :key="index">
-                                    <td v-if="item.auditState != 5 && item.auditState != 10"><input type="radio" name="radioGroup" @click="radioClick($event,item)"></td>
+                                    <td v-if="item.auditState != 5 && item.auditState != 10"><input type="radio" :checked='item.piId==checkedId' name="radioGroup" @click="radioClick($event,item)"></td>
                                     <td v-if="item.auditState == 10 || item.auditState == 5"><input type="radio" name="radioGroup" @click="radioClick($event,item)"
                                     	 disabled="disabled">
                                     	<el-tooltip v-if="item.auditState == 10 || item.auditState == 5" popper-class="atooltip" class="item gantan0"
@@ -359,6 +359,8 @@
 		},
 		data() {
 			return {
+				ischecked:true,
+				checkedId:'',
 				jinqian: 0,
 				member: {
 					memNum: '', //会员号
@@ -442,7 +444,8 @@
 					count: 0
 				},
 				projectObj: {},
-				isDisable: false
+				isDisable: false,
+				couponId:''  //优惠券ID
 			};
 		},
 		methods: {
@@ -460,15 +463,29 @@
 						var mach = new Decimal(this.titles).mul(new Decimal(this.manjian));
 						var zz = new Decimal(this.receivables).sub(new Decimal(mach));
 						this.consume.receivable = zz;
-						this.consume.realCross = zz;
+						if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}else{
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}    // 减去抵扣
+						//this.consume.realCross = zz;
 					}
 					//满折
 					if (this.consume.couponType == 1) {
 						var jh = new Decimal(this.zhekou).div(new Decimal(10));
 						this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
 							2, Decimal.ROUND_HALF_UP);
-						this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
-							2, Decimal.ROUND_HALF_UP);
+						//this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
+							//2, Decimal.ROUND_HALF_UP);
+						if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}else{
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}    // 减去抵扣
 					}
 				}
 			},
@@ -486,20 +503,45 @@
 						var mach = new Decimal(this.titles).mul(new Decimal(this.manjian));
 						var zz = new Decimal(this.receivables).sub(new Decimal(mach));
 						this.consume.receivable = zz;
-						this.consume.realCross = zz;
+						if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}else{
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}    // 减去抵扣
+						//this.consume.realCross = zz;
 					}
 					//满折
 					if (this.consume.couponType == 1) {
 						var jh = new Decimal(this.zhekou).div(new Decimal(10));
 						this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
 							2, Decimal.ROUND_HALF_UP);
-						this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
-							2, Decimal.ROUND_HALF_UP);
+						if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}else{
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}    // 减去抵扣
+						//this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
+							//2, Decimal.ROUND_HALF_UP);
 					}
 				}
 			},
 			// Initialization consume’s content
 			initAuditPur(param) {
+				console.log(param.dedId)
+				this.checkedId = param.dedId;   //抵扣产品ID
+				this.couponId = param.couponId;  //优惠券ID
+				this.titles = param.couponNum;   //优惠券数量
+				if(param.isArrears==1){
+					this.isArrearsShow = false;
+					this.consume.arrears = param.arrears;  //欠费金额
+				}else{
+                    this.isArrearsShow = true;
+					this.consume.arrears = param.arrears;  //欠费金额
+				}
 				this.purAuditId = param.piId;
 				this.productId = param.proId;
 				this.userId = param.memNum;
@@ -522,7 +564,7 @@
 					keyboard: false
 				});
 				this.clickItemObj = {
-					itemId: 0,
+					itemId:param.dedId,
 					count: 0
 				}
 				this.projectObj = {}
@@ -548,7 +590,16 @@
 				}
 				Object.assign(this.consume, param)
 				this.queryUnfinishedPro(param)
+				if(param.cashMoney!==null){
+                    this.cash.select = param.cashMoney;  //定金抵扣
+				}else{
+					this.cash.select = 0;
+				}
+				console.log(this.cash.select)
 				this.checkMemCash(param.memNum)
+				
+				
+				
 			},
 			//咨询师
 			counselorEmpChange: function(param) {
@@ -629,24 +680,106 @@
 			},
 			isArrearsChange() {
 				if (this.consume.isArrears == '1') {
+					this.consume.arrears = 0;
 					this.isArrearsShow = false
-					var ss = new Decimal(this.consume.receivable)
-					this.consume.realCross = ss;
+					// var ss = new Decimal(this.consume.receivable)
+					// this.consume.realCross = ss;
+					if(this.cash.select!='' && this.cash.select!=undefined){
+                        if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}else{
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}
+					}else{
+						if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}else{
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}
+					}   // 减去抵扣
 				} else {
 					this.isArrearsShow = true
 				}
 			},
 			//实交总额
 			dikou() {
-				if (this.cash.select != '') {
+				// if (this.cash.select != '') {
+				// 	var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
+				// 	this.consume.realCross = ss;
+				// }
+				if (this.cash.select != '' && this.cash.select != undefined) {
 					var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
 					this.consume.realCross = ss;
+					if (this.consume.arrears != '') {
+						if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+						    this.consume.realCross = ss;
+						}else{
+                            var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+						    this.consume.realCross = ss;
+						}
+					}
+				}else{
+					this.cash.select = 0;
+					console.log(new Decimal(this.cash.select))
+					if (this.consume.arrears !== '') {
+						if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+						    this.consume.realCross = ss;
+						}else{
+                            var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+						    this.consume.realCross = ss;
+						}
+					}
 				}
 			},
 			qianfei() {
+				// if (this.consume.arrears != '') {
+				// 	var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+				// 	this.consume.realCross = ss;
+				// }
 				if (this.consume.arrears != '') {
-					var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
-					this.consume.realCross = ss;
+					if (this.cash.select != '' && this.cash.select != undefined) {
+						if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+						    this.consume.realCross = ss;
+						}else{
+                            var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+						    this.consume.realCross = ss;
+						}
+					}else{
+                        if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+						    this.consume.realCross = ss;
+						}else{
+                            var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+						    this.consume.realCross = ss;
+						}
+					}
+				}else{
+					this.consume.arrears = 0;
+					console.log(this.cash.select)
+					if (this.cash.select !== '' && this.cash.select !== undefined) {
+						if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select))
+						    this.consume.realCross = ss;
+						}else{
+                            var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
+						    this.consume.realCross = ss;
+						}
+					}else{
+                        if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+						    this.consume.realCross = ss;
+						}else{
+                            var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+						    this.consume.realCross = ss;
+						}
+					}
 				}
 			
 			},
@@ -670,11 +803,20 @@
 						let listZhe = data['1']
 						let listjian = data['2']
 						listZhe.forEach((item) => {
-							item.checked = false
+							if(item.couId == this.couponId){
+								item.checked = true
+							}else{
+							    item.checked = false							
+							}
 							item.recude = item.recude / 10
 						})
 						listjian.forEach((item) => {
-							item.checked = false
+							if(item.couId == this.couponId){
+								item.checked = true
+							}else{
+                                item.checked = false
+							}
+							
 						})
 						this.listCouponZhe = listZhe
 						this.listCouponJian = listjian
@@ -695,6 +837,9 @@
 				if (Number(this.cash.select) > Number(this.cash.balance)) {
 					this.cash.select = this.cash.balance;
 					$("#earn").val(this.cash.select);
+				}else if (Number(this.cash.select)<0) {
+					this.cash.select = 0;
+					//$("#earn").val(this.cash.select);
 				}
 			},
 			//the event of addtional button
@@ -879,6 +1024,7 @@
 			},
 			//选择满减优惠券
 			dianji: function(item, index) {
+				console.log(this.cash.select)
 				this.listCouponJian.forEach((item) => {
 					item.checked = false
 				})
@@ -915,7 +1061,26 @@
 								var mach = new Decimal(this.titttl).mul(new Decimal(rt));
 								var zz = new Decimal(this.receivables).sub(new Decimal(mach));
 								this.consume.receivable = zz;
-								this.consume.realCross = zz;
+								console.log(this.cash.select)
+								
+								if (this.cash.select !== '' && this.cash.select !== undefined) {
+									if(this.jinqian != ''){
+										var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+										this.consume.realCross = ss;
+									}else{
+										var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+										this.consume.realCross = ss;
+									}
+								}else{
+									if(this.jinqian != ''){
+										var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+										this.consume.realCross = ss;
+									}else{
+										var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+										this.consume.realCross = ss;
+									}
+								}    // 减去抵扣
+								//this.consume.realCross = zz;
 							}
 
 						} else {
@@ -930,7 +1095,24 @@
 					if (item.couponType == 2) {
 						var zy = new Decimal(this.receivables)
 						this.consume.receivable = zy;
-						this.consume.realCross = zy;
+						if (this.cash.select !== '' && this.cash.select !== undefined) {
+							if(this.jinqian != ''){
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+								this.consume.realCross = ss;
+							}else{
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+								this.consume.realCross = ss;
+							}
+						}else{
+							if(this.jinqian != ''){
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+								this.consume.realCross = ss;
+							}else{
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+								this.consume.realCross = ss;
+							}
+						}    // 减去抵扣
+						//this.consume.realCross = zy;
 					}
 				}
 				this.dui = !this.dui
@@ -973,8 +1155,25 @@
 								var jh = new Decimal(rw).div(new Decimal(10));
 								this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh,this.titttl))).toFixed(
 									2, Decimal.ROUND_HALF_UP);
-								this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh,this.titttl))).toFixed(
-									2, Decimal.ROUND_HALF_UP);
+								if (this.cash.select !== '' && this.cash.select !== undefined) {
+									if(this.jinqian != ''){
+										var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+										this.consume.realCross = ss;
+									}else{
+										var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+										this.consume.realCross = ss;
+									}
+								}else{
+									if(this.jinqian != ''){
+										var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+										this.consume.realCross = ss;
+									}else{
+										var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+										this.consume.realCross = ss;
+									}
+								}    // 减去抵扣
+								//this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(
+									//2, Decimal.ROUND_HALF_UP);
 							}
 						} else {
 							alert(res.retMsg)
@@ -988,7 +1187,24 @@
 					if (item.couponType == 1) {
 						var us = new Decimal(this.receivables).div(new Decimal(rw)).mul(new Decimal(rw))
 						this.consume.receivable = us;
-						this.consume.realCross = us;
+						if (this.cash.select !== '' && this.cash.select !== undefined) {
+							if(this.jinqian != ''){
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+								this.consume.realCross = ss;
+							}else{
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+								this.consume.realCross = ss;
+							}
+						}else{
+							if(this.jinqian != ''){
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+								this.consume.realCross = ss;
+							}else{
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+								this.consume.realCross = ss;
+							}
+						}    // 减去抵扣
+						//this.consume.realCross = us;
 					}
 				}
 				this.dui = !this.dui
@@ -1015,8 +1231,10 @@
 					var res = response.data
 					if (res.retCode == '0000') {
 						if (res.retData.length > 0) {
-							this.cash = res.retData[0]
-							this.cash.select = '0.0'
+							//this.cash = res.retData[0]
+							this.cash.cashId = res.retData[0].cashId;
+							this.cash.memNum = res.retData[0].memNum;
+							this.cash.balance = res.retData[0].balance;
 						} else {
 							this.cash = {
 								memNum: '', //会员号
@@ -1049,6 +1267,7 @@
 			},
 			//查询已购买产品
 			queryUnfinishedPro(param) {
+				console.log(1)
 				if (this.isBlank(param)) return
 				var url = this.url + '/purchasedItemsAction/queryUnfinishedPro'
 				this.$ajax({
@@ -1068,6 +1287,15 @@
 					var res = response.data
 					if (res.retCode == '0000') {
 						this.unfinishedProList = res.retData
+						res.retData.forEach((item) => {
+							if(item.piId == this.checkedId){
+								this.jinqian = item.balance;
+							}else{
+							    this.jinqian = '';							
+							}
+							
+						})
+						console.log(this.jinqian)
 					} else {
 						alert(res.retMsg)
 					}
@@ -1078,26 +1306,53 @@
 
 			//单选框选中处理
 			radioClick(e, item) {
+				console.log(1)
 				this.jinqian = item.balance;
 				if (this.clickItemObj.itemId == 0) {
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1
-					if (this.jinqian != '') {
-						var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian))
-						this.consume.realCross = ss;
-					}
+					// if (this.jinqian != '') {
+					// 	var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian))
+					// 	this.consume.realCross = ss;
+					// }
+					if(this.cash.select!='' && this.cash.select!=undefined){
+                        if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}else{
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}
+					}else{
+						if(this.jinqian != ''){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}else{
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+							this.consume.realCross = ss;
+						}
+					}   // 减去抵扣
 				} else {
 					
 					if (this.clickItemObj.itemId == item.piId) {
 						
 						if (this.clickItemObj.count % 2 == 0) {
 							e.target.checked = false
-							var ss = new Decimal(this.consume.receivable)
+							this.jinqian = 0;
+							if(this.cash.select!='' && this.cash.select!=undefined){
+                                var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							}else{
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+							}
 							this.consume.realCross = ss;
 						} else {
 			
 							if (this.jinqian != '') {
-								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian))
+								if(this.cash.select!='' && this.cash.select!=undefined){
+								    var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+								}else{
+									var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+								}
 								this.consume.realCross = ss;
 							}
 						}
@@ -1107,11 +1362,15 @@
 					
 						this.clickItemObj.itemId = item.piId
 						this.clickItemObj.count = 0
-						var ss = new Decimal(this.consume.receivable)
-						this.consume.realCross = ss;
+						// var ss = new Decimal(this.consume.receivable)
+						// this.consume.realCross = ss;
 						
 						if (this.jinqian != '') {
-							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian))
+							if(this.cash.select!='' && this.cash.select!=undefined){
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							}else{
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+							}
 							this.consume.realCross = ss;
 						}
 					}

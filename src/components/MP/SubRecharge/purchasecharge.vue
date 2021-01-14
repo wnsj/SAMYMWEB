@@ -50,7 +50,7 @@
 							<tbody>
 								<tr v-for="(item,index) in unfinishedProList" :key="index">
                                     <td v-if="item.auditState != 5 && item.auditState != 10"><input type="radio" :checked='item.piId==checkedId' name="radioGroup" @click="radioClick($event,item)"></td>
-                                    <td v-if="item.auditState == 10 || item.auditState == 5"><input type="radio" name="radioGroup" @click="radioClick($event,item)"
+                                    <td v-if="item.auditState == 10 || item.auditState == 5"><input type="radio" :checked='item.piId==checkedId' name="radioGroup" @click="radioClick($event,item)"
                                     	 disabled="disabled">
                                     	<el-tooltip v-if="item.auditState == 10 || item.auditState == 5" popper-class="atooltip" class="item gantan0"
                                     	 effect="light" content="由于审核原因，当前产品无法操作" placement="bottom">
@@ -531,7 +531,6 @@
 			},
 			// Initialization consume’s content
 			initAuditPur(param) {
-				console.log(param.dedId)
 				this.checkedId = param.dedId;   //抵扣产品ID
 				this.couponId = param.couponId;  //优惠券ID
 				this.titles = param.couponNum;   //优惠券数量
@@ -590,12 +589,14 @@
 				}
 				Object.assign(this.consume, param)
 				this.queryUnfinishedPro(param)
+				if(param.dedId==null){
+					this.jinqian = 0;
+				}
 				if(param.cashMoney!==null){
                     this.cash.select = param.cashMoney;  //定金抵扣
 				}else{
 					this.cash.select = 0;
 				}
-				console.log(this.cash.select)
 				this.checkMemCash(param.memNum)
 				
 				
@@ -725,7 +726,6 @@
 					}
 				}else{
 					this.cash.select = 0;
-					console.log(new Decimal(this.cash.select))
 					if (this.consume.arrears !== '') {
 						if(this.jinqian != ''){
 							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
@@ -762,7 +762,6 @@
 					}
 				}else{
 					this.consume.arrears = 0;
-					console.log(this.cash.select)
 					if (this.cash.select !== '' && this.cash.select !== undefined) {
 						if(this.jinqian != ''){
 							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select))
@@ -912,7 +911,6 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
 					if (res.retCode == '0000') {
 						alert(res.retMsg)
 						this.$emit('closeCurrentPage', 'succ')
@@ -1024,7 +1022,6 @@
 			},
 			//选择满减优惠券
 			dianji: function(item, index) {
-				console.log(this.cash.select)
 				this.listCouponJian.forEach((item) => {
 					item.checked = false
 				})
@@ -1032,7 +1029,6 @@
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
-				console.log(this.consume.proId)
 				var rt = item.recude;
 				this.manjian = item.recude;
 				if (this.dui) {
@@ -1061,7 +1057,6 @@
 								var mach = new Decimal(this.titttl).mul(new Decimal(rt));
 								var zz = new Decimal(this.receivables).sub(new Decimal(mach));
 								this.consume.receivable = zz;
-								console.log(this.cash.select)
 								
 								if (this.cash.select !== '' && this.cash.select !== undefined) {
 									if(this.jinqian != ''){
@@ -1267,7 +1262,6 @@
 			},
 			//查询已购买产品
 			queryUnfinishedPro(param) {
-				console.log(1)
 				if (this.isBlank(param)) return
 				var url = this.url + '/purchasedItemsAction/queryUnfinishedPro'
 				this.$ajax({
@@ -1288,14 +1282,10 @@
 					if (res.retCode == '0000') {
 						this.unfinishedProList = res.retData
 						res.retData.forEach((item) => {
-							if(item.piId == this.checkedId){
+							if(item.piId == param.dedId){
 								this.jinqian = item.balance;
-							}else{
-							    this.jinqian = '';							
 							}
-							
 						})
-						console.log(this.jinqian)
 					} else {
 						alert(res.retMsg)
 					}
@@ -1306,7 +1296,6 @@
 
 			//单选框选中处理
 			radioClick(e, item) {
-				console.log(1)
 				this.jinqian = item.balance;
 				if (this.clickItemObj.itemId == 0) {
 					this.clickItemObj.itemId = item.piId

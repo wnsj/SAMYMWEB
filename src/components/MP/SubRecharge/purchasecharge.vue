@@ -359,8 +359,7 @@
 		},
 		data() {
 			return {
-				ischecked:true,
-				checkedId:'',
+				checkedId:'',  // 抵扣产品ID
 				jinqian: 0,
 				member: {
 					memNum: '', //会员号

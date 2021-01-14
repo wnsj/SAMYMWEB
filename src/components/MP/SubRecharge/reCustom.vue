@@ -55,9 +55,9 @@
 							</thead>
 							<tbody>
 								<tr v-for="(item,index) in unfinishedProList" :key="index">
-									<td v-if="item.auditState != 5 && item.auditState != 10"><input type="radio" v-model="oRadioGroup" :value="index"
+									<td v-if="item.auditState != 5 && item.auditState != 10"><input type="radio" :checked='item.piId==checkedId' v-model="oRadioGroup" :value="index"
 										 name="radioGroup" @click="radioClick($event,item)"></td>
-									<td v-if="item.auditState == 10 || item.auditState == 5"><input type="radio" name="radioGroup" @click="radioClick($event,item)"
+									<td v-if="item.auditState == 10 || item.auditState == 5"><input type="radio" :checked='item.piId==checkedId' name="radioGroup" @click="radioClick($event,item)"
 										 disabled="disabled">
 										<el-tooltip v-if="item.auditState == 10 || item.auditState == 5" popper-class="atooltip" class="item gantan1"
 										 effect="light" content="由于审核原因，当前产品无法操作" placement="bottom">
@@ -387,6 +387,7 @@
 		},
 		data() {
 			return {
+				checkedId:'',  // 抵扣产品ID
 				listCouponJian: [],
 				listCouponZhe: [],
 				oRadioGroup: '',
@@ -531,6 +532,8 @@
 			// },
 			// Initialization consume’s content
 			initData(param) {
+				this.checkedId = param.piId;   //抵扣产品ID
+				console.log(this.checkedId)
 				this.firstFlag = false
 				this.consumAuditId = param.cid;
 				this.productId = param.empId;
@@ -550,6 +553,10 @@
 				// 		this.consume.discount)).div(new Decimal(100));
 				// }
 				// this.clickItemObj.itemId = 0
+				this.clickItemObj = {
+					itemId:param.piId,
+					count: 0
+				};
 				$('#customContent').modal({
 					backdrop: 'static',
 					keyboard: false

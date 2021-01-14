@@ -48,6 +48,7 @@
 								</tr>
 							</thead>
 							<tbody>
+<!--                            item.piId==checkedId-->
 								<tr v-for="(item,index) in unfinishedProList" :key="index">
                                     <td v-if="item.auditState != 5 && item.auditState != 10"><input type="radio" :checked='item.piId==checkedId' name="radioGroup" @click="radioClick($event,item)"></td>
                                     <td v-if="item.auditState == 10 || item.auditState == 5"><input type="radio" :checked='item.piId==checkedId' name="radioGroup" @click="radioClick($event,item)"
@@ -531,6 +532,9 @@
 			// Initialization consume’s content
 			initAuditPur(param) {
 				this.checkedId = param.dedId;   //抵扣产品ID
+                if (this.checkedId) {
+                    this.clickItemObj.count = 1
+                }
 				this.couponId = param.couponId;  //优惠券ID
 				this.titles = param.couponNum;   //优惠券数量
 				if(param.isArrears==1){
@@ -597,9 +601,9 @@
 					this.cash.select = 0;
 				}
 				this.checkMemCash(param.memNum)
-				
-				
-				
+
+
+
 			},
 			//咨询师
 			counselorEmpChange: function(param) {
@@ -670,7 +674,7 @@
 						this.consume.receivable = this.receivables; //应交
 						this.consume.realCross = this.consume.receivable; //实缴
 					}
-					
+
 					this.consume.realCross = param.discouAmount //实缴
 					this.consume.proType = param.proType
 					this.cash.select = '0'
@@ -779,7 +783,7 @@
 						}
 					}
 				}
-			
+
 			},
 			getCoupon(userId, proId) {
 				var url = this.url + '/couponController/selectCoupon'
@@ -804,7 +808,7 @@
 							if(item.couId == this.couponId){
 								item.checked = true
 							}else{
-							    item.checked = false							
+							    item.checked = false
 							}
 							item.recude = item.recude / 10
 						})
@@ -814,7 +818,7 @@
 							}else{
                                 item.checked = false
 							}
-							
+
 						})
 						this.listCouponZhe = listZhe
 						this.listCouponJian = listjian
@@ -888,11 +892,13 @@
 
 				//发生转卡，进余额抵扣
 				if (this.clickItemObj.count % 2 != 0) {
-					this.consume.piId = this.clickItemObj.itemId
+                    this.consume.piId = ''
+                    debugger
 				} else {
-					this.consume.piId = ''
+				    this.consume.piId = this.clickItemObj.itemId
+                    debugger
 				}
-				
+
 				this.isDisable = true
                 setTimeout(() => {
                     this.isDisable = false
@@ -1056,7 +1062,7 @@
 								var mach = new Decimal(this.titttl).mul(new Decimal(rt));
 								var zz = new Decimal(this.receivables).sub(new Decimal(mach));
 								this.consume.receivable = zz;
-								
+
 								if (this.cash.select !== '' && this.cash.select !== undefined) {
 									if(this.jinqian != ''){
 										var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
@@ -1296,9 +1302,13 @@
 			//单选框选中处理
 			radioClick(e, item) {
 				this.jinqian = item.balance;
+                console.log('itemId'+this.clickItemObj.itemId);
+
 				if (this.clickItemObj.itemId == 0) {
+
 					this.clickItemObj.itemId = item.piId
 					this.clickItemObj.count = this.clickItemObj.count + 1
+
 					// if (this.jinqian != '') {
 					// 	var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian))
 					// 	this.consume.realCross = ss;
@@ -1321,9 +1331,9 @@
 						}
 					}   // 减去抵扣
 				} else {
-					
+
 					if (this.clickItemObj.itemId == item.piId) {
-						
+
 						if (this.clickItemObj.count % 2 == 0) {
 							e.target.checked = false
 							this.jinqian = 0;
@@ -1334,7 +1344,7 @@
 							}
 							this.consume.realCross = ss;
 						} else {
-			
+
 							if (this.jinqian != '') {
 								if(this.cash.select!='' && this.cash.select!=undefined){
 								    var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
@@ -1345,14 +1355,15 @@
 							}
 						}
 						this.clickItemObj.count = this.clickItemObj.count + 1
-						
+
 					} else {
-					
+
 						this.clickItemObj.itemId = item.piId
+
 						this.clickItemObj.count = 0
 						// var ss = new Decimal(this.consume.receivable)
 						// this.consume.realCross = ss;
-						
+
 						if (this.jinqian != '') {
 							if(this.cash.select!='' && this.cash.select!=undefined){
 								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))

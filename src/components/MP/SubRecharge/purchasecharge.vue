@@ -464,10 +464,18 @@
 						var zz = new Decimal(this.receivables).sub(new Decimal(mach));
 						this.consume.receivable = zz;
 						if(this.jinqian != ''){
-							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							if(this.cash.select!=='' && this.cash.select!==undefined){
+							    var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							}else{
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+							}
 							this.consume.realCross = ss;
 						}else{
-							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							if(this.cash.select!=='' && this.cash.select!==undefined){
+							    var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							}else{
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+							}
 							this.consume.realCross = ss;
 						}    // 减去抵扣
 						//this.consume.realCross = zz;
@@ -480,10 +488,18 @@
 						//this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
 							//2, Decimal.ROUND_HALF_UP);
 						if(this.jinqian != ''){
-							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							if(this.cash.select!=='' && this.cash.select!==undefined){
+							    var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							}else{
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+							}
 							this.consume.realCross = ss;
 						}else{
-							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							if(this.cash.select!=='' && this.cash.select!==undefined){
+							    var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							}else{
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+							}
 							this.consume.realCross = ss;
 						}    // 减去抵扣
 					}
@@ -504,10 +520,18 @@
 						var zz = new Decimal(this.receivables).sub(new Decimal(mach));
 						this.consume.receivable = zz;
 						if(this.jinqian != ''){
-							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							if(this.cash.select!=='' && this.cash.select!==undefined){
+                                var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							}else{
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+							}
 							this.consume.realCross = ss;
 						}else{
-							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							if(this.cash.select!=='' && this.cash.select!==undefined){
+							    var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							}else{
+                                var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+							}
 							this.consume.realCross = ss;
 						}    // 减去抵扣
 						//this.consume.realCross = zz;
@@ -518,10 +542,18 @@
 						this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
 							2, Decimal.ROUND_HALF_UP);
 						if(this.jinqian != ''){
-							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							if(this.cash.select!=='' && this.cash.select!==undefined){
+							    var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							}else{
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
+							}
 							this.consume.realCross = ss;
 						}else{
-							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							if(this.cash.select!=='' && this.cash.select!==undefined){
+							    var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
+							}else{
+								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
+							}
 							this.consume.realCross = ss;
 						}    // 减去抵扣
 						//this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
@@ -570,7 +602,6 @@
 					count: 0
 				}
 				this.projectObj = {}
-				$("input[name='radioGroup']").prop("checked", "");
 				this.$refs.payStyle.setPsId(param.payType)
 				this.$refs.counselorEmp.setPosName("咨询师")
 				this.$refs.emp.setPosName("咨询顾问")
@@ -592,6 +623,7 @@
 				}
 				Object.assign(this.consume, param)
 				this.queryUnfinishedPro(param)
+				
 				if(param.dedId==null){
 					this.jinqian = 0;
 				}

@@ -919,10 +919,11 @@
 				}
 
 				//发生转卡，进余额抵扣
-				if (this.clickItemObj.count % 2 != 0) {
-					this.consume.piId = this.clickItemObj.itemId
-				}
-
+				// if (this.clickItemObj.count % 2 != 0) {
+				// 	this.consume.piId = this.clickItemObj.itemId
+				// }
+				this.consume.piId = this.clickItemObj.itemId
+                console.log(this.consume.piId)
 				this.isDisable = true
 				setTimeout(() => {
 					this.isDisable = false
@@ -1132,7 +1133,7 @@
 								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
 							}
 							this.consume.realCross = ss;
-
+                            this.clickItemObj.itemId = 0;
 						} else {
 							if (this.jinqian != '') {
 								if(this.cash.select!='' && this.cash.select!=undefined){
@@ -1142,7 +1143,9 @@
 								}
 								this.consume.realCross = ss;
 							}
+							this.clickItemObj.itemId = item.piId;
 						}
+						
 						this.clickItemObj.count = this.clickItemObj.count + 1
 					} else {
 						this.clickItemObj.itemId = item.piId

@@ -553,8 +553,19 @@
 				// 		this.consume.discount)).div(new Decimal(100));
 				// }
 				// this.clickItemObj.itemId = 0
+				if(param.piId!==null){
+					this.clickItemObj = {
+						itemId:param.piId,
+						count: 1
+					};
+				}else{
+                    this.clickItemObj = {
+						itemId:'',
+						count: 0
+					};
+				}
 				this.clickItemObj = {
-					itemId:param.piId,
+					itemId:param.deId,
 					count: 0
 				};
 				$('#customContent').modal({
@@ -652,7 +663,7 @@
 				this.dateArr.push(param.actualBegDate)
 				this.dateArr.push(param.actualEndDate)
 
-				$("input[name='radioGroup']").prop("checked", "");
+				//$("input[name='radioGroup']").prop("checked", "");
 				this.checkMemCash(param.memNum)
 				this.oRadioGroup = ''
 			},

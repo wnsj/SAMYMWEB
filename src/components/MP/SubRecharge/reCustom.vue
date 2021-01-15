@@ -644,8 +644,12 @@
 				this.$refs.counselorEmp.setEmp(param.counselor)
 				this.$refs.emp.setPosName("咨询顾问")
 				this.$refs.emp.setEmp(param.empId)
-
-				this.$refs.project.setEmpId(param.counselor, 1)
+                if(param.piId !== null){
+                    this.$refs.project.setEmpId(param.counselor, 1)
+				}else{
+					this.$refs.project.setEmpId(param.counselor, 2)
+				}
+				
 				this.$refs.project.setProject(param.proId)
 				// this.$refs.project.setEmpId("0")
 				this.queryUnfinishedPro(param.memNum, param.piId)

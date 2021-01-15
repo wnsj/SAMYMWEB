@@ -1165,6 +1165,7 @@
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
 				if (this.dui) {
+					console.log(1)
 					this.listCouponZhe[index].checked = !this.listCouponZhe[index].checked
 					this.listCouponJian.forEach((item) => {
 						item.checked = false
@@ -1217,11 +1218,13 @@
 						console.log('查询请求失败')
 					});
 				} else {
+					console.log(2)
 					this.titles = 0;
 					this.titttl = 0;
 					if (item.couponType == 1) {
 						var us = new Decimal(this.receivables).div(new Decimal(rw)).mul(new Decimal(rw))
 						this.consume.receivable = us;
+						console.log(this.consume.receivable)
 						if (this.cash.select !== '' && this.cash.select !== undefined) {
 							if(this.jinqian != ''){
 								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))

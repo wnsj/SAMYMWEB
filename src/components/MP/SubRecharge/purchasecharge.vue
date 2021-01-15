@@ -531,6 +531,7 @@
 			// Initialization consume’s content
 			initAuditPur(param) {
 				this.checkedId = param.dedId;   //抵扣产品ID
+				console.log(this.checkedId)
 				this.couponId = param.couponId;  //优惠券ID
 				this.titles = param.couponNum;   //优惠券数量
 				if(param.isArrears==1){
@@ -714,7 +715,7 @@
 				if (this.cash.select != '' && this.cash.select != undefined) {
 					var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
 					this.consume.realCross = ss;
-					if (this.consume.arrears != '') {
+					if (this.consume.arrears !== '') {
 						if(this.jinqian != ''){
 							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
 						    this.consume.realCross = ss;
@@ -846,6 +847,9 @@
 				if (this.cash.select > 0) {
 					this.consume.cashId = this.cash.cashId;
 					this.consume.cashMoney = this.cash.select;
+				}else{
+					this.consume.cashId = this.cash.cashId;
+					this.consume.cashMoney = 0;
 				}
 				this.consume.totalCount = this.consume.actualCount
 

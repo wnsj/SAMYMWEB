@@ -784,13 +784,16 @@
 			},
 			dikou() {
 				if (this.cash.select != '' && this.cash.select != undefined) {
-					var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
-					this.consume.realCross = ss;
-					if (this.consume.arrears != '') {
+					// var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
+					// this.consume.realCross = ss;
+					console.log(this.consume.arrears)
+					if (this.consume.arrears !== '') {
 						if(this.jinqian != ''){
+							console.log(1)
 							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
 						    this.consume.realCross = ss;
 						}else{
+							console.log(2)
                             var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
 						    this.consume.realCross = ss;
 						}

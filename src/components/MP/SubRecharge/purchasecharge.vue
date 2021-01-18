@@ -445,7 +445,8 @@
 				},
 				projectObj: {},
 				isDisable: false,
-				couponId:''  //优惠券ID
+				couponId:'',  //优惠券ID
+				dui: true
 			};
 		},
 		methods: {
@@ -568,6 +569,11 @@
                     this.clickItemObj.count = 1
                 }
 				this.couponId = param.couponId;  //优惠券ID
+				if(param.couponId==null){
+					this.dui = true;
+				}else{
+					this.dui = false;
+				}
 				this.titles = param.couponNum;   //优惠券数量
 				if(param.isArrears==1){
 					this.isArrearsShow = false;
@@ -1194,18 +1200,18 @@
 								if (this.cash.select !== '' && this.cash.select !== undefined) {
 									if(this.jinqian != ''){
 										var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
-										this.consume.realCross = ss;
+										this.consume.realCross = ss
 									}else{
 										var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
-										this.consume.realCross = ss;
+										this.consume.realCross = ss
 									}
 								}else{
 									if(this.jinqian != ''){
 										var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
-										this.consume.realCross = ss;
+										this.consume.realCross = ss
 									}else{
 										var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
-										this.consume.realCross = ss;
+										this.consume.realCross = ss
 									}
 								}    // 减去抵扣
 								//this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(
@@ -1218,28 +1224,26 @@
 						console.log('查询请求失败')
 					});
 				} else {
-					console.log(2)
 					this.titles = 0;
 					this.titttl = 0;
 					if (item.couponType == 1) {
-						var us = new Decimal(this.receivables).div(new Decimal(rw)).mul(new Decimal(rw))
+						var us = new Decimal(this.receivables);
 						this.consume.receivable = us;
-						console.log(this.consume.receivable)
 						if (this.cash.select !== '' && this.cash.select !== undefined) {
 							if(this.jinqian != ''){
 								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
-								this.consume.realCross = ss;
+								this.consume.realCross = ss
 							}else{
 								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)).sub(new Decimal(this.consume.arrears))
-								this.consume.realCross = ss;
+								this.consume.realCross = ss
 							}
 						}else{
 							if(this.jinqian != ''){
 								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.jinqian)).sub(new Decimal(this.consume.arrears))
-								this.consume.realCross = ss;
+								this.consume.realCross = ss
 							}else{
 								var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.consume.arrears))
-								this.consume.realCross = ss;
+								this.consume.realCross = ss
 							}
 						}    // 减去抵扣
 						//this.consume.realCross = us;

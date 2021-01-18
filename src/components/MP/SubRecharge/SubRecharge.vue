@@ -175,10 +175,10 @@
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
 									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
-									<div class="youxiao" v-if="item.startTime != null">有效期<span>{{item.startTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+									<div class="youxiao" v-if="item.startTime != null">有效期<span>{{item.startTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
 									<div class="niucha1" v-else-if="item.startTime == null">永久有效</div>
 									<div class="niucha" v-if="item.endTime != null">
-										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span>
 									</div>
 									<div class="gou1" style="display: block;" v-if="Number(item.checked)==1"><img src="../../../../static/img/youhui_xuanze1.png"
 										 alt=""></div>

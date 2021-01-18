@@ -300,10 +300,10 @@
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
 									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
-									<div class="youxiao" v-if="item.startTime != null">有效期<span>{{item.startTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span></div>
+									<div class="youxiao" v-if="item.startTime != null">有效期<span>{{item.startTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
 									<div class="niucha1" v-else-if="item.startTime == null">永久有效</div>
 									<div class="niucha" v-if="item.endTime != null">
-										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("yyyy-MM-DD HH:mm:ss")}}</span>
+										<p class="xian"></p><span>{{item.endTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span>
 									</div>
 									<div class="gou1" style="display: block;" v-if="Number(item.checked)==1"><img src="../../../../static/img/youhui_xuanze1.png"
 										 alt=""></div>
@@ -484,27 +484,27 @@
 					this.consume.couponNum = this.titles;
 					//满减
 					if (this.consume.couponType == 2) {
-						if (this.cash.select == '') {
-							var mach = new Decimal(this.titles).mul(new Decimal(this.manjian));
-							var zz = new Decimal(this.receivables).sub(new Decimal(mach));
-							this.consume.realCross = zz;
-						} else {
-							var mach = new Decimal(this.titles).mul(new Decimal(this.manjian));
-							var zz = new Decimal(this.consume.realCross).sub(new Decimal(mach)).sub(new Decimal(this.cash.select));
-							this.consume.realCross = zz;
+						var mach = new Decimal(this.titles).mul(new Decimal(this.manjian));
+						var zz = new Decimal(this.receivables).sub(new Decimal(mach));
+						this.consume.receivable = zz;
+						if(this.cash.select!=='' && this.cash.select!==undefined){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
+						}else{
+							var ss = new Decimal(this.consume.receivable)
 						}
+						this.consume.realCross = ss;
 
 					}
 					//满折
 					if (this.consume.couponType == 1) {
-						if (this.cash.select == '') {
-							var jh = new Decimal(this.zhekou).div(new Decimal(10));
-							this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(2,
-								Decimal.ROUND_HALF_UP);
+						var jh = new Decimal(re).div(new Decimal(10));
+						this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
+							2, Decimal.ROUND_HALF_UP);
+						if (this.cash.select !== '' && this.cash.select !== undefined) {
+							this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select));
 						} else {
-							var jh = new Decimal(this.zhekou).div(new Decimal(10));
-							this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(Math.pow(jh, this.titles))).sub(new Decimal(
-								this.cash.select)).toFixed(2, Decimal.ROUND_HALF_UP);
+							this.consume.realCross = new Decimal(this.consume.receivable);
+							// this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(2, Decimal.ROUND_HALF_UP);
 						}
 					}
 				}
@@ -520,26 +520,27 @@
 					this.consume.couponNum = this.titles;
 					//满减
 					if (this.consume.couponType == 2) {
-						if (this.cash.select == '') {
-							var mach = new Decimal(this.titles).mul(new Decimal(this.manjian));
-							var zz = new Decimal(this.receivables).sub(new Decimal(mach));
-							this.consume.realCross = zz;
-						} else {
-							var mach = new Decimal(this.titles).mul(new Decimal(this.manjian));
-							var zz = new Decimal(this.consume.realCross).sub(new Decimal(mach));
-							this.consume.realCross = zz;
+						var mach = new Decimal(this.titles).mul(new Decimal(this.manjian));
+						var zz = new Decimal(this.receivables).sub(new Decimal(mach));
+						this.consume.receivable = zz;
+						if(this.cash.select!=='' && this.cash.select!==undefined){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
+						}else{
+							var ss = new Decimal(this.consume.receivable)
 						}
+						this.consume.realCross = ss;
 					}
 					//满折
 					if (this.consume.couponType == 1) {
-						if (this.cash.select == '') {
-							var jh = new Decimal(this.zhekou).div(new Decimal(10));
-							this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(2,
-								Decimal.ROUND_HALF_UP);
+						var jh = new Decimal(this.zhekou).div(new Decimal(10));
+						this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
+							2, Decimal.ROUND_HALF_UP);
+						if(this.cash.select!=='' && this.cash.select!==undefined){
+							var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
 						} else {
-							var jh = new Decimal(this.zhekou).div(new Decimal(10));
-							this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(2, Decimal.ROUND_HALF_UP);
+							var ss = new Decimal(this.consume.receivable);
 						}
+						this.consume.realCross = ss;
 					}
 				}
 			},
@@ -1053,6 +1054,7 @@
 							this.$refs.diseaseTypeRef.setObj('0')
 							this.counselorFlag = false
 						} else {
+							this.selectObj = item
 							if (item.proType != 0) {
 								this.modCounselor(item)
 								this.counselorFlag = false
@@ -1080,7 +1082,6 @@
 							this.consume.receivable = item.receivable //应交
 							this.consume.realCross = item.realCross //实缴
 							this.consume.proType = item.proType
-							this.selectObj = item
 						}
 						this.clickItemObj.count = this.clickItemObj.count + 1
 					} else {

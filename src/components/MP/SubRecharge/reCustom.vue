@@ -583,7 +583,6 @@
 			// Initialization consume’s content
 			initData(param) {
 				this.checkedId = param.piId;   //抵扣产品ID
-				console.log(this.checkedId)
 				this.firstFlag = false
 				this.consumAuditId = param.cid;
 				this.productId = param.empId;
@@ -614,10 +613,10 @@
 						count: 0
 					};
 				}
-				this.clickItemObj = {
-					itemId:param.deId,
-					count: 0
-				};
+				// this.clickItemObj = {
+				// 	itemId:param.deId,
+				// 	count: 0
+				// };
 				$('#customContent').modal({
 					backdrop: 'static',
 					keyboard: false
@@ -685,6 +684,15 @@
 					btn: false,
 				}
 
+                this.$refs.project.setProject(param.proId)
+				// this.$refs.project.setEmpId("0")
+				this.selectObj = null
+				this.queryUnfinishedPro(param.memNum, param.piId)
+				if(param.piId !== null){
+					this.projectFlag = true
+				}else{
+					this.projectFlag = false
+				}
 				this.sameProject = false
 				this.counselorList = []
 				this.isShow = true
@@ -700,29 +708,29 @@
 					this.$refs.project.setEmpId(param.counselor, 2)
 				}
 				
-				this.$refs.project.setProject(param.proId)
-				// this.$refs.project.setEmpId("0")
-				this.queryUnfinishedPro(param.memNum, param.piId)
-
+				
+                
 				this.$refs.VisitStateRef.setObj(param.visitState)
 				this.$refs.ContinStateRef.setObj(param.continState)
 				this.$refs.payStyle.setPsId(param.payType)
 				this.$refs.diseaseTypeRef.setObj(param.diseaseType)
 				this.$refs.counseRoomRef.setChaId(param.counseRoom)
 
-				this.selectObj = null
-				this.projectFlag = false
+				
+				//this.projectFlag = false
 				this.counselorFlag = false
 				this.dateArr = []
 				this.dateArr.push(param.actualBegDate)
 				this.dateArr.push(param.actualEndDate)
 
 				//$("input[name='radioGroup']").prop("checked", "");
-				this.checkMemCash(param.memNum)
+				this.checkMemCash(param.memNum,param.cashMoney)
 				this.oRadioGroup = ''
 				if(param.couponId!==null){
 					this.couponId = param.couponId;  //优惠券ID
 					this.getCoupon(param.memNum, param.proId)
+				}else{
+					this.couponId = null;
 				}
 				this.titles = param.couponNum;   //优惠券数量
 			},
@@ -737,8 +745,7 @@
 				} else {
 					this.consume.counselor = param.empId
 					if (!this.projectFlag) {
-
-						if (this.selectObj == null) {
+						if (this.selectObj === null) {
 							// console.log("nilaile")
 							this.$refs.project.setEmpId(this.consume.counselor, 2)
 						} else {
@@ -778,6 +785,7 @@
 
 			//产品
 			projectChange: function(param) {
+				this.titles = 0;  //优惠券数量清零
 				if (this.isBlank(param)) {
 					this.consume.proId = ""
 				} else {
@@ -796,6 +804,12 @@
 						// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
 						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
 							this.consume.discount)).div(new Decimal(100));
+						this.consume.receivable = this.receivables; //应交
+						if (this.cash.select !== '' && this.cash.select !== undefined) {
+						    this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)) //实缴
+						}else{
+                            this.consume.realCross = this.consume.receivable;
+						}
 					}
 					this.consume.proType = param.proType
 				}
@@ -843,10 +857,12 @@
 			},
 			//使用定金抵扣
 			dikou() {
-				if (this.cash.select != '') {
-					var ss = new Decimal(this.receivables).sub(new Decimal(this.cash.select))
-					this.consume.realCross = ss;
+				if(this.cash.select!=='' && this.cash.select!==undefined){
+					var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))	
+				}else{
+                    var ss = new Decimal(this.consume.receivable)
 				}
+				this.consume.realCross = ss;
 			},
 			//付款方式
 			payChange: function(param) {
@@ -1139,14 +1155,14 @@
 							// 		new Decimal(this.cash.balance)).toFixed(2, Decimal.ROUND_HALF_UP);
 							// }
 							if (item.couponType == 1) {
+								var jh = new Decimal(re).div(new Decimal(10));
+								this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh,this.titttl))).toFixed(
+									2, Decimal.ROUND_HALF_UP);
 								if (this.cash.select !== '' && this.cash.select !== undefined) {
-									var jh = new Decimal(re).div(new Decimal(10));
-									this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).sub(new Decimal(this.cash.select)).toFixed(
-										2, Decimal.ROUND_HALF_UP);
+									
+									this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select));
 								} else {
-									var jh = new Decimal(re).div(new Decimal(10));
-									this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(
-										2, Decimal.ROUND_HALF_UP);
+									this.consume.realCross = new Decimal(this.consume.receivable);
 									// this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(2, Decimal.ROUND_HALF_UP);
 								}
 							}
@@ -1165,14 +1181,13 @@
 					// 	this.consume.realCross = us;
 					// }
 					if (item.couponType == 1) {
+						var jh = new Decimal(re).div(new Decimal(10));
+						this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh,this.titttl))).toFixed(
+							2, Decimal.ROUND_HALF_UP);
 						if (this.cash.select !== '' && this.cash.select !== undefined) {
-						    var jh = new Decimal(re).div(new Decimal(10));
-						    this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).sub(new Decimal(this.cash.select)).toFixed(
-							    2, Decimal.ROUND_HALF_UP);
+						    this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select));
 						}else{
-							var jh = new Decimal(re).div(new Decimal(10));
-							this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(
-								2, Decimal.ROUND_HALF_UP);
+							this.consume.realCross = new Decimal(this.consume.receivable);
 						}
 					}
 				}
@@ -1285,7 +1300,6 @@
 			},
 			//查询已购买产品
 			queryUnfinishedPro(param, piId) {
-				console.log(piId)
 				if (this.isBlank(param)) return
 				var url = this.url + '/purchasedItemsAction/queryUnfinishedPro'
 				this.$ajax({
@@ -1321,12 +1335,13 @@
 								this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
 									this.consume.discount)).div(new Decimal(100));
 							}
+							this.consume.receivable = this.receivables; //应交
 						})
 					} else {
 						alert(res.retMsg)
 					}
 				}).catch((error) => {
-					//console.log('会员查询请求失败')
+					console.log('会员查询请求失败')
 				});
 			},
 			// getCoByPiAndPro(item) {
@@ -1576,7 +1591,7 @@
 					this.consume.realCross = this.consume.consumCount * this.consume.price
 				}
 			},
-			checkMemCash(param) {
+			checkMemCash(param,cashMoney) {
 				if (this.isBlank(param)) {
 					return
 				}
@@ -1598,7 +1613,11 @@
 					if (res.retCode == '0000') {
 						if (res.retData.length > 0) {
 							this.cash = res.retData[0]
-							this.cash.select = 0.0
+							if(cashMoney!==null){
+								this.cash.select = cashMoney;  //定金抵扣
+							}else{
+								this.cash.select = 0.0;
+							}
 						} else {
 							this.cash = {
 								memNum: '', //会员号

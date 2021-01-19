@@ -729,6 +729,7 @@
 						// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
 						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
 							this.consume.discount)).div(new Decimal(100));
+						this.consume.receivable = this.receivables; //应交
 					}
 					this.consume.proType = param.proType
 					this.consume.realCross = this.receivables
@@ -736,10 +737,12 @@
 			},
 			//使用定金抵扣
 			dikou() {
-				if (this.cash.select != '') {
-					var ss = new Decimal(this.receivables).sub(new Decimal(this.cash.select))
-					this.consume.realCross = ss;
+				if(this.cash.select!=='' && this.cash.select!==undefined){
+					var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))	
+				}else{
+                    var ss = new Decimal(this.consume.receivable)
 				}
+				this.consume.realCross = ss;
 			},
 			//付款方式
 			payChange: function(param) {
@@ -1349,15 +1352,23 @@
 							this.titles = res.retData;
 							this.consume.couponNum = this.titttl;
 							if (item.couponType == 1) {
+								// if (this.cash.select !== '' && this.cash.select !== undefined) {
+								// 	var jh = new Decimal(re).div(new Decimal(10));
+								// 	this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).sub(new Decimal(this.cash.select)).toFixed(
+								// 		2, Decimal.ROUND_HALF_UP);
+								// } else {
+								// 	var jh = new Decimal(re).div(new Decimal(10));
+								// 	this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(
+								// 		2, Decimal.ROUND_HALF_UP);
+								// 	// this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(2, Decimal.ROUND_HALF_UP);
+								// }
+								var jh = new Decimal(re).div(new Decimal(10));
+								this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh,this.titttl))).toFixed(
+									2, Decimal.ROUND_HALF_UP);
 								if (this.cash.select !== '' && this.cash.select !== undefined) {
-									var jh = new Decimal(re).div(new Decimal(10));
-									this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).sub(new Decimal(this.cash.select)).toFixed(
-										2, Decimal.ROUND_HALF_UP);
+									this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select));
 								} else {
-									var jh = new Decimal(re).div(new Decimal(10));
-									this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(
-										2, Decimal.ROUND_HALF_UP);
-									// this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(2, Decimal.ROUND_HALF_UP);
+									this.consume.realCross = new Decimal(this.consume.receivable);
 								}
 							}
 						} else {
@@ -1370,14 +1381,22 @@
 					this.titttl = 0;
 					this.titles = 0;
 					if (item.couponType == 1) {
+						// if (this.cash.select !== '' && this.cash.select !== undefined) {
+						//     var jh = new Decimal(re).div(new Decimal(10));
+						//     this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).sub(new Decimal(this.cash.select)).toFixed(
+						// 	    2, Decimal.ROUND_HALF_UP);
+						// }else{
+						// 	var jh = new Decimal(re).div(new Decimal(10));
+						// 	this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(
+						// 		2, Decimal.ROUND_HALF_UP);
+						// }
+						var jh = new Decimal(re).div(new Decimal(10));
+						this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh,this.titttl))).toFixed(
+							2, Decimal.ROUND_HALF_UP);
 						if (this.cash.select !== '' && this.cash.select !== undefined) {
-						    var jh = new Decimal(re).div(new Decimal(10));
-						    this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).sub(new Decimal(this.cash.select)).toFixed(
-							    2, Decimal.ROUND_HALF_UP);
-						}else{
-							var jh = new Decimal(re).div(new Decimal(10));
-							this.consume.realCross = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(
-								2, Decimal.ROUND_HALF_UP);
+							this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select));
+						} else {
+							this.consume.realCross = new Decimal(this.consume.receivable);
 						}
 					}
 				}

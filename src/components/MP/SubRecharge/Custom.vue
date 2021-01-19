@@ -736,10 +736,12 @@
 			},
 			//使用定金抵扣
 			dikou() {
-				if (this.cash.select != '') {
-					var ss = new Decimal(this.receivables).sub(new Decimal(this.cash.select))
-					this.consume.realCross = ss;
+				if(this.cash.select!=='' && this.cash.select!==undefined){
+					var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))	
+				}else{
+                    var ss = new Decimal(this.consume.receivable)
 				}
+				this.consume.realCross = ss;
 			},
 			//付款方式
 			payChange: function(param) {

@@ -857,7 +857,8 @@
 					var sur = this.selectObj.totalCount - this.selectObj.consumCount;
 					if (this.consume.consumCount == sur) {
 						if (this.selectObj.balance) {
-							this.consume.realCross = new Decimal(this.selectObj.receivable).sub(new Decimal(this.selectObj.balance))
+							//this.consume.realCross = new Decimal(this.selectObj.receivable).sub(new Decimal(this.selectObj.balance));
+							this.consume.realCross = new Decimal(this.selectObj.balance);
 						} else {
 							this.consume.realCross = new Decimal(this.selectObj.receivable)
 						}
@@ -1128,7 +1129,12 @@
 					this.consume.payType = item.payType
 					this.appShow = true
 					this.consume.appNumber = item.appNumber
-					this.payChange()
+					if(this.selectObj!=null){
+						this.payChange(this.selectObj.payType)
+					}else{
+                        this.payChange()
+					}
+					
 				} else {
 					this.appShow = false
 					this.consume.appNumber = ''

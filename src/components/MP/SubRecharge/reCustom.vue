@@ -315,7 +315,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-12 clearfix jh-ad-0" v-show="cash.balance>0">
+			<div class="col-md-12 clearfix jh-ad-0" v-show="selectObj == null">
 				<div class="col-md-6 clearfix jh-wd-33" v-show="cash.balance>0">
 					<label class="col-md-4 control-label text-right nopad end-aline">
 						定金抵扣
@@ -512,7 +512,7 @@
 					}
 					//满折
 					if (this.consume.couponType == 1) {
-						var jh = new Decimal(re).div(new Decimal(10));
+						var jh = new Decimal(this.zhekou).div(new Decimal(10));
 						this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
 							2, Decimal.ROUND_HALF_UP);
 						if (this.cash.select !== '' && this.cash.select !== undefined) {
@@ -563,6 +563,7 @@
 					//满折
 					if (this.consume.couponType == 1) {
 						var jh = new Decimal(this.zhekou).div(new Decimal(10));
+						console.log(Math.pow(jh, this.titles))
 						this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
 							2, Decimal.ROUND_HALF_UP);
 						if(this.cash.select!=='' && this.cash.select!==undefined){
@@ -671,11 +672,12 @@
 					accompany: param.accompany, //陪同人
 					companionship: param.companionship, //陪同人关系
 					cashMoney: param.cashMoney,
+					couponType: param.couponType,
 					cId: param.sourceId,
 					preFoldTotalPrice: parseInt(param.totalCount) * parseInt(param.price)
 				}
-
-
+                this.titttl = param.couponNum;
+              
 				this.cash = {
 					cashId: '',
 					memNum: '',
@@ -836,6 +838,7 @@
 						listZhe.forEach((item) => {
 							if(item.couId == this.couponId){
 								item.checked = true
+								this.zhekou = item.recude/10;
 							}else{
 							    item.checked = false
 							}
@@ -974,16 +977,27 @@
 				if (this.selectObj) {
 					// this.consume.realCross = (parseFloat(this.consume.realCross) * parseFloat(this.consume.discount) / 100).toFixed(2)
 					var sur = this.selectObj.totalCount - this.selectObj.consumCount;
-					if (this.consume.consumCount == sur) {
-						if (this.selectObj.realCrossCount) {
-							this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.selectObj.realCrossCount))
-						} else {
-							this.consume.realCross = new Decimal(this.consume.receivable)
-						}
+					// if (this.consume.consumCount == sur) {
+					// 	if (this.selectObj.realCrossCount) {
+					// 		this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.selectObj.realCrossCount))
+					// 	} else {
+					// 		this.consume.realCross = new Decimal(this.consume.receivable)
+					// 	}
 
+					// } else {
+					// 	this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(this.consume.discount)).div(new Decimal(
+					// 		100)).toFixed(2, Decimal.ROUND_HALF_UP)
+					// }
+					if (this.consume.consumCount == sur) {
+						if (this.selectObj.balance) {
+							this.consume.realCross = new Decimal(this.selectObj.balance);
+						} else {
+							this.consume.realCross = new Decimal(this.selectObj.receivable)
+						}
 					} else {
-						this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(this.consume.discount)).div(new Decimal(
-							100)).toFixed(2, Decimal.ROUND_HALF_UP)
+						this.consume.realCross = new Decimal(this.selectObj.receivable).div(new Decimal(this.selectObj.totalCount)).mul(
+							new Decimal(
+								this.consume.consumCount)).toFixed(2, Decimal.ROUND_HALF_UP);
 					}
 				}
 
@@ -1335,7 +1349,7 @@
 								this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
 									this.consume.discount)).div(new Decimal(100));
 							}
-							this.consume.receivable = this.receivables; //应交
+							//this.consume.receivable = this.receivables; //应交
 						})
 					} else {
 						alert(res.retMsg)

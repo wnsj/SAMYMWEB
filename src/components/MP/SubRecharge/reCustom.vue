@@ -32,7 +32,7 @@
 						<input type="text" class="form-control" disabled="true">
 					</div>
 				</div> -->
-				<div v-show="unfinishedProList.length > 0">
+				<div v-show="havetubuyFlag">
 					<div class="col-md-12  clearfix jh-ad-0">
 						<div class="col-md-6  clearfix jh-wd-33 jh-mb-0">
 							<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">已购产品</label><span class="sign-left">:</span>
@@ -447,6 +447,7 @@
 				consumeReceivable: '',
 				isSelect: true,
 				zhekou: 0,
+				manjian: 0,
 				manjianx: 0,
 				titles: 0,
 				sameProject: false,
@@ -470,6 +471,7 @@
 				},
 				isDisable: false,
 				couponId:'',  //优惠券ID
+				havetubuyFlag: false,  // 已购产品显示
 			};
 		},
 		methods: {
@@ -685,6 +687,8 @@
 					select: 0,
 					btn: false,
 				}
+				
+				this.havetubuyFlag = false;  // 已购产品显示
 
                 this.$refs.project.setProject(param.proId)
 				// this.$refs.project.setEmpId("0")
@@ -836,17 +840,19 @@
 						let listZhe = data['1']
 						let listjian = data['2']
 						listZhe.forEach((item) => {
+							item.recude = item.recude / 10
 							if(item.couId == this.couponId){
 								item.checked = true
-								this.zhekou = item.recude/10;
+								this.zhekou = item.recude;
 							}else{
-							    item.checked = false
+								item.checked = false
 							}
-							item.recude = item.recude / 10
+							
 						})
 						listjian.forEach((item) => {
 							if(item.couId == this.couponId){
-								item.checked = true
+								item.checked = true;
+								this.manjian = item.recude;
 							}else{
 							    item.checked = false
 							}
@@ -1330,7 +1336,12 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
-						this.unfinishedProList = res.retData
+						this.unfinishedProList = res.retData;
+						if(this.unfinishedProList==""){
+							this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
+								this.consume.discount)).div(new Decimal(100));
+							return false;
+						}
 						this.unfinishedProList.forEach((item, index) => {
 							if (item.piId == piId) {
 								// console.log(item)
@@ -1341,6 +1352,7 @@
 								this.selectObj = item
 								this.projectFlag = true
 								this.counselorFlag = true
+								this.havetubuyFlag = true;  //已购产品展示
 								// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
 								this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
 									this.consume.discount)).div(new Decimal(100));

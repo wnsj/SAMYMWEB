@@ -279,8 +279,11 @@
 					alert("实退金额和违约金至少一个大于0")
 					return
 				}
-				this.refund.money = this.selectObj.price * this.refund.consumCount
-                this.refund.receivable = this.selectObj.price * this.refund.consumCount
+				//this.refund.money = this.selectObj.price * this.refund.consumCount
+				this.refund.money = new Decimal(this.selectObj.receivable).div(new Decimal(this.selectObj.totalCount)).mul(new Decimal(this.refund
+					.consumCount));
+				this.refund.receivable = this.refund.money
+				
 
                 this.isDisable = true
                 setTimeout(() => {

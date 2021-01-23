@@ -346,6 +346,9 @@
 
 			//点击返回按钮跳转
 			goOff() {
+				localStorage.removeItem('userList');   //重置用户
+				localStorage.removeItem('categoryList');   //重置分类
+				localStorage.removeItem('projectList');   //重置产品
 				this.$router.push({
 					path: '../../MP/Coupon'
 				})

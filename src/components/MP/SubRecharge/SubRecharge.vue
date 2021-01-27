@@ -174,7 +174,7 @@
 									<div class="jia">{{item.recude}}<span>折</span></div>
 									<div class="bianhaoasd">编号：<span>{{item.couId}}</span></div>
 									<div class="titleSY">{{item.couponName}}</div>
-									<div class="manzu">满<span>{{item.fullCondition}}</span>元可用</div>
+									<div class="manzu">满<span>{{item.fullCondition==null ? 0 : item.fullCondition}}</span>元可用</div>
 									<div class="youxiao" v-if="item.startTime != null">有效期<span>{{item.startTime | dateFormatFilter("YYYY-MM-DD HH:mm:ss")}}</span></div>
 									<div class="niucha1" v-else-if="item.startTime == null">永久有效</div>
 									<div class="niucha" v-if="item.endTime != null">

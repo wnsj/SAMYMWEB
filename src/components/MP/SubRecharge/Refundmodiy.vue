@@ -294,9 +294,9 @@
 
 				this.requestData(url, this.refund).then((response) => {
 					if (response.retCode == '0000') {
+						alert(response.retMsg)
                         this.$emit('closeCurrentPage','succ')
                         this.$store.commit('addCount',1)
-						alert(response.retMsg)
 						this.closeCurrentPage()
 					} else {
 						alert(response.retMsg)
@@ -320,13 +320,13 @@
 					data:formData,
 					dataType: 'json',
 				}).then((response) => {
-					var res = response.data
+					var res = response.data;
 					//console.log(res)
 					if (res.retCode == '0000') {
 			           this.$emit('closeCurrentPage','succ')
 			           this.$store.commit('addCount',1)
-			           alert(response.retMsg)
-			           this.closeCurrentPage()
+			           alert(res.retMsg)
+			           //this.closeCurrentPage()
 					} else {
 						alert(res.retMsg)
 					}

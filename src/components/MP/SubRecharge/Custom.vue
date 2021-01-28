@@ -1033,6 +1033,11 @@
 					this.receivables = parseInt(item.totalCount) * parseInt(item.price) * parseInt(item.discount) / 100 //应交
 					this.consume.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
 					this.consume.proType = item.proType
+					this.consume.couponId = null;
+					this.consume.couponName = '';
+					this.consume.couponNum = 0;
+					this.consume.couponType = null;
+
 					return
 				} else {
 					if (this.clickItemObj.itemId == item.piId) {
@@ -1058,6 +1063,8 @@
 							this.$refs.diseaseTypeRef.setObj('0')
 							this.counselorFlag = false
 						} else {
+							this.listCouponZhe = []
+							this.listCouponJian = []
 							this.selectObj = item
 							if (item.proType != 0) {
 								this.modCounselor(item)
@@ -1088,6 +1095,10 @@
 							this.consume.proType = item.proType
 						}
 						this.clickItemObj.count = this.clickItemObj.count + 1
+						this.consume.couponId = null;
+						this.consume.couponName = '';
+						this.consume.couponNum = 0;
+						this.consume.couponType = null;
 					} else {
 						this.selectObj = item
 						this.clickItemObj.itemId = item.piId
@@ -1118,7 +1129,10 @@
 						this.consume.discount = item.discount //折扣
 						this.consume.receivable = item.receivable //应交
 						this.consume.realCross = item.realCross //实缴
-						this.consume.proType = item.proType
+						this.consume.proType = item.proTypethis.consume.couponId = null;
+						this.consume.couponName = '';
+						this.consume.couponNum = 0;
+						this.consume.couponType = null;
 					}
 				}
 				this.projectFlag = e.target.checked

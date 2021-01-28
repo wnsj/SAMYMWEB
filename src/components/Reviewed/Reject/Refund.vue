@@ -125,7 +125,7 @@
         <div class="row row_edit">
             <div class="modal fade" id="refundContent">
                 <div class="modal-dialog wd1000">
-                    <refund ref='refund' @closeCurrentPage='feedBack()'></refund>
+                    <refund ref='refund' @closeCurrentPage='feedBack'></refund>
                 </div>
             </div>
         </div>

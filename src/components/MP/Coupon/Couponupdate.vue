@@ -381,6 +381,7 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
+						this.couId = res.retData.couId;   //优惠券ID
 						this.couponName = res.retData.couponName; //优惠券名称
 						this.state = res.retData.state; //状态
 						this.startTime = res.retData.startTime;
@@ -399,6 +400,9 @@
 						this.limitGet = res.retData.limitGet; //每人限领取
 						this.couponId = res.retData.couponId;
 						this.allCount = res.retData.allCount; //发放机制
+						localStorage.setItem('userList', res.retData.userList.toString());   //用户本地存储
+						localStorage.setItem('categoryList', res.retData.categoryList.toString());   //分类本地存储
+						localStorage.setItem('productList', res.retData.productList.toString());   //产品本地存储
 						if (this.couponType == '') {
 							$(".jin").show();
 							$(".zhe").show();
@@ -510,8 +514,8 @@
 					formData.append('startTime', this.startTime);
 					formData.append('endTime', this.endTime);
 				}
-				var couid = localStorage.getItem('couId');
-				formData.append('couId', couid);
+				//var couid = localStorage.getItem('couId');
+				formData.append('couId', this.couId);
 				formData.append('couponName', this.couponName);
 				formData.append('state', this.state);
 				formData.append('isVaild', this.isVaild);

@@ -400,9 +400,21 @@
 						this.limitGet = res.retData.limitGet; //每人限领取
 						this.couponId = res.retData.couponId;
 						this.allCount = res.retData.allCount; //发放机制
-						localStorage.setItem('userList', res.retData.userList.toString());   //用户本地存储
-						localStorage.setItem('categoryList', res.retData.categoryList.toString());   //分类本地存储
-						localStorage.setItem('productList', res.retData.productList.toString());   //产品本地存储
+						if(res.retData.userList==null){
+							localStorage.setItem('userList', null);
+						}else{
+							localStorage.setItem('userList', res.retData.userList.toString());   //用户本地存储
+						}
+						if(res.retData.categoryList==null){
+							localStorage.setItem('categoryList', null);
+						}else{
+							localStorage.setItem('categoryList', res.retData.categoryList.toString());   //分类本地存储
+						}
+						if(res.retData.productList==null){
+							localStorage.setItem('productList', null);
+						}else{
+							localStorage.setItem('productList', res.retData.productList.toString());   //产品本地存储
+						}
 						if (this.couponType == '') {
 							$(".jin").show();
 							$(".zhe").show();

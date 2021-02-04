@@ -110,7 +110,7 @@
 					<b>*</b>
 					<label class="col-md-4 control-label text-right nopad end-aline">产品</label><span class="sign-left">:</span>
 					<div class="col-md-7  ">
-						<project disabled="true" ref="projectRef" @projectChange="projectChange"></project>
+						<project disabled="true" ref="projectRef" @mrprojectChange="mrprojectChange" @projectChange="projectChange"></project>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -687,14 +687,20 @@
 					}
 				}
 			},
+			//产品折后总额
+			mrprojectChange:function(param){
+				if (!this.isBlank(param)) {
+				    this.receivables = param.discouAmount;
+				}
+			},
 			//产品
 			projectChange: function(param) {
-				// console.log(JSON.stringify(param))
+				//console.log(JSON.stringify(param))
 				if (this.isBlank(param)) {
 					this.consume.proId = ""
 					this.projectObj = {}
 				} else {
-					getCoupon(this.userId, param.proId)
+					this.getCoupon(this.userId, param.proId)
 					this.consume.proId = param.proId
 					this.consume.price = param.price //折前单价
 					//this.consume.disPrice = param.price * param.discount / 100 //折后单价
@@ -708,7 +714,8 @@
 						this.consume.discount = 0;
 					}else{
 						// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount));
-						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(this.consume.discount)).div(new Decimal(100));
+						//this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(this.consume.discount)).div(new Decimal(100));
+						this.receivables = param.discouAmount;
 						this.consume.receivable = this.receivables; //应交
 						this.consume.realCross = this.consume.receivable; //实缴
 					}

@@ -672,12 +672,12 @@
 			projectChange: function(param) {
 				console.log(JSON.stringify(param))
 				this.titles = 0;  //优惠券数量清零
-				this.productId = param.proId;
-				console.log(this.productId)
 				if (this.isBlank(param)) {
 					this.consume.proId = ""
 					this.projectObj = {}
 				} else {
+					this.productId = param.proId;
+				    console.log(this.productId)
 					var url = this.url + '/couponController/selectCoupon'
 					var formData = new FormData();
 					formData.append('productId', this.productId);
@@ -723,8 +723,9 @@
 						this.consume.discount = 0;
 					} else {
 						// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount));
-						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(
-						this.consume.discount)).div(new Decimal(100));
+						//this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.actualCount)).mul(new Decimal(
+						//this.consume.discount)).div(new Decimal(100));
+						this.receivables = param.discouAmount;
 					}
 					this.consume.receivable = this.receivables //应交
 					// this.consume.realCross = param.discouAmount //实缴
@@ -913,7 +914,7 @@
 					return;
 				}
 
-				if (this.consume.isArrears != '1' && (this.isBlank(this.consume.arrears) || parseInt(this.consume.arrears) == 0)) {
+				if (this.consume.isArrears != '1' && (this.isBlank(this.consume.arrears) || parseFloat(this.consume.arrears) == 0)) {
 					alert("欠费金额不能为空!")
 					return;
 				}

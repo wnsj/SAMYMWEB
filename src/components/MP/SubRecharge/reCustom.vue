@@ -106,7 +106,7 @@
 					<b>*</b>
 					<label class="col-md-4 control-label text-right nopad end-aline">产品</label><span class="sign-left">:</span>
 					<div class="col-md-7">
-						<project ref="project" @projectChange="projectChange" :disabled="projectFlag"></project>
+						<project ref="project" @mrprojectChange="mrprojectChange" @projectChange="projectChange" :disabled="projectFlag"></project>
 					</div>
 				</div>
 				<div class="col-md-6 form-group clearfix jh-wd-33">
@@ -791,9 +791,15 @@
 						this.consumeReceivable = 0
 					}
 			},
-
+            //产品折后总额
+			mrprojectChange:function(param){
+				if (!this.isBlank(param)) {
+				    this.receivables = param.discouAmount;
+				}
+			},
 			//产品
 			projectChange: function(param) {
+				console.log(param);
 				this.titles = 0;  //优惠券数量清零
 				if (this.isBlank(param)) {
 					this.consume.proId = ""
@@ -811,8 +817,9 @@
 						this.consume.discount = 0;
 					} else {
 						// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
-						this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
-							this.consume.discount)).div(new Decimal(100));
+						// this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
+						// 	this.consume.discount)).div(new Decimal(100));
+                        this.receivables = param.discouAmount;   //折后总额
 						this.consume.receivable = this.receivables; //应交
 						if (this.cash.select !== '' && this.cash.select !== undefined) {
 						    this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)) //实缴

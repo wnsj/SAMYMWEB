@@ -85,6 +85,8 @@
                     var res = response.data
                     if (res.retCode == '0000') {
                         this.projectList = res.retData
+                        this.projectObj = this.exchangeProjectName(this.proId)
+                        this.$emit('mrprojectChange', this.projectObj)
                     } else {
                         alert(res.retMsg)
                     }

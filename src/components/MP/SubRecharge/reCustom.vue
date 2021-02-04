@@ -854,6 +854,7 @@
 							if(item.couId == this.couponId){
 								item.checked = true
 								this.zhekou = item.recude;
+								this.titttl = item.limitGet;
 							}else{
 								item.checked = false
 							}

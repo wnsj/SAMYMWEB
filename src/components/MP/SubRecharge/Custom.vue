@@ -1038,8 +1038,10 @@
 					this.consume.price = item.price //折前单价
 					this.consume.totalCount = item.totalCount //实际次数
 					this.consume.discount = item.discount //折扣
-					this.receivables = parseInt(item.totalCount) * parseInt(item.price) * parseInt(item.discount) / 100 //应交
+					//this.receivables = parseInt(item.totalCount) * parseInt(item.price) * parseInt(item.discount) / 100 //应交
 					this.consume.preFoldTotalPrice = parseInt(item.totalCount) * parseInt(item.price) //实缴
+					this.consume.receivable = item.receivable //应交
+					this.consume.realCross = item.realCross //实缴
 					this.consume.proType = item.proType
 					this.consume.couponId = null;
 					this.consume.couponName = '';

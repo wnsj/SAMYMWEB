@@ -88,8 +88,8 @@
 					<div class="col-md-7 col-lg-7"><input class="form-control" type="text" value="" v-model="proName"></div>
 				</div>
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
-					<div class="col-md-7 col-lg-7 text-right nopad" style="margin-right: -50px;">
-						<p class="end-aline col-md-11 col-lg-11" style="margin-left: -40px;" >是否使用优惠券</p><span class="sign-left">:</span>
+					<div class="col-md-5 col-lg-5 text-right nopad">
+						<p class="end-aline col-md-11 col-lg-11">使用优惠券</p><span class="sign-left">:</span>
 					</div>
 					<div class="col-md-7 col-lg-7">
 						<select class="form-control" v-model="isUseCoupon">

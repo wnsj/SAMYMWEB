@@ -61,8 +61,7 @@
 					</div>
 
 					<div class="col-md-12 col-lg-12">
-						<p class="tips" style="font-weight: bolder">注：1、上面是已购产品列表，如发生余额抵扣购买新产品，则请选中已购产品；否则，请不要点选。若已经勾选，则再次点击取消勾选
-							<br>2、只能抵扣非欠费普通类型产品，月卡季卡等不可抵扣</p>
+						<p class="tips" style="font-weight: bolder">注：以上为已购产品，若购买新产品时需要将现有产品进行抵扣，请选中已购产品，此时需保证当前产品有余额。否则，请不要点选！</p>
 					</div>
 
 				</div>

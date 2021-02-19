@@ -628,7 +628,7 @@
 				}
 				Object.assign(this.consume, param)
 				this.queryUnfinishedPro(param)
-				
+
 				if(param.dedId==null){
 					this.jinqian = 0;
 				}
@@ -857,7 +857,7 @@
 							}else{
 							    item.checked = false
 							}
-							
+
 						})
 						listjian.forEach((item) => {
 							if(item.couId == this.couponId){
@@ -945,10 +945,8 @@
 				//发生转卡，进余额抵扣
 				if (this.clickItemObj.count % 2 != 0) {
                     this.consume.piId = ''
-                    debugger
 				} else {
 				    this.consume.piId = this.clickItemObj.itemId
-                    debugger
 				}
 
 				this.isDisable = true

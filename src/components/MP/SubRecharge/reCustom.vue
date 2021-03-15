@@ -342,6 +342,7 @@
 						<input type="text" class="form-control" v-model="consume.realCross">
 					</div>
 				</div>
+				
 				<div class="col-md-4 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">备注</label><span class="sign-left">:</span>
 					<div class="col-md-7">

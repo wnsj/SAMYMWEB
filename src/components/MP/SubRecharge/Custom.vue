@@ -338,7 +338,7 @@
 						<input type="text" class="form-control" disabled="true" v-model="consume.realCross">
 					</div>
 				</div>
-				<div class="col-md-4 form-group clearfix jh-wd-33" v-show="selectObj == null">
+				<div class="col-md-4 form-group clearfix jh-wd-33">
 					<label for="cyname" class="col-md-4 control-label text-right nopad end-aline">备注</label><span class="sign-left">:</span>
 					<div class="col-md-7">
 						<textarea type="text" class="form-control" style="height: 34px;" v-model="consume.remark"></textarea>

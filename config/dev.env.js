@@ -7,5 +7,7 @@ module.exports = merge(prodEnv, {
 	// API_HOST:'"https://cs.miyuejk.com:4093/samy"',
     // API_HOST:'"http://172.16.2.107:8080"'
     API_HOST:'" http://vip.miyuexli.com:88/samy20200930"'
-   
+	API_HOST:'"https://cs.miyuejk.com:4093/samy"',
+  //API_HOST:'"http://172.16.3.234:8080"'
+
 })

@@ -159,12 +159,16 @@
 
 						<template>
 							<div class="ques-info" v-if="item.proType==1 && item.selectedAnswer">
-								<span v-if="item.selectedAnswer==1">选项答案：是</span>
-								<span v-else>选项答案：否</span>
+								<!-- <span v-if="item.selectedAnswer==1">选项答案：是</span>
+								<span v-else>选项答案：否</span> -->
+                                <span>答案：{{item.selectedAnswer==1?'是':'否'}}</span>
 							</div>
 							<div class="ques-info" v-else-if="item.proType==2 && item.selectedAnswer">
-								<span>选项答案：{{item.selectedAnswer}}分</span>
+								<span>答案：{{item.selectedAnswer}}分</span>
 							</div>
+                            <div class="ques-info" v-else>
+                            	<span>答案：暂无</span>
+                            </div>
 						</template>
 
 						<div class="ques-info" v-if="item.describeAnswer"><span>描述答案： </span> {{item.describeAnswer}}</div>

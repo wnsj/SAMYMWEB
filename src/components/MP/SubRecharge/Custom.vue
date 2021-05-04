@@ -319,7 +319,7 @@
 							<li>
 								<ul class="count1">
 									<li><span class="num-jian1" @click="btnMinute()">-</span></li>
-									<li><input type="text" class="input-num1" value="1" v-model="titles" /></li>
+									<li><input type="text" class="input-num1" value="1" v-model="titles" @blur="inputBlur()" /></li>
 									<li><span class="num-jia1" @click="btnAdd()">+</span></li>
 								</ul>
 							</li>　
@@ -459,7 +459,7 @@
 				dateArr: [],
 				titles: 0,
 				manjian: 0,
-				zhekou: 0,
+				zhekou: 1,
 				projectFlag: false,
 				counselorFlag: false,
 				cash: {
@@ -469,12 +469,25 @@
 					select: 0,
 					btn: false,
 				},
-				isDisable: false
+				isDisable: false,
+                oldNum: 0
 			};
 		},
+        watch:{
+             titles(val, oldVal){
+                 // console.log("new: "+val, "old: "+oldVal);
+                this.oldNum = Number(oldVal);
+             }
+         },
+
 		methods: {
 			//优惠券使用张数增加
 			btnAdd() {
+                if (this.dui) {
+                    alert('请选择优惠券')
+                    this.titles = 0
+                    return false
+                }
 				// 如果数量大于商品库存
 				if (this.titles >= this.titttl) {
 					alert('该优惠券不能使用更多了~')
@@ -497,7 +510,7 @@
 					}
 					//满折
 					if (this.consume.couponType == 1) {
-						var jh = new Decimal(re).div(new Decimal(10));
+						var jh = new Decimal(this.zhekou).div(new Decimal(10));
 						this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, this.titles))).toFixed(
 							2, Decimal.ROUND_HALF_UP);
 						if (this.cash.select !== '' && this.cash.select !== undefined) {
@@ -505,12 +518,19 @@
 						} else {
 							this.consume.realCross = new Decimal(this.consume.receivable);
 							// this.consume.realCross = new Decimal(this.consume.realCross).mul(new Decimal(Math.pow(jh, this.titttl))).toFixed(2, Decimal.ROUND_HALF_UP);
-						}
+
+                        }
+
 					}
 				}
 			},
 			//优惠券使用张数减少
 			btnMinute() {
+                if (this.dui) {
+                    alert('请选择优惠券')
+                    this.titles = 0
+                    return false
+                }
 				if (this.titles <= 1) {
 					alert('该优惠券不能减少了哟~')
 					return false
@@ -544,6 +564,54 @@
 					}
 				}
 			},
+
+            //blur
+            inputBlur(cNum) {
+                if (this.dui) {
+                    alert('请选择优惠券')
+                    this.titles = 0
+                    return false
+                }
+                var cNum = Number(this.titles)
+            	if (cNum < 1) {
+            		alert('该优惠券不能减少了哟~')
+                    this.titles = this.oldNum
+            		return false
+                } else if (cNum > this.titttl) {
+                    alert('该优惠券不能使用更多了~')
+                    this.titles = this.oldNum
+                    return false
+               } else {
+            		// return false
+            		// cNum--
+            		this.consume.couponNum = cNum;
+            		//满减
+            		if (this.consume.couponType == 2) {
+            			var mach = new Decimal(cNum).mul(new Decimal(this.manjian));
+            			var zz = new Decimal(this.receivables).sub(new Decimal(mach));
+            			this.consume.receivable = zz;
+            			if(this.cash.select!=='' && this.cash.select!==undefined){
+            				var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
+            			}else{
+            				var ss = new Decimal(this.consume.receivable)
+            			}
+            			this.consume.realCross = ss;
+            		}
+            		//满折
+            		if (this.consume.couponType == 1) {
+            			var jh = new Decimal(this.zhekou).div(new Decimal(10));
+            			this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, cNum))).toFixed(
+            				2, Decimal.ROUND_HALF_UP);
+            			if(this.cash.select!=='' && this.cash.select!==undefined){
+            				var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
+            			} else {
+            				var ss = new Decimal(this.consume.receivable);
+            			}
+            			this.consume.realCross = ss;
+            		}
+            	}
+            },
+
 			// Initialization consume’s content
 			initData(param) {
 				this.titles = 0;
@@ -683,7 +751,7 @@
 			//产品
 			projectChange: function(param) {
 				this.titles = 0;  //优惠券数量清零
-				
+
 				if (this.isBlank(param)) {
 					this.consume.proId = ""
 				} else {
@@ -746,7 +814,7 @@
 			//使用定金抵扣
 			dikou() {
 				if(this.cash.select!=='' && this.cash.select!==undefined){
-					var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))	
+					var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
 				}else{
                     var ss = new Decimal(this.consume.receivable)
 				}
@@ -1159,7 +1227,7 @@
 					}else{
                         this.payChange()
 					}
-					
+
 				} else {
 					this.appShow = false
 					this.consume.appNumber = ''
@@ -1302,7 +1370,7 @@
 							if (item.couponType == 2) {
 								var mach = new Decimal(this.titttl).mul(new Decimal(res1));
 								var zz = new Decimal(this.receivables).sub(new Decimal(mach));
-								this.consume.receivable = zz;						
+								this.consume.receivable = zz;
 								if (this.cash.select !== '' && this.cash.select !== undefined) {
 									var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
 									this.consume.realCross = ss;

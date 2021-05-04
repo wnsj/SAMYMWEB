@@ -201,7 +201,7 @@
 							<li>
 								<ul class="count1">
 									<li><span class="num-jian1" @click="btnMinute()">-</span></li>
-									<li><input type="text" class="input-num1" value="1" v-model="titles" /></li>
+									<li><input type="text" class="input-num1" value="1" v-model="titles" @blur="inputBlur()" /></li>
 									<li><span class="num-jia1" @click="btnAdd()">+</span></li>
 								</ul>
 							</li>　
@@ -445,12 +445,70 @@
 				projectObj: {},
 				isDisable: false,
 				couponId:'',  //优惠券ID
-				dui: true
+				dui: true,
+                oldNum: 0
 			};
 		},
+        watch:{
+             titles(val, oldVal){
+                 // console.log("new: "+val, "old: "+oldVal);
+                this.oldNum = Number(oldVal);
+             }
+        },
 		methods: {
+            //blur
+            inputBlur(cNum) {
+                if (this.dui) {
+                    alert('请选择优惠券')
+                    this.titles = 0
+                    return false
+                }
+                var cNum = Number(this.titles)
+            	if (cNum < 1) {
+            		alert('该优惠券不能减少了哟~')
+                    this.titles = this.oldNum
+            		return false
+                } else if (cNum > this.titttl) {
+                    alert('该优惠券不能使用更多了~')
+                    this.titles = this.oldNum
+                    return false
+               } else {
+            		// return false
+            		// cNum--
+            		this.consume.couponNum = cNum;
+            		//满减
+            		if (this.consume.couponType == 2) {
+            			var mach = new Decimal(cNum).mul(new Decimal(this.manjian));
+            			var zz = new Decimal(this.receivables).sub(new Decimal(mach));
+            			this.consume.receivable = zz;
+            			if(this.cash.select!=='' && this.cash.select!==undefined){
+            				var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
+            			}else{
+            				var ss = new Decimal(this.consume.receivable)
+            			}
+            			this.consume.realCross = ss;
+            		}
+            		//满折
+            		if (this.consume.couponType == 1) {
+            			var jh = new Decimal(this.zhekou).div(new Decimal(10));
+            			this.consume.receivable = new Decimal(this.receivables).mul(new Decimal(Math.pow(jh, cNum))).toFixed(
+            				2, Decimal.ROUND_HALF_UP);
+            			if(this.cash.select!=='' && this.cash.select!==undefined){
+            				var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
+            			} else {
+            				var ss = new Decimal(this.consume.receivable);
+            			}
+            			this.consume.realCross = ss;
+            		}
+            	}
+            },
 			//优惠券使用张数增加
 			btnAdd() {
+                if (this.dui) {
+                    alert('请选择优惠券')
+                    this.titles = 0
+                    return false
+                }
 				// 如果数量大于商品库存
 				if (this.titles >= this.titttl) {
 					alert('该优惠券不能使用更多了~')
@@ -507,6 +565,11 @@
 			},
 			//优惠券使用张数减少
 			btnMinute() {
+                if (this.dui) {
+                    alert('请选择优惠券')
+                    this.titles = 0
+                    return false
+                }
 				if (this.titles <= 1) {
 					alert('该优惠券不能减少了哟~')
 					return false

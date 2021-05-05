@@ -400,6 +400,7 @@
 				oRadioGroup: '',
 				realCrossCount: '',
 				destroy: true,
+                dui: true,
 				titttl: 0,
 				firstFlag: false,
 				counselorList: [],
@@ -490,7 +491,7 @@
         },
 		methods: {
             //blur
-            inputBlur(cNum) {
+            inputBlur() {
                 if (this.dui) {
                     alert('请选择优惠券')
                     this.titles = 0
@@ -528,8 +529,10 @@
             				2, Decimal.ROUND_HALF_UP);
             			if(this.cash.select!=='' && this.cash.select!==undefined){
             				var ss = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select))
+                            console.log(ss)
             			} else {
             				var ss = new Decimal(this.consume.receivable);
+                            console.log(ss)
             			}
             			this.consume.realCross = ss;
             		}
@@ -659,7 +662,7 @@
 				this.checkedId = param.piId;   //抵扣产品ID
 				this.firstFlag = false
 				this.consumAuditId = param.cid;
-				this.productId = param.empId;
+				this.productId = param.proId;
 				this.userId = param.memNum;
 				this.consume.price = param.price; //折前单价
 				this.consume.totalCount = param.totalCount; //实际次数
@@ -751,10 +754,18 @@
 					couponType: param.couponType,
 					cId: param.sourceId,
 					preFoldTotalPrice: parseInt(param.totalCount) * parseInt(param.price),
-					remark: param.remark    // 备注
+					remark: param.remark,    // 备注
+                    dui: true,
 				}
-                this.titttl = param.couponNum;
 
+
+                if(param.couponId==null){
+                	this.dui = true;
+                }else{
+                	this.dui = false;
+                }
+                this.titttl = param.couponNum;
+                console.log(param.couponNum)
 				this.cash = {
 					cashId: '',
 					memNum: '',
@@ -814,6 +825,8 @@
 					this.couponId = null;
 				}
 				this.titles = param.couponNum;   //优惠券数量
+
+                // this.maxCouponNum();
 			},
 			// 格式化时间
 			dateFormat: function(cellValue) {
@@ -865,13 +878,16 @@
 			},
             //产品折后总额
 			mrprojectChange:function(param){
+                // console.log(param);
+                // console.log(1)
 				if (!this.isBlank(param)) {
 				    this.receivables = param.discouAmount;
 				}
 			},
 			//产品
 			projectChange: function(param) {
-				console.log(param);
+				// console.log(param);
+    //             console.log(2)
 				this.titles = 0;  //优惠券数量清零
 				if (this.isBlank(param)) {
 					this.consume.proId = ""
@@ -892,7 +908,8 @@
 						// this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
 						// 	this.consume.discount)).div(new Decimal(100));
                         this.receivables = param.discouAmount;   //折后总额
-						this.consume.receivable = this.receivables; //应交
+						this.consume.receivable = param.discouAmount; //应交
+                        // this.consume.receivable = this.receivables; //应交
 						if (this.cash.select !== '' && this.cash.select !== undefined) {
 						    this.consume.realCross = new Decimal(this.consume.receivable).sub(new Decimal(this.cash.select)) //实缴
 						}else{
@@ -943,6 +960,8 @@
 						})
 						this.listCouponZhe = listZhe
 						this.listCouponJian = listjian
+
+                        this.maxCouponNum();
 					}
 				}).catch((error) => {
 					console.log('请求失败处理')
@@ -1298,6 +1317,34 @@
 				this.dui = !this.dui
 			},
 
+
+            maxCouponNum(){
+                var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume.couponId +
+                	'&userId=' + this.userId
+                this.$ajax({
+                	method: 'GET',
+                	url: url,
+                	headers: {
+                		'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                		'Access-Token': this.accessToken
+                	},
+
+                	dataType: 'json',
+                }).then((response) => {
+                	var res = response.data
+                	if (res.retCode == '0000') {
+                		this.titttl = res.retData;
+
+
+                	} else {
+                		alert(res.retMsg)
+                	}
+                }).catch((error) => {
+                	console.log('查询请求失败')
+                });
+            },
+
+
 			xiaofei() {
 				var url = this.url + '/consumAuditBean/rejectConsumAbandon'
 				// var url = 'http://172.16.16.255:8080/consumAuditBean/consumRecord'
@@ -1420,16 +1467,16 @@
 				}).then((response) => {
 					var res = response.data
 					if (res.retCode == '0000') {
+
 						this.unfinishedProList = res.retData;
 						if(this.unfinishedProList==""){
-							this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
-								this.consume.discount)).div(new Decimal(100));
+							//this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(this.consume.discount)).div(new Decimal(100));
+                            //    console.log(this.receivables)
 							return false;
 						}
 						this.unfinishedProList.forEach((item, index) => {
 							if (item.piId == piId) {
-								// console.log(item)
-								// console.log(index)
+
 								this.oRadioGroup = index
 								this.clickItemObj.itemId = item.piId
 								this.clickItemObj.count = 0
@@ -1437,16 +1484,20 @@
 								this.projectFlag = true
 								this.counselorFlag = true
 								this.havetubuyFlag = true;  //已购产品展示
-								// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
-								this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
-									this.consume.discount)).div(new Decimal(100));
-							} else {
-								// this.preFoldTotalPrice = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount));
-								this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
-									this.consume.discount)).div(new Decimal(100));
+								// this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
+								// 	this.consume.discount)).div(new Decimal(100));
+
+                                this.$refs.project.setProject(item.proId)
 							}
-							//this.consume.receivable = this.receivables; //应交
+       //                      else {
+							// 	this.receivables = new Decimal(this.consume.price).mul(new Decimal(this.consume.totalCount)).mul(new Decimal(
+							// 		this.consume.discount)).div(new Decimal(100));
+							// }
+
 						})
+
+
+
 					} else {
 						alert(res.retMsg)
 					}

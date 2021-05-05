@@ -3,7 +3,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h2 class="modal-title">产品购买驳回修改</h2>
+			<h2 class="modal-title">产品购买驳回修改2</h2>
 		</div>
 		<div class="modal-body  pos_r jh-mh-sc">
 			<div class="tab-pane fade in active martop" id="basic">
@@ -1403,6 +1403,7 @@
 						res.retData.forEach((item) => {
 							if(item.piId == param.dedId){
 								this.jinqian = item.balance;
+                                this.$refs.projectRef.setProject(param.proId)
 							}
 						})
 					} else {

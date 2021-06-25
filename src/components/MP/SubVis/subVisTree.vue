@@ -306,6 +306,7 @@
 		float: left;
 	}
 	.tree-body .tree-item .tree-type .tree-type-right ul{
+		width: 910px;
 		height:24px;
 		margin-left: 90px;
 		margin-bottom: 1px;
@@ -329,7 +330,7 @@
 	}
 	.tree-body .tree-item .tree-type .tree-type-right p{
 		display: block;
-		width:622px;
+		width:910px;
 		background: #f2f2f2;
 		margin-bottom: 1px;
 		margin-left: 90px;

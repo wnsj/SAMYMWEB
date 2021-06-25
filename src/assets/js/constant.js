@@ -32,7 +32,8 @@ constant.phone = function(phoneNum) {
 constant.has = function(param) {
     //未传值
     if (this.isBlank(param)) return false;
-    var jsonString = Cookies.get("upValueList");
+    // var jsonString = Cookies.get("upValueList");
+    var jsonString = sessionStorage.getItem("upValueList");
     //未登录
     if (this.isBlank(jsonString)) {
         //alert("您还没有任何权限，请联系管理员添加权限!")

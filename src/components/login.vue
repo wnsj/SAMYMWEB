@@ -64,7 +64,8 @@
                 Cookies.remove("accessToken");
                 Cookies.remove("empData");
                 Cookies.remove("upUriList");
-                Cookies.remove("upValueList");
+                // Cookies.remove("upValueList");
+                sessionStorage.removeItem("upValueList");
                 this.$parent.setRouter("/login");
                 $("#modifyPwd").modal('hide')
             },
@@ -97,7 +98,8 @@
                             Cookies.set('accountData', this.accountData.accountData, "30MIN");
                             Cookies.set('empData', this.accountData.empData, "30MIN");
                             Cookies.set('upUriList', this.accountData.upUriList, "30MIN");
-                            Cookies.set('upValueList', this.accountData.upValueList, "30MIN");
+                            // Cookies.set('upValueList', this.accountData.upValueList, "30MIN");
+                            sessionStorage.setItem("upValueList",this.accountData.upValueList);
                         }
                         if (this.accountPwd == '123456') {
                             $("#modifyPwd").modal('show')

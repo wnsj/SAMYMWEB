@@ -1320,22 +1320,25 @@
 
 			//选择满减优惠券
 			dianji: function(item, index) {
-				this.listCouponJian.forEach((item) => {
-					item.checked = false
-				})
-				console.log(this.titttl)
+				// console.log(this.titttl)
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
 				var res1 = item.recude;
 				this.manjian = item.recude;
-				console.log(this.consume.proId)
-				if (this.dui) {
-					this.listCouponJian[index].checked = !this.listCouponJian[index].checked
+				this.listCouponJian.forEach((item,i) => {
+					if(index == i){
+						this.listCouponJian[index].checked = !this.listCouponJian[index].checked;
+					}else{
+						item.checked = false
+					}
+				})
+				if (item.checked) {
 					this.listCouponZhe.forEach((item) => {
 						item.checked = false
 					})
+					this.dui = false
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
 						.couponId +
 						'&userId=' + this.userId
@@ -1354,7 +1357,7 @@
 							this.titttl = res.retData;
 							this.titles = res.retData;
 							this.consume.couponNum = this.titles;
-							console.log(this.titles)
+							// console.log(this.titles)
 							// if (item.couponType == 2) {
 							// 	if (this.cash.select == '') {
 							// 		var mach = new Decimal(this.titttl).mul(new Decimal(res1));
@@ -1389,6 +1392,7 @@
 				} else {
 					this.titttl = 0;
 					this.titles = 0;
+					this.dui = true
 					// if (item.couponType == 2) {
 					// 	if (this.cash.select == '') {
 					// 	var zy = new Decimal(this.receivables)
@@ -1411,14 +1415,10 @@
 						//this.consume.realCross = zy;
 					}
 				}
-				this.dui = !this.dui
 			},
 
 			//选择满折优惠券
 			dianji1: function(index, item) {
-				this.listCouponZhe.forEach((item) => {
-					item.checked = false
-				})
 				this.productId = this.consume.proId;
 				this.consume.couponNum = this.titles;
 				this.consume.couponId = item.couId;
@@ -1426,12 +1426,18 @@
 				this.consume.couponType = item.couponType;
 				var re = item.recude;
 				this.zhekou = item.recude;
-				console.log(re)
-				if (this.dui) {
-					this.listCouponZhe[index].checked = !this.listCouponZhe[index].checked
+				this.listCouponZhe.forEach((item,i) => {
+					if(index == i){
+						this.listCouponZhe[index].checked = !this.listCouponZhe[index].checked;
+					}else{
+						item.checked = false
+					}
+				})
+				if (item.checked) {
 					this.listCouponJian.forEach((item) => {
 						item.checked = false
 					})
+					this.dui = false
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
 						.couponId +
 						'&userId=' + this.userId
@@ -1479,6 +1485,7 @@
 				} else {
 					this.titttl = 0;
 					this.titles = 0;
+					this.dui = true
 					if (item.couponType == 1) {
 						// if (this.cash.select !== '' && this.cash.select !== undefined) {
 						//     var jh = new Decimal(re).div(new Decimal(10));
@@ -1499,7 +1506,6 @@
 						}
 					}
 				}
-				this.dui = !this.dui
 			},
 			checkMemCash(param) {
 				if (this.isBlank(param)) {

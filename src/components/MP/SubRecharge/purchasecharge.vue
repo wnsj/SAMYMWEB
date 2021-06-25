@@ -1140,20 +1140,24 @@
 			},
 			//选择满减优惠券
 			dianji: function(item, index) {
-				this.listCouponJian.forEach((item) => {
-					item.checked = false
-				})
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
 				var rt = item.recude;
 				this.manjian = item.recude;
-				if (this.dui) {
-					this.listCouponJian[index].checked = !this.listCouponJian[index].checked
+				this.listCouponJian.forEach((item,i) => {
+					if(index == i){
+						this.listCouponJian[index].checked = !this.listCouponJian[index].checked;
+					}else{
+						item.checked = false
+					}
+				})
+				if (item.checked) {
 					this.listCouponZhe.forEach((item) => {
 						item.checked = false
 					})
+					this.dui = false
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
 						.couponId + '&userId=' + this.userId
 					this.$ajax({
@@ -1205,6 +1209,7 @@
 				} else {
 					this.titles = 0;
 					this.titttl = 0;
+					this.dui = true
 					if (item.couponType == 2) {
 						var zy = new Decimal(this.receivables)
 						this.consume.receivable = zy;
@@ -1228,26 +1233,27 @@
 						//this.consume.realCross = zy;
 					}
 				}
-				this.dui = !this.dui
 			},
 			//选择满折优惠券
 			dianji1: function(index, item) {
-				console.log(item.couponType)
-				this.listCouponZhe.forEach((item) => {
-					item.checked = false
-				})
 				this.productId = this.consume.proId;
 				this.consume.couponId = item.couId;
 				var rw = item.recude;
 				this.zhekou = item.recude;
 				this.consume.couponName = item.couponName;
 				this.consume.couponType = item.couponType;
-				if (this.dui) {
-					console.log(1)
-					this.listCouponZhe[index].checked = !this.listCouponZhe[index].checked
+				this.listCouponZhe.forEach((item,i) => {
+					if(index == i){
+						this.listCouponZhe[index].checked = !this.listCouponZhe[index].checked;
+					}else{
+						item.checked = false
+					}
+				})
+				if (item.checked) {
 					this.listCouponJian.forEach((item) => {
 						item.checked = false
 					})
+					this.dui = false
 					var url = this.url + '/couponController/couponCalculate?productId=' + this.productId + '&couponId=' + this.consume
 						.couponId + '&userId=' + this.userId
 					this.$ajax({
@@ -1298,6 +1304,7 @@
 				} else {
 					this.titles = 0;
 					this.titttl = 0;
+					this.dui = true;
 					if (item.couponType == 1) {
 						var us = new Decimal(this.receivables);
 						this.consume.receivable = us;
@@ -1321,7 +1328,6 @@
 						//this.consume.realCross = us;
 					}
 				}
-				this.dui = !this.dui
 			},
 			//Query member's based information of cash on the memNum
 			checkMemCash(param) {

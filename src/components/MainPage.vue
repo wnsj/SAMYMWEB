@@ -140,6 +140,16 @@
                                         <el-menu-item index="/MP/CounseRoomTimeTotal">咨询室总览</el-menu-item>
                                     </el-submenu>
 
+                                    <el-submenu index="9">
+                                        <template slot="title">
+                                            <i class="el-icon-folder-add"></i>
+                                            <span>短信管理</span>
+                                        </template>
+                                        <el-menu-item index="/MP/SmsManage/smsManage">发送短信</el-menu-item>
+                                        <el-menu-item index="/MP/SmsManage/smsTemplate">短信模板设置</el-menu-item>
+                                        <el-menu-item index="/MP/SmsManage/smsSignature">短信签名设置</el-menu-item>
+                                    </el-submenu>
+
                                     <el-submenu index="5">
                                         <template slot="title">
                                             <i class="el-icon-folder-add"></i>
@@ -425,7 +435,8 @@
                     Cookies.remove("accessToken");
                     Cookies.remove("empData");
                     Cookies.remove("upUriList");
-                    Cookies.remove("upValueList");
+                    // Cookies.remove("upValueList");
+                    sessionStorage.removeItem("upValueList");
                     this.$parent.setRouter("/login");
                 }
             },
@@ -445,7 +456,8 @@
                 Cookies.remove("accessToken");
                 Cookies.remove("empData");
                 Cookies.remove("upUriList");
-                Cookies.remove("upValueList");
+                // Cookies.remove("upValueList");
+                sessionStorage.removeItem("upValueList");
                 this.$parent.setRouter("/login");
             },
 

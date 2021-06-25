@@ -354,3 +354,10 @@
 	padding-left: 6px;
 	color: #fff;
 }
+
+.addflex {
+    display: flex;
+}
+.addinput {
+    width: 100px;
+}

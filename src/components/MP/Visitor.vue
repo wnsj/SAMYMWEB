@@ -22,6 +22,9 @@
                 <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('1')"
                         v-has="'SAMY:MP:Visitor:AddRecharge'">购 买 产 品
                 </button>
+                <button type="button" class="btn btn-success pull-left" v-on:click="btnAction('6')"
+                        >补充信息
+                </button>
             </div>
         </div>
         <el-collapse-transition>
@@ -249,6 +252,13 @@
             </div>
         </div>
         <div class="row row_edit">
+            <div class="modal fade" id="addInformationContent">
+                <div class="modal-dialog wd1000">
+                    <addInformation ref='addInformation' @closeCurrentPage='feedBack(9)'></addInformation>
+                </div>
+            </div>
+        </div>
+        <div class="row row_edit">
             <div class="modal fade" id="subCdContent">
                 <div class="modal-dialog wd1000">
                     <subCd ref='subCd' @certainAction='feedBack(1)'></subCd>
@@ -314,8 +324,8 @@
     import recharge from '../MP/SubRecharge/SubRecharge.vue'
     import addSubOrder from '../MP/SubOrder/AddSubOrder.vue'
     import subCd from '../MP/SubCd/SubCd.vue'
-
-
+    // import addInformation from '../MP/SubOrder/SubOderList.vue'
+    import addInformation from '../MP/SubOrder/AddInformation.vue'
     import dPicker from 'vue2-datepicker'
     import Paging from '../common/paging'
 
@@ -332,6 +342,7 @@
             refund,
             recharge,
             addSubOrder,
+            addInformation,
 			subCd,
 			subTree
         },
@@ -459,6 +470,8 @@
 					$("#memContent").modal('hide')
 				else if (param == 8)
 					$("#subVisTree").hide();
+                else if (param == 9)
+                    $("#addInformationContent").modal('hide')
             },
             //check the list of member
             checkVisitor(page) {
@@ -599,6 +612,10 @@
                         }
                         this.$refs.refund.initData(this.objectContent)
                         $("#refundContent").modal('show')
+                        break;
+                    case '6':
+                        this.$refs.addInformation.initData('add', this.objectContent)
+                        $("#addInformationContent").modal('show')
                         break;
                     default:
                         break;

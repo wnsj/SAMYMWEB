@@ -120,7 +120,10 @@
 				<li v-for="item in userList" :key="item.visId">{{item.visId}}-{{item.visitorName}}</li>
 			</ul>
 		</div>
-		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @click="go1()" v-has="'SAMY:MP:Coupon:Update'">确定</button>
+		<div class="smscontent">
+
+		</div>
+		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @click="go1()">确定</button>
 		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
 	</div>
 </template>
@@ -288,7 +291,7 @@
 				}
 				// console.log(this.newprojectList)
 				this.$router.push({
-					path: '../../MP/Coupon/Couponupdate'
+					path: '../../MP/SmsManage/smsManage'
 				})
 				
 			},

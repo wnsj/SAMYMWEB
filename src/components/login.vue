@@ -99,7 +99,7 @@
                             Cookies.set('empData', this.accountData.empData, "30MIN");
                             Cookies.set('upUriList', this.accountData.upUriList, "30MIN");
                             // Cookies.set('upValueList', this.accountData.upValueList, "30MIN");
-                            sessionStorage.setItem("upValueList",this.accountData.upValueList);
+                            sessionStorage.setItem("upValueList",JSON.stringify(this.accountData.upValueList));
                         }
                         if (this.accountPwd == '123456') {
                             $("#modifyPwd").modal('show')

@@ -1,4 +1,4 @@
-export{ selectMultip}
+// export{ selectMultip}
 (function() {
     selectMultip = {
         register: function(id) {

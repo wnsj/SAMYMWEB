@@ -121,10 +121,28 @@
 			</ul>
 		</div>
 		<div class="smscontent">
+            <el-form ref="form" :model="form" label-width="100px" :rules="rules">
+				<el-form-item label="短信内容：" prop="temCon">
+					<el-input type="textarea" v-model="form.temCon" class="smstextarea"></el-input>
+					<el-button type="primary" @click="getTemplate()" class="getTemBtn">使用模板</el-button>
+				</el-form-item>
+				<el-form-item label="使用签名：" prop="signature">
+					<el-select v-model="form.signature" placeholder="请选择签名" class="signature" size="medium">
+						<el-option v-for="item in signatures" :label="item.name" :value="item.id" :key="item.id"></el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item>
+					<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @click="submitForm('form')">确定</button>
+					<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
+				</el-form-item>
 
+			</el-form>
 		</div>
-		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-5" @click="go1()">确定</button>
-		<button type="button" class="btn btn-primary pull-center m_r_10 jh-mr-2 jh-mr-6" @click="goOff()">返回</button>
+		<div class="modal fade" id="getTemplateContent">
+			<div class="modal-dialog getTemW">
+				<getTemplate @getTemDetail='feedBack' ref="getTemplateRef"></getTemplate>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -139,6 +157,7 @@
 	import emp from '../../common/Employee.vue'
 	import judgeState from '../../common/VisitState.vue' //咨客判定
 	import continueState from '../../common/VisitState.vue' //续流状态
+	import getTemplate from '../SmsManage/getTemplate.vue' //使用模版
 	export default {
 		components: {
 			store,
@@ -146,7 +165,8 @@
 			cha,
 			emp,
 			judgeState,
-			continueState
+			continueState,
+			getTemplate         // 使用模版
 		},
 		data() {
 			return {
@@ -166,7 +186,7 @@
 				chaId: '',
 				auditName: '',
 				empId: '',
-				visitorName: '',
+				visitorName: '',   // 咨客名称
 				judgeState: '', //咨客判定
 				continueState: '', //续流状态
 				memName: '',
@@ -182,7 +202,21 @@
 				cheackAllChecked: false,
 				checkArr: [],
 				checkCompleteArr: [],
-				selectDataFlag: false
+				selectDataFlag: false,
+				signatures: [],          // 签名
+				form: {
+					templateId: '',       // 模板ID
+					temCon: '',          // 短信内容
+					signature: ''         // 签名
+				},
+				rules:{
+					temCon: [
+						{ required: true, message: '请输入短信内容', trigger: 'change' }
+					],
+					signature: [
+						{ required: true, message: '请选择签名', trigger: 'change' }
+					],
+				}
 			};
 		},
 		watch: {
@@ -240,7 +274,6 @@
 				});
 			},
 			handleSelectionChange(val) {
-				console.log(1)
 				// this.userList = val;
 				this.userList = [];
 				var obj = {};
@@ -266,30 +299,33 @@
 					this.chaId = param.chaId
 				}
 			},
+			submitForm(formName){
+				this.$refs[formName].validate((valid) => {
+					if (valid) {
+						this.go1();
+					} else {
+						return false;
+					}
+				})
+			},
 			//点击确定按钮跳转
 			go1() {
-				this.couId = ''
-				this.couId = this.$route.query.couId
-				var win = window.localStorage;
-				var bb = '';
+				this.newuserList = [];
 				for (var i = 0; i < this.userList.length; i++) {
 					this.newuserList.push(this.userList[i].visId);
-					if (!win) {
-						alert("浏览器不支持localstorage");
-						return false;
-					} else {
-						//主逻辑业务
-						var storage = window.localStorage;
-						for (var i = 0; i < this.userList.length; i++) {
-							bb += this.userList[i].visId + ",";
-						}
-						if (bb.length > 0) {
-							bb = bb.substr(0, bb.length - 1);
-						}
-						storage.setItem('userList', bb)
-					}
 				}
-				// console.log(this.newprojectList)
+				if(this.newuserList.length == 0){
+					alert("请选择咨客！");
+					return false;
+				}
+				var data = {
+					userList: this.newuserList,
+					templateId: this.form.templateId,
+					temCon: this.form.temCon,
+					signature: this.form.signature
+
+				}
+				console.log(data)
 				this.$router.push({
 					path: '../../MP/SmsManage/smsManage'
 				})
@@ -333,7 +369,14 @@
 					this.addClass = false;
 				}, 400)
 			},
-			//feedback department information
+			//feedback from adding and modifying view
+            feedBack(param) {
+				if(param){
+					this.form.templateId = param[0].id;
+					this.form.temCon = param[0].temCon;
+				}
+                $("#getTemplateContent").modal('hide')
+            },
 			positionChange: function(param) {
 				if (this.isBlank(param)) {
 					this.posId = ""
@@ -355,10 +398,7 @@
 				if (num == 1) {
 					this.page = 1
 				}
-
 				this.showSelect = false
-				var projectList = localStorage.getItem('userList');
-				var stringResult1 = projectList.split(',');
 				var url = this.url + '/visitorAction/queryVisitor'
 				this.$ajax({
 					method: 'POST',
@@ -382,18 +422,13 @@
 					dataType: 'json',
 				}).then((response) => {
 					var res = response.data
-					console.log(res)
+					// console.log(res)
 					if (res.retCode == '0000') {
 						this.pages = res.retData.pages //总页数
 						this.page = res.retData.current //当前页码
 						this.pageSize = res.retData.size //一页显示的数量  必须是奇数
 						this.total = res.retData.total //数据的数量
 						this.tableData = res.retData.records
-						for (let i = 0; i < this.tableData.length; i++) {
-							if (stringResult1.includes(this.tableData[i].visId + '')) {
-								this.$refs.multipleTable.toggleRowSelection(this.tableData[i])
-							}
-						}
 					} else {
 						alert(res.retMsg)
 					}
@@ -408,6 +443,24 @@
 			//点击返回按钮跳转
 			goOff() {
 				this.$router.go(-1);
+			},
+			// 使用模版
+			getTemplate(){
+				this.$refs.getTemplateRef.initData()
+                $("#getTemplateContent").modal('show')
+			},
+			// 使用签名
+			getSignatures(){
+				this.signatures = [
+					{
+						id: 1,
+						name: '米悦心理'
+					},
+					{
+						id: 2,
+						name: '圣安米悦'
+					}
+				]
 			},
 
 			// 翻页
@@ -452,6 +505,7 @@
 		},
 		created() {
 			this.getAllAuditPage()
+			this.getSignatures()        // 获取签名列表
 		}
 	}
 </script>
@@ -562,6 +616,11 @@
 		border: 1px solid #999;
 		z-index: 99;
 	}
+
+	.smstextarea{ width: 85%; float: left;}
+	.getTemBtn{ float: right; background-color: #169bd5;}
+	.signature{ float: left;}
+	.getTemW{ width: 800px;}
 
 	@media print {
 		#fHeader {

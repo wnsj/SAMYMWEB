@@ -181,9 +181,7 @@
         </div>
     </div>
 </template>
-<script src="src/assets/js/selectMultip.js"></script>
 <script>
-    import selectMultip from '../../../assets/js/selectMultip.js'
     import dPicker from 'vue2-datepicker'
     import emp from '../../common/Employee.vue'
     import CounseRoom from '../../common/CounseRoom.vue'
@@ -192,7 +190,6 @@ export default{
         dPicker,
         emp,
         CounseRoom,
-        selectMultip,
     },
     data() {
         return {
@@ -211,7 +208,6 @@ export default{
     },
     methods: {
         multip:function(){
-            selectMultip();
         },
         initData(flag,param) {
 			$('#addInformation').modal({backdrop: 'static', keyboard: false});

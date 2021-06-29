@@ -369,23 +369,79 @@
     margin-bottom: 20px;
 }
 
-.cho1 { margin-left: 482px;}
-.cho2 { margin-left: 210px;}
-.cho3 { margin-left: 258px;}
-.cho4 { margin-left: 498px;}
-.cho5 { margin-left: 303px;}
-.cho6 { margin-left: 338px;}
-.cho7 { margin-left: 465px;}
+.cho1 { margin-left: 482px; margin-right: 40px;}
+.cho2 { margin-left: 210px; margin-right: 40px;}
+.cho3 { margin-left: 258px; margin-right: 40px;}
+.cho4 { margin-left: 498px; margin-right: 40px;}
+.cho5 { margin-left: 301px; margin-right: 40px;}
+.cho6 { margin-left: 338px; margin-right: 40px;}
+.cho7 { margin-left: 465px; margin-right: 40px;}
 .text{ margin-top: 20px;}
-.checkbox1 { margin-left: -20px;padding: 20px; margin-bottom: 20px;}
-.inputWechat{ width: 502px; height: 34px; display: block; margin-left: 100px;}
-.top {display: flex; padding: 20px 80px 20px 20px; justify-content: space-between;}
+.checkbox1 {display: flex;}
+.inputWechat{ width: 302px; height: 34px; padding:0 4px; display: block; margin-left: 80px; margin-top:3px; border: 1px solid #C0C4CC;}
+.classtop {display: flex; padding: 0 80px 20px 20px; justify-content: space-between;}
 .station {
   position: relative; right:85px;
 }
 .bott{ margin-bottom: 40px;}
 .timeselect { width: 200px;}
+.reason{ width: 600px;}
+.reasons{ margin-left: 15px;}
 .addflex { display: flex; }
 .addinput { width: 100px; }
+.form-cortrol {width: 90%;}
+.editinput{
+    /* position: absolute;
+    left: 13px; */
+    bottom: 11px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #999;
+    z-index: 99;
+}
+
+/* 单选框样式 */
+.question {
+    display: inline;
+}
+.radio {
+    position: relative;
+    display: inline-block;
+    margin-right:0 40px;
+  }
+
+  .radio input {
+    width: 15px;
+    height: 15px;
+    appearance: none;
+    /*清楚默认样式*/
+    -webkit-appearance: none;
+    opacity: 0;
+    outline: none;
+  }
+
+  .radio label {
+    /* position: absolute; */
+    left: 0;
+    top: 6px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #3582E9;
+  }
+
+  .radio input:checked+label::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0px;
+    /* 这里显示矩形的一半边框再旋转45度来实现对勾样式 */
+    width: 5px;
+    height: 12px;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    transform: rotate(45deg);
+  }
+/* test */
 /* 增加按钮 */
 /* .boxchoose{ display: flex; justify-self: start;} */

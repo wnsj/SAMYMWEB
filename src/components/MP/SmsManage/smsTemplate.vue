@@ -23,24 +23,20 @@
                         class="sign-left">:</span>
                     </div>
                     <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <select class="form-control" v-model="isuse">
+                        <select class="form-control" v-model="state">
                             <option value="">全部</option>
                             <option value="1">在用</option>
                             <option value="0">停用</option>
                         </select>
                     </div>
                 </div>
-
-            </div>
-            <div class="row newRow">
-
                 <button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-2"
                         data-toggle="modal"
                         v-on:click="selectRule('1')" v-has="'SAMY:MP:Employee:Add'">添加模板
                 </button>
                 <button type="button" class="btn btn-primary pull-right m_r_10 jh-mr-1"
                         data-toggle="modal"
-                        v-on:click="checkTem(1)">查询
+                        v-on:click="checkTem()">查询
                 </button>
             </div>
         </div>
@@ -51,36 +47,37 @@
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover jh-po-re" id="datatable">
-                        <thead>
-                        <tr>
-                            <th class="text-center">模板名称</th>
-                            <th class="text-center">设置时间</th>
-                            <th class="text-center">短信内容</th>
-                            <th class="text-center">状态</th>
-                            <th class="text-center" v-has="'SAMY:MP:Employee:Update'">修改</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-for="(item,index) in tableData" :key="index" v-on:dblclick="selectRule('3',item)">
-                            <td class="text-center">{{item.temName}}</td>
-                            <td class="text-center">{{item.createDate | dateFormatFilter('YYYY-MM-DD')}}</td>
-                            <td class="text-center">{{item.temCon}}</td>
-                            <td class="text-center">{{item.isuse==true ? "在用" : "停用"}}</td>
-                            <td class="text-center" v-has="'SAMY:MP:Employee:Update'">
-                                <button type="button" class="btn btn-warning" v-on:click="selectRule('3',item)">修改
+                    <el-table :data="tableData" border style="width: 100%" size="mini" :cell-style="{color: '#2c3e50'}" :header-cell-style="{color: '#2c3e50', background: '#efefef'}">
+                        <el-table-column prop="temName" label="模板名称" align="center" min-width="100"></el-table-column>
+                        <el-table-column prop="createDate" label="设置时间" align="center" min-width="140"></el-table-column>
+                        <el-table-column prop="temCon" label="短信内容" align="center" width="270">
+                            <template slot-scope="scope">
+                                <el-popover trigger="hover" placement="bottom" width="250">
+                                {{ scope.row.temCon }}
+                                <div slot="reference" class="temcontent">
+                                    {{ scope.row.temCon }}
+                                </div>
+                                </el-popover>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="state" label="状态" align="center" min-width="80">
+                            <template slot-scope="scope">
+                                {{ scope.row.state == 1 ? "在用" : scope.row.state == 0 ? "停用" : ""}}
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="操作" align="center" min-width="80">
+                            <template slot-scope="scope">
+                                <button type="button" class="btn btn-warning" v-on:click="selectRule('3',scope.row)">修改
                                 </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                            </template>
+                        </el-table-column>
+                    </el-table>
                 </div>
-				<p class="tips">* 双击单行，可对当前数据进行修改</p>
             </div>
         </div>
         <div class="row row_edit">
             <div class="modal fade" id="templateadd">
-                <div class="modal-dialog wd1000">
+                <div class="modal-dialog">
                     <templateadd ref='templateadd' @addTem='feedBack'></templateadd>
                 </div>
             </div>
@@ -103,20 +100,14 @@
         data() {
             return {
                 tableData: [],
-                isuse: '1',
-                temName: '',
+                state: 1,            // 状态
+                temName: '',           // 模板名称
                 fixedHeader: false,
-
                 showSelect:true,
                 addClass: false
             };
         },
         methods: {
-            //子级传值到父级上来的动态拿去
-            pageChange: function (page) {
-                this.current = page
-                this.checkTem(page);
-            },
             //modify the cotent of department
             dataOpen(){
                 if(this.showSelect) return
@@ -130,47 +121,35 @@
                     this.addClass = false;
                 },400)
             },
-            addTem() {
-                console.log('modify the cotent of department')
-                this.$refs.templateadd.initData('add')
-                $("#templateadd").modal('show')
-            },
-            //modify the cotent of department
-            modifyTem(item) {
-                console.log('modify the cotent of department')
-                this.$refs.templateadd.initData('modify', item)
-                $("#templateadd").modal('show')
-            },
-
             //feedback from adding and modifying view
             feedBack() {
-                this.checkTem(1)
+                this.checkTem()
                 $("#templateadd").modal('hide')
             },
             // check the adding and modifying rule of account
             selectRule(param, item) {
-
                 if (param == 1) {
+                    // if (!this.has('SAMY:MP:Employee:Update')) {
+                    //     alert("暂无权限!")
+                    //     return
+                    // }
                     this.$refs.templateadd.initData('add', '')
                     $("#templateadd").modal('show')
                 } else if (param == 3) {
-                    if (!this.has('SAMY:MP:Employee:Update')) {
-                        alert("暂无权限!")
-                        return
-                    }
                     this.$refs.templateadd.initData('modify', item)
                     $("#templateadd").modal('show')
                 }
             },
-            //check the list of department
-            checkTem(page) {
+            //查询
+            checkTem() {
                 this.showSelect = false
                 this.tableData = [
                     {
-                        temName: '模板名称',
+                        id: 1,
+                        temName: '回访模板',
                         createDate: '2021-05-25 00:00:00',
-                        temCon: '短信内容',
-                        isuse: true
+                        temCon: '{姓名}您好，我们非常重视您参与沙龙活动的感受，将于{时间}使用专线号码：{电话}与您联系，希望能够了解到我们做出哪些改进会给您带来更好的服务感受。',
+                        state: 1
                     }
 
                 ]
@@ -184,7 +163,7 @@
                 //     },
                 //     data: {
                 //         temName: this.temName,
-                //         isuse: this.isuse,
+                //         state: this.state,
 
                 //         page: page.toString(),
                 //         pageSize: this.pageSize
@@ -208,63 +187,21 @@
                 //     console.log('请求失败处理')
                 // });
             },
-            handleScroll(e) {
-                var self = this
-                var etop = e.target.scrollTop
-                var fHeaderwidth = $("#fHeader").width($(".datathead").width())
-                var fHeaderheight = $("#fHeader").height($(".datathead").height())
-                var theadheight = $(".datathead").height()
-                var thlength = $(".datathead tr th").length
-                for (var i = 0; i < thlength; i++) {
-                    $("#fHeader div").eq(i).width(
-                        $(".datathead tr th").eq(i).width()
-                    )
-                    $("#fHeader div").eq(i).height(
-                        $(".datathead tr th").eq(i).height()
-                    )
-                }
-                if (etop > 0) {
-                    self.fixedHeader = true
-                    $("#fHeader").css("top", etop)
-                } else {
-                    self.fixedHeader = false
-                }
-            }
+            
         },
         mounted() {
-            window.addEventListener('scroll', this.handleScroll, true);
             init();
         },
         created() {
-            // this.checkTem(1)
+            // this.checkTem()
         }
     }
 </script>
 
-<style>
+<style scoped="scoped">
     #datatable {
         position: relative;
     }
-
-    #fHeader {
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: #eeeeee;
-        overflow: hidden;
-    }
-
-    #fHeader div.text-center {
-        float: left;
-        display: inline-block;
-        padding: 8px;
-        border: 1px solid #ddd;
-        font-weight: bold;
-    }
-
-    @media print {
-        #fHeader {
-            display: none
-        }
-    }
+    .templateadd .modal-dialog{ width: 600px;}
+    .temcontent{ white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 </style>

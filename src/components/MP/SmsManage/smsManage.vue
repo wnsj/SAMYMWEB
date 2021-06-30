@@ -92,7 +92,7 @@
         <div class="">
             <div class="col-md-12 col-lg-12">
                 <div class="table-responsive">
-                    <el-table :data="tableData" border style="width: 100%">
+                    <el-table :data="tableData" border style="width: 100%" size="mini" :cell-style="{color: '#2c3e50'}" :header-cell-style="{color: '#2c3e50', background: '#efefef'}">
                         <el-table-column prop="storeName" label="门店" align="center" min-width="100"></el-table-column>
                         <el-table-column prop="CusName" label="收件人姓名" align="center" min-width="100"></el-table-column>
                         <el-table-column prop="phone" label="手机号" align="center" min-width="100"></el-table-column>

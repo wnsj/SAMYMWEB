@@ -87,5 +87,5 @@
 </script>
 
 <style scoped="scoped">
-.margin-right-tem35{ margin: 5px 45px 20px;}
+.margin-right-tem35{ margin: 5px 90px 20px; padding: 5px 28px;}
 </style>

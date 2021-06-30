@@ -367,6 +367,15 @@
     font-size:16px;
     color: #2c3e50;
     margin-bottom: 20px;
+    padding-left: 20px;
+    width: 98%;
+    /* border: 1px dashed #2c3e50;
+    padding: 10px; */
+}
+
+.classbox1 {
+    border: 1px dashed #2c3e50;
+    padding: 10px;
 }
 
 .cho1 { margin-left: 482px; margin-right: 40px;}
@@ -377,16 +386,15 @@
 .cho6 { margin-left: 338px; margin-right: 40px;}
 .cho7 { margin-left: 465px; margin-right: 40px;}
 .text{ margin-top: 20px;}
-.checkbox1 {display: flex;}
-.inputWechat{ width: 302px; height: 34px; padding:0 4px; display: block; margin-left: 80px; margin-top:3px; border: 1px solid #C0C4CC;}
-.classtop {display: flex; padding: 0 80px 20px 20px; justify-content: space-between;}
-.station {
-  position: relative; right:85px;
+.checkbox1 {display: flex; margin-top: 10px;}
+.inputWechat{ width: 434px; height: 34px; padding:0 4px; display: block; margin-left: 80px; margin-top:3px; border: 1px solid #C0C4CC;}
+.classtop {display: flex; padding: 0 30px 20px 20px; justify-content: space-between; align-items: center;}
+.classtop2 {display: flex; padding:10px 60px 20px 20px ; justify-content: space-between; align-items: center;}
+.station {margin-top: 20px; position: relative; right:48px;
 }
 .bott{ margin-bottom: 40px;}
 .timeselect { width: 200px;}
-.reason{ width: 600px;}
-.reasons{ margin-left: 15px;}
+.reason{ width: 90%;}
 .addflex { display: flex; }
 .addinput { width: 100px; }
 .form-cortrol {width: 90%;}
@@ -400,7 +408,12 @@
     border: 1px solid #999;
     z-index: 99;
 }
-
+/* 确认返回按钮 */
+.clearBox {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
 /* 单选框样式 */
 .question {
     display: inline;
@@ -423,11 +436,14 @@
 
   .radio label {
     /* position: absolute; */
+    min-height: 15px;
+    padding-left: 15px;
     left: 0;
-    top: 6px;
-    width: 15px;
-    height: 15px;
-    border: 1px solid #3582E9;
+    top: 2px;
+    /* width: 15px;
+    height: 15px; */
+
+    border: 1px solid #2C3E50;
   }
 
   .radio input:checked+label::after {

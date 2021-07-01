@@ -443,7 +443,7 @@
     /* width: 15px;
     height: 15px; */
 
-    border: 1px solid #2C3E50;
+    border: 1px solid #ccc;
   }
 
   .radio input:checked+label::after {
@@ -454,8 +454,8 @@
     /* 这里显示矩形的一半边框再旋转45度来实现对勾样式 */
     width: 5px;
     height: 12px;
-    border-right: 1px solid #000000;
-    border-bottom: 1px solid #000000;
+    border-right: 1px solid #2C3E50;
+    border-bottom: 1px solid #2C3E50;
     transform: rotate(45deg);
   }
 /* test */

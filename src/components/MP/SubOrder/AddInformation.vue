@@ -9,9 +9,9 @@
                 <div class="col-md-6 form-group clearfix jh-wd-33">
                     <label class="col-md-3 control-label text-right nopad end-aline">消费状态</label><span
                     class="sign-left">:</span>
-                    <div class="col-md-7">
+                    <div class="col-md-8">
                         <select class="form-control" v-model="orderClick.channel">
-                            <option value="">--未选择--</option>
+                            <option value="">未选择</option>
                             <option value="1">沉睡</option>
                             <option value="2">活跃</option>
                             <option value="3">暂停</option>
@@ -23,7 +23,7 @@
                     class="sign-left">:</span>
                     <div class="col-md-8">
                         <select class="form-control" v-model="orderClick.channel">
-                            <option value="">--未选择--</option>
+                            <option value="">未选择</option>
                             <option value="1">已婚</option>
                             <option value="2">未婚</option>
                             <option value="3">离婚</option>
@@ -74,7 +74,7 @@
                     class="sign-left">:</span>
                     <div class="col-md-5 addflex">
                         <select class="form-control addinput" v-model="orderClick.channel">
-                            <option value="">--未选择--</option>
+                            <option value="">未选择</option>
                             <option value="1">低</option>
                             <option value="2">中</option>
                             <option value="3">高</option>
@@ -159,7 +159,7 @@
                     <!-- 多选 -->
                     <div>
                         <span class="demonstration">可回访时间：</span>
-                        <el-select v-model="timeselect" multiple placeholder="请选择">
+                        <el-select collapse-tags v-model="timeselect" multiple placeholder="请选择">
                             <el-option
                             v-for="item in select"
                             :key="item.value"
@@ -170,7 +170,7 @@
                     </div>
                     <div class="checkbox1">
                         <span class="demonstration">是否添加售后客服微信：</span>
-                        <el-select v-model="value1" multiple placeholder="请选择">
+                        <el-select  v-model="value1" multiple placeholder="请选择">
                             <el-option
                             v-for="item in options"
                             :key="item.value"
@@ -244,7 +244,6 @@ export default{
                     reason:'', //节课原因
                 }]
             },
-            // itemcount:,
             accountName: this.accountName(),
             orderClick:{ //自定义表单绑定数据
                 channel:'',
@@ -281,8 +280,8 @@ export default{
     },
     methods: {
         initData(flag,param) {
-			// $('#addInformation').modal({backdrop: 'static', keyboard: false});
-            console.log(param)            
+			// $('#addInformationContent').modal({backdrop: 'static', keyboard: false});
+            console.log(param)
         },
         // 点击新增课程
         addForm(){
@@ -299,8 +298,7 @@ export default{
         },
         // 关闭弹窗
         closeCurrentPage() {
-            this.$emit('addInformation')
-            // this.$emit('closeCurrentPage')
+            this.$emit('closeCurrentPage')
         },
         // 初访
         firstVisit() {

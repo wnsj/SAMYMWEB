@@ -468,10 +468,11 @@
                     $("#visContent").modal('hide')
                 else if (param == 7)
 					$("#memContent").modal('hide')
-				else if (param == 8)
-					$("#subVisTree").hide();
                 else if (param == 9)
                     $("#addInformationContent").modal('hide')
+				else if (param == 8)
+					$("#subVisTree").hide();
+                
             },
             //check the list of member
             checkVisitor(page) {

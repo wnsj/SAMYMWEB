@@ -1,6 +1,6 @@
 <template>
-    <div class="modal-content">
-        <div class="modal-header">
+    <div class="modal-content" >
+        <div class="modal-header" >
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
 			<h2 id="myModalLabel" class="modal-title">补充信息</h2>
         </div>
@@ -136,7 +136,7 @@
                         <input type="radio" id="10" name="five">
                         <label for="10"></label> 否
                     </div><br/>
-                    <textarea class="form-control" placeholder="备注：就诊机构和就诊时间、服用药品" v-model="time"></textarea>
+                    <textarea class="form-control" placeholder="备注：就诊机构和就诊时间、服用药品" v-model="orderClick.time"></textarea>
                     <div class="question"> 是否曾在其它心理咨询机构进行过心理咨询 </div>
                     <div class="radio cho6">
                         <input type="radio" id="11" name="six">
@@ -146,7 +146,7 @@
                         <input type="radio" id="12" name="six">
                         <label for="12"></label> 否
                     </div><br/>
-                    <textarea class="form-control" placeholder="备注：机构、时间、次数、效果等" v-model="time"></textarea>
+                    <textarea class="form-control" placeholder="备注：机构、时间、次数、效果等" v-model="orderClick.time"></textarea>
                     <div class="question"> 是否愿意接受满意度回访 </div>
                     <div class="radio cho7">
                         <input type="radio" id="13" name="seven">
@@ -183,28 +183,30 @@
                     </div>
                     <div class="col-md-12  clearfix jh-ad-0">
                         <span>疾病史【疾病名称、程度、身体健康状况】</span><br/>
-                        <textarea class="form-control" v-model="time"></textarea>
+                        <textarea class="form-control" v-model="orderClick.time"></textarea>
                     </div>
                     <div class="col-md-12  clearfix jh-ad-0">
                         <span>过敏史</span><br/>
-                        <textarea class="form-control" v-model="time"></textarea><br/>
+                        <textarea class="form-control" v-model="orderClick.time"></textarea><br/>
                     </div>
                 </div>
                 <!-- 课程详情 -->
-                <div v-for='(item,index) in itemcount' :key="index" 
+                <div v-for='(item,index) in form.itemcount' :key="index" 
                 class="col-md-10 clearfix jh-ad-0 choosebox1">
-                    <div class="classtop">
-                       <div class="classtop">
+                    <div class="classbox1">
+                        <div class="classtop2">
+                       <div>
                             结课时间:&nbsp;
-                            <dPicker v-model="timeStart" format="YYYY-MM-DD" ></dPicker>
+                            <dPicker v-model="item.classtime" format="YYYY-MM-DD" ></dPicker>
                        </div>
                         <p >
-                            填写人:789{{reason}}
+                            填写人:{{accountName}}
                         </p>
                     </div>
-                    <div  class="classtop reasons">
+                    <div  class="classtop">
                         节课原因:
-                        <textarea class="form-control reason" name="textarea" cols="80" rows="2" ></textarea><br/>
+                        <textarea v-model="item.reason" class="form-control reason" name="textarea" cols="80" rows="2" ></textarea><br/>
+                    </div>
                     </div>
                     <button id="btn" type="button" :disabled="isDisable" class="btn btn-primary pull-right margin-right-15 station"
                             data-toggle="modal" v-on:click="addForm()">新增结课信息
@@ -212,11 +214,11 @@
                 </div>
             </div>
             <!-- 关闭&返回 -->
-            <div class="col-md-12 form-group clearfix">
-				<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="closeCurrentPage()">返回
-				</button>
-				<button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10 jh-mr-1" :style="{disabled:succ?'':'disabled'}"
+            <div class="col-md-12 form-group clearfix clearBox">
+                <button type="button" :disabled="isDisable" class="btn btn-primary pull-right m_r_10 jh-mr-1" :style="{disabled:succ?'':'disabled'}"
 				 data-toggle="modal" v-on:click="addInformation()">确认
+				</button>
+				<button type="button" class="btn btn-warning pull-right m_r_10 jh-mr-1" data-toggle="modal" v-on:click="closeCurrentPage()">取消
 				</button>
 			</div>
         </div>
@@ -224,28 +226,35 @@
 </template>
 <script>
     import dPicker from 'vue2-datepicker'
-    import emp from '../../common/Employee.vue'
-    import CounseRoom from '../../common/CounseRoom.vue'
 export default{
     components: {
         dPicker,
-        emp,
-        CounseRoom,
     },
     data() {
         return {
 			succ: false,
             isDisable: false,
-            itemcount:1,
+            copyItem:{   //按钮复制内容
+                classtime:'',  //结课时间
+                reason:'', //节课原因
+            },
+            form:{
+                itemcount:[{  //需要循环的数据
+                    classtime:'',  //结课时间
+                    reason:'', //节课原因
+                }]
+            },
+            // itemcount:,
+            accountName: this.accountName(),
             orderClick:{ //自定义表单绑定数据
                 channel:'',
                 phone:'' ,
+                id:'',
+                time:'', //心理咨询
             },
-            timeStart:'', //时间选择器
+            timeStart:'',
             timeselect:[], // 回访时间
             value1: [], //微信多选绑定值
-            time:'',  //结课时间
-            reason:'', //节课原因
             options: [{   //微信绑定值
             value: '客服一',
             label: '客服一'
@@ -272,28 +281,38 @@ export default{
     },
     methods: {
         initData(flag,param) {
-			$('#addInformation').modal({backdrop: 'static', keyboard: false});
-            console.log(param)
+			// $('#addInformation').modal({backdrop: 'static', keyboard: false});
+            console.log(param)            
         },
         // 点击新增课程
-        addForm() {
-            console.log(this.itemcount);
-            this.itemcount +=1;
-        }, 
+        addForm(){
+            var obj = Object.assign({}, this.copyItem); //深拷贝
+            this.form.itemcount.push(obj)
+        },
         // 确认按钮
         addInformation() {
-
+            if (this.isBlank(this.timeStart)) {
+                alert("初访时间不能为空")
+                return
+            }
+            this.idDisable = true
         },
         // 关闭弹窗
         closeCurrentPage() {
-            this.$emit('closeCurrentPage')
+            this.$emit('addInformation')
+            // this.$emit('closeCurrentPage')
         },
         // 初访
         firstVisit() {
 
         },
+        //复制表单
+        addForm(){
+            var obj = Object.assign({}, this.copyItem); //深拷贝
+            this.form.itemcount.push(obj)
+        },
 
-    }
+    },
    
 }
 </script>

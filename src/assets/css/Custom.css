@@ -358,13 +358,24 @@
 .choosebox {
     border-top: #2c3e50 1px solid;
     text-align: left;
-    padding: 20px;
-    font-size: 16px;
+    padding: 15px;
+    font-size: 14px;
+    font-weight: bold;
     color: #2c3e50;
     line-height: 3;
 }
+.chooseboxs {
+    text-align: left;
+    padding:0 15px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50;
+    line-height: 4;
+    margin-bottom: 10px;
+}
 .choosebox1 {
-    font-size:16px;
+    font-size: 14px;
+    font-weight: bold;
     color: #2c3e50;
     margin-bottom: 20px;
     padding-left: 20px;
@@ -376,22 +387,27 @@
 .classbox1 {
     border: 1px dashed #2c3e50;
     padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+
 }
 
 .cho1 { margin-left: 482px; margin-right: 40px;}
-.cho2 { margin-left: 210px; margin-right: 40px;}
-.cho3 { margin-left: 258px; margin-right: 40px;}
-.cho4 { margin-left: 498px; margin-right: 40px;}
-.cho5 { margin-left: 301px; margin-right: 40px;}
-.cho6 { margin-left: 338px; margin-right: 40px;}
-.cho7 { margin-left: 465px; margin-right: 40px;}
+.cho2 { margin-left: 244px; margin-right: 40px;}
+.cho3 { margin-left: 286px; margin-right: 40px;}
+.cho4 { margin-left: 496px; margin-right: 40px;}
+.cho5 { margin-left: 324px; margin-right: 40px;}
+.cho6 { margin-left: 356px; margin-right: 40px;}
+.cho7 { margin-left: 468px; margin-right: 40px;}
+.choicesbox {display: flex; align-items: center;}
+.choices {width: 114px; display: inline-block;}
+.sumsele {width: 114px; margin-left: 20px; display: inline-block; margin-right: 163px;}
 .text{ margin-top: 20px;}
 .checkbox1 {display: flex; margin-top: 10px;}
 .inputWechat{ width: 434px; height: 34px; padding:0 4px; display: block; margin-left: 80px; margin-top:3px; border: 1px solid #C0C4CC;}
 .classtop {display: flex; padding: 0 30px 20px 20px; justify-content: space-between; align-items: center;}
 .classtop2 {display: flex; padding:10px 60px 20px 20px ; justify-content: space-between; align-items: center;}
-.station {margin-top: 20px; position: relative; right:48px;
-}
+.station {margin-top: 20px; position: relative; right:48px;}
 .bott{ margin-bottom: 40px;}
 .timeselect { width: 200px;}
 .reason{ width: 90%;}
@@ -416,8 +432,26 @@
 }
 /* 单选框样式 */
 .question {
-    display: inline;
+    display: inline-block;
 }
+.form-group1 {
+    position: relative;
+    width: 400px;
+    margin-left: -10px;
+}
+/* 家庭成员 */
+.titleinput2 {
+    margin-left: -80px;
+    display: flex;
+}
+/* 消费价位 */
+.titleinput {
+    display: flex;
+    width: 398px !important;
+    margin-left: -40px;
+
+}
+
 .radio {
     position: relative;
     display: inline-block;

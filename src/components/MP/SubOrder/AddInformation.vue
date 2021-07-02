@@ -1,9 +1,9 @@
 <template>
     <div class="modal-content" >
-        <div class="modal-header" >
+        <div class="modal-header">
 			<button type="button" aria-hidden="true" class="close" v-on:click="closeCurrentPage()">×</button>
-			<h2 id="myModalLabel" class="modal-title">补充信息</h2>
-        </div>
+			<h4 id="myModalLabel" class="modal-title">补充信息</h4>
+		</div>
         <div class="modal-body  pos_r jh-mh-sc">
             <div class="tab-pane fade in active martop" id="basic">
                 <div class="col-md-6 form-group clearfix jh-wd-33">
@@ -161,7 +161,7 @@
                         <span class="demonstration">可回访时间：</span>
                         <el-select collapse-tags v-model="timeselect" multiple placeholder="请选择">
                             <el-option
-                            v-for="item in select"
+                            v-for="item in options2"
                             :key="item.value"
                             :label="item.label"
                             :value="item.value">
@@ -261,7 +261,7 @@ export default{
             value: '客服二',
             label: '客服二'
             }],
-            select: [{   //回访时间绑定值
+            options2: [{   //回访时间绑定值
             value: '1',
             label: '9-12点'
             }, {
@@ -280,7 +280,7 @@ export default{
     },
     methods: {
         initData(flag,param) {
-			// $('#addInformationContent').modal({backdrop: 'static', keyboard: false});
+			$('#addInformationContent').modal({backdrop: 'static', keyboard: false});
             console.log(param)
         },
         // 点击新增课程
@@ -303,11 +303,6 @@ export default{
         // 初访
         firstVisit() {
 
-        },
-        //复制表单
-        addForm(){
-            var obj = Object.assign({}, this.copyItem); //深拷贝
-            this.form.itemcount.push(obj)
         },
 
     },

@@ -129,6 +129,10 @@
                                 v-on:click="selectRule('1')"
                                 v-has="'SAMY:MP:Visitor:Add'">添加咨客
                         </button>
+                        <button type="button" class="btn btn-primary pull-right margin-right-10" data-toggle="modal"
+                                v-on:click="Advanced()" 
+                                >高级查询
+                        </button>
                         <button type="button" class="btn btn-primary pull-right margin-right-10" data-toggle="modal" v-on:click="checkVisitor(1)">查询</button>
                     </div>
                 </div>
@@ -207,6 +211,20 @@
 
         </div>
         <div class="row row_edit">
+            <div class="modal fade" id="addInformationContent">
+                <div class="modal-dialog wd1000">
+                    <addInformation ref='addInformation' @closeCurrentPage='feedBack(9)'></addInformation>
+                </div>
+            </div>
+        </div>
+        <div class="row row_edit">
+            <div class="modal fade" id="advancedContent">
+                <div class="modal-dialog wd1000">
+                    <advanced ref='advanced' @closeCurrentPage='feedBack(10)'></advanced>
+                </div>
+            </div>
+        </div>
+        <div class="row row_edit">
             <div class="modal fade" id="visContent">
                 <div class="modal-dialog wd1000">
                     <subVis ref='subVis' @certainAction='feedBack(6)'></subVis>
@@ -248,13 +266,6 @@
             <div class="modal fade" id="addSubOrderContent">
                 <div class="modal-dialog wd1000">
                     <addSubOrder ref='addSubOrder' @closeCurrentPage='feedBack(2)'></addSubOrder>
-                </div>
-            </div>
-        </div>
-        <div class="row row_edit">
-            <div class="modal fade" id="addInformationContent">
-                <div class="modal-dialog wd1000">
-                    <addInformation ref='addInformation' @closeCurrentPage='feedBack(9)'></addInformation>
                 </div>
             </div>
         </div>
@@ -326,6 +337,7 @@
     import subCd from '../MP/SubCd/SubCd.vue'
     // import addInformation from '../MP/SubOrder/SubOderList.vue'
     import addInformation from '../MP/SubOrder/AddInformation.vue'
+    import advanced from '../MP/SubOrder/Advanced.vue'
     import dPicker from 'vue2-datepicker'
     import Paging from '../common/paging'
 
@@ -343,6 +355,7 @@
             recharge,
             addSubOrder,
             addInformation,
+            advanced,
 			subCd,
 			subTree
         },
@@ -408,7 +421,11 @@
 					$("#subVisTree").show();
 				}
             },
-
+            // 高级查询
+            Advanced() {
+                this.$refs.advanced.initData('add', this.objectContent)
+                $("#advancedContent").modal('show')
+            },
             //转会员
             tranferMember(item) {
                 if (item.isMem == 1) {
@@ -472,7 +489,8 @@
                     $("#addInformationContent").modal('hide')
 				else if (param == 8)
 					$("#subVisTree").hide();
-                
+                else if(param == 10)
+                    $("#advancedContent").modal('hide')
             },
             //check the list of member
             checkVisitor(page) {

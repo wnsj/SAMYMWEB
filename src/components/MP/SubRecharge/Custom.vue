@@ -470,7 +470,8 @@
 					btn: false,
 				},
 				isDisable: false,
-                oldNum: 0
+                oldNum: 0,
+				projectLog: ''
 			};
 		},
         watch:{
@@ -750,6 +751,7 @@
 			},
 			//产品
 			projectChange: function(param) {
+				this.projectLog = JSON.stringify(param);
 				this.titles = 0;  //优惠券数量清零
 
 				if (this.isBlank(param)) {
@@ -793,9 +795,9 @@
 					this.consume.discount = param.discount
 					this.consume.preFoldTotalPrice = param.totalPrice
 					// this.consume.receivable = param.discouAmount
-					console.log(this.consume.price)
-					console.log(this.consume.actualCount)
-					console.log(this.consume.discount)
+					// console.log(this.consume.price)
+					// console.log(this.consume.actualCount)
+					// console.log(this.consume.discount)
 					if (this.consume.price == null || this.consume.totalCount == null || this.consume.discount == null) {
 						this.consume.price = 0;
 						this.consume.totalCount = 0;
@@ -949,7 +951,8 @@
 				setTimeout(() => {
 					this.isDisable = false
 				}, 2000)
-
+				this.addConsumLog(this.projectLog,2);
+                this.addConsumLog(JSON.stringify(this.consume),3);
 				var url = this.url + '/purchasedItemsAction/consumProject'
 				this.$ajax({
 					method: 'POST',
@@ -1067,6 +1070,35 @@
 					var res = response.data
 					if (res.retCode == '0000') {
 						this.unfinishedProList = res.retData
+						this.addConsumLog(JSON.stringify(res.retData), 1);       // 添加消费日志--购买产品
+					} else {
+						alert(res.retMsg)
+					}
+				}).catch((error) => {
+					//console.log('会员查询请求失败')
+				});
+			},
+			//添加消费日志
+			addConsumLog(param, index) {
+				if (this.isBlank(param)) return
+				var url = this.url + '/consumLogBean/insertConsumLog'
+				this.$ajax({
+					method: 'POST',
+					url: url,
+					headers: {
+						'Content-Type': this.formDataType,
+						'Access-Token': this.accessToken
+					},
+					params: {
+						accId: this.accountId(),
+						contentData: param,
+						opreateSite: index
+					},
+					dataType: 'json',
+				}).then((response) => {
+					var res = response.data
+					if (res.retCode == '0000') {
+						// console.log(res.retData);
 					} else {
 						alert(res.retMsg)
 					}

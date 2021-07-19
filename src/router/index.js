@@ -513,39 +513,39 @@ export default new Router({
 					meta: {
 						showName: '查看指定产品'
 					}
-				},
-				{
-					path: '/MP/SmsManage/smsManage',
-					name: 'smsManage',
-					component: () => import("../components/MP/SmsManage/smsManage"),
-					meta: {
-						showName: '发送短信'
-					}
-				},
-				{
-					path: '/MP/SmsManage/smsAdd',
-					name: 'smsAdd',
-					component: () => import("../components/MP/SmsManage/smsAdd"),
-					meta: {
-						showName: '发送短信'
-					}
-				},
-				{
-					path: '/MP/SmsManage/smsTemplate',
-					name: 'smsTemplate',
-					component: () => import("../components/MP/SmsManage/smsTemplate"),
-					meta: {
-						showName: '短信模板设置'
-					}
-				},
-				{
-					path: '/MP/SmsManage/smsSignature',
-					name: 'smsSignature',
-					component: () => import("../components/MP/SmsManage/smsSignature"),
-					meta: {
-						showName: '短信签名设置'
-					}
 				}
+				// {
+				// 	path: '/MP/SmsManage/smsManage',
+				// 	name: 'smsManage',
+				// 	component: () => import("../components/MP/SmsManage/smsManage"),
+				// 	meta: {
+				// 		showName: '发送短信'
+				// 	}
+				// },
+				// {
+				// 	path: '/MP/SmsManage/smsAdd',
+				// 	name: 'smsAdd',
+				// 	component: () => import("../components/MP/SmsManage/smsAdd"),
+				// 	meta: {
+				// 		showName: '发送短信'
+				// 	}
+				// },
+				// {
+				// 	path: '/MP/SmsManage/smsTemplate',
+				// 	name: 'smsTemplate',
+				// 	component: () => import("../components/MP/SmsManage/smsTemplate"),
+				// 	meta: {
+				// 		showName: '短信模板设置'
+				// 	}
+				// },
+				// {
+				// 	path: '/MP/SmsManage/smsSignature',
+				// 	name: 'smsSignature',
+				// 	component: () => import("../components/MP/SmsManage/smsSignature"),
+				// 	meta: {
+				// 		showName: '短信签名设置'
+				// 	}
+				// }
 			],
 			redirect: '/MP/Visitor'
 		}

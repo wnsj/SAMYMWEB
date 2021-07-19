@@ -107,6 +107,7 @@ Vue.prototype.accountDataLife = 0.01
 Vue.prototype.isUseSetCookie = true
 
 Vue.prototype.contentType = 'application/json;charset=utf-8'
+Vue.prototype.formDataType = 'application/x-www-form-urlencoded;charset=UTF-8'
 /**
  * 判断是否为null
  */

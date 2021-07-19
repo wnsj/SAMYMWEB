@@ -67,7 +67,7 @@ constant.accountId = function() {
     if (this.isBlank(jsonString)) return false;
     var accountData = JSON.parse(jsonString);
     var accountId = accountData.accountId;
-    // //console.log('accountId:'+accountId)
+    // console.log('accountId:'+accountId)
     return accountId
 }
 

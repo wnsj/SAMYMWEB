@@ -117,7 +117,7 @@
 		<div class="xuanzhong_kuang">
 			<h2>已选中：</h2>
 			<ul>
-				<li v-for="item in userList" :key="item.visId">{{item.visId}}-{{item.visitorName}}</li>
+				<li v-for="(item,index) in userList" :key="item.visId" @click="deleteItem(index)">{{item.visId}}-{{item.visitorName}}</li>
 			</ul>
 		</div>
 		<div class="smscontent">
@@ -170,6 +170,7 @@
 		},
 		data() {
 			return {
+				userLists: [],
 				userList: [],
 				newuserList: [],
 				showSelect: true,
@@ -274,7 +275,7 @@
 				});
 			},
 			handleSelectionChange(val) {
-				// this.userList = val;
+				this.userLists.push(val);
 				this.userList = [];
 				var obj = {};
 				for (var i = 0; i < val.length; i++) {
@@ -283,6 +284,9 @@
 						obj[val[i].visId] = true;
 					}
 				}
+			},
+			deleteItem(i){
+				this.$refs.multipleTable.toggleRowSelection(this.userLists[i],false);
 			},
 			resetDate(row, column, cellValue, index) {
 				if (cellValue !== '' && cellValue !== null) {

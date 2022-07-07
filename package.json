@@ -20,7 +20,7 @@
     "html2canvas": "^1.0.0-rc.7",
     "jquery": "^3.5.1",
     "js-cookie": "^2.2.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "qrcanvas": "^3.1.1",
     "script-loader": "^0.7.2",
     "vee-validate": "^3.4.0",
